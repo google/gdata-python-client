@@ -44,7 +44,7 @@ class AtomService(object):
                           should be included with CRUD operations.
     """
     self.server = server
-    self.additional_headers = additional_headers
+    self.additional_headers = additional_headers or {}
 
   # CRUD operations
   def Get(self, uri, extra_headers=None, url_params=None, escape_params=True):

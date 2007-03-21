@@ -393,7 +393,7 @@ class EntryTest(unittest.TestCase):
     self.assert_(entry.title.text == 'Testing 2000 series laptop')
     self.assert_(entry.title.type == 'text')
     self.assert_(entry.content.type == 'xhtml')
-    #TODO check correctness for the rest of the test data
+    #TODO check all other values for the test entry
     
     
 class SourceTest(unittest.TestCase):

@@ -15,12 +15,14 @@
 # limitations under the License.
 
 
+
 XML_ENTRY_1 = """<?xml version='1.0'?>
 <entry xmlns='http://www.w3.org/2005/Atom'
        xmlns:g='http://base.google.com/ns/1.0'>
   <category scheme="http://base.google.com/categories/itemtypes"
             term="products"/>
-  <id>http://www.google.com/test/id/url</id>
+  <id>http://www.google.com/test/id/url    
+     </id>
   <title type='text'>Testing 2000 series laptop</title>
   <content type='xhtml'>
     <div xmlns='http://www.w3.org/1999/xhtml'>A Testing Laptop</div>
@@ -32,7 +34,6 @@ XML_ENTRY_1 = """<?xml version='1.0'?>
   <g:label>testing laptop</g:label>
   <g:item_type>products</g:item_type>
 </entry>"""
-
 
 BIG_FEED = """<?xml version="1.0" encoding="utf-8"?>
    <feed xmlns="http://www.w3.org/2005/Atom">
@@ -81,7 +82,6 @@ BIG_FEED = """<?xml version="1.0" encoding="utf-8"?>
    </feed>
 """
 
-
 SMALL_FEED = """<?xml version="1.0" encoding="utf-8"?>
    <feed xmlns="http://www.w3.org/2005/Atom">
      <title>Example Feed</title>
@@ -100,7 +100,6 @@ SMALL_FEED = """<?xml version="1.0" encoding="utf-8"?>
      </entry>
    </feed>
 """
-
 
 GBASE_FEED = """<?xml version='1.0' encoding='UTF-8'?>
 <feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:g='http://base.google.com/ns/1.0' xmlns:batch='http://schemas.google.com/gdata/batch'>
@@ -219,7 +218,6 @@ GBASE_FEED = """<?xml version='1.0' encoding='UTF-8'?>
 </entry>
 </feed>"""
 
-
 EXTENSION_TREE = """<?xml version="1.0" encoding="utf-8"?>
    <feed xmlns="http://www.w3.org/2005/Atom">
      <g:author xmlns:g="http://www.google.com">
@@ -230,7 +228,6 @@ EXTENSION_TREE = """<?xml version="1.0" encoding="utf-8"?>
    </feed>
 """
 
-
 TEST_AUTHOR = """<?xml version="1.0" encoding="utf-8"?>
    <author xmlns="http://www.w3.org/2005/Atom">
        <name xmlns="http://www.w3.org/2005/Atom">John Doe</name>
@@ -238,7 +235,6 @@ TEST_AUTHOR = """<?xml version="1.0" encoding="utf-8"?>
        <uri xmlns="http://www.w3.org/2005/Atom">http://www.google.com</uri>
    </author>
 """
-
 
 TEST_LINK = """<?xml version="1.0" encoding="utf-8"?>
    <link xmlns="http://www.w3.org/2005/Atom" href="http://www.google.com" 
