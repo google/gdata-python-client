@@ -311,7 +311,7 @@ xmlns:gCal='http://schemas.google.com/gCal/2005'>
 </feed>
 """
 
-CALENDAR_EVENT_FEED = """<?xml version='1.0' encoding='utf-8'?>
+CALENDAR_FULL_EVENT_FEED = """<?xml version='1.0' encoding='utf-8'?>
 <feed xmlns='http://www.w3.org/2005/Atom'
 xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
 xmlns:gd='http://schemas.google.com/g/2005'
