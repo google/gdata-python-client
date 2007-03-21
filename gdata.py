@@ -27,7 +27,6 @@ __author__ = 'api.jscudder (Jeffrey Scudder)'
 
 
 from elementtree import ElementTree
-import xml_wrapper
 import atom
 
 
