@@ -319,6 +319,22 @@ class CalendarEventFeedTest(unittest.TestCase):
     # Assert the post link value is as expected
     self.assertEquals(self.calendar_event_feed.GetPostLink().href, 'http://www.google.com/calendar/feeds/default/private/full')
 
+  def testEditLink(self):
+    """Tests the existence of a <atom:link> with a rel='edit' in each entry and verifies the value"""
+
+    # Assert that each link in the feed is an atom.Link
+    for a_link in self.calendar_event_feed.link:
+      self.assert_(isinstance(a_link, atom.Link),
+          "Calendar event entry <atom:link> element must be an instance of atom.Link: %s" % a_link)
+
+    # Assert edit link exists
+    for a_entry in self.calendar_event_feed.entry:
+      self.assert_(a_entry.GetEditLink() is not None)
+
+    # Assert the edit link value is as expected
+    self.assertEquals(self.calendar_event_feed.entry[0].GetEditLink().href, 'http://www.google.com/calendar/feeds/default/private/full/o99flmgmkfkfrr8u745ghr3100/63310109397')
+    self.assertEquals(self.calendar_event_feed.entry[0].GetEditLink().type, 'application/atom+xml')
+
   def testOpenSearch(self):
     """Tests the existence of <openSearch:totalResults>, <openSearch:startIndex>, <openSearch:itemsPerPage>"""
     # Assert that the elements exist and are the appropriate type
@@ -401,6 +417,102 @@ class CalendarEventFeedTest(unittest.TestCase):
     self.assertEquals(
         self.calendar_event_feed.entry[1].event_status.value,
         'CONFIRMED')
+
+  def testComments(self):
+    """Tests the existence of <atom:comments> and verifies the value"""
+    # Assert that the element exists and is of the appropriate type and value
+    for an_event in self.calendar_event_feed.entry:
+      self.assert_(an_event.comments is None or isinstance(an_event.comments, 
+          gcalendar.Comments),
+          ("Calendar event feed entry <gd:comments> element " +
+          "must be an instance of gcalendar.Comments: %s") % (
+          an_event.comments,))
+
+  def testVisibility(self):
+    """Test the existence of <gd:visibility> and verifies the value"""
+    # Assert that the element exists and is of the appropriate type and value
+    for an_event in self.calendar_event_feed.entry:
+      self.assert_(isinstance(an_event.visibility, 
+          gcalendar.Visibility),
+          ("Calendar event feed entry <gd:visibility> element " +
+          "must be an instance of gcalendar.Visibility: %s") % (
+          an_event.visibility,))
+   
+    # Assert the <gd:visibility> are as expected 
+    self.assertEquals(
+        self.calendar_event_feed.entry[0].visibility.value,
+        'DEFAULT')
+
+    self.assertEquals(
+        self.calendar_event_feed.entry[1].visibility.value,
+        'PRIVATE')
+
+    self.assertEquals(
+        self.calendar_event_feed.entry[2].visibility.value,
+        'PUBLIC')
+
+  def testTransparency(self):
+    """Test the existence of <gd:transparency> and verifies the value"""
+    # Assert that the element exists and is of the appropriate type and value
+    for an_event in self.calendar_event_feed.entry:
+      self.assert_(isinstance(an_event.transparency, 
+          gcalendar.Transparency),
+          ("Calendar event feed entry <gd:transparency> element " +
+          "must be an instance of gcalendar.Transparency: %s") % (
+          an_event.transparency,))
+   
+    # Assert the <gd:transparency> are as expected 
+    self.assertEquals(
+        self.calendar_event_feed.entry[0].transparency.value,
+        'OPAQUE')
+
+    self.assertEquals(
+        self.calendar_event_feed.entry[1].transparency.value,
+        'OPAQUE')
+
+    self.assertEquals(
+        self.calendar_event_feed.entry[2].transparency.value,
+        'OPAQUE')
+ 
+    # TODO: TEST VALUES OF VISIBILITY OTHER THAN OPAQUE
+
+  def testWhere(self):
+    """Tests the existence of a <gd:where> in the entries and verifies the value"""
+
+    # Assert that each entry has a where value which is an gcalendar.Where
+    for an_entry in self.calendar_event_feed.entry:
+      for a_where in an_entry.where:
+        self.assert_(isinstance(a_where, gcalendar.Where),
+            "Calendar event entry <gd:where> element must be an instance of gcalendar.Where: %s" % a_where)
+
+    # Assert one of the values for where is as expected
+    self.assertEquals(self.calendar_event_feed.entry[1].where[0].valueString, 'Dolores Park with Kim')
+
+  def testWhenAndReminder(self):
+    """Tests the existence of a <gd:when> and <gd:reminder> in the entries and verifies the values"""
+
+    # Assert that each entry's when value is a gcalendar.When
+    # Assert that each reminder is a gcalendar.Reminder 
+    for an_entry in self.calendar_event_feed.entry:
+      for a_when in an_entry.when:
+        self.assert_(isinstance(a_when, gcalendar.When),
+            "Calendar event entry <gd:when> element must be an instance of gcalendar.When: %s" % a_when)
+        for a_reminder in a_when.reminder:
+          self.assert_(isinstance(a_reminder, gcalendar.Reminder),
+              "Calendar event entry <gd:reminder> element must be an instance of gcalendar.Reminder: %s" % a_reminder)
+
+    # Assert one of the values for when is as expected
+    self.assertEquals(self.calendar_event_feed.entry[0].when[0].start_time, '2007-03-23T12:00:00.000-07:00')
+    self.assertEquals(self.calendar_event_feed.entry[0].when[0].end_time, '2007-03-23T13:00:00.000-07:00')
+
+    # Assert the reminder child of when is as expected
+    self.assertEquals(self.calendar_event_feed.entry[0].when[0].reminder[0].minutes, '10')
+    self.assertEquals(self.calendar_event_feed.entry[1].when[0].reminder[0].minutes, '20')
+
+    # TODO add reminder tests for absolute_time and hours/seconds (if possible)
+
+  # TODO test recurrence and recurrenceexception
+  # TODO test originalEvent 
 
 
 #class GBaseItemTest(unittest.TestCase):

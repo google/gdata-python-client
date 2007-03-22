@@ -240,8 +240,8 @@ class Where(atom.AtomBase):
 
   def __init__(self, extension_elements=None,
       extension_attributes=None, text=None,
-      where = None):
-    self.where = where
+      valueString = None):
+    self.valueString = valueString 
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
@@ -251,15 +251,15 @@ class Where(atom.AtomBase):
     return element_tree
 
   def _TransferToElementTree(self, element_tree):
-    if self.where:
-      element_tree.attrib['where'] = self.where
+    if self.valueString:
+      element_tree.attrib['valueString'] = self.valueString
     atom.AtomBase._TransferToElementTree(self, element_tree)
     element_tree.tag = gdata.GDATA_TEMPLATE % 'where'
     return element_tree
 
   def _TakeAttributeFromElementTree(self, attribute, element_tree):
-    if attribute == 'where':
-      self.where = element_tree.attrib[attribute]
+    if attribute == 'valueString':
+      self.valueString = element_tree.attrib[attribute]
       del element_tree.attrib[attribute]
     else:
       atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
@@ -302,9 +302,11 @@ class When(atom.AtomBase):
 
   def __init__(self, extension_elements=None,
       extension_attributes=None, text=None,
-      start_time=None, end_time=None):
+      start_time=None, end_time=None, 
+      reminder=None):
     self.start_time = start_time 
     self.end_time = end_time 
+    self.reminder = reminder or []
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
@@ -313,9 +315,18 @@ class When(atom.AtomBase):
       element_tree.attrib['startTime'] = self.start_time
     if self.end_time:
       element_tree.attrib['endTime'] = self.end_time
+    for a_reminder in self.reminder:
+      element_tree.append(a_reminder._ToElementTree())
     atom.AtomBase._TransferToElementTree(self, element_tree)
     element_tree.tag = gdata.GDATA_TEMPLATE % 'when'
     return element_tree
+
+  def _TakeChildFromElementTree(self, child, element_tree):
+    if child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'reminder'):
+      self.reminder.append(_ReminderFromElementTree(child))
+      element_tree.remove(child)
+    else:
+      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
 
   def _TakeAttributeFromElementTree(self, attribute, element_tree):
     if attribute == 'startTime':
@@ -336,34 +347,36 @@ class Recurrence(atom.AtomBase):
     atom.AtomBase._TransferToElementTree(self, element_tree)
     return element_tree
 
+# TODO implement recurrence exception
+# TODO implement originalEvent 
 class RecurrenceException(atom.AtomBase):
   """The Google Calendar RecurrenceException element"""
 
 
 
 class UriEnumElement(atom.AtomBase):
-  def __init__(self, tag, enumMap, attribName='value', extension_elements=None,
+  def __init__(self, tag, enum_map, attrib_name='value', extension_elements=None,
                extension_attributes=None):
      self.tag=tag
-     self.enumMap=enumMap
-     self.attribName=attribName
+     self.enum_map=enum_map
+     self.attrib_name=attrib_name
      self.value=None
      self.extension_elements = extension_elements or []
      self.extension_attributes = extension_attributes or {}
      
   def findKey(self, value):
-     res=[item[0] for item in self.enumMap.items() if item[1] == value]
+     res=[item[0] for item in self.enum_map.items() if item[1] == value]
      if res is None or len(res) == 0:
        return None
      return res[0]
 
   def _TakeAttributeFromElementTree(self, attribute, element_tree):
-#    print "Class ", self.__class__.__name__, " attr is ", attribute, ' aname is ', self.attribName
-    if attribute == self.attribName:
-       val = element_tree.attrib[self.attribName]
+#    print "Class ", self.__class__.__name__, " attr is ", attribute, ' aname is ', self.attrib_name
+    if attribute == self.attrib_name:
+       val = element_tree.attrib[self.attrib_name]
        if val != '':
-          self.value = self.enumMap[val]
-       del element_tree.attrib[self.attribName]
+          self.value = self.enum_map[val]
+       del element_tree.attrib[self.attrib_name]
     else:
       atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
           element_tree)
@@ -372,7 +385,7 @@ class UriEnumElement(atom.AtomBase):
     element_tree.tag = gdata.GDATA_TEMPLATE % self.tag
     key = self.findKey(self.value)
     if key is not None:
-       element_tree.attrib[self.attribName]=key
+       element_tree.attrib[self.attrib_name]=key
     atom.AtomBase._TransferToElementTree(self, element_tree)
     return element_tree
 
@@ -391,7 +404,7 @@ class Who(UriEnumElement):
   
   def __init__(self, extension_elements=None,
       extension_attributes=None):
-    UriEnumElement.__init__(self, 'who', Who.relEnum, attribName='rel',
+    UriEnumElement.__init__(self, 'who', Who.relEnum, attrib_name='rel',
                             extension_elements=extension_elements,
                             extension_attributes=extension_attributes)
     self.name=None
@@ -431,41 +444,40 @@ class Who(UriEnumElement):
 
 class AttendeeStatus(UriEnumElement):
   """The Google Calendar attendeeStatus element"""
-  attendeeEnum = { 'http://schemas.google.com/g/2005#event.accepted' : 'ACCEPTED',
+  attendee_enum = { 'http://schemas.google.com/g/2005#event.accepted' : 'ACCEPTED',
                    'http://schemas.google.com/g/2005#event.declined' : 'DECLINED',
                    'http://schemas.google.com/g/2005#event.invited' : 'INVITED',
                    'http://schemas.google.com/g/2005#event.tentative' : 'TENTATIVE'}
   
   def __init__(self, extension_elements=None,
       extension_attributes=None):
-    UriEnumElement.__init__(self, 'attendeeStatus', AttendeeStatus.attendeeEnum,
+    UriEnumElement.__init__(self, 'attendeeStatus', AttendeeStatus.attendee_enum,
                             extension_elements=extension_elements,
                             extension_attributes=extension_attributes)
 
 
-
 class AttendeeType(UriEnumElement):
   """The Google Calendar attendeeType element"""
-  attendeeTypeEnum = { 'http://schemas.google.com/g/2005#event.optional' : 'OPTIONAL',
+  attendee_type_enum = { 'http://schemas.google.com/g/2005#event.optional' : 'OPTIONAL',
                        'http://schemas.google.com/g/2005#event.required' : 'REQUIRED' }
   
   def __init__(self, extension_elements=None,
       extension_attributes=None, text=None):
-    UriEnumElement.__init__(self, 'attendeeType', AttendeeType.attendeeTypeEnum,
+    UriEnumElement.__init__(self, 'attendeeType', AttendeeType.attendee_type_enum,
                             extension_elements=extension_elements,
                             extension_attributes=extension_attributes)
 
 
 class Visibility(UriEnumElement):
   """The Google Calendar Visibility element"""
-  visibilityEnum = { 'http://schemas.google.com/g/2005#event.confidential' : 'CONFIDENTIAL',
+  visibility_enum = { 'http://schemas.google.com/g/2005#event.confidential' : 'CONFIDENTIAL',
                      'http://schemas.google.com/g/2005#event.default' : 'DEFAULT',
                      'http://schemas.google.com/g/2005#event.private' : 'PRIVATE',
                      'http://schemas.google.com/g/2005#event.public' : 'PUBLIC' }
 
   def __init__(self, extension_elements=None,
       extension_attributes=None, text=None):
-    UriEnumElement.__init__(self, 'visibility', Visibility.visibilityEnum,
+    UriEnumElement.__init__(self, 'visibility', Visibility.visibility_enum,
                             extension_elements=extension_elements,
                             extension_attributes=extension_attributes)
 
@@ -473,16 +485,17 @@ class Visibility(UriEnumElement):
     
 class Transparency(UriEnumElement):
   """The Google Calendar Transparency element"""
-  transparencyEnum = { 'http://schemas.google.com/g/2005#event.opaque' : 'OPAQUE',
+  transparency_enum = { 'http://schemas.google.com/g/2005#event.opaque' : 'OPAQUE',
                        'http://schemas.google.com/g/2005#event.transparent' : 'TRANSPARENT' }
   
   def __init__(self, extension_elements=None,
       extension_attributes=None, text=None):
-    UriEnumElement.__init__(self, tag='transparency', enumMap=Transparency.transparencyEnum,
+    UriEnumElement.__init__(self, tag='transparency', enum_map=Transparency.transparency_enum,
                             extension_elements=extension_elements,
                             extension_attributes=extension_attributes)
 
 
+# TODO finish comments implementation
 class Comments(atom.AtomBase):
   """The Google Calendar comments element"""
 
@@ -497,15 +510,60 @@ class Comments(atom.AtomBase):
     return element_tree
 
 
+class Reminder(atom.AtomBase):
+  """The Google Calendar reminder element"""
+
+  def __init__(self, absolute_time=None,
+      days=None, hours=None, minutes=None, 
+      extension_elements=None,
+      extension_attributes=None, text=None):
+    self.absolute_time = absolute_time 
+    self.days = days 
+    self.hours = hours 
+    self.minutes = minutes
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+  def _TransferToElementTree(self, element_tree):
+    if self.absolute_time:
+      element_tree.attrib['absolute_time'] = self.absolute_time
+    if self.days:
+      element_tree.attrib['days'] = self.days
+    if self.hours:
+      element_tree.attrib['hours'] = self.hours
+    if self.minutes:
+      element_tree.attrib['minutes'] = self.minutes
+    element_tree.tag = gdata.GDATA_TEMPLATE % 'reminder'
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    return element_tree
+
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+    if attribute == 'absoluteTime':
+      self.absolute_time= element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    elif attribute == 'days':
+      self.days = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    elif attribute == 'hours':
+      self.hours = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    elif attribute == 'minutes':
+      self.minutes = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    else:
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
+          element_tree)
+
+
 class EventStatus(UriEnumElement):
   """The Google Calendar eventStatus element"""
-  statusEnum = { 'http://schemas.google.com/g/2005#event.canceled' : 'CANCELED',
+  status_enum = { 'http://schemas.google.com/g/2005#event.canceled' : 'CANCELED',
                  'http://schemas.google.com/g/2005#event.confirmed' : 'CONFIRMED',
                  'http://schemas.google.com/g/2005#event.tentative' : 'TENTATIVE'}
   
   def __init__(self, extension_elements=None,
       extension_attributes=None, text=None):
-    UriEnumElement.__init__(self, tag='eventStatus', enumMap=EventStatus.statusEnum,
+    UriEnumElement.__init__(self, tag='eventStatus', enum_map=EventStatus.status_enum,
                             extension_elements=extension_elements,
                             extension_attributes=extension_attributes)
 
@@ -678,3 +736,4 @@ _ColorFromElementTree = atom._AtomInstanceFromElementTree(Color, 'color', GCAL_N
 _HiddenFromElementTree = atom._AtomInstanceFromElementTree(Hidden, 'hidden', GCAL_NAMESPACE)
 _TimezoneFromElementTree = atom._AtomInstanceFromElementTree(Timezone, 'timezone', GCAL_NAMESPACE)
 _AccessLevelFromElementTree = atom._AtomInstanceFromElementTree(AccessLevel, 'accesslevel', GCAL_NAMESPACE)
+_ReminderFromElementTree = atom._AtomInstanceFromElementTree(Reminder, 'reminder', gdata.GDATA_NAMESPACE)
