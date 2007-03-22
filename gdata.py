@@ -32,8 +32,8 @@ import atom
 
 # XML namespaces which are often used in GData entities.
 GDATA_NAMESPACE = 'http://schemas.google.com/g/2005'
-OPENSEARCH_NAMESPACE = 'http://a9.com/-/spec/opensearchrss/1.0/'
 GDATA_TEMPLATE = '{http://schemas.google.com/g/2005}%s'
+OPENSEARCH_NAMESPACE = 'http://a9.com/-/spec/opensearchrss/1.0/'
 OPENSEARCH_TEMPLATE = '{http://a9.com/-/spec/opensearchrss/1.0/}%s'
 
 
@@ -174,10 +174,12 @@ class GDataFeed(atom.Feed, LinkFinder):
       element_tree.remove(child)
     elif child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'id'):
       atom.Feed._TakeChildFromElementTree(self, child, element_tree)
+      # Remove whitespace from the id element.
       if self.id and self.id.text:
         self.id.text = self.id.text.strip()
     elif child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'generator'):
       atom.Feed._TakeChildFromElementTree(self, child, element_tree)
+      # Remove whitespace from the generator element.
       if self.generator and self.generator.text:
         self.generator.text = self.generator.text.strip()
     else:
@@ -189,14 +191,8 @@ class GDataFeed(atom.Feed, LinkFinder):
     atom.Feed._TransferFromElementTree(self, element_tree)
 
 def GDataFeedFromString(xml_string):
-  print 'IN GDataFeedFromString'
   element_tree = ElementTree.fromstring(xml_string)
   to_return =  _GDataFeedFromElementTree(element_tree)
-  # Remove whitespace from selected GData elements
-  #if to_return.id and to_return.id.text:
-  #  to_return.id.text = to_return.id.text.strip()
-  #if to_return.generator and to_return.generator.text:
-  #  to_return.generator.text = to_return.generator.text.strip()
   return to_return
 
 def _GDataFeedFromElementTree(element_tree):

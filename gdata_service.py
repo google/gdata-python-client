@@ -55,6 +55,7 @@
 
 __author__ = 'api.jscudder (Jeffrey Scudder)'
 
+
 import httplib
 import urllib
 from elementtree import ElementTree
@@ -62,18 +63,9 @@ import app_service
 import gdata
 import atom
 
+
 PROGRAMMATIC_AUTH_LABEL = 'GoogleLogin auth'
 AUTHSUB_AUTH_LABEL = 'AuthSub token'
-
-# XML namespaces which are often used in GData entities.
-ATOM_NAMESPACE = '{http://www.w3.org/2005/Atom}'
-GBASE_NAMESPACE = '{http://base.google.com/ns/1.0}'
-GDATA_NAMESPACE = '{http://schemas.google.com/g/2005}'
-
-
-GDATA_NAMESPACES = {'atom': ATOM_NAMESPACE, 
-                    'gbase': GBASE_NAMESPACE, 
-                    'gdata': GDATA_NAMESPACE}
 
 
 class Error(Exception):
