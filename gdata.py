@@ -31,9 +31,9 @@ import atom
 
 
 # XML namespaces which are often used in GData entities.
-GDATA_NAMESPACE = ''
+GDATA_NAMESPACE = 'http://schemas.google.com/g/2005'
 OPENSEARCH_NAMESPACE = 'http://a9.com/-/spec/opensearchrss/1.0/'
-GDATA_TEMPLATE = '{}%s'
+GDATA_TEMPLATE = '{http://schemas.google.com/g/2005}%s'
 OPENSEARCH_TEMPLATE = '{http://a9.com/-/spec/opensearchrss/1.0/}%s'
 
 
@@ -189,6 +189,7 @@ class GDataFeed(atom.Feed, LinkFinder):
     atom.Feed._TransferFromElementTree(self, element_tree)
 
 def GDataFeedFromString(xml_string):
+  print 'IN GDataFeedFromString'
   element_tree = ElementTree.fromstring(xml_string)
   to_return =  _GDataFeedFromElementTree(element_tree)
   # Remove whitespace from selected GData elements

@@ -1,0 +1,680 @@
+#!/usr/bin/python
+#
+# Copyright (C) 2006 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+
+# TODO:
+#   add text=none to all inits
+
+
+"""Contains extensions to ElementWrapper objects used with Google Calendar."""
+
+__author__ = 'api.jscudder (Jeffrey Scudder)'
+
+
+from elementtree import ElementTree
+import atom
+import gdata
+
+
+# XML namespaces which are often used in Google Calendar entities.
+GCAL_NAMESPACE = 'http://schemas.google.com/gCal/2005'
+GCAL_TEMPLATE = '{http://schemas.google.com/gCal/2005}%s'
+
+
+class CalendarFeed(gdata.GDataFeed, gdata.LinkFinder):
+
+  def _TakeChildFromElementTree(self, child, element_tree):
+    if child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'entry'):
+      self.entry.append(_CalendarEntryFromElementTree(child))
+      element_tree.remove(child)
+    else:
+      gdata.GDataFeed._TakeChildFromElementTree(self, child, element_tree)
+
+class CalendarEventFeed(gdata.GDataFeed, gdata.LinkFinder):
+  def __init__(self, author=None, category=None, contributor=None,
+      generator=None, icon=None, atom_id=None, link=None, logo=None, 
+      rights=None, subtitle=None, title=None, updated=None, entry=None, 
+      total_results=None, start_index=None, items_per_page=None,
+      text=None, extension_elements=None, extension_attributes=None):
+     gdata.GDataFeed.__init__(self, author=author, category=category,
+                              contributor=contributor, generator=generator,
+                              icon=icon,  atom_id=atom_id, link=link,
+                              logo=logo, rights=rights, subtitle=subtitle,
+                              title=title, updated=updated, entry=entry,
+                              total_results=total_results,
+                              start_index=start_index,
+                              items_per_page=items_per_page, text=text,
+                              extension_elements=extension_elements,
+                              extension_attributes=extension_attributes)
+
+  def _TakeChildFromElementTree(self, child, element_tree):
+    if child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'entry'):
+      self.entry.append(_CalendarEventEntryFromElementTree(child))
+      element_tree.remove(child)
+    else:
+      gdata.GDataFeed._TakeChildFromElementTree(self, child, element_tree)
+
+class CalendarEntry(gdata.GDataEntry, gdata.LinkFinder):
+  """An Google Calendar flavor of an Atom Entry """
+  
+  def __init__(self, author=None, category=None, content=None,
+      atom_id=None, link=None, published=None, 
+      title=None, updated=None, 
+      color=None, access_level=None, hidden=None, timezone=None,
+      text=None,extension_elements=None, extension_attributes=None):
+
+
+    gdata.GDataEntry.__init__(self, author=author, category=category, content=content,
+                        atom_id=atom_id, link=link, published=published,
+                        title=title, updated=updated)
+
+    
+    self.color = color
+    self.access_level = access_level
+    self.hidden = hidden 
+    self.timezone = timezone
+
+  def _TransferToElementTree(self, element_tree):
+    if self.color:
+      element_tree.append(self.color._ToElementTree())
+    if self.access_level:
+      element_tree.append(self.access_level._ToElementTree())
+    if self.hidden:
+      element_tree.append(self.hidden._ToElementTree())
+    if self.timezone:
+      element_tree.append(self.timezone._ToElementTree())
+
+    gdata.GDataEntry._TransferToElementTree(self, element_tree)
+    return element_tree
+
+  def _TakeChildFromElementTree(self, child, element_tree):
+    if child.tag == '{%s}%s' % (GCAL_NAMESPACE, 'color'):
+      self.color = _ColorFromElementTree(child)
+      element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (GCAL_NAMESPACE, 'accesslevel'):
+      self.access_level = _AccessLevelFromElementTree(child)
+      element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (GCAL_NAMESPACE, 'hidden'):
+      self.hidden = _HiddenFromElementTree(child)
+      element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (GCAL_NAMESPACE, 'timezone'):
+      self.timezone = _TimezoneFromElementTree(child)
+      element_tree.remove(child)
+    else:
+      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
+
+  def _TransferFromElementTree(self, element_tree):
+    while len(element_tree) > 0:
+      self._TakeChildFromElementTree(element_tree[0], element_tree)
+    gdata.GDataEntry._TransferFromElementTree(self, element_tree)
+
+def CalendarEventEntryFromString(xml_string):
+  element_tree = ElementTree.fromstring(xml_string)
+  return _CalendarEventEntryFromElementTree(element_tree)
+
+
+
+class CalendarEventEntry(gdata.GDataEntry):
+  """An Google Calendar flavor of an Atom Entry """
+  
+  def __init__(self, author=None, category=None, content=None,
+      atom_id=None, link=None, published=None, 
+      title=None, updated=None, 
+      transparency=None, comments=None, event_status=None,
+      send_event_notifications=None, visibility=None,
+      recurrence=None, recurrence_exception=None,
+      where=None, when=None, who=None,
+      extended_property=None, 
+      text=None,extension_elements=None, extension_attributes=None):
+
+
+    gdata.GDataEntry.__init__(self, author=author, category=category, content=content,
+                        atom_id=atom_id, link=link, published=published,
+                        title=title, updated=updated)
+
+    
+    self.transparency = transparency 
+    self.comments = comments
+    self.event_status = event_status 
+    self.send_event_notifications = send_event_notifications
+    self.visibility = visibility
+    self.recurrence = recurrence 
+    self.recurrence_exception = recurrence_exception 
+    self.where = where or []
+    self.when = when or []
+    self.who = who or []
+    self.extended_property = extended_property or []
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+  def _TransferToElementTree(self, element_tree):
+    for a_where in self.where:
+      element_tree.append(a_where._ToElementTree())
+    for a_who in self.who:
+      element_tree.append(a_who._ToElementTree())
+    for a_when in self.when:
+      element_tree.append(a_when._ToElementTree())
+    for a_extended_property in self.extended_property:
+      element_tree.append(a_extended_property._ToElementTree())
+    if self.transparency:
+      element_tree.append(self.transparency._ToElementTree())
+    if self.visibility:
+      element_tree.append(self.visibility._ToElementTree())
+    if self.comments:
+      element_tree.append(self.comments._ToElementTree())
+    if self.send_event_notifications:
+      element_tree.append(self.send_event_notifications._ToElementTree())
+    if self.event_status:
+      element_tree.append(self.event_status._ToElementTree())
+    if self.recurrence:
+      element_tree.append(self.recurrence._ToElementTree())
+    if self.recurrence_exception:
+      element_tree.append(self.recurrence_exception._ToElementTree())
+
+    gdata.GDataEntry._TransferToElementTree(self, element_tree)
+    return element_tree
+
+  def _TakeChildFromElementTree(self, child, element_tree):
+    if child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'where'):
+      self.where.append(_WhereFromElementTree(child))
+      element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'when'):
+      self.when.append(_WhenFromElementTree(child))
+      element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'who'):
+      self.who.append(_WhoFromElementTree(child))
+      element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'extendedProperty'):
+      self.extended_property.append(_ExtendedPropertyFromElementTree(child))
+      element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'visibility'):
+      self.visibility=_VisibilityFromElementTree(child)
+      element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'transparency'):
+      self.transparency=_TransparencyFromElementTree(child)
+      element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'eventStatus'):
+      self.event_status=_EventStatusFromElementTree(child)
+      element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'recurrence'):
+      self.recurrence=_RecurrenceFromElementTree(child)
+      element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'recurrenceException'):
+      self.recurrence_exception=_RecurrenceExceptionFromElementTree(child)
+      element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (GCAL_NAMESPACE, 'sendEventNotifications'):
+      self.send_event_notifications=_SendEventNotificationsFromElementTree(child)
+      element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'comments'):
+      self.comments=_CommentsFromElementTree(child) 
+      element_tree.remove(child)
+    else:
+      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
+
+  def _TransferFromElementTree(self, element_tree):
+    while len(element_tree) > 0:
+      self._TakeChildFromElementTree(element_tree[0], element_tree)
+    gdata.GDataEntry._TransferFromElementTree(self, element_tree)
+
+def CalendarEventEntryFromString(xml_string):
+  element_tree = ElementTree.fromstring(xml_string)
+  return _CalendarEventEntryFromElementTree(element_tree)
+
+
+class Where(atom.AtomBase):
+  """The Google Calendar Where element"""
+
+  def __init__(self, extension_elements=None,
+      extension_attributes=None, text=None,
+      where = None):
+    self.where = where
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+  def _TransferToElementTree(self, element_tree):
+    element_tree.tag = gdata.GDATA_TEMPLATE % 'where'
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    return element_tree
+
+  def _TransferToElementTree(self, element_tree):
+    if self.where:
+      element_tree.attrib['where'] = self.where
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    element_tree.tag = gdata.GDATA_TEMPLATE % 'where'
+    return element_tree
+
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+    if attribute == 'where':
+      self.where = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    else:
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
+          element_tree)
+
+class ExtendedProperty(atom.AtomBase):
+  """The Google Calendar extendedProperty element"""
+
+  def __init__(self, extension_elements=None,
+      extension_attributes=None, text=None,
+      name=None, value=None):
+    self.name = name 
+    self.value = value
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+  def _TransferToElementTree(self, element_tree):
+    if self.name:
+      element_tree.attrib['name'] = self.name
+    if self.value:
+      element_tree.attrib['value'] = self.value
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    element_tree.tag = gdata.GDATA_TEMPLATE % 'extendedProperty'
+    return element_tree
+
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+    if attribute == 'name':
+      self.name = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    elif attribute == 'value':
+      self.value = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    else:
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
+          element_tree)
+
+
+class When(atom.AtomBase):
+  """The Google Calendar When element"""
+
+  def __init__(self, extension_elements=None,
+      extension_attributes=None, text=None,
+      start_time=None, end_time=None):
+    self.start_time = start_time 
+    self.end_time = end_time 
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+  def _TransferToElementTree(self, element_tree):
+    if self.start_time:
+      element_tree.attrib['startTime'] = self.start_time
+    if self.end_time:
+      element_tree.attrib['endTime'] = self.end_time
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    element_tree.tag = gdata.GDATA_TEMPLATE % 'when'
+    return element_tree
+
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+    if attribute == 'startTime':
+      self.start_time = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    elif attribute == 'endTime':
+      self.end_time = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    else:
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
+          element_tree)
+
+class Recurrence(atom.AtomBase):
+  """The Google Calendar Recurrence element"""
+
+  def _TransferToElementTree(self, element_tree):
+    element_tree.tag = gdata.GDATA_TEMPLATE % 'recurrence'
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    return element_tree
+
+class RecurrenceException(atom.AtomBase):
+  """The Google Calendar RecurrenceException element"""
+
+
+
+class UriEnumElement(atom.AtomBase):
+  def __init__(self, tag, enumMap, attribName='value', extension_elements=None,
+               extension_attributes=None):
+     self.tag=tag
+     self.enumMap=enumMap
+     self.attribName=attribName
+     self.value=None
+     self.extension_elements = extension_elements or []
+     self.extension_attributes = extension_attributes or {}
+     
+  def findKey(self, value):
+     res=[item[0] for item in self.enumMap.items() if item[1] == value]
+     if res is None or len(res) == 0:
+       return None
+     return res[0]
+
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+#    print "Class ", self.__class__.__name__, " attr is ", attribute, ' aname is ', self.attribName
+    if attribute == self.attribName:
+       val = element_tree.attrib[self.attribName]
+       if val != '':
+          self.value = self.enumMap[val]
+       del element_tree.attrib[self.attribName]
+    else:
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
+          element_tree)
+
+  def _TransferToElementTree(self, element_tree):
+    element_tree.tag = gdata.GDATA_TEMPLATE % self.tag
+    key = self.findKey(self.value)
+    if key is not None:
+       element_tree.attrib[self.attribName]=key
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    return element_tree
+
+ 
+class Who(UriEnumElement):
+  """The Google Calendar Who element"""
+  relEnum = { 'http://schemas.google.com/g/2005#event.attendee' : 'ATTENDEE',
+              'http://schemas.google.com/g/2005#event.organizer' : 'ORGANIZER',
+              'http://schemas.google.com/g/2005#event.performer' : 'PERFORMER',
+              'http://schemas.google.com/g/2005#event.speaker' : 'SPEAKER',
+              'http://schemas.google.com/g/2005#message.bcc' : 'BCC',
+              'http://schemas.google.com/g/2005#message.cc' : 'CC',
+              'http://schemas.google.com/g/2005#message.from' : 'FROM',
+              'http://schemas.google.com/g/2005#message.reply-to' : 'REPLY_TO',
+              'http://schemas.google.com/g/2005#message.to' : 'TO' }
+  
+  def __init__(self, extension_elements=None,
+      extension_attributes=None):
+    UriEnumElement.__init__(self, 'who', Who.relEnum, attribName='rel',
+                            extension_elements=extension_elements,
+                            extension_attributes=extension_attributes)
+    self.name=None
+    self.email=None
+    self.attendeeStatus=None
+    self.attendeeType=None
+    self.rel=None
+    
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+    if attribute == 'valueString':
+       self.name=element_tree.attrib[attribute]
+       del element_tree.attrib[attribute]
+    elif attribute == 'email':
+       self.email=element_tree.attrib[attribute]
+       del element_tree.attrib[attribute]
+    else:
+      UriEnumElement._TakeAttributeFromElementTree(self, attribute, 
+          element_tree)
+      self.rel=self.value
+
+  def _TakeChildFromElementTree(self, child, element_tree):
+    if child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'attendeeStatus'):
+      self.attendeeStatus=_AttendeeStatusFromElementTree(child)
+      element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'attendeeType'):
+      self.attendeeType=_AttendeeTypeFromElementTree(child)
+      element_tree.remove(child)
+    else:
+      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
+
+  def _TransferToElementTree(self, element_tree):
+    self.value=self.rel
+    element_tree.attrib['valueString']=self.name
+    element_tree.attrib['email']=self.email
+    return UriEnumElement._TransferToElementTree(self, element_tree)
+
+
+class AttendeeStatus(UriEnumElement):
+  """The Google Calendar attendeeStatus element"""
+  attendeeEnum = { 'http://schemas.google.com/g/2005#event.accepted' : 'ACCEPTED',
+                   'http://schemas.google.com/g/2005#event.declined' : 'DECLINED',
+                   'http://schemas.google.com/g/2005#event.invited' : 'INVITED',
+                   'http://schemas.google.com/g/2005#event.tentative' : 'TENTATIVE'}
+  
+  def __init__(self, extension_elements=None,
+      extension_attributes=None):
+    UriEnumElement.__init__(self, 'attendeeStatus', AttendeeStatus.attendeeEnum,
+                            extension_elements=extension_elements,
+                            extension_attributes=extension_attributes)
+
+
+
+class AttendeeType(UriEnumElement):
+  """The Google Calendar attendeeType element"""
+  attendeeTypeEnum = { 'http://schemas.google.com/g/2005#event.optional' : 'OPTIONAL',
+                       'http://schemas.google.com/g/2005#event.required' : 'REQUIRED' }
+  
+  def __init__(self, extension_elements=None,
+      extension_attributes=None, text=None):
+    UriEnumElement.__init__(self, 'attendeeType', AttendeeType.attendeeTypeEnum,
+                            extension_elements=extension_elements,
+                            extension_attributes=extension_attributes)
+
+
+class Visibility(UriEnumElement):
+  """The Google Calendar Visibility element"""
+  visibilityEnum = { 'http://schemas.google.com/g/2005#event.confidential' : 'CONFIDENTIAL',
+                     'http://schemas.google.com/g/2005#event.default' : 'DEFAULT',
+                     'http://schemas.google.com/g/2005#event.private' : 'PRIVATE',
+                     'http://schemas.google.com/g/2005#event.public' : 'PUBLIC' }
+
+  def __init__(self, extension_elements=None,
+      extension_attributes=None, text=None):
+    UriEnumElement.__init__(self, 'visibility', Visibility.visibilityEnum,
+                            extension_elements=extension_elements,
+                            extension_attributes=extension_attributes)
+
+
+    
+class Transparency(UriEnumElement):
+  """The Google Calendar Transparency element"""
+  transparencyEnum = { 'http://schemas.google.com/g/2005#event.opaque' : 'OPAQUE',
+                       'http://schemas.google.com/g/2005#event.transparent' : 'TRANSPARENT' }
+  
+  def __init__(self, extension_elements=None,
+      extension_attributes=None, text=None):
+    UriEnumElement.__init__(self, tag='transparency', enumMap=Transparency.transparencyEnum,
+                            extension_elements=extension_elements,
+                            extension_attributes=extension_attributes)
+
+
+class Comments(atom.AtomBase):
+  """The Google Calendar comments element"""
+
+  def __init__(self, extension_elements=None,
+      extension_attributes=None, text=None):
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+  def _TransferToElementTree(self, element_tree):
+    element_tree.tag = gdata.GDATA_TEMPLATE % 'comments'
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    return element_tree
+
+
+class EventStatus(UriEnumElement):
+  """The Google Calendar eventStatus element"""
+  statusEnum = { 'http://schemas.google.com/g/2005#event.canceled' : 'CANCELED',
+                 'http://schemas.google.com/g/2005#event.confirmed' : 'CONFIRMED',
+                 'http://schemas.google.com/g/2005#event.tentative' : 'TENTATIVE'}
+  
+  def __init__(self, extension_elements=None,
+      extension_attributes=None, text=None):
+    UriEnumElement.__init__(self, tag='eventStatus', enumMap=EventStatus.statusEnum,
+                            extension_elements=extension_elements,
+                            extension_attributes=extension_attributes)
+
+
+class SendEventNotifications(atom.AtomBase):
+  """The Google Calendar sendEventNotifications element"""
+
+  def __init__(self, extension_elements=None,
+      value=None,
+      extension_attributes=None, text=None):
+    self.value = value
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+  def _TransferToElementTree(self, element_tree):
+    if self.value:
+      element_tree.attrib['value'] = self.value
+    element_tree.tag = GCAL_TEMPLATE % 'sendEventNotifications'
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    return element_tree
+
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+    if attribute == 'value':
+      self.value = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    else:
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
+          element_tree)
+
+class Color(atom.AtomBase):
+  """The Google Calendar color element"""
+  
+  def __init__(self, extension_elements=None,
+      extension_attributes=None, text=None, value=None):
+    self.value = value
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+  def _TransferToElementTree(self, element_tree):
+    if self.value:
+      element_tree.attrib['value'] = self.value
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    element_tree.tag = GCAL_TEMPLATE % 'color'
+    return element_tree
+
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+    if attribute == 'value':
+      self.value = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    else:
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
+          element_tree)
+
+class AccessLevel(atom.AtomBase):
+  """The Google Calendar accesslevel element"""
+  
+  def __init__(self, extension_elements=None,
+      extension_attributes=None, text=None, value=None):
+    self.value = value
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+  def _TransferToElementTree(self, element_tree):
+    if self.value:
+      element_tree.attrib['value'] = self.value
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    element_tree.tag = GCAL_TEMPLATE % 'accesslevel'
+    return element_tree
+
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+    if attribute == 'value':
+      self.value = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    else:
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
+          element_tree)
+
+class Hidden(atom.AtomBase):
+  """The Google Calendar hidden element"""
+  
+  def __init__(self, extension_elements=None,
+      extension_attributes=None, text=None, value=None):
+    self.value = value
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+  def _TransferToElementTree(self, element_tree):
+    if self.value:
+      element_tree.attrib['value'] = self.value
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    element_tree.tag = GCAL_TEMPLATE % 'hidden'
+    return element_tree
+
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+    if attribute == 'value':
+      self.value = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    else:
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
+          element_tree)
+
+class Timezone(atom.AtomBase):
+  """The Google Calendar timezone element"""
+  
+  def __init__(self, extension_elements=None,
+      extension_attributes=None, text=None, value=None):
+    self.value = value
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+  def _TransferToElementTree(self, element_tree):
+    if self.value:
+      element_tree.attrib['value'] = self.value
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    element_tree.tag = GCAL_TEMPLATE % 'timezone'
+    return element_tree
+
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+    if attribute == 'value':
+      self.value = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    else:
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
+          element_tree)
+
+def CalendarFeedFromString(xml_string):
+  element_tree = ElementTree.fromstring(xml_string)
+  return _CalendarFeedFromElementTree(element_tree)
+
+def CalendarEventFeedFromString(xml_string):
+  element_tree = ElementTree.fromstring(xml_string)
+  return _CalendarEventFeedFromElementTree(element_tree)
+
+
+_CalendarFeedFromElementTree = atom._AtomInstanceFromElementTree(CalendarFeed, 'feed', atom.ATOM_NAMESPACE)
+
+_CalendarEntryFromElementTree = atom._AtomInstanceFromElementTree(CalendarEntry, 'entry', atom.ATOM_NAMESPACE)
+
+_CalendarEventFeedFromElementTree = atom._AtomInstanceFromElementTree(CalendarEventFeed, 'feed', atom.ATOM_NAMESPACE)
+
+_CalendarEventEntryFromElementTree = atom._AtomInstanceFromElementTree(CalendarEventEntry, 'entry', atom.ATOM_NAMESPACE)
+
+_WhereFromElementTree = atom._AtomInstanceFromElementTree(Where, 'where', gdata.GDATA_NAMESPACE)
+
+_WhenFromElementTree = atom._AtomInstanceFromElementTree(When, 'when', gdata.GDATA_NAMESPACE)
+
+_WhoFromElementTree = atom._AtomInstanceFromElementTree(Who, 'who', gdata.GDATA_NAMESPACE)
+
+_VisibilityFromElementTree= atom._AtomInstanceFromElementTree(Visibility, 'visibility', gdata.GDATA_NAMESPACE)
+
+_TransparencyFromElementTree = atom._AtomInstanceFromElementTree(Transparency, 'transparency', gdata.GDATA_NAMESPACE)
+
+_CommentsFromElementTree = atom._AtomInstanceFromElementTree(Comments, 'comments', gdata.GDATA_NAMESPACE)
+
+_EventStatusFromElementTree = atom._AtomInstanceFromElementTree(EventStatus, 'eventStatus', gdata.GDATA_NAMESPACE)
+
+_SendEventNotificationsFromElementTree = atom._AtomInstanceFromElementTree(SendEventNotifications, 'sendEventNotifications', GCAL_NAMESPACE)
+
+_AttendeeStatusFromElementTree = atom._AtomInstanceFromElementTree(AttendeeStatus, 'attendeeStatus', gdata.GDATA_NAMESPACE)
+
+_AttendeeTypeFromElementTree = atom._AtomInstanceFromElementTree(AttendeeType, 'attendeeType', gdata.GDATA_NAMESPACE)
+
+_ExtendedPropertyFromElementTree = atom._AtomInstanceFromElementTree(ExtendedProperty, 'extendedProperty', gdata.GDATA_NAMESPACE)
+
+_RecurrenceFromElementTree = atom._AtomInstanceFromElementTree(Recurrence, 'recurrence', gdata.GDATA_NAMESPACE)
+
+_RecurrenceExceptionFromElementTree = atom._AtomInstanceFromElementTree(RecurrenceException, 'recurrenceException', gdata.GDATA_NAMESPACE)
+
+_ColorFromElementTree = atom._AtomInstanceFromElementTree(Color, 'color', GCAL_NAMESPACE)
+_HiddenFromElementTree = atom._AtomInstanceFromElementTree(Hidden, 'hidden', GCAL_NAMESPACE)
+_TimezoneFromElementTree = atom._AtomInstanceFromElementTree(Timezone, 'timezone', GCAL_NAMESPACE)
+_AccessLevelFromElementTree = atom._AtomInstanceFromElementTree(AccessLevel, 'accesslevel', GCAL_NAMESPACE)
