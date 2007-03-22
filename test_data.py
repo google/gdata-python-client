@@ -22,7 +22,10 @@ XML_ENTRY_1 = """<?xml version='1.0'?>
   <category scheme="http://base.google.com/categories/itemtypes"
             term="products"/>
   <id>
+
     http://www.google.com/test/id/url 
+
+        
   </id>
   <title type='text'>Testing 2000 series laptop</title>
   <content type='xhtml'>

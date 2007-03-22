@@ -58,8 +58,8 @@ class GDataEntryTest(unittest.TestCase):
   def testIdShouldBeCleaned(self):
     entry = gdata.GDataEntryFromString(test_data.XML_ENTRY_1)
     element_tree = ElementTree.fromstring(test_data.XML_ENTRY_1)
-    self.assert_(element_tree.findall('{http://www.w3.org/2005/Atom}id'
-        )[0].text != entry.id.text)
+    self.assert_(element_tree.findall(
+        '{http://www.w3.org/2005/Atom}id')[0].text != entry.id.text)
     self.assert_(entry.id.text == 'http://www.google.com/test/id/url')
     
   def testGeneratorShouldBeCleaned(self):
@@ -67,7 +67,6 @@ class GDataEntryTest(unittest.TestCase):
     element_tree = ElementTree.fromstring(test_data.GBASE_FEED)
     self.assert_(element_tree.findall('{http://www.w3.org/2005/Atom}generator'
         )[0].text != feed.generator.text)
-    print 'feed.generator.text', feed.generator.text
     self.assert_(feed.generator.text == 'GoogleBase')
     
     

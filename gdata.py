@@ -172,6 +172,14 @@ class GDataFeed(atom.Feed, LinkFinder):
     elif child.tag == '{%s}%s' % (OPENSEARCH_NAMESPACE, 'itemsPerPage'):
       self.items_per_page = _ItemsPerPageFromElementTree(child)
       element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'id'):
+      atom.Feed._TakeChildFromElementTree(self, child, element_tree)
+      if self.id and self.id.text:
+        self.id.text = self.id.text.strip()
+    elif child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'generator'):
+      atom.Feed._TakeChildFromElementTree(self, child, element_tree)
+      if self.generator and self.generator.text:
+        self.generator.text = self.generator.text.strip()
     else:
       atom.Feed._TakeChildFromElementTree(self, child, element_tree)
 
@@ -184,10 +192,10 @@ def GDataFeedFromString(xml_string):
   element_tree = ElementTree.fromstring(xml_string)
   to_return =  _GDataFeedFromElementTree(element_tree)
   # Remove whitespace from selected GData elements
-  if to_return.id and to_return.id.text:
-    to_return.id.text = to_return.id.text.strip()
-  if to_return.generator and to_return.generator.text:
-    to_return.generator.text = to_return.generator.text.strip()
+  #if to_return.id and to_return.id.text:
+  #  to_return.id.text = to_return.id.text.strip()
+  #if to_return.generator and to_return.generator.text:
+  #  to_return.generator.text = to_return.generator.text.strip()
   return to_return
 
 def _GDataFeedFromElementTree(element_tree):
@@ -197,19 +205,22 @@ def _GDataFeedFromElementTree(element_tree):
 
 class GDataEntry(atom.Entry, LinkFinder):
   """Extends Atom Entry to provide data processing"""
-  pass
+  
+  def _TakeChildFromElementTree(self, child, element_tree):
+    if child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'id'):
+      atom.Entry._TakeChildFromElementTree(self, child, element_tree)
+      if self.id and self.id.text:
+        self.id.text = self.id.text.strip()
+    else:
+      atom.Entry._TakeChildFromElementTree(self, child, element_tree)
   
 def GDataEntryFromString(xml_string):
   """Creates a new GDataEntry instance given a string of XML."""
 
   element_tree = ElementTree.fromstring(xml_string)
-  to_return = _GDataEntryFromElementTree(element_tree)
-  # Clean the id's contents to remove whitespace characters.
-  if to_return.id and to_return.id.text:
-    to_return.id.text = to_return.id.text.strip()
-  return to_return
+  return _GDataEntryFromElementTree(element_tree)
 
-_GDataEntryFromElementTree = atom._AtomInstanceFromElementTree(atom.Entry, 
+_GDataEntryFromElementTree = atom._AtomInstanceFromElementTree(GDataEntry, 
     'entry', atom.ATOM_NAMESPACE)
 
 class TotalResults(atom.AtomBase):
