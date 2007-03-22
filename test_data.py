@@ -115,7 +115,7 @@ GBASE_FEED = """<?xml version='1.0' encoding='UTF-8'?>
 </link>
 <link rel='next' type='application/atom+xml' href='http://www.google.com/base/feeds/snippets?start-index=26&amp;max-results=25&amp;bq=digital+camera'>
 </link>
-<generator version='1.0' uri='http://base.google.com'>GoogleBase</generator>
+<generator version='1.0' uri='http://base.google.com'>GoogleBase              </generator>
 <openSearch:totalResults>2171885</openSearch:totalResults>
 <openSearch:startIndex>1</openSearch:startIndex>
 <openSearch:itemsPerPage>25</openSearch:itemsPerPage>

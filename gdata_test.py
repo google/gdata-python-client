@@ -62,6 +62,14 @@ class GDataEntryTest(unittest.TestCase):
         )[0].text != entry.id.text)
     self.assert_(entry.id.text == 'http://www.google.com/test/id/url')
     
+  def testGeneratorShouldBeCleaned(self):
+    feed = gdata.GDataFeedFromString(test_data.GBASE_FEED)
+    element_tree = ElementTree.fromstring(test_data.GBASE_FEED)
+    self.assert_(element_tree.findall('{http://www.w3.org/2005/Atom}generator'
+        )[0].text != feed.generator.text)
+    print 'feed.generator.text', feed.generator.text
+    self.assert_(feed.generator.text == 'GoogleBase')
+    
     
 if __name__ == '__main__':
   unittest.main()

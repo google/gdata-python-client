@@ -182,7 +182,13 @@ class GDataFeed(atom.Feed, LinkFinder):
 
 def GDataFeedFromString(xml_string):
   element_tree = ElementTree.fromstring(xml_string)
-  return _GDataFeedFromElementTree(element_tree)
+  to_return =  _GDataFeedFromElementTree(element_tree)
+  # Remove whitespace from selected GData elements
+  if to_return.id and to_return.id.text:
+    to_return.id.text = to_return.id.text.strip()
+  if to_return.generator and to_return.generator.text:
+    to_return.generator.text = to_return.generator.text.strip()
+  return to_return
 
 def _GDataFeedFromElementTree(element_tree):
   return atom._XFromElementTree(GDataFeed, 'feed', atom.ATOM_NAMESPACE, 
