@@ -389,7 +389,7 @@ class EntryTest(unittest.TestCase):
     self.assert_(entry.category[0].scheme == 
         'http://base.google.com/categories/itemtypes')
     self.assert_(entry.category[0].term == 'products')
-    self.assert_(entry.id.text == 'http://www.google.com/test/id/url')
+    self.assert_(entry.id.text == '    http://www.google.com/test/id/url   ')
     self.assert_(entry.title.text == 'Testing 2000 series laptop')
     self.assert_(entry.title.type == 'text')
     self.assert_(entry.content.type == 'xhtml')

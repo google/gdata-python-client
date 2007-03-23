@@ -228,16 +228,17 @@ class AtomBase(object):
 class Person(AtomBase):
   """A foundation class from which atom:author and atom:contributor extend.
   
-  This class should never be instantiated.
+  A person contains information like name, email address, and web page URI for
+  an author or contributor to an Atom feed. 
   """
 
-  def __init__(self, name=None, email=None, uri=None, 
+  def __init__(self, name=None, email=None, uri=None,
       extension_elements=None, extension_attributes=None, text=None):
     """Foundation from which author and contributor are derived.
 
     The constructor is provided for illustrative purposes, you should not
     need to instantiate a Person.
-    
+
     Args:
       name: Name The person's name
       email: Email The person's email address
@@ -256,9 +257,12 @@ class Person(AtomBase):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
     self.text = text
+
     
   def _TransferToElementTree(self, element_tree):
-    """Translates members into XML child nodes.
+    """Translates the Person's members into XML child nodes.
+
+    Members include the person's name, email address, and website URI.
     
     Args:
       element_tree: ElementTree._Element The element tree to which child
@@ -320,7 +324,10 @@ class Person(AtomBase):
 
 
 class Author(Person):
-  """The atom:author element"""
+  """The atom:author element
+  
+  An author is a required element in Feed. 
+  """
 
   def __init__(self, name=None, email=None, uri=None, 
       extension_elements=None, extension_attributes=None, text=None):
@@ -361,7 +368,7 @@ def _XFromElementTree(class_x, x_tag, x_namespace, element_tree):
   """Creates instance of class X if the element_tree's tag and namespace are 
      correct.
 
-  DEPRECATED
+  DEPRECATED, use _AtomInstanceFromElementTree instead
   
   Args:
     class_x: function The constructor method for the desired class.
@@ -650,7 +657,10 @@ _GeneratorFromElementTree = _AtomInstanceFromElementTree(Generator,
 
 
 class Text(AtomBase):
-  """A parent class for atom:title, summary, etc."""
+  """A foundation class from which atom:title, summary, etc. extend.
+  
+  This class should never be instantiated.
+  """
 
   def __init__(self, text_type=None, text=None, extension_elements=None,
       extension_attributes=None):
