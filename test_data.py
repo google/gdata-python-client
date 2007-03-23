@@ -240,6 +240,11 @@ TEST_LINK = """<?xml version="1.0" encoding="utf-8"?>
        rel="test rel" foo1="bar" foo2="rab"/>
 """
 
+TEST_GBASE_ATTRIBUTE = """<?xml version="1.0" encoding="utf-8"?>
+   <g:brand type='text' xmlns:g="http://base.google.com/ns/1.0">Digital Camera Battery</g:brand>
+"""
+   
+
 CALENDAR_FEED = """<?xml version='1.0' encoding='utf-8'?>
 <feed xmlns='http://www.w3.org/2005/Atom'
 xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
