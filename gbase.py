@@ -35,12 +35,6 @@ GMETA_TEMPLATE = '{http://base.google.com/ns-metadata/1.0}%s'
 class GBaseItemFeed(gdata.GDataFeed):
   """A feed containing Google Base Items"""
 
-  def _TransferToElementTree(self, element_tree):
-    for an_entry in self.entry:
-      element_tree.append(an_entry._ToElementTree())
-    gdata.GDataFeed._TransferToElementTree(self, element_tree)
-    return element_tree
-
   def _TakeChildFromElementTree(self, child, element_tree):
     if child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'entry'):
       self.entry.append(_GBaseItemFromElementTree(child))
@@ -92,12 +86,6 @@ class GBaseAttributeFeed(gdata.GDataFeed):
   attributes which are present in the items that match the
   query. 
   """
-
-  #def _TransferToElementTree(self, element_tree):
-    #for an_entry in self.entry:
-    #  element_tree.append(an_entry._ToElementTree())
-    #gdata.GDataFeed._TransferToElementTree(self, element_tree)
-    #return element_tree
 
   def _TakeChildFromElementTree(self, child, element_tree):
     if child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'entry'):
@@ -229,25 +217,12 @@ class ItemAttribute(atom.Text):
     atom.Text._TransferToElementTree(self, element_tree)
     return element_tree
 
-  #def _TakeAttributeFromElementTree(self, attribute, element_tree):
-  #  if element_treedd
-  #  self.name = child.tag[child.tag.index('}')+1:]
-  #  if attribute == 'type':
-  #    self.type = element_tree.attrib[attribute]
-  #    del element_tree.attrib[attribute]
-  #  else:
-  #    AtomBase._TakeAttributeFromElementTree(self, attribute, element_tree)
-
   def _TransferFromElementTree(self, element_tree):
     full_tag = element_tree.tag
     if full_tag.find(GBASE_TEMPLATE % '') == 0:
       self.name = full_tag[full_tag.index('}')+1:]
     # Transfer all xml attributes and children
     atom.Text._TransferFromElementTree(self, element_tree)
-#    while len(element_tree.attrib.keys()) > 0:
-#      current_key = element_tree.attrib.keys()[0]
-#      self._TakeAttributeFromElementTree(current_key, element_tree)
-#    AtomBase._TransferFromElementTree(self, element_tree)
 
 def ItemAttributeFromString(xml_string):
   element_tree = ElementTree.fromstring(xml_string)
@@ -306,9 +281,6 @@ class GBaseItem(gdata.GDataEntry, ItemAttributeContainer):
     if self.item_type:
       element_tree.append(self.item_type._ToElementTree())
     for name, value in self.item_attributes.items():
-      #new_element = ElementTree.Element('')
-      #new_element.tag = GBASE_TEMPLATE % name
-      #new_element.text = value
       element_tree.append(value._ToElementTree())
     atom.Entry._TransferToElementTree(self, element_tree)
     return element_tree
@@ -327,8 +299,6 @@ class GBaseItem(gdata.GDataEntry, ItemAttributeContainer):
       item_attribute = _ItemAttributeFromElementTree(child)
       if item_attribute:
         self.item_attributes[item_attribute.name] = item_attribute
-      #name = child.tag[child.tag.index('}')+1:]
-      #self.item_attributes[name] = child.text
         element_tree.remove(child)
     else:
       gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
@@ -580,5 +550,97 @@ _GBaseAttributeEntryFromElementTree = atom._AtomInstanceFromElementTree(
     GBaseAttributeEntry, 'entry', atom.ATOM_NAMESPACE)
 
 
+class GBaseItemTypeEntry(gdata.GDataEntry):
+  """An Atom entry from the item types feed
+  
+  These entries contain a list of attributes which are stored in one
+  XML node called attributes. This class simplifies the data structure
+  by treating attributes as a list of attribute instances. 
+  """
 
+  def __init__(self, author=None, category=None, content=None,
+      contributor=None, atom_id=None, link=None, published=None, rights=None,
+      source=None, summary=None, title=None, updated=None, label=None,
+      item_type=None, attributes=None,
+      text=None, extension_elements=None, extension_attributes=None):
+    self.author = author or []
+    self.category = category or []
+    self.content = content
+    self.contributor = contributor or []
+    self.id = atom_id
+    self.link = link or []
+    self.published = published
+    self.rights = rights
+    self.source = source
+    self.summary = summary
+    self.title = title
+    self.updated = updated
+    self.label = label or []
+    self.item_type = item_type
+    self.attributes = attributes or []
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
 
+  def _TransferToElementTree(self, element_tree):
+    attribute_list = ElementTree.Element(GMETA_TEMPLATE % 'attributes')
+    for an_attribute in self.attributes:
+      attribute_list.append(an_attribute._ToElementTree())
+    if len(attribute_list) > 0:
+      element_tree.append(attribute_list)
+    if self.item_type:
+      element_tree.append(self.item_type._ToElementTree())
+    gdata.GDataEntry._TransferToElementTree(self, element_tree)
+    return element_tree
+
+  def _TakeChildFromElementTree(self, child, element_tree):
+    if child.tag == '{%s}%s' % (GMETA_NAMESPACE, 'attributes'):
+      while len(child) > 0:
+        if child[0].tag == '{%s}%s' % (GMETA_NAMESPACE, 'attribute'):
+          self.attributes.append(_AttributeFromElementTree(child[0]))
+          child.remove(child[0])
+      element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (GMETA_NAMESPACE, 'attribute'):
+      self.attributes.append(_AttributeFromElementTree(child))
+      element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (GBASE_NAMESPACE, 'item_type'):
+      self.item_type = _ItemTypeFromElementTree(child)
+      element_tree.remove(child)
+    else:
+      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
+
+  def _TransferFromElementTree(self, element_tree):
+    while len(element_tree) > 0:
+      self._TakeChildFromElementTree(element_tree[0], element_tree)
+    gdata.GDataEntry._TransferFromElementTree(self, element_tree)
+
+def GBaseItemTypeEntryFromString(xml_string):
+  element_tree = ElementTree.fromstring(xml_string)
+  return _GBaseItemTypeEntryFromElementTree(element_tree)
+
+_GBaseItemTypeEntryFromElementTree = atom._AtomInstanceFromElementTree(
+    GBaseItemTypeEntry, 'entry', atom.ATOM_NAMESPACE)
+ 
+
+class GBaseItemTypesFeed(gdata.GDataFeed):
+  """A feed from the Google Base item types feed"""
+
+  def _TakeChildFromElementTree(self, child, element_tree):
+    if child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'entry'):
+      self.entry.append(_GBaseItemTypeEntryFromElementTree(child))
+      element_tree.remove(child)
+    else:
+      gdata.GDataFeed._TakeChildFromElementTree(self, child, element_tree)
+
+  def _TransferFromElementTree(self, element_tree):
+    while len(element_tree) > 0:
+      self._TakeChildFromElementTree(element_tree[0], element_tree)
+    gdata.GDataFeed._TransferFromElementTree(self, element_tree)
+
+def GBaseItemTypesFeedFromString(xml_string):
+  element_tree = ElementTree.fromstring(xml_string)
+  return _GBaseItemTypesFeedFromElementTree(element_tree)
+
+def _GBaseItemTypesFeedFromElementTree(element_tree):
+  return atom._XFromElementTree(GBaseItemTypesFeed, 'feed', atom.ATOM_NAMESPACE,
+      element_tree)

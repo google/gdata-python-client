@@ -258,7 +258,23 @@ class GBaseLocalesFeedTest(unittest.TestCase):
         self.assert_(an_entry.category[0].term == 'en_US')
       self.assert_(an_entry.title.text == an_entry.category[0].term)
 
-    
+  
+class GBaseItemTypesFeedAndEntryTest(unittest.TestCase):
+
+  def testItemTypesFeedToAndFromString(self):
+    feed = gbase.GBaseItemTypesFeed()
+    entry = gbase.GBaseItemTypeEntry()
+    entry.attributes.append(gbase.Attribute(name='location', 
+        attribute_type='location'))
+    entry.item_type = gbase.ItemType(text='jobs')
+    feed.entry.append(entry)
+    self.assert_(len(feed.entry) == 1)
+    self.assert_(feed.entry[0].item_type.text == 'jobs')
+    self.assert_(feed.entry[0].attributes[0].name == 'location')
+    new_feed = gbase.GBaseItemTypesFeedFromString(str(feed))
+    self.assert_(len(new_feed.entry) == 1)
+    self.assert_(new_feed.entry[0].item_type.text == 'jobs')
+    self.assert_(new_feed.entry[0].attributes[0].name == 'location')
     
 if __name__ == '__main__':
   unittest.main()
