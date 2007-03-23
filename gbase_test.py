@@ -246,6 +246,19 @@ class GBaseAttributeFeedTest(unittest.TestCase):
     self.assert_(new_feed.entry[0].attribute[0].value[0].text == 'happy')
             
 
+class GBaseLocalesFeedTest(unittest.TestCase):
+  
+  def testLocatesFeedWithExampleData(self):
+    feed = gbase.GBaseLocalesFeedFromString(test_data.GBASE_LOCALES_FEED)
+    self.assert_(len(feed.entry) == 3)
+    self.assert_(feed.GetSelfLink().href == 
+        'http://www.google.com/base/feeds/locales/') 
+    for an_entry in feed.entry:
+      if an_entry.title.text == 'en_US':
+        self.assert_(an_entry.category[0].term == 'en_US')
+      self.assert_(an_entry.title.text == an_entry.category[0].term)
+
+    
     
 if __name__ == '__main__':
   unittest.main()

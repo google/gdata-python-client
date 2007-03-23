@@ -833,3 +833,61 @@ GBASE_ATTRIBUTE_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
         </gm:attribute>
       </entry>
 """ 
+
+GBASE_LOCALES_FEED = """<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom'
+      xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
+      xmlns:gm='http://base.google.com/ns-metadata/1.0'>
+         <id> http://www.google.com/base/feeds/locales/</id>
+  <updated>2006-06-13T18:11:40.120Z</updated>
+  <title type="text">Locales</title> 
+  <link rel="alternate" type="text/html" href="http://base.google.com"/>
+  <link rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml"
+
+       href="http://www.google.com/base/feeds/locales/"/>
+  <link rel="self" type="application/atom+xml" href="http://www.google.com/base/feeds/locales/"/>
+         <author>
+    <name>Google Inc.</name>
+    <email>base@google.com</email>
+  </author>
+  <generator version="1.0" uri="http://base.google.com">GoogleBase</generator>
+  <openSearch:totalResults>3</openSearch:totalResults>
+  <openSearch:itemsPerPage>25</openSearch:itemsPerPage>
+
+<entry>
+  <id>http://www.google.com/base/feeds/locales/en_US</id>
+  <updated>2006-03-27T22:27:36.658Z</updated>
+  <category scheme="http://base.google.com/categories/locales" term="en_US"/>
+
+  <title type="text">en_US</title>
+  <content type="text">en_US</content>
+  <link rel="self" type="application/atom+xml" 
+     href="http://www.google.com/base/feeds/locales/en_US"></link>
+
+  <link rel="related" type="application/atom+xml" 
+     href="http://www.google.com/base/feeds/itemtypes/en_US" title="Item types in en_US"/>
+</entry>
+<entry>
+         <id>http://www.google.com/base/feeds/locales/en_GB</id>
+  <updated>2006-06-13T18:14:18.601Z</updated>
+  <category scheme="http://base.google.com/categories/locales" term="en_GB"/>
+  <title type="text">en_GB</title>
+  <content type="text">en_GB</content>
+  <link rel="related" type="application/atom+xml" 
+     href="http://www.google.com/base/feeds/itemtypes/en_GB" title="Item types in en_GB"/>
+  <link rel="self" type="application/atom+xml" 
+     href="http://www.google.com/base/feeds/locales/en_GB"/>
+</entry>
+<entry>
+  <id>http://www.google.com/base/feeds/locales/de_DE</id>
+  <updated>2006-06-13T18:14:18.601Z</updated>
+  <category scheme="http://base.google.com/categories/locales" term="de_DE"/>
+  <title type="text">de_DE</title>
+  <content type="text">de_DE</content>
+  <link rel="related" type="application/atom+xml" 
+     href="http://www.google.com/base/feeds/itemtypes/de_DE" title="Item types in de_DE"/>
+  <link rel="self" type="application/atom+xml" 
+     href="http://www.google.com/base/feeds/locales/de_DE"/>
+</entry>
+</feed>"""
+

@@ -119,6 +119,23 @@ _GBaseAttributeFeedFromElementTree = atom._AtomInstanceFromElementTree(
     GBaseAttributeFeed, 'feed', atom.ATOM_NAMESPACE)
 
 
+class GBaseLocalesFeed(gdata.GDataFeed):
+  """The locales feed from Google Base.
+
+  This read-only feed defines the permitted locales for Google Base. The 
+  locale value identifies the language, currency, and date formats used in a
+  feed.
+  """
+  pass
+
+def GBaseLocalesFeedFromString(xml_string):
+  element_tree = ElementTree.fromstring(xml_string)
+  return _GBaseLocalesFeedFromElementTree(element_tree)
+
+_GBaseLocalesFeedFromElementTree = atom._AtomInstanceFromElementTree(
+    GBaseLocalesFeed, 'feed', atom.ATOM_NAMESPACE)
+
+
 class ItemAttributeContainer(object):
   """Provides methods for finding Google Base Item attributes.
   
