@@ -62,6 +62,7 @@ from elementtree import ElementTree
 import app_service
 import gdata
 import atom
+import re
 
 
 PROGRAMMATIC_AUTH_LABEL = 'GoogleLogin auth'
@@ -135,6 +136,7 @@ class GDataService(app_service.AtomService):
     self.__auth_type = None
     self.__captcha_token = None
     self.__captcha_url = None
+    self.__gsessionid = None
  
   # Define properties for GDataClient
   def _SetAuthSubToken(self, auth_token):
@@ -391,7 +393,7 @@ class GDataService(app_service.AtomService):
       self.__auth_token = None
 
   # CRUD operations
-  def Get(self, uri, extra_headers=None):
+  def Get(self, uri, extra_headers=None, redirects_remaining=4):
     """Query the GData API with the given URI
 
     The uri is the portion of the URI after the server value 
@@ -422,6 +424,13 @@ class GDataService(app_service.AtomService):
       extra_headers['Authorization'] = '%s=%s' % (self.__auth_type, 
                                                   self.__auth_token)
 
+    if self.__gsessionid is not None:
+      if uri.find('?') > -1:
+        uri += '&gsessionid=%s' % (gsessionid,)
+      else:
+        uri += '?gsessionid=%s' % (gsessionid,)
+
+    print 'Calling AtomService with a uri ' + uri
     server_response = app_service.AtomService.Get(self, uri, extra_headers)
     result_body = server_response.read()
 
@@ -433,6 +442,23 @@ class GDataService(app_service.AtomService):
           return result_body
         return entry
       return feed
+    elif server_response.status == 302:
+      if redirects_remaining > 0:
+        location = server_response.getheader('Location')
+        if location is not None:
+          m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
+          if m is not None:
+            self.__gsessionid = m.group(0) 
+          return self.Get(location, extra_headers, redirects_remaining - 1)
+        else:
+          raise RequestError, {'status': server_response.status,
+              'reason': '302 received without Location header',
+              'body': result_body}
+      else:
+        raise RequestError, {'status': server_response.status,
+            'reason': 'Redirect received, but redirects_remaining <= 0',
+            'body': result_body}
+        
     else:
       raise RequestError, {'status': server_response.status,
           'reason': server_response.reason, 'body': result_body}
