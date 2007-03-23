@@ -773,3 +773,63 @@ xmlns:gCal='http://schemas.google.com/gCal/2005'>
   </entry>
 </feed>
 """
+
+GBASE_ATTRIBUTE_FEED = """<?xml version='1.0' encoding='UTF-8'?>
+    <feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:gm='http://base.google.com/ns-metadata/1.0'>
+      <id>http://www.google.com/base/feeds/attributes</id>
+      <updated>2006-11-01T20:35:59.578Z</updated>
+      <category scheme='http://base.google.com/categories/itemtypes' term='online jobs'></category>
+      <category scheme='http://base.google.com/categories/itemtypes' term='jobs'></category>
+      <title type='text'>Attribute histogram for query: [item type:jobs]</title>
+      <link rel='alternate' type='text/html' href='http://base.google.com'></link>
+      <link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='http://www.google.com/base/feeds/attributes'></link>
+      <link rel='self' type='application/atom+xml' href='http://www.google.com/base/feeds/attributes/-/jobs?key=ABQIAAAA7VerLsOcLuBYXR7vZI2NjhTRERdeAiwZ9EeJWta3L_JZVS0bOBRIFbhTrQjhHE52fqjZvfabYYyn6A&max-values=10'></link>
+      <generator version='1.0' uri='http://base.google.com'>GoogleBase</generator>
+      <openSearch:totalResults>16</openSearch:totalResults>
+      <openSearch:startIndex>1</openSearch:startIndex>
+      <openSearch:itemsPerPage>16</openSearch:itemsPerPage>
+      <entry>
+        <id>http://www.google.com/base/feeds/attributes/job+industry%28text%29N%5Bitem+type%3Ajobs%5D</id>
+        <updated>2006-11-01T20:36:00.100Z</updated>
+        <title type='text'>job industry(text)</title>
+        <content type='text'>Attribute"job industry" of type text.
+        </content>
+        <link rel='self' type='application/atom+xml' href='http://www.google.com/base/feeds/attributes/job+industry%28text%29N%5Bitem+type%3Ajobs%5D'></link>
+        <gm:attribute name='job industry' type='text' count='4416629'>
+          <gm:value count='380772'>it internet</gm:value>
+          <gm:value count='261565'>healthcare</gm:value>
+          <gm:value count='142018'>information technology</gm:value>
+          <gm:value count='124622'>accounting</gm:value>
+          <gm:value count='111311'>clerical and administrative</gm:value>
+          <gm:value count='82928'>other</gm:value>
+          <gm:value count='77620'>sales and sales management</gm:value>
+          <gm:value count='68764'>information systems</gm:value>
+          <gm:value count='65859'>engineering and architecture</gm:value>
+          <gm:value count='64757'>sales</gm:value>
+        </gm:attribute>
+      </entry>
+    </feed>
+"""
+
+GBASE_ATTRIBUTE_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
+ <entry xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:gm='http://base.google.com/ns-metadata/1.0'>
+        <id>http://www.google.com/base/feeds/attributes/job+industry%28text%29N%5Bitem+type%3Ajobs%5D</id>
+        <updated>2006-11-01T20:36:00.100Z</updated>
+        <title type='text'>job industry(text)</title>
+        <content type='text'>Attribute"job industry" of type text.
+        </content>
+        <link rel='self' type='application/atom+xml' href='http://www.google.com/base/feeds/attributes/job+industry%28text%29N%5Bitem+type%3Ajobs%5D'></link>
+        <gm:attribute name='job industry' type='text' count='4416629'>
+          <gm:value count='380772'>it internet</gm:value>
+          <gm:value count='261565'>healthcare</gm:value>
+          <gm:value count='142018'>information technology</gm:value>
+          <gm:value count='124622'>accounting</gm:value>
+          <gm:value count='111311'>clerical and administrative</gm:value>
+          <gm:value count='82928'>other</gm:value>
+          <gm:value count='77620'>sales and sales management</gm:value>
+          <gm:value count='68764'>information systems</gm:value>
+          <gm:value count='65859'>engineering and architecture</gm:value>
+          <gm:value count='64757'>sales</gm:value>
+        </gm:attribute>
+      </entry>
+""" 

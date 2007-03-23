@@ -156,7 +156,96 @@ class ItemAttributeTest(unittest.TestCase):
     # Test conversion to en ElementTree
     element = attrib._ToElementTree()
     self.assert_(element.tag == gbase.GBASE_TEMPLATE % 'brand')
+
+
+class AttributeTest(unittest.TestCase):
+
+  def testAttributeToAndFromString(self):
+    attrib = gbase.Attribute()
+    attrib.type = 'float'
+    attrib.count = '44000'
+    attrib.name = 'test attribute'
+    attrib.value.append(gbase.Value(count='500', text='a value'))
+    self.assert_(attrib.type == 'float')
+    self.assert_(attrib.count == '44000')
+    self.assert_(attrib.name == 'test attribute')
+    self.assert_(attrib.value[0].count == '500')
+    self.assert_(attrib.value[0].text == 'a value')
+    new_attrib = gbase.AttributeFromString(str(attrib))
+    self.assert_(attrib.type == new_attrib.type)
+    self.assert_(attrib.count == new_attrib.count)
+    self.assert_(attrib.value[0].count == new_attrib.value[0].count)
+    self.assert_(attrib.value[0].text == new_attrib.value[0].text)
+    self.assert_(attrib.name == new_attrib.name)
+
+
+class ValueTest(unittest.TestCase):
+
+  def testValueToAndFromString(self):
+    value = gbase.Value()
+    value.count = '5123'
+    value.text = 'super great'
+    self.assert_(value.count == '5123')
+    self.assert_(value.text == 'super great')
+    new_value = gbase.ValueFromString(str(value))
+    self.assert_(new_value.count == value.count)
+    self.assert_(new_value.text == value.text)
     
+
+class AttributeEntryTest(unittest.TestCase):
+
+  def testAttributeEntryToAndFromString(self):
+    value = gbase.Value(count='500', text='happy')
+    attribute = gbase.Attribute(count='600', value=[value])
+    a_entry = gbase.GBaseAttributeEntry(attribute=[attribute])
+    self.assert_(a_entry.attribute[0].count == '600')
+    self.assert_(a_entry.attribute[0].value[0].count == '500')
+    self.assert_(a_entry.attribute[0].value[0].text == 'happy')
+    new_entry = gbase.GBaseAttributeEntryFromString(str(a_entry))
+    self.assert_(new_entry.attribute[0].count == '600')
+    self.assert_(new_entry.attribute[0].value[0].count == '500')
+    self.assert_(new_entry.attribute[0].value[0].text == 'happy')
+    
+
+class GBaseAttributeEntryTest(unittest.TestCase):
+
+  def testAttribteEntryFromExampleData(self):
+    entry = gbase.GBaseAttributeEntryFromString(
+        test_data.GBASE_ATTRIBUTE_ENTRY)
+    self.assert_(len(entry.attribute) == 1)
+    self.assert_(len(entry.attribute[0].value) == 10)
+    self.assert_(entry.attribute[0].name == 'job industry')
+    for val in entry.attribute[0].value:
+      if val.text == 'it internet':
+        self.assert_(val.count == '380772')
+      elif val.text == 'healthcare':
+        self.assert_(val.count == '261565')
+      
+
+
+class GBaseAttributeFeedTest(unittest.TestCase):
+
+  def testAttributeFeedExampleData(self):
+    #feed = gbase.GBaseAttributeFeedFromString(test_data.GBASE_ATTRIBUTE_FEED)
+    #self.assert_(len(feed.entry) == 1)
+    #self.assert_(isinstance(feed.entry[0], gbase.GBaseAttributeEntry))
+    #TODO: find the malformed XML in test_data.GBASE_ATTRIBUTE_FEED
+    pass
+
+  def testAttributeFeedToAndFromString(self):
+    value = gbase.Value(count='500', text='happy')
+    attribute = gbase.Attribute(count='600', value=[value])
+    a_entry = gbase.GBaseAttributeEntry(attribute=[attribute])
+    feed = gbase.GBaseAttributeFeed(entry=[a_entry])
+    self.assert_(feed.entry[0].attribute[0].count == '600')
+    self.assert_(feed.entry[0].attribute[0].value[0].count == '500')
+    self.assert_(feed.entry[0].attribute[0].value[0].text == 'happy')
+    new_feed = gbase.GBaseAttributeFeedFromString(str(feed))
+    self.assert_(new_feed.entry[0].attribute[0].count == '600')
+    self.assert_(new_feed.entry[0].attribute[0].value[0].count == '500')
+    self.assert_(new_feed.entry[0].attribute[0].value[0].text == 'happy')
+            
+
     
 if __name__ == '__main__':
   unittest.main()
