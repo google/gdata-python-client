@@ -223,24 +223,24 @@ class GBaseAttributeEntryTest(unittest.TestCase):
       
 
 
-class GBaseAttributeFeedTest(unittest.TestCase):
+class GBaseAttributesFeedTest(unittest.TestCase):
 
-  def testAttributeFeedExampleData(self):
-    #feed = gbase.GBaseAttributeFeedFromString(test_data.GBASE_ATTRIBUTE_FEED)
+  def testAttributesFeedExampleData(self):
+    #feed = gbase.GBaseAttributesFeedFromString(test_data.GBASE_ATTRIBUTE_FEED)
     #self.assert_(len(feed.entry) == 1)
     #self.assert_(isinstance(feed.entry[0], gbase.GBaseAttributeEntry))
     #TODO: find the malformed XML in test_data.GBASE_ATTRIBUTE_FEED
     pass
 
-  def testAttributeFeedToAndFromString(self):
+  def testAttributesFeedToAndFromString(self):
     value = gbase.Value(count='500', text='happy')
     attribute = gbase.Attribute(count='600', value=[value])
     a_entry = gbase.GBaseAttributeEntry(attribute=[attribute])
-    feed = gbase.GBaseAttributeFeed(entry=[a_entry])
+    feed = gbase.GBaseAttributesFeed(entry=[a_entry])
     self.assert_(feed.entry[0].attribute[0].count == '600')
     self.assert_(feed.entry[0].attribute[0].value[0].count == '500')
     self.assert_(feed.entry[0].attribute[0].value[0].text == 'happy')
-    new_feed = gbase.GBaseAttributeFeedFromString(str(feed))
+    new_feed = gbase.GBaseAttributesFeedFromString(str(feed))
     self.assert_(new_feed.entry[0].attribute[0].count == '600')
     self.assert_(new_feed.entry[0].attribute[0].value[0].count == '500')
     self.assert_(new_feed.entry[0].attribute[0].value[0].text == 'happy')

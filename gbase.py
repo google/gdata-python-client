@@ -19,7 +19,7 @@
 __author__ = 'api.jscudder (Jeffrey Scudder)'
 
 
-#TODO: create the following GBaseAttribute, GBaseAttributeFeed, GBaseItemType, GBaseItemTypeFeed, Attribute, Value, ...
+#TODO: create the following GBaseAttribute, GBaseAttributesFeed, GBaseItemType, GBaseItemTypeFeed, Attribute, Value, ...
 
 from elementtree import ElementTree
 import atom
@@ -79,7 +79,7 @@ _GBaseSnippetFeedFromElementTree = atom._AtomInstanceFromElementTree(
     GBaseSnippetFeed, 'feed', atom.ATOM_NAMESPACE)
 
 
-class GBaseAttributeFeed(gdata.GDataFeed):
+class GBaseAttributesFeed(gdata.GDataFeed):
   """A feed containing Google Base Attributes
  
   A query sent to the attributes feed will return a feed of
@@ -99,12 +99,12 @@ class GBaseAttributeFeed(gdata.GDataFeed):
       self._TakeChildFromElementTree(element_tree[0], element_tree)
     gdata.GDataFeed._TransferFromElementTree(self, element_tree)
 
-def GBaseAttributeFeedFromString(xml_string):
+def GBaseAttributesFeedFromString(xml_string):
   element_tree = ElementTree.fromstring(xml_string)
-  return _GBaseAttributeFeedFromElementTree(element_tree)
+  return _GBaseAttributesFeedFromElementTree(element_tree)
 
-_GBaseAttributeFeedFromElementTree = atom._AtomInstanceFromElementTree(
-    GBaseAttributeFeed, 'feed', atom.ATOM_NAMESPACE)
+_GBaseAttributesFeedFromElementTree = atom._AtomInstanceFromElementTree(
+    GBaseAttributesFeed, 'feed', atom.ATOM_NAMESPACE)
 
 
 class GBaseLocalesFeed(gdata.GDataFeed):
