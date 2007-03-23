@@ -430,7 +430,6 @@ class GDataService(app_service.AtomService):
       else:
         uri += '?gsessionid=%s' % (gsessionid,)
 
-    print 'Calling AtomService with a uri ' + uri
     server_response = app_service.AtomService.Get(self, uri, extra_headers)
     result_body = server_response.read()
 
