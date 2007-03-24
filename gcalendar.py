@@ -354,10 +354,91 @@ class Recurrence(atom.AtomBase):
     return element_tree
 
 
-# TODO implement recurrence exception
-# TODO implement originalEvent 
 class RecurrenceException(atom.AtomBase):
   """The Google Calendar RecurrenceException element"""
+  
+  def __init__(self, extension_elements=None,
+      extension_attributes=None, text=None,
+      specialized=None, entry_link=None, 
+      original_event=None):
+    self.specialized = specialized
+    self.entry_link = entry_link
+    self.original_event = original_event
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+    
+  def _TransferToElementTree(self, element_tree):
+    if self.specialized:
+      element_tree.attrib['specialized'] = self.specialized
+    if self.entry_link:
+      element_tree.append(entry_link._ToElementTree())
+    if self.original_event:
+      element_tree.append(original_event._ToElementTree())
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    element_tree.tag = gdata.GDATA_TEMPLATE % 'recurrenceException'
+    return element_tree
+    
+  def _TakeChildFromElementTree(self, child, element_tree):
+    if child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'entry_link'):
+      self.entry_link = _EntryLinkFromElementTree(child)
+      element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'original_event'):
+      self.original_event = _OriginalEventLinkFromElementTree(child)
+    else:
+      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
+
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+    if attribute == 'specialized':
+      self.specialized = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    else:
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute,
+          element_tree)
+  
+ 
+class OriginalEvent(atom.AtomBase):
+  """The Google Calendar OriginalEvent element"""
+
+  def __init__(self, extension_elements=None,
+      extension_attributes=None, text=None,
+      id=None, href=None, 
+      when=None):
+    self.id = id
+    self.href = href 
+    self.when = when
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+  def _TransferToElementTree(self, element_tree):
+    if self.id:
+      element_tree.attrib['id'] = self.id
+    if self.href:
+      element_tree.attrib['href'] = self.href
+    if self.when:
+      element_tree.append(self.when._ToElementTree())
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    element_tree.tag = gdata.GDATA_TEMPLATE % 'originalEvent'
+    return element_tree
+    
+  def _TakeChildFromElementTree(self, child, element_tree):
+    if child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'when'):
+      self.when = _EntryLinkFromElementTree(child)
+      element_tree.remove(child)
+    else:
+      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
+
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+    if attribute == 'id':
+      self.id = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    elif attribute == 'href':
+      self.href = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    else:
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute,
+          element_tree)
 
 
 class UriEnumElement(atom.AtomBase):
@@ -750,6 +831,8 @@ _RecurrenceFromElementTree = atom._AtomInstanceFromElementTree(
     Recurrence, 'recurrence', gdata.GDATA_NAMESPACE)
 _RecurrenceExceptionFromElementTree = atom._AtomInstanceFromElementTree(
     RecurrenceException, 'recurrenceException', gdata.GDATA_NAMESPACE)
+_OriginalEventFromElementTree = atom._AtomInstanceFromElementTree(
+    OriginalEvent, 'originalEvent', gdata.GDATA_NAMESPACE)
 _ColorFromElementTree = atom._AtomInstanceFromElementTree(
     Color, 'color', GCAL_NAMESPACE)
 _HiddenFromElementTree = atom._AtomInstanceFromElementTree(
