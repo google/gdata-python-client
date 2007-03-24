@@ -715,6 +715,103 @@ class Query(dict):
   text_query = property(_GetTextQuery, _SetTextQuery, 
       doc="""The feed query's q parameter""")
 
+  def _GetAuthor(self):
+    if 'author' in self.keys():
+      return self['author']
+    else:
+      return None
+
+  def _SetAuthor(self, query):
+    self['author'] = query
+
+  author = property(_GetAuthor, _SetAuthor,
+      doc="""The feed query's author parameter""")
+
+  def _GetAlt(self):
+    if 'alt' in self.keys():
+      return self['alt']
+    else:
+      return None
+
+  def _SetAlt(self, query):
+    self['alt'] = query
+
+  alt = property(_GetAlt, _SetAlt,
+      doc="""The feed query's alt parameter""")
+
+  def _GetUpdatedMin(self):
+    if 'updated-min' in self.keys():
+      return self['updated-min']
+    else:
+      return None
+
+  def _SetUpdatedMin(self, query):
+    self['updated-min'] = query
+
+  updated_min = property(_GetUpdatedMin, _SetUpdatedMin,
+      doc="""The feed query's updated-min parameter""")
+
+  def _GetUpdatedMax(self):
+    if 'updated-max' in self.keys():
+      return self['updated-max']
+    else:
+      return None
+
+  def _SetUpdatedMax(self, query):
+    self['updated-max'] = query
+
+  updated_max = property(_GetUpdatedMax, _SetUpdatedMax,
+      doc="""The feed query's updated-max parameter""")
+
+  def _GetPublishedMin(self):
+    if 'published-min' in self.keys():
+      return self['published-min']
+    else:
+      return None
+
+  def _SetPublishedMin(self, query):
+    self['published-min'] = query
+
+  published_min = property(_GetPublishedMin, _SetPublishedMin,
+      doc="""The feed query's published-min parameter""")
+
+  def _GetPublishedMax(self):
+    if 'published-max' in self.keys():
+      return self['published-max']
+    else:
+      return None
+
+  def _SetPublishedMax(self, query):
+    self['published-max'] = query
+
+  published_max = property(_GetPublishedMax, _SetPublishedMax,
+      doc="""The feed query's published-max parameter""")
+
+  def _GetStartIndex(self):
+    if 'start-index' in self.keys():
+      return self['start-index']
+    else:
+      return None
+
+  def _SetStartIndex(self, query):
+    self['start-index'] = query
+
+  start_index = property(_GetStartIndex, _SetStartIndex,
+      doc="""The feed query's start-index parameter""")
+
+  def _GetMaxResults(self):
+    if 'max-results' in self.keys():
+      return self['max-results']
+    else:
+      return None
+
+  def _SetMaxResults(self, query):
+    self['max-results'] = query
+
+  max_results = property(_GetMaxResults, _SetMaxResults,
+      doc="""The feed query's max-results parameter""")
+
+
   def ToUri(self):
     q_feed = self.feed or ''
     category_string = '/'.join(
