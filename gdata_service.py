@@ -704,7 +704,7 @@ class GDataService(app_service.AtomService):
           m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
           if m is not None:
             self.__gsessionid = m.group(0) 
-          return self.Delete(location, data, extra_headers, url_params, escape_params, redirects_remaining - 1)
+          return self.Delete(location, extra_headers, url_params, escape_params, redirects_remaining - 1)
         else:
           raise RequestError, {'status': server_response.status,
               'reason': '302 received without Location header',
