@@ -83,13 +83,14 @@ class GCalendarService(gdata_service.GDataService):
       print "else result"
       return result
     
-  def InsertItem(self, new_item, insert_uri, url_params=None, escape_params=True):
-    """Adds an item to Google Calendar.
+  def InsertEvent(self, new_event, insert_uri, url_params=None, 
+                  escape_params=True):
+    """Adds an event to Google Calendar.
 
     Args: 
-      new_item: ElementTree._Element A new item which is to be added to 
+      new_event: ElementTree._Element A new event which is to be added to 
                 Google Calendar.
-      insert_uri: the URL to post new items to for the feed
+      insert_uri: the URL to post new events to the feed
       url_params: dict (optional) Additional URL parameters to be included
                   in the insertion request. 
       escape_params: boolean (optional) If true, the url_parameters will be
@@ -97,25 +98,25 @@ class GCalendarService(gdata_service.GDataService):
 
     Returns:
       On successful insert, a tuple in the form
-      (boolean succeeded=True, ElementTree._Element new item from Google Calendar)
-      On failure, a tuple in the form
+      (boolean succeeded=True, ElementTree._Element new event from Google 
+      Calendar) On failure, a tuple in the form:
       (boolean succeeded=False, {'status': HTTP status code from server, 
                                  'reason': HTTP reason from the server, 
                                  'body': HTTP body of the server's response})
     """
 
-    response = self.Post(insert_uri, new_item, url_params=url_params,
+    response = self.Post(insert_uri, new_event, url_params=url_params,
                          escape_params=escape_params)
 
     if isinstance(response, atom.Entry):
-      return gcalendar.GCalendarItemFromString(response.ToString())
+      return gcalendar.CalendarEventEntryFromString(response.ToString())
 
-  def DeleteItem(self, item_id, url_params=None, escape_params=True):
-    """Removes an item with the specified ID from Google Calendar.
+  def DeleteEvent(self, event_id, url_params=None, escape_params=True):
+    """Removes an event with the specified ID from Google Calendar.
 
     Args:
-      item_id: string The ID of the item to be deleted. Example:
-               'http://www.google.com/calendar/feeds/default/private/full/abxhjfgkdhe
+      event_id: string The ID of the event to be deleted. Example:
+               'http://www.google.com/calendar/feeds/default/private/full/abx'
       url_params: dict (optional) Additional URL parameters to be included
                   in the deletion request.
       escape_params: boolean (optional) If true, the url_parameters will be
@@ -130,18 +131,21 @@ class GCalendarService(gdata_service.GDataService):
                                  'body': HTTP body of the server's response})
     """
     
-    return self.Delete('/%s' % (item_id.lstrip('http://www.google.com/')),
+    url_prefix = 'http://%s/' % self.server
+    if edit_uri.startswith(url_prefix):
+      edit_uri = edit_uri[len(url_prefix):]
+    return self.Delete('/%s' % edit_uri,
                        url_params=url_params, escape_params=escape_params)
 
-  def UpdateItem(self, edit_uri, updated_item, url_params=None, 
+  def UpdateEvent(self, edit_uri, updated_event, url_params=None, 
                  escape_params=True):
-    """Updates an existing item.
+    """Updates an existing event.
 
     Args:
       edit_uri: string The edit link URI for the element being updated
-      updated_item: string, ElementTree._Element, or ElementWrapper containing
-                    the Atom Entry which will replace the base item which is 
-                    stored at the item_id.
+      updated_event: string, ElementTree._Element, or ElementWrapper containing
+                    the Atom Entry which will replace the event which is 
+                    stored at the edit_url 
       url_params: dict (optional) Additional URL parameters to be included
                   in the update request.
       escape_params: boolean (optional) If true, the url_parameters will be
@@ -149,17 +153,20 @@ class GCalendarService(gdata_service.GDataService):
 
     Returns:
       On successful update, a tuple in the form
-      (boolean succeeded=True, ElementTree._Element new item from Google Calendar)
-      On failure, a tuple in the form
+      (boolean succeeded=True, ElementTree._Element new event from Google 
+      Calendar) On failure, a tuple in the form:
       (boolean succeeded=False, {'status': HTTP status code from server, 
                                  'reason': HTTP reason from the server, 
                                  'body': HTTP body of the server's response})
     """
-    response = self.Put('/%s' % (edit_uri.lstrip('http://www.google.com/')),
-                        updated_item, url_params=url_params, 
+    url_prefix = 'http://%s/' % self.server
+    if edit_uri.startswith(url_prefix):
+      edit_uri = edit_uri[len(url_prefix):]
+    response = self.Put('/%s' % edit_uri,
+                        updated_event, url_params=url_params, 
                         escape_params=escape_params)
     if isinstance(response, atom.Entry):
-      return gcalendar.GCalendarItemFromString(response.ToString())
+      return gcalendar.CalendarEventEntryFromString(response.ToString())
 
 
 class CalendarQuery(gdata_service.Query):
@@ -170,7 +177,10 @@ class CalendarQuery(gdata_service.Query):
                                  categories)
     
   def _GetStartMin(self):
-    return self['start-min']
+    if 'start-min' in self.keys():
+      return self['start-min']
+    else:
+      return None
 
   def _SetStartMin(self, val):
     self['start-min'] = val
@@ -179,7 +189,10 @@ class CalendarQuery(gdata_service.Query):
       doc="""The start-min query parameter""")
 
   def _GetStartMax(self):
-    return self['start-max']
+    if 'start-max' in self.keys():
+      return self['start-max']
+    else:
+      return None
 
   def _SetStartMax(self, val):
     self['start-max'] = val
@@ -188,7 +201,10 @@ class CalendarQuery(gdata_service.Query):
       doc="""The start-max query parameter""")
 
   def _GetOrderBy(self):
-    return self['orderby']
+    if 'orderby' in self.keys():
+      return self['orderby']
+    else:
+      return None
 
   def _SetOrderBy(self, val):
     if val is not 'lastmodified' or val is not 'starttime':
@@ -199,18 +215,27 @@ class CalendarQuery(gdata_service.Query):
       doc="""The orderby query parameter""")
 
   def _GetSortOrder(self):
-    return self['sortorder']
+    if 'sortorder' in self.keys():
+      return self['sortorder']
+    else:
+      return None
 
   def _SetSortOrder(self, val):
-    if val is not 'ascending' or val is not 'descending' or val is not 'a' or val is not 'd' or val is not 'ascend' or val is not 'descend':
-      raise Error, "Sort order must be either ascending, ascend, a or descending, descend, d"
+    if (val is not 'ascending' or val is not 'descending' 
+        or val is not 'a' or val is not 'd' or val is not 'ascend' 
+        or val is not 'descend'):
+      raise Error, "Sort order must be either ascending, ascend, " + (
+          "a or descending, descend, d")
     self['sortorder'] = val
 
   sortorder = property(_GetSortOrder, _SetSortOrder, 
       doc="""The sortorder query parameter""")
 
   def _GetSingleEvents(self):
-    return self['singleevents']
+    if 'singleevents' in self.keys():
+      return self['singleevents']
+    else:
+      return None
 
   def _SetSingleEvents(self, val):
     self['singleevents'] = val
@@ -219,7 +244,10 @@ class CalendarQuery(gdata_service.Query):
       doc="""The singleevents query parameter""")
 
   def _GetFutureEvents(self):
-    return self['futureevents']
+    if 'futureevents' in self.keys():
+      return self['futureevents']
+    else:
+      return None
 
   def _SetFutureEvents(self, val):
     self['futureevents'] = val
@@ -228,37 +256,50 @@ class CalendarQuery(gdata_service.Query):
       doc="""The futureevents query parameter""")
 
   def _GetRecurrenceExpansionStart(self):
-    return self['recurrence-expansion-start']
+    if 'recurrence-expansion-start' in self.keys():
+      return self['recurrence-expansion-start']
+    else:
+      return None
 
   def _SetRecurrenceExpansionStart(self, val):
     self['recurrence-expansion-start'] = val
 
-  recurrence_expansion_start = property(_GetRecurrenceExpansionStart, _SetRecurrenceExpansionStart, 
+  recurrence_expansion_start = property(_GetRecurrenceExpansionStart, 
+      _SetRecurrenceExpansionStart, 
       doc="""The recurrence-expansion-start query parameter""")
 
   def _GetRecurrenceExpansionEnd(self):
-    return self['recurrence-expansion-end']
+    if 'recurrence-expansion-end' in self.keys():
+      return self['recurrence-expansion-end']
+    else:
+      return None
 
   def _SetRecurrenceExpansionEnd(self, val):
     self['recurrence-expansion-end'] = val
 
-  recurrence_expansion_end = property(_GetRecurrenceExpansionEnd, _SetRecurrenceExpansionEnd, 
+  recurrence_expansion_end = property(_GetRecurrenceExpansionEnd, 
+      _SetRecurrenceExpansionEnd, 
       doc="""The recurrence-expansion-end query parameter""")
 
-
+# TODO add query params for calendar list if exists
 class ListCalendarsQuery(CalendarQuery):
   def __init__(self, userId=None, text_query=None,
                params=None, categories=None):
     if userId is None:
       userId = 'default'
 
-    CalendarQuery.__init__(self, feed='http://www.google.com/calendar/feeds/'+userId,
-                           text_query=text_query, params=params, categories=categories)
+    CalendarQuery.__init__(self, feed='http://www.google.com/calendar/feeds/'
+                           +userId,
+                           text_query=text_query, params=params,
+                           categories=categories)
+
 
 class EventCalendarQuery(CalendarQuery):
   def __init__(self, userId=None, text_query=None,
                params=None, categories=None):
     if userId is None:
       userId = 'default'
-    CalendarQuery.__init__(self, feed='http://www.google.com/calendar/feeds/'+userId+'/private/full',
-                           text_query=text_query, params=params, categories=categories)
+    CalendarQuery.__init__(self, feed='http://www.google.com/calendar/feeds/'+
+                           userId+'/private/full',
+                           text_query=text_query, params=params, 
+                           categories=categories)

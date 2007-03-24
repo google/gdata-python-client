@@ -426,9 +426,9 @@ class GDataService(app_service.AtomService):
 
     if self.__gsessionid is not None:
       if uri.find('?') > -1:
-        uri += '&gsessionid=%s' % (gsessionid,)
+        uri += '&gsessionid=%s' % (self.__gsessionid,)
       else:
-        uri += '?gsessionid=%s' % (gsessionid,)
+        uri += '?gsessionid=%s' % (self.__gsessionid,)
 
     server_response = app_service.AtomService.Get(self, uri, extra_headers)
     result_body = server_response.read()
@@ -457,7 +457,6 @@ class GDataService(app_service.AtomService):
         raise RequestError, {'status': server_response.status,
             'reason': 'Redirect received, but redirects_remaining <= 0',
             'body': result_body}
-        
     else:
       raise RequestError, {'status': server_response.status,
           'reason': server_response.reason, 'body': result_body}
@@ -511,7 +510,7 @@ class GDataService(app_service.AtomService):
       raise UnexpectedReturnType, 'Server did not send a feed'  
 
   def Post(self, uri, data, extra_headers=None, url_params=None, 
-           escape_params=True):
+           escape_params=True, redirects_remaining=4):
     """Insert data into a GData service at the given URI.
 
     Args:
@@ -542,6 +541,12 @@ class GDataService(app_service.AtomService):
     if self.__auth_token:
       extra_headers['Authorization'] = '%s=%s' % (self.__auth_type, 
                                                   self.__auth_token)
+
+    if self.__gsessionid is not None:
+      if uri.find('?') > -1:
+        uri += '&gsessionid=%s' % (self.__gsessionid,)
+      else:
+        uri += '?gsessionid=%s' % (self.__gsessionid,)
                                                   
     server_response = app_service.AtomService.Post(self, uri, data, 
         extra_headers, url_params, escape_params)
@@ -555,6 +560,22 @@ class GDataService(app_service.AtomService):
           return result_body
         return entry
       return feed
+    elif server_response.status == 302:
+      if redirects_remaining > 0:
+        location = server_response.getheader('Location')
+        if location is not None:
+          m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
+          if m is not None:
+            self.__gsessionid = m.group(0) 
+          return self.Post(location, data, extra_headers, url_params, escape_params, redirects_remaining - 1)
+        else:
+          raise RequestError, {'status': server_response.status,
+              'reason': '302 received without Location header',
+              'body': result_body}
+      else:
+        raise RequestError, {'status': server_response.status,
+            'reason': 'Redirect received, but redirects_remaining <= 0',
+            'body': result_body}
     else:
       raise RequestError, {'status': server_response.status,
           'reason': server_response.reason, 'body': result_body}
@@ -563,7 +584,7 @@ class GDataService(app_service.AtomService):
     #                                    url_params, escape_params)
 
   def Put(self, uri, data, extra_headers=None, url_params=None, 
-          escape_params=True):
+          escape_params=True, redirects_remaining=3):
     """Updates an entry at the given URI.
      
     Args:
@@ -594,9 +615,13 @@ class GDataService(app_service.AtomService):
     if self.__auth_token:
       extra_headers['Authorization'] = '%s=%s' % (self.__auth_type, 
                                                   self.__auth_token)
+
+    if self.__gsessionid is not None:
+      if uri.find('?') > -1:
+        uri += '&gsessionid=%s' % (self.__gsessionid,)
+      else:
+        uri += '?gsessionid=%s' % (self.__gsessionid,)
                                                   
-    #return app_service.AtomService.Put(self, uri, data, extra_headers, 
-    #                                   url_params, escape_params)
     server_response = app_service.AtomService.Put(self, uri, data, 
         extra_headers, url_params, escape_params)
     result_body = server_response.read()
@@ -609,12 +634,28 @@ class GDataService(app_service.AtomService):
           return result_body
         return entry
       return feed
+    elif server_response.status == 302:
+      if redirects_remaining > 0:
+        location = server_response.getheader('Location')
+        if location is not None:
+          m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
+          if m is not None:
+            self.__gsessionid = m.group(0) 
+          return self.Put(location, data, extra_headers, url_params, escape_params, redirects_remaining - 1)
+        else:
+          raise RequestError, {'status': server_response.status,
+              'reason': '302 received without Location header',
+              'body': result_body}
+      else:
+        raise RequestError, {'status': server_response.status,
+            'reason': 'Redirect received, but redirects_remaining <= 0',
+            'body': result_body}
     else:
       raise RequestError, {'status': server_response.status,
           'reason': server_response.reason, 'body': result_body}
 
   def Delete(self, uri, extra_headers=None, url_params=None, 
-             escape_params=True):
+             escape_params=True, redirects_remaining=4):
     """Deletes the entry at the given URI.
 
     Args:
@@ -643,15 +684,35 @@ class GDataService(app_service.AtomService):
     if self.__auth_token:
       extra_headers['Authorization'] = '%s=%s' % (self.__auth_type, 
                                                   self.__auth_token)
+
+    if self.__gsessionid is not None:
+      if uri.find('?') > -1:
+        uri += '&gsessionid=%s' % (self.__gsessionid,)
+      else:
+        uri += '?gsessionid=%s' % (self.__gsessionid,)
                                                   
-    #return app_service.AtomService.Delete(self, uri, extra_headers, 
-    #                                      url_params, escape_params)
     server_response = app_service.AtomService.Delete(self, uri,
         extra_headers, url_params, escape_params)
     result_body = server_response.read()
 
     if server_response.status == 200:
       return True
+    elif server_response.status == 302:
+      if redirects_remaining > 0:
+        location = server_response.getheader('Location')
+        if location is not None:
+          m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
+          if m is not None:
+            self.__gsessionid = m.group(0) 
+          return self.Delete(location, data, extra_headers, url_params, escape_params, redirects_remaining - 1)
+        else:
+          raise RequestError, {'status': server_response.status,
+              'reason': '302 received without Location header',
+              'body': result_body}
+      else:
+        raise RequestError, {'status': server_response.status,
+            'reason': 'Redirect received, but redirects_remaining <= 0',
+            'body': result_body}
     else:
       raise RequestError, {'status': server_response.status,
           'reason': server_response.reason, 'body': result_body}
