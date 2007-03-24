@@ -73,12 +73,12 @@ class GCalendarService(gdata_service.GDataService):
     result = self.Get(uri)
     return result
 
-  def CalendarQuery(self, query):
+  def CalendarServiceQuery(self, query):
     result = self.Query(query.ToUri())
-    if isinstance(query, ListCalendarsQuery):
-      return gcalendar.CalendarFeedFromString(result.ToString())
-    elif isinstance(query, EventCalendarQuery):
+    if isinstance(query, CalendarEventQuery):
       return gcalendar.CalendarEventFeedFromString(result.ToString())
+    elif isinstance(query, CalendarQuery):
+      return gcalendar.CalendarFeedFromString(result.ToString())
     else:
       print "else result"
       return result
@@ -111,7 +111,8 @@ class GCalendarService(gdata_service.GDataService):
     if isinstance(response, atom.Entry):
       return gcalendar.CalendarEventEntryFromString(response.ToString())
 
-  def DeleteEvent(self, event_id, url_params=None, escape_params=True):
+  def DeleteEvent(self, edit_uri, extra_headers=None, 
+      url_params=None, escape_params=True):
     """Removes an event with the specified ID from Google Calendar.
 
     Args:
@@ -169,12 +170,14 @@ class GCalendarService(gdata_service.GDataService):
       return gcalendar.CalendarEventEntryFromString(response.ToString())
 
 
-class CalendarQuery(gdata_service.Query):
+class CalendarEventQuery(gdata_service.Query):
 
-  def __init__(self, feed=None, text_query=None, params=None,
-               categories=None):
-    gdata_service.Query.__init__(self, feed, text_query, params,
-                                 categories)
+  def __init__(self, user='default', visibility='private', projection='full',
+               text_query=None, params=None, categories=None):
+    gdata_service.Query.__init__(self, feed='http://www.google.com/calendar/feeds/'+
+                           '%s/%s/%s' % (user, visibility, projection,),
+                           text_query=text_query, params=params, 
+                           categories=categories)
     
   def _GetStartMin(self):
     if 'start-min' in self.keys():
@@ -282,24 +285,27 @@ class CalendarQuery(gdata_service.Query):
       doc="""The recurrence-expansion-end query parameter""")
 
 # TODO add query params for calendar list if exists
-class ListCalendarsQuery(CalendarQuery):
-  def __init__(self, userId=None, text_query=None,
-               params=None, categories=None):
-    if userId is None:
-      userId = 'default'
 
-    CalendarQuery.__init__(self, feed='http://www.google.com/calendar/feeds/'
-                           +userId,
-                           text_query=text_query, params=params,
-                           categories=categories)
+#class CalendarQuery(CalendarQuery): 
+#  """Queries the Google Calendar meta feed"""
+#
+#  def __init__(self, userId=None, text_query=None,
+#               params=None, categories=None):
+#    if userId is None:
+#      userId = 'default'
+#
+#    CalendarQuery.__init__(self, feed='http://www.google.com/calendar/feeds/'
+#                           +userId,
+#                           text_query=text_query, params=params,
+#                           categories=categories)
 
 
-class EventCalendarQuery(CalendarQuery):
-  def __init__(self, userId=None, text_query=None,
-               params=None, categories=None):
-    if userId is None:
-      userId = 'default'
-    CalendarQuery.__init__(self, feed='http://www.google.com/calendar/feeds/'+
-                           userId+'/private/full',
-                           text_query=text_query, params=params, 
-                           categories=categories)
+#class CalendarEventQuery(CalendarQuery):
+#  """Queries the Google Calendar event feed"""
+#
+#  def __init__(self, user='default', visibility='private', projection='full',
+#               text_query=None, params=None, categories=None):
+#    CalendarQuery.__init__(self, feed='http://www.google.com/calendar/feeds/'+
+#                           '/%s/%s/%s' % (user, visibility, projection,),
+#                           text_query=text_query, params=params, 
+#                           categories=categories)
