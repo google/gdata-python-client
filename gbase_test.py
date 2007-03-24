@@ -62,15 +62,14 @@ class GBaseItemTest(unittest.TestCase):
     self.assert_(self.item.label[0].text == 'my label')
     self.item.item_type = gbase.ItemType(text='products')
     self.assert_(self.item.item_type.text == 'products')
-    self.item.item_attributes['extra'] = gbase.ItemAttribute('extra', 
-        text='foo')
-    self.assert_(self.item.item_attributes['extra'].text == 'foo')
-    self.assert_(self.item.item_attributes['extra'].name == 'extra')
+    self.item.item_attributes.append(gbase.ItemAttribute('extra', text='foo'))
+    self.assert_(self.item.item_attributes[0].text == 'foo')
+    self.assert_(self.item.item_attributes[0].name == 'extra')
     new_item = gbase.GBaseItemFromString(self.item.ToString())
     self.assert_(self.item.label[0].text == new_item.label[0].text)
     self.assert_(self.item.item_type.text == new_item.item_type.text)
-    self.assert_(self.item.item_attributes['extra'].text == 
-        new_item.item_attributes['extra'].text)
+    self.assert_(self.item.item_attributes[0].text == 
+        new_item.item_attributes[0].text)
 
   def testCustomItemAttributes(self):
     self.item.AddItemAttribute('test_attrib', 'foo')
@@ -84,9 +83,13 @@ class GBaseItemTest(unittest.TestCase):
     feed = gbase.GBaseSnippetFeedFromString(test_data.GBASE_FEED)
     for an_entry in feed.entry:
       if an_entry.author[0].email.text == 'anon-szot0wdsq0at@base.google.com':
-        self.assert_(an_entry.item_attributes['payment_notes'].text == 
-            'PayPal & Bill Me Later credit available online only.')
-        self.assert_(an_entry.item_attributes['condition'].text == 'new')
+        for attrib in an_entry.item_attributes:
+          if attrib.name == 'payment_notes':
+            self.assert_(attrib.text == 
+                'PayPal & Bill Me Later credit available online only.')
+          if attrib.name == 'condition':
+            self.assert_(attrib.text == 'new')
+#        self.assert_(an_entry.item_attributes['condition'].text == 'new')
 
 
 class GBaseItemFeedTest(unittest.TestCase):

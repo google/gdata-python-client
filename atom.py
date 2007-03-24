@@ -39,8 +39,6 @@
       into an ExtensionElement instance. ExtensionElement is designed to fully
       capture the information in the XML. Child nodes in an XML extension are
       turned into ExtensionElements as well.
-
-
 """
 
 
@@ -519,7 +517,7 @@ _UriFromElementTree = _AtomInstanceFromElementTree(Uri, 'uri', ATOM_NAMESPACE)
 class Link(AtomBase):
   """The atom:link element"""
   
-  def __init__(self, href=None, rel=None, type=None, hreflang=None, 
+  def __init__(self, href=None, rel=None, link_type=None, hreflang=None, 
       title=None, length=None, text=None, extension_elements=None, 
       extension_attributes=None):
     """Constructor for Link
@@ -538,7 +536,7 @@ class Link(AtomBase):
 
     self.href = href
     self.rel = rel
-    self.type = type
+    self.type = link_type
     self.hreflang = hreflang
     self.title = title
     self.length = length

@@ -144,9 +144,10 @@ class ItemAttributeContainer(object):
       The text contents of the item attribute, or none if the attribute was
       not found.
     """
-   
-    if self.item_attributes.has_key(name):
-      return self.item_attributes[name].text
+  
+    for attrib in self.item_attributes:
+      if attrib.name == name:
+        return attrib.text
     return None
 
   def AddItemAttribute(self, name, value, value_type=None):
@@ -165,12 +166,15 @@ class ItemAttributeContainer(object):
 
     new_attribute =  ItemAttribute(name, text=value, 
         text_type=value_type)
-    self.item_attributes[name] = new_attribute
+    self.item_attributes.append(new_attribute)
     
   def SetItemAttribute(self, name, value):
     """Changes an existing item attribute's value."""
 
-    self.item_attributes[name].text = value
+    for attrib in self.item_attributes:
+      if attrib.name == name:
+        attrib.text = value
+        return
 
   def RemoveItemAttribute(self, name):
     """Deletes the first extension element which matches name.
@@ -178,7 +182,10 @@ class ItemAttributeContainer(object):
     Deletes the first extension element which matches name. 
     """
 
-    del self.item_attributes[name]
+    for i in xrange(len(self.item_attributes)):
+      if self.item_attributes[i].name == name:
+        del self.item_attributes[i]
+        return
 
 
 class ItemAttribute(atom.Text):
@@ -269,7 +276,7 @@ class GBaseItem(gdata.GDataEntry, ItemAttributeContainer):
     self.updated = updated
     self.label = label or []
     self.item_type = item_type
-    self.item_attributes = item_attributes or {}
+    self.item_attributes = item_attributes or []
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
@@ -280,8 +287,8 @@ class GBaseItem(gdata.GDataEntry, ItemAttributeContainer):
     # Added: converting the item type to XML
     if self.item_type:
       element_tree.append(self.item_type._ToElementTree())
-    for name, value in self.item_attributes.items():
-      element_tree.append(value._ToElementTree())
+    for attribute in self.item_attributes:
+      element_tree.append(attribute._ToElementTree())
     atom.Entry._TransferToElementTree(self, element_tree)
     return element_tree
 
@@ -298,7 +305,7 @@ class GBaseItem(gdata.GDataEntry, ItemAttributeContainer):
       # attribute.
       item_attribute = _ItemAttributeFromElementTree(child)
       if item_attribute:
-        self.item_attributes[item_attribute.name] = item_attribute
+        self.item_attributes.append(item_attribute)
         element_tree.remove(child)
     else:
       gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)

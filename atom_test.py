@@ -165,15 +165,22 @@ class LinkTest(unittest.TestCase):
   def testLinkToAndFromString(self):
     self.link.href = 'test href'
     self.link.hreflang = 'english'
+    self.link.type = 'text/html'
     self.link.extension_attributes['foo'] = 'bar'
     self.assert_(self.link.href == 'test href')
     self.assert_(self.link.hreflang == 'english')
+    self.assert_(self.link.type == 'text/html')
     self.assert_(self.link.extension_attributes['foo'] == 'bar')
     new_link = atom.LinkFromString(self.link.ToString())
     self.assert_(self.link.href == new_link.href)
+    self.assert_(self.link.type == new_link.type)
     self.assert_(self.link.hreflang == new_link.hreflang)
     self.assert_(self.link.extension_attributes['foo'] == 
         new_link.extension_attributes['foo'])
+
+  def testLinkType(self):
+    test_link = atom.Link(link_type='text/html')
+    self.assert_(test_link.type == 'text/html')
 
 
 class GeneratorTest(unittest.TestCase):
