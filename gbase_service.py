@@ -157,7 +157,7 @@ class GBaseService(gdata_service.GDataService):
                                  'body': HTTP body of the server's response})
     """
 
-    response = self.Post('/base/feeds/items', new_item, url_params=url_params,
+    response = self.Post(new_item, '/base/feeds/items', url_params=url_params,
                          escape_params=escape_params)
 
     if isinstance(response, atom.Entry):
@@ -210,9 +210,9 @@ class GBaseService(gdata_service.GDataService):
                                  'body': HTTP body of the server's response})
     """
     
-    response = self.Put('/%s' % (item_id.lstrip('http://www.google.com/')),
-                        updated_item, url_params=url_params, 
-                        escape_params=escape_params)
+    response = self.Put(updated_item, 
+        '/%s' % (item_id.lstrip('http://www.google.com/')), 
+        url_params=url_params, escape_params=escape_params)
     if isinstance(response, atom.Entry):
       return gbase.GBaseItemFromString(response.ToString())
     

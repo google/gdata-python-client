@@ -97,15 +97,15 @@ class AtomService(object):
 
     return query_connection.getresponse()
 
-  def Post(self, uri, data, extra_headers=None, url_params=None, 
+  def Post(self, data, uri, extra_headers=None, url_params=None, 
            escape_params=True):
     """Insert data into an APP server at the given URI.
 
     Args:
-      uri: string The location (feed) to which the data should be inserted. 
-           Example: '/base/feeds/items'. 
       data: string, ElementTree._Element, or something with a __str__ method 
             The XML to be sent to the uri. 
+      uri: string The location (feed) to which the data should be inserted. 
+           Example: '/base/feeds/items'. 
       extra_headers: dict (optional) HTTP headers which are to be included. 
                      The client automatically sets the Content-Type,
                      Authorization, and Content-Length headers.
@@ -146,15 +146,15 @@ class AtomService(object):
 
     return insert_connection.getresponse()
 
-  def Put(self, uri, data, extra_headers=None, url_params=None, 
+  def Put(self, data, uri, extra_headers=None, url_params=None, 
            escape_params=True):
     """Updates an entry at the given URI.
      
     Args:
-      uri: string A URI indicating entry to which the update will be applied.
-           Example: '/base/feeds/items/ITEM-ID'
       data: string, ElementTree._Element, or xml_wrapper.ElementWrapper The 
             XML containing the updated data.
+      uri: string A URI indicating entry to which the update will be applied.
+           Example: '/base/feeds/items/ITEM-ID'
       extra_headers: dict (optional) HTTP headers which are to be included.
                      The client automatically sets the Content-Type,
                      Authorization, and Content-Length headers.

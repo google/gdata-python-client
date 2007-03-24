@@ -509,15 +509,15 @@ class GDataService(app_service.AtomService):
     else:
       raise UnexpectedReturnType, 'Server did not send a feed'  
 
-  def Post(self, uri, data, extra_headers=None, url_params=None, 
+  def Post(self, data, uri, extra_headers=None, url_params=None, 
            escape_params=True, redirects_remaining=4):
     """Insert data into a GData service at the given URI.
 
     Args:
-      uri: string The location (feed) to which the data should be inserted. 
-           Example: '/base/feeds/items'. 
       data: string, ElementTree._Element, atom.Entry, or gdata.GDataEntry The
             XML to be sent to the uri. 
+      uri: string The location (feed) to which the data should be inserted. 
+           Example: '/base/feeds/items'. 
       extra_headers: dict (optional) HTTP headers which are to be included. 
                      The client automatically sets the Content-Type,
                      Authorization, and Content-Length headers.
@@ -548,7 +548,7 @@ class GDataService(app_service.AtomService):
       else:
         uri += '?gsessionid=%s' % (self.__gsessionid,)
                                                   
-    server_response = app_service.AtomService.Post(self, uri, data, 
+    server_response = app_service.AtomService.Post(self, data, uri,
         extra_headers, url_params, escape_params)
     result_body = server_response.read()
 
@@ -579,19 +579,16 @@ class GDataService(app_service.AtomService):
     else:
       raise RequestError, {'status': server_response.status,
           'reason': server_response.reason, 'body': result_body}
-      
-    #return app_service.AtomService.Post(self, uri, data, extra_headers, 
-    #                                    url_params, escape_params)
 
-  def Put(self, uri, data, extra_headers=None, url_params=None, 
+  def Put(self, data, uri, extra_headers=None, url_params=None, 
           escape_params=True, redirects_remaining=3):
     """Updates an entry at the given URI.
      
     Args:
-      uri: string A URI indicating entry to which the update will be applied.
-           Example: '/base/feeds/items/ITEM-ID'
       data: string, ElementTree._Element, or xml_wrapper.ElementWrapper The 
             XML containing the updated data.
+      uri: string A URI indicating entry to which the update will be applied.
+           Example: '/base/feeds/items/ITEM-ID'
       extra_headers: dict (optional) HTTP headers which are to be included.
                      The client automatically sets the Content-Type,
                      Authorization, and Content-Length headers.
@@ -622,7 +619,7 @@ class GDataService(app_service.AtomService):
       else:
         uri += '?gsessionid=%s' % (self.__gsessionid,)
                                                   
-    server_response = app_service.AtomService.Put(self, uri, data, 
+    server_response = app_service.AtomService.Put(self, data, uri, 
         extra_headers, url_params, escape_params)
     result_body = server_response.read()
 
