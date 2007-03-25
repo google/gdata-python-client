@@ -104,7 +104,7 @@ class GDataFeed(atom.Feed, LinkFinder):
       generator=None, icon=None, atom_id=None, link=None, logo=None, 
       rights=None, subtitle=None, title=None, updated=None, entry=None, 
       total_results=None, start_index=None, items_per_page=None,
-      text=None, extension_elements=None, extension_attributes=None):
+      extension_elements=None, extension_attributes=None, text=None):
     """Constructor for Source
     
     Args:
@@ -223,8 +223,8 @@ _GDataEntryFromElementTree = atom._AtomInstanceFromElementTree(GDataEntry,
 class TotalResults(atom.AtomBase):
   """opensearch:TotalResults for a GData feed"""
 
-  def __init__(self, text=None, extension_elements=None,
-     extension_attributes=None):
+  def __init__(self, extension_elements=None,
+     extension_attributes=None, text=None):
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
@@ -246,8 +246,8 @@ def _TotalResultsFromElementTree(element_tree):
 class StartIndex(atom.AtomBase):
   """The opensearch:StartIndex element in GData feed"""
 
-  def __init__(self, text=None, extension_elements=None,
-      extension_attributes=None):
+  def __init__(self, extension_elements=None, 
+      extension_attributes=None, text=None):
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
@@ -269,8 +269,8 @@ def _StartIndexFromElementTree(element_tree):
 class ItemsPerPage(atom.AtomBase):
   """The opensearch:itemsPerPage element in GData feed"""
 
-  def __init__(self, text=None, extension_elements=None,
-      extension_attributes=None):
+  def __init__(self, extension_elements=None,
+      extension_attributes=None, text=None):
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
@@ -287,5 +287,103 @@ def ItemsPerPageFromString(xml_string):
 def _ItemsPerPageFromElementTree(element_tree):
   return atom._XFromElementTree(ItemsPerPage, 'itemsPerPage', 
       OPENSEARCH_NAMESPACE, element_tree)
+ 
+ 
+class EntryLink(atom.AtomBase):
+  """The gd:entryLink element"""
   
-  
+  def __init__(self, href=None, read_only=None, rel=None,
+      entry=None, extension_elements=None, 
+      extension_attributes=None, text=None):
+    self.href = href
+    self.read_only = read_only
+    self.rel = rel
+    self.entry = entry
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+    
+  def _TransferToElementTree(self, element_tree):
+    if self.href:
+      element_tree.attrib['href'] = self.href
+    if self.read_only:
+      element_tree.attrib['readOnly'] = self.read_only
+    if self.rel:
+      element_tree.attrib['rel'] = self.rel
+    if self.entry:
+      element_tree.append(self.entry._ToElementTree())
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    element_tree.tag = gdata.GDATA_TEMPLATE % 'entryLink'
+    return element_tree
+
+  def _TakeChildFromElementTree(self, child, element_tree):
+    if child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'entry'):
+      self.entry = _EntryLinkFromElementTree(child)
+      element_tree.remove(child)
+    else:
+      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
+
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+    if attribute == 'href':
+      self.href = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    elif attribute == 'readOnly':
+      self.read_only = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    else:
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute,
+          element_tree)
+
+
+class FeedLink(atom.AtomBase):
+  """The gd:feedLink element"""
+
+  def __init__(self, count_hint=None, href=None, read_only=None, rel=None,
+      feed=None, extension_elements=None, extension_attributes=None, text=None):
+    self.count_hint = count_hint 
+    self.href = href
+    self.read_only = read_only
+    self.rel = rel
+    self.feed = feed
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+  def _TransferToElementTree(self, element_tree):
+    if self.count_hint:
+      element_tree.attrib['countHint'] = self.count_hint
+    if self.href:
+      element_tree.attrib['href'] = self.href
+    if self.read_only:
+      element_tree.attrib['readOnly'] = self.read_only
+    if self.rel:
+      element_tree.attrib['rel'] = self.rel
+    if self.feed:
+      element_tree.append(self.feed._ToElementTree())
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    element_tree.tag = gdata.GDATA_TEMPLATE % 'feedLink'
+    return element_tree
+
+  def _TakeChildFromElementTree(self, child, element_tree):
+    if child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'feed'):
+      self.feed = _GDataFeedFromElementTree(child)
+      element_tree.remove(child)
+    else:
+      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
+
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+    if attribute == 'countHint':
+      self.count_hint = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    elif attribute == 'href':
+      self.href = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    elif attribute == 'readOnly':
+      self.read_only = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    elif attribute == 'rel':
+      self.rel = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    else:
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute,
+          element_tree)  
