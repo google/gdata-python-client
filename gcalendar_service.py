@@ -54,13 +54,13 @@ class CalendarService(gdata_service.GDataService):
                                         server=server, 
                                         additional_headers=additional_headers)
 
-  def GetCalendarEventFeed(self, uri):
+  def GetCalendarEventFeed(self, uri='/calendar/feeds/default/private/full'):
     return gcalendar.CalendarEventFeedFromString(str(self.Get(uri)))
 
   def GetCalendarEventEntry(self, uri):
     return gcalendar.CalendarEventEntryFromString(str(self.Get(uri)))
 
-  def GetCalendarListFeed(self, uri):
+  def GetCalendarListFeed(self, uri='/calendar/feeds/default/'):
     return gcalendar.CalendarListFeedFromString(str(self.Get(uri)))
 
   def GetCalendarListEntry(self, uri):

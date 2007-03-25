@@ -509,8 +509,8 @@ class Who(UriEnumElement):
                             text=text)
     self.name=None
     self.email=None
-    self.attendeeStatus=None
-    self.attendeeType=None
+    self.attendee_status=None
+    self.attendee_type=None
     self.rel=None
     
   def _TakeAttributeFromElementTree(self, attribute, element_tree):
@@ -527,10 +527,10 @@ class Who(UriEnumElement):
 
   def _TakeChildFromElementTree(self, child, element_tree):
     if child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'attendeeStatus'):
-      self.attendeeStatus=_AttendeeStatusFromElementTree(child)
+      self.attendee_status=_AttendeeStatusFromElementTree(child)
       element_tree.remove(child)
     elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'attendeeType'):
-      self.attendeeType=_AttendeeTypeFromElementTree(child)
+      self.attendee_type=_AttendeeTypeFromElementTree(child)
       element_tree.remove(child)
     else:
       gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
