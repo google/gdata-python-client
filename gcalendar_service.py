@@ -105,7 +105,7 @@ class GCalendarService(gdata_service.GDataService):
                                  'body': HTTP body of the server's response})
     """
 
-    response = self.Post(insert_uri, new_event, url_params=url_params,
+    response = self.Post(new_event, insert_uri, url_params=url_params,
                          escape_params=escape_params)
 
     if isinstance(response, atom.Entry):
@@ -163,8 +163,8 @@ class GCalendarService(gdata_service.GDataService):
     url_prefix = 'http://%s/' % self.server
     if edit_uri.startswith(url_prefix):
       edit_uri = edit_uri[len(url_prefix):]
-    response = self.Put('/%s' % edit_uri,
-                        updated_event, url_params=url_params, 
+    response = self.Put(updated_event, '/%s' % edit_uri,
+                        url_params=url_params, 
                         escape_params=escape_params)
     if isinstance(response, atom.Entry):
       return gcalendar.CalendarEventEntryFromString(response.ToString())
