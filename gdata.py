@@ -313,15 +313,15 @@ class EntryLink(atom.AtomBase):
     if self.entry:
       element_tree.append(self.entry._ToElementTree())
     atom.AtomBase._TransferToElementTree(self, element_tree)
-    element_tree.tag = gdata.GDATA_TEMPLATE % 'entryLink'
+    element_tree.tag = GDATA_TEMPLATE % 'entryLink'
     return element_tree
 
   def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'entry'):
+    if child.tag == '{%s}%s' % (GDATA_NAMESPACE, 'entry'):
       self.entry = _EntryLinkFromElementTree(child)
       element_tree.remove(child)
     else:
-      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
+      GDataEntry._TakeChildFromElementTree(self, child, element_tree)
 
   def _TakeAttributeFromElementTree(self, attribute, element_tree):
     if attribute == 'href':
@@ -333,6 +333,10 @@ class EntryLink(atom.AtomBase):
     else:
       atom.AtomBase._TakeAttributeFromElementTree(self, attribute,
           element_tree)
+
+def _EntryLinkFromElementTree(element_tree):
+  return atom._XFromElementTree(EntryLink, 'feedLink',
+      GDATA_NAMESPACE, element_tree)
 
 
 class FeedLink(atom.AtomBase):
@@ -361,15 +365,15 @@ class FeedLink(atom.AtomBase):
     if self.feed:
       element_tree.append(self.feed._ToElementTree())
     atom.AtomBase._TransferToElementTree(self, element_tree)
-    element_tree.tag = gdata.GDATA_TEMPLATE % 'feedLink'
+    element_tree.tag = GDATA_TEMPLATE % 'feedLink'
     return element_tree
 
   def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'feed'):
+    if child.tag == '{%s}%s' % (GDATA_NAMESPACE, 'feed'):
       self.feed = _GDataFeedFromElementTree(child)
       element_tree.remove(child)
     else:
-      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
+      GDataEntry._TakeChildFromElementTree(self, child, element_tree)
 
   def _TakeAttributeFromElementTree(self, attribute, element_tree):
     if attribute == 'countHint':
@@ -387,3 +391,7 @@ class FeedLink(atom.AtomBase):
     else:
       atom.AtomBase._TakeAttributeFromElementTree(self, attribute,
           element_tree)  
+
+def _FeedLinkFromElementTree(element_tree):
+  return atom._XFromElementTree(FeedLink, 'feedLink',
+      GDATA_NAMESPACE, element_tree)

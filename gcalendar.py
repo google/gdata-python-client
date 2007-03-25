@@ -35,19 +35,35 @@ GCAL_NAMESPACE = 'http://schemas.google.com/gCal/2005'
 GCAL_TEMPLATE = '{http://schemas.google.com/gCal/2005}%s'
 
 
-class CalendarFeed(gdata.GDataFeed, gdata.LinkFinder):
-  """An Google Calendar meta feed flavor of an Atom Feed"""
+class CalendarListFeed(gdata.GDataFeed, gdata.LinkFinder):
+  """A Google Calendar meta feed flavor of an Atom Feed"""
 
   def _TakeChildFromElementTree(self, child, element_tree):
     if child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'entry'):
-      self.entry.append(_CalendarEntryFromElementTree(child))
+      self.entry.append(_CalendarListEntryFromElementTree(child))
       element_tree.remove(child)
     else:
       gdata.GDataFeed._TakeChildFromElementTree(self, child, element_tree)
 
+class CalendarEventCommentFeed(gdata.GDataFeed, gdata.LinkFinder):
+  """A Google Calendar event comments feed flavor of an Atom Feed"""
+
+  def _TakeChildFromElementTree(self, child, element_tree):
+    if child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'entry'):
+      self.entry.append(_CalendarEventCommentEntryFromElementTree(child))
+      element_tree.remove(child)
+    else:
+      gdata.GDataFeed._TakeChildFromElementTree(self, child, element_tree)
+
+class CalendarEventCommentEntry(gdata.GDataEntry, gdata.LinkFinder):
+  """A Google Calendar event comments entry flavor of an Atom Entry"""
+
+def CalendarEventCommentEntryFromString(xml_string):
+  element_tree = ElementTree.fromstring(xml_string)
+  return _CalendarEventCommentEntryFromElementTree(element_tree)
 
 class CalendarEventFeed(gdata.GDataFeed, gdata.LinkFinder):
-  """An Google Calendar event feed flavor of an Atom Feed"""
+  """A Google Calendar event feed flavor of an Atom Feed"""
 
   def __init__(self, author=None, category=None, contributor=None,
       generator=None, icon=None, atom_id=None, link=None, logo=None, 
@@ -74,8 +90,8 @@ class CalendarEventFeed(gdata.GDataFeed, gdata.LinkFinder):
       gdata.GDataFeed._TakeChildFromElementTree(self, child, element_tree)
 
 
-class CalendarEntry(gdata.GDataEntry, gdata.LinkFinder):
-  """An Google Calendar meta Entry flavor of an Atom Entry """
+class CalendarListEntry(gdata.GDataEntry, gdata.LinkFinder):
+  """A Google Calendar meta Entry flavor of an Atom Entry """
   
   def __init__(self, author=None, category=None, content=None,
       atom_id=None, link=None, published=None, 
@@ -132,7 +148,7 @@ def CalendarEventEntryFromString(xml_string):
 
 
 class CalendarEventEntry(gdata.GDataEntry):
-  """An Google Calendar flavor of an Atom Entry """
+  """A Google Calendar flavor of an Atom Entry """
   
   def __init__(self, author=None, category=None, content=None,
       atom_id=None, link=None, published=None, 
@@ -587,21 +603,40 @@ class Transparency(UriEnumElement):
                             text=text)
 
 
-# TODO finish comments implementation
 class Comments(atom.AtomBase):
   """The Google Calendar comments element"""
 
-  def __init__(self, extension_elements=None,
+  def __init__(self, rel=None, feed_link=None, extension_elements=None,
       extension_attributes=None, text=None):
+    self.rel = rel 
+    self.feed_link = feed_link
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
   def _TransferToElementTree(self, element_tree):
-    element_tree.tag = gdata.GDATA_TEMPLATE % 'comments'
+    if self.rel:
+      element_tree.attrib['rel'] = self.rel
+    if self.feed_link:
+      element_tree.append(self.feed_link._ToElementTree())
     atom.AtomBase._TransferToElementTree(self, element_tree)
+    element_tree.tag = gdata.GDATA_TEMPLATE % 'comments'
     return element_tree
+    
+  def _TakeChildFromElementTree(self, child, element_tree):
+    if child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'feedLink'):
+      self.feed_link = gdata._FeedLinkFromElementTree(child)
+      element_tree.remove(child)
+    else:
+      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
 
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+    if attribute == 'rel':
+      self.rel = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    else:
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute,
+          element_tree)
 
 class Reminder(atom.AtomBase):
   """The Google Calendar reminder element"""
@@ -793,24 +828,32 @@ class Timezone(atom.AtomBase):
       atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
           element_tree)
 
-def CalendarFeedFromString(xml_string):
+def CalendarListFeedFromString(xml_string):
   element_tree = ElementTree.fromstring(xml_string)
-  return _CalendarFeedFromElementTree(element_tree)
+  return _CalendarListFeedFromElementTree(element_tree)
 
 def CalendarEventFeedFromString(xml_string):
   element_tree = ElementTree.fromstring(xml_string)
   return _CalendarEventFeedFromElementTree(element_tree)
 
+def CalendarEventCommentFeedFromString(xml_string):
+  element_tree = ElementTree.fromstring(xml_string)
+  return _CalendarEventCommentFeedFromElementTree(element_tree)
+
 
 # Code to create atom feeds from element trees
-_CalendarFeedFromElementTree = atom._AtomInstanceFromElementTree(
-    CalendarFeed, 'feed', atom.ATOM_NAMESPACE)
-_CalendarEntryFromElementTree = atom._AtomInstanceFromElementTree(
-    CalendarEntry, 'entry', atom.ATOM_NAMESPACE)
+_CalendarListFeedFromElementTree = atom._AtomInstanceFromElementTree(
+    CalendarListFeed, 'feed', atom.ATOM_NAMESPACE)
+_CalendarListEntryFromElementTree = atom._AtomInstanceFromElementTree(
+    CalendarListEntry, 'entry', atom.ATOM_NAMESPACE)
 _CalendarEventFeedFromElementTree = atom._AtomInstanceFromElementTree(
     CalendarEventFeed, 'feed', atom.ATOM_NAMESPACE)
 _CalendarEventEntryFromElementTree = atom._AtomInstanceFromElementTree(
     CalendarEventEntry, 'entry', atom.ATOM_NAMESPACE)
+_CalendarEventCommentFeedFromElementTree = atom._AtomInstanceFromElementTree(
+    CalendarEventCommentFeed, 'feed', atom.ATOM_NAMESPACE)
+_CalendarEventCommentEntryFromElementTree = atom._AtomInstanceFromElementTree(
+    CalendarEventCommentEntry, 'entry', atom.ATOM_NAMESPACE)
 _WhereFromElementTree = atom._AtomInstanceFromElementTree(
     Where, 'where', gdata.GDATA_NAMESPACE)
 _WhenFromElementTree = atom._AtomInstanceFromElementTree(

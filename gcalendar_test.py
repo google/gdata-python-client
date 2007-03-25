@@ -29,7 +29,7 @@ import gcalendar
 class CalendarFeedTest(unittest.TestCase):
   
   def setUp(self):
-    self.calendar_feed = gcalendar.CalendarFeedFromString(
+    self.calendar_feed = gcalendar.CalendarListFeedFromString(
         test_data.CALENDAR_FEED)
 
   def testEntryCount(self):
@@ -39,15 +39,15 @@ class CalendarFeedTest(unittest.TestCase):
   def testToAndFromString(self):
     # Assert the appropriate type for each entry
     for an_entry in self.calendar_feed.entry:
-      self.assert_(isinstance(an_entry, gcalendar.CalendarEntry), 
-          'Entry must be an instance of CalendarEntry')
+      self.assert_(isinstance(an_entry, gcalendar.CalendarListEntry), 
+          'Entry must be an instance of CalendarListEntry')
 
     # Regenerate feed from xml text
     new_calendar_feed = ( 
-        gcalendar.CalendarFeedFromString(str(self.calendar_feed)))
+        gcalendar.CalendarListFeedFromString(str(self.calendar_feed)))
     for an_entry in new_calendar_feed.entry:
-      self.assert_(isinstance(an_entry, gcalendar.CalendarEntry), 
-          'Entry in regenerated feed must be an instance of CalendarEntry')
+      self.assert_(isinstance(an_entry, gcalendar.CalendarListEntry), 
+          'Entry in regenerated feed must be an instance of CalendarListEntry')
 
   def testAuthor(self):
     """Tests the existence of a <atom:author> and verifies the name and email"""
@@ -234,9 +234,9 @@ class CalendarFeedTest(unittest.TestCase):
 class CalendarFeedTestRegenerated(CalendarFeedTest):
   def setUp(self):    
     old_calendar_feed = (
-        gcalendar.CalendarFeedFromString(test_data.CALENDAR_FEED))
+        gcalendar.CalendarListFeedFromString(test_data.CALENDAR_FEED))
     self.calendar_feed = (
-        gcalendar.CalendarFeedFromString(str(old_calendar_feed)))
+        gcalendar.CalendarListFeedFromString(str(old_calendar_feed)))
 
 
 class CalendarEventFeedTest(unittest.TestCase):

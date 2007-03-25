@@ -14,9 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""GCalendarService extends the GDataService to streamline Google Calendar operations.
+"""CalendarService extends the GDataService to streamline Google Calendar operations.
 
-  GCalendarService: Provides methods to query feeds and manipulate items. Extends 
+  CalendarService: Provides methods to query feeds and manipulate items. Extends 
                 GDataService.
 
   DictionaryToParamList: Function which converts a dictionary into a list of 
@@ -43,7 +43,7 @@ class RequestError(Error):
   pass
 
 
-class GCalendarService(gdata_service.GDataService):
+class CalendarService(gdata_service.GDataService):
   """Client for the Google Calendar service."""
 
   def __init__(self, email=None, password=None, source=None, 
@@ -54,7 +54,24 @@ class GCalendarService(gdata_service.GDataService):
                                         server=server, 
                                         additional_headers=additional_headers)
 
-  
+  def GetCalendarEventFeed(self, uri):
+    return gcalendar.CalendarEventFeedFromString(str(self.Get(uri)))
+
+  def GetCalendarEventEntry(self, uri):
+    return gcalendar.CalendarEventEntryFromString(str(self.Get(uri)))
+
+  def GetCalendarListFeed(self, uri):
+    return gcalendar.CalendarListFeedFromString(str(self.Get(uri)))
+
+  def GetCalendarListEntry(self, uri):
+    return gcalendar.CalendarListEntryFromString(str(self.Get(uri)))
+
+  def GetCalendarEventCommentFeed(self, uri):
+    return gcalendar.CalendarEventCommentFeedFromString(str(self.Get(uri)))
+
+  def GetCalendarEventCommentEntry(self, uri):
+    return gcalendar.CalendarEventCommentEntryFromString(str(self.Get(uri)))
+ 
   def Query(self, uri):
     """Performs a query and returns a resulting feed or entry.
 
@@ -73,12 +90,14 @@ class GCalendarService(gdata_service.GDataService):
     result = self.Get(uri)
     return result
 
-  def CalendarServiceQuery(self, query):
+  def CalendarQuery(self, query):
     result = self.Query(query.ToUri())
     if isinstance(query, CalendarEventQuery):
       return gcalendar.CalendarEventFeedFromString(result.ToString())
-    elif isinstance(query, CalendarQuery):
-      return gcalendar.CalendarFeedFromString(result.ToString())
+    elif isinstance(query, CalendarListQuery):
+      return gcalendar.CalendarListFeedFromString(result.ToString())
+    elif isinstance(query, CalendarEventCommentQuery):
+      return gcalendar.CalendarEventCommentFeedFromString(result.ToString())
     else:
       print "else result"
       return result
@@ -110,6 +129,34 @@ class GCalendarService(gdata_service.GDataService):
 
     if isinstance(response, atom.Entry):
       return gcalendar.CalendarEventEntryFromString(response.ToString())
+
+  def InsertEventComment(self, new_entry, insert_uri, url_params=None,
+                  escape_params=True):
+    """Adds an entry to Google Calendar.
+
+    Args:
+      new_entry: ElementTree._Element A new entry which is to be added to
+                Google Calendar.
+      insert_uri: the URL to post new entrys to the feed
+      url_params: dict (optional) Additional URL parameters to be included
+                  in the insertion request.
+      escape_params: boolean (optional) If true, the url_parameters will be
+                     escaped before they are included in the request.
+
+    Returns:
+      On successful insert, a tuple in the form
+      (boolean succeeded=True, ElementTree._Element new entry from Google
+      Calendar) On failure, a tuple in the form:
+      (boolean succeeded=False, {'status': HTTP status code from server,
+                                 'reason': HTTP reason from the server,
+                                 'body': HTTP body of the server's response})
+    """
+
+    response = self.Post(new_entry, insert_uri, url_params=url_params,
+                         escape_params=escape_params)
+
+    if isinstance(response, atom.Entry):
+      return gcalendar.CalendarEventCommentEntryFromString(response.ToString())
 
   def DeleteEvent(self, edit_uri, extra_headers=None, 
       url_params=None, escape_params=True):
@@ -284,28 +331,21 @@ class CalendarEventQuery(gdata_service.Query):
       _SetRecurrenceExpansionEnd, 
       doc="""The recurrence-expansion-end query parameter""")
 
-# TODO add query params for calendar list if exists
+class CalendarListQuery(gdata_service.Query): 
+  """Queries the Google Calendar meta feed"""
 
-#class CalendarQuery(CalendarQuery): 
-#  """Queries the Google Calendar meta feed"""
-#
-#  def __init__(self, userId=None, text_query=None,
-#               params=None, categories=None):
-#    if userId is None:
-#      userId = 'default'
-#
-#    CalendarQuery.__init__(self, feed='http://www.google.com/calendar/feeds/'
-#                           +userId,
-#                           text_query=text_query, params=params,
-#                           categories=categories)
+  def __init__(self, userId=None, text_query=None,
+               params=None, categories=None):
+    if userId is None:
+      userId = 'default'
 
+    gdata_service.Query.__init__(self, feed='http://www.google.com/calendar/feeds/'
+                           +userId,
+                           text_query=text_query, params=params,
+                           categories=categories)
 
-#class CalendarEventQuery(CalendarQuery):
-#  """Queries the Google Calendar event feed"""
-#
-#  def __init__(self, user='default', visibility='private', projection='full',
-#               text_query=None, params=None, categories=None):
-#    CalendarQuery.__init__(self, feed='http://www.google.com/calendar/feeds/'+
-#                           '/%s/%s/%s' % (user, visibility, projection,),
-#                           text_query=text_query, params=params, 
-#                           categories=categories)
+class CalendarEventCommentQuery(gdata_service.Query): 
+  """Queries the Google Calendar event comments feed"""
+
+  def __init__(self, feed=None):
+    gdata_service.Query.__init__(self, feed=feed)
