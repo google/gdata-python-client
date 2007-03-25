@@ -110,7 +110,7 @@ class AtomBase(object):
     """
     self.extension_elements = []
     self.extension_attributes = {}
-    self.text = None
+    self.text = text 
     
   def _TransferToElementTree(self, element_tree):
     """Transfer this object's data to an element tree.
