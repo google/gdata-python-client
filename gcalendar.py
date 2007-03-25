@@ -53,7 +53,7 @@ class CalendarEventFeed(gdata.GDataFeed, gdata.LinkFinder):
       generator=None, icon=None, atom_id=None, link=None, logo=None, 
       rights=None, subtitle=None, title=None, updated=None, entry=None, 
       total_results=None, start_index=None, items_per_page=None,
-      text=None, extension_elements=None, extension_attributes=None):
+      extension_elements=None, extension_attributes=None, text=None):
      gdata.GDataFeed.__init__(self, author=author, category=category,
                               contributor=contributor, generator=generator,
                               icon=icon,  atom_id=atom_id, link=link,
@@ -61,9 +61,10 @@ class CalendarEventFeed(gdata.GDataFeed, gdata.LinkFinder):
                               title=title, updated=updated, entry=entry,
                               total_results=total_results,
                               start_index=start_index,
-                              items_per_page=items_per_page, text=text,
+                              items_per_page=items_per_page,
                               extension_elements=extension_elements,
-                              extension_attributes=extension_attributes)
+                              extension_attributes=extension_attributes,
+                              text=text)
 
   def _TakeChildFromElementTree(self, child, element_tree):
     if child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'entry'):
@@ -80,11 +81,11 @@ class CalendarEntry(gdata.GDataEntry, gdata.LinkFinder):
       atom_id=None, link=None, published=None, 
       title=None, updated=None, 
       color=None, access_level=None, hidden=None, timezone=None,
-      text=None,extension_elements=None, extension_attributes=None):
+      extension_elements=None, extension_attributes=None, text=None):
     gdata.GDataEntry.__init__(self, author=author, category=category, 
-                        content=content,
-                        atom_id=atom_id, link=link, published=published,
-                        title=title, updated=updated)
+                        content=content, atom_id=atom_id, link=link, 
+                        published=published, title=title, 
+                        updated=updated, text=None)
 
     self.color = color
     self.access_level = access_level
@@ -141,7 +142,7 @@ class CalendarEventEntry(gdata.GDataEntry):
       recurrence=None, recurrence_exception=None,
       where=None, when=None, who=None,
       extended_property=None, 
-      text=None,extension_elements=None, extension_attributes=None):
+      extension_elements=None, extension_attributes=None, text=None):
 
     gdata.GDataEntry.__init__(self, author=author, category=category, 
                         content=content,
@@ -159,6 +160,7 @@ class CalendarEventEntry(gdata.GDataEntry):
     self.when = when or []
     self.who = who or []
     self.extended_property = extended_property or []
+    self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
@@ -240,9 +242,8 @@ def CalendarEventEntryFromString(xml_string):
 class Where(atom.AtomBase):
   """The Google Calendar Where element"""
 
-  def __init__(self, extension_elements=None,
-      extension_attributes=None, text=None,
-      value_string = None):
+  def __init__(self, value_string=None, extension_elements=None,
+      extension_attributes=None, text=None):
     self.value_string = value_string 
     self.text = text
     self.extension_elements = extension_elements or []
@@ -272,11 +273,11 @@ class Where(atom.AtomBase):
 class ExtendedProperty(atom.AtomBase):
   """The Google Calendar extendedProperty element"""
 
-  def __init__(self, extension_elements=None,
-      extension_attributes=None, text=None,
-      name=None, value=None):
+  def __init__(self, name=None, value=None, extension_elements=None,
+      extension_attributes=None, text=None):
     self.name = name 
     self.value = value
+    self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
@@ -304,10 +305,8 @@ class ExtendedProperty(atom.AtomBase):
 class When(atom.AtomBase):
   """The Google Calendar When element"""
 
-  def __init__(self, extension_elements=None,
-      extension_attributes=None, text=None,
-      start_time=None, end_time=None, 
-      reminder=None):
+  def __init__(self, start_time=None, end_time=None, reminder=None, 
+      extension_elements=None, extension_attributes=None, text=None):
     self.start_time = start_time 
     self.end_time = end_time 
     self.reminder = reminder or []
@@ -357,10 +356,9 @@ class Recurrence(atom.AtomBase):
 class RecurrenceException(atom.AtomBase):
   """The Google Calendar RecurrenceException element"""
   
-  def __init__(self, extension_elements=None,
-      extension_attributes=None, text=None,
-      specialized=None, entry_link=None, 
-      original_event=None):
+  def __init__(self, specialized=None, entry_link=None, 
+      original_event=None, extension_elements=None, 
+      extension_attributes=None, text=None):
     self.specialized = specialized
     self.entry_link = entry_link
     self.original_event = original_event
@@ -380,10 +378,10 @@ class RecurrenceException(atom.AtomBase):
     return element_tree
     
   def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'entry_link'):
+    if child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'entryLink'):
       self.entry_link = _EntryLinkFromElementTree(child)
       element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'original_event'):
+    elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'originalEvent'):
       self.original_event = _OriginalEventLinkFromElementTree(child)
     else:
       gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
@@ -400,10 +398,8 @@ class RecurrenceException(atom.AtomBase):
 class OriginalEvent(atom.AtomBase):
   """The Google Calendar OriginalEvent element"""
 
-  def __init__(self, extension_elements=None,
-      extension_attributes=None, text=None,
-      id=None, href=None, 
-      when=None):
+  def __init__(self, id=None, href=None, when=None, 
+      extension_elements=None, extension_attributes=None, text=None):
     self.id = id
     self.href = href 
     self.when = when
@@ -443,16 +439,14 @@ class OriginalEvent(atom.AtomBase):
 
 class UriEnumElement(atom.AtomBase):
   def __init__(self, tag, enum_map, attrib_name='value', 
-               text=None,
-               extension_elements=None,
-               extension_attributes=None):
-     self.tag=tag
-     self.enum_map=enum_map
-     self.attrib_name=attrib_name
-     self.value=None
-     self.text=text
-     self.extension_elements = extension_elements or []
-     self.extension_attributes = extension_attributes or {}
+      extension_elements=None, extension_attributes=None, text=None):
+    self.tag=tag
+    self.enum_map=enum_map
+    self.attrib_name=attrib_name
+    self.value=None
+    self.text=text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
      
   def findKey(self, value):
      res=[item[0] for item in self.enum_map.items() if item[1] == value]
@@ -491,11 +485,12 @@ class Who(UriEnumElement):
               'http://schemas.google.com/g/2005#message.reply-to' : 'REPLY_TO',
               'http://schemas.google.com/g/2005#message.to' : 'TO' }
   
-  def __init__(self, extension_elements=None,
-      extension_attributes=None):
+  def __init__(self, extension_elements=None, 
+    extension_attributes=None, text=None):
     UriEnumElement.__init__(self, 'who', Who.relEnum, attrib_name='rel',
                             extension_elements=extension_elements,
-                            extension_attributes=extension_attributes)
+                            extension_attributes=extension_attributes, 
+                            text=text)
     self.name=None
     self.email=None
     self.attendeeStatus=None
@@ -539,11 +534,12 @@ class AttendeeStatus(UriEnumElement):
       'http://schemas.google.com/g/2005#event.invited' : 'INVITED',
       'http://schemas.google.com/g/2005#event.tentative' : 'TENTATIVE'}
   
-  def __init__(self, extension_elements=None,
-      extension_attributes=None):
+  def __init__(self, extension_elements=None, 
+      extension_attributes=None, text=None):
     UriEnumElement.__init__(self, 'attendeeStatus', AttendeeStatus.attendee_enum,
                             extension_elements=extension_elements,
-                            extension_attributes=extension_attributes)
+                            extension_attributes=extension_attributes, 
+                            text=text)
 
 
 class AttendeeType(UriEnumElement):
@@ -554,9 +550,10 @@ class AttendeeType(UriEnumElement):
   
   def __init__(self, extension_elements=None,
       extension_attributes=None, text=None):
-    UriEnumElement.__init__(self, 'attendeeType', AttendeeType.attendee_type_enum,
-                            extension_elements=extension_elements,
-                            extension_attributes=extension_attributes)
+    UriEnumElement.__init__(self, 'attendeeType', 
+        AttendeeType.attendee_type_enum,
+        extension_elements=extension_elements,
+        extension_attributes=extension_attributes,text=text)
 
 
 class Visibility(UriEnumElement):
@@ -571,7 +568,8 @@ class Visibility(UriEnumElement):
       extension_attributes=None, text=None):
     UriEnumElement.__init__(self, 'visibility', Visibility.visibility_enum,
                             extension_elements=extension_elements,
-                            extension_attributes=extension_attributes)
+                            extension_attributes=extension_attributes, 
+                            text=text)
 
 
 class Transparency(UriEnumElement):
@@ -585,7 +583,8 @@ class Transparency(UriEnumElement):
     UriEnumElement.__init__(self, tag='transparency', 
                             enum_map=Transparency.transparency_enum,
                             extension_elements=extension_elements,
-                            extension_attributes=extension_attributes)
+                            extension_attributes=extension_attributes, 
+                            text=text)
 
 
 # TODO finish comments implementation
@@ -594,6 +593,7 @@ class Comments(atom.AtomBase):
 
   def __init__(self, extension_elements=None,
       extension_attributes=None, text=None):
+    self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
@@ -614,6 +614,7 @@ class Reminder(atom.AtomBase):
     self.days = days 
     self.hours = hours 
     self.minutes = minutes
+    self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
@@ -657,18 +658,19 @@ class EventStatus(UriEnumElement):
   def __init__(self, extension_elements=None,
       extension_attributes=None, text=None):
     UriEnumElement.__init__(self, tag='eventStatus', 
-                            enum_map=EventStatus.status_enum,
-                            extension_elements=extension_elements,
-                            extension_attributes=extension_attributes)
+        enum_map=EventStatus.status_enum,
+        extension_elements=extension_elements,
+        extension_attributes=extension_attributes, 
+        text=text)
 
 
 class SendEventNotifications(atom.AtomBase):
   """The Google Calendar sendEventNotifications element"""
 
   def __init__(self, extension_elements=None,
-      value=None,
-      extension_attributes=None, text=None):
+      value=None, extension_attributes=None, text=None):
     self.value = value
+    self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
@@ -691,9 +693,10 @@ class SendEventNotifications(atom.AtomBase):
 class Color(atom.AtomBase):
   """The Google Calendar color element"""
   
-  def __init__(self, extension_elements=None,
-      extension_attributes=None, text=None, value=None):
+  def __init__(self, value=None, extension_elements=None,
+      extension_attributes=None, text=None):
     self.value = value
+    self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
@@ -716,9 +719,10 @@ class Color(atom.AtomBase):
 class AccessLevel(atom.AtomBase):
   """The Google Calendar accesslevel element"""
   
-  def __init__(self, extension_elements=None,
-      extension_attributes=None, text=None, value=None):
+  def __init__(self, value=None, extension_elements=None,
+      extension_attributes=None, text=None):
     self.value = value
+    self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
@@ -741,9 +745,10 @@ class AccessLevel(atom.AtomBase):
 class Hidden(atom.AtomBase):
   """The Google Calendar hidden element"""
   
-  def __init__(self, extension_elements=None,
-      extension_attributes=None, text=None, value=None):
+  def __init__(self, extension_elements=None, value=None,
+      extension_attributes=None, text=None):
     self.value = value
+    self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
@@ -766,9 +771,10 @@ class Hidden(atom.AtomBase):
 class Timezone(atom.AtomBase):
   """The Google Calendar timezone element"""
   
-  def __init__(self, extension_elements=None,
-      extension_attributes=None, text=None, value=None):
+  def __init__(self, extension_elements=None, value=None,
+      extension_attributes=None, text=None):
     self.value = value
+    self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
