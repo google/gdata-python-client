@@ -1190,8 +1190,8 @@ class Entry(FeedEntryParent):
 
   def __init__(self, author=None, category=None, content=None, 
       contributor=None, atom_id=None, link=None, published=None, rights=None,
-      source=None, summary=None, title=None, updated=None, text=None,
-      extension_elements=None, extension_attributes=None):
+      source=None, summary=None, title=None, updated=None,
+      extension_elements=None, extension_attributes=None, text=None):
     """Constructor for atom:entry
     
     Args:
