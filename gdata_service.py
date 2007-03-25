@@ -425,10 +425,11 @@ class GDataService(app_service.AtomService):
                                                   self.__auth_token)
 
     if self.__gsessionid is not None:
-      if uri.find('?') > -1:
-        uri += '&gsessionid=%s' % (self.__gsessionid,)
-      else:
-        uri += '?gsessionid=%s' % (self.__gsessionid,)
+      if uri.find('gsessionid=') < 0:
+        if uri.find('?') > -1:
+          uri += '&gsessionid=%s' % (self.__gsessionid,)
+        else:
+          uri += '?gsessionid=%s' % (self.__gsessionid,)
 
     server_response = app_service.AtomService.Get(self, uri, extra_headers)
     result_body = server_response.read()
@@ -447,7 +448,7 @@ class GDataService(app_service.AtomService):
         if location is not None:
           m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
           if m is not None:
-            self.__gsessionid = m.group(0) 
+            self.__gsessionid = m.group(1)
           return self.Get(location, extra_headers, redirects_remaining - 1)
         else:
           raise RequestError, {'status': server_response.status,
@@ -543,10 +544,11 @@ class GDataService(app_service.AtomService):
                                                   self.__auth_token)
 
     if self.__gsessionid is not None:
-      if uri.find('?') > -1:
-        uri += '&gsessionid=%s' % (self.__gsessionid,)
-      else:
-        uri += '?gsessionid=%s' % (self.__gsessionid,)
+      if uri.find('gsessionid=') < 0:
+        if uri.find('?') > -1:
+          uri += '&gsessionid=%s' % (self.__gsessionid,)
+        else:
+          uri += '?gsessionid=%s' % (self.__gsessionid,)
                                                   
     server_response = app_service.AtomService.Post(self, data, uri,
         extra_headers, url_params, escape_params)
@@ -566,7 +568,7 @@ class GDataService(app_service.AtomService):
         if location is not None:
           m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
           if m is not None:
-            self.__gsessionid = m.group(0) 
+            self.__gsessionid = m.group(1) 
           return self.Post(data, location, extra_headers, url_params, escape_params, redirects_remaining - 1)
         else:
           raise RequestError, {'status': server_response.status,
@@ -614,10 +616,11 @@ class GDataService(app_service.AtomService):
                                                   self.__auth_token)
 
     if self.__gsessionid is not None:
-      if uri.find('?') > -1:
-        uri += '&gsessionid=%s' % (self.__gsessionid,)
-      else:
-        uri += '?gsessionid=%s' % (self.__gsessionid,)
+      if uri.find('gsessionid=') < 0:
+        if uri.find('?') > -1:
+          uri += '&gsessionid=%s' % (self.__gsessionid,)
+        else:
+          uri += '?gsessionid=%s' % (self.__gsessionid,)
                                                   
     server_response = app_service.AtomService.Put(self, data, uri,
         extra_headers, url_params, escape_params)
@@ -637,7 +640,7 @@ class GDataService(app_service.AtomService):
         if location is not None:
           m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
           if m is not None:
-            self.__gsessionid = m.group(0) 
+            self.__gsessionid = m.group(1) 
           return self.Put(data, location, extra_headers, url_params, escape_params, redirects_remaining - 1)
         else:
           raise RequestError, {'status': server_response.status,
@@ -683,10 +686,11 @@ class GDataService(app_service.AtomService):
                                                   self.__auth_token)
 
     if self.__gsessionid is not None:
-      if uri.find('?') > -1:
-        uri += '&gsessionid=%s' % (self.__gsessionid,)
-      else:
-        uri += '?gsessionid=%s' % (self.__gsessionid,)
+      if uri.find('gsessionid=') < 0:
+        if uri.find('?') > -1:
+          uri += '&gsessionid=%s' % (self.__gsessionid,)
+        else:
+          uri += '?gsessionid=%s' % (self.__gsessionid,)
                                                   
     server_response = app_service.AtomService.Delete(self, uri,
         extra_headers, url_params, escape_params)
@@ -700,7 +704,7 @@ class GDataService(app_service.AtomService):
         if location is not None:
           m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
           if m is not None:
-            self.__gsessionid = m.group(0) 
+            self.__gsessionid = m.group(1) 
           return self.Delete(location, extra_headers, url_params, escape_params, redirects_remaining - 1)
         else:
           raise RequestError, {'status': server_response.status,
