@@ -104,7 +104,7 @@ class GDataService(app_service.AtomService):
   services to allow a user to perform inserts, updates, and deletes.
   """
 
-  def __init__(self, email=None, password=None, account_type='GOOGLE',
+  def __init__(self, email=None, password=None, account_type='HOSTED_OR_GOOGLE',
                service=None, source=None, server=None, 
                additional_headers=None):
     """Creates an object of type GDataClient.
@@ -115,7 +115,9 @@ class GDataService(app_service.AtomService):
       password: string (optional) The user's password.
       account_type: string (optional) The type of account to use. Use
               'GOOGLE' for regular Google accounts or 'HOSTED' for Google
-              Apps accounts. Default value: 'GOOGLE'.
+              Apps accounts, or 'HOSTED_OR_GOOGLE' to try finding a HOSTED
+              account first and, if it doesn't exist, try finding a regular
+              GOOGLE account. Default value: 'HOSTED_OR_GOOGLE'.
       service: string (optional) The desired service for which credentials
                will be obtained.
       source: string (optional) The name of the user's application.
