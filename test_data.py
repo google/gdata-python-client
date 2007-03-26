@@ -34,6 +34,25 @@ XML_ENTRY_1 = """<?xml version='1.0'?>
   <g:item_type>products</g:item_type>
 </entry>"""
 
+
+TEST_BASE_ENTRY = """<?xml version='1.0'?>
+<entry xmlns='http://www.w3.org/2005/Atom'
+       xmlns:g='http://base.google.com/ns/1.0'>
+  <category scheme="http://base.google.com/categories/itemtypes"
+            term="products"/>
+  <title type='text'>Testing 2000 series laptop</title>
+  <content type='xhtml'>
+    <div xmlns='http://www.w3.org/1999/xhtml'>A Testing Laptop</div>
+  </content>
+  <link rel='alternate' type='text/html'
+        href='http://www.provider-host.com/123456789'/>
+  <g:label>Computer</g:label>
+  <g:label>Laptop</g:label>
+  <g:label>testing laptop</g:label>
+  <g:item_type>products</g:item_type>
+</entry>"""
+
+
 BIG_FEED = """<?xml version="1.0" encoding="utf-8"?>
    <feed xmlns="http://www.w3.org/2005/Atom">
      <title type="text">dive into mark</title>
