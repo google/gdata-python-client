@@ -30,7 +30,7 @@ import string
 import time
 
 
-class CalendarSample:
+class CalendarExample:
 
   def __init__(self, email, password):
     """Creates a CalendarService and provides ClientLogin auth details to it.
@@ -286,7 +286,7 @@ class CalendarSample:
     
  
 def main():
-  """Runs the CalendarSample application with the provided username and
+  """Runs the CalendarExample application with the provided username and
   and password values.  Authentication credentials are required.  
   NOTE: It is recommended that you run this sample using a test account."""
 
@@ -294,7 +294,7 @@ def main():
   try:
     opts, args = getopt.getopt(sys.argv[1:], "", ["user=", "pw=", "delete="])
   except getopt.error, msg:
-    print ('python calendarSample.py --user [usename] --pw [password] ' + 
+    print ('python calendarExample.py --user [usename] --pw [password] ' + 
         '--delete [true|false] ')
     sys.exit(2)
 
@@ -312,10 +312,11 @@ def main():
       delete = a
 
   if user == '' or pw == '':
-    print 'python calendarExample.py --user [usename] --pw [password] '
+    print ('python calendarExample.py --user [usename] --pw [password] ' + 
+        '--delete [true|false] ')
     sys.exit(2)
 
-  sample = CalendarSample(user, pw)
+  sample = CalendarExample(user, pw)
   sample.Run(delete)
 
 if __name__ == '__main__':
