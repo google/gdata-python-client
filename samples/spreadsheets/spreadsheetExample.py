@@ -32,7 +32,7 @@ import string
 class SimpleCRUD:
 
   def __init__(self, email, password):
-    self.gd_client = gspreadsheet_service.GSpreadsheetsService()
+    self.gd_client = gspreadsheet_service.SpreadsheetsService()
     self.gd_client.email = email
     self.gd_client.password = password
     self.gd_client.source = 'Spreadsheets GData Sample'
@@ -100,7 +100,7 @@ class SimpleCRUD:
   def _CellsUpdateAction(self, row, col, inputValue):
     entry = self.gd_client.UpdateCell(row=row, col=col, inputValue=inputValue, 
         key=self.curr_key, wksht_id=self.curr_wksht_id)
-    if isinstance(entry, gspreadsheet.GSpreadsheetsCell):
+    if isinstance(entry, gspreadsheet.SpreadsheetsCell):
       print 'Updated!'
         
   def _ListGetAction(self):
@@ -111,14 +111,14 @@ class SimpleCRUD:
   def _ListInsertAction(self, row_data):
     entry = self.gd_client.InsertRow(self._StringToDictionary(row_data), 
         self.curr_key, self.curr_wksht_id)
-    if isinstance(entry, gspreadsheet.GSpreadsheetsCell):
+    if isinstance(entry, gspreadsheet.SpreadsheetsCell):
       print 'Inserted!'
         
   def _ListUpdateAction(self, index, row_data):
     entry = self.gd_client.UpdateRow(
         self.list_feed.entry[string.atoi(index)], 
         self._StringToDictionary(row_data))
-    if isinstance(entry, gspreadsheet.GSpreadsheetsCell):
+    if isinstance(entry, gspreadsheet.SpreadsheetsCell):
       print 'Updated!'
   
   def _ListDeleteAction(self, index):
@@ -134,9 +134,9 @@ class SimpleCRUD:
   
   def _PrintFeed(self, feed):
     for i, entry in enumerate(feed.entry):
-      if isinstance(feed, gspreadsheet.GSpreadsheetsCellsFeed):
+      if isinstance(feed, gspreadsheet.SpreadsheetsCellsFeed):
         print '%s %s\n' % (entry.title.text, entry.content.text)
-      elif isinstance(feed, gspreadsheet.GSpreadsheetsListFeed):
+      elif isinstance(feed, gspreadsheet.SpreadsheetsListFeed):
         print '%s %s %s\n' % (i, entry.title.text, entry.content.text)
       else:
         print '%s %s\n' % (i, entry.title.text)
