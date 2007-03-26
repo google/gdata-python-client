@@ -645,10 +645,19 @@ class Reminder(atom.AtomBase):
       days=None, hours=None, minutes=None, 
       extension_elements=None,
       extension_attributes=None, text=None):
-    self.absolute_time = absolute_time 
-    self.days = days 
-    self.hours = hours 
-    self.minutes = minutes
+    self.absolute_time = absolute_time
+    if days is not None: 
+      self.days = str(days)
+    else:
+      self.days = None
+    if hours is not None:
+      self.hours = str(hours)
+    else:
+      self.hours = None
+    if minutes is not None:
+      self.minutes = str(minutes)
+    else:
+      self.minutes = None
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
