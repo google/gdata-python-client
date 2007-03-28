@@ -161,7 +161,7 @@ def main():
   try:
     opts, args = getopt.getopt(sys.argv[1:], "", ["user=", "pw="])
   except getopt.error, msg:
-    print 'python spreadsheetExample.py --user [usename] --pw [password] '
+    print 'python spreadsheetExample.py --user [username] --pw [password] '
     sys.exit(2)
   
   user = ''
@@ -175,7 +175,7 @@ def main():
       pw = a
 
   if user == '' or pw == '':
-    print 'python spreadsheetExample.py --user [usename] --pw [password] '
+    print 'python spreadsheetExample.py --user [username] --pw [password] '
     sys.exit(2)
         
   sample = SimpleCRUD(user, pw)
