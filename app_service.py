@@ -27,11 +27,17 @@ __author__ = 'api.jscudder (Jeffrey Scudder)'
 
 import httplib
 import urllib
+import re
 from elementtree import ElementTree
 
+URL_REGEX = re.compile('http(s)?\://([\w\.]*)(\:(\d+))?(/.*)?')
 
 class AtomService(object):
   """Performs Atom Publishing Protocol CRUD operations."""
+
+  # Default values for members
+  port = 80
+  ssl = False
 
   def __init__(self, server=None, additional_headers=None):
     """Creates a new AtomService client.
@@ -45,6 +51,35 @@ class AtomService(object):
     """
     self.server = server
     self.additional_headers = additional_headers or {}
+
+
+  def _ProcessUrl(self, url):
+    """Processes a passed URL.  If the URL does not begin with https?, then
+    the default value for self.server is used"""
+
+    server = self.server
+    port = self.port
+    ssl = self.ssl
+    uri = url
+
+    m = URL_REGEX.match(url)
+
+    if m is None:
+      return (server, port, ssl, uri)
+    else:
+      if m.group(1) is not None:
+        port = 443
+        ssl = True
+      if m.group(3) is None:
+        server = m.group(2)
+      else:
+        server = m.group(2)
+        port = int(m.group(4))
+      if m.group(5) is not None:
+        uri = m.group(5)
+      else:
+        uri = '/'
+      return (server, port, ssl, uri)
 
   # CRUD operations
   def Get(self, uri, extra_headers=None, url_params=None, escape_params=True):
@@ -81,8 +116,13 @@ class AtomService(object):
       httplib.HTTPResponse The server's response to the GET request.
     """
     full_uri = BuildUri(uri, url_params, escape_params)
+    (server, port, ssl, uri) = self._ProcessUrl(full_uri)
 
-    query_connection = httplib.HTTPConnection(self.server)
+    if ssl:
+      query_connection = httplib.HTTPSConnection(server, port)
+    else:
+      query_connection = httplib.HTTPConnection(server, port)
+
     query_connection.putrequest('GET', full_uri)
 
     query_connection.putheader('Content-Type','application/atom+xml')
@@ -128,8 +168,13 @@ class AtomService(object):
       data_str = str(data)
       
     full_uri = BuildUri(uri, url_params, escape_params)
+    (server, port, ssl, full_uri) = self._ProcessUrl(full_uri)
 
-    insert_connection = httplib.HTTPConnection(self.server)
+    if ssl:
+      insert_connection = httplib.HTTPSConnection(server, port)
+    else:
+      insert_connection = httplib.HTTPConnection(server, port)
+
     insert_connection.putrequest('POST', full_uri)
 
     insert_connection.putheader('Content-Type','application/atom+xml')
@@ -177,8 +222,14 @@ class AtomService(object):
       data_str = str(data)
       
     full_uri = BuildUri(uri, url_params, escape_params)
-    
-    update_connection = httplib.HTTPConnection(self.server)
+
+    (server, port, ssl, full_uri) = self._ProcessUrl(full_uri)
+
+    if ssl:
+      update_connection = httplib.HTTPSConnection(server, port)
+    else:
+      update_connection = httplib.HTTPConnection(server, port)
+
     update_connection.putrequest('PUT', full_uri)
 
     update_connection.putheader('Content-Type','application/atom+xml')
@@ -219,8 +270,13 @@ class AtomService(object):
       httplib.HTTPResponse Server's response to the DELETE request.
     """
     full_uri = BuildUri(uri, url_params, escape_params)
- 
-    delete_connection = httplib.HTTPConnection(self.server)
+    (server, port, ssl, full_uri) = self._ProcessUrl(full_uri)
+
+    if ssl:
+      delete_connection = httplib.HTTPSConnection(server, port)
+    else:
+      delete_connection = httplib.HTTPConnection(server, port)
+
     delete_connection.putrequest('DELETE', full_uri)
     delete_connection.putheader('Content-Type','application/atom+xml')
     if isinstance(self.additional_headers, dict):

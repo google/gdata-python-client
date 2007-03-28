@@ -60,7 +60,49 @@ class AtomServiceUnitTest(unittest.TestCase):
     self.assert_(x.index('foo= bar') != -1)
     self.assert_(x.index('bq=digital camera') != -1)
 
+  def testParseHttpUrl(self):
+    as = app_service.AtomService('code.google.com')
+    self.assertEquals(as.server, 'code.google.com')
+    (host, port, ssl, path) =  as._ProcessUrl(
+        'http://www.google.com/service/subservice?name=value')
 
+    self.assertEquals(ssl, False)
+    self.assertEquals(host, 'www.google.com')
+    self.assertEquals(port, 80)
+    self.assertEquals(path, '/service/subservice?name=value')
+
+  def testParseHttpUrlWithPort(self):
+    as = app_service.AtomService('code.google.com')
+    self.assertEquals(as.server, 'code.google.com')
+    (host, port, ssl, path) =  as._ProcessUrl(
+        'http://www.google.com:12/service/subservice?name=value&newname=newvalue')
+
+    self.assertEquals(ssl, False)
+    self.assertEquals(host, 'www.google.com')
+    self.assertEquals(port, 12)
+    self.assertEquals(path, '/service/subservice?name=value&newname=newvalue')
+
+  def testParseHttpsUrl(self):
+    as = app_service.AtomService('code.google.com')
+    self.assertEquals(as.server, 'code.google.com')
+    (host, port, ssl, path) =  as._ProcessUrl(
+        'https://www.google.com/service/subservice?name=value&newname=newvalue')
+
+    self.assertEquals(ssl, True)
+    self.assertEquals(host, 'www.google.com')
+    self.assertEquals(port, 443)
+    self.assertEquals(path, '/service/subservice?name=value&newname=newvalue')
+
+  def testParseHttpsUrlWithPort(self):
+    as = app_service.AtomService('code.google.com')
+    self.assertEquals(as.server, 'code.google.com')
+    (host, port, ssl, path) =  as._ProcessUrl(
+        'https://www.google.com:13981/service/subservice?name=value&newname=newvalue')
+
+    self.assertEquals(ssl, True)
+    self.assertEquals(host, 'www.google.com')
+    self.assertEquals(port, 13981)
+    self.assertEquals(path, '/service/subservice?name=value&newname=newvalue')
 
 
 if __name__ == '__main__':
