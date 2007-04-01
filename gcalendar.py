@@ -25,7 +25,10 @@
 __author__ = 'api.vli (Vivian Li), api.rboyd (Ryan Boyd)'
 
 
-from elementtree import ElementTree
+try:
+  from xml.etree import ElementTree
+except ImportError:
+  from elementtree import ElementTree
 import atom
 import gdata
 

@@ -18,7 +18,10 @@ __author__ = 'jscudder@google.com (Jeff Scudder)'
 
 import unittest
 import getpass
-from elementtree import ElementTree
+try:
+  from xml.etree import ElementTree
+except ImportError:
+  from elementtree import ElementTree
 import gdata_service
 import gdata
 import atom

@@ -28,7 +28,10 @@ __author__ = 'api.jscudder (Jeffrey Scudder)'
 import httplib
 import urllib
 import re
-from elementtree import ElementTree
+try:
+  from xml.etree import ElementTree
+except ImportError:
+  from elementtree import ElementTree
 
 URL_REGEX = re.compile('http(s)?\://([\w\.]*)(\:(\d+))?(/.*)?')
 

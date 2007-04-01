@@ -17,7 +17,10 @@
 
 import gbase_service
 import gdata_service
-from elementtree import ElementTree
+try:
+  from xml.etree import ElementTree
+except ImportError:
+  from elementtree import ElementTree
 import atom
 import gbase
 

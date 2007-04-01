@@ -19,7 +19,10 @@ __author__ = 'api.jscudder@gmail.com (Jeff Scudder)'
 
 
 import unittest
-from elementtree import ElementTree
+try:
+  from xml.etree import ElementTree
+except ImportError:
+  from elementtree import ElementTree
 import atom 
 import gdata
 import test_data

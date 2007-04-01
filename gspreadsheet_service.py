@@ -27,7 +27,10 @@ Spreadsheets operations.
 
 __author__ = 'api.laurabeth@gmail.com (Laura Beth Lincoln)'
 
-from elementtree import ElementTree
+try:
+  from xml.etree import ElementTree
+except ImportError:
+  from elementtree import ElementTree
 import urllib
 import gdata
 import app_service

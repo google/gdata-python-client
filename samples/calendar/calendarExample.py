@@ -18,7 +18,10 @@
 __author__ = 'api.rboyd@gmail.com (Ryan Boyd)'
 
 
-from elementtree import ElementTree
+try:
+  from xml.etree import ElementTree
+except ImportError:
+  from elementtree import ElementTree
 import gcalendar_service
 import gdata_service
 import app_service

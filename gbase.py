@@ -21,7 +21,10 @@ __author__ = 'api.jscudder (Jeffrey Scudder)'
 
 #TODO: create the following GBaseAttribute, GBaseAttributesFeed, GBaseItemType, GBaseItemTypeFeed, Attribute, Value, ...
 
-from elementtree import ElementTree
+try:
+  from xml.etree import ElementTree
+except ImportError:
+  from elementtree import ElementTree
 import atom
 import gdata
 

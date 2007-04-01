@@ -18,7 +18,10 @@
 __author__ = 'api.laurabeth@gmail.com (Laura Beth Lincoln)'
 
 
-from elementtree import ElementTree
+try:
+  from xml.etree import ElementTree
+except ImportError:
+  from elementtree import ElementTree
 import gspreadsheet_service
 import gdata_service
 import app_service

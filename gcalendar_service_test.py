@@ -17,7 +17,10 @@
 __author__ = 'api.rboyd@google.com (Ryan Boyd)'
 
 import unittest
-from elementtree import ElementTree
+try:
+  from xml.etree import ElementTree
+except ImportError:
+  from elementtree import ElementTree
 import atom
 import gcalendar
 import gcalendar_service
