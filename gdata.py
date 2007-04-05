@@ -15,9 +15,9 @@
 # limitations under the License.
 
 
-"""Contains classes representing GData elements.
+"""Contains classes representing Google Data elements.
 
-  Extends Atom classes to add GData specific elements.
+  Extends Atom classes to add Google Data specific elements.
 
 
 """
@@ -337,9 +337,15 @@ class EntryLink(atom.AtomBase):
       atom.AtomBase._TakeAttributeFromElementTree(self, attribute,
           element_tree)
 
-def _EntryLinkFromElementTree(element_tree):
-  return atom._XFromElementTree(EntryLink, 'entryLink',
-      GDATA_NAMESPACE, element_tree)
+_EntryLinkFromElementTree = atom._AtomInstanceFromElementTree(EntryLink, 
+    'entryLink', GDATA_NAMESPACE)
+
+def EntryLinkFromString(xml_string):
+  element_tree = ElementTree.fromstring(xml_string)
+  return _EntryLinkFromElementTree(element_tree)
+#def _EntryLinkFromElementTree(element_tree):
+#  return atom._XFromElementTree(EntryLink, 'entryLink',
+#      GDATA_NAMESPACE, element_tree)
 
 
 class FeedLink(atom.AtomBase):
@@ -376,7 +382,7 @@ class FeedLink(atom.AtomBase):
       self.feed = _GDataFeedFromElementTree(child)
       element_tree.remove(child)
     else:
-      GDataEntry._TakeChildFromElementTree(self, child, element_tree)
+      atom.AtomBase._TakeChildFromElementTree(self, child, element_tree)
 
   def _TakeAttributeFromElementTree(self, attribute, element_tree):
     if attribute == 'countHint':
@@ -398,3 +404,7 @@ class FeedLink(atom.AtomBase):
 def _FeedLinkFromElementTree(element_tree):
   return atom._XFromElementTree(FeedLink, 'feedLink',
       GDATA_NAMESPACE, element_tree)
+
+def FeedLinkFromString(xml_string):
+  element_tree = ElementTree.fromstring(xml_string)
+  return _FeedLinkFromElementTree(element_tree)

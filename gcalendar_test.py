@@ -242,6 +242,8 @@ class CalendarFeedTest(unittest.TestCase):
     self.assertTrue(isinstance(entry.recurrence_exception, list))
     self.assertTrue(isinstance(entry.recurrence_exception[0].entry_link, 
         gdata.EntryLink))
+    self.assertTrue(isinstance(entry.recurrence_exception[0].entry_link.entry,
+        gcalendar.CalendarEventEntry))
     self.assertEquals(
         entry.recurrence_exception[0].entry_link.entry.author[0].name.text, 
         'gdata ops')

@@ -15,7 +15,6 @@
 # limitations under the License.
 
 
-
 # TODO:
 #   add text=none to all inits
 
@@ -373,6 +372,29 @@ class Recurrence(atom.AtomBase):
     return element_tree
 
 
+class CalendarEventEntryLink(gdata.EntryLink):
+  """An entryLink which contains a calendar event entry
+  
+  Within an event's recurranceExceptions, an entry link
+  points to a calendar event entry. This class exists
+  to capture the calendar specific extensions in the entry.
+  """
+
+  def _TakeChildFromElementTree(self, child, element_tree):
+    if child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'entry'):
+      self.entry = _CalendarEventEntryFromElementTree(child)
+      element_tree.remove(child)
+    else:
+      gdata.EntryLink._TakeChildFromElementTree(self, child, element_tree)
+
+_CalendarEventEntryLinkFromElementTree = atom._AtomInstanceFromElementTree(
+    CalendarEventEntryLink, 'entryLink', gdata.GDATA_NAMESPACE)
+
+def CalendarEventEntryLinkFromString(xml_string):
+  element_tree = ElementTree.fromstring(xml_string)
+  return _CalendarEventEntryLinkFromElementTree(element_tree)
+  
+
 class RecurrenceException(atom.AtomBase):
   """The Google Calendar RecurrenceException element"""
   
@@ -399,7 +421,7 @@ class RecurrenceException(atom.AtomBase):
     
   def _TakeChildFromElementTree(self, child, element_tree):
     if child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'entryLink'):
-      self.entry_link = gdata._EntryLinkFromElementTree(child)
+      self.entry_link = _CalendarEventEntryLinkFromElementTree(child)
       element_tree.remove(child)
     elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'originalEvent'):
       self.original_event = _OriginalEventLinkFromElementTree(child)
