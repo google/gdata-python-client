@@ -320,11 +320,11 @@ class EntryLink(atom.AtomBase):
     return element_tree
 
   def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (GDATA_NAMESPACE, 'entry'):
-      self.entry = _EntryLinkFromElementTree(child)
+    if child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'entry'):
+      self.entry = atom._EntryFromElementTree(child)
       element_tree.remove(child)
     else:
-      GDataEntry._TakeChildFromElementTree(self, child, element_tree)
+      atom.AtomBase._TakeChildFromElementTree(self, child, element_tree)
 
   def _TakeAttributeFromElementTree(self, attribute, element_tree):
     if attribute == 'href':
@@ -338,7 +338,7 @@ class EntryLink(atom.AtomBase):
           element_tree)
 
 def _EntryLinkFromElementTree(element_tree):
-  return atom._XFromElementTree(EntryLink, 'feedLink',
+  return atom._XFromElementTree(EntryLink, 'entryLink',
       GDATA_NAMESPACE, element_tree)
 
 

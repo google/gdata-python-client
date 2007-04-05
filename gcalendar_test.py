@@ -233,6 +233,19 @@ class CalendarFeedTest(unittest.TestCase):
     self.assertEquals(self.calendar_feed.generator.uri, 
         'http://www.google.com/calendar')
 
+  def testEntryLink(self):
+    """Makes sure entry links in the private composite feed are parsed."""
+
+    entry = gcalendar.CalendarEventEntryFromString(
+        test_data.RECURRENCE_EXCEPTION_ENTRY)
+
+    self.assertTrue(isinstance(entry.recurrence_exception, list))
+    self.assertTrue(isinstance(entry.recurrence_exception[0].entry_link, 
+        gdata.EntryLink))
+    self.assertEquals(
+        entry.recurrence_exception[0].entry_link.entry.author[0].name.text, 
+        'gdata ops')
+
 
 class CalendarFeedTestRegenerated(CalendarFeedTest):
   def setUp(self):    

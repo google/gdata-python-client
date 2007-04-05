@@ -174,7 +174,7 @@ class CalendarEventEntry(gdata.GDataEntry):
     self.send_event_notifications = send_event_notifications
     self.visibility = visibility
     self.recurrence = recurrence 
-    self.recurrence_exception = recurrence_exception 
+    self.recurrence_exception = recurrence_exception or []
     self.where = where or []
     self.when = when or []
     self.who = who or []
@@ -204,8 +204,8 @@ class CalendarEventEntry(gdata.GDataEntry):
       element_tree.append(self.event_status._ToElementTree())
     if self.recurrence:
       element_tree.append(self.recurrence._ToElementTree())
-    if self.recurrence_exception:
-      element_tree.append(self.recurrence_exception._ToElementTree())
+    for an_exception in self.recurrence_exception:
+      element_tree.append(an_exception._ToElementTree())
 
     gdata.GDataEntry._TransferToElementTree(self, element_tree)
     return element_tree
@@ -236,7 +236,8 @@ class CalendarEventEntry(gdata.GDataEntry):
       self.recurrence=_RecurrenceFromElementTree(child)
       element_tree.remove(child)
     elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'recurrenceException'):
-      self.recurrence_exception=_RecurrenceExceptionFromElementTree(child)
+      self.recurrence_exception.append(_RecurrenceExceptionFromElementTree(
+          child))
       element_tree.remove(child)
     elif child.tag == '{%s}%s' % (GCAL_NAMESPACE, 'sendEventNotifications'):
       self.send_event_notifications=(
@@ -389,7 +390,7 @@ class RecurrenceException(atom.AtomBase):
     if self.specialized:
       element_tree.attrib['specialized'] = self.specialized
     if self.entry_link:
-      element_tree.append(entry_link._ToElementTree())
+      element_tree.append(self.entry_link._ToElementTree())
     if self.original_event:
       element_tree.append(original_event._ToElementTree())
     atom.AtomBase._TransferToElementTree(self, element_tree)
@@ -398,7 +399,7 @@ class RecurrenceException(atom.AtomBase):
     
   def _TakeChildFromElementTree(self, child, element_tree):
     if child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'entryLink'):
-      self.entry_link = _EntryLinkFromElementTree(child)
+      self.entry_link = gdata._EntryLinkFromElementTree(child)
       element_tree.remove(child)
     elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'originalEvent'):
       self.original_event = _OriginalEventLinkFromElementTree(child)
@@ -439,7 +440,7 @@ class OriginalEvent(atom.AtomBase):
     
   def _TakeChildFromElementTree(self, child, element_tree):
     if child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'when'):
-      self.when = _EntryLinkFromElementTree(child)
+      self.when = gdata._EntryLinkFromElementTree(child)
       element_tree.remove(child)
     else:
       gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)

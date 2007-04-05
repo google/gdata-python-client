@@ -910,3 +910,103 @@ GBASE_LOCALES_FEED = """<?xml version='1.0' encoding='UTF-8'?>
 </entry>
 </feed>"""
 
+RECURRENCE_EXCEPTION_ENTRY = """<entry xmlns='http://www.w3.org/2005/Atom'
+xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
+xmlns:gd='http://schemas.google.com/g/2005'
+xmlns:gCal='http://schemas.google.com/gCal/2005'>
+    <id>
+    http://www.google.com/calendar/feeds/default/private/composite/i7lgfj69mjqjgnodklif3vbm7g</id>
+    <published>2007-04-05T21:51:49.000Z</published>
+    <updated>2007-04-05T21:51:49.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind'
+    term='http://schemas.google.com/g/2005#event'></category>
+    <title type='text'>testDavid</title>
+    <content type='text'></content>
+    <link rel='alternate' type='text/html'
+    href='http://www.google.com/calendar/event?eid=aTdsZ2ZqNjltanFqZ25vZGtsaWYzdmJtN2dfMjAwNzA0MDNUMTgwMDAwWiBnZGF0YS5vcHMudGVzdEBt'
+    title='alternate'></link>
+    <link rel='self' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/composite/i7lgfj69mjqjgnodklif3vbm7g'>
+    </link>
+    <author>
+      <name>gdata ops</name>
+      <email>gdata.ops.test@gmail.com</email>
+    </author>
+    <gd:visibility value='http://schemas.google.com/g/2005#event.default'>
+    </gd:visibility>
+    <gCal:sendEventNotifications value='true'>
+    </gCal:sendEventNotifications>
+    <gd:transparency value='http://schemas.google.com/g/2005#event.opaque'>
+    </gd:transparency>
+    <gd:eventStatus value='http://schemas.google.com/g/2005#event.confirmed'>
+    </gd:eventStatus>
+    <gd:recurrence>DTSTART;TZID=America/Anchorage:20070403T100000
+    DTEND;TZID=America/Anchorage:20070403T110000
+    RRULE:FREQ=DAILY;UNTIL=20070408T180000Z;WKST=SU
+    EXDATE;TZID=America/Anchorage:20070407T100000
+    EXDATE;TZID=America/Anchorage:20070405T100000
+    EXDATE;TZID=America/Anchorage:20070404T100000 BEGIN:VTIMEZONE
+    TZID:America/Anchorage X-LIC-LOCATION:America/Anchorage
+    BEGIN:STANDARD TZOFFSETFROM:-0800 TZOFFSETTO:-0900 TZNAME:AKST
+    DTSTART:19701025T020000 RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+    END:STANDARD BEGIN:DAYLIGHT TZOFFSETFROM:-0900 TZOFFSETTO:-0800
+    TZNAME:AKDT DTSTART:19700405T020000
+    RRULE:FREQ=YEARLY;BYMONTH=4;BYDAY=1SU END:DAYLIGHT
+    END:VTIMEZONE</gd:recurrence>
+    <gd:where valueString=''></gd:where>
+    <gd:reminder minutes='10'></gd:reminder>
+    <gd:recurrenceException specialized='true'>
+      <gd:entryLink>
+        <entry>
+          <id>i7lgfj69mjqjgnodklif3vbm7g_20070407T180000Z</id>
+          <published>2007-04-05T21:51:49.000Z</published>
+          <updated>2007-04-05T21:52:58.000Z</updated>
+          <category scheme='http://schemas.google.com/g/2005#kind'
+          term='http://schemas.google.com/g/2005#event'></category>
+          <title type='text'>testDavid</title>
+          <content type='text'></content>
+          <link rel='alternate' type='text/html'
+          href='http://www.google.com/calendar/event?eid=aTdsZ2ZqNjltanFqZ25vZGtsaWYzdmJtN2dfMjAwNzA0MDdUMTgwMDAwWiBnZGF0YS5vcHMudGVzdEBt'
+          title='alternate'></link>
+          <author>
+            <name>gdata ops</name>
+            <email>gdata.ops.test@gmail.com</email>
+          </author>
+          <gd:visibility value='http://schemas.google.com/g/2005#event.default'>
+          </gd:visibility>
+          <gd:originalEvent id='i7lgfj69mjqjgnodklif3vbm7g'
+          href='http://www.google.com/calendar/feeds/default/private/composite/i7lgfj69mjqjgnodklif3vbm7g'>
+
+            <gd:when startTime='2007-04-07T13:00:00.000-05:00'>
+            </gd:when>
+          </gd:originalEvent>
+          <gCal:sendEventNotifications value='false'>
+          </gCal:sendEventNotifications>
+          <gd:transparency value='http://schemas.google.com/g/2005#event.opaque'>
+          </gd:transparency>
+          <gd:eventStatus value='http://schemas.google.com/g/2005#event.canceled'>
+          </gd:eventStatus>
+          <gd:comments>
+            <gd:feedLink href='http://www.google.com/calendar/feeds/default/private/full/i7lgfj69mjqjgnodklif3vbm7g_20070407T180000Z/comments'>
+
+              <feed>
+                <updated>2007-04-05T21:54:09.285Z</updated>
+                <category scheme='http://schemas.google.com/g/2005#kind'
+                term='http://schemas.google.com/g/2005#message'>
+                </category>
+                <title type='text'>Comments for: testDavid</title>
+                <link rel='alternate' type='text/html'
+                href='http://www.google.com/calendar/feeds/default/private/full/i7lgfj69mjqjgnodklif3vbm7g_20070407T180000Z/comments'
+                title='alternate'></link>
+              </feed>
+            </gd:feedLink>
+          </gd:comments>
+          <gd:when startTime='2007-04-07T13:00:00.000-05:00'
+          endTime='2007-04-07T14:00:00.000-05:00'>
+            <gd:reminder minutes='10'></gd:reminder>
+          </gd:when>
+          <gd:where valueString=''></gd:where>
+        </entry>
+      </gd:entryLink>
+    </gd:recurrenceException>
+  </entry>"""
