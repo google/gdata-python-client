@@ -77,7 +77,7 @@ class SimpleCRUD:
   
   def _PromptForListAction(self):
     print ('dump\n'
-           'insert {row_data}\n'
+           'insert {row_data} (example: insert label=content)\n'
            'update {row_index} {row_data}\n'
            'delete {row_index}\n'
            '\n')
@@ -118,6 +118,7 @@ class SimpleCRUD:
       print 'Inserted!'
         
   def _ListUpdateAction(self, index, row_data):
+    self.list_feed = self.gd_client.GetListFeed(self.curr_key, self.curr_wksht_id)
     entry = self.gd_client.UpdateRow(
         self.list_feed.entry[string.atoi(index)], 
         self._StringToDictionary(row_data))
@@ -125,6 +126,7 @@ class SimpleCRUD:
       print 'Updated!'
   
   def _ListDeleteAction(self, index):
+    self.list_feed = self.gd_client.GetListFeed(self.curr_key, self.curr_wksht_id)
     self.gd_client.DeleteRow(self.list_feed.entry[string.atoi(index)])
     print 'Deleted!'
     
