@@ -802,7 +802,7 @@ GBASE_ATTRIBUTE_FEED = """<?xml version='1.0' encoding='UTF-8'?>
       <title type='text'>Attribute histogram for query: [item type:jobs]</title>
       <link rel='alternate' type='text/html' href='http://base.google.com'></link>
       <link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='http://www.google.com/base/feeds/attributes'></link>
-      <link rel='self' type='application/atom+xml' href='http://www.google.com/base/feeds/attributes/-/jobs?key=ABQIAAAA7VerLsOcLuBYXR7vZI2NjhTRERdeAiwZ9EeJWta3L_JZVS0bOBRIFbhTrQjhHE52fqjZvfabYYyn6A&max-values=10'></link>
+      <link rel='self' type='application/atom+xml' href='http://www.google.com/base/feeds/attributes/-/jobs'></link>
       <generator version='1.0' uri='http://base.google.com'>GoogleBase</generator>
       <openSearch:totalResults>16</openSearch:totalResults>
       <openSearch:startIndex>1</openSearch:startIndex>
@@ -829,6 +829,7 @@ GBASE_ATTRIBUTE_FEED = """<?xml version='1.0' encoding='UTF-8'?>
       </entry>
     </feed>
 """
+
 
 GBASE_ATTRIBUTE_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
  <entry xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:gm='http://base.google.com/ns-metadata/1.0'>

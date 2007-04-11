@@ -459,6 +459,41 @@ class ContentEntryParentTest(unittest.TestCase):
     self.assert_(self.content.type == new_content.type)
     self.assert_(self.content.src == new_content.src)
 
+
+class PreserveUnkownElementTest(unittest.TestCase):
+  """Tests correct preservation of XML elements which are non Atom"""
+  
+  def setUp(self):
+    self.feed = atom.FeedFromString(test_data.GBASE_ATTRIBUTE_FEED)
+
+  def testCaptureOpenSearchElements(self):
+    self.assertEquals(self.feed.FindExtensions('totalResults')[0].tag,
+        'totalResults')
+    self.assertEquals(self.feed.FindExtensions('totalResults')[0].namespace,
+        'http://a9.com/-/spec/opensearchrss/1.0/')
+    open_search_extensions = self.feed.FindExtensions(
+        namespace='http://a9.com/-/spec/opensearchrss/1.0/')
+    self.assertEquals(len(open_search_extensions), 3)
+    for element in open_search_extensions:
+      self.assertEquals(element.namespace, 
+          'http://a9.com/-/spec/opensearchrss/1.0/')
+
+  def testCaptureMetaElements(self):
+    meta_elements = self.feed.entry[0].FindExtensions(
+        namespace='http://base.google.com/ns-metadata/1.0')
+    self.assertEquals(len(meta_elements), 1)
+    self.assertEquals(meta_elements[0].attributes['count'], '4416629')
+    self.assertEquals(len(meta_elements[0].children), 10)
+
+  def testCaptureMetaChildElements(self):
+    meta_elements = self.feed.entry[0].FindExtensions(
+        namespace='http://base.google.com/ns-metadata/1.0')
+    meta_children = meta_elements[0].FindChildren(
+        namespace='http://base.google.com/ns-metadata/1.0')
+    self.assertEquals(len(meta_children), 10)
+    for child in meta_children:
+      self.assertEquals(child.tag, 'value')
+    
     
 if __name__ == '__main__':
   unittest.main()

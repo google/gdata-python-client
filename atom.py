@@ -224,6 +224,44 @@ class AtomBase(object):
       current_key = element_tree.attrib.keys()[0]
       self._TakeAttributeFromElementTree(current_key, element_tree)
     self.text = element_tree.text 
+
+  def FindExtensions(self, tag=None, namespace=None):
+    """Searches extension elements for child nodes with the desired name.
+    
+    Returns a list of extension elements within this object whose tag
+    and/or namespace match those passed in. To find all extensions in
+    a particular namespace, specify the namespace but not the tag name.
+    If you specify only the tag, the result list may contain extension
+    elements in multiple namespaces.
+    
+    Args:
+      tag: str (optional) The desired tag
+      namespace: str (optional) The desired namespace
+
+    Returns:
+      A list of elements whose tag and/or namespace match the parameters 
+      values
+    """
+
+    results = []
+
+    if tag and namespace:
+      for element in self.extension_elements:
+        if element.tag == tag and element.namespace == namespace:
+          results.append(element)
+    elif tag and not namespace:
+      for element in self.extension_elements:
+        if element.tag == tag:
+          results.append(element)
+    elif namespace and not tag:
+      for element in self.extension_elements:
+        if element.namespace == namespace:
+          results.append(element)
+    else:
+      for element in self.extension_elements:
+        results.append(element)
+
+    return results
     
   
 class Person(AtomBase):
@@ -1491,6 +1529,45 @@ class ExtensionElement(object):
     element_tree.text = self.text
       
     return element_tree
+
+  def FindChildren(self, tag=None, namespace=None):
+    """Searches child nodes for objects with the desired tag/namespace.
+
+    Returns a list of extension elements within this object whose tag
+    and/or namespace match those passed in. To find all children in
+    a particular namespace, specify the namespace but not the tag name.
+    If you specify only the tag, the result list may contain extension
+    elements in multiple namespaces.
+
+    Args:
+      tag: str (optional) The desired tag
+      namespace: str (optional) The desired namespace
+
+    Returns:
+      A list of elements whose tag and/or namespace match the parameters
+      values
+    """
+
+    results = []
+
+    if tag and namespace:
+      for element in self.children:
+        if element.tag == tag and element.namespace == namespace:
+          results.append(element)
+    elif tag and not namespace:
+      for element in self.children:
+        if element.tag == tag:
+          results.append(element)
+    elif namespace and not tag:
+      for element in self.children:
+        if element.namespace == namespace:
+          results.append(element)
+    else:
+      for element in self.children:
+        results.append(element)
+
+    return results
+ 
     
 def ExtensionElementFromString(xml_string):
   element_tree = ElementTree.fromstring(xml_string)
