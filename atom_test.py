@@ -404,6 +404,42 @@ class EntryTest(unittest.TestCase):
     self.assert_(entry.title.type == 'text')
     self.assert_(entry.content.type == 'xhtml')
     #TODO check all other values for the test entry
+
+  def testAppControl(self):
+    entry = atom.EntryFromString(test_data.TEST_BASE_ENTRY)
+    self.assertEquals(entry.control.draft.text, 'yes')
+    self.assertEquals(len(entry.control.extension_elements), 1)
+    self.assertEquals(entry.control.extension_elements[0].tag, 'disapproved')
+
+
+class ControlTest(unittest.TestCase):
+
+  def testConvertToAndFromString(self):
+    control = atom.Control()
+    control.text = 'some text'
+    control.draft = atom.Draft(text='yes')
+    self.assertEquals(control.draft.text, 'yes')
+    self.assertEquals(control.text, 'some text')
+    self.assertTrue(isinstance(control.draft, atom.Draft))
+    new_control = atom.ControlFromString(str(control))
+    self.assertEquals(control.draft.text, new_control.draft.text)
+    self.assertEquals(control.text, new_control.text)
+    self.assertTrue(isinstance(new_control.draft, atom.Draft))
+
+
+class DraftTest(unittest.TestCase):
+
+  def testConvertToAndFromString(self):
+    draft = atom.Draft()
+    draft.text = 'maybe'
+    draft.extension_attributes['foo'] = 'bar'
+    self.assertEquals(draft.text, 'maybe')
+    self.assertEquals(draft.extension_attributes['foo'], 'bar')
+    new_draft = atom.DraftFromString(str(draft))
+    self.assertEquals(draft.text, new_draft.text)
+    self.assertEquals(draft.extension_attributes['foo'], 
+        new_draft.extension_attributes['foo'])
+    
     
     
 class SourceTest(unittest.TestCase):

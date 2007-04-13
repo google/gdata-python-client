@@ -51,9 +51,11 @@ except ImportError:
   from elementtree import ElementTree
 
 
-# XML namespaces which are often used in GData entities.
+# XML namespaces which are often used in Atom entities.
 ATOM_NAMESPACE = 'http://www.w3.org/2005/Atom'
 ELEMENT_TEMPLATE = '{http://www.w3.org/2005/Atom}%s'
+APP_NAMESPACE = 'http://purl.org/atom/app#'
+APP_TEMPLATE = '{http://purl.org/atom/app#}%s'
 
 
 def _AtomInstanceFromElementTree(class_constructor, class_tag_name, 
@@ -1075,6 +1077,74 @@ _LogoFromElementTree = _AtomInstanceFromElementTree(Logo, 'logo',
     ATOM_NAMESPACE)
 
 
+class Draft(AtomBase):
+  """The app:draft element which indicates if this entry should be public."""
+
+  def __init__(self, text=None, extension_elements=None,
+      extension_attributes=None):
+    """Constructor for app:draft
+
+    Args:
+      text: str The text data in the this element
+      extension_elements: list A  list of ExtensionElement instances
+      extension_attributes: dict A dictionary of attribute value string pairs
+    """
+
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+  def _TransferToElementTree(self, element_tree):
+    AtomBase._TransferToElementTree(self, element_tree)
+    element_tree.tag = APP_TEMPLATE % 'draft'
+    return element_tree
+
+def DraftFromString(xml_string):
+  element_tree = ElementTree.fromstring(xml_string)
+  return _DraftFromElementTree(element_tree)
+
+_DraftFromElementTree = _AtomInstanceFromElementTree(Draft, 'draft',
+    APP_NAMESPACE)
+
+
+class Control(AtomBase):
+  """The app:control element indicating restrictions on publication.
+  
+  The APP control element may contain a draft element indicating whether or
+  not this entry should be publicly available.
+  """
+
+  def __init__(self, draft=None, text=None, extension_elements=None,
+        extension_attributes=None):
+    """Constructor for app:control"""
+    
+    self.draft = draft
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+  def _TransferToElementTree(self, element_tree):
+    AtomBase._TransferToElementTree(self, element_tree)
+    if self.draft:
+      element_tree.append(self.draft._ToElementTree())
+    element_tree.tag = APP_TEMPLATE % 'control'
+    return element_tree
+    
+  def _TakeChildFromElementTree(self, child, element_tree):
+    if child.tag == '{%s}%s' % (APP_NAMESPACE, 'draft'):
+      self.draft = _DraftFromElementTree(child)
+      element_tree.remove(child)
+    else:
+      AtomBase._TakeChildFromElementTree(self, child, element_tree)
+
+def ControlFromString(xml_string):
+  element_tree = ElementTree.fromstring(xml_string)
+  return _ControlFromElementTree(element_tree)
+
+_ControlFromElementTree = _AtomInstanceFromElementTree(Control, 'control', 
+    APP_NAMESPACE)
+
+
 class Date(AtomBase):
   """A parent class for atom:updated, published, etc."""
 
@@ -1231,7 +1301,7 @@ class Entry(FeedEntryParent):
 
   def __init__(self, author=None, category=None, content=None, 
       contributor=None, atom_id=None, link=None, published=None, rights=None,
-      source=None, summary=None, title=None, updated=None,
+      source=None, summary=None, control=None, title=None, updated=None,
       extension_elements=None, extension_attributes=None, text=None):
     """Constructor for atom:entry
     
@@ -1248,6 +1318,8 @@ class Entry(FeedEntryParent):
       summary: Summary the entry's summary element
       title: Title the entry's title element
       updated: Updated the entry's updated element
+      control: The entry's app:control element which can be used to mark an 
+          entry as a draft which should not be publicly viewable.
       text: String The text contents of the element. This is the contents
           of the Entry's XML text node. (Example: <foo>This is the text</foo>)
       extension_elements: list A list of ExtensionElement instances which are
@@ -1268,6 +1340,7 @@ class Entry(FeedEntryParent):
     self.summary = summary
     self.title = title
     self.updated = updated
+    self.control = control
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
@@ -1281,6 +1354,8 @@ class Entry(FeedEntryParent):
       element_tree.append(self.source._ToElementTree())
     if self.summary:
       element_tree.append(self.summary._ToElementTree())
+    if self.control:
+      element_tree.append(self.control._ToElementTree())
     FeedEntryParent._TransferToElementTree(self, element_tree)
     element_tree.tag = ELEMENT_TEMPLATE % 'entry'
     return element_tree
@@ -1297,6 +1372,9 @@ class Entry(FeedEntryParent):
       element_tree.remove(child)
     elif child.tag == '{%s}%s' % (ATOM_NAMESPACE, 'summary'):
       self.summary = _SummaryFromElementTree(child)
+      element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (APP_NAMESPACE, 'control'):
+      self.control = _ControlFromElementTree(child)
       element_tree.remove(child)
     else:
       FeedEntryParent._TakeChildFromElementTree(self, child, element_tree)

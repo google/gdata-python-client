@@ -44,6 +44,10 @@ TEST_BASE_ENTRY = """<?xml version='1.0'?>
   <content type='xhtml'>
     <div xmlns='http://www.w3.org/1999/xhtml'>A Testing Laptop</div>
   </content>
+  <app:control xmlns:app='http://purl.org/atom/app#'>
+    <app:draft>yes</app:draft>
+    <gm:disapproved xmlns:gm='http://base.google.com/ns-metadata/1.0'/>   
+  </app:control>
   <link rel='alternate' type='text/html'
         href='http://www.provider-host.com/123456789'/>
   <g:label>Computer</g:label>
