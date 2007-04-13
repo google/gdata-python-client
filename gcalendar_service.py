@@ -260,8 +260,8 @@ class CalendarEventQuery(gdata_service.Query):
       return None
 
   def _SetOrderBy(self, val):
-    if val is not 'lastmodified' or val is not 'starttime':
-      raise Error, "Order By must be either 'lastmodified' or 'startttime'"
+    if val is not 'lastmodified' and val is not 'starttime':
+      raise Error, "Order By must be either 'lastmodified' or 'starttime'"
     self['orderby'] = val
 
   orderby = property(_GetOrderBy, _SetOrderBy, 
@@ -274,11 +274,11 @@ class CalendarEventQuery(gdata_service.Query):
       return None
 
   def _SetSortOrder(self, val):
-    if (val is not 'ascending' or val is not 'descending' 
-        or val is not 'a' or val is not 'd' or val is not 'ascend' 
-        or val is not 'descend'):
+    if (val is not 'ascending' and val is not 'descending' 
+        and val is not 'a' and val is not 'd' and val is not 'ascend'
+        and val is not 'descend'):
       raise Error, "Sort order must be either ascending, ascend, " + (
-          "a or descending, descend, d")
+          "a or descending, descend, or d")
     self['sortorder'] = val
 
   sortorder = property(_GetSortOrder, _SetSortOrder, 

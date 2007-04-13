@@ -199,6 +199,30 @@ class CalendarServiceUnitTest(unittest.TestCase):
         'CANCELED')
 
 
+class CalendarEventQueryUnitTest(unittest.TestCase):
+
+  def setUp(self):
+    self.query = gcalendar_service.CalendarEventQuery()
+
+  def testOrderByValidatesValues(self):
+    self.query.orderby = 'lastmodified'
+    self.assertEquals(self.query.orderby, 'lastmodified')
+    try:
+      self.query.orderby = 'illegal input'
+      self.fail()
+    except gcalendar_service.Error:
+      self.assertEquals(self.query.orderby, 'lastmodified')
+      
+  def testSortOrderValidatesValues(self):
+    self.query.sortorder = 'a'
+    self.assertEquals(self.query.sortorder, 'a')
+    try:
+      self.query.sortorder = 'illegal input'
+      self.fail()
+    except gcalendar_service.Error:
+      self.assertEquals(self.query.sortorder, 'a')
+
+
 if __name__ == '__main__':
   print ('NOTE: Please run these tests only with a test account. ' +
       'The tests may delete or update your data.')
