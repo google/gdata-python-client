@@ -262,8 +262,8 @@ class GBaseItem(gdata.GDataEntry, ItemAttributeContainer):
   
   def __init__(self, author=None, category=None, content=None,
       contributor=None, atom_id=None, link=None, published=None, rights=None,
-      source=None, summary=None, title=None, updated=None, label=None, 
-      item_type=None, item_attributes=None,
+      source=None, summary=None, title=None, updated=None, control=None, 
+      label=None, item_type=None, item_attributes=None,
       text=None, extension_elements=None, extension_attributes=None):
     self.author = author or []
     self.category = category or []
@@ -277,6 +277,7 @@ class GBaseItem(gdata.GDataEntry, ItemAttributeContainer):
     self.summary = summary
     self.title = title
     self.updated = updated
+    self.control = control
     self.label = label or []
     self.item_type = item_type
     self.item_attributes = item_attributes or []

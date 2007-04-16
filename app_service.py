@@ -28,6 +28,7 @@ __author__ = 'api.jscudder (Jeffrey Scudder)'
 import httplib
 import urllib
 import re
+import base64
 try:
   from xml.etree import ElementTree
 except ImportError:
@@ -83,6 +84,21 @@ class AtomService(object):
       else:
         uri = '/'
       return (server, port, ssl, uri)
+
+  def UseBasicAuth(self, username, password):
+    """Sets an Authenticaiton: Basic HTTP header containing plaintext.
+    
+    The username and password are base64 encoded and added to an HTTP header
+    which will be included in each request. Note that your username and 
+    password are sent in plaintext.
+
+    Args:
+      username: str
+      password: str
+    """
+
+    base_64_string = base64.encodestring('%s:%s' % (username, password))
+    self.additional_headers['Authorization'] = 'Basic %s' % (base_64_string,)
 
   # CRUD operations
   def Get(self, uri, extra_headers=None, url_params=None, escape_params=True):

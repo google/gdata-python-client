@@ -1299,6 +1299,8 @@ class FeedEntryParent(AtomBase):
 class Entry(FeedEntryParent):
   """The atom:entry element"""
 
+  control=None
+
   def __init__(self, author=None, category=None, content=None, 
       contributor=None, atom_id=None, link=None, published=None, rights=None,
       source=None, summary=None, control=None, title=None, updated=None,

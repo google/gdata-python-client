@@ -104,6 +104,15 @@ class AtomServiceUnitTest(unittest.TestCase):
     self.assertEquals(port, 13981)
     self.assertEquals(path, '/service/subservice?name=value&newname=newvalue')
 
+  def testSetBasicAuth(self):
+    client = app_service.AtomService()
+    client.UseBasicAuth('foo', 'bar')
+    self.assertEquals(client.additional_headers['Authorization'], 
+        'Basic Zm9vOmJhcg==\n')
+    client.UseBasicAuth('','')
+    self.assertEquals(client.additional_headers['Authorization'],
+        'Basic Og==\n')
+
 
 if __name__ == '__main__':
   unittest.main()
