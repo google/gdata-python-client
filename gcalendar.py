@@ -349,7 +349,7 @@ class When(atom.AtomBase):
       self.reminder.append(_ReminderFromElementTree(child))
       element_tree.remove(child)
     else:
-      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
+      atom.AtomBase._TakeChildFromElementTree(self, child, element_tree)
 
   def _TakeAttributeFromElementTree(self, attribute, element_tree):
     if attribute == 'startTime':
@@ -426,7 +426,7 @@ class RecurrenceException(atom.AtomBase):
     elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'originalEvent'):
       self.original_event = _OriginalEventLinkFromElementTree(child)
     else:
-      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
+      atom.AtomBase._TakeChildFromElementTree(self, child, element_tree)
 
   def _TakeAttributeFromElementTree(self, attribute, element_tree):
     if attribute == 'specialized':
@@ -465,7 +465,7 @@ class OriginalEvent(atom.AtomBase):
       self.when = gdata._EntryLinkFromElementTree(child)
       element_tree.remove(child)
     else:
-      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
+      atom.AtomBase._TakeChildFromElementTree(self, child, element_tree)
 
   def _TakeAttributeFromElementTree(self, attribute, element_tree):
     if attribute == 'id':
@@ -559,7 +559,7 @@ class Who(UriEnumElement):
       self.attendee_type=_AttendeeTypeFromElementTree(child)
       element_tree.remove(child)
     else:
-      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
+      UriEnumElement._TakeChildFromElementTree(self, child, element_tree)
 
   def _TransferToElementTree(self, element_tree):
     self.value=self.rel
@@ -654,7 +654,7 @@ class Comments(atom.AtomBase):
       self.feed_link = gdata._FeedLinkFromElementTree(child)
       element_tree.remove(child)
     else:
-      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
+      atom.AtomBase._TakeChildFromElementTree(self, child, element_tree)
 
   def _TakeAttributeFromElementTree(self, attribute, element_tree):
     if attribute == 'rel':
