@@ -158,8 +158,8 @@ class CalendarExample:
         start_time = time.strftime('%Y-%m-%dT%H:%M:%S.000Z', time.gmtime())
         end_time = time.strftime('%Y-%m-%dT%H:%M:%S.000Z', 
             time.gmtime(time.time() + 3600))
-        event.when.append(gcalendar.When(start_time=start_time, 
-            end_time=end_time))
+      event.when.append(gcalendar.When(start_time=start_time, 
+          end_time=end_time))
     
     new_event = self.cal_client.InsertEvent(event, 
         '/calendar/feeds/default/private/full')
