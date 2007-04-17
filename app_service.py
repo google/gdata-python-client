@@ -98,6 +98,7 @@ class AtomService(object):
     """
 
     base_64_string = base64.encodestring('%s:%s' % (username, password))
+    base_64_string = base_64_string.strip()
     self.additional_headers['Authorization'] = 'Basic %s' % (base_64_string,)
 
   # CRUD operations

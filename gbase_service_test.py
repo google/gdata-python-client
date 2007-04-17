@@ -112,6 +112,7 @@ class GBaseServiceUnitTest(unittest.TestCase):
     result = self.gd_client.InsertItem(proposed_item)
 
     item_id = result.id.text
+    self.assertTrue(result.id.text != None)
 
     updated_item = gbase.GBaseItemFromString(test_data.TEST_BASE_ENTRY)
     updated_item.label[0].text = 'Test Item'
