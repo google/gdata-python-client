@@ -62,7 +62,7 @@ try:
   from xml.etree import ElementTree
 except ImportError:
   from elementtree import ElementTree
-import app_service
+import atom.service
 import gdata
 import atom
 import re
@@ -100,7 +100,7 @@ class UnexpectedReturnType(Error):
   pass
 
 
-class GDataService(app_service.AtomService):
+class GDataService(atom.service.AtomService):
   """Contains elements needed for GData login and CRUD request headers.
 
   Maintains additional headers (tokens for example) needed for the GData 
@@ -436,7 +436,7 @@ class GDataService(app_service.AtomService):
         else:
           uri += '?gsessionid=%s' % (self.__gsessionid,)
 
-    server_response = app_service.AtomService.Get(self, uri, extra_headers)
+    server_response = atom.service.AtomService.Get(self, uri, extra_headers)
     result_body = server_response.read()
 
     if server_response.status == 200:
@@ -470,7 +470,7 @@ class GDataService(app_service.AtomService):
   def GetEntry(self, uri, extra_headers=None):
     """Query the GData API with the given URI and receive an Entry.
     
-    See also documentation for gdata_service.Get
+    See also documentation for gdata.service.Get
 
     Args:
       uri: string The query in the form of a URI. Example:
@@ -494,7 +494,7 @@ class GDataService(app_service.AtomService):
   def GetFeed(self, uri, extra_headers=None):
     """Query the GData API with the given URI and receive a Feed.
 
-    See also documentation for gdata_service.Get
+    See also documentation for gdata.service.Get
 
     Args:
       uri: string The query in the form of a URI. Example:
@@ -555,7 +555,7 @@ class GDataService(app_service.AtomService):
         else:
           uri += '?gsessionid=%s' % (self.__gsessionid,)
                                                   
-    server_response = app_service.AtomService.Post(self, data, uri,
+    server_response = atom.service.AtomService.Post(self, data, uri,
         extra_headers, url_params, escape_params)
     result_body = server_response.read()
 
@@ -627,7 +627,7 @@ class GDataService(app_service.AtomService):
         else:
           uri += '?gsessionid=%s' % (self.__gsessionid,)
                                                   
-    server_response = app_service.AtomService.Put(self, data, uri,
+    server_response = atom.service.AtomService.Put(self, data, uri,
         extra_headers, url_params, escape_params)
     result_body = server_response.read()
 
@@ -697,7 +697,7 @@ class GDataService(app_service.AtomService):
         else:
           uri += '?gsessionid=%s' % (self.__gsessionid,)
                                                   
-    server_response = app_service.AtomService.Delete(self, uri,
+    server_response = atom.service.AtomService.Delete(self, uri,
         extra_headers, url_params, escape_params)
     result_body = server_response.read()
 
@@ -886,6 +886,6 @@ class Query(dict):
     # Add categories to the feed if there are any.
     if len(self.categories) > 0:
       q_feed = q_feed + '/-/' + category_string
-    return app_service.BuildUri(q_feed, self)
+    return atom.service.BuildUri(q_feed, self)
 
   

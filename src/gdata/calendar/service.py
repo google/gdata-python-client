@@ -32,9 +32,9 @@ except ImportError:
   from elementtree import ElementTree
 import urllib
 import gdata
-import app_service
-import gdata_service
-import gcalendar
+import atom.service
+import gdata.service
+import gdata.calendar
 import atom
 
 
@@ -46,34 +46,34 @@ class RequestError(Error):
   pass
 
 
-class CalendarService(gdata_service.GDataService):
+class CalendarService(gdata.service.GDataService):
   """Client for the Google Calendar service."""
 
   def __init__(self, email=None, password=None, source=None, 
                server='www.google.com', 
                additional_headers=None):
-    gdata_service.GDataService.__init__(self, email=email, password=password,
+    gdata.service.GDataService.__init__(self, email=email, password=password,
                                         service='cl', source=source, 
                                         server=server, 
                                         additional_headers=additional_headers)
 
   def GetCalendarEventFeed(self, uri='/calendar/feeds/default/private/full'):
-    return gcalendar.CalendarEventFeedFromString(str(self.Get(uri)))
+    return gdata.calendar.CalendarEventFeedFromString(str(self.Get(uri)))
 
   def GetCalendarEventEntry(self, uri):
-    return gcalendar.CalendarEventEntryFromString(str(self.Get(uri)))
+    return gdata.calendar.CalendarEventEntryFromString(str(self.Get(uri)))
 
   def GetCalendarListFeed(self, uri='/calendar/feeds/default/'):
-    return gcalendar.CalendarListFeedFromString(str(self.Get(uri)))
+    return gdata.calendar.CalendarListFeedFromString(str(self.Get(uri)))
 
   def GetCalendarListEntry(self, uri):
-    return gcalendar.CalendarListEntryFromString(str(self.Get(uri)))
+    return gdata.calendar.CalendarListEntryFromString(str(self.Get(uri)))
 
   def GetCalendarEventCommentFeed(self, uri):
-    return gcalendar.CalendarEventCommentFeedFromString(str(self.Get(uri)))
+    return gdata.calendar.CalendarEventCommentFeedFromString(str(self.Get(uri)))
 
   def GetCalendarEventCommentEntry(self, uri):
-    return gcalendar.CalendarEventCommentEntryFromString(str(self.Get(uri)))
+    return gdata.calendar.CalendarEventCommentEntryFromString(str(self.Get(uri)))
  
   def Query(self, uri):
     """Performs a query and returns a resulting feed or entry.
@@ -96,11 +96,11 @@ class CalendarService(gdata_service.GDataService):
   def CalendarQuery(self, query):
     result = self.Query(query.ToUri())
     if isinstance(query, CalendarEventQuery):
-      return gcalendar.CalendarEventFeedFromString(result.ToString())
+      return gdata.calendar.CalendarEventFeedFromString(result.ToString())
     elif isinstance(query, CalendarListQuery):
-      return gcalendar.CalendarListFeedFromString(result.ToString())
+      return gdata.calendar.CalendarListFeedFromString(result.ToString())
     elif isinstance(query, CalendarEventCommentQuery):
-      return gcalendar.CalendarEventCommentFeedFromString(result.ToString())
+      return gdata.calendar.CalendarEventCommentFeedFromString(result.ToString())
     else:
       print "else result"
       return result
@@ -131,7 +131,7 @@ class CalendarService(gdata_service.GDataService):
                          escape_params=escape_params)
 
     if isinstance(response, atom.Entry):
-      return gcalendar.CalendarEventEntryFromString(response.ToString())
+      return gdata.calendar.CalendarEventEntryFromString(response.ToString())
 
   def InsertEventComment(self, new_entry, insert_uri, url_params=None,
                   escape_params=True):
@@ -159,7 +159,7 @@ class CalendarService(gdata_service.GDataService):
                          escape_params=escape_params)
 
     if isinstance(response, atom.Entry):
-      return gcalendar.CalendarEventCommentEntryFromString(response.ToString())
+      return gdata.calendar.CalendarEventCommentEntryFromString(response.ToString())
 
   def DeleteEvent(self, edit_uri, extra_headers=None, 
       url_params=None, escape_params=True):
@@ -217,14 +217,14 @@ class CalendarService(gdata_service.GDataService):
                         url_params=url_params, 
                         escape_params=escape_params)
     if isinstance(response, atom.Entry):
-      return gcalendar.CalendarEventEntryFromString(response.ToString())
+      return gdata.calendar.CalendarEventEntryFromString(response.ToString())
 
 
-class CalendarEventQuery(gdata_service.Query):
+class CalendarEventQuery(gdata.service.Query):
 
   def __init__(self, user='default', visibility='private', projection='full',
                text_query=None, params=None, categories=None):
-    gdata_service.Query.__init__(self, feed='http://www.google.com/calendar/feeds/'+
+    gdata.service.Query.__init__(self, feed='http://www.google.com/calendar/feeds/'+
                            '%s/%s/%s' % (user, visibility, projection,),
                            text_query=text_query, params=params, 
                            categories=categories)
@@ -334,7 +334,7 @@ class CalendarEventQuery(gdata_service.Query):
       _SetRecurrenceExpansionEnd, 
       doc="""The recurrence-expansion-end query parameter""")
 
-class CalendarListQuery(gdata_service.Query): 
+class CalendarListQuery(gdata.service.Query): 
   """Queries the Google Calendar meta feed"""
 
   def __init__(self, userId=None, text_query=None,
@@ -342,13 +342,13 @@ class CalendarListQuery(gdata_service.Query):
     if userId is None:
       userId = 'default'
 
-    gdata_service.Query.__init__(self, feed='http://www.google.com/calendar/feeds/'
+    gdata.service.Query.__init__(self, feed='http://www.google.com/calendar/feeds/'
                            +userId,
                            text_query=text_query, params=params,
                            categories=categories)
 
-class CalendarEventCommentQuery(gdata_service.Query): 
+class CalendarEventCommentQuery(gdata.service.Query): 
   """Queries the Google Calendar event comments feed"""
 
   def __init__(self, feed=None):
-    gdata_service.Query.__init__(self, feed=feed)
+    gdata.service.Query.__init__(self, feed=feed)

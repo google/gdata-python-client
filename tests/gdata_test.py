@@ -24,7 +24,7 @@ try:
 except ImportError:
   from elementtree import ElementTree
 import gdata
-import test_data
+from tests import test_data
 
 
 class StartIndexTest(unittest.TestCase):

@@ -22,11 +22,11 @@ try:
   from xml.etree import ElementTree
 except ImportError:
   from elementtree import ElementTree
-import gdata_service
+import gdata.service
 import gdata
 import atom
-import gbase
-import test_data
+import gdata.base
+from tests import test_data
 
 
 username = ''
@@ -36,7 +36,7 @@ password = ''
 class GDataServiceUnitTest(unittest.TestCase):
   
   def setUp(self):
-    self.gd_client = gdata_service.GDataService()
+    self.gd_client = gdata.service.GDataService()
     self.gd_client.email = username
     self.gd_client.password = password
     self.gd_client.service = 'gbase'
@@ -62,18 +62,18 @@ class GDataServiceUnitTest(unittest.TestCase):
       self.assert_(self.gd_client.auth_token is not None)
       self.assert_(self.gd_client.captcha_token is None)
       self.assert_(self.gd_client.captcha_url is None)
-    except gdata_service.CaptchaRequired:
+    except gdata.service.CaptchaRequired:
     
       self.fail('Required Captcha')
 
   def testGet(self):
     try:
       self.gd_client.ProgrammaticLogin()
-    except gdata_service.CaptchaRequired:
+    except gdata.service.CaptchaRequired:
       self.fail('Required Captcha')
-    except gdata_service.BadAuthentication:
+    except gdata.service.BadAuthentication:
       self.fail('Bad Authentication')
-    except gdata_service.Error:
+    except gdata.service.Error:
       self.fail('Login Error')
     self.gd_client.additional_headers = {'X-Google-Key': 
                                                'ABQIAAAAoLioN3buSs9KqIIq9V' +
@@ -88,11 +88,11 @@ class GDataServiceUnitTest(unittest.TestCase):
   def testGetWithAuthentication(self):
     try:
       self.gd_client.ProgrammaticLogin()
-    except gdata_service.CaptchaRequired:
+    except gdata.service.CaptchaRequired:
       self.fail('Required Captcha')
-    except gdata_service.BadAuthentication:
+    except gdata.service.BadAuthentication:
       self.fail('Bad Authentication')
-    except gdata_service.Error:
+    except gdata.service.Error:
       self.fail('Login Error')
     self.gd_client.additional_headers = {'X-Google-Key':
                                                'ABQIAAAAoLioN3buSs9KqIIq9V' +
@@ -107,28 +107,28 @@ class GDataServiceUnitTest(unittest.TestCase):
   def testGetEntry(self):
     try:
       self.gd_client.ProgrammaticLogin()
-    except gdata_service.CaptchaRequired:
+    except gdata.service.CaptchaRequired:
       self.fail('Required Captcha')
-    except gdata_service.BadAuthentication:
+    except gdata.service.BadAuthentication:
       self.fail('Bad Authentication')
-    except gdata_service.Error:
+    except gdata.service.Error:
       self.fail('Login Error')
     self.gd_client.server = 'base.google.com'
     try:
       result = self.gd_client.GetEntry('/base/feeds/items?bq=digital+camera')
       self.fail(
           'Result from server in GetEntry should have raised an exception')
-    except gdata_service.UnexpectedReturnType:
+    except gdata.service.UnexpectedReturnType:
       pass
 
   def testGetFeed(self):
     try:
       self.gd_client.ProgrammaticLogin()
-    except gdata_service.CaptchaRequired:
+    except gdata.service.CaptchaRequired:
       self.fail('Required Captcha')
-    except gdata_service.BadAuthentication:
+    except gdata.service.BadAuthentication:
       self.fail('Bad Authentication')
-    except gdata_service.Error:
+    except gdata.service.Error:
       self.fail('Login Error')
     self.gd_client.server = 'base.google.com'
     result = self.gd_client.GetFeed('/base/feeds/items?bq=digital+camera')
@@ -138,9 +138,9 @@ class GDataServiceUnitTest(unittest.TestCase):
   def testPostPutAndDelete(self):
     try:
       self.gd_client.ProgrammaticLogin()
-    except gdata_service.CaptchaRequired:
+    except gdata.service.CaptchaRequired:
       self.fail('Required Captcha')
-    except gdata_service.BadAuthentication:
+    except gdata.service.BadAuthentication:
       self.fail('Bad Authentication')
     except gdata_client.Error:
       self.fail('Login Error')
@@ -163,14 +163,14 @@ class GDataServiceUnitTest(unittest.TestCase):
         'http://www.google.com/base/feeds/items/')
     self.assert_(item_id is not None)
     
-    updated_xml = gbase.GBaseItemFromString(test_data.TEST_BASE_ENTRY)
+    updated_xml = gdata.base.GBaseItemFromString(test_data.TEST_BASE_ENTRY)
     # Change one of the labels in the item
     updated_xml.label[2].text = 'beach ball'
     # Update the item
     response = self.gd_client.Put(updated_xml, 
         '/base/feeds/items/%s' % item_id)
     self.assert_(response is not None)
-    new_base_item = gbase.GBaseItemFromString(str(response))
+    new_base_item = gdata.base.GBaseItemFromString(str(response))
     self.assert_(isinstance(new_base_item, atom.Entry))
     
     # Delete the item the test just created.
@@ -181,7 +181,7 @@ class GDataServiceUnitTest(unittest.TestCase):
 class QueryTest(unittest.TestCase):
 
   def setUp(self):
-    self.query = gdata_service.Query()
+    self.query = gdata.service.Query()
 
   def testQueryShouldBehaveLikeDict(self):
     try:
@@ -193,7 +193,7 @@ class QueryTest(unittest.TestCase):
     self.assert_(self.query['zap'] == 'x')
 
   def testContructorShouldRejectBadInputs(self):
-    test_q = gdata_service.Query(params=[1,2,3,4])
+    test_q = gdata.service.Query(params=[1,2,3,4])
     self.assert_(len(test_q.keys()) == 0)
 
   def testTextQueryProperty(self):

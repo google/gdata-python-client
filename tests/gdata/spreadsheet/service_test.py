@@ -21,10 +21,10 @@ try:
   from xml.etree import ElementTree
 except ImportError:
   from elementtree import ElementTree
-import gspreadsheet_service
-import gdata_service
-import app_service
-import gspreadsheet
+import gdata.spreadsheet.service
+import gdata.service
+import atom.service
+import gdata.spreadsheet
 import atom
 import getpass
 
@@ -39,7 +39,7 @@ ws_key = ''
 class DocumentQueryTest(unittest.TestCase):
   
   def setUp(self):
-    self.query = gspreadsheet_service.DocumentQuery()
+    self.query = gdata.spreadsheet.service.DocumentQuery()
     
   def testTitle(self):
     self.query['title'] = 'my title'
@@ -55,7 +55,7 @@ class DocumentQueryTest(unittest.TestCase):
 class CellQueryTest(unittest.TestCase):
   
   def setUp(self):
-    self.query = gspreadsheet_service.CellQuery()
+    self.query = gdata.spreadsheet.service.CellQuery()
     
   def testMinRow(self):
     self.query['min-row'] = '1'
@@ -91,7 +91,7 @@ class CellQueryTest(unittest.TestCase):
 class ListQueryTest(unittest.TestCase):
 
   def setUp(self):
-    self.query = gspreadsheet_service.ListQuery()
+    self.query = gdata.spreadsheet.service.ListQuery()
     
   def testSpreadsheetQuery(self):
     self.query['sq'] = 'first=john&last=smith'
@@ -114,7 +114,7 @@ class SpreadsheetsServiceTest(unittest.TestCase):
   def setUp(self):
     self.key = ss_key 
     self.worksheet = ws_key
-    self.gd_client = gspreadsheet_service.SpreadsheetsService()
+    self.gd_client = gdata.spreadsheet.service.SpreadsheetsService()
     self.gd_client.email = username
     self.gd_client.password = password 
     self.gd_client.source = 'SpreadsheetsClient "Unit" Tests'
@@ -123,27 +123,27 @@ class SpreadsheetsServiceTest(unittest.TestCase):
     
   def testGetSpreadsheetsFeed(self):
     #feed = self.gd_client.GetSpreadsheetsFeed()
-    #self.assert_(isinstance(feed, gspreadsheet.SpreadsheetsSpreadsheetsFeed))
+    #self.assert_(isinstance(feed, gdata.spreadsheet.SpreadsheetsSpreadsheetsFeed))
     entry = self.gd_client.GetSpreadsheetsFeed(self.key)
-    self.assert_(isinstance(entry, gspreadsheet.SpreadsheetsSpreadsheet))
+    self.assert_(isinstance(entry, gdata.spreadsheet.SpreadsheetsSpreadsheet))
     
   def testGetWorksheetsFeed(self):
     feed = self.gd_client.GetWorksheetsFeed(self.key)
-    self.assert_(isinstance(feed, gspreadsheet.SpreadsheetsWorksheetsFeed))
+    self.assert_(isinstance(feed, gdata.spreadsheet.SpreadsheetsWorksheetsFeed))
     entry = self.gd_client.GetWorksheetsFeed(self.key, self.worksheet)
-    self.assert_(isinstance(entry, gspreadsheet.SpreadsheetsWorksheet))
+    self.assert_(isinstance(entry, gdata.spreadsheet.SpreadsheetsWorksheet))
     
   def testGetCellsFeed(self):
     feed = self.gd_client.GetCellsFeed(self.key)
-    self.assert_(isinstance(feed, gspreadsheet.SpreadsheetsCellsFeed))
+    self.assert_(isinstance(feed, gdata.spreadsheet.SpreadsheetsCellsFeed))
     entry = self.gd_client.GetCellsFeed(self.key, cell='R5C1')
-    self.assert_(isinstance(entry, gspreadsheet.SpreadsheetsCell))
+    self.assert_(isinstance(entry, gdata.spreadsheet.SpreadsheetsCell))
     
   def testGetListFeed(self):
     feed = self.gd_client.GetListFeed(self.key)
-    self.assert_(isinstance(feed, gspreadsheet.SpreadsheetsListFeed))
+    self.assert_(isinstance(feed, gdata.spreadsheet.SpreadsheetsListFeed))
     entry = self.gd_client.GetListFeed(self.key, row_id='cokwr')
-    self.assert_(isinstance(entry, gspreadsheet.SpreadsheetsList))
+    self.assert_(isinstance(entry, gdata.spreadsheet.SpreadsheetsList))
     
   def testUpdateCell(self):
     self.gd_client.UpdateCell(row='5', col='1', inputValue='', key=self.key)

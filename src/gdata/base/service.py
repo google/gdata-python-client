@@ -32,9 +32,9 @@ except ImportError:
   from elementtree import ElementTree
 import urllib
 import gdata
-import app_service
-import gdata_service
-import gbase
+import atom.service
+import gdata.service
+import gdata.base
 import atom
 
 
@@ -46,13 +46,13 @@ class RequestError(Error):
   pass
 
 
-class GBaseService(gdata_service.GDataService):
+class GBaseService(gdata.service.GDataService):
   """Client for the Google Base service."""
 
   def __init__(self, email=None, password=None, source=None, 
                server='base.google.com', api_key=None, 
                additional_headers=None):
-    gdata_service.GDataService.__init__(self, email=email, password=password,
+    gdata.service.GDataService.__init__(self, email=email, password=password,
                                         service='gbase', source=source, 
                                         server=server, 
                                         additional_headers=additional_headers)
@@ -107,35 +107,35 @@ class GBaseService(gdata_service.GDataService):
     
     result = self.Get(uri)
     if isinstance(result, atom.Entry):
-      return gbase.GBaseItemFromString(result.ToString())
+      return gdata.base.GBaseItemFromString(result.ToString())
     return result
 
   def QuerySnippetsFeed(self, uri):
-    return gbase.GBaseSnippetFeedFromString(str(self.Get(uri)))
+    return gdata.base.GBaseSnippetFeedFromString(str(self.Get(uri)))
 
   def QueryItemsFeed(self, uri):
-    return gbase.GBaseItemFeedFromString(str(self.Get(uri)))
+    return gdata.base.GBaseItemFeedFromString(str(self.Get(uri)))
 
   def QueryAttributesFeed(self, uri):
-    return gbase.GBaseAttributesFeedFromString(str(self.Get(uri)))
+    return gdata.base.GBaseAttributesFeedFromString(str(self.Get(uri)))
 
   def QueryItemTypesFeed(self, uri):
-    return gbase.GBaseItemTypesFeedFromString(str(self.Get(uri)))
+    return gdata.base.GBaseItemTypesFeedFromString(str(self.Get(uri)))
 
   def QueryLocalesFeed(self, uri):
-    return gbase.GBaseLocalesFeedFromString(str(self.Get(uri)))
+    return gdata.base.GBaseLocalesFeedFromString(str(self.Get(uri)))
 
   def GetItem(self, uri):
-    return gbase.GBaseItemFromString(str(self.Get(uri)))
+    return gdata.base.GBaseItemFromString(str(self.Get(uri)))
 
   def GetSnippet(self, uri):
-    return gbase.GBaseSnippetFromString(str(self.Get(uri)))
+    return gdata.base.GBaseSnippetFromString(str(self.Get(uri)))
 
   def GetAttribute(self, uri):
-    return gbase.GBaseAttributeEntryFromString(str(self.Get(uri)))
+    return gdata.base.GBaseAttributeEntryFromString(str(self.Get(uri)))
 
   def GetItemType(self, uri):
-    return gbase.GBaseItemTypeEntryFromString(str(self.Get(uri)))
+    return gdata.base.GBaseItemTypeEntryFromString(str(self.Get(uri)))
 
   def GetLocale(self, uri):
     return gdata.GDataEntryFromString(str(self.Get(uri)))
@@ -164,7 +164,7 @@ class GBaseService(gdata_service.GDataService):
                          escape_params=escape_params)
 
     if isinstance(response, atom.Entry):
-      return gbase.GBaseItemFromString(response.ToString())
+      return gdata.base.GBaseItemFromString(response.ToString())
 
   def DeleteItem(self, item_id, url_params=None, escape_params=True):
     """Removes an item with the specified ID from Google Base.
@@ -217,10 +217,10 @@ class GBaseService(gdata_service.GDataService):
         '/%s' % (item_id.lstrip('http://www.google.com/')), 
         url_params=url_params, escape_params=escape_params)
     if isinstance(response, atom.Entry):
-      return gbase.GBaseItemFromString(response.ToString())
+      return gdata.base.GBaseItemFromString(response.ToString())
     
 
-class BaseQuery(gdata_service.Query):
+class BaseQuery(gdata.service.Query):
 
   def _GetBaseQuery(self):
     return self['bq']

@@ -33,9 +33,9 @@ except ImportError:
   from elementtree import ElementTree
 import urllib
 import gdata
-import app_service
-import gdata_service
-import gspreadsheet
+import atom.service
+import gdata.service
+import gdata.spreadsheet
 import atom
 
 
@@ -47,13 +47,13 @@ class RequestError(Error):
   pass
 
 
-class SpreadsheetsService(gdata_service.GDataService):
+class SpreadsheetsService(gdata.service.GDataService):
   """Client for the Google Spreadsheets service."""
 
   def __init__(self, email=None, password=None, source=None,
                server='spreadsheets.google.com',
                additional_headers=None):
-    gdata_service.GDataService.__init__(self, email=email, password=password,
+    gdata.service.GDataService.__init__(self, email=email, password=password,
                                         service='wise', source=source,
                                         server=server,
                                         additional_headers=additional_headers)
@@ -83,10 +83,10 @@ class SpreadsheetsService(gdata_service.GDataService):
     result = self.Get(uri)
     
     if isinstance(result, atom.Feed):
-      return gspreadsheet.SpreadsheetsSpreadsheetsFeedFromString(
+      return gdata.spreadsheet.SpreadsheetsSpreadsheetsFeedFromString(
           result.ToString())
     elif isinstance(result, atom.Entry):
-      return gspreadsheet.SpreadsheetsSpreadsheetFromString(
+      return gdata.spreadsheet.SpreadsheetsSpreadsheetFromString(
           result.ToString())
   
   def GetWorksheetsFeed(self, key, wksht_id=None, query=None, 
@@ -114,9 +114,9 @@ class SpreadsheetsService(gdata_service.GDataService):
       
     result = self.Get(uri)
     if isinstance(result, atom.Feed):
-      return gspreadsheet.SpreadsheetsWorksheetsFeedFromString(result.ToString())
+      return gdata.spreadsheet.SpreadsheetsWorksheetsFeedFromString(result.ToString())
     elif isinstance(result, atom.Entry):
-      return gspreadsheet.SpreadsheetsWorksheetFromString(result.ToString())
+      return gdata.spreadsheet.SpreadsheetsWorksheetFromString(result.ToString())
   
   def GetCellsFeed(self, key, wksht_id='default', cell=None, query=None, 
       visibility='private', projection='full'):
@@ -144,9 +144,9 @@ class SpreadsheetsService(gdata_service.GDataService):
       
     result = self.Get(uri)
     if isinstance(result, atom.Feed):
-      return gspreadsheet.SpreadsheetsCellsFeedFromString(result.ToString())
+      return gdata.spreadsheet.SpreadsheetsCellsFeedFromString(result.ToString())
     elif isinstance(result, atom.Entry):
-      return gspreadsheet.SpreadsheetsCellFromString(result.ToString())
+      return gdata.spreadsheet.SpreadsheetsCellFromString(result.ToString())
   
   def GetListFeed(self, key, wksht_id='default', row_id=None, query=None,
       visibility='private', projection='full'):
@@ -174,9 +174,9 @@ class SpreadsheetsService(gdata_service.GDataService):
       
     result = self.Get(uri)
     if isinstance(result, atom.Feed):
-      return gspreadsheet.SpreadsheetsListFeedFromString(result.ToString())
+      return gdata.spreadsheet.SpreadsheetsListFeedFromString(result.ToString())
     elif isinstance(result, atom.Entry):
-      return gspreadsheet.SpreadsheetsListFromString(result.ToString())
+      return gdata.spreadsheet.SpreadsheetsListFromString(result.ToString())
     
   def UpdateCell(self, row, col, inputValue, key, wksht_id='default'):
     """Updates an existing cell.
@@ -191,7 +191,7 @@ class SpreadsheetsService(gdata_service.GDataService):
       The updated cell entry
     """
     # make the new cell
-    new_cell = gspreadsheet.Cell(row=row, col=col, inputValue=inputValue)
+    new_cell = gdata.spreadsheet.Cell(row=row, col=col, inputValue=inputValue)
     # get the edit uri and PUT
     cell = 'R%sC%s' % (row, col)
     entry = self.GetCellsFeed(key, wksht_id, cell)
@@ -200,7 +200,7 @@ class SpreadsheetsService(gdata_service.GDataService):
         entry.cell = new_cell
         response = self.Put(entry, a_link.href)
         if isinstance(response, atom.Entry):
-          return gspreadsheet.SpreadsheetsCellFromString(response.ToString())
+          return gdata.spreadsheet.SpreadsheetsCellFromString(response.ToString())
         
     
   def InsertRow(self, row_data, key, wksht_id='default'):
@@ -213,9 +213,9 @@ class SpreadsheetsService(gdata_service.GDataService):
     Returns:
       The inserted row
     """
-    new_entry = gspreadsheet.SpreadsheetsList()
+    new_entry = gdata.spreadsheet.SpreadsheetsList()
     for k, v in row_data.iteritems():
-      new_custom = gspreadsheet.Custom()
+      new_custom = gdata.spreadsheet.Custom()
       new_custom.column = k
       new_custom.text = v
       new_entry.custom.append(new_custom)
@@ -224,13 +224,13 @@ class SpreadsheetsService(gdata_service.GDataService):
       if a_link.rel == 'http://schemas.google.com/g/2005#post':
         response = self.Post(new_entry, a_link.href)
         if isinstance(response, atom.Entry):
-          return gspreadsheet.SpreadsheetsListFromString(response.ToString())
+          return gdata.spreadsheet.SpreadsheetsListFromString(response.ToString())
     
   def UpdateRow(self, entry, new_row_data):
     """Updates a row with the provided data
     
     Args:
-      entry: gspreadsheet.SpreadsheetsList The entry to be updated
+      entry: gdata.spreadsheet.SpreadsheetsList The entry to be updated
       new_row_data: dict A dictionary of column header to row data
       
     Returns:
@@ -238,7 +238,7 @@ class SpreadsheetsService(gdata_service.GDataService):
     """
     entry.custom = []
     for k, v in new_row_data.iteritems():
-      new_custom = gspreadsheet.Custom()
+      new_custom = gdata.spreadsheet.Custom()
       new_custom.column = k
       new_custom.text = v
       entry.custom.append(new_custom)
@@ -246,13 +246,13 @@ class SpreadsheetsService(gdata_service.GDataService):
       if a_link.rel == 'edit':
         response = self.Put(entry, a_link.href)
         if isinstance(response, atom.Entry):
-          return gspreadsheet.SpreadsheetsListFromString(response.ToString())
+          return gdata.spreadsheet.SpreadsheetsListFromString(response.ToString())
         
   def DeleteRow(self, entry):
     """Deletes a row, the provided entry
     
     Args:
-      entry: gspreadsheet.SpreadsheetsList The row to be deleted
+      entry: gdata.spreadsheet.SpreadsheetsList The row to be deleted
     
     Returns:
       The delete response
@@ -262,7 +262,7 @@ class SpreadsheetsService(gdata_service.GDataService):
         return self.Delete(a_link.href)
 
 
-class DocumentQuery(gdata_service.Query):
+class DocumentQuery(gdata.service.Query):
 
   def _GetTitleQuery(self):
     return self['title']
@@ -283,7 +283,7 @@ class DocumentQuery(gdata_service.Query):
       doc="""The title-exact query parameter""")
  
  
-class CellQuery(gdata_service.Query):
+class CellQuery(gdata.service.Query):
 
   def _GetMinRowQuery(self):
     return self['min-row']
@@ -340,7 +340,7 @@ class CellQuery(gdata_service.Query):
       doc="""The return-empty query parameter""")
  
  
-class ListQuery(gdata_service.Query):
+class ListQuery(gdata.service.Query):
 
   def _GetSpreadsheetQuery(self):
     return self['sq']

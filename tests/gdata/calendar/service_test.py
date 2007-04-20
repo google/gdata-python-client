@@ -22,8 +22,8 @@ try:
 except ImportError:
   from elementtree import ElementTree
 import atom
-import gcalendar
-import gcalendar_service
+import gdata.calendar
+import gdata.calendar.service
 import random
 import getpass
 
@@ -38,7 +38,7 @@ password = ''
 class CalendarServiceUnitTest(unittest.TestCase):
   
   def setUp(self):
-    self.cal_client = gcalendar_service.CalendarService()
+    self.cal_client = gdata.calendar.service.CalendarService()
     self.cal_client.email = username 
     self.cal_client.password = password
     self.cal_client.source = 'GCalendarClient "Unit" Tests'
@@ -57,11 +57,11 @@ class CalendarServiceUnitTest(unittest.TestCase):
         random_event_number)
 
     # Set event data 
-    event = gcalendar.CalendarEventEntry()
+    event = gdata.calendar.CalendarEventEntry()
     event.author.append(atom.Author(name=atom.Name(text='GData Test user')))
     event.title = atom.Title(text=random_event_title)
     event.content = atom.Content(text='Picnic with some lunch')
-    event.extended_property.append(gcalendar.ExtendedProperty(
+    event.extended_property.append(gdata.calendar.ExtendedProperty(
         name='prop test name', value='prop test value'))
 
     # Insert event 
@@ -86,7 +86,7 @@ class CalendarServiceUnitTest(unittest.TestCase):
         random_event_number)
 
     # Set event data
-    event = gcalendar.CalendarEventEntry()
+    event = gdata.calendar.CalendarEventEntry()
     event.author.append(atom.Author(name=atom.Name(text='GData Test user')))
     event.title = atom.Title(text=random_event_title)
     event.content = atom.Content(text='Picnic with some lunch')
@@ -98,11 +98,11 @@ class CalendarServiceUnitTest(unittest.TestCase):
 
     # Get comments feed
     comments_url = new_event.comments.feed_link.href
-    comments_query = gcalendar_service.CalendarEventCommentQuery(comments_url)
+    comments_query = gdata.calendar.service.CalendarEventCommentQuery(comments_url)
     comments_feed = self.cal_client.CalendarQuery(comments_query)
 
     # Add comment
-    comments_entry = gcalendar.CalendarEventCommentEntry()
+    comments_entry = gdata.calendar.CalendarEventCommentEntry()
     comments_entry.content = atom.Content(text='Comments content')
     comments_entry.author.append(
         atom.Author(name=atom.Name(text='GData Test user'),
@@ -138,12 +138,12 @@ class CalendarServiceUnitTest(unittest.TestCase):
         random_end_hour, non_random_end_minute,)
 
     # Set event data 
-    event = gcalendar.CalendarEventEntry()
+    event = gdata.calendar.CalendarEventEntry()
     event.author.append(atom.Author(name=atom.Name(text='GData Test user')))
     event.title = atom.Title(text=random_event_title)
     event.content = atom.Content(text='Picnic with some lunch')
-    event.where.append(gcalendar.Where(value_string='Down by the river'))
-    event.when.append(gcalendar.When(start_time=start_time,end_time=end_time))
+    event.where.append(gdata.calendar.Where(value_string='Down by the river'))
+    event.when.append(gdata.calendar.When(start_time=start_time,end_time=end_time))
 
     # Insert event 
     self.cal_client.ProgrammaticLogin()
@@ -183,7 +183,7 @@ class CalendarServiceUnitTest(unittest.TestCase):
     self.cal_client.DeleteEvent(updated_event.GetEditLink().href)
 
     # Ensure deleted event is marked as canceled in the feed
-    after_delete_query = gcalendar_service.CalendarEventQuery()
+    after_delete_query = gdata.calendar.service.CalendarEventQuery()
     after_delete_query.updated_min = '2007-01-01'
     after_delete_query.text_query = str(random_event_number) 
     after_delete_query.max_results = '1'
@@ -202,7 +202,7 @@ class CalendarServiceUnitTest(unittest.TestCase):
 class CalendarEventQueryUnitTest(unittest.TestCase):
 
   def setUp(self):
-    self.query = gcalendar_service.CalendarEventQuery()
+    self.query = gdata.calendar.service.CalendarEventQuery()
 
   def testOrderByValidatesValues(self):
     self.query.orderby = 'lastmodified'
@@ -210,7 +210,7 @@ class CalendarEventQueryUnitTest(unittest.TestCase):
     try:
       self.query.orderby = 'illegal input'
       self.fail()
-    except gcalendar_service.Error:
+    except gdata.calendar.service.Error:
       self.assertEquals(self.query.orderby, 'lastmodified')
       
   def testSortOrderValidatesValues(self):
@@ -219,7 +219,7 @@ class CalendarEventQueryUnitTest(unittest.TestCase):
     try:
       self.query.sortorder = 'illegal input'
       self.fail()
-    except gcalendar_service.Error:
+    except gdata.calendar.service.Error:
       self.assertEquals(self.query.sortorder, 'a')
 
 

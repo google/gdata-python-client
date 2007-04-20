@@ -24,12 +24,12 @@ try:
   from xml.etree import ElementTree
 except ImportError:
   from elementtree import ElementTree
-import gbase_service
-import gdata_service
-import app_service
-import gbase
+import gdata.base.service
+import gdata.service
+import atom.service
+import gdata.base
 import atom
-import test_data
+from tests import test_data
 
 
 username = ''
@@ -39,7 +39,7 @@ password = ''
 class GBaseServiceUnitTest(unittest.TestCase):
   
   def setUp(self):
-    self.gd_client = gbase_service.GBaseService()
+    self.gd_client = gdata.base.service.GBaseService()
     self.gd_client.email = username 
     self.gd_client.password = password 
     self.gd_client.source = 'BaseClient "Unit" Tests'
@@ -65,38 +65,38 @@ class GBaseServiceUnitTest(unittest.TestCase):
     self.assert_(self.gd_client.api_key is None)
 
   def testQuery(self):
-    my_query = gbase_service.BaseQuery(feed='/base/feeds/snippets')
+    my_query = gdata.base.service.BaseQuery(feed='/base/feeds/snippets')
     my_query['max-results'] = '25'
     my_query.bq = 'digital camera [item type: products]'
     result = self.gd_client.Query(my_query.ToUri())
     self.assert_(isinstance(result, atom.Feed))
 
-    service = gbase_service.GBaseService(username, password)
-    query = gbase_service.BaseQuery()
+    service = gdata.base.service.GBaseService(username, password)
+    query = gdata.base.service.BaseQuery()
     query.feed = '/base/feeds/snippets'
     query.bq = 'digital camera'
     feed = service.Query(query.ToUri())
     
   def testCorrectReturnTypes(self):
-    q = gbase_service.BaseQuery()
+    q = gdata.base.service.BaseQuery()
     q.feed = '/base/feeds/snippets'
     q.bq = 'digital camera'
     result = self.gd_client.QuerySnippetsFeed(q.ToUri())
-    self.assert_(isinstance(result, gbase.GBaseSnippetFeed))
+    self.assert_(isinstance(result, gdata.base.GBaseSnippetFeed))
 
     q.feed = '/base/feeds/attributes'
     result = self.gd_client.QueryAttributesFeed(q.ToUri())
-    self.assert_(isinstance(result, gbase.GBaseAttributesFeed))
+    self.assert_(isinstance(result, gdata.base.GBaseAttributesFeed))
 
-    q = gbase_service.BaseQuery()
+    q = gdata.base.service.BaseQuery()
     q.feed = '/base/feeds/itemtypes/en_US'
     result = self.gd_client.QueryItemTypesFeed(q.ToUri())
-    self.assert_(isinstance(result, gbase.GBaseItemTypesFeed))
+    self.assert_(isinstance(result, gdata.base.GBaseItemTypesFeed))
 
-    q = gbase_service.BaseQuery()
+    q = gdata.base.service.BaseQuery()
     q.feed = '/base/feeds/locales'
     result = self.gd_client.QueryLocalesFeed(q.ToUri())
-    self.assert_(isinstance(result, gbase.GBaseLocalesFeed))
+    self.assert_(isinstance(result, gdata.base.GBaseLocalesFeed))
 
   def testInsertItemUpdateItemAndDeleteItem(self):
     try:
@@ -104,17 +104,17 @@ class GBaseServiceUnitTest(unittest.TestCase):
       self.assert_(self.gd_client.auth_token is not None)
       self.assert_(self.gd_client.captcha_token is None)
       self.assert_(self.gd_client.captcha_url is None)
-    except gdata_service.CaptchaRequired:
+    except gdata.service.CaptchaRequired:
       self.fail('Required Captcha')
 
     
-    proposed_item = gbase.GBaseItemFromString(test_data.TEST_BASE_ENTRY)
+    proposed_item = gdata.base.GBaseItemFromString(test_data.TEST_BASE_ENTRY)
     result = self.gd_client.InsertItem(proposed_item)
 
     item_id = result.id.text
     self.assertTrue(result.id.text != None)
 
-    updated_item = gbase.GBaseItemFromString(test_data.TEST_BASE_ENTRY)
+    updated_item = gdata.base.GBaseItemFromString(test_data.TEST_BASE_ENTRY)
     updated_item.label[0].text = 'Test Item'
     result = self.gd_client.UpdateItem(item_id, updated_item)
 
@@ -122,7 +122,7 @@ class GBaseServiceUnitTest(unittest.TestCase):
     try:
       result = self.gd_client.UpdateItem(item_id + '2', updated_item)
       self.fail()
-    except gdata_service.RequestError:
+    except gdata.service.RequestError:
       pass
 
     result = self.gd_client.DeleteItem(item_id)
@@ -132,7 +132,7 @@ class GBaseServiceUnitTest(unittest.TestCase):
     try:
       result = self.gd_client.DeleteItem(item_id)
       self.fail()
-    except gdata_service.RequestError:
+    except gdata.service.RequestError:
       pass
 
         

@@ -22,10 +22,10 @@ try:
   from xml.etree import ElementTree
 except ImportError:
   from elementtree import ElementTree
-import gcalendar_service
-import gdata_service
-import app_service
-import gcalendar
+import gdata.calendar.service
+import gdata.service
+import atom.service
+import gdata.calendar
 import atom
 import getopt
 import sys
@@ -43,12 +43,12 @@ class CalendarExample:
     string, but should be used to reference your name or the name of your
     organization, the app name and version, with '-' between each of the three
     values.  The account_type is specified to authenticate either 
-    Google Accounts or Google Apps accounts.  See gdata_service or 
+    Google Accounts or Google Apps accounts.  See gdata.service or 
     http://code.google.com/apis/accounts/AuthForInstalledApps.html for more
     info on ClientLogin.  NOTE: ClientLogin should only be used for installed 
     applications and not for multi-user web applications."""
 
-    self.cal_client = gcalendar_service.CalendarService()
+    self.cal_client = gdata.calendar.service.CalendarService()
     self.cal_client.email = email
     self.cal_client.password = password
     self.cal_client.source = 'Google-Calendar_Python_Sample-1.0'
@@ -100,7 +100,7 @@ class CalendarExample:
 
     print 'Full text query for events on Primary Calendar: \'%s\'' % (
         text_query,)
-    query = gcalendar_service.CalendarEventQuery('default', 'private', 'full',
+    query = gdata.calendar.service.CalendarEventQuery('default', 'private', 'full',
         text_query)
     feed = self.cal_client.CalendarQuery(query)
     for i, an_event in enumerate(feed.entry):
@@ -118,7 +118,7 @@ class CalendarExample:
 
     print 'Date range query for events on Primary Calendar: %s to %s' % (
         start_date, end_date,)
-    query = gcalendar_service.CalendarEventQuery('default', 'private', 'full')
+    query = gdata.calendar.service.CalendarEventQuery('default', 'private', 'full')
     query.start_min = start_date
     query.start_max = end_date 
     feed = self.cal_client.CalendarQuery(query)
@@ -143,22 +143,22 @@ class CalendarExample:
     http://code.google.com/apis/gdata/elements.html#gdEventKind
     for more information"""
     
-    event = gcalendar.CalendarEventEntry()
+    event = gdata.calendar.CalendarEventEntry()
     event.author.append(atom.Author(name=atom.Name(text='CalendarExample')))
     event.title = atom.Title(text=title)
     event.content = atom.Content(text=content)
-    event.where.append(gcalendar.Where(value_string=where))
+    event.where.append(gdata.calendar.Where(value_string=where))
 
     if recurrence_data is not None:
       # Set a recurring event
-      event.recurrence = gcalendar.Recurrence(text=recurrence_data)
+      event.recurrence = gdata.calendar.Recurrence(text=recurrence_data)
     else:
       if start_time is None:
         # Use current time for the start_time and have the event last 1 hour
         start_time = time.strftime('%Y-%m-%dT%H:%M:%S.000Z', time.gmtime())
         end_time = time.strftime('%Y-%m-%dT%H:%M:%S.000Z', 
             time.gmtime(time.time() + 3600))
-      event.when.append(gcalendar.When(start_time=start_time, 
+      event.when.append(gdata.calendar.When(start_time=start_time, 
           end_time=end_time))
     
     new_event = self.cal_client.InsertEvent(event, 
@@ -236,7 +236,7 @@ class CalendarExample:
       if len(a_when.reminder) > 0:
         a_when.reminder[0].minutes = minutes
       else:
-        a_when.reminder.append(gcalendar.Reminder(minutes=minutes))
+        a_when.reminder.append(gdata.calendar.Reminder(minutes=minutes))
 
     print 'Adding %d minute reminder to event' % (minutes,)
     return self.cal_client.UpdateEvent(event.GetEditLink().href, event)
@@ -250,7 +250,7 @@ class CalendarExample:
     namespace prefix to avoid collisions between different applications."""
 
     event.extended_property.append(
-        gcalendar.ExtendedProperty(name=name, value=value))  
+        gdata.calendar.ExtendedProperty(name=name, value=value))  
     print 'Adding extended property to event: \'%s\'=\'%s\'' % (name, value,)
     return self.cal_client.UpdateEvent(event.GetEditLink().href, event)
 

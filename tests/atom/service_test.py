@@ -17,7 +17,7 @@
 __author__ = 'jscudder@google.com (Jeff Scudder)'
 
 import unittest
-import app_service
+import atom.service
 
 class AtomServiceUnitTest(unittest.TestCase):
   
@@ -28,12 +28,12 @@ class AtomServiceUnitTest(unittest.TestCase):
     pass
 
   def testBuildUriWithNoParams(self):
-    x = app_service.BuildUri('/base/feeds/snippets')
+    x = atom.service.BuildUri('/base/feeds/snippets')
     self.assert_(x == '/base/feeds/snippets')
 
   def testBuildUriWithParams(self):
     # Add parameters to a URI
-    x = app_service.BuildUri('/base/feeds/snippets', url_params={'foo': 'bar', 
+    x = atom.service.BuildUri('/base/feeds/snippets', url_params={'foo': 'bar', 
                                                      'bq': 'digital camera'})
     self.assert_(x == '/base/feeds/snippets?foo=bar&bq=digital+camera')
     self.assert_(x.startswith('/base/feeds/snippets'))
@@ -43,7 +43,7 @@ class AtomServiceUnitTest(unittest.TestCase):
     self.assert_(x.index('bq=digital+camera') != -1)
 
     # Add parameters to a URI that already has parameters
-    x = app_service.BuildUri('/base/feeds/snippets?bq=digital+camera', 
+    x = atom.service.BuildUri('/base/feeds/snippets?bq=digital+camera', 
                              url_params={'foo': 'bar', 'max-results': '250'})
     self.assert_(x.startswith('/base/feeds/snippets?bq=digital+camera'))
     self.assert_(x.count('?') == 1)
@@ -54,14 +54,14 @@ class AtomServiceUnitTest(unittest.TestCase):
 
 
   def testBuildUriWithoutParameterEscaping(self):
-    x = app_service.BuildUri('/base/feeds/snippets', 
+    x = atom.service.BuildUri('/base/feeds/snippets', 
             url_params={'foo': ' bar', 'bq': 'digital camera'}, 
             escape_params=False)
     self.assert_(x.index('foo= bar') != -1)
     self.assert_(x.index('bq=digital camera') != -1)
 
   def testParseHttpUrl(self):
-    as = app_service.AtomService('code.google.com')
+    as = atom.service.AtomService('code.google.com')
     self.assertEquals(as.server, 'code.google.com')
     (host, port, ssl, path) =  as._ProcessUrl(
         'http://www.google.com/service/subservice?name=value')
@@ -72,7 +72,7 @@ class AtomServiceUnitTest(unittest.TestCase):
     self.assertEquals(path, '/service/subservice?name=value')
 
   def testParseHttpUrlWithPort(self):
-    as = app_service.AtomService('code.google.com')
+    as = atom.service.AtomService('code.google.com')
     self.assertEquals(as.server, 'code.google.com')
     (host, port, ssl, path) =  as._ProcessUrl(
         'http://www.google.com:12/service/subservice?name=value&newname=newvalue')
@@ -83,7 +83,7 @@ class AtomServiceUnitTest(unittest.TestCase):
     self.assertEquals(path, '/service/subservice?name=value&newname=newvalue')
 
   def testParseHttpsUrl(self):
-    as = app_service.AtomService('code.google.com')
+    as = atom.service.AtomService('code.google.com')
     self.assertEquals(as.server, 'code.google.com')
     (host, port, ssl, path) =  as._ProcessUrl(
         'https://www.google.com/service/subservice?name=value&newname=newvalue')
@@ -94,7 +94,7 @@ class AtomServiceUnitTest(unittest.TestCase):
     self.assertEquals(path, '/service/subservice?name=value&newname=newvalue')
 
   def testParseHttpsUrlWithPort(self):
-    as = app_service.AtomService('code.google.com')
+    as = atom.service.AtomService('code.google.com')
     self.assertEquals(as.server, 'code.google.com')
     (host, port, ssl, path) =  as._ProcessUrl(
         'https://www.google.com:13981/service/subservice?name=value&newname=newvalue')
@@ -105,13 +105,13 @@ class AtomServiceUnitTest(unittest.TestCase):
     self.assertEquals(path, '/service/subservice?name=value&newname=newvalue')
 
   def testSetBasicAuth(self):
-    client = app_service.AtomService()
+    client = atom.service.AtomService()
     client.UseBasicAuth('foo', 'bar')
     self.assertEquals(client.additional_headers['Authorization'], 
-        'Basic Zm9vOmJhcg==\n')
+        'Basic Zm9vOmJhcg==')
     client.UseBasicAuth('','')
     self.assertEquals(client.additional_headers['Authorization'],
-        'Basic Og==\n')
+        'Basic Og==')
 
 
 if __name__ == '__main__':

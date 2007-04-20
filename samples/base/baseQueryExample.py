@@ -15,19 +15,19 @@
 # limitations under the License.
 
 
-import gbase_service
-import gdata_service
+import gdata.base.service
+import gdata.service
 try:
   from xml.etree import ElementTree
 except ImportError:
   from elementtree import ElementTree
 import atom
-import gbase
+import gdata.base
 
 # Demonstrates queries to the snippets feed and stepping through the results.
 
-gb_client = gbase_service.GBaseService()
-q = gbase_service.BaseQuery()
+gb_client = gdata.base.service.GBaseService()
+q = gdata.base.service.BaseQuery()
 q.feed = '/base/feeds/snippets'
 q['start-index'] = '1'
 q['max-results'] = '10'

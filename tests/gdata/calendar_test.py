@@ -25,14 +25,14 @@ except ImportError:
   from elementtree import ElementTree
 import atom 
 import gdata
-import test_data
-import gcalendar
+from tests import test_data
+import gdata.calendar
 
 
 class CalendarFeedTest(unittest.TestCase):
   
   def setUp(self):
-    self.calendar_feed = gcalendar.CalendarListFeedFromString(
+    self.calendar_feed = gdata.calendar.CalendarListFeedFromString(
         test_data.CALENDAR_FEED)
 
   def testEntryCount(self):
@@ -42,14 +42,14 @@ class CalendarFeedTest(unittest.TestCase):
   def testToAndFromString(self):
     # Assert the appropriate type for each entry
     for an_entry in self.calendar_feed.entry:
-      self.assert_(isinstance(an_entry, gcalendar.CalendarListEntry), 
+      self.assert_(isinstance(an_entry, gdata.calendar.CalendarListEntry), 
           'Entry must be an instance of CalendarListEntry')
 
     # Regenerate feed from xml text
     new_calendar_feed = ( 
-        gcalendar.CalendarListFeedFromString(str(self.calendar_feed)))
+        gdata.calendar.CalendarListFeedFromString(str(self.calendar_feed)))
     for an_entry in new_calendar_feed.entry:
-      self.assert_(isinstance(an_entry, gcalendar.CalendarListEntry), 
+      self.assert_(isinstance(an_entry, gdata.calendar.CalendarListEntry), 
           'Entry in regenerated feed must be an instance of CalendarListEntry')
 
   def testAuthor(self):
@@ -160,11 +160,11 @@ class CalendarFeedTest(unittest.TestCase):
   def testColor(self):
     """Tests the existence of a <gCal:color> and verifies the value"""
     
-    # Assert the color is present and is a gcalendar.Color
+    # Assert the color is present and is a gdata.calendar.Color
     for an_entry in self.calendar_feed.entry:
-      self.assert_(isinstance(an_entry.color, gcalendar.Color), 
+      self.assert_(isinstance(an_entry.color, gdata.calendar.Color), 
           "Calendar feed <gCal:color> element must be an instance of " +
-          "gcalendar.Color: %s" % an_entry.color)
+          "gdata.calendar.Color: %s" % an_entry.color)
 
     # Assert the color value is as expected
     self.assertEquals(self.calendar_feed.entry[0].color.value, '#2952A3')
@@ -173,11 +173,11 @@ class CalendarFeedTest(unittest.TestCase):
     """Tests the existence of a <gCal:accesslevel> element and verifies the
     value"""
 
-    # Assert the access_level is present and is a gcalendar.AccessLevel
+    # Assert the access_level is present and is a gdata.calendar.AccessLevel
     for an_entry in self.calendar_feed.entry:
-      self.assert_(isinstance(an_entry.access_level, gcalendar.AccessLevel), 
+      self.assert_(isinstance(an_entry.access_level, gdata.calendar.AccessLevel), 
           "Calendar feed <gCal:accesslevel> element must be an instance of " +
-          "gcalendar.AccessLevel: %s" % an_entry.access_level)
+          "gdata.calendar.AccessLevel: %s" % an_entry.access_level)
 
     # Assert the access_level value is as expected
     self.assertEquals(self.calendar_feed.entry[0].access_level.value, 'owner')
@@ -186,11 +186,11 @@ class CalendarFeedTest(unittest.TestCase):
     """Tests the existence of a <gCal:timezone> element and verifies the
      value"""
 
-    # Assert the timezone is present and is a gcalendar.Timezone
+    # Assert the timezone is present and is a gdata.calendar.Timezone
     for an_entry in self.calendar_feed.entry:
-      self.assert_(isinstance(an_entry.timezone, gcalendar.Timezone), 
+      self.assert_(isinstance(an_entry.timezone, gdata.calendar.Timezone), 
           "Calendar feed <gCal:timezone> element must be an instance of " +
-          "gcalendar.Timezone: %s" % an_entry.timezone)
+          "gdata.calendar.Timezone: %s" % an_entry.timezone)
 
     # Assert the timezone value is as expected
     self.assertEquals(self.calendar_feed.entry[0].timezone.value, 
@@ -200,11 +200,11 @@ class CalendarFeedTest(unittest.TestCase):
     """Tests the existence of a <gCal:hidden> element and verifies the
      value"""
 
-    # Assert the hidden is present and is a gcalendar.Hidden
+    # Assert the hidden is present and is a gdata.calendar.Hidden
     for an_entry in self.calendar_feed.entry:
-      self.assert_(isinstance(an_entry.hidden, gcalendar.Hidden), 
+      self.assert_(isinstance(an_entry.hidden, gdata.calendar.Hidden), 
           "Calendar feed <gCal:hidden> element must be an instance of " +
-          "gcalendar.Hidden: %s" % an_entry.hidden)
+          "gdata.calendar.Hidden: %s" % an_entry.hidden)
 
     # Assert the hidden value is as expected
     self.assertEquals(self.calendar_feed.entry[0].hidden.value, 'false')
@@ -236,14 +236,14 @@ class CalendarFeedTest(unittest.TestCase):
   def testEntryLink(self):
     """Makes sure entry links in the private composite feed are parsed."""
 
-    entry = gcalendar.CalendarEventEntryFromString(
+    entry = gdata.calendar.CalendarEventEntryFromString(
         test_data.RECURRENCE_EXCEPTION_ENTRY)
 
     self.assertTrue(isinstance(entry.recurrence_exception, list))
     self.assertTrue(isinstance(entry.recurrence_exception[0].entry_link, 
         gdata.EntryLink))
     self.assertTrue(isinstance(entry.recurrence_exception[0].entry_link.entry,
-        gcalendar.CalendarEventEntry))
+        gdata.calendar.CalendarEventEntry))
     self.assertEquals(
         entry.recurrence_exception[0].entry_link.entry.author[0].name.text, 
         'gdata ops')
@@ -252,16 +252,16 @@ class CalendarFeedTest(unittest.TestCase):
 class CalendarFeedTestRegenerated(CalendarFeedTest):
   def setUp(self):    
     old_calendar_feed = (
-        gcalendar.CalendarListFeedFromString(test_data.CALENDAR_FEED))
+        gdata.calendar.CalendarListFeedFromString(test_data.CALENDAR_FEED))
     self.calendar_feed = (
-        gcalendar.CalendarListFeedFromString(str(old_calendar_feed)))
+        gdata.calendar.CalendarListFeedFromString(str(old_calendar_feed)))
 
 
 class CalendarEventFeedTest(unittest.TestCase):
   
   def setUp(self):
     self.calendar_event_feed = (
-        gcalendar.CalendarEventFeedFromString(
+        gdata.calendar.CalendarEventFeedFromString(
             test_data.CALENDAR_FULL_EVENT_FEED))
 
   def testEntryCount(self):
@@ -271,14 +271,14 @@ class CalendarEventFeedTest(unittest.TestCase):
   def testToAndFromString(self):
     # Assert the appropriate type for each entry
     for an_entry in self.calendar_event_feed.entry:
-      self.assert_(isinstance(an_entry, gcalendar.CalendarEventEntry), 
+      self.assert_(isinstance(an_entry, gdata.calendar.CalendarEventEntry), 
           "Entry must be an instance of a CalendarEventEntry")
 
     # Regenerate feed from xml text
-    new_calendar_event_feed = gcalendar.CalendarEventFeedFromString(
+    new_calendar_event_feed = gdata.calendar.CalendarEventFeedFromString(
         str(self.calendar_event_feed))
     for an_entry in new_calendar_event_feed.entry:
-      self.assert_(isinstance(an_entry, gcalendar.CalendarEventEntry), 
+      self.assert_(isinstance(an_entry, gdata.calendar.CalendarEventEntry), 
           "Entry in regenerated feed must be an instance of CalendarEventEntry")
 
   def testAuthor(self):
@@ -497,9 +497,9 @@ class CalendarEventFeedTest(unittest.TestCase):
     # Assert that the element exists and is of the appropriate type and value
     for an_event in self.calendar_event_feed.entry:
       self.assert_(isinstance(an_event.send_event_notifications, 
-          gcalendar.SendEventNotifications),
+          gdata.calendar.SendEventNotifications),
           ("Calendar event feed entry <gCal:sendEventNotifications> element " +
-          "must be an instance of gcalendar.SendEventNotifications: %s") % (
+          "must be an instance of gdata.calendar.SendEventNotifications: %s") % (
           an_event.send_event_notifications,))
    
     # Assert the <gCal:sendEventNotifications> are as expected 
@@ -518,9 +518,9 @@ class CalendarEventFeedTest(unittest.TestCase):
     # Assert that the element exists and is of the appropriate type and value
     for an_event in self.calendar_event_feed.entry:
       self.assert_(isinstance(an_event.event_status, 
-          gcalendar.EventStatus),
+          gdata.calendar.EventStatus),
           ("Calendar event feed entry <gd:eventStatus> element " +
-          "must be an instance of gcalendar.EventStatus: %s") % (
+          "must be an instance of gdata.calendar.EventStatus: %s") % (
           an_event.event_status,))
    
     # Assert the <gd:eventStatus> are as expected 
@@ -538,9 +538,9 @@ class CalendarEventFeedTest(unittest.TestCase):
     # Assert that the element exists and is of the appropriate type and value
     for an_event in self.calendar_event_feed.entry:
       self.assert_(an_event.comments is None or isinstance(an_event.comments, 
-          gcalendar.Comments),
+          gdata.calendar.Comments),
           ("Calendar event feed entry <gd:comments> element " +
-          "must be an instance of gcalendar.Comments: %s") % (
+          "must be an instance of gdata.calendar.Comments: %s") % (
           an_event.comments,))
 
   def testVisibility(self):
@@ -549,9 +549,9 @@ class CalendarEventFeedTest(unittest.TestCase):
     # Assert that the element exists and is of the appropriate type and value
     for an_event in self.calendar_event_feed.entry:
       self.assert_(isinstance(an_event.visibility, 
-          gcalendar.Visibility),
+          gdata.calendar.Visibility),
           ("Calendar event feed entry <gd:visibility> element " +
-          "must be an instance of gcalendar.Visibility: %s") % (
+          "must be an instance of gdata.calendar.Visibility: %s") % (
           an_event.visibility,))
    
     # Assert the <gd:visibility> are as expected 
@@ -573,9 +573,9 @@ class CalendarEventFeedTest(unittest.TestCase):
     # Assert that the element exists and is of the appropriate type and value
     for an_event in self.calendar_event_feed.entry:
       self.assert_(isinstance(an_event.transparency, 
-          gcalendar.Transparency),
+          gdata.calendar.Transparency),
           ("Calendar event feed entry <gd:transparency> element " +
-          "must be an instance of gcalendar.Transparency: %s") % (
+          "must be an instance of gdata.calendar.Transparency: %s") % (
           an_event.transparency,))
    
     # Assert the <gd:transparency> are as expected 
@@ -597,12 +597,12 @@ class CalendarEventFeedTest(unittest.TestCase):
     """Tests the existence of a <gd:where> in the entries 
     and verifies the value"""
 
-    # Assert that each entry has a where value which is an gcalendar.Where
+    # Assert that each entry has a where value which is an gdata.calendar.Where
     for an_entry in self.calendar_event_feed.entry:
       for a_where in an_entry.where:
-        self.assert_(isinstance(a_where, gcalendar.Where),
+        self.assert_(isinstance(a_where, gdata.calendar.Where),
             "Calendar event entry <gd:where> element must be an instance of " +
-            "gcalendar.Where: %s" % a_where)
+            "gdata.calendar.Where: %s" % a_where)
 
     # Assert one of the values for where is as expected
     self.assertEquals(self.calendar_event_feed.entry[1].where[0].value_string, 
@@ -612,17 +612,17 @@ class CalendarEventFeedTest(unittest.TestCase):
     """Tests the existence of a <gd:when> and <gd:reminder> in the entries 
     and verifies the values"""
 
-    # Assert that each entry's when value is a gcalendar.When
-    # Assert that each reminder is a gcalendar.Reminder 
+    # Assert that each entry's when value is a gdata.calendar.When
+    # Assert that each reminder is a gdata.calendar.Reminder 
     for an_entry in self.calendar_event_feed.entry:
       for a_when in an_entry.when:
-        self.assert_(isinstance(a_when, gcalendar.When),
+        self.assert_(isinstance(a_when, gdata.calendar.When),
             "Calendar event entry <gd:when> element must be an instance " +
-            "of gcalendar.When: %s" % a_when)
+            "of gdata.calendar.When: %s" % a_when)
         for a_reminder in a_when.reminder:
-          self.assert_(isinstance(a_reminder, gcalendar.Reminder),
+          self.assert_(isinstance(a_reminder, gdata.calendar.Reminder),
               "Calendar event entry <gd:reminder> element must be an " +
-              "instance of gcalendar.Reminder: %s" % a_reminder)
+              "instance of gdata.calendar.Reminder: %s" % a_reminder)
 
     # Assert one of the values for when is as expected
     self.assertEquals(self.calendar_event_feed.entry[0].when[0].start_time, 

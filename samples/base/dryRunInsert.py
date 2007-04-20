@@ -15,20 +15,20 @@
 # limitations under the License.
 
 
-import gbase_service
-import gdata_service
+import gdata.base.service
+import gdata.service
 try:
   from xml.etree import ElementTree
 except ImportError:
   from elementtree import ElementTree
 import atom
-import gbase
+import gdata.base
 import getpass
 
 # Demonstrates item insertion with a dry run insert operation. The item will
 # NOT be added to Google Base.
 
-gb_client = gbase_service.GBaseService()
+gb_client = gdata.base.service.GBaseService()
 gb_client.email = raw_input('Please enter your username: ')
 gb_client.password = getpass.getpass()
 
@@ -36,15 +36,15 @@ print 'Logging in'
 gb_client.ProgrammaticLogin()
 
 # Create a test item which will be used in a dry run insert
-item = gbase.GBaseItem()
+item = gdata.base.GBaseItem()
 item.author.append(atom.Author(name=atom.Name(text='Mr. Smith')))
 item.title = atom.Title(text='He Jingxian\'s chicken')
 item.link.append(atom.Link(rel='alternate', link_type='text/html',
     href='http://www.host.com/123456jsh9'))
-item.label.append(gbase.Label(text='kung pao chicken'))
-item.label.append(gbase.Label(text='chinese cuisine'))
-item.label.append(gbase.Label(text='recipes'))
-item.item_type = gbase.ItemType(text='Recipies')
+item.label.append(gdata.base.Label(text='kung pao chicken'))
+item.label.append(gdata.base.Label(text='chinese cuisine'))
+item.label.append(gdata.base.Label(text='recipes'))
+item.item_type = gdata.base.ItemType(text='Recipies')
 item.AddItemAttribute(name='cooking_time', value='30 minutes')
 item.AddItemAttribute(name='main_ingredient', value='chicken')
 item.AddItemAttribute(name='main_ingredient', value='chili')
