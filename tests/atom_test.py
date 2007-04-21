@@ -24,7 +24,7 @@ try:
 except ImportError:
   from elementtree import ElementTree
 import atom
-from tests import test_data
+from gdata import test_data
 
 
 class AuthorTest(unittest.TestCase):

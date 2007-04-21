@@ -29,7 +29,7 @@ import gdata.service
 import atom.service
 import gdata.base
 import atom
-from tests import test_data
+from gdata import test_data
 
 
 username = ''

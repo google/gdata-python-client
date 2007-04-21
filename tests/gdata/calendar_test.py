@@ -25,7 +25,7 @@ except ImportError:
   from elementtree import ElementTree
 import atom 
 import gdata
-from tests import test_data
+from gdata import test_data
 import gdata.calendar
 
 
