@@ -12,6 +12,17 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 
-   For more information on the GData Python client library, please see the 
+    For more information on the GData Python client library, please see the 
 project on code.google.com's hosting service here: 
 http://code.google.com/p/gdata-python-client/
+
+    Dependency Modules
+
+  ElementTree - For XML parsing, download here: 
+http://effbot.org/zone/element-index.htm
+
+  httplib - Part of the core Python library since version 2.0, so it should
+already be present.
+
+  urllib - For URL creation and URL encoding, should already be present in
+current versions of Python.  

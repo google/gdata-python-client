@@ -1,3 +1,21 @@
+=== 1.0.1 ===
+April 20, 2007
+
+- Rearranged package structure, tests are in their own directory and Google
+  data API extension classes are nested under the gdata package.
+- Simplified accessing extension elements by adding FindExtesions.
+- Provided a setup.py file for distutils based installation.
+- Added support for the app:draft element.
+- Imports ElementTree from XML libraries in Python 2.5
+- Fixed _EntryLinkFromElementTree in the calendar data module.
+- Fixed various _TakeChildFromElementTree methods in calendar data module.
+- Fixed delete and update operations in the spreadsheetExample script.
+- Fixed setting sort order and order by in calendar's service module.
+- Added HTTP BasicAuth for AtomService.
+
+
+
 === 1.0 ===
+March 26, 2007
 
 Initial release
