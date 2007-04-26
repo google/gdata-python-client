@@ -31,6 +31,7 @@ try:
 except ImportError:
   from elementtree import ElementTree
 import atom
+import os
 
 
 # XML namespaces which are often used in GData entities.
@@ -39,6 +40,28 @@ GDATA_TEMPLATE = '{http://schemas.google.com/g/2005}%s'
 OPENSEARCH_NAMESPACE = 'http://a9.com/-/spec/opensearchrss/1.0/'
 OPENSEARCH_TEMPLATE = '{http://a9.com/-/spec/opensearchrss/1.0/}%s'
 
+
+class MediaSource(object):
+  """GData Entries can refer to media sources, so this class provides a
+  place to store references to these objects along with some metadata.
+  """
+  
+  def __init__(self, file_handle=None, content_type=None, content_length=None):
+    self.file_handle = file_handle
+    self.content_type = content_type
+    self.content_length = content_length
+  
+  def setFile(self, file_name, content_type):
+    """A helper function which can create a file handle from a given filename
+    and set the content type and length all at once.
+    file_name: string The path and file name to the file containing the media
+    content_type: string A MIME type representing the type of the media
+    """
+    
+    self.file_handle = open(file_name, 'r')
+    self.content_type = content_type
+    self.content_length = os.path.getsize(file_name)
+  
 
 class LinkFinder(object):
   """An "interface" providing methods to find link elements
@@ -66,6 +89,17 @@ class LinkFinder(object):
   def GetEditLink(self):
     for a_link in self.link:
       if a_link.rel == 'edit':
+        return a_link
+    return None
+    
+  def GetEditMediaLink(self):
+    """The Picasa API mistakenly returns media-edit rather than edit-media, but
+    this may change soon.
+    """
+    for a_link in self.link:
+      if a_link.rel == 'edit-media':
+        return a_link
+      if a_link.rel == 'media-edit':
         return a_link
     return None
 
@@ -97,7 +131,6 @@ class LinkFinder(object):
       if a_link.rel == 'next':
         return a_link
     return None
-
 
 
 class GDataFeed(atom.Feed, LinkFinder):
@@ -205,6 +238,23 @@ def _GDataFeedFromElementTree(element_tree):
 
 class GDataEntry(atom.Entry, LinkFinder):
   """Extends Atom Entry to provide data processing"""
+    
+  def IsMedia(self):
+    """Determines whether or not an entry is a GData Media entry.
+    """
+    if (self.GetEditMediaLink()):
+      return True
+    else:
+      return False
+  
+  def GetMediaURL(self):
+    """Returns the URL to the media content, if the entry is a media entry.
+    Otherwise returns None.
+    """
+    if not self.IsMedia():
+      return None
+    else:
+      return self.content.src
   
   def _TakeChildFromElementTree(self, child, element_tree):
     if child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'id'):
@@ -352,7 +402,8 @@ class FeedLink(atom.AtomBase):
   """The gd:feedLink element"""
 
   def __init__(self, count_hint=None, href=None, read_only=None, rel=None,
-      feed=None, extension_elements=None, extension_attributes=None, text=None):
+      feed=None, extension_elements=None, extension_attributes=None,
+      text=None):
     self.count_hint = count_hint 
     self.href = href
     self.read_only = read_only

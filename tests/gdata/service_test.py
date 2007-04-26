@@ -26,13 +26,107 @@ import gdata.service
 import gdata
 import atom
 import gdata.base
-from tests import test_data
+from gdata import test_data
 
 
 username = ''
 password = ''
 
 
+class GDataServiceMediaUnitTest(unittest.TestCase):
+  def setUp(self):
+    self.gd_client = gdata.service.GDataService()
+    self.gd_client.email = username
+    self.gd_client.password = password
+    self.gd_client.service = 'lh2'
+    self.gd_client.source = 'GDataService Media "Unit" Tests'
+    try:
+      self.gd_client.ProgrammaticLogin()
+    except gdata.service.CaptchaRequired:
+      self.fail('Required Captcha')
+    except gdata.service.BadAuthentication:
+      self.fail('Bad Authentication')
+    except gdata_client.Error:
+      self.fail('Login Error')
+    
+    # create a test album
+    gd_entry = gdata.GDataEntry()
+    gd_entry.title = atom.Title(text='GData Test Album')
+    gd_entry.category.append(atom.Category(
+        scheme='http://schemas.google.com/g/2005#kind',
+        term='http://schemas.google.com/photos/2007#album'))
+    
+    self.album_entry = self.gd_client.Post(gd_entry, 
+        'http://picasaweb.google.com/data/feed/api/user/' + username)
+    
+  def tearDown(self):
+    album_entry = self.gd_client.Get(self.album_entry.id.text)
+    self.gd_client.Delete(album_entry.GetEditLink().href)
+    
+  def testMedia1(self):
+    # Create media-only
+    ms = gdata.MediaSource()
+    ms.setFile('testimage.jpg', 'image/jpeg')
+    media_entry = self.gd_client.Post(None, 
+        self.album_entry.GetFeedLink().href, media_source = ms)
+    self.assert_(media_entry is not None)
+    self.assert_(isinstance(media_entry, gdata.GDataEntry))
+    self.assert_(media_entry.IsMedia())
+    
+    # Update media & metadata
+    ms = gdata.MediaSource()
+    ms.setFile('testimage.jpg', 'image/jpeg')
+    media_entry.summary = atom.Summary(text='Test Image')
+    media_entry2 = self.gd_client.Put(media_entry,
+        media_entry.GetEditLink().href, media_source = ms)
+    self.assert_(media_entry2 is not None)
+    self.assert_(isinstance(media_entry2, gdata.GDataEntry))
+    self.assert_(media_entry2.IsMedia())
+    self.assert_(media_entry2.summary.text == 'Test Image')
+    
+    # Read media binary
+    imageSource = self.gd_client.GetMedia(media_entry2.GetMediaURL())
+    self.assert_(isinstance(imageSource, gdata.MediaSource))
+    self.assert_(imageSource.content_type == 'image/jpeg')
+    self.assert_(imageSource.content_length)
+    
+    imageData = imageSource.file_handle.read()
+    self.assert_(imageData)
+    
+    # Delete entry
+    response = self.gd_client.Delete(media_entry2.GetEditLink().href)
+    self.assert_(response)
+    
+  def testMedia2(self):
+    # Create media & metadata
+    ms = gdata.MediaSource()
+    ms.setFile('testimage.jpg', 'image/jpeg')
+    new_media_entry = gdata.GDataEntry()
+    new_media_entry.title = atom.Title(text='testimage1.jpg')
+    new_media_entry.summary = atom.Summary(text='Test Image')
+    new_media_entry.category.append(atom.Category(scheme = 
+        'http://schemas.google.com/g/2005#kind', term = 
+        'http://schemas.google.com/photos/2007#photo'))
+    media_entry = self.gd_client.Post(new_media_entry,
+        self.album_entry.GetFeedLink().href, media_source = ms)
+    self.assert_(media_entry is not None)
+    self.assert_(isinstance(media_entry, gdata.GDataEntry))
+    self.assert_(media_entry.IsMedia())
+    self.assert_(media_entry.summary.text == 'Test Image')
+    
+    # Update media only
+    ms = gdata.MediaSource()
+    ms.setFile('testimage.jpg', 'image/jpeg')
+    media_entry = self.gd_client.Put(None, media_entry.GetEditMediaLink().href,
+        media_source = ms)
+    self.assert_(media_entry is not None)
+    self.assert_(isinstance(media_entry, gdata.GDataEntry))
+    self.assert_(media_entry.IsMedia())
+    
+    # Delete entry
+    response = self.gd_client.Delete(media_entry.GetEditLink().href)
+    self.assert_(response)
+    
 class GDataServiceUnitTest(unittest.TestCase):
   
   def setUp(self):
@@ -229,3 +323,4 @@ if __name__ == '__main__':
   username = raw_input('Please enter your username: ')
   password = getpass.getpass()
   unittest.main()
+  

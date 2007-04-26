@@ -100,6 +100,31 @@ class AtomService(object):
     base_64_string = base64.encodestring('%s:%s' % (username, password))
     base_64_string = base_64_string.strip()
     self.additional_headers['Authorization'] = 'Basic %s' % (base_64_string,)
+    
+  def _CreateConnection(self, uri, http_operation, extra_headers=None,
+      url_params=None, escape_params=True):
+      
+    full_uri = BuildUri(uri, url_params, escape_params)
+    (server, port, ssl, full_uri) = self._ProcessUrl(full_uri)
+
+    if ssl:
+      connection = httplib.HTTPSConnection(server, port)
+    else:
+      connection = httplib.HTTPConnection(server, port)
+
+    connection.putrequest(http_operation, full_uri)
+
+    #connection.putheader('Content-Type', content_type)
+    if isinstance(self.additional_headers, dict):
+      for header in self.additional_headers:
+        connection.putheader(header, self.additional_headers[header])
+    if isinstance(extra_headers, dict):
+      for header in extra_headers:
+        connection.putheader(header, extra_headers[header])
+    # connection.putheader('Content-Length', content_length)
+    connection.endheaders()
+    
+    return connection
 
   # CRUD operations
   def Get(self, uri, extra_headers=None, url_params=None, escape_params=True):
@@ -135,30 +160,13 @@ class AtomService(object):
     Returns:
       httplib.HTTPResponse The server's response to the GET request.
     """
-    full_uri = BuildUri(uri, url_params, escape_params)
-    (server, port, ssl, uri) = self._ProcessUrl(full_uri)
-
-    if ssl:
-      query_connection = httplib.HTTPSConnection(server, port)
-    else:
-      query_connection = httplib.HTTPConnection(server, port)
-
-    query_connection.putrequest('GET', full_uri)
-
-    query_connection.putheader('Content-Type','application/atom+xml')
-    # Add any additional headers held in the client
-    if isinstance(self.additional_headers, dict):
-      for header in self.additional_headers:
-        query_connection.putheader(header, self.additional_headers[header])
-    if isinstance(extra_headers, dict):
-      for header in extra_headers:
-        query_connection.putheader(header, extra_headers[header])
-    query_connection.endheaders()
+    query_connection = self._CreateConnection(uri, 'GET', extra_headers,
+        url_params, escape_params)
 
     return query_connection.getresponse()
 
   def Post(self, data, uri, extra_headers=None, url_params=None, 
-           escape_params=True):
+           escape_params=True, content_type='application/atom+xml'):
     """Insert data into an APP server at the given URI.
 
     Args:
@@ -186,33 +194,18 @@ class AtomService(object):
       data_str = ElementTree.tostring(data)
     else:
       data_str = str(data)
-      
-    full_uri = BuildUri(uri, url_params, escape_params)
-    (server, port, ssl, full_uri) = self._ProcessUrl(full_uri)
-
-    if ssl:
-      insert_connection = httplib.HTTPSConnection(server, port)
-    else:
-      insert_connection = httplib.HTTPConnection(server, port)
-
-    insert_connection.putrequest('POST', full_uri)
-
-    insert_connection.putheader('Content-Type','application/atom+xml')
-    if isinstance(self.additional_headers, dict):
-      for header in self.additional_headers:
-        insert_connection.putheader(header, self.additional_headers[header])
-    if isinstance(extra_headers, dict):
-      for header in extra_headers:
-        insert_connection.putheader(header, extra_headers[header])
-    insert_connection.putheader('Content-Length',str(len(data_str)))
-    insert_connection.endheaders()
+    
+    extra_headers['Content-Length'] = len(data_str)
+    extra_headers['Content-Type'] = content_type
+    insert_connection = self._CreateConnection(uri, 'POST', extra_headers,
+        url_params, escape_params)
 
     insert_connection.send(data_str)
 
     return insert_connection.getresponse()
 
   def Put(self, data, uri, extra_headers=None, url_params=None, 
-           escape_params=True):
+           escape_params=True, content_type='application/atom+xml'):
     """Updates an entry at the given URI.
      
     Args:
@@ -241,26 +234,10 @@ class AtomService(object):
     else:
       data_str = str(data)
       
-    full_uri = BuildUri(uri, url_params, escape_params)
-
-    (server, port, ssl, full_uri) = self._ProcessUrl(full_uri)
-
-    if ssl:
-      update_connection = httplib.HTTPSConnection(server, port)
-    else:
-      update_connection = httplib.HTTPConnection(server, port)
-
-    update_connection.putrequest('PUT', full_uri)
-
-    update_connection.putheader('Content-Type','application/atom+xml')
-    if isinstance(self.additional_headers, dict):
-      for header in self.additional_headers:
-        update_connection.putheader(header, self.additional_headers[header])
-    if isinstance(extra_headers, dict):
-      for header in extra_headers:
-        update_connection.putheader(header, extra_headers[header])
-    update_connection.putheader('Content-Length',str(len(data_str)))
-    update_connection.endheaders()
+    extra_headers['Content-Length'] = len(data_str)
+    extra_headers['Content-Type'] = content_type
+    update_connection = self._CreateConnection(uri, 'PUT', extra_headers,
+        url_params, escape_params)
 
     update_connection.send(data_str)
 
@@ -289,23 +266,8 @@ class AtomService(object):
     Returns:
       httplib.HTTPResponse Server's response to the DELETE request.
     """
-    full_uri = BuildUri(uri, url_params, escape_params)
-    (server, port, ssl, full_uri) = self._ProcessUrl(full_uri)
-
-    if ssl:
-      delete_connection = httplib.HTTPSConnection(server, port)
-    else:
-      delete_connection = httplib.HTTPConnection(server, port)
-
-    delete_connection.putrequest('DELETE', full_uri)
-    delete_connection.putheader('Content-Type','application/atom+xml')
-    if isinstance(self.additional_headers, dict):
-      for header in self.additional_headers:
-        delete_connection.putheader(header, self.additional_headers[header])
-    if isinstance(extra_headers, dict):
-      for header in extra_headers:
-        delete_connection.putheader(header, extra_headers[header])
-    delete_connection.endheaders()
+    delete_connection = self._CreateConnection(uri, 'DELETE', extra_headers,
+        url_params, escape_params)
 
     return delete_connection.getresponse()
 

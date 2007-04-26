@@ -442,7 +442,7 @@ class GDataService(atom.service.AtomService):
     if server_response.status == 200:
       feed = gdata.GDataFeedFromString(result_body)
       if not feed:
-        entry = atom.EntryFromString(result_body)
+        entry = gdata.GDataEntryFromString(result_body)
         if not entry:
           return result_body
         return entry
@@ -466,6 +466,16 @@ class GDataService(atom.service.AtomService):
     else:
       raise RequestError, {'status': server_response.status,
           'reason': server_response.reason, 'body': result_body}
+
+  def GetMedia(self, uri, extra_headers=None):
+    """Returns a MediaSource containing media and its metadata from the given
+    URI string.
+    """
+    connection = atom.service.AtomService._CreateConnection(self, uri, 'GET',
+        extra_headers)
+    response_handle = connection.getresponse()
+    return gdata.MediaSource(response_handle, response_handle.getheader('Content-Type'),
+        response_handle.getheader('Content-Length'))
 
   def GetEntry(self, uri, extra_headers=None):
     """Query the GData API with the given URI and receive an Entry.
@@ -516,7 +526,7 @@ class GDataService(atom.service.AtomService):
       raise UnexpectedReturnType, 'Server did not send a feed'  
 
   def Post(self, data, uri, extra_headers=None, url_params=None, 
-           escape_params=True, redirects_remaining=4):
+           escape_params=True, redirects_remaining=4, media_source=None):
     """Insert data into a GData service at the given URI.
 
     Args:
@@ -536,6 +546,8 @@ class GDataService(atom.service.AtomService):
                      reserved characters have been escaped). If true, this
                      method will escape the query and any URL parameters
                      provided.
+      media_source: MediaSource (optional) Container for the media to be sent
+                    along with the entry, if provided.
 
     Returns:
       httplib.HTTPResponse Server's response to the POST request.
@@ -554,15 +566,70 @@ class GDataService(atom.service.AtomService):
           uri += '&gsessionid=%s' % (self.__gsessionid,)
         else:
           uri += '?gsessionid=%s' % (self.__gsessionid,)
-                                                  
-    server_response = atom.service.AtomService.Post(self, data, uri,
-        extra_headers, url_params, escape_params)
-    result_body = server_response.read()
+
+    if data and media_source:
+      if isinstance(data, ElementTree._Element):
+        data_str = ElementTree.tostring(data)
+      else:
+        data_str = str(data)
+        
+      multipart = []
+      multipart.append('Media multipart posting\r\n--END_OF_PART\r\n' + \
+          'Content-Type: application/atom+xml\r\n\r\n')
+      multipart.append('\r\n--END_OF_PART\r\nContent-Type: ' + \
+          media_source.content_type+'\r\n\r\n')
+      multipart.append('\r\n--END_OF_PART--\r\n')
+        
+      extra_headers['Content-Type'] = 'multipart/related; boundary=END_OF_PART'
+      extra_headers['MIME-version'] = '1.0'
+      extra_headers['Content-Length'] = str(len(multipart[0]) +
+          len(multipart[1]) + len(multipart[2]) +
+          len(data_str) + media_source.content_length)
+          
+      insert_connection = atom.service.AtomService._CreateConnection(self,
+          uri, 'POST', extra_headers, url_params, escape_params)
+
+      insert_connection.send(multipart[0])
+      insert_connection.send(data_str)
+      insert_connection.send(multipart[1])
+
+      while 1:
+        binarydata = media_source.file_handle.read(100000)
+        if (binarydata == ""): break
+        insert_connection.send(binarydata)
+        
+      insert_connection.send(multipart[2])
+      
+      server_response = insert_connection.getresponse()
+      result_body = server_response.read()
+      
+    elif media_source:
+      extra_headers['Content-Type'] = media_source.content_type
+      extra_headers['Content-Length'] = media_source.content_length
+      insert_connection = atom.service.AtomService._CreateConnection(self, uri,
+          'POST', extra_headers, url_params, escape_params)
+
+      while 1:
+        binarydata = media_source.file_handle.read(100000)
+        if (binarydata == ""): break
+        insert_connection.send(binarydata)
+      
+      server_response = insert_connection.getresponse()
+      result_body = server_response.read()
+
+    else:
+      http_data = data
+      content_type = 'application/atom+xml'
+
+      server_response = atom.service.AtomService.Post(self, http_data, uri,
+          extra_headers, url_params, escape_params, content_type)
+      result_body = server_response.read()
+
 
     if server_response.status == 201:
       feed = gdata.GDataFeedFromString(result_body)
       if not feed:
-        entry = atom.EntryFromString(result_body)
+        entry = gdata.GDataEntryFromString(result_body)
         if not entry:
           return result_body
         return entry
@@ -574,7 +641,8 @@ class GDataService(atom.service.AtomService):
           m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
           if m is not None:
             self.__gsessionid = m.group(1) 
-          return self.Post(data, location, extra_headers, url_params, escape_params, redirects_remaining - 1)
+          return self.Post(data, location, extra_headers, url_params,
+              escape_params, redirects_remaining - 1, media_source)
         else:
           raise RequestError, {'status': server_response.status,
               'reason': '302 received without Location header',
@@ -588,7 +656,7 @@ class GDataService(atom.service.AtomService):
           'reason': server_response.reason, 'body': result_body}
 
   def Put(self, data, uri, extra_headers=None, url_params=None, 
-          escape_params=True, redirects_remaining=3):
+          escape_params=True, redirects_remaining=3, media_source=None):
     """Updates an entry at the given URI.
      
     Args:
@@ -626,15 +694,68 @@ class GDataService(atom.service.AtomService):
           uri += '&gsessionid=%s' % (self.__gsessionid,)
         else:
           uri += '?gsessionid=%s' % (self.__gsessionid,)
-                                                  
-    server_response = atom.service.AtomService.Put(self, data, uri,
-        extra_headers, url_params, escape_params)
-    result_body = server_response.read()
+
+    if media_source and data:
+      if isinstance(data, ElementTree._Element):
+        data_str = ElementTree.tostring(data)
+      else:
+        data_str = str(data)
+
+      multipart = []
+      multipart.append('Media multipart posting\r\n--END_OF_PART\r\n' + \
+          'Content-Type: application/atom+xml\r\n\r\n')
+      multipart.append('\r\n--END_OF_PART\r\nContent-Type: ' + \
+          media_source.content_type+'\r\n\r\n')
+      multipart.append('\r\n--END_OF_PART--\r\n')
+        
+      extra_headers['Content-Type'] = 'multipart/related; boundary=END_OF_PART'
+      extra_headers['MIME-version'] = '1.0'
+      extra_headers['Content-Length'] = str(len(multipart[0]) +
+          len(multipart[1]) + len(multipart[2]) +
+          len(data_str) + media_source.content_length)
+          
+      insert_connection = atom.service.AtomService._CreateConnection(self, uri,
+          'PUT', extra_headers, url_params, escape_params)
+
+      insert_connection.send(multipart[0])
+      insert_connection.send(data_str)
+      insert_connection.send(multipart[1])
+      
+      while 1:
+        binarydata = media_source.file_handle.read(100000)
+        if (binarydata == ""): break
+        insert_connection.send(binarydata)
+        
+      insert_connection.send(multipart[2])
+      
+      server_response = insert_connection.getresponse()
+      result_body = server_response.read()
+
+    elif media_source:
+      extra_headers['Content-Type'] = media_source.content_type
+      extra_headers['Content-Length'] = media_source.content_length
+      insert_connection = atom.service.AtomService._CreateConnection(self, uri,
+          'PUT', extra_headers, url_params, escape_params)
+
+      while 1:
+        binarydata = media_source.file_handle.read(100000)
+        if (binarydata == ""): break
+        insert_connection.send(binarydata)
+      
+      server_response = insert_connection.getresponse()
+      result_body = server_response.read()
+    else:
+      http_data = data
+      content_type = 'application/atom+xml'
+
+      server_response = atom.service.AtomService.Put(self, http_data, uri,
+          extra_headers, url_params, escape_params, content_type)
+      result_body = server_response.read()
 
     if server_response.status == 200:
       feed = gdata.GDataFeedFromString(result_body)
       if not feed:
-        entry = atom.EntryFromString(result_body)
+        entry = gdata.GDataEntryFromString(result_body)
         if not entry:
           return result_body
         return entry
@@ -646,7 +767,8 @@ class GDataService(atom.service.AtomService):
           m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
           if m is not None:
             self.__gsessionid = m.group(1) 
-          return self.Put(data, location, extra_headers, url_params, escape_params, redirects_remaining - 1)
+          return self.Put(data, location, extra_headers, url_params,
+              escape_params, redirects_remaining - 1)
         else:
           raise RequestError, {'status': server_response.status,
               'reason': '302 received without Location header',
@@ -710,7 +832,8 @@ class GDataService(atom.service.AtomService):
           m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
           if m is not None:
             self.__gsessionid = m.group(1) 
-          return self.Delete(location, extra_headers, url_params, escape_params, redirects_remaining - 1)
+          return self.Delete(location, extra_headers, url_params,
+              escape_params, redirects_remaining - 1)
         else:
           raise RequestError, {'status': server_response.status,
               'reason': '302 received without Location header',
