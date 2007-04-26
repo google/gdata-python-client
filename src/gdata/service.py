@@ -142,6 +142,8 @@ class GDataService(atom.service.AtomService):
     self.__captcha_token = None
     self.__captcha_url = None
     self.__gsessionid = None
+
+    self.additional_headers['User-Agent'] = 'Python Google Data Client Lib'
  
   # Define properties for GDataClient
   def _SetAuthSubToken(self, auth_token):

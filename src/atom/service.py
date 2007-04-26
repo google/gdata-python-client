@@ -53,9 +53,11 @@ class AtomService(object):
       additional_headers: dict (optional) Any additional HTTP headers which
                           should be included with CRUD operations.
     """
+
     self.server = server
     self.additional_headers = additional_headers or {}
 
+    self.additional_headers['User-Agent'] = 'Python Google Data Client Lib'
 
   def _ProcessUrl(self, url):
     """Processes a passed URL.  If the URL does not begin with https?, then
