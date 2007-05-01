@@ -34,7 +34,7 @@ try:
 except ImportError:
   from elementtree import ElementTree
 
-URL_REGEX = re.compile('http(s)?\://([\w\.]*)(\:(\d+))?(/.*)?')
+URL_REGEX = re.compile('http(s)?\://([\w\.-]*)(\:(\d+))?(/.*)?')
 
 class AtomService(object):
   """Performs Atom Publishing Protocol CRUD operations."""
@@ -116,14 +116,12 @@ class AtomService(object):
 
     connection.putrequest(http_operation, full_uri)
 
-    #connection.putheader('Content-Type', content_type)
     if isinstance(self.additional_headers, dict):
       for header in self.additional_headers:
         connection.putheader(header, self.additional_headers[header])
     if isinstance(extra_headers, dict):
       for header in extra_headers:
         connection.putheader(header, extra_headers[header])
-    # connection.putheader('Content-Length', content_length)
     connection.endheaders()
     
     return connection
