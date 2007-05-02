@@ -37,11 +37,16 @@ except ImportError:
 URL_REGEX = re.compile('http(s)?\://([\w\.-]*)(\:(\d+))?(/.*)?')
 
 class AtomService(object):
-  """Performs Atom Publishing Protocol CRUD operations."""
+  """Performs Atom Publishing Protocol CRUD operations.
+  
+  The AtomService contains methods to perform HTTP CRUD operations. 
+  """
 
   # Default values for members
   port = 80
   ssl = False
+  # If debug is True, the HTTPConnection will display debug information
+  debug = False
 
   def __init__(self, server=None, additional_headers=None):
     """Creates a new AtomService client.
@@ -123,7 +128,11 @@ class AtomService(object):
       for header in extra_headers:
         connection.putheader(header, extra_headers[header])
     connection.endheaders()
-    
+
+    # Turn on debug mode if the debug member is set
+    if self.debug:
+      connection.debuglevel = 1
+
     return connection
 
   # CRUD operations

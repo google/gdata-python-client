@@ -1223,8 +1223,55 @@ def PublishedFromString(xml_string):
 _PublishedFromElementTree = _AtomInstanceFromElementTree(Published, 
     'published', ATOM_NAMESPACE)
 
+class LinkFinder(object):
+  """An "interface" providing methods to find link elements
+
+  Entry elements often contain multiple links which differ in the rel
+  attribute or content type. Often, developers are interested in a specific
+  type of link so this class provides methods to find specific classes of
+  links.
+
+  This class is used as a mixin in Atom entries and feeds.
+  """
+
+  def GetSelfLink(self):
+    """Find the first link with rel set to 'self'
+
+    Returns:
+      An atom.Link or none if none of the links had rel equal to 'self'
+    """
+
+    for a_link in self.link:
+      if a_link.rel == 'self':
+        return a_link
+    return None
+
+  def GetEditLink(self):
+    for a_link in self.link:
+      if a_link.rel == 'edit':
+        return a_link
+    return None
+
+  def GetNextLink(self):
+    for a_link in self.link:
+      if a_link.rel == 'next':
+        return a_link
+    return None
+
+  def GetLicenseLink(self):
+    for a_link in self.link:
+      if a_link.rel == 'license':
+        return a_link
+    return None
+
+  def GetAlternateLink(self):
+    for a_link in self.link:
+      if a_link.rel == 'alternate':
+        return a_link
+    return None
+    
  
-class FeedEntryParent(AtomBase):
+class FeedEntryParent(AtomBase, LinkFinder):
   """A super class for atom:feed and entry, contains shared attributes"""
 
   def __init__(self, author=None, category=None, contributor=None, 

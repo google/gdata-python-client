@@ -28,6 +28,8 @@ XML_ENTRY_1 = """<?xml version='1.0'?>
   </content>
   <link rel='alternate' type='text/html'
         href='http://www.provider-host.com/123456789'/>
+  <link rel='license' 
+        href='http://creativecommons.org/licenses/by-nc/2.5/rdf'/>
   <g:label>Computer</g:label>
   <g:label>Laptop</g:label>
   <g:label>testing laptop</g:label>

@@ -24,6 +24,7 @@ try:
 except ImportError:
   from elementtree import ElementTree
 import gdata
+import atom
 from gdata import test_data
 
 
@@ -54,10 +55,6 @@ class ItemsPerPageTest(unittest.TestCase):
 
 class GDataEntryTest(unittest.TestCase):
 
-  def setUp(self):
-    #self.entry = gdata.GDataEntry()
-    pass
-
   def testIdShouldBeCleaned(self):
     entry = gdata.GDataEntryFromString(test_data.XML_ENTRY_1)
     element_tree = ElementTree.fromstring(test_data.XML_ENTRY_1)
@@ -71,6 +68,24 @@ class GDataEntryTest(unittest.TestCase):
     self.assert_(element_tree.findall('{http://www.w3.org/2005/Atom}generator'
         )[0].text != feed.generator.text)
     self.assert_(feed.generator.text == 'GoogleBase')
+
+class LinkFinderTest(unittest.TestCase):
+  
+  def setUp(self):
+    self.entry = gdata.GDataEntryFromString(test_data.XML_ENTRY_1)
+
+  def testLinkFinderGetsLicenseLink(self):
+    self.assertTrue(isinstance(self.entry.GetLicenseLink(), atom.Link))
+    self.assertEquals(self.entry.GetLicenseLink().href, 
+        'http://creativecommons.org/licenses/by-nc/2.5/rdf')
+    self.assertEquals(self.entry.GetLicenseLink().rel, 'license')
+
+  def testLinkFinderGetsAlternateLink(self):
+    self.assertTrue(isinstance(self.entry.GetAlternateLink(), atom.Link))
+    self.assertEquals(self.entry.GetAlternateLink().href, 
+        'http://www.provider-host.com/123456789')
+    self.assertEquals(self.entry.GetAlternateLink().rel, 'alternate')
+        
     
     
 if __name__ == '__main__':

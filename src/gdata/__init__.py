@@ -63,7 +63,7 @@ class MediaSource(object):
     self.content_length = os.path.getsize(file_name)
   
 
-class LinkFinder(object):
+class LinkFinder(atom.LinkFinder):
   """An "interface" providing methods to find link elements
 
   GData Entry elements often contain multiple links which differ in the rel
