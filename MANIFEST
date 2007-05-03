@@ -17,6 +17,7 @@ samples/base/baseQueryExample.py
 samples/base/dryRunInsert.py
 samples/calendar/calendarExample.py
 samples/spreadsheets/spreadsheetExample.py
+samples/blogger/BloggerExample.py
 tests/atom_test.py
 tests/gdata_test.py
 tests/atom/service_test.py
