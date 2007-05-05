@@ -7,7 +7,7 @@ May 4, 2007
 - Fixed host name processing for URLs which have -'s in the host name.
 - Added a debug setting for service classes.
 - Added user agent header.
-- Made finding links of a specific type easier when dealing with Atom elemnts.
+- Made finding links of a specific type easier when dealing with Atom elements.
   Atom Entries now have GetXLink methods.
 - Simplified finding license links in Atom Entries. 
 
