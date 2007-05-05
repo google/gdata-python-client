@@ -1,3 +1,16 @@
+=== 1.0.2 ===
+May 4, 2007
+
+- Added support for media. Services can now upload images, the tests for this
+  service use the Picasa Web Albums data API.
+- Added example code illustrating Blogger operations.
+- Fixed host name processing for URLs which have -'s in the host name.
+- Added a debug setting for service classes.
+- Added user agent header.
+- Made finding links of a specific type easier when dealing with Atom elemnts.
+  Atom Entries now have GetXLink methods.
+- Simplified finding license links in Atom Entries. 
+
 === 1.0.1 ===
 April 20, 2007
 
