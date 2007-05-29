@@ -114,7 +114,7 @@ class SimpleCRUD:
   def _ListInsertAction(self, row_data):
     entry = self.gd_client.InsertRow(self._StringToDictionary(row_data), 
         self.curr_key, self.curr_wksht_id)
-    if isinstance(entry, gdata.spreadsheet.SpreadsheetsCell):
+    if isinstance(entry, gdata.spreadsheet.SpreadsheetsList):
       print 'Inserted!'
         
   def _ListUpdateAction(self, index, row_data):
@@ -122,7 +122,7 @@ class SimpleCRUD:
     entry = self.gd_client.UpdateRow(
         self.list_feed.entry[string.atoi(index)], 
         self._StringToDictionary(row_data))
-    if isinstance(entry, gdata.spreadsheet.SpreadsheetsCell):
+    if isinstance(entry, gdata.spreadsheet.SpreadsheetsList):
       print 'Updated!'
   
   def _ListDeleteAction(self, index):
