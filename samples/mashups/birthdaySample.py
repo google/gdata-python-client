@@ -51,7 +51,6 @@ import datetime
 import getopt
 import getpass
 import sys
-import re
 
 
 class BirthdaySample:
@@ -289,35 +288,35 @@ class BirthdaySample:
 
     # Create dict to represent the row data to update edit link back to
     # Spreadsheet
-    
-    birthday_format = re.compile(
-      r"(0?[1-9]|1[012])/(0?[1-9]|[12][0-9]|3[01])") 
      
     for entry in feed.entry:
       d = {} 
-      birthday_valid = True
+      input_valid = True
       
       for custom in entry.custom:
         d[custom.column] = custom.text
 
+      month = int(d[self.BIRTHDAY].split("/")[0]) 
+      day = int(d[self.BIRTHDAY].split("/")[1])
+      
       # Some input checking. Script will allow the insert to continue with
       # a missing name value.
       if d[self.NAME] is None:
         d[self.NAME] = " "
       if d[self.PHOTO_URL] is None:
-        birthday_valid = False
+        input_valid = False
       if d[self.BIRTHDAY] is None:
-        birthday_valid = False
-      elif birthday_format.search(d[self.BIRTHDAY]) is False:
-        birthday_valid = False  
+        input_valid = False
+      elif not 1 <= month <= 12 or not 1 <= day <= 31:
+        input_valid = False  
 
-      if d[self.EDIT_URL] is None and birthday_valid:
+      if d[self.EDIT_URL] is None and input_valid:
         event = self._CreateBirthdayWebContentEvent(d[self.NAME], 
             d[self.BIRTHDAY], d[self.PHOTO_URL])
         event = self._InsertBirthdayWebContentEvent(event)
         event = self._AddReminder(event, self.REMINDER)
 	print "Added %s's birthday!" % d[self.NAME]
-      elif birthday_valid: # Event already exists
+      elif input_valid: # Event already exists
         edit_link = d[self.EDIT_URL]
         event = self._CreateBirthdayWebContentEvent(d[self.NAME], 
             d[self.BIRTHDAY], d[self.PHOTO_URL])          
@@ -325,7 +324,7 @@ class BirthdaySample:
         event = self._AddReminder(event, self.REMINDER)
         print "Updated %s's birthday!" % d[self.NAME]
       
-      if birthday_valid:
+      if input_valid:
         d[self.EDIT_URL] = event.GetEditLink().href
         self.s_client.UpdateRow(entry, d)
       else:
