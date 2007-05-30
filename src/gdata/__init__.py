@@ -190,11 +190,11 @@ class GDataFeed(atom.Feed, LinkFinder):
 
   def _TransferToElementTree(self, element_tree):
     if self.total_results:
-      element_tree.append(self.total_results._ToElementTree())
+      self.total_results._BecomeChildElement(element_tree)
     if self.items_per_page:
-      element_tree.append(self.items_per_page._ToElementTree())
+      self.items_per_page._BecomeChildElement(element_tree)
     if self.start_index:
-      element_tree.append(self.start_index._ToElementTree())
+      self.start_index._BecomeChildElement(element_tree)
     atom.Feed._TransferToElementTree(self, element_tree)
     return element_tree
 
@@ -364,7 +364,7 @@ class EntryLink(atom.AtomBase):
     if self.rel:
       element_tree.attrib['rel'] = self.rel
     if self.entry:
-      element_tree.append(self.entry._ToElementTree())
+      self.entry._BecomeChildElement(element_tree)
     atom.AtomBase._TransferToElementTree(self, element_tree)
     element_tree.tag = GDATA_TEMPLATE % 'entryLink'
     return element_tree
@@ -423,7 +423,7 @@ class FeedLink(atom.AtomBase):
     if self.rel:
       element_tree.attrib['rel'] = self.rel
     if self.feed:
-      element_tree.append(self.feed._ToElementTree())
+      self.feed._BecomeChildElement(element_tree)
     atom.AtomBase._TransferToElementTree(self, element_tree)
     element_tree.tag = GDATA_TEMPLATE % 'feedLink'
     return element_tree

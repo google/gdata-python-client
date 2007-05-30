@@ -138,9 +138,7 @@ class AtomBase(object):
         # Create a new element tree which will hold the extensions's data. 
         # Note that the extension's _TransferToElementTree method will 
         # overwrite the element tree's tag.
-        new_element_tree = ElementTree.Element('none')
-        extension._TransferToElementTree(new_element_tree)
-        element_tree.append(new_element_tree)
+        extension._BecomeChildElement(element_tree)
     if self.extension_attributes:
       for attribute, value in self.extension_attributes.iteritems():
         element_tree.attrib[attribute] = value
@@ -264,6 +262,20 @@ class AtomBase(object):
         results.append(element)
 
     return results
+
+  def _BecomeChildElement(self, element_tree):
+    """Converts this object into an etree element and adds it as a child node.
+    
+    Adds self to the ElementTree. This method is required to avoid verbose XML
+    which constantly redefines the namespace. 
+
+    Args:
+      element_tree: ElementTree._Element The element to which this object's XML 
+          will be added.
+    """
+    new_element = ElementTree.Element('')
+    element_tree.append(new_element)
+    self._TransferToElementTree(new_element)
     
   
 class Person(AtomBase):
@@ -312,11 +324,11 @@ class Person(AtomBase):
     """
     
     if self.name:
-      element_tree.append(self.name._ToElementTree())
+      self.name._BecomeChildElement(element_tree)
     if self.email:
-      element_tree.append(self.email._ToElementTree())
+      self.email._BecomeChildElement(element_tree)
     if self.uri:
-      element_tree.append(self.uri._ToElementTree())
+      self.uri._BecomeChildElement(element_tree)
     # Call the parent's tranfer to method to convert all other class members
     # into XML nodes. By parent I mean superclass.
     AtomBase._TransferToElementTree(self, element_tree)
@@ -1126,7 +1138,7 @@ class Control(AtomBase):
   def _TransferToElementTree(self, element_tree):
     AtomBase._TransferToElementTree(self, element_tree)
     if self.draft:
-      element_tree.append(self.draft._ToElementTree())
+      self.draft._BecomeChildElement(element_tree)
     element_tree.tag = APP_TEMPLATE % 'control'
     return element_tree
     
@@ -1291,21 +1303,21 @@ class FeedEntryParent(AtomBase, LinkFinder):
 
   def _TransferToElementTree(self, element_tree):
     for an_author in self.author:
-      element_tree.append(an_author._ToElementTree())
+      an_author._BecomeChildElement(element_tree)
     for a_category in self.category:
-      element_tree.append(a_category._ToElementTree())
+      a_category._BecomeChildElement(element_tree)
     for a_contributor in self.contributor:
-      element_tree.append(a_contributor._ToElementTree())
+      a_contributor._BecomeChildElement(element_tree)
     if self.id:
-      element_tree.append(self.id._ToElementTree())
+      self.id._BecomeChildElement(element_tree)
     for a_link in self.link:
-      element_tree.append(a_link._ToElementTree())
+      a_link._BecomeChildElement(element_tree)
     if self.rights:
-      element_tree.append(self.rights._ToElementTree())
+      self.rights._BecomeChildElement(element_tree)
     if self.title:
-      element_tree.append(self.title._ToElementTree())
+      self.title._BecomeChildElement(element_tree)
     if self.updated:
-      element_tree.append(self.updated._ToElementTree())
+      self.updated._BecomeChildElement(element_tree)
     AtomBase._TransferToElementTree(self, element_tree)
     return element_tree
  
@@ -1396,15 +1408,15 @@ class Entry(FeedEntryParent):
 
   def _TransferToElementTree(self, element_tree):
     if self.content:
-      element_tree.append(self.content._ToElementTree())
+      self.content._BecomeChildElement(element_tree)
     if self.published:
-      element_tree.append(self.published._ToElementTree())
+      self.published._BecomeChildElement(element_tree)
     if self.source:
-      element_tree.append(self.source._ToElementTree())
+      self.source._BecomeChildElement(element_tree)
     if self.summary:
-      element_tree.append(self.summary._ToElementTree())
+      self.summary._BecomeChildElement(element_tree)
     if self.control:
-      element_tree.append(self.control._ToElementTree())
+      self.control._BecomeChildElement(element_tree)
     FeedEntryParent._TransferToElementTree(self, element_tree)
     element_tree.tag = ELEMENT_TEMPLATE % 'entry'
     return element_tree
@@ -1490,13 +1502,13 @@ class Source(FeedEntryParent):
 
   def _TransferToElementTree(self, element_tree):
     if self.generator:
-      element_tree.append(self.generator._ToElementTree())
+      self.generator._BecomeChildElement(element_tree)
     if self.icon:
-      element_tree.append(self.icon._ToElementTree())
+      self.icon._BecomeChildElement(element_tree)
     if self.logo:
-      element_tree.append(self.logo._ToElementTree())
+      self.logo._BecomeChildElement(element_tree)
     if self.subtitle:
-      element_tree.append(self.subtitle._ToElementTree())
+      self.subtitle._BecomeChildElement(element_tree)
     FeedEntryParent._TransferToElementTree(self, element_tree)
     element_tree.tag = ELEMENT_TEMPLATE % 'source'
     return element_tree
@@ -1582,10 +1594,10 @@ class Feed(Source):
 
   def _TransferToElementTree(self, element_tree):
     for an_entry in self.entry:
-      element_tree.append(an_entry._ToElementTree())
+      an_entry._BecomeChildElement(element_tree)
     Source._TransferToElementTree(self, element_tree)
     # set the element_tree tag at the end of this method
-    # because Source.TransferToElementTree sets the tag
+    # because Source._TransferToElementTree sets the tag
     # to atom:source
     element_tree.tag = ELEMENT_TEMPLATE % 'feed'
     return element_tree
@@ -1650,12 +1662,25 @@ class ExtensionElement(object):
       element_tree.attrib[key] = value
       
     for child in self.children:
-      element_tree.append(child._TransferToElementTree(
-          ElementTree.Element('')))
+      child._BecomeChildElement(element_tree)
       
     element_tree.text = self.text
       
     return element_tree
+
+  def _BecomeChildElement(self, element_tree):
+    """Converts this object into an etree element and adds it as a child node.
+
+    Adds self to the ElementTree. This method is required to avoid verbose XML
+    which constantly redefines the namespace.
+
+    Args:
+      element_tree: ElementTree._Element The element to which this object's XML
+          will be added.
+    """
+    new_element = ElementTree.Element('')
+    element_tree.append(new_element)
+    self._TransferToElementTree(new_element)
 
   def FindChildren(self, tag=None, namespace=None):
     """Searches child nodes for objects with the desired tag/namespace.
@@ -1699,6 +1724,7 @@ class ExtensionElement(object):
 def ExtensionElementFromString(xml_string):
   element_tree = ElementTree.fromstring(xml_string)
   return _ExtensionElementFromElementTree(element_tree)
+
 
 def _ExtensionElementFromElementTree(element_tree):
   element_tag = element_tree.tag

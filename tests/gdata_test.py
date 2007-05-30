@@ -85,8 +85,18 @@ class LinkFinderTest(unittest.TestCase):
     self.assertEquals(self.entry.GetAlternateLink().href, 
         'http://www.provider-host.com/123456789')
     self.assertEquals(self.entry.GetAlternateLink().rel, 'alternate')
+
+
+class GDataFeedTest(unittest.TestCase):
+
+  def testCorrectConversionToElementTree(self):
+    test_feed = gdata.GDataFeedFromString(test_data.GBASE_FEED)
+    self.assert_(test_feed.total_results is not None)
+    element_tree = test_feed._ToElementTree()
+    feed = element_tree.find('{http://www.w3.org/2005/Atom}feed')
+    self.assert_(element_tree.find(
+        '{http://a9.com/-/spec/opensearchrss/1.0/}totalResults') is not None)
         
-    
     
 if __name__ == '__main__':
   unittest.main()

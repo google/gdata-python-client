@@ -19,8 +19,6 @@
 __author__ = 'api.jscudder (Jeffrey Scudder)'
 
 
-#TODO: create the following GBaseAttribute, GBaseAttributesFeed, GBaseItemType, GBaseItemTypeFeed, Attribute, Value, ...
-
 try:
   from xml.etree import ElementTree
 except ImportError:
@@ -34,6 +32,7 @@ GBASE_NAMESPACE = 'http://base.google.com/ns/1.0'
 GBASE_TEMPLATE = '{http://base.google.com/ns/1.0}%s'
 GMETA_NAMESPACE = 'http://base.google.com/ns-metadata/1.0'
 GMETA_TEMPLATE = '{http://base.google.com/ns-metadata/1.0}%s'
+
 
 class GBaseItemFeed(gdata.GDataFeed):
   """A feed containing Google Base Items"""
@@ -287,12 +286,12 @@ class GBaseItem(gdata.GDataEntry, ItemAttributeContainer):
 
   def _TransferToElementTree(self, element_tree):
     for a_label in self.label:
-      element_tree.append(a_label._ToElementTree())
+      a_label._BecomeChildElement(element_tree)
     # Added: converting the item type to XML
     if self.item_type:
-      element_tree.append(self.item_type._ToElementTree())
+      self.item_type._BecomeChildElement(element_tree)
     for attribute in self.item_attributes:
-      element_tree.append(attribute._ToElementTree())
+      attribute._BecomeChildElement(element_tree)
     atom.Entry._TransferToElementTree(self, element_tree)
     return element_tree
 
@@ -479,7 +478,7 @@ class Attribute(atom.Text):
     if self.count:
       element_tree.attrib['count'] = self.count
     for a_value in self.value:
-      element_tree.append(a_value._ToElementTree())
+      a_value._BecomeChildElement(element_tree)
     atom.Text._TransferToElementTree(self, element_tree)
     element_tree.tag = GMETA_TEMPLATE % 'attribute'
     return element_tree
@@ -537,7 +536,7 @@ class GBaseAttributeEntry(gdata.GDataEntry):
 
   def _TransferToElementTree(self, element_tree):
     for an_attribute in self.attribute:
-      element_tree.append(an_attribute._ToElementTree())
+      an_attribute._BecomeChildElement(element_tree)
     gdata.GDataEntry._TransferToElementTree(self, element_tree)
     return element_tree
 
@@ -596,11 +595,11 @@ class GBaseItemTypeEntry(gdata.GDataEntry):
   def _TransferToElementTree(self, element_tree):
     attribute_list = ElementTree.Element(GMETA_TEMPLATE % 'attributes')
     for an_attribute in self.attributes:
-      attribute_list.append(an_attribute._ToElementTree())
+      an_attribute._BecomeChildElement(attribute_list)
     if len(attribute_list) > 0:
       element_tree.append(attribute_list)
     if self.item_type:
-      element_tree.append(self.item_type._ToElementTree())
+      self.item_type._BecomeChildElement(element_tree)
     gdata.GDataEntry._TransferToElementTree(self, element_tree)
     return element_tree
 

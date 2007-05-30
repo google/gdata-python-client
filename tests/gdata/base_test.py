@@ -98,7 +98,6 @@ class GBaseItemTest(unittest.TestCase):
 class GBaseItemFeedTest(unittest.TestCase):
 
   def setUp(self):
-    #self.item_feed = gdata.base.GBaseItemFeed()
     self.item_feed = gdata.base.GBaseItemFeedFromString(test_data.GBASE_FEED)
 
   def testToAndFromString(self):
@@ -109,13 +108,13 @@ class GBaseItemFeedTest(unittest.TestCase):
     for an_entry in new_item_feed.entry:
       self.assert_(isinstance(an_entry, gdata.base.GBaseItem))
     
-#    self.item_feed.label.append(gdata.base.Label(text='my label'))
-#    self.assert_(self.item.label[0].text == 'my label')
-#    self.item.item_type = gdata.base.ItemType(text='products')
-#    self.assert_(self.item.item_type.text == 'products')
-#    new_item = gdata.base.GBaseItemFromString(self.item.ToString())
-#    self.assert_(self.item.label[0].text == new_item.label[0].text)
-#    self.assert_(self.item.item_type.text == new_item.item_type.text)
+    #self.item_feed.label.append(gdata.base.Label(text='my label'))
+    #self.assert_(self.item.label[0].text == 'my label')
+    #self.item.item_type = gdata.base.ItemType(text='products')
+    #self.assert_(self.item.item_type.text == 'products')
+    #new_item = gdata.base.GBaseItemFromString(self.item.ToString())
+    #self.assert_(self.item.label[0].text == new_item.label[0].text)
+    #self.assert_(self.item.item_type.text == new_item.item_type.text)
 
   def testLinkFinderFindsHtmlLink(self):
     for entry in self.item_feed.entry:
@@ -232,11 +231,9 @@ class GBaseAttributeEntryTest(unittest.TestCase):
 class GBaseAttributesFeedTest(unittest.TestCase):
 
   def testAttributesFeedExampleData(self):
-    #feed = gdata.base.GBaseAttributesFeedFromString(test_data.GBASE_ATTRIBUTE_FEED)
-    #self.assert_(len(feed.entry) == 1)
-    #self.assert_(isinstance(feed.entry[0], gdata.base.GBaseAttributeEntry))
-    #TODO: find the malformed XML in test_data.GBASE_ATTRIBUTE_FEED
-    pass
+    feed = gdata.base.GBaseAttributesFeedFromString(test_data.GBASE_ATTRIBUTE_FEED)
+    self.assert_(len(feed.entry) == 1)
+    self.assert_(isinstance(feed.entry[0], gdata.base.GBaseAttributeEntry))
 
   def testAttributesFeedToAndFromString(self):
     value = gdata.base.Value(count='500', text='happy')
@@ -250,7 +247,7 @@ class GBaseAttributesFeedTest(unittest.TestCase):
     self.assert_(new_feed.entry[0].attribute[0].count == '600')
     self.assert_(new_feed.entry[0].attribute[0].value[0].count == '500')
     self.assert_(new_feed.entry[0].attribute[0].value[0].text == 'happy')
-            
+
 
 class GBaseLocalesFeedTest(unittest.TestCase):
   
@@ -281,6 +278,7 @@ class GBaseItemTypesFeedAndEntryTest(unittest.TestCase):
     self.assert_(len(new_feed.entry) == 1)
     self.assert_(new_feed.entry[0].item_type.text == 'jobs')
     self.assert_(new_feed.entry[0].attributes[0].name == 'location')
+
     
 if __name__ == '__main__':
   unittest.main()

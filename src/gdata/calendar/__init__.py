@@ -112,14 +112,13 @@ class CalendarListEntry(gdata.GDataEntry, gdata.LinkFinder):
 
   def _TransferToElementTree(self, element_tree):
     if self.color:
-      element_tree.append(self.color._ToElementTree())
+      self.color._BecomeChildElement(element_tree)
     if self.access_level:
-      element_tree.append(self.access_level._ToElementTree())
+      self.access_level._BecomeChildElement(element_tree)
     if self.hidden:
-      element_tree.append(self.hidden._ToElementTree())
+      self.hidden._BecomeChildElement(element_tree)
     if self.timezone:
-      element_tree.append(self.timezone._ToElementTree())
-
+      self.timezone._BecomeChildElement(element_tree)
     gdata.GDataEntry._TransferToElementTree(self, element_tree)
     return element_tree
 
@@ -184,28 +183,27 @@ class CalendarEventEntry(gdata.GDataEntry):
 
   def _TransferToElementTree(self, element_tree):
     for a_where in self.where:
-      element_tree.append(a_where._ToElementTree())
+      a_where._BecomeChildElement(element_tree)
     for a_who in self.who:
-      element_tree.append(a_who._ToElementTree())
+      a_who._BecomeChildElement(element_tree)
     for a_when in self.when:
-      element_tree.append(a_when._ToElementTree())
+      a_when._BecomeChildElement(element_tree)
     for a_extended_property in self.extended_property:
-      element_tree.append(a_extended_property._ToElementTree())
+      a_extended_property._BecomeChildElement(element_tree)
     if self.transparency:
-      element_tree.append(self.transparency._ToElementTree())
+      self.transparency._BecomeChildElement(element_tree)
     if self.visibility:
-      element_tree.append(self.visibility._ToElementTree())
+      self.visibility._BecomeChildElement(element_tree)
     if self.comments:
-      element_tree.append(self.comments._ToElementTree())
+      self.comments._BecomeChildElement(element_tree)
     if self.send_event_notifications:
-      element_tree.append(self.send_event_notifications._ToElementTree())
+      self.send_event_notifications._BecomeChildElement(element_tree)
     if self.event_status:
-      element_tree.append(self.event_status._ToElementTree())
+       self.event_status._BecomeChildElement(element_tree)
     if self.recurrence:
-      element_tree.append(self.recurrence._ToElementTree())
+      self.recurrence._BecomeChildElement(element_tree)
     for an_exception in self.recurrence_exception:
-      element_tree.append(an_exception._ToElementTree())
-
+      an_exception._BecomeChildElement(element_tree)
     gdata.GDataEntry._TransferToElementTree(self, element_tree)
     return element_tree
 
@@ -268,10 +266,10 @@ class Where(atom.AtomBase):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    element_tree.tag = gdata.GDATA_TEMPLATE % 'where'
-    atom.AtomBase._TransferToElementTree(self, element_tree)
-    return element_tree
+  #def _TransferToElementTree(self, element_tree):
+  #  element_tree.tag = gdata.GDATA_TEMPLATE % 'where'
+  #  atom.AtomBase._TransferToElementTree(self, element_tree)
+  #  return element_tree
 
   def _TransferToElementTree(self, element_tree):
     if self.value_string:
@@ -339,7 +337,7 @@ class When(atom.AtomBase):
     if self.end_time:
       element_tree.attrib['endTime'] = self.end_time
     for a_reminder in self.reminder:
-      element_tree.append(a_reminder._ToElementTree())
+      a_reminder._BecomeChildElement(element_tree)
     atom.AtomBase._TransferToElementTree(self, element_tree)
     element_tree.tag = gdata.GDATA_TEMPLATE % 'when'
     return element_tree
@@ -412,9 +410,9 @@ class RecurrenceException(atom.AtomBase):
     if self.specialized:
       element_tree.attrib['specialized'] = self.specialized
     if self.entry_link:
-      element_tree.append(self.entry_link._ToElementTree())
+      self.entry_link._BecomeChildElement(element_tree)
     if self.original_event:
-      element_tree.append(original_event._ToElementTree())
+      self.original_event._BecomeChildElement(element_tree)
     atom.AtomBase._TransferToElementTree(self, element_tree)
     element_tree.tag = gdata.GDATA_TEMPLATE % 'recurrenceException'
     return element_tree
@@ -455,7 +453,7 @@ class OriginalEvent(atom.AtomBase):
     if self.href:
       element_tree.attrib['href'] = self.href
     if self.when:
-      element_tree.append(self.when._ToElementTree())
+      self.when._BecomeChildElement(element_tree)
     atom.AtomBase._TransferToElementTree(self, element_tree)
     element_tree.tag = gdata.GDATA_TEMPLATE % 'originalEvent'
     return element_tree
@@ -480,6 +478,7 @@ class OriginalEvent(atom.AtomBase):
 
 
 class UriEnumElement(atom.AtomBase):
+
   def __init__(self, tag, enum_map, attrib_name='value', 
       extension_elements=None, extension_attributes=None, text=None):
     self.tag=tag
@@ -644,7 +643,7 @@ class Comments(atom.AtomBase):
     if self.rel:
       element_tree.attrib['rel'] = self.rel
     if self.feed_link:
-      element_tree.append(self.feed_link._ToElementTree())
+      self.feed_link._BecomeChildElement(element_tree)
     atom.AtomBase._TransferToElementTree(self, element_tree)
     element_tree.tag = gdata.GDATA_TEMPLATE % 'comments'
     return element_tree

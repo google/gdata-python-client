@@ -44,7 +44,7 @@ class SpreadsheetsSpreadsheetsFeed(gdata.GDataFeed):
 
   def _TransferToElementTree(self, element_tree):
     for an_entry in self.entry:
-      element_tree.append(an_entry._ToElementTree())
+      an_entry._BecomeChildElement(element_tree)
     gdata.GDataFeed._TransferToElementTree(self, element_tree)
     return element_tree
 
@@ -73,7 +73,7 @@ class SpreadsheetsWorksheetsFeed(gdata.GDataFeed):
 
   def _TransferToElementTree(self, element_tree):
     for an_entry in self.entry:
-      element_tree.append(an_entry._ToElementTree())
+      an_entry._BecomeChildElement(element_tree)
     gdata.GDataFeed._TransferToElementTree(self, element_tree)
     return element_tree
 
@@ -103,7 +103,7 @@ class SpreadsheetsCellsFeed(gdata.GDataFeed):
 
   def _TransferToElementTree(self, element_tree):
     for an_entry in self.entry:
-      element_tree.append(an_entry._ToElementTree())
+      an_entry._BecomeChildElement(element_tree)
     gdata.GDataFeed._TransferToElementTree(self, element_tree)
     return element_tree
 
@@ -138,7 +138,7 @@ class SpreadsheetsListFeed(gdata.GDataFeed):
 
   def _TransferToElementTree(self, element_tree):
     for an_entry in self.entry:
-      element_tree.append(an_entry._ToElementTree())
+      an_entry._BecomeChildElement(element_tree)
     gdata.GDataFeed._TransferToElementTree(self, element_tree)
     return element_tree
 
@@ -221,8 +221,10 @@ class SpreadsheetsWorksheet(atom.Entry):
     self.extension_attributes = extension_attributes or {}
 
   def _TransferToElementTree(self, element_tree):
-    element_tree.append(self.row_count._ToElementTree())
-    element_tree.append(self.col_count._ToElementTree())
+    if self.row_count:
+      self.row_count._BecomeChildElement(element_tree)
+    if self.col_count:
+      self.col_count._BecomeChildElement(element_tree)
     atom.Entry._TransferToElementTree(self, element_tree)
     return element_tree
 
@@ -275,7 +277,8 @@ class SpreadsheetsCell(atom.Entry):
     self.extension_attributes = extension_attributes or {}
 
   def _TransferToElementTree(self, element_tree):
-    element_tree.append(self.cell._ToElementTree())
+    if self.cell:
+      self.cell._BecomeChildElement(element_tree)
     atom.Entry._TransferToElementTree(self, element_tree)
     return element_tree
 
@@ -326,7 +329,7 @@ class SpreadsheetsList(atom.Entry):
 
   def _TransferToElementTree(self, element_tree):
     for key, a_custom in self.custom.items():
-      element_tree.append(a_custom._ToElementTree())
+      a_custom._BecomeChildElement(element_tree)
     atom.Entry._TransferToElementTree(self, element_tree)
     return element_tree
 

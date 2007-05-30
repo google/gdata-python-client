@@ -50,7 +50,7 @@ class AuthorTest(unittest.TestCase):
     new_author = atom.AuthorFromString(self.author.ToString())
     self.assert_(len(self.author.extension_elements) == 1)
     self.assert_(new_author.name.text == 'Jeff Scudder')
-        
+
   def testEmptyAuthorToAndFromStringShouldMatch(self):
     string_from_author = self.author.ToString()
     new_author = atom.AuthorFromString(string_from_author)
@@ -547,7 +547,25 @@ class LinkFinderTest(unittest.TestCase):
     self.assertEquals(self.entry.GetAlternateLink().href,
         'http://www.provider-host.com/123456789')
     self.assertEquals(self.entry.GetAlternateLink().rel, 'alternate')
-    
-    
+
+
+class AtomBaseTest(unittest.TestCase):
+
+   def testAtomBaseConvertsExtensions(self):
+     atom_base = atom.AtomBase()
+     extension_child = atom.ExtensionElement('foo', namespace='http://ns0.com')
+     extension_grandchild = atom.ExtensionElement('bar', namespace='http://ns0.com')
+     extension_child.children.append(extension_grandchild)
+     atom_base.extension_elements.append(extension_child)
+     self.assertEquals(len(atom_base.extension_elements), 1)
+     self.assertEquals(len(atom_base.extension_elements[0].children), 1)
+     self.assertEquals(atom_base.extension_elements[0].tag, 'foo')
+     self.assertEquals(atom_base.extension_elements[0].children[0].tag, 'bar')
+     
+     element_tree = atom_base._ToElementTree()
+     self.assert_(element_tree.find('{http://ns0.com}foo') is not None)
+     self.assert_(element_tree.find('{http://ns0.com}foo').find('{http://ns0.com}bar') is not None)
+
+  
 if __name__ == '__main__':
   unittest.main()
