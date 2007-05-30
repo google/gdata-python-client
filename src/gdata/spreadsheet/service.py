@@ -218,7 +218,7 @@ class SpreadsheetsService(gdata.service.GDataService):
       new_custom = gdata.spreadsheet.Custom()
       new_custom.column = k
       new_custom.text = v
-      new_entry.custom.append(new_custom)
+      new_entry.custom[new_custom.column] = new_custom
     feed = self.GetListFeed(key, wksht_id)
     for a_link in feed.link:
       if a_link.rel == 'http://schemas.google.com/g/2005#post':
@@ -236,12 +236,12 @@ class SpreadsheetsService(gdata.service.GDataService):
     Returns:
       The updated row
     """
-    entry.custom = []
+    entry.custom = {}
     for k, v in new_row_data.iteritems():
       new_custom = gdata.spreadsheet.Custom()
       new_custom.column = k
       new_custom.text = v
-      entry.custom.append(new_custom)
+      entry.custom[k] = new_custom
     for a_link in entry.link:
       if a_link.rel == 'edit':
         response = self.Put(entry, a_link.href)

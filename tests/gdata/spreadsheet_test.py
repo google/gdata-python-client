@@ -320,19 +320,19 @@ class SpreadsheetsListTest(unittest.TestCase):
     self.row = gdata.spreadsheet.SpreadsheetsList()
     
   def testToAndFromString(self):
-    self.row.custom.append(gdata.spreadsheet.Custom(column='column_1', 
-        text='my first column'))
-    self.row.custom.append(gdata.spreadsheet.Custom(column='column_2', 
-        text='my second column'))
-    self.assert_(self.row.custom[0].column == 'column_1')
-    self.assert_(self.row.custom[0].text == 'my first column')
-    self.assert_(self.row.custom[1].column == 'column_2')
-    self.assert_(self.row.custom[1].text == 'my second column')
+    self.row.custom['column_1'] = gdata.spreadsheet.Custom(column='column_1', 
+        text='my first column')
+    self.row.custom['column_2'] = gdata.spreadsheet.Custom(column='column_2', 
+        text='my second column')
+    self.assert_(self.row.custom['column_1'].column == 'column_1')
+    self.assert_(self.row.custom['column_1'].text == 'my first column')
+    self.assert_(self.row.custom['column_2'].column == 'column_2')
+    self.assert_(self.row.custom['column_2'].text == 'my second column')
     new_row = gdata.spreadsheet.SpreadsheetsListFromString(self.row.ToString())
-    self.assert_(self.row.custom[0].column == new_row.custom[0].column)
-    self.assert_(self.row.custom[0].text == new_row.custom[0].text)
-    self.assert_(self.row.custom[1].column == new_row.custom[1].column)
-    self.assert_(self.row.custom[1].text == new_row.custom[1].text)
+    self.assert_(self.row.custom['column_1'].column == new_row.custom['column_1'].column)
+    self.assert_(self.row.custom['column_1'].text == new_row.custom['column_1'].text)
+    self.assert_(self.row.custom['column_2'].column == new_row.custom['column_2'].column)
+    self.assert_(self.row.custom['column_2'].text == new_row.custom['column_2'].text)
     
 class SpreadsheetsSpreadsheetsFeedTest(unittest.TestCase):
 

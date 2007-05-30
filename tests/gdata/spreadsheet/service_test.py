@@ -120,7 +120,6 @@ class SpreadsheetsServiceTest(unittest.TestCase):
     self.gd_client.source = 'SpreadsheetsClient "Unit" Tests'
     self.gd_client.ProgrammaticLogin()
     
-    
   def testGetSpreadsheetsFeed(self):
     #feed = self.gd_client.GetSpreadsheetsFeed()
     #self.assert_(isinstance(feed, gdata.spreadsheet.SpreadsheetsSpreadsheetsFeed))
@@ -154,8 +153,8 @@ class SpreadsheetsServiceTest(unittest.TestCase):
     entry = self.gd_client.InsertRow(dict(a1='new', b1='row', 
         c1='was', d1='here'), self.key)
     entry = self.gd_client.UpdateRow(entry, dict(a1='newer', 
-        b1=entry.custom[1].text, c1=entry.custom[2].text, 
-        d1=entry.custom[3].text))
+        b1=entry.custom['b1'].text, c1=entry.custom['c1'].text, 
+        d1=entry.custom['d1'].text))
     self.gd_client.DeleteRow(entry)
     
     

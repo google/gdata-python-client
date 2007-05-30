@@ -319,13 +319,13 @@ class SpreadsheetsList(atom.Entry):
     self.summary = summary
     self.title = title
     self.updated = updated
-    self.custom = custom or []
+    self.custom = custom or {}
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
   def _TransferToElementTree(self, element_tree):
-    for a_custom in self.custom:
+    for key, a_custom in self.custom.items():
       element_tree.append(a_custom._ToElementTree())
     atom.Entry._TransferToElementTree(self, element_tree)
     return element_tree
@@ -333,7 +333,7 @@ class SpreadsheetsList(atom.Entry):
   def _TakeChildFromElementTree(self, child, element_tree):
     namespace_uri, local_tag = string.split(child.tag[1:], "}", 1)
     if namespace_uri == GSPREADSHEETS_EXTENDED_NAMESPACE:
-      self.custom.append(_CustomFromElementTree(child))
+      self.custom[local_tag] = _CustomFromElementTree(child)
       element_tree.remove(child)
     else:
       atom.Entry._TakeChildFromElementTree(self, child, element_tree)

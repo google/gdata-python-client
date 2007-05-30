@@ -28,3 +28,4 @@ tests/gdata/spreadsheet/service_test.py
 tests/gdata/calendar_test.py
 tests/gdata/base_test.py
 tests/gdata/spreadsheet_test.py
+tests/gdata/testimage.jpg
