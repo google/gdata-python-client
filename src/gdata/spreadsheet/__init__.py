@@ -162,7 +162,7 @@ def _SpreadsheetsListFeedFromElementTree(element_tree):
   return atom._XFromElementTree(SpreadsheetsListFeed, 'feed', 
       atom.ATOM_NAMESPACE, element_tree)
 
-class SpreadsheetsSpreadsheet(atom.Entry):
+class SpreadsheetsSpreadsheet(gdata.GDataEntry):
   """A Google Spreadsheets flavor of a Spreadsheet Atom Entry """
   
   def __init__(self, author=None, category=None, content=None,
@@ -194,7 +194,7 @@ def _SpreadsheetsSpreadsheetFromElementTree(element_tree):
       atom.ATOM_NAMESPACE, element_tree)
 
 
-class SpreadsheetsWorksheet(atom.Entry):
+class SpreadsheetsWorksheet(gdata.GDataEntry):
   """A Google Spreadsheets flavor of a Worksheet Atom Entry """
   
   def __init__(self, author=None, category=None, content=None,
@@ -252,7 +252,7 @@ def _SpreadsheetsWorksheetFromElementTree(element_tree):
       atom.ATOM_NAMESPACE, element_tree)
 
 
-class SpreadsheetsCell(atom.Entry):
+class SpreadsheetsCell(gdata.GDataEntry):
   """A Google Spreadsheets flavor of a Cell Atom Entry """
   
   def __init__(self, author=None, category=None, content=None,
@@ -303,7 +303,7 @@ def _SpreadsheetsCellFromElementTree(element_tree):
       atom.ATOM_NAMESPACE, element_tree)
 
 
-class SpreadsheetsList(atom.Entry):
+class SpreadsheetsList(gdata.GDataEntry):
   """A Google Spreadsheets flavor of a List Atom Entry """
   
   def __init__(self, author=None, category=None, content=None,
