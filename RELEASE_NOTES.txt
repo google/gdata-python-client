@@ -1,3 +1,13 @@
+=== 1.0.3 ===
+May 30, 2007
+
+- Added a mashup sample using the spreadsheets and calendar services.
+- Reduced the number of unnecessary namespace declarations in the XML produced by objects.
+- Changed type of custom elements in a spreadsheets list entry.
+- Fixed bugs in spreadsheetsExample.py.
+- Spreadsheet entries now inherit from GDataEntry and have gdata specific convenience methods. 
+
+
 === 1.0.2 ===
 May 4, 2007
 
