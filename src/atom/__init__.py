@@ -148,7 +148,7 @@ class AtomBase(object):
   def ToString(self):
     """Converts the Atom object to a string containing XML."""
   
-    return ElementTree.tostring(self._ToElementTree())
+    return ElementTree.tostring(self._ToElementTree(), encoding="UTF-8")
 
   def __str__(self):
     return self.ToString()
@@ -1647,7 +1647,7 @@ class ExtensionElement(object):
     
   def ToString(self):
     element_tree = self._TransferToElementTree(ElementTree.Element(''))
-    return ElementTree.tostring(element_tree)
+    return ElementTree.tostring(element_tree, encoding="UTF-8")
     
   def _TransferToElementTree(self, element_tree):
     if self.tag is None:

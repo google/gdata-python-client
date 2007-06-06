@@ -316,6 +316,32 @@ class GDataService(atom.service.AtomService):
         self.__captcha_url = None
         raise Error, 'Server responded with a 403 code'
 
+  def ClientLogin(self, username, password, account_type=None, service=None,
+      source=None, captcha_token=None, captcha_response=None):
+    """Convenience method for authenticating using ProgrammaticLogin. 
+    
+    Sets values for email, password, and other optional members.
+
+    Args:
+      username:
+      password:
+      account_type: string (optional)
+      service: string (optional)
+      captcha_token: string (optional)
+      captcha_response: string (optional)
+    """
+    self.email = username
+    self.password = password
+
+    if account_type:
+      self.account_type = account_type
+    if service:
+      self.service = service
+    if source:
+      self.source = source
+
+    self.ProgrammaticLogin(captcha_token, captcha_response)
+
   def GenerateAuthSubURL(self, next, scope, secure=False, session=True):
     """Generate a URL at which the user will login and be redirected back.
 
