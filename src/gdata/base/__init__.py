@@ -385,6 +385,23 @@ def _ItemTypeFromElementTree(element_tree):
       element_tree)
 
 
+class MetaItemType(ItemType):
+  """The Google Base item_type element"""
+
+  def _TransferToElementTree(self, element_tree):
+    element_tree.tag = GMETA_TEMPLATE % 'item_type'
+    atom.Text._TransferToElementTree(self, element_tree)
+    return element_tree
+
+def MetaItemTypeFromString(xml_string):
+  element_tree = ElementTree.fromstring(xml_string)
+  return _MetaItemTypeFromElementTree(element_tree)
+
+def _MetaItemTypeFromElementTree(element_tree):
+  return atom._XFromElementTree(MetaItemType, 'item_type', GMETA_NAMESPACE,
+      element_tree)
+
+
 class Value(atom.AtomBase):
   """Metadata about common values for a given attribute
   
@@ -566,6 +583,9 @@ class GBaseItemTypeEntry(gdata.GDataEntry):
   These entries contain a list of attributes which are stored in one
   XML node called attributes. This class simplifies the data structure
   by treating attributes as a list of attribute instances. 
+
+  Note that the item_type for an item type entry is in the Google Base meta
+  namespace as opposed to item_types encountered in other feeds.
   """
 
   def __init__(self, author=None, category=None, content=None,
@@ -613,8 +633,10 @@ class GBaseItemTypeEntry(gdata.GDataEntry):
     elif child.tag == '{%s}%s' % (GMETA_NAMESPACE, 'attribute'):
       self.attributes.append(_AttributeFromElementTree(child))
       element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (GBASE_NAMESPACE, 'item_type'):
-      self.item_type = _ItemTypeFromElementTree(child)
+    elif child.tag == '{%s}%s' % (GMETA_NAMESPACE, 'item_type'):
+      # If this child is a gm:item_type, create a meta item type instead of
+      # an ItemType.
+      self.item_type = _MetaItemTypeFromElementTree(child)
       element_tree.remove(child)
     else:
       gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)

@@ -426,7 +426,7 @@ class GDataService(atom.service.AtomService):
       self.__auth_token = None
 
   # CRUD operations
-  def Get(self, uri, extra_headers=None, redirects_remaining=4):
+  def Get(self, uri, extra_headers=None, redirects_remaining=4, encoding='UTF-8', ResultsTransformer=None):
     """Query the GData API with the given URI
 
     The uri is the portion of the URI after the server value 
@@ -445,6 +445,14 @@ class GDataService(atom.service.AtomService):
                      those stored in the client's additional_headers property.
                      The client automatically sets the Content-Type and 
                      Authorization headers.
+      redirects_remaining: int (optional) Tracks the number of additional
+          redirects this method will allow. If the service object receives
+          a redirect and remaining is 0, it will not follow the redirect. 
+          This was added to avoid infinite redirect loops.
+      encoding: string (optional) The character encoding for the server's
+          response. Default is UTF-8
+      ResultsTransformer: func (optional) A function which will transform
+          the server's results before it is returned. 
 
     Returns:
       A GDataFeed or Entry depending on which is sent from the server.
