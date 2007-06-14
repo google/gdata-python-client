@@ -35,6 +35,8 @@ import gdata
 # XML namespaces which are often used in Google Calendar entities.
 GCAL_NAMESPACE = 'http://schemas.google.com/gCal/2005'
 GCAL_TEMPLATE = '{http://schemas.google.com/gCal/2005}%s'
+GACL_NAMESPACE = 'http://schemas.google.com/acl/2007'
+GACL_TEMPLATE = '{http://schemas.google.com/acl/2007}%s'
 
 
 class CalendarListFeed(gdata.GDataFeed, gdata.LinkFinder):
@@ -43,6 +45,16 @@ class CalendarListFeed(gdata.GDataFeed, gdata.LinkFinder):
   def _TakeChildFromElementTree(self, child, element_tree):
     if child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'entry'):
       self.entry.append(_CalendarListEntryFromElementTree(child))
+      element_tree.remove(child)
+    else:
+      gdata.GDataFeed._TakeChildFromElementTree(self, child, element_tree)
+
+class CalendarAclFeed(gdata.GDataFeed, gdata.LinkFinder):
+  """A Google Calendar ACL feed flavor of an Atom Feed"""
+
+  def _TakeChildFromElementTree(self, child, element_tree):
+    if child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'entry'):
+      self.entry.append(_CalendarAclEntryFromElementTree(child))
       element_tree.remove(child)
     else:
       gdata.GDataFeed._TakeChildFromElementTree(self, child, element_tree)
@@ -134,6 +146,51 @@ class CalendarListEntry(gdata.GDataEntry, gdata.LinkFinder):
       element_tree.remove(child)
     elif child.tag == '{%s}%s' % (GCAL_NAMESPACE, 'timezone'):
       self.timezone = _TimezoneFromElementTree(child)
+      element_tree.remove(child)
+    else:
+      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
+
+  def _TransferFromElementTree(self, element_tree):
+    while len(element_tree) > 0:
+      self._TakeChildFromElementTree(element_tree[0], element_tree)
+    gdata.GDataEntry._TransferFromElementTree(self, element_tree)
+
+def CalendarAclEntryFromString(xml_string):
+  element_tree = ElementTree.fromstring(xml_string)
+  return _CalendarAclEntryFromElementTree(element_tree)
+
+
+class CalendarAclEntry(gdata.GDataEntry, gdata.LinkFinder):
+  """A Google Calendar ACL Entry flavor of an Atom Entry """
+  
+  def __init__(self, author=None, category=None, content=None,
+      atom_id=None, link=None, published=None, 
+      title=None, updated=None,
+      scope=None, role=None,
+      extension_elements=None, extension_attributes=None, text=None):
+    gdata.GDataEntry.__init__(self, author=author, category=category, 
+                        content=content, atom_id=atom_id, link=link, 
+                        published=published, title=title, 
+                        updated=updated, text=None)
+
+    self.scope = scope
+    self.role = role
+
+  def _TransferToElementTree(self, element_tree):
+    if self.scope:
+      self.scope._BecomeChildElement(element_tree)
+    if self.role:
+      self.role._BecomeChildElement(element_tree)
+
+    gdata.GDataEntry._TransferToElementTree(self, element_tree)
+    return element_tree
+
+  def _TakeChildFromElementTree(self, child, element_tree):
+    if child.tag == '{%s}%s' % (GACL_NAMESPACE, 'scope'):
+      self.scope = _ScopeFromElementTree(child)
+      element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (GACL_NAMESPACE, 'role'):
+      self.role = _RoleFromElementTree(child)
       element_tree.remove(child)
     else:
       gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
@@ -862,9 +919,69 @@ class Timezone(atom.AtomBase):
       atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
           element_tree)
 
+class Scope(atom.AtomBase):
+  """The Google ACL scope element"""
+  
+  def __init__(self, extension_elements=None, value=None, type=None,
+      extension_attributes=None, text=None):
+    self.value = value
+    self.type = type
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+  def _TransferToElementTree(self, element_tree):
+    if self.value:
+      element_tree.attrib['value'] = self.value
+    if self.type:
+      element_tree.attrib['type'] = self.type
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    element_tree.tag = GACL_TEMPLATE % 'scope'
+    return element_tree
+
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+    if attribute == 'value':
+      self.value = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    elif attribute == 'type':
+      self.type = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    else:
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
+          element_tree)
+
+class Role(atom.AtomBase):
+  """The Google ACL role element"""
+  
+  def __init__(self, extension_elements=None, value=None,
+      extension_attributes=None, text=None):
+    self.value = value
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+  def _TransferToElementTree(self, element_tree):
+    if self.value:
+      element_tree.attrib['value'] = self.value
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    element_tree.tag = GACL_TEMPLATE % 'role'
+    return element_tree
+
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+    if attribute == 'value':
+      self.value = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    else:
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
+          element_tree)
+
 def CalendarListFeedFromString(xml_string):
   element_tree = ElementTree.fromstring(xml_string)
   return _CalendarListFeedFromElementTree(element_tree)
+
+def CalendarAclFeedFromString(xml_string):
+  element_tree = ElementTree.fromstring(xml_string)
+  return _CalendarAclFeedFromElementTree(element_tree)
 
 def CalendarEventFeedFromString(xml_string):
   element_tree = ElementTree.fromstring(xml_string)
@@ -880,6 +997,10 @@ _CalendarListFeedFromElementTree = atom._AtomInstanceFromElementTree(
     CalendarListFeed, 'feed', atom.ATOM_NAMESPACE)
 _CalendarListEntryFromElementTree = atom._AtomInstanceFromElementTree(
     CalendarListEntry, 'entry', atom.ATOM_NAMESPACE)
+_CalendarAclFeedFromElementTree = atom._AtomInstanceFromElementTree(
+    CalendarAclFeed, 'feed', atom.ATOM_NAMESPACE)
+_CalendarAclEntryFromElementTree = atom._AtomInstanceFromElementTree(
+    CalendarAclEntry, 'entry', atom.ATOM_NAMESPACE)
 _CalendarEventFeedFromElementTree = atom._AtomInstanceFromElementTree(
     CalendarEventFeed, 'feed', atom.ATOM_NAMESPACE)
 _CalendarEventEntryFromElementTree = atom._AtomInstanceFromElementTree(
@@ -926,3 +1047,7 @@ _AccessLevelFromElementTree = atom._AtomInstanceFromElementTree(
     AccessLevel, 'accesslevel', GCAL_NAMESPACE)
 _ReminderFromElementTree = atom._AtomInstanceFromElementTree(
     Reminder, 'reminder', gdata.GDATA_NAMESPACE)
+_ScopeFromElementTree = atom._AtomInstanceFromElementTree(
+    Scope, 'scope', GACL_NAMESPACE)
+_RoleFromElementTree = atom._AtomInstanceFromElementTree(
+    Role, 'role', GACL_NAMESPACE)

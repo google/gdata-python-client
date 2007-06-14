@@ -69,6 +69,12 @@ class CalendarService(gdata.service.GDataService):
   def GetCalendarListEntry(self, uri):
     return gdata.calendar.CalendarListEntryFromString(str(self.Get(uri)))
 
+  def GetCalendarAclFeed(self, uri='/calendar/feeds/default/acl/full'):
+    return gdata.calendar.CalendarAclFeedFromString(str(self.Get(uri)))
+
+  def GetCalendarAclEntry(self, uri):
+    return gdata.calendar.CalendarAclEntryFromString(str(self.Get(uri)))
+
   def GetCalendarEventCommentFeed(self, uri):
     return gdata.calendar.CalendarEventCommentFeedFromString(str(self.Get(uri)))
 
@@ -82,12 +88,12 @@ class CalendarService(gdata.service.GDataService):
       feed: string The feed which is to be queried
 
     Returns:
-      On success, a tuple in the form
-      (boolean succeeded=True, ElementTree._Element result)
-      On failure, a tuple in the form
-      (boolean succeeded=False, {'status': HTTP status code from server, 
-                                 'reason': HTTP reason from the server, 
-                                 'body': HTTP body of the server's response})
+      On success, a GDataFeed or Entry depending on which is sent from the 
+        server.
+      On failure, a RequestError is raised of the form:
+        {'status': HTTP status code from server, 
+         'reason': HTTP reason from the server, 
+         'body': HTTP body of the server's response}
     """
 
     result = self.Get(uri)
@@ -119,12 +125,12 @@ class CalendarService(gdata.service.GDataService):
                      escaped before they are included in the request.
 
     Returns:
-      On successful insert, a tuple in the form
-      (boolean succeeded=True, ElementTree._Element new event from Google 
-      Calendar) On failure, a tuple in the form:
-      (boolean succeeded=False, {'status': HTTP status code from server, 
-                                 'reason': HTTP reason from the server, 
-                                 'body': HTTP body of the server's response})
+      On successful insert,  a httplib.HTTPResponse containing the server's
+        response to the POST request.
+      On failure, a RequestError is raised of the form:
+        {'status': HTTP status code from server, 
+         'reason': HTTP reason from the server, 
+         'body': HTTP body of the server's response}
     """
 
     response = self.Post(new_event, insert_uri, url_params=url_params,
@@ -132,6 +138,38 @@ class CalendarService(gdata.service.GDataService):
 
     if isinstance(response, atom.Entry):
       return gdata.calendar.CalendarEventEntryFromString(response.ToString())
+    else:
+      return response
+
+  def InsertAclEntry(self, new_entry, insert_uri, url_params=None, 
+                  escape_params=True):
+    """Adds an ACL entry (rule) to Google Calendar.
+
+    Args: 
+      new_entry: ElementTree._Element A new ACL entry which is to be added to 
+                Google Calendar.
+      insert_uri: the URL to post new entries to the ACL feed
+      url_params: dict (optional) Additional URL parameters to be included
+                  in the insertion request. 
+      escape_params: boolean (optional) If true, the url_parameters will be
+                     escaped before they are included in the request.
+
+    Returns:
+      On successful insert,  a httplib.HTTPResponse containing the server's
+        response to the POST request.
+      On failure, a RequestError is raised of the form:
+        {'status': HTTP status code from server, 
+         'reason': HTTP reason from the server, 
+         'body': HTTP body of the server's response}
+    """
+
+    response = self.Post(new_entry, insert_uri, url_params=url_params,
+                         escape_params=escape_params)
+
+    if isinstance(response, atom.Entry):
+      return gdata.calendar.CalendarAclEntryFromString(response.ToString())
+    else:
+      return response
 
   def InsertEventComment(self, new_entry, insert_uri, url_params=None,
                   escape_params=True):
@@ -147,12 +185,12 @@ class CalendarService(gdata.service.GDataService):
                      escaped before they are included in the request.
 
     Returns:
-      On successful insert, a tuple in the form
-      (boolean succeeded=True, ElementTree._Element new entry from Google
-      Calendar) On failure, a tuple in the form:
-      (boolean succeeded=False, {'status': HTTP status code from server,
-                                 'reason': HTTP reason from the server,
-                                 'body': HTTP body of the server's response})
+      On successful insert,  a httplib.HTTPResponse containing the server's
+        response to the POST request.
+      On failure, a RequestError is raised of the form:
+        {'status': HTTP status code from server, 
+         'reason': HTTP reason from the server, 
+         'body': HTTP body of the server's response}
     """
 
     response = self.Post(new_entry, insert_uri, url_params=url_params,
@@ -160,13 +198,15 @@ class CalendarService(gdata.service.GDataService):
 
     if isinstance(response, atom.Entry):
       return gdata.calendar.CalendarEventCommentEntryFromString(response.ToString())
+    else:
+      return response
 
   def DeleteEvent(self, edit_uri, extra_headers=None, 
       url_params=None, escape_params=True):
     """Removes an event with the specified ID from Google Calendar.
 
     Args:
-      event_id: string The ID of the event to be deleted. Example:
+      edit_uri: string The edit URL of the entry to be deleted. Example:
                'http://www.google.com/calendar/feeds/default/private/full/abx'
       url_params: dict (optional) Additional URL parameters to be included
                   in the deletion request.
@@ -174,12 +214,39 @@ class CalendarService(gdata.service.GDataService):
                      escaped before they are included in the request.
 
     Returns:
-      On successful deletion, a tuple in the form
-      (boolean succeeded=True,)
-      On failure, a tuple in the form
-      (boolean succeeded=False, {'status': HTTP status code from server, 
-                                 'reason': HTTP reason from the server, 
-                                 'body': HTTP body of the server's response})
+      On successful delete,  a httplib.HTTPResponse containing the server's
+        response to the DELETE request.
+      On failure, a RequestError is raised of the form:
+        {'status': HTTP status code from server, 
+         'reason': HTTP reason from the server, 
+         'body': HTTP body of the server's response}
+    """
+    
+    url_prefix = 'http://%s/' % self.server
+    if edit_uri.startswith(url_prefix):
+      edit_uri = edit_uri[len(url_prefix):]
+    return self.Delete('/%s' % edit_uri,
+                       url_params=url_params, escape_params=escape_params)
+
+  def DeleteAclEntry(self, edit_uri, extra_headers=None, 
+      url_params=None, escape_params=True):
+    """Removes an ACL entry at the given edit_uri from Google Calendar.
+
+    Args:
+      edit_uri: string The edit URL of the entry to be deleted. Example:
+               'http://www.google.com/calendar/feeds/liz%40gmail.com/acl/full/default'
+      url_params: dict (optional) Additional URL parameters to be included
+                  in the deletion request.
+      escape_params: boolean (optional) If true, the url_parameters will be
+                     escaped before they are included in the request.
+
+    Returns:
+      On successful delete,  a httplib.HTTPResponse containing the server's
+        response to the DELETE request.
+      On failure, a RequestError is raised of the form:
+        {'status': HTTP status code from server, 
+         'reason': HTTP reason from the server, 
+         'body': HTTP body of the server's response}
     """
     
     url_prefix = 'http://%s/' % self.server
@@ -203,12 +270,12 @@ class CalendarService(gdata.service.GDataService):
                      escaped before they are included in the request.
 
     Returns:
-      On successful update, a tuple in the form
-      (boolean succeeded=True, ElementTree._Element new event from Google 
-      Calendar) On failure, a tuple in the form:
-      (boolean succeeded=False, {'status': HTTP status code from server, 
-                                 'reason': HTTP reason from the server, 
-                                 'body': HTTP body of the server's response})
+      On successful update,  a httplib.HTTPResponse containing the server's
+        response to the PUT request.
+      On failure, a RequestError is raised of the form:
+        {'status': HTTP status code from server, 
+         'reason': HTTP reason from the server, 
+         'body': HTTP body of the server's response}
     """
     url_prefix = 'http://%s/' % self.server
     if edit_uri.startswith(url_prefix):
@@ -218,6 +285,41 @@ class CalendarService(gdata.service.GDataService):
                         escape_params=escape_params)
     if isinstance(response, atom.Entry):
       return gdata.calendar.CalendarEventEntryFromString(response.ToString())
+    else:
+      return response
+
+  def UpdateAclEntry(self, edit_uri, updated_rule, url_params=None, 
+                     escape_params=True):
+    """Updates an existing ACL rule.
+
+    Args:
+      edit_uri: string The edit link URI for the element being updated
+      updated_rule: string, ElementTree._Element, or ElementWrapper containing
+                    the Atom Entry which will replace the event which is 
+                    stored at the edit_url 
+      url_params: dict (optional) Additional URL parameters to be included
+                  in the update request.
+      escape_params: boolean (optional) If true, the url_parameters will be
+                     escaped before they are included in the request.
+
+    Returns:
+      On successful update,  a httplib.HTTPResponse containing the server's
+        response to the PUT request.
+      On failure, a RequestError is raised of the form:
+        {'status': HTTP status code from server, 
+         'reason': HTTP reason from the server, 
+         'body': HTTP body of the server's response}
+    """
+    url_prefix = 'http://%s/' % self.server
+    if edit_uri.startswith(url_prefix):
+      edit_uri = edit_uri[len(url_prefix):]
+    response = self.Put(updated_rule, '/%s' % edit_uri,
+                        url_params=url_params, 
+                        escape_params=escape_params)
+    if isinstance(response, atom.Entry):
+      return gdata.calendar.CalendarAclEntryFromString(response.ToString())
+    else:
+      return response
 
 
 class CalendarEventQuery(gdata.service.Query):

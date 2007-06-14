@@ -1320,3 +1320,99 @@ EMAIL_LIST_RECIPIENT_FEED = """<?xml version="1.0" encoding="UTF-8"?>
         <gd:who email="susan@example.com"/>
     </atom:entry>
 </atom:feed>"""
+
+ACL_FEED = """<?xml version='1.0' encoding='UTF-8'?>
+  <feed xmlns='http://www.w3.org/2005/Atom'
+      xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
+      xmlns:gAcl='http://schemas.google.com/acl/2007'>
+    <id>http://www.google.com/calendar/feeds/liz%40gmail.com/acl/full</id>
+    <updated>2007-04-21T00:52:04.000Z</updated>
+    <title type='text'>Elizabeth Bennet's access control list</title>
+    <link rel='http://schemas.google.com/acl/2007#controlledObject'
+      type='application/atom+xml'
+      href='http://www.google.com/calendar/feeds/liz%40gmail.com/private/full'>
+    </link>
+    <link rel='http://schemas.google.com/g/2005#feed'
+      type='application/atom+xml'
+      href='http://www.google.com/calendar/feeds/liz%40gmail.com/acl/full'>
+    </link>
+    <link rel='http://schemas.google.com/g/2005#post'
+      type='application/atom+xml'
+      href='http://www.google.com/calendar/feeds/liz%40gmail.com/acl/full'>
+    </link>
+    <link rel='self' type='application/atom+xml'
+      href='http://www.google.com/calendar/feeds/liz%40gmail.com/acl/full'>
+    </link>
+    <generator version='1.0'
+      uri='http://www.google.com/calendar'>Google Calendar</generator>
+    <openSearch:totalResults>2</openSearch:totalResults>
+    <openSearch:startIndex>1</openSearch:startIndex>
+    <entry>
+      <id>http://www.google.com/calendar/feeds/liz%40gmail.com/acl/full/user%3Aliz%40gmail.com</id>
+      <updated>2007-04-21T00:52:04.000Z</updated>
+      <category scheme='http://schemas.google.com/g/2005#kind'
+        term='http://schemas.google.com/acl/2007#accessRule'>
+      </category>
+      <title type='text'>owner</title>
+      <content type='text'></content>
+      <link rel='self' type='application/atom+xml'
+        href='http://www.google.com/calendar/feeds/liz%40gmail.com/acl/full/user%3Aliz%40gmail.com'>
+      </link>
+      <link rel='edit' type='application/atom+xml'
+        href='http://www.google.com/calendar/feeds/liz%40gmail.com/acl/full/user%3Aliz%40gmail.com'>
+      </link>
+      <author>
+        <name>Elizabeth Bennet</name>
+        <email>liz@gmail.com</email>
+      </author>
+      <gAcl:scope type='user' value='liz@gmail.com'></gAcl:scope>
+      <gAcl:role value='http://schemas.google.com/gCal/2005#owner'>
+      </gAcl:role>
+    </entry>
+    <entry>
+      <id>http://www.google.com/calendar/feeds/liz%40gmail.com/acl/full/default</id>
+      <updated>2007-04-21T00:52:04.000Z</updated>
+      <category scheme='http://schemas.google.com/g/2005#kind'
+        term='http://schemas.google.com/acl/2007#accessRule'>
+      </category>
+      <title type='text'>read</title>
+      <content type='text'></content>
+      <link rel='self' type='application/atom+xml'
+        href='http://www.google.com/calendar/feeds/liz%40gmail.com/acl/full/default'>
+      </link>
+      <link rel='edit' type='application/atom+xml'
+        href='http://www.google.com/calendar/feeds/liz%40gmail.com/acl/full/default'>
+      </link>
+      <author>
+        <name>Elizabeth Bennet</name>
+        <email>liz@gmail.com</email>
+      </author>
+      <gAcl:scope type='default'></gAcl:scope>
+      <gAcl:role value='http://schemas.google.com/gCal/2005#read'>
+      </gAcl:role>
+    </entry>
+  </feed>"""
+
+ACL_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
+  <entry xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:gd='http://schemas.google.com/g/2005' xmlns:gCal='http://schemas.google.com/gCal/2005' xmlns:gAcl='http://schemas.google.com/acl/2007'>
+    <id>http://www.google.com/calendar/feeds/liz%40gmail.com/acl/full/user%3Aliz%40gmail.com</id>
+    <updated>2007-04-21T00:52:04.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind'
+      term='http://schemas.google.com/acl/2007#accessRule'>
+    </category>
+    <title type='text'>owner</title>
+    <content type='text'></content>
+    <link rel='self' type='application/atom+xml'
+      href='http://www.google.com/calendar/feeds/liz%40gmail.com/acl/full/user%3Aliz%40gmail.com'>
+    </link>
+    <link rel='edit' type='application/atom+xml'
+      href='http://www.google.com/calendar/feeds/liz%40gmail.com/acl/full/user%3Aliz%40gmail.com'>
+    </link>
+    <author>
+      <name>Elizabeth Bennet</name>
+      <email>liz@gmail.com</email>
+    </author>
+    <gAcl:scope type='user' value='liz@gmail.com'></gAcl:scope>
+    <gAcl:role value='http://schemas.google.com/gCal/2005#owner'>
+    </gAcl:role>
+  </entry>"""

@@ -100,8 +100,8 @@ class CalendarExample:
 
     print 'Full text query for events on Primary Calendar: \'%s\'' % (
         text_query,)
-    query = gdata.calendar.service.CalendarEventQuery('default', 'private', 'full',
-        text_query)
+    query = gdata.calendar.service.CalendarEventQuery('default', 'private', 
+        'full', text_query)
     feed = self.cal_client.CalendarQuery(query)
     for i, an_event in enumerate(feed.entry):
       print '\t%s. %s' % (i, an_event.title.text,)
@@ -118,7 +118,8 @@ class CalendarExample:
 
     print 'Date range query for events on Primary Calendar: %s to %s' % (
         start_date, end_date,)
-    query = gdata.calendar.service.CalendarEventQuery('default', 'private', 'full')
+    query = gdata.calendar.service.CalendarEventQuery('default', 'private', 
+        'full')
     query.start_min = start_date
     query.start_max = end_date 
     feed = self.cal_client.CalendarQuery(query)
@@ -144,7 +145,6 @@ class CalendarExample:
     for more information"""
     
     event = gdata.calendar.CalendarEventEntry()
-    event.author.append(atom.Author(name=atom.Name(text='CalendarExample')))
     event.title = atom.Title(text=title)
     event.content = atom.Content(text=content)
     event.where.append(gdata.calendar.Where(value_string=where))
@@ -184,7 +184,7 @@ class CalendarExample:
   def _InsertRecurringEvent(self, title='Weekly Tennis with Beth',
       content='Meet for a quick lesson', where='On the courts',
       recurrence_data=None):
-    """Users the _InsertEvent helper method to insert a recurring event which
+    """Uses the _InsertEvent helper method to insert a recurring event which
     has only RFC2445 icalendar recurrence syntax specified.  Note the use of
     carriage return/newline pairs at the end of each line in the syntax.  Even 
     when specifying times (as opposed to only dates), VTIMEZONE syntax is not
@@ -260,7 +260,62 @@ class CalendarExample:
     in the HTTP DELETE request."""
 
     self.cal_client.DeleteEvent(event.GetEditLink().href)
+
+  def _PrintAclFeed(self):
+    """Sends a HTTP GET to the default ACL URL 
+    (http://www.google.com/calendar/feeds/default/acl/full) and displays the
+    feed returned in the response."""
     
+    feed = self.cal_client.GetCalendarAclFeed()
+    print feed.title.text
+    for i, a_rule in enumerate(feed.entry):
+      print '\t%s. %s' % (i, a_rule.title.text,)
+      print '\t\t Role: %s' % (a_rule.role.value,)
+      print '\t\t Scope %s - %s' % (a_rule.scope.type, a_rule.scope.value)
+    
+  def _CreateAclRule(self, username):      
+    """Creates a ACL rule that grants the given user permission to view 
+    free/busy information on the default calendar.  Note: It is not necessary 
+    to specify a title for the ACL entry.  The server will set this to be the
+    value of the role specified (in this case "freebusy")."""
+    
+    rule = gdata.calendar.CalendarAclEntry()
+    rule.scope = gdata.calendar.Scope(value=username, type="user")
+    roleValue = "http://schemas.google.com/gCal/2005#%s" % ("freebusy")
+    rule.role = gdata.calendar.Role(value=roleValue)
+    aclUrl = "/calendar/feeds/default/acl/full"
+    returned_rule = self.cal_client.InsertAclEntry(rule, aclUrl)
+  
+  def _RetrieveAclRule(self, username):
+    """Builds the aclEntryUri or the entry created in the previous example.
+    The sends a HTTP GET message and displays the entry returned in the 
+    response."""
+    
+    aclEntryUri = "http://www.google.com/calendar/feeds/"
+    aclEntryUri += "default/acl/full/user:%s" % (username)
+    entry = self.cal_client.GetCalendarAclEntry(aclEntryUri)
+    print '\t%s' % (entry.title.text,)
+    print '\t\t Role: %s' % (entry.role.value,)
+    print '\t\t Scope %s - %s' % (entry.scope.type, entry.scope.value)
+    return entry
+
+  def _UpdateAclRule(self, entry):
+    """Modifies the value of the role in the given entry and POSTs the updated
+    entry.  Note that while the role of an ACL entry can be updated, the 
+    scope can not be modified."""
+     
+    roleValue = "http://schemas.google.com/gCal/2005#%s" % ("read")
+    entry.role = gdata.calendar.Role(value=roleValue)
+    returned_rule = self.cal_client.UpdateAclEntry(entry.GetEditLink().href, 
+        entry)
+  
+  def _DeleteAclRule(self, entry):
+    """Given an ACL entry returned for the calendar server, this method
+    deletes the entry.  The edit link present in the entry is the URL used
+    in the HTTP DELETE request."""
+    
+    self.cal_client.DeleteAclEntry(entry.GetEditLink().href)
+
   def Run(self, delete='false'):
     """Runs each of the example methods defined above.  Note how the result
     of the _InsertSingleEvent call is used for updating the title and the
@@ -270,16 +325,26 @@ class CalendarExample:
     http://code.google.com/apis/gdata/reference.html#Optimistic-concurrency
     """
 
+    # Getting feeds and query results
     self._PrintUserCalendars()
     self._PrintAllEventsOnDefaultCalendar()
     self._FullTextQuery()
     self._DateRangeQuery()
+    
+    # Inserting and updating events
     see = self._InsertSingleEvent()
     see_u_title = self._UpdateTitle(see, 'New title for single event')
     see_u_reminder = self._AddReminder(see_u_title, minutes=30)
     see_u_ext_prop = self._AddExtendedProperty(see_u_reminder, 
         name='propname', value='propvalue')
     ree = self._InsertRecurringEvent()
+  
+    # Access Control List examples
+    self._PrintAclFeed()
+    self._CreateAclRule("user@gmail.com")
+    entry = self._RetrieveAclRule("user@gmail.com")
+    self._UpdateAclRule(entry)
+    self._DeleteAclRule(entry)
 
     # Delete entries if delete argument='true'
     if delete == 'true':
