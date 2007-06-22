@@ -109,6 +109,16 @@ class AppsService(gdata.service.GDataService):
     return self.AddAllElementsFromAllPages(
       ret, gdata.apps.EmailListFeedFromString)
 
+  def RetrieveEmailList(self, list_name):
+    """Retreive a single email list by the list's name."""
+
+    uri = "%s/emailList/%s/%s" % (
+      self._baseURL(), API_VER, list_name)
+    try:
+      return self.Get(uri, converter=gdata.apps.EmailListEntryFromString)
+    except gdata.service.RequestError, e:
+      raise AppsForYourDomainException(e.args[0])
+
   def RetrieveEmailLists(self, recipient):
     """Retrieve All Email List Subscriptions for an Email Address."""
 
@@ -280,15 +290,15 @@ class AppsService(gdata.service.GDataService):
       raise AppsForYourDomainException(e.args[0])
 
   def CreateUser(self, user_name, family_name, given_name, password,
-                 suspended='false', ip_whitelisted='false',
-                 quota_limit=DEFAULT_QUOTA_LIMIT):
+                 suspended='false', quota_limit=DEFAULT_QUOTA_LIMIT, 
+                 password_hash_function=None):
     """Create a user account. """
 
     uri = "%s/user/%s" % (self._baseURL(), API_VER)
     user_entry = gdata.apps.UserEntry()
     user_entry.login = gdata.apps.Login(
-      user_name=user_name, password=password, suspended=suspended,
-      ip_whitelisted=ip_whitelisted)
+        user_name=user_name, password=password, suspended=suspended,
+        hash_function_name=password_hash_function)
     user_entry.name = gdata.apps.Name(family_name=family_name,
                                       given_name=given_name)
     user_entry.quota = gdata.apps.Quota(limit=str(quota_limit))
@@ -297,6 +307,20 @@ class AppsService(gdata.service.GDataService):
       return gdata.apps.UserEntryFromString(str(self.Post(user_entry, uri)))
     except gdata.service.RequestError, e:
       raise AppsForYourDomainException(e.args[0])
+
+  def SuspendUser(self, user_name):
+    user_entry = self.RetrieveUser(user_name)
+    if user_entry.login.suspended != 'true':
+      user_entry.login.suspended = 'true'
+      user_entry = self.UpdateUser(user_name, user_entry)
+    return user_entry
+
+  def RestoreUser(self, user_name):
+    user_entry = self.RetrieveUser(user_name)
+    if user_entry.login.suspended != 'false':
+      user_entry.login.suspended = 'false'
+      user_entry = self.UpdateUser(user_name, user_entry)
+    return user_entry
 
   def RetrieveUser(self, user_name):
     """Retrieve an user account.

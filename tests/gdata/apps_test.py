@@ -522,6 +522,7 @@ class AppsUserEntryTest(unittest.TestCase):
     self.assertEquals(self.user_entry.login.password, 'password')
     self.assertEquals(self.user_entry.login.suspended, 'false')
     self.assertEquals(self.user_entry.login.ip_whitelisted, 'false')
+    self.assertEquals(self.user_entry.login.hash_function_name, 'SHA-1')
 
   def testName(self):
     """Tests the existence of <apps:name> in UserEntry and verifies

@@ -74,6 +74,27 @@ class AppsServiceUnitTest01(unittest.TestCase):
     else:
       self.fail('No exception occurred')
 
+  def testSuspendAndRestoreUser(self):
+    # Create a test user
+    user_name = 'an-apps-service-test-account-' + self.postfix
+    family_name = 'Tester'
+    given_name = 'Apps'
+    password = '123$$abc'
+    suspended = 'false'
+
+    created_user = self.apps_client.CreateUser(
+        user_name=user_name, family_name=family_name, given_name=given_name,
+        password=password, suspended=suspended)
+
+    # Suspend then restore the new user.
+    entry = self.apps_client.SuspendUser(created_user.login.user_name)
+    self.assertEquals(entry.login.suspended, 'true')
+    entry = self.apps_client.RestoreUser(created_user.login.user_name)
+    self.assertEquals(entry.login.suspended, 'false')
+
+    # Clean up, delete the test user.
+    self.apps_client.DeleteUser(user_name)
+
   def test003MethodsForUser(self):
     """Tests methods for user"""
 
@@ -411,6 +432,23 @@ class AppsServiceUnitTest02(unittest.TestCase):
         succeed = True
     self.assert_(succeed, "There must be an email list named %s" % list_name)
 
+  def testRetrieveEmailList(self):
+    new_list = self.apps_client.CreateEmailList('my_testing_email_list')
+    retrieved_list = self.apps_client.RetrieveEmailList('my_testing_email_list')
+    self.assertEquals(new_list.title.text, retrieved_list.title.text)
+    self.assertEquals(new_list.id.text, retrieved_list.id.text)
+    self.assertEquals(new_list.email_list.name, retrieved_list.email_list.name)
+
+    self.apps_client.DeleteEmailList('my_testing_email_list')
+
+    # Should not be able to retrieve the deleted list.
+    try:
+      removed_list = self.apps_client.RetrieveEmailList('my_testing_email_list')
+      self.fail()
+    except gdata.apps.service.AppsForYourDomainException:
+      pass
+
+
 class AppsServiceUnitTest03(unittest.TestCase):
   
   def setUp(self):
@@ -443,7 +481,7 @@ class AppsServiceUnitTest03(unittest.TestCase):
     list_nums = 101
     for i in range(list_nums):
       list_name = 'list%03d-' % i + self.postfix
-      print 'creating list named:', list_name
+      #print 'creating list named:', list_name
       try:
         created_email_list = self.apps_client.CreateEmailList(list_name)
       except Exception, e:

@@ -431,12 +431,14 @@ class Login(atom.AtomBase):
   """The Google Apps Login element"""
 
   def __init__(self, user_name=None, password=None, suspended=None,
-               ip_whitelisted=None, extension_elements=None,
-               extension_attributes=None, text=None):
+               ip_whitelisted=None, hash_function_name=None, 
+               extension_elements=None, extension_attributes=None, 
+               text=None):
     self.user_name = user_name
     self.password = password
     self.suspended = suspended
     self.ip_whitelisted = ip_whitelisted
+    self.hash_function_name = hash_function_name
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
@@ -450,6 +452,8 @@ class Login(atom.AtomBase):
       element_tree.attrib['suspended'] = self.suspended
     if self.ip_whitelisted:
       element_tree.attrib['ipWhitelisted'] = self.ip_whitelisted
+    if self.hash_function_name:
+      element_tree.attrib['hashFunctionName'] = self.hash_function_name
     atom.AtomBase._TransferToElementTree(self, element_tree)
     element_tree.tag = APPS_TEMPLATE % 'login'
     return element_tree
@@ -466,6 +470,9 @@ class Login(atom.AtomBase):
       del element_tree.attrib[attribute]
     elif attribute == 'ipWhitelisted':
       self.ip_whitelisted = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    elif attribute == 'hashFunctionName':
+      self.hash_function_name = element_tree.attrib[attribute]
       del element_tree.attrib[attribute]
     else:
       atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 

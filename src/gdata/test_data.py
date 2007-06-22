@@ -1100,7 +1100,7 @@ USER_ENTRY = """<?xml version="1.0" encoding="UTF-8"?>
   <atom:link rel="edit" type="application/atom+xml"
     href="https://www.google.com/a/feeds/example.com/user/2.0/TestUser"/>
   <apps:login userName="TestUser" password="password" suspended="false"
-  ipWhitelisted="false"/>
+    ipWhitelisted='false' hashFunctionName="SHA-1"/>
   <apps:name familyName="Test" givenName="User"/>
   <apps:quota limit="1024"/>
   <gd:feedLink rel='http://schemas.google.com/apps/2006#user.nicknames'
