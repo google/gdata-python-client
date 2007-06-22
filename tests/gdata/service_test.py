@@ -229,6 +229,15 @@ class GDataServiceUnitTest(unittest.TestCase):
     self.assert_(result is not None)
     self.assert_(isinstance(result, atom.Feed))
 
+  def testGetWithResponseTransformer(self):
+    # Query Google Base and interpret the results as a GBaseSnippetFeed.
+    feed = self.gd_client.Get(
+        'http://www.google.com/base/feeds/snippets?bq=digital+camera',
+        converter=gdata.base.GBaseSnippetFeedFromString)
+    self.assertTrue(isinstance(feed, gdata.base.GBaseSnippetFeed))
+    pass
+    
+
   def testPostPutAndDelete(self):
     try:
       self.gd_client.ProgrammaticLogin()
@@ -271,6 +280,44 @@ class GDataServiceUnitTest(unittest.TestCase):
     response = self.gd_client.Delete('/base/feeds/items/%s' % item_id)
     self.assert_(response)
 
+  def testPostPutAndDeleteWithConverters(self):
+    try:
+      self.gd_client.ProgrammaticLogin()
+    except gdata.service.CaptchaRequired:
+      self.fail('Required Captcha')
+    except gdata.service.BadAuthentication:
+      self.fail('Bad Authentication')
+    except gdata_client.Error:
+      self.fail('Login Error')
+    self.gd_client.additional_headers = {'X-Google-Key':
+                                               'ABQIAAAAoLioN3buSs9KqIIq9V' +
+                                               'mkFxT2yXp_ZAY8_ufC3CFXhHIE' +
+                                               '1NvwkxRK8C1Q8OWhsWA2AIKv-c' +
+                                               'VKlVrNhQ'}
+    self.gd_client.server = 'base.google.com'
+
+    # Insert a new item
+    response = self.gd_client.Post(test_data.TEST_BASE_ENTRY,
+        '/base/feeds/items', converter=gdata.base.GBaseItemFromString)
+    self.assert_(response is not None)
+    self.assert_(isinstance(response, atom.Entry))
+    self.assert_(isinstance(response, gdata.base.GBaseItem))
+    self.assert_(response.category[0].term == 'products')
+
+    updated_xml = gdata.base.GBaseItemFromString(test_data.TEST_BASE_ENTRY)
+    # Change one of the labels in the item
+    updated_xml.label[2].text = 'beach ball'
+    # Update the item
+    response = self.gd_client.Put(updated_xml,
+        response.id.text,
+        converter=gdata.base.GBaseItemFromString)
+    self.assertTrue(response is not None)
+    self.assertTrue(isinstance(response, gdata.base.GBaseItem))
+
+    # Delete the item the test just created.
+    response = self.gd_client.Delete(response.id.text)
+    self.assert_(response)
+      
 
 class QueryTest(unittest.TestCase):
 

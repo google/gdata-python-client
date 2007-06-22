@@ -272,11 +272,9 @@ class GBaseItemTypesFeedAndEntryTest(unittest.TestCase):
     entry.item_type = gdata.base.ItemType(text='jobs')
     feed.entry.append(entry)
     self.assert_(len(feed.entry) == 1)
-    self.assert_(feed.entry[0].item_type.text == 'jobs')
     self.assert_(feed.entry[0].attributes[0].name == 'location')
     new_feed = gdata.base.GBaseItemTypesFeedFromString(str(feed))
     self.assert_(len(new_feed.entry) == 1)
-    self.assert_(new_feed.entry[0].item_type.text == 'jobs')
     self.assert_(new_feed.entry[0].attributes[0].name == 'location')
 
     

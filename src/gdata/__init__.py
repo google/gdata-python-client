@@ -18,8 +18,6 @@
 """Contains classes representing Google Data elements.
 
   Extends Atom classes to add Google Data specific elements.
-
-
 """
 
 

@@ -108,7 +108,6 @@ class CalendarService(gdata.service.GDataService):
     elif isinstance(query, CalendarEventCommentQuery):
       return gdata.calendar.CalendarEventCommentFeedFromString(result.ToString())
     else:
-      print "else result"
       return result
     
   def InsertEvent(self, new_event, insert_uri, url_params=None, 

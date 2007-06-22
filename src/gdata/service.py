@@ -426,7 +426,7 @@ class GDataService(atom.service.AtomService):
       self.__auth_token = None
 
   # CRUD operations
-  def Get(self, uri, extra_headers=None, redirects_remaining=4, encoding='UTF-8', ResultsTransformer=None):
+  def Get(self, uri, extra_headers=None, redirects_remaining=4, encoding='UTF-8', converter=None):
     """Query the GData API with the given URI
 
     The uri is the portion of the URI after the server value 
@@ -451,12 +451,19 @@ class GDataService(atom.service.AtomService):
           This was added to avoid infinite redirect loops.
       encoding: string (optional) The character encoding for the server's
           response. Default is UTF-8
-      ResultsTransformer: func (optional) A function which will transform
-          the server's results before it is returned. 
+      converter: func (optional) A function which will transform
+          the server's results before it is returned. Example: use 
+          GDataFeedFromString to parse the server response as if it
+          were a GDataFeed.
 
     Returns:
-      A GDataFeed or Entry depending on which is sent from the server.
+      If there is no ResultsTransformer specified in the call, a GDataFeed 
+      or GDataEntry depending on which is sent from the server. If the 
+      response is niether a feed or entry and there is no ResultsTransformer,
+      return a string. If there is a ResultsTransformer, the returned value 
+      will be that of the ResultsTransformer function.
     """
+    
     if extra_headers is None:
       extra_headers = {}
 
@@ -476,10 +483,18 @@ class GDataService(atom.service.AtomService):
     result_body = server_response.read()
 
     if server_response.status == 200:
+      if converter:
+        return converter(result_body)
+      # There was no ResultsTransformer specified, so try to convert the
+      # server's response into a GDataFeed.
       feed = gdata.GDataFeedFromString(result_body)
       if not feed:
+        # If conversion to a GDataFeed failed, try to convert the server's
+        # response to a GDataEntry.
         entry = gdata.GDataEntryFromString(result_body)
         if not entry:
+          # The server's response wasn't a feed, or an entry, so return the
+          # response body as a string.
           return result_body
         return entry
       return feed
@@ -562,7 +577,8 @@ class GDataService(atom.service.AtomService):
       raise UnexpectedReturnType, 'Server did not send a feed'  
 
   def Post(self, data, uri, extra_headers=None, url_params=None, 
-           escape_params=True, redirects_remaining=4, media_source=None):
+           escape_params=True, redirects_remaining=4, media_source=None, 
+           converter=None):
     """Insert data into a GData service at the given URI.
 
     Args:
@@ -583,10 +599,16 @@ class GDataService(atom.service.AtomService):
                      method will escape the query and any URL parameters
                      provided.
       media_source: MediaSource (optional) Container for the media to be sent
-                    along with the entry, if provided.
+          along with the entry, if provided.
+      converter: func (optional) A function which will be executed on the 
+          server's response. Often this is a function like 
+          GDataEntryFromString which will parse the body of the server's 
+          response and return a GDataEntry.
 
     Returns:
-      httplib.HTTPResponse Server's response to the POST request.
+      If the post succeeded, this method will return a GDataFeed, GDataEntry,
+      or the results of running converter on the server's result body (if
+      converter was specified).
     """
     if extra_headers is None:
       extra_headers = {}
@@ -663,6 +685,8 @@ class GDataService(atom.service.AtomService):
 
 
     if server_response.status == 201:
+      if converter:
+        return converter(result_body)
       feed = gdata.GDataFeedFromString(result_body)
       if not feed:
         entry = gdata.GDataEntryFromString(result_body)
@@ -692,7 +716,8 @@ class GDataService(atom.service.AtomService):
           'reason': server_response.reason, 'body': result_body}
 
   def Put(self, data, uri, extra_headers=None, url_params=None, 
-          escape_params=True, redirects_remaining=3, media_source=None):
+          escape_params=True, redirects_remaining=3, media_source=None,
+          converter=None):
     """Updates an entry at the given URI.
      
     Args:
@@ -712,9 +737,15 @@ class GDataService(atom.service.AtomService):
                      reserved characters have been escaped). If true, this
                      method will escape the query and any URL parameters
                      provided.
-  
+      converter: func (optional) A function which will be executed on the 
+          server's response. Often this is a function like 
+          GDataEntryFromString which will parse the body of the server's 
+          response and return a GDataEntry.
+
     Returns:
-      httplib.HTTPResponse Server's response to the PUT request.
+      If the put succeeded, this method will return a GDataFeed, GDataEntry,
+      or the results of running converter on the server's result body (if
+      converter was specified).
     """
     if extra_headers is None:
       extra_headers = {}
@@ -789,6 +820,8 @@ class GDataService(atom.service.AtomService):
       result_body = server_response.read()
 
     if server_response.status == 200:
+      if converter:
+        return converter(result_body)
       feed = gdata.GDataFeedFromString(result_body)
       if not feed:
         entry = gdata.GDataEntryFromString(result_body)

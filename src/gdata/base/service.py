@@ -78,69 +78,64 @@ class GBaseService(gdata.service.GDataService):
   api_key = property(__GetAPIKey, __SetAPIKey,
       doc="""Get or set the API key to be included in all requests.""")
     
-  def Query(self, uri):
+  def Query(self, uri, converter=None):
     """Performs a style query and returns a resulting feed or entry.
 
     Args:
-      feed: string The feed which is to be queried. Examples: 'items', 
-                   'snippets', 'attributes', etc.
-      bq_string: string The query string as described at 
-                 http://code.google.com/apis/base/query-lang-spec.html .
-      url_params: dict (optional) Additional URL parameters to be included
-                  in the query. These are translated into query arguments 
-                  in the form '&dict_key=value&...'. 
-                  Example: {'max-results': '250'} becomes &max-results=250
-      escape_params: boolean (optional) If false, the calling code has already
-                     ensured that the query will form a valid URL (all 
-                     reserved characters have been escaped). If true, this 
-                     method will escape the query and any URL parameters 
-                     provided.
+      uri: string The full URI which be queried. Examples include
+          '/base/feeds/snippets?bq=digital+camera', 
+          'http://www.google.com/base/feeds/snippets?bq=digital+camera'
+          '/base/feeds/items'
+          I recommend creating a URI using a query class.
+      converter: func (optional) A function which will be executed on the
+          server's response. Examples include GBaseItemFromString, etc. 
 
     Returns:
-      On success, a tuple in the form
-      (boolean succeeded=True, ElementTree._Element result)
-      On failure, a tuple in the form
-      (boolean succeeded=False, {'status': HTTP status code from server, 
-                                 'reason': HTTP reason from the server, 
-                                 'body': HTTP body of the server's response})
+      If converter was specified, returns the results of calling converter on
+      the server's response. If converter was not specified, and the result
+      was an Atom Entry, returns a GBaseItem, by default, the method returns
+      the result of calling gdata.service's Get method.
     """
-    
-    result = self.Get(uri)
-    if isinstance(result, atom.Entry):
+ 
+    result = self.Get(uri, converter=converter)
+    if converter:
+      return result
+    elif isinstance(result, atom.Entry):
       return gdata.base.GBaseItemFromString(result.ToString())
     return result
 
   def QuerySnippetsFeed(self, uri):
-    return gdata.base.GBaseSnippetFeedFromString(str(self.Get(uri)))
+    return self.Get(uri, converter=gdata.base.GBaseSnippetFeedFromString)
 
   def QueryItemsFeed(self, uri):
-    return gdata.base.GBaseItemFeedFromString(str(self.Get(uri)))
+    return self.Get(uri, converter=gdata.base.GBaseItemFeedFromString)
 
   def QueryAttributesFeed(self, uri):
-    return gdata.base.GBaseAttributesFeedFromString(str(self.Get(uri)))
+    return self.Get(uri, converter=gdata.base.GBaseAttributesFeedFromString)
 
   def QueryItemTypesFeed(self, uri):
-    return gdata.base.GBaseItemTypesFeedFromString(str(self.Get(uri)))
+    return self.Get(uri, converter=gdata.base.GBaseItemTypesFeedFromString)
 
   def QueryLocalesFeed(self, uri):
-    return gdata.base.GBaseLocalesFeedFromString(str(self.Get(uri)))
+    return self.Get(uri, converter=gdata.base.GBaseLocalesFeedFromString)
 
   def GetItem(self, uri):
-    return gdata.base.GBaseItemFromString(str(self.Get(uri)))
+    return self.Get(uri, converter=gdata.base.GBaseItemFromString)
 
   def GetSnippet(self, uri):
-    return gdata.base.GBaseSnippetFromString(str(self.Get(uri)))
+    return self.Get(uri, converter=gdata.base.GBaseSnippetFromString)
 
   def GetAttribute(self, uri):
-    return gdata.base.GBaseAttributeEntryFromString(str(self.Get(uri)))
+    return self.Get(uri, converter=gdata.base.GBaseAttributeEntryFromString)
 
   def GetItemType(self, uri):
-    return gdata.base.GBaseItemTypeEntryFromString(str(self.Get(uri)))
+    return self.Get(uri, converter=gdata.base.GBaseItemTypeEntryFromString)
 
   def GetLocale(self, uri):
-    return gdata.GDataEntryFromString(str(self.Get(uri)))
+    return self.Get(uri, converter=gdata.base.GDataEntryFromString)
 
-  def InsertItem(self, new_item, url_params=None, escape_params=True):
+  def InsertItem(self, new_item, url_params=None, escape_params=True, 
+      converter=None):
     """Adds an item to Google Base.
 
     Args: 
@@ -150,21 +145,22 @@ class GBaseService(gdata.service.GDataService):
                   in the insertion request. 
       escape_params: boolean (optional) If true, the url_parameters will be
                      escaped before they are included in the request.
+      converter: func (optional) Function which is executed on the server's
+          response before it is returned. Usually this is a function like
+          GBaseItemFromString which will parse the response and turn it into
+          an object.
 
     Returns:
-      On successful insert, a tuple in the form
-      (boolean succeeded=True, ElementTree._Element new item from Google Base)
-      On failure, a tuple in the form
-      (boolean succeeded=False, {'status': HTTP status code from server, 
-                                 'reason': HTTP reason from the server, 
-                                 'body': HTTP body of the server's response})
+      If converter is defined, the results of running converter on the server's
+      response. Otherwise, it will be a GBaseItem.
     """
 
     response = self.Post(new_item, '/base/feeds/items', url_params=url_params,
-                         escape_params=escape_params)
+                         escape_params=escape_params, converter=converter)
 
-    if isinstance(response, atom.Entry):
+    if not converter and isinstance(response, atom.Entry):
       return gdata.base.GBaseItemFromString(response.ToString())
+    return response
 
   def DeleteItem(self, item_id, url_params=None, escape_params=True):
     """Removes an item with the specified ID from Google Base.
@@ -178,19 +174,14 @@ class GBaseService(gdata.service.GDataService):
                      escaped before they are included in the request.
 
     Returns:
-      On successful deletion, a tuple in the form
-      (boolean succeeded=True,)
-      On failure, a tuple in the form
-      (boolean succeeded=False, {'status': HTTP status code from server, 
-                                 'reason': HTTP reason from the server, 
-                                 'body': HTTP body of the server's response})
+      True if the delete succeeded.
     """
     
     return self.Delete('/%s' % (item_id.lstrip('http://www.google.com/')),
                        url_params=url_params, escape_params=escape_params)
                            
   def UpdateItem(self, item_id, updated_item, url_params=None, 
-                 escape_params=True):
+                 escape_params=True, converter=None):
     """Updates an existing item.
 
     Args:
@@ -203,21 +194,22 @@ class GBaseService(gdata.service.GDataService):
                   in the update request.
       escape_params: boolean (optional) If true, the url_parameters will be
                      escaped before they are included in the request.
+      converter: func (optional) Function which is executed on the server's
+          response before it is returned. Usually this is a function like
+          GBaseItemFromString which will parse the response and turn it into
+          an object.
 
     Returns:
-      On successful update, a tuple in the form
-      (boolean succeeded=True, ElementTree._Element new item from Google Base)
-      On failure, a tuple in the form
-      (boolean succeeded=False, {'status': HTTP status code from server, 
-                                 'reason': HTTP reason from the server, 
-                                 'body': HTTP body of the server's response})
+      If converter is defined, the results of running converter on the server's
+      response. Otherwise, it will be a GBaseItem.
     """
     
     response = self.Put(updated_item, 
-        '/%s' % (item_id.lstrip('http://www.google.com/')), 
-        url_params=url_params, escape_params=escape_params)
-    if isinstance(response, atom.Entry):
+        item_id, url_params=url_params, escape_params=escape_params, 
+        converter=converter)
+    if not converter and isinstance(response, atom.Entry):
       return gdata.base.GBaseItemFromString(response.ToString())
+    return response
     
 
 class BaseQuery(gdata.service.Query):

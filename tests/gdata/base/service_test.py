@@ -76,7 +76,15 @@ class GBaseServiceUnitTest(unittest.TestCase):
     query.feed = '/base/feeds/snippets'
     query.bq = 'digital camera'
     feed = service.Query(query.ToUri())
-    
+
+  def testQueryWithConverter(self):
+    my_query = gdata.base.service.BaseQuery(feed='/base/feeds/snippets')
+    my_query['max-results'] = '1'
+    my_query.bq = 'digital camera [item type: products]'
+    result = self.gd_client.Query(my_query.ToUri(), 
+        converter=gdata.base.GBaseSnippetFeedFromString)
+    self.assert_(isinstance(result, gdata.base.GBaseSnippetFeed))
+
   def testCorrectReturnTypes(self):
     q = gdata.base.service.BaseQuery()
     q.feed = '/base/feeds/snippets'
@@ -106,7 +114,6 @@ class GBaseServiceUnitTest(unittest.TestCase):
       self.assert_(self.gd_client.captcha_url is None)
     except gdata.service.CaptchaRequired:
       self.fail('Required Captcha')
-
     
     proposed_item = gdata.base.GBaseItemFromString(test_data.TEST_BASE_ENTRY)
     result = self.gd_client.InsertItem(proposed_item)
@@ -134,6 +141,34 @@ class GBaseServiceUnitTest(unittest.TestCase):
       self.fail()
     except gdata.service.RequestError:
       pass
+
+  def testInsertItemUpdateItemAndDeleteItemWithConverter(self):
+    try:
+      self.gd_client.ProgrammaticLogin()
+      self.assert_(self.gd_client.auth_token is not None)
+      self.assert_(self.gd_client.captcha_token is None)
+      self.assert_(self.gd_client.captcha_url is None)
+    except gdata.service.CaptchaRequired:
+      self.fail('Required Captcha')
+
+    proposed_item = gdata.base.GBaseItemFromString(test_data.TEST_BASE_ENTRY)
+    result = self.gd_client.InsertItem(proposed_item, 
+        converter=atom.EntryFromString)
+    self.assertTrue(isinstance(result, atom.Entry))
+    self.assertFalse(isinstance(result, gdata.base.GBaseItem))
+
+    item_id = result.id.text
+    self.assertTrue(result.id.text != None)
+
+    updated_item = gdata.base.GBaseItemFromString(test_data.TEST_BASE_ENTRY)
+    updated_item.label[0].text = 'Test Item'
+    result = self.gd_client.UpdateItem(item_id, updated_item, 
+        converter=atom.EntryFromString)
+    self.assertTrue(isinstance(result, atom.Entry))
+    self.assertFalse(isinstance(result, gdata.base.GBaseItem))
+
+    result = self.gd_client.DeleteItem(item_id)
+    self.assertTrue(result)
 
         
 if __name__ == '__main__':

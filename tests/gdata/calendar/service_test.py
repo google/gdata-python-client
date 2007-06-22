@@ -198,6 +198,12 @@ class CalendarServiceUnitTest(unittest.TestCase):
     self.assertEquals(after_delete_query_result.entry[0].event_status.value,
         'CANCELED')
 
+  def testCorrectReturnTypesForGetMethods(self):
+    self.cal_client.ProgrammaticLogin()
+
+    result = self.cal_client.GetCalendarEventFeed()
+    self.assertTrue(isinstance(result, gdata.calendar.CalendarEventFeed))
+
 
 class CalendarEventQueryUnitTest(unittest.TestCase):
 

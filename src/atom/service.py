@@ -169,6 +169,7 @@ class AtomService(object):
     Returns:
       httplib.HTTPResponse The server's response to the GET request.
     """
+    
     query_connection = self._CreateConnection(uri, 'GET', extra_headers,
         url_params, escape_params)
 
