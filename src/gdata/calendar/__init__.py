@@ -618,9 +618,12 @@ class Who(UriEnumElement):
       UriEnumElement._TakeChildFromElementTree(self, child, element_tree)
 
   def _TransferToElementTree(self, element_tree):
-    self.value=self.rel
-    element_tree.attrib['valueString']=self.name
-    element_tree.attrib['email']=self.email
+    if self.rel:
+      self.value=self.rel
+    if self.name:
+      element_tree.attrib['valueString']=self.name
+    if self.email:
+      element_tree.attrib['email']=self.email
     return UriEnumElement._TransferToElementTree(self, element_tree)
 
 
