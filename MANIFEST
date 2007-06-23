@@ -13,11 +13,14 @@ src/gdata/calendar/__init__.py
 src/gdata/calendar/service.py
 src/gdata/spreadsheet/__init__.py
 src/gdata/spreadsheet/service.py
+src/gdata/apps/__init__.py
+src/gdata/apps/service.py
 samples/base/baseQueryExample.py
 samples/base/dryRunInsert.py
 samples/calendar/calendarExample.py
 samples/spreadsheets/spreadsheetExample.py
 samples/blogger/BloggerExample.py
+samples/mashups/birthdaySample.py
 tests/atom_test.py
 tests/gdata_test.py
 tests/atom/service_test.py
@@ -25,7 +28,9 @@ tests/gdata/service_test.py
 tests/gdata/calendar/service_test.py
 tests/gdata/base/service_test.py
 tests/gdata/spreadsheet/service_test.py
+tests/gdata/apps/service_test.py
 tests/gdata/calendar_test.py
 tests/gdata/base_test.py
 tests/gdata/spreadsheet_test.py
+tests/gdata/apps_test.py
 tests/gdata/testimage.jpg
