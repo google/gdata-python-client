@@ -1,31 +1,43 @@
+=== 1.0.4 ===
+June 23, 2007
+
+- Added data and service modules for Google Apps.
+- XML parsing can now be configured in gdata module service calls to avoid 
+    multiparsing to convert to the desired type.
+- Fixed UTF-8 support in the Atom modules.
+- The spreadsheets example now works with UTF-8 column names.
+- Fixed a type in the Google Base dry-run sample.
+- Calendar's Who element no longer requires a name when converting to XML.
+
 === 1.0.3 ===
 May 30, 2007
 
 - Added a mashup sample using the spreadsheets and calendar services.
-- Reduced the number of unnecessary namespace declarations in the XML produced by objects.
+- Reduced the number of unnecessary namespace declarations in the XML produced 
+    by objects.
 - Changed type of custom elements in a spreadsheets list entry.
 - Fixed bugs in spreadsheetsExample.py.
-- Spreadsheet entries now inherit from GDataEntry and have gdata specific convenience methods. 
-
+- Spreadsheet entries now inherit from GDataEntry and have gdata specific 
+    convenience methods. 
 
 === 1.0.2 ===
 May 4, 2007
 
 - Added support for media. Services can now upload images, the tests for this
-  service use the Picasa Web Albums data API.
+    service use the Picasa Web Albums data API.
 - Added example code illustrating Blogger operations.
 - Fixed host name processing for URLs which have -'s in the host name.
 - Added a debug setting for service classes.
 - Added user agent header.
 - Made finding links of a specific type easier when dealing with Atom elements.
-  Atom Entries now have GetXLink methods.
+    Atom Entries now have GetXLink methods.
 - Simplified finding license links in Atom Entries. 
 
 === 1.0.1 ===
 April 20, 2007
 
 - Rearranged package structure, tests are in their own directory and Google
-  data API extension classes are nested under the gdata package.
+    data API extension classes are nested under the gdata package.
 - Simplified accessing extension elements by adding FindExtesions.
 - Provided a setup.py file for distutils based installation.
 - Added support for the app:draft element.
@@ -35,8 +47,6 @@ April 20, 2007
 - Fixed delete and update operations in the spreadsheetExample script.
 - Fixed setting sort order and order by in calendar's service module.
 - Added HTTP BasicAuth for AtomService.
-
-
 
 === 1.0 ===
 March 26, 2007

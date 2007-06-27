@@ -222,9 +222,7 @@ class SpreadsheetsService(gdata.service.GDataService):
     feed = self.GetListFeed(key, wksht_id)
     for a_link in feed.link:
       if a_link.rel == 'http://schemas.google.com/g/2005#post':
-        response = self.Post(new_entry, a_link.href)
-        if isinstance(response, atom.Entry):
-          return gdata.spreadsheet.SpreadsheetsListFromString(response.ToString())
+        return self.Post(new_entry, a_link.href, converter=gdata.spreadsheet.SpreadsheetsListFromString)
     
   def UpdateRow(self, entry, new_row_data):
     """Updates a row with the provided data
