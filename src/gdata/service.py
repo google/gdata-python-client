@@ -505,7 +505,8 @@ class GDataService(atom.service.AtomService):
           m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
           if m is not None:
             self.__gsessionid = m.group(1)
-          return self.Get(location, extra_headers, redirects_remaining - 1)
+          return self.Get(location, extra_headers, redirects_remaining - 1, 
+              encoding=encoding, converter=converter)
         else:
           raise RequestError, {'status': server_response.status,
               'reason': '302 received without Location header',
@@ -546,7 +547,7 @@ class GDataService(atom.service.AtomService):
       A GDataEntry built from the XML in the server's response.
     """
 
-    result = self.Get(uri, extra_headers)
+    result = self.Get(uri, extra_headers, converter=atom.EntryFromString)
     if isinstance(result, atom.Entry):
       return result
     else:
@@ -570,7 +571,7 @@ class GDataService(atom.service.AtomService):
       A GDataFeed built from the XML in the server's response.
     """
 
-    result = self.Get(uri, extra_headers)
+    result = self.Get(uri, extra_headers, converter=atom.FeedFromString)
     if isinstance(result, atom.Feed):
       return result
     else:
@@ -702,7 +703,8 @@ class GDataService(atom.service.AtomService):
           if m is not None:
             self.__gsessionid = m.group(1) 
           return self.Post(data, location, extra_headers, url_params,
-              escape_params, redirects_remaining - 1, media_source)
+              escape_params, redirects_remaining - 1, media_source, 
+              converter=converter)
         else:
           raise RequestError, {'status': server_response.status,
               'reason': '302 received without Location header',
@@ -837,7 +839,8 @@ class GDataService(atom.service.AtomService):
           if m is not None:
             self.__gsessionid = m.group(1) 
           return self.Put(data, location, extra_headers, url_params,
-              escape_params, redirects_remaining - 1)
+              escape_params, redirects_remaining - 1, 
+              media_source=media_source, converter=converter)
         else:
           raise RequestError, {'status': server_response.status,
               'reason': '302 received without Location header',
