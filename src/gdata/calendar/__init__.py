@@ -35,6 +35,7 @@ import gdata
 # XML namespaces which are often used in Google Calendar entities.
 GCAL_NAMESPACE = 'http://schemas.google.com/gCal/2005'
 GCAL_TEMPLATE = '{http://schemas.google.com/gCal/2005}%s'
+WEB_CONTENT_LINK_REL = '%s/%s' % (GCAL_NAMESPACE, 'webContent')
 GACL_NAMESPACE = 'http://schemas.google.com/acl/2007'
 GACL_TEMPLATE = '{http://schemas.google.com/acl/2007}%s'
 
@@ -214,7 +215,7 @@ class CalendarEventEntry(gdata.GDataEntry):
       transparency=None, comments=None, event_status=None,
       send_event_notifications=None, visibility=None,
       recurrence=None, recurrence_exception=None,
-      where=None, when=None, who=None,
+      where=None, when=None, who=None, quick_add=None,
       extended_property=None, 
       extension_elements=None, extension_attributes=None, text=None):
 
@@ -233,6 +234,7 @@ class CalendarEventEntry(gdata.GDataEntry):
     self.where = where or []
     self.when = when or []
     self.who = who or []
+    self.quick_add = quick_add
     self.extended_property = extended_property or []
     self.text = text
     self.extension_elements = extension_elements or []
@@ -259,6 +261,8 @@ class CalendarEventEntry(gdata.GDataEntry):
        self.event_status._BecomeChildElement(element_tree)
     if self.recurrence:
       self.recurrence._BecomeChildElement(element_tree)
+    if self.quick_add:
+      self.quick_add._BecomeChildElement(element_tree)
     for an_exception in self.recurrence_exception:
       an_exception._BecomeChildElement(element_tree)
     gdata.GDataEntry._TransferToElementTree(self, element_tree)
@@ -297,8 +301,15 @@ class CalendarEventEntry(gdata.GDataEntry):
       self.send_event_notifications=(
           _SendEventNotificationsFromElementTree(child))
       element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (GCAL_NAMESPACE, 'quickadd'):
+      self.quick_add=(_QuickAddFromElementTree(child))
+      element_tree.remove(child)
     elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'comments'):
       self.comments=_CommentsFromElementTree(child) 
+      element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'link') and \
+        child.attrib['rel'] == WEB_CONTENT_LINK_REL:
+      self.link.append(_WebContentLinkFromElementTree(child))
       element_tree.remove(child)
     else:
       gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
@@ -307,6 +318,19 @@ class CalendarEventEntry(gdata.GDataEntry):
     while len(element_tree) > 0:
       self._TakeChildFromElementTree(element_tree[0], element_tree)
     gdata.GDataEntry._TransferFromElementTree(self, element_tree)
+    
+  def GetWebContentLink(self):
+    """Finds the first link with rel set to WEB_CONTENT_REL
+
+    Returns:
+      A gdata.calendar.WebContentLink or none if none of the links had rel 
+      equal to WEB_CONTENT_REL
+    """
+
+    for a_link in self.link:
+      if a_link.rel == WEB_CONTENT_LINK_REL:
+        return a_link
+    return None
 
 def CalendarEventEntryFromString(xml_string):
   element_tree = ElementTree.fromstring(xml_string)
@@ -818,6 +842,30 @@ class SendEventNotifications(atom.AtomBase):
       atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
           element_tree)
 
+class QuickAdd(atom.AtomBase):
+  """The Google Calendar quickadd element"""
+
+  def __init__(self, extension_elements=None,
+      value=None, extension_attributes=None, text=None):
+    self.value = value
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+  def _TransferToElementTree(self, element_tree):
+    if self.value:
+      element_tree.attrib['value'] = self.value
+    element_tree.tag = GCAL_TEMPLATE % 'quickadd'
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    return element_tree
+
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+    if attribute == 'value':
+      self.value = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    else:
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
+          element_tree)
 
 class Color(atom.AtomBase):
   """The Google Calendar color element"""
@@ -976,7 +1024,68 @@ class Role(atom.AtomBase):
       del element_tree.attrib[attribute]
     else:
       atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
+          element_tree)                    
+      
+class WebContentLink(atom.Link):
+    
+  def __init__(self, title=None, href=None, link_type=None, 
+        web_content=None):
+    atom.Link.__init__(self, rel=WEB_CONTENT_LINK_REL, title=title, href=href, 
+        link_type=link_type)
+    self.web_content = web_content
+    
+  def _TransferToElementTree(self, element_tree):
+    if self.web_content:
+      self.web_content._BecomeChildElement(element_tree)
+    atom.Link._TransferToElementTree(self, element_tree)
+    return element_tree
+
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+      atom.Link._TakeAttributeFromElementTree(self, attribute, 
           element_tree)
+
+  def _TakeChildFromElementTree(self, child, element_tree):
+    if child.tag == '{%s}%s' % (GCAL_NAMESPACE, 'webContent'):
+      self.web_content=(_WebContentFromElementTree(child))
+      element_tree.remove(child)
+    else:
+      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
+
+     
+class WebContent(atom.AtomBase):
+  def __init__(self, url=None, width=None, height=None, text=None,
+      extension_elements=None, extension_attributes=None):
+    self.url = url
+    self.width = width
+    self.height = height
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+  def _TransferToElementTree(self, element_tree):
+    if self.url:
+      element_tree.attrib['url'] = self.url
+    if self.width:
+      element_tree.attrib['width'] = self.width
+    if self.height:
+      element_tree.attrib['height'] = self.height
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    element_tree.tag = GCAL_TEMPLATE % 'webContent'
+    return element_tree
+
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+    if attribute == 'url':
+      self.url = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    elif attribute == 'width':
+      self.width = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    elif attribute == 'height':
+      self.height = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    else:
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
+          element_tree)                    
 
 def CalendarListFeedFromString(xml_string):
   element_tree = ElementTree.fromstring(xml_string)
@@ -1028,6 +1137,8 @@ _EventStatusFromElementTree = atom._AtomInstanceFromElementTree(
     EventStatus, 'eventStatus', gdata.GDATA_NAMESPACE)
 _SendEventNotificationsFromElementTree = atom._AtomInstanceFromElementTree(
     SendEventNotifications, 'sendEventNotifications', GCAL_NAMESPACE)
+_QuickAddFromElementTree = atom._AtomInstanceFromElementTree(
+    QuickAdd, 'quickadd', GCAL_NAMESPACE)
 _AttendeeStatusFromElementTree = atom._AtomInstanceFromElementTree(
     AttendeeStatus, 'attendeeStatus', gdata.GDATA_NAMESPACE)
 _AttendeeTypeFromElementTree = atom._AtomInstanceFromElementTree(
@@ -1054,3 +1165,7 @@ _ScopeFromElementTree = atom._AtomInstanceFromElementTree(
     Scope, 'scope', GACL_NAMESPACE)
 _RoleFromElementTree = atom._AtomInstanceFromElementTree(
     Role, 'role', GACL_NAMESPACE)
+_WebContentLinkFromElementTree = atom._AtomInstanceFromElementTree(
+    WebContentLink, 'link', atom.ATOM_NAMESPACE)
+_WebContentFromElementTree = atom._AtomInstanceFromElementTree(
+    WebContent, 'webContent', GCAL_NAMESPACE)

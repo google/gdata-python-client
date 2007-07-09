@@ -774,6 +774,9 @@ xmlns:gCal='http://schemas.google.com/gCal/2005'>
     <link rel='edit' type='application/atom+xml'
     href='http://www.google.com/calendar/feeds/default/private/full/fu6sl0rqakf3o0a13oo1i1a1mg/63307178730'>
     </link>
+    <link rel="http://schemas.google.com/gCal/2005/webContent" title="World Cup" href="http://www.google.com/calendar/images/google-holiday.gif" type="image/gif">
+      <gCal:webContent width="276" height="120" url="http://www.google.com/logos/worldcup06.gif" />
+    </link>
     <author>
       <name>GData Ops Demo</name>
       <email>gdata.ops.demo@gmail.com</email>

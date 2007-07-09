@@ -207,6 +207,42 @@ class CalendarExample:
   
     return new_event
 
+  def _InsertQuickAddEvent(self, 
+      content="Tennis with John today 3pm-3:30pm"):
+    """Creates an event with the quick_add property set to true so the content
+    is processed as quick add content instead of as an event description."""
+    event = gdata.calendar.CalendarEventEntry()
+    event.content = atom.Content('html', '', content)
+    event.quick_add = gdata.calendar.QuickAdd(value='true');
+
+    new_event = self.cal_client.InsertEvent(event, 
+        '/calendar/feeds/default/private/full')
+    return new_event
+    
+  def _InsertWebContentEvent(self):
+    """Creates a WebContent object and embeds it in a WebContentLink.
+    The WebContentLink is appended to the existing list of links in the event
+    entry.  Finally, the calendar client inserts the event."""
+
+    # Create a WebContent object
+    url = 'http://www.google.com/logos/worldcup06.gif'
+    web_content = gdata.calendar.WebContent(url=url, width='276', height='120')
+    
+    # Create a WebContentLink object that contains the WebContent object
+    title = 'World Cup'
+    href = 'http://www.google.com/calendar/images/google-holiday.gif'
+    type = 'image/gif'
+    web_content_link = gdata.calendar.WebContentLink(title=title, href=href, 
+        link_type=type, web_content=web_content)
+        
+    # Create an event that contains this web content
+    event = gdata.calendar.CalendarEventEntry()
+    event.link.append(web_content_link)
+
+    new_event = self.cal_client.InsertEvent(event, 
+        '/calendar/feeds/default/private/full')
+    return new_event
+
   def _UpdateTitle(self, event, new_title='Updated event title'):
     """Updates the title of the specified event with the specified new_title.
     Note that the UpdateEvent method (like InsertEvent) returns the 
@@ -338,6 +374,8 @@ class CalendarExample:
     see_u_ext_prop = self._AddExtendedProperty(see_u_reminder, 
         name='propname', value='propvalue')
     ree = self._InsertRecurringEvent()
+    web_content_event = self._InsertWebContentEvent()
+    quick_add_event = self._InsertQuickAddEvent()
   
     # Access Control List examples
     self._PrintAclFeed()
@@ -351,6 +389,8 @@ class CalendarExample:
       print 'Deleting created events'
       self.cal_client.DeleteEvent(see_u_ext_prop.GetEditLink().href)
       self.cal_client.DeleteEvent(ree.GetEditLink().href)
+      self.cal_client.DeleteEvent(web_content_event.GetEditLink().href)
+      self.cal_client.DeleteEvent(quick_add_event.GetEditLink().href)
     
  
 def main():

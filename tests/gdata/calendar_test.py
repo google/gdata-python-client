@@ -239,10 +239,10 @@ class CalendarFeedTest(unittest.TestCase):
     entry = gdata.calendar.CalendarEventEntryFromString(
         test_data.RECURRENCE_EXCEPTION_ENTRY)
 
-    self.assertTrue(isinstance(entry.recurrence_exception, list))
-    self.assertTrue(isinstance(entry.recurrence_exception[0].entry_link, 
+    self.assert_(isinstance(entry.recurrence_exception, list))
+    self.assert_(isinstance(entry.recurrence_exception[0].entry_link, 
         gdata.EntryLink))
-    self.assertTrue(isinstance(entry.recurrence_exception[0].entry_link.entry,
+    self.assert_(isinstance(entry.recurrence_exception[0].entry_link.entry,
         gdata.calendar.CalendarEventEntry))
     self.assertEquals(
         entry.recurrence_exception[0].entry_link.entry.author[0].name.text, 
@@ -511,6 +511,18 @@ class CalendarEventFeedTest(unittest.TestCase):
         self.calendar_event_feed.entry[2].send_event_notifications.value,
         'true')
 
+  def testQuickAdd(self):
+    """Test the existence of <gCal:quickadd> 
+    and verifies the value"""
+
+    entry = gdata.calendar.CalendarEventEntry()
+    entry.quick_add = gdata.calendar.QuickAdd(value='true')
+    unmarshalled_entry = entry.ToString()
+    tag = '{%s}quickadd' % (gdata.calendar.GCAL_NAMESPACE)
+    marshalled_entry = ElementTree.fromstring(unmarshalled_entry).find(tag)
+    self.assert_(marshalled_entry.attrib['value'],'true')
+    self.assert_(marshalled_entry.tag,tag)
+
   def testEventStatus(self):
     """Test the existence of <gd:eventStatus> 
     and verifies the value"""
@@ -640,6 +652,84 @@ class CalendarEventFeedTest(unittest.TestCase):
   # TODO test recurrence and recurrenceexception
   # TODO test originalEvent 
 
+class CalendarWebContentTest(unittest.TestCase):
+  def setUp(self):
+    self.calendar_event_feed = (
+        gdata.calendar.CalendarEventFeedFromString(
+            test_data.CALENDAR_FULL_EVENT_FEED))
+    
+  def testAddWebContentEventEntry(self):
+    """Verifies that we can add a web content link to an event entry."""
+    
+    title = "Al Einstein's Birthday!"
+    href = 'http://gdata.ops.demo.googlepages.com/birthdayicon.gif'
+    type = 'image/jpeg'
+    url = 'http://gdata.ops.demo.googlepages.com/einstein.jpg'
+    width = '300'
+    height = '225'
+    
+    # Create a web content event
+    event = gdata.calendar.CalendarEventEntry()    
+    web_content = gdata.calendar.WebContent(url=url, width=width, height=height)
+    web_content_link = gdata.calendar.WebContentLink(title=title, 
+        href=href, link_type=type, web_content=web_content)
+    event.link.append(web_content_link)
+    
+    # Verify the web content link exists and contains the expected data    
+    web_content_link = event.GetWebContentLink()
+    self.assertValidWebContentLink(title, href, type, web_content_link)
+    
+    # Verify the web content element exists and contains the expected data    
+    web_content_element = web_content_link.web_content
+    self.assertValidWebContent(url, width, height, web_content_element)
+  
+  def testFromXmlToWebContent(self):
+    """Verifies that we can read a web content link from an event entry."""
+
+    # Expected values (from test_data.py file)
+    title = 'World Cup'
+    href = 'http://www.google.com/calendar/images/google-holiday.gif'
+    type = 'image/gif'
+    url = 'http://www.google.com/logos/worldcup06.gif'
+    width = '276'
+    height = '120'
+
+    # Note: The tenth event entry contains web content
+    web_content_event = self.calendar_event_feed.entry[9]
+
+    # Verify the web content link exists and contains the expected data
+    web_content_link = web_content_event.GetWebContentLink()
+    self.assertValidWebContentLink(title, href, type, web_content_link)
+    
+    # Verify the web content element exists and contains the expected data
+    web_content_element = web_content_link.web_content
+    self.assertValidWebContent(url, width, height, web_content_element)
+    
+  def assertValidWebContentLink(self, expected_title=None, expected_href=None, 
+      expected_type=None, web_content_link=None):
+    """Asserts that the web content link is the correct type and contains the
+    expected values"""
+    
+    self.assert_(isinstance(web_content_link, gdata.calendar.WebContentLink),
+          "Web content link element must be an " +
+          "instance of gdata.calendar.WebContentLink: %s" % web_content_link)
+    expected_rel = '%s/%s' % (gdata.calendar.GCAL_NAMESPACE, 'webContent')
+    self.assertEquals(expected_rel, web_content_link.rel)
+    self.assertEqual(expected_title, web_content_link.title)
+    self.assertEqual(expected_href, web_content_link.href)
+    self.assertEqual(expected_type, web_content_link.type)
+
+  def assertValidWebContent(self, expected_url=None, expected_width=None, 
+      expected_height=None, web_content_element=None):
+    """Asserts that the web content element is the correct type and contains
+    the expected values"""
+
+    self.assert_(isinstance(web_content_element, gdata.calendar.WebContent),
+          "Calendar event entry <gCal:webContent> element must be an " +
+          "instance of gdata.calendar.WebContent: %s" % web_content_element)
+    self.assertEquals(expected_width, web_content_element.width)
+    self.assertEquals(expected_height, web_content_element.height)
+    self.assertEquals(expected_url, web_content_element.url)
 
 if __name__ == '__main__':
   unittest.main()
