@@ -27,11 +27,14 @@ Spreadsheets operations.
 
 __author__ = 'api.laurabeth@gmail.com (Laura Beth Lincoln)'
 
-try:
-  from xml.etree import ElementTree
-except ImportError:
-  from elementtree import ElementTree
 import urllib
+try:
+  from xml.etree import cElementTree as ElementTree
+except ImportError:
+  try:
+    import cElementTree as ElementTree
+  except ImportError:
+    from elementtree import ElementTree
 import gdata
 import atom.service
 import gdata.service
@@ -73,21 +76,19 @@ class SpreadsheetsService(gdata.service.GDataService):
     uri = ('http://%s/feeds/spreadsheets/%s/%s' 
            % (self.server, visibility, projection))
     
-    if key != None:
+    if key is not None:
       uri = '%s/%s' % (uri, key)
       
     if query != None:
       query.feed = uri
       uri = query.ToUri()
-      
-    result = self.Get(uri)
-    
-    if isinstance(result, atom.Feed):
-      return gdata.spreadsheet.SpreadsheetsSpreadsheetsFeedFromString(
-          result.ToString())
-    elif isinstance(result, atom.Entry):
-      return gdata.spreadsheet.SpreadsheetsSpreadsheetFromString(
-          result.ToString())
+
+    if key:
+      return self.Get(uri, 
+          converter=gdata.spreadsheet.SpreadsheetsSpreadsheetFromString)
+    else:
+      return self.Get(uri,
+          converter=gdata.spreadsheet.SpreadsheetsSpreadsheetsFeedFromString)
   
   def GetWorksheetsFeed(self, key, wksht_id=None, query=None, 
       visibility='private', projection='full'):
@@ -111,12 +112,13 @@ class SpreadsheetsService(gdata.service.GDataService):
     if query != None:
       query.feed = uri
       uri = query.ToUri()
-      
-    result = self.Get(uri)
-    if isinstance(result, atom.Feed):
-      return gdata.spreadsheet.SpreadsheetsWorksheetsFeedFromString(result.ToString())
-    elif isinstance(result, atom.Entry):
-      return gdata.spreadsheet.SpreadsheetsWorksheetFromString(result.ToString())
+
+    if wksht_id:
+      return self.Get(uri, 
+          converter=gdata.spreadsheet.SpreadsheetsWorksheetFromString)
+    else:
+      return self.Get(uri,
+          converter=gdata.spreadsheet.SpreadsheetsWorksheetsFeedFromString)
   
   def GetCellsFeed(self, key, wksht_id='default', cell=None, query=None, 
       visibility='private', projection='full'):
@@ -141,12 +143,13 @@ class SpreadsheetsService(gdata.service.GDataService):
     if query != None:
       query.feed = uri
       uri = query.ToUri()
-      
-    result = self.Get(uri)
-    if isinstance(result, atom.Feed):
-      return gdata.spreadsheet.SpreadsheetsCellsFeedFromString(result.ToString())
-    elif isinstance(result, atom.Entry):
-      return gdata.spreadsheet.SpreadsheetsCellFromString(result.ToString())
+
+    if cell:
+      return self.Get(uri, 
+          converter=gdata.spreadsheet.SpreadsheetsCellFromString)
+    else:
+      return self.Get(uri, 
+          converter=gdata.spreadsheet.SpreadsheetsCellsFeedFromString)
   
   def GetListFeed(self, key, wksht_id='default', row_id=None, query=None,
       visibility='private', projection='full'):
@@ -164,19 +167,20 @@ class SpreadsheetsService(gdata.service.GDataService):
     
     uri = ('http://%s/feeds/list/%s/%s/%s/%s' 
            % (self.server, key, wksht_id, visibility, projection))
-    
-    if row_id != None:
+
+    if row_id is not None:
       uri = '%s/%s' % (uri, row_id)
       
-    if query != None:
+    if query is not None:
       query.feed = uri
       uri = query.ToUri()
-      
-    result = self.Get(uri)
-    if isinstance(result, atom.Feed):
-      return gdata.spreadsheet.SpreadsheetsListFeedFromString(result.ToString())
-    elif isinstance(result, atom.Entry):
-      return gdata.spreadsheet.SpreadsheetsListFromString(result.ToString())
+
+    if row_id:
+      return self.Get(uri, 
+          converter=gdata.spreadsheet.SpreadsheetsListFromString)
+    else:
+      return self.Get(uri, 
+          converter=gdata.spreadsheet.SpreadsheetsListFeedFromString)
     
   def UpdateCell(self, row, col, inputValue, key, wksht_id='default'):
     """Updates an existing cell.
@@ -198,10 +202,8 @@ class SpreadsheetsService(gdata.service.GDataService):
     for a_link in entry.link:
       if a_link.rel == 'edit':
         entry.cell = new_cell
-        response = self.Put(entry, a_link.href)
-        if isinstance(response, atom.Entry):
-          return gdata.spreadsheet.SpreadsheetsCellFromString(response.ToString())
-        
+        return self.Put(entry, a_link.href, 
+            converter=gdata.spreadsheet.SpreadsheetsCellFromString)
     
   def InsertRow(self, row_data, key, wksht_id='default'):
     """Inserts a new row with the provided data
@@ -222,7 +224,8 @@ class SpreadsheetsService(gdata.service.GDataService):
     feed = self.GetListFeed(key, wksht_id)
     for a_link in feed.link:
       if a_link.rel == 'http://schemas.google.com/g/2005#post':
-        return self.Post(new_entry, a_link.href, converter=gdata.spreadsheet.SpreadsheetsListFromString)
+        return self.Post(new_entry, a_link.href, 
+            converter=gdata.spreadsheet.SpreadsheetsListFromString)
     
   def UpdateRow(self, entry, new_row_data):
     """Updates a row with the provided data
@@ -242,9 +245,8 @@ class SpreadsheetsService(gdata.service.GDataService):
       entry.custom[k] = new_custom
     for a_link in entry.link:
       if a_link.rel == 'edit':
-        response = self.Put(entry, a_link.href)
-        if isinstance(response, atom.Entry):
-          return gdata.spreadsheet.SpreadsheetsListFromString(response.ToString())
+        return self.Put(entry, a_link.href, 
+            converter=gdata.spreadsheet.SpreadsheetsListFromString)
         
   def DeleteRow(self, entry):
     """Deletes a row, the provided entry

@@ -21,9 +21,12 @@ __author__ = 'api.laurabeth@gmail.com (Laura Beth Lincoln)'
 
 
 try:
-  from xml.etree import ElementTree
+  from xml.etree import cElementTree as ElementTree
 except ImportError:
-  from elementtree import ElementTree
+  try:
+    import cElementTree as ElementTree
+  except ImportError:
+    from elementtree import ElementTree
 import atom
 import gdata
 import re

@@ -27,9 +27,12 @@
 __author__ = 'api.vli (Vivian Li)'
 
 try:
-  from xml.etree import ElementTree
+  from xml.etree import cElementTree as ElementTree
 except ImportError:
-  from elementtree import ElementTree
+  try:
+    import cElementTree as ElementTree
+  except ImportError:
+    from elementtree import ElementTree
 import urllib
 import gdata
 import atom.service

@@ -46,9 +46,12 @@ __author__ = 'api.jscudder (Jeffrey Scudder)'
 
 
 try:
-  from xml.etree import ElementTree
+  from xml.etree import cElementTree as ElementTree
 except ImportError:
-  from elementtree import ElementTree
+  try:
+    import cElementTree as ElementTree
+  except ImportError:
+    from elementtree import ElementTree
 
 
 # XML namespaces which are often used in Atom entities.

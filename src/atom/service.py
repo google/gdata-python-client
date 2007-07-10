@@ -30,9 +30,12 @@ import urllib
 import re
 import base64
 try:
-  from xml.etree import ElementTree
+  from xml.etree import cElementTree as ElementTree
 except ImportError:
-  from elementtree import ElementTree
+  try:
+    import cElementTree as ElementTree
+  except ImportError:
+    from elementtree import ElementTree
 
 URL_REGEX = re.compile('http(s)?\://([\w\.-]*)(\:(\d+))?(/.*)?')
 
@@ -169,7 +172,7 @@ class AtomService(object):
     Returns:
       httplib.HTTPResponse The server's response to the GET request.
     """
-    
+
     query_connection = self._CreateConnection(uri, 'GET', extra_headers,
         url_params, escape_params)
 
@@ -200,7 +203,7 @@ class AtomService(object):
     Returns:
       httplib.HTTPResponse Server's response to the POST request.
     """
-    if isinstance(data, ElementTree._Element):
+    if ElementTree.iselement(data):
       data_str = ElementTree.tostring(data)
     else:
       data_str = str(data)
@@ -239,7 +242,7 @@ class AtomService(object):
     Returns:
       httplib.HTTPResponse Server's response to the PUT request.
     """
-    if isinstance(data, ElementTree._Element):
+    if ElementTree.iselement(data):
       data_str = ElementTree.tostring(data)
     else:
       data_str = str(data)

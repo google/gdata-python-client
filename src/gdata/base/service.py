@@ -26,11 +26,14 @@
 
 __author__ = 'api.jscudder (Jeffrey Scudder)'
 
-try:
-  from xml.etree import ElementTree
-except ImportError:
-  from elementtree import ElementTree
 import urllib
+try:
+  from xml.etree import cElementTree as ElementTree
+except ImportError:
+  try:
+    import cElementTree as ElementTree
+  except ImportError:
+    from elementtree import ElementTree
 import gdata
 import atom.service
 import gdata.service

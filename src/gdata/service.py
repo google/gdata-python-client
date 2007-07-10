@@ -56,16 +56,19 @@
 __author__ = 'api.jscudder (Jeffrey Scudder)'
 
 
+import re
 import httplib
 import urllib
 try:
-  from xml.etree import ElementTree
+  from xml.etree import cElementTree as ElementTree
 except ImportError:
-  from elementtree import ElementTree
+  try:
+    import cElementTree as ElementTree
+  except ImportError:
+    from elementtree import ElementTree
 import atom.service
 import gdata
 import atom
-import re
 
 
 PROGRAMMATIC_AUTH_LABEL = 'GoogleLogin auth'
@@ -463,7 +466,7 @@ class GDataService(atom.service.AtomService):
       return a string. If there is a ResultsTransformer, the returned value 
       will be that of the ResultsTransformer function.
     """
-    
+
     if extra_headers is None:
       extra_headers = {}
 
@@ -627,7 +630,7 @@ class GDataService(atom.service.AtomService):
           uri += '?gsessionid=%s' % (self.__gsessionid,)
 
     if data and media_source:
-      if isinstance(data, ElementTree._Element):
+      if ElementTree.iselement(data):
         data_str = ElementTree.tostring(data)
       else:
         data_str = str(data)
@@ -765,7 +768,7 @@ class GDataService(atom.service.AtomService):
           uri += '?gsessionid=%s' % (self.__gsessionid,)
 
     if media_source and data:
-      if isinstance(data, ElementTree._Element):
+      if ElementTree.iselement(data):
         data_str = ElementTree.tostring(data)
       else:
         data_str = str(data)

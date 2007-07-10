@@ -23,13 +23,15 @@
 
 __author__ = 'api.jscudder (Jeffrey Scudder)'
 
-
-try:
-  from xml.etree import ElementTree
-except ImportError:
-  from elementtree import ElementTree
-import atom
 import os
+try:
+  from xml.etree import cElementTree as ElementTree
+except ImportError:
+  try:
+    import cElementTree as ElementTree
+  except ImportError:
+    from elementtree import ElementTree
+import atom
 
 
 # XML namespaces which are often used in GData entities.

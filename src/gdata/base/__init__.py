@@ -16,13 +16,17 @@
 
 """Contains extensions to Atom objects used with Google Base."""
 
+
 __author__ = 'api.jscudder (Jeffrey Scudder)'
 
 
 try:
-  from xml.etree import ElementTree
+  from xml.etree import cElementTree as ElementTree
 except ImportError:
-  from elementtree import ElementTree
+  try:
+    import cElementTree as ElementTree
+  except ImportError:
+    from elementtree import ElementTree
 import atom
 import gdata
 
