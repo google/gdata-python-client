@@ -113,7 +113,7 @@ class GDataService(atom.service.AtomService):
   def __init__(self, email=None, password=None, account_type='HOSTED_OR_GOOGLE',
                service=None, source=None, server=None, 
                additional_headers=None):
-    """Creates an object of type GDataClient.
+    """Creates an object of type GDataService.
 
     Args:
       email: string (optional) The user's email address, used for
@@ -148,7 +148,7 @@ class GDataService(atom.service.AtomService):
 
     self.additional_headers['User-Agent'] = 'Python Google Data Client Lib'
  
-  # Define properties for GDataClient
+  # Define properties for GDataService
   def _SetAuthSubToken(self, auth_token):
     """Sets the token sent in requests to an AuthSub token.
 
