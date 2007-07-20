@@ -25,10 +25,12 @@
 
 __author__ = 'api.jscudder (Jeffrey Scudder)'
 
+import os
 import httplib
 import urllib
 import re
 import base64
+import socket
 try:
   from xml.etree import cElementTree as ElementTree
 except ImportError:
@@ -67,13 +69,17 @@ class AtomService(object):
 
     self.additional_headers['User-Agent'] = 'Python Google Data Client Lib'
 
-  def _ProcessUrl(self, url):
+  def _ProcessUrl(self, url, for_proxy=False):
     """Processes a passed URL.  If the URL does not begin with https?, then
     the default value for self.server is used"""
 
     server = self.server
-    port = self.port
-    ssl = self.ssl
+    if for_proxy:
+      port = 80
+      ssl = False
+    else:
+      port = self.port
+      ssl = self.ssl
     uri = url
 
     m = URL_REGEX.match(url)
@@ -95,7 +101,7 @@ class AtomService(object):
         uri = '/'
       return (server, port, ssl, uri)
 
-  def UseBasicAuth(self, username, password):
+  def UseBasicAuth(self, username, password, for_proxy=False):
     """Sets an Authenticaiton: Basic HTTP header containing plaintext.
     
     The username and password are base64 encoded and added to an HTTP header
@@ -109,19 +115,79 @@ class AtomService(object):
 
     base_64_string = base64.encodestring('%s:%s' % (username, password))
     base_64_string = base_64_string.strip()
-    self.additional_headers['Authorization'] = 'Basic %s' % (base_64_string,)
+    if for_proxy:
+      header_name = 'Proxy-Authorization'
+    else:
+      header_name = 'Authorization'
+    self.additional_headers[header_name] = 'Basic %s' % (base_64_string,)
+
+  def _PrepareConnection(self, full_uri):
     
+    (server, port, ssl, partial_uri) = self._ProcessUrl(full_uri)
+    if ssl:
+      # destination is https
+      proxy = os.environ.get('https_proxy')
+      if proxy:
+        (p_server, p_port, p_ssl, p_uri) = self._ProcessUrl(proxy, True)
+        proxy_username = os.environ.get('proxy-username')
+        proxy_password = os.environ.get('proxy-password')
+        if proxy_username:
+          user_pass=base64.encodestring(proxy_username + ':' + proxy_password)
+          proxy_authorization = 'Proxy-authorization: Basic '+user_pass+'\r\n'
+        else:
+          proxy_authorization = ''
+        proxy_connect='CONNECT %s:%s HTTP/1.0\r\n' % (server,port)
+        user_agent='User-Agent: %s\r\n' % self.additional_headers['User-Agent']
+        proxy_pieces=proxy_connect+proxy_authorization+user_agent+'\r\n'
+
+        #now connect, very simple recv and error checking
+        p_sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+        p_sock.connect((p_server,p_port))
+        p_sock.sendall(proxy_pieces)
+        response=p_sock.recv(8192)
+        p_status=response.split()[1]
+        if p_status!=str(200):
+          raise 'Error status=',str(p_status)
+
+        #trivial setup for ssl socket
+        ssl = socket.ssl(p_sock, None, None)
+        fake_sock = httplib.FakeSocket(p_sock, ssl)
+
+        #initalize httplib and replace with your socket
+        connection=httplib.HTTPConnection('localhost')
+        connection.sock=fake_sock
+        full_uri = partial_uri
+
+      else:
+        connection = httplib.HTTPSConnection(server, port)
+        full_uri = partial_uri
+
+    else:
+      # destination is http
+      proxy = os.environ.get('http_proxy')
+      if proxy:
+        (p_server, p_port, p_ssl, p_uri) = self._ProcessUrl(proxy, True)
+        proxy_username = os.environ.get('proxy-username')
+        proxy_password = os.environ.get('proxy-password')
+        if proxy_username:
+          self.UseBasicAuth(proxy_username, proxy_password, True)
+        connection = httplib.HTTPConnection(p_server, p_port)
+        if not full_uri.startswith("http://"):
+          if full_uri.startswith("/"):
+            full_uri = "http://%s%s" % (self.server, full_uri)
+          else:
+            full_uri = "http://%s/%s" % (self.server, full_uri)
+      else:
+        connection = httplib.HTTPConnection(server, port)
+        full_uri = partial_uri
+
+    return (connection, full_uri)
+ 
   def _CreateConnection(self, uri, http_operation, extra_headers=None,
       url_params=None, escape_params=True):
       
     full_uri = BuildUri(uri, url_params, escape_params)
-    (server, port, ssl, full_uri) = self._ProcessUrl(full_uri)
-
-    if ssl:
-      connection = httplib.HTTPSConnection(server, port)
-    else:
-      connection = httplib.HTTPConnection(server, port)
-
+    (connection, full_uri) = self._PrepareConnection(full_uri)
     connection.putrequest(http_operation, full_uri)
 
     if isinstance(self.additional_headers, dict):

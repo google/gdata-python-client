@@ -264,7 +264,7 @@ class GDataService(atom.service.AtomService):
                                        'source': self.source})
 
     # Open a connection to the authentication server.
-    auth_connection = httplib.HTTPSConnection('www.google.com')
+    (auth_connection, uri) = self._PrepareConnection('https://www.google.com/')
 
     # Begin the POST request to the client login service.
     auth_connection.putrequest('POST', '/accounts/ClientLogin')
@@ -387,7 +387,8 @@ class GDataService(atom.service.AtomService):
     if self.__auth_type != AUTHSUB_AUTH_LABEL: 
       raise NonAuthSubToken
 
-    upgrade_connection = httplib.HTTPSConnection('www.google.com')
+    (upgrade_connection, uri) = self._PrepareConnection(
+        'https://www.google.com/')
     upgrade_connection.putrequest('GET', '/accounts/AuthSubSessionToken')
     
     upgrade_connection.putheader('Content-Type',
@@ -414,7 +415,8 @@ class GDataService(atom.service.AtomService):
     if self.__auth_type != AUTHSUB_AUTH_LABEL:
       raise NonAuthSubToken
     
-    revoke_connection = httplib.HTTPSConnection('www.google.com')
+    (revoke_connection, uri) = self._PrepareConnection(
+        'https://www.google.com/')
     revoke_connection.putrequest('GET', '/accounts/AuthSubRevokeToken')
     
     revoke_connection.putheader('Content-Type', 
