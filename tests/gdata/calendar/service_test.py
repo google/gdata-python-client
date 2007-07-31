@@ -47,6 +47,87 @@ class CalendarServiceUnitTest(unittest.TestCase):
     # No teardown needed
     pass  
 
+  def testPostUpdateAndDeleteSubscription(self):
+    """Test posting a new subscription, updating it, deleting it"""
+    self.cal_client.ProgrammaticLogin()
+
+    subscription_id = 'c4o4i7m2lbamc4k26sc2vokh5g%40group.calendar.google.com'
+    subscription_url = '%s%s' % (
+        'http://www.google.com/calendar/feeds/default/allcalendars/full/', 
+        subscription_id)
+
+    # Subscribe to Google Doodles calendar        
+    calendar = gdata.calendar.CalendarListEntry()
+    calendar.id = atom.Id(text=subscription_id)
+    returned_calendar = self.cal_client.InsertCalendarSubscription(calendar)
+    self.assertEquals(subscription_url, returned_calendar.id.text)
+    self.assertEquals('Google Doodles', returned_calendar.title.text)
+
+    # Update subscription
+    calendar_to_update = self.cal_client.GetCalendarListEntry(subscription_url)
+    self.assertEquals('Google Doodles', calendar_to_update.title.text) 
+    self.assertEquals('true', calendar_to_update.selected.value) 
+    calendar_to_update.selected.value = 'false'
+    self.assertEquals('false', calendar_to_update.selected.value) 
+    updated_calendar = self.cal_client.UpdateCalendar(calendar_to_update)
+    self.assertEquals('false', updated_calendar.selected.value) 
+    
+    # Delete subscription
+    response = self.cal_client.DeleteCalendarEntry(
+        returned_calendar.GetEditLink().href)
+    self.assertEquals(True, response)
+
+  def testPostUpdateAndDeleteCalendar(self):
+    """Test posting a new calendar, updating it, deleting it"""
+    self.cal_client.ProgrammaticLogin()
+
+    # New calendar to create
+    title='Little League Schedule'
+    description='This calendar contains practice and game times'
+    time_zone='America/Los_Angeles'
+    hidden=False
+    location='Oakland'
+    color='#2952A3'
+
+    # Calendar object
+    calendar = gdata.calendar.CalendarListEntry()
+    calendar.title = atom.Title(text=title)
+    calendar.summary = atom.Summary(text=description)
+    calendar.where = gdata.calendar.Where(value_string=location)
+    calendar.color = gdata.calendar.Color(value=color)
+    calendar.timezone = gdata.calendar.Timezone(value=time_zone)
+    if hidden:
+      calendar.hidden = gdata.calendar.Hidden(value='true')
+    else:
+      calendar.hidden = gdata.calendar.Hidden(value='false')
+
+    # Create calendar
+    new_calendar = self.cal_client.InsertCalendar(new_calendar=calendar)
+    self.assertEquals(title, new_calendar.title.text)
+    self.assertEquals(description, new_calendar.summary.text)
+    self.assertEquals(location, new_calendar.where.value_string)
+    self.assertEquals(color, new_calendar.color.value)
+    self.assertEquals(time_zone, new_calendar.timezone.value)
+    if hidden:
+      self.assertEquals('true', new_calendar.hidden.value) 
+    else:
+      self.assertEquals('false', new_calendar.hidden.value) 
+
+    # Update calendar
+    calendar_to_update = self.cal_client.GetCalendarListEntry(
+        new_calendar.id.text)
+    updated_title = 'This is the updated title'
+    calendar_to_update.title.text = updated_title 
+    updated_calendar = self.cal_client.UpdateCalendar(calendar_to_update)
+    self.assertEquals(updated_title, updated_calendar.title.text)
+   
+    # Delete calendar
+    calendar_to_delete  = self.cal_client.GetCalendarListEntry(
+        new_calendar.id.text)
+    self.cal_client.Delete(calendar_to_delete.GetEditLink().href) 
+
+    return new_calendar
+    
   def testPostAndDeleteExtendedPropertyEvent(self):
     """Test posting a new entry with an extended property, deleting it"""
     # Get random data for creating event

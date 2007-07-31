@@ -799,6 +799,46 @@ xmlns:gCal='http://schemas.google.com/gCal/2005'>
     </gd:when>
     <gd:where></gd:where>
   </entry>
+  <entry>
+    <id>
+    http://www.google.com/calendar/feeds/default/private/full/h7a0haa4da8sil3rr19ia6luvc</id>
+    <published>2007-07-16T22:13:28.000Z</published>
+    <updated>2007-07-16T22:13:29.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind'
+    term='http://schemas.google.com/g/2005#event' />
+    <title type='text'></title>
+    <content type='text' />
+    <link rel='alternate' type='text/html'
+    href='http://www.google.com/calendar/event?eid=aDdhMGhhYTRkYThzaWwzcnIxOWlhNmx1dmMgZ2RhdGEub3BzLmRlbW9AbQ'
+    title='alternate' />
+    <link rel='http://schemas.google.com/gCal/2005/webContent'
+    type='application/x-google-gadgets+xml'
+    href='http://gdata.ops.demo.googlepages.com/birthdayicon.gif'
+    title='Date and Time Gadget'>
+      <gCal:webContent width='300' height='136'
+      url='http://google.com/ig/modules/datetime.xml'>
+        <gCal:webContentGadgetPref name='color' value='green' />
+      </gCal:webContent>
+    </link>
+    <link rel='self' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/h7a0haa4da8sil3rr19ia6luvc' />
+    <link rel='edit' type='application/atom+xml'
+    href='http://www.google.com/calendar/feeds/default/private/full/h7a0haa4da8sil3rr19ia6luvc/63320307209' />
+    <author>
+      <name>GData Ops Demo</name>
+      <email>gdata.ops.demo@gmail.com</email>
+    </author>
+    <gd:comments>
+      <gd:feedLink href='http://www.google.com/calendar/feeds/default/private/full/h7a0haa4da8sil3rr19ia6luvc/comments' />
+    </gd:comments>
+    <gCal:sendEventNotifications value='false'>
+    </gCal:sendEventNotifications>
+    <gd:eventStatus value='http://schemas.google.com/g/2005#event.confirmed' />
+    <gd:visibility value='http://schemas.google.com/g/2005#event.default' />
+    <gd:transparency value='http://schemas.google.com/g/2005#event.opaque' />
+    <gd:when startTime='2007-03-14' endTime='2007-03-15' />
+    <gd:where />
+  </entry>
 </feed>
 """
 

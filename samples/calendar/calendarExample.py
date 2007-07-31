@@ -62,8 +62,21 @@ class CalendarExample:
     calendar, the timezone, and more.  See CalendarListEntry for more details
     on available attributes."""
 
-    feed = self.cal_client.GetCalendarListFeed()
-    print feed.title.text
+    feed = self.cal_client.GetAllCalendarsFeed()
+    print 'Printing allcalendars: %s' % feed.title.text
+    for i, a_calendar in enumerate(feed.entry):
+      print '\t%s. %s' % (i, a_calendar.title.text,)
+
+  def _PrintOwnCalendars(self):
+    """Retrieves the list of calendars to which the authenticated user 
+    owns -- 
+    Although we are only printing the title of the 
+    calendar in this case, other information, including the color of the
+    calendar, the timezone, and more.  See CalendarListEntry for more details
+    on available attributes."""
+
+    feed = self.cal_client.GetOwnCalendarsFeed()
+    print 'Printing owncalendars: %s' % feed.title.text
     for i, a_calendar in enumerate(feed.entry):
       print '\t%s. %s' % (i, a_calendar.title.text,)
 
@@ -128,6 +141,95 @@ class CalendarExample:
       for a_when in an_event.when:
         print '\t\tStart time: %s' % (a_when.start_time,)
         print '\t\tEnd time:   %s' % (a_when.end_time,)
+
+  def _InsertCalendar(self, title='Little League Schedule',
+      description='This calendar contains practice and game times',
+      time_zone='America/Los_Angeles', hidden=False, location='Oakland',
+      color='#2952A3'): 
+    """Creates a new calendar using the specified data."""
+    print 'Creating new calendar with title "%s"' % title
+    calendar = gdata.calendar.CalendarListEntry()
+    calendar.title = atom.Title(text=title)
+    calendar.summary = atom.Summary(text=description)
+    calendar.where = gdata.calendar.Where(value_string=location)
+    calendar.color = gdata.calendar.Color(value=color)
+    calendar.timezone = gdata.calendar.Timezone(value=time_zone)  
+
+    if hidden:
+      calendar.hidden = gdata.calendar.Hidden(value='true')
+    else:
+      calendar.hidden = gdata.calendar.Hidden(value='false')
+
+    new_calendar = self.cal_client.InsertCalendar(new_calendar=calendar)
+    return new_calendar
+
+  def _UpdateCalendar(self, calendar, title='New Title', color=None):
+    """Updates the title and, optionally, the color of the supplied calendar"""
+    print 'Updating the calendar titled "%s" with the title "%s"' % (
+        calendar.title.text, title)
+    calendar.title = atom.Title(text=title)
+    if color is not None:
+      calendar.color = gdata.calendar.Color(value=color)
+
+    updated_calendar = self.cal_client.UpdateCalendar(calendar=calendar) 
+    return updated_calendar
+
+  def _DeleteAllCalendars(self):
+    """Deletes all calendars.  Note: the primary calendar cannot be deleted"""
+    feed = self.cal_client.GetOwnCalendarsFeed()
+    for entry in feed.entry:
+      print 'Deleting calendar: %s' % entry.title.text
+      try:
+        self.cal_client.Delete(entry.GetEditLink().href)
+      except gdata.service.RequestError, msg:
+        if msg[0]['body'].startswith('Cannot remove primary calendar'):
+            print '\t%s' % msg[0]['body']
+        else:
+            print '\tUnexpected Error: %s' % msg[0]['body']
+
+  def _InsertSubscription(self, 
+      id='c4o4i7m2lbamc4k26sc2vokh5g%40group.calendar.google.com'):
+    """Subscribes to the calendar with the specified ID."""
+    print 'Subscribing to the calendar with ID: %s' % id
+    calendar = gdata.calendar.CalendarListEntry()
+    calendar.id = atom.Id(text=id)
+    returned_calendar = self.cal_client.InsertCalendarSubscription(calendar)
+    return returned_calendar
+
+  def _UpdateCalendarSubscription(self, 
+      id='c4o4i7m2lbamc4k26sc2vokh5g%40group.calendar.google.com', 
+      color=None, hidden=None, selected=None):
+    """Updates the subscription to the calendar with the specified ID."""
+    print 'Updating the calendar subscription with ID: %s' % id
+    calendar_url = (
+      'http://www.google.com/calendar/feeds/default/allcalendars/full/%s' % id) 
+    calendar_entry = self.cal_client.GetCalendarListEntry(calendar_url)
+
+    if color is not None:
+      calendar_entry.color = gdata.calendar.Color(value=color)
+    if hidden is not None:
+      if hidden:
+        calendar_entry.hidden = gdata.calendar.Hidden(value='true')
+      else:
+        calendar_entry.hidden = gdata.calendar.Hidden(value='false')
+    if selected is not None:
+      if selected:
+        calendar_entry.selected = gdata.calendar.Selected(value='true')
+      else:
+        calendar_entry.selected = gdata.calendar.Selected(value='false')
+
+    updated_calendar = self.cal_client.UpdateCalendar(
+        calendar_entry)
+    return updated_calendar
+
+  def _DeleteCalendarSubscription(self, 
+      id='c4o4i7m2lbamc4k26sc2vokh5g%40group.calendar.google.com'):
+    """Deletes the subscription to the calendar with the specified ID."""
+    print 'Deleting the calendar subscription with ID: %s' % id
+    calendar_url = (
+      'http://www.google.com/calendar/feeds/default/allcalendars/full/%s' % id)
+    calendar_entry = self.cal_client.GetCalendarListEntry(calendar_url)
+    self.cal_client.DeleteCalendarEntry(calendar_entry.GetEditLink().href)
 
   def _InsertEvent(self, title='Tennis with Beth', 
       content='Meet for a quick lesson', where='On the courts',
@@ -212,14 +314,14 @@ class CalendarExample:
     """Creates an event with the quick_add property set to true so the content
     is processed as quick add content instead of as an event description."""
     event = gdata.calendar.CalendarEventEntry()
-    event.content = atom.Content('html', '', content)
+    event.content = atom.Content(text=content)
     event.quick_add = gdata.calendar.QuickAdd(value='true');
 
     new_event = self.cal_client.InsertEvent(event, 
         '/calendar/feeds/default/private/full')
     return new_event
     
-  def _InsertWebContentEvent(self):
+  def _InsertSimpleWebContentEvent(self):
     """Creates a WebContent object and embeds it in a WebContentLink.
     The WebContentLink is appended to the existing list of links in the event
     entry.  Finally, the calendar client inserts the event."""
@@ -239,7 +341,36 @@ class CalendarExample:
     event = gdata.calendar.CalendarEventEntry()
     event.link.append(web_content_link)
 
+    print 'Inserting Simple Web Content Event'
     new_event = self.cal_client.InsertEvent(event, 
+        '/calendar/feeds/default/private/full')
+    return new_event
+
+  def _InsertWebContentGadgetEvent(self):
+    """Creates a WebContent object and embeds it in a WebContentLink.
+    The WebContentLink is appended to the existing list of links in the event
+    entry.  Finally, the calendar client inserts the event.  Web content
+    gadget events display Calendar Gadgets inside Google Calendar."""
+
+    # Create a WebContent object
+    url = 'http://google.com/ig/modules/datetime.xml'
+    web_content = gdata.calendar.WebContent(url=url, width='300', height='136')
+    web_content.gadget_pref.append(
+        gdata.calendar.WebContentGadgetPref(name='color', value='green'))
+
+    # Create a WebContentLink object that contains the WebContent object
+    title = 'Date and Time Gadget'
+    href = 'http://gdata.ops.demo.googlepages.com/birthdayicon.gif'
+    type = 'application/x-google-gadgets+xml'
+    web_content_link = gdata.calendar.WebContentLink(title=title, href=href,
+        link_type=type, web_content=web_content)
+
+    # Create an event that contains this web content
+    event = gdata.calendar.CalendarEventEntry()
+    event.link.append(web_content_link)
+
+    print 'Inserting Web Content Gadget Event'
+    new_event = self.cal_client.InsertEvent(event,
         '/calendar/feeds/default/private/full')
     return new_event
 
@@ -363,6 +494,7 @@ class CalendarExample:
 
     # Getting feeds and query results
     self._PrintUserCalendars()
+    self._PrintOwnCalendars()
     self._PrintAllEventsOnDefaultCalendar()
     self._FullTextQuery()
     self._DateRangeQuery()
@@ -374,7 +506,8 @@ class CalendarExample:
     see_u_ext_prop = self._AddExtendedProperty(see_u_reminder, 
         name='propname', value='propvalue')
     ree = self._InsertRecurringEvent()
-    web_content_event = self._InsertWebContentEvent()
+    simple_web_content_event = self._InsertSimpleWebContentEvent()
+    web_content_gadget_event = self._InsertWebContentGadgetEvent()
     quick_add_event = self._InsertQuickAddEvent()
   
     # Access Control List examples
@@ -384,13 +517,26 @@ class CalendarExample:
     self._UpdateAclRule(entry)
     self._DeleteAclRule(entry)
 
+    # Creating, updating and deleting calendars
+    inserted_calendar = self._InsertCalendar()
+    updated_calendar = self._UpdateCalendar(calendar=inserted_calendar) 
+    
+    # Insert Subscription
+    inserted_subscription = self._InsertSubscription()
+    updated_subscription = self._UpdateCalendarSubscription(selected=False)
+    
     # Delete entries if delete argument='true'
     if delete == 'true':
       print 'Deleting created events'
       self.cal_client.DeleteEvent(see_u_ext_prop.GetEditLink().href)
       self.cal_client.DeleteEvent(ree.GetEditLink().href)
-      self.cal_client.DeleteEvent(web_content_event.GetEditLink().href)
+      self.cal_client.DeleteEvent(simple_web_content_event.GetEditLink().href)
+      self.cal_client.DeleteEvent(web_content_gadget_event.GetEditLink().href)
       self.cal_client.DeleteEvent(quick_add_event.GetEditLink().href)
+      print 'Deleting subscriptions'
+      self._DeleteCalendarSubscription()
+      print 'Deleting all calendars'
+      self._DeleteAllCalendars()
     
  
 def main():

@@ -114,6 +114,8 @@ class CalendarListEntry(gdata.GDataEntry, gdata.LinkFinder):
       atom_id=None, link=None, published=None, 
       title=None, updated=None, 
       color=None, access_level=None, hidden=None, timezone=None,
+      selected=None,
+      where=None,
       extension_elements=None, extension_attributes=None, text=None):
     gdata.GDataEntry.__init__(self, author=author, category=category, 
                         content=content, atom_id=atom_id, link=link, 
@@ -123,7 +125,9 @@ class CalendarListEntry(gdata.GDataEntry, gdata.LinkFinder):
     self.color = color
     self.access_level = access_level
     self.hidden = hidden 
+    self.selected = selected
     self.timezone = timezone
+    self.where = where 
 
   def _TransferToElementTree(self, element_tree):
     if self.color:
@@ -132,8 +136,12 @@ class CalendarListEntry(gdata.GDataEntry, gdata.LinkFinder):
       self.access_level._BecomeChildElement(element_tree)
     if self.hidden:
       self.hidden._BecomeChildElement(element_tree)
+    if self.selected:
+      self.selected._BecomeChildElement(element_tree)
     if self.timezone:
       self.timezone._BecomeChildElement(element_tree)
+    if self.where:
+      self.where._BecomeChildElement(element_tree)
     gdata.GDataEntry._TransferToElementTree(self, element_tree)
     return element_tree
 
@@ -147,8 +155,14 @@ class CalendarListEntry(gdata.GDataEntry, gdata.LinkFinder):
     elif child.tag == '{%s}%s' % (GCAL_NAMESPACE, 'hidden'):
       self.hidden = _HiddenFromElementTree(child)
       element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (GCAL_NAMESPACE, 'selected'):
+      self.selected = _SelectedFromElementTree(child)
+      element_tree.remove(child)
     elif child.tag == '{%s}%s' % (GCAL_NAMESPACE, 'timezone'):
       self.timezone = _TimezoneFromElementTree(child)
+      element_tree.remove(child)
+    elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'where'):
+      self.where = _WhereFromElementTree(child)
       element_tree.remove(child)
     else:
       gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
@@ -158,9 +172,9 @@ class CalendarListEntry(gdata.GDataEntry, gdata.LinkFinder):
       self._TakeChildFromElementTree(element_tree[0], element_tree)
     gdata.GDataEntry._TransferFromElementTree(self, element_tree)
 
-def CalendarAclEntryFromString(xml_string):
+def CalendarListEntryFromString(xml_string):
   element_tree = ElementTree.fromstring(xml_string)
-  return _CalendarAclEntryFromElementTree(element_tree)
+  return _CalendarListEntryFromElementTree(element_tree)
 
 
 class CalendarAclEntry(gdata.GDataEntry, gdata.LinkFinder):
@@ -203,9 +217,9 @@ class CalendarAclEntry(gdata.GDataEntry, gdata.LinkFinder):
       self._TakeChildFromElementTree(element_tree[0], element_tree)
     gdata.GDataEntry._TransferFromElementTree(self, element_tree)
 
-def CalendarEventEntryFromString(xml_string):
+def CalendarAclEntryFromString(xml_string):
   element_tree = ElementTree.fromstring(xml_string)
-  return _CalendarEventEntryFromElementTree(element_tree)
+  return _CalendarAclEntryFromElementTree(element_tree)
 
 
 class CalendarEventEntry(gdata.GDataEntry):
@@ -946,6 +960,30 @@ class Hidden(atom.AtomBase):
       atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
           element_tree)
 
+class Selected(atom.AtomBase):
+  """The Google Calendar selected element"""
+
+  def __init__(self, extension_elements=None, value=None,
+      extension_attributes=None, text=None):
+    self.value = value
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+  def _TransferToElementTree(self, element_tree):
+    if self.value:
+      element_tree.attrib['value'] = self.value
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    element_tree.tag = GCAL_TEMPLATE % 'selected'
+    return element_tree
+
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+    if attribute == 'value':
+      self.value = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    else:
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute,
+          element_tree)
 
 class Timezone(atom.AtomBase):
   """The Google Calendar timezone element"""
@@ -1056,11 +1094,12 @@ class WebContentLink(atom.Link):
      
 class WebContent(atom.AtomBase):
   def __init__(self, url=None, width=None, height=None, text=None,
-      extension_elements=None, extension_attributes=None):
+      gadget_pref=None, extension_elements=None, extension_attributes=None):
     self.url = url
     self.width = width
     self.height = height
     self.text = text
+    self.gadget_pref = gadget_pref or []
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
@@ -1071,6 +1110,8 @@ class WebContent(atom.AtomBase):
       element_tree.attrib['width'] = self.width
     if self.height:
       element_tree.attrib['height'] = self.height
+    for gadget_pref in self.gadget_pref:
+      gadget_pref._BecomeChildElement(element_tree)
     atom.AtomBase._TransferToElementTree(self, element_tree)
     element_tree.tag = GCAL_TEMPLATE % 'webContent'
     return element_tree
@@ -1088,6 +1129,46 @@ class WebContent(atom.AtomBase):
     else:
       atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
           element_tree)                    
+
+  def _TakeChildFromElementTree(self, child, element_tree):
+    if child.tag == '{%s}%s' % (GCAL_NAMESPACE, 'webContentGadgetPref'):
+      self.gadget_pref.append(_WebContentGadgetPrefFromElementTree(child))
+      element_tree.remove(child)
+    else:
+      atom.AtomBase._TakeChildFromElementTree(self, child, element_tree)
+
+
+class WebContentGadgetPref(atom.AtomBase):
+  """The Google Calendar Web Content Gadget Preferences element"""
+
+  def __init__(self, name=None, value=None, extension_elements=None,
+      extension_attributes=None, text=None):
+    self.name = name
+    self.value = value
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+  def _TransferToElementTree(self, element_tree):
+    if self.name:
+      element_tree.attrib['name'] = self.name
+    if self.value:
+      element_tree.attrib['value'] = self.value
+    atom.AtomBase._TransferToElementTree(self, element_tree)
+    element_tree.tag = GACL_TEMPLATE % 'role'
+    return element_tree
+
+  def _TakeAttributeFromElementTree(self, attribute, element_tree):
+    if attribute == 'name':
+      self.name = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    elif attribute == 'value':
+      self.value = element_tree.attrib[attribute]
+      del element_tree.attrib[attribute]
+    else:
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute,
+          element_tree)
+
 
 def CalendarListFeedFromString(xml_string):
   element_tree = ElementTree.fromstring(xml_string)
@@ -1157,6 +1238,8 @@ _ColorFromElementTree = atom._AtomInstanceFromElementTree(
     Color, 'color', GCAL_NAMESPACE)
 _HiddenFromElementTree = atom._AtomInstanceFromElementTree(
     Hidden, 'hidden', GCAL_NAMESPACE)
+_SelectedFromElementTree = atom._AtomInstanceFromElementTree(
+    Selected, 'selected', GCAL_NAMESPACE)
 _TimezoneFromElementTree = atom._AtomInstanceFromElementTree(
     Timezone, 'timezone', GCAL_NAMESPACE)
 _AccessLevelFromElementTree = atom._AtomInstanceFromElementTree(
@@ -1171,3 +1254,5 @@ _WebContentLinkFromElementTree = atom._AtomInstanceFromElementTree(
     WebContentLink, 'link', atom.ATOM_NAMESPACE)
 _WebContentFromElementTree = atom._AtomInstanceFromElementTree(
     WebContent, 'webContent', GCAL_NAMESPACE)
+_WebContentGadgetPrefFromElementTree = atom._AtomInstanceFromElementTree(
+    WebContentGadgetPref, 'webContentGadgetPref', GCAL_NAMESPACE)

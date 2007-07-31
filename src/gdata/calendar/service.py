@@ -66,7 +66,13 @@ class CalendarService(gdata.service.GDataService):
   def GetCalendarEventEntry(self, uri):
     return gdata.calendar.CalendarEventEntryFromString(str(self.Get(uri)))
 
-  def GetCalendarListFeed(self, uri='/calendar/feeds/default/'):
+  def GetCalendarListFeed(self, uri='/calendar/feeds/default/allcalendars/full'):
+    return gdata.calendar.CalendarListFeedFromString(str(self.Get(uri)))
+
+  def GetAllCalendarsFeed(self, uri='/calendar/feeds/default/allcalendars/full'):
+    return gdata.calendar.CalendarListFeedFromString(str(self.Get(uri)))
+
+  def GetOwnCalendarsFeed(self, uri='/calendar/feeds/default/owncalendars/full'):
     return gdata.calendar.CalendarListFeedFromString(str(self.Get(uri)))
 
   def GetCalendarListEntry(self, uri):
@@ -127,8 +133,7 @@ class CalendarService(gdata.service.GDataService):
                      escaped before they are included in the request.
 
     Returns:
-      On successful insert,  a httplib.HTTPResponse containing the server's
-        response to the POST request.
+      On successful insert,  an entry containing the event created
       On failure, a RequestError is raised of the form:
         {'status': HTTP status code from server, 
          'reason': HTTP reason from the server, 
@@ -142,6 +147,81 @@ class CalendarService(gdata.service.GDataService):
       return gdata.calendar.CalendarEventEntryFromString(response.ToString())
     else:
       return response
+
+  def InsertCalendarSubscription(self, calendar, url_params=None, 
+                                 escape_params=True):
+    """Subscribes the authenticated user to the provided calendar.
+    
+    Args: 
+      calendar: The calendar to which the user should be subscribed.
+      url_params: dict (optional) Additional URL parameters to be included
+                  in the insertion request. 
+      escape_params: boolean (optional) If true, the url_parameters will be
+                     escaped before they are included in the request.
+
+    Returns:
+      On successful insert,  an entry containing the subscription created
+      On failure, a RequestError is raised of the form:
+        {'status': HTTP status code from server, 
+         'reason': HTTP reason from the server, 
+         'body': HTTP body of the server's response}
+    """
+    
+    insert_uri = '/calendar/feeds/default/allcalendars/full'
+    response = self.Post(calendar, insert_uri, url_params=url_params,
+                         escape_params=escape_params, 
+                         converter=gdata.calendar.CalendarListEntryFromString)
+    return response
+
+  def InsertCalendar(self, new_calendar, url_params=None,
+                                 escape_params=True):
+    """Creates a new calendar.
+    
+    Args: 
+      new_calendar: The calendar to be created
+      url_params: dict (optional) Additional URL parameters to be included
+                  in the insertion request. 
+      escape_params: boolean (optional) If true, the url_parameters will be
+                     escaped before they are included in the request.
+
+    Returns:
+      On successful insert,  an entry containing the calendar created
+      On failure, a RequestError is raised of the form:
+        {'status': HTTP status code from server, 
+         'reason': HTTP reason from the server, 
+         'body': HTTP body of the server's response}
+    """
+
+    insert_uri = '/calendar/feeds/default/owncalendars/full'
+    response = self.Post(new_calendar, insert_uri, url_params=url_params,
+                         escape_params=escape_params, 
+                         converter=gdata.calendar.CalendarListEntryFromString)
+    return response
+
+  def UpdateCalendar(self, calendar, url_params=None,
+                                 escape_params=True):
+    """Updates a calendar.
+    
+    Args: 
+      calendar: The calendar which should be updated
+      url_params: dict (optional) Additional URL parameters to be included
+                  in the insertion request. 
+      escape_params: boolean (optional) If true, the url_parameters will be
+                     escaped before they are included in the request.
+
+    Returns:
+      On successful insert,  an entry containing the calendar created
+      On failure, a RequestError is raised of the form:
+        {'status': HTTP status code from server, 
+         'reason': HTTP reason from the server, 
+         'body': HTTP body of the server's response}
+    """
+
+    update_uri = calendar.GetEditLink().href
+    response = self.Put(data=calendar, uri=update_uri, url_params=url_params,
+                         escape_params=escape_params,
+                         converter=gdata.calendar.CalendarListEntryFromString)
+    return response
 
   def InsertAclEntry(self, new_entry, insert_uri, url_params=None, 
                   escape_params=True):
@@ -157,8 +237,7 @@ class CalendarService(gdata.service.GDataService):
                      escaped before they are included in the request.
 
     Returns:
-      On successful insert,  a httplib.HTTPResponse containing the server's
-        response to the POST request.
+      On successful insert,  an entry containing the ACL entry created
       On failure, a RequestError is raised of the form:
         {'status': HTTP status code from server, 
          'reason': HTTP reason from the server, 
@@ -187,8 +266,7 @@ class CalendarService(gdata.service.GDataService):
                      escaped before they are included in the request.
 
     Returns:
-      On successful insert,  a httplib.HTTPResponse containing the server's
-        response to the POST request.
+      On successful insert,  an entry containing the comment created
       On failure, a RequestError is raised of the form:
         {'status': HTTP status code from server, 
          'reason': HTTP reason from the server, 
@@ -256,6 +334,29 @@ class CalendarService(gdata.service.GDataService):
       edit_uri = edit_uri[len(url_prefix):]
     return self.Delete('/%s' % edit_uri,
                        url_params=url_params, escape_params=escape_params)
+
+  def DeleteCalendarEntry(self, edit_uri, extra_headers=None,
+      url_params=None, escape_params=True):
+    """Removes a calendar entry at the given edit_uri from Google Calendar.
+
+    Args:
+      edit_uri: string The edit URL of the entry to be deleted. Example:
+               'http://www.google.com/calendar/feeds/default/allcalendars/abcdef@group.calendar.google.com'
+      url_params: dict (optional) Additional URL parameters to be included
+                  in the deletion request.
+      escape_params: boolean (optional) If true, the url_parameters will be
+                     escaped before they are included in the request.
+
+    Returns:
+      On successful delete, True is returned
+      On failure, a RequestError is raised of the form:
+        {'status': HTTP status code from server, 
+         'reason': HTTP reason from the server, 
+         'body': HTTP body of the server's response}
+    """
+
+    return self.Delete(edit_uri, url_params=url_params, 
+                       escape_params=escape_params)
 
   def UpdateEvent(self, edit_uri, updated_event, url_params=None, 
                  escape_params=True):

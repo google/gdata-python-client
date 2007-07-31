@@ -266,7 +266,7 @@ class CalendarEventFeedTest(unittest.TestCase):
 
   def testEntryCount(self):
     # Assert the number of items in the feed of events
-    self.assertEquals(len(self.calendar_event_feed.entry),10)
+    self.assertEquals(len(self.calendar_event_feed.entry),11)
 
   def testToAndFromString(self):
     # Assert the appropriate type for each entry
@@ -658,7 +658,7 @@ class CalendarWebContentTest(unittest.TestCase):
         gdata.calendar.CalendarEventFeedFromString(
             test_data.CALENDAR_FULL_EVENT_FEED))
     
-  def testAddWebContentEventEntry(self):
+  def testAddSimpleWebContentEventEntry(self):
     """Verifies that we can add a web content link to an event entry."""
     
     title = "Al Einstein's Birthday!"
@@ -681,9 +681,39 @@ class CalendarWebContentTest(unittest.TestCase):
     
     # Verify the web content element exists and contains the expected data    
     web_content_element = web_content_link.web_content
-    self.assertValidWebContent(url, width, height, web_content_element)
-  
-  def testFromXmlToWebContent(self):
+    self.assertValidSimpleWebContent(url, width, height, web_content_element)
+ 
+  def testAddWebContentGadgetEventEntry(self):
+    """Verifies that we can add a web content gadget link to an event entry."""
+
+    title = "Date and Time Gadget"
+    href = 'http://gdata.ops.demo.googlepages.com/birthdayicon.gif'
+    url = 'http://google.com/ig/modules/datetime.xml'
+    type = 'application/x-google-gadgets+xml'
+    width = '300'
+    height = '200'
+    pref_name = 'color'
+    pref_value = 'green'
+
+    # Create a web content event
+    event = gdata.calendar.CalendarEventEntry()
+    web_content = gdata.calendar.WebContent(url=url, width=width, height=height)
+    web_content.gadget_pref.append(
+        gdata.calendar.WebContentGadgetPref(name=pref_name, value=pref_value))
+    web_content_link = gdata.calendar.WebContentLink(title=title,
+        href=href, web_content=web_content, link_type=type)
+    event.link.append(web_content_link)
+
+    # Verify the web content link exists and contains the expected data    
+    web_content_link = event.GetWebContentLink()
+    self.assertValidWebContentLink(title, href, type, web_content_link)
+
+    # Verify the web content element exists and contains the expected data    
+    web_content_element = web_content_link.web_content
+    self.assertValidWebContentGadget(url, width, height, 
+        pref_name, pref_value, web_content_element)
+ 
+  def testFromXmlToSimpleWebContent(self):
     """Verifies that we can read a web content link from an event entry."""
 
     # Expected values (from test_data.py file)
@@ -703,7 +733,32 @@ class CalendarWebContentTest(unittest.TestCase):
     
     # Verify the web content element exists and contains the expected data
     web_content_element = web_content_link.web_content
-    self.assertValidWebContent(url, width, height, web_content_element)
+    self.assertValidSimpleWebContent(url, width, height, web_content_element)
+
+  def testFromXmlToWebContentGadget(self):
+    """Verifies that we can read a web content link from an event entry."""
+
+    # Expected values (from test_data.py file)
+    title = 'Date and Time Gadget'
+    href = 'http://gdata.ops.demo.googlepages.com/birthdayicon.gif'
+    url = 'http://google.com/ig/modules/datetime.xml'
+    type = 'application/x-google-gadgets+xml'
+    width = '300'
+    height = '136'
+    pref_name = 'color'
+    pref_value = 'green'
+
+    # Note: The eleventh event entry contains web content
+    web_content_event = self.calendar_event_feed.entry[10]
+  
+    # Verify the web content link exists and contains the expected data
+    web_content_link = web_content_event.GetWebContentLink()
+    self.assertValidWebContentLink(title, href, type, web_content_link)
+
+    # Verify the web content element exists and contains the expected data
+    web_content_element = web_content_link.web_content
+    self.assertValidWebContentGadget(url, width, height, pref_name, 
+        pref_value, web_content_element)
     
   def assertValidWebContentLink(self, expected_title=None, expected_href=None, 
       expected_type=None, web_content_link=None):
@@ -719,7 +774,7 @@ class CalendarWebContentTest(unittest.TestCase):
     self.assertEqual(expected_href, web_content_link.href)
     self.assertEqual(expected_type, web_content_link.type)
 
-  def assertValidWebContent(self, expected_url=None, expected_width=None, 
+  def assertValidSimpleWebContent(self, expected_url=None, expected_width=None, 
       expected_height=None, web_content_element=None):
     """Asserts that the web content element is the correct type and contains
     the expected values"""
@@ -730,6 +785,23 @@ class CalendarWebContentTest(unittest.TestCase):
     self.assertEquals(expected_width, web_content_element.width)
     self.assertEquals(expected_height, web_content_element.height)
     self.assertEquals(expected_url, web_content_element.url)
+
+  def assertValidWebContentGadget(self, expected_url=None, expected_width=None,
+      expected_height=None, expected_pref_name=None, expected_pref_value=None, 
+      web_content_element=None):
+    """Asserts that the web content element is the correct type and contains
+    the expected values"""
+
+    self.assert_(isinstance(web_content_element, gdata.calendar.WebContent),
+          "Calendar event entry <gCal:webContent> element must be an " +
+          "instance of gdata.calendar.WebContent: %s" % web_content_element)
+    self.assertEquals(expected_width, web_content_element.width)
+    self.assertEquals(expected_height, web_content_element.height)
+    self.assertEquals(expected_url, web_content_element.url)
+    self.assertEquals(expected_pref_name, 
+        web_content_element.gadget_pref[0].name)
+    self.assertEquals(expected_pref_value, 
+        web_content_element.gadget_pref[0].value)
 
 if __name__ == '__main__':
   unittest.main()
