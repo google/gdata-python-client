@@ -58,7 +58,7 @@ class MediaSource(object):
     content_type: string A MIME type representing the type of the media
     """
     
-    self.file_handle = open(file_name, 'r')
+    self.file_handle = open(file_name, 'rb')
     self.content_type = content_type
     self.content_length = os.path.getsize(file_name)
   
