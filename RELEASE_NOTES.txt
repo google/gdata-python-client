@@ -1,3 +1,21 @@
+=== 1.0.6 ===
+Aug 2, 2007
+
+- Support for Documents List API added along with sample code.
+
+=== 1.0.5 ===
+July 31, 2007
+
+- XML parsing can now use cElementTree if it is available, this should speed 
+    up XML parsing.
+- Redirects now include all params in the original HTTP request.
+- Added support for WebContent and QuickAdd features of Google Calendar data 
+    API.
+- Proxy support added.
+- Binary MIME uploads now work for Windows files when performing media uploads.
+- New calendar functionality for add/edit/delete calendar and add/edit/delete 
+    subscriptions. Also, added new functionality for Calendar Gadgets.
+
 === 1.0.4 ===
 June 23, 2007
 
