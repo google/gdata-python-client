@@ -26,6 +26,7 @@ import gdata.service
 import gdata
 import atom
 import gdata.base
+import os.path
 from gdata import test_data
 
 
@@ -126,7 +127,39 @@ class GDataServiceMediaUnitTest(unittest.TestCase):
     # Delete entry
     response = self.gd_client.Delete(media_entry.GetEditLink().href)
     self.assert_(response)
+
+  def testMediaConstructorDefaults(self):
+
+    ms = gdata.MediaSource()
+    ms.setFile('testimage.jpg', 'image/jpeg')
     
+    self.assert_(ms is not None)
+    self.assert_(isinstance(ms, gdata.MediaSource))
+    self.assertEqual(ms.file_name, 'testimage.jpg')
+    self.assertEqual(ms.content_type, 'image/jpeg')
+  
+  def testMediaConstructorWithFilePath(self):
+
+    ms = gdata.MediaSource(file_path='testimage.jpg',
+                           content_type='image/jpeg')
+    
+    self.assert_(ms is not None)
+    self.assert_(isinstance(ms, gdata.MediaSource))
+    self.assertEqual(ms.file_name, 'testimage.jpg')
+    self.assertEqual(ms.content_type, 'image/jpeg')
+   
+  def testMediaConstructorWithFileHandle(self):
+
+    fh = open('testimage.jpg', 'r')
+    len = os.path.getsize('testimage.jpg')
+    ms = gdata.MediaSource(fh, 'image/jpeg', len, file_name='testimage.jpg')
+    
+    self.assert_(ms is not None)
+    self.assert_(isinstance(ms, gdata.MediaSource))
+    self.assertEqual(ms.file_name, 'testimage.jpg')
+    self.assertEqual(ms.content_type, 'image/jpeg')
+
+
 class GDataServiceUnitTest(unittest.TestCase):
   
   def setUp(self):
@@ -370,4 +403,3 @@ if __name__ == '__main__':
   username = raw_input('Please enter your username: ')
   password = getpass.getpass()
   unittest.main()
-  
