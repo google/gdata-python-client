@@ -35,6 +35,6 @@ the Atom Publishing Protocol.
     license='Apache 2.0',
     url='http://code.google.com/p/gdata-python-client/',
     packages=['atom', 'gdata', 'gdata.calendar', 'gdata.base',
-        'gdata.spreadsheet', 'gdata.apps'],
+        'gdata.spreadsheet', 'gdata.apps', 'gdata.docs'],
     package_dir = {'gdata':'src/gdata', 'atom':'src/atom'}
 )
