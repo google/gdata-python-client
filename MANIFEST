@@ -34,6 +34,7 @@ tests/gdata/spreadsheet/service_test.py
 tests/gdata/apps/service_test.py
 tests/gdata/calendar_test.py
 tests/gdata/docs_test.py
+tests/gdata/docs/service_test.py
 tests/gdata/base_test.py
 tests/gdata/spreadsheet_test.py
 tests/gdata/apps_test.py
