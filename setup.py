@@ -15,13 +15,12 @@
 # limitations under the License.
 
 
-#from setuptools import setup, find_packages
 from distutils.core import setup
 
 
 setup(
     name='gdata.py',
-    version='1.0.6',
+    version='1.0.7',
     description='Python client library for Google data APIs',
     long_description = """\
 The Google data Python client library makes it easy to access data
