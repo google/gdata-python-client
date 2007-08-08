@@ -40,27 +40,53 @@ GDATA_TEMPLATE = '{http://schemas.google.com/g/2005}%s'
 OPENSEARCH_NAMESPACE = 'http://a9.com/-/spec/opensearchrss/1.0/'
 OPENSEARCH_TEMPLATE = '{http://a9.com/-/spec/opensearchrss/1.0/}%s'
 
+class Error(Exception):
+  pass
 
 class MediaSource(object):
   """GData Entries can refer to media sources, so this class provides a
   place to store references to these objects along with some metadata.
   """
   
-  def __init__(self, file_handle=None, content_type=None, content_length=None):
+  def __init__(self, file_handle=None, content_type=None, content_length=None,
+      file_path=None, file_name=None):
+    """Creates an object of type MediaSource.
+
+    Args:
+      file_handle: A file handle pointing to the file to be encapsulated in the
+                   MediaSource
+      content_type: string The MIME type of the file. Required if a file_handle
+                    is given.
+      content_length: int The size of the file. Required if a file_handle is
+                      given.
+      file_path: string (optional) A full path name to the file. Used in
+                    place of a file_handle.
+      file_name: string The name of the file without any path information.
+                 Required if a file_handle is given.
+    """
     self.file_handle = file_handle
     self.content_type = content_type
     self.content_length = content_length
-  
+    self.file_name = file_name
+
+    if (file_handle is None and content_type is not None and
+        file_path is not None):
+
+        self.setFile(file_path, content_type)
+
   def setFile(self, file_name, content_type):
     """A helper function which can create a file handle from a given filename
     and set the content type and length all at once.
-    file_name: string The path and file name to the file containing the media
-    content_type: string A MIME type representing the type of the media
+
+    Args:
+      file_name: string The path and file name to the file containing the media
+      content_type: string A MIME type representing the type of the media
     """
-    
-    self.file_handle = open(file_name, 'rb')
+
+    self.file_handle = open(file_name, 'r')
     self.content_type = content_type
     self.content_length = os.path.getsize(file_name)
+    self.file_name = os.path.basename(file_name)
   
 
 class LinkFinder(atom.LinkFinder):
