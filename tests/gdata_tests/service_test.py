@@ -32,6 +32,8 @@ from gdata import test_data
 
 username = ''
 password = ''
+test_image_location = '../testimage.jpg'
+test_image_name = 'testimage.jpg'
 
 
 class GDataServiceMediaUnitTest(unittest.TestCase):
@@ -67,7 +69,7 @@ class GDataServiceMediaUnitTest(unittest.TestCase):
   def testMedia1(self):
     # Create media-only
     ms = gdata.MediaSource()
-    ms.setFile('testimage.jpg', 'image/jpeg')
+    ms.setFile(test_image_location, 'image/jpeg')
     media_entry = self.gd_client.Post(None, 
         self.album_entry.GetFeedLink().href, media_source = ms)
     self.assert_(media_entry is not None)
@@ -76,7 +78,7 @@ class GDataServiceMediaUnitTest(unittest.TestCase):
     
     # Update media & metadata
     ms = gdata.MediaSource()
-    ms.setFile('testimage.jpg', 'image/jpeg')
+    ms.setFile(test_image_location, 'image/jpeg')
     media_entry.summary = atom.Summary(text='Test Image')
     media_entry2 = self.gd_client.Put(media_entry,
         media_entry.GetEditLink().href, media_source = ms)
@@ -101,7 +103,7 @@ class GDataServiceMediaUnitTest(unittest.TestCase):
   def testMedia2(self):
     # Create media & metadata
     ms = gdata.MediaSource()
-    ms.setFile('testimage.jpg', 'image/jpeg')
+    ms.setFile(test_image_location, 'image/jpeg')
     new_media_entry = gdata.GDataEntry()
     new_media_entry.title = atom.Title(text='testimage1.jpg')
     new_media_entry.summary = atom.Summary(text='Test Image')
@@ -117,7 +119,7 @@ class GDataServiceMediaUnitTest(unittest.TestCase):
     
     # Update media only
     ms = gdata.MediaSource()
-    ms.setFile('testimage.jpg', 'image/jpeg')
+    ms.setFile(test_image_location, 'image/jpeg')
     media_entry = self.gd_client.Put(None, media_entry.GetEditMediaLink().href,
         media_source = ms)
     self.assert_(media_entry is not None)
@@ -131,32 +133,32 @@ class GDataServiceMediaUnitTest(unittest.TestCase):
   def testMediaConstructorDefaults(self):
 
     ms = gdata.MediaSource()
-    ms.setFile('testimage.jpg', 'image/jpeg')
+    ms.setFile(test_image_location, 'image/jpeg')
     
     self.assert_(ms is not None)
     self.assert_(isinstance(ms, gdata.MediaSource))
-    self.assertEqual(ms.file_name, 'testimage.jpg')
+    self.assertEqual(ms.file_name, test_image_name)
     self.assertEqual(ms.content_type, 'image/jpeg')
   
   def testMediaConstructorWithFilePath(self):
 
-    ms = gdata.MediaSource(file_path='testimage.jpg',
+    ms = gdata.MediaSource(file_path=test_image_location,
                            content_type='image/jpeg')
     
     self.assert_(ms is not None)
     self.assert_(isinstance(ms, gdata.MediaSource))
-    self.assertEqual(ms.file_name, 'testimage.jpg')
+    self.assertEqual(ms.file_name, test_image_name)
     self.assertEqual(ms.content_type, 'image/jpeg')
    
   def testMediaConstructorWithFileHandle(self):
 
-    fh = open('testimage.jpg', 'r')
-    len = os.path.getsize('testimage.jpg')
-    ms = gdata.MediaSource(fh, 'image/jpeg', len, file_name='testimage.jpg')
+    fh = open(test_image_location, 'r')
+    len = os.path.getsize(test_image_location)
+    ms = gdata.MediaSource(fh, 'image/jpeg', len, file_name=test_image_location)
     
     self.assert_(ms is not None)
     self.assert_(isinstance(ms, gdata.MediaSource))
-    self.assertEqual(ms.file_name, 'testimage.jpg')
+    self.assertEqual(ms.file_name, test_image_location)
     self.assertEqual(ms.content_type, 'image/jpeg')
 
 
