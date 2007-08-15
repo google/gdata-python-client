@@ -61,9 +61,9 @@ class BloggerExample:
 
     # Get the blog ID for the first blog.
     feed = self.service.Get('/feeds/default/blogs')
-    for a_link in feed.entry[0].link:
-      if a_link.rel == 'self':
-        self.blog_id = a_link.href.split("/")[-1]
+    self_link = feed.entry[0].GetSelfLink()
+    if self_link:
+      self.blog_id = self_link.href.split('/')[-1]
 
   def PrintUserBlogTitles(self):
     """Prints a list of all the user's blogs."""
