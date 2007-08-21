@@ -27,17 +27,19 @@ import gdata.apps.service
 import getpass
 import time
 
-domain = ''
-username = ''
-password = ''
+
+apps_domain = ''
+apps_username = ''
+apps_password = ''
+
 
 class AppsServiceUnitTest01(unittest.TestCase):
   
   def setUp(self):
     self.postfix = time.strftime("%Y%m%d%H%M%S")
-    email = username + '@' + domain
+    email = apps_username + '@' + apps_domain
     self.apps_client = gdata.apps.service.AppsService(
-      email=email, domain=domain, password=password,
+      email=email, domain=apps_domain, password=apps_password,
       source='AppsClient "Unit" Tests')
     self.apps_client.ProgrammaticLogin()
     self.created_user = None
@@ -53,13 +55,13 @@ class AppsServiceUnitTest01(unittest.TestCase):
     """Tests RetrieveUser method"""
 
     try:
-      self_user_entry = self.apps_client.RetrieveUser(username)
+      self_user_entry = self.apps_client.RetrieveUser(apps_username)
     except:
       self.fail('Unexpected exception occurred')
     self.assert_(isinstance(self_user_entry, gdata.apps.UserEntry),
         "The return value of RetrieveUser() must be an instance of " +
         "apps.UserEntry: %s" % self_user_entry)
-    self.assertEquals(self_user_entry.login.user_name, username)
+    self.assertEquals(self_user_entry.login.user_name, apps_username)
 
   def test002RetrieveUserRaisesException(self):
     """Tests if RetrieveUser() raises AppsForYourDomainException with
@@ -287,9 +289,9 @@ class AppsServiceUnitTest02(unittest.TestCase):
   
   def setUp(self):
     self.postfix = time.strftime("%Y%m%d%H%M%S")
-    email = username + '@' + domain
+    email = apps_username + '@' + apps_domain
     self.apps_client = gdata.apps.service.AppsService(
-      email=email, domain=domain, password=password,
+      email=email, domain=apps_domain, password=apps_password,
       source='AppsClient "Unit" Tests')
     self.apps_client.ProgrammaticLogin()
     self.created_users = []
@@ -356,7 +358,7 @@ class AppsServiceUnitTest02(unittest.TestCase):
     # tests AddRecipientToEmailList method
     try:
       recipient = self.apps_client.AddRecipientToEmailList(
-        user_yuji.login.user_name + '@' + domain,
+        user_yuji.login.user_name + '@' + apps_domain,
         list_name)
     except Exception, e:
       self.fail('Unexpected exception occurred: %s' % e)
@@ -365,11 +367,11 @@ class AppsServiceUnitTest02(unittest.TestCase):
         "Return value of AddRecipientToEmailList method must be an instance " +
         "of EmailListRecipientEntry: %s" % recipient)
     self.assertEquals(recipient.who.email, 
-                      user_yuji.login.user_name + '@' + domain)
+                      user_yuji.login.user_name + '@' + apps_domain)
 
     try:
       recipient = self.apps_client.AddRecipientToEmailList(
-        user_taro.login.user_name + '@' + domain,
+        user_taro.login.user_name + '@' + apps_domain,
         list_name)
     except Exception, e:
       self.fail('Unexpected exception occurred: %s' % e)
@@ -388,7 +390,7 @@ class AppsServiceUnitTest02(unittest.TestCase):
     # tests RemoveRecipientFromEmailList method
     try:
       self.apps_client.RemoveRecipientFromEmailList(
-        user_taro.login.user_name + '@' + domain, list_name)
+        user_taro.login.user_name + '@' + apps_domain, list_name)
     except Exception, e:
       self.fail('Unexpected exception occurred: %s' % e)
 
@@ -420,7 +422,7 @@ class AppsServiceUnitTest02(unittest.TestCase):
     # tests RetrieveEmailLists method.
     try:
       list_feed = self.apps_client.RetrieveEmailLists(
-        user_yuji.login.user_name + '@' + domain)
+        user_yuji.login.user_name + '@' + apps_domain)
     except Exception, e:
       self.fail('Unexpected exception occurred: %s' % e)
     self.assert_(isinstance(list_feed, gdata.apps.EmailListFeed),
@@ -453,9 +455,9 @@ class AppsServiceUnitTest03(unittest.TestCase):
   
   def setUp(self):
     self.postfix = time.strftime("%Y%m%d%H%M%S")
-    email = username + '@' + domain
+    email = apps_username + '@' + apps_domain
     self.apps_client = gdata.apps.service.AppsService(
-      email=email, domain=domain, password=password,
+      email=email, domain=apps_domain, password=apps_password,
       source='AppsClient "Unit" Tests')
     self.apps_client.ProgrammaticLogin()
     self.created_users = []
@@ -494,7 +496,7 @@ class AppsServiceUnitTest03(unittest.TestCase):
 if __name__ == '__main__':
   print ('NOTE: Please run these tests only with a test domain. ' +
          'The tests may delete or update your domain\'s account data.')
-  domain = raw_input('Please enter your domain: ')
-  username = raw_input('Please enter your username of admin account: ')
-  password = getpass.getpass()
+  apps_domain = raw_input('Please enter your domain: ')
+  apps_username = raw_input('Please enter your username of admin account: ')
+  apps_password = getpass.getpass()
   unittest.main()
