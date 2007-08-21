@@ -15,7 +15,8 @@ import gdata_tests.docs.service_test
 import gdata_tests.spreadsheet.service_test
 
 
-def RunAllTests(username, password, spreadsheet_key, worksheet_key, domain):
+def RunAllTests(username, password, spreadsheet_key, worksheet_key,
+                apps_username, apps_password, apps_domain):
   test_runner = module_test_runner.ModuleTestRunner()
   test_runner.modules = [atom_tests.service_test, 
                          gdata_tests.service_test, 
@@ -28,7 +29,9 @@ def RunAllTests(username, password, spreadsheet_key, worksheet_key, domain):
                           'test_image_location':'testimage.jpg',
                           'ss_key':spreadsheet_key,
                           'ws_key':worksheet_key,
-                          'domain':domain}
+                          'apps_username':apps_username,
+                          'apps_password':apps_password,
+                          'apps_domain':apps_domain}
   test_runner.RunAllTests()
 
 def GetValuesForTestSettingsAndRunAllTests():
@@ -36,14 +39,18 @@ def GetValuesForTestSettingsAndRunAllTests():
   password = ''
   spreadsheet_key = ''
   worksheet_key = ''
-  domain = ''
+  apps_domain = ''
+  apps_username = ''
+  apps_password = ''
   
   print ('NOTE: Please run these tests only with a test account. ' 
          'The tests may delete or update your data.')
   try:
     opts, args = getopt.getopt(sys.argv[1:], '', ['username=', 'password=',
-                                                  'ss_key=', 'ws_key=', 
-                                                  'domain='])
+                                                  'ss_key=', 'ws_key=',
+                                                  'apps_username=',
+                                                  'apps_password=',
+                                                  'apps_domain='])
     for o, a in opts:
       if o == '--username':
         username = a
@@ -53,8 +60,12 @@ def GetValuesForTestSettingsAndRunAllTests():
         spreadsheet_key = a
       elif o == '--ws_key':
         worksheet_key = a
-      elif o == '--domain':
-        domain = a
+      elif o == '--apps_username':
+        apps_username = a
+      elif o == '--apps_password':
+        apps_password = a
+      elif o == '--apps_domain':
+        apps_domain = a
   except getopt.GetoptError:
     pass
 
@@ -71,9 +82,14 @@ def GetValuesForTestSettingsAndRunAllTests():
   if worksheet_key == '':
     worksheet_key = raw_input(
         'Please enter the id for the worksheet to be edited: ')
-  if domain == '':
-    domain = raw_input('Please enter the domain for the Google Apps account: ')
-  RunAllTests(username, password, spreadsheet_key, worksheet_key, domain)
+  if apps_username == '':
+    apps_username = raw_input('Please enter your Google Apps admin username: ')
+  if apps_password == '':
+    apps_password = getpass.getpass()
+  if apps_domain == '':
+    apps_domain = raw_input('Please enter your Google Apps domain: ')
+  RunAllTests(username, password, spreadsheet_key, worksheet_key,
+              apps_username, apps_password, apps_domain)
 
 if __name__ == '__main__':
   GetValuesForTestSettingsAndRunAllTests()
