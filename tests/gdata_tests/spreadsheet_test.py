@@ -378,12 +378,12 @@ class SpreadsheetsCellsFeedTest(unittest.TestCase):
     for an_entry in self.feed.entry:
       self.assert_(isinstance(an_entry, gdata.spreadsheet.SpreadsheetsCell))
     new_feed = gdata.spreadsheet.SpreadsheetsCellsFeedFromString(str(self.feed))
-    self.assert_(isinstance(new_feed.extension_elements[0], 
+    self.assert_(isinstance(new_feed.row_count, 
         gdata.spreadsheet.RowCount))
-    self.assert_(new_feed.extension_elements[0].text == '100')
-    self.assert_(isinstance(new_feed.extension_elements[1], 
+    self.assert_(new_feed.row_count.text == '100')
+    self.assert_(isinstance(new_feed.col_count, 
         gdata.spreadsheet.ColCount))
-    self.assert_(new_feed.extension_elements[1].text == '20')
+    self.assert_(new_feed.col_count.text == '20')
     for an_entry in new_feed.entry:
       self.assert_(isinstance(an_entry, gdata.spreadsheet.SpreadsheetsCell))
       

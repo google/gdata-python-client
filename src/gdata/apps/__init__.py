@@ -29,12 +29,159 @@ except ImportError:
 import atom
 import gdata
 
+
 # XML namespaces which are often used in Google Apps entity.
 APPS_NAMESPACE = 'http://schemas.google.com/apps/2006'
 APPS_TEMPLATE = '{http://schemas.google.com/apps/2006}%s'
 
+
+class EmailList(atom.AtomBase):
+  """The Google Apps EmailList element"""
+  
+  _tag = 'emailList'
+  _namespace = APPS_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['name'] = 'name'
+
+  def __init__(self, name=None, extension_elements=None,
+               extension_attributes=None, text=None):
+    self.name = name
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+def EmailListFromString(xml_string):
+  return atom.CreateClassFromXMLString(EmailList, xml_string)
+  
+
+class Who(atom.AtomBase):
+  """The Google Apps Who element"""
+  
+  _tag = 'who'
+  _namespace = gdata.GDATA_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['rel'] = 'rel'
+  _attributes['email'] = 'email'
+
+  def __init__(self, rel=None, email=None, extension_elements=None,
+               extension_attributes=None, text=None):
+    self.rel = rel
+    self.email = email
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+def WhoFromString(xml_string):
+  return atom.CreateClassFromXMLString(Who, xml_string)
+  
+
+class Login(atom.AtomBase):
+  """The Google Apps Login element"""
+  
+  _tag = 'login'
+  _namespace = APPS_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['userName'] = 'user_name'
+  _attributes['password'] = 'password'
+  _attributes['suspended'] = 'suspended'
+  _attributes['ipWhitelisted'] = 'ip_whitelisted'
+  _attributes['hashFunctionName'] = 'hash_function_name'
+
+  def __init__(self, user_name=None, password=None, suspended=None,
+               ip_whitelisted=None, hash_function_name=None, 
+               extension_elements=None, extension_attributes=None, 
+               text=None):
+    self.user_name = user_name
+    self.password = password
+    self.suspended = suspended
+    self.ip_whitelisted = ip_whitelisted
+    self.hash_function_name = hash_function_name
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+    
+def LoginFromString(xml_string):
+    return atom.CreateClassFromXMLString(Login, xml_string)
+    
+
+class Quota(atom.AtomBase):
+  """The Google Apps Quota element"""
+  
+  _tag = 'quota'
+  _namespace = APPS_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['limit'] = 'limit'
+
+  def __init__(self, limit=None, extension_elements=None,
+               extension_attributes=None, text=None):
+    self.limit = limit
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+    
+def QuotaFromString(xml_string):
+    return atom.CreateClassFromXMLString(Quota, xml_string)
+
+    
+class Name(atom.AtomBase):
+  """The Google Apps Name element"""
+
+  _tag = 'name'
+  _namespace = APPS_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy()  
+  _attributes['familyName'] = 'family_name'
+  _attributes['givenName'] = 'given_name'
+  
+  def __init__(self, family_name=None, given_name=None,
+               extension_elements=None, extension_attributes=None, text=None):
+    self.family_name = family_name
+    self.given_name = given_name
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+
+def NameFromString(xml_string):
+    return atom.CreateClassFromXMLString(Name, xml_string)
+
+
+class Nickname(atom.AtomBase):
+  """The Google Apps Nickname element"""
+  
+  _tag = 'nickname'
+  _namespace = APPS_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy() 
+  _attributes['name'] = 'name'
+
+  def __init__(self, name=None,
+               extension_elements=None, extension_attributes=None, text=None):
+    self.name = name
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+
+def NicknameFromString(xml_string):
+    return atom.CreateClassFromXMLString(Nickname, xml_string)
+  
+
 class NicknameEntry(gdata.GDataEntry):
   """A Google Apps flavor of an Atom Entry for Nickname"""
+  
+  _tag = 'entry'
+  _namespace = atom.ATOM_NAMESPACE
+  _children = gdata.GDataEntry._children.copy()
+  _attributes = gdata.GDataEntry._attributes.copy()
+  _children['{%s}login' % APPS_NAMESPACE] = ('login', Login)
+  _children['{%s}nickname' % APPS_NAMESPACE] = ('nickname', Nickname)
 
   def __init__(self, author=None, category=None, content=None,
                atom_id=None, link=None, published=None, 
@@ -54,33 +201,19 @@ class NicknameEntry(gdata.GDataEntry):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    if self.login:
-      self.login._BecomeChildElement(element_tree)
-    if self.nickname:
-      self.nickname._BecomeChildElement(element_tree)
-    gdata.GDataEntry._TransferToElementTree(self, element_tree)
-    return element_tree
-
-  def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (APPS_NAMESPACE, 'login'):
-      self.login = _LoginFromElementTree(child)
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (APPS_NAMESPACE, 'nickname'):
-      self.nickname = _NicknameFromElementTree(child)
-      element_tree.remove(child)
-    else:
-      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
 
 def NicknameEntryFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _NicknameEntryFromElementTree(element_tree)
+  return atom.CreateClassFromXMLString(NicknameEntry, xml_string)
 
-_NicknameEntryFromElementTree = atom._AtomInstanceFromElementTree(
-  NicknameEntry, 'entry', atom.ATOM_NAMESPACE)
 
 class NicknameFeed(gdata.GDataFeed, gdata.LinkFinder):
   """A Google Apps Nickname feed flavor of an Atom Feed"""
+  
+  _tag = 'feed'
+  _namespace = atom.ATOM_NAMESPACE
+  _children = gdata.GDataFeed._children.copy()
+  _attributes = gdata.GDataFeed._attributes.copy()
+  _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', [NicknameEntry])
 
   def __init__(self, author=None, category=None, contributor=None,
                generator=None, icon=None, atom_id=None, link=None, logo=None, 
@@ -100,22 +233,25 @@ class NicknameFeed(gdata.GDataFeed, gdata.LinkFinder):
                              extension_attributes=extension_attributes,
                              text=text)
 
-  def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'entry'):
-      self.entry.append(_NicknameEntryFromElementTree(child))
-      element_tree.remove(child)
-    else:
-      gdata.GDataFeed._TakeChildFromElementTree(self, child, element_tree)
 
 def NicknameFeedFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _NicknameFeedFromElementTree(element_tree)
+  return atom.CreateClassFromXMLString(NicknameFeed, xml_string)
 
-_NicknameFeedFromElementTree = atom._AtomInstanceFromElementTree(
-    NicknameFeed, 'feed', atom.ATOM_NAMESPACE)
 
 class UserEntry(gdata.GDataEntry):
   """A Google Apps flavor of an Atom Entry"""
+  
+  _tag = 'entry'
+  _namespace = atom.ATOM_NAMESPACE
+  _children = gdata.GDataEntry._children.copy()
+  _attributes = gdata.GDataEntry._attributes.copy()
+  _children['{%s}login' % APPS_NAMESPACE] = ('login', Login)
+  _children['{%s}name' % APPS_NAMESPACE] = ('name', Name)
+  _children['{%s}quota' % APPS_NAMESPACE] = ('quota', Quota)
+  # This child may already be defined in GDataEntry, confirm before removing.
+  _children['{%s}feedLink' % gdata.GDATA_NAMESPACE] = ('feed_link', 
+                                                       [gdata.FeedLink])
+  _children['{%s}who' % gdata.GDATA_NAMESPACE] = ('who', Who)
 
   def __init__(self, author=None, category=None, content=None,
                atom_id=None, link=None, published=None, 
@@ -137,49 +273,20 @@ class UserEntry(gdata.GDataEntry):
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
-
-  def _TransferToElementTree(self, element_tree):
-    if self.login:
-      self.login._BecomeChildElement(element_tree)
-    if self.name:
-      self.name._BecomeChildElement(element_tree)
-    if self.quota:
-      self.quota._BecomeChildElement(element_tree)
-    if self.who:
-      self.who._BecomeChildElement(element_tree)
-    for a_feed_link in self.feed_link:
-      a_feed_link._BecomeChildElement(element_tree)
-    gdata.GDataEntry._TransferToElementTree(self, element_tree)
-    return element_tree
-
-  def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (APPS_NAMESPACE, 'login'):
-      self.login = _LoginFromElementTree(child)
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (APPS_NAMESPACE, 'name'):
-      self.name = _NameFromElementTree(child)
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (APPS_NAMESPACE, 'quota'):
-      self.quota = _QuotaFromElementTree(child)
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'feedLink'):
-      self.feed_link.append(gdata._FeedLinkFromElementTree(child))
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'who'):
-      self.who = _WhoFromElementTree(child)
-      element_tree.remove(child)
-    else:
-      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
+    
 
 def UserEntryFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _UserEntryFromElementTree(element_tree)
+  return atom.CreateClassFromXMLString(UserEntry, xml_string)
 
-_UserEntryFromElementTree = atom._AtomInstanceFromElementTree(
-  UserEntry, 'entry', atom.ATOM_NAMESPACE)
-
+  
 class UserFeed(gdata.GDataFeed, gdata.LinkFinder):
   """A Google Apps User feed flavor of an Atom Feed"""
+  
+  _tag = 'feed'
+  _namespace = atom.ATOM_NAMESPACE
+  _children = gdata.GDataFeed._children.copy()
+  _attributes = gdata.GDataFeed._attributes.copy()
+  _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', [UserEntry])
 
   def __init__(self, author=None, category=None, contributor=None,
                generator=None, icon=None, atom_id=None, link=None, logo=None, 
@@ -199,22 +306,22 @@ class UserFeed(gdata.GDataFeed, gdata.LinkFinder):
                              extension_attributes=extension_attributes,
                              text=text)
 
-  def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'entry'):
-      self.entry.append(_UserEntryFromElementTree(child))
-      element_tree.remove(child)
-    else:
-      gdata.GDataFeed._TakeChildFromElementTree(self, child, element_tree)
 
 def UserFeedFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _UserFeedFromElementTree(element_tree)
+  return atom.CreateClassFromXMLString(UserFeed, xml_string)
 
-_UserFeedFromElementTree = atom._AtomInstanceFromElementTree(
-    UserFeed, 'feed', atom.ATOM_NAMESPACE)
 
 class EmailListEntry(gdata.GDataEntry):
   """A Google Apps EmailList flavor of an Atom Entry"""
+  
+  _tag = 'entry'
+  _namespace = atom.ATOM_NAMESPACE
+  _children = gdata.GDataEntry._children.copy()
+  _attributes = gdata.GDataEntry._attributes.copy()
+  _children['{%s}emailList' % APPS_NAMESPACE] = ('email_list', EmailList)
+  # Might be able to remove this _children entry.
+  _children['{%s}feedLink' % gdata.GDATA_NAMESPACE] = ('feed_link', 
+                                                       [gdata.FeedLink])
 
   def __init__(self, author=None, category=None, content=None,
                atom_id=None, link=None, published=None, 
@@ -234,33 +341,19 @@ class EmailListEntry(gdata.GDataEntry):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    if self.email_list:
-      self.email_list._BecomeChildElement(element_tree)
-    for a_feed_link in self.feed_link:
-      a_feed_link._BecomeChildElement(element_tree)
-    gdata.GDataEntry._TransferToElementTree(self, element_tree)
-    return element_tree
-
-  def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (APPS_NAMESPACE, 'emailList'):
-      self.email_list = _EmailListFromElementTree(child)
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'feedLink'):
-      self.feed_link.append(gdata._FeedLinkFromElementTree(child))
-      element_tree.remove(child)
-    else:
-      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
 
 def EmailListEntryFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _EmailListEntryFromElementTree(element_tree)
-
-_EmailListEntryFromElementTree = atom._AtomInstanceFromElementTree(
-  EmailListEntry, 'entry', atom.ATOM_NAMESPACE)
+  return atom.CreateClassFromXMLString(EmailListEntry, xml_string)
+  
 
 class EmailListFeed(gdata.GDataFeed, gdata.LinkFinder):
   """A Google Apps EmailList feed flavor of an Atom Feed"""
+  
+  _tag = 'feed'
+  _namespace = atom.ATOM_NAMESPACE
+  _children = gdata.GDataFeed._children.copy()
+  _attributes = gdata.GDataFeed._attributes.copy()
+  _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', [EmailListEntry])
 
   def __init__(self, author=None, category=None, contributor=None,
                generator=None, icon=None, atom_id=None, link=None, logo=None, 
@@ -279,23 +372,20 @@ class EmailListFeed(gdata.GDataFeed, gdata.LinkFinder):
                              extension_elements=extension_elements,
                              extension_attributes=extension_attributes,
                              text=text)
-
-  def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'entry'):
-      self.entry.append(_EmailListEntryFromElementTree(child))
-      element_tree.remove(child)
-    else:
-      gdata.GDataFeed._TakeChildFromElementTree(self, child, element_tree)
+                             
 
 def EmailListFeedFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _EmailListFeedFromElementTree(element_tree)
+  return atom.CreateClassFromXMLString(EmailListFeed, xml_string)
 
-_EmailListFeedFromElementTree = atom._AtomInstanceFromElementTree(
-    EmailListFeed, 'feed', atom.ATOM_NAMESPACE)
 
 class EmailListRecipientEntry(gdata.GDataEntry):
   """A Google Apps EmailListRecipient flavor of an Atom Entry"""
+  
+  _tag = 'entry'
+  _namespace = atom.ATOM_NAMESPACE
+  _children = gdata.GDataEntry._children.copy()
+  _attributes = gdata.GDataEntry._attributes.copy()
+  _children['{%s}who' % gdata.GDATA_NAMESPACE] = ('who', Who)
 
   def __init__(self, author=None, category=None, content=None,
                atom_id=None, link=None, published=None, 
@@ -314,28 +404,20 @@ class EmailListRecipientEntry(gdata.GDataEntry):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    if self.who:
-      self.who._BecomeChildElement(element_tree)
-    gdata.GDataEntry._TransferToElementTree(self, element_tree)
-    return element_tree
-
-  def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (gdata.GDATA_NAMESPACE, 'who'):
-      self.who = _WhoFromElementTree(child)
-      element_tree.remove(child)
-    else:
-      gdata.GDataEntry._TakeChildFromElementTree(self, child, element_tree)
 
 def EmailListRecipientEntryFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _EmailListRecipientEntryFromElementTree(element_tree)
+  return atom.CreateClassFromXMLString(EmailListRecipientEntry, xml_string)
 
-_EmailListRecipientEntryFromElementTree = atom._AtomInstanceFromElementTree(
-  EmailListRecipientEntry, 'entry', atom.ATOM_NAMESPACE)
 
 class EmailListRecipientFeed(gdata.GDataFeed, gdata.LinkFinder):
   """A Google Apps EmailListRecipient feed flavor of an Atom Feed"""
+  
+  _tag = 'feed'
+  _namespace = atom.ATOM_NAMESPACE
+  _children = gdata.GDataFeed._children.copy()
+  _attributes = gdata.GDataFeed._attributes.copy()
+  _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', 
+                                                  [EmailListRecipientEntry])
 
   def __init__(self, author=None, category=None, contributor=None,
                generator=None, icon=None, atom_id=None, link=None, logo=None, 
@@ -355,221 +437,15 @@ class EmailListRecipientFeed(gdata.GDataFeed, gdata.LinkFinder):
                              extension_attributes=extension_attributes,
                              text=text)
 
-  def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'entry'):
-      self.entry.append(_EmailListRecipientEntryFromElementTree(child))
-      element_tree.remove(child)
-    else:
-      gdata.GDataFeed._TakeChildFromElementTree(self, child, element_tree)
 
 def EmailListRecipientFeedFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _EmailListRecipientFeedFromElementTree(element_tree)
+  return atom.CreateClassFromXMLString(EmailListRecipientFeed, xml_string)
 
-_EmailListRecipientFeedFromElementTree = atom._AtomInstanceFromElementTree(
-    EmailListRecipientFeed, 'feed', atom.ATOM_NAMESPACE)
 
-class EmailList(atom.AtomBase):
-  """The Google Apps EmailList element"""
 
-  def __init__(self, name=None, extension_elements=None,
-               extension_attributes=None, text=None):
-    self.name = name
-    self.text = text
-    self.extension_elements = extension_elements or []
-    self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    if self.name:
-      element_tree.attrib['name'] = self.name
-    atom.AtomBase._TransferToElementTree(self, element_tree)
-    element_tree.tag = APPS_TEMPLATE % 'emailList'
-    return element_tree
 
-  def _TakeAttributeFromElementTree(self, attribute, element_tree):
-    if attribute == 'name':
-      self.name = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    else:
-      atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
-                                                  element_tree)
 
-_EmailListFromElementTree = atom._AtomInstanceFromElementTree(
-    EmailList, 'emailList', APPS_NAMESPACE)
 
-class Who(atom.AtomBase):
-  """The Google Apps Who element"""
 
-  def __init__(self, rel=None, email=None, extension_elements=None,
-               extension_attributes=None, text=None):
-    self.rel = rel
-    self.email = email
-    self.text = text
-    self.extension_elements = extension_elements or []
-    self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    if self.email:
-      element_tree.attrib['email'] = self.email
-    if self.rel:
-      element_tree.attrib['rel'] = self.rel
-    atom.AtomBase._TransferToElementTree(self, element_tree)
-    element_tree.tag = gdata.GDATA_TEMPLATE % 'who'
-    return element_tree
-
-  def _TakeAttributeFromElementTree(self, attribute, element_tree):
-    if attribute == 'rel':
-      self.rel = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    elif attribute == 'email':
-      self.email = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    else:
-      atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
-                                                  element_tree)
-
-_WhoFromElementTree = atom._AtomInstanceFromElementTree(
-    Who, 'who', gdata.GDATA_NAMESPACE)
-
-class Login(atom.AtomBase):
-  """The Google Apps Login element"""
-
-  def __init__(self, user_name=None, password=None, suspended=None,
-               ip_whitelisted=None, hash_function_name=None, 
-               extension_elements=None, extension_attributes=None, 
-               text=None):
-    self.user_name = user_name
-    self.password = password
-    self.suspended = suspended
-    self.ip_whitelisted = ip_whitelisted
-    self.hash_function_name = hash_function_name
-    self.text = text
-    self.extension_elements = extension_elements or []
-    self.extension_attributes = extension_attributes or {}
-
-  def _TransferToElementTree(self, element_tree):
-    if self.user_name:
-      element_tree.attrib['userName'] = self.user_name
-    if self.password:
-      element_tree.attrib['password'] = self.password
-    if self.suspended:
-      element_tree.attrib['suspended'] = self.suspended
-    if self.ip_whitelisted:
-      element_tree.attrib['ipWhitelisted'] = self.ip_whitelisted
-    if self.hash_function_name:
-      element_tree.attrib['hashFunctionName'] = self.hash_function_name
-    atom.AtomBase._TransferToElementTree(self, element_tree)
-    element_tree.tag = APPS_TEMPLATE % 'login'
-    return element_tree
-
-  def _TakeAttributeFromElementTree(self, attribute, element_tree):
-    if attribute == 'userName':
-      self.user_name = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    elif attribute == 'password':
-      self.password = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    elif attribute == 'suspended':
-      self.suspended = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    elif attribute == 'ipWhitelisted':
-      self.ip_whitelisted = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    elif attribute == 'hashFunctionName':
-      self.hash_function_name = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    else:
-      atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
-                                                  element_tree)
-
-_LoginFromElementTree = atom._AtomInstanceFromElementTree(
-    Login, 'login', APPS_NAMESPACE)
-
-class Quota(atom.AtomBase):
-  """The Google Apps Quota element"""
-
-  def __init__(self, limit=None, extension_elements=None,
-               extension_attributes=None, text=None):
-    self.limit = limit
-    self.text = text
-    self.extension_elements = extension_elements or []
-    self.extension_attributes = extension_attributes or {}
-
-  def _TransferToElementTree(self, element_tree):
-    if self.limit:
-      element_tree.attrib['limit'] = self.limit
-    atom.AtomBase._TransferToElementTree(self, element_tree)
-    element_tree.tag = APPS_TEMPLATE % 'quota'
-    return element_tree
-
-  def _TakeAttributeFromElementTree(self, attribute, element_tree):
-    if attribute == 'limit':
-      self.limit = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    else:
-      atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
-                                                  element_tree)
-_QuotaFromElementTree = atom._AtomInstanceFromElementTree(
-    Quota, 'quota', APPS_NAMESPACE)
-
-class Name(atom.AtomBase):
-  """The Google Apps Name element"""
-
-  def __init__(self, family_name=None, given_name=None,
-               extension_elements=None, extension_attributes=None, text=None):
-    self.family_name = family_name
-    self.given_name = given_name
-    self.text = text
-    self.extension_elements = extension_elements or []
-    self.extension_attributes = extension_attributes or {}
-
-  def _TransferToElementTree(self, element_tree):
-    if self.family_name:
-      element_tree.attrib['familyName'] = self.family_name
-    if self.given_name:
-      element_tree.attrib['givenName'] = self.given_name
-    atom.AtomBase._TransferToElementTree(self, element_tree)
-    element_tree.tag = APPS_TEMPLATE % 'name'
-    return element_tree
-
-  def _TakeAttributeFromElementTree(self, attribute, element_tree):
-    if attribute == 'familyName':
-      self.family_name = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    elif attribute == 'givenName':
-      self.given_name = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    else:
-      atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
-                                                  element_tree)
-
-_NameFromElementTree = atom._AtomInstanceFromElementTree(
-    Name, 'name', APPS_NAMESPACE)
-
-class Nickname(atom.AtomBase):
-  """The Google Apps Nickname element"""
-
-  def __init__(self, name=None,
-               extension_elements=None, extension_attributes=None, text=None):
-    self.name = name
-    self.text = text
-    self.extension_elements = extension_elements or []
-    self.extension_attributes = extension_attributes or {}
-
-  def _TransferToElementTree(self, element_tree):
-    if self.name:
-      element_tree.attrib['name'] = self.name
-    atom.AtomBase._TransferToElementTree(self, element_tree)
-    element_tree.tag = APPS_TEMPLATE % 'nickname'
-    return element_tree
-
-  def _TakeAttributeFromElementTree(self, attribute, element_tree):
-    if attribute == 'name':
-      self.name = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    else:
-      atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
-                                                  element_tree)
-
-_NicknameFromElementTree = atom._AtomInstanceFromElementTree(
-    Nickname, 'nickname', APPS_NAMESPACE)

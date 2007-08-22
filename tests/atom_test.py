@@ -366,7 +366,8 @@ class FeedEntryParentTest(unittest.TestCase):
   """The test accesses hidden methods in atom.FeedEntryParent"""
 
   def testConvertToAndFromElementTree(self):
-    original = atom.FeedEntryParent()
+    # Use entry because FeedEntryParent doesn't have a tag or namespace.
+    original = atom.Entry()
     copy = atom.FeedEntryParent()
  
     original.author.append(atom.Author(name=atom.Name(text='J Scud')))
@@ -377,7 +378,7 @@ class FeedEntryParentTest(unittest.TestCase):
     self.assert_(original.id.text == 'test id')
     self.assert_(copy.id is None)
 
-    copy._TransferFromElementTree(original._TransferToElementTree(ElementTree.Element('')))
+    copy._HarvestElementTree(original._ToElementTree())
     self.assert_(original.author[0].name.text == copy.author[0].name.text)
     self.assert_(original.id.text == copy.id.text)
 
@@ -552,7 +553,8 @@ class LinkFinderTest(unittest.TestCase):
 class AtomBaseTest(unittest.TestCase):
 
    def testAtomBaseConvertsExtensions(self):
-     atom_base = atom.AtomBase()
+     # Using Id because it adds no additional members.
+     atom_base = atom.Id()
      extension_child = atom.ExtensionElement('foo', namespace='http://ns0.com')
      extension_grandchild = atom.ExtensionElement('bar', namespace='http://ns0.com')
      extension_child.children.append(extension_grandchild)

@@ -29,43 +29,13 @@ import atom
 import gdata
 
 
-class DocumentListFeed(gdata.GDataFeed):
-  """A feed containing a list of Google Documents Items"""
-
-  def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'entry'):
-      self.entry.append(_DocumentListEntryFromElementTree(child))
-      element_tree.remove(child)
-    else:
-      gdata.GDataFeed._TakeChildFromElementTree(self, child, element_tree)
-
-  def _TransferFromElementTree(self, element_tree):
-    while len(element_tree) > 0:
-      self._TakeChildFromElementTree(element_tree[0], element_tree)
-    gdata.GDataFeed._TransferFromElementTree(self, element_tree)
-
-
-def DocumentListFeedFromString(xml_string):
-  """Converts an XML string into a DocumentListFeed object.
-
-  Args:
-    xml_string: string The XML describing a DocumentList feed.
-
-  Returns:
-    A DocumentListFeed object corresponding to the given XML.
-  """
-  element_tree = ElementTree.fromstring(xml_string)
-  return _DocumentListFeedFromElementTree(element_tree)
-
-
-# Generate function to handle feed parsing using ElementTree.
-_DocumentListFeedFromElementTree = atom._AtomInstanceFromElementTree(
-    DocumentListFeed, 'feed', atom.ATOM_NAMESPACE)
-
-
 class DocumentListEntry(gdata.GDataEntry):
   """The Google Documents version of an Atom Entry"""
-  pass
+  
+  _tag = 'entry'
+  _namespace = atom.ATOM_NAMESPACE
+  _children = gdata.GDataEntry._children.copy()
+  _attributes = gdata.GDataEntry._attributes.copy()
 
 
 def DocumentListEntryFromString(xml_string):
@@ -77,10 +47,29 @@ def DocumentListEntryFromString(xml_string):
   Returns:
     A DocumentListEntry object corresponding to the given XML.
   """
-  element_tree = ElementTree.fromstring(xml_string)
-  return _DocumentListEntryFromElementTree(element_tree)
+  return atom.CreateClassFromXMLString(DocumentListEntry, xml_string)
 
 
-# Generate function to handle feed entry parsing using ElementTree.
-_DocumentListEntryFromElementTree = atom._AtomInstanceFromElementTree(
-    DocumentListEntry, 'entry', atom.ATOM_NAMESPACE)
+class DocumentListFeed(gdata.GDataFeed):
+  """A feed containing a list of Google Documents Items"""
+  
+  _tag = 'feed'
+  _namespace = atom.ATOM_NAMESPACE
+  _children = gdata.GDataFeed._children.copy()
+  _attributes = gdata.GDataFeed._attributes.copy()
+  _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', 
+                                                  [DocumentListEntry])
+
+
+def DocumentListFeedFromString(xml_string):
+  """Converts an XML string into a DocumentListFeed object.
+
+  Args:
+    xml_string: string The XML describing a DocumentList feed.
+
+  Returns:
+    A DocumentListFeed object corresponding to the given XML.
+  """
+  return atom.CreateClassFromXMLString(DocumentListFeed, xml_string)
+  
+

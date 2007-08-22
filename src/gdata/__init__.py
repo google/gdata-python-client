@@ -159,8 +159,144 @@ class LinkFinder(atom.LinkFinder):
     return None
 
 
+class TotalResults(atom.AtomBase):
+  """opensearch:TotalResults for a GData feed"""
+  
+  _tag = 'totalResults'
+  _namespace = OPENSEARCH_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy()
+
+  def __init__(self, extension_elements=None,
+     extension_attributes=None, text=None):
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+
+def TotalResultsFromString(xml_string):
+  return atom.CreateClassFromXMLString(TotalResults, xml_string)
+
+  
+class StartIndex(atom.AtomBase):
+  """The opensearch:startIndex element in GData feed"""
+
+  _tag = 'startIndex'
+  _namespace = OPENSEARCH_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy()
+
+  def __init__(self, extension_elements=None, 
+      extension_attributes=None, text=None):
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+
+def StartIndexFromString(xml_string):
+  return atom.CreateClassFromXMLString(StartIndex, xml_string)
+
+
+class ItemsPerPage(atom.AtomBase):
+  """The opensearch:itemsPerPage element in GData feed"""
+
+  _tag = 'itemsPerPage'
+  _namespace = OPENSEARCH_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy()
+
+  def __init__(self, extension_elements=None,
+      extension_attributes=None, text=None):
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+
+def ItemsPerPageFromString(xml_string):
+  return atom.CreateClassFromXMLString(ItemsPerPage, xml_string)
+
+
+class GDataEntry(atom.Entry, LinkFinder):
+  """Extends Atom Entry to provide data processing"""
+
+  _tag = atom.Entry._tag
+  _namespace = atom.Entry._namespace
+  _children = atom.Entry._children.copy()
+  _attributes = atom.Entry._attributes.copy()
+
+  def __GetId(self):
+    return self.__id
+
+  # This method was created to strip the unwanted whitespace from the id's 
+  # text node.
+  def __SetId(self, id):
+    self.__id = id
+    if id is not None:
+      self.__id.text = id.text.strip()
+
+  id = property(__GetId, __SetId)
+  
+  def IsMedia(self):
+    """Determines whether or not an entry is a GData Media entry.
+    """
+    if (self.GetEditMediaLink()):
+      return True
+    else:
+      return False
+  
+  def GetMediaURL(self):
+    """Returns the URL to the media content, if the entry is a media entry.
+    Otherwise returns None.
+    """
+    if not self.IsMedia():
+      return None
+    else:
+      return self.content.src
+  
+
+def GDataEntryFromString(xml_string):
+  """Creates a new GDataEntry instance given a string of XML."""
+  return atom.CreateClassFromXMLString(GDataEntry, xml_string)
+
+
 class GDataFeed(atom.Feed, LinkFinder):
   """A Feed from a GData service"""
+
+  _tag = 'feed'
+  _namespace = atom.ATOM_NAMESPACE
+  _children = atom.Feed._children.copy()
+  _attributes = atom.Feed._attributes.copy()
+  _children['{%s}totalResults' % OPENSEARCH_NAMESPACE] = ('total_results', 
+                                                          TotalResults)
+  _children['{%s}startIndex' % OPENSEARCH_NAMESPACE] = ('start_index', 
+                                                        StartIndex)
+  _children['{%s}itemsPerPage' % OPENSEARCH_NAMESPACE] = ('items_per_page',
+                                                          ItemsPerPage)
+               # Add a conversion rule for atom:entry to make it into a GData
+               # Entry.
+  _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', [GDataEntry])
+
+  #TODO: determine how to strip whitespace from the id
+  def __GetId(self):
+    return self.__id
+
+  def __SetId(self, id):
+    self.__id = id
+    if id is not None:
+      self.__id.text = id.text.strip()
+
+  id = property(__GetId, __SetId)
+
+  #TODO: strip whitespace from generator.text
+  def __GetGenerator(self):
+    return self.__generator
+
+  def __SetGenerator(self, generator):
+    self.__generator = generator
+    if generator is not None:
+      self.__generator.text = generator.text.strip()
+
+  generator = property(__GetGenerator, __SetGenerator)
 
   def __init__(self, author=None, category=None, contributor=None,
       generator=None, icon=None, atom_id=None, link=None, logo=None, 
@@ -214,162 +350,23 @@ class GDataFeed(atom.Feed, LinkFinder):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    if self.total_results:
-      self.total_results._BecomeChildElement(element_tree)
-    if self.items_per_page:
-      self.items_per_page._BecomeChildElement(element_tree)
-    if self.start_index:
-      self.start_index._BecomeChildElement(element_tree)
-    atom.Feed._TransferToElementTree(self, element_tree)
-    return element_tree
-
-  def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (OPENSEARCH_NAMESPACE, 'totalResults'):
-      self.total_results = _TotalResultsFromElementTree(child)
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (OPENSEARCH_NAMESPACE, 'startIndex'):
-      self.start_index = _StartIndexFromElementTree(child)
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (OPENSEARCH_NAMESPACE, 'itemsPerPage'):
-      self.items_per_page = _ItemsPerPageFromElementTree(child)
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'id'):
-      atom.Feed._TakeChildFromElementTree(self, child, element_tree)
-      # Remove whitespace from the id element.
-      if self.id and self.id.text:
-        self.id.text = self.id.text.strip()
-    elif child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'generator'):
-      atom.Feed._TakeChildFromElementTree(self, child, element_tree)
-      # Remove whitespace from the generator element.
-      if self.generator and self.generator.text:
-        self.generator.text = self.generator.text.strip()
-    else:
-      atom.Feed._TakeChildFromElementTree(self, child, element_tree)
-
-  def _TransferFromElementTree(self, element_tree):
-    while len(element_tree) > 0:
-      self._TakeChildFromElementTree(element_tree[0], element_tree)
-    atom.Feed._TransferFromElementTree(self, element_tree)
 
 def GDataFeedFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  to_return =  _GDataFeedFromElementTree(element_tree)
-  return to_return
+  return atom.CreateClassFromXMLString(GDataFeed, xml_string)
 
-def _GDataFeedFromElementTree(element_tree):
-  return atom._XFromElementTree(GDataFeed, 'feed', atom.ATOM_NAMESPACE, 
-      element_tree)
-
-
-class GDataEntry(atom.Entry, LinkFinder):
-  """Extends Atom Entry to provide data processing"""
-    
-  def IsMedia(self):
-    """Determines whether or not an entry is a GData Media entry.
-    """
-    if (self.GetEditMediaLink()):
-      return True
-    else:
-      return False
-  
-  def GetMediaURL(self):
-    """Returns the URL to the media content, if the entry is a media entry.
-    Otherwise returns None.
-    """
-    if not self.IsMedia():
-      return None
-    else:
-      return self.content.src
-  
-  def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'id'):
-      atom.Entry._TakeChildFromElementTree(self, child, element_tree)
-      if self.id and self.id.text:
-        self.id.text = self.id.text.strip()
-    else:
-      atom.Entry._TakeChildFromElementTree(self, child, element_tree)
-  
-def GDataEntryFromString(xml_string):
-  """Creates a new GDataEntry instance given a string of XML."""
-
-  element_tree = ElementTree.fromstring(xml_string)
-  return _GDataEntryFromElementTree(element_tree)
-
-_GDataEntryFromElementTree = atom._AtomInstanceFromElementTree(GDataEntry, 
-    'entry', atom.ATOM_NAMESPACE)
-
-class TotalResults(atom.AtomBase):
-  """opensearch:TotalResults for a GData feed"""
-
-  def __init__(self, extension_elements=None,
-     extension_attributes=None, text=None):
-    self.text = text
-    self.extension_elements = extension_elements or []
-    self.extension_attributes = extension_attributes or {}
-
-  def _TransferToElementTree(self, element_tree):
-    element_tree.tag = OPENSEARCH_TEMPLATE % 'totalResults'
-    atom.AtomBase._TransferToElementTree(self, element_tree)
-    return element_tree
-
-def TotalResultsFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _TotalResultsFromElementTree(element_tree)
-
-def _TotalResultsFromElementTree(element_tree):
-  return atom._XFromElementTree(TotalResults, 'totalResults',
-      OPENSEARCH_NAMESPACE, element_tree)
-
-  
-class StartIndex(atom.AtomBase):
-  """The opensearch:StartIndex element in GData feed"""
-
-  def __init__(self, extension_elements=None, 
-      extension_attributes=None, text=None):
-    self.text = text
-    self.extension_elements = extension_elements or []
-    self.extension_attributes = extension_attributes or {}
-
-  def _TransferToElementTree(self, element_tree):
-    element_tree.tag = OPENSEARCH_TEMPLATE % 'startIndex'
-    atom.AtomBase._TransferToElementTree(self, element_tree)
-    return element_tree
-
-def StartIndexFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _StartIndexFromElementTree(element_tree)
-
-def _StartIndexFromElementTree(element_tree):
-  return atom._XFromElementTree(StartIndex, 'startIndex', 
-      OPENSEARCH_NAMESPACE, element_tree)
-      
-
-class ItemsPerPage(atom.AtomBase):
-  """The opensearch:itemsPerPage element in GData feed"""
-
-  def __init__(self, extension_elements=None,
-      extension_attributes=None, text=None):
-    self.text = text
-    self.extension_elements = extension_elements or []
-    self.extension_attributes = extension_attributes or {}
-
-  def _TransferToElementTree(self, element_tree):
-    element_tree.tag = OPENSEARCH_TEMPLATE % 'itemsPerPage'
-    atom.AtomBase._TransferToElementTree(self, element_tree)
-    return element_tree
-
-def ItemsPerPageFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _ItemsPerPageFromElementTree(element_tree)
-
-def _ItemsPerPageFromElementTree(element_tree):
-  return atom._XFromElementTree(ItemsPerPage, 'itemsPerPage', 
-      OPENSEARCH_NAMESPACE, element_tree)
- 
  
 class EntryLink(atom.AtomBase):
   """The gd:entryLink element"""
+
+  _tag = 'entryLink'
+  _namespace = GDATA_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy()
+  # The entry used to be an atom.Entry, now it is a GDataEntry.
+  _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', GDataEntry)
+  _attributes['rel'] = 'rel',
+  _attributes['readOnly'] = 'read_only'
+  _attributes['href'] = 'href'
   
   def __init__(self, href=None, read_only=None, rel=None,
       entry=None, extension_elements=None, 
@@ -382,50 +379,23 @@ class EntryLink(atom.AtomBase):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
     
-  def _TransferToElementTree(self, element_tree):
-    if self.href:
-      element_tree.attrib['href'] = self.href
-    if self.read_only:
-      element_tree.attrib['readOnly'] = self.read_only
-    if self.rel:
-      element_tree.attrib['rel'] = self.rel
-    if self.entry:
-      self.entry._BecomeChildElement(element_tree)
-    atom.AtomBase._TransferToElementTree(self, element_tree)
-    element_tree.tag = GDATA_TEMPLATE % 'entryLink'
-    return element_tree
-
-  def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (atom.ATOM_NAMESPACE, 'entry'):
-      self.entry = atom._EntryFromElementTree(child)
-      element_tree.remove(child)
-    else:
-      atom.AtomBase._TakeChildFromElementTree(self, child, element_tree)
-
-  def _TakeAttributeFromElementTree(self, attribute, element_tree):
-    if attribute == 'href':
-      self.href = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    elif attribute == 'readOnly':
-      self.read_only = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    else:
-      atom.AtomBase._TakeAttributeFromElementTree(self, attribute,
-          element_tree)
-
-_EntryLinkFromElementTree = atom._AtomInstanceFromElementTree(EntryLink, 
-    'entryLink', GDATA_NAMESPACE)
 
 def EntryLinkFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _EntryLinkFromElementTree(element_tree)
-#def _EntryLinkFromElementTree(element_tree):
-#  return atom._XFromElementTree(EntryLink, 'entryLink',
-#      GDATA_NAMESPACE, element_tree)
+  return atom.CreateClassFromXMLString(EntryLink, xml_string)
 
 
 class FeedLink(atom.AtomBase):
   """The gd:feedLink element"""
+
+  _tag = 'feedLink'
+  _namespace = GDATA_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy()
+  _children['{%s}feed' % atom.ATOM_NAMESPACE] = ('feed', GDataFeed)
+  _attributes['rel'] = 'rel'
+  _attributes['readOnly'] = 'read_only'
+  _attributes['countHint'] = 'count_hint'
+  _attributes['href'] = 'href'
 
   def __init__(self, count_hint=None, href=None, read_only=None, rel=None,
       feed=None, extension_elements=None, extension_attributes=None,
@@ -439,49 +409,6 @@ class FeedLink(atom.AtomBase):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    if self.count_hint:
-      element_tree.attrib['countHint'] = self.count_hint
-    if self.href:
-      element_tree.attrib['href'] = self.href
-    if self.read_only:
-      element_tree.attrib['readOnly'] = self.read_only
-    if self.rel:
-      element_tree.attrib['rel'] = self.rel
-    if self.feed:
-      self.feed._BecomeChildElement(element_tree)
-    atom.AtomBase._TransferToElementTree(self, element_tree)
-    element_tree.tag = GDATA_TEMPLATE % 'feedLink'
-    return element_tree
-
-  def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (GDATA_NAMESPACE, 'feed'):
-      self.feed = _GDataFeedFromElementTree(child)
-      element_tree.remove(child)
-    else:
-      atom.AtomBase._TakeChildFromElementTree(self, child, element_tree)
-
-  def _TakeAttributeFromElementTree(self, attribute, element_tree):
-    if attribute == 'countHint':
-      self.count_hint = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    elif attribute == 'href':
-      self.href = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    elif attribute == 'readOnly':
-      self.read_only = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    elif attribute == 'rel':
-      self.rel = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    else:
-      atom.AtomBase._TakeAttributeFromElementTree(self, attribute,
-          element_tree)  
-
-def _FeedLinkFromElementTree(element_tree):
-  return atom._XFromElementTree(FeedLink, 'feedLink',
-      GDATA_NAMESPACE, element_tree)
 
 def FeedLinkFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _FeedLinkFromElementTree(element_tree)
+  return atom.CreateClassFromXMLString(EntryLink, xml_string)

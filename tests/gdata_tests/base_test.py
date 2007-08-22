@@ -136,7 +136,7 @@ class GBaseSnippetFeedTest(unittest.TestCase):
     self.assert_(len(self.snippet_feed.entry) == 3)
     for an_entry in self.snippet_feed.entry:
       self.assert_(isinstance(an_entry, gdata.base.GBaseSnippet))
-    new_snippet_feed = gdata.base.GBaseItemFeedFromString(str(self.snippet_feed))
+    new_snippet_feed = gdata.base.GBaseSnippetFeedFromString(str(self.snippet_feed))
     for an_entry in new_snippet_feed.entry:
       self.assert_(isinstance(an_entry, gdata.base.GBaseSnippet))
 
@@ -267,15 +267,15 @@ class GBaseItemTypesFeedAndEntryTest(unittest.TestCase):
   def testItemTypesFeedToAndFromString(self):
     feed = gdata.base.GBaseItemTypesFeed()
     entry = gdata.base.GBaseItemTypeEntry()
-    entry.attributes.append(gdata.base.Attribute(name='location', 
+    entry.attribute.append(gdata.base.Attribute(name='location', 
         attribute_type='location'))
     entry.item_type = gdata.base.ItemType(text='jobs')
     feed.entry.append(entry)
     self.assert_(len(feed.entry) == 1)
-    self.assert_(feed.entry[0].attributes[0].name == 'location')
+    self.assert_(feed.entry[0].attribute[0].name == 'location')
     new_feed = gdata.base.GBaseItemTypesFeedFromString(str(feed))
     self.assert_(len(new_feed.entry) == 1)
-    self.assert_(new_feed.entry[0].attributes[0].name == 'location')
+    self.assert_(new_feed.entry[0].attribute[0].name == 'location')
 
     
 if __name__ == '__main__':

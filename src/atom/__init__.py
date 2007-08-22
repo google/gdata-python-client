@@ -61,188 +61,77 @@ APP_NAMESPACE = 'http://purl.org/atom/app#'
 APP_TEMPLATE = '{http://purl.org/atom/app#}%s'
 
 
-def _AtomInstanceFromElementTree(class_constructor, class_tag_name, 
-    class_namespace):
-  """Instantiates an instance of an Atom class.
+def CreateClassFromXMLString(target_class, xml_string):
+  tree = ElementTree.fromstring(xml_string)
+  return _CreateClassFromElementTree(target_class, tree)
 
-  This is a template function which is used to generate factory functions like 
-  AuthorFromElementTree, EntryFromElementTree, etc. The internal closure is 
-  used to precompute the desired tag and improve performace. 
 
-  Args:
-    class_constructor: function The constructor which will be called if the
-        element tree passed in later has a tag with the desired tag name and
-        namespace.
-    class_tag_name: str The tag name for the desired Atom instance. If the tag
-        name and namespace do not match, a new object will not be created.
-        Examples: 'entry', 'feed', 'email', etc.
-    class_namespace: str The namespace for the desired Atom instance. In this
-        module it is always ATOM_NAMESPACE, but other modules may specify a
-        different namespace.
-
-  Returns: 
-    A function which takes an ElementTree._Element and creates an instance
-    of the desired class if the tag and namespace are correct.
+def _CreateClassFromElementTree(target_class, tree, namespace=None, tag=None):
   """
-  def TemplateFunction(element_tree):
-    new_object = None
-    if element_tree.tag == '{%s}%s' % (class_namespace, class_tag_name):
-      new_object = class_constructor()
-      new_object._TransferFromElementTree(element_tree)
-    return new_object
-  return TemplateFunction
 
+  Note: Only use this function with classes that have _namespace and _tag
+  class members.
 
-class AtomBase(object):
-  """A foundation class for all Atom entities to derive from.
-
-  It provides data handling methods which are reused by the Atom classes.
-  This class should never be instantiated directly, it provides method 
-  implementations which are used by most of the classes in this module.
   """
+  if namespace is None:
+    namespace = target_class._namespace
+  if tag is None:
+    tag = target_class._tag
+  if tree.tag == '{%s}%s' % (namespace, tag):
+    target = target_class()
+    target._HarvestElementTree(tree)
+    return target
+  else:
+    return None
+
+
+class ExtensionContainer(object):
   
-  def __init__(self, extension_elements=None, extension_attributes=None, 
+  def __init__(self, extension_elements=None, extension_attributes=None,
       text=None):
-    """Constructor for the Atom base class.
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+    self.text = text
+ 
+  # Three methods to create an object from an ElementTree
+  def _HarvestElementTree(self, tree):
+    # Fill in the instance members from the contents of the XML tree.
+    for child in tree:
+      self._ConvertElementTreeToMember(child)
+    for attribute, value in tree.attrib.iteritems():
+      self._ConvertElementAttributeToMember(attribute, value)
+    self.text = tree.text
+    
+  def _ConvertElementTreeToMember(self, child_tree, current_class=None):
+    self.extension_elements.append(_ExtensionElementFromElementTree(
+        child_tree))
 
-    The constructor is provided for illustrative purposes, you should not
-    need to instantiate an AtomBase.
-    
-    Args:
-      extension_elements: list A list of ExtensionElement instances which are
-          children of this element.
-      extension_attributes: dict A dictionary of strings which are the values
-          for additional XML attributes of this element.
-      text: String The text contents of the element. This is the contents
-          of the Entry's XML text node. (Example: <foo>This is the text</foo>)
-    """
-    self.extension_elements = []
-    self.extension_attributes = {}
-    self.text = text 
-    
-  def _TransferToElementTree(self, element_tree):
-    """Transfer this object's data to an element tree.
+  def _ConvertElementAttributeToMember(self, attribute, value):
+    self.extension_attributes[attribute] = value
 
-    Sets the text of the element_tree to the text of this object and converts
-    all extension elements into child nodes in the element tree.
-    
-    Args:
-      element_tree: ElementTree._Element The element tree to which all of this
-          object's data will be transfered.
-    
-    Returns:
-      The element_tree which was passed in. The original element_tree is returned
-      in order to allow function chaining (ex: 
-      DoSomethingWithElementTree(x._TransferToElementTree(element_tree))  ).
-    """
-    
-    if self.extension_elements:
-      for extension in self.extension_elements:
-        # Create a new element tree which will hold the extensions's data. 
-        # Note that the extension's _TransferToElementTree method will 
-        # overwrite the element tree's tag.
-        extension._BecomeChildElement(element_tree)
-    if self.extension_attributes:
-      for attribute, value in self.extension_attributes.iteritems():
-        element_tree.attrib[attribute] = value
-    element_tree.text = self.text
-    return element_tree
-    
-  def ToString(self):
-    """Converts the Atom object to a string containing XML."""
-  
-    return ElementTree.tostring(self._ToElementTree(), encoding="UTF-8")
-
-  def __str__(self):
-    return self.ToString()
-    
-  def _ToElementTree(self):
-    """Converts the Atom object to an ElementTree._Element."""
-  
-    return self._TransferToElementTree(ElementTree.Element(''))
-    
-  def _TakeAttributeFromElementTree(self, attribute, element_tree):
-    """Translates the XML attribute into a class attribute.
-
-    In AtomBase, all XML attributes become extension attributes, but
-    other Atom elements use selected XML attributes. In such cases, the
-    extending Atom class overloads this method to transfer selected 
-    attributes to class members.
-
-    The attribute is removed from the element_tree so that it will not be
-    processed by future method calls.
-    
-    Args:
-      attribute: str The name of the attribute which should be processed.
-      element_tree: ElementTree._Element The node which contains the 
-          attribute. The element_tree is modified by this method.
-    """
-    
-    self.extension_attributes[attribute] = element_tree.attrib[attribute]
-    # Consume the attribute
-    del element_tree.attrib[attribute]
-
-  def _TakeChildFromElementTree(self, child, element_tree):
-    """Translates an XML child node into a class attribute and add as a member.
-
-    In AtomBase, all XML child nodes become extension elements, but
-    other Atom elements translate selected XML elements into class members. 
-    In such cases, the extending Atom class overloads this method to transfer 
-    selected child nodes to class members.
-
-    The child node is removed from the element_tree so that it will not be
-    processed by future method calls.
-
-    Args:
-      child: ElementTree._Element The XML node in the element_tree which
-          should be processed.
-      element_tree: ElementTree._Element The node which contains the
-          attribute. The element_tree is modified by this method.
-    """    
-    
-    self.extension_elements.append(_ExtensionElementFromElementTree(child))
-    # Consume the child element
-    element_tree.remove(child)
-    
-
-  def _TransferFromElementTree(self, element_tree):
-    """Creates extension elements and attributes from children in element_tree
-    
-    It also moves the text from the element_tree to the Base instance.
-    Note that all element_tree children will become extension elements, so any
-    children which should not become extension elements must be removed before
-    calling this method. Also, all element attributes will become extension
-    attributes so any attributes which should not become extensions must be
-    removed prior to calling this method.
-
-    Args:
-      element_tree: ElementTree._Element The element tree whose data is moved to
-          the Base instance. This function removes children from element_tree.
-    """
-
-    while len(element_tree) > 0:
-      self._TakeChildFromElementTree(element_tree[0], element_tree)
-    current_key = None
-    while len(element_tree.attrib.keys()) > 0:
-      current_key = element_tree.attrib.keys()[0]
-      self._TakeAttributeFromElementTree(current_key, element_tree)
-    self.text = element_tree.text 
+  # One method to create an ElementTree from an object
+  def _AddMembersToElementTree(self, tree):
+    for child in self.extension_elements:
+      child._BecomeChildElement(tree)
+    for attribute, value in self.extension_attributes.iteritems():
+      tree.attrib[attribute] = value
+    tree.text = self.text
 
   def FindExtensions(self, tag=None, namespace=None):
     """Searches extension elements for child nodes with the desired name.
-    
+
     Returns a list of extension elements within this object whose tag
     and/or namespace match those passed in. To find all extensions in
     a particular namespace, specify the namespace but not the tag name.
     If you specify only the tag, the result list may contain extension
     elements in multiple namespaces.
-    
+
     Args:
       tag: str (optional) The desired tag
       namespace: str (optional) The desired namespace
 
     Returns:
-      A list of elements whose tag and/or namespace match the parameters 
+      A list of elements whose tag and/or namespace match the parameters
       values
     """
 
@@ -265,21 +154,189 @@ class AtomBase(object):
         results.append(element)
 
     return results
+  
 
-  def _BecomeChildElement(self, element_tree):
-    """Converts this object into an etree element and adds it as a child node.
+class AtomBase(ExtensionContainer):
+
+  _children = {}
+  _attributes = {}
+
+  def __init__(self, extension_elements=None, extension_attributes=None,
+      text=None):
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+    self.text = text
+      
+  def _ConvertElementTreeToMember(self, child_tree):
+    # Find the element's tag in this class's list of child members
+    if self.__class__._children.has_key(child_tree.tag):
+      member_name = self.__class__._children[child_tree.tag][0]
+      member_class = self.__class__._children[child_tree.tag][1]
+      # If the class member is supposed to contain a list, make sure the
+      # matching member is set to a list, then append the new member
+      # instance to the list.
+      if isinstance(member_class, list):
+        if getattr(self, member_name) is None:
+          setattr(self, member_name, [])
+        getattr(self, member_name).append(_CreateClassFromElementTree(
+            member_class[0], child_tree))
+      else:
+        setattr(self, member_name, 
+                _CreateClassFromElementTree(member_class, child_tree))
+    else:
+      ExtensionContainer._ConvertElementTreeToMember(self, child_tree)      
+
+  def _ConvertElementAttributeToMember(self, attribute, value):
+    # Find the attribute in this class's list of attributes. 
+    if self.__class__._attributes.has_key(attribute):
+      # Find the member of this class which corresponds to the XML attribute
+      # (lookup in current_class._attributes) and set this member to the
+      # desired value (using self.__dict__).
+      setattr(self, self.__class__._attributes[attribute], value)
+    else:
+      ExtensionContainer._ConvertElementAttributeToMember(self, attribute, value)
+
+  # Three methods to create an ElementTree from an object
+  def _AddMembersToElementTree(self, tree):
+    # Convert the members of this class which are XML child nodes. 
+    # This uses the class's _children dictionary to find the members which
+    # should become XML child nodes.
+    member_node_names = [values[0] for tag, values in 
+                                       self.__class__._children.iteritems()]
+    for member_name in member_node_names:
+      member = getattr(self, member_name)
+      if member is None:
+        pass
+      elif isinstance(member, list):
+        for instance in member:
+          instance._BecomeChildElement(tree)
+      else:
+        member._BecomeChildElement(tree)
+    # Convert the members of this class which are XML attributes.
+    for xml_attribute, member_name in self.__class__._attributes.iteritems():
+      member = getattr(self, member_name)
+      if member is not None:
+        tree.attrib[xml_attribute] = member
+    # Lastly, call the ExtensionContainers's _AddMembersToElementTree to 
+    # convert any extension attributes.
+    ExtensionContainer._AddMembersToElementTree(self, tree)
     
-    Adds self to the ElementTree. This method is required to avoid verbose XML
-    which constantly redefines the namespace. 
+  
+  def _BecomeChildElement(self, tree):
+    """
+
+    Note: Only for use with classes that have a _tag and _namespace class 
+    member. It is in AtomBase so that it can be inherited but it should
+    not be called on instances of AtomBase.
+    
+    """
+    new_child = ElementTree.Element('')
+    tree.append(new_child)
+    new_child.tag = '{%s}%s' % (self.__class__._namespace, 
+                                self.__class__._tag)
+    self._AddMembersToElementTree(new_child)
+
+  def _ToElementTree(self):
+    """
+
+    Note, this method is designed to be used only with classes that have a 
+    _tag and _namespace. It is placed in AtomBase for inheritance but should
+    not be called on this class.
+
+    """
+    new_tree = ElementTree.Element('{%s}%s' % (self.__class__._namespace,
+                                               self.__class__._tag))
+    self._AddMembersToElementTree(new_tree)
+    return new_tree
+
+  def ToString(self):
+    """Converts the Atom object to a string containing XML."""
+    return ElementTree.tostring(self._ToElementTree(), encoding="UTF-8")
+
+  def __str__(self):
+    return self.ToString()
+
+    
+class Name(AtomBase):
+  """The atom:name element"""
+
+  _tag = 'name'
+  _namespace = ATOM_NAMESPACE
+  _children = AtomBase._children.copy()
+  _attributes = AtomBase._attributes.copy()
+
+  def __init__(self, text=None, extension_elements=None,
+      extension_attributes=None):
+    """Constructor for Name
 
     Args:
-      element_tree: ElementTree._Element The element to which this object's XML 
-          will be added.
+      text: str The text data in the this element
+      extension_elements: list A  list of ExtensionElement instances
+      extension_attributes: dict A dictionary of attribute value string pairs
     """
-    new_element = ElementTree.Element('')
-    element_tree.append(new_element)
-    self._TransferToElementTree(new_element)
-    
+
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+
+def NameFromString(xml_string):
+  return CreateClassFromXMLString(Name, xml_string)
+
+
+class Email(AtomBase):
+  """The atom:email element"""
+
+  _tag = 'email'
+  _namespace = ATOM_NAMESPACE
+  _children = AtomBase._children.copy()
+  _attributes = AtomBase._attributes.copy()
+  
+  def __init__(self, text=None, extension_elements=None,
+      extension_attributes=None):
+    """Constructor for Email
+
+    Args:
+      extension_elements: list A  list of ExtensionElement instances
+      extension_attributes: dict A dictionary of attribute value string pairs
+      text: str The text data in the this element
+    """
+
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+
+def EmailFromString(xml_string):
+  return CreateClassFromXMLString(Email, xml_string)
+
+
+class Uri(AtomBase):
+  """The atom:uri element"""
+
+  _tag = 'uri'
+  _namespace = ATOM_NAMESPACE
+  _children = AtomBase._children.copy()
+  _attributes = AtomBase._attributes.copy()
+
+  def __init__(self, text=None, extension_elements=None,
+      extension_attributes=None):
+    """Constructor for Uri
+
+    Args:
+      extension_elements: list A  list of ExtensionElement instances
+      extension_attributes: dict A dictionary of attribute value string pairs
+      text: str The text data in the this element
+    """
+
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+
+def UriFromString(xml_string):
+  return CreateClassFromXMLString(Uri, xml_string)
+
   
 class Person(AtomBase):
   """A foundation class from which atom:author and atom:contributor extend.
@@ -287,6 +344,12 @@ class Person(AtomBase):
   A person contains information like name, email address, and web page URI for
   an author or contributor to an Atom feed. 
   """
+
+  _children = AtomBase._children.copy()
+  _attributes = AtomBase._attributes.copy()
+  _children['{%s}name' % (ATOM_NAMESPACE)] = ('name', Name)
+  _children['{%s}email' % (ATOM_NAMESPACE)] = ('email', Email)
+  _children['{%s}uri' % (ATOM_NAMESPACE)] = ('uri', Uri)
 
   def __init__(self, name=None, email=None, uri=None,
       extension_elements=None, extension_attributes=None, text=None):
@@ -314,76 +377,19 @@ class Person(AtomBase):
     self.extension_attributes = extension_attributes or {}
     self.text = text
 
-    
-  def _TransferToElementTree(self, element_tree):
-    """Translates the Person's members into XML child nodes.
-
-    Members include the person's name, email address, and website URI.
-    
-    Args:
-      element_tree: ElementTree._Element The element tree to which child
-          nodes will be added. The contents of this person will be converted
-          to element trees and appended to the element_tree provided.
-    """
-    
-    if self.name:
-      self.name._BecomeChildElement(element_tree)
-    if self.email:
-      self.email._BecomeChildElement(element_tree)
-    if self.uri:
-      self.uri._BecomeChildElement(element_tree)
-    # Call the parent's tranfer to method to convert all other class members
-    # into XML nodes. By parent I mean superclass.
-    AtomBase._TransferToElementTree(self, element_tree)
-    return element_tree
-
-  def _TakeChildFromElementTree(self, child, element_tree):
-    """Translates XML child nodes into Person members.
-    
-    Args:
-      child: ElementTree._Element The child node in element_tree which is
-          to be processed. If the child node is part of a person object, this
-          method converts it to the appropriate object and adds it to the
-          person. If the child node is not part of the person or an atom 
-          object, it is turned into an extension element. In all cases the
-          child node is removed from element_tree.
-      element_tree: ElementTree._Element The parent of the child node. This
-          method removes the child from element_tree after converting it to
-          an Atom object.
-    """
-    
-    if child.tag == '{%s}%s' % (ATOM_NAMESPACE, 'name'):
-      self.name = _NameFromElementTree(child)
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (ATOM_NAMESPACE, 'email'):
-      self.email = _EmailFromElementTree(child)
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (ATOM_NAMESPACE, 'uri'):
-      self.uri = _UriFromElementTree(child)
-      element_tree.remove(child)
-    else:
-      # Call the parent's transfer method to process all other nodes. 
-      # AtomBase turns all remaining child nodes into ExtensionElements.
-      AtomBase._TakeChildFromElementTree(self, child, element_tree)
-
-  def _TransferFromElementTree(self, element_tree):
-    """Processes all XML child nodes and adds them to this Person instance.
-    
-    Args:
-      element_tree: ElementTree._Element The element tree whose children are
-          converted into Atom objects and stored as children of self.
-    """
-
-    while len(element_tree) > 0:
-      self._TakeChildFromElementTree(element_tree[0], element_tree)
-    AtomBase._TransferFromElementTree(self, element_tree)
-
 
 class Author(Person):
   """The atom:author element
   
   An author is a required element in Feed. 
   """
+
+  _tag = 'author'
+  _namespace = ATOM_NAMESPACE
+  _children = Person._children.copy()
+  _attributes = Person._attributes.copy()
+  #_children = {}
+  #_attributes = {}
 
   def __init__(self, name=None, email=None, uri=None, 
       extension_elements=None, extension_attributes=None, text=None):
@@ -405,48 +411,18 @@ class Author(Person):
     self.extension_attributes = extension_attributes or {}
     self.text = text
 
-  def _TransferToElementTree(self, element_tree):
-    # Call the parent's tranfer to method to convert all other class members
-    # into XML nodes. By parent I mean superclass.
-    Person._TransferToElementTree(self, element_tree)
-    element_tree.tag = ELEMENT_TEMPLATE % 'author'
-    return element_tree
     
 def AuthorFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _AuthorFromElementTree(element_tree)
+  return CreateClassFromXMLString(Author, xml_string)
   
-_AuthorFromElementTree = _AtomInstanceFromElementTree(Author, 'author', 
-    ATOM_NAMESPACE)
-
-
-def _XFromElementTree(class_x, x_tag, x_namespace, element_tree):
-  """Creates instance of class X if the element_tree's tag and namespace are 
-     correct.
-
-  DEPRECATED, use _AtomInstanceFromElementTree instead
-  
-  Args:
-    class_x: function The constructor method for the desired class.
-    x_tag: str The expected tag for the desired class.
-    x_namespace: str The expected namespace for the desired class.
-    element_tree: ElementTree._Element The element_tree from which class data 
-        is extracted. 
-  
-  Returns:
-    An instance of class_x with the data from the element_tree, or None if the
-    element_tree's tag and namespace were not the desired values.
-  """
-
-  new_object = None
-  if element_tree.tag == '{%s}%s' % (x_namespace, x_tag):
-    new_object = class_x()
-    new_object._TransferFromElementTree(element_tree)
-  return new_object
-
 
 class Contributor(Person):
   """The atom:contributor element"""
+
+  _tag = 'contributor'
+  _namespace = ATOM_NAMESPACE
+  _children = Person._children.copy()
+  _attributes = Person._attributes.copy()
 
   def __init__(self, name=None, email=None, uri=None,
       extension_elements=None, extension_attributes=None, text=None):
@@ -468,112 +444,24 @@ class Contributor(Person):
     self.extension_attributes = extension_attributes or {}
     self.text = text
 
-  def _TransferToElementTree(self, element_tree):
-    # Call the parent's tranfer to method to convert all other class members
-    # into XML nodes.
-    Person._TransferToElementTree(self, element_tree)
-    element_tree.tag = ELEMENT_TEMPLATE % 'contributor'
-    return element_tree
 
 def ContributorFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _ContributorFromElementTree(element_tree)
-
-_ContributorFromElementTree = _AtomInstanceFromElementTree(Contributor, 
-    'contributor', ATOM_NAMESPACE)
-  
-  
-class Name(AtomBase):
-  """The atom:name element"""
-
-  def __init__(self, text=None, extension_elements=None, 
-      extension_attributes=None):
-    """Constructor for Name
-    
-    Args:
-      text: str The text data in the this element
-      extension_elements: list A  list of ExtensionElement instances
-      extension_attributes: dict A dictionary of attribute value string pairs
-    """
-
-    self.text = text
-    self.extension_elements = extension_elements or []
-    self.extension_attributes = extension_attributes or {}
-    
-  def _TransferToElementTree(self, element_tree):
-    AtomBase._TransferToElementTree(self, element_tree)
-    element_tree.tag = ELEMENT_TEMPLATE % 'name'
-    return element_tree
-  
-def NameFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _NameFromElementTree(element_tree)
-  
-_NameFromElementTree = _AtomInstanceFromElementTree(Name, 'name', 
-    ATOM_NAMESPACE)
-  
-  
-class Email(AtomBase):
-  """The atom:email element"""
-  
-  def __init__(self, text=None, extension_elements=None, 
-      extension_attributes=None):
-    """Constructor for Email
-    
-    Args:
-      extension_elements: list A  list of ExtensionElement instances
-      extension_attributes: dict A dictionary of attribute value string pairs
-      text: str The text data in the this element
-    """
-
-    self.text = text
-    self.extension_elements = extension_elements or []
-    self.extension_attributes = extension_attributes or {}
-  
-  def _TransferToElementTree(self, element_tree):
-    AtomBase._TransferToElementTree(self, element_tree)
-    element_tree.tag = ELEMENT_TEMPLATE % 'email'
-    return element_tree
-
-def EmailFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _EmailFromElementTree(element_tree)
-  
-_EmailFromElementTree = _AtomInstanceFromElementTree(Email, 'email', 
-    ATOM_NAMESPACE)
-
-
-class Uri(AtomBase):
-  """The atom:uri element"""
-
-  def __init__(self, text=None, extension_elements=None,
-      extension_attributes=None):
-    """Constructor for Uri
-    
-    Args:
-      extension_elements: list A  list of ExtensionElement instances
-      extension_attributes: dict A dictionary of attribute value string pairs
-      text: str The text data in the this element
-    """
-
-    self.text = text
-    self.extension_elements = extension_elements or []
-    self.extension_attributes = extension_attributes or {}
-
-  def _TransferToElementTree(self, element_tree):
-    AtomBase._TransferToElementTree(self, element_tree)
-    element_tree.tag = ELEMENT_TEMPLATE % 'uri'
-    return element_tree
-
-def UriFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _UriFromElementTree(element_tree)
-
-_UriFromElementTree = _AtomInstanceFromElementTree(Uri, 'uri', ATOM_NAMESPACE)
+  return CreateClassFromXMLString(Contributor, xml_string)
   
   
 class Link(AtomBase):
   """The atom:link element"""
+
+  _tag = 'link'
+  _namespace = ATOM_NAMESPACE
+  _children = AtomBase._children.copy()
+  _attributes = AtomBase._attributes.copy()
+  _attributes['rel'] = 'rel'
+  _attributes['href'] = 'href'
+  _attributes['type'] = 'type'
+  _attributes['title'] = 'title'
+  _attributes['length'] = 'length'
+  _attributes['hreflang'] = 'hreflang'
   
   def __init__(self, href=None, rel=None, link_type=None, hreflang=None, 
       title=None, length=None, text=None, extension_elements=None, 
@@ -602,63 +490,20 @@ class Link(AtomBase):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    if self.href:
-      element_tree.attrib['href'] = self.href
-    if self.rel:
-      element_tree.attrib['rel'] = self.rel
-    if self.type:
-      element_tree.attrib['type'] = self.type
-    if self.hreflang:
-      element_tree.attrib['hreflang'] = self.hreflang
-    if self.title:
-      element_tree.attrib['title'] = self.title
-    if self.length:
-      element_tree.attrib['length'] = self.length    
-    AtomBase._TransferToElementTree(self, element_tree)
-    element_tree.tag = ELEMENT_TEMPLATE % 'link'
-    return element_tree
 
-  def _TakeAttributeFromElementTree(self, attribute, element_tree):
-    if attribute == 'href':
-      self.href = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    elif attribute == 'rel':
-      self.rel = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    elif attribute == 'type':
-      self.type = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    elif attribute == 'hreflang':
-      self.hreflang = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    elif attribute == 'title':
-      self.title = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    elif attribute == 'length':
-      self.length = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    else:
-      AtomBase._TakeAttributeFromElementTree(self, attribute, 
-          element_tree)
-
-  def _TransferFromElementTree(self, element_tree):
-    # find all attributes
-    while len(element_tree.attrib.keys()) > 0:
-      current_key = element_tree.attrib.keys()[0]
-      self._TakeAttributeFromElementTree(current_key, element_tree)
-    AtomBase._TransferFromElementTree(self, element_tree)
-    
 def LinkFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _LinkFromElementTree(element_tree)
+  return CreateClassFromXMLString(Link, xml_string)
   
-_LinkFromElementTree = _AtomInstanceFromElementTree(Link, 'link', 
-    ATOM_NAMESPACE)
-
 
 class Generator(AtomBase):
   """The atom:generator element"""
+
+  _tag = 'generator'
+  _namespace = ATOM_NAMESPACE
+  _children = AtomBase._children.copy()
+  _attributes = AtomBase._attributes.copy()
+  _attributes['uri'] = 'uri'
+  _attributes['version'] = 'version'
 
   def __init__(self, uri=None, version=None, text=None, 
       extension_elements=None, extension_attributes=None):
@@ -678,38 +523,8 @@ class Generator(AtomBase):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    if self.uri:
-      element_tree.attrib['uri'] = self.uri
-    if self.version:
-      element_tree.attrib['version'] = self.version
-    AtomBase._TransferToElementTree(self, element_tree)
-    element_tree.tag = ELEMENT_TEMPLATE % 'generator'
-    return element_tree
-
-  def _TakeAttributeFromElementTree(self, attribute, element_tree):
-    if attribute == 'uri':
-      self.uri = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    elif attribute == 'version':
-      self.version = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    else:
-      AtomBase._TakeAttributeFromElementTree(self, attribute, element_tree)
-
-  def _TransferFromElementTree(self, element_tree):
-    # find all attributes
-    while len(element_tree.attrib.keys()) > 0:
-      current_key = element_tree.attrib.keys()[0]
-      self._TakeAttributeFromElementTree(current_key, element_tree)
-    AtomBase._TransferFromElementTree(self, element_tree)
-
 def GeneratorFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _GeneratorFromElementTree(element_tree)
-
-_GeneratorFromElementTree = _AtomInstanceFromElementTree(Generator, 
-    'generator', ATOM_NAMESPACE)
+  return CreateClassFromXMLString(Generator, xml_string)
 
 
 class Text(AtomBase):
@@ -717,6 +532,10 @@ class Text(AtomBase):
   
   This class should never be instantiated.
   """
+
+  _children = AtomBase._children.copy()
+  _attributes = AtomBase._attributes.copy()
+  _attributes['type'] = 'type'
 
   def __init__(self, text_type=None, text=None, extension_elements=None,
       extension_attributes=None):
@@ -734,29 +553,14 @@ class Text(AtomBase):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    if self.type:
-      element_tree.attrib['type'] = self.type
-    AtomBase._TransferToElementTree(self, element_tree)
-    return element_tree
-  
-  def _TakeAttributeFromElementTree(self, attribute, element_tree):
-    if attribute == 'type':
-      self.type = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    else:
-      AtomBase._TakeAttributeFromElementTree(self, attribute, element_tree)
-
-  def _TransferFromElementTree(self, element_tree):
-    # Transfer all xml attributes
-    while len(element_tree.attrib.keys()) > 0:
-      current_key = element_tree.attrib.keys()[0]
-      self._TakeAttributeFromElementTree(current_key, element_tree)
-    AtomBase._TransferFromElementTree(self, element_tree)
-
 
 class Title(Text):
   """The atom:title element"""
+
+  _tag = 'title'
+  _namespace = ATOM_NAMESPACE
+  _children = Text._children.copy()
+  _attributes = Text._attributes.copy()
 
   def __init__(self, title_type=None, text=None, extension_elements=None,
       extension_attributes=None):
@@ -774,23 +578,18 @@ class Title(Text):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    Text._TransferToElementTree(self, element_tree)
-    element_tree.tag = ELEMENT_TEMPLATE % 'title'
-    return element_tree
- 
-  def _TransferFromElementTree(self, element_tree):
-    Text._TransferFromElementTree(self, element_tree)
 
 def TitleFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _TitleFromElementTree(element_tree)
+  return CreateClassFromXMLString(Title, xml_string)
 
-_TitleFromElementTree = _AtomInstanceFromElementTree(Title, 'title', 
-    ATOM_NAMESPACE)
 
 class Subtitle(Text):
   """The atom:subtitle element"""
+
+  _tag = 'subtitle'
+  _namespace = ATOM_NAMESPACE
+  _children = Text._children.copy()
+  _attributes = Text._attributes.copy()
 
   def __init__(self, subtitle_type=None, text=None, extension_elements=None,
       extension_attributes=None):
@@ -808,24 +607,18 @@ class Subtitle(Text):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    Text._TransferToElementTree(self, element_tree)
-    element_tree.tag = ELEMENT_TEMPLATE % 'subtitle'
-    return element_tree
-
-  def _TransferFromElementTree(self, element_tree):
-    Text._TransferFromElementTree(self, element_tree)
 
 def SubtitleFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _SubtitleFromElementTree(element_tree)
-
-_SubtitleFromElementTree = _AtomInstanceFromElementTree(Subtitle, 'subtitle',
-    ATOM_NAMESPACE)
+  return CreateClassFromXMLString(Subtitle, xml_string)
 
 
 class Rights(Text):
   """The atom:rights element"""
+
+  _tag = 'rights'
+  _namespace = ATOM_NAMESPACE
+  _children = Text._children.copy()
+  _attributes = Text._attributes.copy()
 
   def __init__(self, rights_type=None, text=None, extension_elements=None,
       extension_attributes=None):
@@ -843,24 +636,18 @@ class Rights(Text):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    Text._TransferToElementTree(self, element_tree)
-    element_tree.tag = ELEMENT_TEMPLATE % 'rights'
-    return element_tree
-
-  def _TransferFromElementTree(self, element_tree):
-    Text._TransferFromElementTree(self, element_tree)
 
 def RightsFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _RightsFromElementTree(element_tree)
-
-_RightsFromElementTree = _AtomInstanceFromElementTree(Rights, 'rights', 
-    ATOM_NAMESPACE)
+  return CreateClassFromXMLString(Rights, xml_string)
 
 
 class Summary(Text):
   """The atom:summary element"""
+
+  _tag = 'summary'
+  _namespace = ATOM_NAMESPACE
+  _children = Text._children.copy()
+  _attributes = Text._attributes.copy()
 
   def __init__(self, summary_type=None, text=None, extension_elements=None,
       extension_attributes=None):
@@ -878,23 +665,19 @@ class Summary(Text):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    Text._TransferToElementTree(self, element_tree)
-    element_tree.tag = ELEMENT_TEMPLATE % 'summary'
-    return element_tree
-
-  def _TransferFromElementTree(self, element_tree):
-    Text._TransferFromElementTree(self, element_tree)
 
 def SummaryFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _SummaryFromElementTree(element_tree)
-
-_SummaryFromElementTree = _AtomInstanceFromElementTree(Summary, 'summary', ATOM_NAMESPACE)
+  return CreateClassFromXMLString(Summary, xml_string)
 
 
 class Content(Text):
   """The atom:content element"""
+
+  _tag = 'content'
+  _namespace = ATOM_NAMESPACE
+  _children = Text._children.copy()
+  _attributes = Text._attributes.copy()
+  _attributes['src'] = 'src'
 
   def __init__(self, content_type=None, src=None, text=None, extension_elements=None,
       extension_attributes=None):
@@ -914,36 +697,20 @@ class Content(Text):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    if self.src:
-      element_tree.attrib['src'] = self.src
-    Text._TransferToElementTree(self, element_tree)
-    element_tree.tag = ELEMENT_TEMPLATE % 'content'
-    return element_tree
-
-  def _TakeAttributeFromElementTree(self, attribute, element_tree):
-    if attribute == 'src':
-      self.src = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    else:
-      Text._TakeAttributeFromElementTree(self, attribute, element_tree)
-
-  def _TransferFromElementTree(self, element_tree):
-    # Transfer all xml attributes
-    while len(element_tree.attrib.keys()) > 0:
-      current_key = element_tree.attrib.keys()[0]
-      self._TakeAttributeFromElementTree(current_key, element_tree)
-    Text._TransferFromElementTree(self, element_tree)
-
 def ContentFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _ContentFromElementTree(element_tree)
-
-_ContentFromElementTree = _AtomInstanceFromElementTree(Content, 'content', ATOM_NAMESPACE)
+  return CreateClassFromXMLString(Content, xml_string)
 
 
 class Category(AtomBase):
   """The atom:category element"""
+
+  _tag = 'category'
+  _namespace = ATOM_NAMESPACE
+  _children = AtomBase._children.copy()
+  _attributes = AtomBase._attributes.copy()
+  _attributes['term'] = 'term'
+  _attributes['scheme'] = 'scheme'
+  _attributes['label'] = 'label'
 
   def __init__(self, term=None, scheme=None, label=None, text=None, 
       extension_elements=None, extension_attributes=None):
@@ -965,46 +732,18 @@ class Category(AtomBase):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    if self.term:
-      element_tree.attrib['term'] = self.term
-    if self.scheme:
-      element_tree.attrib['scheme'] = self.scheme
-    if self.label:
-      element_tree.attrib['label'] = self.label
-    AtomBase._TransferToElementTree(self, element_tree)
-    element_tree.tag = ELEMENT_TEMPLATE % 'category'
-    return element_tree
-
-  def _TakeAttributeFromElementTree(self, attribute, element_tree):
-    if attribute == 'term':
-      self.term = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    elif attribute == 'scheme':
-      self.scheme = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    elif attribute == 'label':
-      self.label = element_tree.attrib[attribute]
-      del element_tree.attrib[attribute]
-    else:
-      AtomBase._TakeAttributeFromElementTree(self, attribute, element_tree)
-
-  def _TransferFromElementTree(self, element_tree):
-    # find all attributes
-    while len(element_tree.attrib.keys()) > 0:
-      current_key = element_tree.attrib.keys()[0]
-      self._TakeAttributeFromElementTree(current_key, element_tree)
-    AtomBase._TransferFromElementTree(self, element_tree)
 
 def CategoryFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _CategoryFromElementTree(element_tree)
-
-_CategoryFromElementTree = _AtomInstanceFromElementTree(Category, 'category', ATOM_NAMESPACE)
+  return CreateClassFromXMLString(Category, xml_string)
 
 
 class Id(AtomBase):
   """The atom:id element."""
+
+  _tag = 'id'
+  _namespace = ATOM_NAMESPACE
+  _children = AtomBase._children.copy()
+  _attributes = AtomBase._attributes.copy()
 
   def __init__(self, text=None, extension_elements=None,
       extension_attributes=None):
@@ -1020,20 +759,18 @@ class Id(AtomBase):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    AtomBase._TransferToElementTree(self, element_tree)
-    element_tree.tag = ELEMENT_TEMPLATE % 'id'
-    return element_tree
 
 def IdFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _IdFromElementTree(element_tree)
-
-_IdFromElementTree = _AtomInstanceFromElementTree(Id, 'id', ATOM_NAMESPACE)
+  return CreateClassFromXMLString(Id, xml_string)
 
 
 class Icon(AtomBase):
   """The atom:icon element."""
+  
+  _tag = 'icon'
+  _namespace = ATOM_NAMESPACE
+  _children = AtomBase._children.copy()
+  _attributes = AtomBase._attributes.copy()
 
   def __init__(self, text=None, extension_elements=None,
       extension_attributes=None):
@@ -1049,21 +786,18 @@ class Icon(AtomBase):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    AtomBase._TransferToElementTree(self, element_tree)
-    element_tree.tag = ELEMENT_TEMPLATE % 'icon'
-    return element_tree
 
 def IconFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _IconFromElementTree(element_tree)
-
-_IconFromElementTree = _AtomInstanceFromElementTree(Icon, 'icon', 
-    ATOM_NAMESPACE)
+  return CreateClassFromXMLString(Icon, xml_string)
 
 
 class Logo(AtomBase):
   """The atom:logo element."""
+
+  _tag = 'logo'
+  _namespace = ATOM_NAMESPACE
+  _children = AtomBase._children.copy()
+  _attributes = AtomBase._attributes.copy()
 
   def __init__(self, text=None, extension_elements=None,
       extension_attributes=None):
@@ -1079,21 +813,18 @@ class Logo(AtomBase):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    AtomBase._TransferToElementTree(self, element_tree)
-    element_tree.tag = ELEMENT_TEMPLATE % 'logo'
-    return element_tree
 
 def LogoFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _LogoFromElementTree(element_tree)
-
-_LogoFromElementTree = _AtomInstanceFromElementTree(Logo, 'logo', 
-    ATOM_NAMESPACE)
+  return CreateClassFromXMLString(Logo, xml_string)
 
 
 class Draft(AtomBase):
   """The app:draft element which indicates if this entry should be public."""
+
+  _tag = 'draft'
+  _namespace = APP_NAMESPACE
+  _children = AtomBase._children.copy()
+  _attributes = AtomBase._attributes.copy()
 
   def __init__(self, text=None, extension_elements=None,
       extension_attributes=None):
@@ -1109,17 +840,9 @@ class Draft(AtomBase):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    AtomBase._TransferToElementTree(self, element_tree)
-    element_tree.tag = APP_TEMPLATE % 'draft'
-    return element_tree
 
 def DraftFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _DraftFromElementTree(element_tree)
-
-_DraftFromElementTree = _AtomInstanceFromElementTree(Draft, 'draft',
-    APP_NAMESPACE)
+  return CreateClassFromXMLString(Draft, xml_string)
 
 
 class Control(AtomBase):
@@ -1128,6 +851,12 @@ class Control(AtomBase):
   The APP control element may contain a draft element indicating whether or
   not this entry should be publicly available.
   """
+
+  _tag = 'control'
+  _namespace = APP_NAMESPACE
+  _children = AtomBase._children.copy()
+  _attributes = AtomBase._attributes.copy()
+  _children['{%s}draft' % APP_NAMESPACE] = ('draft', Draft)
 
   def __init__(self, draft=None, text=None, extension_elements=None,
         extension_attributes=None):
@@ -1138,26 +867,9 @@ class Control(AtomBase):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    AtomBase._TransferToElementTree(self, element_tree)
-    if self.draft:
-      self.draft._BecomeChildElement(element_tree)
-    element_tree.tag = APP_TEMPLATE % 'control'
-    return element_tree
-    
-  def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (APP_NAMESPACE, 'draft'):
-      self.draft = _DraftFromElementTree(child)
-      element_tree.remove(child)
-    else:
-      AtomBase._TakeChildFromElementTree(self, child, element_tree)
 
 def ControlFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _ControlFromElementTree(element_tree)
-
-_ControlFromElementTree = _AtomInstanceFromElementTree(Control, 'control', 
-    APP_NAMESPACE)
+  return CreateClassFromXMLString(Control, xml_string)
 
 
 class Date(AtomBase):
@@ -1165,6 +877,9 @@ class Date(AtomBase):
 
   #TODO Add text to and from time conversion methods to allow users to set
   # the contents of a Date to a python DateTime object.
+
+  _children = AtomBase._children.copy()
+  _attributes = AtomBase._attributes.copy()
 
   def __init__(self, text=None, extension_elements=None,
       extension_attributes=None):
@@ -1175,6 +890,11 @@ class Date(AtomBase):
 
 class Updated(Date):
   """The atom:updated element."""
+
+  _tag = 'updated'
+  _namespace = ATOM_NAMESPACE
+  _children = Date._children.copy()
+  _attributes = Date._attributes.copy()
 
   def __init__(self, text=None, extension_elements=None,
       extension_attributes=None):
@@ -1190,24 +910,18 @@ class Updated(Date):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    Date._TransferToElementTree(self, element_tree)
-    element_tree.tag = ELEMENT_TEMPLATE % 'updated'
-    return element_tree
-
-  def _TransferFromElementTree(self, element_tree):
-    Date._TransferFromElementTree(self, element_tree)
 
 def UpdatedFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _UpdatedFromElementTree(element_tree)
-
-_UpdatedFromElementTree = _AtomInstanceFromElementTree(Updated, 'updated', 
-    ATOM_NAMESPACE)
+  return CreateClassFromXMLString(Updated, xml_string)
 
 
 class Published(Date):
   """The atom:published element."""
+
+  _tag = 'published'
+  _namespace = ATOM_NAMESPACE
+  _children = Date._children.copy()
+  _attributes = Date._attributes.copy()
 
   def __init__(self, text=None, extension_elements=None,
       extension_attributes=None):
@@ -1223,20 +937,10 @@ class Published(Date):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    Date._TransferToElementTree(self, element_tree)
-    element_tree.tag = ELEMENT_TEMPLATE % 'published'
-    return element_tree
-
-  def _TransferFromElementTree(self, element_tree):
-    Date._TransferFromElementTree(self, element_tree)
 
 def PublishedFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _PublishedFromElementTree(element_tree)
+  return CreateClassFromXMLString(Published, xml_string)
 
-_PublishedFromElementTree = _AtomInstanceFromElementTree(Published, 
-    'published', ATOM_NAMESPACE)
 
 class LinkFinder(object):
   """An "interface" providing methods to find link elements
@@ -1289,6 +993,17 @@ class LinkFinder(object):
 class FeedEntryParent(AtomBase, LinkFinder):
   """A super class for atom:feed and entry, contains shared attributes"""
 
+  _children = AtomBase._children.copy()
+  _attributes = AtomBase._attributes.copy()
+  _children['{%s}author' % ATOM_NAMESPACE] = ('author', [Author])
+  _children['{%s}category' % ATOM_NAMESPACE] = ('category', [Category])
+  _children['{%s}contributor' % ATOM_NAMESPACE] = ('contributor', [Contributor])
+  _children['{%s}id' % ATOM_NAMESPACE] = ('id', Id)
+  _children['{%s}link' % ATOM_NAMESPACE] = ('link', [Link])
+  _children['{%s}rights' % ATOM_NAMESPACE] = ('rights', Rights)
+  _children['{%s}title' % ATOM_NAMESPACE] = ('title', Title)
+  _children['{%s}updated' % ATOM_NAMESPACE] = ('updated', Updated)
+
   def __init__(self, author=None, category=None, contributor=None, 
       atom_id=None, link=None, rights=None, title=None, updated=None, text=None, 
       extension_elements=None, extension_attributes=None):
@@ -1304,71 +1019,87 @@ class FeedEntryParent(AtomBase, LinkFinder):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    for an_author in self.author:
-      an_author._BecomeChildElement(element_tree)
-    for a_category in self.category:
-      a_category._BecomeChildElement(element_tree)
-    for a_contributor in self.contributor:
-      a_contributor._BecomeChildElement(element_tree)
-    if self.id:
-      self.id._BecomeChildElement(element_tree)
-    for a_link in self.link:
-      a_link._BecomeChildElement(element_tree)
-    if self.rights:
-      self.rights._BecomeChildElement(element_tree)
-    if self.title:
-      self.title._BecomeChildElement(element_tree)
-    if self.updated:
-      self.updated._BecomeChildElement(element_tree)
-    AtomBase._TransferToElementTree(self, element_tree)
-    return element_tree
- 
-  def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (ATOM_NAMESPACE, 'author'):
-      self.author.append(_AuthorFromElementTree(child))
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (ATOM_NAMESPACE, 'category'):
-      self.category.append(_CategoryFromElementTree(child))
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (ATOM_NAMESPACE, 'contributor'):
-      self.contributor.append(_ContributorFromElementTree(child))
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (ATOM_NAMESPACE, 'id'):
-      self.id = _IdFromElementTree(child)
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (ATOM_NAMESPACE, 'link'):
-      self.link.append(_LinkFromElementTree(child))
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (ATOM_NAMESPACE, 'rights'):
-      self.rights = _RightsFromElementTree(child)
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (ATOM_NAMESPACE, 'title'):
-      self.title = _TitleFromElementTree(child)
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (ATOM_NAMESPACE, 'updated'):
-      self.updated = _UpdatedFromElementTree(child)
-      element_tree.remove(child)
-    else:
-      AtomBase._TakeChildFromElementTree(self, child, element_tree)
 
-  def _TransferFromElementTree(self, element_tree):
-    while len(element_tree) > 0:
-      self._TakeChildFromElementTree(element_tree[0], element_tree)
-    AtomBase._TransferFromElementTree(self, element_tree)
-  
+class Source(FeedEntryParent):
+  """The atom:source element"""
+
+  _tag = 'source'
+  _namespace = ATOM_NAMESPACE
+  _children = FeedEntryParent._children.copy()
+  _attributes = FeedEntryParent._attributes.copy()
+  _children['{%s}generator' % ATOM_NAMESPACE] = ('generator', Generator)
+  _children['{%s}icon' % ATOM_NAMESPACE] = ('icon', Icon)
+  _children['{%s}logo' % ATOM_NAMESPACE] = ('logo', Logo)
+  _children['{%s}subtitle' % ATOM_NAMESPACE] = ('subtitle', Subtitle)
+
+  def __init__(self, author=None, category=None, contributor=None,
+      generator=None, icon=None, atom_id=None, link=None, logo=None, rights=None, subtitle=None, title=None, updated=None, text=None,
+      extension_elements=None, extension_attributes=None):
+    """Constructor for Source
+
+    Args:
+      author: list (optional) A list of Author instances which belong to this
+          class.
+      category: list (optional) A list of Category instances
+      contributor: list (optional) A list on Contributor instances
+      generator: Generator (optional)
+      icon: Icon (optional)
+      id: Id (optional) The entry's Id element
+      link: list (optional) A list of Link instances
+      logo: Logo (optional)
+      rights: Rights (optional) The entry's Rights element
+      subtitle: Subtitle (optional) The entry's subtitle element
+      title: Title (optional) the entry's title element
+      updated: Updated (optional) the entry's updated element
+      text: String (optional) The text contents of the element. This is the
+          contents of the Entry's XML text node.
+          (Example: <foo>This is the text</foo>)
+      extension_elements: list (optional) A list of ExtensionElement instances
+          which are children of this element.
+      extension_attributes: dict (optional) A dictionary of strings which are
+          the values for additional XML attributes of this element.
+    """
+
+    self.author = author or []
+    self.category = category or []
+    self.contributor = contributor or []
+    self.generator = generator
+    self.icon = icon
+    self.id = atom_id
+    self.link = link or []
+    self.logo = logo
+    self.rights = rights
+    self.subtitle = subtitle
+    self.title = title
+    self.updated = updated
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+
+def SourceFromString(xml_string):
+  return CreateClassFromXMLString(Source, xml_string)
+
 
 class Entry(FeedEntryParent):
   """The atom:entry element"""
 
-  control=None
+  _tag = 'entry'
+  _namespace = ATOM_NAMESPACE
+  _children = FeedEntryParent._children.copy()
+  _attributes = FeedEntryParent._attributes.copy()
+  _children['{%s}content' % ATOM_NAMESPACE] = ('content', Content)
+  _children['{%s}published' % ATOM_NAMESPACE] = ('published', Published)
+  _children['{%s}source' % ATOM_NAMESPACE] = ('source', Source)
+  _children['{%s}summary' % ATOM_NAMESPACE] = ('summary', Summary)
+  _children['{%s}control' % APP_NAMESPACE] = ('control', Control)
 
   def __init__(self, author=None, category=None, content=None, 
       contributor=None, atom_id=None, link=None, published=None, rights=None,
       source=None, summary=None, control=None, title=None, updated=None,
       extension_elements=None, extension_attributes=None, text=None):
     """Constructor for atom:entry
-    
+
     Args:
       author: list A list of Author instances which belong to this class.
       category: list A list of Category instances
@@ -1409,144 +1140,19 @@ class Entry(FeedEntryParent):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    if self.content:
-      self.content._BecomeChildElement(element_tree)
-    if self.published:
-      self.published._BecomeChildElement(element_tree)
-    if self.source:
-      self.source._BecomeChildElement(element_tree)
-    if self.summary:
-      self.summary._BecomeChildElement(element_tree)
-    if self.control:
-      self.control._BecomeChildElement(element_tree)
-    FeedEntryParent._TransferToElementTree(self, element_tree)
-    element_tree.tag = ELEMENT_TEMPLATE % 'entry'
-    return element_tree
-
-  def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (ATOM_NAMESPACE, 'content'):
-      self.content = _ContentFromElementTree(child)
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (ATOM_NAMESPACE, 'published'):
-      self.published = _PublishedFromElementTree(child)
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (ATOM_NAMESPACE, 'source'):
-      self.source = _SourceFromElementTree(child)
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (ATOM_NAMESPACE, 'summary'):
-      self.summary = _SummaryFromElementTree(child)
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (APP_NAMESPACE, 'control'):
-      self.control = _ControlFromElementTree(child)
-      element_tree.remove(child)
-    else:
-      FeedEntryParent._TakeChildFromElementTree(self, child, element_tree)
-
-  def _TransferFromElementTree(self, element_tree):
-    while len(element_tree) > 0:
-      self._TakeChildFromElementTree(element_tree[0], element_tree)
-    FeedEntryParent._TransferFromElementTree(self, element_tree)
 
 def EntryFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _EntryFromElementTree(element_tree)
-
-_EntryFromElementTree = _AtomInstanceFromElementTree(Entry, 'entry', 
-    ATOM_NAMESPACE)
-
-
-class Source(FeedEntryParent):
-  """The atom:source element"""
-
-  def __init__(self, author=None, category=None, contributor=None,
-      generator=None, icon=None, atom_id=None, link=None, logo=None, rights=None, subtitle=None, title=None, updated=None, text=None,
-      extension_elements=None, extension_attributes=None):
-    """Constructor for Source
-    
-    Args:
-      author: list (optional) A list of Author instances which belong to this 
-          class.
-      category: list (optional) A list of Category instances
-      contributor: list (optional) A list on Contributor instances
-      generator: Generator (optional) 
-      icon: Icon (optional) 
-      id: Id (optional) The entry's Id element
-      link: list (optional) A list of Link instances
-      logo: Logo (optional) 
-      rights: Rights (optional) The entry's Rights element
-      subtitle: Subtitle (optional) The entry's subtitle element
-      title: Title (optional) the entry's title element
-      updated: Updated (optional) the entry's updated element
-      text: String (optional) The text contents of the element. This is the 
-          contents of the Entry's XML text node. 
-          (Example: <foo>This is the text</foo>)
-      extension_elements: list (optional) A list of ExtensionElement instances
-          which are children of this element.
-      extension_attributes: dict (optional) A dictionary of strings which are 
-          the values for additional XML attributes of this element.
-    """
-
-    self.author = author or []
-    self.category = category or []
-    self.contributor = contributor or []
-    self.generator = generator
-    self.icon = icon
-    self.id = atom_id
-    self.link = link or []
-    self.logo = logo
-    self.rights = rights
-    self.subtitle = subtitle
-    self.title = title
-    self.updated = updated
-    self.text = text
-    self.extension_elements = extension_elements or []
-    self.extension_attributes = extension_attributes or {}
-
-  def _TransferToElementTree(self, element_tree):
-    if self.generator:
-      self.generator._BecomeChildElement(element_tree)
-    if self.icon:
-      self.icon._BecomeChildElement(element_tree)
-    if self.logo:
-      self.logo._BecomeChildElement(element_tree)
-    if self.subtitle:
-      self.subtitle._BecomeChildElement(element_tree)
-    FeedEntryParent._TransferToElementTree(self, element_tree)
-    element_tree.tag = ELEMENT_TEMPLATE % 'source'
-    return element_tree
-
-  def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (ATOM_NAMESPACE, 'generator'):
-      self.generator = _GeneratorFromElementTree(child)
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (ATOM_NAMESPACE, 'icon'):
-      self.icon = _IconFromElementTree(child)
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (ATOM_NAMESPACE, 'logo'):
-      self.logo = _LogoFromElementTree(child)
-      element_tree.remove(child)
-    elif child.tag == '{%s}%s' % (ATOM_NAMESPACE, 'subtitle'):
-      self.subtitle = _SubtitleFromElementTree(child)
-      element_tree.remove(child)
-    else:
-      FeedEntryParent._TakeChildFromElementTree(self, child, element_tree)
-
-  def _TransferFromElementTree(self, element_tree):
-    while len(element_tree) > 0:
-      self._TakeChildFromElementTree(element_tree[0], element_tree)
-    FeedEntryParent._TransferFromElementTree(self, element_tree)
-
-def SourceFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _SourceFromElementTree(element_tree)
-
-_SourceFromElementTree = _AtomInstanceFromElementTree(Source, 'source', 
-    ATOM_NAMESPACE)
+  return CreateClassFromXMLString(Entry, xml_string)
 
 
 class Feed(Source):
   """The atom:feed element"""
+
+  _tag = 'feed'
+  _namespace = ATOM_NAMESPACE
+  _children = Source._children.copy()
+  _attributes = Source._attributes.copy()
+  _children['{%s}entry' % ATOM_NAMESPACE] = ('entry', [Entry])
 
   def __init__(self, author=None, category=None, contributor=None,
       generator=None, icon=None, atom_id=None, link=None, logo=None, rights=None, subtitle=None, title=None, updated=None, entry=None, text=None,
@@ -1595,33 +1201,9 @@ class Feed(Source):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
-  def _TransferToElementTree(self, element_tree):
-    for an_entry in self.entry:
-      an_entry._BecomeChildElement(element_tree)
-    Source._TransferToElementTree(self, element_tree)
-    # set the element_tree tag at the end of this method
-    # because Source._TransferToElementTree sets the tag
-    # to atom:source
-    element_tree.tag = ELEMENT_TEMPLATE % 'feed'
-    return element_tree
-
-  def _TakeChildFromElementTree(self, child, element_tree):
-    if child.tag == '{%s}%s' % (ATOM_NAMESPACE, 'entry'):
-      self.entry.append(_EntryFromElementTree(child))
-      element_tree.remove(child)
-    else:
-      Source._TakeChildFromElementTree(self, child, element_tree)
-
-  def _TransferFromElementTree(self, element_tree):
-    while len(element_tree) > 0:
-      self._TakeChildFromElementTree(element_tree[0], element_tree)
-    Source._TransferFromElementTree(self, element_tree)
 
 def FeedFromString(xml_string):
-  element_tree = ElementTree.fromstring(xml_string)
-  return _FeedFromElementTree(element_tree)
-
-_FeedFromElementTree = _AtomInstanceFromElementTree(Feed, 'feed', ATOM_NAMESPACE)
+  return CreateClassFromXMLString(Feed, xml_string)
   
   
 class ExtensionElement(object):

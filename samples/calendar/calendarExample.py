@@ -447,7 +447,7 @@ class CalendarExample:
     value of the role specified (in this case "freebusy")."""
     
     rule = gdata.calendar.CalendarAclEntry()
-    rule.scope = gdata.calendar.Scope(value=username, type="user")
+    rule.scope = gdata.calendar.Scope(value=username, scope_type="user")
     roleValue = "http://schemas.google.com/gCal/2005#%s" % ("freebusy")
     rule.role = gdata.calendar.Role(value=roleValue)
     aclUrl = "/calendar/feeds/default/acl/full"

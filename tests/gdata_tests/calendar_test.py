@@ -38,6 +38,8 @@ class CalendarFeedTest(unittest.TestCase):
   def testEntryCount(self):
     # Assert the number of items in the feed of calendars
     self.assertEquals(len(self.calendar_feed.entry),2)
+    
+      
 
   def testToAndFromString(self):
     # Assert the appropriate type for each entry
@@ -250,11 +252,12 @@ class CalendarFeedTest(unittest.TestCase):
 
 
 class CalendarFeedTestRegenerated(CalendarFeedTest):
-  def setUp(self):    
+  def setUp(self):
     old_calendar_feed = (
         gdata.calendar.CalendarListFeedFromString(test_data.CALENDAR_FEED))
     self.calendar_feed = (
         gdata.calendar.CalendarListFeedFromString(str(old_calendar_feed)))
+    tree = ElementTree.fromstring(str(old_calendar_feed))
 
 
 class CalendarEventFeedTest(unittest.TestCase):
