@@ -52,6 +52,8 @@ class AtomService(object):
   ssl = False
   # If debug is True, the HTTPConnection will display debug information
   debug = False
+  # Used in connection put requests if a proxy is configured.
+  skip_host = False
 
   def __init__(self, server=None, additional_headers=None):
     """Creates a new AtomService client.
@@ -132,31 +134,41 @@ class AtomService(object):
         proxy_username = os.environ.get('proxy-username')
         proxy_password = os.environ.get('proxy-password')
         if proxy_username:
-          user_pass=base64.encodestring(proxy_username + ':' + proxy_password)
-          proxy_authorization = 'Proxy-authorization: Basic '+user_pass+'\r\n'
+          user_pass=base64.encodestring('%s:%s' % (proxy_username, 
+                                                   proxy_password))
+          proxy_authorization = ('Proxy-authorization: Basic '+ user_pass 
+                                 + '\r\n')
         else:
           proxy_authorization = ''
-        proxy_connect='CONNECT %s:%s HTTP/1.0\r\n' % (server,port)
-        user_agent='User-Agent: %s\r\n' % self.additional_headers['User-Agent']
-        proxy_pieces=proxy_connect+proxy_authorization+user_agent+'\r\n'
+        proxy_connect = 'CONNECT %s:%s HTTP/1.0\r\n' % (server,port)
+        user_agent = 'User-Agent: %s\r\n' % (
+            self.additional_headers['User-Agent'])
+        proxy_pieces = (proxy_connect + proxy_authorization + user_agent 
+                        + '\r\n')
 
         #now connect, very simple recv and error checking
         p_sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         p_sock.connect((p_server,p_port))
         p_sock.sendall(proxy_pieces)
-        response=p_sock.recv(8192)
+        response = ''
+
+        # Wait for the full response.
+        while response.find("\r\n\r\n") == -1:
+          response += p_sock.recv(8192)
+        
         p_status=response.split()[1]
         if p_status!=str(200):
           raise 'Error status=',str(p_status)
 
-        #trivial setup for ssl socket
+        # Trivial setup for ssl socket.
         ssl = socket.ssl(p_sock, None, None)
         fake_sock = httplib.FakeSocket(p_sock, ssl)
 
-        #initalize httplib and replace with your socket
-        connection=httplib.HTTPConnection('localhost')
+        # Initalize httplib and replace with the proxy socket.
+        connection = httplib.HTTPConnection('localhost')
         connection.sock=fake_sock
         full_uri = partial_uri
+        self.skip_host = True
 
       else:
         connection = httplib.HTTPSConnection(server, port)
@@ -188,7 +200,7 @@ class AtomService(object):
       
     full_uri = BuildUri(uri, url_params, escape_params)
     (connection, full_uri) = self._PrepareConnection(full_uri)
-    connection.putrequest(http_operation, full_uri)
+    connection.putrequest(http_operation, full_uri, skip_host=self.skip_host)
 
     if isinstance(self.additional_headers, dict):
       for header in self.additional_headers:
