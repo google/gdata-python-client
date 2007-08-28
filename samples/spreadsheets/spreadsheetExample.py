@@ -49,14 +49,16 @@ class SimpleCRUD:
     feed = self.gd_client.GetSpreadsheetsFeed()
     self._PrintFeed(feed)
     input = raw_input('\nSelection: ')
-    self.curr_key = feed.entry[string.atoi(input)].id.text.rsplit('/', 1)[1]
+    id_parts = feed.entry[string.atoi(input)].id.text.split('/')
+    self.curr_key = id_parts[len(id_parts) - 1]
   
   def _PromptForWorksheet(self):
     # Get the list of worksheets
     feed = self.gd_client.GetWorksheetsFeed(self.curr_key)
     self._PrintFeed(feed)
     input = raw_input('\nSelection: ')
-    self.curr_wksht_id = feed.entry[string.atoi(input)].id.text.rsplit('/', 1)[1]
+    id_parts = feed.entry[string.atoi(input)].id.text.split('/')
+    self.curr_wksht_id = id_parts[len(id_parts) - 1]
   
   def _PromptForCellsAction(self):
     print ('dump\n'

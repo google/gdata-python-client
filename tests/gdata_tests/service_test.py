@@ -137,8 +137,8 @@ class GDataServiceMediaUnitTest(unittest.TestCase):
     
     self.assert_(ms is not None)
     self.assert_(isinstance(ms, gdata.MediaSource))
-    self.assertEqual(ms.file_name, test_image_name)
-    self.assertEqual(ms.content_type, 'image/jpeg')
+    self.assertEquals(ms.file_name, test_image_name)
+    self.assertEquals(ms.content_type, 'image/jpeg')
   
   def testMediaConstructorWithFilePath(self):
 
@@ -147,8 +147,8 @@ class GDataServiceMediaUnitTest(unittest.TestCase):
     
     self.assert_(ms is not None)
     self.assert_(isinstance(ms, gdata.MediaSource))
-    self.assertEqual(ms.file_name, test_image_name)
-    self.assertEqual(ms.content_type, 'image/jpeg')
+    self.assertEquals(ms.file_name, test_image_name)
+    self.assertEquals(ms.content_type, 'image/jpeg')
    
   def testMediaConstructorWithFileHandle(self):
 
@@ -158,8 +158,8 @@ class GDataServiceMediaUnitTest(unittest.TestCase):
     
     self.assert_(ms is not None)
     self.assert_(isinstance(ms, gdata.MediaSource))
-    self.assertEqual(ms.file_name, test_image_location)
-    self.assertEqual(ms.content_type, 'image/jpeg')
+    self.assertEquals(ms.file_name, test_image_location)
+    self.assertEquals(ms.content_type, 'image/jpeg')
 
 
 class GDataServiceUnitTest(unittest.TestCase):
@@ -269,9 +269,7 @@ class GDataServiceUnitTest(unittest.TestCase):
     feed = self.gd_client.Get(
         'http://www.google.com/base/feeds/snippets?bq=digital+camera',
         converter=gdata.base.GBaseSnippetFeedFromString)
-    self.assertTrue(isinstance(feed, gdata.base.GBaseSnippetFeed))
-    pass
-    
+    self.assertEquals(isinstance(feed, gdata.base.GBaseSnippetFeed), True)
 
   def testPostPutAndDelete(self):
     try:
@@ -346,8 +344,8 @@ class GDataServiceUnitTest(unittest.TestCase):
     response = self.gd_client.Put(updated_xml,
         response.id.text,
         converter=gdata.base.GBaseItemFromString)
-    self.assertTrue(response is not None)
-    self.assertTrue(isinstance(response, gdata.base.GBaseItem))
+    self.assertEquals(response is not None, True)
+    self.assertEquals(isinstance(response, gdata.base.GBaseItem), True)
 
     # Delete the item the test just created.
     response = self.gd_client.Delete(response.id.text)

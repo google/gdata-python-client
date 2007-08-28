@@ -64,7 +64,7 @@ class CalendarExample:
 
     feed = self.cal_client.GetAllCalendarsFeed()
     print 'Printing allcalendars: %s' % feed.title.text
-    for i, a_calendar in enumerate(feed.entry):
+    for i, a_calendar in zip(xrange(len(feed.entry)), feed.entry):
       print '\t%s. %s' % (i, a_calendar.title.text,)
 
   def _PrintOwnCalendars(self):
@@ -77,7 +77,7 @@ class CalendarExample:
 
     feed = self.cal_client.GetOwnCalendarsFeed()
     print 'Printing owncalendars: %s' % feed.title.text
-    for i, a_calendar in enumerate(feed.entry):
+    for i, a_calendar in zip(xrange(len(feed.entry)), feed.entry):
       print '\t%s. %s' % (i, a_calendar.title.text,)
 
   def _PrintAllEventsOnDefaultCalendar(self):
@@ -91,9 +91,9 @@ class CalendarExample:
   
     feed = self.cal_client.GetCalendarEventFeed()
     print 'Events on Primary Calendar: %s' % (feed.title.text,)
-    for i, an_event in enumerate(feed.entry):
+    for i, an_event in zip(xrange(len(feed.entry)), feed.entry):
       print '\t%s. %s' % (i, an_event.title.text,)
-      for p, a_participant in enumerate(an_event.who):
+      for p, a_participant in zip(xrange(len(an_event.who)), an_event.who):
         print '\t\t%s. %s' % (p, a_participant.email,)
         print '\t\t\t%s' % (a_participant.name,)
         print '\t\t\t%s' % (a_participant.attendee_status.value,)
@@ -116,7 +116,7 @@ class CalendarExample:
     query = gdata.calendar.service.CalendarEventQuery('default', 'private', 
         'full', text_query)
     feed = self.cal_client.CalendarQuery(query)
-    for i, an_event in enumerate(feed.entry):
+    for i, an_event in zip(xrange(len(feed.entry)), feed.entry):
       print '\t%s. %s' % (i, an_event.title.text,)
       print '\t\t%s. %s' % (i, an_event.content.text,)
       for a_when in an_event.when:
@@ -136,7 +136,7 @@ class CalendarExample:
     query.start_min = start_date
     query.start_max = end_date 
     feed = self.cal_client.CalendarQuery(query)
-    for i, an_event in enumerate(feed.entry):
+    for i, an_event in zip(xrange(len(feed.entry)), feed.entry):
       print '\t%s. %s' % (i, an_event.title.text,)
       for a_when in an_event.when:
         print '\t\tStart time: %s' % (a_when.start_time,)
@@ -435,7 +435,7 @@ class CalendarExample:
     
     feed = self.cal_client.GetCalendarAclFeed()
     print feed.title.text
-    for i, a_rule in enumerate(feed.entry):
+    for i, a_rule in zip(xrange(len(feed.entry)), feed.entry):
       print '\t%s. %s' % (i, a_rule.title.text,)
       print '\t\t Role: %s' % (a_rule.role.value,)
       print '\t\t Scope %s - %s' % (a_rule.scope.type, a_rule.scope.value)

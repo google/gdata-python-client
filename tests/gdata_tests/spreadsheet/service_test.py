@@ -35,7 +35,6 @@ ss_key = ''
 ws_key = ''
 
 
-
 class DocumentQueryTest(unittest.TestCase):
   
   def setUp(self):
@@ -150,11 +149,11 @@ class SpreadsheetsServiceTest(unittest.TestCase):
          key=self.key)
    
   def testInsertUpdateRow(self):
-    entry = self.gd_client.InsertRow(dict(a1='new', b1='row', 
-        c1='was', d1='here'), self.key)
-    entry = self.gd_client.UpdateRow(entry, dict(a1='newer', 
-        b1=entry.custom['b1'].text, c1=entry.custom['c1'].text, 
-        d1=entry.custom['d1'].text))
+    entry = self.gd_client.InsertRow({'a1':'new', 'b1':'row', 'c1':'was', 
+        'd1':'here'}, self.key)
+    entry = self.gd_client.UpdateRow(entry, {'a1':'newer', 
+        'b1':entry.custom['b1'].text, 'c1':entry.custom['c1'].text,
+        'd1':entry.custom['d1'].text})
     self.gd_client.DeleteRow(entry)
     
     

@@ -283,7 +283,8 @@ class CalendarServiceUnitTest(unittest.TestCase):
     self.cal_client.ProgrammaticLogin()
 
     result = self.cal_client.GetCalendarEventFeed()
-    self.assertTrue(isinstance(result, gdata.calendar.CalendarEventFeed))
+    self.assertEquals(isinstance(result, gdata.calendar.CalendarEventFeed), 
+                      True)
 
 
 class CalendarEventQueryUnitTest(unittest.TestCase):

@@ -119,7 +119,7 @@ class GBaseServiceUnitTest(unittest.TestCase):
     result = self.gd_client.InsertItem(proposed_item)
 
     item_id = result.id.text
-    self.assertTrue(result.id.text != None)
+    self.assertEquals(result.id.text != None, True)
 
     updated_item = gdata.base.GBaseItemFromString(test_data.TEST_BASE_ENTRY)
     updated_item.label[0].text = 'Test Item'
@@ -154,21 +154,21 @@ class GBaseServiceUnitTest(unittest.TestCase):
     proposed_item = gdata.base.GBaseItemFromString(test_data.TEST_BASE_ENTRY)
     result = self.gd_client.InsertItem(proposed_item, 
         converter=atom.EntryFromString)
-    self.assertTrue(isinstance(result, atom.Entry))
-    self.assertFalse(isinstance(result, gdata.base.GBaseItem))
+    self.assertEquals(isinstance(result, atom.Entry), True)
+    self.assertEquals(isinstance(result, gdata.base.GBaseItem), False)
 
     item_id = result.id.text
-    self.assertTrue(result.id.text != None)
+    self.assertEquals(result.id.text != None, True)
 
     updated_item = gdata.base.GBaseItemFromString(test_data.TEST_BASE_ENTRY)
     updated_item.label[0].text = 'Test Item'
     result = self.gd_client.UpdateItem(item_id, updated_item, 
         converter=atom.EntryFromString)
-    self.assertTrue(isinstance(result, atom.Entry))
-    self.assertFalse(isinstance(result, gdata.base.GBaseItem))
+    self.assertEquals(isinstance(result, atom.Entry), True)
+    self.assertEquals(isinstance(result, gdata.base.GBaseItem), False)
 
     result = self.gd_client.DeleteItem(item_id)
-    self.assertTrue(result)
+    self.assertEquals(result, True)
 
         
 if __name__ == '__main__':

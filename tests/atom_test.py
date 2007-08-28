@@ -421,11 +421,11 @@ class ControlTest(unittest.TestCase):
     control.draft = atom.Draft(text='yes')
     self.assertEquals(control.draft.text, 'yes')
     self.assertEquals(control.text, 'some text')
-    self.assertTrue(isinstance(control.draft, atom.Draft))
+    self.assertEquals(isinstance(control.draft, atom.Draft), True)
     new_control = atom.ControlFromString(str(control))
     self.assertEquals(control.draft.text, new_control.draft.text)
     self.assertEquals(control.text, new_control.text)
-    self.assertTrue(isinstance(new_control.draft, atom.Draft))
+    self.assertEquals(isinstance(new_control.draft, atom.Draft), True)
 
 
 class DraftTest(unittest.TestCase):
@@ -538,13 +538,15 @@ class LinkFinderTest(unittest.TestCase):
     self.entry = atom.EntryFromString(test_data.XML_ENTRY_1)
 
   def testLinkFinderGetsLicenseLink(self):
-    self.assertTrue(isinstance(self.entry.GetLicenseLink(), atom.Link))
+    self.assertEquals(isinstance(self.entry.GetLicenseLink(), atom.Link), 
+                      True)
     self.assertEquals(self.entry.GetLicenseLink().href,
         'http://creativecommons.org/licenses/by-nc/2.5/rdf')
     self.assertEquals(self.entry.GetLicenseLink().rel, 'license')
 
   def testLinkFinderGetsAlternateLink(self):
-    self.assertTrue(isinstance(self.entry.GetAlternateLink(), atom.Link))
+    self.assertEquals(isinstance(self.entry.GetAlternateLink(), atom.Link), 
+                      True)
     self.assertEquals(self.entry.GetAlternateLink().href,
         'http://www.provider-host.com/123456789')
     self.assertEquals(self.entry.GetAlternateLink().rel, 'alternate')

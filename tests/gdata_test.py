@@ -75,13 +75,15 @@ class LinkFinderTest(unittest.TestCase):
     self.entry = gdata.GDataEntryFromString(test_data.XML_ENTRY_1)
 
   def testLinkFinderGetsLicenseLink(self):
-    self.assertTrue(isinstance(self.entry.GetLicenseLink(), atom.Link))
+    self.assertEquals(isinstance(self.entry.GetLicenseLink(), atom.Link), 
+                      True)
     self.assertEquals(self.entry.GetLicenseLink().href, 
         'http://creativecommons.org/licenses/by-nc/2.5/rdf')
     self.assertEquals(self.entry.GetLicenseLink().rel, 'license')
 
   def testLinkFinderGetsAlternateLink(self):
-    self.assertTrue(isinstance(self.entry.GetAlternateLink(), atom.Link))
+    self.assertEquals(isinstance(self.entry.GetAlternateLink(), atom.Link), 
+                                 True)
     self.assertEquals(self.entry.GetAlternateLink().href, 
         'http://www.provider-host.com/123456789')
     self.assertEquals(self.entry.GetAlternateLink().rel, 'alternate')
