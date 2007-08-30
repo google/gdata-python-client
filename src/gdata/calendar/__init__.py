@@ -578,7 +578,7 @@ class OriginalEvent(atom.AtomBase):
   _attributes = atom.AtomBase._attributes.copy()
   # TODO: The when tag used to map to a EntryLink, make sure it should really be a When.
   _children['{%s}when' % gdata.GDATA_NAMESPACE] = ('when', When)
-  _attributes['id'] = 'id',
+  _attributes['id'] = 'id'
   _attributes['href'] = 'href'
 
   def __init__(self, id=None, href=None, when=None, 
@@ -771,6 +771,8 @@ class CalendarEventEntry(gdata.GDataEntry):
       'send_event_notifications', SendEventNotifications)
   _children['{%s}quickadd' % GCAL_NAMESPACE] = ('quick_add', QuickAdd)
   _children['{%s}comments' % gdata.GDATA_NAMESPACE] = ('comments', Comments)
+  _children['{%s}originalEvent' % gdata.GDATA_NAMESPACE] = ('original_event',
+                                                            OriginalEvent)
   
   def __init__(self, author=None, category=None, content=None,
       atom_id=None, link=None, published=None, 
@@ -779,7 +781,7 @@ class CalendarEventEntry(gdata.GDataEntry):
       send_event_notifications=None, visibility=None,
       recurrence=None, recurrence_exception=None,
       where=None, when=None, who=None, quick_add=None,
-      extended_property=None, 
+      extended_property=None, original_event=None,
       extension_elements=None, extension_attributes=None, text=None):
 
     gdata.GDataEntry.__init__(self, author=author, category=category, 
@@ -799,6 +801,7 @@ class CalendarEventEntry(gdata.GDataEntry):
     self.who = who or []
     self.quick_add = quick_add
     self.extended_property = extended_property or []
+    self.original_event = original_event
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}

@@ -250,6 +250,16 @@ class CalendarFeedTest(unittest.TestCase):
         entry.recurrence_exception[0].entry_link.entry.author[0].name.text, 
         'gdata ops')
 
+  def testOriginalEntry(self):
+    """Make sure original entry in the private composite feed are parsed."""
+
+    entry = gdata.calendar.CalendarEventEntryFromString(
+        test_data.RECURRENCE_EXCEPTION_ENTRY)
+
+    self.assertEquals(
+        entry.recurrence_exception[0].entry_link.entry.original_event.id,
+        'i7lgfj69mjqjgnodklif3vbm7g')
+
 
 class CalendarFeedTestRegenerated(CalendarFeedTest):
   def setUp(self):
