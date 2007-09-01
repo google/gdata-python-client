@@ -539,6 +539,19 @@ class CalendarEventQuery(gdata.service.Query):
       _SetRecurrenceExpansionEnd, 
       doc="""The recurrence-expansion-end query parameter""")
 
+  def _SetTimezone(self, val):
+    self['ctz'] = val
+
+  def _GetTimezone(self):
+    if 'ctz' in self.keys():
+      return self['ctz']
+    else:
+      return None
+
+  ctz = property(_GetTimezone, _SetTimezone, 
+      doc="""The ctz query parameter which sets report time on the server.""")
+
+
 class CalendarListQuery(gdata.service.Query): 
   """Queries the Google Calendar meta feed"""
 

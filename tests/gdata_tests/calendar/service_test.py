@@ -310,6 +310,11 @@ class CalendarEventQueryUnitTest(unittest.TestCase):
     except gdata.calendar.service.Error:
       self.assertEquals(self.query.sortorder, 'a')
 
+  def testTimezoneParameter(self):
+    self.query.ctz = 'America/Los_Angeles'
+    self.assertEquals(self.query['ctz'], 'America/Los_Angeles')
+    self.assert_(self.query.ToUri().find('America%2FLos_Angeles') > -1)
+
 
 if __name__ == '__main__':
   print ('NOTE: Please run these tests only with a test account. ' +
