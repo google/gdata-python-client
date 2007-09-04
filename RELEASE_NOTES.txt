@@ -1,3 +1,22 @@
+=== 1.0.8 ===
+August 31, 2007 (revision 192)
+
+- Major refactoring of the data model classes. Improved XML parsing
+    performance.
+- Created a script to run all of the tests, one to run the data model tests,
+    and one to run all service tests.
+- Changes to MediaSource to handle uploading files on Windows.
+- All of the sample code should now work in Python 2.2 and higher. I removed
+    2.4 dependancies.
+- Minor change to the Blogger sample; it now uses entry.GetSelfLink().
+- Added fix to prevent socket.sslerror and redirect failures when using a
+    proxy.
+- Google Calendar event entries can now contain a reference to the original
+    event. The original event element is present when describing a recurrance
+    exception.
+- Added timezone parameter to Google Calendar queries. This allows the client
+    to request that event times be expressed in a specific timezone.
+
 === 1.0.7 ===
 August 7, 2007
 

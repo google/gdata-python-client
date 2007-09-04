@@ -20,14 +20,23 @@ from distutils.core import setup
 
 setup(
     name='gdata.py',
-    version='1.0.7',
+    version='1.0.8',
     description='Python client library for Google data APIs',
     long_description = """\
 The Google data Python client library makes it easy to access data
 through the Google data APIs. This library provides data model and
-service modules for the Google Calendar data API, Google Spreadsheets
-data API, Google Base data API, core Google data API functionality and
-the Atom Publishing Protocol.
+service modules for the the following Google data services:
+- Google Calendar data API
+- Google Spreadsheets data API
+- Google Document List data APIs
+- Google Base data API
+- Google Apps Provisioning API
+- core Google data API functionality 
+The core Google data code provides sufficient functionality to use this 
+library with any Google data API (even if a module hasn't been written for 
+it yet). For example, this client can be used with the Picasa Web Albums data
+API, the Blogger API, and the YouTube API. This library may also be used with
+any Atom Publishing Protocol service.
 """,
     author='Jeffrey Scudder',
     author_email='api.jscudder@gmail.com',
