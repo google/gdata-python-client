@@ -39,6 +39,7 @@ GDATA_NAMESPACE = 'http://schemas.google.com/g/2005'
 GDATA_TEMPLATE = '{http://schemas.google.com/g/2005}%s'
 OPENSEARCH_NAMESPACE = 'http://a9.com/-/spec/opensearchrss/1.0/'
 OPENSEARCH_TEMPLATE = '{http://a9.com/-/spec/opensearchrss/1.0/}%s'
+BATCH_NAMESPACE = 'http://schemas.google.com/gdata/batch'
 
 class Error(Exception):
   pass
@@ -252,7 +253,7 @@ class GDataEntry(atom.Entry, LinkFinder):
       return None
     else:
       return self.content.src
-  
+
 
 def GDataEntryFromString(xml_string):
   """Creates a new GDataEntry instance given a string of XML."""
@@ -276,7 +277,6 @@ class GDataFeed(atom.Feed, LinkFinder):
                # Entry.
   _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', [GDataEntry])
 
-  #TODO: determine how to strip whitespace from the id
   def __GetId(self):
     return self.__id
 
@@ -287,7 +287,6 @@ class GDataFeed(atom.Feed, LinkFinder):
 
   id = property(__GetId, __SetId)
 
-  #TODO: strip whitespace from generator.text
   def __GetGenerator(self):
     return self.__generator
 
@@ -354,7 +353,174 @@ class GDataFeed(atom.Feed, LinkFinder):
 def GDataFeedFromString(xml_string):
   return atom.CreateClassFromXMLString(GDataFeed, xml_string)
 
- 
+
+class BatchId(atom.AtomBase):
+  _tag = 'id'
+  _namespace = BATCH_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy()
+
+
+def BatchIdFromString(xml_string):
+  return atom.CreateClassFromXMLString(BatchId, xml_string)
+
+
+class BatchOperation(atom.AtomBase):
+  _tag = 'operation'
+  _namespace = BATCH_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['type'] = 'type'
+
+  def __init__(self, op_type=None, extension_elements=None, 
+               extension_attributes=None,
+               text=None):
+    self.type = op_type
+    atom.AtomBase.__init__(self, 
+                           extension_elements=extension_elements, 
+                           extension_attributes=extension_attributes, 
+                           text=text)
+
+
+def BatchOperationFromString(xml_string):
+  return atom.CreateClassFromXMLString(BatchOperation, xml_string)
+
+
+class BatchStatus(atom.AtomBase):
+  """The batch:status element present in a batch response entry.
+  
+  A status element contains the code (HTTP response code) and 
+  reason as elements. In a single request these fields would
+  be part of the HTTP response, but in a batch request each
+  Entry operation has a corresponding Entry in the response
+  feed which includes status information.
+
+  See http://code.google.com/apis/gdata/batch.html#Handling_Errors
+  """
+
+  _tag = 'status'
+  _namespace = BATCH_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['code'] = 'code'
+  _attributes['reason'] = 'reason'
+  _attributes['content-type'] = 'content_type'
+
+  def __init__(self, code=None, reason=None, content_type=None, 
+               extension_elements=None, extension_attributes=None, text=None):
+    self.code = code
+    self.reason = reason
+    self.content_type = content_type
+    atom.AtomBase.__init__(self, extension_elements=extension_elements,
+                           extension_attributes=extension_attributes, 
+                           text=text)
+
+
+def BatchStatusFromString(xml_string):
+  return atom.CreateClassFromXMLString(BatchStatus, xml_string)
+
+
+class BatchEntry(GDataEntry):
+  """An atom:entry for use in batch requests.
+
+  The BatchEntry contains additional members to specify the operation to be
+  performed on this entry and a batch ID so that the server can reference
+  individual operations in the response feed. For more information, see:
+  http://code.google.com/apis/gdata/batch.html
+  """
+
+  _tag = GDataEntry._tag
+  _namespace = GDataEntry._namespace
+  _children = GDataEntry._children.copy()
+  _children['{%s}operation' % BATCH_NAMESPACE] = ('batch_operation', BatchOperation) 
+  _children['{%s}id' % BATCH_NAMESPACE] = ('batch_id', BatchId)
+  _children['{%s}status' % BATCH_NAMESPACE] = ('batch_status', BatchStatus)
+  _attributes = GDataEntry._attributes.copy()
+
+  def __init__(self, author=None, category=None, content=None,
+      contributor=None, atom_id=None, link=None, published=None, rights=None,
+      source=None, summary=None, control=None, title=None, updated=None,
+      batch_operation=None, batch_id=None, batch_status=None,
+      extension_elements=None, extension_attributes=None, text=None):
+    self.batch_operation = batch_operation
+    self.batch_id = batch_id
+    self.batch_status = batch_status
+    GDataEntry.__init__(self, author=author, category=category, 
+        content=content, contributor=contributor, atom_id=atom_id, link=link, 
+        published=published, rights=rights, source=source, summary=summary, 
+        control=control, title=title, updated=updated, 
+        extension_elements=extension_elements, 
+        extension_attributes=extension_attributes, text=text)
+
+
+def BatchEntryFromString(xml_string):
+  return atom.CreateClassFromXMLString(BatchEntry, xml_string)
+
+
+class BatchInterrupted(atom.AtomBase):
+  """The batch:interrupted element sent if batch request was interrupted.
+  
+  Only appears in a feed if some of the batch entries could not be processed.
+  See: http://code.google.com/apis/gdata/batch.html#Handling_Errors
+  """
+
+  _tag = 'interrupted'
+  _namespace = BATCH_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['reason'] = 'reason'
+  _attributes['success'] = 'success'
+  _attributes['failures'] = 'failures'
+  _attributes['parsed'] = 'parsed'
+
+  def __init__(self, reason=None, success=None, failures=None, parsed=None, 
+               extension_elements=None, extension_attributes=None, text=None):
+    self.reason = reason
+    self.success = success
+    self.failures = failures
+    self.parsed = parsed
+    atom.AtomBase.__init__(self, extension_elements=extension_elements,
+                           extension_attributes=extension_attributes, 
+                           text=text)
+
+
+def BatchInterruptedFromString(xml_string):
+  return atom.CreateClassFromXMLString(BatchInterrupted, xml_string)
+
+
+class BatchFeed(GDataFeed):
+  """A feed containing a list of batch request entries."""
+
+  _tag = GDataFeed._tag
+  _namespace = GDataFeed._namespace
+  _children = GDataFeed._children.copy()
+  _attributes = GDataFeed._attributes.copy()
+  _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', [BatchEntry])
+  _children['{%s}interrupted' % BATCH_NAMESPACE] = ('interrupted', BatchInterrupted)
+
+  def __init__(self, author=None, category=None, contributor=None,
+      generator=None, icon=None, atom_id=None, link=None, logo=None,
+      rights=None, subtitle=None, title=None, updated=None, entry=None,
+      total_results=None, start_index=None, items_per_page=None,
+      interrupted=None,
+      extension_elements=None, extension_attributes=None, text=None):
+    self.interrupted = interrupted
+    GDataFeed.__init__(self, author=author, category=category, 
+                       contributor=contributor, generator=generator, 
+                       icon=icon, atom_id=atom_id, link=link, 
+                       logo=logo, rights=rights, subtitle=subtitle,
+                       title=title, updated=updated, entry=entry,
+                       total_results=total_results, start_index=start_index,
+                       items_per_page=items_per_page,
+                       extension_elements=extension_elements, 
+                       extension_attributes=extension_attributes,
+                       text=text)
+
+
+def BatchFeedFromString(xml_string):
+  return atom.CreateClassFromXMLString(BatchFeed, xml_string)
+  
+
 class EntryLink(atom.AtomBase):
   """The gd:entryLink element"""
 

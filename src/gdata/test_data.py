@@ -1514,3 +1514,131 @@ type="application/atom+xml" /><ns0:link
 href="http://docs.google.com/feeds/documents/private/full/spreadsheet%3Asupercalifragilisticexpealidocious"
 rel="self" type="application/atom+xml" /><ns0:title type="text">Test Spreadsheet</ns0:title><ns0:updated>2007-07-03T18:03:32.045Z</ns0:updated></ns0:entry>
 """
+
+BATCH_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
+<entry xmlns="http://www.w3.org/2005/Atom"
+       xmlns:batch="http://schemas.google.com/gdata/batch" 
+       xmlns:g="http://base.google.com/ns/1.0">
+  <id>http://www.google.com/base/feeds/items/2173859253842813008</id>
+  <published>2006-07-11T14:51:43.560Z</published>
+  <updated>2006-07-11T14:51: 43.560Z</updated>
+  <title type="text">title</title>
+  <content type="html">content</content>
+  <link rel="self" 
+    type="application/atom+xml" 
+    href="http://www.google.com/base/feeds/items/2173859253842813008"/>
+  <link rel="edit" 
+    type="application/atom+xml" 
+    href="http://www.google.com/base/feeds/items/2173859253842813008"/>
+  <g:item_type>recipes</g:item_type>
+  <batch:operation type="insert"/>
+  <batch:id>itemB</batch:id>
+  <batch:status code="201" reason="Created"/>
+</entry>"""
+
+BATCH_FEED_REQUEST = """<?xml version="1.0" encoding="UTF-8"?>
+<feed
+  xmlns="http://www.w3.org/2005/Atom"
+  xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/"
+  xmlns:g="http://base.google.com/ns/1.0"
+  xmlns:batch="http://schemas.google.com/gdata/batch">
+  <title type="text">My Batch Feed</title>
+  <entry>
+    <id>http://www.google.com/base/feeds/items/13308004346459454600</id>
+    <batch:operation type="delete"/>
+  </entry>
+  <entry>
+    <id>http://www.google.com/base/feeds/items/17437536661927313949</id>
+    <batch:operation type="delete"/>
+  </entry>
+  <entry>
+    <title type="text">...</title>
+    <content type="html">...</content>
+    <batch:id>itemA</batch:id>
+    <batch:operation type="insert"/>
+    <g:item_type>recipes</g:item_type>
+  </entry>
+  <entry>
+    <title type="text">...</title>
+    <content type="html">...</content>
+    <batch:id>itemB</batch:id>
+    <batch:operation type="insert"/>
+    <g:item_type>recipes</g:item_type>
+  </entry>
+</feed>"""
+
+BATCH_FEED_RESULT = """<?xml version="1.0" encoding="UTF-8"?>
+<feed
+  xmlns="http://www.w3.org/2005/Atom"
+  xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/"
+  xmlns:g="http://base.google.com/ns/1.0"
+  xmlns:batch="http://schemas.google.com/gdata/batch">
+  <id>http://www.google.com/base/feeds/items</id>
+  <updated>2006-07-11T14:51:42.894Z</updated>
+  <title type="text">My Batch</title>
+  <link rel="http://schemas.google.com/g/2005#feed"
+    type="application/atom+xml"
+    href="http://www.google.com/base/feeds/items"/>
+  <link rel="http://schemas.google.com/g/2005#post"
+    type="application/atom+xml"
+    href="http://www.google.com/base/feeds/items"/>
+  <link rel=" http://schemas.google.com/g/2005#batch"
+    type="application/atom+xml"
+    href="http://www.google.com/base/feeds/items/batch"/>
+  <entry>
+    <id>http://www.google.com/base/feeds/items/2173859253842813008</id>
+    <published>2006-07-11T14:51:43.560Z</published>
+    <updated>2006-07-11T14:51: 43.560Z</updated>
+    <title type="text">...</title>
+    <content type="html">...</content>
+    <link rel="self"
+      type="application/atom+xml"
+      href="http://www.google.com/base/feeds/items/2173859253842813008"/>
+    <link rel="edit"
+      type="application/atom+xml"
+      href="http://www.google.com/base/feeds/items/2173859253842813008"/>
+    <g:item_type>recipes</g:item_type>
+    <batch:operation type="insert"/>
+    <batch:id>itemB</batch:id>
+    <batch:status code="201" reason="Created"/>
+  </entry>
+  <entry>
+    <id>http://www.google.com/base/feeds/items/11974645606383737963</id>
+    <published>2006-07-11T14:51:43.247Z</published>
+    <updated>2006-07-11T14:51: 43.247Z</updated>
+    <title type="text">...</title>
+    <content type="html">...</content>
+    <link rel="self"
+      type="application/atom+xml"
+      href="http://www.google.com/base/feeds/items/11974645606383737963"/>
+    <link rel="edit"
+      type="application/atom+xml"
+      href="http://www.google.com/base/feeds/items/11974645606383737963"/>
+    <g:item_type>recipes</g:item_type>
+    <batch:operation type="insert"/>
+    <batch:id>itemA</batch:id>
+    <batch:status code="201" reason="Created"/>
+  </entry>
+  <entry>
+    <id>http://www.google.com/base/feeds/items/13308004346459454600</id>
+    <updated>2006-07-11T14:51:42.894Z</updated>
+    <title type="text">Error</title>
+    <content type="text">Bad request</content>
+    <batch:status code="404"
+      reason="Bad request"
+      content-type="application/xml">
+      <errors>
+        <error type="request" reason="Cannot find item"/>
+      </errors>
+    </batch:status>
+  </entry>
+  <entry>
+    <id>http://www.google.com/base/feeds/items/17437536661927313949</id>
+    <updated>2006-07-11T14:51:43.246Z</updated>
+    <content type="text">Deleted</content>
+    <batch:operation type="delete"/>
+    <batch:status code="200" reason="Success"/>
+  </entry>
+</feed>"""
+
+

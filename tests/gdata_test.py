@@ -98,6 +98,76 @@ class GDataFeedTest(unittest.TestCase):
     feed = element_tree.find('{http://www.w3.org/2005/Atom}feed')
     self.assert_(element_tree.find(
         '{http://a9.com/-/spec/opensearchrss/1.0/}totalResults') is not None)
+
+
+class BatchEntryTest(unittest.TestCase):
+
+  def testCorrectConversionFromAndToString(self):
+    batch_entry = gdata.BatchEntryFromString(test_data.BATCH_ENTRY)
+    
+    self.assertEquals(batch_entry.batch_id.text, 'itemB')
+    self.assertEquals(batch_entry.id.text, 
+                      'http://www.google.com/base/feeds/items/'
+                      '2173859253842813008')
+    self.assertEquals(batch_entry.batch_operation.type, 'insert')
+    self.assertEquals(batch_entry.batch_status.code, '201')
+    self.assertEquals(batch_entry.batch_status.reason, 'Created')
+    
+    new_entry = gdata.BatchEntryFromString(str(batch_entry))
+
+    self.assertEquals(batch_entry.batch_id.text, new_entry.batch_id.text)
+    self.assertEquals(batch_entry.id.text, new_entry.id.text)
+    self.assertEquals(batch_entry.batch_operation.type, 
+                      new_entry.batch_operation.type)
+    self.assertEquals(batch_entry.batch_status.code, 
+                      new_entry.batch_status.code)
+    self.assertEquals(batch_entry.batch_status.reason, 
+                      new_entry.batch_status.reason)
+
+
+class BatchFeedTest(unittest.TestCase):
+
+  def testConvertRequestFeed(self):
+    batch_feed = gdata.BatchFeedFromString(test_data.BATCH_FEED_REQUEST)
+
+    self.assertEquals(len(batch_feed.entry), 4)
+    for entry in batch_feed.entry:
+      self.assert_(isinstance(entry, gdata.BatchEntry))
+    self.assertEquals(batch_feed.title.text, 'My Batch Feed')
+
+    new_feed = gdata.BatchFeedFromString(str(batch_feed))
+
+    self.assertEquals(len(new_feed.entry), 4)
+    for entry in new_feed.entry:
+      self.assert_(isinstance(entry, gdata.BatchEntry))
+    self.assertEquals(new_feed.title.text, 'My Batch Feed')
+
+  def testConvertResultFeed(self):
+    batch_feed = gdata.BatchFeedFromString(test_data.BATCH_FEED_RESULT)
+    
+    self.assertEquals(len(batch_feed.entry), 4)
+    for entry in batch_feed.entry:
+      self.assert_(isinstance(entry, gdata.BatchEntry))
+      if entry.id.text == ('http://www.google.com/base/feeds/items/'
+                           '2173859253842813008'):
+        self.assertEquals(entry.batch_operation.type, 'insert')
+        self.assertEquals(entry.batch_id.text, 'itemB')
+        self.assertEquals(entry.batch_status.code, '201')
+        self.assertEquals(entry.batch_status.reason, 'Created')
+    self.assertEquals(batch_feed.title.text, 'My Batch')
+
+    new_feed = gdata.BatchFeedFromString(str(batch_feed))
+    
+    self.assertEquals(len(new_feed.entry), 4)
+    for entry in new_feed.entry:
+      self.assert_(isinstance(entry, gdata.BatchEntry))
+      if entry.id.text == ('http://www.google.com/base/feeds/items/'
+                           '2173859253842813008'):
+        self.assertEquals(entry.batch_operation.type, 'insert')
+        self.assertEquals(entry.batch_id.text, 'itemB')
+        self.assertEquals(entry.batch_status.code, '201')
+        self.assertEquals(entry.batch_status.reason, 'Created')
+    self.assertEquals(new_feed.title.text, 'My Batch')
         
     
 if __name__ == '__main__':

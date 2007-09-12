@@ -62,16 +62,46 @@ APP_TEMPLATE = '{http://purl.org/atom/app#}%s'
 
 
 def CreateClassFromXMLString(target_class, xml_string):
+  """Creates an instance of the target class from the string contents.
+  
+  Args:
+    target_class: class The class which will be instantiated and populated
+        with the contents of the XML. This class must have a _tag and a
+        _namespace class variable.
+    xml_string: str A string which contains valid XML. The root element
+        of the XML string should match the tag and namespace of the desired
+        class.
+
+  Returns:
+    An instance of the target class with members assigned according to the
+    contents of the XML - or None if the root XML tag and namespace did not
+    match those of the target class.
+  """
   tree = ElementTree.fromstring(xml_string)
   return _CreateClassFromElementTree(target_class, tree)
 
 
 def _CreateClassFromElementTree(target_class, tree, namespace=None, tag=None):
-  """
+  """Instantiates the class and populates members according to the tree.
 
   Note: Only use this function with classes that have _namespace and _tag
   class members.
 
+  Args:
+    target_class: class The class which will be instantiated and populated
+        with the contents of the XML.
+    tree: ElementTree An element tree whose contents will be converted into
+        members of the new target_class instance.
+    namespace: str (optional) The namespace which the XML tree's root node must
+        match. If omitted, the namespace defaults to the _namespace of the 
+        target class.
+    tag: str (optional) The tag which the XML tree's root node must match. If
+        omitted, the tag defaults to the _tag class member of the target 
+        class.
+
+    Returns:
+      An instance of the target class - or None if the tag and namespace of 
+      the XML tree's root node did not match the desired namespace and tag.
   """
   if namespace is None:
     namespace = target_class._namespace
@@ -1155,8 +1185,9 @@ class Feed(Source):
   _children['{%s}entry' % ATOM_NAMESPACE] = ('entry', [Entry])
 
   def __init__(self, author=None, category=None, contributor=None,
-      generator=None, icon=None, atom_id=None, link=None, logo=None, rights=None, subtitle=None, title=None, updated=None, entry=None, text=None,
-      extension_elements=None, extension_attributes=None):
+      generator=None, icon=None, atom_id=None, link=None, logo=None, 
+      rights=None, subtitle=None, title=None, updated=None, entry=None, 
+      text=None, extension_elements=None, extension_attributes=None):
     """Constructor for Source
     
     Args:
