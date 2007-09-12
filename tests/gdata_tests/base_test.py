@@ -94,6 +94,24 @@ class GBaseItemTest(unittest.TestCase):
             self.assert_(attrib.text == 'new')
 #        self.assert_(an_entry.item_attributes['condition'].text == 'new')
 
+  def testModifyCustomItemAttributes(self):
+    self.item.AddItemAttribute('test_attrib', 'foo', value_type='test1')
+    self.item.AddItemAttribute('test_attrib', 'bar', value_type='test2')
+    self.assertEquals(self.item.item_attributes[0].name, 'test_attrib')
+    self.assertEquals(self.item.item_attributes[1].name, 'test_attrib')
+    self.assertEquals(self.item.item_attributes[0].text, 'foo')
+    self.assertEquals(self.item.item_attributes[1].text, 'bar')
+
+    # Get one of the custom attributes from the item.
+    attributes = self.item.GetItemAttributes('test_attrib')
+    self.assertEquals(len(attributes), 2)
+    self.assertEquals(attributes[0].text, 'foo')
+    # Change the contents of the found item attribute.
+    attributes[0].text = 'new foo'
+    self.assertEquals(attributes[0].text, 'new foo')
+    # Make sure that the change is reflected in the item.
+    self.assertEquals(self.item.item_attributes[0].text, 'new foo')
+    
 
 class GBaseItemFeedTest(unittest.TestCase):
 
