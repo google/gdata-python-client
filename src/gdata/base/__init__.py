@@ -49,8 +49,27 @@ class ItemAttributeContainer(object):
   methods to interact with the custom attributes.   
   """
 
+  def GetItemAttributes(self, name):
+    """Returns a list of all item attributes which have the desired name.
+
+    Args:
+      name: str The tag of the desired base attributes. For example, calling
+          this method with 'rating' would return a list of ItemAttributes
+          represented by a 'g:rating' tag.
+
+    Returns:
+      A list of matching ItemAttribute objects.
+    """
+    result = []
+    for attrib in self.item_attributes:
+      if attrib.name == name:
+        result.append(attrib)
+    return result
+
   def FindItemAttribute(self, name):
     """Get the contents of the first Base item attribute which matches name.
+
+    This method is deprecated, please use GetItemAttributes instead.
     
     Args: 
       name: str The tag of the desired base attribute. For example, calling
