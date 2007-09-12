@@ -220,6 +220,26 @@ class GDataService(atom.service.AtomService):
   captcha_url = property(__GetCaptchaURL,
       doc="""Get the captcha URL for a login request.""")
 
+  def GetAuthSubToken(self):
+    if self.__auth_type == AUTHSUB_AUTH_LABEL:
+      return self.__auth_token
+    else:
+      return None
+
+  def SetAuthSubToken(self, token):
+    self.__auth_token = token
+    self.__auth_type = AUTHSUB_AUTH_LABEL
+
+  def GetClientLoginToken(self):
+    if self.__auth_type == PROGRAMMATIC_AUTH_LABEL:
+      return self.__auth_token
+    else:
+      return None
+
+  def SetClientLoginToken(self, token):
+    self.__auth_token = token
+    self.__auth_type = PROGRAMMATIC_AUTH_LABEL
+
   # Authentication operations
 
   def ProgrammaticLogin(self, captcha_token=None, captcha_response=None):
