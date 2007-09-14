@@ -127,6 +127,11 @@ class BatchEntryTest(unittest.TestCase):
 
 class BatchFeedTest(unittest.TestCase):
 
+  def setUp(self):
+    self.batch_feed = gdata.BatchFeed()
+    self.example_entry = gdata.BatchEntry(
+        atom_id=atom.Id(text='http://example.com/1'), text='This is a test')
+
   def testConvertRequestFeed(self):
     batch_feed = gdata.BatchFeedFromString(test_data.BATCH_FEED_REQUEST)
 
@@ -168,7 +173,131 @@ class BatchFeedTest(unittest.TestCase):
         self.assertEquals(entry.batch_status.code, '201')
         self.assertEquals(entry.batch_status.reason, 'Created')
     self.assertEquals(new_feed.title.text, 'My Batch')
-        
+
+  def testAddBatchEntry(self):
+    try:
+      self.batch_feed.AddBatchEntry(batch_id_string='a')
+      self.fail('AddBatchEntry with neither entry or URL should raise Error')
+    except gdata.MissingRequiredParameters:
+      pass
+
+    new_entry = self.batch_feed.AddBatchEntry(
+        id_url_string='http://example.com/1')
+    self.assertEquals(len(self.batch_feed.entry), 1)
+    self.assertEquals(self.batch_feed.entry[0].id.text, 
+                      'http://example.com/1')
+    self.assertEquals(self.batch_feed.entry[0].batch_id.text, '0')
+    self.assertEquals(new_entry.id.text, 'http://example.com/1')
+    self.assertEquals(new_entry.batch_id.text, '0')
+
+    to_add = gdata.BatchEntry(atom_id=atom.Id(text='originalId'))
+    new_entry = self.batch_feed.AddBatchEntry(entry=to_add, 
+                                              batch_id_string='foo')
+    self.assertEquals(new_entry.batch_id.text, 'foo')
+    self.assertEquals(new_entry.id.text, 'originalId')
+
+    to_add = gdata.BatchEntry(atom_id=atom.Id(text='originalId'), 
+                              batch_id=gdata.BatchId(text='bar'))
+    new_entry = self.batch_feed.AddBatchEntry(entry=to_add, 
+                                              id_url_string='newId',
+                                              batch_id_string='foo')
+    self.assertEquals(new_entry.batch_id.text, 'foo')
+    self.assertEquals(new_entry.id.text, 'originalId')
+
+    to_add = gdata.BatchEntry(atom_id=atom.Id(text='originalId'), 
+                              batch_id=gdata.BatchId(text='bar'))
+    new_entry = self.batch_feed.AddBatchEntry(entry=to_add, 
+                                              id_url_string='newId')
+    self.assertEquals(new_entry.batch_id.text, 'bar')
+    self.assertEquals(new_entry.id.text, 'originalId')
+
+    to_add = gdata.BatchEntry(atom_id=atom.Id(text='originalId'), 
+                              batch_id=gdata.BatchId(text='bar'),
+                              batch_operation=gdata.BatchOperation(
+                                  op_type=gdata.BATCH_INSERT))
+    self.assertEquals(to_add.batch_operation.type, gdata.BATCH_INSERT)
+    new_entry = self.batch_feed.AddBatchEntry(entry=to_add, 
+        id_url_string='newId', batch_id_string='foo', 
+        operation_string=gdata.BATCH_UPDATE)
+    self.assertEquals(new_entry.batch_operation.type, gdata.BATCH_UPDATE)
+
+
+  def testAddInsert(self):
+    
+    first_entry = gdata.BatchEntry(
+        atom_id=atom.Id(text='http://example.com/1'), text='This is a test1')
+    self.batch_feed.AddInsert(first_entry)
+    self.assertEquals(self.batch_feed.entry[0].batch_operation.type, 
+                      gdata.BATCH_INSERT)
+    self.assertEquals(self.batch_feed.entry[0].batch_id.text, '0')
+
+    second_entry = gdata.BatchEntry(
+        atom_id=atom.Id(text='http://example.com/2'), text='This is a test2')
+    self.batch_feed.AddInsert(second_entry, batch_id_string='foo')
+    self.assertEquals(self.batch_feed.entry[1].batch_operation.type, 
+                      gdata.BATCH_INSERT)
+    self.assertEquals(self.batch_feed.entry[1].batch_id.text, 'foo')
+
+    
+    third_entry = gdata.BatchEntry(
+        atom_id=atom.Id(text='http://example.com/3'), text='This is a test3')
+    third_entry.batch_operation = gdata.BatchOperation(
+        op_type=gdata.BATCH_DELETE)
+    # Add an entry with a delete operation already assigned.
+    self.batch_feed.AddInsert(third_entry)
+    # The batch entry should not have the original operation, it should 
+    # have been changed to an insert.
+    self.assertEquals(self.batch_feed.entry[2].batch_operation.type, 
+                      gdata.BATCH_INSERT)
+    self.assertEquals(self.batch_feed.entry[2].batch_id.text, '2')
+
+  def testAddDelete(self):
+    # Try deleting an entry
+    delete_entry = gdata.BatchEntry(
+        atom_id=atom.Id(text='http://example.com/1'), text='This is a test')
+    self.batch_feed.AddDelete(entry=delete_entry)
+    self.assertEquals(self.batch_feed.entry[0].batch_operation.type, 
+                      gdata.BATCH_DELETE)
+    self.assertEquals(self.batch_feed.entry[0].id.text, 
+                      'http://example.com/1')
+    self.assertEquals(self.batch_feed.entry[0].text, 'This is a test') 
+
+    # Try deleting a URL
+    self.batch_feed.AddDelete(url_string='http://example.com/2')
+    self.assertEquals(self.batch_feed.entry[0].batch_operation.type, 
+                      gdata.BATCH_DELETE)
+    self.assertEquals(self.batch_feed.entry[1].id.text, 
+                      'http://example.com/2')
+    self.assert_(self.batch_feed.entry[1].text is None) 
+
+  def testAddQuery(self):
+    # Try querying with an existing batch entry
+    delete_entry = gdata.BatchEntry(
+        atom_id=atom.Id(text='http://example.com/1'))
+    self.batch_feed.AddQuery(entry=delete_entry)
+    self.assertEquals(self.batch_feed.entry[0].batch_operation.type,
+                      gdata.BATCH_QUERY)
+    self.assertEquals(self.batch_feed.entry[0].id.text,
+                      'http://example.com/1')
+
+    # Try querying a URL
+    self.batch_feed.AddQuery(url_string='http://example.com/2')
+    self.assertEquals(self.batch_feed.entry[0].batch_operation.type,
+                      gdata.BATCH_QUERY)
+    self.assertEquals(self.batch_feed.entry[1].id.text,
+                      'http://example.com/2')
+
+  def testAddUpdate(self):
+    # Try updating an entry
+    delete_entry = gdata.BatchEntry(
+        atom_id=atom.Id(text='http://example.com/1'), text='This is a test')
+    self.batch_feed.AddUpdate(entry=delete_entry)
+    self.assertEquals(self.batch_feed.entry[0].batch_operation.type,
+                      gdata.BATCH_UPDATE)
+    self.assertEquals(self.batch_feed.entry[0].id.text,
+                      'http://example.com/1')
+    self.assertEquals(self.batch_feed.entry[0].text, 'This is a test')
+
     
 if __name__ == '__main__':
   unittest.main()

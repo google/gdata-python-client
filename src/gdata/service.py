@@ -710,7 +710,9 @@ class GDataService(atom.service.AtomService):
       result_body = server_response.read()
 
 
-    if server_response.status == 201:
+    # Server returns 201 for most post requests, but when performing a batch
+    # request the server responds with a 200 on success.
+    if server_response.status == 201 or server_response.status == 200:
       if converter:
         return converter(result_body)
       feed = gdata.GDataFeedFromString(result_body)

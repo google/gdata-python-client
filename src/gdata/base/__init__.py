@@ -38,9 +38,6 @@ GMETA_NAMESPACE = 'http://base.google.com/ns-metadata/1.0'
 GMETA_TEMPLATE = '{http://base.google.com/ns-metadata/1.0}%s'
 
 
-
-
-
 class ItemAttributeContainer(object):
   """Provides methods for finding Google Base Item attributes.
   
@@ -402,7 +399,7 @@ class Attributes(atom.AtomBase):
     self.text = text  
   
   
-class GBaseItem(ItemAttributeContainer, gdata.GDataEntry):
+class GBaseItem(ItemAttributeContainer, gdata.BatchEntry):
   """An Google Base flavor of an Atom Entry.
   
   Google Base items have required attributes, recommended attributes, and user
@@ -417,8 +414,8 @@ class GBaseItem(ItemAttributeContainer, gdata.GDataEntry):
   
   _tag = 'entry'
   _namespace = atom.ATOM_NAMESPACE
-  _children = gdata.GDataEntry._children.copy()
-  _attributes = gdata.GDataEntry._attributes.copy()
+  _children = gdata.BatchEntry._children.copy()
+  _attributes = gdata.BatchEntry._attributes.copy()
   _children['{%s}label' % GBASE_NAMESPACE] = ('label', [Label])
   _children['{%s}item_type' % GBASE_NAMESPACE] = ('item_type', ItemType)
   
@@ -426,6 +423,7 @@ class GBaseItem(ItemAttributeContainer, gdata.GDataEntry):
       contributor=None, atom_id=None, link=None, published=None, rights=None,
       source=None, summary=None, title=None, updated=None, control=None, 
       label=None, item_type=None, item_attributes=None,
+      batch_operation=None, batch_id=None, batch_status=None,
       text=None, extension_elements=None, extension_attributes=None):
     self.author = author or []
     self.category = category or []
@@ -443,6 +441,9 @@ class GBaseItem(ItemAttributeContainer, gdata.GDataEntry):
     self.label = label or []
     self.item_type = item_type
     self.item_attributes = item_attributes or []
+    self.batch_operation = batch_operation
+    self.batch_id = batch_id
+    self.batch_status = batch_status
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
@@ -551,13 +552,13 @@ def GBaseItemTypeEntryFromString(xml_string):
   return atom.CreateClassFromXMLString(GBaseItemTypeEntry, xml_string)
   
   
-class GBaseItemFeed(gdata.GDataFeed):
+class GBaseItemFeed(gdata.BatchFeed):
   """A feed containing Google Base Items"""
   
   _tag = 'feed'
   _namespace = atom.ATOM_NAMESPACE
-  _children = gdata.GDataFeed._children.copy()
-  _attributes = gdata.GDataFeed._attributes.copy()
+  _children = gdata.BatchFeed._children.copy()
+  _attributes = gdata.BatchFeed._attributes.copy()
   _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', [GBaseItem])
 
 

@@ -47,8 +47,7 @@ SUPPORTED_FILETYPES = {
   'RTF': 'application/rtf',
   'SXW': 'application/vnd.sun.xml.writer',
   'TXT': 'text/plain',
-  'XLS': 'application/vnd.ms-excel'
-  }
+  'XLS': 'application/vnd.ms-excel'}
 
 
 class Error(Exception):

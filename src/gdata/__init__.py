@@ -40,9 +40,23 @@ GDATA_TEMPLATE = '{http://schemas.google.com/g/2005}%s'
 OPENSEARCH_NAMESPACE = 'http://a9.com/-/spec/opensearchrss/1.0/'
 OPENSEARCH_TEMPLATE = '{http://a9.com/-/spec/opensearchrss/1.0/}%s'
 BATCH_NAMESPACE = 'http://schemas.google.com/gdata/batch'
+GACL_NAMESPACE = 'http://schemas.google.com/acl/2007'
+GACL_TEMPLATE = '{http://schemas.google.com/acl/2007}%s'
+
+
+# Labels used in batch request entries to specify the desired CRUD operation.
+BATCH_INSERT = 'insert'
+BATCH_UPDATE = 'update'
+BATCH_DELETE = 'delete'
+BATCH_QUERY = 'query'
 
 class Error(Exception):
   pass
+
+
+class MissingRequiredParameters(Error):
+  pass
+
 
 class MediaSource(object):
   """GData Entries can refer to media sources, so this class provides a
@@ -144,6 +158,12 @@ class LinkFinder(atom.LinkFinder):
   def GetPostLink(self):
     for a_link in self.link:
       if a_link.rel == 'http://schemas.google.com/g/2005#post':
+        return a_link
+    return None
+
+  def GetAclLink(self):
+    for a_link in self.link:
+      if a_link.rel == 'http://schemas.google.com/acl/2007#accessControlList':
         return a_link
     return None
 
@@ -516,6 +536,144 @@ class BatchFeed(GDataFeed):
                        extension_attributes=extension_attributes,
                        text=text)
 
+  def AddBatchEntry(self, entry=None, id_url_string=None, 
+                     batch_id_string=None, operation_string=None):
+    """Logic for populating members of a BatchEntry and adding to the feed.
+
+    
+    If the entry is not a BatchEntry, it is converted to a BatchEntry so
+    that the batch specific members will be present. 
+
+    The id_url_string can be used in place of an entry if the batch operation
+    applies to a URL. For example query and delete operations require just
+    the URL of an entry, no body is sent in the HTTP request. If an
+    id_url_string is sent instead of an entry, a BatchEntry is created and
+    added to the feed.
+
+    This method also assigns the desired batch id to the entry so that it 
+    can be referenced in the server's response. If the batch_id_string is
+    None, this method will assign a batch_id to be the index at which this
+    entry will be in the feed's entry list.
+    
+    Args:
+      entry: BatchEntry, atom.Entry, or another Entry flavor (optional) The
+          entry which will be sent to the server as part of the batch request.
+          The item must have a valid atom id so that the server knows which 
+          entry this request references.
+      id_url_string: str (optional) The URL of the entry to be acted on. You
+          can find this URL in the text member of the atom id for an entry.
+          If an entry is not sent, this id will be used to construct a new
+          BatchEntry which will be added to the request feed.
+      batch_id_string: str (optional) The batch ID to be used to reference
+          this batch operation in the results feed. If this parameter is None,
+          the current length of the feed's entry array will be used as a
+          count. Note that batch_ids should either always be specified or
+          never, mixing could potentially result in duplicate batch ids.
+      operation_string: str (optional) The desired batch operation which will
+          set the batch_operation.type member of the entry. Options are
+          'insert', 'update', 'delete', and 'query'
+    
+    Raises:
+      MissingRequiredParameters: Raised if neither an id_ url_string nor an
+          entry are provided in the request.
+
+    Returns:
+      The added entry.
+    """
+    if entry is None and id_url_string is None:
+      raise MissingRequiredParameters('supply either an entry or URL string')
+    if entry is None and id_url_string is not None:
+      entry = BatchEntry(atom_id=atom.Id(text=id_url_string))
+    # TODO: handle cases in which the entry lacks batch_... members.
+    #if not isinstance(entry, BatchEntry):
+      # Convert the entry to a batch entry.
+    if batch_id_string is not None:
+      entry.batch_id = BatchId(text=batch_id_string)
+    elif entry.batch_id is None or entry.batch_id.text is None:
+      entry.batch_id = BatchId(text=str(len(self.entry)))
+    if operation_string is not None:
+      entry.batch_operation = BatchOperation(op_type=operation_string)
+    self.entry.append(entry)
+    return entry
+
+  def AddInsert(self, entry, batch_id_string=None):
+    """Add an insert request to the operations in this batch request feed.
+
+    If the entry doesn't yet have an operation or a batch id, these will
+    be set to the insert operation and a batch_id specified as a parameter.
+
+    Args:
+      entry: BatchEntry The entry which will be sent in the batch feed as an
+          insert request.
+      batch_id_string: str (optional) The batch ID to be used to reference
+          this batch operation in the results feed. If this parameter is None,
+          the current length of the feed's entry array will be used as a
+          count. Note that batch_ids should either always be specified or
+          never, mixing could potentially result in duplicate batch ids.
+    """
+    entry = self.AddBatchEntry(entry=entry, batch_id_string=batch_id_string,
+                               operation_string=BATCH_INSERT)
+  
+  def AddUpdate(self, entry, batch_id_string=None):
+    """Add an update request to the list of batch operations in this feed.
+
+    Sets the operation type of the entry to insert if it is not already set
+    and assigns the desired batch id to the entry so that it can be 
+    referenced in the server's response.
+
+    Args:
+      entry: BatchEntry The entry which will be sent to the server as an
+          update (HTTP PUT) request. The item must have a valid atom id
+          so that the server knows which entry to replace.
+      batch_id_string: str (optional) The batch ID to be used to reference
+          this batch operation in the results feed. If this parameter is None,
+          the current length of the feed's entry array will be used as a
+          count. See also comments for AddInsert.
+    """
+    entry = self.AddBatchEntry(entry=entry, batch_id_string=batch_id_string,
+                               operation_string=BATCH_UPDATE)
+
+  def AddDelete(self, url_string=None, entry=None, batch_id_string=None):
+    """Adds a delete request to the batch request feed.
+
+    This method takes either the url_string which is the atom id of the item
+    to be deleted, or the entry itself. The atom id of the entry must be 
+    present so that the server knows which entry should be deleted.
+
+    Args:
+      url_string: str (optional) The URL of the entry to be deleted. You can
+         find this URL in the text member of the atom id for an entry. 
+      entry: BatchEntry (optional) The entry to be deleted.
+      batch_id_string: str (optional)
+
+    Raises:
+      MissingRequiredParameters: Raised if neither a url_string nor an entry 
+          are provided in the request. 
+    """
+    entry = self.AddBatchEntry(entry=entry, id_url_string=url_string, 
+                               batch_id_string=batch_id_string, 
+                               operation_string=BATCH_DELETE)
+
+  def AddQuery(self, url_string=None, entry=None, batch_id_string=None):
+    """Adds a query request to the batch request feed.
+
+    This method takes either the url_string which is the query URL 
+    whose results will be added to the result feed. The query URL will
+    be encapsulated in a BatchEntry, and you may pass in the BatchEntry
+    with a query URL instead of sending a url_string.
+
+    Args:
+      url_string: str (optional)
+      entry: BatchEntry (optional)
+      batch_id_string: str (optional)
+
+    Raises:
+      MissingRequiredParameters
+    """
+    entry = self.AddBatchEntry(entry=entry, id_url_string=url_string,
+                               batch_id_string=batch_id_string,
+                               operation_string=BATCH_QUERY)
+ 
 
 def BatchFeedFromString(xml_string):
   return atom.CreateClassFromXMLString(BatchFeed, xml_string)

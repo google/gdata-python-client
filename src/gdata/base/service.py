@@ -41,6 +41,10 @@ import gdata.base
 import atom
 
 
+# URL to which all batch requests are sent.
+BASE_BATCH_URL = 'http://www.google.com/base/feeds/items/batch'
+
+
 class Error(Exception):
   pass
 
@@ -184,7 +188,8 @@ class GBaseService(gdata.service.GDataService):
                        url_params=url_params, escape_params=escape_params)
                            
   def UpdateItem(self, item_id, updated_item, url_params=None, 
-                 escape_params=True, converter=None):
+                 escape_params=True, 
+                 converter=gdata.base.GBaseItemFromString):
     """Updates an existing item.
 
     Args:
@@ -213,7 +218,25 @@ class GBaseService(gdata.service.GDataService):
     if not converter and isinstance(response, atom.Entry):
       return gdata.base.GBaseItemFromString(response.ToString())
     return response
+
+  def ExecuteBatch(self, batch_feed, 
+                   converter=gdata.base.GBaseItemFeedFromString):
+    """Sends a batch request feed to the server.
     
+    Args: 
+      batch_feed: gdata.BatchFeed A feed containing BatchEntry elements which
+          contain the desired CRUD operation and any necessary entry data.
+      converter: Function (optional) Function to be executed on the server's
+          response. This function should take one string as a parameter. The
+          default value is GBaseItemFeedFromString which will turn the result 
+          into a gdata.base.GBaseItem object.
+
+    Returns:
+      A gdata.BatchFeed containing the results.
+    """
+    
+    return self.Post(batch_feed, BASE_BATCH_URL, converter=converter) 
+
 
 class BaseQuery(gdata.service.Query):
 

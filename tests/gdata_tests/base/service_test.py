@@ -170,7 +170,52 @@ class GBaseServiceUnitTest(unittest.TestCase):
     result = self.gd_client.DeleteItem(item_id)
     self.assertEquals(result, True)
 
-        
+  def testMakeBatchRequests(self):
+    try:
+      self.gd_client.ProgrammaticLogin()
+      self.assert_(self.gd_client.auth_token is not None)
+      self.assert_(self.gd_client.captcha_token is None)
+      self.assert_(self.gd_client.captcha_url is None)
+    except gdata.service.CaptchaRequired:
+      self.fail('Required Captcha')
+
+    request_feed = gdata.base.GBaseItemFeed(atom_id=atom.Id(
+        text='test batch'))
+    entry1 = gdata.base.GBaseItemFromString(test_data.TEST_BASE_ENTRY)
+    entry1.title.text = 'first batch request item'
+    entry2 = gdata.base.GBaseItemFromString(test_data.TEST_BASE_ENTRY)
+    entry2.title.text = 'second batch request item'
+    request_feed.AddInsert(entry1)
+    request_feed.AddInsert(entry2)
+    
+    result_feed = self.gd_client.ExecuteBatch(request_feed)
+    self.assertEquals(result_feed.entry[0].batch_status.code, '201')
+    self.assertEquals(result_feed.entry[0].batch_status.reason, 'Created')
+    self.assertEquals(result_feed.entry[0].title.text, 'first batch request item')
+    self.assertEquals(result_feed.entry[0].item_type.text, 'products')
+    self.assertEquals(result_feed.entry[1].batch_status.code, '201')
+    self.assertEquals(result_feed.entry[1].batch_status.reason, 'Created')
+    self.assertEquals(result_feed.entry[1].title.text, 'second batch request item')
+
+    # Now delete the newly created items.
+    request_feed = gdata.base.GBaseItemFeed(atom_id=atom.Id(
+        text='test deletions'))
+    request_feed.AddDelete(entry=result_feed.entry[0])
+    request_feed.AddDelete(entry=result_feed.entry[1])
+    self.assertEquals(request_feed.entry[0].batch_operation.type, 
+                      gdata.BATCH_DELETE)
+    self.assertEquals(request_feed.entry[1].batch_operation.type, 
+                      gdata.BATCH_DELETE)
+    
+    result_feed = self.gd_client.ExecuteBatch(request_feed)
+    self.assertEquals(result_feed.entry[0].batch_status.code, '200')
+    self.assertEquals(result_feed.entry[0].batch_status.reason, 'Success')
+    self.assertEquals(result_feed.entry[0].title.text, 'first batch request item')
+    self.assertEquals(result_feed.entry[1].batch_status.code, '200')
+    self.assertEquals(result_feed.entry[1].batch_status.reason, 'Success')
+    self.assertEquals(result_feed.entry[1].title.text, 'second batch request item')
+
+    
 if __name__ == '__main__':
   print ('NOTE: Please run these tests only with a test account. ' +
       'The tests may delete or update your data.')

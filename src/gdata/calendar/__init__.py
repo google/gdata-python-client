@@ -38,8 +38,8 @@ import gdata
 GCAL_NAMESPACE = 'http://schemas.google.com/gCal/2005'
 GCAL_TEMPLATE = '{http://schemas.google.com/gCal/2005}%s'
 WEB_CONTENT_LINK_REL = '%s/%s' % (GCAL_NAMESPACE, 'webContent')
-GACL_NAMESPACE = 'http://schemas.google.com/acl/2007'
-GACL_TEMPLATE = '{http://schemas.google.com/acl/2007}%s'
+GACL_NAMESPACE = gdata.GACL_NAMESPACE
+GACL_TEMPLATE = gdata.GACL_TEMPLATE
 
 
 
