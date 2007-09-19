@@ -18,13 +18,6 @@
 
 __author__ = 'api.jfisher (Jeff Fisher)'
 
-try:
-  from xml.etree import cElementTree as ElementTree
-except ImportError:
-  try:
-    import cElementTree as ElementTree
-  except ImportError:
-    from elementtree import ElementTree
 import atom
 import gdata
 
@@ -71,5 +64,3 @@ def DocumentListFeedFromString(xml_string):
     A DocumentListFeed object corresponding to the given XML.
   """
   return atom.CreateClassFromXMLString(DocumentListFeed, xml_string)
-  
-

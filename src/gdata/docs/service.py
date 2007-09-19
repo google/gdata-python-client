@@ -21,7 +21,6 @@
                     Extends GDataService.
 
   DocumentQuery: Queries a Google Document list feed.
-
 """
 
 
@@ -29,7 +28,7 @@ __author__ = 'api.jfisher (Jeff Fisher)'
 
 
 import urllib
-import atom.service
+import atom
 import gdata.service
 import gdata.docs
 
@@ -38,6 +37,7 @@ import gdata.docs
 DATA_KIND_SCHEME = 'http://schemas.google.com/g/2005#kind'
 DOCUMENT_KIND_TERM = 'http://schemas.google.com/docs/2007#document'
 SPREADSHEET_KIND_TERM = 'http://schemas.google.com/docs/2007#spreadsheet'
+PRESENTATION_KIND_TERM = 'http://schemas.google.com/docs/2007#presentation'
 # File extensions of documents that are permitted to be uploaded.
 SUPPORTED_FILETYPES = {
   'CSV': 'text/comma-separated-values',
@@ -47,15 +47,9 @@ SUPPORTED_FILETYPES = {
   'RTF': 'application/rtf',
   'SXW': 'application/vnd.sun.xml.writer',
   'TXT': 'text/plain',
-  'XLS': 'application/vnd.ms-excel'}
-
-
-class Error(Exception):
-  pass
-
-
-class RequestError(Error):
-  pass
+  'XLS': 'application/vnd.ms-excel',
+  'PPT': 'application/vnd.ms-powerpoint',
+  'PPS': 'application/vnd.ms-powerpoint' }
 
 
 class DocsService(gdata.service.GDataService):
@@ -81,7 +75,6 @@ class DocsService(gdata.service.GDataService):
       A DocsService object used to communicate with the Google Documents
       service.
     """
-
     gdata.service.GDataService.__init__(self, email=email, password=password,
                                         service='writely', source=source,
                                         server=server,
@@ -102,7 +95,6 @@ class DocsService(gdata.service.GDataService):
                  return a DocumentListFeed object. This is because most feed
                  queries will result in a feed and not a single entry.
     """
-
     return self.Get(uri, converter=converter)
 
   def QueryDocumentListFeed(self, uri):
@@ -132,9 +124,26 @@ class DocsService(gdata.service.GDataService):
 
   def GetDocumentListFeed(self):
     """Retrieves a feed containing all of a user's documents."""
-
     q = gdata.docs.service.DocumentQuery();
     return self.QueryDocumentListFeed(q.ToUri())
+
+  def UploadPresentation(self, media_source, title):
+    """Uploads a presentation inside of a MediaSource object to the Document
+       List feed with the given title.
+
+    Args:
+      media_source: MediaSource The MediaSource object containing a
+          presentation file to be uploaded.
+      title: string The title of the presentation on the server after being
+          uploaded.
+
+    Returns:
+      A GDataEntry containing information about the presentation created on the
+      Google Documents service.
+    """
+    category = atom.Category(scheme=DATA_KIND_SCHEME,
+        term=PRESENTATION_KIND_TERM)
+    return self._UploadFile(media_source, title, category)
 
   def UploadSpreadsheet(self, media_source, title):
     """Uploads a spreadsheet inside of a MediaSource object to the Document
@@ -159,8 +168,8 @@ class DocsService(gdata.service.GDataService):
        feed with the given title.
 
     Args:
-      media_source: MediaSource The MediaSource object containing a document
-                    file to be uploaded.
+      media_source: MediaSource The gdata.MediaSource object containing a
+                    document file to be uploaded.
       title: string The title of the document on the server after being
              uploaded.
 
@@ -173,7 +182,19 @@ class DocsService(gdata.service.GDataService):
     return self._UploadFile(media_source, title, category)
 
   def _UploadFile(self, media_source, title, category):
-    """Uploads a file to the Document List feed."""
+    """Uploads a file to the Document List feed.
+    
+    Args:
+      media_source: A gdata.MediaSource object containing the file to be
+                    uploaded.
+      title: string The title of the document on the server after being
+             uploaded.
+      category: An atom.Category object specifying the appropriate document
+                type
+    Returns:
+      A GDataEntry containing information about the document created on
+      the Google Documents service.
+     """
     media_entry = gdata.GDataEntry()
     media_entry.title = atom.Title(text=title)
     media_entry.category.append(category)
@@ -185,9 +206,10 @@ class DocsService(gdata.service.GDataService):
 
 
 class DocumentQuery(gdata.service.Query):
+ 
   """Object used to construct a URI to query the Google Document List feed"""
 
-  def __init__(self,feed='/feeds/documents', visibility='private',
+  def __init__(self, feed='/feeds/documents', visibility='private',
       projection='full', text_query=None, params=None,
       categories=None):
     """Constructor for Document List Query
@@ -209,7 +231,6 @@ class DocumentQuery(gdata.service.Query):
       A DocumentQuery object used to construct a URI based on the Document
       List feed.
     """
-
     self.visibility = visibility
     self.projection = projection
     gdata.service.Query.__init__(self, feed, text_query, params, categories)
@@ -221,7 +242,6 @@ class DocumentQuery(gdata.service.Query):
       A string containing the URI used to retrieve entries from the Document
       List feed.
     """
-
     old_feed = self.feed
     self.feed = '/'.join([old_feed, self.visibility, self.projection])
     new_feed = gdata.service.Query.ToUri(self)
