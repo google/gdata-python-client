@@ -267,7 +267,7 @@ class BirthdaySample:
     # Need to find at least one instance of name, birthday, photourl
     # editurl 
     if len(feed.entry) > 0:
-      for custom in feed.entry[0].custom:
+      for name, custom in feed.entry[0].custom.iteritems():
         if custom.column == self.NAME:
           found_name = True
         elif custom.column == self.BIRTHDAY:
@@ -293,7 +293,7 @@ class BirthdaySample:
       d = {} 
       input_valid = True
       
-      for custom in entry.custom:
+      for name, custom in entry.custom.iteritems():
         d[custom.column] = custom.text
 
       month = int(d[self.BIRTHDAY].split("/")[0]) 
