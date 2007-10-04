@@ -73,6 +73,7 @@ import atom
 
 PROGRAMMATIC_AUTH_LABEL = 'GoogleLogin auth'
 AUTHSUB_AUTH_LABEL = 'AuthSub token'
+AUTH_SERVER_HOST = 'https://www.google.com/'
 
 
 class Error(Exception):
@@ -137,7 +138,7 @@ class GDataService(atom.service.AtomService):
     self.password = password
     self.account_type = account_type
     self.service = service
-    self.source =  source
+    self.__source =  source
     self.server = server
     self.additional_headers = additional_headers or {}
     self.__auth_token = None
@@ -146,7 +147,7 @@ class GDataService(atom.service.AtomService):
     self.__captcha_url = None
     self.__gsessionid = None
 
-    self.additional_headers['User-Agent'] = 'Python Google Data Client Lib'
+    self.additional_headers['User-Agent'] = ''
  
   # Define properties for GDataService
   def _SetAuthSubToken(self, auth_token):
@@ -240,6 +241,19 @@ class GDataService(atom.service.AtomService):
     self.__auth_token = token
     self.__auth_type = PROGRAMMATIC_AUTH_LABEL
 
+  # Private methods to create the source property.
+  def __GetSource(self):
+    return self.__source
+
+  def __SetSource(self, new_source):
+    self.__source = new_source
+    # Update the UserAgent header to include the new application name.
+    self.additional_headers['User-Agent'] = ''
+
+  source = property(__GetSource, __SetSource, 
+      doc="""The source is the name of the application making the request. 
+             It should be in the form company_id-app_name-app_version""")
+
   # Authentication operations
 
   def ProgrammaticLogin(self, captcha_token=None, captcha_response=None):
@@ -284,7 +298,7 @@ class GDataService(atom.service.AtomService):
                                        'source': self.source})
 
     # Open a connection to the authentication server.
-    (auth_connection, uri) = self._PrepareConnection('https://www.google.com/')
+    (auth_connection, uri) = self._PrepareConnection(AUTH_SERVER_HOST)
 
     # Begin the POST request to the client login service.
     auth_connection.putrequest('POST', '/accounts/ClientLogin')
@@ -321,7 +335,7 @@ class GDataService(atom.service.AtomService):
         elif response_line.startswith('CaptchaToken='):
           self.__captcha_token = response_line.lstrip('CaptchaToken=')
         elif response_line.startswith('CaptchaUrl='):
-          self.__captcha_url = 'https://www.google.com/accounts/Captcha%s' % (
+          self.__captcha_url = '%saccounts/Captcha%s' % (AUTH_SERVER_HOST,
                                response_line.lstrip('CaptchaUrl='))
       
 
@@ -395,7 +409,7 @@ class GDataService(atom.service.AtomService):
 
     request_params = urllib.urlencode({'next': next, 'scope': scope,
                                     'secure': secure, 'session': session})
-    return 'https://www.google.com/accounts/AuthSubRequest?%s' % request_params
+    return '%saccounts/AuthSubRequest?%s' % (AUTH_SERVER_HOST, request_params)
 
   def UpgradeToSessionToken(self):
     """Upgrades a single use AuthSub token to a session token.
@@ -408,7 +422,7 @@ class GDataService(atom.service.AtomService):
       raise NonAuthSubToken
 
     (upgrade_connection, uri) = self._PrepareConnection(
-        'https://www.google.com/')
+        AUTH_SERVER_HOST)
     upgrade_connection.putrequest('GET', '/accounts/AuthSubSessionToken')
     
     upgrade_connection.putheader('Content-Type',
@@ -436,7 +450,7 @@ class GDataService(atom.service.AtomService):
       raise NonAuthSubToken
     
     (revoke_connection, uri) = self._PrepareConnection(
-        'https://www.google.com/')
+        AUTH_SERVER_HOST)
     revoke_connection.putrequest('GET', '/accounts/AuthSubRevokeToken')
     
     revoke_connection.putheader('Content-Type', 
