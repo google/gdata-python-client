@@ -722,7 +722,7 @@ class Content(Text):
     """
     
     self.type = content_type
-    self.src = None
+    self.src = src
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
