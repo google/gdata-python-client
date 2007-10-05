@@ -147,6 +147,30 @@ class SpreadsheetsServiceTest(unittest.TestCase):
     self.gd_client.UpdateCell(row='5', col='1', inputValue='', key=self.key)
     self.gd_client.UpdateCell(row='5', col='1', inputValue='newer data', 
          key=self.key)
+
+  def testBatchUpdateCell(self):
+    cell_feed = self.gd_client.GetCellsFeed(key=self.key)
+    edit_cell = cell_feed.entry[0]
+    old_cell_value = 'a1'
+
+    # Create a batch request to change the contents of a cell.
+    batch_feed = gdata.spreadsheet.SpreadsheetsCellsFeed()
+    edit_cell.cell.inputValue = 'New Value'
+    batch_feed.AddUpdate(edit_cell)
+    result = self.gd_client.ExecuteBatch(batch_feed, 
+                                         url=cell_feed.GetBatchLink().href)
+    self.assertEquals(len(result.entry), 1)
+    self.assertEquals(result.entry[0].cell.inputValue, 'New Value')
+    
+    # Make a second batch request to change the cell's value back.
+    edit_cell = result.entry[0]
+    edit_cell.cell.inputValue = old_cell_value
+    batch_feed = gdata.spreadsheet.SpreadsheetsCellsFeed()
+    batch_feed.AddUpdate(edit_cell)
+    restored = self.gd_client.ExecuteBatch(batch_feed,
+                                           url=cell_feed.GetBatchLink().href)
+    self.assertEquals(len(restored.entry), 1)
+    self.assertEquals(restored.entry[0].cell.inputValue, old_cell_value)
    
   def testInsertUpdateRow(self):
     entry = self.gd_client.InsertRow({'a1':'new', 'b1':'row', 'c1':'was', 
