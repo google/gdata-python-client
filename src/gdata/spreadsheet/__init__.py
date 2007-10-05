@@ -240,19 +240,19 @@ def SpreadsheetsWorksheetFromString(xml_string):
                                        xml_string)
 
 
-class SpreadsheetsCell(gdata.GDataEntry):
+class SpreadsheetsCell(gdata.BatchEntry):
   """A Google Spreadsheets flavor of a Cell Atom Entry """
   
   _tag = 'entry'
   _namespace = atom.ATOM_NAMESPACE
-  _children = gdata.GDataEntry._children.copy()
-  _attributes = gdata.GDataEntry._attributes.copy()
+  _children = gdata.BatchEntry._children.copy()
+  _attributes = gdata.BatchEntry._attributes.copy()
   _children['{%s}cell' % GSPREADSHEETS_NAMESPACE] = ('cell', Cell)
   
   def __init__(self, author=None, category=None, content=None,
       contributor=None, atom_id=None, link=None, published=None, rights=None,
       source=None, summary=None, title=None, control=None, updated=None, 
-      cell=None, 
+      cell=None, batch_operation=None, batch_id=None, batch_status=None,
       text=None, extension_elements=None, extension_attributes=None):
     self.author = author or []
     self.category = category or []
@@ -266,6 +266,9 @@ class SpreadsheetsCell(gdata.GDataEntry):
     self.summary = summary
     self.control = control
     self.title = title
+    self.batch_operation = batch_operation
+    self.batch_id = batch_id
+    self.batch_status = batch_status
     self.updated = updated
     self.cell = cell
     self.text = text
@@ -405,13 +408,13 @@ def SpreadsheetsWorksheetsFeedFromString(xml_string):
                                        xml_string)
 
 
-class SpreadsheetsCellsFeed(gdata.GDataFeed):
+class SpreadsheetsCellsFeed(gdata.BatchFeed):
   """A feed containing Google Spreadsheets Cells"""
   
   _tag = 'feed'
   _namespace = atom.ATOM_NAMESPACE
-  _children = gdata.GDataFeed._children.copy()
-  _attributes = gdata.GDataFeed._attributes.copy()
+  _children = gdata.BatchFeed._children.copy()
+  _attributes = gdata.BatchFeed._attributes.copy()
   _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', 
                                                   [SpreadsheetsCell])
   _children['{%s}rowCount' % GSPREADSHEETS_NAMESPACE] = ('row_count', 
@@ -425,8 +428,8 @@ class SpreadsheetsCellsFeed(gdata.GDataFeed):
                entry=None, total_results=None, start_index=None,
                items_per_page=None, extension_elements=None,
                extension_attributes=None, text=None, row_count=None,
-               col_count=None):
-    gdata.GDataFeed.__init__(self, author=author, category=category,
+               col_count=None, interrupted=None):
+    gdata.BatchFeed.__init__(self, author=author, category=category,
                              contributor=contributor, generator=generator,
                              icon=icon,  atom_id=atom_id, link=link,
                              logo=logo, rights=rights, subtitle=subtitle,
@@ -436,9 +439,15 @@ class SpreadsheetsCellsFeed(gdata.GDataFeed):
                              items_per_page=items_per_page,
                              extension_elements=extension_elements,
                              extension_attributes=extension_attributes,
-                             text=text)
+                             text=text, interrupted=interrupted)
     self.row_count = row_count
     self.col_count = col_count
+
+  def GetBatchLink(self):
+    for link in self.link:
+      if link.rel == 'http://schemas.google.com/g/2005#batch':
+        return link
+    return None
 
 
 def SpreadsheetsCellsFeedFromString(xml_string):

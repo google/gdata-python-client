@@ -204,6 +204,45 @@ class SpreadsheetsService(gdata.service.GDataService):
         entry.cell = new_cell
         return self.Put(entry, a_link.href, 
             converter=gdata.spreadsheet.SpreadsheetsCellFromString)
+
+  def _GenerateCellsBatchUrl(self, spreadsheet_key, worksheet_id):
+    return ('http://spreadsheets.google.com/feeds/cells/%s/%s/'
+            'private/full/batch' % (spreadsheet_key, worksheet_id))
+
+  def ExecuteBatch(self, batch_feed, url=None, spreadsheet_key=None, 
+      worksheet_id=None,
+      converter=gdata.spreadsheet.SpreadsheetsCellsFeedFromString):
+    """Sends a batch request feed to the server.
+
+    The batch request needs to be sent to the batch URL for a particular 
+    worksheet. You can specify the worksheet by providing the spreadsheet_key
+    and worksheet_id, or by sending the URL from the cells feed's batch link.
+
+    Args:
+      batch_feed: gdata.spreadsheet.SpreadsheetsCellFeed A feed containing 
+          BatchEntry elements which contain the desired CRUD operation and 
+          any necessary data to modify a cell.
+      url: str (optional) The batch URL for the cells feed to which these 
+          changes should be applied. This can be found by calling 
+          cells_feed.GetBatchLink().href.
+      spreadsheet_key: str (optional) Used to generate the batch request URL
+          if the url argument is None. If using the spreadsheet key to 
+          generate the URL, the worksheet id is also required.
+      worksheet_id: str (optional) Used if the url is not provided, it is 
+          oart of the batch feed target URL. This is used with the spreadsheet
+          key.
+      converter: Function (optional) Function to be executed on the server's
+          response. This function should take one string as a parameter. The
+          default value is SpreadsheetsCellsFeedFromString which will turn the result
+          into a gdata.base.GBaseItem object.
+
+    Returns:
+      A gdata.BatchFeed containing the results.
+    """
+
+    if url is None:
+      url = self._GenerateCellsBatchUrl(spreadsheet_key, worksheet_id)
+    return self.Post(batch_feed, url, converter=converter)
     
   def InsertRow(self, row_data, key, wksht_id='default'):
     """Inserts a new row with the provided data
