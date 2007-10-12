@@ -842,15 +842,135 @@ xmlns:gCal='http://schemas.google.com/gCal/2005'>
 </feed>
 """
 
+CALENDAR_BATCH_REQUEST = """<?xml version='1.0' encoding='utf-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom' 
+      xmlns:batch='http://schemas.google.com/gdata/batch'
+      xmlns:gCal='http://schemas.google.com/gCal/2005'>
+  <category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/g/2005#event' />
+  <entry>
+    <batch:id>1</batch:id>
+    <batch:operation type='insert' />
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/g/2005#event' />
+    <title type='text'>Event inserted via batch</title>
+  </entry>
+  <entry>
+    <batch:id>2</batch:id>
+    <batch:operation type='query' />
+    <id>http://www.google.com/calendar/feeds/default/private/full/glcs0kv2qqa0gf52qi1jo018gc</id>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/g/2005#event' />
+    <title type='text'>Event queried via batch</title>
+  </entry>
+  <entry>
+    <batch:id>3</batch:id>
+    <batch:operation type='update' />
+    <id>http://www.google.com/calendar/feeds/default/private/full/ujm0go5dtngdkr6u91dcqvj0qs</id>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/g/2005#event' />
+    <title type='text'>Event updated via batch</title>
+    <link rel='alternate' type='text/html' 
+        href='http://www.google.com/calendar/event?eid=dWptMGdvNWR0bmdka3I2dTkxZGNxdmowcXMgaGFyaXNodi50ZXN0QG0' title='alternate' />
+    <link rel='self' type='application/atom+xml' 
+        href='http://www.google.com/calendar/feeds/default/private/full/ujm0go5dtngdkr6u91dcqvj0qs' />
+    <link rel='edit' type='application/atom+xml' 
+        href='http://www.google.com/calendar/feeds/default/private/full/ujm0go5dtngdkr6u91dcqvj0qs/63326098791' />
+  </entry>
+  <entry>
+    <batch:id>4</batch:id>
+    <batch:operation type='delete' />
+    <id>http://www.google.com/calendar/feeds/default/private/full/d8qbg9egk1n6lhsgq1sjbqffqc</id>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/g/2005#event' />
+    <title type='text'>Event deleted via batch</title>
+    <link rel='alternate' type='text/html' 
+        href='http://www.google.com/calendar/event?eid=ZDhxYmc5ZWdrMW42bGhzZ3Exc2picWZmcWMgaGFyaXNodi50ZXN0QG0' title='alternate' />
+    <link rel='self' type='application/atom+xml' 
+        href='http://www.google.com/calendar/feeds/default/private/full/d8qbg9egk1n6lhsgq1sjbqffqc' />
+    <link rel='edit' type='application/atom+xml' 
+        href='http://www.google.com/calendar/feeds/default/private/full/d8qbg9egk1n6lhsgq1sjbqffqc/63326018324' />
+  </entry>
+</feed>
+"""
+
+CALENDAR_BATCH_RESPONSE = """<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom' 
+      xmlns:batch='http://schemas.google.com/gdata/batch'
+      xmlns:gCal='http://schemas.google.com/gCal/2005'>
+  <id>http://www.google.com/calendar/feeds/default/private/full</id>
+  <updated>2007-09-21T23:01:00.380Z</updated>
+  <category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/g/2005#event'></category>
+  <title type='text'>Batch Feed</title>
+  <link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' 
+      href='http://www.google.com/calendar/feeds/default/private/full' />
+  <link rel='http://schemas.google.com/g/2005#post' type='application/atom+xml' 
+      href='http://www.google.com/calendar/feeds/default/private/full' />
+  <link rel='http://schemas.google.com/g/2005#batch' type='application/atom+xml' 
+      href='http://www.google.com/calendar/feeds/default/private/full/batch' />
+  <entry>
+    <batch:id>1</batch:id>
+    <batch:status code='201' reason='Created' />
+    <batch:operation type='insert' />
+    <id>http://www.google.com/calendar/feeds/default/private/full/n9ug78gd9tv53ppn4hdjvk68ek</id>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/g/2005#event' />
+    <title type='text'>Event inserted via batch</title>
+    <link rel='alternate' type='text/html' 
+        href='http://www.google.com/calendar/event?eid=bjl1Zzc4Z2Q5dHY1M3BwbjRoZGp2azY4ZWsgaGFyaXNodi50ZXN0QG0' title='alternate' />
+    <link rel='self' type='application/atom+xml' 
+        href='http://www.google.com/calendar/feeds/default/private/full/n9ug78gd9tv53ppn4hdjvk68ek' />
+    <link rel='edit' type='application/atom+xml' 
+      href='http://www.google.com/calendar/feeds/default/private/full/n9ug78gd9tv53ppn4hdjvk68ek/63326098860' />
+  </entry>
+  <entry>
+    <batch:id>2</batch:id>
+    <batch:status code='200' reason='Success' />
+    <batch:operation type='query' />
+    <id>http://www.google.com/calendar/feeds/default/private/full/glsc0kv2aqa0ff52qi1jo018gc</id>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/g/2005#event' />
+    <title type='text'>Event queried via batch</title>
+    <link rel='alternate' type='text/html' 
+        href='http://www.google.com/calendar/event?eid=Z2xzYzBrdjJhcWEwZmY1MnFpMWpvMDE4Z2MgaGFyaXNodi50ZXN0QG0' title='alternate' />
+    <link rel='self' type='application/atom+xml' 
+        href='http://www.google.com/calendar/feeds/default/private/full/glsc0kv2aqa0ff52qi1jo018gc' />
+    <link rel='edit' type='application/atom+xml' 
+        href='http://www.google.com/calendar/feeds/default/private/full/glsc0kv2aqa0ff52qi1jo018gc/63326098791' />
+  </entry>
+  <entry xmlns:gCal='http://schemas.google.com/gCal/2005'>
+    <batch:id>3</batch:id>
+    <batch:status code='200' reason='Success' />
+    <batch:operation type='update' />
+    <id>http://www.google.com/calendar/feeds/default/private/full/ujm0go5dtngdkr6u91dcqvj0qs</id>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/g/2005#event' />
+    <title type='text'>Event updated via batch</title>
+    <link rel='alternate' type='text/html' 
+        href='http://www.google.com/calendar/event?eid=dWptMGdvNWR0bmdka3I2dTkxZGNxdmowcXMgaGFyaXNodi50ZXN0QG0' title='alternate' />
+    <link rel='self' type='application/atom+xml' 
+        href='http://www.google.com/calendar/feeds/default/private/full/ujm0go5dtngdkr6u91dcqvj0qs' />
+    <link rel='edit' type='application/atom+xml' 
+        href='http://www.google.com/calendar/feeds/default/private/full/ujm0go5dtngdkr6u91dcqvj0qs/63326098860' />
+    <batch:id>3</batch:id>
+    <batch:status code='200' reason='Success' />
+    <batch:operation type='update' />
+  </entry>
+  <entry>
+    <batch:id>4</batch:id>
+    <batch:status code='200' reason='Success' />
+    <batch:operation type='delete' />
+    <id>http://www.google.com/calendar/feeds/default/private/full/d8qbg9egk1n6lhsgq1sjbqffqc</id>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/g/2005#event' />
+    <title type='text'>Event deleted via batch</title>
+    <content type='text'>Deleted</content>
+  </entry>
+</feed>
+"""
+
 GBASE_ATTRIBUTE_FEED = """<?xml version='1.0' encoding='UTF-8'?>
-    <feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:gm='http://base.google.com/ns-metadata/1.0'>
+    <feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:gm='http://
+base.google.com/ns-metadata/1.0'>
       <id>http://www.google.com/base/feeds/attributes</id>
       <updated>2006-11-01T20:35:59.578Z</updated>
       <category scheme='http://base.google.com/categories/itemtypes' term='online jobs'></category>
       <category scheme='http://base.google.com/categories/itemtypes' term='jobs'></category>
       <title type='text'>Attribute histogram for query: [item type:jobs]</title>
       <link rel='alternate' type='text/html' href='http://base.google.com'></link>
-      <link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='http://www.google.com/base/feeds/attributes'></link>
+      <link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='http://www.google.com/base/feeds
+/attributes'></link>
       <link rel='self' type='application/atom+xml' href='http://www.google.com/base/feeds/attributes/-/jobs'></link>
       <generator version='1.0' uri='http://base.google.com'>GoogleBase</generator>
       <openSearch:totalResults>16</openSearch:totalResults>
@@ -862,7 +982,8 @@ GBASE_ATTRIBUTE_FEED = """<?xml version='1.0' encoding='UTF-8'?>
         <title type='text'>job industry(text)</title>
         <content type='text'>Attribute"job industry" of type text.
         </content>
-        <link rel='self' type='application/atom+xml' href='http://www.google.com/base/feeds/attributes/job+industry%28text%29N%5Bitem+type%3Ajobs%5D'></link>
+        <link rel='self' type='application/atom+xml' href='http://www.google.com/base/feeds/attributes/job+industry%28text
+%29N%5Bitem+type%3Ajobs%5D'></link>
         <gm:attribute name='job industry' type='text' count='4416629'>
           <gm:value count='380772'>it internet</gm:value>
           <gm:value count='261565'>healthcare</gm:value>

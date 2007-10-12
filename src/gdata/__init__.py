@@ -156,6 +156,13 @@ class LinkFinder(atom.LinkFinder):
     return None
 
   def GetPostLink(self):
+    """Get a link containing the POST target URL.
+    
+    The POST target URL is used to insert new entries.
+
+    Returns:
+      A link object with a rel matching the POST type.
+    """
     for a_link in self.link:
       if a_link.rel == 'http://schemas.google.com/g/2005#post':
         return a_link

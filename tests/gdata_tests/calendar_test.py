@@ -661,6 +661,52 @@ class CalendarEventFeedTest(unittest.TestCase):
     self.assertEquals(
         self.calendar_event_feed.entry[1].when[0].reminder[0].minutes, '20')
 
+  def testBatchRequestParsing(self):
+    batch_request = gdata.calendar.CalendarEventFeedFromString(
+        test_data.CALENDAR_BATCH_REQUEST)
+    self.assertEquals(len(batch_request.entry), 4)
+    # Iterate over the batch request entries and match the operation with 
+    # the batch id. These values are hard coded to match the test data.
+    for entry in batch_request.entry:
+      if entry.batch_id.text == '1':
+        self.assertEquals(entry.batch_operation.type, 'insert')
+      if entry.batch_id.text == '2':
+        self.assertEquals(entry.batch_operation.type, 'query')
+      if entry.batch_id.text == '3':
+        self.assertEquals(entry.batch_operation.type, 'update')
+        self.assertEquals(entry.title.text, 'Event updated via batch')
+      if entry.batch_id.text == '4':
+        self.assertEquals(entry.batch_operation.type, 'delete')
+        self.assertEquals(entry.id.text, 
+                          'http://www.google.com/calendar/feeds/default/'
+                          'private/full/d8qbg9egk1n6lhsgq1sjbqffqc')
+        self.assertEquals(entry.GetEditLink().href, 
+                          'http://www.google.com/calendar/feeds/default/'
+                          'private/full/d8qbg9egk1n6lhsgq1sjbqffqc/'
+                          '63326018324')
+
+  def testBatchResponseParsing(self):
+    batch_response = gdata.calendar.CalendarEventFeedFromString(
+        test_data.CALENDAR_BATCH_RESPONSE)
+    self.assertEquals(len(batch_response.entry), 4)
+    for entry in batch_response.entry:
+      if entry.batch_id.text == '1':
+        self.assertEquals(entry.batch_operation.type, 'insert')
+        self.assertEquals(entry.batch_status.code, '201')
+        self.assertEquals(entry.batch_status.reason, 'Created')
+        self.assertEquals(entry.id.text, 'http://www.google.com/calendar/'
+                          'feeds/default/private/full/'
+                          'n9ug78gd9tv53ppn4hdjvk68ek')
+      if entry.batch_id.text == '2':
+        self.assertEquals(entry.batch_operation.type, 'query')
+      if entry.batch_id.text == '3':
+        self.assertEquals(entry.batch_operation.type, 'update')
+      if entry.batch_id.text == '4':
+        self.assertEquals(entry.batch_operation.type, 'delete')
+        self.assertEquals(entry.id.text, 'http://www.google.com/calendar/'
+                          'feeds/default/private/full/'
+                          'd8qbg9egk1n6lhsgq1sjbqffqc')
+
   # TODO add reminder tests for absolute_time and hours/seconds (if possible)
   # TODO test recurrence and recurrenceexception
   # TODO test originalEvent 

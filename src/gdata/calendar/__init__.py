@@ -508,10 +508,6 @@ class Comments(atom.AtomBase):
     self.extension_attributes = extension_attributes or {}
 
 
-
-
-
-
 class EventStatus(UriEnumElement):
   """The Google Calendar eventStatus element"""
   
@@ -743,13 +739,13 @@ class WebContentLink(atom.Link):
     self.web_content = web_content
 
 
-class CalendarEventEntry(gdata.GDataEntry):
+class CalendarEventEntry(gdata.BatchEntry):
   """A Google Calendar flavor of an Atom Entry """
 
-  _tag = gdata.GDataEntry._tag
-  _namespace = gdata.GDataEntry._namespace
-  _children = gdata.GDataEntry._children.copy()
-  _attributes = gdata.GDataEntry._attributes.copy()
+  _tag = gdata.BatchEntry._tag
+  _namespace = gdata.BatchEntry._namespace
+  _children = gdata.BatchEntry._children.copy()
+  _attributes = gdata.BatchEntry._attributes.copy()
   # This class also contains WebContentLinks but converting those members
   # is handled in a special version of _ConvertElementTreeToMember.
   _children['{%s}where' % gdata.GDATA_NAMESPACE] = ('where', [Where])
@@ -782,11 +778,14 @@ class CalendarEventEntry(gdata.GDataEntry):
       recurrence=None, recurrence_exception=None,
       where=None, when=None, who=None, quick_add=None,
       extended_property=None, original_event=None,
+      batch_operation=None, batch_id=None, batch_status=None,
       extension_elements=None, extension_attributes=None, text=None):
 
-    gdata.GDataEntry.__init__(self, author=author, category=category, 
+    gdata.BatchEntry.__init__(self, author=author, category=category, 
                         content=content,
                         atom_id=atom_id, link=link, published=published,
+                        batch_operation=batch_operation, batch_id=batch_id, 
+                        batch_status=batch_status,
                         title=title, updated=updated)
     
     self.transparency = transparency 
@@ -867,13 +866,13 @@ def CalendarEventEntryLinkFromString(xml_string):
   return atom.CreateClassFromXMLString(CalendarEventEntryLink, xml_string)
 
 
-class CalendarEventFeed(gdata.GDataFeed, gdata.LinkFinder):
+class CalendarEventFeed(gdata.BatchFeed, gdata.LinkFinder):
   """A Google Calendar event feed flavor of an Atom Feed"""
 
-  _tag = gdata.GDataFeed._tag
-  _namespace = gdata.GDataFeed._namespace
-  _children = gdata.GDataFeed._children.copy()
-  _attributes = gdata.GDataFeed._attributes.copy()
+  _tag = gdata.BatchFeed._tag
+  _namespace = gdata.BatchFeed._namespace
+  _children = gdata.BatchFeed._children.copy()
+  _attributes = gdata.BatchFeed._attributes.copy()
   _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', 
                                                   [CalendarEventEntry])
 
@@ -881,8 +880,9 @@ class CalendarEventFeed(gdata.GDataFeed, gdata.LinkFinder):
       generator=None, icon=None, atom_id=None, link=None, logo=None, 
       rights=None, subtitle=None, title=None, updated=None, entry=None, 
       total_results=None, start_index=None, items_per_page=None,
+      interrupted=None,
       extension_elements=None, extension_attributes=None, text=None):
-     gdata.GDataFeed.__init__(self, author=author, category=category,
+     gdata.BatchFeed.__init__(self, author=author, category=category,
                               contributor=contributor, generator=generator,
                               icon=icon,  atom_id=atom_id, link=link,
                               logo=logo, rights=rights, subtitle=subtitle,
@@ -890,6 +890,7 @@ class CalendarEventFeed(gdata.GDataFeed, gdata.LinkFinder):
                               total_results=total_results,
                               start_index=start_index,
                               items_per_page=items_per_page,
+                              interrupted=interrupted,
                               extension_elements=extension_elements,
                               extension_attributes=extension_attributes,
                               text=text)
