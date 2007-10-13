@@ -680,6 +680,12 @@ class BatchFeed(GDataFeed):
     entry = self.AddBatchEntry(entry=entry, id_url_string=url_string,
                                batch_id_string=batch_id_string,
                                operation_string=BATCH_QUERY)
+
+  def GetBatchLink(self):
+    for link in self.link:
+      if link.rel == 'http://schemas.google.com/g/2005#batch':
+        return link
+    return None
  
 
 def BatchFeedFromString(xml_string):

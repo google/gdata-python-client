@@ -279,6 +279,46 @@ class CalendarServiceUnitTest(unittest.TestCase):
     self.assertEquals(after_delete_query_result.entry[0].event_status.value,
         'CANCELED')
 
+  def testCreateAndDeleteEventUsingBatch(self):
+    # Get random data for creating event
+    r = random.Random()
+    r.seed()
+    random_event_number = str(r.randint(100000,1000000))
+    random_event_title = 'My Random Comments Test Event %s' % (
+        random_event_number)
+
+    # Set event data
+    event = gdata.calendar.CalendarEventEntry()
+    event.author.append(atom.Author(name=atom.Name(text='GData Test user')))
+    event.title = atom.Title(text=random_event_title)
+    event.content = atom.Content(text='Picnic with some lunch')
+
+    # Form a batch request
+    batch_request = gdata.calendar.CalendarEventFeed()
+    batch_request.AddInsert(entry=event)
+
+    # Execute the batch request to insert the event.
+    self.cal_client.ProgrammaticLogin()
+    batch_result = self.cal_client.ExecuteBatch(batch_request, 
+        gdata.calendar.service.DEFAULT_BATCH_URL)
+
+    self.assertEquals(len(batch_result.entry), 1)
+    self.assertEquals(batch_result.entry[0].title.text, random_event_title)
+    self.assertEquals(batch_result.entry[0].batch_operation.type, 
+                      gdata.BATCH_INSERT)
+    self.assertEquals(batch_result.GetBatchLink().href, 
+                      gdata.calendar.service.DEFAULT_BATCH_URL)
+
+    # Create a batch request to delete the newly created entry.
+    batch_delete_request = gdata.calendar.CalendarEventFeed()
+    batch_delete_request.AddDelete(entry=batch_result.entry[0])
+  
+    batch_delete_result = self.cal_client.ExecuteBatch(batch_delete_request, 
+        batch_result.GetBatchLink().href)
+    self.assertEquals(len(batch_delete_result.entry), 1)
+    self.assertEquals(batch_delete_result.entry[0].batch_operation.type, 
+                      gdata.BATCH_DELETE)
+
   def testCorrectReturnTypesForGetMethods(self):
     self.cal_client.ProgrammaticLogin()
 

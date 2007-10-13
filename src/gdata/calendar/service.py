@@ -41,6 +41,10 @@ import gdata.calendar
 import atom
 
 
+DEFAULT_BATCH_URL = ('http://www.google.com/calendar/feeds/default/private'
+                     '/full/batch')
+
+
 class Error(Exception):
   pass
 
@@ -423,6 +427,32 @@ class CalendarService(gdata.service.GDataService):
       return gdata.calendar.CalendarAclEntryFromString(response.ToString())
     else:
       return response
+
+  def ExecuteBatch(self, batch_feed, url, 
+      converter=gdata.calendar.CalendarEventFeedFromString):
+    """Sends a batch request feed to the server.
+
+    The batch request needs to be sent to the batch URL for a particular 
+    calendar. You can find the URL by calling GetBatchLink().href on the 
+    CalendarEventFeed.
+
+    Args:
+      batch_feed: gdata.calendar.CalendarEventFeed A feed containing batch
+          request entries. Each entry contains the operation to be performed 
+          on the data contained in the entry. For example an entry with an 
+          operation type of insert will be used as if the individual entry 
+          had been inserted.
+      url: str The batch URL for the Calendar to which these operations should
+          be applied.
+      converter: Function (optional) The function used to convert the server's
+          response to an object. The default value is 
+          CalendarEventFeedFromString.
+     
+    Returns:
+      The results of the batch request's execution on the server. If the 
+      default converter is used, this is stored in a CalendarEventFeed.
+    """
+    return self.Post(batch_feed, url, converter=converter)
 
 
 class CalendarEventQuery(gdata.service.Query):
