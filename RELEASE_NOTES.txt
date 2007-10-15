@@ -1,3 +1,15 @@
+=== 1.0.9 === 
+October 15, 2007 (revision 213)
+
+- Added support for batch requests for the Google Spreadsheets cells feed,
+    Google Calendar's events feed, and Google Base's items feed.
+- Authentication requests can now be sent to a different server by modifying 
+    a module variable in gdata.service.
+- Fixed the birthdaySample mashup.
+- User Agent headers now fit the pattern used in other Google data client 
+    libraries.
+- Made it easier to access custom elements for Google Base items. 
+
 === 1.0.8 ===
 August 31, 2007 (revision 192)
 
