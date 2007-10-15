@@ -138,16 +138,14 @@ class GDataService(atom.service.AtomService):
     self.password = password
     self.account_type = account_type
     self.service = service
-    self.__source =  source
     self.server = server
     self.additional_headers = additional_headers or {}
+    self.__SetSource(source)
     self.__auth_token = None
     self.__auth_type = None
     self.__captcha_token = None
     self.__captcha_url = None
     self.__gsessionid = None
-
-    self.additional_headers['User-Agent'] = ''
  
   # Define properties for GDataService
   def _SetAuthSubToken(self, auth_token):
@@ -248,7 +246,7 @@ class GDataService(atom.service.AtomService):
   def __SetSource(self, new_source):
     self.__source = new_source
     # Update the UserAgent header to include the new application name.
-    self.additional_headers['User-Agent'] = ''
+    self.additional_headers['User-Agent'] = '%s GData-Python/1.0.8' % self.__source
 
   source = property(__GetSource, __SetSource, 
       doc="""The source is the name of the application making the request. 

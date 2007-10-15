@@ -37,6 +37,7 @@ test_image_name = 'testimage.jpg'
 
 
 class GDataServiceMediaUnitTest(unittest.TestCase):
+
   def setUp(self):
     self.gd_client = gdata.service.GDataService()
     self.gd_client.email = username
@@ -65,6 +66,11 @@ class GDataServiceMediaUnitTest(unittest.TestCase):
   def tearDown(self):
     album_entry = self.gd_client.Get(self.album_entry.id.text)
     self.gd_client.Delete(album_entry.GetEditLink().href)
+
+  def testSourceGeneratesUserAgentHeader(self):
+    self.gd_client.source = 'GoogleInc-ServiceUnitTest-1'
+    self.assert_(self.gd_client.additional_headers['User-Agent'].startswith(
+        'GoogleInc-ServiceUnitTest-1 GData-Python'))
     
   def testMedia1(self):
     # Create media-only
