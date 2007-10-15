@@ -961,8 +961,7 @@ CALENDAR_BATCH_RESPONSE = """<?xml version='1.0' encoding='UTF-8'?>
 """
 
 GBASE_ATTRIBUTE_FEED = """<?xml version='1.0' encoding='UTF-8'?>
-    <feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:gm='http://
-base.google.com/ns-metadata/1.0'>
+    <feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:gm='http://base.google.com/ns-metadata/1.0'>
       <id>http://www.google.com/base/feeds/attributes</id>
       <updated>2006-11-01T20:35:59.578Z</updated>
       <category scheme='http://base.google.com/categories/itemtypes' term='online jobs'></category>

@@ -246,7 +246,7 @@ class GDataService(atom.service.AtomService):
   def __SetSource(self, new_source):
     self.__source = new_source
     # Update the UserAgent header to include the new application name.
-    self.additional_headers['User-Agent'] = '%s GData-Python/1.0.8' % self.__source
+    self.additional_headers['User-Agent'] = '%s GData-Python/1.0.9' % self.__source
 
   source = property(__GetSource, __SetSource, 
       doc="""The source is the name of the application making the request. 

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# Copyright (C) 2006 Google Inc.
+# Copyright (C) 2007 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ from distutils.core import setup
 
 setup(
     name='gdata.py',
-    version='1.0.8',
+    version='1.0.9',
     description='Python client library for Google data APIs',
     long_description = """\
 The Google data Python client library makes it easy to access data
