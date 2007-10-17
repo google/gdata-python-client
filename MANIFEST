@@ -20,7 +20,7 @@ src/gdata/apps/service.py
 samples/base/baseQueryExample.py
 samples/base/dryRunInsert.py
 samples/calendar/calendarExample.py
-samples/docs/docsExample.py
+samples/docs/docs_example.py
 samples/spreadsheets/spreadsheetExample.py
 samples/blogger/BloggerExample.py
 samples/mashups/birthdaySample.py
