@@ -179,6 +179,26 @@ class SpreadsheetsServiceTest(unittest.TestCase):
         'b1':entry.custom['b1'].text, 'c1':entry.custom['c1'].text,
         'd1':entry.custom['d1'].text})
     self.gd_client.DeleteRow(entry)
+
+  def testWorksheetCRUD(self):
+    # Add a new worksheet.
+    new_worksheet = self.gd_client.AddWorksheet('worksheet_title_test_12', '2', 3, self.key)
+    self.assertEquals(new_worksheet.col_count.text, '3')
+    self.assertEquals(new_worksheet.row_count.text, '2')
+    self.assertEquals(new_worksheet.title.text, 'worksheet_title_test_12')
+
+    # Change the dimensions and title of the new worksheet.
+    new_worksheet.col_count.text = '1'
+    new_worksheet.title.text = 'edited worksheet test12'
+    edited_worksheet = self.gd_client.UpdateWorksheet(new_worksheet)
+    self.assertEquals(edited_worksheet.col_count.text, '1')
+    self.assertEquals(edited_worksheet.row_count.text, '2')
+    self.assertEquals(edited_worksheet.title.text, 'edited worksheet test12')
+
+    # Delete the new worksheet.
+    result = self.gd_client.DeleteWorksheet(edited_worksheet)
+    self.assertEquals(result, True)
+
     
     
 

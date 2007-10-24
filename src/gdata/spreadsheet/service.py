@@ -119,6 +119,67 @@ class SpreadsheetsService(gdata.service.GDataService):
     else:
       return self.Get(uri,
           converter=gdata.spreadsheet.SpreadsheetsWorksheetsFeedFromString)
+
+  def AddWorksheet(self, title, row_count, col_count, key):
+    """Creates a new worksheet in the desired spreadsheet.
+
+    The new worksheet is appended to the end of the list of worksheets. The
+    new worksheet will only have the available number of columns and cells 
+    specified.
+
+    Args:
+      title: str The title which will be displayed in the list of worksheets.
+      row_count: int or str The number of rows in the new worksheet.
+      col_count: int or str The number of columns in the new worksheet.
+      key: str The spreadsheet key to the spreadsheet to which the new 
+          worksheet should be added. 
+
+    Returns:
+      A SpreadsheetsWorksheet if the new worksheet was created succesfully.  
+    """
+    new_worksheet = gdata.spreadsheet.SpreadsheetsWorksheet(
+        title=atom.Title(text=title), 
+        row_count=gdata.spreadsheet.RowCount(text=str(row_count)), 
+        col_count=gdata.spreadsheet.ColCount(text=str(col_count)))
+    return self.Post(new_worksheet, 
+        'http://%s/feeds/worksheets/%s/private/full' % (self.server, key),
+        converter=gdata.spreadsheet.SpreadsheetsWorksheetFromString)
+
+  def UpdateWorksheet(self, worksheet_entry, url=None):
+    """Changes the size and/or title of the desired worksheet.
+    
+    Args:
+      worksheet_entry: SpreadsheetWorksheet The new contents of the 
+          worksheet. 
+      url: str (optional) The URL to which the edited worksheet entry should
+          be sent. If the url is None, the edit URL from the worksheet will
+          be used.
+
+    Returns: 
+      A SpreadsheetsWorksheet with the new information about the worksheet.
+    """
+    target_url = url or worksheet_entry.GetEditLink().href
+    return self.Put(worksheet_entry, target_url, 
+        converter=gdata.spreadsheet.SpreadsheetsWorksheetFromString)
+    
+  def DeleteWorksheet(self, worksheet_entry=None, url=None):
+    """Removes the desired worksheet from the spreadsheet
+    
+    Args:
+      worksheet_entry: SpreadsheetWorksheet (optional) The worksheet to
+          be deleted. If this is none, then the DELETE reqest is sent to 
+          the url specified in the url parameter.
+      url: str (optaional) The URL to which the DELETE request should be
+          sent. If left as None, the worksheet's edit URL is used.
+
+    Returns:
+      True if the worksheet was deleted successfully. 
+    """
+    if url:
+      target_url = url
+    else:
+      target_url = worksheet_entry.GetEditLink().href
+    return self.Delete(target_url)
   
   def GetCellsFeed(self, key, wksht_id='default', cell=None, query=None, 
       visibility='private', projection='full'):
