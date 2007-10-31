@@ -298,7 +298,7 @@ class AppsService(gdata.service.GDataService):
       raise AppsForYourDomainException(e.args[0])
 
   def CreateUser(self, user_name, family_name, given_name, password,
-                 suspended='false', quota_limit=DEFAULT_QUOTA_LIMIT, 
+                 suspended='false', quota_limit=None, 
                  password_hash_function=None):
     """Create a user account. """
 
@@ -309,7 +309,8 @@ class AppsService(gdata.service.GDataService):
         hash_function_name=password_hash_function)
     user_entry.name = gdata.apps.Name(family_name=family_name,
                                       given_name=given_name)
-    user_entry.quota = gdata.apps.Quota(limit=str(quota_limit))
+    if quota_limit is not None:
+      user_entry.quota = gdata.apps.Quota(limit=str(quota_limit))
 
     try: 
       return gdata.apps.UserEntryFromString(str(self.Post(user_entry, uri)))
