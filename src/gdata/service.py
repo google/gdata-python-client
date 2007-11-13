@@ -590,7 +590,8 @@ class GDataService(atom.service.AtomService):
     else:
       raise UnexpectedReturnType, 'Server did not send an entry' 
 
-  def GetFeed(self, uri, extra_headers=None):
+  def GetFeed(self, uri, extra_headers=None, 
+              converter=gdata.GDataFeedFromString):
     """Query the GData API with the given URI and receive a Feed.
 
     See also documentation for gdata.service.Get
@@ -608,7 +609,7 @@ class GDataService(atom.service.AtomService):
       A GDataFeed built from the XML in the server's response.
     """
 
-    result = self.Get(uri, extra_headers, converter=atom.FeedFromString)
+    result = self.Get(uri, extra_headers, converter=converter)
     if isinstance(result, atom.Feed):
       return result
     else:
