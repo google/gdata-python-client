@@ -92,8 +92,8 @@ class BloggerExample:
     # Create the entry to insert.
     entry = gdata.GDataEntry()
     entry.author.append(atom.Author(atom.Name(text=author_name)))
-    entry.title = atom.Title('xhtml', title)
-    entry.content = atom.Content('html', '', content)
+    entry.title = atom.Title(title_type='xhtml', text=title)
+    entry.content = atom.Content(content_type='html', text=content)
     if is_draft:
       control = atom.Control()
       control.draft = atom.Draft(text='yes')
@@ -187,7 +187,7 @@ class BloggerExample:
 
     # Create a new entry for the comment and submit it to the GDataService
     entry = gdata.GDataEntry()
-    entry.content = atom.Content('xhtml', '', comment_text)
+    entry.content = atom.Content(content_type='xhtml', text=comment_text)
     return self.service.Post(entry, feed_uri)
 
   def PrintAllComments(self, post_id):
