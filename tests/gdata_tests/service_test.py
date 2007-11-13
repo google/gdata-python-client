@@ -402,6 +402,15 @@ class QueryTest(unittest.TestCase):
     self.query.categories.append('Fritz|Laurie')
     self.assert_(self.query.ToUri() == '/x/-/Fritz%7CLaurie')
 
+  def testTypeCoercionOnIntParams(self):
+    self.query.feed = '/x'
+    self.query.max_results = 10
+    self.query.start_index = 5
+    self.assert_(isinstance(self.query.max_results, str))
+    self.assert_(isinstance(self.query.start_index, str))
+    self.assertEquals(self.query['max-results'], '10')
+    self.assertEquals(self.query['start-index'], '5')
+
 
 if __name__ == '__main__':
   print ('NOTE: Please run these tests only with a test account. ' +

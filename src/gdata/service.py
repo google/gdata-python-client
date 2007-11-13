@@ -1096,6 +1096,8 @@ class Query(dict):
       return None
 
   def _SetStartIndex(self, query):
+    if not isinstance(query, str):
+      query = str(query)
     self['start-index'] = query
 
   start_index = property(_GetStartIndex, _SetStartIndex,
@@ -1108,6 +1110,8 @@ class Query(dict):
       return None
 
   def _SetMaxResults(self, query):
+    if not isinstance(query, str):
+      query = str(query)
     self['max-results'] = query
 
   max_results = property(_GetMaxResults, _SetMaxResults,
