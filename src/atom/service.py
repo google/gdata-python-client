@@ -52,8 +52,6 @@ class AtomService(object):
   ssl = False
   # If debug is True, the HTTPConnection will display debug information
   debug = False
-  # Used in connection put requests if a proxy is configured.
-  skip_host = False
 
   def __init__(self, server=None, additional_headers=None):
     """Creates a new AtomService client.
@@ -165,10 +163,9 @@ class AtomService(object):
         fake_sock = httplib.FakeSocket(p_sock, ssl)
 
         # Initalize httplib and replace with the proxy socket.
-        connection = httplib.HTTPConnection('localhost')
+        connection = httplib.HTTPConnection(server)
         connection.sock=fake_sock
         full_uri = partial_uri
-        self.skip_host = True
 
       else:
         connection = httplib.HTTPSConnection(server, port)
@@ -200,7 +197,7 @@ class AtomService(object):
       
     full_uri = BuildUri(uri, url_params, escape_params)
     (connection, full_uri) = self._PrepareConnection(full_uri)
-    connection.putrequest(http_operation, full_uri, skip_host=self.skip_host)
+    connection.putrequest(http_operation, full_uri)
 
     if isinstance(self.additional_headers, dict):
       for header in self.additional_headers:
