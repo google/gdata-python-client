@@ -49,6 +49,7 @@ class DocsSample(object):
     self.gd_client.password = password
     self.gd_client.source = 'Document List Python Sample'
     self.gd_client.ProgrammaticLogin()
+    #self.gd_client.server = 'writely-testing-pq.corp.google.com'
 
   def _PrintFeed(self, feed):
     """Prints out the contents of a feed to the console.
@@ -71,7 +72,7 @@ class DocsSample(object):
     Returns:
       A string containing the file extension of the file.
     """
-    match = re.search('.*\.([a-zA-Z]{3}$)', file_name)
+    match = re.search('.*\.([a-zA-Z]{3,}$)', file_name)
     if match:
       return match.group(1).upper()
     return False

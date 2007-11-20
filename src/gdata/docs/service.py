@@ -40,16 +40,20 @@ SPREADSHEET_KIND_TERM = 'http://schemas.google.com/docs/2007#spreadsheet'
 PRESENTATION_KIND_TERM = 'http://schemas.google.com/docs/2007#presentation'
 # File extensions of documents that are permitted to be uploaded.
 SUPPORTED_FILETYPES = {
-  'CSV': 'text/comma-separated-values',
+  'CSV': 'text/csv',
+  'TSV': 'text/tab-separated-values',
+  'TAB': 'text/tab-separated-values',
   'DOC': 'application/msword',
-  'ODS': 'application/vnd.oasis.opendocument.spreadsheet',
+  'ODS': 'application/x-vnd.oasis.opendocument.spreadsheet',
   'ODT': 'application/vnd.oasis.opendocument.text',
   'RTF': 'application/rtf',
   'SXW': 'application/vnd.sun.xml.writer',
   'TXT': 'text/plain',
   'XLS': 'application/vnd.ms-excel',
   'PPT': 'application/vnd.ms-powerpoint',
-  'PPS': 'application/vnd.ms-powerpoint' }
+  'PPS': 'application/vnd.ms-powerpoint',
+  'HTM': 'text/html',
+  'HTML' : 'text/html'}
 
 
 class DocsService(gdata.service.GDataService):
