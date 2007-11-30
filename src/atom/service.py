@@ -132,10 +132,10 @@ class AtomService(object):
         proxy_username = os.environ.get('proxy-username')
         proxy_password = os.environ.get('proxy-password')
         if proxy_username:
-          user_pass=base64.encodestring('%s:%s' % (proxy_username, 
-                                                   proxy_password))
-          proxy_authorization = ('Proxy-authorization: Basic '+ user_pass 
-                                 + '\r\n')
+          user_auth = base64.encodestring('%s:%s' % (proxy_username, 
+                                                     proxy_password))
+          proxy_authorization = ('Proxy-authorization: Basic %s\r\n' % (
+              user_auth.strip()))
         else:
           proxy_authorization = ''
         proxy_connect = 'CONNECT %s:%s HTTP/1.0\r\n' % (server,port)
