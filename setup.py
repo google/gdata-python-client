@@ -20,7 +20,7 @@ from distutils.core import setup
 
 setup(
     name='gdata.py',
-    version='1.0.9',
+    version='1.0.10',
     description='Python client library for Google data APIs',
     long_description = """\
 The Google data Python client library makes it easy to access data
@@ -43,6 +43,6 @@ any Atom Publishing Protocol service.
     license='Apache 2.0',
     url='http://code.google.com/p/gdata-python-client/',
     packages=['atom', 'gdata', 'gdata.calendar', 'gdata.base',
-        'gdata.spreadsheet', 'gdata.apps', 'gdata.docs'],
+        'gdata.spreadsheet', 'gdata.apps', 'gdata.docs', 'gdata.codesearch'],
     package_dir = {'gdata':'src/gdata', 'atom':'src/atom'}
 )
