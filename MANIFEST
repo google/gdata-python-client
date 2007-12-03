@@ -1,5 +1,6 @@
 README.txt
 RELEASE_NOTES.txt
+INSTALL.txt
 MANIFEST
 setup.py
 src/atom/__init__.py
