@@ -18,6 +18,8 @@ src/gdata/spreadsheet/__init__.py
 src/gdata/spreadsheet/service.py
 src/gdata/apps/__init__.py
 src/gdata/apps/service.py
+src/gdata/codesearch/__init__.py
+src/gdata/codesearch/service.py
 samples/base/baseQueryExample.py
 samples/base/dryRunInsert.py
 samples/calendar/calendarExample.py
