@@ -247,14 +247,17 @@ class SpreadsheetsService(gdata.service.GDataService):
     """Updates an existing cell.
     
     Args:
-      uri: string The uri of the cells feed containing the cell
       row: int The row the cell to be editted is in
       col: int The column the cell to be editted is in
-      inputValue: string the new value of the cell
+      inputValue: str the new value of the cell
+      key: str The key of the spreadsheet in which this cell resides.
+      wksht_id: str The ID of the worksheet which holds this cell.
       
     Returns:
       The updated cell entry
     """
+    row = str(row)
+    col = str(col)
     # make the new cell
     new_cell = gdata.spreadsheet.Cell(row=row, col=col, inputValue=inputValue)
     # get the edit uri and PUT
