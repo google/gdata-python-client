@@ -18,11 +18,13 @@ __author__ = 'api.jfisher (Jeff Fisher)'
 
 import getpass
 import unittest
+import StringIO
 import gdata.docs.service
 
 
 username = ''
 password = ''
+
 
 class DocumentListServiceTest(unittest.TestCase):
 
@@ -37,6 +39,14 @@ class DocumentListServiceTest(unittest.TestCase):
   def testGetDocumentsListFeed(self):
     feed = self.gd_client.GetDocumentListFeed()
     self.assert_(isinstance(feed, gdata.docs.DocumentListFeed))
+
+  def testCreateAndDeleteSpreadsheet(self):
+    virtual_csv_file = StringIO.StringIO(',,,')
+    virtual_media_source = gdata.MediaSource(file_handle=virtual_csv_file, content_type='text/csv', content_length=3)
+    entry = self.gd_client.UploadSpreadsheet(virtual_media_source, 'test title')
+    self.assertTrue(entry.title.text == 'test title')
+    self.gd_client.Delete(entry.GetEditLink().href)
+
 
 if __name__ == '__main__':
   print ('NOTE: Please run these tests only with a test account. ' +
