@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*-*- encoding: utf-8 -*-*-
 #
 # Copyright (C) 2006 Google Inc.
 #
@@ -17,7 +18,8 @@
 
 __author__ = 'api.jscudder@gmail.com (Jeff Scudder)'
 
-
+#debug
+import sys
 import unittest
 try:
   from xml.etree import ElementTree
@@ -574,6 +576,20 @@ class AtomBaseTest(unittest.TestCase):
      self.assert_(element_tree.find('{http://ns0.com}foo') is not None)
      self.assert_(element_tree.find('{http://ns0.com}foo').find('{http://ns0.com}bar') is not None)
 
+
+class UtfParsingTest(unittest.TestCase):
+  
+  def setUp(self):
+    self.test_xml = u"""<?xml version="1.0" encoding="utf-8"?><entry xmlns='http://www.w3.org/2005/Atom'>
+  <id>http://www.google.com/test/id/url</id>
+  <title type='\u03B1\u03BB\u03C6\u03B1'>\u03B1\u03BB\u03C6\u03B1</title>
+</entry>"""
+
+  def testMemberStringEncoding(self):
+    atom_entry = atom.EntryFromString(self.test_xml)
+    self.assert_(atom_entry.title.type == u'\u03B1\u03BB\u03C6\u03B1'.encode('utf-8'))
+    self.assert_(atom_entry.title.text == u'\u03B1\u03BB\u03C6\u03B1'.encode('utf-8'))
+    
   
 if __name__ == '__main__':
   unittest.main()
