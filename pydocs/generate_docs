@@ -1,0 +1,17 @@
+pydoc -w atom
+pydoc -w atom.service
+pydoc -w gdata
+pydoc -w gdata.service
+pydoc -w gdata.calendar
+pydoc -w gdata.calendar.service
+pydoc -w gdata.docs
+pydoc -w gdata.docs.service
+pydoc -w gdata.apps
+pydoc -w gdata.apps.service
+pydoc -w gdata.codesearch
+pydoc -w gdata.codesearch.service
+pydoc -w gdata.base
+pydoc -w gdata.base.service
+pydoc -w gdata.spreadsheet
+pydoc -w gdata.spreadsheet.service
+
