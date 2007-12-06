@@ -61,7 +61,15 @@ APP_NAMESPACE = 'http://purl.org/atom/app#'
 APP_TEMPLATE = '{http://purl.org/atom/app#}%s'
 
 
-def CreateClassFromXMLString(target_class, xml_string):
+# Module string encoding variables used to perform conversion of XML.
+# Used when converting a raw XML string into an element tree.
+XML_STRING_ENCODING = 'utf-8'
+# The desired string encoding for object members.
+MEMBER_STRING_ENCODING = 'utf-8'
+
+
+def CreateClassFromXMLString(target_class, xml_string, 
+    string_encoding='utf-8'):
   """Creates an instance of the target class from the string contents.
   
   Args:
@@ -77,7 +85,7 @@ def CreateClassFromXMLString(target_class, xml_string):
     contents of the XML - or None if the root XML tag and namespace did not
     match those of the target class.
   """
-  tree = ElementTree.fromstring(xml_string)
+  tree = ElementTree.fromstring(xml_string.encode(XML_STRING_ENCODING))
   return _CreateClassFromElementTree(target_class, tree)
 
 
@@ -130,21 +138,28 @@ class ExtensionContainer(object):
       self._ConvertElementTreeToMember(child)
     for attribute, value in tree.attrib.iteritems():
       self._ConvertElementAttributeToMember(attribute, value)
-    self.text = tree.text
+    # Encode the text string according to the desired encoding type. (UTF-8)
+    if tree.text:
+      self.text = tree.text.encode(MEMBER_STRING_ENCODING)
     
   def _ConvertElementTreeToMember(self, child_tree, current_class=None):
     self.extension_elements.append(_ExtensionElementFromElementTree(
         child_tree))
 
   def _ConvertElementAttributeToMember(self, attribute, value):
-    self.extension_attributes[attribute] = value
+    # Encode the attribute value's string with the desired type Default UTF-8
+    if value:
+      self.extension_attributes[attribute] = value.encode(
+          MEMBER_STRING_ENCODING)
 
   # One method to create an ElementTree from an object
   def _AddMembersToElementTree(self, tree):
     for child in self.extension_elements:
       child._BecomeChildElement(tree)
     for attribute, value in self.extension_attributes.iteritems():
-      tree.attrib[attribute] = value
+      if value:
+        # Encode the value in the desired type (default UTF-8).
+        tree.attrib[attribute] = value.encode(MEMBER_STRING_ENCODING)
     tree.text = self.text
 
   def FindExtensions(self, tag=None, namespace=None):
@@ -222,7 +237,10 @@ class AtomBase(ExtensionContainer):
       # Find the member of this class which corresponds to the XML attribute
       # (lookup in current_class._attributes) and set this member to the
       # desired value (using self.__dict__).
-      setattr(self, self.__class__._attributes[attribute], value)
+      if value:
+        # Encode the string to capture non-ascii characters (default UTF-8)
+        setattr(self, self.__class__._attributes[attribute], 
+                value.encode(MEMBER_STRING_ENCODING))
     else:
       ExtensionContainer._ConvertElementAttributeToMember(self, attribute, value)
 
@@ -279,9 +297,9 @@ class AtomBase(ExtensionContainer):
     self._AddMembersToElementTree(new_tree)
     return new_tree
 
-  def ToString(self):
+  def ToString(self, string_encoding='UTF-8'):
     """Converts the Atom object to a string containing XML."""
-    return ElementTree.tostring(self._ToElementTree(), encoding="UTF-8")
+    return ElementTree.tostring(self._ToElementTree(), encoding=string_encoding)
 
   def __str__(self):
     return self.ToString()
