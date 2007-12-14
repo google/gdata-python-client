@@ -43,9 +43,9 @@ item.link.append(atom.Link(rel='alternate', link_type='text/html',
     href='http://www.host.com/123456jsh9'))
 item.label.append(gdata.base.Label(text='kung pao chicken'))
 item.label.append(gdata.base.Label(text='chinese cuisine'))
-item.label.append(gdata.base.Label(text='recipes'))
+item.label.append(gdata.base.Label(text='testrecipes'))
 item.item_type = gdata.base.ItemType(text='recipes')
-item.AddItemAttribute(name='cooking_time', value='30 minutes')
+item.AddItemAttribute(name='cooking_time', value_type='intUnit', value='30 minutes')
 item.AddItemAttribute(name='main_ingredient', value='chicken')
 item.AddItemAttribute(name='main_ingredient', value='chili')
 
