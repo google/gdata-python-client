@@ -148,7 +148,7 @@ class ItemAttributeContainer(object):
         value_type = None
       self.AddItemAttribute(name, value, value_type)
     else:
-      ExtensionContainer._ConvertElementTreeToMember(self, child_tree)
+      atom.ExtensionContainer._ConvertElementTreeToMember(self, child_tree)
   
   # We need to overwtite _AddMembersToElementTree to add special logic to
   # convert custom members to XML nodes.
