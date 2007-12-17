@@ -77,10 +77,10 @@ Example:
 
 __author__ = u'havard@gulldahl.no'# (Håvard Gulldahl)' #BUG: pydoc chokes on non-ascii chars in __author__
 __license__ = 'Apache License v2'
-__version__ = '$Revision: 170 $'[11:-2] 
+__version__ = '$Revision: 176 $'[11:-2] 
 
 
-import sys, os.path
+import sys, os.path, StringIO
 import time
 try:
   from xml.etree import cElementTree as ElementTree
@@ -418,17 +418,20 @@ class PhotosService(gdata.service.GDataService):
       os.path.exists(filename_or_handle): # it's a file name
       mediasource = gdata.MediaSource()
       mediasource.setFile(filename_or_handle, content_type)
-    elif hasattr(filename_or_handle, 'read') \
-      and hasattr(filename_or_handle, 'len'):
-      file_handle = filename_or_handle # it's a file-like resource
-      if hasattr(file_handle, 'seek'):
-        file_handle.seek(0) # rewind pointer to the start of the file
+    elif hasattr(filename_or_handle, 'read'):# it's a file-like resource
+      if hasattr(filename_or_handle, 'seek'):
+        filename_or_handle.seek(0) # rewind pointer to the start of the file
+      # gdata.MediaSource needs the content length, so read the whole image 
+      file_handle = StringIO.StringIO(filename_or_handle.read()) 
+      name = 'image'
+      if hasattr(filename_or_handle, 'name'):
+        name = filename_or_handle.name
       mediasource = gdata.MediaSource(file_handle, content_type,
-        content_length=file_handle.len, file_name='image')
+        content_length=file_handle.len, file_name=name)
     else: #filename_or_handle is not valid
       raise GooglePhotosException({'status':GPHOTOS_INVALID_ARGUMENT,
         'body':'`filename_or_handle` must be a path name or a file-like object',
-        'reason':'Found %s, not path name or object that has .read() and .len attributes' % \
+        'reason':'Found %s, not path name or object with a .read() method' % \
           type(filename_or_handle)
         })
     
@@ -567,24 +570,27 @@ class PhotosService(gdata.service.GDataService):
       os.path.exists(filename_or_handle): # it's a file name
       photoblob = gdata.MediaSource()
       photoblob.setFile(filename_or_handle, content_type)
-    elif hasattr(filename_or_handle, 'read') \
-      and hasattr(filename_or_handle, 'len'):
-      file_handle = filename_or_handle # it's a file-like resource 
-      if hasattr(file_handle, 'seek'):
-        file_handle.seek(0) # rewind pointer to the start of the file
-      photoblob = gdata.MediaSource(file_handle, content_type,
-        content_length=file_handle.len, file_name='image')
+    elif hasattr(filename_or_handle, 'read'):# it's a file-like resource
+      if hasattr(filename_or_handle, 'seek'):
+        filename_or_handle.seek(0) # rewind pointer to the start of the file
+      # gdata.MediaSource needs the content length, so read the whole image 
+      file_handle = StringIO.StringIO(filename_or_handle.read()) 
+      name = 'image'
+      if hasattr(filename_or_handle, 'name'):
+        name = filename_or_handle.name
+      mediasource = gdata.MediaSource(file_handle, content_type,
+        content_length=file_handle.len, file_name=name)
     else: #filename_or_handle is not valid
       raise GooglePhotosException({'status':GPHOTOS_INVALID_ARGUMENT,
         'body':'`filename_or_handle` must be a path name or a file-like object',
-        'reason':'Found %s, not path name or object that has .read() and .len attributes' % \
+        'reason':'Found %s, not path name or an object with .read() method' % \
           type(filename_or_handle)
         })
     
     if isinstance(photo_or_uri, (str, unicode)):
       entry_uri = photo_or_uri # it's a uri
     elif hasattr(photo_or_uri, 'GetEditMediaLink'):
-      entry_uri = photo.GetEditMediaLink().href
+      entry_uri = photo_or_uri.GetEditMediaLink().href
     try:
       return self.Put(photoblob, entry_uri,
       converter=gdata.photos.PhotoEntryFromString)
