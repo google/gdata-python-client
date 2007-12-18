@@ -1,3 +1,21 @@
+=== 1.0.10 ===
+December X, 2007 (revision Y)
+
+- Photos packages for working with the Picasa Web Albums Data API.
+- New modules for handling media, geo, and exif XML elements.
+- Packages for the Google Code Seach API.
+- New PyDoc HTML pages generated from the source code.
+- The core XML parser should now fully support UTF-8 strings, there are also
+    options to change the default encoding.
+- Bugfixes in Atom service's proxy support when authenticating with the proxy.
+- Spreadsheets UpdateCell can now take integers for the row and column 
+    parameters.
+- Added INSTALL.txt to explain the installation process. The content was 
+    copied from the getting started article here:
+    http://code.google.com/support/bin/answer.py?answer=75582
+- You can now create update and delete worksheets within a Google 
+    Spreadsheet.
+
 === 1.0.9 === 
 October 15, 2007 (revision 213)
 
