@@ -581,6 +581,34 @@ class GDataService(atom.service.AtomService):
     else:
       raise UnexpectedReturnType, 'Server did not send a feed'  
 
+  def GetNext(self, feed):
+    """Requests the next 'page' of results in the feed.
+    
+    This method uses the feed's next link to request an additional feed
+    and uses the class of the feed to convert the results of the GET request.
+
+    Args:
+      feed: atom.Feed or a subclass. The feed should contain a next link and
+          the type of the feed will be applied to the results from the 
+          server. The new feed which is returned will be of the same class
+          as this feed which was passed in.
+
+    Returns:
+      A new feed representing the next set of results in the server's feed.
+      The type of this feed will match that of the feed argument.
+    """
+    next_link = feed.GetNextLink()
+    # Create a closure which will convert an XML string to the class of
+    # the feed object passed in.
+    def ConvertToFeedClass(xml_string):
+      return atom.CreateClassFromXMLString(feed.__class__, xml_string)
+    # Make a GET request on the next link and use the above closure for the
+    # converted which processes the XML string from the server.
+    if next_link and next_link.href:
+      return self.Get(next_link.href, converter=ConvertToFeedClass)
+    else:
+      return None
+
   def Post(self, data, uri, extra_headers=None, url_params=None, 
            escape_params=True, redirects_remaining=4, media_source=None, 
            converter=None):

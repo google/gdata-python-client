@@ -411,6 +411,28 @@ class QueryTest(unittest.TestCase):
     self.assertEquals(self.query['start-index'], '5')
 
 
+class GetNextPageInFeedTest(unittest.TestCase):
+
+  def setUp(self):
+    self.gd_client = gdata.service.GDataService()
+    atom.XML_STRING_ENCODING = None
+
+  def testGetNextPage(self):
+    feed = self.gd_client.Get(
+        'http://www.google.com/base/feeds/snippets?max-results=2',
+        converter=gdata.base.GBaseSnippetFeedFromString)
+    self.assert_(len(feed.entry) > 0)
+    first_id = feed.entry[0].id.text
+    feed2 = self.gd_client.GetNext(feed)
+    self.assert_(len(feed2.entry) > 0)
+    next_id = feed2.entry[0].id.text
+    self.assert_(first_id != next_id)
+    self.assert_(feed2.__class__ == feed.__class__)
+
+  def tearDown(self):
+    atom.XML_STRING_ENCODING = 'utf-8'
+
+
 if __name__ == '__main__':
   print ('NOTE: Please run these tests only with a test account. ' +
       'The tests may delete or update your data.')
