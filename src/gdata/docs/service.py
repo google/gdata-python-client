@@ -251,3 +251,42 @@ class DocumentQuery(gdata.service.Query):
     new_feed = gdata.service.Query.ToUri(self)
     self.feed = old_feed
     return new_feed
+
+  def AddNamedFolder(self, email, folder_name):
+    """Adds a named folder category, qualified by a schema.
+
+    This function lets you query for documents that are contained inside a
+    named folder without fear of collision with other categories.
+
+    Args:
+      email: string The email of the user who owns the folder.
+      folder_name: string The name of the folder.
+
+      Returns:
+        The string of the category that was added to the object.
+    """
+
+    category = '{http://schemas.google.com/docs/2007/folders/'
+    category += email + '}' + folder_name
+
+    self.categories.append(category)
+
+    return category
+
+  def RemoveNamedFolder(self, email, folder_name):
+    """Removes a named folder category, qualified by a schema.
+
+    Args:
+      email: string The email of the user who owns the folder.
+      folder_name: string The name of the folder.
+
+      Returns:
+        The string of the category that was removed to the object.
+    """
+
+    category = '{http://schemas.google.com/docs/2007/folders/'
+    category += email + '}' + folder_name
+
+    self.categories.remove(category)
+
+    return category
