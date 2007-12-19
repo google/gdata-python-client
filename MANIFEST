@@ -8,6 +8,7 @@ src/atom/service.py
 src/gdata/__init__.py
 src/gdata/test_data.py
 src/gdata/service.py
+src/gdata/auth.py
 src/gdata/base/__init__.py
 src/gdata/base/service.py
 src/gdata/calendar/__init__.py
@@ -36,6 +37,7 @@ tests/atom_test.py
 tests/gdata_test.py
 tests/atom_tests/service_test.py
 tests/gdata_tests/service_test.py
+tests/gdata_tests/auth_test.py
 tests/gdata_tests/calendar/service_test.py
 tests/gdata_tests/base/service_test.py
 tests/gdata_tests/spreadsheet/service_test.py
