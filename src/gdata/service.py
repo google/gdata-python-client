@@ -69,6 +69,7 @@ except ImportError:
 import atom.service
 import gdata
 import atom
+import gdata.auth
 
 
 PROGRAMMATIC_AUTH_LABEL = 'GoogleLogin auth'
@@ -142,7 +143,6 @@ class GDataService(atom.service.AtomService):
     self.additional_headers = additional_headers or {}
     self.__SetSource(source)
     self.__auth_token = None
-    self.__auth_type = None
     self.__captcha_token = None
     self.__captcha_url = None
     self.__gsessionid = None
@@ -160,10 +160,9 @@ class GDataService(atom.service.AtomService):
       auth_token: string The token returned by the AuthSub service.
     """
 
-    self.__auth_token = auth_token
+    self.__auth_token = '%s=%s' % (AUTHSUB_AUTH_LABEL, auth_token)
     # The auth token is only set externally when using AuthSub authentication,
     # so set the auth_type to indicate AuthSub.
-    self.__auth_type = AUTHSUB_AUTH_LABEL
 
   def __SetAuthSubToken(self, auth_token):
     self._SetAuthSubToken(auth_token)
@@ -220,24 +219,22 @@ class GDataService(atom.service.AtomService):
       doc="""Get the captcha URL for a login request.""")
 
   def GetAuthSubToken(self):
-    if self.__auth_type == AUTHSUB_AUTH_LABEL:
-      return self.__auth_token
+    if self.__auth_token.startswith(AUTHSUB_AUTH_LABEL):
+      return self.__auth_token.lstrip(AUTHSUB_AUTH_LABEL + '=')
     else:
       return None
 
   def SetAuthSubToken(self, token):
-    self.__auth_token = token
-    self.__auth_type = AUTHSUB_AUTH_LABEL
+    self.__auth_token = '%s=%s' % (AUTHSUB_AUTH_LABEL, token)
 
   def GetClientLoginToken(self):
-    if self.__auth_type == PROGRAMMATIC_AUTH_LABEL:
-      return self.__auth_token
+    if self.__auth_token.startswith(PROGRAMMATIC_AUTH_LABEL):
+      return self.__auth_token.lstrip(PROGRAMMATIC_AUTH_LABEL + '=')
     else:
       return None
 
   def SetClientLoginToken(self, token):
-    self.__auth_token = token
-    self.__auth_type = PROGRAMMATIC_AUTH_LABEL
+    self.__auth_token = '%s=%s' % (PROGRAMMATIC_AUTH_LABEL, token)
 
   # Private methods to create the source property.
   def __GetSource(self):
@@ -276,24 +273,9 @@ class GDataService(atom.service.AtomService):
       BadAuthentication if the login service rejected the username or password
       Error if the login service responded with a 403 different from the above
     """
-
-    # Create a POST body containing the user's credentials.
-    if captcha_token and captcha_response:
-      # Send the captcha token and response as part of the POST body if the
-      # user is responding to a captch challenge.
-      request_body = urllib.urlencode({'Email': self.email,
-                                       'Passwd': self.password,
-                                       'accountType': self.account_type,
-                                       'service': self.service,
-                                       'source': self.source,
-                                       'logintoken': captcha_token,
-                                       'logincaptcha': captcha_response})
-    else:
-      request_body = urllib.urlencode({'Email': self.email,
-                                       'Passwd': self.password,
-                                       'accountType': self.account_type,
-                                       'service': self.service,
-                                       'source': self.source})
+    request_body = gdata.auth.GenerateClientLoginRequestBody(self.email, 
+        self.password, self.service, self.source, self.account_type, 
+        captcha_token, captcha_response)
 
     # Open a connection to the authentication server.
     (auth_connection, uri) = self._PrepareConnection(AUTH_SERVER_HOST)
@@ -311,38 +293,26 @@ class GDataService(atom.service.AtomService):
     # Process the response and throw exceptions if the login request did not
     # succeed.
     auth_response = auth_connection.getresponse()
+    response_body = auth_response.read()
 
     if auth_response.status == 200:
-      response_body = auth_response.read()
-      for response_line in response_body.splitlines():
-        if response_line.startswith('Auth='):
-          self.__auth_token = response_line.lstrip('Auth=')
-          self.__auth_type = PROGRAMMATIC_AUTH_LABEL
-          # Get rid of any residual captcha information because the request
-          # succeeded.
-          self.__captcha_token = None
-          self.__captcha_url = None
+      
+      self.__auth_token = gdata.auth.GenerateClientLoginAuthToken(
+           response_body)
+      self.__captcha_token = None
+      self.__captcha_url = None
 
     elif auth_response.status == 403:
-      response_body = auth_response.read()
+
       # Examine each line to find the error type and the captcha token and
       # captch URL if they are present.
-      for response_line in response_body.splitlines():
-        if response_line.startswith('Error='):
-          error_line = response_line
-        elif response_line.startswith('CaptchaToken='):
-          self.__captcha_token = response_line.lstrip('CaptchaToken=')
-        elif response_line.startswith('CaptchaUrl='):
-          self.__captcha_url = '%saccounts/Captcha%s' % (AUTH_SERVER_HOST,
-                               response_line.lstrip('CaptchaUrl='))
-      
-
-      # Raise an exception based on the error type in the 403 response.
-      # In cases where there was no captcha challenge, remove any previous
-      # captcha values.
-      if error_line == 'Error=CaptchaRequired':
+      captcha_parameters = gdata.auth.GetCaptchChallenge(response_body, 
+          captcha_base_url='%saccounts/' % AUTH_SERVER_HOST)
+      if captcha_parameters:
+        self.__captcha_token = captcha_parameters['token']
+        self.__captcha_url = captcha_parameters['url']
         raise CaptchaRequired, 'Captcha Required'
-      elif error_line == 'Error=BadAuthentication':
+      elif response_body.splitlines()[0] == 'Error=BadAuthentication':
         self.__captcha_token = None
         self.__captcha_url = None
         raise BadAuthentication, 'Incorrect username or password'
@@ -415,8 +385,8 @@ class GDataService(atom.service.AtomService):
     Raises:
       NonAuthSubToken if the user's auth token is not an AuthSub token
     """
-    
-    if self.__auth_type != AUTHSUB_AUTH_LABEL: 
+   
+    if not self.__auth_token.startswith(AUTHSUB_AUTH_LABEL):
       raise NonAuthSubToken
 
     (upgrade_connection, uri) = self._PrepareConnection(
@@ -425,8 +395,7 @@ class GDataService(atom.service.AtomService):
     
     upgrade_connection.putheader('Content-Type',
                                  'application/x-www-form-urlencoded')
-    upgrade_connection.putheader('Authorization', '%s=%s' %
-        (self.__auth_type, self.__auth_token))
+    upgrade_connection.putheader('Authorization', self.__auth_token)
     upgrade_connection.endheaders()
 
     response = upgrade_connection.getresponse()
@@ -444,7 +413,7 @@ class GDataService(atom.service.AtomService):
       NonAuthSubToken if the user's auth token is not an AuthSub token
     """
 
-    if self.__auth_type != AUTHSUB_AUTH_LABEL:
+    if not self.__auth_token.startswith(AUTHSUB_AUTH_LABEL):
       raise NonAuthSubToken
     
     (revoke_connection, uri) = self._PrepareConnection(
@@ -453,13 +422,11 @@ class GDataService(atom.service.AtomService):
     
     revoke_connection.putheader('Content-Type', 
                                 'application/x-www-form-urlencoded')
-    revoke_connection.putheader('Authorization', '%s=%s' %
-            (self.__auth_type, self.__auth_token))
+    revoke_connection.putheader('Authorization', self.__auth_token)
     revoke_connection.endheaders()
 
     response = revoke_connection.getresponse()
     if response.status == 200:
-      self.__auth_type = None
       self.__auth_token = None
 
   # CRUD operations
@@ -506,8 +473,7 @@ class GDataService(atom.service.AtomService):
 
     # Add the authentication header to the Get request
     if self.__auth_token:
-      extra_headers['Authorization'] = '%s=%s' % (self.__auth_type, 
-                                                  self.__auth_token)
+      extra_headers['Authorization'] = self.__auth_token
 
     if self.__gsessionid is not None:
       if uri.find('gsessionid=') < 0:
@@ -654,8 +620,7 @@ class GDataService(atom.service.AtomService):
 
     # Add the authentication header to the Get request
     if self.__auth_token:
-      extra_headers['Authorization'] = '%s=%s' % (self.__auth_type, 
-                                                  self.__auth_token)
+      extra_headers['Authorization'] = self.__auth_token
 
     if self.__gsessionid is not None:
       if uri.find('gsessionid=') < 0:
@@ -794,8 +759,7 @@ class GDataService(atom.service.AtomService):
 
     # Add the authentication header to the Get request
     if self.__auth_token:
-      extra_headers['Authorization'] = '%s=%s' % (self.__auth_type, 
-                                                  self.__auth_token)
+      extra_headers['Authorization'] = self.__auth_token
 
     if self.__gsessionid is not None:
       if uri.find('gsessionid=') < 0:
@@ -921,8 +885,7 @@ class GDataService(atom.service.AtomService):
 
     # Add the authentication header to the Get request
     if self.__auth_token:
-      extra_headers['Authorization'] = '%s=%s' % (self.__auth_type, 
-                                                  self.__auth_token)
+      extra_headers['Authorization'] = self.__auth_token
 
     if self.__gsessionid is not None:
       if uri.find('gsessionid=') < 0:
