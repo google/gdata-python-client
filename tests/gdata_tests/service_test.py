@@ -176,11 +176,10 @@ class GDataServiceUnitTest(unittest.TestCase):
     self.gd_client.password = password
     self.gd_client.service = 'gbase'
     self.gd_client.source = 'GDataClient "Unit" Tests'
-    pass
+    atom.XML_STRING_ENCODING = None
 
   def tearDown(self):
-    # No teardown needed
-    pass  
+    atom.XML_STRING_ENCODING = 'utf-8'
 
   def testProperties(self):
     email_string = 'Test Email'
