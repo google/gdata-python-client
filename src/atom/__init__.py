@@ -60,16 +60,14 @@ ELEMENT_TEMPLATE = '{http://www.w3.org/2005/Atom}%s'
 APP_NAMESPACE = 'http://purl.org/atom/app#'
 APP_TEMPLATE = '{http://purl.org/atom/app#}%s'
 
-
-# Module string encoding variables used to perform conversion of XML.
-# Used when converting a raw XML string into an element tree.
+# This encoding is used for converting strings before translating the XML
+# into an object.
 XML_STRING_ENCODING = 'utf-8'
 # The desired string encoding for object members.
 MEMBER_STRING_ENCODING = 'utf-8'
 
 
-def CreateClassFromXMLString(target_class, xml_string, 
-    string_encoding='utf-8'):
+def CreateClassFromXMLString(target_class, xml_string, string_encoding=None):
   """Creates an instance of the target class from the string contents.
   
   Args:
@@ -79,13 +77,23 @@ def CreateClassFromXMLString(target_class, xml_string,
     xml_string: str A string which contains valid XML. The root element
         of the XML string should match the tag and namespace of the desired
         class.
+    string_encoding: str The character encoding which the xml_string should
+        be converted to before it is interpreted and translated into 
+        objects. The default is None in which case the string encoding
+        is not changed.
 
   Returns:
     An instance of the target class with members assigned according to the
     contents of the XML - or None if the root XML tag and namespace did not
     match those of the target class.
   """
-  tree = ElementTree.fromstring(xml_string.encode(XML_STRING_ENCODING))
+  if string_encoding:
+    tree = ElementTree.fromstring(xml_string.encode(string_encoding))
+  else:
+    if XML_STRING_ENCODING:
+      tree = ElementTree.fromstring(xml_string.encode(XML_STRING_ENCODING))
+    else:
+      tree = ElementTree.fromstring(xml_string)
   return _CreateClassFromElementTree(target_class, tree)
 
 
