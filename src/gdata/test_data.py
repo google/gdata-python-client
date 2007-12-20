@@ -1888,3 +1888,156 @@ ALBUM_FEED = """<?xml version="1.0" encoding="UTF-8"?>
     </author>
   </entry>
 </feed>"""
+
+CODE_SEARCH_FEED = """<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:opensearch="http://a9.com/-/spec/opensearchrss/1.0/" xmlns:gcs="http://schemas.google.com/codesearch/2006" xml:base="http://www.google.com">
+<id>http://www.google.com/codesearch/feeds/search?q=malloc</id>
+<updated>2007-12-19T16:08:04Z</updated> 
+<title type="text">Google Code Search</title>
+<generator version="1.0" uri="http://www.google.com/codesearch">Google Code Search</generator>
+<opensearch:totalResults>2530000</opensearch:totalResults>
+<opensearch:startIndex>1</opensearch:startIndex>
+<author>
+<name>Google Code Search</name>
+
+<uri>http://www.google.com/codesearch</uri>
+</author>
+<link rel="http://schemas.google.com/g/2006#feed" type="application/atom+xml" href="http://schemas.google.com/codesearch/2006"/>
+<link rel="self" type="application/atom+xml" href="http://www.google.com/codesearch/feeds/search?q=malloc"/>
+<link rel="next" type="application/atom+xml"  href="http://www.google.com/codesearch/feeds/search?q=malloc&amp;start-index=11"/>
+<link rel="alternate" type="text/html" href="http://www.google.com/codesearch?q=malloc"/>
+<entry><id>http://www.google.com/codesearch?hl=en&amp;q=+malloc+show:LDjwp-Iqc7U:84hEYaYsZk8:xDGReDhvNi0&amp;sa=N&amp;ct=rx&amp;cd=1&amp;cs_p=http://www.gnu.org&amp;cs_f=software/autoconf/manual/autoconf-2.60/autoconf.html-002&amp;cs_p=http://www.gnu.org&amp;cs_f=software/autoconf/manual/autoconf-2.60/autoconf.html-002#first</id><updated>2007-12-19T16:08:04Z</updated><author><name>Code owned by external author.</name></author><title type="text">software/autoconf/manual/autoconf-2.60/autoconf.html</title><link rel="alternate" type="text/html" href="http://www.google.com/codesearch?hl=en&amp;q=+malloc+show:LDjwp-Iqc7U:84hEYaYsZk8:xDGReDhvNi0&amp;sa=N&amp;ct=rx&amp;cd=1&amp;cs_p=http://www.gnu.org&amp;cs_f=software/autoconf/manual/autoconf-2.60/autoconf.html-002&amp;cs_p=http://www.gnu.org&amp;cs_f=software/autoconf/manual/autoconf-2.60/autoconf.html-002#first"/><gcs:package name="http://www.gnu.org" uri="http://www.gnu.org"></gcs:package><gcs:file name="software/autoconf/manual/autoconf-2.60/autoconf.html-002"></gcs:file><content type="text/html">&lt;pre&gt;     8:      void *&lt;b&gt;malloc&lt;/b&gt; ();
+        
+
+&lt;/pre&gt;</content><gcs:match lineNumber="4" type="text/html">&lt;pre&gt;     #undef &lt;b&gt;malloc&lt;/b&gt;
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="8" type="text/html">&lt;pre&gt;     void *&lt;b&gt;malloc&lt;/b&gt; ();
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="14" type="text/html">&lt;pre&gt;     rpl_&lt;b&gt;malloc&lt;/b&gt; (size_t n)
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="18" type="text/html">&lt;pre&gt;       return &lt;b&gt;malloc&lt;/b&gt; (n);
+
+&lt;/pre&gt;</gcs:match></entry>
+<entry><id>http://www.google.com/codesearch?hl=en&amp;q=+malloc+show:h4hfh-fV-jI:niBq_bwWZNs:H0OhClf0HWQ&amp;sa=N&amp;ct=rx&amp;cd=2&amp;cs_p=ftp://ftp.gnu.org/gnu/guile/guile-1.6.8.tar.gz&amp;cs_f=guile-1.6.8/libguile/mallocs.c&amp;cs_p=ftp://ftp.gnu.org/gnu/guile/guile-1.6.8.tar.gz&amp;cs_f=guile-1.6.8/libguile/mallocs.c#first</id><updated>2007-12-19T16:08:04Z</updated><author><name>Code owned by external author.</name></author><title type="text">guile-1.6.8/libguile/mallocs.c</title><link rel="alternate" type="text/html" href="http://www.google.com/codesearch?hl=en&amp;q=+malloc+show:h4hfh-fV-jI:niBq_bwWZNs:H0OhClf0HWQ&amp;sa=N&amp;ct=rx&amp;cd=2&amp;cs_p=ftp://ftp.gnu.org/gnu/guile/guile-1.6.8.tar.gz&amp;cs_f=guile-1.6.8/libguile/mallocs.c&amp;cs_p=ftp://ftp.gnu.org/gnu/guile/guile-1.6.8.tar.gz&amp;cs_f=guile-1.6.8/libguile/mallocs.c#first"/><gcs:package name="ftp://ftp.gnu.org/gnu/guile/guile-1.6.8.tar.gz" uri="ftp://ftp.gnu.org/gnu/guile/guile-1.6.8.tar.gz"></gcs:package><gcs:file name="guile-1.6.8/libguile/mallocs.c"></gcs:file><content type="text/html">&lt;pre&gt;    86: {
+          scm_t_bits mem = n ? (scm_t_bits) &lt;b&gt;malloc&lt;/b&gt; (n) : 0;
+          if (n &amp;amp;&amp;amp; !mem)
+
+&lt;/pre&gt;</content><gcs:match lineNumber="54" type="text/html">&lt;pre&gt;#include &amp;lt;&lt;b&gt;malloc&lt;/b&gt;.h&amp;gt;
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="62" type="text/html">&lt;pre&gt;scm_t_bits scm_tc16_&lt;b&gt;malloc&lt;/b&gt;;
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="66" type="text/html">&lt;pre&gt;&lt;b&gt;malloc&lt;/b&gt;_free (SCM ptr)
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="75" type="text/html">&lt;pre&gt;&lt;b&gt;malloc&lt;/b&gt;_print (SCM exp, SCM port, scm_print_state *pstate SCM_UNUSED)
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="77" type="text/html">&lt;pre&gt;  scm_puts(&amp;quot;#&amp;lt;&lt;b&gt;malloc&lt;/b&gt; &amp;quot;, port);
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="87" type="text/html">&lt;pre&gt;  scm_t_bits mem = n ? (scm_t_bits) &lt;b&gt;malloc&lt;/b&gt; (n) : 0;
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="90" type="text/html">&lt;pre&gt;  SCM_RETURN_NEWSMOB (scm_tc16_&lt;b&gt;malloc&lt;/b&gt;, mem);
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="98" type="text/html">&lt;pre&gt;  scm_tc16_&lt;b&gt;malloc&lt;/b&gt; = scm_make_smob_type (&amp;quot;&lt;b&gt;malloc&lt;/b&gt;&amp;quot;, 0);
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="99" type="text/html">&lt;pre&gt;  scm_set_smob_free (scm_tc16_&lt;b&gt;malloc&lt;/b&gt;, &lt;b&gt;malloc&lt;/b&gt;_free);
+&lt;/pre&gt;</gcs:match><rights>GPL</rights></entry>
+
+<entry><id>http://www.google.com/codesearch?hl=en&amp;q=+malloc+show:9wyZUG-N_30:7_dFxoC1ZrY:C0_iYbFj90M&amp;sa=N&amp;ct=rx&amp;cd=3&amp;cs_p=http://ftp.gnu.org/gnu/bash/bash-3.0.tar.gz&amp;cs_f=bash-3.0/lib/malloc/alloca.c&amp;cs_p=http://ftp.gnu.org/gnu/bash/bash-3.0.tar.gz&amp;cs_f=bash-3.0/lib/malloc/alloca.c#first</id><updated>2007-12-19T16:08:04Z</updated><author><name>Code owned by external author.</name></author><title type="text">bash-3.0/lib/malloc/alloca.c</title><link rel="alternate" type="text/html" href="http://www.google.com/codesearch?hl=en&amp;q=+malloc+show:9wyZUG-N_30:7_dFxoC1ZrY:C0_iYbFj90M&amp;sa=N&amp;ct=rx&amp;cd=3&amp;cs_p=http://ftp.gnu.org/gnu/bash/bash-3.0.tar.gz&amp;cs_f=bash-3.0/lib/malloc/alloca.c&amp;cs_p=http://ftp.gnu.org/gnu/bash/bash-3.0.tar.gz&amp;cs_f=bash-3.0/lib/malloc/alloca.c#first"/><gcs:package name="http://ftp.gnu.org/gnu/bash/bash-3.0.tar.gz" uri="http://ftp.gnu.org/gnu/bash/bash-3.0.tar.gz"></gcs:package><gcs:file name="bash-3.0/lib/malloc/alloca.c"></gcs:file><content type="text/html">&lt;pre&gt;    78: #ifndef emacs
+        #define &lt;b&gt;malloc&lt;/b&gt; x&lt;b&gt;malloc&lt;/b&gt;
+        extern pointer x&lt;b&gt;malloc&lt;/b&gt; ();
+
+&lt;/pre&gt;</content><gcs:match lineNumber="69" type="text/html">&lt;pre&gt;   &lt;b&gt;malloc&lt;/b&gt;.  The Emacs executable needs alloca to call x&lt;b&gt;malloc&lt;/b&gt;, because
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="70" type="text/html">&lt;pre&gt;   ordinary &lt;b&gt;malloc&lt;/b&gt; isn&amp;#39;t protected from input signals.  On the other
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="71" type="text/html">&lt;pre&gt;   hand, the utilities in lib-src need alloca to call &lt;b&gt;malloc&lt;/b&gt;; some of
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="72" type="text/html">&lt;pre&gt;   them are very simple, and don&amp;#39;t have an x&lt;b&gt;malloc&lt;/b&gt; routine.
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="76" type="text/html">&lt;pre&gt;   Callers below should use &lt;b&gt;malloc&lt;/b&gt;.  */
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="79" type="text/html">&lt;pre&gt;#define &lt;b&gt;malloc&lt;/b&gt; x&lt;b&gt;malloc&lt;/b&gt;
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="80" type="text/html">&lt;pre&gt;extern pointer x&lt;b&gt;malloc&lt;/b&gt; ();
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="132" type="text/html">&lt;pre&gt;   It is very important that sizeof(header) agree with &lt;b&gt;malloc&lt;/b&gt;
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="198" type="text/html">&lt;pre&gt;    register pointer new = &lt;b&gt;malloc&lt;/b&gt; (sizeof (header) + size);
+&lt;/pre&gt;</gcs:match><rights>GPL</rights></entry>
+<entry><id>http://www.google.com/codesearch?hl=en&amp;q=+malloc+show:uhVCKyPcT6k:8juMxxzmUJw:H7_IDsTB2L4&amp;sa=N&amp;ct=rx&amp;cd=4&amp;cs_p=http://ftp.mozilla.org/pub/mozilla.org/mozilla/releases/mozilla1.7b/src/mozilla-source-1.7b-source.tar.bz2&amp;cs_f=mozilla/xpcom/build/malloc.c&amp;cs_p=http://ftp.mozilla.org/pub/mozilla.org/mozilla/releases/mozilla1.7b/src/mozilla-source-1.7b-source.tar.bz2&amp;cs_f=mozilla/xpcom/build/malloc.c#first</id><updated>2007-12-19T16:08:04Z</updated><author><name>Code owned by external author.</name></author><title type="text">mozilla/xpcom/build/malloc.c</title><link rel="alternate" type="text/html" href="http://www.google.com/codesearch?hl=en&amp;q=+malloc+show:uhVCKyPcT6k:8juMxxzmUJw:H7_IDsTB2L4&amp;sa=N&amp;ct=rx&amp;cd=4&amp;cs_p=http://ftp.mozilla.org/pub/mozilla.org/mozilla/releases/mozilla1.7b/src/mozilla-source-1.7b-source.tar.bz2&amp;cs_f=mozilla/xpcom/build/malloc.c&amp;cs_p=http://ftp.mozilla.org/pub/mozilla.org/mozilla/releases/mozilla1.7b/src/mozilla-source-1.7b-source.tar.bz2&amp;cs_f=mozilla/xpcom/build/malloc.c#first"/><gcs:package name="http://ftp.mozilla.org/pub/mozilla.org/mozilla/releases/mozilla1.7b/src/mozilla-source-1.7b-source.tar.bz2" uri="http://ftp.mozilla.org/pub/mozilla.org/mozilla/releases/mozilla1.7b/src/mozilla-source-1.7b-source.tar.bz2"></gcs:package><gcs:file name="mozilla/xpcom/build/malloc.c"></gcs:file><content type="text/html">&lt;pre&gt;    54:      http://gee.cs.oswego.edu/dl/html/&lt;b&gt;malloc&lt;/b&gt;.html
+        
+          You may already by default be using a c library containing a &lt;b&gt;malloc&lt;/b&gt;
+
+&lt;/pre&gt;</content><gcs:match lineNumber="4" type="text/html">&lt;pre&gt;/* ---------- To make a &lt;b&gt;malloc&lt;/b&gt;.h, start cutting here ------------ */
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="22" type="text/html">&lt;pre&gt;   Note: There may be an updated version of this &lt;b&gt;malloc&lt;/b&gt; obtainable at
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="23" type="text/html">&lt;pre&gt;           ftp://gee.cs.oswego.edu/pub/misc/&lt;b&gt;malloc&lt;/b&gt;.c
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="34" type="text/html">&lt;pre&gt;* Why use this &lt;b&gt;malloc&lt;/b&gt;?
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="37" type="text/html">&lt;pre&gt;  most tunable &lt;b&gt;malloc&lt;/b&gt; ever written. However it is among the fastest
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="40" type="text/html">&lt;pre&gt;  allocator for &lt;b&gt;malloc&lt;/b&gt;-intensive programs.
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="54" type="text/html">&lt;pre&gt;     http://gee.cs.oswego.edu/dl/html/&lt;b&gt;malloc&lt;/b&gt;.html
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="56" type="text/html">&lt;pre&gt;  You may already by default be using a c library containing a &lt;b&gt;malloc&lt;/b&gt;
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="57" type="text/html">&lt;pre&gt;  that is somehow based on some version of this &lt;b&gt;malloc&lt;/b&gt; (for example in
+&lt;/pre&gt;</gcs:match><rights>Mozilla</rights></entry>
+<entry><id>http://www.google.com/codesearch?hl=en&amp;q=+malloc+show:4n1P2HVOISs:Ybbpph0wR2M:OhIN_sDrG0U&amp;sa=N&amp;ct=rx&amp;cd=5&amp;cs_p=http://regexps.srparish.net/src/hackerlab/hackerlab-1.0pre2.tar.gz&amp;cs_f=hackerlab-1.0pre2/src/hackerlab/tests/mem-tests/unit-must-malloc.sh&amp;cs_p=http://regexps.srparish.net/src/hackerlab/hackerlab-1.0pre2.tar.gz&amp;cs_f=hackerlab-1.0pre2/src/hackerlab/tests/mem-tests/unit-must-malloc.sh#first</id><updated>2007-12-19T16:08:04Z</updated><author><name>Code owned by external author.</name></author><title type="text">hackerlab-1.0pre2/src/hackerlab/tests/mem-tests/unit-must-malloc.sh</title><link rel="alternate" type="text/html" href="http://www.google.com/codesearch?hl=en&amp;q=+malloc+show:4n1P2HVOISs:Ybbpph0wR2M:OhIN_sDrG0U&amp;sa=N&amp;ct=rx&amp;cd=5&amp;cs_p=http://regexps.srparish.net/src/hackerlab/hackerlab-1.0pre2.tar.gz&amp;cs_f=hackerlab-1.0pre2/src/hackerlab/tests/mem-tests/unit-must-malloc.sh&amp;cs_p=http://regexps.srparish.net/src/hackerlab/hackerlab-1.0pre2.tar.gz&amp;cs_f=hackerlab-1.0pre2/src/hackerlab/tests/mem-tests/unit-must-malloc.sh#first"/><gcs:package name="http://regexps.srparish.net/src/hackerlab/hackerlab-1.0pre2.tar.gz" uri="http://regexps.srparish.net/src/hackerlab/hackerlab-1.0pre2.tar.gz"></gcs:package><gcs:file name="hackerlab-1.0pre2/src/hackerlab/tests/mem-tests/unit-must-malloc.sh"></gcs:file><content type="text/html">&lt;pre&gt;    11: echo ================ unit-must-&lt;b&gt;malloc&lt;/b&gt; tests ================
+        ./unit-must-&lt;b&gt;malloc&lt;/b&gt;
+        echo ...passed
+
+&lt;/pre&gt;</content><gcs:match lineNumber="2" type="text/html">&lt;pre&gt;# tag: Tom Lord Tue Dec  4 14:54:29 2001 (mem-tests/unit-must-&lt;b&gt;malloc&lt;/b&gt;.sh)
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="11" type="text/html">&lt;pre&gt;echo ================ unit-must-&lt;b&gt;malloc&lt;/b&gt; tests ================
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="12" type="text/html">&lt;pre&gt;./unit-must-&lt;b&gt;malloc&lt;/b&gt;
+&lt;/pre&gt;</gcs:match><rights>GPL</rights></entry>
+<entry><id>http://www.google.com/codesearch?hl=en&amp;q=+malloc+show:GzkwiWG266M:ykuz3bG00ws:2sTvVSif08g&amp;sa=N&amp;ct=rx&amp;cd=6&amp;cs_p=http://ftp.gnu.org/gnu/tar/tar-1.14.tar.bz2&amp;cs_f=tar-1.14/lib/malloc.c&amp;cs_p=http://ftp.gnu.org/gnu/tar/tar-1.14.tar.bz2&amp;cs_f=tar-1.14/lib/malloc.c#first</id><updated>2007-12-19T16:08:04Z</updated><author><name>Code owned by external author.</name></author><title type="text">tar-1.14/lib/malloc.c</title><link rel="alternate" type="text/html" href="http://www.google.com/codesearch?hl=en&amp;q=+malloc+show:GzkwiWG266M:ykuz3bG00ws:2sTvVSif08g&amp;sa=N&amp;ct=rx&amp;cd=6&amp;cs_p=http://ftp.gnu.org/gnu/tar/tar-1.14.tar.bz2&amp;cs_f=tar-1.14/lib/malloc.c&amp;cs_p=http://ftp.gnu.org/gnu/tar/tar-1.14.tar.bz2&amp;cs_f=tar-1.14/lib/malloc.c#first"/><gcs:package name="http://ftp.gnu.org/gnu/tar/tar-1.14.tar.bz2" uri="http://ftp.gnu.org/gnu/tar/tar-1.14.tar.bz2"></gcs:package><gcs:file name="tar-1.14/lib/malloc.c"></gcs:file><content type="text/html">&lt;pre&gt;    22: #endif
+        #undef &lt;b&gt;malloc&lt;/b&gt;
+        
+
+&lt;/pre&gt;</content><gcs:match lineNumber="1" type="text/html">&lt;pre&gt;/* Work around bug on some systems where &lt;b&gt;malloc&lt;/b&gt; (0) fails.
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="23" type="text/html">&lt;pre&gt;#undef &lt;b&gt;malloc&lt;/b&gt;
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="31" type="text/html">&lt;pre&gt;rpl_&lt;b&gt;malloc&lt;/b&gt; (size_t n)
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="35" type="text/html">&lt;pre&gt;  return &lt;b&gt;malloc&lt;/b&gt; (n);
+
+&lt;/pre&gt;</gcs:match><rights>GPL</rights></entry>
+<entry><id>http://www.google.com/codesearch?hl=en&amp;q=+malloc+show:o_TFIeBY6dY:ktI_dt8wPao:AI03BD1Dz0Y&amp;sa=N&amp;ct=rx&amp;cd=7&amp;cs_p=http://ftp.gnu.org/gnu/tar/tar-1.16.1.tar.gz&amp;cs_f=tar-1.16.1/lib/malloc.c&amp;cs_p=http://ftp.gnu.org/gnu/tar/tar-1.16.1.tar.gz&amp;cs_f=tar-1.16.1/lib/malloc.c#first</id><updated>2007-12-19T16:08:04Z</updated><author><name>Code owned by external author.</name></author><title type="text">tar-1.16.1/lib/malloc.c</title><link rel="alternate" type="text/html" href="http://www.google.com/codesearch?hl=en&amp;q=+malloc+show:o_TFIeBY6dY:ktI_dt8wPao:AI03BD1Dz0Y&amp;sa=N&amp;ct=rx&amp;cd=7&amp;cs_p=http://ftp.gnu.org/gnu/tar/tar-1.16.1.tar.gz&amp;cs_f=tar-1.16.1/lib/malloc.c&amp;cs_p=http://ftp.gnu.org/gnu/tar/tar-1.16.1.tar.gz&amp;cs_f=tar-1.16.1/lib/malloc.c#first"/><gcs:package name="http://ftp.gnu.org/gnu/tar/tar-1.16.1.tar.gz" uri="http://ftp.gnu.org/gnu/tar/tar-1.16.1.tar.gz"></gcs:package><gcs:file name="tar-1.16.1/lib/malloc.c"></gcs:file><content type="text/html">&lt;pre&gt;    21: #include &amp;lt;config.h&amp;gt;
+        #undef &lt;b&gt;malloc&lt;/b&gt;
+        
+
+&lt;/pre&gt;</content><gcs:match lineNumber="1" type="text/html">&lt;pre&gt;/* &lt;b&gt;malloc&lt;/b&gt;() function that is glibc compatible.
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="22" type="text/html">&lt;pre&gt;#undef &lt;b&gt;malloc&lt;/b&gt;
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="30" type="text/html">&lt;pre&gt;rpl_&lt;b&gt;malloc&lt;/b&gt; (size_t n)
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="34" type="text/html">&lt;pre&gt;  return &lt;b&gt;malloc&lt;/b&gt; (n);
+
+&lt;/pre&gt;</gcs:match><rights>GPL</rights></entry>
+<entry><id>http://www.google.com/codesearch?hl=en&amp;q=+malloc+show:_ibw-VLkMoI:jBOtIJSmFd4:-0NUEVeCwfY&amp;sa=N&amp;ct=rx&amp;cd=8&amp;cs_p=http://freshmeat.net/redir/uclibc/20616/url_bz2/uClibc-0.9.28.1.tar.bz2&amp;cs_f=uClibc-0.9.29/include/malloc.h&amp;cs_p=http://freshmeat.net/redir/uclibc/20616/url_bz2/uClibc-0.9.28.1.tar.bz2&amp;cs_f=uClibc-0.9.29/include/malloc.h#first</id><updated>2007-12-19T16:08:04Z</updated><author><name>Code owned by external author.</name></author><title type="text">uClibc-0.9.29/include/malloc.h</title><link rel="alternate" type="text/html" href="http://www.google.com/codesearch?hl=en&amp;q=+malloc+show:_ibw-VLkMoI:jBOtIJSmFd4:-0NUEVeCwfY&amp;sa=N&amp;ct=rx&amp;cd=8&amp;cs_p=http://freshmeat.net/redir/uclibc/20616/url_bz2/uClibc-0.9.28.1.tar.bz2&amp;cs_f=uClibc-0.9.29/include/malloc.h&amp;cs_p=http://freshmeat.net/redir/uclibc/20616/url_bz2/uClibc-0.9.28.1.tar.bz2&amp;cs_f=uClibc-0.9.29/include/malloc.h#first"/><gcs:package name="http://freshmeat.net/redir/uclibc/20616/url_bz2/uClibc-0.9.28.1.tar.bz2" uri="http://freshmeat.net/redir/uclibc/20616/url_bz2/uClibc-0.9.28.1.tar.bz2"></gcs:package><gcs:file name="uClibc-0.9.29/include/malloc.h"></gcs:file><content type="text/html">&lt;pre&gt;     1: /* Prototypes and definition for &lt;b&gt;malloc&lt;/b&gt; implementation.
+           Copyright (C) 1996, 1997, 1999, 2000 Free Software Foundation, Inc.
+
+&lt;/pre&gt;</content><gcs:match lineNumber="1" type="text/html">&lt;pre&gt;/* Prototypes and definition for &lt;b&gt;malloc&lt;/b&gt; implementation.
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="26" type="text/html">&lt;pre&gt;  `pt&lt;b&gt;malloc&lt;/b&gt;&amp;#39;, a &lt;b&gt;malloc&lt;/b&gt; implementation for multiple threads without
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="28" type="text/html">&lt;pre&gt;  See the files `pt&lt;b&gt;malloc&lt;/b&gt;.c&amp;#39; or `COPYRIGHT&amp;#39; for copying conditions.
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="32" type="text/html">&lt;pre&gt;  This work is mainly derived from &lt;b&gt;malloc&lt;/b&gt;-2.6.4 by Doug Lea
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="35" type="text/html">&lt;pre&gt;                 ftp://g.oswego.edu/pub/misc/&lt;b&gt;malloc&lt;/b&gt;.c
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="40" type="text/html">&lt;pre&gt;  `pt&lt;b&gt;malloc&lt;/b&gt;.c&amp;#39;.
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="45" type="text/html">&lt;pre&gt;# define __&lt;b&gt;malloc&lt;/b&gt;_ptr_t  void *
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="51" type="text/html">&lt;pre&gt;# define __&lt;b&gt;malloc&lt;/b&gt;_ptr_t  char *
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="56" type="text/html">&lt;pre&gt;# define __&lt;b&gt;malloc&lt;/b&gt;_size_t size_t
+&lt;/pre&gt;</gcs:match><rights>LGPL</rights></entry>
+<entry><id>http://www.google.com/codesearch?hl=en&amp;q=+malloc+show:F6qHcZ9vefo:bTX7o9gKfks:hECF4r_eKC0&amp;sa=N&amp;ct=rx&amp;cd=9&amp;cs_p=http://ftp.gnu.org/gnu/glibc/glibc-2.0.1.tar.gz&amp;cs_f=glibc-2.0.1/hurd/hurdmalloc.h&amp;cs_p=http://ftp.gnu.org/gnu/glibc/glibc-2.0.1.tar.gz&amp;cs_f=glibc-2.0.1/hurd/hurdmalloc.h#first</id><updated>2007-12-19T16:08:04Z</updated><author><name>Code owned by external author.</name></author><title type="text">glibc-2.0.1/hurd/hurdmalloc.h</title><link rel="alternate" type="text/html" href="http://www.google.com/codesearch?hl=en&amp;q=+malloc+show:F6qHcZ9vefo:bTX7o9gKfks:hECF4r_eKC0&amp;sa=N&amp;ct=rx&amp;cd=9&amp;cs_p=http://ftp.gnu.org/gnu/glibc/glibc-2.0.1.tar.gz&amp;cs_f=glibc-2.0.1/hurd/hurdmalloc.h&amp;cs_p=http://ftp.gnu.org/gnu/glibc/glibc-2.0.1.tar.gz&amp;cs_f=glibc-2.0.1/hurd/hurdmalloc.h#first"/><gcs:package name="http://ftp.gnu.org/gnu/glibc/glibc-2.0.1.tar.gz" uri="http://ftp.gnu.org/gnu/glibc/glibc-2.0.1.tar.gz"></gcs:package><gcs:file name="glibc-2.0.1/hurd/hurdmalloc.h"></gcs:file><content type="text/html">&lt;pre&gt;    15: #define &lt;b&gt;malloc&lt;/b&gt;   _hurd_&lt;b&gt;malloc&lt;/b&gt;
+        #define realloc _hurd_realloc
+
+&lt;/pre&gt;</content><gcs:match lineNumber="3" type="text/html">&lt;pre&gt;   All hurd-internal code which uses &lt;b&gt;malloc&lt;/b&gt; et al includes this file so it
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="4" type="text/html">&lt;pre&gt;   will use the internal &lt;b&gt;malloc&lt;/b&gt; routines _hurd_{&lt;b&gt;malloc&lt;/b&gt;,realloc,free}
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="7" type="text/html">&lt;pre&gt;   of &lt;b&gt;malloc&lt;/b&gt; et al is the unixoid one using sbrk.
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="11" type="text/html">&lt;pre&gt;extern void *_hurd_&lt;b&gt;malloc&lt;/b&gt; (size_t);
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="15" type="text/html">&lt;pre&gt;#define &lt;b&gt;malloc&lt;/b&gt;        _hurd_&lt;b&gt;malloc&lt;/b&gt;
+&lt;/pre&gt;</gcs:match><rights>GPL</rights></entry>
+
+<entry><id>http://www.google.com/codesearch?hl=en&amp;q=+malloc+show:CHUvHYzyLc8:pdcAfzDA6lY:wjofHuNLTHg&amp;sa=N&amp;ct=rx&amp;cd=10&amp;cs_p=ftp://apache.mirrors.pair.com/httpd/httpd-2.2.4.tar.bz2&amp;cs_f=httpd-2.2.4/srclib/apr/include/arch/netware/apr_private.h&amp;cs_p=ftp://apache.mirrors.pair.com/httpd/httpd-2.2.4.tar.bz2&amp;cs_f=httpd-2.2.4/srclib/apr/include/arch/netware/apr_private.h#first</id><updated>2007-12-19T16:08:04Z</updated><author><name>Code owned by external author.</name></author><title type="text">httpd-2.2.4/srclib/apr/include/arch/netware/apr_private.h</title><link rel="alternate" type="text/html" href="http://www.google.com/codesearch?hl=en&amp;q=+malloc+show:CHUvHYzyLc8:pdcAfzDA6lY:wjofHuNLTHg&amp;sa=N&amp;ct=rx&amp;cd=10&amp;cs_p=ftp://apache.mirrors.pair.com/httpd/httpd-2.2.4.tar.bz2&amp;cs_f=httpd-2.2.4/srclib/apr/include/arch/netware/apr_private.h&amp;cs_p=ftp://apache.mirrors.pair.com/httpd/httpd-2.2.4.tar.bz2&amp;cs_f=httpd-2.2.4/srclib/apr/include/arch/netware/apr_private.h#first"/><gcs:package name="ftp://apache.mirrors.pair.com/httpd/httpd-2.2.4.tar.bz2" uri="ftp://apache.mirrors.pair.com/httpd/httpd-2.2.4.tar.bz2"></gcs:package><gcs:file name="httpd-2.2.4/srclib/apr/include/arch/netware/apr_private.h"></gcs:file><content type="text/html">&lt;pre&gt;   173: #undef &lt;b&gt;malloc&lt;/b&gt;
+        #define &lt;b&gt;malloc&lt;/b&gt;(x) library_&lt;b&gt;malloc&lt;/b&gt;(gLibHandle,x)
+
+&lt;/pre&gt;</content><gcs:match lineNumber="170" type="text/html">&lt;pre&gt;/* Redefine &lt;b&gt;malloc&lt;/b&gt; to use the library &lt;b&gt;malloc&lt;/b&gt; call so
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="173" type="text/html">&lt;pre&gt;#undef &lt;b&gt;malloc&lt;/b&gt;
+
+&lt;/pre&gt;</gcs:match><gcs:match lineNumber="174" type="text/html">&lt;pre&gt;#define &lt;b&gt;malloc&lt;/b&gt;(x) library_&lt;b&gt;malloc&lt;/b&gt;(gLibHandle,x)
+&lt;/pre&gt;</gcs:match><rights>Apache</rights></entry>
+
+</feed>"""
