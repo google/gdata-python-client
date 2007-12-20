@@ -40,14 +40,14 @@ class Match(atom.AtomBase):
     _namespace = CODESEARCH_NAMESPACE
     _children = atom.AtomBase._children.copy()
     _attributes = atom.AtomBase._attributes.copy()
-    _attributes['lineNumber'] = 'lineNumber'
+    _attributes['lineNumber'] = 'line_number'
     _attributes['type'] = 'type'
 
-    def __init__(self, lineNumber=None, type=None, extension_elements=None,
+    def __init__(self, line_number=None, type=None, extension_elements=None,
             extension_attributes=None, text=None):
         self.text = text
         self.type = type
-        self.lineNumber = lineNumber 
+        self.line_number = line_number 
         self.extension_elements = extension_elements or []
         self.extension_attributes = extension_attributes or {}
 
