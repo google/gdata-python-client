@@ -34,17 +34,6 @@ operations.<br>
     
 <tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl>
-<dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>
-</font></dt><dd>
-<dl>
-<dt><font face="helvetica, arial"><a href="gdata.docs.service.html#Error">Error</a>
-</font></dt><dd>
-<dl>
-<dt><font face="helvetica, arial"><a href="gdata.docs.service.html#RequestError">RequestError</a>
-</font></dt></dl>
-</dd>
-</dl>
-</dd>
 <dt><font face="helvetica, arial"><a href="gdata.service.html#GDataService">gdata.service.GDataService</a>(<a href="atom.service.html#AtomService">atom.service.AtomService</a>)
 </font></dt><dd>
 <dl>
@@ -114,13 +103,26 @@ Returns:<br>
 &nbsp;&nbsp;&nbsp;feed&nbsp;with&nbsp;the&nbsp;given&nbsp;title.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;media_source:&nbsp;MediaSource&nbsp;The&nbsp;MediaSource&nbsp;object&nbsp;containing&nbsp;a&nbsp;document<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file&nbsp;to&nbsp;be&nbsp;uploaded.<br>
+&nbsp;&nbsp;media_source:&nbsp;MediaSource&nbsp;The&nbsp;gdata.MediaSource&nbsp;object&nbsp;containing&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document&nbsp;file&nbsp;to&nbsp;be&nbsp;uploaded.<br>
 &nbsp;&nbsp;title:&nbsp;string&nbsp;The&nbsp;title&nbsp;of&nbsp;the&nbsp;document&nbsp;on&nbsp;the&nbsp;server&nbsp;after&nbsp;being<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploaded.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;document&nbsp;created&nbsp;on&nbsp;the<br>
+&nbsp;&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
+
+<dl><dt><a name="DocsService-UploadPresentation"><strong>UploadPresentation</strong></a>(self, media_source, title)</dt><dd><tt>Uploads&nbsp;a&nbsp;presentation&nbsp;inside&nbsp;of&nbsp;a&nbsp;MediaSource&nbsp;object&nbsp;to&nbsp;the&nbsp;Document<br>
+&nbsp;&nbsp;&nbsp;List&nbsp;feed&nbsp;with&nbsp;the&nbsp;given&nbsp;title.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;media_source:&nbsp;MediaSource&nbsp;The&nbsp;MediaSource&nbsp;object&nbsp;containing&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;presentation&nbsp;file&nbsp;to&nbsp;be&nbsp;uploaded.<br>
+&nbsp;&nbsp;title:&nbsp;string&nbsp;The&nbsp;title&nbsp;of&nbsp;the&nbsp;presentation&nbsp;on&nbsp;the&nbsp;server&nbsp;after&nbsp;being<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploaded.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;presentation&nbsp;created&nbsp;on&nbsp;the<br>
 &nbsp;&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
 
 <dl><dt><a name="DocsService-UploadSpreadsheet"><strong>UploadSpreadsheet</strong></a>(self, media_source, title)</dt><dd><tt>Uploads&nbsp;a&nbsp;spreadsheet&nbsp;inside&nbsp;of&nbsp;a&nbsp;MediaSource&nbsp;object&nbsp;to&nbsp;the&nbsp;Document<br>
@@ -277,6 +279,21 @@ Returns:<br>
 <dl><dt><a name="DocsService-GetMedia"><strong>GetMedia</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>)</dt><dd><tt>Returns&nbsp;a&nbsp;MediaSource&nbsp;containing&nbsp;media&nbsp;and&nbsp;its&nbsp;metadata&nbsp;from&nbsp;the&nbsp;given<br>
 URI&nbsp;string.</tt></dd></dl>
 
+<dl><dt><a name="DocsService-GetNext"><strong>GetNext</strong></a>(self, feed)</dt><dd><tt>Requests&nbsp;the&nbsp;next&nbsp;'page'&nbsp;of&nbsp;results&nbsp;in&nbsp;the&nbsp;feed.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;uses&nbsp;the&nbsp;feed's&nbsp;next&nbsp;link&nbsp;to&nbsp;request&nbsp;an&nbsp;additional&nbsp;feed<br>
+and&nbsp;uses&nbsp;the&nbsp;class&nbsp;of&nbsp;the&nbsp;feed&nbsp;to&nbsp;convert&nbsp;the&nbsp;results&nbsp;of&nbsp;the&nbsp;GET&nbsp;request.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;feed:&nbsp;atom.Feed&nbsp;or&nbsp;a&nbsp;subclass.&nbsp;The&nbsp;feed&nbsp;should&nbsp;contain&nbsp;a&nbsp;next&nbsp;link&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;type&nbsp;of&nbsp;the&nbsp;feed&nbsp;will&nbsp;be&nbsp;applied&nbsp;to&nbsp;the&nbsp;results&nbsp;from&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server.&nbsp;The&nbsp;new&nbsp;feed&nbsp;which&nbsp;is&nbsp;returned&nbsp;will&nbsp;be&nbsp;of&nbsp;the&nbsp;same&nbsp;class<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;as&nbsp;this&nbsp;feed&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;new&nbsp;feed&nbsp;representing&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;results&nbsp;in&nbsp;the&nbsp;server's&nbsp;feed.<br>
+&nbsp;&nbsp;The&nbsp;type&nbsp;of&nbsp;this&nbsp;feed&nbsp;will&nbsp;match&nbsp;that&nbsp;of&nbsp;the&nbsp;feed&nbsp;argument.</tt></dd></dl>
+
 <dl><dt><a name="DocsService-Post"><strong>Post</strong></a>(self, data, uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, redirects_remaining<font color="#909090">=4</font>, media_source<font color="#909090">=None</font>, converter<font color="#909090">=None</font>)</dt><dd><tt>Insert&nbsp;data&nbsp;into&nbsp;a&nbsp;GData&nbsp;service&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.<br>
 &nbsp;<br>
 Args:<br>
@@ -327,7 +344,7 @@ Args:<br>
 Raises:<br>
 &nbsp;&nbsp;CaptchaRequired&nbsp;if&nbsp;the&nbsp;login&nbsp;service&nbsp;will&nbsp;require&nbsp;a&nbsp;captcha&nbsp;response<br>
 &nbsp;&nbsp;BadAuthentication&nbsp;if&nbsp;the&nbsp;login&nbsp;service&nbsp;rejected&nbsp;the&nbsp;username&nbsp;or&nbsp;password<br>
-&nbsp;&nbsp;<a href="#Error">Error</a>&nbsp;if&nbsp;the&nbsp;login&nbsp;service&nbsp;responded&nbsp;with&nbsp;a&nbsp;403&nbsp;different&nbsp;from&nbsp;the&nbsp;above</tt></dd></dl>
+&nbsp;&nbsp;Error&nbsp;if&nbsp;the&nbsp;login&nbsp;service&nbsp;responded&nbsp;with&nbsp;a&nbsp;403&nbsp;different&nbsp;from&nbsp;the&nbsp;above</tt></dd></dl>
 
 <dl><dt><a name="DocsService-Put"><strong>Put</strong></a>(self, data, uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, redirects_remaining<font color="#909090">=3</font>, media_source<font color="#909090">=None</font>, converter<font color="#909090">=None</font>)</dt><dd><tt>Updates&nbsp;an&nbsp;entry&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.<br>
 &nbsp;<br>
@@ -440,6 +457,27 @@ Data and other attributes inherited from <a href="atom.service.html#AtomService"
 </dl>
 <hr>
 Methods defined here:<br>
+<dl><dt><a name="DocumentQuery-AddNamedFolder"><strong>AddNamedFolder</strong></a>(self, email, folder_name)</dt><dd><tt>Adds&nbsp;a&nbsp;named&nbsp;folder&nbsp;category,&nbsp;qualified&nbsp;by&nbsp;a&nbsp;schema.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;lets&nbsp;you&nbsp;query&nbsp;for&nbsp;documents&nbsp;that&nbsp;are&nbsp;contained&nbsp;inside&nbsp;a<br>
+named&nbsp;folder&nbsp;without&nbsp;fear&nbsp;of&nbsp;collision&nbsp;with&nbsp;other&nbsp;categories.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;email:&nbsp;string&nbsp;The&nbsp;email&nbsp;of&nbsp;the&nbsp;user&nbsp;who&nbsp;owns&nbsp;the&nbsp;folder.<br>
+&nbsp;&nbsp;folder_name:&nbsp;string&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;folder.<br>
+&nbsp;<br>
+&nbsp;&nbsp;Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;string&nbsp;of&nbsp;the&nbsp;category&nbsp;that&nbsp;was&nbsp;added&nbsp;to&nbsp;the&nbsp;object.</tt></dd></dl>
+
+<dl><dt><a name="DocumentQuery-RemoveNamedFolder"><strong>RemoveNamedFolder</strong></a>(self, email, folder_name)</dt><dd><tt>Removes&nbsp;a&nbsp;named&nbsp;folder&nbsp;category,&nbsp;qualified&nbsp;by&nbsp;a&nbsp;schema.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;email:&nbsp;string&nbsp;The&nbsp;email&nbsp;of&nbsp;the&nbsp;user&nbsp;who&nbsp;owns&nbsp;the&nbsp;folder.<br>
+&nbsp;&nbsp;folder_name:&nbsp;string&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;folder.<br>
+&nbsp;<br>
+&nbsp;&nbsp;Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;string&nbsp;of&nbsp;the&nbsp;category&nbsp;that&nbsp;was&nbsp;removed&nbsp;to&nbsp;the&nbsp;object.</tt></dd></dl>
+
 <dl><dt><a name="DocumentQuery-ToUri"><strong>ToUri</strong></a>(self)</dt><dd><tt>Generates&nbsp;a&nbsp;URI&nbsp;from&nbsp;the&nbsp;query&nbsp;parameters&nbsp;set&nbsp;in&nbsp;the&nbsp;object.<br>
 &nbsp;<br>
 Returns:<br>
@@ -608,40 +646,6 @@ Data and other attributes inherited from <a href="__builtin__.html#dict">__built
 <dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object&gt;<dd><tt>dict.<a href="#DocumentQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
-</td></tr></table> <p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#ffc8d8">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="Error">class <strong>Error</strong></a>(<a href="exceptions.html#Exception">exceptions.Exception</a>)</font></td></tr>
-    
-<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%">Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><a name="Error-__getitem__"><strong>__getitem__</strong></a>(...)</dt></dl>
-
-<dl><dt><a name="Error-__init__"><strong>__init__</strong></a>(...)</dt></dl>
-
-<dl><dt><a name="Error-__str__"><strong>__str__</strong></a>(...)</dt></dl>
-
-</td></tr></table> <p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#ffc8d8">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="RequestError">class <strong>RequestError</strong></a>(<a href="gdata.docs.service.html#Error">Error</a>)</font></td></tr>
-    
-<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="gdata.docs.service.html#RequestError">RequestError</a></dd>
-<dd><a href="gdata.docs.service.html#Error">Error</a></dd>
-<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
-</dl>
-<hr>
-Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><a name="RequestError-__getitem__"><strong>__getitem__</strong></a>(...)</dt></dl>
-
-<dl><dt><a name="RequestError-__init__"><strong>__init__</strong></a>(...)</dt></dl>
-
-<dl><dt><a name="RequestError-__str__"><strong>__str__</strong></a>(...)</dt></dl>
-
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
@@ -651,8 +655,9 @@ Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception<
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><strong>DATA_KIND_SCHEME</strong> = 'http://schemas.google.com/g/2005#kind'<br>
 <strong>DOCUMENT_KIND_TERM</strong> = 'http://schemas.google.com/docs/2007#document'<br>
+<strong>PRESENTATION_KIND_TERM</strong> = 'http://schemas.google.com/docs/2007#presentation'<br>
 <strong>SPREADSHEET_KIND_TERM</strong> = 'http://schemas.google.com/docs/2007#spreadsheet'<br>
-<strong>SUPPORTED_FILETYPES</strong> = {'CSV': 'text/comma-separated-values', 'DOC': 'application/msword', 'ODS': 'application/vnd.oasis.opendocument.spreadsheet', 'ODT': 'application/vnd.oasis.opendocument.text', 'RTF': 'application/rtf', 'SXW': 'application/vnd.sun.xml.writer', 'TXT': 'text/plain', 'XLS': 'application/vnd.ms-excel'}<br>
+<strong>SUPPORTED_FILETYPES</strong> = {'CSV': 'text/csv', 'DOC': 'application/msword', 'HTM': 'text/html', 'HTML': 'text/html', 'ODS': 'application/x-vnd.oasis.opendocument.spreadsheet', 'ODT': 'application/vnd.oasis.opendocument.text', 'PPS': 'application/vnd.ms-powerpoint', 'PPT': 'application/vnd.ms-powerpoint', 'RTF': 'application/rtf', 'SXW': 'application/vnd.sun.xml.writer', ...}<br>
 <strong>__author__</strong> = 'api.jfisher (Jeff Fisher)'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#7799ee">

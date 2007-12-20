@@ -2,6 +2,7 @@ pydoc -w atom
 pydoc -w atom.service
 pydoc -w gdata
 pydoc -w gdata.service
+pydoc -w gdata.auth
 pydoc -w gdata.calendar
 pydoc -w gdata.calendar.service
 pydoc -w gdata.docs
@@ -14,4 +15,8 @@ pydoc -w gdata.base
 pydoc -w gdata.base.service
 pydoc -w gdata.spreadsheet
 pydoc -w gdata.spreadsheet.service
+pydoc -w gdata.photos
+pydoc -w gdata.photos.service
+pydoc -w gdata.codesearch
+pydoc -w gdata.codesearch.service
 

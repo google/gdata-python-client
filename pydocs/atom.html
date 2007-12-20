@@ -1901,7 +1901,7 @@ Data and other attributes inherited from <a href="atom.html#ExtensionContainer">
  <dl><dt><a name="-ContentFromString"><strong>ContentFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-ContributorFromString"><strong>ContributorFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-ControlFromString"><strong>ControlFromString</strong></a>(xml_string)</dt></dl>
- <dl><dt><a name="-CreateClassFromXMLString"><strong>CreateClassFromXMLString</strong></a>(target_class, xml_string, string_encoding<font color="#909090">='utf-8'</font>)</dt><dd><tt>Creates&nbsp;an&nbsp;instance&nbsp;of&nbsp;the&nbsp;target&nbsp;class&nbsp;from&nbsp;the&nbsp;string&nbsp;contents.<br>
+ <dl><dt><a name="-CreateClassFromXMLString"><strong>CreateClassFromXMLString</strong></a>(target_class, xml_string, string_encoding<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;an&nbsp;instance&nbsp;of&nbsp;the&nbsp;target&nbsp;class&nbsp;from&nbsp;the&nbsp;string&nbsp;contents.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;target_class:&nbsp;class&nbsp;The&nbsp;class&nbsp;which&nbsp;will&nbsp;be&nbsp;instantiated&nbsp;and&nbsp;populated<br>
@@ -1910,6 +1910,10 @@ Args:<br>
 &nbsp;&nbsp;xml_string:&nbsp;str&nbsp;A&nbsp;string&nbsp;which&nbsp;contains&nbsp;valid&nbsp;XML.&nbsp;The&nbsp;root&nbsp;element<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;XML&nbsp;string&nbsp;should&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace&nbsp;of&nbsp;the&nbsp;desired<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class.<br>
+&nbsp;&nbsp;string_encoding:&nbsp;str&nbsp;The&nbsp;character&nbsp;encoding&nbsp;which&nbsp;the&nbsp;xml_string&nbsp;should<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;converted&nbsp;to&nbsp;before&nbsp;it&nbsp;is&nbsp;interpreted&nbsp;and&nbsp;translated&nbsp;into&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objects.&nbsp;The&nbsp;default&nbsp;is&nbsp;None&nbsp;in&nbsp;which&nbsp;case&nbsp;the&nbsp;string&nbsp;encoding<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;not&nbsp;changed.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;An&nbsp;instance&nbsp;of&nbsp;the&nbsp;target&nbsp;class&nbsp;with&nbsp;members&nbsp;assigned&nbsp;according&nbsp;to&nbsp;the<br>

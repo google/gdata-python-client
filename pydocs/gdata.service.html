@@ -290,6 +290,21 @@ Returns:<br>
 <dl><dt><a name="GDataService-GetMedia"><strong>GetMedia</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>)</dt><dd><tt>Returns&nbsp;a&nbsp;MediaSource&nbsp;containing&nbsp;media&nbsp;and&nbsp;its&nbsp;metadata&nbsp;from&nbsp;the&nbsp;given<br>
 URI&nbsp;string.</tt></dd></dl>
 
+<dl><dt><a name="GDataService-GetNext"><strong>GetNext</strong></a>(self, feed)</dt><dd><tt>Requests&nbsp;the&nbsp;next&nbsp;'page'&nbsp;of&nbsp;results&nbsp;in&nbsp;the&nbsp;feed.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;uses&nbsp;the&nbsp;feed's&nbsp;next&nbsp;link&nbsp;to&nbsp;request&nbsp;an&nbsp;additional&nbsp;feed<br>
+and&nbsp;uses&nbsp;the&nbsp;class&nbsp;of&nbsp;the&nbsp;feed&nbsp;to&nbsp;convert&nbsp;the&nbsp;results&nbsp;of&nbsp;the&nbsp;GET&nbsp;request.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;feed:&nbsp;atom.Feed&nbsp;or&nbsp;a&nbsp;subclass.&nbsp;The&nbsp;feed&nbsp;should&nbsp;contain&nbsp;a&nbsp;next&nbsp;link&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;type&nbsp;of&nbsp;the&nbsp;feed&nbsp;will&nbsp;be&nbsp;applied&nbsp;to&nbsp;the&nbsp;results&nbsp;from&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server.&nbsp;The&nbsp;new&nbsp;feed&nbsp;which&nbsp;is&nbsp;returned&nbsp;will&nbsp;be&nbsp;of&nbsp;the&nbsp;same&nbsp;class<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;as&nbsp;this&nbsp;feed&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;new&nbsp;feed&nbsp;representing&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;results&nbsp;in&nbsp;the&nbsp;server's&nbsp;feed.<br>
+&nbsp;&nbsp;The&nbsp;type&nbsp;of&nbsp;this&nbsp;feed&nbsp;will&nbsp;match&nbsp;that&nbsp;of&nbsp;the&nbsp;feed&nbsp;argument.</tt></dd></dl>
+
 <dl><dt><a name="GDataService-Post"><strong>Post</strong></a>(self, data, uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, redirects_remaining<font color="#909090">=4</font>, media_source<font color="#909090">=None</font>, converter<font color="#909090">=None</font>)</dt><dd><tt>Insert&nbsp;data&nbsp;into&nbsp;a&nbsp;GData&nbsp;service&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.<br>
 &nbsp;<br>
 Args:<br>
