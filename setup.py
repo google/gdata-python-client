@@ -31,6 +31,8 @@ service modules for the the following Google data services:
 - Google Document List data APIs
 - Google Base data API
 - Google Apps Provisioning API
+- Picasa Web Albums Data API
+- Google Code Search Data API
 - core Google data API functionality 
 The core Google data code provides sufficient functionality to use this 
 library with any Google data API (even if a module hasn't been written for 
