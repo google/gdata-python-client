@@ -1,5 +1,5 @@
-=== 1.0.10 ===
-December 19, 2007 (revision 263)
+=== 1.0.10.1 ===
+December 20, 2007 (revision 265)
 
 - Photos packages for working with the Picasa Web Albums Data API.
 - New modules for handling media, geo, and exif XML elements.
