@@ -38,6 +38,7 @@ tests/gdata_test.py
 tests/atom_tests/service_test.py
 tests/gdata_tests/service_test.py
 tests/gdata_tests/auth_test.py
+tests/gdata_tests/codesearch_test.py
 tests/gdata_tests/calendar/service_test.py
 tests/gdata_tests/base/service_test.py
 tests/gdata_tests/spreadsheet/service_test.py
