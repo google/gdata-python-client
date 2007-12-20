@@ -46,6 +46,6 @@ any Atom Publishing Protocol service.
     url='http://code.google.com/p/gdata-python-client/',
     packages=['atom', 'gdata', 'gdata.calendar', 'gdata.base',
         'gdata.spreadsheet', 'gdata.apps', 'gdata.docs', 'gdata.codesearch',
-        'gdata.photos', 'gdata.auth'],
+        'gdata.photos'],
     package_dir = {'gdata':'src/gdata', 'atom':'src/atom'}
 )
