@@ -44,7 +44,6 @@
 
 __author__ = 'api.jscudder (Jeffrey Scudder)'
 
-
 try:
   from xml.etree import cElementTree as ElementTree
 except ImportError:
@@ -90,7 +89,7 @@ def CreateClassFromXMLString(target_class, xml_string, string_encoding=None):
   if string_encoding:
     tree = ElementTree.fromstring(xml_string.encode(string_encoding))
   else:
-    if XML_STRING_ENCODING:
+    if XML_STRING_ENCODING and isinstance(xml_string, unicode):
       tree = ElementTree.fromstring(xml_string.encode(XML_STRING_ENCODING))
     else:
       tree = ElementTree.fromstring(xml_string)
