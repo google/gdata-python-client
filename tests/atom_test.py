@@ -589,6 +589,13 @@ class UtfParsingTest(unittest.TestCase):
     atom_entry = atom.EntryFromString(self.test_xml)
     self.assert_(atom_entry.title.type == u'\u03B1\u03BB\u03C6\u03B1'.encode('utf-8'))
     self.assert_(atom_entry.title.text == u'\u03B1\u03BB\u03C6\u03B1'.encode('utf-8'))
+
+  def testConvertExampleXML(self):
+    try:
+      entry = atom.CreateClassFromXMLString(atom.Entry, test_data.GBASE_STRING_ENCODING_ENTRY)
+      print entry
+    except UnicodeDecodeError:
+      self.fail('Error when converting XML')
     
   
 if __name__ == '__main__':

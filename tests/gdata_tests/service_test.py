@@ -176,10 +176,10 @@ class GDataServiceUnitTest(unittest.TestCase):
     self.gd_client.password = password
     self.gd_client.service = 'gbase'
     self.gd_client.source = 'GDataClient "Unit" Tests'
-    atom.XML_STRING_ENCODING = None
+#    atom.XML_STRING_ENCODING = None
 
-  def tearDown(self):
-    atom.XML_STRING_ENCODING = 'utf-8'
+#  def tearDown(self):
+#    atom.XML_STRING_ENCODING = 'utf-8'
 
   def testProperties(self):
     email_string = 'Test Email'
@@ -415,7 +415,6 @@ class GetNextPageInFeedTest(unittest.TestCase):
 
   def setUp(self):
     self.gd_client = gdata.service.GDataService()
-    atom.XML_STRING_ENCODING = None
 
   def testGetNextPage(self):
     feed = self.gd_client.Get(
@@ -428,9 +427,6 @@ class GetNextPageInFeedTest(unittest.TestCase):
     next_id = feed2.entry[0].id.text
     self.assert_(first_id != next_id)
     self.assert_(feed2.__class__ == feed.__class__)
-
-  def tearDown(self):
-    atom.XML_STRING_ENCODING = 'utf-8'
 
 
 if __name__ == '__main__':
