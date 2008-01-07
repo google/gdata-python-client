@@ -243,7 +243,7 @@ class GDataService(atom.service.AtomService):
   def __SetSource(self, new_source):
     self.__source = new_source
     # Update the UserAgent header to include the new application name.
-    self.additional_headers['User-Agent'] = '%s GData-Python/1.0.9' % self.__source
+    self.additional_headers['User-Agent'] = '%s GData-Python/1.0.10' % self.__source
 
   source = property(__GetSource, __SetSource, 
       doc="""The source is the name of the application making the request. 
@@ -404,7 +404,7 @@ class GDataService(atom.service.AtomService):
     if response.status == 200:
       for response_line in response_body.splitlines():
         if response_line.startswith('Token='):
-          self.__auth_token = response_line.lstrip('Token=')
+          self.SetAuthSubToken(response_line.lstrip('Token='))
 
   def RevokeAuthSubToken(self):
     """Revokes an existing AuthSub token.
