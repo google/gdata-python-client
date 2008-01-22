@@ -31,10 +31,6 @@
 
 __author__ = 'lkeppler@google.com (Luke Keppler)'
 
-try:
-  from xml.etree import ElementTree # for Python 2.5 users
-except:
-  from elementtree import ElementTree
 
 from gdata import service
 import gdata
