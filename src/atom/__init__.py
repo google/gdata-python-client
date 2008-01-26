@@ -86,13 +86,10 @@ def CreateClassFromXMLString(target_class, xml_string, string_encoding=None):
     contents of the XML - or None if the root XML tag and namespace did not
     match those of the target class.
   """
-  if string_encoding:
-    tree = ElementTree.fromstring(xml_string.encode(string_encoding))
-  else:
-    if XML_STRING_ENCODING and isinstance(xml_string, unicode):
-      tree = ElementTree.fromstring(xml_string.encode(XML_STRING_ENCODING))
-    else:
-      tree = ElementTree.fromstring(xml_string)
+  encoding = string_encoding or XML_STRING_ENCODING
+  if encoding and isinstance(xml_string, unicode):
+    xml_string = xml_string.encode(encoding)
+  tree = ElementTree.fromstring(xml_string)
   return _CreateClassFromElementTree(target_class, tree)
 
 
