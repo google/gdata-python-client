@@ -352,6 +352,48 @@ class Size(PhotosBaseElement):
 def SizeFromString(xml_string):
   return atom.CreateClassFromXMLString(Size, xml_string)
 
+class Snippet(PhotosBaseElement):
+  """The Google Photo `snippet' element.
+
+  When searching, the snippet element will contain a 
+  string with the word you're looking for, highlighted in html markup
+  E.g. when your query is `hafjell', this element may contain:
+  `... here at <b>Hafjell</b>.'
+
+  You'll find this element in searches -- that is, feeds that combine the 
+  `kind=photo' and `q=yoursearch' parameters in the request.
+
+  See also gphoto:truncated and gphoto:snippettype.
+  
+  """
+  
+  _tag = 'snippet'
+def SnippetFromString(xml_string):
+  return atom.CreateClassFromXMLString(Snippet, xml_string)
+
+class Snippettype(PhotosBaseElement):
+  """The Google Photo `Snippettype' element
+
+  When searching, this element will tell you the type of element that matches.
+
+  You'll find this element in searches -- that is, feeds that combine the 
+  `kind=photo' and `q=yoursearch' parameters in the request.
+
+  See also gphoto:snippet and gphoto:truncated.
+  
+  Possible values and their interpretation: 
+  o ALBUM_TITLE       - The album title matches 
+  o PHOTO_TAGS        - The match is a tag/keyword
+  o PHOTO_DESCRIPTION - The match is in the photo's description
+
+  If you discover a value not listed here, please submit a patch to update this docstring.
+  
+  """
+  
+  _tag = 'snippettype'
+def SnippettypeFromString(xml_string):
+  return atom.CreateClassFromXMLString(Snippettype, xml_string)
+
 class Thumbnail(PhotosBaseElement):
   """The Google Photo `Thumbnail' element
 
@@ -397,6 +439,22 @@ class Timestamp(PhotosBaseElement):
     return datetime.datetime.fromtimestamp(epoch)
 def TimestampFromString(xml_string):
   return atom.CreateClassFromXMLString(Timestamp, xml_string)
+
+class Truncated(PhotosBaseElement):
+  """The Google Photo `Truncated' element
+
+  You'll find this element in searches -- that is, feeds that combine the 
+  `kind=photo' and `q=yoursearch' parameters in the request.
+
+  See also gphoto:snippet and gphoto:snippettype.
+  
+  Possible values and their interpretation:
+  0 -- unknown 
+  """
+  
+  _tag = 'Truncated'
+def TruncatedFromString(xml_string):
+  return atom.CreateClassFromXMLString(Truncated, xml_string)
 
 class User(PhotosBaseElement):
   "The Google Photo `User' element"
@@ -615,6 +673,10 @@ class PhotoData(object):
   _children['{%s}tags' % EXIF_NAMESPACE] = ('exif', Exif.Tags)
   _children['{%s}where' % GEORSS_NAMESPACE] = ('geo', Geo.Where)
   _children['{%s}group' % MEDIA_NAMESPACE] = ('media', Media.Group)
+  # These elements show up in search feeds 
+  _children['{%s}snippet' % PHOTOS_NAMESPACE] = ('snippet', Snippet)
+  _children['{%s}snippettype' % PHOTOS_NAMESPACE] = ('snippettype', Snippettype)
+  _children['{%s}truncated' % PHOTOS_NAMESPACE] = ('truncated', Truncated)
   gphoto_id = None
   albumid = None
   checksum = None
@@ -628,6 +690,9 @@ class PhotoData(object):
   width = None
   commentingEnabled = None
   commentCount = None
+  snippet=None
+  snippettype=None
+  truncated=None
   media = Media.Group()
   geo = Geo.Where()
   tags = Exif.Tags()
