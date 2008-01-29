@@ -484,7 +484,7 @@ class PhotosService(gdata.service.GDataService):
     if keywords is not None:
       if isinstance(keywords, list):
         keywords = ','.join(keywords)
-      metadata.media.keywords = gdata.photos.media.Keywords(text=keywords)
+      metadata.media.keywords = gdata.media.Keywords(text=keywords)
     return self.InsertPhoto(album_or_uri, metadata, filename_or_handle,
       content_type)
 
@@ -681,8 +681,8 @@ class PhotosService(gdata.service.GDataService):
 
 def GetSmallestThumbnail(media_thumbnail_list):
   """Helper function to get the smallest thumbnail of a list of
-    gdata.photos.media.Thumbnail.
-  Returns gdata.photos.media.Thumbnail """
+    gdata.media.Thumbnail.
+  Returns gdata.media.Thumbnail """
   r = {}
   for thumb in media_thumbnail_list:
       r[int(thumb.width)*int(thumb.height)] = thumb
