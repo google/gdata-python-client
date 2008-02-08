@@ -114,25 +114,29 @@ class GDataService(atom.service.AtomService):
 
   def __init__(self, email=None, password=None, account_type='HOSTED_OR_GOOGLE',
                service=None, source=None, server=None, 
-               additional_headers=None):
+               additional_headers=None, handler=None):
     """Creates an object of type GDataService.
 
     Args:
       email: string (optional) The user's email address, used for
-             authentication.
+          authentication.
       password: string (optional) The user's password.
       account_type: string (optional) The type of account to use. Use
-              'GOOGLE' for regular Google accounts or 'HOSTED' for Google
-              Apps accounts, or 'HOSTED_OR_GOOGLE' to try finding a HOSTED
-              account first and, if it doesn't exist, try finding a regular
-              GOOGLE account. Default value: 'HOSTED_OR_GOOGLE'.
+          'GOOGLE' for regular Google accounts or 'HOSTED' for Google
+          Apps accounts, or 'HOSTED_OR_GOOGLE' to try finding a HOSTED
+          account first and, if it doesn't exist, try finding a regular
+          GOOGLE account. Default value: 'HOSTED_OR_GOOGLE'.
       service: string (optional) The desired service for which credentials
-               will be obtained.
+          will be obtained.
       source: string (optional) The name of the user's application.
       server: string (optional) The name of the server to which a connection
-              will be opened. Default value: 'base.google.com'.
+          will be opened. Default value: 'base.google.com'.
       additional_headers: dictionary (optional) Any additional headers which 
-                          should be included with CRUD operations.
+          should be included with CRUD operations.
+      handler: class (optional) The class whose Get, Post, Put, Delete, and
+          _CreateConnection and _PrepareConnection methods should be used 
+          when making requests to the server. The default value is 
+          atom.service.AtomService.
     """
 
     self.email = email
@@ -141,6 +145,7 @@ class GDataService(atom.service.AtomService):
     self.service = service
     self.server = server
     self.additional_headers = additional_headers or {}
+    self.handler = handler or atom.service.AtomService
     self.__SetSource(source)
     self.__auth_token = None
     self.__captcha_token = None
@@ -429,6 +434,9 @@ class GDataService(atom.service.AtomService):
     if response.status == 200:
       self.__auth_token = None
 
+  def _PrepareConnection(self, full_uri):
+    return self.handler._PrepareConnection(self, full_uri)
+
   # CRUD operations
   def Get(self, uri, extra_headers=None, redirects_remaining=4, encoding='UTF-8', converter=None):
     """Query the GData API with the given URI
@@ -482,7 +490,7 @@ class GDataService(atom.service.AtomService):
         else:
           uri += '?gsessionid=%s' % (self.__gsessionid,)
 
-    server_response = atom.service.AtomService.Get(self, uri, extra_headers)
+    server_response = self.handler.Get(self, uri, extra_headers)
     result_body = server_response.read()
 
     if server_response.status == 200:
@@ -526,7 +534,7 @@ class GDataService(atom.service.AtomService):
     """Returns a MediaSource containing media and its metadata from the given
     URI string.
     """
-    connection = atom.service.AtomService._CreateConnection(self, uri, 'GET',
+    connection = self.handler._CreateConnection(self, uri, 'GET', 
         extra_headers)
     response_handle = connection.getresponse()
     return gdata.MediaSource(response_handle, response_handle.getheader('Content-Type'),
@@ -676,7 +684,7 @@ class GDataService(atom.service.AtomService):
           len(multipart[1]) + len(multipart[2]) +
           len(data_str) + media_source.content_length)
           
-      insert_connection = atom.service.AtomService._CreateConnection(self,
+      insert_connection = self.handler._CreateConnection(self, 
           uri, 'POST', extra_headers, url_params, escape_params)
 
       insert_connection.send(multipart[0])
@@ -696,7 +704,7 @@ class GDataService(atom.service.AtomService):
     elif media_source:
       extra_headers['Content-Type'] = media_source.content_type
       extra_headers['Content-Length'] = media_source.content_length
-      insert_connection = atom.service.AtomService._CreateConnection(self, uri,
+      insert_connection = self.handler._CreateConnection(self, uri,
           'POST', extra_headers, url_params, escape_params)
 
       while 1:
@@ -711,7 +719,7 @@ class GDataService(atom.service.AtomService):
       http_data = data
       content_type = 'application/atom+xml'
 
-      server_response = atom.service.AtomService.Post(self, http_data, uri,
+      server_response = self.handler.Post(self, http_data, uri,
           extra_headers, url_params, escape_params, content_type)
       result_body = server_response.read()
 
@@ -815,7 +823,7 @@ class GDataService(atom.service.AtomService):
           len(multipart[1]) + len(multipart[2]) +
           len(data_str) + media_source.content_length)
           
-      insert_connection = atom.service.AtomService._CreateConnection(self, uri,
+      insert_connection = self.handler._CreateConnection(self, uri,
           'PUT', extra_headers, url_params, escape_params)
 
       insert_connection.send(multipart[0])
@@ -835,7 +843,7 @@ class GDataService(atom.service.AtomService):
     elif media_source:
       extra_headers['Content-Type'] = media_source.content_type
       extra_headers['Content-Length'] = media_source.content_length
-      insert_connection = atom.service.AtomService._CreateConnection(self, uri,
+      insert_connection = self.handler._CreateConnection(self, uri,
           'PUT', extra_headers, url_params, escape_params)
 
       while 1:
@@ -849,7 +857,7 @@ class GDataService(atom.service.AtomService):
       http_data = data
       content_type = 'application/atom+xml'
 
-      server_response = atom.service.AtomService.Put(self, http_data, uri,
+      server_response = self.handler.Put(self, http_data, uri,
           extra_headers, url_params, escape_params, content_type)
       result_body = server_response.read()
 
@@ -922,7 +930,7 @@ class GDataService(atom.service.AtomService):
         else:
           uri += '?gsessionid=%s' % (self.__gsessionid,)
                                                   
-    server_response = atom.service.AtomService.Delete(self, uri,
+    server_response = self.handler.Delete(self, uri,
         extra_headers, url_params, escape_params)
     result_body = server_response.read()
 
