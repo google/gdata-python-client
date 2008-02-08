@@ -130,7 +130,11 @@ class AtomService(object):
       if proxy:
         (p_server, p_port, p_ssl, p_uri) = self._ProcessUrl(proxy, True)
         proxy_username = os.environ.get('proxy-username')
+        if not proxy_username:
+          proxy_username = os.environ.get('proxy_username')
         proxy_password = os.environ.get('proxy-password')
+        if not proxy_password:
+          proxy_password = os.environ.get('proxy_password')
         if proxy_username:
           user_auth = base64.encodestring('%s:%s' % (proxy_username, 
                                                      proxy_password))
@@ -177,7 +181,11 @@ class AtomService(object):
       if proxy:
         (p_server, p_port, p_ssl, p_uri) = self._ProcessUrl(proxy, True)
         proxy_username = os.environ.get('proxy-username')
+        if not proxy_username:
+          proxy_username = os.environ.get('proxy_username')
         proxy_password = os.environ.get('proxy-password')
+        if not proxy_password:
+          proxy_password = os.environ.get('proxy_password')
         if proxy_username:
           self.UseBasicAuth(proxy_username, proxy_password, True)
         connection = httplib.HTTPConnection(p_server, p_port)
