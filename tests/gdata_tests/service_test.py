@@ -25,6 +25,7 @@ except ImportError:
 import gdata.service
 import gdata
 import atom
+import atom.service
 import gdata.base
 import os.path
 from gdata import test_data
@@ -176,10 +177,6 @@ class GDataServiceUnitTest(unittest.TestCase):
     self.gd_client.password = password
     self.gd_client.service = 'gbase'
     self.gd_client.source = 'GDataClient "Unit" Tests'
-#    atom.XML_STRING_ENCODING = None
-
-#  def tearDown(self):
-#    atom.XML_STRING_ENCODING = 'utf-8'
 
   def testProperties(self):
     email_string = 'Test Email'
@@ -199,6 +196,9 @@ class GDataServiceUnitTest(unittest.TestCase):
     except gdata.service.CaptchaRequired:
     
       self.fail('Required Captcha')
+
+  def testDefaultHandler(self):
+    self.assertTrue(self.gd_client.handler == atom.service.AtomService)
 
   def testGet(self):
     try:
