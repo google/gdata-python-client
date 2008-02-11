@@ -1080,6 +1080,38 @@ GBASE_LOCALES_FEED = """<?xml version='1.0' encoding='UTF-8'?>
 </entry>
 </feed>"""
 
+GBASE_STRING_ENCODING_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
+<entry xmlns='http://www.w3.org/2005/Atom' xmlns:gm='http://base.google.com/ns-metadata/1.0' 
+       xmlns:g='http://base.google.com/ns/1.0' xmlns:batch='http://schemas.google.com/gdata/batch'>
+  <id>http://www.google.com/base/feeds/snippets/17495780256183230088</id>
+  <published>2007-12-09T03:13:07.000Z</published>
+  <updated>2008-01-07T03:26:46.000Z</updated>
+  <category scheme='http://base.google.com/categories/itemtypes' term='Products'/>
+  <title type='text'>Digital Camera Cord Fits SONY Cybershot DSC-R1 S40</title>
+  <content type='html'>SONY \xC2\xB7 Cybershot Digital Camera Usb Cable DESCRIPTION 
+      This is a 2.5 USB 2.0 A to Mini B (5 Pin) high quality digital camera 
+      cable used for connecting your Sony Digital Cameras and Camcoders. Backward 
+      Compatible with USB 2.0, 1.0 and 1.1. Fully  ...</content>
+  <link rel='alternate' type='text/html' 
+        href='http://adfarm.mediaplex.com/ad/ck/711-5256-8196-2?loc=http%3A%2F%2Fcgi.ebay.com%2FDigital-Camera-Cord-Fits-SONY-Cybershot-DSC-R1-S40_W0QQitemZ270195049057QQcmdZViewItem'/>
+  <link rel='self' type='application/atom+xml' 
+        href='http://www.google.com/base/feeds/snippets/17495780256183230088'/>
+  <author>
+    <name>eBay</name>
+  </author>
+  <g:item_type type='text'>Products</g:item_type>
+  <g:item_language type='text'>EN</g:item_language>
+  <g:target_country type='text'>US</g:target_country>
+  <g:price type='floatUnit'>0.99 usd</g:price>
+  <g:image_link type='url'>http://thumbs.ebaystatic.com/pict/270195049057_1.jpg</g:image_link>
+  <g:category type='text'>Cameras &amp; Photo&gt;Digital Camera Accessories&gt;Cables</g:category>
+  <g:category type='text'>Cords &amp; Connectors&gt;USB Cables&gt;For Other Brands</g:category>
+  <g:customer_id type='int'>11729</g:customer_id>
+  <g:id type='text'>270195049057</g:id>
+  <g:expiration_date type='dateTime'>2008-02-06T03:26:46Z</g:expiration_date>
+</entry>"""
+
+
 RECURRENCE_EXCEPTION_ENTRY = """<entry xmlns='http://www.w3.org/2005/Atom'
 xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
 xmlns:gd='http://schemas.google.com/g/2005'
