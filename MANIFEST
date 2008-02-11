@@ -77,4 +77,7 @@ pydocs/gdata.photos.service.html
 pydocs/gdata.service.html
 pydocs/gdata.spreadsheet.html
 pydocs/gdata.spreadsheet.service.html
+pydocs/gdata.exif.html
+pydocs/gdata.geo.html
+pydocs/gdata.media.html
 pydocs/generate_docs
