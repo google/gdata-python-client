@@ -122,6 +122,22 @@ class AtomService(object):
     self.additional_headers[header_name] = 'Basic %s' % (base_64_string,)
 
   def _PrepareConnection(self, full_uri):
+    """Opens a connection to the server based on the full URI.
+
+    Examines the target URI and the proxy settings, which are set as 
+    environment variables, to open a connection with the server. This 
+    connection is used to make an HTTP request.
+
+    Args:
+      full_uri: str Which is the target relative (lacks protocol and host) or
+      absolute URL to be opened. Example:
+      'https://www.google.com/accounts/ClientLogin' or
+      'base/feeds/snippets' where the server is set to www.google.com.
+
+    Returns:
+      A tuple containing the httplib.HTTPConnection and the full_uri for the
+      request.
+    """
     
     (server, port, ssl, partial_uri) = self._ProcessUrl(full_uri)
     if ssl:
