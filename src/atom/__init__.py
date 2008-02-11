@@ -246,7 +246,8 @@ class AtomBase(ExtensionContainer):
         setattr(self, self.__class__._attributes[attribute], 
                 value.encode(MEMBER_STRING_ENCODING))
     else:
-      ExtensionContainer._ConvertElementAttributeToMember(self, attribute, value)
+      ExtensionContainer._ConvertElementAttributeToMember(self, attribute, 
+          value)
 
   # Three methods to create an ElementTree from an object
   def _AddMembersToElementTree(self, tree):
@@ -731,8 +732,8 @@ class Content(Text):
   _attributes = Text._attributes.copy()
   _attributes['src'] = 'src'
 
-  def __init__(self, content_type=None, src=None, text=None, extension_elements=None,
-      extension_attributes=None):
+  def __init__(self, content_type=None, src=None, text=None, 
+      extension_elements=None, extension_attributes=None):
     """Constructor for Content
     
     Args:
@@ -1057,8 +1058,8 @@ class FeedEntryParent(AtomBase, LinkFinder):
   _children['{%s}updated' % ATOM_NAMESPACE] = ('updated', Updated)
 
   def __init__(self, author=None, category=None, contributor=None, 
-      atom_id=None, link=None, rights=None, title=None, updated=None, text=None, 
-      extension_elements=None, extension_attributes=None):
+      atom_id=None, link=None, rights=None, title=None, updated=None, 
+      text=None, extension_elements=None, extension_attributes=None):
     self.author = author or []
     self.category = category or []
     self.contributor = contributor or []
@@ -1085,7 +1086,8 @@ class Source(FeedEntryParent):
   _children['{%s}subtitle' % ATOM_NAMESPACE] = ('subtitle', Subtitle)
 
   def __init__(self, author=None, category=None, contributor=None,
-      generator=None, icon=None, atom_id=None, link=None, logo=None, rights=None, subtitle=None, title=None, updated=None, text=None,
+      generator=None, icon=None, atom_id=None, link=None, logo=None, 
+      rights=None, subtitle=None, title=None, updated=None, text=None,
       extension_elements=None, extension_attributes=None):
     """Constructor for Source
 

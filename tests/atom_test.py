@@ -18,7 +18,7 @@
 
 __author__ = 'api.jscudder@gmail.com (Jeff Scudder)'
 
-#debug
+
 import sys
 import unittest
 try:
