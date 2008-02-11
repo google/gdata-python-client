@@ -58,11 +58,12 @@ class GBaseService(gdata.service.GDataService):
 
   def __init__(self, email=None, password=None, source=None, 
                server='base.google.com', api_key=None, 
-               additional_headers=None):
+               additional_headers=None, handler=None):
     gdata.service.GDataService.__init__(self, email=email, password=password,
                                         service='gbase', source=source, 
                                         server=server, 
-                                        additional_headers=additional_headers)
+                                        additional_headers=additional_headers,
+                                        handler=handler)
     self.api_key = api_key
   
   def _SetAPIKey(self, api_key):
