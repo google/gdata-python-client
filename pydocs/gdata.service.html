@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.service</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/jscudder/svn/gdata-python-client/src/gdata/service.py">/home/jscudder/svn/gdata-python-client/src/gdata/service.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client-release/src/gdata/service.py">/usr/local/svn/gdata-python-client-release/src/gdata/service.py</a></font></td></tr></table>
     <p><tt><a href="#GDataService">GDataService</a>&nbsp;provides&nbsp;CRUD&nbsp;ops.&nbsp;and&nbsp;programmatic&nbsp;login&nbsp;for&nbsp;GData&nbsp;services.<br>
 &nbsp;<br>
 <a href="#Error">Error</a>:&nbsp;A&nbsp;base&nbsp;exception&nbsp;class&nbsp;for&nbsp;all&nbsp;exceptions&nbsp;in&nbsp;the&nbsp;gdata_client<br>
@@ -400,24 +400,28 @@ Raises:<br>
 Raises:<br>
 &nbsp;&nbsp;<a href="#NonAuthSubToken">NonAuthSubToken</a>&nbsp;if&nbsp;the&nbsp;user's&nbsp;auth&nbsp;token&nbsp;is&nbsp;not&nbsp;an&nbsp;AuthSub&nbsp;token</tt></dd></dl>
 
-<dl><dt><a name="GDataService-__init__"><strong>__init__</strong></a>(self, email<font color="#909090">=None</font>, password<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, service<font color="#909090">=None</font>, source<font color="#909090">=None</font>, server<font color="#909090">=None</font>, additional_headers<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;an&nbsp;object&nbsp;of&nbsp;type&nbsp;<a href="#GDataService">GDataService</a>.<br>
+<dl><dt><a name="GDataService-__init__"><strong>__init__</strong></a>(self, email<font color="#909090">=None</font>, password<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, service<font color="#909090">=None</font>, source<font color="#909090">=None</font>, server<font color="#909090">=None</font>, additional_headers<font color="#909090">=None</font>, handler<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;an&nbsp;object&nbsp;of&nbsp;type&nbsp;<a href="#GDataService">GDataService</a>.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;email:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;user's&nbsp;email&nbsp;address,&nbsp;used&nbsp;for<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authentication.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authentication.<br>
 &nbsp;&nbsp;password:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;user's&nbsp;password.<br>
 &nbsp;&nbsp;account_type:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;type&nbsp;of&nbsp;account&nbsp;to&nbsp;use.&nbsp;Use<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'GOOGLE'&nbsp;for&nbsp;regular&nbsp;Google&nbsp;accounts&nbsp;or&nbsp;'HOSTED'&nbsp;for&nbsp;Google<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apps&nbsp;accounts,&nbsp;or&nbsp;'HOSTED_OR_GOOGLE'&nbsp;to&nbsp;try&nbsp;finding&nbsp;a&nbsp;HOSTED<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;account&nbsp;first&nbsp;and,&nbsp;if&nbsp;it&nbsp;doesn't&nbsp;exist,&nbsp;try&nbsp;finding&nbsp;a&nbsp;regular<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOOGLE&nbsp;account.&nbsp;Default&nbsp;value:&nbsp;'HOSTED_OR_GOOGLE'.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'GOOGLE'&nbsp;for&nbsp;regular&nbsp;Google&nbsp;accounts&nbsp;or&nbsp;'HOSTED'&nbsp;for&nbsp;Google<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apps&nbsp;accounts,&nbsp;or&nbsp;'HOSTED_OR_GOOGLE'&nbsp;to&nbsp;try&nbsp;finding&nbsp;a&nbsp;HOSTED<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;account&nbsp;first&nbsp;and,&nbsp;if&nbsp;it&nbsp;doesn't&nbsp;exist,&nbsp;try&nbsp;finding&nbsp;a&nbsp;regular<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOOGLE&nbsp;account.&nbsp;Default&nbsp;value:&nbsp;'HOSTED_OR_GOOGLE'.<br>
 &nbsp;&nbsp;service:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;service&nbsp;for&nbsp;which&nbsp;credentials<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;be&nbsp;obtained.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;be&nbsp;obtained.<br>
 &nbsp;&nbsp;source:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;user's&nbsp;application.<br>
 &nbsp;&nbsp;server:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;server&nbsp;to&nbsp;which&nbsp;a&nbsp;connection<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;be&nbsp;opened.&nbsp;Default&nbsp;value:&nbsp;'base.google.com'.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;be&nbsp;opened.&nbsp;Default&nbsp;value:&nbsp;'base.google.com'.<br>
 &nbsp;&nbsp;additional_headers:&nbsp;dictionary&nbsp;(optional)&nbsp;Any&nbsp;additional&nbsp;headers&nbsp;which&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should&nbsp;be&nbsp;included&nbsp;with&nbsp;CRUD&nbsp;operations.</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should&nbsp;be&nbsp;included&nbsp;with&nbsp;CRUD&nbsp;operations.<br>
+&nbsp;&nbsp;handler:&nbsp;class&nbsp;(optional)&nbsp;The&nbsp;class&nbsp;whose&nbsp;Get,&nbsp;Post,&nbsp;Put,&nbsp;Delete,&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_CreateConnection&nbsp;and&nbsp;_PrepareConnection&nbsp;methods&nbsp;should&nbsp;be&nbsp;used&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;when&nbsp;making&nbsp;requests&nbsp;to&nbsp;the&nbsp;server.&nbsp;The&nbsp;default&nbsp;value&nbsp;is&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;atom.service.<a href="atom.service.html#AtomService">AtomService</a>.</tt></dd></dl>
 
 <hr>
 Properties defined here:<br>

@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.photos</strong></big></big> (version 164)</font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/jscudder/svn/gdata-python-client/src/gdata/photos/__init__.py">/home/jscudder/svn/gdata-python-client/src/gdata/photos/__init__.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client-release/src/gdata/photos/__init__.py">/usr/local/svn/gdata-python-client-release/src/gdata/photos/__init__.py</a></font></td></tr></table>
     <p><tt>This&nbsp;module&nbsp;provides&nbsp;a&nbsp;pythonic,&nbsp;gdata-centric&nbsp;interface&nbsp;to&nbsp;Google&nbsp;Photos<br>
 (a.k.a.&nbsp;Picasa&nbsp;Web&nbsp;Services.<br>
 &nbsp;<br>
@@ -77,8 +77,11 @@ documentation&nbsp;or&nbsp;live&nbsp;help()&nbsp;system&nbsp;for&nbsp;available&
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.photos.html#Quotalimit">Quotalimit</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.photos.html#Rotation">Rotation</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.photos.html#Size">Size</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.photos.html#Snippet">Snippet</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.photos.html#Snippettype">Snippettype</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.photos.html#Thumbnail">Thumbnail</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.photos.html#Timestamp">Timestamp</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.photos.html#Truncated">Truncated</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.photos.html#User">User</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.photos.html#Version">Version</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.photos.html#Weight">Weight</a>
@@ -1920,9 +1923,15 @@ Data and other attributes inherited from <a href="atom.html#ExtensionContainer">
 
 <dl><dt><strong>size</strong> = None</dl>
 
+<dl><dt><strong>snippet</strong> = None</dl>
+
+<dl><dt><strong>snippettype</strong> = None</dl>
+
 <dl><dt><strong>tags</strong> = &lt;gdata.exif.Tags object&gt;</dl>
 
 <dl><dt><strong>timestamp</strong> = None</dl>
+
+<dl><dt><strong>truncated</strong> = None</dl>
 
 <dl><dt><strong>version</strong> = None</dl>
 
@@ -2078,9 +2087,15 @@ Data and other attributes inherited from <a href="gdata.photos.html#PhotoData">P
 
 <dl><dt><strong>size</strong> = None</dl>
 
+<dl><dt><strong>snippet</strong> = None</dl>
+
+<dl><dt><strong>snippettype</strong> = None</dl>
+
 <dl><dt><strong>tags</strong> = &lt;gdata.exif.Tags object&gt;</dl>
 
 <dl><dt><strong>timestamp</strong> = None</dl>
+
+<dl><dt><strong>truncated</strong> = None</dl>
 
 <dl><dt><strong>version</strong> = None</dl>
 
@@ -2235,9 +2250,15 @@ Data and other attributes inherited from <a href="gdata.photos.html#PhotoData">P
 
 <dl><dt><strong>size</strong> = None</dl>
 
+<dl><dt><strong>snippet</strong> = None</dl>
+
+<dl><dt><strong>snippettype</strong> = None</dl>
+
 <dl><dt><strong>tags</strong> = &lt;gdata.exif.Tags object&gt;</dl>
 
 <dl><dt><strong>timestamp</strong> = None</dl>
+
+<dl><dt><strong>truncated</strong> = None</dl>
 
 <dl><dt><strong>version</strong> = None</dl>
 
@@ -2838,6 +2859,138 @@ Data and other attributes inherited from <a href="atom.html#ExtensionContainer">
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Snippet">class <strong>Snippet</strong></a>(<a href="gdata.photos.html#PhotosBaseElement">PhotosBaseElement</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;Google&nbsp;Photo&nbsp;`snippet'&nbsp;element.<br>
+&nbsp;<br>
+When&nbsp;searching,&nbsp;the&nbsp;snippet&nbsp;element&nbsp;will&nbsp;contain&nbsp;a&nbsp;<br>
+string&nbsp;with&nbsp;the&nbsp;word&nbsp;you're&nbsp;looking&nbsp;for,&nbsp;highlighted&nbsp;in&nbsp;html&nbsp;markup<br>
+E.g.&nbsp;when&nbsp;your&nbsp;query&nbsp;is&nbsp;`hafjell',&nbsp;this&nbsp;element&nbsp;may&nbsp;contain:<br>
+`...&nbsp;here&nbsp;at&nbsp;&lt;b&gt;Hafjell&lt;/b&gt;.'<br>
+&nbsp;<br>
+You'll&nbsp;find&nbsp;this&nbsp;element&nbsp;in&nbsp;searches&nbsp;--&nbsp;that&nbsp;is,&nbsp;feeds&nbsp;that&nbsp;combine&nbsp;the&nbsp;<br>
+`kind=photo'&nbsp;and&nbsp;`q=yoursearch'&nbsp;parameters&nbsp;in&nbsp;the&nbsp;request.<br>
+&nbsp;<br>
+See&nbsp;also&nbsp;gphoto:truncated&nbsp;and&nbsp;gphoto:snippettype.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.photos.html#Snippet">Snippet</a></dd>
+<dd><a href="gdata.photos.html#PhotosBaseElement">PhotosBaseElement</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="gdata.photos.html#PhotosBaseElement">PhotosBaseElement</a>:<br>
+<dl><dt><a name="Snippet-__init__"><strong>__init__</strong></a>(self, name<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="Snippet-__int__"><strong>__int__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Snippet-bool"><strong>bool</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="Snippet-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Snippet-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="Snippet-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Snippettype">class <strong>Snippettype</strong></a>(<a href="gdata.photos.html#PhotosBaseElement">PhotosBaseElement</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;Google&nbsp;Photo&nbsp;`<a href="#Snippettype">Snippettype</a>'&nbsp;element<br>
+&nbsp;<br>
+When&nbsp;searching,&nbsp;this&nbsp;element&nbsp;will&nbsp;tell&nbsp;you&nbsp;the&nbsp;type&nbsp;of&nbsp;element&nbsp;that&nbsp;matches.<br>
+&nbsp;<br>
+You'll&nbsp;find&nbsp;this&nbsp;element&nbsp;in&nbsp;searches&nbsp;--&nbsp;that&nbsp;is,&nbsp;feeds&nbsp;that&nbsp;combine&nbsp;the&nbsp;<br>
+`kind=photo'&nbsp;and&nbsp;`q=yoursearch'&nbsp;parameters&nbsp;in&nbsp;the&nbsp;request.<br>
+&nbsp;<br>
+See&nbsp;also&nbsp;gphoto:snippet&nbsp;and&nbsp;gphoto:truncated.<br>
+&nbsp;<br>
+Possible&nbsp;values&nbsp;and&nbsp;their&nbsp;interpretation:&nbsp;<br>
+o&nbsp;ALBUM_TITLE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;album&nbsp;title&nbsp;matches&nbsp;<br>
+o&nbsp;PHOTO_TAGS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;match&nbsp;is&nbsp;a&nbsp;tag/keyword<br>
+o&nbsp;PHOTO_DESCRIPTION&nbsp;-&nbsp;The&nbsp;match&nbsp;is&nbsp;in&nbsp;the&nbsp;photo's&nbsp;description<br>
+&nbsp;<br>
+If&nbsp;you&nbsp;discover&nbsp;a&nbsp;value&nbsp;not&nbsp;listed&nbsp;here,&nbsp;please&nbsp;submit&nbsp;a&nbsp;patch&nbsp;to&nbsp;update&nbsp;this&nbsp;docstring.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.photos.html#Snippettype">Snippettype</a></dd>
+<dd><a href="gdata.photos.html#PhotosBaseElement">PhotosBaseElement</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="gdata.photos.html#PhotosBaseElement">PhotosBaseElement</a>:<br>
+<dl><dt><a name="Snippettype-__init__"><strong>__init__</strong></a>(self, name<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="Snippettype-__int__"><strong>__int__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Snippettype-bool"><strong>bool</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="Snippettype-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Snippettype-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="Snippettype-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="TagData">class <strong>TagData</strong></a>(<a href="gdata.photos.html#GPhotosBaseData">GPhotosBaseData</a>)</font></td></tr>
     
 <tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
@@ -3204,6 +3357,68 @@ Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
 <hr>
 Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
 <dl><dt><a name="Timestamp-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Truncated">class <strong>Truncated</strong></a>(<a href="gdata.photos.html#PhotosBaseElement">PhotosBaseElement</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;Google&nbsp;Photo&nbsp;`<a href="#Truncated">Truncated</a>'&nbsp;element<br>
+&nbsp;<br>
+You'll&nbsp;find&nbsp;this&nbsp;element&nbsp;in&nbsp;searches&nbsp;--&nbsp;that&nbsp;is,&nbsp;feeds&nbsp;that&nbsp;combine&nbsp;the&nbsp;<br>
+`kind=photo'&nbsp;and&nbsp;`q=yoursearch'&nbsp;parameters&nbsp;in&nbsp;the&nbsp;request.<br>
+&nbsp;<br>
+See&nbsp;also&nbsp;gphoto:snippet&nbsp;and&nbsp;gphoto:snippettype.<br>
+&nbsp;<br>
+Possible&nbsp;values&nbsp;and&nbsp;their&nbsp;interpretation:<br>
+0&nbsp;--&nbsp;unknown<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.photos.html#Truncated">Truncated</a></dd>
+<dd><a href="gdata.photos.html#PhotosBaseElement">PhotosBaseElement</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="gdata.photos.html#PhotosBaseElement">PhotosBaseElement</a>:<br>
+<dl><dt><a name="Truncated-__init__"><strong>__init__</strong></a>(self, name<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="Truncated-__int__"><strong>__int__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Truncated-bool"><strong>bool</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="Truncated-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Truncated-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="Truncated-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
 &nbsp;<br>
 Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
 and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
@@ -3826,10 +4041,13 @@ Returns:<br>
  <dl><dt><a name="-QuotalimitFromString"><strong>QuotalimitFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-RotationFromString"><strong>RotationFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-SizeFromString"><strong>SizeFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-SnippetFromString"><strong>SnippetFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-SnippettypeFromString"><strong>SnippettypeFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-TagEntryFromString"><strong>TagEntryFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-TagFeedFromString"><strong>TagFeedFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-ThumbnailFromString"><strong>ThumbnailFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-TimestampFromString"><strong>TimestampFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-TruncatedFromString"><strong>TruncatedFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-UserEntryFromString"><strong>UserEntryFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-UserFeedFromString"><strong>UserFeedFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-UserFromString"><strong>UserFromString</strong></a>(xml_string)</dt></dl>
