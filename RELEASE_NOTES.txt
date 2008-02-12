@@ -1,3 +1,14 @@
+=== 1.0.11 ===
+December 20, 2007 (revision 290)
+
+- Modified the gdata.service.GDataService to include a handler member to 
+    which all HTTP requests are delegated. This will allow the underlying
+    HTTP client to be swapped out and pave the way for use of a mock server
+    in unit tests.
+- Fixed character encoding problems when parsing non ASCII XML.
+- Added pydocs for gdata's geo, exif, and media packages. 
+
+
 === 1.0.10.1 ===
 December 20, 2007 (revision 265)
 
