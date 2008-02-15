@@ -135,6 +135,7 @@ class BloggerExample:
     query.feed = '/feeds/' + self.blog_id + '/posts/default'
     query.updated_min = start_time
     query.updated_max = end_time
+    query.orderby = 'updated'
     feed = self.service.Get(query.ToUri())
 
     # Print the results.
