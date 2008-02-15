@@ -1116,6 +1116,18 @@ class Query(dict):
   max_results = property(_GetMaxResults, _SetMaxResults,
       doc="""The feed query's max-results parameter""")
 
+  def _GetOrderBy(self):
+    if 'orderby' in self.keys():
+      return self['orderby']
+    else:
+      return None
+ 
+  def _SetOrderBy(self, query):
+    self['orderby'] = query
+  
+  orderby = property(_GetOrderBy, _SetOrderBy, 
+      doc="""The feed query's orderby parameter""")
+
 
   def ToUri(self):
     q_feed = self.feed or ''
