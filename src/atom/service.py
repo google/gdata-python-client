@@ -121,7 +121,7 @@ class AtomService(object):
       header_name = 'Authorization'
     self.additional_headers[header_name] = 'Basic %s' % (base_64_string,)
 
-  def _PrepareConnection(self, full_uri):
+  def PrepareConnection(self, full_uri):
     """Opens a connection to the server based on the full URI.
 
     Examines the target URI and the proxy settings, which are set as 
@@ -215,8 +215,12 @@ class AtomService(object):
         full_uri = partial_uri
 
     return (connection, full_uri)
+
+  # Alias the old name for the above method to preserve backwards 
+  # compatibility.
+  _PrepareConnection = PrepareConnection
  
-  def _CreateConnection(self, uri, http_operation, extra_headers=None,
+  def CreateConnection(self, uri, http_operation, extra_headers=None,
       url_params=None, escape_params=True):
       
     full_uri = BuildUri(uri, url_params, escape_params)
@@ -236,6 +240,11 @@ class AtomService(object):
       connection.debuglevel = 1
 
     return connection
+
+  # Set an alias to allow calling of _CreateConnection for backwards
+  # compatibility
+  _CreateConnection = CreateConnection
+
 
   # CRUD operations
   def Get(self, uri, extra_headers=None, url_params=None, escape_params=True):

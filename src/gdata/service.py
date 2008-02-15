@@ -133,8 +133,8 @@ class GDataService(atom.service.AtomService):
           will be opened. Default value: 'base.google.com'.
       additional_headers: dictionary (optional) Any additional headers which 
           should be included with CRUD operations.
-      handler: class (optional) The class whose Get, Post, Put, Delete, and
-          _CreateConnection and _PrepareConnection methods should be used 
+      handler: class (optional) The class whose Get, Post, Put, Delete, 
+          CreateConnection and PrepareConnection methods should be used 
           when making requests to the server. The default value is 
           atom.service.AtomService.
     """
@@ -283,7 +283,7 @@ class GDataService(atom.service.AtomService):
         captcha_token, captcha_response)
 
     # Open a connection to the authentication server.
-    (auth_connection, uri) = self._PrepareConnection(AUTH_SERVER_HOST)
+    (auth_connection, uri) = self.PrepareConnection(AUTH_SERVER_HOST)
 
     # Begin the POST request to the client login service.
     auth_connection.putrequest('POST', '/accounts/ClientLogin')
@@ -394,7 +394,7 @@ class GDataService(atom.service.AtomService):
     if not self.__auth_token.startswith(AUTHSUB_AUTH_LABEL):
       raise NonAuthSubToken
 
-    (upgrade_connection, uri) = self._PrepareConnection(
+    (upgrade_connection, uri) = self.PrepareConnection(
         AUTH_SERVER_HOST)
     upgrade_connection.putrequest('GET', '/accounts/AuthSubSessionToken')
     
@@ -421,7 +421,7 @@ class GDataService(atom.service.AtomService):
     if not self.__auth_token.startswith(AUTHSUB_AUTH_LABEL):
       raise NonAuthSubToken
     
-    (revoke_connection, uri) = self._PrepareConnection(
+    (revoke_connection, uri) = self.PrepareConnection(
         AUTH_SERVER_HOST)
     revoke_connection.putrequest('GET', '/accounts/AuthSubRevokeToken')
     
@@ -434,8 +434,8 @@ class GDataService(atom.service.AtomService):
     if response.status == 200:
       self.__auth_token = None
 
-  def _PrepareConnection(self, full_uri):
-    return self.handler._PrepareConnection(self, full_uri)
+  def PrepareConnection(self, full_uri):
+    return self.handler.PrepareConnection(self, full_uri)
 
   # CRUD operations
   def Get(self, uri, extra_headers=None, redirects_remaining=4, encoding='UTF-8', converter=None):
@@ -534,7 +534,7 @@ class GDataService(atom.service.AtomService):
     """Returns a MediaSource containing media and its metadata from the given
     URI string.
     """
-    connection = self.handler._CreateConnection(self, uri, 'GET', 
+    connection = self.handler.CreateConnection(self, uri, 'GET', 
         extra_headers)
     response_handle = connection.getresponse()
     return gdata.MediaSource(response_handle, response_handle.getheader('Content-Type'),
@@ -684,7 +684,7 @@ class GDataService(atom.service.AtomService):
           len(multipart[1]) + len(multipart[2]) +
           len(data_str) + media_source.content_length)
           
-      insert_connection = self.handler._CreateConnection(self, 
+      insert_connection = self.handler.CreateConnection(self, 
           uri, 'POST', extra_headers, url_params, escape_params)
 
       insert_connection.send(multipart[0])
@@ -704,7 +704,7 @@ class GDataService(atom.service.AtomService):
     elif media_source:
       extra_headers['Content-Type'] = media_source.content_type
       extra_headers['Content-Length'] = media_source.content_length
-      insert_connection = self.handler._CreateConnection(self, uri,
+      insert_connection = self.handler.CreateConnection(self, uri,
           'POST', extra_headers, url_params, escape_params)
 
       while 1:
@@ -823,7 +823,7 @@ class GDataService(atom.service.AtomService):
           len(multipart[1]) + len(multipart[2]) +
           len(data_str) + media_source.content_length)
           
-      insert_connection = self.handler._CreateConnection(self, uri,
+      insert_connection = self.handler.CreateConnection(self, uri,
           'PUT', extra_headers, url_params, escape_params)
 
       insert_connection.send(multipart[0])
@@ -843,7 +843,7 @@ class GDataService(atom.service.AtomService):
     elif media_source:
       extra_headers['Content-Type'] = media_source.content_type
       extra_headers['Content-Length'] = media_source.content_length
-      insert_connection = self.handler._CreateConnection(self, uri,
+      insert_connection = self.handler.CreateConnection(self, uri,
           'PUT', extra_headers, url_params, escape_params)
 
       while 1:
