@@ -382,6 +382,13 @@ class QueryTest(unittest.TestCase):
     self.query.text_query = 'test2'
     self.assert_(self.query.text_query == 'test2')
 
+  def testOrderByQueryProperty(self): 
+    self.assert_(self.query.orderby is None) 
+    self.query['orderby'] = 'updated' 
+    self.assert_(self.query.orderby == 'updated') 
+    self.query.orderby = 'starttime' 
+    self.assert_(self.query.orderby == 'starttime') 
+
   def testQueryShouldProduceExampleUris(self):
     self.query.feed = '/base/feeds/snippets'
     self.query.text_query = 'This is a test'
