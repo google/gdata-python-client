@@ -164,7 +164,10 @@ class ExtensionContainer(object):
       if value:
         # Encode the value in the desired type (default UTF-8).
         tree.attrib[attribute] = value.encode(MEMBER_STRING_ENCODING)
-    tree.text = self.text
+    if self.text and not isinstance(self.text, unicode):
+      tree.text = self.text.decode(MEMBER_STRING_ENCODING)
+    else:
+      tree.text = self.text 
 
   def FindExtensions(self, tag=None, namespace=None):
     """Searches extension elements for child nodes with the desired name.
