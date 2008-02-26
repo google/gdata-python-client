@@ -2073,3 +2073,293 @@ CODE_SEARCH_FEED = """<?xml version="1.0" encoding="UTF-8"?>
 &lt;/pre&gt;</gcs:match><rights>Apache</rights></entry>
 
 </feed>"""
+
+YOU_TUBE_VIDEO_FEED = """<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom'
+         xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
+         xmlns:gml='http://www.opengis.net/gml'
+         xmlns:georss='http://www.georss.org/georss'
+         xmlns:media='http://search.yahoo.com/mrss/'
+         xmlns:yt='http://gdata.youtube.com/schemas/2007'
+         xmlns:gd='http://schemas.google.com/g/2005'>
+  <id>http://gdata.youtube.com/feeds/api/standardfeeds/top_rated</id>
+  <updated>2008-02-21T18:57:10.801Z</updated>
+  <category scheme='http://schemas.google.com/g/2005#kind'
+    term='http://gdata.youtube.com/schemas/2007#video'/>
+  <title type='text'>Top Rated</title>
+  <logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo>
+  <link rel='alternate' type='text/html'
+    href='http://www.youtube.com/browser?s=tr'/>
+  <link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml'
+    href='http://gdata.youtube.com/feeds/api/standardfeeds/top_rated'/>
+  <link rel='self' type='application/atom+xml'
+    href='http://gdata.youtube.com/feeds/api/standardfeeds/top_rated?start_index=1&amp;max-results=25'/>
+  <link rel='self' type='application/atom+xml'
+    href='http://gdata.youtube.com/feeds/api/standardfeeds/top_rated?start_index=26&amp;max-results=25'/>
+  <author>
+    <name>YouTube</name>
+    <uri>http://www.youtube.com/</uri>
+  </author>
+  <generator version='beta'
+    uri='http://gdata.youtube.com/'>YouTube data API</generator>
+  <openSearch:totalResults>99</openSearch:totalResults>
+  <openSearch:startIndex>1</openSearch:startIndex>
+  <openSearch:itemsPerPage>25</openSearch:itemsPerPage>
+  <entry>
+    <id>http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b</id>
+    <published>2007-02-16T20:22:57.000Z</published>
+    <updated>2007-02-16T20:22:57.000Z</updated>
+    <category scheme="http://schemas.google.com/g/2005#kind"
+      term="http://gdata.youtube.com/schemas/2007#video"/>
+    <category scheme="http://gdata.youtube.com/schemas/2007/keywords.cat"
+      term="Steventon"/>
+    <category scheme="http://gdata.youtube.com/schemas/2007/keywords.cat"
+      term="walk"/>
+    <category scheme="http://gdata.youtube.com/schemas/2007/keywords.cat"
+      term="Darcy"/>
+    <category scheme="http://gdata.youtube.com/schemas/2007/categories.cat"
+      term="Entertainment" label="Entertainment"/>
+    <title type="text">My walk with Mr. Darcy</title>
+    <content type="html"><div ... html content trimmed ...></content>
+    <link rel="self" type="application/atom+xml"
+      href="http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b"/>
+    <link rel="alternate" type="text/html"
+      href="http://www.youtube.com/watch?v=ZTUVgYoeN_b"/>
+    <link rel="http://gdata.youtube.com/schemas/2007#video.responses"
+      type="application/atom+xml"
+      href="http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/responses"/>
+    <link rel="http://gdata.youtube.com/schemas/2007#video.ratings"
+      type="application/atom+xml"
+      href="http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/ratings"/>
+    <link rel="http://gdata.youtube.com/schemas/2007#video.complaints"
+      type="application/atom+xml"
+      href="http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/complaints"/>
+    <link rel="http://gdata.youtube.com/schemas/2007#video.related"
+      type="application/atom+xml"
+      href="http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/related"/>
+    <author>
+      <name>Andy Samplo</name>
+      <uri>http://gdata.youtube.com/feeds/api/users/andyland74</uri>
+    </author>
+  <media:group>
+    <media:title type="plain">Shopping for Coats</media:title>
+    <media:description type="plain">
+      What could make for more exciting video?
+    </media:description>
+    <media:keywords>Shopping, parkas</media:keywords>
+    <yt:duration seconds="79"/>
+    <media:category label="People"
+      scheme="http://gdata.youtube.com/schemas/2007/categories.cat">People
+    </media:category>
+    <media:content
+      url='http://www.youtube.com/v/ZTUVgYoeN_b'
+      type='application/x-shockwave-flash' medium='video' 
+      isDefault='true' expression="full" duration='215' yt:format="5"/>
+    <media:content
+      url='rtsp://rtsp2.youtube.com/ChoLENy73bIAEQ1k30OPEgGDA==/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' 
+      expression="full" duration='215' yt:format="1"/>
+    <media:content
+      url='rtsp://rtsp2.youtube.com/ChoLENy73bIAEQ1k30OPEgGDA==/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' 
+      expression="full" duration='215' yt:format="6"/>
+    <media:player url="http://www.youtube.com/watch?v=ZTUVgYoeN_b"/>
+    <media:thumbnail url="http://img.youtube.com/vi/ZTUVgYoeN_b/2.jpg"
+      height="97" width="130" time="00:00:03.500"/>
+    <media:thumbnail url="http://img.youtube.com/vi/ZTUVgYoeN_b/1.jpg"
+      height="97" width="130" time="00:00:01.750"/>
+    <media:thumbnail url="http://img.youtube.com/vi/ZTUVgYoeN_b/3.jpg"
+      height="97" width="130" time="00:00:05.250"/>
+    <media:thumbnail url="http://img.youtube.com/vi/ZTUVgYoeN_b/0.jpg"
+      height="240" width="320" time="00:00:03.500"/>
+  </media:group>
+  <yt:statistics viewCount="93"/>
+  <gd:rating min='1' max='5' numRaters='435' average='4.94'/>
+  <gd:comments>
+    <gd:feedLink
+      href="http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/comments"
+      countHint='2197'/>
+  </gd:comments>
+</entry>
+</feed>"""
+
+YOU_TUBE_COMMENT_FEED = """<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'>
+  <id>http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/comments?start-index=1&amp;max-results=25</id>
+  <updated>2008-02-25T23:14:03.148Z</updated>
+  <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#comment'/>
+  <title type='text'>Comments on 'My walk with Mr. Darcy'</title>
+  <logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo>
+  <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b'/>
+  <link rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=ZTUVgYoeN_b'/>
+  <link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/comments'/>
+  <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/comments?start-index=1&amp;max-results=25'/>
+  <link rel='next' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/comments?start-index=26&amp;max-results=25'/>
+  <author>                                                    
+    <name>YouTube</name>                                 
+    <uri>http://www.youtube.com/</uri>
+  </author>                                                           
+  <generator version='beta' uri='http://gdata.youtube.com/'>YouTube data API</generator>
+  <openSearch:totalResults>100</openSearch:totalResults>
+  <openSearch:startIndex>1</openSearch:startIndex>
+  <openSearch:itemsPerPage>25</openSearch:itemsPerPage>
+  <entry>
+    <id>http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/comments/7F2BAAD03653A691</id>
+    <published>2007-05-23T00:21:59.000-07:00</published>
+    <updated>2007-05-23T00:21:59.000-07:00</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#comment'/>
+    <title type='text'>Walking is fun.</title>
+    <content type='text'>Walking is fun.</content>
+    <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b'/>
+    <link rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=ZTUVgYoeN_b'/>
+    <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/comments/7F2BAAD03653A691'/>
+    <author>
+      <name>andyland744</name>
+      <uri>http://gdata.youtube.com/feeds/api/users/andyland744</uri> 
+    </author>                                                                                    
+  </entry>                
+</feed>"""
+
+YOU_TUBE_PLAYLIST_FEED = """<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom'
+    xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' 
+    xmlns:media='http://search.yahoo.com/mrss/' 
+    xmlns:yt='http://gdata.youtube.com/schemas/2007' 
+    xmlns:gd='http://schemas.google.com/g/2005'>
+  <id>http://gdata.youtube.com/feeds/users/andyland74/playlists?start-index=1&amp;max-results=25</id>
+  <updated>2008-02-26T00:26:15.635Z</updated>
+  <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+  <title type='text'>andyland74's Playlists</title>
+  <logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo>
+  <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/users/andyland74'/>
+  <link rel='alternate' type='text/html' href='http://www.youtube.com/profile_play_list?user=andyland74'/>
+  <link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='http://gdata.youtube.com/feeds/users/andyland74/playlists'/>
+  <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/users/andyland74/playlists?start-index=1&amp;max-results=25'/>
+  <author>
+    <name>andyland74</name>
+    <uri>http://gdata.youtube.com/feeds/users/andyland74</uri>
+  </author>
+  <generator version='beta' uri='http://gdata.youtube.com/'>YouTube data API</generator>
+  <openSearch:totalResults>1</openSearch:totalResults>
+  <openSearch:startIndex>1</openSearch:startIndex>
+  <openSearch:itemsPerPage>25</openSearch:itemsPerPage>
+  <entry>
+    <id>http://gdata.youtube.com/feeds/users/andyland74/playlists/8BCDD04DE8F771B2</id>
+    <published>2007-11-04T17:30:27.000-08:00</published>
+    <updated>2008-02-22T09:55:14.000-08:00</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+    <title type='text'>My New Playlist Title</title>
+    <content type='text'>My new playlist Description</content>
+    <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/users/andyland74'/>
+    <link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=8BCDD04DE8F771B2'/>
+    <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/users/andyland74/playlists/8BCDD04DE8F771B2'/>
+    <author>
+      <name>andyland74</name>                              
+      <uri>http://gdata.youtube.com/feeds/users/andyland74</uri>
+    </author>
+    <yt:description>My new playlist Description</yt:description>
+    <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#playlist' href='http://gdata.youtube.com/feeds/playlists/8BCDD04DE8F771B2'/>
+  </entry>              
+</feed>"""
+
+YOU_TUBE_SUBSCRIPTIONS_FEED = """<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom'
+    xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
+    xmlns:media='http://search.yahoo.com/mrss/'
+    xmlns:yt='http://gdata.youtube.com/schemas/2007'
+    xmlns:gd='http://schemas.google.com/g/2005'>
+  <id>http://gdata.youtube.com/feeds/users/andyland74/subscriptions?start-index=1&amp;max-results=25</id>
+  <updated>2008-02-26T00:26:15.635Z</updated>
+  <category scheme='http://schemas.google.com/g/2005#kind'
+    term='http://gdata.youtube.com/schemas/2007#subscription'/>
+  <title type='text'>andyland74's Subscriptions</title>
+  <logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo>
+  <link rel='related' type='application/atom+xml'
+    href='http://gdata.youtube.com/feeds/users/andyland74'/>
+  <link rel='alternate' type='text/html'
+    href='http://www.youtube.com/profile_subscriptions?user=andyland74'/>
+  <link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml'
+    href='http://gdata.youtube.com/feeds/users/andyland74/subscriptions'/>
+  <link rel='self' type='application/atom+xml'
+    href='http://gdata.youtube.com/feeds/users/andyland74/subscriptions?start-index=1&amp;max-results=25'/>
+  <author>
+    <name>andyland74</name>
+    <uri>http://gdata.youtube.com/feeds/users/andyland74</uri>
+  </author>
+  <generator version='beta' uri='http://gdata.youtube.com/'>YouTube data API</generator>
+  <openSearch:totalResults>1</openSearch:totalResults>
+  <openSearch:startIndex>1</openSearch:startIndex>
+  <openSearch:itemsPerPage>25</openSearch:itemsPerPage>
+  <entry>
+    <id>http://gdata.youtube.com/feeds/users/andyland74/subscriptions/d411759045e2ad8c</id>
+    <published>2007-11-04T17:30:27.000-08:00</published>
+    <updated>2008-02-22T09:55:14.000-08:00</updated>
+    <category scheme='http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'
+      term='channel'/>
+    <category scheme='http://schemas.google.com/g/2005#kind'
+      term='http://gdata.youtube.com/schemas/2007#subscription'/>
+    <title type='text'>Videos published by : NBC</title>
+    <link rel='related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/users/andyland74'/>
+    <link rel='alternate' type='text/html'
+      href='http://www.youtube.com/profile_videos?user=NBC'/>
+    <link rel='self' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/users/andyland74/subscriptions/d411759045e2ad8c'/>
+    <author>
+      <name>andyland74</name>
+      <uri>http://gdata.youtube.com/feeds/users/andyland74</uri>
+    </author>
+    <yt:username>NBC</yt:username>
+    <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.uploads'
+      href='http://gdata.youtube.com/feeds/api/users/nbc/uploads'/>
+  </entry>
+</feed>"""
+
+YOU_TUBE_PROFILE = """<?xml version='1.0' encoding='UTF-8'?>
+<entry xmlns='http://www.w3.org/2005/Atom'
+    xmlns:media='http://search.yahoo.com/mrss/'
+    xmlns:yt='http://gdata.youtube.com/schemas/2007'
+    xmlns:gd='http://schemas.google.com/g/2005'>
+  <id>http://gdata.youtube.com/feeds/users/andyland74</id>
+  <published>2006-10-16T00:09:45.000-07:00</published>
+  <updated>2008-02-26T11:48:21.000-08:00</updated>
+  <category scheme='http://gdata.youtube.com/schemas/2007/channeltypes.cat'
+    term='Standard'/>
+  <category scheme='http://schemas.google.com/g/2005#kind'
+    term='http://gdata.youtube.com/schemas/2007#userProfile'/>
+  <title type='text'>andyland74 Channel</title>
+  <link rel='alternate' type='text/html'
+    href='http://www.youtube.com/profile?user=andyland74'/>
+  <link rel='self' type='application/atom+xml'
+    href='http://gdata.youtube.com/feeds/users/andyland74'/>
+  <author>
+    <name>andyland74</name>
+    <uri>http://gdata.youtube.com/feeds/users/andyland74</uri>
+  </author>
+  <yt:age>33</yt:age>
+  <yt:username>andyland74</yt:username>
+  <yt:books>Catch-22</yt:books>
+  <yt:gender>m</yt:gender>
+  <yt:company>Google</yt:company>
+  <yt:hobbies>Testing YouTube APIs</yt:hobbies>
+  <yt:location>US</yt:location>
+  <yt:movies>Aqua Teen Hungerforce</yt:movies>
+  <yt:music>Elliott Smith</yt:music>
+  <yt:occupation>Technical Writer</yt:occupation>
+  <yt:school>University of North Carolina</yt:school>
+  <media:thumbnail url='http://i.ytimg.com/vi/YFbSxcdOL-w/default.jpg'/>
+  <yt:statistics viewCount='9' videoWatchCount='21' subscriberCount='1'
+    lastWebAccess='2008-02-25T16:03:38.000-08:00'/>
+  <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.favorites'
+    href='http://gdata.youtube.com/feeds/users/andyland74/favorites' countHint='4'/>
+  <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.contacts'
+    href='http://gdata.youtube.com/feeds/users/andyland74/contacts' countHint='1'/>
+  <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.inbox'
+    href='http://gdata.youtube.com/feeds/users/andyland74/inbox' countHint='0'/>
+  <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.playlists'
+    href='http://gdata.youtube.com/feeds/users/andyland74/playlists'/>
+  <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.subscriptions'
+    href='http://gdata.youtube.com/feeds/users/andyland74/subscriptions' countHint='4'/>
+  <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.uploads'
+    href='http://gdata.youtube.com/feeds/users/andyland74/uploads' countHint='1'/>
+</entry>"""
