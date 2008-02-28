@@ -83,7 +83,7 @@ class ItemAttributeContainer(object):
         return attrib.text
     return None
 
-  def AddItemAttribute(self, name, value, value_type=None):
+  def AddItemAttribute(self, name, value, value_type=None, access=None):
     """Adds a new item attribute tag containing the value.
     
     Creates a new extension element in the GBase namespace to represent a
@@ -95,10 +95,12 @@ class ItemAttributeContainer(object):
       value: str Contents for the item attribute
       value_type: str (optional) The type of data in the vlaue, Examples: text
           float
+      access: str (optional) Used to hide attributes. The attribute is not 
+          exposed in the snippets feed if access is set to 'private'.
     """
 
     new_attribute =  ItemAttribute(name, text=value, 
-        text_type=value_type)
+        text_type=value_type, access=access)
     self.item_attributes.append(new_attribute)
     
   def SetItemAttribute(self, name, value):
@@ -192,8 +194,9 @@ class ItemAttribute(atom.Text):
   _namespace = GBASE_NAMESPACE
   _children = atom.Text._children.copy()
   _attributes = atom.Text._attributes.copy()
+  _attributes['access'] = 'access'
 
-  def __init__(self, name, text_type=None, text=None, 
+  def __init__(self, name, text_type=None, access=None, text=None, 
       extension_elements=None, extension_attributes=None):
     """Constructor for a GBase item attribute
 
@@ -201,6 +204,9 @@ class ItemAttribute(atom.Text):
       name: str The name of the attribute. Examples include
           price, color, make, model, pages, salary, etc.
       text_type: str (optional) The type associated with the text contents
+      access: str (optional) If the access attribute is set to 'private', the
+          attribute will not be included in the item's description in the 
+          snippets feed
       text: str (optional) The text data in the this element
       extension_elements: list (optional) A  list of ExtensionElement 
           instances
@@ -210,6 +216,7 @@ class ItemAttribute(atom.Text):
 
     self.name = name
     self.type = text_type
+    self.access = access
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
@@ -260,7 +267,52 @@ class Label(atom.AtomBase):
 
 def LabelFromString(xml_string):
   return atom.CreateClassFromXMLString(Label, xml_string)
+
+
+class Thumbnail(atom.AtomBase):
+  """The Google Base thumbnail element"""
   
+  _tag = 'thumbnail'
+  _namespace = GMETA_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['width'] = 'width'
+  _attributes['height'] = 'height'
+
+  def __init__(self, width=None, height=None, text=None, extension_elements=None,
+      extension_attributes=None):
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+    self.width = width
+    self.height = height
+
+
+def ThumbnailFromString(xml_string):
+  return atom.CreateClassFromXMLString(Thumbnail, xml_string)
+
+
+class ImageLink(atom.Text):
+  """The Google Base image_link element"""
+  
+  _tag = 'image_link'
+  _namespace = GBASE_NAMESPACE
+  _children = atom.Text._children.copy()
+  _attributes = atom.Text._attributes.copy()
+  _children['{%s}thumbnail' % GMETA_NAMESPACE] = ('thumbnail', [Thumbnail])
+
+  def __init__(self, thumbnail=None, text=None, extension_elements=None,
+      text_type=None, extension_attributes=None):
+    self.thumbnail = thumbnail or []
+    self.text = text
+    self.type = text_type
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+    
+
+def ImageLinkFromString(xml_string):
+  return atom.CreateClassFromXMLString(ImageLink, xml_string)
+
 
 class ItemType(atom.Text):
   """The Google Base item_type element"""

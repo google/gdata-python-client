@@ -295,6 +295,43 @@ class GBaseItemTypesFeedAndEntryTest(unittest.TestCase):
     self.assert_(len(new_feed.entry) == 1)
     self.assert_(new_feed.entry[0].attribute[0].name == 'location')
 
+class GBaseImageLinkTest(unittest.TestCase):
+
+  def testImageLinkToAndFromString(self):
+    image_link = gdata.base.ImageLink()
+    image_link.type = 'url'
+    image_link.text = 'example.com'
+    thumbnail = gdata.base.Thumbnail()
+    thumbnail.width = '60'
+    thumbnail.height = '80'
+    thumbnail.text = 'example text'
+    image_link.thumbnail.append(thumbnail)
+    xml = image_link.ToString()    
+    parsed = gdata.base.ImageLinkFromString(xml)
     
+    self.assert_(parsed.type == image_link.type)
+    self.assert_(parsed.text == image_link.text)
+    self.assert_(len(parsed.thumbnail) == 1)
+    self.assert_(parsed.thumbnail[0].width == thumbnail.width)
+    self.assert_(parsed.thumbnail[0].height == thumbnail.height)
+    self.assert_(parsed.thumbnail[0].text == thumbnail.text)
+
+
+class GBaseItemAttributeAccessElement(unittest.TestCase):
+
+  def testItemAttributeAccessAttribute(self):
+    item = gdata.base.GBaseItem()
+    item.AddItemAttribute('test', '1', value_type='int', access='private')
+    print item
+    private_attribute = item.GetItemAttributes('test')[0]
+    self.assert_(private_attribute.access == 'private')
+    xml = item.ToString()
+    new_item = gdata.base.GBaseItemFromString(xml)
+    new_attributes = new_item.GetItemAttributes('test')
+    print new_attributes[0].access
+    self.assert_(len(new_attributes) == 1)
+    self.assert_(new_attributes[0].access == 'private')
+    
+
 if __name__ == '__main__':
   unittest.main()
