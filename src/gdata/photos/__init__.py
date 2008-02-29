@@ -96,7 +96,7 @@ class GPhotosBaseFeed(gdata.GDataFeed, gdata.LinkFinder):
   _attributes = gdata.GDataFeed._attributes.copy()
   _children = gdata.GDataFeed._children.copy()
   # We deal with Entry elements ourselves
-  _children.pop('{%s}entry' % atom.ATOM_NAMESPACE) 
+  del _children['{%s}entry' % atom.ATOM_NAMESPACE]
     
   def __init__(self, author=None, category=None, contributor=None,
                generator=None, icon=None, atom_id=None, link=None, logo=None,

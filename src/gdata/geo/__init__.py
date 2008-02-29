@@ -129,7 +129,7 @@ class Where(GeoBaseElement):
   def location(self):
     "(float, float) Return Where.Point.pos.text as a (lat,lon) tuple"
     try:
-      return tuple(float(z) for z in self.Point.pos.text.split(' '))
+      return tuple([float(z) for z in self.Point.pos.text.split(' ')])
     except AttributeError:
       return tuple()
   def set_location(self, latlon):
