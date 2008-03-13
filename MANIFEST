@@ -17,6 +17,7 @@ src/gdata/docs/__init__.py
 src/gdata/docs/service.py
 src/gdata/spreadsheet/__init__.py
 src/gdata/spreadsheet/service.py
+src/gdata/spreadsheet/text_db.py
 src/gdata/apps/__init__.py
 src/gdata/apps/service.py
 src/gdata/codesearch/__init__.py

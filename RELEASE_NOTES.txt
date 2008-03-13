@@ -1,5 +1,17 @@
+=== 1.0.11.1 ===
+March 13, 2008 (revision 314)
+
+- Added text_db module to gdata.spreadsheet which makes using the Spreadsheets
+    API feel more like using a simple database. This module streamlines use
+    of the list feed.
+- Compatibility fixes for geo and photos modules to run on Python 2.2 and 2.3.
+- Added the orderby parameter to gdata.service's Query class.
+- Changed the blogger sample to use orderby=updated so that queries on 
+    updated min or max will work.
+- Fix to string encoding in the atom core when converting text members to XML.
+
 === 1.0.11 ===
-December 20, 2007 (revision 290)
+February 11, 2008 (revision 290)
 
 - Modified the gdata.service.GDataService to include a handler member to 
     which all HTTP requests are delegated. This will allow the underlying
