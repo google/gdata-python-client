@@ -154,7 +154,7 @@ class DatabaseClient(object):
 
     Args:
       spreadsheet_key: str The unique key for the spreadsheet, this 
-          usually in the the form 'pk23...We' or 'o23423...123'.
+          usually in the the form 'pk23...We' or 'o23...423.12,,,3'.
       name: str The title of the spreadsheets.
 
     Returns:
@@ -182,20 +182,63 @@ class DatabaseClient(object):
 
 
 class Database(object):
+  """Provides interface to find and create tables.
+
+  The database represents a Google Spreadsheet.
+  """
 
   def __init__(self, spreadsheet_entry=None, database_client=None):
+    """Constructor for a database object.
+
+    Args:
+      spreadsheet_entry: gdata.docs.DocumentListEntry The 
+          Atom entry which represents the Google Spreadsheet. The
+          spreadsheet's key is extracted from the entry and stored as a 
+          member.
+      database_client: DatabaseClient A client which can talk to the
+          Google Spreadsheets servers to perform operations on worksheets
+          within this spreadsheet.
+    """
     self.entry = spreadsheet_entry
-    id_parts = spreadsheet_entry.id.text.split('/')
-    self.spreadsheet_key = id_parts[-1].replace('spreadsheet%3A', '')
+    if self.entry:
+      id_parts = spreadsheet_entry.id.text.split('/')
+      self.spreadsheet_key = id_parts[-1].replace('spreadsheet%3A', '')
     self.client = database_client
 
   def CreateTable(self, name, fields=None):
+    """Add a new worksheet to this spreadsheet and fill in column names.
+
+    Args:
+      name: str The title of the new worksheet.
+      fields: list of strings The column names which are placed in the
+          first row of this worksheet. These names are converted into XML
+          tags by the server. To avoid changes during the translation
+          process I recommend using all lowercase alphabetic names. For
+          example ['somelongname', 'theothername']
+
+    Returns:
+      Table representing the newly created worksheet.
+    """
     worksheet = self.client._GetSpreadsheetsClient().AddWorksheet(title=name,
         row_count=1, col_count=len(fields), key=self.spreadsheet_key)
-    return Table(name=name, worksheet_entry=worksheet, database_client=self.client, 
+    return Table(name=name, worksheet_entry=worksheet, 
+        database_client=self.client, 
         spreadsheet_key=self.spreadsheet_key, fields=fields)
 
   def GetTables(self, worksheet_id=None, name=None):
+    """Searches for a worksheet with the specified ID or name.
+
+    The list of results should have one table at most, or no results
+    if the id or name were not found.
+
+    Args:
+      worksheet_id: str The ID of the worksheet, example: 'od6'
+      name: str The title of the worksheet.
+
+    Returns:
+      A list of length 0 or 1 containing the desired Table. A list is returned
+      to make this method feel like GetDatabases and GetRecords.
+    """
     if worksheet_id:
       worksheet_entry = self.client._GetSpreadsheetsClient().GetWorksheetsFeed(
           self.spreadsheet_key, wksht_id=worksheet_id)
@@ -224,7 +267,8 @@ class Database(object):
 
 class Table(object):
 
-  def __init__(self, name=None, worksheet_entry=None, database_client=None, spreadsheet_key=None, fields=None):
+  def __init__(self, name=None, worksheet_entry=None, database_client=None, 
+      spreadsheet_key=None, fields=None):
     self.name = name
     self.entry = worksheet_entry
     id_parts = worksheet_entry.id.text.split('/')
@@ -262,23 +306,41 @@ class Table(object):
       self.fields = ConvertStringsToColumnHeaders(first_row_contents)
     
   def SetFields(self, fields):
-    # Need to get the required cells from the worksheet.
+    """Changes the contents of the cells in the first row of this worksheet.
+
+    Args:
+      fields: list of strings The names in the list comprise the
+          first row of the worksheet. These names are converted into XML
+          tags by the server. To avoid changes during the translation
+          process I recommend using all lowercase alphabetic names. For
+          example ['somelongname', 'theothername']
+    """
     # TODO: If the table already had fields, we might want to clear out the,
     # current column headers.
     self.fields = fields
     i = 0
     for column_name in fields:
       i = i + 1
+      # TODO: speed this up by using a batch request to update cells.
       self.client._GetSpreadsheetsClient().UpdateCell(1, i, column_name, 
           self.spreadsheet_key, self.worksheet_id)
 
   def Delete(self):
+    """Deletes this worksheet from the spreadsheet."""
     worksheet = self.client._GetSpreadsheetsClient().GetWorksheetsFeed(
         self.spreadsheet_key, wksht_id=self.worksheet_id)
     self.client._GetSpreadsheetsClient().DeleteWorksheet(
         worksheet_entry=worksheet)
 
   def AddRecord(self, data):
+    """Adds a new row to this worksheet.
+
+    Args:
+      data: dict of strings Mapping of string values to column names. 
+
+    Returns:
+      Record which represents this row of the spreadsheet.
+    """
     new_row = self.client._GetSpreadsheetsClient().InsertRow(data, 
         self.spreadsheet_key, wksht_id=self.worksheet_id)
     return Record(content=data, row_entry=new_row, 
@@ -286,6 +348,17 @@ class Table(object):
         database_client=self.client)
 
   def GetRecord(self, row_id=None, row_number=None):
+    """Gets a single record from the worksheet based on row ID or number.
+    
+    Args:
+      row_id: The ID for the individual row.
+      row_number: str or int The position of the desired row. Numbering 
+          begins at 1, which refers to the second row in the worksheet since
+          the first row is used for column names.
+
+    Returns:
+      Record for the desired row.
+    """
     if row_id:
       row_entry = self.client._GetSpreadsheetsClient().GetListFeed(
           self.spreadsheet_key, wksht_id=self.worksheet_id, row_id=row_id)
@@ -306,6 +379,15 @@ class Table(object):
         return None
 
   def GetRecords(self, start_row, end_row):
+    """Gets all rows between the start and end row numbers inclusive.
+
+    Args:
+      start_row: str or int
+      end_row: str or int
+
+    Returns:
+      RecordResultSet for the desired rows.
+    """
     start_row = int(start_row)
     end_row = int(end_row)
     max_rows = end_row - start_row + 1
@@ -318,6 +400,18 @@ class Table(object):
         self.worksheet_id)
 
   def FindRecords(self, query_string):
+    """Performs a query against the worksheet to find rows which match.
+
+    For details on query string syntax see the section on sq under
+    http://code.google.com/apis/spreadsheets/reference.html#list_Parameters
+
+    Args:
+      query_string: str Examples: 'name == john' to find all rows with john
+          in the name column, '(cost < 19.50 and name != toy) or cost > 500'
+
+    Returns:
+      RecordResultSet with the first group of matches.
+    """
     row_query = gdata.spreadsheet.service.ListQuery()
     row_query.sq = query_string
     matching_feed = self.client._GetSpreadsheetsClient().GetListFeed(
@@ -327,6 +421,13 @@ class Table(object):
 
 
 class RecordResultSet(list):
+  """A collection of rows which allows fetching of the next set of results.
+
+  The server may not send all rows in the requested range because there are
+  too many. Using this result set you can access the first set of results
+  as if it is a list, then get the next batch (if there are more results) by
+  calling GetNext().
+  """
 
   def __init__(self, feed, client, spreadsheet_key, worksheet_id):
     self.client = client
@@ -340,6 +441,11 @@ class RecordResultSet(list):
           database_client=client))
 
   def GetNext(self):
+    """Fetches the next batch of rows in the result set.
+
+    Returns:
+      A new RecordResultSet.
+    """
     next_link = self.feed.GetNextLink()
     if next_link and next_link.href:
       new_feed = self.client._GetSpreadsheetsClient().Get(next_link.href, 
@@ -358,6 +464,18 @@ class Record(object):
 
   def __init__(self, content=None, row_entry=None, spreadsheet_key=None, 
        worksheet_id=None, database_client=None):
+    """Constructor for a record.
+    
+    Args:
+      content: dict of strings Mapping of string values to column names.
+      row_entry: gdata.spreadsheet.SpreadsheetsList The Atom entry 
+          representing this row in the worksheet.
+      spreadsheet_key: str The ID of the spreadsheet in which this row 
+          belongs.
+      worksheet_id: str The ID of the worksheet in which this row belongs.
+      database_client: DatabaseClient The client which can be used to talk
+          the Google Spreadsheets server to edit this row.
+    """
     self.entry = row_entry
     self.spreadsheet_key = spreadsheet_key
     self.worksheet_id = worksheet_id
@@ -368,11 +486,20 @@ class Record(object):
     self.client = database_client
     self.content = content or {}
     if not content:
-      self.__ExtractContentFromEntry(row_entry)
+      self.ExtractContentFromEntry(row_entry)
 
-  def __ExtractContentFromEntry(self, entry):
+  def ExtractContentFromEntry(self, entry):
+    """Populates the content and row_id based on content of the entry.
+
+    This method is used in the Record's contructor.
+
+    Args:
+      entry: gdata.spreadsheet.SpreadsheetsList The Atom entry 
+          representing this row in the worksheet.
+    """
     self.content = {}
     if entry:
+      self.row_id = entry.id.text.split('/')[-1]
       for label, custom in entry.custom.iteritems():
         self.content[label] = custom.text
 
@@ -380,7 +507,9 @@ class Record(object):
     """Send the content of the record to spreadsheets to edit the row.
 
     All items in the content dictionary will be sent. Items which have been
-    removed from the content may remain in the row. 
+    removed from the content may remain in the row. The content member
+    of the record will not be modified so additional fields in the row
+    might be absent from this local copy.
     """
     self.entry = self.client._GetSpreadsheetsClient().UpdateRow(self.entry, self.content)
 
@@ -425,4 +554,3 @@ def ConvertStringsToColumnHeaders(proposed_headers):
     else:
       headers.append(sanitized)
   return headers
-
