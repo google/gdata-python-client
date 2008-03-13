@@ -130,6 +130,14 @@ class DatabaseClient(object):
         raise BadCredentials('Username or password incorrect.')
     
   def CreateDatabase(self, name):
+    """Creates a new Google Spreadsheet with the desired name.
+
+    Args:
+      name: str The title for the spreadsheet.
+
+    Returns:
+      A Database instance representing the new spreadsheet. 
+    """
     # Create a Google Spreadsheet to form the foundation of this database.
     # Spreadsheet is created by uploading a file to the Google Documents
     # List API.
@@ -139,6 +147,19 @@ class DatabaseClient(object):
     return Database(spreadsheet_entry=db_entry, database_client=self)
 
   def GetDatabases(self, spreadsheet_key=None, name=None):
+    """Finds spreadsheets which have the unique key or title.
+
+    If querying on the spreadsheet_key there will be at most one result, but
+    searching by name could yield multiple results.
+
+    Args:
+      spreadsheet_key: str The unique key for the spreadsheet, this 
+          usually in the the form 'pk23...We' or 'o23423...123'.
+      name: str The title of the spreadsheets.
+
+    Returns:
+      A list of Database objects representing the desired spreadsheets.
+    """
     if spreadsheet_key:
       db_entry = self.__docs_client.GetDocumentListEntry(
           r'/feeds/documents/private/full/spreadsheet%3A' + spreadsheet_key)
@@ -328,13 +349,22 @@ class RecordResultSet(list):
 
 
 class Record(object):
+  """Represents one row in a worksheet and provides a dictionary of values.
+
+  Attributes:
+    custom: dict Represents the contents of the row with cell values mapped
+        to column headers.
+  """
 
   def __init__(self, content=None, row_entry=None, spreadsheet_key=None, 
        worksheet_id=None, database_client=None):
     self.entry = row_entry
     self.spreadsheet_key = spreadsheet_key
     self.worksheet_id = worksheet_id
-    self.row_id = row_entry.id.text.split('/')[-1]
+    if row_entry:
+      self.row_id = row_entry.id.text.split('/')[-1]
+    else:
+      self.row_id = None
     self.client = database_client
     self.content = content or {}
     if not content:
@@ -347,9 +377,19 @@ class Record(object):
         self.content[label] = custom.text
 
   def Push(self):
+    """Send the content of the record to spreadsheets to edit the row.
+
+    All items in the content dictionary will be sent. Items which have been
+    removed from the content may remain in the row. 
+    """
     self.entry = self.client._GetSpreadsheetsClient().UpdateRow(self.entry, self.content)
 
   def Pull(self):
+    """Query Google Spreadsheets to get the latest data from the server.
+
+    Fetches the entry for this row and repopulates the content dictionary 
+    with the data found in the row.
+    """
     if self.row_id:
       self.entry = self.client._GetSpreadsheetsClient().GetListFeed(
           self.spreadsheet_key, wksht_id=self.worksheet_id, row_id=self.row_id)
