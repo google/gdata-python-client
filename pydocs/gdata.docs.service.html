@@ -325,6 +325,8 @@ Returns:<br>
 &nbsp;&nbsp;or&nbsp;the&nbsp;results&nbsp;of&nbsp;running&nbsp;converter&nbsp;on&nbsp;the&nbsp;server's&nbsp;result&nbsp;body&nbsp;(if<br>
 &nbsp;&nbsp;converter&nbsp;was&nbsp;specified).</tt></dd></dl>
 
+<dl><dt><a name="DocsService-PrepareConnection"><strong>PrepareConnection</strong></a>(self, full_uri)</dt></dl>
+
 <dl><dt><a name="DocsService-ProgrammaticLogin"><strong>ProgrammaticLogin</strong></a>(self, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Authenticates&nbsp;the&nbsp;user&nbsp;and&nbsp;sets&nbsp;the&nbsp;GData&nbsp;Auth&nbsp;token.<br>
 &nbsp;<br>
 Login&nbsp;retreives&nbsp;a&nbsp;temporary&nbsp;auth&nbsp;token&nbsp;which&nbsp;must&nbsp;be&nbsp;used&nbsp;with&nbsp;all<br>
@@ -418,6 +420,8 @@ It&nbsp;should&nbsp;be&nbsp;in&nbsp;the&nbsp;form&nbsp;company_id-app_name-app_v
 </dl>
 <hr>
 Methods inherited from <a href="atom.service.html#AtomService">atom.service.AtomService</a>:<br>
+<dl><dt><a name="DocsService-CreateConnection"><strong>CreateConnection</strong></a>(self, uri, http_operation, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>)</dt></dl>
+
 <dl><dt><a name="DocsService-UseBasicAuth"><strong>UseBasicAuth</strong></a>(self, username, password, for_proxy<font color="#909090">=False</font>)</dt><dd><tt>Sets&nbsp;an&nbsp;Authenticaiton:&nbsp;Basic&nbsp;HTTP&nbsp;header&nbsp;containing&nbsp;plaintext.<br>
 &nbsp;<br>
 The&nbsp;username&nbsp;and&nbsp;password&nbsp;are&nbsp;base64&nbsp;encoded&nbsp;and&nbsp;added&nbsp;to&nbsp;an&nbsp;HTTP&nbsp;header<br>
@@ -524,6 +528,13 @@ Properties inherited from <a href="gdata.service.html#Query">gdata.service.Query
 <dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetMaxResults(self)</dt></dl>
 </dd>
 <dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetMaxResults(self, query)</dt></dl>
+</dd>
+</dl>
+<dl><dt><strong>orderby</strong></dt>
+<dd><tt>The&nbsp;feed&nbsp;query's&nbsp;orderby&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetOrderBy(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetOrderBy(self, query)</dt></dl>
 </dd>
 </dl>
 <dl><dt><strong>published_max</strong></dt>

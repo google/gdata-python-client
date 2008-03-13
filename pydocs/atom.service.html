@@ -56,6 +56,8 @@
 The&nbsp;<a href="#AtomService">AtomService</a>&nbsp;contains&nbsp;methods&nbsp;to&nbsp;perform&nbsp;HTTP&nbsp;CRUD&nbsp;operations.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
+<dl><dt><a name="AtomService-CreateConnection"><strong>CreateConnection</strong></a>(self, uri, http_operation, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>)</dt></dl>
+
 <dl><dt><a name="AtomService-Delete"><strong>Delete</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>)</dt><dd><tt>Deletes&nbsp;the&nbsp;entry&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.<br>
 &nbsp;<br>
 Args:<br>
@@ -131,6 +133,22 @@ Args:<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;httplib.HTTPResponse&nbsp;Server's&nbsp;response&nbsp;to&nbsp;the&nbsp;POST&nbsp;request.</tt></dd></dl>
+
+<dl><dt><a name="AtomService-PrepareConnection"><strong>PrepareConnection</strong></a>(self, full_uri)</dt><dd><tt>Opens&nbsp;a&nbsp;connection&nbsp;to&nbsp;the&nbsp;server&nbsp;based&nbsp;on&nbsp;the&nbsp;full&nbsp;URI.<br>
+&nbsp;<br>
+Examines&nbsp;the&nbsp;target&nbsp;URI&nbsp;and&nbsp;the&nbsp;proxy&nbsp;settings,&nbsp;which&nbsp;are&nbsp;set&nbsp;as&nbsp;<br>
+environment&nbsp;variables,&nbsp;to&nbsp;open&nbsp;a&nbsp;connection&nbsp;with&nbsp;the&nbsp;server.&nbsp;This&nbsp;<br>
+connection&nbsp;is&nbsp;used&nbsp;to&nbsp;make&nbsp;an&nbsp;HTTP&nbsp;request.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;full_uri:&nbsp;str&nbsp;Which&nbsp;is&nbsp;the&nbsp;target&nbsp;relative&nbsp;(lacks&nbsp;protocol&nbsp;and&nbsp;host)&nbsp;or<br>
+&nbsp;&nbsp;absolute&nbsp;URL&nbsp;to&nbsp;be&nbsp;opened.&nbsp;Example:<br>
+&nbsp;&nbsp;'https://www.google.com/accounts/ClientLogin'&nbsp;or<br>
+&nbsp;&nbsp;'base/feeds/snippets'&nbsp;where&nbsp;the&nbsp;server&nbsp;is&nbsp;set&nbsp;to&nbsp;www.google.com.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;tuple&nbsp;containing&nbsp;the&nbsp;httplib.HTTPConnection&nbsp;and&nbsp;the&nbsp;full_uri&nbsp;for&nbsp;the<br>
+&nbsp;&nbsp;request.</tt></dd></dl>
 
 <dl><dt><a name="AtomService-Put"><strong>Put</strong></a>(self, data, uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, content_type<font color="#909090">='application/atom+xml'</font>)</dt><dd><tt>Updates&nbsp;an&nbsp;entry&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.<br>
 &nbsp;<br>

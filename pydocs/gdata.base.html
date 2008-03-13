@@ -47,6 +47,7 @@
 <dl>
 <dt><font face="helvetica, arial"><a href="gdata.base.html#Attributes">Attributes</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.base.html#Label">Label</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.base.html#Thumbnail">Thumbnail</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.base.html#Value">Value</a>
 </font></dt></dl>
 </dd>
@@ -54,6 +55,7 @@
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="gdata.base.html#Attribute">Attribute</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.base.html#ImageLink">ImageLink</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.base.html#ItemAttribute">ItemAttribute</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.base.html#ItemType">ItemType</a>
 </font></dt><dd>
@@ -479,7 +481,7 @@ Methods defined here:<br>
 
 <hr>
 Methods inherited from <a href="gdata.base.html#ItemAttributeContainer">ItemAttributeContainer</a>:<br>
-<dl><dt><a name="GBaseItem-AddItemAttribute"><strong>AddItemAttribute</strong></a>(self, name, value, value_type<font color="#909090">=None</font>)</dt><dd><tt>Adds&nbsp;a&nbsp;new&nbsp;item&nbsp;attribute&nbsp;tag&nbsp;containing&nbsp;the&nbsp;value.<br>
+<dl><dt><a name="GBaseItem-AddItemAttribute"><strong>AddItemAttribute</strong></a>(self, name, value, value_type<font color="#909090">=None</font>, access<font color="#909090">=None</font>)</dt><dd><tt>Adds&nbsp;a&nbsp;new&nbsp;item&nbsp;attribute&nbsp;tag&nbsp;containing&nbsp;the&nbsp;value.<br>
 &nbsp;<br>
 Creates&nbsp;a&nbsp;new&nbsp;extension&nbsp;element&nbsp;in&nbsp;the&nbsp;GBase&nbsp;namespace&nbsp;to&nbsp;represent&nbsp;a<br>
 Google&nbsp;Base&nbsp;item&nbsp;attribute.<br>
@@ -489,7 +491,9 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;tag&nbsp;name.&nbsp;The&nbsp;tag&nbsp;will&nbsp;be&nbsp;placed&nbsp;in&nbsp;the&nbsp;GBase&nbsp;namespace.<br>
 &nbsp;&nbsp;value:&nbsp;str&nbsp;Contents&nbsp;for&nbsp;the&nbsp;item&nbsp;attribute<br>
 &nbsp;&nbsp;value_type:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;type&nbsp;of&nbsp;data&nbsp;in&nbsp;the&nbsp;vlaue,&nbsp;Examples:&nbsp;text<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float<br>
+&nbsp;&nbsp;access:&nbsp;str&nbsp;(optional)&nbsp;Used&nbsp;to&nbsp;hide&nbsp;attributes.&nbsp;The&nbsp;attribute&nbsp;is&nbsp;not&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exposed&nbsp;in&nbsp;the&nbsp;snippets&nbsp;feed&nbsp;if&nbsp;access&nbsp;is&nbsp;set&nbsp;to&nbsp;'private'.</tt></dd></dl>
 
 <dl><dt><a name="GBaseItem-FindItemAttribute"><strong>FindItemAttribute</strong></a>(self, name)</dt><dd><tt>Get&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;first&nbsp;Base&nbsp;item&nbsp;attribute&nbsp;which&nbsp;matches&nbsp;name.<br>
 &nbsp;<br>
@@ -1214,7 +1218,7 @@ Methods inherited from <a href="gdata.base.html#GBaseItem">GBaseItem</a>:<br>
 
 <hr>
 Methods inherited from <a href="gdata.base.html#ItemAttributeContainer">ItemAttributeContainer</a>:<br>
-<dl><dt><a name="GBaseSnippet-AddItemAttribute"><strong>AddItemAttribute</strong></a>(self, name, value, value_type<font color="#909090">=None</font>)</dt><dd><tt>Adds&nbsp;a&nbsp;new&nbsp;item&nbsp;attribute&nbsp;tag&nbsp;containing&nbsp;the&nbsp;value.<br>
+<dl><dt><a name="GBaseSnippet-AddItemAttribute"><strong>AddItemAttribute</strong></a>(self, name, value, value_type<font color="#909090">=None</font>, access<font color="#909090">=None</font>)</dt><dd><tt>Adds&nbsp;a&nbsp;new&nbsp;item&nbsp;attribute&nbsp;tag&nbsp;containing&nbsp;the&nbsp;value.<br>
 &nbsp;<br>
 Creates&nbsp;a&nbsp;new&nbsp;extension&nbsp;element&nbsp;in&nbsp;the&nbsp;GBase&nbsp;namespace&nbsp;to&nbsp;represent&nbsp;a<br>
 Google&nbsp;Base&nbsp;item&nbsp;attribute.<br>
@@ -1224,7 +1228,9 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;tag&nbsp;name.&nbsp;The&nbsp;tag&nbsp;will&nbsp;be&nbsp;placed&nbsp;in&nbsp;the&nbsp;GBase&nbsp;namespace.<br>
 &nbsp;&nbsp;value:&nbsp;str&nbsp;Contents&nbsp;for&nbsp;the&nbsp;item&nbsp;attribute<br>
 &nbsp;&nbsp;value_type:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;type&nbsp;of&nbsp;data&nbsp;in&nbsp;the&nbsp;vlaue,&nbsp;Examples:&nbsp;text<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float<br>
+&nbsp;&nbsp;access:&nbsp;str&nbsp;(optional)&nbsp;Used&nbsp;to&nbsp;hide&nbsp;attributes.&nbsp;The&nbsp;attribute&nbsp;is&nbsp;not&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exposed&nbsp;in&nbsp;the&nbsp;snippets&nbsp;feed&nbsp;if&nbsp;access&nbsp;is&nbsp;set&nbsp;to&nbsp;'private'.</tt></dd></dl>
 
 <dl><dt><a name="GBaseSnippet-FindItemAttribute"><strong>FindItemAttribute</strong></a>(self, name)</dt><dd><tt>Get&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;first&nbsp;Base&nbsp;item&nbsp;attribute&nbsp;which&nbsp;matches&nbsp;name.<br>
 &nbsp;<br>
@@ -1470,6 +1476,56 @@ Methods inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ImageLink">class <strong>ImageLink</strong></a>(<a href="atom.html#Text">atom.Text</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;Google&nbsp;Base&nbsp;image_link&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.base.html#ImageLink">ImageLink</a></dd>
+<dd><a href="atom.html#Text">atom.Text</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ImageLink-__init__"><strong>__init__</strong></a>(self, thumbnail<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, text_type<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="ImageLink-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="ImageLink-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="ImageLink-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="ItemAttribute">class <strong>ItemAttribute</strong></a>(<a href="atom.html#Text">atom.Text</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
@@ -1489,12 +1545,15 @@ the&nbsp;same&nbsp;structure,&nbsp;so&nbsp;this&nbsp;class&nbsp;inherits&nbsp;fr
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="ItemAttribute-__init__"><strong>__init__</strong></a>(self, name, text_type<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;a&nbsp;GBase&nbsp;item&nbsp;attribute<br>
+<dl><dt><a name="ItemAttribute-__init__"><strong>__init__</strong></a>(self, name, text_type<font color="#909090">=None</font>, access<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;a&nbsp;GBase&nbsp;item&nbsp;attribute<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;name:&nbsp;str&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;attribute.&nbsp;Examples&nbsp;include<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price,&nbsp;color,&nbsp;make,&nbsp;model,&nbsp;pages,&nbsp;salary,&nbsp;etc.<br>
 &nbsp;&nbsp;text_type:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;type&nbsp;associated&nbsp;with&nbsp;the&nbsp;text&nbsp;contents<br>
+&nbsp;&nbsp;access:&nbsp;str&nbsp;(optional)&nbsp;If&nbsp;the&nbsp;access&nbsp;attribute&nbsp;is&nbsp;set&nbsp;to&nbsp;'private',&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attribute&nbsp;will&nbsp;not&nbsp;be&nbsp;included&nbsp;in&nbsp;the&nbsp;item's&nbsp;description&nbsp;in&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;snippets&nbsp;feed<br>
 &nbsp;&nbsp;text:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;text&nbsp;data&nbsp;in&nbsp;the&nbsp;this&nbsp;element<br>
 &nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;ExtensionElement&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;instances<br>
@@ -1545,7 +1604,7 @@ Base&nbsp;allows&nbsp;you&nbsp;to&nbsp;define&nbsp;your&nbsp;own&nbsp;item&nbsp;
 methods&nbsp;to&nbsp;interact&nbsp;with&nbsp;the&nbsp;custom&nbsp;attributes.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
-<dl><dt><a name="ItemAttributeContainer-AddItemAttribute"><strong>AddItemAttribute</strong></a>(self, name, value, value_type<font color="#909090">=None</font>)</dt><dd><tt>Adds&nbsp;a&nbsp;new&nbsp;item&nbsp;attribute&nbsp;tag&nbsp;containing&nbsp;the&nbsp;value.<br>
+<dl><dt><a name="ItemAttributeContainer-AddItemAttribute"><strong>AddItemAttribute</strong></a>(self, name, value, value_type<font color="#909090">=None</font>, access<font color="#909090">=None</font>)</dt><dd><tt>Adds&nbsp;a&nbsp;new&nbsp;item&nbsp;attribute&nbsp;tag&nbsp;containing&nbsp;the&nbsp;value.<br>
 &nbsp;<br>
 Creates&nbsp;a&nbsp;new&nbsp;extension&nbsp;element&nbsp;in&nbsp;the&nbsp;GBase&nbsp;namespace&nbsp;to&nbsp;represent&nbsp;a<br>
 Google&nbsp;Base&nbsp;item&nbsp;attribute.<br>
@@ -1555,7 +1614,9 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;tag&nbsp;name.&nbsp;The&nbsp;tag&nbsp;will&nbsp;be&nbsp;placed&nbsp;in&nbsp;the&nbsp;GBase&nbsp;namespace.<br>
 &nbsp;&nbsp;value:&nbsp;str&nbsp;Contents&nbsp;for&nbsp;the&nbsp;item&nbsp;attribute<br>
 &nbsp;&nbsp;value_type:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;type&nbsp;of&nbsp;data&nbsp;in&nbsp;the&nbsp;vlaue,&nbsp;Examples:&nbsp;text<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float<br>
+&nbsp;&nbsp;access:&nbsp;str&nbsp;(optional)&nbsp;Used&nbsp;to&nbsp;hide&nbsp;attributes.&nbsp;The&nbsp;attribute&nbsp;is&nbsp;not&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exposed&nbsp;in&nbsp;the&nbsp;snippets&nbsp;feed&nbsp;if&nbsp;access&nbsp;is&nbsp;set&nbsp;to&nbsp;'private'.</tt></dd></dl>
 
 <dl><dt><a name="ItemAttributeContainer-FindItemAttribute"><strong>FindItemAttribute</strong></a>(self, name)</dt><dd><tt>Get&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;first&nbsp;Base&nbsp;item&nbsp;attribute&nbsp;which&nbsp;matches&nbsp;name.<br>
 &nbsp;<br>
@@ -1746,6 +1807,55 @@ Data and other attributes inherited from <a href="atom.html#ExtensionContainer">
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Thumbnail">class <strong>Thumbnail</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;Google&nbsp;Base&nbsp;thumbnail&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.base.html#Thumbnail">Thumbnail</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Thumbnail-__init__"><strong>__init__</strong></a>(self, width<font color="#909090">=None</font>, height<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="Thumbnail-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Thumbnail-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="Thumbnail-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="Value">class <strong>Value</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
@@ -1822,10 +1932,12 @@ Data and other attributes inherited from <a href="atom.html#ExtensionContainer">
  <dl><dt><a name="-GBaseLocalesFeedFromString"><strong>GBaseLocalesFeedFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-GBaseSnippetFeedFromString"><strong>GBaseSnippetFeedFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-GBaseSnippetFromString"><strong>GBaseSnippetFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-ImageLinkFromString"><strong>ImageLinkFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-ItemAttributeFromString"><strong>ItemAttributeFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-ItemTypeFromString"><strong>ItemTypeFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-LabelFromString"><strong>LabelFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-MetaItemTypeFromString"><strong>MetaItemTypeFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-ThumbnailFromString"><strong>ThumbnailFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-ValueFromString"><strong>ValueFromString</strong></a>(xml_string)</dt></dl>
 </td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">

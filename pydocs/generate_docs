@@ -16,6 +16,7 @@ pydoc -w gdata.base
 pydoc -w gdata.base.service
 pydoc -w gdata.spreadsheet
 pydoc -w gdata.spreadsheet.service
+pydoc -w gdata.spreadsheet.text_db
 pydoc -w gdata.photos
 pydoc -w gdata.photos.service
 pydoc -w gdata.codesearch

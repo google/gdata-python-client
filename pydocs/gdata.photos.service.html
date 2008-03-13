@@ -556,6 +556,8 @@ Returns:<br>
 &nbsp;&nbsp;or&nbsp;the&nbsp;results&nbsp;of&nbsp;running&nbsp;converter&nbsp;on&nbsp;the&nbsp;server's&nbsp;result&nbsp;body&nbsp;(if<br>
 &nbsp;&nbsp;converter&nbsp;was&nbsp;specified).</tt></dd></dl>
 
+<dl><dt><a name="PhotosService-PrepareConnection"><strong>PrepareConnection</strong></a>(self, full_uri)</dt></dl>
+
 <dl><dt><a name="PhotosService-ProgrammaticLogin"><strong>ProgrammaticLogin</strong></a>(self, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Authenticates&nbsp;the&nbsp;user&nbsp;and&nbsp;sets&nbsp;the&nbsp;GData&nbsp;Auth&nbsp;token.<br>
 &nbsp;<br>
 Login&nbsp;retreives&nbsp;a&nbsp;temporary&nbsp;auth&nbsp;token&nbsp;which&nbsp;must&nbsp;be&nbsp;used&nbsp;with&nbsp;all<br>
@@ -649,6 +651,8 @@ It&nbsp;should&nbsp;be&nbsp;in&nbsp;the&nbsp;form&nbsp;company_id-app_name-app_v
 </dl>
 <hr>
 Methods inherited from <a href="atom.service.html#AtomService">atom.service.AtomService</a>:<br>
+<dl><dt><a name="PhotosService-CreateConnection"><strong>CreateConnection</strong></a>(self, uri, http_operation, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>)</dt></dl>
+
 <dl><dt><a name="PhotosService-UseBasicAuth"><strong>UseBasicAuth</strong></a>(self, username, password, for_proxy<font color="#909090">=False</font>)</dt><dd><tt>Sets&nbsp;an&nbsp;Authenticaiton:&nbsp;Basic&nbsp;HTTP&nbsp;header&nbsp;containing&nbsp;plaintext.<br>
 &nbsp;<br>
 The&nbsp;username&nbsp;and&nbsp;password&nbsp;are&nbsp;base64&nbsp;encoded&nbsp;and&nbsp;added&nbsp;to&nbsp;an&nbsp;HTTP&nbsp;header<br>
