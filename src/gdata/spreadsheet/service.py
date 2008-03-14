@@ -325,11 +325,11 @@ class SpreadsheetsService(gdata.service.GDataService):
       new_custom.column = k
       new_custom.text = v
       new_entry.custom[new_custom.column] = new_custom
-    feed = self.GetListFeed(key, wksht_id)
-    for a_link in feed.link:
-      if a_link.rel == 'http://schemas.google.com/g/2005#post':
-        return self.Post(new_entry, a_link.href, 
-            converter=gdata.spreadsheet.SpreadsheetsListFromString)
+    # Generate the post URL for the worksheet which will receive the new entry.
+    post_url = 'http://spreadsheets.google.com/feeds/list/%s/%s/private/full'%(
+        key, wksht_id) 
+    return self.Post(new_entry, post_url, 
+        converter=gdata.spreadsheet.SpreadsheetsListFromString)
     
   def UpdateRow(self, entry, new_row_data):
     """Updates a row with the provided data

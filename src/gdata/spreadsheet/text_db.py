@@ -522,7 +522,7 @@ class Record(object):
     if self.row_id:
       self.entry = self.client._GetSpreadsheetsClient().GetListFeed(
           self.spreadsheet_key, wksht_id=self.worksheet_id, row_id=self.row_id)
-    self.__ExtractContentFromEntry(self.entry)
+    self.ExtractContentFromEntry(self.entry)
 
   def Delete(self):
     self.client._GetSpreadsheetsClient().DeleteRow(self.entry)
