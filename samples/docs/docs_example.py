@@ -49,7 +49,6 @@ class DocsSample(object):
     self.gd_client.password = password
     self.gd_client.source = 'Document List Python Sample'
     self.gd_client.ProgrammaticLogin()
-    #self.gd_client.server = 'writely-testing-pq.corp.google.com'
 
   def _PrintFeed(self, feed):
     """Prints out the contents of a feed to the console.
