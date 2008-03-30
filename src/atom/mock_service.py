@@ -184,7 +184,7 @@ class MockService(atom.service.AtomService):
       # Store the response in the recordings.
       # Return the response.
       return response
-    # Search for the TODO: complete
+    # TODO: complete
     return (MockRequest(None, full_uri), full_uri)
     
   def CreateConnection(self, uri, http_operation, extra_headers=None,
