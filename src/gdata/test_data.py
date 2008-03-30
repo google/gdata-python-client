@@ -2363,3 +2363,64 @@ YOU_TUBE_PROFILE = """<?xml version='1.0' encoding='UTF-8'?>
   <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.uploads'
     href='http://gdata.youtube.com/feeds/users/andyland74/uploads' countHint='1'/>
 </entry>"""
+
+NEW_CONTACT = """<?xml version='1.0' encoding='UTF-8'?>
+<atom:entry xmlns:atom='http://www.w3.org/2005/Atom'
+    xmlns:gd='http://schemas.google.com/g/2005'>
+  <atom:category scheme='http://schemas.google.com/g/2005#kind'
+    term='http://schemas.google.com/contact/2008#contact' />
+  <atom:title type='text'>Elizabeth Bennet</atom:title>
+  <atom:content type='text'>Notes</atom:content>
+  <gd:email rel='http://schemas.google.com/g/2005#work'
+    address='liz@gmail.com' />
+  <gd:email rel='http://schemas.google.com/g/2005#home'
+    address='liz@example.org' />
+  <gd:phoneNumber rel='http://schemas.google.com/g/2005#work'
+    primary='true'>(206)555-1212</gd:phoneNumber>
+  <gd:phoneNumber rel='http://schemas.google.com/g/2005#home'>(206)555-1213</gd:phoneNumber>
+  <gd:im address='liz@gmail.com'
+    protocol='http://schemas.google.com/g/2005#GOOGLE_TALK'
+    rel='http://schemas.google.com/g/2005#home' />
+  <gd:postalAddress rel='http://schemas.google.com/g/2005#work'
+    primary='true'>1600 Amphitheatre Pkwy Mountain View</gd:postalAddress>
+</atom:entry>"""
+
+CONTACTS_FEED = """<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom'
+    xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
+    xmlns:gd='http://schemas.google.com/g/2005'>
+  <id>http://www.google.com/m8/feeds/contacts/liz%40gmail.com/base</id>
+  <updated>2008-03-05T12:36:38.836Z</updated>
+  <category scheme='http://schemas.google.com/g/2005#kind'
+    term='http://schemas.google.com/contact/2008#contact' />
+  <title type='text'>Contacts</title>
+  <link rel='http://schemas.google.com/g/2005#feed'
+    type='application/atom+xml'
+    href='http://www.google.com/m8/feeds/contacts/liz%40gmail.com/base' />
+  <link rel='http://schemas.google.com/g/2005#post'
+    type='application/atom+xml'
+    href='http://www.google.com/m8/feeds/contacts/liz%40gmail.com/base' />
+  <link rel='self' type='application/atom+xml'
+    href='http://www.google.com/m8/feeds/contacts/liz%40gmail.com/base?max-results=25' />
+  <author>
+    <name>Elizabeth Bennet</name>
+    <email>liz@gmail.com</email>
+  </author>
+  <generator version='1.0' uri='http://www.google.com/m8/feeds/contacts'>Contacts</generator>
+  <openSearch:totalResults>1</openSearch:totalResults>
+  <openSearch:startIndex>1</openSearch:startIndex>
+  <openSearch:itemsPerPage>25</openSearch:itemsPerPage>
+  <entry>
+    <id>http://www.google.com/m8/feeds/contacts/liz%40gmail.com/base/c9012de</id>
+    <updated>2008-03-05T12:36:38.835Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind'
+      term='http://schemas.google.com/contact/2008#contact' />
+    <title type='text'>Fitzgerald</title>
+    <link rel='self' type='application/atom+xml'
+      href='http://www.google.com/m8/feeds/contacts/liz%40gmail.com/base/c9012de' />
+    <link rel='edit' type='application/atom+xml'
+      href='http://www.google.com/m8/feeds/contacts/liz%40gmail.com/base/c9012de/1204720598835000' />
+    <gd:phoneNumber rel='http://schemas.google.com/g/2005#home'
+      primary='true'>456</gd:phoneNumber>
+  </entry>
+</feed>"""

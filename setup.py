@@ -27,6 +27,7 @@ The Google data Python client library makes it easy to access data
 through the Google data APIs. This library provides data model and
 service modules for the the following Google data services:
 - Google Calendar data API
+- Google Contacts data API
 - Google Spreadsheets data API
 - Google Document List data APIs
 - Google Base data API
@@ -46,6 +47,7 @@ any Atom Publishing Protocol service.
     url='http://code.google.com/p/gdata-python-client/',
     packages=['atom', 'gdata', 'gdata.calendar', 'gdata.base',
         'gdata.spreadsheet', 'gdata.apps', 'gdata.docs', 'gdata.codesearch',
-        'gdata.photos', 'gdata.exif', 'gdata.geo', 'gdata.media'],
+        'gdata.photos', 'gdata.exif', 'gdata.geo', 'gdata.media', 
+        'gdata.contacts'],
     package_dir = {'gdata':'src/gdata', 'atom':'src/atom'}
 )
