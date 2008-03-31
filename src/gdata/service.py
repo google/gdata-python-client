@@ -994,7 +994,7 @@ class Query(dict):
     """
     
     self.feed = feed
-    self.categories = []
+    self.categories = categories or []
     if text_query:
       self.text_query = text_query
     if isinstance(params, dict):
@@ -1128,7 +1128,6 @@ class Query(dict):
   orderby = property(_GetOrderBy, _SetOrderBy, 
       doc="""The feed query's orderby parameter""")
 
-
   def ToUri(self):
     q_feed = self.feed or ''
     category_string = '/'.join(
@@ -1138,4 +1137,5 @@ class Query(dict):
       q_feed = q_feed + '/-/' + category_string
     return atom.service.BuildUri(q_feed, self)
 
-  
+  def __str__(self):
+    return self.ToUri()

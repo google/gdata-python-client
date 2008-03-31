@@ -59,8 +59,7 @@ class ContactsService(gdata.service.GDataService):
 
   def GetContactsFeed(self, 
       uri='http://www.google.com/m8/feeds/contacts/default/base'):
-    #return self.Get(uri, converter=gdata.contacts.ContactsFeedFromString)
-    return gdata.contacts.ContactsFeedFromString(str(self.Get(uri)))
+    return self.Get(uri, converter=gdata.contacts.ContactsFeedFromString)
 
   def CreateContact(self, new_contact, 
       insert_uri='/m8/feeds/contacts/default/base', url_params=None, 
@@ -83,14 +82,10 @@ class ContactsService(gdata.service.GDataService):
          'reason': HTTP reason from the server, 
          'body': HTTP body of the server's response}
     """
+    return self.Post(new_contact, insert_uri, url_params=url_params,
+        escape_params=escape_params,
+        converter=gdata.contacts.ContactEntryFromString)
 
-    response = self.Post(new_contact, insert_uri, url_params=url_params,
-                         escape_params=escape_params)
-
-    if isinstance(response, atom.Entry):
-      return gdata.contacts.ContactEntryFromString(response.ToString())
-    else:
-      return response
       
   def UpdateContact(self, edit_uri, updated_contact, url_params=None, 
                     escape_params=True):
@@ -151,3 +146,12 @@ class ContactsService(gdata.service.GDataService):
       edit_uri = edit_uri[len(url_prefix):]
     return self.Delete('/%s' % edit_uri,
                        url_params=url_params, escape_params=escape_params)
+
+
+class ContactsQuery(gdata.service.Query):
+
+  def __init__(self, feed=None, text_query=None, params=None,
+      categories=None):
+    self.feed = feed or '/m8/feeds/contacts/default/base'
+    gdata.service.Query.__init__(self, feed=self.feed, text_query=text_query,
+        params=params, categories=categories)

@@ -82,6 +82,16 @@ class ContactsServiceTest(unittest.TestCase):
     self.gd_client.DeleteContact(updated.GetEditLink().href)
 
 
+class ContactsQueryTest(unittest.TestCase):
+
+  def testConvertToString(self):
+    query = gdata.contacts.service.ContactsQuery()
+    self.assertEquals(str(query), '/m8/feeds/contacts/default/base')
+    query.max_results = '10'
+    self.assertEquals(query.ToUri(), 
+        '/m8/feeds/contacts/default/base?max-results=10')
+
+
 def DeleteTestContact(client):
   # Get test contact
   feed = client.GetContactsFeed(uri='/m8/feeds/contacts/%s/base' % username)
