@@ -28,6 +28,23 @@ except ImportError:
 import atom
 import gdata
 
+
+## Constants from http://code.google.com/apis/gdata/elements.html ##
+REL_HOME = 'http://schemas.google.com/g/2005#home'
+REL_WORK = 'http://schemas.google.com/g/2005#work'
+REL_OTHER = 'http://schemas.google.com/g/2005#other'
+
+
+IM_AIM = 'http://schemas.google.com/g/2005#AIM' # AOL Instant Messenger protocol
+IM_MSN = 'http://schemas.google.com/g/2005#MSN' # MSN Messenger protocol
+IM_YAHOO = 'http://schemas.google.com/g/2005#YAHOO' # Yahoo Messenger protocol
+IM_SKYPE = 'http://schemas.google.com/g/2005#SKYPE' # Skype protocol
+IM_QQ = 'http://schemas.google.com/g/2005#QQ' # QQ protocol
+IM_GOOGLE_TALK = 'http://schemas.google.com/g/2005#GOOGLE_TALK' # Google Talk protocol
+IM_ICQ = 'http://schemas.google.com/g/2005#ICQ' # ICQ protocol
+IM_JABBER = 'http://schemas.google.com/g/2005#JABBER' # Jabber protocol
+
+
 class OrgName(atom.AtomBase):
   _tag = 'orgName'
   _namespace = gdata.GDATA_NAMESPACE
@@ -59,17 +76,20 @@ class Organization(atom.AtomBase):
   _attributes = atom.AtomBase._attributes.copy()
 
   _attributes['rel'] = 'rel'
+  _attributes['label'] = 'label'
   _attributes['primary'] = 'primary'
   
   _children['{%s}orgName' % gdata.GDATA_NAMESPACE] = ('org_name', OrgName)
   _children['{%s}orgTitle' % gdata.GDATA_NAMESPACE] = ('org_title', OrgTitle)
 
   def __init__(self, rel=None, primary='false', org_name=None, org_title=None, 
-      text=None, extension_elements=None, extension_attributes=None):
-    self.rel = rel
+      label=None, text=None, extension_elements=None, 
+      extension_attributes=None):
+    self.rel = rel or REL_OTHER
     self.primary = primary
     self.org_name = org_name
     self.org_title = org_title
+    self.label = label
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
@@ -86,7 +106,7 @@ class PostalAddress(atom.AtomBase):
   def __init__(self, primary=None, rel=None, text=None, 
       extension_elements=None, extension_attributes=None):
     self.primary = primary
-    self.rel = rel
+    self.rel = rel or REL_OTHER
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
@@ -100,14 +120,17 @@ class IM(atom.AtomBase):
   _attributes['address'] = 'address'
   _attributes['primary'] = 'primary'
   _attributes['protocol'] = 'protocol'
+  _attributes['label'] = 'label'
   _attributes['rel'] = 'rel'
 
   def __init__(self, primary=None, rel=None, address=None, protocol=None,
-      text=None, extension_elements=None, extension_attributes=None):
+      label=None, text=None, extension_elements=None, 
+      extension_attributes=None):
     self.protocol = protocol
     self.address = address
     self.primary = primary
-    self.rel = rel
+    self.rel = rel or REL_OTHER
+    self.label = label
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
@@ -121,12 +144,14 @@ class Email(atom.AtomBase):
   _attributes['address'] = 'address'
   _attributes['primary'] = 'primary'
   _attributes['rel'] = 'rel'
+  _attributes['label'] = 'label'
 
   def __init__(self, primary=None, rel=None, address=None, text=None, 
-      extension_elements=None, extension_attributes=None):
+      label=None, extension_elements=None, extension_attributes=None):
     self.address = address
     self.primary = primary
-    self.rel = rel
+    self.rel = rel or REL_OTHER
+    self.label = label
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
@@ -143,7 +168,7 @@ class PhoneNumber(atom.AtomBase):
   def __init__(self, primary=None, rel=None, text=None, 
       extension_elements=None, extension_attributes=None):
     self.primary = primary
-    self.rel = rel
+    self.rel = rel or REL_OTHER
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
