@@ -87,16 +87,23 @@ class Login(atom.AtomBase):
   _attributes['userName'] = 'user_name'
   _attributes['password'] = 'password'
   _attributes['suspended'] = 'suspended'
+  _attributes['admin'] = 'admin'
+  _attributes['changePasswordAtNextLogin'] = 'change_password'
+  _attributes['agreedToTerms'] = 'agreed_to_terms'
   _attributes['ipWhitelisted'] = 'ip_whitelisted'
   _attributes['hashFunctionName'] = 'hash_function_name'
 
   def __init__(self, user_name=None, password=None, suspended=None,
                ip_whitelisted=None, hash_function_name=None, 
+               admin=None, change_password=None, agreed_to_terms=None, 
                extension_elements=None, extension_attributes=None, 
                text=None):
     self.user_name = user_name
     self.password = password
     self.suspended = suspended
+    self.admin = admin
+    self.change_password = change_password
+    self.agreed_to_terms = agreed_to_terms
     self.ip_whitelisted = ip_whitelisted
     self.hash_function_name = hash_function_name
     self.text = text
