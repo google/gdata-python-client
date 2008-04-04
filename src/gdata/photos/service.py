@@ -593,7 +593,7 @@ class PhotosService(gdata.service.GDataService):
       entry_uri = photo_or_uri.GetEditMediaLink().href
     try:
       return self.Put(photoblob, entry_uri,
-      converter=gdata.photos.PhotoEntryFromString)
+          converter=gdata.photos.PhotoEntryFromString)
     except gdata.service.RequestError, e:
       raise GooglePhotosException(e.args[0])
 

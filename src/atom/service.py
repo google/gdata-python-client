@@ -331,20 +331,18 @@ def __SendDataPart(data, connection):
     connection.send(ElementTree.tostring(data))
     return
   # Check to see if data is a file-like object that has a read method.
-  try:
-    if data.read:
-      # Read the file and send it a chunk at a time.
-      while 1:
-        binarydata = data.read(100000)
-        if binarydata == '': break
-        connection.send(binarydata)
-      return
-  except AttributeError:
-    pass
+  elif hasattr(data, 'read'):
+    # Read the file and send it a chunk at a time.
+    while 1:
+      binarydata = data.read(100000)
+      if binarydata == '': break
+      connection.send(binarydata)
+    return
+  else:
     # The data object was not a file.
-  # Try to convert to a string and send the data.
-  connection.send(str(data))
-  return
+    # Try to convert to a string and send the data.
+    connection.send(str(data))
+    return
 
 
 def __CalculateDataLength(data):
@@ -363,11 +361,10 @@ def __CalculateDataLength(data):
     return None
   elif ElementTree.iselement(data):
     return len(ElementTree.tostring(data))
-  try:
-    if data.read:
-      # If this is a file-like object, don't try to guess the length.
-      return None
-  except AttributeError:
+  elif hasattr(data, 'read'):
+    # If this is a file-like object, don't try to guess the length.
+    return None
+  else:
     return len(str(data))
 
 

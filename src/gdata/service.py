@@ -713,7 +713,9 @@ class GDataService(atom.service.AtomService):
           content_type='multipart/related; boundary=END_OF_PART')
       result_body = server_response.read()
       
-    elif media_source:
+    elif media_source or isinstance(data, gdata.MediaSource):
+      if isinstance(data, gdata.MediaSource):
+        media_source = data
       extra_headers['Content-Length'] = media_source.content_length
       server_response = self.handler.HttpRequest(self, verb, 
           media_source.file_handle, uri, extra_headers=extra_headers, 

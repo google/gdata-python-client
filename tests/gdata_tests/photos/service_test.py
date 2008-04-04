@@ -54,7 +54,7 @@ class PhotosServiceTest(unittest.TestCase):
     self.assert_(len(results_feed.entry) > 0)
     self.client.Delete(image_entry)
 
-  def testInsertPhotoAndDelete(self):
+  def testInsertPhotoUpdateBlobAndDelete(self):
     new_entry = gdata.photos.PhotoEntry()
     new_entry.title = atom.Title(text='a_test_image')
     new_entry.summary = atom.Summary(text='Just a test.')
@@ -64,7 +64,9 @@ class PhotosServiceTest(unittest.TestCase):
     entry = self.client.InsertPhoto(self.test_album, new_entry, 
         test_image_location, content_type='image/jpeg')
     self.assert_(entry.id.text)
-    self.client.Delete(entry)
+    updated_entry = self.client.UpdatePhotoBlob(entry, test_image_location)
+    self.assert_(entry.GetEditLink().href != updated_entry.GetEditLink().href)
+    self.client.Delete(updated_entry)
 
   def tearDown(self):
     # Delete the test album.
