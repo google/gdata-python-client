@@ -21,6 +21,8 @@ import time
 import unittest
 import StringIO
 import gdata.photos.service
+import gdata.photos
+import atom
 
 
 username = ''
@@ -51,6 +53,18 @@ class PhotosServiceTest(unittest.TestCase):
     results_feed = self.client.SearchUserPhotos('test')
     self.assert_(len(results_feed.entry) > 0)
     self.client.Delete(image_entry)
+
+  def testInsertPhotoAndDelete(self):
+    new_entry = gdata.photos.PhotoEntry()
+    new_entry.title = atom.Title(text='a_test_image')
+    new_entry.summary = atom.Summary(text='Just a test.')
+    new_entry.category.append(atom.Category(
+        scheme='http://schemas.google.com/g/2005#kind', 
+        term='http://schemas.google.com/photos/2007#photo'))
+    entry = self.client.InsertPhoto(self.test_album, new_entry, 
+        test_image_location, content_type='image/jpeg')
+    self.assert_(entry.id.text)
+    self.client.Delete(entry)
 
   def tearDown(self):
     # Delete the test album.

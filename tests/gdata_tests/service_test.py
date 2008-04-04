@@ -51,7 +51,7 @@ class GDataServiceMediaUnitTest(unittest.TestCase):
       self.fail('Required Captcha')
     except gdata.service.BadAuthentication:
       self.fail('Bad Authentication')
-    except gdata_client.Error:
+    except gdata.service.Error:
       self.fail('Login Error')
     
     # create a test album
@@ -198,7 +198,7 @@ class GDataServiceUnitTest(unittest.TestCase):
       self.fail('Required Captcha')
 
   def testDefaultHandler(self):
-    self.assertTrue(self.gd_client.handler == atom.service.AtomService)
+    self.assertEquals(self.gd_client.handler, atom.service)
 
   def testGet(self):
     try:
@@ -283,7 +283,7 @@ class GDataServiceUnitTest(unittest.TestCase):
       self.fail('Required Captcha')
     except gdata.service.BadAuthentication:
       self.fail('Bad Authentication')
-    except gdata_client.Error:
+    except gdata.service.Error:
       self.fail('Login Error')
     self.gd_client.additional_headers = {'X-Google-Key':
                                                'ABQIAAAAoLioN3buSs9KqIIq9V' +
@@ -325,7 +325,7 @@ class GDataServiceUnitTest(unittest.TestCase):
       self.fail('Required Captcha')
     except gdata.service.BadAuthentication:
       self.fail('Bad Authentication')
-    except gdata_client.Error:
+    except gdata.service.Error:
       self.fail('Login Error')
     self.gd_client.additional_headers = {'X-Google-Key':
                                                'ABQIAAAAoLioN3buSs9KqIIq9V' +
