@@ -304,11 +304,9 @@ def HttpRequest(service, operation, data, uri, extra_headers=None,
   # Send the HTTP headers.
   if isinstance(service.additional_headers, dict):
     for header in service.additional_headers:
-      #print 'DEBUG: sending header', header, ':', service.additional_headers[header]
       connection.putheader(header, service.additional_headers[header])
   if isinstance(extra_headers, dict):
     for header in extra_headers:
-      #print 'DEBUG: sending header', header, ':', extra_headers[header]
       connection.putheader(header, extra_headers[header])
   connection.endheaders()
 
