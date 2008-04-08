@@ -8,6 +8,7 @@ src/atom/service.py
 src/gdata/__init__.py
 src/gdata/test_data.py
 src/gdata/service.py
+src/gdata/urlfetch.py
 src/gdata/auth.py
 src/gdata/base/__init__.py
 src/gdata/base/service.py
