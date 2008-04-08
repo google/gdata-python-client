@@ -1,5 +1,5 @@
 === 1.0.12 ===
-April 8, 2008 (revision 333)
+April 8, 2008 (revision 334)
 
 - Added support for the Google Contacts API.
 - Added a gdata.urlfetch module which allows this library to be used in 
