@@ -46,6 +46,7 @@ tests/gdata_tests/codesearch_test.py
 tests/gdata_tests/calendar/service_test.py
 tests/gdata_tests/base/service_test.py
 tests/gdata_tests/spreadsheet/service_test.py
+tests/gdata_tests/spreadsheet/text_db_test.py
 tests/gdata_tests/apps/service_test.py
 tests/gdata_tests/calendar_test.py
 tests/gdata_tests/docs_test.py
@@ -71,6 +72,8 @@ pydocs/gdata.calendar.html
 pydocs/gdata.calendar.service.html
 pydocs/gdata.codesearch.html
 pydocs/gdata.codesearch.service.html
+pydocs/gdata.contacts.html
+pydocs/gdata.contacts.service.html
 pydocs/gdata.docs.html
 pydocs/gdata.docs.service.html
 pydocs/gdata.html

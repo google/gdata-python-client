@@ -1,3 +1,19 @@
+=== 1.0.12 ===
+April 8, 2008 (revision 333)
+
+- Added support for the Google Contacts API.
+- Added a gdata.urlfetch module which allows this library to be used in 
+    Google App Engine. This module uses urlfetch instead of httplib to 
+    perform HTTP requests.
+- Refactored atom.service and gdata.service to make it easier to swap out the
+    HTTP communication layer.
+- Fixed a bug in the Push method of gdata.spreadsheet.text_db.
+- Sped up InsertRow method in gdata.spreadsheet.service.
+- Improved XML parsing efficiency in gdata.calendar.service.
+- Added new attribuges for the Google Apps login element.
+- Improved UpdatePhotoBlob in gdata.photo.service.
+- Added pydocs for Google Contacts API and updates in other modules.
+
 === 1.0.11.1 ===
 March 13, 2008 (revision 314)
 
