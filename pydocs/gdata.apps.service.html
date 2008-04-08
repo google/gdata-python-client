@@ -301,9 +301,41 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;feed&nbsp;representing&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;results&nbsp;in&nbsp;the&nbsp;server's&nbsp;feed.<br>
 &nbsp;&nbsp;The&nbsp;type&nbsp;of&nbsp;this&nbsp;feed&nbsp;will&nbsp;match&nbsp;that&nbsp;of&nbsp;the&nbsp;feed&nbsp;argument.</tt></dd></dl>
 
-<dl><dt><a name="AppsService-Post"><strong>Post</strong></a>(self, data, uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, redirects_remaining<font color="#909090">=4</font>, media_source<font color="#909090">=None</font>, converter<font color="#909090">=None</font>)</dt><dd><tt>Insert&nbsp;data&nbsp;into&nbsp;a&nbsp;GData&nbsp;service&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.<br>
+<dl><dt><a name="AppsService-Post"><strong>Post</strong></a>(self, data, uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, redirects_remaining<font color="#909090">=4</font>, media_source<font color="#909090">=None</font>, converter<font color="#909090">=None</font>)</dt><dd><tt>Insert&nbsp;or&nbsp;update&nbsp;&nbsp;data&nbsp;into&nbsp;a&nbsp;GData&nbsp;service&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.<br>
 &nbsp;<br>
 Args:<br>
+&nbsp;&nbsp;data:&nbsp;string,&nbsp;ElementTree._Element,&nbsp;atom.Entry,&nbsp;or&nbsp;gdata.GDataEntry&nbsp;The<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XML&nbsp;to&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;uri.<br>
+&nbsp;&nbsp;uri:&nbsp;string&nbsp;The&nbsp;location&nbsp;(feed)&nbsp;to&nbsp;which&nbsp;the&nbsp;data&nbsp;should&nbsp;be&nbsp;inserted.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example:&nbsp;'/base/feeds/items'.<br>
+&nbsp;&nbsp;extra_headers:&nbsp;dict&nbsp;(optional)&nbsp;HTTP&nbsp;headers&nbsp;which&nbsp;are&nbsp;to&nbsp;be&nbsp;included.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;client&nbsp;automatically&nbsp;sets&nbsp;the&nbsp;Content-Type,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authorization,&nbsp;and&nbsp;Content-Length&nbsp;headers.<br>
+&nbsp;&nbsp;url_params:&nbsp;dict&nbsp;(optional)&nbsp;Additional&nbsp;URL&nbsp;parameters&nbsp;to&nbsp;be&nbsp;included<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;URI.&nbsp;These&nbsp;are&nbsp;translated&nbsp;into&nbsp;query&nbsp;arguments<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;form&nbsp;'&amp;dict_key=value&amp;...'.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example:&nbsp;{'max-results':&nbsp;'250'}&nbsp;becomes&nbsp;&amp;max-results=250<br>
+&nbsp;&nbsp;escape_params:&nbsp;boolean&nbsp;(optional)&nbsp;If&nbsp;false,&nbsp;the&nbsp;calling&nbsp;code&nbsp;has&nbsp;already<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ensured&nbsp;that&nbsp;the&nbsp;query&nbsp;will&nbsp;form&nbsp;a&nbsp;valid&nbsp;URL&nbsp;(all<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reserved&nbsp;characters&nbsp;have&nbsp;been&nbsp;escaped).&nbsp;If&nbsp;true,&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method&nbsp;will&nbsp;escape&nbsp;the&nbsp;query&nbsp;and&nbsp;any&nbsp;URL&nbsp;parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;provided.<br>
+&nbsp;&nbsp;media_source:&nbsp;MediaSource&nbsp;(optional)&nbsp;Container&nbsp;for&nbsp;the&nbsp;media&nbsp;to&nbsp;be&nbsp;sent<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;along&nbsp;with&nbsp;the&nbsp;entry,&nbsp;if&nbsp;provided.<br>
+&nbsp;&nbsp;converter:&nbsp;func&nbsp;(optional)&nbsp;A&nbsp;function&nbsp;which&nbsp;will&nbsp;be&nbsp;executed&nbsp;on&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server's&nbsp;response.&nbsp;Often&nbsp;this&nbsp;is&nbsp;a&nbsp;function&nbsp;like<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GDataEntryFromString&nbsp;which&nbsp;will&nbsp;parse&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;server's<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;and&nbsp;return&nbsp;a&nbsp;GDataEntry.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;If&nbsp;the&nbsp;post&nbsp;succeeded,&nbsp;this&nbsp;method&nbsp;will&nbsp;return&nbsp;a&nbsp;GDataFeed,&nbsp;GDataEntry,<br>
+&nbsp;&nbsp;or&nbsp;the&nbsp;results&nbsp;of&nbsp;running&nbsp;converter&nbsp;on&nbsp;the&nbsp;server's&nbsp;result&nbsp;body&nbsp;(if<br>
+&nbsp;&nbsp;converter&nbsp;was&nbsp;specified).</tt></dd></dl>
+
+<dl><dt><a name="AppsService-PostOrPut"><strong>PostOrPut</strong></a>(self, verb, data, uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, redirects_remaining<font color="#909090">=4</font>, media_source<font color="#909090">=None</font>, converter<font color="#909090">=None</font>)</dt><dd><tt>Insert&nbsp;data&nbsp;into&nbsp;a&nbsp;GData&nbsp;service&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;verb:&nbsp;string,&nbsp;either&nbsp;'POST'&nbsp;or&nbsp;'PUT'<br>
 &nbsp;&nbsp;data:&nbsp;string,&nbsp;ElementTree._Element,&nbsp;atom.Entry,&nbsp;or&nbsp;gdata.GDataEntry&nbsp;The<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XML&nbsp;to&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;uri.&nbsp;<br>
 &nbsp;&nbsp;uri:&nbsp;string&nbsp;The&nbsp;location&nbsp;(feed)&nbsp;to&nbsp;which&nbsp;the&nbsp;data&nbsp;should&nbsp;be&nbsp;inserted.&nbsp;<br>
@@ -331,8 +363,6 @@ Returns:<br>
 &nbsp;&nbsp;If&nbsp;the&nbsp;post&nbsp;succeeded,&nbsp;this&nbsp;method&nbsp;will&nbsp;return&nbsp;a&nbsp;GDataFeed,&nbsp;GDataEntry,<br>
 &nbsp;&nbsp;or&nbsp;the&nbsp;results&nbsp;of&nbsp;running&nbsp;converter&nbsp;on&nbsp;the&nbsp;server's&nbsp;result&nbsp;body&nbsp;(if<br>
 &nbsp;&nbsp;converter&nbsp;was&nbsp;specified).</tt></dd></dl>
-
-<dl><dt><a name="AppsService-PrepareConnection"><strong>PrepareConnection</strong></a>(self, full_uri)</dt></dl>
 
 <dl><dt><a name="AppsService-ProgrammaticLogin"><strong>ProgrammaticLogin</strong></a>(self, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Authenticates&nbsp;the&nbsp;user&nbsp;and&nbsp;sets&nbsp;the&nbsp;GData&nbsp;Auth&nbsp;token.<br>
 &nbsp;<br>
@@ -427,7 +457,21 @@ It&nbsp;should&nbsp;be&nbsp;in&nbsp;the&nbsp;form&nbsp;company_id-app_name-app_v
 </dl>
 <hr>
 Methods inherited from <a href="atom.service.html#AtomService">atom.service.AtomService</a>:<br>
-<dl><dt><a name="AppsService-CreateConnection"><strong>CreateConnection</strong></a>(self, uri, http_operation, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>)</dt></dl>
+<dl><dt><a name="AppsService-PrepareConnection"><strong>PrepareConnection</strong></a>(self, full_uri)</dt><dd><tt>Opens&nbsp;a&nbsp;connection&nbsp;to&nbsp;the&nbsp;server&nbsp;based&nbsp;on&nbsp;the&nbsp;full&nbsp;URI.<br>
+&nbsp;<br>
+Examines&nbsp;the&nbsp;target&nbsp;URI&nbsp;and&nbsp;the&nbsp;proxy&nbsp;settings,&nbsp;which&nbsp;are&nbsp;set&nbsp;as&nbsp;<br>
+environment&nbsp;variables,&nbsp;to&nbsp;open&nbsp;a&nbsp;connection&nbsp;with&nbsp;the&nbsp;server.&nbsp;This&nbsp;<br>
+connection&nbsp;is&nbsp;used&nbsp;to&nbsp;make&nbsp;an&nbsp;HTTP&nbsp;request.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;full_uri:&nbsp;str&nbsp;Which&nbsp;is&nbsp;the&nbsp;target&nbsp;relative&nbsp;(lacks&nbsp;protocol&nbsp;and&nbsp;host)&nbsp;or<br>
+&nbsp;&nbsp;absolute&nbsp;URL&nbsp;to&nbsp;be&nbsp;opened.&nbsp;Example:<br>
+&nbsp;&nbsp;'https://www.google.com/accounts/ClientLogin'&nbsp;or<br>
+&nbsp;&nbsp;'base/feeds/snippets'&nbsp;where&nbsp;the&nbsp;server&nbsp;is&nbsp;set&nbsp;to&nbsp;www.google.com.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;tuple&nbsp;containing&nbsp;the&nbsp;httplib.HTTPConnection&nbsp;and&nbsp;the&nbsp;full_uri&nbsp;for&nbsp;the<br>
+&nbsp;&nbsp;request.</tt></dd></dl>
 
 <dl><dt><a name="AppsService-UseBasicAuth"><strong>UseBasicAuth</strong></a>(self, username, password, for_proxy<font color="#909090">=False</font>)</dt><dd><tt>Sets&nbsp;an&nbsp;Authenticaiton:&nbsp;Basic&nbsp;HTTP&nbsp;header&nbsp;containing&nbsp;plaintext.<br>
 &nbsp;<br>

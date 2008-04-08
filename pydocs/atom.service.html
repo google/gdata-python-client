@@ -14,7 +14,11 @@
 <a href="#AtomService">AtomService</a>:&nbsp;Encapsulates&nbsp;the&nbsp;ability&nbsp;to&nbsp;perform&nbsp;insert,&nbsp;update&nbsp;and&nbsp;delete<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;operations&nbsp;with&nbsp;the&nbsp;Atom&nbsp;Publishing&nbsp;Protocol&nbsp;on&nbsp;which&nbsp;GData&nbsp;is<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;based.&nbsp;An&nbsp;instance&nbsp;can&nbsp;perform&nbsp;query,&nbsp;insertion,&nbsp;deletion,&nbsp;and<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;update.</tt></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;update.<br>
+&nbsp;<br>
+HttpRequest:&nbsp;Function&nbsp;that&nbsp;performs&nbsp;a&nbsp;GET,&nbsp;POST,&nbsp;PUT,&nbsp;or&nbsp;DELETE&nbsp;HTTP&nbsp;request<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;the&nbsp;specified&nbsp;end&nbsp;point.&nbsp;An&nbsp;<a href="#AtomService">AtomService</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;or&nbsp;a&nbsp;subclass&nbsp;can&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;used&nbsp;to&nbsp;specify&nbsp;information&nbsp;about&nbsp;the&nbsp;request.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -56,8 +60,6 @@
 The&nbsp;<a href="#AtomService">AtomService</a>&nbsp;contains&nbsp;methods&nbsp;to&nbsp;perform&nbsp;HTTP&nbsp;CRUD&nbsp;operations.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
-<dl><dt><a name="AtomService-CreateConnection"><strong>CreateConnection</strong></a>(self, uri, http_operation, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>)</dt></dl>
-
 <dl><dt><a name="AtomService-Delete"><strong>Delete</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>)</dt><dd><tt>Deletes&nbsp;the&nbsp;entry&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.<br>
 &nbsp;<br>
 Args:<br>
@@ -244,6 +246,77 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;list&nbsp;which&nbsp;contains&nbsp;a&nbsp;string&nbsp;for&nbsp;each&nbsp;key-value&nbsp;pair.&nbsp;The&nbsp;strings&nbsp;are<br>
 &nbsp;&nbsp;ready&nbsp;to&nbsp;be&nbsp;incorporated&nbsp;into&nbsp;a&nbsp;URL&nbsp;by&nbsp;using&nbsp;'&amp;'.join([]&nbsp;+&nbsp;parameter_list)</tt></dd></dl>
+ <dl><dt><a name="-HttpRequest"><strong>HttpRequest</strong></a>(service, operation, data, uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, content_type<font color="#909090">='application/atom+xml'</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;HTTP&nbsp;call&nbsp;to&nbsp;the&nbsp;server,&nbsp;supports&nbsp;GET,&nbsp;POST,&nbsp;PUT,&nbsp;and&nbsp;DELETE.<br>
+&nbsp;<br>
+Usage&nbsp;example,&nbsp;perform&nbsp;and&nbsp;HTTP&nbsp;GET&nbsp;on&nbsp;<a href="http://www.google.com/">http://www.google.com/</a>:<br>
+&nbsp;&nbsp;import&nbsp;atom.service<br>
+&nbsp;&nbsp;client&nbsp;=&nbsp;atom.service.<a href="#AtomService">AtomService</a>()<br>
+&nbsp;&nbsp;http_response&nbsp;=&nbsp;client.Get('<a href="http://www.google.com/">http://www.google.com/</a>')<br>
+or&nbsp;you&nbsp;could&nbsp;set&nbsp;the&nbsp;client.server&nbsp;to&nbsp;'www.google.com'&nbsp;and&nbsp;use&nbsp;the&nbsp;<br>
+following:<br>
+&nbsp;&nbsp;client.server&nbsp;=&nbsp;'www.google.com'<br>
+&nbsp;&nbsp;http_response&nbsp;=&nbsp;client.Get('/')<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;service:&nbsp;atom.<a href="#AtomService">AtomService</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;which&nbsp;contains&nbsp;some&nbsp;of&nbsp;the&nbsp;parameters&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;needed&nbsp;to&nbsp;make&nbsp;the&nbsp;request.&nbsp;The&nbsp;following&nbsp;members&nbsp;are&nbsp;used&nbsp;to&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;construct&nbsp;the&nbsp;HTTP&nbsp;call:&nbsp;server&nbsp;(str),&nbsp;additional_headers&nbsp;(dict),&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;port&nbsp;(int),&nbsp;and&nbsp;ssl&nbsp;(bool).<br>
+&nbsp;&nbsp;operation:&nbsp;str&nbsp;The&nbsp;HTTP&nbsp;operation&nbsp;to&nbsp;be&nbsp;performed.&nbsp;This&nbsp;is&nbsp;usually&nbsp;one&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'GET',&nbsp;'POST',&nbsp;'PUT',&nbsp;or&nbsp;'DELETE'<br>
+&nbsp;&nbsp;data:&nbsp;ElementTree,&nbsp;filestream,&nbsp;list&nbsp;of&nbsp;parts,&nbsp;or&nbsp;other&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;which&nbsp;can&nbsp;be&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;converted&nbsp;to&nbsp;a&nbsp;string.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Should&nbsp;be&nbsp;set&nbsp;to&nbsp;None&nbsp;when&nbsp;performing&nbsp;a&nbsp;GET&nbsp;or&nbsp;PUT.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;data&nbsp;is&nbsp;a&nbsp;file-like&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;which&nbsp;can&nbsp;be&nbsp;read,&nbsp;this&nbsp;method&nbsp;will&nbsp;read<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;chunk&nbsp;of&nbsp;100K&nbsp;bytes&nbsp;at&nbsp;a&nbsp;time&nbsp;and&nbsp;send&nbsp;them.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;the&nbsp;data&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;parts&nbsp;to&nbsp;be&nbsp;sent,&nbsp;each&nbsp;part&nbsp;will&nbsp;be&nbsp;evaluated<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;sent.<br>
+&nbsp;&nbsp;uri:&nbsp;The&nbsp;beginning&nbsp;of&nbsp;the&nbsp;URL&nbsp;to&nbsp;which&nbsp;the&nbsp;request&nbsp;should&nbsp;be&nbsp;sent.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Examples:&nbsp;'/',&nbsp;'/base/feeds/snippets',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/m8/feeds/contacts/default/base'<br>
+&nbsp;&nbsp;extra_headers:&nbsp;dict&nbsp;of&nbsp;strings.&nbsp;HTTP&nbsp;headers&nbsp;which&nbsp;should&nbsp;be&nbsp;sent<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;request.&nbsp;These&nbsp;headers&nbsp;are&nbsp;in&nbsp;addition&nbsp;to&nbsp;those&nbsp;stored&nbsp;in&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;service.additional_headers.<br>
+&nbsp;&nbsp;url_params:&nbsp;dict&nbsp;of&nbsp;strings.&nbsp;Key&nbsp;value&nbsp;pairs&nbsp;to&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;URL&nbsp;as<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;URL&nbsp;parameters.&nbsp;For&nbsp;example&nbsp;{'foo':'bar',&nbsp;'test':'param'}&nbsp;will&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;become&nbsp;?foo=bar&amp;test=param.<br>
+&nbsp;&nbsp;escape_params:&nbsp;bool&nbsp;default&nbsp;True.&nbsp;If&nbsp;true,&nbsp;the&nbsp;keys&nbsp;and&nbsp;values&nbsp;in&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url_params&nbsp;will&nbsp;be&nbsp;URL&nbsp;escaped&nbsp;when&nbsp;the&nbsp;form&nbsp;is&nbsp;constructed&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Special&nbsp;characters&nbsp;converted&nbsp;to&nbsp;%XX&nbsp;form.)<br>
+&nbsp;&nbsp;content_type:&nbsp;str&nbsp;The&nbsp;MIME&nbsp;type&nbsp;for&nbsp;the&nbsp;data&nbsp;being&nbsp;sent.&nbsp;Defaults&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'application/atom+xml',&nbsp;this&nbsp;is&nbsp;only&nbsp;used&nbsp;if&nbsp;data&nbsp;is&nbsp;set.</tt></dd></dl>
+ <dl><dt><a name="-PrepareConnection"><strong>PrepareConnection</strong></a>(service, full_uri)</dt><dd><tt>Opens&nbsp;a&nbsp;connection&nbsp;to&nbsp;the&nbsp;server&nbsp;based&nbsp;on&nbsp;the&nbsp;full&nbsp;URI.<br>
+&nbsp;<br>
+Examines&nbsp;the&nbsp;target&nbsp;URI&nbsp;and&nbsp;the&nbsp;proxy&nbsp;settings,&nbsp;which&nbsp;are&nbsp;set&nbsp;as<br>
+environment&nbsp;variables,&nbsp;to&nbsp;open&nbsp;a&nbsp;connection&nbsp;with&nbsp;the&nbsp;server.&nbsp;This<br>
+connection&nbsp;is&nbsp;used&nbsp;to&nbsp;make&nbsp;an&nbsp;HTTP&nbsp;request.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;service:&nbsp;atom.<a href="#AtomService">AtomService</a>&nbsp;or&nbsp;a&nbsp;subclass.&nbsp;It&nbsp;must&nbsp;have&nbsp;a&nbsp;server&nbsp;string&nbsp;which<br>
+&nbsp;&nbsp;&nbsp;&nbsp;represents&nbsp;the&nbsp;server&nbsp;host&nbsp;to&nbsp;which&nbsp;the&nbsp;request&nbsp;should&nbsp;be&nbsp;made.&nbsp;It&nbsp;may&nbsp;also<br>
+&nbsp;&nbsp;&nbsp;&nbsp;have&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;additional_headers&nbsp;to&nbsp;send&nbsp;in&nbsp;the&nbsp;HTTP&nbsp;request.<br>
+&nbsp;&nbsp;full_uri:&nbsp;str&nbsp;Which&nbsp;is&nbsp;the&nbsp;target&nbsp;relative&nbsp;(lacks&nbsp;protocol&nbsp;and&nbsp;host)&nbsp;or<br>
+&nbsp;&nbsp;absolute&nbsp;URL&nbsp;to&nbsp;be&nbsp;opened.&nbsp;Example:<br>
+&nbsp;&nbsp;'https://www.google.com/accounts/ClientLogin'&nbsp;or<br>
+&nbsp;&nbsp;'base/feeds/snippets'&nbsp;where&nbsp;the&nbsp;server&nbsp;is&nbsp;set&nbsp;to&nbsp;www.google.com.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;tuple&nbsp;containing&nbsp;the&nbsp;httplib.HTTPConnection&nbsp;and&nbsp;the&nbsp;full_uri&nbsp;for&nbsp;the<br>
+&nbsp;&nbsp;request.</tt></dd></dl>
+ <dl><dt><a name="-ProcessUrl"><strong>ProcessUrl</strong></a>(service, url, for_proxy<font color="#909090">=False</font>)</dt><dd><tt>Processes&nbsp;a&nbsp;passed&nbsp;URL.&nbsp;&nbsp;If&nbsp;the&nbsp;URL&nbsp;does&nbsp;not&nbsp;begin&nbsp;with&nbsp;https?,&nbsp;then<br>
+the&nbsp;default&nbsp;value&nbsp;for&nbsp;server&nbsp;is&nbsp;used</tt></dd></dl>
+ <dl><dt><a name="-UseBasicAuth"><strong>UseBasicAuth</strong></a>(service, username, password, for_proxy<font color="#909090">=False</font>)</dt><dd><tt>Sets&nbsp;an&nbsp;Authenticaiton:&nbsp;Basic&nbsp;HTTP&nbsp;header&nbsp;containing&nbsp;plaintext.<br>
+&nbsp;<br>
+The&nbsp;username&nbsp;and&nbsp;password&nbsp;are&nbsp;base64&nbsp;encoded&nbsp;and&nbsp;added&nbsp;to&nbsp;an&nbsp;HTTP&nbsp;header<br>
+which&nbsp;will&nbsp;be&nbsp;included&nbsp;in&nbsp;each&nbsp;request.&nbsp;Note&nbsp;that&nbsp;your&nbsp;username&nbsp;and&nbsp;<br>
+password&nbsp;are&nbsp;sent&nbsp;in&nbsp;plaintext.&nbsp;The&nbsp;auth&nbsp;header&nbsp;is&nbsp;added&nbsp;to&nbsp;the&nbsp;<br>
+additional_headers&nbsp;dictionary&nbsp;in&nbsp;the&nbsp;service&nbsp;<a href="__builtin__.html#object">object</a>.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;service:&nbsp;atom.<a href="#AtomService">AtomService</a>&nbsp;or&nbsp;a&nbsp;subclass&nbsp;which&nbsp;has&nbsp;an&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;additional_headers&nbsp;dict&nbsp;as&nbsp;a&nbsp;member.<br>
+&nbsp;&nbsp;username:&nbsp;str<br>
+&nbsp;&nbsp;password:&nbsp;str</tt></dd></dl>
 </td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
