@@ -322,7 +322,6 @@ class GBaseItemAttributeAccessElement(unittest.TestCase):
   def testItemAttributeAccessAttribute(self):
     item = gdata.base.GBaseItem()
     item.AddItemAttribute('test', '1', value_type='int', access='private')
-    print item
     private_attribute = item.GetItemAttributes('test')[0]
     self.assert_(private_attribute.access == 'private')
     xml = item.ToString()
