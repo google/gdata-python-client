@@ -21,7 +21,9 @@
 
 """Contains extensions to ElementWrapper objects used with Google Calendar."""
 
+
 __author__ = 'api.vli (Vivian Li), api.rboyd (Ryan Boyd)'
+
 
 try:
   from xml.etree import cElementTree as ElementTree
@@ -29,7 +31,10 @@ except ImportError:
   try:
     import cElementTree as ElementTree
   except ImportError:
-    from elementtree import ElementTree
+    try:
+      from xml.etree import ElementTree
+    except Import Error:
+      from elementtree import ElementTree
 import atom
 import gdata
 

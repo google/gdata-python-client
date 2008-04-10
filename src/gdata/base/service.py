@@ -27,13 +27,6 @@
 __author__ = 'api.jscudder (Jeffrey Scudder)'
 
 import urllib
-try:
-  from xml.etree import cElementTree as ElementTree
-except ImportError:
-  try:
-    import cElementTree as ElementTree
-  except ImportError:
-    from elementtree import ElementTree
 import gdata
 import atom.service
 import gdata.service
@@ -147,7 +140,7 @@ class GBaseService(gdata.service.GDataService):
     """Adds an item to Google Base.
 
     Args: 
-      new_item: ElementTree._Element A new item which is to be added to 
+      new_item: atom.Entry or subclass A new item which is to be added to 
                 Google Base.
       url_params: dict (optional) Additional URL parameters to be included
                   in the insertion request. 
@@ -196,7 +189,7 @@ class GBaseService(gdata.service.GDataService):
     Args:
       item_id: string The ID of the item to be updated.  Example:
                'http://www.google.com/base/feeds/items/13185446517496042648'
-      updated_item: string, ElementTree._Element, or ElementWrapper containing
+      updated_item: atom.Entry, subclass, or string, containing
                     the Atom Entry which will replace the base item which is 
                     stored at the item_id.
       url_params: dict (optional) Additional URL parameters to be included

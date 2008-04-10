@@ -38,14 +38,16 @@ __license__ = 'Apache License v2'
 __version__ = '$Revision: 164 $'[11:-2]
 
 import re
-
 try:
   from xml.etree import cElementTree as ElementTree
 except ImportError:
   try:
     import cElementTree as ElementTree
   except ImportError:
-    from elementtree import ElementTree
+    try:
+      from xml.etree import ElementTree
+    except Import Error:
+      from elementtree import ElementTree
 import atom
 import gdata
 

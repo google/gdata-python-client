@@ -66,7 +66,10 @@ except ImportError:
   try:
     import cElementTree as ElementTree
   except ImportError:
-    from elementtree import ElementTree
+    try:
+      from xml.etree import ElementTree
+    except Import Error:
+      from elementtree import ElementTree
 import atom.service
 import gdata
 import atom

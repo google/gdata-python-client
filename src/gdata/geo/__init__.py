@@ -42,13 +42,7 @@ W3C format and plain-GeoRSS (without GML) format.
 __author__ = u'havard@gulldahl.no'# (Håvard Gulldahl)' #BUG: api chokes on non-ascii chars in __author__
 __license__ = 'Apache License v2'
 
-try:
-  from xml.etree import cElementTree as ElementTree
-except ImportError:
-  try:
-    import cElementTree as ElementTree
-  except ImportError:
-    from elementtree import ElementTree
+
 import atom
 import gdata
 

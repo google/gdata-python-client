@@ -26,14 +26,7 @@
 
 __author__ = 'dbrattli (Dag Brattli)'
 
-try:
-  from xml.etree import cElementTree as ElementTree
-except ImportError:
-  try:
-    import cElementTree as ElementTree
-  except ImportError:
-    from elementtree import ElementTree
-import urllib
+
 import gdata
 import atom.service
 import gdata.service
@@ -67,7 +60,7 @@ class ContactsService(gdata.service.GDataService):
     """Adds an event to Google Contacts.
 
     Args: 
-      new_contact: ElementTree._Element A new event which is to be added to 
+      new_contact: atom.Entry or subclass A new event which is to be added to
                 Google Contacts.
       insert_uri: the URL to post new contacts to the feed
       url_params: dict (optional) Additional URL parameters to be included
@@ -93,7 +86,7 @@ class ContactsService(gdata.service.GDataService):
 
     Args:
       edit_uri: string The edit link URI for the element being updated
-      updated_contact: string, ElementTree._Element, or ElementWrapper containing
+      updated_contact: string, atom.Entry or subclass containing
                     the Atom Entry which will replace the event which is 
                     stored at the edit_url 
       url_params: dict (optional) Additional URL parameters to be included

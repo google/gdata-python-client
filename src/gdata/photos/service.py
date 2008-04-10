@@ -82,14 +82,6 @@ __version__ = '$Revision: 176 $'[11:-2]
 
 import sys, os.path, StringIO
 import time
-try:
-  from xml.etree import cElementTree as ElementTree
-except ImportError:
-  try:
-    import cElementTree as ElementTree
-  except ImportError:
-    from elementtree import ElementTree
-
 import gdata.service
 import gdata
 import atom.service
@@ -128,13 +120,6 @@ class GooglePhotosException(Exception):
         self.error_code = code
         break
     self.args = [self.error_code, self.reason, self.body]
-    #try:
-      #self.element_tree = ElementTree.fromstring(response['body'])
-      #self.error_code = int(self.element_tree[0].attrib['errorCode'])
-      #self.reason = self.element_tree[0].attrib['reason']
-      #self.invalidInput = self.element_tree[0].attrib['invalidInput']
-    #except:
-      #self.error_code = UNKOWN_ERROR
 
 class PhotosService(gdata.service.GDataService):
   userUri = '/data/feed/api/user/%s'

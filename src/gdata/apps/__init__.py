@@ -19,13 +19,6 @@
 __author__ = 'tmatsuo@sios.com (Takashi MATSUO)'
 
 
-try:
-  from xml.etree import cElementTree as ElementTree
-except ImportError:
-  try:
-    import cElementTree as ElementTree
-  except ImportError:
-    from elementtree import ElementTree
 import atom
 import gdata
 

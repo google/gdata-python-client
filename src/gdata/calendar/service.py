@@ -24,15 +24,10 @@
                          utility function used in CRUD operations.
 """
 
+
 __author__ = 'api.vli (Vivian Li)'
 
-try:
-  from xml.etree import cElementTree as ElementTree
-except ImportError:
-  try:
-    import cElementTree as ElementTree
-  except ImportError:
-    from elementtree import ElementTree
+
 import urllib
 import gdata
 import atom.service
@@ -133,7 +128,7 @@ class CalendarService(gdata.service.GDataService):
     """Adds an event to Google Calendar.
 
     Args: 
-      new_event: ElementTree._Element A new event which is to be added to 
+      new_event: atom.Entry or subclass A new event which is to be added to 
                 Google Calendar.
       insert_uri: the URL to post new events to the feed
       url_params: dict (optional) Additional URL parameters to be included
@@ -232,7 +227,7 @@ class CalendarService(gdata.service.GDataService):
     """Adds an ACL entry (rule) to Google Calendar.
 
     Args: 
-      new_entry: ElementTree._Element A new ACL entry which is to be added to 
+      new_entry: atom.Entry or subclass A new ACL entry which is to be added to 
                 Google Calendar.
       insert_uri: the URL to post new entries to the ACL feed
       url_params: dict (optional) Additional URL parameters to be included
@@ -257,7 +252,7 @@ class CalendarService(gdata.service.GDataService):
     """Adds an entry to Google Calendar.
 
     Args:
-      new_entry: ElementTree._Element A new entry which is to be added to
+      new_entry: atom.Entry or subclass A new entry which is to be added to
                 Google Calendar.
       insert_uri: the URL to post new entrys to the feed
       url_params: dict (optional) Additional URL parameters to be included
@@ -360,7 +355,7 @@ class CalendarService(gdata.service.GDataService):
 
     Args:
       edit_uri: string The edit link URI for the element being updated
-      updated_event: string, ElementTree._Element, or ElementWrapper containing
+      updated_event: string, atom.Entry, or subclass containing
                     the Atom Entry which will replace the event which is 
                     stored at the edit_url 
       url_params: dict (optional) Additional URL parameters to be included
@@ -390,7 +385,7 @@ class CalendarService(gdata.service.GDataService):
 
     Args:
       edit_uri: string The edit link URI for the element being updated
-      updated_rule: string, ElementTree._Element, or ElementWrapper containing
+      updated_rule: string, atom.Entry, or subclass containing
                     the Atom Entry which will replace the event which is 
                     stored at the edit_url 
       url_params: dict (optional) Additional URL parameters to be included

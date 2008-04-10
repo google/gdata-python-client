@@ -27,14 +27,7 @@ Spreadsheets operations.
 
 __author__ = 'api.laurabeth@gmail.com (Laura Beth Lincoln)'
 
-import urllib
-try:
-  from xml.etree import cElementTree as ElementTree
-except ImportError:
-  try:
-    import cElementTree as ElementTree
-  except ImportError:
-    from elementtree import ElementTree
+
 import gdata
 import atom.service
 import gdata.service
