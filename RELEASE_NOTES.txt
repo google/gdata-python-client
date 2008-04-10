@@ -1,3 +1,9 @@
+=== 1.0.12.1 ===
+April 10, 2008 (revision 341)
+
+- Added new import statements so that xml.etree.ElementTree can be used. 
+    Needed for the library to run on Google App Engine.
+
 === 1.0.12 ===
 April 8, 2008 (revision 334)
 
