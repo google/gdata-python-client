@@ -52,7 +52,7 @@ except ImportError:
   except ImportError:
     try:
       from xml.etree import ElementTree
-    except Import Error:
+    except ImportError:
       from elementtree import ElementTree
 
 
