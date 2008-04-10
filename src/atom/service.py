@@ -41,9 +41,14 @@ except ImportError:
   try:
     import cElementTree as ElementTree
   except ImportError:
-    from elementtree import ElementTree
+    try:
+      from xml.etree import ElementTree
+    except Import Error:
+      from elementtree import ElementTree
+
 
 URL_REGEX = re.compile('http(s)?\://([\w\.-]*)(\:(\d+))?(/.*)?')
+
 
 class AtomService(object):
   """Performs Atom Publishing Protocol CRUD operations.
