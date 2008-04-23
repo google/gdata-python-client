@@ -15,7 +15,7 @@
 # limitations under the License.
 
 
-__author__ = 'jscudder@google.com (Jeff Scudder)'
+__author__ = 'api.jscudder (Jeff Scudder)'
 
 
 import unittest

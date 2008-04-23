@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-__author__ = 'jscudder@google.com (Jeff Scudder)'
+__author__ = 'api.jscudder (Jeff Scudder)'
 
 import unittest
 import getpass
