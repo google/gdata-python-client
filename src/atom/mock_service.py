@@ -91,7 +91,12 @@ def HttpRequest(service, operation, data, uri, extra_headers=None,
   # If the request handler is set, we should actually make the request using 
   # the request handler and record the response to replay later.
   if real_request_handler:
-    pass
+    response = real_request_handler.HttpRequest(service, operation, data, uri,
+        extra_headers=extra_headers, url_params=url_params, 
+        escape_params=escape_params, content_type=content_type)
+    # Insert a tuple which maps the request to the response object returned
+    # when making an HTTP call using the real_request_handler.
+    recordings.append((current_request, response))
   else:
     # Look through available recordings to see if one matches the current 
     # request.
