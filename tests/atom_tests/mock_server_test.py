@@ -73,6 +73,24 @@ class HttpRequestTest(unittest.TestCase):
     self.assertEquals(raw_response.read(), 'Got it')
     self.assertEquals(raw_response.status, 200)
     self.assertEquals(raw_response.reason, 'OK')
+
+
+class RecordRealHttpRequestsTest(unittest.TestCase):
+
+  def testRecordAndReuseResponse(self):
+    client = gdata.service.GDataService()
+    client.server = 'www.google.com'
+    atom.mock_service.recordings = []
+    atom.mock_service.real_request_handler = atom.service
+
+    # Record a response
+    real_response = atom.mock_service.HttpRequest(client, 'GET', None, 'http://www.google.com/')
+    # Enter 'replay' mode
+    atom.mock_service.real_request_handler = None
+    mock_response = atom.mock_service.HttpRequest(client, 'GET', None, 'http://www.google.com/')
+    self.assertEquals(real_response.reason, mock_response.reason)
+    self.assertEquals(real_response.status, mock_response.status)
+    self.assertEquals(real_response.read(), mock_response.read())
     
 
 if __name__ == '__main__':

@@ -94,9 +94,14 @@ def HttpRequest(service, operation, data, uri, extra_headers=None,
     response = real_request_handler.HttpRequest(service, operation, data, uri,
         extra_headers=extra_headers, url_params=url_params, 
         escape_params=escape_params, content_type=content_type)
+    # TODO: need to copy the HTTP headers from the real response into the
+    # recorded_response.
+    recorded_response = MockHttpResponse(body=response.read(), 
+        status=response.status, reason=response.reason)
     # Insert a tuple which maps the request to the response object returned
     # when making an HTTP call using the real_request_handler.
-    recordings.append((current_request, response))
+    recordings.append((current_request, recorded_response))
+    return recorded_response
   else:
     # Look through available recordings to see if one matches the current 
     # request.
