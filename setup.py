@@ -20,7 +20,7 @@ from distutils.core import setup
 
 setup(
     name='gdata.py',
-    version='1.0.12.1',
+    version='1.0.12.2',
     description='Python client library for Google data APIs',
     long_description = """\
 The Google data Python client library makes it easy to access data
@@ -37,9 +37,9 @@ service modules for the the following Google data services:
 - core Google data API functionality 
 The core Google data code provides sufficient functionality to use this 
 library with any Google data API (even if a module hasn't been written for 
-it yet). For example, this client can be used with the Picasa Web Albums data
-API, the Blogger API, and the YouTube API. This library may also be used with
-any Atom Publishing Protocol service.
+it yet). For example, this client can be used with the Blogger API, and the
+YouTube API. This library may also be used with any Atom Publishing Protocol
+service.
 """,
     author='Jeffrey Scudder',
     author_email='api.jscudder@gmail.com',

@@ -45,10 +45,14 @@ tests/gdata_tests/__init__.py
 tests/gdata_tests/service_test.py
 tests/gdata_tests/auth_test.py
 tests/gdata_tests/codesearch_test.py
+tests/gdata_tests/calendar/__init__.py
 tests/gdata_tests/calendar/service_test.py
+tests/gdata_tests/base/__init__.py
 tests/gdata_tests/base/service_test.py
+tests/gdata_tests/spreadsheet/__init__.py
 tests/gdata_tests/spreadsheet/service_test.py
 tests/gdata_tests/spreadsheet/text_db_test.py
+tests/gdata_tests/apps/__init__.py
 tests/gdata_tests/apps/service_test.py
 tests/gdata_tests/calendar_test.py
 tests/gdata_tests/docs_test.py
