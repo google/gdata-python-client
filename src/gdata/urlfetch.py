@@ -50,7 +50,7 @@ def HttpRequest(service, operation, data, uri, extra_headers=None,
         port (int), and ssl (bool).
     operation: str The HTTP operation to be performed. This is usually one of
         'GET', 'POST', 'PUT', or 'DELETE'
-    data: ElementTree, filestream, list of parts, or other object which can be
+    data: filestream, list of parts, or other object which can be
         converted to a string.
         Should be set to None when performing a GET or PUT.
         If data is a file-like object which can be read, this method will read

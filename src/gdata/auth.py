@@ -75,7 +75,8 @@ def GenerateClientLoginAuthToken(http_body):
   """
   for response_line in http_body.splitlines():
     if response_line.startswith('Auth='):
-      return 'GoogleLogin auth=%s' % response_line.lstrip('Auth=')
+      # Strip off the leading Auth= and return the Authorization value.
+      return 'GoogleLogin auth=%s' % response_line[5:]
   return None
 
 
@@ -107,10 +108,11 @@ def GetCaptchChallenge(http_body,
     if response_line.startswith('Error=CaptchaRequired'):
       contains_captcha_challenge = True
     elif response_line.startswith('CaptchaToken='):
-      captcha_parameters['token'] = response_line.lstrip('CaptchaToken=')
+      # Strip off the leading CaptchaToken=
+      captcha_parameters['token'] = response_line[13:]
     elif response_line.startswith('CaptchaUrl='):
       captcha_parameters['url'] = '%s%s' % (captcha_base_url,
-          response_line.lstrip('CaptchaUrl='))
+          response_line[11:])
   if contains_captcha_challenge:
     return captcha_parameters
   else:
@@ -191,6 +193,7 @@ def AuthSubTokenFromHttpBody(http_body):
   """
   for response_line in http_body.splitlines():
     if response_line.startswith('Token='):
-      auth_token = response_line.lstrip('Token=')
+      # Strip off Token= and construct the Authorization value.
+      auth_token = response_line[6:]
       return 'AuthSub token=%s' % auth_token
   return None
