@@ -56,6 +56,7 @@ tests/gdata_tests/apps/__init__.py
 tests/gdata_tests/apps/service_test.py
 tests/gdata_tests/calendar_test.py
 tests/gdata_tests/docs_test.py
+tests/gdata_tests/docs/__init__.py
 tests/gdata_tests/docs/service_test.py
 tests/gdata_tests/base_test.py
 tests/gdata_tests/spreadsheet_test.py
