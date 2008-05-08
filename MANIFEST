@@ -62,8 +62,10 @@ tests/gdata_tests/base_test.py
 tests/gdata_tests/spreadsheet_test.py
 tests/gdata_tests/apps_test.py
 tests/gdata_tests/photos_test.py
+tests/gdata_tests/photos/__init__.py
 tests/gdata_tests/photos/service_test.py
 tests/gdata_tests/contacts_test.py
+tests/gdata_tests/contacts/__init__.py
 tests/gdata_tests/contacts/service_test.py
 tests/module_test_runner.py
 tests/run_all_tests.py
