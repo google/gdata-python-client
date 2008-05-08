@@ -69,6 +69,14 @@ class GDataEntryTest(unittest.TestCase):
         )[0].text != feed.generator.text)
     self.assert_(feed.generator.text == 'GoogleBase')
 
+  def testAllowsEmptyId(self):
+    entry = gdata.GDataEntry()
+    try:
+      entry.id = atom.Id()
+    except AttributeError:
+      self.fail('Empty id should not raise an attribute error.')
+
+
 class LinkFinderTest(unittest.TestCase):
   
   def setUp(self):
@@ -98,6 +106,13 @@ class GDataFeedTest(unittest.TestCase):
     feed = element_tree.find('{http://www.w3.org/2005/Atom}feed')
     self.assert_(element_tree.find(
         '{http://a9.com/-/spec/opensearchrss/1.0/}totalResults') is not None)
+
+  def testAllowsEmptyId(self):
+    feed = gdata.GDataFeed()
+    try:
+      feed.id = atom.Id()
+    except AttributeError:
+      self.fail('Empty id should not raise an attribute error.')
 
 
 class BatchEntryTest(unittest.TestCase):

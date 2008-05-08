@@ -252,7 +252,7 @@ class GDataEntry(atom.Entry, LinkFinder):
   # text node.
   def __SetId(self, id):
     self.__id = id
-    if id is not None:
+    if id is not None and id.text is not None:
       self.__id.text = id.text.strip()
 
   id = property(__GetId, __SetId)
@@ -302,7 +302,7 @@ class GDataFeed(atom.Feed, LinkFinder):
 
   def __SetId(self, id):
     self.__id = id
-    if id is not None:
+    if id is not None and id.text is not None:
       self.__id.text = id.text.strip()
 
   id = property(__GetId, __SetId)
