@@ -24,11 +24,10 @@ DictionaryToParamList:&nbsp;Function&nbsp;which&nbsp;converts&nbsp;a&nbsp;dictio
 <font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="cElementTree.html">cElementTree</a><br>
-</td><td width="25%" valign=top><a href="atom.html">atom</a><br>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="atom.html">atom</a><br>
 </td><td width="25%" valign=top><a href="gdata.html">gdata</a><br>
 </td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
-</td></tr></table></td></tr></table><p>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -324,7 +323,7 @@ Returns:<br>
 <dl><dt><a name="GBaseService-InsertItem"><strong>InsertItem</strong></a>(self, new_item, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, converter<font color="#909090">=None</font>)</dt><dd><tt>Adds&nbsp;an&nbsp;item&nbsp;to&nbsp;Google&nbsp;Base.<br>
 &nbsp;<br>
 Args:&nbsp;<br>
-&nbsp;&nbsp;new_item:&nbsp;ElementTree._Element&nbsp;A&nbsp;new&nbsp;item&nbsp;which&nbsp;is&nbsp;to&nbsp;be&nbsp;added&nbsp;to&nbsp;<br>
+&nbsp;&nbsp;new_item:&nbsp;atom.Entry&nbsp;or&nbsp;subclass&nbsp;A&nbsp;new&nbsp;item&nbsp;which&nbsp;is&nbsp;to&nbsp;be&nbsp;added&nbsp;to&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Google&nbsp;Base.<br>
 &nbsp;&nbsp;url_params:&nbsp;dict&nbsp;(optional)&nbsp;Additional&nbsp;URL&nbsp;parameters&nbsp;to&nbsp;be&nbsp;included<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;insertion&nbsp;request.&nbsp;<br>
@@ -371,7 +370,7 @@ Returns:<br>
 Args:<br>
 &nbsp;&nbsp;item_id:&nbsp;string&nbsp;The&nbsp;ID&nbsp;of&nbsp;the&nbsp;item&nbsp;to&nbsp;be&nbsp;updated.&nbsp;&nbsp;Example:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<a href="http://www.google.com/base/feeds/items/13185446517496042648">http://www.google.com/base/feeds/items/13185446517496042648</a>'<br>
-&nbsp;&nbsp;updated_item:&nbsp;string,&nbsp;ElementTree._Element,&nbsp;or&nbsp;ElementWrapper&nbsp;containing<br>
+&nbsp;&nbsp;updated_item:&nbsp;atom.Entry,&nbsp;subclass,&nbsp;or&nbsp;string,&nbsp;containing<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Atom&nbsp;Entry&nbsp;which&nbsp;will&nbsp;replace&nbsp;the&nbsp;base&nbsp;item&nbsp;which&nbsp;is&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stored&nbsp;at&nbsp;the&nbsp;item_id.<br>
 &nbsp;&nbsp;url_params:&nbsp;dict&nbsp;(optional)&nbsp;Additional&nbsp;URL&nbsp;parameters&nbsp;to&nbsp;be&nbsp;included<br>

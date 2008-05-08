@@ -24,11 +24,10 @@ DictionaryToParamList:&nbsp;Function&nbsp;which&nbsp;converts&nbsp;a&nbsp;dictio
 <font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="cElementTree.html">cElementTree</a><br>
-</td><td width="25%" valign=top><a href="atom.html">atom</a><br>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="atom.html">atom</a><br>
 </td><td width="25%" valign=top><a href="gdata.html">gdata</a><br>
 </td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
-</td></tr></table></td></tr></table><p>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -760,7 +759,7 @@ Returns:<br>
 <dl><dt><a name="CalendarService-InsertAclEntry"><strong>InsertAclEntry</strong></a>(self, new_entry, insert_uri, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>)</dt><dd><tt>Adds&nbsp;an&nbsp;ACL&nbsp;entry&nbsp;(rule)&nbsp;to&nbsp;Google&nbsp;Calendar.<br>
 &nbsp;<br>
 Args:&nbsp;<br>
-&nbsp;&nbsp;new_entry:&nbsp;ElementTree._Element&nbsp;A&nbsp;new&nbsp;ACL&nbsp;entry&nbsp;which&nbsp;is&nbsp;to&nbsp;be&nbsp;added&nbsp;to&nbsp;<br>
+&nbsp;&nbsp;new_entry:&nbsp;atom.Entry&nbsp;or&nbsp;subclass&nbsp;A&nbsp;new&nbsp;ACL&nbsp;entry&nbsp;which&nbsp;is&nbsp;to&nbsp;be&nbsp;added&nbsp;to&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Google&nbsp;Calendar.<br>
 &nbsp;&nbsp;insert_uri:&nbsp;the&nbsp;URL&nbsp;to&nbsp;post&nbsp;new&nbsp;entries&nbsp;to&nbsp;the&nbsp;ACL&nbsp;feed<br>
 &nbsp;&nbsp;url_params:&nbsp;dict&nbsp;(optional)&nbsp;Additional&nbsp;URL&nbsp;parameters&nbsp;to&nbsp;be&nbsp;included<br>
@@ -810,7 +809,7 @@ Returns:<br>
 <dl><dt><a name="CalendarService-InsertEvent"><strong>InsertEvent</strong></a>(self, new_event, insert_uri, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>)</dt><dd><tt>Adds&nbsp;an&nbsp;event&nbsp;to&nbsp;Google&nbsp;Calendar.<br>
 &nbsp;<br>
 Args:&nbsp;<br>
-&nbsp;&nbsp;new_event:&nbsp;ElementTree._Element&nbsp;A&nbsp;new&nbsp;event&nbsp;which&nbsp;is&nbsp;to&nbsp;be&nbsp;added&nbsp;to&nbsp;<br>
+&nbsp;&nbsp;new_event:&nbsp;atom.Entry&nbsp;or&nbsp;subclass&nbsp;A&nbsp;new&nbsp;event&nbsp;which&nbsp;is&nbsp;to&nbsp;be&nbsp;added&nbsp;to&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Google&nbsp;Calendar.<br>
 &nbsp;&nbsp;insert_uri:&nbsp;the&nbsp;URL&nbsp;to&nbsp;post&nbsp;new&nbsp;events&nbsp;to&nbsp;the&nbsp;feed<br>
 &nbsp;&nbsp;url_params:&nbsp;dict&nbsp;(optional)&nbsp;Additional&nbsp;URL&nbsp;parameters&nbsp;to&nbsp;be&nbsp;included<br>
@@ -828,7 +827,7 @@ Returns:<br>
 <dl><dt><a name="CalendarService-InsertEventComment"><strong>InsertEventComment</strong></a>(self, new_entry, insert_uri, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>)</dt><dd><tt>Adds&nbsp;an&nbsp;entry&nbsp;to&nbsp;Google&nbsp;Calendar.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;new_entry:&nbsp;ElementTree._Element&nbsp;A&nbsp;new&nbsp;entry&nbsp;which&nbsp;is&nbsp;to&nbsp;be&nbsp;added&nbsp;to<br>
+&nbsp;&nbsp;new_entry:&nbsp;atom.Entry&nbsp;or&nbsp;subclass&nbsp;A&nbsp;new&nbsp;entry&nbsp;which&nbsp;is&nbsp;to&nbsp;be&nbsp;added&nbsp;to<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Google&nbsp;Calendar.<br>
 &nbsp;&nbsp;insert_uri:&nbsp;the&nbsp;URL&nbsp;to&nbsp;post&nbsp;new&nbsp;entrys&nbsp;to&nbsp;the&nbsp;feed<br>
 &nbsp;&nbsp;url_params:&nbsp;dict&nbsp;(optional)&nbsp;Additional&nbsp;URL&nbsp;parameters&nbsp;to&nbsp;be&nbsp;included<br>
@@ -860,7 +859,7 @@ Returns:<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;edit_uri:&nbsp;string&nbsp;The&nbsp;edit&nbsp;link&nbsp;URI&nbsp;for&nbsp;the&nbsp;element&nbsp;being&nbsp;updated<br>
-&nbsp;&nbsp;updated_rule:&nbsp;string,&nbsp;ElementTree._Element,&nbsp;or&nbsp;ElementWrapper&nbsp;containing<br>
+&nbsp;&nbsp;updated_rule:&nbsp;string,&nbsp;atom.Entry,&nbsp;or&nbsp;subclass&nbsp;containing<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Atom&nbsp;Entry&nbsp;which&nbsp;will&nbsp;replace&nbsp;the&nbsp;event&nbsp;which&nbsp;is&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stored&nbsp;at&nbsp;the&nbsp;edit_url&nbsp;<br>
 &nbsp;&nbsp;url_params:&nbsp;dict&nbsp;(optional)&nbsp;Additional&nbsp;URL&nbsp;parameters&nbsp;to&nbsp;be&nbsp;included<br>
@@ -896,7 +895,7 @@ Returns:<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;edit_uri:&nbsp;string&nbsp;The&nbsp;edit&nbsp;link&nbsp;URI&nbsp;for&nbsp;the&nbsp;element&nbsp;being&nbsp;updated<br>
-&nbsp;&nbsp;updated_event:&nbsp;string,&nbsp;ElementTree._Element,&nbsp;or&nbsp;ElementWrapper&nbsp;containing<br>
+&nbsp;&nbsp;updated_event:&nbsp;string,&nbsp;atom.Entry,&nbsp;or&nbsp;subclass&nbsp;containing<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Atom&nbsp;Entry&nbsp;which&nbsp;will&nbsp;replace&nbsp;the&nbsp;event&nbsp;which&nbsp;is&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stored&nbsp;at&nbsp;the&nbsp;edit_url&nbsp;<br>
 &nbsp;&nbsp;url_params:&nbsp;dict&nbsp;(optional)&nbsp;Additional&nbsp;URL&nbsp;parameters&nbsp;to&nbsp;be&nbsp;included<br>
