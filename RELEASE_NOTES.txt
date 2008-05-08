@@ -1,5 +1,5 @@
-=== 1.0.12.2 ===
-May 8, 2008 (revision 356)
+=== 1.0.13 ===
+May 8, 2008 (revision 357)
 
 - Added sample code illustrating the use of the Contacts API modules.
 - Added a mock_service module which will allow for faster test execution
