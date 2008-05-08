@@ -1,3 +1,17 @@
+=== 1.0.12.2 ===
+May 8, 2008 (revision 356)
+
+- Added sample code illustrating the use of the Contacts API modules.
+- Added a mock_service module which will allow for faster test execution
+    by simulating a server and replaying recordings instead of making
+    HTTP requests to a remote server.
+- Fixed a but in the gdata.auth module which could cause certain characters
+    at the start of the token to be removed incorrectly.
+- Fixed a bug in the gdata.apps.service module which caused an import to 
+    fail when loading ElementTree in some cases.
+- Service unit tests should run correctly when using run_service_tests 
+    and run_all_tests now that the subtests have been made into packages.
+
 === 1.0.12.1 ===
 April 10, 2008 (revision 341)
 
