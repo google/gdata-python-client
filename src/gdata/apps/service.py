@@ -91,6 +91,15 @@ class AppsService(gdata.service.GDataService):
   def _baseURL(self):
     return "/a/feeds/%s" % self.domain 
 
+  def GetGenaratorFromLinkFinder(self, link_finder, func):
+    """returns a generator for pagination"""
+    yield link_finder
+    next = link_finder.GetNextLink()
+    while next is not None:
+      next_feed = func(str(self.Get(next.href)))
+      yield next_feed
+      next = next_feed.GetNextLink()
+
   def AddAllElementsFromAllPages(self, link_finder, func):
     """retrieve all pages and add all elements"""
     next = link_finder.GetNextLink()
@@ -204,7 +213,6 @@ class AppsService(gdata.service.GDataService):
     uri = "%s/emailList/%s" % (self._baseURL(), API_VER)
     email_list_entry = gdata.apps.EmailListEntry()
     email_list_entry.email_list = gdata.apps.EmailList(name=list_name)
-
     try: 
       return gdata.apps.EmailListEntryFromString(
         str(self.Post(email_list_entry, uri)))
@@ -361,10 +369,17 @@ class AppsService(gdata.service.GDataService):
     except gdata.service.RequestError, e:
       raise AppsForYourDomainException(e.args[0])
 
+  def GetGeneratorForAllUsers(self):
+    """Retrieve a generator for all users in this domain."""
+    first_page = self.RetrievePageOfUsers()
+    return self.GetGenaratorFromLinkFinder(first_page,
+                                           gdata.apps.UserFeedFromString)
+
   def RetrieveAllUsers(self):
-    """Retrieve all users in this domain."""
+    """Retrieve all users in this domain. OBSOLETE"""
 
     ret = self.RetrievePageOfUsers()
     # pagination
     return self.AddAllElementsFromAllPages(
       ret, gdata.apps.UserFeedFromString)
+
