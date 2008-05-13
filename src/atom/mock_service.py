@@ -33,14 +33,22 @@ recordings = []
 # If set, the mock service HttpRequest are actually made through this object.
 real_request_handler = None
 
-def DumpRecordings():
+def ConcealValueWithSha(source):
+  import sha
+  return sha.new(source[:-5]).hexdigest()
+
+def DumpRecordings(conceal_func=ConcealValueWithSha):
+  if conceal_func:
+    for recording_pair in recordings:
+      recording_pair[0].ConcealSecrets(conceal_func)
   return pickle.dumps(recordings)
 
 def LoadRecordings(recordings_file_or_string):
   if isinstance(recordings_file_or_string, str):
-    recordings =  pickle.loads(recordings_file_or_string)
+    atom.mock_service.recordings =  pickle.loads(recordings_file_or_string)
   elif hasattr(recordings_file_or_string, 'read'):
-    recordings =  pickle.loads(recordings_file_or_string.read())
+    atom.mock_service.recordings = pickle.loads(
+      recordings_file_or_string.read())
 
 def HttpRequest(service, operation, data, uri, extra_headers=None,
     url_params=None, escape_params=True, content_type='application/atom+xml'):
@@ -157,6 +165,12 @@ class MockRequest(object):
     self.url_params = url_params or {}
     self.escape_params = escape_params
     self.content_type = content_type
+
+  def ConcealSecrets(self, conceal_func):
+    """Conceal secret data in this request."""
+    if self.extra_headers.has_key('Authorization'):
+      self.extra_headers['Authorization'] = conceal_func(
+        self.extra_headers['Authorization'])
 
   def IsMatch(self, other_request):
     """Check to see if the other_request is equivalent to this request.
