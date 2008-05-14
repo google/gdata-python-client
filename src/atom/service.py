@@ -500,16 +500,17 @@ def ProcessUrl(service, url, for_proxy=False):
   the default value for server is used"""
 
   server = None
+  port = 80
+  ssl = False
   if hasattr(service, 'server'):
     server = service.server
   else:
     server = service
-  if for_proxy:
-    port = 80
-    ssl = False
-  else:
-    port = service.port
-    ssl = service.ssl
+  if not for_proxy:
+    if hasattr(service, 'port'):
+      port = service.port
+    if hasattr(service, 'port'):
+      ssl = service.ssl
   uri = url
 
   m = URL_REGEX.match(url)
