@@ -499,7 +499,11 @@ def ProcessUrl(service, url, for_proxy=False):
   """Processes a passed URL.  If the URL does not begin with https?, then
   the default value for server is used"""
 
-  server = service.server
+  server = None
+  if hasattr(service, 'server'):
+    server = service.server
+  else:
+    server = service
   if for_proxy:
     port = 80
     ssl = False
