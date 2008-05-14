@@ -908,7 +908,7 @@ class Query(dict):
     """
     
     self.feed = feed
-    self.categories = categories or []
+    self.categories = []
     if text_query:
       self.text_query = text_query
     if isinstance(params, dict):
