@@ -113,6 +113,30 @@ class AtomServiceUnitTest(unittest.TestCase):
     self.assertEquals(client.additional_headers['Authorization'],
         'Basic Og==')
 
+  def testProcessUrlWithStringForService(self):
+    (server, port, ssl, uri) = atom.service.ProcessUrl(
+        service='www.google.com', url='/base/feeds/items')
+    self.assertEquals(server, 'www.google.com')
+    self.assertEquals(port, 80)
+    self.assertEquals(ssl, False)
+    self.assertEquals(uri, '/base/feeds/items')
+
+    client = atom.service.AtomService()
+    client.server = 'www.google.com'
+    client.ssl = True
+    (server, port, ssl, uri) = atom.service.ProcessUrl(
+        service=client, url='/base/feeds/items')
+    self.assertEquals(server, 'www.google.com')
+    self.assertEquals(ssl, True)
+    self.assertEquals(uri, '/base/feeds/items')
+
+    (server, port, ssl, uri) = atom.service.ProcessUrl(service=None,
+        url='https://www.google.com/base/feeds/items')
+    self.assertEquals(server, 'www.google.com')
+    self.assertEquals(port, 443)
+    self.assertEquals(ssl, True)
+    self.assertEquals(uri, '/base/feeds/items')
+
 
 if __name__ == '__main__':
   unittest.main()

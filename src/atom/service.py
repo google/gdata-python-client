@@ -509,7 +509,7 @@ def ProcessUrl(service, url, for_proxy=False):
   if not for_proxy:
     if hasattr(service, 'port'):
       port = service.port
-    if hasattr(service, 'port'):
+    if hasattr(service, 'ssl'):
       ssl = service.ssl
   uri = url
 
