@@ -417,6 +417,14 @@ class QueryTest(unittest.TestCase):
     self.assertEquals(self.query['max-results'], '10')
     self.assertEquals(self.query['start-index'], '5')
 
+  def testPassInCategoryListToConstructor(self):
+    query = gdata.service.Query(feed='/feed/sample', categories=['foo', 'bar',
+            'eggs|spam'])
+    url = query.ToUri()
+    self.assert_(url.find('/foo') > -1)
+    self.assert_(url.find('/bar') > -1)
+    self.assert_(url.find('/eggs%7Cspam') > -1)
+
 
 class GetNextPageInFeedTest(unittest.TestCase):
 
