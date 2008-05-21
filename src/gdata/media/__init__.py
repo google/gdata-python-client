@@ -53,9 +53,11 @@ import atom
 import gdata
 
 MEDIA_NAMESPACE = 'http://search.yahoo.com/mrss/'
+YOUTUBE_NAMESPACE = 'http://gdata.youtube.com/schemas/2007'
 
 class MediaBaseElement(atom.AtomBase):
-  """Base class for elements in the MEDIA_NAMESPACE. To add new elements, you only need to add the element tag name to self._tag
+  """Base class for elements in the MEDIA_NAMESPACE. 
+  To add new elements, you only need to add the element tag name to self._tag
   """
   
   _tag = ''
@@ -105,14 +107,15 @@ class Content(MediaBaseElement):
       medium=None, content_type=None, fileSize=None,
       extension_elements=None, extension_attributes=None, text=None):
     MediaBaseElement.__init__(self, extension_elements=extension_elements,
-                            extension_attributes=extension_attributes,
-                            text=text)
+                              extension_attributes=extension_attributes,
+                              text=text)
     self.url = url
     self.width = width
     self.height = height
     self.medium = medium
     self.type = content_type
     self.fileSize = fileSize
+
 def ContentFromString(xml_string):
   return atom.CreateClassFromXMLString(Content, xml_string)
 
@@ -150,8 +153,8 @@ class Description(MediaBaseElement):
   def __init__(self, description_type=None, 
       extension_elements=None, extension_attributes=None, text=None):
     MediaBaseElement.__init__(self, extension_elements=extension_elements,
-                            extension_attributes=extension_attributes,
-                            text=text)
+                              extension_attributes=extension_attributes,
+                              text=text)
     
     self.type = description_type
 def DescriptionFromString(xml_string):
@@ -197,8 +200,8 @@ class Thumbnail(MediaBaseElement):
   def __init__(self, url=None, width=None, height=None,
       extension_attributes=None, text=None, extension_elements=None):
     MediaBaseElement.__init__(self, extension_elements=extension_elements,
-                            extension_attributes=extension_attributes,
-                            text=text)
+                              extension_attributes=extension_attributes,
+                              text=text)
     self.url = url
     self.width = width
     self.height = height
@@ -218,15 +221,76 @@ class Title(MediaBaseElement):
   def __init__(self, title_type=None, 
       extension_attributes=None, text=None, extension_elements=None):
     MediaBaseElement.__init__(self, extension_elements=extension_elements,
-                            extension_attributes=extension_attributes,
-                            text=text)
+                              extension_attributes=extension_attributes,
+                              text=text)
     self.type = title_type
 def TitleFromString(xml_string):
   return atom.CreateClassFromXMLString(Title, xml_string)
 
+class Player(MediaBaseElement):
+  """(string) Contains the embeddable player URL for the entry's media content 
+  if the media is a video.
+  
+  Attributes:
+  url: Always set to plain
+  """
+  
+  _tag = 'player'
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['url'] = 'url'
+  
+  def __init__(self, player_url=None, 
+      extension_attributes=None, extension_elements=None):
+    MediaBaseElement.__init__(self, extension_elements=extension_elements,
+                              extension_attributes=extension_attributes)
+    self.url= player_url
+
+class Private(atom.AtomBase):
+  """The YouTube Private element"""
+  _tag = 'private'
+  _namespace = YOUTUBE_NAMESPACE
+
+class Duration(atom.AtomBase):
+  """The YouTube Duration element"""
+  _tag = 'duration'
+  _namespace = YOUTUBE_NAMESPACE
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['seconds'] = 'seconds'
+
+class Category(MediaBaseElement):
+  """The mediagroup:category element"""
+
+  _tag = 'category'
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['term'] = 'term'
+  _attributes['scheme'] = 'scheme'
+  _attributes['label'] = 'label'
+
+  def __init__(self, term=None, scheme=None, label=None, text=None, 
+               extension_elements=None, extension_attributes=None):
+    """Constructor for Category
+
+    Args:
+      term: str
+      scheme: str
+      label: str
+      text: str The text data in the this element
+      extension_elements: list A  list of ExtensionElement instances
+      extension_attributes: dict A dictionary of attribute value string pairs
+    """
+
+    self.term = term
+    self.scheme = scheme
+    self.label = label
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+
 class Group(MediaBaseElement):
   """Container element for all media elements.
-  The <media:group> element can appear as a child of an album or photo entry."""
+  The <media:group> element can appear as a child of an album, photo or 
+  video entry."""
 
   _tag = 'group'
   _children = atom.AtomBase._children.copy()
@@ -236,18 +300,29 @@ class Group(MediaBaseElement):
   _children['{%s}keywords' % MEDIA_NAMESPACE] = ('keywords', Keywords) 
   _children['{%s}thumbnail' % MEDIA_NAMESPACE] = ('thumbnail', [Thumbnail,])
   _children['{%s}title' % MEDIA_NAMESPACE] = ('title', Title) 
+  _children['{%s}category' % MEDIA_NAMESPACE] = ('category', Category) 
+  _children['{%s}duration' % YOUTUBE_NAMESPACE] = ('duration', Duration)
+  _children['{%s}private' % YOUTUBE_NAMESPACE] = ('private', Private)
+  _children['{%s}player' % MEDIA_NAMESPACE] = ('player', Player)
 
   def __init__(self, content=None, credit=None, description=None, keywords=None,
-      thumbnail=None, title=None,
-      extension_elements=None, extension_attributes=None, text=None):
+               thumbnail=None, title=None, duration=None, private=None, 
+               category=None, player=None, extension_elements=None, 
+               extension_attributes=None, text=None):
+
     MediaBaseElement.__init__(self, extension_elements=extension_elements,
-                            extension_attributes=extension_attributes,
-                            text=text)
+                              extension_attributes=extension_attributes,
+                              text=text)
     self.content=content
     self.credit=credit
     self.description=description
     self.keywords=keywords
     self.thumbnail=thumbnail or []
     self.title=title
+    self.duration=duration
+    self.private=private
+    self.category=category
+    self.player=player
+
 def GroupFromString(xml_string):
   return atom.CreateClassFromXMLString(Group, xml_string)
