@@ -2074,153 +2074,188 @@ CODE_SEARCH_FEED = """<?xml version="1.0" encoding="UTF-8"?>
 
 </feed>"""
 
-YOU_TUBE_VIDEO_FEED = """<?xml version='1.0' encoding='UTF-8'?>
-<feed xmlns='http://www.w3.org/2005/Atom'
-         xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
-         xmlns:gml='http://www.opengis.net/gml'
-         xmlns:georss='http://www.georss.org/georss'
-         xmlns:media='http://search.yahoo.com/mrss/'
-         xmlns:yt='http://gdata.youtube.com/schemas/2007'
-         xmlns:gd='http://schemas.google.com/g/2005'>
-  <id>http://gdata.youtube.com/feeds/api/standardfeeds/top_rated</id>
-  <updated>2008-02-21T18:57:10.801Z</updated>
+YOUTUBE_VIDEO_FEED = """<?xml version='1.0' encoding='UTF-8'?><feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:gml='http://www.opengis.net/gml' xmlns:georss='http://www.georss.org/georss' xmlns:media='http://search.yahoo.com/mrss/' xmlns:yt='http://gdata.youtube.com/schemas/2007' xmlns:gd='http://schemas.google.com/g/2005'><id>http://gdata.youtube.com/feeds/api/standardfeeds/top_rated</id><updated>2008-05-14T02:24:07.000-07:00</updated><category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><title type='text'>Top Rated</title><logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo><link rel='alternate' type='text/html' href='http://www.youtube.com/browse?s=tr'/><link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/standardfeeds/top_rated'/><link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/standardfeeds/top_rated?start-index=1&amp;max-results=25'/><link rel='next' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/standardfeeds/top_rated?start-index=26&amp;max-results=25'/><author><name>YouTube</name><uri>http://www.youtube.com/</uri></author><generator version='beta' uri='http://gdata.youtube.com/'>YouTube data API</generator><openSearch:totalResults>100</openSearch:totalResults><openSearch:startIndex>1</openSearch:startIndex><openSearch:itemsPerPage>25</openSearch:itemsPerPage>
+<entry><id>http://gdata.youtube.com/feeds/api/videos/C71ypXYGho8</id><published>2008-03-20T10:17:27.000-07:00</published><updated>2008-05-14T04:26:37.000-07:00</updated><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='karyn'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='garcia'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='me'/><category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='boyfriend'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='por'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='te'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='odeio'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='amar'/><category scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Music' label='Music'/><title type='text'>Me odeio por te amar - KARYN GARCIA</title><content type='text'>http://www.karyngarcia.com.br</content><link rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=C71ypXYGho8'/><link rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/C71ypXYGho8/related'/><link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/standardfeeds/top_rated/C71ypXYGho8'/><author><name>TvKarynGarcia</name><uri>http://gdata.youtube.com/feeds/api/users/tvkaryngarcia</uri></author><media:group><media:title type='plain'>Me odeio por te amar - KARYN GARCIA</media:title><media:description type='plain'>http://www.karyngarcia.com.br</media:description><media:keywords>amar, boyfriend, garcia, karyn, me, odeio, por, te</media:keywords><yt:duration seconds='203'/><media:category label='Music' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Music</media:category><media:content url='http://www.youtube.com/v/C71ypXYGho8' type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full' duration='203' yt:format='5'/><media:content url='rtsp://rtsp2.youtube.com/ChoLENy73wIaEQmPhgZ2pXK9CxMYDSANFEgGDA==/0/0/0/video.3gp' type='video/3gpp' medium='video' expression='full' duration='203' yt:format='1'/><media:content url='rtsp://rtsp2.youtube.com/ChoLENy73wIaEQmPhgZ2pXK9CxMYESARFEgGDA==/0/0/0/video.3gp' type='video/3gpp' medium='video' expression='full' duration='203' yt:format='6'/><media:player url='http://www.youtube.com/watch?v=C71ypXYGho8'/><media:thumbnail url='http://img.youtube.com/vi/C71ypXYGho8/2.jpg' height='97' width='130' time='00:01:41.500'/><media:thumbnail url='http://img.youtube.com/vi/C71ypXYGho8/1.jpg' height='97' width='130' time='00:00:50.750'/><media:thumbnail url='http://img.youtube.com/vi/C71ypXYGho8/3.jpg' height='97' width='130' time='00:02:32.250'/><media:thumbnail url='http://img.youtube.com/vi/C71ypXYGho8/0.jpg' height='240' width='320' time='00:01:41.500'/></media:group><yt:statistics viewCount='138864' favoriteCount='2474'/><gd:rating min='1' max='5' numRaters='4626' average='4.95'/><gd:comments><gd:feedLink href='http://gdata.youtube.com/feeds/api/videos/C71ypXYGho8/comments' countHint='27'/></gd:comments></entry>
+<entry><id>http://gdata.youtube.com/feeds/api/videos/gsVaTyb1tBw</id><published>2008-02-15T04:31:45.000-08:00</published><updated>2008-05-14T05:09:42.000-07:00</updated><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='extreme'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='cam'/><category scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Sports' label='Sports'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='alcala'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='kani'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='helmet'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='campillo'/><category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='pato'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='dirt'/><title type='text'>extreme helmet cam Kani, Keil and Pato</title><content type='text'>trimmed</content><link rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=gsVaTyb1tBw'/><link rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/gsVaTyb1tBw/responses'/><link rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/gsVaTyb1tBw/related'/><link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/standardfeeds/recently_featured/gsVaTyb1tBw'/><author><name>peraltamagic</name><uri>http://gdata.youtube.com/feeds/api/users/peraltamagic</uri></author><media:group><media:title type='plain'>extreme helmet cam Kani, Keil and Pato</media:title><media:description type='plain'>trimmed</media:description><media:keywords>alcala, cam, campillo, dirt, extreme, helmet, kani, pato</media:keywords><yt:duration seconds='31'/><media:category label='Sports' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Sports</media:category><media:content url='http://www.youtube.com/v/gsVaTyb1tBw' type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full' duration='31' yt:format='5'/><media:content url='rtsp://rtsp2.youtube.com/ChoLENy73wIaEQkctPUmT1rFghMYDSANFEgGDA==/0/0/0/video.3gp' type='video/3gpp' medium='video' expression='full' duration='31' yt:format='1'/><media:content url='rtsp://rtsp2.youtube.com/ChoLENy73wIaEQkctPUmT1rFghMYESARFEgGDA==/0/0/0/video.3gp' type='video/3gpp' medium='video' expression='full' duration='31' yt:format='6'/><media:player url='http://www.youtube.com/watch?v=gsVaTyb1tBw'/><media:thumbnail url='http://img.youtube.com/vi/gsVaTyb1tBw/2.jpg' height='97' width='130' time='00:00:15.500'/><media:thumbnail url='http://img.youtube.com/vi/gsVaTyb1tBw/1.jpg' height='97' width='130' time='00:00:07.750'/><media:thumbnail url='http://img.youtube.com/vi/gsVaTyb1tBw/3.jpg' height='97' width='130' time='00:00:23.250'/><media:thumbnail url='http://img.youtube.com/vi/gsVaTyb1tBw/0.jpg' height='240' width='320' time='00:00:15.500'/></media:group><yt:statistics viewCount='489941' favoriteCount='561'/><gd:rating min='1' max='5' numRaters='1255' average='4.11'/><gd:comments><gd:feedLink href='http://gdata.youtube.com/feeds/api/videos/gsVaTyb1tBw/comments' countHint='1116'/></gd:comments></entry>
+</feed>"""
+
+YOUTUBE_ENTRY_PRIVATE = """<?xml version='1.0' encoding='utf-8'?>
+<entry xmlns='http://www.w3.org/2005/Atom' 
+xmlns:media='http://search.yahoo.com/mrss/' 
+xmlns:gd='http://schemas.google.com/g/2005' 
+xmlns:yt='http://gdata.youtube.com/schemas/2007' 
+xmlns:gml='http://www.opengis.net/gml' 
+xmlns:georss='http://www.georss.org/georss'
+xmlns:app='http://purl.org/atom/app#'>
+  <id>http://gdata.youtube.com/feeds/videos/UMFI1hdm96E</id>
+  <published>2007-01-07T01:50:15.000Z</published>
+  <updated>2007-01-07T01:50:15.000Z</updated>
   <category scheme='http://schemas.google.com/g/2005#kind'
-    term='http://gdata.youtube.com/schemas/2007#video'/>
-  <title type='text'>Top Rated</title>
-  <logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo>
+  term='http://gdata.youtube.com/schemas/2007#video' />
+  <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+  term='barkley' />
+  <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+  term='singing' />
+  <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+  term='acoustic' />
+  <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+  term='cover' />
+  <category scheme='http://gdata.youtube.com/schemas/2007/categories.cat'
+  term='Music' label='Music' />
+  <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+  term='gnarls' />
+  <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+  term='music' />
+  <title type='text'>"Crazy (Gnarles Barkley)" - Acoustic Cover</title>
+  <content type='html'>&lt;div style="color: #000000;font-family:
+  Arial, Helvetica, sans-serif; font-size:12px; font-size: 12px;
+  width: 555px;"&gt;&lt;table cellspacing="0" cellpadding="0"
+  border="0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td width="140"
+  valign="top" rowspan="2"&gt;&lt;div style="border: 1px solid
+  #999999; margin: 0px 10px 5px 0px;"&gt;&lt;a
+  href="http://www.youtube.com/watch?v=UMFI1hdm96E"&gt;&lt;img
+  alt=""
+  src="http://img.youtube.com/vi/UMFI1hdm96E/2.jpg"&gt;&lt;/a&gt;&lt;/div&gt;&lt;/td&gt;
+  &lt;td width="256" valign="top"&gt;&lt;div style="font-size:
+  12px; font-weight: bold;"&gt;&lt;a style="font-size: 15px;
+  font-weight: bold; font-decoration: none;"
+  href="http://www.youtube.com/watch?v=UMFI1hdm96E"&gt;&amp;quot;Crazy
+  (Gnarles Barkley)&amp;quot; - Acoustic Cover&lt;/a&gt;
+  &lt;br&gt;&lt;/div&gt; &lt;div style="font-size: 12px; margin:
+  3px 0px;"&gt;&lt;span&gt;Gnarles Barkley acoustic cover
+  http://www.myspace.com/davidchoimusic&lt;/span&gt;&lt;/div&gt;&lt;/td&gt;
+  &lt;td style="font-size: 11px; line-height: 1.4em; padding-left:
+  20px; padding-top: 1px;" width="146"
+  valign="top"&gt;&lt;div&gt;&lt;span style="color: #666666;
+  font-size: 11px;"&gt;From:&lt;/span&gt; &lt;a
+  href="http://www.youtube.com/profile?user=davidchoimusic"&gt;davidchoimusic&lt;/a&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;span style="color: #666666; font-size:
+  11px;"&gt;Views:&lt;/span&gt; 113321&lt;/div&gt; &lt;div
+  style="white-space: nowrap;text-align: left"&gt;&lt;img
+  style="border: 0px none; margin: 0px; padding: 0px;
+  vertical-align: middle; font-size: 11px;" align="top" alt=""
+  src="http://gdata.youtube.com/static/images/icn_star_full_11x11.gif"&gt;
+  &lt;img style="border: 0px none; margin: 0px; padding: 0px;
+  vertical-align: middle; font-size: 11px;" align="top" alt=""
+  src="http://gdata.youtube.com/static/images/icn_star_full_11x11.gif"&gt;
+  &lt;img style="border: 0px none; margin: 0px; padding: 0px;
+  vertical-align: middle; font-size: 11px;" align="top" alt=""
+  src="http://gdata.youtube.com/static/images/icn_star_full_11x11.gif"&gt;
+  &lt;img style="border: 0px none; margin: 0px; padding: 0px;
+  vertical-align: middle; font-size: 11px;" align="top" alt=""
+  src="http://gdata.youtube.com/static/images/icn_star_full_11x11.gif"&gt;
+  &lt;img style="border: 0px none; margin: 0px; padding: 0px;
+  vertical-align: middle; font-size: 11px;" align="top" alt=""
+  src="http://gdata.youtube.com/static/images/icn_star_half_11x11.gif"&gt;&lt;/div&gt;
+  &lt;div style="font-size: 11px;"&gt;1005 &lt;span style="color:
+  #666666; font-size:
+  11px;"&gt;ratings&lt;/span&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;&lt;span style="color: #666666; font-size:
+  11px;"&gt;Time:&lt;/span&gt; &lt;span style="color: #000000;
+  font-size: 11px; font-weight:
+  bold;"&gt;04:15&lt;/span&gt;&lt;/td&gt; &lt;td style="font-size:
+  11px; padding-left: 20px;"&gt;&lt;span style="color: #666666;
+  font-size: 11px;"&gt;More in&lt;/span&gt; &lt;a
+  href="http://www.youtube.com/categories_portal?c=10"&gt;Music&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;</content>
+  <link rel='self' type='application/atom+xml'
+  href='http://gdata.youtube.com/feeds/videos/UMFI1hdm96E' />
   <link rel='alternate' type='text/html'
-    href='http://www.youtube.com/browser?s=tr'/>
-  <link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml'
-    href='http://gdata.youtube.com/feeds/api/standardfeeds/top_rated'/>
-  <link rel='self' type='application/atom+xml'
-    href='http://gdata.youtube.com/feeds/api/standardfeeds/top_rated?start_index=1&amp;max-results=25'/>
-  <link rel='self' type='application/atom+xml'
-    href='http://gdata.youtube.com/feeds/api/standardfeeds/top_rated?start_index=26&amp;max-results=25'/>
+  href='http://www.youtube.com/watch?v=UMFI1hdm96E' />
+  <link rel='http://gdata.youtube.com/schemas/2007#video.responses'
+  type='application/atom+xml'
+  href='http://gdata.youtube.com/feeds/videos/UMFI1hdm96E/responses' />
+  <link rel='http://gdata.youtube.com/schemas/2007#video.related'
+  type='application/atom+xml'
+  href='http://gdata.youtube.com/feeds/videos/UMFI1hdm96E/related' />
   <author>
-    <name>YouTube</name>
-    <uri>http://www.youtube.com/</uri>
+    <name>davidchoimusic</name>
+    <uri>http://gdata.youtube.com/feeds/users/davidchoimusic</uri>
   </author>
-  <generator version='beta'
-    uri='http://gdata.youtube.com/'>YouTube data API</generator>
-  <openSearch:totalResults>99</openSearch:totalResults>
-  <openSearch:startIndex>1</openSearch:startIndex>
-  <openSearch:itemsPerPage>25</openSearch:itemsPerPage>
-  <entry>
-    <id>http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b</id>
-    <published>2007-02-16T20:22:57.000Z</published>
-    <updated>2007-02-16T20:22:57.000Z</updated>
-    <category scheme="http://schemas.google.com/g/2005#kind"
-      term="http://gdata.youtube.com/schemas/2007#video"/>
-    <category scheme="http://gdata.youtube.com/schemas/2007/keywords.cat"
-      term="Steventon"/>
-    <category scheme="http://gdata.youtube.com/schemas/2007/keywords.cat"
-      term="walk"/>
-    <category scheme="http://gdata.youtube.com/schemas/2007/keywords.cat"
-      term="Darcy"/>
-    <category scheme="http://gdata.youtube.com/schemas/2007/categories.cat"
-      term="Entertainment" label="Entertainment"/>
-    <title type="text">My walk with Mr. Darcy</title>
-    <content type="html"><div ... html content trimmed ...></content>
-    <link rel="self" type="application/atom+xml"
-      href="http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b"/>
-    <link rel="alternate" type="text/html"
-      href="http://www.youtube.com/watch?v=ZTUVgYoeN_b"/>
-    <link rel="http://gdata.youtube.com/schemas/2007#video.responses"
-      type="application/atom+xml"
-      href="http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/responses"/>
-    <link rel="http://gdata.youtube.com/schemas/2007#video.ratings"
-      type="application/atom+xml"
-      href="http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/ratings"/>
-    <link rel="http://gdata.youtube.com/schemas/2007#video.complaints"
-      type="application/atom+xml"
-      href="http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/complaints"/>
-    <link rel="http://gdata.youtube.com/schemas/2007#video.related"
-      type="application/atom+xml"
-      href="http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/related"/>
-    <author>
-      <name>Andy Samplo</name>
-      <uri>http://gdata.youtube.com/feeds/api/users/andyland74</uri>
-    </author>
   <media:group>
-    <media:title type="plain">Shopping for Coats</media:title>
-    <media:description type="plain">
-      What could make for more exciting video?
-    </media:description>
-    <media:keywords>Shopping, parkas</media:keywords>
-    <yt:duration seconds="79"/>
-    <media:category label="People"
-      scheme="http://gdata.youtube.com/schemas/2007/categories.cat">People
-    </media:category>
-    <media:content
-      url='http://www.youtube.com/v/ZTUVgYoeN_b'
-      type='application/x-shockwave-flash' medium='video' 
-      isDefault='true' expression="full" duration='215' yt:format="5"/>
-    <media:content
-      url='rtsp://rtsp2.youtube.com/ChoLENy73bIAEQ1k30OPEgGDA==/0/0/0/video.3gp'
-      type='video/3gpp' medium='video' 
-      expression="full" duration='215' yt:format="1"/>
-    <media:content
-      url='rtsp://rtsp2.youtube.com/ChoLENy73bIAEQ1k30OPEgGDA==/0/0/0/video.3gp'
-      type='video/3gpp' medium='video' 
-      expression="full" duration='215' yt:format="6"/>
-    <media:player url="http://www.youtube.com/watch?v=ZTUVgYoeN_b"/>
-    <media:thumbnail url="http://img.youtube.com/vi/ZTUVgYoeN_b/2.jpg"
-      height="97" width="130" time="00:00:03.500"/>
-    <media:thumbnail url="http://img.youtube.com/vi/ZTUVgYoeN_b/1.jpg"
-      height="97" width="130" time="00:00:01.750"/>
-    <media:thumbnail url="http://img.youtube.com/vi/ZTUVgYoeN_b/3.jpg"
-      height="97" width="130" time="00:00:05.250"/>
-    <media:thumbnail url="http://img.youtube.com/vi/ZTUVgYoeN_b/0.jpg"
-      height="240" width="320" time="00:00:03.500"/>
+    <media:title type='plain'>"Crazy (Gnarles Barkley)" - Acoustic Cover</media:title>
+    <media:description type='plain'>Gnarles Barkley acoustic cover http://www.myspace.com/davidchoimusic</media:description>
+    <media:keywords>music, singing, gnarls, barkley, acoustic, cover</media:keywords>
+    <yt:duration seconds='255' />
+    <media:category label='Music'
+    scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>
+    Music</media:category>
+    <media:category 
+    scheme='http://gdata.youtube.com/schemas/2007/developertags.cat'>
+    DeveloperTag1</media:category>
+    <media:content url='http://www.youtube.com/v/UMFI1hdm96E'
+    type='application/x-shockwave-flash' medium='video'
+    isDefault='true' expression='full' duration='255'
+    yt:format='5' />
+    <media:player url='http://www.youtube.com/watch?v=UMFI1hdm96E' />
+    <media:thumbnail url='http://img.youtube.com/vi/UMFI1hdm96E/2.jpg'
+    height='97' width='130' time='00:02:07.500' />
+    <media:thumbnail url='http://img.youtube.com/vi/UMFI1hdm96E/1.jpg'
+    height='97' width='130' time='00:01:03.750' />
+    <media:thumbnail url='http://img.youtube.com/vi/UMFI1hdm96E/3.jpg'
+    height='97' width='130' time='00:03:11.250' />
+    <media:thumbnail url='http://img.youtube.com/vi/UMFI1hdm96E/0.jpg'
+    height='240' width='320' time='00:02:07.500' />
+    <yt:private />
   </media:group>
-  <yt:statistics viewCount="93"/>
-  <gd:rating min='1' max='5' numRaters='435' average='4.94'/>
+  <yt:statistics viewCount='113321' />
+  <gd:rating min='1' max='5' numRaters='1005' average='4.77' />
+  <georss:where>
+    <gml:Point>
+      <gml:pos>37.398529052734375 -122.0635986328125</gml:pos>
+    </gml:Point>
+  </georss:where>
   <gd:comments>
-    <gd:feedLink
-      href="http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/comments"
-      countHint='2197'/>
+    <gd:feedLink href='http://gdata.youtube.com/feeds/videos/UMFI1hdm96E/comments' />
   </gd:comments>
-</entry>
-</feed>"""
+  <yt:noembed />
+      <app:control>
+        <app:draft>yes</app:draft>
+        <yt:state
+          name="rejected"
+          reasonCode="inappropriate"
+          helpUrl="http://www.youtube.com/t/community_guidelines">
+          The content of this video may violate the terms of use.</yt:state>
+      </app:control>
+</entry>"""
 
-YOU_TUBE_COMMENT_FEED = """<?xml version='1.0' encoding='UTF-8'?>
-<feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'>
-  <id>http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/comments?start-index=1&amp;max-results=25</id>
-  <updated>2008-02-25T23:14:03.148Z</updated>
-  <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#comment'/>
-  <title type='text'>Comments on 'My walk with Mr. Darcy'</title>
-  <logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo>
-  <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b'/>
-  <link rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=ZTUVgYoeN_b'/>
-  <link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/comments'/>
-  <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/comments?start-index=1&amp;max-results=25'/>
-  <link rel='next' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/comments?start-index=26&amp;max-results=25'/>
-  <author>                                                    
-    <name>YouTube</name>                                 
-    <uri>http://www.youtube.com/</uri>
-  </author>                                                           
-  <generator version='beta' uri='http://gdata.youtube.com/'>YouTube data API</generator>
-  <openSearch:totalResults>100</openSearch:totalResults>
-  <openSearch:startIndex>1</openSearch:startIndex>
-  <openSearch:itemsPerPage>25</openSearch:itemsPerPage>
+YOUTUBE_COMMENT_FEED = """<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'><id>http://gdata.youtube.com/feeds/videos/2Idhz9ef5oU/comments</id><updated>2008-05-19T21:45:45.261Z</updated><category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#comment'/><title type='text'>Comments</title><logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo><link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/videos/2Idhz9ef5oU'/><link rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=2Idhz9ef5oU'/><link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='http://gdata.youtube.com/feeds/videos/2Idhz9ef5oU/comments'/><link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/videos/2Idhz9ef5oU/comments?start-index=1&amp;max-results=25'/><author><name>YouTube</name><uri>http://www.youtube.com/</uri></author><generator version='beta' uri='http://gdata.youtube.com/'>YouTube data API</generator><openSearch:totalResults>0</openSearch:totalResults><openSearch:startIndex>1</openSearch:startIndex><openSearch:itemsPerPage>25</openSearch:itemsPerPage>
   <entry>
-    <id>http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/comments/7F2BAAD03653A691</id>
-    <published>2007-05-23T00:21:59.000-07:00</published>
-    <updated>2007-05-23T00:21:59.000-07:00</updated>
+    <id>http://gdata.youtube.com/feeds/videos/2Idhz9ef5oU/comments/91F809A3DE2EB81B</id>
+    <published>2008-02-22T15:27:15.000-08:00</published><updated>2008-02-22T15:27:15.000-08:00</updated>
     <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#comment'/>
-    <title type='text'>Walking is fun.</title>
-    <content type='text'>Walking is fun.</content>
-    <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b'/>
-    <link rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=ZTUVgYoeN_b'/>
-    <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/ZTUVgYoeN_b/comments/7F2BAAD03653A691'/>
-    <author>
-      <name>andyland744</name>
-      <uri>http://gdata.youtube.com/feeds/api/users/andyland744</uri> 
-    </author>                                                                                    
-  </entry>                
+    <title type='text'>test66</title>
+      <content type='text'>test66</content>
+      <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/videos/2Idhz9ef5oU'/>
+      <link rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=2Idhz9ef5oU'/>
+      <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/videos/2Idhz9ef5oU/comments/91F809A3DE2EB81B'/>
+      <author><name>apitestjhartmann</name><uri>http://gdata.youtube.com/feeds/users/apitestjhartmann</uri></author>
+   </entry>
+   <entry>
+    <id>http://gdata.youtube.com/feeds/videos/2Idhz9ef5oU/comments/A261AEEFD23674AA</id>
+    <published>2008-02-22T15:27:01.000-08:00</published><updated>2008-02-22T15:27:01.000-08:00</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#comment'/>
+    <title type='text'>test333</title>
+      <content type='text'>test333</content>
+        <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/videos/2Idhz9ef5oU'/>
+        <link rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=2Idhz9ef5oU'/>
+        <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/videos/2Idhz9ef5oU/comments/A261AEEFD23674AA'/>
+        <author><name>apitestjhartmann</name><uri>http://gdata.youtube.com/feeds/users/apitestjhartmann</uri></author>
+    </entry>
+    <entry>
+      <id>http://gdata.youtube.com/feeds/videos/2Idhz9ef5oU/comments/0DCF1E3531B3FF85</id>
+      <published>2008-02-22T15:11:06.000-08:00</published><updated>2008-02-22T15:11:06.000-08:00</updated>
+      <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#comment'/>
+      <title type='text'>test2</title>
+      <content type='text'>test2</content>
+        <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/videos/2Idhz9ef5oU'/>
+        <link rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=2Idhz9ef5oU'/>
+        <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/videos/2Idhz9ef5oU/comments/0DCF1E3531B3FF85'/>
+        <author><name>apitestjhartmann</name><uri>http://gdata.youtube.com/feeds/users/apitestjhartmann</uri></author>
+    </entry>
 </feed>"""
 
-YOU_TUBE_PLAYLIST_FEED = """<?xml version='1.0' encoding='UTF-8'?>
+YOUTUBE_PLAYLIST_FEED = """<?xml version='1.0' encoding='UTF-8'?>
 <feed xmlns='http://www.w3.org/2005/Atom'
     xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' 
     xmlns:media='http://search.yahoo.com/mrss/' 
@@ -2244,6 +2279,8 @@ YOU_TUBE_PLAYLIST_FEED = """<?xml version='1.0' encoding='UTF-8'?>
   <openSearch:startIndex>1</openSearch:startIndex>
   <openSearch:itemsPerPage>25</openSearch:itemsPerPage>
   <entry>
+    <yt:description>My new playlist Description</yt:description>
+    <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#playlist' href='http://gdata.youtube.com/feeds/playlists/8BCDD04DE8F771B2'/>
     <id>http://gdata.youtube.com/feeds/users/andyland74/playlists/8BCDD04DE8F771B2</id>
     <published>2007-11-04T17:30:27.000-08:00</published>
     <updated>2008-02-22T09:55:14.000-08:00</updated>
@@ -2257,12 +2294,24 @@ YOU_TUBE_PLAYLIST_FEED = """<?xml version='1.0' encoding='UTF-8'?>
       <name>andyland74</name>                              
       <uri>http://gdata.youtube.com/feeds/users/andyland74</uri>
     </author>
-    <yt:description>My new playlist Description</yt:description>
-    <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#playlist' href='http://gdata.youtube.com/feeds/playlists/8BCDD04DE8F771B2'/>
   </entry>              
 </feed>"""
 
-YOU_TUBE_SUBSCRIPTIONS_FEED = """<?xml version='1.0' encoding='UTF-8'?>
+YOUTUBE_PLAYLIST_VIDEO_FEED = """<?xml version='1.0' encoding='UTF-8'?><feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:gml='http://www.opengis.net/gml' xmlns:georss='http://www.georss.org/georss' xmlns:media='http://search.yahoo.com/mrss/' xmlns:yt='http://gdata.youtube.com/schemas/2007' xmlns:gd='http://schemas.google.com/g/2005'><id>http://gdata.youtube.com/feeds/api/playlists/BCB3BB96DF51B505</id><updated>2008-05-16T12:03:17.000-07:00</updated><category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlist'/><category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='videos'/><category scheme='http://gdata.youtube.com/schemas/2007/tags.cat' term='python'/><title type='text'>Test Playlist</title><subtitle type='text'>Test playlist 1</subtitle><logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo><link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=BCB3BB96DF51B505'/><link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/playlists/BCB3BB96DF51B505'/><link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/playlists/BCB3BB96DF51B505?start-index=1&amp;max-results=25'/><author><name>gdpython</name><uri>http://gdata.youtube.com/feeds/api/users/gdpython</uri></author><generator version='beta' uri='http://gdata.youtube.com/'>YouTube data API</generator><openSearch:totalResults>1</openSearch:totalResults><openSearch:startIndex>1</openSearch:startIndex><openSearch:itemsPerPage>25</openSearch:itemsPerPage><media:group><media:title type='plain'>Test Playlist</media:title><media:description type='plain'>Test playlist 1</media:description><media:content url='http://www.youtube.com/ep.swf?id=BCB3BB96DF51B505' type='application/x-shockwave-flash' yt:format='5'/></media:group><entry><id>http://gdata.youtube.com/feeds/api/playlists/BCB3BB96DF51B505/B0F29389E537F888</id><updated>2008-05-16T20:54:08.520Z</updated><category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlist'/><title type='text'>Uploading YouTube Videos with the PHP Client Library</title><content type='text'>Jochen Hartmann demonstrates the basics of how to use the PHP Client Library with the YouTube Data API.
+
+PHP Developer's Guide:
+http://code.google.com/apis/youtube/developers_guide_php.html
+
+Other documentation:
+http://code.google.com/apis/youtube/</content><link rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=iIp7OnHXBlo'/><link rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/iIp7OnHXBlo/responses'/><link rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/iIp7OnHXBlo/related'/><link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/iIp7OnHXBlo'/><link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/playlists/BCB3BB96DF51B505/B0F29389E537F888'/><author><name>GoogleDevelopers</name><uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri></author><media:group><media:title type='plain'>Uploading YouTube Videos with the PHP Client Library</media:title><media:description type='plain'>Jochen Hartmann demonstrates the basics of how to use the PHP Client Library with the YouTube Data API.
+
+PHP Developer's Guide:
+http://code.google.com/apis/youtube/developers_guide_php.html
+
+Other documentation:
+http://code.google.com/apis/youtube/</media:description><media:keywords>api, data, demo, php, screencast, tutorial, uploading, walkthrough, youtube</media:keywords><yt:duration seconds='466'/><media:category label='Education' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Education</media:category><media:content url='http://www.youtube.com/v/iIp7OnHXBlo' type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full' duration='466' yt:format='5'/><media:content url='rtsp://rtsp2.youtube.com/ChoLENy73wIaEQlaBtdxOnuKiBMYDSANFEgGDA==/0/0/0/video.3gp' type='video/3gpp' medium='video' expression='full' duration='466' yt:format='1'/><media:content url='rtsp://rtsp2.youtube.com/ChoLENy73wIaEQlaBtdxOnuKiBMYESARFEgGDA==/0/0/0/video.3gp' type='video/3gpp' medium='video' expression='full' duration='466' yt:format='6'/><media:player url='http://www.youtube.com/watch?v=iIp7OnHXBlo'/><media:thumbnail url='http://img.youtube.com/vi/iIp7OnHXBlo/2.jpg' height='97' width='130' time='00:03:53'/><media:thumbnail url='http://img.youtube.com/vi/iIp7OnHXBlo/1.jpg' height='97' width='130' time='00:01:56.500'/><media:thumbnail url='http://img.youtube.com/vi/iIp7OnHXBlo/3.jpg' height='97' width='130' time='00:05:49.500'/><media:thumbnail url='http://img.youtube.com/vi/iIp7OnHXBlo/0.jpg' height='240' width='320' time='00:03:53'/></media:group><yt:statistics viewCount='1550' favoriteCount='5'/><gd:rating min='1' max='5' numRaters='3' average='4.67'/><yt:location>undefined</yt:location><gd:comments><gd:feedLink href='http://gdata.youtube.com/feeds/api/videos/iIp7OnHXBlo/comments' countHint='2'/></gd:comments><yt:position>1</yt:position></entry></feed>"""
+
+YOUTUBE_SUBSCRIPTION_FEED = """<?xml version='1.0' encoding='UTF-8'?>
 <feed xmlns='http://www.w3.org/2005/Atom'
     xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
     xmlns:media='http://search.yahoo.com/mrss/'
@@ -2315,7 +2364,53 @@ YOU_TUBE_SUBSCRIPTIONS_FEED = """<?xml version='1.0' encoding='UTF-8'?>
   </entry>
 </feed>"""
 
-YOU_TUBE_PROFILE = """<?xml version='1.0' encoding='UTF-8'?>
+YOUTUBE_VIDEO_RESPONSE_FEED = """<?xml version='1.0' encoding='UTF-8'?>
+  <feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:gml='http://www.opengis.net/gml' xmlns:georss='http://www.georss.org/georss' xmlns:media='http://search.yahoo.com/mrss/' xmlns:yt='http://gdata.youtube.com/schemas/2007' xmlns:gd='http://schemas.google.com/g/2005'>
+  <id>http://gdata.youtube.com/feeds/videos/2c3q9K4cHzY/responses</id><updated>2008-05-19T22:37:34.076Z</updated><category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><title type='text'>Videos responses to 'Giant NES controller coffee table'</title><logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo><link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/videos/2c3q9K4cHzY'/><link rel='alternate' type='text/html' href='http://www.youtube.com/video_response_view_all?v=2c3q9K4cHzY'/><link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='http://gdata.youtube.com/feeds/videos/2c3q9K4cHzY/responses'/><link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/videos/2c3q9K4cHzY/responses?start-index=1&amp;max-results=25'/><author><name>YouTube</name><uri>http://www.youtube.com/</uri></author><generator version='beta' uri='http://gdata.youtube.com/'>YouTube data API</generator><openSearch:totalResults>8</openSearch:totalResults><openSearch:startIndex>1</openSearch:startIndex><openSearch:itemsPerPage>25</openSearch:itemsPerPage>
+    <entry>
+      <id>http://gdata.youtube.com/feeds/videos/7b9EnRI9VbY</id><published>2008-03-11T19:08:53.000-07:00</published><updated>2008-05-18T21:33:10.000-07:00</updated>
+      <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='OD'/><category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='chat'/>
+      <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='Uncle'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='sex'/>
+      <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='catmint'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='kato'/>
+      <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='kissa'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='katt'/>
+      <category scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Animals' label='Pets &amp; Animals'/>
+      <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='kat'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='cat'/>
+      <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='cats'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='kedi'/>
+      <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='gato'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='Brattman'/>
+      <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='drug'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='overdose'/>
+      <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='catnip'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='party'/>
+      <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='Katze'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='gatto'/>
+      <title type='text'>Catnip Party</title><content type='html'>snipped</content>
+      <link rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=7b9EnRI9VbY'/>
+      <link rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml' href='http://gdata.youtube.com/feeds/videos/7b9EnRI9VbY/responses'/>
+      <link rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/videos/7b9EnRI9VbY/related'/>
+      <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/videos/2c3q9K4cHzY/responses/7b9EnRI9VbY'/>
+      <author><name>PismoBeach</name><uri>http://gdata.youtube.com/feeds/users/pismobeach</uri></author>
+        <media:group>
+          <media:title type='plain'>Catnip Party</media:title>
+          <media:description type='plain'>Uncle, Hillary, Hankette, and B4 all but overdose on the patio</media:description><media:keywords>Brattman, cat, catmint, catnip, cats, chat, drug, gato, gatto, kat, kato, katt, Katze, kedi, kissa, OD, overdose, party, sex, Uncle</media:keywords>
+          <yt:duration seconds='139'/>
+          <media:category label='Pets &amp; Animals' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Animals</media:category>
+          <media:content url='http://www.youtube.com/v/7b9EnRI9VbY' type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full' duration='139' yt:format='5'/>
+          <media:content url='rtsp://rtsp2.youtube.com/ChoLENy73wIaEQm2VT0SnUS_7RMYDSANFEgGDA==/0/0/0/video.3gp' type='video/3gpp' medium='video' expression='full' duration='139' yt:format='1'/>
+          <media:content url='rtsp://rtsp2.youtube.com/ChoLENy73wIaEQm2VT0SnUS_7RMYESARFEgGDA==/0/0/0/video.3gp' type='video/3gpp' medium='video' expression='full' duration='139' yt:format='6'/>
+          <media:player url='http://www.youtube.com/watch?v=7b9EnRI9VbY'/>
+          <media:thumbnail url='http://img.youtube.com/vi/7b9EnRI9VbY/2.jpg' height='97' width='130' time='00:01:09.500'/>
+          <media:thumbnail url='http://img.youtube.com/vi/7b9EnRI9VbY/1.jpg' height='97' width='130' time='00:00:34.750'/>
+          <media:thumbnail url='http://img.youtube.com/vi/7b9EnRI9VbY/3.jpg' height='97' width='130' time='00:01:44.250'/>
+          <media:thumbnail url='http://img.youtube.com/vi/7b9EnRI9VbY/0.jpg' height='240' width='320' time='00:01:09.500'/>
+        </media:group>
+        <yt:statistics viewCount='4235' favoriteCount='3'/>
+        <gd:rating min='1' max='5' numRaters='24' average='3.54'/>
+        <gd:comments>
+          <gd:feedLink href='http://gdata.youtube.com/feeds/videos/7b9EnRI9VbY/comments' countHint='14'/>
+        </gd:comments>
+        </entry>
+</feed>
+"""
+
+
+YOUTUBE_PROFILE = """<?xml version='1.0' encoding='UTF-8'?>
 <entry xmlns='http://www.w3.org/2005/Atom'
     xmlns:media='http://search.yahoo.com/mrss/'
     xmlns:yt='http://gdata.youtube.com/schemas/2007'
@@ -2338,10 +2433,13 @@ YOU_TUBE_PROFILE = """<?xml version='1.0' encoding='UTF-8'?>
   </author>
   <yt:age>33</yt:age>
   <yt:username>andyland74</yt:username>
+  <yt:firstName>andy</yt:firstName>
+  <yt:lastName>example</yt:lastName>
   <yt:books>Catch-22</yt:books>
   <yt:gender>m</yt:gender>
   <yt:company>Google</yt:company>
   <yt:hobbies>Testing YouTube APIs</yt:hobbies>
+  <yt:hometown>Somewhere</yt:hometown>
   <yt:location>US</yt:location>
   <yt:movies>Aqua Teen Hungerforce</yt:movies>
   <yt:music>Elliott Smith</yt:music>
@@ -2363,6 +2461,15 @@ YOU_TUBE_PROFILE = """<?xml version='1.0' encoding='UTF-8'?>
   <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.uploads'
     href='http://gdata.youtube.com/feeds/users/andyland74/uploads' countHint='1'/>
 </entry>"""
+
+YOUTUBE_CONTACTS_FEED = """<?xml version='1.0' encoding='UTF-8'?><feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:yt='http://gdata.youtube.com/schemas/2007' xmlns:gd='http://schemas.google.com/g/2005'>
+  <id>http://gdata.youtube.com/feeds/users/apitestjhartmann/contacts</id><updated>2008-05-16T19:24:34.916Z</updated><category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#friend'/><title type='text'>apitestjhartmann's Contacts</title><logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo><link rel='alternate' type='text/html' href='http://www.youtube.com/profile_friends?user=apitestjhartmann'/><link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='http://gdata.youtube.com/feeds/users/apitestjhartmann/contacts'/><link rel='http://schemas.google.com/g/2005#post' type='application/atom+xml' href='http://gdata.youtube.com/feeds/users/apitestjhartmann/contacts'/><link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/users/apitestjhartmann/contacts?start-index=1&amp;max-results=25'/><author><name>apitestjhartmann</name><uri>http://gdata.youtube.com/feeds/users/apitestjhartmann</uri></author><generator version='beta' uri='http://gdata.youtube.com/'>YouTube data API</generator><openSearch:totalResults>2</openSearch:totalResults><openSearch:startIndex>1</openSearch:startIndex><openSearch:itemsPerPage>25</openSearch:itemsPerPage>
+    <entry>
+      <id>http://gdata.youtube.com/feeds/users/apitestjhartmann/contacts/test89899090</id><published>2008-02-04T11:27:54.000-08:00</published><updated>2008-05-16T19:24:34.916Z</updated><category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#friend'/><title type='text'>test89899090</title><link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/users/test89899090'/><link rel='alternate' type='text/html' href='http://www.youtube.com/profile?user=test89899090'/><link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/users/apitestjhartmann/contacts/test89899090'/><link rel='edit' type='application/atom+xml' href='http://gdata.youtube.com/feeds/users/apitestjhartmann/contacts/test89899090'/><author><name>apitestjhartmann</name><uri>http://gdata.youtube.com/feeds/users/apitestjhartmann</uri></author><yt:username>test89899090</yt:username><yt:status>requested</yt:status></entry>
+    <entry>
+      <id>http://gdata.youtube.com/feeds/users/apitestjhartmann/contacts/testjfisher</id><published>2008-02-26T14:13:03.000-08:00</published><updated>2008-05-16T19:24:34.916Z</updated><category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#friend'/><title type='text'>testjfisher</title><link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/users/testjfisher'/><link rel='alternate' type='text/html' href='http://www.youtube.com/profile?user=testjfisher'/><link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/users/apitestjhartmann/contacts/testjfisher'/><link rel='edit' type='application/atom+xml' href='http://gdata.youtube.com/feeds/users/apitestjhartmann/contacts/testjfisher'/><author><name>apitestjhartmann</name><uri>http://gdata.youtube.com/feeds/users/apitestjhartmann</uri></author><yt:username>testjfisher</yt:username><yt:status>pending</yt:status></entry>
+</feed>"""
+
 
 NEW_CONTACT = """<?xml version='1.0' encoding='UTF-8'?>
 <atom:entry xmlns:atom='http://www.w3.org/2005/Atom'
