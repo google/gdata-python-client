@@ -2531,3 +2531,117 @@ CONTACTS_FEED = """<?xml version='1.0' encoding='UTF-8'?>
       primary='true'>456</gd:phoneNumber>
   </entry>
 </feed>"""
+
+BLOG_ENTRY = """<entry xmlns='http://www.w3.org/2005/Atom'>
+  <id>tag:blogger.com,1999:blog-blogID.post-postID</id>
+  <published>2006-08-02T18:44:43.089-07:00</published>
+  <updated>2006-11-08T18:10:23.020-08:00</updated>
+  <title type='text'>Lizzy's Diary</title>
+  <summary type='html'>Being the journal of Elizabeth Bennet</summary>
+  <link rel='alternate' type='text/html'
+    href='http://blogName.blogspot.com/'>
+  </link>
+  <link rel='http://schemas.google.com/g/2005#feed'
+    type='application/atom+xml'
+    href='http://blogName.blogspot.com/feeds/posts/default'>
+  </link>
+  <link rel='http://schemas.google.com/g/2005#post'
+    type='application/atom+xml'
+    href='http://www.blogger.com/feeds/blogID/posts/default'>
+  </link>
+  <link rel='self' type='application/atom+xml'
+    href='http://www.blogger.com/feeds/userID/blogs/blogID'>
+  </link>
+  <link rel='edit' type='application/atom+xml' 
+      href='http://www.blogger.com/feeds/userID/blogs/blogID'>
+  </link>
+  <author>
+    <name>Elizabeth Bennet</name>
+    <email>liz@gmail.com</email>
+  </author>
+</entry>"""
+
+BLOG_POST = """<entry xmlns='http://www.w3.org/2005/Atom'>
+  <title type='text'>Marriage!</title>
+  <content type='xhtml'>
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <p>Mr. Darcy has <em>proposed marriage</em> to me!</p>
+      <p>He is the last man on earth I would ever desire to marry.</p>
+      <p>Whatever shall I do?</p>
+    </div>
+  </content>
+  <author>
+    <name>Elizabeth Bennet</name>
+    <email>liz@gmail.com</email>
+  </author>
+</entry>"""
+
+BLOG_POSTS_FEED = """<feed xmlns='http://www.w3.org/2005/Atom'>
+  <id>tag:blogger.com,1999:blog-blogID</id>
+  <updated>2006-11-08T18:10:23.020-08:00</updated>
+  <title type='text'>Lizzy's Diary</title>
+  <link rel='alternate' type='text/html'
+    href='http://blogName.blogspot.com/index.html'>
+  </link>
+  <link rel='http://schemas.google.com/g/2005#feed'
+    type='application/atom+xml'
+    href='http://blogName.blogspot.com/feeds/posts/default'>
+  </link>
+  <link rel='self' type='application/atom+xml'
+    href='http://blogName.blogspot.com/feeds/posts/default'>
+  </link>
+  <author>
+    <name>Elizabeth Bennet</name>
+    <email>liz@gmail.com</email>
+  </author>
+  <generator version='7.00' uri='http://www2.blogger.com'>Blogger</generator>
+  <entry>
+    <id>tag:blogger.com,1999:blog-blogID.post-postID</id>
+    <published>2006-11-08T18:10:00.000-08:00</published>
+    <updated>2006-11-08T18:10:14.954-08:00</updated>
+    <title type='text'>Quite disagreeable</title>
+    <content type='html'>&lt;p&gt;I met Mr. Bingley's friend Mr. Darcy
+      this evening. I found him quite disagreeable.&lt;/p&gt;</content>
+    <link rel='alternate' type='text/html'
+      href='http://blogName.blogspot.com/2006/11/quite-disagreeable.html'>
+    </link>
+    <link rel='self' type='application/atom+xml'
+      href='http://blogName.blogspot.com/feeds/posts/default/postID'>
+    </link>
+    <link rel='edit' type='application/atom+xml'
+      href='http://www.blogger.com/feeds/blogID/posts/default/postID'>
+    </link>
+    <author>
+      <name>Elizabeth Bennet</name>
+      <email>liz@gmail.com</email>
+    </author>
+  </entry>
+</feed>"""
+
+BLOG_COMMENTS_FEED = """<feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/">
+  <id>tag:blogger.com,1999:blog-blogID.postpostID..comments</id>
+  <updated>2007-04-04T21:56:29.803-07:00</updated>
+  <title type="text">My Blog : Time to relax</title>
+  <link rel="alternate" type="text/html" href="http://blogName.blogspot.com/2007/04/first-post.html"/>
+  <link rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml" href="http://blogName.blogspot.com/feeds/postID/comments/default"/>
+  <link rel="self" type="application/atom+xml" href="http://blogName.blogspot.com/feeds/postID/comments/default"/>
+  <author>
+    <name>Blog Author name</name>
+  </author>
+  <generator version="7.00" uri="http://www2.blogger.com">Blogger</generator>
+  <openSearch:totalResults>1</openSearch:totalResults>
+  <openSearch:startIndex>1</openSearch:startIndex>
+  <entry>
+    <id>tag:blogger.com,1999:blog-blogID.post-commentID</id>
+    <published>2007-04-04T21:56:00.000-07:00</published>
+    <updated>2007-04-04T21:56:29.803-07:00</updated>
+    <title type="text">This is my first comment</title>
+    <content type="html">This is my first comment</content>
+    <link rel="alternate" type="text/html" href="http://blogName.blogspot.com/2007/04/first-post.html#commentID"/>
+    <link rel="self" type="application/atom+xml" href="http://blogName.blogspot.com/feeds/postID/comments/default/commentID"/>
+    <link rel="edit" type="application/atom+xml" href="http://www.blogger.com/feeds/blogID/postID/comments/default/commentID"/>
+    <author>
+      <name>Blog Author name</name>
+    </author>
+  </entry>
+</feed>"""
