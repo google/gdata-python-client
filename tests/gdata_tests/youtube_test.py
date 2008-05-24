@@ -549,8 +549,10 @@ class YouTubeUserEntry(unittest.TestCase):
     playlist_entry = gdata.youtube.YouTubePlaylistEntry(
         title=atom.Title(text='my title'),
         description=gdata.youtube.Description(text='ok playlist'),
-        private=False)
-    # print playlist_entry.ToString()
+        private=None)
+    self.assertEquals(playlist_entry.description.text,
+        'ok playlist')
+
 
 if __name__ == '__main__':
   unittest.main()
