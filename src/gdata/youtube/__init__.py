@@ -22,7 +22,8 @@ import atom
 import gdata
 import gdata.media as Media
 import gdata.geo as Geo
-
+# TODO (jhartmann) remove me
+from pprint import pprint as px
 
 # XML namespaces which are often used in YouTube entities.
 YOUTUBE_NAMESPACE = 'http://gdata.youtube.com/schemas/2007'
@@ -258,36 +259,6 @@ class YouTubePlaylistVideoEntry(gdata.GDataEntry):
                               extension_attributes=extension_attributes)
 
 
-class YouTubePlaylistEntry(gdata.GDataEntry):
-  _tag = gdata.GDataEntry._tag
-  _namespace = gdata.GDataEntry._namespace
-  _children = gdata.GDataEntry._children.copy()
-  _attributes = gdata.GDataEntry._attributes.copy()
-
-  _children['{%s}description' % YOUTUBE_NAMESPACE] = ('description',
-                                                       Description)
-  _children['{%s}description' % YOUTUBE_NAMESPACE] = ('private',
-                                                       gdata.media.Private)
-  _children['{%s}feedLink' % gdata.GDATA_NAMESPACE] = ('feed_link',
-                                                        [gdata.FeedLink])
-
-  def __init__(self, author=None, category=None, content=None,
-               atom_id=None, link=None, published=None, title=None,
-               updated=None, description=None, private=None, feed_link=None,
-               extension_elements=None, extension_attributes=None):
-
-    self.description = description
-    self.private = private
-    self.feed_link = feed_link
-
-    gdata.GDataEntry.__init__(self, author=author, category=category,
-                              content=content, atom_id=atom_id,
-                              link=link, published=published, title=title, 
-                              updated=updated,
-                              extension_elements=extension_elements,
-                              extension_attributes=extension_attributes)
-
-
 class YouTubeVideoCommentEntry(gdata.GDataEntry):
   _tag = gdata.GDataEntry._tag
   _namespace = gdata.GDataEntry._namespace
@@ -401,6 +372,18 @@ class YouTubeVideoEntry(gdata.GDataEntry):
                               extension_elements=extension_elements,
                               extension_attributes=extension_attributes)
 
+  def GetSwfUrl(self):
+    """Return the URL for the embeddable Video
+
+      Returns:
+          URL of the embeddable video
+    """
+    for content in self.media.content:
+      if content.format == '5':
+        return content.url
+      else:
+        return None
+
 
 class YouTubeUserEntry(gdata.GDataEntry):
   _tag = gdata.GDataEntry._tag
@@ -474,6 +457,40 @@ class YouTubeVideoFeed(gdata.GDataFeed, gdata.LinkFinder):
   _children = gdata.GDataFeed._children.copy()
   _attributes = gdata.GDataFeed._attributes.copy()
   _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', [YouTubeVideoEntry])
+
+class YouTubePlaylistEntry(gdata.GDataEntry):
+  _tag = gdata.GDataEntry._tag
+  _namespace = gdata.GDataEntry._namespace
+  _children = gdata.GDataEntry._children.copy()
+  _attributes = gdata.GDataEntry._attributes.copy()
+  _children['{%s}description' % YOUTUBE_NAMESPACE] = ('description',
+                                                       Description)
+  _children['{%s}description' % YOUTUBE_NAMESPACE] = ('private',
+                                                       Private)
+  _children['{%s}feedLink' % gdata.GDATA_NAMESPACE] = ('feed_link',
+                                                        [gdata.FeedLink])
+
+  def __init__(self, author=None, category=None, content=None,
+               atom_id=None, link=None, published=None, title=None,
+               updated=None, private=None, feed_link=None,
+               description=None, extension_elements=None,
+               extension_attributes=None):
+
+
+    print "description came in as " + str(type(description))
+
+    self.description = description
+    self.private = private
+    self.feed_link = feed_link
+    px(self.__dict__)
+
+    gdata.GDataEntry.__init__(self, author=author, category=category,
+                              content=content, atom_id=atom_id,
+                              link=link, published=published, title=title, 
+                              updated=updated,
+                              extension_elements=extension_elements,
+                              extension_attributes=extension_attributes)
+
 
 
 class YouTubePlaylistFeed(gdata.GDataFeed, gdata.LinkFinder):
