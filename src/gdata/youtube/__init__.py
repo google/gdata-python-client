@@ -22,8 +22,6 @@ import atom
 import gdata
 import gdata.media as Media
 import gdata.geo as Geo
-# TODO (jhartmann) remove me
-from pprint import pprint as px
 
 # XML namespaces which are often used in YouTube entities.
 YOUTUBE_NAMESPACE = 'http://gdata.youtube.com/schemas/2007'
@@ -476,13 +474,9 @@ class YouTubePlaylistEntry(gdata.GDataEntry):
                description=None, extension_elements=None,
                extension_attributes=None):
 
-
-    print "description came in as " + str(type(description))
-
     self.description = description
     self.private = private
     self.feed_link = feed_link
-    px(self.__dict__)
 
     gdata.GDataEntry.__init__(self, author=author, category=category,
                               content=content, atom_id=atom_id,
