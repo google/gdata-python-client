@@ -377,11 +377,12 @@ class YouTubeVideoEntry(gdata.GDataEntry):
       Returns:
           URL of the embeddable video
     """
-    for content in self.media.content:
-      if content.extension_attributes[YOUTUBE_FORMAT] == '5':
-        return content.url
-      else:
-        return None
+    if self.media.content:
+      for content in self.media.content:
+        if content.extension_attributes[YOUTUBE_FORMAT] == '5':
+          return content.url
+    else:
+      return None
 
 
 class YouTubeUserEntry(gdata.GDataEntry):
