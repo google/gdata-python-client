@@ -22,6 +22,7 @@ from gdata import test_data
 import gdata.youtube
 import gdata.youtube.service
 import atom
+from pprint import pprint as px
 
 YOUTUBE_TEMPLATE = '{http://gdata.youtube.com/schemas/2007}%s'
 YT_FORMAT = YOUTUBE_TEMPLATE % ('format')
@@ -157,6 +158,8 @@ class VideoEntryTest(unittest.TestCase):
              'C71ypXYGho8/comments'))
         self.assertEquals(entry.comments.feed_link[0].count_hint, '27')
 
+        self.assertEquals(entry.GetSwfUrl(),
+            'http://www.youtube.com/v/C71ypXYGho8')
 
 class VideoEntryPrivateTest(unittest.TestCase):
 
@@ -543,16 +546,6 @@ class YouTubeUserEntry(unittest.TestCase):
     self.assertEquals(self.feed.title.text, 'andyland74 Channel')
     self.assertEquals(self.feed.updated.text, '2008-02-26T11:48:21.000-08:00')
     self.assertEquals(self.feed.username.text, 'andyland74')
-
-
-  def testCreatePlaylistEntry(self):
-    playlist_entry = gdata.youtube.YouTubePlaylistEntry(
-        title=atom.Title(text='my title'),
-        description=gdata.youtube.Description(text='ok playlist'),
-        private=None)
-    self.assertEquals(playlist_entry.description.text,
-        'ok playlist')
-
 
 if __name__ == '__main__':
   unittest.main()
