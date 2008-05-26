@@ -26,6 +26,7 @@ import gdata.geo as Geo
 # XML namespaces which are often used in YouTube entities.
 YOUTUBE_NAMESPACE = 'http://gdata.youtube.com/schemas/2007'
 YOUTUBE_TEMPLATE = '{http://gdata.youtube.com/schemas/2007}%s'
+YOUTUBE_FORMAT = '{http://gdata.youtube.com/schemas/2007}format'
 
 class Username(atom.AtomBase):
   """The YouTube Username element"""
@@ -377,7 +378,7 @@ class YouTubeVideoEntry(gdata.GDataEntry):
           URL of the embeddable video
     """
     for content in self.media.content:
-      if content.format == '5':
+      if content.extension_attributes[YOUTUBE_FORMAT] == '5':
         return content.url
       else:
         return None
@@ -463,8 +464,8 @@ class YouTubePlaylistEntry(gdata.GDataEntry):
   _attributes = gdata.GDataEntry._attributes.copy()
   _children['{%s}description' % YOUTUBE_NAMESPACE] = ('description',
                                                        Description)
-  _children['{%s}description' % YOUTUBE_NAMESPACE] = ('private',
-                                                       Private)
+  _children['{%s}private' % YOUTUBE_NAMESPACE] = ('private',
+                                                  Private)
   _children['{%s}feedLink' % gdata.GDATA_NAMESPACE] = ('feed_link',
                                                         [gdata.FeedLink])
 
