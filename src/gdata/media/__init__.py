@@ -103,8 +103,9 @@ class Content(MediaBaseElement):
   _attributes['medium'] = 'medium'
   _attributes['type'] = 'type'
   _attributes['fileSize'] = 'fileSize'
+
   def __init__(self, url=None, width=None, height=None,
-      medium=None, content_type=None, fileSize=None,
+      medium=None, content_type=None, fileSize=None, format=None,
       extension_elements=None, extension_attributes=None, text=None):
     MediaBaseElement.__init__(self, extension_elements=extension_elements,
                               extension_attributes=extension_attributes,
