@@ -27,4 +27,5 @@ pydoc -w gdata.contacts.service
 pydoc -w gdata.geo
 pydoc -w gdata.exif
 pydoc -w gdata.media
-
+pydoc -w gdata.youtube
+pydoc -w gdata.youtube.service
