@@ -34,6 +34,7 @@ service modules for the the following Google data services:
 - Google Apps Provisioning API
 - Picasa Web Albums Data API
 - Google Code Search Data API
+- YouTube Data API
 - core Google data API functionality 
 The core Google data code provides sufficient functionality to use this 
 library with any Google data API (even if a module hasn't been written for 
@@ -48,6 +49,6 @@ service.
     packages=['atom', 'gdata', 'gdata.calendar', 'gdata.base',
         'gdata.spreadsheet', 'gdata.apps', 'gdata.docs', 'gdata.codesearch',
         'gdata.photos', 'gdata.exif', 'gdata.geo', 'gdata.media', 
-        'gdata.contacts'],
+        'gdata.contacts', 'gdata.youtube'],
     package_dir = {'gdata':'src/gdata', 'atom':'src/atom'}
 )
