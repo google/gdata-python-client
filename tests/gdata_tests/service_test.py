@@ -29,6 +29,7 @@ import atom.service
 import gdata.base
 import os.path
 from gdata import test_data
+import atom.mock_service
 
 
 username = ''
@@ -355,6 +356,31 @@ class GDataServiceUnitTest(unittest.TestCase):
     # Delete the item the test just created.
     response = self.gd_client.Delete(response.id.text)
     self.assert_(response)
+
+  def testCaptchaUrlGeneration(self):
+    # Populate the mock server with a pairing for a ClientLogin request to a
+    # CAPTCHA challenge.
+    login_request = atom.mock_service.MockRequest(operation='POST', 
+        uri='https://www.google.com/accounts/ClientLogin')
+    captcha_response = atom.mock_service.MockHttpResponse(
+        body="""Url=http://www.google.com/login/captcha
+Error=CaptchaRequired
+CaptchaToken=DQAAAGgAdkI1LK9
+CaptchaUrl=Captcha?ctoken=HiteT4b0Bk5Xg18_AcVoP6-yFkHPibe7O9EqxeiI7lUSN
+""", status=403, reason='Access Forbidden')
+    atom.mock_service.recordings.append((login_request, captcha_response))
+
+    # Set the exising client's handler so that it will make requests to the
+    # mock service instead of the real server.
+    self.gd_client.handler = atom.mock_service
+
+    try:
+      self.gd_client.ProgrammaticLogin()
+      self.fail('Login attempt should have caused a CAPTCHA challenge.')
+    except gdata.service.CaptchaRequired, error:
+      self.assertEquals(self.gd_client.captcha_url, 
+          ('https://www.google.com/accounts/Captcha?ctoken=HiteT4b0Bk5Xg18_'
+           'AcVoP6-yFkHPibe7O9EqxeiI7lUSN'))
       
 
 class QueryTest(unittest.TestCase):

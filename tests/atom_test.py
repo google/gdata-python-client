@@ -595,7 +595,7 @@ class UtfParsingTest(unittest.TestCase):
       entry = atom.CreateClassFromXMLString(atom.Entry, test_data.GBASE_STRING_ENCODING_ENTRY)
     except UnicodeDecodeError:
       self.fail('Error when converting XML')
-    
+
   
 if __name__ == '__main__':
   unittest.main()

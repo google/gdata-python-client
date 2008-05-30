@@ -324,7 +324,7 @@ class GDataService(atom.service.AtomService):
       # Examine each line to find the error type and the captcha token and
       # captch URL if they are present.
       captcha_parameters = gdata.auth.GetCaptchChallenge(response_body, 
-          captcha_base_url='%saccounts/' % AUTH_SERVER_HOST)
+          captcha_base_url='%s/accounts/' % AUTH_SERVER_HOST)
       if captcha_parameters:
         self.__captcha_token = captcha_parameters['token']
         self.__captcha_url = captcha_parameters['url']
