@@ -165,8 +165,8 @@ class ExtensionContainer(object):
       child._BecomeChildElement(tree)
     for attribute, value in self.extension_attributes.iteritems():
       if value:
-        # Encode the value in the desired type (default UTF-8).
-        tree.attrib[attribute] = value.encode(MEMBER_STRING_ENCODING)
+        # Decode the value from the desired encoding (default UTF-8).
+        tree.attrib[attribute] = value.decode(MEMBER_STRING_ENCODING)
     if self.text and not isinstance(self.text, unicode):
       tree.text = self.text.decode(MEMBER_STRING_ENCODING)
     else:
