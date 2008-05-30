@@ -440,10 +440,12 @@ class CalendarEventQuery(gdata.service.Query):
 
   def __init__(self, user='default', visibility='private', projection='full',
                text_query=None, params=None, categories=None):
-    gdata.service.Query.__init__(self, feed='http://www.google.com/calendar/feeds/'+
-                           '%s/%s/%s' % (user, visibility, projection,),
-                           text_query=text_query, params=params, 
-                           categories=categories)
+    gdata.service.Query.__init__(self, 
+        feed='http://www.google.com/calendar/feeds/%s/%s/%s' % (
+            urllib.quote(user), 
+            urllib.quote(visibility), 
+            urllib.quote(projection)),
+        text_query=text_query, params=params, categories=categories)
     
   def _GetStartMin(self):
     if 'start-min' in self.keys():
