@@ -880,12 +880,13 @@ class CalendarEventFeed(gdata.BatchFeed, gdata.LinkFinder):
   _attributes = gdata.BatchFeed._attributes.copy()
   _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', 
                                                   [CalendarEventEntry])
+  _children['{%s}timezone' % GCAL_NAMESPACE] = ('timezone', Timezone)
 
   def __init__(self, author=None, category=None, contributor=None,
       generator=None, icon=None, atom_id=None, link=None, logo=None, 
       rights=None, subtitle=None, title=None, updated=None, entry=None, 
       total_results=None, start_index=None, items_per_page=None,
-      interrupted=None,
+      interrupted=None, timezone=None,
       extension_elements=None, extension_attributes=None, text=None):
      gdata.BatchFeed.__init__(self, author=author, category=category,
                               contributor=contributor, generator=generator,
@@ -899,6 +900,7 @@ class CalendarEventFeed(gdata.BatchFeed, gdata.LinkFinder):
                               extension_elements=extension_elements,
                               extension_attributes=extension_attributes,
                               text=text)
+     self.timezone = timezone
 
 
 def CalendarListEntryFromString(xml_string):
