@@ -28,11 +28,6 @@ import random
 YOUTUBE_TEMPLATE = '{http://gdata.youtube.com/schemas/2007}%s'
 YOUTUBE_TEST_CLIENT_ID = 'ytapi-pythonclientlibrary_servicetest'
 
-username = 'api.jhartmann@google.com'
-password = '404n9e8s7@G'
-developer_key = 'AI39si5rCETGH6IkhVxY17suSw7BJ7SBB3vMObcigiugSAXN3crTwkE2iQdiTGCxF3npZSi21HjGKdSfXBD0NqZ_F7gpdbDpjw'
-video_file_location = '/Users/jhartmann/Desktop/Test2.mov'
-
 class YouTubeServiceTest(unittest.TestCase):
 
   def setUp(self):
@@ -428,9 +423,9 @@ class YouTubeServiceTest(unittest.TestCase):
 if __name__ == '__main__':
   print ('NOTE: Please run these tests only with a test account. '
          'The tests may delete or update your data.')
-  #username = raw_input('Please enter your username: ')
-  #password = getpass.getpass()
-  #developer_key = raw_input('Please enter your developer key: ')
-  #video_file_location = raw_input(
-  #    'Please enter the absolute path to a video file: ')
+  username = raw_input('Please enter your username: ')
+  password = getpass.getpass()
+  developer_key = raw_input('Please enter your developer key: ')
+  video_file_location = raw_input(
+      'Please enter the absolute path to a video file: ')
   unittest.main()
