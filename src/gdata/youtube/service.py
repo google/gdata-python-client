@@ -16,11 +16,9 @@
 
 """YouTubeService extends GDataService to streamline YouTube operations.
 
-  YouTubeService: Provides methods to query feeds. Extends GDataService.
+  YouTubeService: Provides methods to perform CRUD operations on YouTube feeds. 
+  Extends GDataService.
 
-  DictionaryToParamList: Function which converts a dictionary into a list of 
-                         URL arguments (represented as strings). This is a 
-                         utility function used in CRUD operations.
 """
 
 __author__ = ('api.stephaniel@gmail.com (Stephanie Liu), '
@@ -266,34 +264,6 @@ class YouTubeService(gdata.service.GDataService):
   def GetUserFavoritesFeed(self, username='default'):
     return self.GetYouTubeVideoFeed('http://gdata.youtube.com/feeds/api/users/'
                                     + username + '/favorites')
-  def Query(self, uri):
-    """Performs a query and returns a resulting feed or entry.
-
-    Args:
-      feed: string The feed which is to be queried
-
-    Returns:
-      On success, a tuple in the form
-      (boolean succeeded=True, ElementTree._Element result)
-      On failure, a tuple in the form
-      (boolean succeeded=False, {'status': HTTP status code from server, 
-                                 'reason': HTTP reason from the server, 
-                                 'body': HTTP body of the server's response})
-    """
-
-    result = self.Get(uri)
-    return result
-
-  def YouTubeQuery(self, query):
-    result = self.Query(query.ToUri())
-    if isinstance(query, YouTubeVideoQuery):
-      return gdata.youtube.YouTubeVideoFeedFromString(result.ToString())
-    elif isinstance(query, YouTubeUserQuery):
-      return gdata.youtube.YouTubeUserFeedFromString(result.ToString())
-    elif isinstance(query, YouTubePlaylistQuery):
-      return gdata.youtube.YouTubePlaylistFeedFromString(result.ToString())
-    else:
-      return result
 
   def InsertVideoEntry(self, video_entry, filename_or_handle,
                        youtube_username='default',
@@ -869,6 +839,35 @@ class YouTubeService(gdata.service.GDataService):
   client_id = property(_GetClientId, _SetClientId,
                          doc="""The ClientId property""")
 
+  def Query(self, uri):
+    """Performs a query and returns a resulting feed or entry.
+
+    Args:
+      feed: string The feed which is to be queried
+
+    Returns:
+      On success, a tuple in the form
+      (boolean succeeded=True, ElementTree._Element result)
+      On failure, a tuple in the form
+      (boolean succeeded=False, {'status': HTTP status code from server, 
+                                 'reason': HTTP reason from the server, 
+                                 'body': HTTP body of the server's response})
+    """
+
+    result = self.Get(uri)
+    return result
+
+  def YouTubeQuery(self, query):
+    result = self.Query(query.ToUri())
+    if isinstance(query, YouTubeVideoQuery):
+      return gdata.youtube.YouTubeVideoFeedFromString(result.ToString())
+    elif isinstance(query, YouTubeUserQuery):
+      return gdata.youtube.YouTubeUserFeedFromString(result.ToString())
+    elif isinstance(query, YouTubePlaylistQuery):
+      return gdata.youtube.YouTubePlaylistFeedFromString(result.ToString())
+    else:
+      return result
+
 class YouTubeVideoQuery(gdata.service.Query):
 
   def __init__(self, video_id=None, feed_type=None, text_query=None,
@@ -909,17 +908,17 @@ class YouTubeVideoQuery(gdata.service.Query):
   start_max = property(_GetStartMax, _SetStartMax,
                        doc="""The start-max query parameter""")
 
-  def _GetVq(self):
+  def _GetVideoQuery(self):
     if 'vq' in self.keys():
       return self['vq']
     else:
       return None
 
-  def _SetVq(self, val):
+  def _SetVideoQuery(self, val):
     self['vq'] = val
 
-  vq = property(_GetVq, _SetVq,
-                doc="""The vq (video query) query parameter""")
+  vq = property(_GetVideoQuery, _SetVideoQuery,
+                doc="""The video query (vq) query parameter""")
 
   def _GetOrderBy(self):
     if 'orderby' in self.keys():
@@ -981,7 +980,7 @@ class YouTubeVideoQuery(gdata.service.Query):
   racy = property(_GetRacy, _SetRacy, 
                   doc="""The racy query parameter""")
 
-class YouTubeUserQuery(gdata.service.Query):
+class YouTubeUserQuery(YouTubeVideoQuery):
 
   def __init__(self, username=None, feed_type=None, subscription_id=None,
                text_query=None, params=None, categories=None):
@@ -1000,107 +999,11 @@ class YouTubeUserQuery(gdata.service.Query):
     else:
       feed = "http://%s/feeds/users" % (YOUTUBE_SERVER)
 
-    gdata.service.Query.__init__(self, feed, text_query=text_query,
-                                 params=params, categories=categories)
-
-  def _GetStartMin(self):
-    if 'start-min' in self.keys():
-      return self['start-min']
-    else:
-      return None
-
-  def _SetStartMin(self, val):
-    self['start-min'] = val
-
-  start_min = property(_GetStartMin, _SetStartMin,
-                       doc="""The start-min query parameter""")
-
-  def _GetStartMax(self):
-    if 'start-max' in self.keys():
-      return self['start-max']
-    else:
-      return None
-
-  def _SetStartMax(self, val):
-    self['start-max'] = val
-
-  start_max = property(_GetStartMax, _SetStartMax,
-                       doc="""The start-max query parameter""")
-
-  def _GetVq(self):
-    if 'vq' in self.keys():
-      return self['vq']
-    else:
-      return None
-
-  def _SetVq(self, val):
-    self['vq'] = val
-
-  vq = property(_GetVq, _SetVq,
-                doc="""The vq (video query) query parameter""")
-
-  def _GetOrderBy(self):
-    if 'orderby' in self.keys():
-      return self['orderby']
-    else:
-      return None
-
-  def _SetOrderBy(self, val):
-    if val not in YOUTUBE_QUERY_VALID_ORDERBY_PARAMETERS:
-      raise YouTubeError('OrderBy must be one of: %s ' %
-                         ' '.join(YOUTUBE_QUERY_VALID_ORDERBY_PARAMETERS))
-    self['orderby'] = val
-
-  orderby = property(_GetOrderBy, _SetOrderBy,
-                     doc="""The orderby query parameter""")
-
-  def _GetTime(self):
-    if 'time' in self.keys():
-      return self['time']
-    else:
-      return None
-
-  def _SetTime(self, val):
-    if val not in YOUTUBE_QUERY_VALID_TIME_PARAMETERS:
-      raise YouTubeError('Time must be one of: %s ' % 
-                         ' '.join(YOUTUBE_QUERY_VALID_TIME_PARAMETERS))
-    self['time'] = val
-
-  time = property(_GetTime, _SetTime,
-                  doc="""The time query parameter""")
-
-  def _GetFormat(self):
-    if 'format' in self.keys():
-      return self['format']
-    else:
-      return None
-
-  def _SetFormat(self, val):
-    if val not in YOUTUBE_QUERY_VALID_FORMAT_PARAMETERS:
-      raise YouTubeError('Format must be one of: %s ' % 
-                         ' '.join(YOUTUBE_QUERY_VALID_FORMAT_PARAMETERS))
-    self['format'] = val
-
-  format = property(_GetFormat, _SetFormat,
-                    doc="""The format query parameter""")
-
-  def _GetRacy(self):
-    if 'racy' in self.keys():
-      return self['racy']
-    else:
-      return None
-
-  def _SetRacy(self, val):
-    if val not in YOUTUBE_QUERY_VALID_RACY_PARAMETERS:
-      raise YouTubeError('Racy must be one of: %s ' % 
-                         ' '.join(YOUTUBE_QUERY_VALID_RACY_PARAMETERS))
-    self['racy'] = val
-
-  racy = property(_GetRacy, _SetRacy,
-                  doc="""The racy query parameter""")
+    YouTubeVideoQuery.__init__(self, feed, text_query=text_query,
+                               params=params, categories=categories)
 
 
-class YouTubePlaylistQuery(gdata.service.Query):
+class YouTubePlaylistQuery(YouTubeVideoQuery):
 
   def __init__(self, playlist_id, text_query=None, params=None,
                categories=None):
@@ -1109,101 +1012,5 @@ class YouTubePlaylistQuery(gdata.service.Query):
     else:
       feed = "http://%s/feeds/playlists" % (YOUTUBE_SERVER)
 
-    gdata.service.Query.__init__(self, feed, text_query=text_query,
-                                 params=params, categories=categories)
-
-  def _GetStartMin(self):
-    if 'start-min' in self.keys():
-      return self['start-min']
-    else:
-      return None
-
-  def _SetStartMin(self, val):
-    self['start-min'] = val
-
-  start_min = property(_GetStartMin, _SetStartMin, 
-                       doc="""The start-min query parameter""")
-
-  def _GetStartMax(self):
-    if 'start-max' in self.keys():
-      return self['start-max']
-    else:
-      return None
-
-  def _SetStartMax(self, val):
-    self['start-max'] = val
-
-  start_max = property(_GetStartMax, _SetStartMax,
-                       doc="""The start-max query parameter""")
-
-  def _GetVq(self):
-    if 'vq' in self.keys():
-      return self['vq']
-    else:
-      return None
-
-  def _SetVq(self, val):
-    self['vq'] = val
-
-  vq = property(_GetVq, _SetVq, 
-                doc="""The vq (video query) query parameter""")
-
-  def _GetOrderBy(self):
-    if 'orderby' in self.keys():
-      return self['orderby']
-    else:
-      return None
-
-  def _SetOrderBy(self, val):
-    if val not in YOUTUBE_QUERY_VALID_ORDERBY_PARAMETERS:
-      raise YouTubeError('OrderBy must be one of: %s ' %
-                         ' '.join(YOUTUBE_QUERY_VALID_ORDERBY_PARAMETERS))
-    self['orderby'] = val
-
-  orderby = property(_GetOrderBy, _SetOrderBy, 
-                     doc="""The orderby query parameter""")
-
-  def _GetTime(self):
-    if 'time' in self.keys():
-      return self['time']
-    else:
-      return None
-
-  def _SetTime(self, val):
-    if val not in YOUTUBE_QUERY_VALID_TIME_PARAMETERS:
-      raise YouTubeError('Time must be one of: %s ' % 
-                         ' '.join(YOUTUBE_QUERY_VALID_TIME_PARAMETERS))
-    self['time'] = val
-
-  time = property(_GetTime, _SetTime, 
-                  doc="""The time query parameter""")
-
-  def _GetFormat(self):
-    if 'format' in self.keys():
-      return self['format']
-    else:
-      return None
-
-  def _SetFormat(self, val):
-    if val not in YOUTUBE_QUERY_VALID_FORMAT_PARAMETERS:
-      raise YouTubeError('Format must be one of: %s ' % 
-                         ' '.join(YOUTUBE_QUERY_VALID_FORMAT_PARAMETERS))
-    self['format'] = val
-
-  format = property(_GetFormat, _SetFormat, 
-                    doc="""The format query parameter""")
-
-  def _GetRacy(self):
-    if 'racy' in self.keys(): 
-      return self['racy']
-    else:
-      return None
-
-  def _SetRacy(self, val):
-    if val not in YOUTUBE_QUERY_VALID_RACY_PARAMETERS:
-      raise YouTubeError('Racy must be one of: %s ' % 
-                         ' '.join(YOUTUBE_QUERY_VALID_RACY_PARAMETERS))
-    self['racy'] = val
-
-  racy = property(_GetRacy, _SetRacy, 
-                  doc="""The racy query parameter""")
+    YouTubeVideoQuery.__init__(self, feed, text_query=text_query,
+                               params=params, categories=categories)

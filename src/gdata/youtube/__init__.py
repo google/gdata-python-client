@@ -243,12 +243,18 @@ class YouTubePlaylistVideoEntry(gdata.GDataEntry):
   def __init__(self, author=None, category=None, content=None,
                atom_id=None, link=None, published=None, title=None,
                updated=None, feed_link=None, description=None,
-               position=None,
+               rating=None, comments=None, statistics=None,
+               location=None, position=None, media=None,
                extension_elements=None, extension_attributes=None):
 
     self.feed_link = feed_link
     self.description = description
+    self.rating = rating
+    self.comments = comments
+    self.statistics = statistics
+    self.location = location
     self.position = position
+    self.media = media
 
     gdata.GDataEntry.__init__(self, author=author, category=category,
                               content=content, atom_id=atom_id,
