@@ -238,6 +238,17 @@ class GDataService(atom.service.AtomService):
       doc="""Get the captcha URL for a login request.""")
 
   def GetAuthSubToken(self):
+    """Returns the AuthSub Token after removing the AuthSub Authorization
+    Label.
+     
+    The AuthSub Authorization Label reads: "AuthSub token"
+
+    Returns:
+      If the AuthSub Token is set AND it begins with the AuthSub 
+      Authorization Label, the AuthSub Token is returned minus the AuthSub
+      Label. If the AuthSub Token does not start with the AuthSub
+      Authorization Label or it is not set, None is returned.
+    """
     if self.__auth_token.startswith(AUTHSUB_AUTH_LABEL):
       # Strip off the leading 'AUTHSUB_AUTH_LABEL=' and just return the
       # token value.
