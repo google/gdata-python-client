@@ -35,11 +35,12 @@ service modules for the the following Google data services:
 - Picasa Web Albums Data API
 - Google Code Search Data API
 - YouTube Data API
+- Blogger Data API
 - core Google data API functionality 
 The core Google data code provides sufficient functionality to use this 
 library with any Google data API (even if a module hasn't been written for 
-it yet). For example, this client can be used with the Blogger API, and the
-YouTube API. This library may also be used with any Atom Publishing Protocol
+it yet). For example, this client can be used with the Notebook API. 
+This library may also be used with any Atom Publishing Protocol
 service.
 """,
     author='Jeffrey Scudder',

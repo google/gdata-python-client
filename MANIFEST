@@ -104,6 +104,10 @@ pydocs/gdata.service.html
 pydocs/gdata.spreadsheet.html
 pydocs/gdata.spreadsheet.service.html
 pydocs/gdata.spreadsheet.text_db.html
+pydocs/gdata.youtube.html
+pydocs/gdata.youtube.service.html
+pydocs/gdata.blogger.html
+pydocs/gdata.blogger.service.html
 pydocs/gdata.exif.html
 pydocs/gdata.geo.html
 pydocs/gdata.media.html

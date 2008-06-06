@@ -1,8 +1,9 @@
 === 1.1.0 ===
-June 6, 2008 (revision 401)
+June 6, 2008 (revision 403)
 
 - Added modules for YouTube.
 - Added modules for Blogger to simplify using the Blogger API.
+- Updated pydocs for all modules.
 - New member in service object to allow the ClientLogin server to be changed.
     Required to be able to use ClientLogin with YouTube.
 - Iterating over Google Apps Feeds can now be accomplished using a generator.
