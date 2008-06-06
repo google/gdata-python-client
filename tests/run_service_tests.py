@@ -15,7 +15,9 @@ import gdata_tests.docs.service_test
 import gdata_tests.spreadsheet.service_test
 import gdata_tests.spreadsheet.text_db_test
 import gdata_tests.photos.service_test
-#import gdata_tests.contacts.service_test
+import gdata_tests.contacts.service_test
+import gdata_tests.blogger.service_test
+import gdata_tests.youtube.service_test
 
 
 def RunAllTests(username, password, spreadsheet_key, worksheet_key,
