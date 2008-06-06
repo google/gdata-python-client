@@ -8,14 +8,11 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.youtube.html"><font color="#ffffff">youtube</font></a>.service</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svnrepos/gdata-python-client/src/gdata/youtube/service.py">/usr/local/svnrepos/gdata-python-client/src/gdata/youtube/service.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client-release/src/gdata/youtube/service.py">/usr/local/svn/gdata-python-client-release/src/gdata/youtube/service.py</a></font></td></tr></table>
     <p><tt><a href="#YouTubeService">YouTubeService</a>&nbsp;extends&nbsp;<a href="gdata.service.html#GDataService">GDataService</a>&nbsp;to&nbsp;streamline&nbsp;YouTube&nbsp;operations.<br>
 &nbsp;<br>
-<a href="#YouTubeService">YouTubeService</a>:&nbsp;Provides&nbsp;methods&nbsp;to&nbsp;query&nbsp;feeds.&nbsp;Extends&nbsp;<a href="gdata.service.html#GDataService">GDataService</a>.<br>
-&nbsp;<br>
-DictionaryToParamList:&nbsp;Function&nbsp;which&nbsp;converts&nbsp;a&nbsp;dictionary&nbsp;into&nbsp;a&nbsp;list&nbsp;of&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;URL&nbsp;arguments&nbsp;(represented&nbsp;as&nbsp;strings).&nbsp;This&nbsp;is&nbsp;a&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;utility&nbsp;function&nbsp;used&nbsp;in&nbsp;CRUD&nbsp;operations.</tt></p>
+<a href="#YouTubeService">YouTubeService</a>:&nbsp;Provides&nbsp;methods&nbsp;to&nbsp;perform&nbsp;CRUD&nbsp;operations&nbsp;on&nbsp;YouTube&nbsp;feeds.<br>
+Extends&nbsp;<a href="gdata.service.html#GDataService">GDataService</a>.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -23,7 +20,7 @@ DictionaryToParamList:&nbsp;Function&nbsp;which&nbsp;converts&nbsp;a&nbsp;dictio
 <font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="xml.etree.ElementTree.html">xml.etree.ElementTree</a><br>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="elementtree.ElementTree.html">elementtree.ElementTree</a><br>
 <a href="atom.html">atom</a><br>
 </td><td width="25%" valign=top><a href="gdata.html">gdata</a><br>
 <a href="os.html">os</a><br>
@@ -36,7 +33,7 @@ DictionaryToParamList:&nbsp;Function&nbsp;which&nbsp;converts&nbsp;a&nbsp;dictio
     
 <tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl>
-<dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>(<a href="exceptions.html#BaseException">exceptions.BaseException</a>)
+<dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="gdata.youtube.service.html#Error">Error</a>
@@ -57,10 +54,14 @@ DictionaryToParamList:&nbsp;Function&nbsp;which&nbsp;converts&nbsp;a&nbsp;dictio
 <dt><font face="helvetica, arial"><a href="gdata.service.html#Query">gdata.service.Query</a>(<a href="__builtin__.html#dict">__builtin__.dict</a>)
 </font></dt><dd>
 <dl>
+<dt><font face="helvetica, arial"><a href="gdata.youtube.service.html#YouTubeVideoQuery">YouTubeVideoQuery</a>
+</font></dt><dd>
+<dl>
 <dt><font face="helvetica, arial"><a href="gdata.youtube.service.html#YouTubePlaylistQuery">YouTubePlaylistQuery</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.youtube.service.html#YouTubeUserQuery">YouTubeUserQuery</a>
-</font></dt><dt><font face="helvetica, arial"><a href="gdata.youtube.service.html#YouTubeVideoQuery">YouTubeVideoQuery</a>
 </font></dt></dl>
+</dd>
+</dl>
 </dd>
 </dl>
  <p>
@@ -69,170 +70,76 @@ DictionaryToParamList:&nbsp;Function&nbsp;which&nbsp;converts&nbsp;a&nbsp;dictio
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="Error">class <strong>Error</strong></a>(<a href="exceptions.html#Exception">exceptions.Exception</a>)</font></td></tr>
     
-<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="gdata.youtube.service.html#Error">Error</a></dd>
-<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
-<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
-<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
-</dl>
-<hr>
-Data descriptors defined here:<br>
-<dl><dt><strong>__weakref__</strong></dt>
-<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-<hr>
-Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><a name="Error-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;class&nbsp;for&nbsp;errors&nbsp;within&nbsp;the&nbsp;YouTube&nbsp;service.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="Error-__getitem__"><strong>__getitem__</strong></a>(...)</dt></dl>
 
-<hr>
-Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x2fba40&gt;<dd><tt>T.<a href="#Error-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><a name="Error-__init__"><strong>__init__</strong></a>(...)</dt></dl>
 
-<hr>
-Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
-<dl><dt><a name="Error-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+<dl><dt><a name="Error-__str__"><strong>__str__</strong></a>(...)</dt></dl>
 
-<dl><dt><a name="Error-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
-
-<dl><dt><a name="Error-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
-
-<dl><dt><a name="Error-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
-
-<dl><dt><a name="Error-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
-
-<dl><dt><a name="Error-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
-
-<dl><dt><a name="Error-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
-
-<dl><dt><a name="Error-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
-
-<hr>
-Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
-<dl><dt><strong>__dict__</strong></dt>
-</dl>
-<dl><dt><strong>args</strong></dt>
-</dl>
-<dl><dt><strong>message</strong></dt>
-<dd><tt>exception&nbsp;message</tt></dd>
-</dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="RequestError">class <strong>RequestError</strong></a>(<a href="gdata.youtube.service.html#Error">Error</a>)</font></td></tr>
     
-<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Error">Error</a>&nbsp;class&nbsp;that&nbsp;is&nbsp;thrown&nbsp;in&nbsp;response&nbsp;to&nbsp;an&nbsp;invalid&nbsp;HTTP&nbsp;Request.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.youtube.service.html#RequestError">RequestError</a></dd>
 <dd><a href="gdata.youtube.service.html#Error">Error</a></dd>
 <dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
-<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
-<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
-</dl>
-<hr>
-Data descriptors inherited from <a href="gdata.youtube.service.html#Error">Error</a>:<br>
-<dl><dt><strong>__weakref__</strong></dt>
-<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
 <hr>
 Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><a name="RequestError-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#RequestError-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+<dl><dt><a name="RequestError-__getitem__"><strong>__getitem__</strong></a>(...)</dt></dl>
 
-<hr>
-Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x2fba40&gt;<dd><tt>T.<a href="#RequestError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><a name="RequestError-__init__"><strong>__init__</strong></a>(...)</dt></dl>
 
-<hr>
-Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
-<dl><dt><a name="RequestError-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#RequestError-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+<dl><dt><a name="RequestError-__str__"><strong>__str__</strong></a>(...)</dt></dl>
 
-<dl><dt><a name="RequestError-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#RequestError-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
-
-<dl><dt><a name="RequestError-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#RequestError-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
-
-<dl><dt><a name="RequestError-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
-
-<dl><dt><a name="RequestError-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#RequestError-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
-
-<dl><dt><a name="RequestError-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#RequestError-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
-
-<dl><dt><a name="RequestError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
-
-<dl><dt><a name="RequestError-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#RequestError-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
-
-<hr>
-Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
-<dl><dt><strong>__dict__</strong></dt>
-</dl>
-<dl><dt><strong>args</strong></dt>
-</dl>
-<dl><dt><strong>message</strong></dt>
-<dd><tt>exception&nbsp;message</tt></dd>
-</dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="YouTubeError">class <strong>YouTubeError</strong></a>(<a href="gdata.youtube.service.html#Error">Error</a>)</font></td></tr>
     
-<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>YouTube&nbsp;service&nbsp;specific&nbsp;error&nbsp;class.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.youtube.service.html#YouTubeError">YouTubeError</a></dd>
 <dd><a href="gdata.youtube.service.html#Error">Error</a></dd>
 <dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
-<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
-<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
-</dl>
-<hr>
-Data descriptors inherited from <a href="gdata.youtube.service.html#Error">Error</a>:<br>
-<dl><dt><strong>__weakref__</strong></dt>
-<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
 <hr>
 Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><a name="YouTubeError-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#YouTubeError-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+<dl><dt><a name="YouTubeError-__getitem__"><strong>__getitem__</strong></a>(...)</dt></dl>
 
-<hr>
-Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x2fba40&gt;<dd><tt>T.<a href="#YouTubeError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><a name="YouTubeError-__init__"><strong>__init__</strong></a>(...)</dt></dl>
 
-<hr>
-Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
-<dl><dt><a name="YouTubeError-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#YouTubeError-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+<dl><dt><a name="YouTubeError-__str__"><strong>__str__</strong></a>(...)</dt></dl>
 
-<dl><dt><a name="YouTubeError-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#YouTubeError-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
-
-<dl><dt><a name="YouTubeError-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#YouTubeError-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
-
-<dl><dt><a name="YouTubeError-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
-
-<dl><dt><a name="YouTubeError-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#YouTubeError-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
-
-<dl><dt><a name="YouTubeError-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#YouTubeError-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
-
-<dl><dt><a name="YouTubeError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
-
-<dl><dt><a name="YouTubeError-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#YouTubeError-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
-
-<hr>
-Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
-<dl><dt><strong>__dict__</strong></dt>
-</dl>
-<dl><dt><strong>args</strong></dt>
-</dl>
-<dl><dt><strong>message</strong></dt>
-<dd><tt>exception&nbsp;message</tt></dd>
-</dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="YouTubePlaylistQuery">class <strong>YouTubePlaylistQuery</strong></a>(<a href="gdata.service.html#Query">gdata.service.Query</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="YouTubePlaylistQuery">class <strong>YouTubePlaylistQuery</strong></a>(<a href="gdata.youtube.service.html#YouTubeVideoQuery">YouTubeVideoQuery</a>)</font></td></tr>
     
-<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Subclasses&nbsp;<a href="#YouTubeVideoQuery">YouTubeVideoQuery</a>&nbsp;to&nbsp;perform&nbsp;playlist-specific&nbsp;queries.<br>
+&nbsp;<br>
+Attributes&nbsp;are&nbsp;set&nbsp;dynamically&nbsp;via&nbsp;properties.&nbsp;Properties&nbsp;correspond&nbsp;to<br>
+the&nbsp;standard&nbsp;Google&nbsp;Data&nbsp;API&nbsp;query&nbsp;parameters&nbsp;with&nbsp;YouTube&nbsp;Data&nbsp;API<br>
+extensions.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.youtube.service.html#YouTubePlaylistQuery">YouTubePlaylistQuery</a></dd>
+<dd><a href="gdata.youtube.service.html#YouTubeVideoQuery">YouTubeVideoQuery</a></dd>
 <dd><a href="gdata.service.html#Query">gdata.service.Query</a></dd>
 <dd><a href="__builtin__.html#dict">__builtin__.dict</a></dd>
 <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
@@ -242,27 +149,55 @@ Methods defined here:<br>
 <dl><dt><a name="YouTubePlaylistQuery-__init__"><strong>__init__</strong></a>(self, playlist_id, text_query<font color="#909090">=None</font>, params<font color="#909090">=None</font>, categories<font color="#909090">=None</font>)</dt></dl>
 
 <hr>
-Data descriptors defined here:<br>
+Properties inherited from <a href="gdata.youtube.service.html#YouTubeVideoQuery">YouTubeVideoQuery</a>:<br>
 <dl><dt><strong>format</strong></dt>
 <dd><tt>The&nbsp;format&nbsp;query&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetFormat(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetFormat(self, val)</dt></dl>
+</dd>
+</dl>
+<dl><dt><strong>lr</strong></dt>
+<dd><tt>The&nbsp;lr&nbsp;(language&nbsp;restriction)&nbsp;query&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetLanguageRestriction(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetLanguageRestriction(self, val)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>orderby</strong></dt>
 <dd><tt>The&nbsp;orderby&nbsp;query&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetOrderBy(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetOrderBy(self, val)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>racy</strong></dt>
 <dd><tt>The&nbsp;racy&nbsp;query&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetRacy(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetRacy(self, val)</dt></dl>
+</dd>
 </dl>
-<dl><dt><strong>start_max</strong></dt>
-<dd><tt>The&nbsp;start-max&nbsp;query&nbsp;parameter</tt></dd>
-</dl>
-<dl><dt><strong>start_min</strong></dt>
-<dd><tt>The&nbsp;start-min&nbsp;query&nbsp;parameter</tt></dd>
+<dl><dt><strong>restriction</strong></dt>
+<dd><tt>The&nbsp;restriction&nbsp;query&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetIPRestriction(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetIPRestriction(self, val)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>time</strong></dt>
 <dd><tt>The&nbsp;time&nbsp;query&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetTime(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetTime(self, val)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>vq</strong></dt>
-<dd><tt>The&nbsp;vq&nbsp;(video&nbsp;query)&nbsp;query&nbsp;parameter</tt></dd>
+<dd><tt>The&nbsp;video&nbsp;query&nbsp;(vq)&nbsp;query&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetVideoQuery(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetVideoQuery(self, val)</dt></dl>
+</dd>
 </dl>
 <hr>
 Methods inherited from <a href="gdata.service.html#Query">gdata.service.Query</a>:<br>
@@ -271,40 +206,76 @@ Methods inherited from <a href="gdata.service.html#Query">gdata.service.Query</a
 <dl><dt><a name="YouTubePlaylistQuery-__str__"><strong>__str__</strong></a>(self)</dt></dl>
 
 <hr>
-Data descriptors inherited from <a href="gdata.service.html#Query">gdata.service.Query</a>:<br>
-<dl><dt><strong>__dict__</strong></dt>
-<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-<dl><dt><strong>__weakref__</strong></dt>
-<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
+Properties inherited from <a href="gdata.service.html#Query">gdata.service.Query</a>:<br>
 <dl><dt><strong>alt</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;alt&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetAlt(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetAlt(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>author</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;author&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetAuthor(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetAuthor(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>max_results</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;max-results&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetMaxResults(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetMaxResults(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>published_max</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;published-max&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetPublishedMax(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetPublishedMax(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>published_min</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;published-min&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetPublishedMin(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetPublishedMin(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>start_index</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;start-index&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetStartIndex(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetStartIndex(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>text_query</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;q&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetTextQuery(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetTextQuery(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>updated_max</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;updated-max&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetUpdatedMax(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetUpdatedMax(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>updated_min</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;updated-min&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetUpdatedMin(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetUpdatedMin(self, query)</dt></dl>
+</dd>
 </dl>
+<hr>
+Data and other attributes inherited from <a href="gdata.service.html#Query">gdata.service.Query</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'Query' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
 <hr>
 Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><a name="YouTubePlaylistQuery-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#YouTubePlaylistQuery-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
@@ -372,9 +343,9 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 
 <hr>
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x301ec0&gt;<dd><tt>T.<a href="#YouTubePlaylistQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#YouTubePlaylistQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0x655940&gt;<dd><tt>dict.<a href="#YouTubePlaylistQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object&gt;<dd><tt>dict.<a href="#YouTubePlaylistQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -384,7 +355,26 @@ v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 <font color="#000000" face="helvetica, arial"><a name="YouTubeService">class <strong>YouTubeService</strong></a>(<a href="gdata.service.html#GDataService">gdata.service.GDataService</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Client&nbsp;for&nbsp;the&nbsp;YouTube&nbsp;service.<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt>Client&nbsp;for&nbsp;the&nbsp;YouTube&nbsp;service.<br>
+&nbsp;<br>
+Performs&nbsp;all&nbsp;documented&nbsp;Google&nbsp;Data&nbsp;YouTube&nbsp;API&nbsp;functions,&nbsp;such&nbsp;as&nbsp;inserting,<br>
+updating&nbsp;and&nbsp;deleting&nbsp;videos,&nbsp;comments,&nbsp;playlist,&nbsp;subscriptions&nbsp;etc.<br>
+YouTube&nbsp;Service&nbsp;requires&nbsp;authentication&nbsp;for&nbsp;any&nbsp;write,&nbsp;update&nbsp;or&nbsp;delete<br>
+actions.<br>
+&nbsp;<br>
+Attributes:<br>
+&nbsp;&nbsp;email:&nbsp;An&nbsp;optional&nbsp;string&nbsp;identifying&nbsp;the&nbsp;user.&nbsp;Required&nbsp;only&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authenticated&nbsp;actions.<br>
+&nbsp;&nbsp;password:&nbsp;An&nbsp;optional&nbsp;string&nbsp;identifying&nbsp;the&nbsp;user's&nbsp;password.<br>
+&nbsp;&nbsp;source:&nbsp;An&nbsp;optional&nbsp;string&nbsp;identifying&nbsp;the&nbsp;name&nbsp;of&nbsp;your&nbsp;application.<br>
+&nbsp;&nbsp;server:&nbsp;An&nbsp;optional&nbsp;address&nbsp;of&nbsp;the&nbsp;YouTube&nbsp;API&nbsp;server.&nbsp;gdata.youtube.com&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;provided&nbsp;as&nbsp;the&nbsp;default&nbsp;value.<br>
+&nbsp;&nbsp;additional_headers:&nbsp;An&nbsp;optional&nbsp;dictionary&nbsp;containing&nbsp;additional&nbsp;headers<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;be&nbsp;passed&nbsp;along&nbsp;with&nbsp;each&nbsp;request.&nbsp;Use&nbsp;to&nbsp;store&nbsp;developer&nbsp;key.<br>
+&nbsp;&nbsp;client_id:&nbsp;An&nbsp;optional&nbsp;string&nbsp;identifying&nbsp;your&nbsp;application,&nbsp;required&nbsp;for&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authenticated&nbsp;requests,&nbsp;along&nbsp;with&nbsp;a&nbsp;developer&nbsp;key.<br>
+&nbsp;&nbsp;developer_key:&nbsp;An&nbsp;optional&nbsp;string&nbsp;value.&nbsp;Register&nbsp;your&nbsp;application&nbsp;at<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://code.google.com/apis/youtube/dashboard">http://code.google.com/apis/youtube/dashboard</a>&nbsp;to&nbsp;obtain&nbsp;a&nbsp;(free)&nbsp;key.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.youtube.service.html#YouTubeService">YouTubeService</a></dd>
@@ -394,348 +384,652 @@ v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="YouTubeService-AddComment"><strong>AddComment</strong></a>(self, comment_text, video_entry)</dt><dd><tt>Add&nbsp;a&nbsp;comment&nbsp;to&nbsp;a&nbsp;video&nbsp;entry<br>
+<dl><dt><a name="YouTubeService-AddComment"><strong>AddComment</strong></a>(self, comment_text, video_entry)</dt><dd><tt>Add&nbsp;a&nbsp;comment&nbsp;to&nbsp;a&nbsp;video&nbsp;entry.<br>
 &nbsp;<br>
-Needs&nbsp;authentication.<br>
+Needs&nbsp;authentication.&nbsp;Note&nbsp;that&nbsp;each&nbsp;comment&nbsp;that&nbsp;is&nbsp;posted&nbsp;must&nbsp;contain<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;video&nbsp;entry&nbsp;that&nbsp;it&nbsp;is&nbsp;to&nbsp;be&nbsp;posted&nbsp;to.<br>
 &nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;comment_text:&nbsp;The&nbsp;text&nbsp;of&nbsp;the&nbsp;comment<br>
-&nbsp;&nbsp;&nbsp;&nbsp;video_entry:&nbsp;The&nbsp;YouTubeVideoEntry&nbsp;to&nbsp;be&nbsp;commented&nbsp;on<br>
+Args:<br>
+&nbsp;&nbsp;comment_text:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;text&nbsp;of&nbsp;the&nbsp;comment.<br>
+&nbsp;&nbsp;video_entry:&nbsp;The&nbsp;YouTubeVideoEntry&nbsp;to&nbsp;be&nbsp;commented&nbsp;on.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;comment&nbsp;was&nbsp;added&nbsp;successfully</tt></dd></dl>
+&nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;comment&nbsp;was&nbsp;added&nbsp;successfully.</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-AddComplaint"><strong>AddComplaint</strong></a>(self, complaint_text, complaint_term, video_id)</dt><dd><tt>Add&nbsp;a&nbsp;complaint&nbsp;for&nbsp;a&nbsp;particular&nbsp;video&nbsp;entry<br>
+<dl><dt><a name="YouTubeService-AddComplaint"><strong>AddComplaint</strong></a>(self, complaint_text, complaint_term, video_id)</dt><dd><tt>Add&nbsp;a&nbsp;complaint&nbsp;for&nbsp;a&nbsp;particular&nbsp;video&nbsp;entry.<br>
 &nbsp;<br>
 Needs&nbsp;authentication.<br>
 &nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;complaint_text:&nbsp;Text&nbsp;explaining&nbsp;the&nbsp;complaint<br>
-&nbsp;&nbsp;&nbsp;&nbsp;complaint_term:&nbsp;Complaint&nbsp;category&nbsp;term<br>
-&nbsp;&nbsp;&nbsp;&nbsp;video_id:&nbsp;Id&nbsp;of&nbsp;YouTubeVideoEntry&nbsp;to&nbsp;complain&nbsp;about<br>
+Args:<br>
+&nbsp;&nbsp;complaint_text:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;complaint&nbsp;text.<br>
+&nbsp;&nbsp;complaint_term:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;complaint&nbsp;category&nbsp;term.<br>
+&nbsp;&nbsp;video_id:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;ID&nbsp;of&nbsp;YouTubeVideoEntry&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;complain&nbsp;about.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;True&nbsp;if&nbsp;posted&nbsp;successfully</tt></dd></dl>
+&nbsp;&nbsp;True&nbsp;if&nbsp;posted&nbsp;successfully.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;<a href="#YouTubeError">YouTubeError</a>:&nbsp;Your&nbsp;complaint_term&nbsp;is&nbsp;not&nbsp;valid.</tt></dd></dl>
 
 <dl><dt><a name="YouTubeService-AddContact"><strong>AddContact</strong></a>(self, contact_username, my_username<font color="#909090">='default'</font>)</dt><dd><tt>Add&nbsp;a&nbsp;new&nbsp;contact&nbsp;to&nbsp;the&nbsp;currently&nbsp;authenticated&nbsp;user's&nbsp;contact&nbsp;feed.<br>
 &nbsp;<br>
-Needs&nbsp;authentication<br>
+Needs&nbsp;authentication.<br>
 &nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;contact_username:&nbsp;The&nbsp;username&nbsp;of&nbsp;the&nbsp;contact&nbsp;that&nbsp;you&nbsp;wish&nbsp;to&nbsp;add<br>
-&nbsp;&nbsp;&nbsp;&nbsp;my_username:&nbsp;(optional)&nbsp;The&nbsp;username&nbsp;of&nbsp;the&nbsp;contact&nbsp;feed<br>
+Args:<br>
+&nbsp;&nbsp;contact_username:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;username&nbsp;of&nbsp;the&nbsp;contact<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;you&nbsp;wish&nbsp;to&nbsp;add.<br>
+&nbsp;&nbsp;my_username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;username&nbsp;to&nbsp;whose<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contact&nbsp;the&nbsp;new&nbsp;contact&nbsp;is&nbsp;to&nbsp;be&nbsp;added.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;YouTubeContactEntry&nbsp;if&nbsp;added&nbsp;successfully</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;YouTubeContactEntry&nbsp;if&nbsp;added&nbsp;successfully.</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-AddPlaylist"><strong>AddPlaylist</strong></a>(self, playlist_title, playlist_description, playlist_private<font color="#909090">=None</font>)</dt><dd><tt>Add&nbsp;a&nbsp;new&nbsp;playlist&nbsp;to&nbsp;the&nbsp;currently&nbsp;authenticated&nbsp;users&nbsp;account<br>
+<dl><dt><a name="YouTubeService-AddPlaylist"><strong>AddPlaylist</strong></a>(self, playlist_title, playlist_description, playlist_private<font color="#909090">=None</font>)</dt><dd><tt>Add&nbsp;a&nbsp;new&nbsp;playlist&nbsp;to&nbsp;the&nbsp;currently&nbsp;authenticated&nbsp;users&nbsp;account.<br>
 &nbsp;<br>
-Needs&nbsp;authentication<br>
+Needs&nbsp;authentication.<br>
 &nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;playlist_title:&nbsp;The&nbsp;title&nbsp;for&nbsp;the&nbsp;new&nbsp;playlist<br>
-&nbsp;&nbsp;&nbsp;&nbsp;playlist_description:&nbsp;The&nbsp;description&nbsp;for&nbsp;the&nbsp;playlist<br>
-&nbsp;&nbsp;&nbsp;&nbsp;playlist_private:&nbsp;(optiona)&nbsp;Submit&nbsp;as&nbsp;True&nbsp;if&nbsp;the&nbsp;playlist&nbsp;is&nbsp;to&nbsp;be<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private<br>
+Args:<br>
+&nbsp;&nbsp;playlist_title:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;title&nbsp;for&nbsp;the&nbsp;new&nbsp;playlist.<br>
+&nbsp;&nbsp;playlist_description:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;description&nbsp;of&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;playlist.<br>
+&nbsp;&nbsp;playlist_private:&nbsp;An&nbsp;optional&nbsp;boolean,&nbsp;set&nbsp;to&nbsp;True&nbsp;if&nbsp;the&nbsp;playlist&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;be&nbsp;private.<br>
+&nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;new&nbsp;YouTubePlaylistEntry&nbsp;if&nbsp;successfully&nbsp;posted</tt></dd></dl>
+&nbsp;&nbsp;The&nbsp;YouTubePlaylistEntry&nbsp;if&nbsp;successfully&nbsp;posted.</tt></dd></dl>
 
 <dl><dt><a name="YouTubeService-AddPlaylistVideoEntryToPlaylist"><strong>AddPlaylistVideoEntryToPlaylist</strong></a>(self, playlist_uri, video_id, custom_video_title<font color="#909090">=None</font>, custom_video_description<font color="#909090">=None</font>)</dt><dd><tt>Add&nbsp;a&nbsp;video&nbsp;entry&nbsp;to&nbsp;a&nbsp;playlist,&nbsp;optionally&nbsp;providing&nbsp;a&nbsp;custom&nbsp;title<br>
-and&nbsp;description<br>
-&nbsp;<br>
-Needs&nbsp;authentication<br>
-&nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;playlist_uri:&nbsp;Uri&nbsp;of&nbsp;playlist&nbsp;to&nbsp;add&nbsp;this&nbsp;video&nbsp;to.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;video_id:&nbsp;Id&nbsp;of&nbsp;the&nbsp;video&nbsp;entry&nbsp;to&nbsp;add<br>
-&nbsp;&nbsp;&nbsp;&nbsp;custom_video_title:&nbsp;(optional)&nbsp;Custom&nbsp;title&nbsp;for&nbsp;the&nbsp;video<br>
-&nbsp;&nbsp;&nbsp;&nbsp;custom_video_description:&nbsp;(optional)&nbsp;Custom&nbsp;video&nbsp;description<br>
-&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;YouTubePlaylistVideoEntry&nbsp;if&nbsp;successfully&nbsp;posted</tt></dd></dl>
-
-<dl><dt><a name="YouTubeService-AddRating"><strong>AddRating</strong></a>(self, rating_value, video_entry)</dt><dd><tt>Add&nbsp;a&nbsp;rating&nbsp;to&nbsp;a&nbsp;video&nbsp;entry<br>
+and&nbsp;description.<br>
 &nbsp;<br>
 Needs&nbsp;authentication.<br>
 &nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;rating_value:&nbsp;The&nbsp;value&nbsp;for&nbsp;the&nbsp;rating&nbsp;(between&nbsp;1&nbsp;and&nbsp;5)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;video_entry:&nbsp;The&nbsp;YouTubeVideoEntry&nbsp;to&nbsp;be&nbsp;rated<br>
+Args:<br>
+&nbsp;&nbsp;playlist_uri:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;playlist&nbsp;to&nbsp;which&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;video&nbsp;entry&nbsp;is&nbsp;to&nbsp;be&nbsp;added.<br>
+&nbsp;&nbsp;video_id:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;ID&nbsp;of&nbsp;the&nbsp;video&nbsp;entry&nbsp;to&nbsp;add.<br>
+&nbsp;&nbsp;custom_video_title:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;a&nbsp;custom&nbsp;title&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;video&nbsp;(only&nbsp;shown&nbsp;on&nbsp;the&nbsp;playlist).<br>
+&nbsp;&nbsp;custom_video_description:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;a&nbsp;custom<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;description&nbsp;for&nbsp;the&nbsp;video&nbsp;(only&nbsp;shown&nbsp;on&nbsp;the&nbsp;playlist).<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;rating&nbsp;was&nbsp;added&nbsp;successfully</tt></dd></dl>
+&nbsp;&nbsp;A&nbsp;YouTubePlaylistVideoEntry&nbsp;if&nbsp;successfully&nbsp;posted.</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-AddSubscriptionToChannel"><strong>AddSubscriptionToChannel</strong></a>(self, username)</dt><dd><tt>Add&nbsp;a&nbsp;new&nbsp;channel&nbsp;subscription&nbsp;to&nbsp;the&nbsp;currently&nbsp;authenticated&nbsp;users&nbsp;<br>
-account<br>
+<dl><dt><a name="YouTubeService-AddRating"><strong>AddRating</strong></a>(self, rating_value, video_entry)</dt><dd><tt>Add&nbsp;a&nbsp;rating&nbsp;to&nbsp;a&nbsp;video&nbsp;entry.<br>
 &nbsp;<br>
-Needs&nbsp;authentication<br>
+Needs&nbsp;authentication.<br>
 &nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;username:&nbsp;The&nbsp;username&nbsp;of&nbsp;the&nbsp;channel&nbsp;to&nbsp;subscribe&nbsp;to.<br>
+Args:<br>
+&nbsp;&nbsp;rating_value:&nbsp;The&nbsp;integer&nbsp;value&nbsp;for&nbsp;the&nbsp;rating&nbsp;(between&nbsp;1&nbsp;and&nbsp;5).<br>
+&nbsp;&nbsp;video_entry:&nbsp;The&nbsp;YouTubeVideoEntry&nbsp;to&nbsp;be&nbsp;rated.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;new&nbsp;YouTubeSubscriptionEntry&nbsp;if&nbsp;successfully&nbsp;posted</tt></dd></dl>
+&nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;rating&nbsp;was&nbsp;added&nbsp;successfully.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;<a href="#YouTubeError">YouTubeError</a>:&nbsp;rating_value&nbsp;must&nbsp;be&nbsp;between&nbsp;1&nbsp;and&nbsp;5&nbsp;in&nbsp;<a href="#YouTubeService-AddRating">AddRating</a>().</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-AddSubscriptionToChannel"><strong>AddSubscriptionToChannel</strong></a>(self, username)</dt><dd><tt>Add&nbsp;a&nbsp;new&nbsp;channel&nbsp;subscription&nbsp;to&nbsp;the&nbsp;currently&nbsp;authenticated&nbsp;users<br>
+account.<br>
+&nbsp;<br>
+Needs&nbsp;authentication.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;username:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;username&nbsp;of&nbsp;the&nbsp;channel&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subscribe&nbsp;to.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;new&nbsp;YouTubeSubscriptionEntry&nbsp;if&nbsp;successfully&nbsp;posted.</tt></dd></dl>
 
 <dl><dt><a name="YouTubeService-AddSubscriptionToFavorites"><strong>AddSubscriptionToFavorites</strong></a>(self, username)</dt><dd><tt>Add&nbsp;a&nbsp;new&nbsp;subscription&nbsp;to&nbsp;a&nbsp;users&nbsp;favorites&nbsp;to&nbsp;the&nbsp;currently<br>
-authenticated&nbsp;user's&nbsp;account<br>
+authenticated&nbsp;user's&nbsp;account.<br>
 &nbsp;<br>
 Needs&nbsp;authentication<br>
 &nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;username:&nbsp;The&nbsp;username&nbsp;of&nbsp;the&nbsp;users&nbsp;favorite&nbsp;feed&nbsp;to&nbsp;subscribe&nbsp;to<br>
+Args:<br>
+&nbsp;&nbsp;username:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;username&nbsp;of&nbsp;the&nbsp;user's&nbsp;favorite&nbsp;feed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;subscribe&nbsp;to.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;new&nbsp;YouTubeSubscriptionEntry&nbsp;if&nbsp;successful</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;new&nbsp;YouTubeSubscriptionEntry&nbsp;if&nbsp;successful.</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-AddVideoEntryToFavorites"><strong>AddVideoEntryToFavorites</strong></a>(self, video_entry, username<font color="#909090">='default'</font>)</dt><dd><tt>Add&nbsp;a&nbsp;video&nbsp;entry&nbsp;to&nbsp;a&nbsp;users&nbsp;favorite&nbsp;feed<br>
+<dl><dt><a name="YouTubeService-AddVideoEntryToFavorites"><strong>AddVideoEntryToFavorites</strong></a>(self, video_entry, username<font color="#909090">='default'</font>)</dt><dd><tt>Add&nbsp;a&nbsp;video&nbsp;entry&nbsp;to&nbsp;a&nbsp;users&nbsp;favorite&nbsp;feed.<br>
 &nbsp;<br>
 Needs&nbsp;authentication.<br>
 &nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;video_entry:&nbsp;The&nbsp;YouTubeVideoEntry&nbsp;to&nbsp;add<br>
-&nbsp;&nbsp;&nbsp;&nbsp;username:&nbsp;(optional)&nbsp;The&nbsp;username&nbsp;to&nbsp;whose&nbsp;favorite&nbsp;feed&nbsp;you&nbsp;wish&nbsp;to<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add&nbsp;the&nbsp;entry.&nbsp;Your&nbsp;client&nbsp;must&nbsp;be&nbsp;authenticated&nbsp;to&nbsp;the&nbsp;username's<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;account.<br>
+Args:<br>
+&nbsp;&nbsp;video_entry:&nbsp;The&nbsp;YouTubeVideoEntry&nbsp;to&nbsp;add.<br>
+&nbsp;&nbsp;username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;username&nbsp;to&nbsp;whose&nbsp;favorite<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed&nbsp;you&nbsp;wish&nbsp;to&nbsp;add&nbsp;the&nbsp;entry.&nbsp;Defaults&nbsp;to&nbsp;the&nbsp;currently<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authenticated&nbsp;user.<br>
 Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;if&nbsp;posted&nbsp;successfully</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;posted&nbsp;YouTubeVideoEntry&nbsp;if&nbsp;successfully&nbsp;posted.</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-AddVideoResponse"><strong>AddVideoResponse</strong></a>(self, video_id_to_respond_to, video_response)</dt><dd><tt>Add&nbsp;a&nbsp;video&nbsp;response<br>
+<dl><dt><a name="YouTubeService-AddVideoResponse"><strong>AddVideoResponse</strong></a>(self, video_id_to_respond_to, video_response)</dt><dd><tt>Add&nbsp;a&nbsp;video&nbsp;response.<br>
 &nbsp;<br>
 Needs&nbsp;authentication.<br>
 &nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;video_id_to_respond_to:&nbsp;Id&nbsp;of&nbsp;the&nbsp;YouTubeVideoEntry&nbsp;to&nbsp;be&nbsp;responded&nbsp;to<br>
-&nbsp;&nbsp;&nbsp;&nbsp;video_response:&nbsp;YouTubeVideoEntry&nbsp;to&nbsp;be&nbsp;posted&nbsp;as&nbsp;a&nbsp;response<br>
+Args:<br>
+&nbsp;&nbsp;video_id_to_respond_to:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;ID&nbsp;of&nbsp;the&nbsp;video&nbsp;to&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;responded&nbsp;to.<br>
+&nbsp;&nbsp;video_response:&nbsp;YouTubeVideoEntry&nbsp;to&nbsp;be&nbsp;posted&nbsp;as&nbsp;a&nbsp;response.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;True&nbsp;if&nbsp;video&nbsp;response&nbsp;was&nbsp;posted&nbsp;successfully</tt></dd></dl>
+&nbsp;&nbsp;True&nbsp;if&nbsp;video&nbsp;response&nbsp;was&nbsp;posted&nbsp;successfully.</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-CheckUploadStatus"><strong>CheckUploadStatus</strong></a>(self, video_entry<font color="#909090">=None</font>, video_id<font color="#909090">=None</font>)</dt><dd><tt>Check&nbsp;upload&nbsp;status&nbsp;on&nbsp;a&nbsp;recently&nbsp;uploaded&nbsp;video&nbsp;entry<br>
+<dl><dt><a name="YouTubeService-CheckUploadStatus"><strong>CheckUploadStatus</strong></a>(self, video_entry<font color="#909090">=None</font>, video_id<font color="#909090">=None</font>)</dt><dd><tt>Check&nbsp;upload&nbsp;status&nbsp;on&nbsp;a&nbsp;recently&nbsp;uploaded&nbsp;video&nbsp;entry.<br>
 &nbsp;<br>
-Needs&nbsp;authentication.<br>
+Needs&nbsp;authentication.&nbsp;Either&nbsp;video_entry&nbsp;or&nbsp;video_id&nbsp;must&nbsp;be&nbsp;provided.<br>
 &nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;video_entry:&nbsp;(optional)&nbsp;The&nbsp;YouTubeVideoEntry&nbsp;to&nbsp;upload<br>
-&nbsp;&nbsp;video_id:&nbsp;(optional)&nbsp;The&nbsp;videoId&nbsp;of&nbsp;a&nbsp;recently&nbsp;uploaded&nbsp;entry.&nbsp;One&nbsp;of<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;these&nbsp;two&nbsp;arguments&nbsp;will&nbsp;need&nbsp;to&nbsp;be&nbsp;present.<br>
+Args:<br>
+&nbsp;&nbsp;video_entry:&nbsp;An&nbsp;optional&nbsp;YouTubeVideoEntry&nbsp;whose&nbsp;upload&nbsp;status&nbsp;to&nbsp;check<br>
+&nbsp;&nbsp;video_id:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;ID&nbsp;of&nbsp;the&nbsp;uploaded&nbsp;video<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;whose&nbsp;status&nbsp;is&nbsp;to&nbsp;be&nbsp;checked.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;tuple&nbsp;containing&nbsp;(video_upload_state,&nbsp;detailed_message)&nbsp;or&nbsp;None&nbsp;if<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;status&nbsp;information&nbsp;is&nbsp;found.</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;no&nbsp;status&nbsp;information&nbsp;is&nbsp;found.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;<a href="#YouTubeError">YouTubeError</a>:&nbsp;You&nbsp;must&nbsp;provide&nbsp;at&nbsp;least&nbsp;a&nbsp;video_entry&nbsp;or&nbsp;a&nbsp;video_id&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#YouTubeService-CheckUploadStatus">CheckUploadStatus</a>()&nbsp;method.</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-DeleteContact"><strong>DeleteContact</strong></a>(self, contact_username, my_username<font color="#909090">='default'</font>)</dt><dd><tt>Delete&nbsp;a&nbsp;contact&nbsp;from&nbsp;a&nbsp;users&nbsp;contact&nbsp;feed<br>
-&nbsp;<br>
-Needs&nbsp;authentication<br>
-&nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;contact_username:&nbsp;Username&nbsp;of&nbsp;the&nbsp;contact&nbsp;to&nbsp;be&nbsp;deleted<br>
-&nbsp;&nbsp;&nbsp;&nbsp;my_username:&nbsp;(optional)&nbsp;Username&nbsp;of&nbsp;the&nbsp;users&nbsp;contact&nbsp;feed&nbsp;that&nbsp;is&nbsp;to&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;modified.&nbsp;Defaults&nbsp;to&nbsp;the&nbsp;currently&nbsp;authenticated&nbsp;user<br>
-&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;contact&nbsp;was&nbsp;deleted&nbsp;successfully</tt></dd></dl>
-
-<dl><dt><a name="YouTubeService-DeletePlaylist"><strong>DeletePlaylist</strong></a>(self, playlist_uri)</dt><dd><tt>Delete&nbsp;a&nbsp;playlist&nbsp;from&nbsp;the&nbsp;currently&nbsp;authenticated&nbsp;users&nbsp;playlists<br>
-&nbsp;<br>
-Needs&nbsp;authentication<br>
-&nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;playlist_uri:&nbsp;The&nbsp;uri&nbsp;of&nbsp;the&nbsp;playlist&nbsp;to&nbsp;delete<br>
-&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;True&nbsp;if&nbsp;successfully&nbsp;deleted</tt></dd></dl>
-
-<dl><dt><a name="YouTubeService-DeleteSubscription"><strong>DeleteSubscription</strong></a>(self, subscription_uri)</dt><dd><tt>Delete&nbsp;a&nbsp;subscription&nbsp;from&nbsp;the&nbsp;currently&nbsp;authenticated&nbsp;user's&nbsp;account<br>
-&nbsp;<br>
-Needs&nbsp;authentication<br>
-&nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;subscription_uri:&nbsp;The&nbsp;uri&nbsp;of&nbsp;a&nbsp;subscription<br>
-&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;True&nbsp;if&nbsp;successfully&nbsp;deleted</tt></dd></dl>
-
-<dl><dt><a name="YouTubeService-DeleteVideoEntry"><strong>DeleteVideoEntry</strong></a>(self, video_entry)</dt><dd><tt>Deletes&nbsp;a&nbsp;video&nbsp;entry<br>
+<dl><dt><a name="YouTubeService-DeleteContact"><strong>DeleteContact</strong></a>(self, contact_username, my_username<font color="#909090">='default'</font>)</dt><dd><tt>Delete&nbsp;a&nbsp;contact&nbsp;from&nbsp;a&nbsp;users&nbsp;contact&nbsp;feed.<br>
 &nbsp;<br>
 Needs&nbsp;authentication.<br>
 &nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;video_entry:&nbsp;The&nbsp;YouTubeVideoEntry&nbsp;to&nbsp;be&nbsp;deleted<br>
+Args:<br>
+&nbsp;&nbsp;contact_username:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;username&nbsp;of&nbsp;the&nbsp;contact<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;is&nbsp;to&nbsp;be&nbsp;deleted.<br>
+&nbsp;&nbsp;my_username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;username&nbsp;of&nbsp;the&nbsp;user's<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contact&nbsp;feed&nbsp;from&nbsp;which&nbsp;to&nbsp;delete&nbsp;the&nbsp;contact.&nbsp;Defaults&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;currently&nbsp;authenticated&nbsp;user.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;True&nbsp;if&nbsp;entry&nbsp;was&nbsp;deleted&nbsp;successfully</tt></dd></dl>
+&nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;contact&nbsp;was&nbsp;deleted&nbsp;successfully</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-DeleteVideoEntryFromFavorites"><strong>DeleteVideoEntryFromFavorites</strong></a>(self, video_id, username<font color="#909090">='default'</font>)</dt><dd><tt>Delete&nbsp;a&nbsp;video&nbsp;entry&nbsp;from&nbsp;the&nbsp;users&nbsp;favorite&nbsp;feed<br>
+<dl><dt><a name="YouTubeService-DeletePlaylist"><strong>DeletePlaylist</strong></a>(self, playlist_uri)</dt><dd><tt>Delete&nbsp;a&nbsp;playlist&nbsp;from&nbsp;the&nbsp;currently&nbsp;authenticated&nbsp;users&nbsp;playlists.<br>
 &nbsp;<br>
 Needs&nbsp;authentication.<br>
 &nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;video_id:&nbsp;The&nbsp;Id&nbsp;for&nbsp;the&nbsp;YouTubeVideoEntry&nbsp;to&nbsp;be&nbsp;removed<br>
-&nbsp;&nbsp;&nbsp;&nbsp;username:&nbsp;(optional)&nbsp;The&nbsp;username&nbsp;of&nbsp;the&nbsp;user's&nbsp;favorite&nbsp;feed.&nbsp;Defaults<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;the&nbsp;currently&nbsp;authenticated&nbsp;user.<br>
+Args:<br>
+&nbsp;&nbsp;playlist_uri:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;playlist&nbsp;that&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;be&nbsp;deleted.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;True&nbsp;if&nbsp;entry&nbsp;was&nbsp;successfully&nbsp;deleted</tt></dd></dl>
+&nbsp;&nbsp;True&nbsp;if&nbsp;successfully&nbsp;deleted.</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-DeleteVideoResponse"><strong>DeleteVideoResponse</strong></a>(self, video_id, response_video_id)</dt><dd><tt>Delete&nbsp;a&nbsp;video&nbsp;response<br>
+<dl><dt><a name="YouTubeService-DeleteSubscription"><strong>DeleteSubscription</strong></a>(self, subscription_uri)</dt><dd><tt>Delete&nbsp;a&nbsp;subscription&nbsp;from&nbsp;the&nbsp;currently&nbsp;authenticated&nbsp;user's&nbsp;account.<br>
 &nbsp;<br>
 Needs&nbsp;authentication.<br>
 &nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;video_id:&nbsp;Id&nbsp;of&nbsp;YouTubeVideoEntry&nbsp;that&nbsp;contains&nbsp;the&nbsp;response<br>
-&nbsp;&nbsp;&nbsp;&nbsp;response_video_id:&nbsp;Id&nbsp;of&nbsp;the&nbsp;YouTubeVideoEntry&nbsp;posted&nbsp;as&nbsp;response<br>
+Args:<br>
+&nbsp;&nbsp;subscription_uri:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;subscription&nbsp;that<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;to&nbsp;be&nbsp;deleted.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;True&nbsp;if&nbsp;video&nbsp;response&nbsp;was&nbsp;deleted&nbsp;succcessfully</tt></dd></dl>
+&nbsp;&nbsp;True&nbsp;if&nbsp;deleted&nbsp;successfully.</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-GetFormUploadToken"><strong>GetFormUploadToken</strong></a>(self, video_entry, uri<font color="#909090">='http://gdata.youtube.com/action/GetUploadToken'</font>)</dt><dd><tt>Receives&nbsp;a&nbsp;YouTube&nbsp;Token&nbsp;and&nbsp;a&nbsp;YouTube&nbsp;PostUrl&nbsp;with&nbsp;which&nbsp;to&nbsp;construct<br>
-the&nbsp;HTML&nbsp;Upload&nbsp;form&nbsp;for&nbsp;browser-based&nbsp;video&nbsp;uploads<br>
+<dl><dt><a name="YouTubeService-DeleteVideoEntry"><strong>DeleteVideoEntry</strong></a>(self, video_entry)</dt><dd><tt>Deletes&nbsp;a&nbsp;video&nbsp;entry.<br>
 &nbsp;<br>
 Needs&nbsp;authentication.<br>
 &nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;video_entry:&nbsp;The&nbsp;YouTubeVideoEntry&nbsp;to&nbsp;upload&nbsp;(meta-data&nbsp;only)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;A&nbsp;url&nbsp;from&nbsp;where&nbsp;to&nbsp;fetch&nbsp;the&nbsp;token&nbsp;information<br>
+Args:<br>
+&nbsp;&nbsp;video_entry:&nbsp;The&nbsp;YouTubeVideoEntry&nbsp;to&nbsp;be&nbsp;deleted.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;tuple&nbsp;containing&nbsp;(post_url,&nbsp;youtube_token)</tt></dd></dl>
+&nbsp;&nbsp;True&nbsp;if&nbsp;entry&nbsp;was&nbsp;deleted&nbsp;successfully.</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-GetMostDiscussedVideoFeed"><strong>GetMostDiscussedVideoFeed</strong></a>(self)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetMostLinkedVideoFeed"><strong>GetMostLinkedVideoFeed</strong></a>(self)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetMostRecentVideoFeed"><strong>GetMostRecentVideoFeed</strong></a>(self)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetMostRespondedVideoFeed"><strong>GetMostRespondedVideoFeed</strong></a>(self)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetMostViewedVideoFeed"><strong>GetMostViewedVideoFeed</strong></a>(self)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetRecentlyFeaturedVideoFeed"><strong>GetRecentlyFeaturedVideoFeed</strong></a>(self)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetTopFavoritesVideoFeed"><strong>GetTopFavoritesVideoFeed</strong></a>(self)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetTopRatedVideoFeed"><strong>GetTopRatedVideoFeed</strong></a>(self)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetUserFavoritesFeed"><strong>GetUserFavoritesFeed</strong></a>(self, username<font color="#909090">='default'</font>)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetWatchOnMobileVideoFeed"><strong>GetWatchOnMobileVideoFeed</strong></a>(self)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetYouTubeContactEntry"><strong>GetYouTubeContactEntry</strong></a>(self, uri<font color="#909090">=None</font>)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetYouTubeContactFeed"><strong>GetYouTubeContactFeed</strong></a>(self, uri<font color="#909090">=None</font>, username<font color="#909090">=None</font>)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetYouTubePlaylistEntry"><strong>GetYouTubePlaylistEntry</strong></a>(self, uri)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetYouTubePlaylistFeed"><strong>GetYouTubePlaylistFeed</strong></a>(self, uri<font color="#909090">=None</font>, username<font color="#909090">=None</font>)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetYouTubePlaylistVideoFeed"><strong>GetYouTubePlaylistVideoFeed</strong></a>(self, uri<font color="#909090">=None</font>, playlist_id<font color="#909090">=None</font>)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetYouTubeRelatedVideoFeed"><strong>GetYouTubeRelatedVideoFeed</strong></a>(self, uri<font color="#909090">=None</font>, video_id<font color="#909090">=None</font>)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetYouTubeSubscriptionEntry"><strong>GetYouTubeSubscriptionEntry</strong></a>(self, uri)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetYouTubeSubscriptionFeed"><strong>GetYouTubeSubscriptionFeed</strong></a>(self, uri<font color="#909090">=None</font>, username<font color="#909090">=None</font>)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetYouTubeUserEntry"><strong>GetYouTubeUserEntry</strong></a>(self, uri<font color="#909090">=None</font>, username<font color="#909090">=None</font>)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetYouTubeUserFeed"><strong>GetYouTubeUserFeed</strong></a>(self, uri<font color="#909090">=None</font>, username<font color="#909090">=None</font>)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetYouTubeVideoCommentEntry"><strong>GetYouTubeVideoCommentEntry</strong></a>(self, uri)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetYouTubeVideoCommentFeed"><strong>GetYouTubeVideoCommentFeed</strong></a>(self, uri<font color="#909090">=None</font>, video_id<font color="#909090">=None</font>)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetYouTubeVideoEntry"><strong>GetYouTubeVideoEntry</strong></a>(self, uri<font color="#909090">=None</font>, video_id<font color="#909090">=None</font>)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetYouTubeVideoFeed"><strong>GetYouTubeVideoFeed</strong></a>(self, uri)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetYouTubeVideoResponseEntry"><strong>GetYouTubeVideoResponseEntry</strong></a>(self, uri)</dt></dl>
-
-<dl><dt><a name="YouTubeService-GetYouTubeVideoResponseFeed"><strong>GetYouTubeVideoResponseFeed</strong></a>(self, uri<font color="#909090">=None</font>, video_id<font color="#909090">=None</font>)</dt></dl>
-
-<dl><dt><a name="YouTubeService-InsertVideoEntry"><strong>InsertVideoEntry</strong></a>(self, video_entry, filename_or_handle, youtube_username<font color="#909090">='default'</font>, content_type<font color="#909090">='video/quicktime'</font>)</dt><dd><tt>Upload&nbsp;a&nbsp;new&nbsp;video&nbsp;to&nbsp;YouTube&nbsp;using&nbsp;the&nbsp;direct&nbsp;upload&nbsp;mechanism<br>
+<dl><dt><a name="YouTubeService-DeleteVideoEntryFromFavorites"><strong>DeleteVideoEntryFromFavorites</strong></a>(self, video_id, username<font color="#909090">='default'</font>)</dt><dd><tt>Delete&nbsp;a&nbsp;video&nbsp;entry&nbsp;from&nbsp;the&nbsp;users&nbsp;favorite&nbsp;feed.<br>
 &nbsp;<br>
 Needs&nbsp;authentication.<br>
 &nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;video_entry:&nbsp;The&nbsp;YouTubeVideoEntry&nbsp;to&nbsp;upload<br>
+Args:<br>
+&nbsp;&nbsp;video_id:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;ID&nbsp;of&nbsp;the&nbsp;video&nbsp;that&nbsp;is&nbsp;to&nbsp;be&nbsp;removed<br>
+&nbsp;&nbsp;username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;username&nbsp;of&nbsp;the&nbsp;user's<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;favorite&nbsp;feed.&nbsp;Defaults&nbsp;to&nbsp;the&nbsp;currently&nbsp;authenticated&nbsp;user.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;True&nbsp;if&nbsp;entry&nbsp;was&nbsp;successfully&nbsp;deleted.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-DeleteVideoResponse"><strong>DeleteVideoResponse</strong></a>(self, video_id, response_video_id)</dt><dd><tt>Delete&nbsp;a&nbsp;video&nbsp;response.<br>
+&nbsp;<br>
+Needs&nbsp;authentication.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;video_id:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;ID&nbsp;of&nbsp;video&nbsp;that&nbsp;contains&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response.<br>
+&nbsp;&nbsp;response_video_id:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;ID&nbsp;of&nbsp;the&nbsp;video&nbsp;that&nbsp;was<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;posted&nbsp;as&nbsp;a&nbsp;response.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;True&nbsp;if&nbsp;video&nbsp;response&nbsp;was&nbsp;deleted&nbsp;succcessfully.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetFormUploadToken"><strong>GetFormUploadToken</strong></a>(self, video_entry, uri<font color="#909090">='http://gdata.youtube.com/action/GetUploadToken'</font>)</dt><dd><tt>Receives&nbsp;a&nbsp;YouTube&nbsp;Token&nbsp;and&nbsp;a&nbsp;YouTube&nbsp;PostUrl&nbsp;from&nbsp;a&nbsp;YouTubeVideoEntry.<br>
+&nbsp;<br>
+Needs&nbsp;authentication.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;video_entry:&nbsp;The&nbsp;YouTubeVideoEntry&nbsp;to&nbsp;upload&nbsp;(meta-data&nbsp;only).<br>
+&nbsp;&nbsp;uri:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;from&nbsp;where&nbsp;to&nbsp;fetch&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token&nbsp;information.&nbsp;Defaults&nbsp;to&nbsp;the&nbsp;YOUTUBE_UPLOADTOKEN_URI.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;tuple&nbsp;containing&nbsp;the&nbsp;URL&nbsp;to&nbsp;which&nbsp;to&nbsp;post&nbsp;your&nbsp;video&nbsp;file,&nbsp;along<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;the&nbsp;youtube&nbsp;token&nbsp;that&nbsp;must&nbsp;be&nbsp;included&nbsp;with&nbsp;your&nbsp;upload&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;form&nbsp;of:&nbsp;(post_url,&nbsp;youtube_token).</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetMostDiscussedVideoFeed"><strong>GetMostDiscussedVideoFeed</strong></a>(self)</dt><dd><tt>Retrieve&nbsp;the&nbsp;'most_discussed'&nbsp;standard&nbsp;video&nbsp;feed.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeVideoFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetMostLinkedVideoFeed"><strong>GetMostLinkedVideoFeed</strong></a>(self)</dt><dd><tt>Retrieve&nbsp;the&nbsp;'most_linked'&nbsp;standard&nbsp;video&nbsp;feed.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeVideoFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetMostRecentVideoFeed"><strong>GetMostRecentVideoFeed</strong></a>(self)</dt><dd><tt>Retrieve&nbsp;the&nbsp;'most_recent'&nbsp;standard&nbsp;video&nbsp;feed.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeVideoFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetMostRespondedVideoFeed"><strong>GetMostRespondedVideoFeed</strong></a>(self)</dt><dd><tt>Retrieve&nbsp;the&nbsp;'most_responded'&nbsp;standard&nbsp;video&nbsp;feed.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeVideoFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetMostViewedVideoFeed"><strong>GetMostViewedVideoFeed</strong></a>(self)</dt><dd><tt>Retrieve&nbsp;the&nbsp;'most_viewed'&nbsp;standard&nbsp;video&nbsp;feed.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeVideoFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetRecentlyFeaturedVideoFeed"><strong>GetRecentlyFeaturedVideoFeed</strong></a>(self)</dt><dd><tt>Retrieve&nbsp;the&nbsp;'recently_featured'&nbsp;standard&nbsp;video&nbsp;feed.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeVideoFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetTopFavoritesVideoFeed"><strong>GetTopFavoritesVideoFeed</strong></a>(self)</dt><dd><tt>Retrieve&nbsp;the&nbsp;'top_favorites'&nbsp;standard&nbsp;video&nbsp;feed.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeVideoFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetTopRatedVideoFeed"><strong>GetTopRatedVideoFeed</strong></a>(self)</dt><dd><tt>Retrieve&nbsp;the&nbsp;'top_rated'&nbsp;standard&nbsp;video&nbsp;feed.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeVideoFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetUserFavoritesFeed"><strong>GetUserFavoritesFeed</strong></a>(self, username<font color="#909090">='default'</font>)</dt><dd><tt>Retrieve&nbsp;the&nbsp;favorites&nbsp;feed&nbsp;for&nbsp;a&nbsp;given&nbsp;user.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;username&nbsp;whose&nbsp;favorites<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed&nbsp;is&nbsp;to&nbsp;be&nbsp;retrieved.&nbsp;Defaults&nbsp;to&nbsp;the&nbsp;currently&nbsp;authenticated&nbsp;user.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeVideoFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetWatchOnMobileVideoFeed"><strong>GetWatchOnMobileVideoFeed</strong></a>(self)</dt><dd><tt>Retrieve&nbsp;the&nbsp;'watch_on_mobile'&nbsp;standard&nbsp;video&nbsp;feed.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeVideoFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetYouTubeContactEntry"><strong>GetYouTubeContactEntry</strong></a>(self, uri)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubeContactEntry.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;contact&nbsp;entry&nbsp;that&nbsp;is&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;retrieved.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeContactEntry&nbsp;if&nbsp;successfully&nbsp;retrieved.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetYouTubeContactFeed"><strong>GetYouTubeContactFeed</strong></a>(self, uri<font color="#909090">=None</font>, username<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubeContactFeed.<br>
+&nbsp;<br>
+Either&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;username&nbsp;must&nbsp;be&nbsp;provided.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;contact&nbsp;feed&nbsp;that<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;to&nbsp;be&nbsp;retrieved.<br>
+&nbsp;&nbsp;username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;username.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeContactFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;<a href="#YouTubeError">YouTubeError</a>:&nbsp;You&nbsp;must&nbsp;provide&nbsp;at&nbsp;least&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;username&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#YouTubeService-GetYouTubeContactFeed">GetYouTubeContactFeed</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetYouTubePlaylistEntry"><strong>GetYouTubePlaylistEntry</strong></a>(self, uri)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubePlaylistEntry.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;playlist&nbsp;feed&nbsp;that&nbsp;is&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;retrieved.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubePlaylistEntry&nbsp;if&nbsp;successfully&nbsp;retrieved.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetYouTubePlaylistFeed"><strong>GetYouTubePlaylistFeed</strong></a>(self, uri<font color="#909090">=None</font>, username<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubePlaylistFeed&nbsp;(a&nbsp;feed&nbsp;of&nbsp;playlists&nbsp;for&nbsp;a&nbsp;user).<br>
+&nbsp;<br>
+Either&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;username&nbsp;must&nbsp;be&nbsp;provided.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;playlist&nbsp;feed&nbsp;that<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;to&nbsp;be&nbsp;retrieved.<br>
+&nbsp;&nbsp;username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;username.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubePlaylistFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;<a href="#YouTubeError">YouTubeError</a>:&nbsp;You&nbsp;must&nbsp;provide&nbsp;at&nbsp;least&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;username&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#YouTubeService-GetYouTubePlaylistFeed">GetYouTubePlaylistFeed</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetYouTubePlaylistVideoFeed"><strong>GetYouTubePlaylistVideoFeed</strong></a>(self, uri<font color="#909090">=None</font>, playlist_id<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubePlaylistVideoFeed&nbsp;(a&nbsp;feed&nbsp;of&nbsp;videos&nbsp;on&nbsp;a&nbsp;playlist).<br>
+&nbsp;<br>
+Either&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;playlist_id&nbsp;must&nbsp;be&nbsp;provided.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;playlist&nbsp;video&nbsp;feed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;is&nbsp;to&nbsp;be&nbsp;retrieved.<br>
+&nbsp;&nbsp;playlist_id:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;Id&nbsp;of&nbsp;the&nbsp;playlist&nbsp;whose<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;playlist&nbsp;video&nbsp;feed&nbsp;is&nbsp;to&nbsp;be&nbsp;retrieved.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubePlaylistVideoFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;<a href="#YouTubeError">YouTubeError</a>:&nbsp;You&nbsp;must&nbsp;provide&nbsp;at&nbsp;least&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;playlist_id&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#YouTubeService-GetYouTubePlaylistVideoFeed">GetYouTubePlaylistVideoFeed</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetYouTubeRelatedVideoFeed"><strong>GetYouTubeRelatedVideoFeed</strong></a>(self, uri<font color="#909090">=None</font>, video_id<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubeRelatedVideoFeed.<br>
+&nbsp;<br>
+Either&nbsp;a&nbsp;uri&nbsp;for&nbsp;the&nbsp;feed&nbsp;or&nbsp;a&nbsp;video_id&nbsp;is&nbsp;required.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;feed&nbsp;that&nbsp;is&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;retrieved.<br>
+&nbsp;&nbsp;video_id:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;ID&nbsp;of&nbsp;the&nbsp;video&nbsp;for&nbsp;which<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;retrieve&nbsp;the&nbsp;related&nbsp;video&nbsp;feed.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeRelatedVideoFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;<a href="#YouTubeError">YouTubeError</a>:&nbsp;You&nbsp;must&nbsp;provide&nbsp;at&nbsp;least&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;video_id&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#YouTubeService-GetYouTubeRelatedVideoFeed">GetYouTubeRelatedVideoFeed</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetYouTubeSubscriptionEntry"><strong>GetYouTubeSubscriptionEntry</strong></a>(self, uri)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubeSubscriptionEntry.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;entry&nbsp;that&nbsp;is&nbsp;to&nbsp;be&nbsp;retrieved.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeVideoSubscriptionEntry&nbsp;if&nbsp;successfully&nbsp;retrieved.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetYouTubeSubscriptionFeed"><strong>GetYouTubeSubscriptionFeed</strong></a>(self, uri<font color="#909090">=None</font>, username<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubeSubscriptionFeed.<br>
+&nbsp;<br>
+Either&nbsp;the&nbsp;uri&nbsp;of&nbsp;the&nbsp;feed&nbsp;or&nbsp;a&nbsp;username&nbsp;must&nbsp;be&nbsp;provided.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;feed&nbsp;that&nbsp;is&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;retrieved.<br>
+&nbsp;&nbsp;username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;username&nbsp;whose&nbsp;subscription<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed&nbsp;is&nbsp;to&nbsp;be&nbsp;retrieved.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeVideoSubscriptionFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;<a href="#YouTubeError">YouTubeError</a>:&nbsp;You&nbsp;must&nbsp;provide&nbsp;at&nbsp;least&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;username&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#YouTubeService-GetYouTubeSubscriptionFeed">GetYouTubeSubscriptionFeed</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetYouTubeUserEntry"><strong>GetYouTubeUserEntry</strong></a>(self, uri<font color="#909090">=None</font>, username<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubeUserEntry.<br>
+&nbsp;<br>
+Either&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;username&nbsp;must&nbsp;be&nbsp;provided.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;user&nbsp;entry&nbsp;that&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;be&nbsp;retrieved.<br>
+&nbsp;&nbsp;username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;username.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeUserEntry&nbsp;if&nbsp;successfully&nbsp;retrieved.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;<a href="#YouTubeError">YouTubeError</a>:&nbsp;You&nbsp;must&nbsp;provide&nbsp;at&nbsp;least&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;username&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#YouTubeService-GetYouTubeUserEntry">GetYouTubeUserEntry</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetYouTubeUserFeed"><strong>GetYouTubeUserFeed</strong></a>(self, uri<font color="#909090">=None</font>, username<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubeUserFeed.<br>
+&nbsp;<br>
+Either&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;username&nbsp;must&nbsp;be&nbsp;provided.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;user&nbsp;feed&nbsp;that&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;be&nbsp;retrieved.<br>
+&nbsp;&nbsp;username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;username.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeUserFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;<a href="#YouTubeError">YouTubeError</a>:&nbsp;You&nbsp;must&nbsp;provide&nbsp;at&nbsp;least&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;username&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#YouTubeService-GetYouTubeUserFeed">GetYouTubeUserFeed</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetYouTubeVideoCommentEntry"><strong>GetYouTubeVideoCommentEntry</strong></a>(self, uri)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubeVideoCommentEntry.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;comment&nbsp;entry&nbsp;that&nbsp;is&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;retrieved.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeCommentEntry&nbsp;if&nbsp;successfully&nbsp;retrieved.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetYouTubeVideoCommentFeed"><strong>GetYouTubeVideoCommentFeed</strong></a>(self, uri<font color="#909090">=None</font>, video_id<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubeVideoCommentFeed.<br>
+&nbsp;<br>
+Either&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;video_id&nbsp;must&nbsp;be&nbsp;provided.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;comment&nbsp;feed&nbsp;that<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;to&nbsp;be&nbsp;retrieved.<br>
+&nbsp;&nbsp;username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;ID&nbsp;of&nbsp;the&nbsp;video&nbsp;for&nbsp;which&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;retrieve&nbsp;the&nbsp;comment&nbsp;feed.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeVideoCommentFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;<a href="#YouTubeError">YouTubeError</a>:&nbsp;You&nbsp;must&nbsp;provide&nbsp;at&nbsp;least&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;video_id&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#YouTubeService-GetYouTubeVideoCommentFeed">GetYouTubeVideoCommentFeed</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetYouTubeVideoEntry"><strong>GetYouTubeVideoEntry</strong></a>(self, uri<font color="#909090">=None</font>, video_id<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubeVideoEntry.<br>
+&nbsp;<br>
+Either&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;video_id&nbsp;must&nbsp;be&nbsp;provided.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;entry&nbsp;that&nbsp;is&nbsp;to&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;retrieved.<br>
+&nbsp;&nbsp;video_id:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;ID&nbsp;of&nbsp;the&nbsp;video.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeVideoFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;<a href="#YouTubeError">YouTubeError</a>:&nbsp;You&nbsp;must&nbsp;provide&nbsp;at&nbsp;least&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;video_id&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#YouTubeService-GetYouTubeVideoEntry">GetYouTubeVideoEntry</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetYouTubeVideoFeed"><strong>GetYouTubeVideoFeed</strong></a>(self, uri)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubeVideoFeed.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;feed&nbsp;that&nbsp;is&nbsp;to&nbsp;be&nbsp;retrieved.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeVideoFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetYouTubeVideoResponseEntry"><strong>GetYouTubeVideoResponseEntry</strong></a>(self, uri)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubeVideoResponseEntry.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;video&nbsp;response&nbsp;entry&nbsp;that<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;to&nbsp;be&nbsp;retrieved.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeVideoResponseEntry&nbsp;if&nbsp;successfully&nbsp;retrieved.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetYouTubeVideoResponseFeed"><strong>GetYouTubeVideoResponseFeed</strong></a>(self, uri<font color="#909090">=None</font>, video_id<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubeVideoResponseFeed.<br>
+&nbsp;<br>
+Either&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;playlist_id&nbsp;must&nbsp;be&nbsp;provided.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;video&nbsp;response&nbsp;feed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;is&nbsp;to&nbsp;be&nbsp;retrieved.<br>
+&nbsp;&nbsp;video_id:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;ID&nbsp;of&nbsp;the&nbsp;video&nbsp;whose<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;feed&nbsp;is&nbsp;to&nbsp;be&nbsp;retrieved.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubeVideoResponseFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;<a href="#YouTubeError">YouTubeError</a>:&nbsp;You&nbsp;must&nbsp;provide&nbsp;at&nbsp;least&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;video_id&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#YouTubeService-GetYouTubeVideoResponseFeed">GetYouTubeVideoResponseFeed</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-InsertVideoEntry"><strong>InsertVideoEntry</strong></a>(self, video_entry, filename_or_handle, youtube_username<font color="#909090">='default'</font>, content_type<font color="#909090">='video/quicktime'</font>)</dt><dd><tt>Upload&nbsp;a&nbsp;new&nbsp;video&nbsp;to&nbsp;YouTube&nbsp;using&nbsp;the&nbsp;direct&nbsp;upload&nbsp;mechanism.<br>
+&nbsp;<br>
+Needs&nbsp;authentication.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;video_entry:&nbsp;The&nbsp;YouTubeVideoEntry&nbsp;to&nbsp;upload.<br>
 &nbsp;&nbsp;filename_or_handle:&nbsp;A&nbsp;file-like&nbsp;object&nbsp;or&nbsp;file&nbsp;name&nbsp;where&nbsp;the&nbsp;video<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;be&nbsp;read&nbsp;from<br>
-&nbsp;&nbsp;youtube_username:&nbsp;(optional)&nbsp;Username&nbsp;into&nbsp;whose&nbsp;account&nbsp;this&nbsp;video&nbsp;is<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;be&nbsp;uploaded&nbsp;to.&nbsp;Defaults&nbsp;to&nbsp;the&nbsp;currently&nbsp;authenticated&nbsp;user.<br>
-&nbsp;&nbsp;content_type&nbsp;(optional):&nbsp;Internet&nbsp;media&nbsp;type&nbsp;(a.k.a.&nbsp;mime&nbsp;type)&nbsp;of<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;media&nbsp;object.&nbsp;Currently&nbsp;the&nbsp;YouTube&nbsp;API&nbsp;supports&nbsp;these&nbsp;types:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;be&nbsp;read&nbsp;from.<br>
+&nbsp;&nbsp;youtube_username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;username&nbsp;into&nbsp;whose<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;account&nbsp;this&nbsp;video&nbsp;is&nbsp;to&nbsp;be&nbsp;uploaded&nbsp;to.&nbsp;Defaults&nbsp;to&nbsp;the&nbsp;currently<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authenticated&nbsp;user.<br>
+&nbsp;&nbsp;content_type:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;internet&nbsp;media&nbsp;type<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(a.k.a.&nbsp;mime&nbsp;type)&nbsp;of&nbsp;the&nbsp;media&nbsp;object.&nbsp;Currently&nbsp;the&nbsp;YouTube&nbsp;API<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;supports&nbsp;these&nbsp;types:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o&nbsp;video/mpeg<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o&nbsp;video/quicktime<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o&nbsp;video/x-msvideo<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o&nbsp;video/mp4<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;The&nbsp;newly&nbsp;created&nbsp;YouTubeVideoEntry&nbsp;or&nbsp;a&nbsp;<a href="#YouTubeError">YouTubeError</a></tt></dd></dl>
+&nbsp;&nbsp;The&nbsp;newly&nbsp;created&nbsp;YouTubeVideoEntry&nbsp;if&nbsp;successful.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;AssertionError:&nbsp;video_entry&nbsp;must&nbsp;be&nbsp;a&nbsp;gdata.youtube.VideoEntry&nbsp;instance.<br>
+&nbsp;&nbsp;<a href="#YouTubeError">YouTubeError</a>:&nbsp;An&nbsp;error&nbsp;occurred&nbsp;trying&nbsp;to&nbsp;read&nbsp;the&nbsp;video&nbsp;file&nbsp;provided.<br>
+&nbsp;&nbsp;gdata.service.<a href="#RequestError">RequestError</a>:&nbsp;An&nbsp;error&nbsp;occurred&nbsp;trying&nbsp;to&nbsp;upload&nbsp;the&nbsp;video<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;the&nbsp;API&nbsp;server.</tt></dd></dl>
 
 <dl><dt><a name="YouTubeService-Query"><strong>Query</strong></a>(self, uri)</dt><dd><tt>Performs&nbsp;a&nbsp;query&nbsp;and&nbsp;returns&nbsp;a&nbsp;resulting&nbsp;feed&nbsp;or&nbsp;entry.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;feed:&nbsp;string&nbsp;The&nbsp;feed&nbsp;which&nbsp;is&nbsp;to&nbsp;be&nbsp;queried<br>
+&nbsp;&nbsp;uri:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;feed&nbsp;that&nbsp;is&nbsp;to&nbsp;be&nbsp;queried.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;On&nbsp;success,&nbsp;a&nbsp;tuple&nbsp;in&nbsp;the&nbsp;form<br>
+&nbsp;&nbsp;On&nbsp;success,&nbsp;a&nbsp;tuple&nbsp;in&nbsp;the&nbsp;form:<br>
 &nbsp;&nbsp;(boolean&nbsp;succeeded=True,&nbsp;ElementTree._Element&nbsp;result)<br>
-&nbsp;&nbsp;On&nbsp;failure,&nbsp;a&nbsp;tuple&nbsp;in&nbsp;the&nbsp;form<br>
-&nbsp;&nbsp;(boolean&nbsp;succeeded=False,&nbsp;{'status':&nbsp;HTTP&nbsp;status&nbsp;code&nbsp;from&nbsp;server,&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'reason':&nbsp;HTTP&nbsp;reason&nbsp;from&nbsp;the&nbsp;server,&nbsp;<br>
+&nbsp;&nbsp;On&nbsp;failure,&nbsp;a&nbsp;tuple&nbsp;in&nbsp;the&nbsp;form:<br>
+&nbsp;&nbsp;(boolean&nbsp;succeeded=False,&nbsp;{'status':&nbsp;HTTP&nbsp;status&nbsp;code&nbsp;from&nbsp;server,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'reason':&nbsp;HTTP&nbsp;reason&nbsp;from&nbsp;the&nbsp;server,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'body':&nbsp;HTTP&nbsp;body&nbsp;of&nbsp;the&nbsp;server's&nbsp;response})</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-UpdateContact"><strong>UpdateContact</strong></a>(self, contact_username, new_contact_status, new_contact_category, my_username<font color="#909090">='default'</font>)</dt><dd><tt>Update&nbsp;a&nbsp;contact,&nbsp;providing&nbsp;a&nbsp;new&nbsp;status&nbsp;and&nbsp;a&nbsp;new&nbsp;category<br>
-&nbsp;<br>
-Needs&nbsp;authentication<br>
-&nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;contact_username:&nbsp;The&nbsp;username&nbsp;of&nbsp;the&nbsp;contact&nbsp;to&nbsp;be&nbsp;updated<br>
-&nbsp;&nbsp;&nbsp;&nbsp;new_contact_status:&nbsp;New&nbsp;status,&nbsp;either&nbsp;'accepted'&nbsp;or&nbsp;'rejected'<br>
-&nbsp;&nbsp;&nbsp;&nbsp;new_contact_category:&nbsp;New&nbsp;category&nbsp;for&nbsp;the&nbsp;contact,&nbsp;either&nbsp;'Friends'&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Family'<br>
-&nbsp;&nbsp;&nbsp;&nbsp;my_username:&nbsp;(optional)&nbsp;Username&nbsp;of&nbsp;the&nbsp;user&nbsp;whose&nbsp;contact&nbsp;feed&nbsp;we&nbsp;are&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modifying.&nbsp;Defaults&nbsp;to&nbsp;the&nbsp;currently&nbsp;authenticated&nbsp;user<br>
-&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;YouTubeContactEntry&nbsp;if&nbsp;updated&nbsp;succesfully</tt></dd></dl>
-
-<dl><dt><a name="YouTubeService-UpdatePlaylistVideoEntryMetaData"><strong>UpdatePlaylistVideoEntryMetaData</strong></a>(self, playlist_uri, playlist_entry_id, new_video_title, new_video_description, new_video_position)</dt><dd><tt>Update&nbsp;the&nbsp;meta&nbsp;data&nbsp;for&nbsp;a&nbsp;YouTubePlaylistVideoEntry<br>
-&nbsp;<br>
-Needs&nbsp;authentication<br>
-&nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;playlist_uri:&nbsp;Uri&nbsp;of&nbsp;the&nbsp;playlist&nbsp;that&nbsp;contains&nbsp;the&nbsp;entry&nbsp;to&nbsp;be&nbsp;updated<br>
-&nbsp;&nbsp;&nbsp;&nbsp;playlist_entry_id:&nbsp;Id&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;be&nbsp;updated<br>
-&nbsp;&nbsp;&nbsp;&nbsp;new_video_title:&nbsp;New&nbsp;title&nbsp;for&nbsp;the&nbsp;video&nbsp;entry<br>
-&nbsp;&nbsp;&nbsp;&nbsp;new_video_description:&nbsp;New&nbsp;description&nbsp;for&nbsp;the&nbsp;video&nbsp;entry<br>
-&nbsp;&nbsp;&nbsp;&nbsp;new_video_position:&nbsp;New&nbsp;position&nbsp;for&nbsp;the&nbsp;video<br>
-&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;YouTubePlaylistVideoEntry&nbsp;if&nbsp;the&nbsp;update&nbsp;was&nbsp;successful</tt></dd></dl>
-
-<dl><dt><a name="YouTubeService-UpdateVideoEntry"><strong>UpdateVideoEntry</strong></a>(self, video_entry)</dt><dd><tt>Updates&nbsp;a&nbsp;video&nbsp;entry's&nbsp;meta-data<br>
+<dl><dt><a name="YouTubeService-UpdateContact"><strong>UpdateContact</strong></a>(self, contact_username, new_contact_status, new_contact_category, my_username<font color="#909090">='default'</font>)</dt><dd><tt>Update&nbsp;a&nbsp;contact,&nbsp;providing&nbsp;a&nbsp;new&nbsp;status&nbsp;and&nbsp;a&nbsp;new&nbsp;category.<br>
 &nbsp;<br>
 Needs&nbsp;authentication.<br>
 &nbsp;<br>
-Arguments:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;video_entry:&nbsp;The&nbsp;YouTubeVideoEntry&nbsp;to&nbsp;update,&nbsp;containing&nbsp;updated&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;meta-data<br>
+Args:<br>
+&nbsp;&nbsp;contact_username:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;username&nbsp;of&nbsp;the&nbsp;contact<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;is&nbsp;to&nbsp;be&nbsp;updated.<br>
+&nbsp;&nbsp;new_contact_status:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;new&nbsp;status&nbsp;of&nbsp;the&nbsp;contact.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;can&nbsp;either&nbsp;be&nbsp;set&nbsp;to&nbsp;'accepted'&nbsp;or&nbsp;'rejected'.<br>
+&nbsp;&nbsp;new_contact_category:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;new&nbsp;category&nbsp;for&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contact,&nbsp;either&nbsp;'Friends'&nbsp;or&nbsp;'Family'.<br>
+&nbsp;&nbsp;my_username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;username&nbsp;of&nbsp;the&nbsp;user<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;whose&nbsp;contact&nbsp;feed&nbsp;we&nbsp;are&nbsp;modifying.&nbsp;Defaults&nbsp;to&nbsp;the&nbsp;currently<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authenticated&nbsp;user.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;An&nbsp;updated&nbsp;YouTubeVideoEntry&nbsp;on&nbsp;success&nbsp;or&nbsp;None</tt></dd></dl>
+&nbsp;&nbsp;A&nbsp;YouTubeContactEntry&nbsp;if&nbsp;updated&nbsp;succesfully.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;<a href="#YouTubeError">YouTubeError</a>:&nbsp;New&nbsp;contact&nbsp;status&nbsp;must&nbsp;be&nbsp;within&nbsp;the&nbsp;accepted&nbsp;values.&nbsp;Or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new&nbsp;contact&nbsp;category&nbsp;must&nbsp;be&nbsp;within&nbsp;the&nbsp;accepted&nbsp;categories.</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-YouTubeQuery"><strong>YouTubeQuery</strong></a>(self, query)</dt></dl>
+<dl><dt><a name="YouTubeService-UpdatePlaylistVideoEntryMetaData"><strong>UpdatePlaylistVideoEntryMetaData</strong></a>(self, playlist_uri, playlist_entry_id, new_video_title, new_video_description, new_video_position)</dt><dd><tt>Update&nbsp;the&nbsp;meta&nbsp;data&nbsp;for&nbsp;a&nbsp;YouTubePlaylistVideoEntry.<br>
+&nbsp;<br>
+Needs&nbsp;authentication.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;playlist_uri:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;playlist&nbsp;that&nbsp;contains<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;entry&nbsp;to&nbsp;be&nbsp;updated.<br>
+&nbsp;&nbsp;playlist_entry_id:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;ID&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;updated.<br>
+&nbsp;&nbsp;new_video_title:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;new&nbsp;title&nbsp;for&nbsp;the&nbsp;video&nbsp;entry.<br>
+&nbsp;&nbsp;new_video_description:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;new&nbsp;description&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;video&nbsp;entry.<br>
+&nbsp;&nbsp;new_video_position:&nbsp;An&nbsp;integer&nbsp;representing&nbsp;the&nbsp;new&nbsp;position&nbsp;on&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;playlist&nbsp;for&nbsp;the&nbsp;video.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;YouTubePlaylistVideoEntry&nbsp;if&nbsp;the&nbsp;update&nbsp;was&nbsp;successful.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-UpdateVideoEntry"><strong>UpdateVideoEntry</strong></a>(self, video_entry)</dt><dd><tt>Updates&nbsp;a&nbsp;video&nbsp;entry's&nbsp;meta-data.<br>
+&nbsp;<br>
+Needs&nbsp;authentication.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;video_entry:&nbsp;The&nbsp;YouTubeVideoEntry&nbsp;to&nbsp;update,&nbsp;containing&nbsp;updated<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;meta-data.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;updated&nbsp;YouTubeVideoEntry&nbsp;on&nbsp;success&nbsp;or&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-YouTubeQuery"><strong>YouTubeQuery</strong></a>(self, query)</dt><dd><tt>Performs&nbsp;a&nbsp;YouTube&nbsp;specific&nbsp;query&nbsp;and&nbsp;returns&nbsp;a&nbsp;resulting&nbsp;feed&nbsp;or&nbsp;entry.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;query:&nbsp;A&nbsp;<a href="gdata.service.html#Query">Query</a>&nbsp;object&nbsp;or&nbsp;one&nbsp;if&nbsp;its&nbsp;sub-classes&nbsp;(<a href="#YouTubeVideoQuery">YouTubeVideoQuery</a>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#YouTubeUserQuery">YouTubeUserQuery</a>&nbsp;or&nbsp;<a href="#YouTubePlaylistQuery">YouTubePlaylistQuery</a>).<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;Depending&nbsp;on&nbsp;the&nbsp;type&nbsp;of&nbsp;<a href="gdata.service.html#Query">Query</a>&nbsp;object&nbsp;submitted&nbsp;returns&nbsp;either&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YouTubeVideoFeed,&nbsp;a&nbsp;YouTubeUserFeed,&nbsp;a&nbsp;YouTubePlaylistFeed.&nbsp;If&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="gdata.service.html#Query">Query</a>&nbsp;object&nbsp;provided&nbsp;was&nbsp;not&nbsp;YouTube-related,&nbsp;a&nbsp;tuple&nbsp;is&nbsp;returned.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;success&nbsp;the&nbsp;tuple&nbsp;will&nbsp;be&nbsp;in&nbsp;this&nbsp;form:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(boolean&nbsp;succeeded=True,&nbsp;ElementTree._Element&nbsp;result)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;failure,&nbsp;the&nbsp;tuple&nbsp;will&nbsp;be&nbsp;in&nbsp;this&nbsp;form:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(boolean&nbsp;succeeded=False,&nbsp;{'status':&nbsp;HTTP&nbsp;status&nbsp;code&nbsp;from&nbsp;server,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'reason':&nbsp;HTTP&nbsp;reason&nbsp;from&nbsp;the&nbsp;server,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'body':&nbsp;HTTP&nbsp;body&nbsp;of&nbsp;the&nbsp;server&nbsp;response})</tt></dd></dl>
 
 <dl><dt><a name="YouTubeService-__init__"><strong>__init__</strong></a>(self, email<font color="#909090">=None</font>, password<font color="#909090">=None</font>, source<font color="#909090">=None</font>, server<font color="#909090">='gdata.youtube.com'</font>, additional_headers<font color="#909090">=None</font>, client_id<font color="#909090">=None</font>, developer_key<font color="#909090">=None</font>)</dt></dl>
 
 <hr>
-Data descriptors defined here:<br>
+Properties defined here:<br>
 <dl><dt><strong>client_id</strong></dt>
 <dd><tt>The&nbsp;ClientId&nbsp;property</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetClientId(self)</dt><dd><tt>Getter&nbsp;for&nbsp;Client&nbsp;Id&nbsp;property.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;If&nbsp;the&nbsp;client_id&nbsp;has&nbsp;been&nbsp;set,&nbsp;a&nbsp;string&nbsp;representing&nbsp;it&nbsp;is&nbsp;returned<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;None.</tt></dd></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetClientId(self, client_id)</dt><dd><tt>Setter&nbsp;for&nbsp;Client&nbsp;Id&nbsp;property.<br>
+&nbsp;<br>
+Sets&nbsp;the&nbsp;'X-Gdata-Client'&nbsp;header.</tt></dd></dl>
+</dd>
 </dl>
 <dl><dt><strong>developer_key</strong></dt>
 <dd><tt>The&nbsp;Developer&nbsp;Key&nbsp;property</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetDeveloperKey(self)</dt><dd><tt>Getter&nbsp;for&nbsp;Developer&nbsp;Key&nbsp;property.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;If&nbsp;the&nbsp;developer&nbsp;key&nbsp;has&nbsp;been&nbsp;set,&nbsp;a&nbsp;string&nbsp;representing&nbsp;the&nbsp;developer&nbsp;key<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;returned&nbsp;or&nbsp;None.</tt></dd></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetDeveloperKey(self, developer_key)</dt><dd><tt>Setter&nbsp;for&nbsp;Developer&nbsp;Key&nbsp;property.<br>
+&nbsp;<br>
+Sets&nbsp;the&nbsp;developer&nbsp;key&nbsp;in&nbsp;the&nbsp;'X-GData-Key'&nbsp;header.&nbsp;The&nbsp;actual&nbsp;value&nbsp;that<br>
+&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;set&nbsp;is&nbsp;'key='&nbsp;plus&nbsp;the&nbsp;developer_key&nbsp;that&nbsp;was&nbsp;passed.</tt></dd></dl>
+</dd>
 </dl>
 <hr>
 Methods inherited from <a href="gdata.service.html#GDataService">gdata.service.GDataService</a>:<br>
@@ -823,7 +1117,16 @@ Returns:<br>
 &nbsp;&nbsp;return&nbsp;a&nbsp;string.&nbsp;If&nbsp;there&nbsp;is&nbsp;a&nbsp;ResultsTransformer,&nbsp;the&nbsp;returned&nbsp;value&nbsp;<br>
 &nbsp;&nbsp;will&nbsp;be&nbsp;that&nbsp;of&nbsp;the&nbsp;ResultsTransformer&nbsp;function.</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-GetAuthSubToken"><strong>GetAuthSubToken</strong></a>(self)</dt></dl>
+<dl><dt><a name="YouTubeService-GetAuthSubToken"><strong>GetAuthSubToken</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;AuthSub&nbsp;Token&nbsp;after&nbsp;removing&nbsp;the&nbsp;AuthSub&nbsp;Authorization<br>
+Label.<br>
+&nbsp;<br>
+The&nbsp;AuthSub&nbsp;Authorization&nbsp;Label&nbsp;reads:&nbsp;"AuthSub&nbsp;token"<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;If&nbsp;the&nbsp;AuthSub&nbsp;Token&nbsp;is&nbsp;set&nbsp;AND&nbsp;it&nbsp;begins&nbsp;with&nbsp;the&nbsp;AuthSub&nbsp;<br>
+&nbsp;&nbsp;Authorization&nbsp;Label,&nbsp;the&nbsp;AuthSub&nbsp;Token&nbsp;is&nbsp;returned&nbsp;minus&nbsp;the&nbsp;AuthSub<br>
+&nbsp;&nbsp;Label.&nbsp;If&nbsp;the&nbsp;AuthSub&nbsp;Token&nbsp;does&nbsp;not&nbsp;start&nbsp;with&nbsp;the&nbsp;AuthSub<br>
+&nbsp;&nbsp;Authorization&nbsp;Label&nbsp;or&nbsp;it&nbsp;is&nbsp;not&nbsp;set,&nbsp;None&nbsp;is&nbsp;returned.</tt></dd></dl>
 
 <dl><dt><a name="YouTubeService-GetClientLoginToken"><strong>GetClientLoginToken</strong></a>(self)</dt></dl>
 
@@ -843,7 +1146,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x7495f0&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
+<dl><dt><a name="YouTubeService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;gdata.service.Get<br>
 &nbsp;<br>
@@ -1005,19 +1308,31 @@ Raises:<br>
 &nbsp;&nbsp;NonAuthSubToken&nbsp;if&nbsp;the&nbsp;user's&nbsp;auth&nbsp;token&nbsp;is&nbsp;not&nbsp;an&nbsp;AuthSub&nbsp;token</tt></dd></dl>
 
 <hr>
-Data descriptors inherited from <a href="gdata.service.html#GDataService">gdata.service.GDataService</a>:<br>
+Properties inherited from <a href="gdata.service.html#GDataService">gdata.service.GDataService</a>:<br>
 <dl><dt><strong>auth_token</strong></dt>
 <dd><tt>Get&nbsp;or&nbsp;set&nbsp;the&nbsp;token&nbsp;used&nbsp;for&nbsp;authentication.</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetAuthToken(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetAuthSubToken(self, auth_token)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>captcha_token</strong></dt>
 <dd><tt>Get&nbsp;the&nbsp;captcha&nbsp;token&nbsp;for&nbsp;a&nbsp;login&nbsp;request.</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetCaptchaToken(self)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>captcha_url</strong></dt>
 <dd><tt>Get&nbsp;the&nbsp;captcha&nbsp;URL&nbsp;for&nbsp;a&nbsp;login&nbsp;request.</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetCaptchaURL(self)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>source</strong></dt>
 <dd><tt>The&nbsp;source&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;application&nbsp;making&nbsp;the&nbsp;request.&nbsp;<br>
 It&nbsp;should&nbsp;be&nbsp;in&nbsp;the&nbsp;form&nbsp;company_id-app_name-app_version</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetSource(self)</dt><dd><tt>#&nbsp;Private&nbsp;methods&nbsp;to&nbsp;create&nbsp;the&nbsp;source&nbsp;property.</tt></dd></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetSource(self, new_source)</dt></dl>
+</dd>
 </dl>
 <hr>
 Methods inherited from <a href="atom.service.html#AtomService">atom.service.AtomService</a>:<br>
@@ -1048,15 +1363,11 @@ Args:<br>
 &nbsp;&nbsp;password:&nbsp;str</tt></dd></dl>
 
 <hr>
-Data descriptors inherited from <a href="atom.service.html#AtomService">atom.service.AtomService</a>:<br>
-<dl><dt><strong>__dict__</strong></dt>
-<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-<dl><dt><strong>__weakref__</strong></dt>
-<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-<hr>
 Data and other attributes inherited from <a href="atom.service.html#AtomService">atom.service.AtomService</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'AtomService' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
 <dl><dt><strong>debug</strong> = False</dl>
 
 <dl><dt><strong>port</strong> = 80</dl>
@@ -1067,11 +1378,18 @@ Data and other attributes inherited from <a href="atom.service.html#AtomService"
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="YouTubeUserQuery">class <strong>YouTubeUserQuery</strong></a>(<a href="gdata.service.html#Query">gdata.service.Query</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="YouTubeUserQuery">class <strong>YouTubeUserQuery</strong></a>(<a href="gdata.youtube.service.html#YouTubeVideoQuery">YouTubeVideoQuery</a>)</font></td></tr>
     
-<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Subclasses&nbsp;<a href="#YouTubeVideoQuery">YouTubeVideoQuery</a>&nbsp;to&nbsp;perform&nbsp;user-specific&nbsp;queries.<br>
+&nbsp;<br>
+Attributes&nbsp;are&nbsp;set&nbsp;dynamically&nbsp;via&nbsp;properties.&nbsp;Properties&nbsp;correspond&nbsp;to<br>
+the&nbsp;standard&nbsp;Google&nbsp;Data&nbsp;API&nbsp;query&nbsp;parameters&nbsp;with&nbsp;YouTube&nbsp;Data&nbsp;API<br>
+extensions.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.youtube.service.html#YouTubeUserQuery">YouTubeUserQuery</a></dd>
+<dd><a href="gdata.youtube.service.html#YouTubeVideoQuery">YouTubeVideoQuery</a></dd>
 <dd><a href="gdata.service.html#Query">gdata.service.Query</a></dd>
 <dd><a href="__builtin__.html#dict">__builtin__.dict</a></dd>
 <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
@@ -1081,27 +1399,55 @@ Methods defined here:<br>
 <dl><dt><a name="YouTubeUserQuery-__init__"><strong>__init__</strong></a>(self, username<font color="#909090">=None</font>, feed_type<font color="#909090">=None</font>, subscription_id<font color="#909090">=None</font>, text_query<font color="#909090">=None</font>, params<font color="#909090">=None</font>, categories<font color="#909090">=None</font>)</dt></dl>
 
 <hr>
-Data descriptors defined here:<br>
+Properties inherited from <a href="gdata.youtube.service.html#YouTubeVideoQuery">YouTubeVideoQuery</a>:<br>
 <dl><dt><strong>format</strong></dt>
 <dd><tt>The&nbsp;format&nbsp;query&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetFormat(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetFormat(self, val)</dt></dl>
+</dd>
+</dl>
+<dl><dt><strong>lr</strong></dt>
+<dd><tt>The&nbsp;lr&nbsp;(language&nbsp;restriction)&nbsp;query&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetLanguageRestriction(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetLanguageRestriction(self, val)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>orderby</strong></dt>
 <dd><tt>The&nbsp;orderby&nbsp;query&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetOrderBy(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetOrderBy(self, val)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>racy</strong></dt>
 <dd><tt>The&nbsp;racy&nbsp;query&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetRacy(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetRacy(self, val)</dt></dl>
+</dd>
 </dl>
-<dl><dt><strong>start_max</strong></dt>
-<dd><tt>The&nbsp;start-max&nbsp;query&nbsp;parameter</tt></dd>
-</dl>
-<dl><dt><strong>start_min</strong></dt>
-<dd><tt>The&nbsp;start-min&nbsp;query&nbsp;parameter</tt></dd>
+<dl><dt><strong>restriction</strong></dt>
+<dd><tt>The&nbsp;restriction&nbsp;query&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetIPRestriction(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetIPRestriction(self, val)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>time</strong></dt>
 <dd><tt>The&nbsp;time&nbsp;query&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetTime(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetTime(self, val)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>vq</strong></dt>
-<dd><tt>The&nbsp;vq&nbsp;(video&nbsp;query)&nbsp;query&nbsp;parameter</tt></dd>
+<dd><tt>The&nbsp;video&nbsp;query&nbsp;(vq)&nbsp;query&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetVideoQuery(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetVideoQuery(self, val)</dt></dl>
+</dd>
 </dl>
 <hr>
 Methods inherited from <a href="gdata.service.html#Query">gdata.service.Query</a>:<br>
@@ -1110,40 +1456,76 @@ Methods inherited from <a href="gdata.service.html#Query">gdata.service.Query</a
 <dl><dt><a name="YouTubeUserQuery-__str__"><strong>__str__</strong></a>(self)</dt></dl>
 
 <hr>
-Data descriptors inherited from <a href="gdata.service.html#Query">gdata.service.Query</a>:<br>
-<dl><dt><strong>__dict__</strong></dt>
-<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-<dl><dt><strong>__weakref__</strong></dt>
-<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
+Properties inherited from <a href="gdata.service.html#Query">gdata.service.Query</a>:<br>
 <dl><dt><strong>alt</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;alt&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetAlt(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetAlt(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>author</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;author&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetAuthor(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetAuthor(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>max_results</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;max-results&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetMaxResults(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetMaxResults(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>published_max</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;published-max&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetPublishedMax(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetPublishedMax(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>published_min</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;published-min&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetPublishedMin(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetPublishedMin(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>start_index</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;start-index&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetStartIndex(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetStartIndex(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>text_query</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;q&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetTextQuery(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetTextQuery(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>updated_max</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;updated-max&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetUpdatedMax(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetUpdatedMax(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>updated_min</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;updated-min&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetUpdatedMin(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetUpdatedMin(self, query)</dt></dl>
+</dd>
 </dl>
+<hr>
+Data and other attributes inherited from <a href="gdata.service.html#Query">gdata.service.Query</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'Query' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
 <hr>
 Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><a name="YouTubeUserQuery-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#YouTubeUserQuery-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
@@ -1211,9 +1593,9 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 
 <hr>
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x301ec0&gt;<dd><tt>T.<a href="#YouTubeUserQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#YouTubeUserQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0x655770&gt;<dd><tt>dict.<a href="#YouTubeUserQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object&gt;<dd><tt>dict.<a href="#YouTubeUserQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -1222,7 +1604,38 @@ v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="YouTubeVideoQuery">class <strong>YouTubeVideoQuery</strong></a>(<a href="gdata.service.html#Query">gdata.service.Query</a>)</font></td></tr>
     
-<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Subclasses&nbsp;gdata.service.<a href="gdata.service.html#Query">Query</a>&nbsp;to&nbsp;represent&nbsp;a&nbsp;YouTube&nbsp;Data&nbsp;API&nbsp;query.<br>
+&nbsp;<br>
+Attributes&nbsp;are&nbsp;set&nbsp;dynamically&nbsp;via&nbsp;properties.&nbsp;Properties&nbsp;correspond&nbsp;to<br>
+the&nbsp;standard&nbsp;Google&nbsp;Data&nbsp;API&nbsp;query&nbsp;parameters&nbsp;with&nbsp;YouTube&nbsp;Data&nbsp;API<br>
+extensions.&nbsp;Please&nbsp;refer&nbsp;to&nbsp;the&nbsp;API&nbsp;documentation&nbsp;for&nbsp;details.<br>
+&nbsp;<br>
+Attributes:<br>
+&nbsp;&nbsp;vq:&nbsp;The&nbsp;vq&nbsp;parameter,&nbsp;which&nbsp;is&nbsp;only&nbsp;supported&nbsp;for&nbsp;video&nbsp;feeds,&nbsp;specifies&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;search&nbsp;query&nbsp;term.&nbsp;Refer&nbsp;to&nbsp;API&nbsp;documentation&nbsp;for&nbsp;further&nbsp;details.<br>
+&nbsp;&nbsp;orderby:&nbsp;The&nbsp;orderby&nbsp;parameter,&nbsp;which&nbsp;is&nbsp;only&nbsp;supported&nbsp;for&nbsp;video&nbsp;feeds,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specifies&nbsp;the&nbsp;value&nbsp;that&nbsp;will&nbsp;be&nbsp;used&nbsp;to&nbsp;sort&nbsp;videos&nbsp;in&nbsp;the&nbsp;search<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;set.&nbsp;Valid&nbsp;values&nbsp;for&nbsp;this&nbsp;parameter&nbsp;are&nbsp;relevance,&nbsp;published,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;viewCount&nbsp;and&nbsp;rating.<br>
+&nbsp;&nbsp;time:&nbsp;The&nbsp;time&nbsp;parameter,&nbsp;which&nbsp;is&nbsp;only&nbsp;available&nbsp;for&nbsp;the&nbsp;top_rated,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top_favorites,&nbsp;most_viewed,&nbsp;most_discussed,&nbsp;most_linked&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;most_responded&nbsp;standard&nbsp;feeds,&nbsp;restricts&nbsp;the&nbsp;search&nbsp;to&nbsp;videos&nbsp;uploaded<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;within&nbsp;the&nbsp;specified&nbsp;time.&nbsp;Valid&nbsp;values&nbsp;for&nbsp;this&nbsp;parameter&nbsp;are&nbsp;today<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1&nbsp;day),&nbsp;this_week&nbsp;(7&nbsp;days),&nbsp;this_month&nbsp;(1&nbsp;month)&nbsp;and&nbsp;all_time.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;for&nbsp;this&nbsp;parameter&nbsp;is&nbsp;all_time.<br>
+&nbsp;&nbsp;format:&nbsp;The&nbsp;format&nbsp;parameter&nbsp;specifies&nbsp;that&nbsp;videos&nbsp;must&nbsp;be&nbsp;available&nbsp;in&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;particular&nbsp;video&nbsp;format.&nbsp;Refer&nbsp;to&nbsp;the&nbsp;API&nbsp;documentation&nbsp;for&nbsp;details.<br>
+&nbsp;&nbsp;racy:&nbsp;The&nbsp;racy&nbsp;parameter&nbsp;allows&nbsp;a&nbsp;search&nbsp;result&nbsp;set&nbsp;to&nbsp;include&nbsp;restricted<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content&nbsp;as&nbsp;well&nbsp;as&nbsp;standard&nbsp;content.&nbsp;Valid&nbsp;values&nbsp;for&nbsp;this&nbsp;parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;include&nbsp;and&nbsp;exclude.&nbsp;By&nbsp;default,&nbsp;restricted&nbsp;content&nbsp;is&nbsp;excluded.<br>
+&nbsp;&nbsp;lr:&nbsp;The&nbsp;lr&nbsp;parameter&nbsp;restricts&nbsp;the&nbsp;search&nbsp;to&nbsp;videos&nbsp;that&nbsp;have&nbsp;a&nbsp;title,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;description&nbsp;or&nbsp;keywords&nbsp;in&nbsp;a&nbsp;specific&nbsp;language.&nbsp;Valid&nbsp;values&nbsp;for&nbsp;the&nbsp;lr<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameter&nbsp;are&nbsp;ISO&nbsp;639-1&nbsp;two-letter&nbsp;language&nbsp;codes.<br>
+&nbsp;&nbsp;restriction:&nbsp;The&nbsp;restriction&nbsp;parameter&nbsp;identifies&nbsp;the&nbsp;IP&nbsp;address&nbsp;that<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should&nbsp;be&nbsp;used&nbsp;to&nbsp;filter&nbsp;videos&nbsp;that&nbsp;can&nbsp;only&nbsp;be&nbsp;played&nbsp;in&nbsp;specific<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;countries.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.youtube.service.html#YouTubeVideoQuery">YouTubeVideoQuery</a></dd>
 <dd><a href="gdata.service.html#Query">gdata.service.Query</a></dd>
@@ -1234,27 +1647,55 @@ Methods defined here:<br>
 <dl><dt><a name="YouTubeVideoQuery-__init__"><strong>__init__</strong></a>(self, video_id<font color="#909090">=None</font>, feed_type<font color="#909090">=None</font>, text_query<font color="#909090">=None</font>, params<font color="#909090">=None</font>, categories<font color="#909090">=None</font>)</dt></dl>
 
 <hr>
-Data descriptors defined here:<br>
+Properties defined here:<br>
 <dl><dt><strong>format</strong></dt>
 <dd><tt>The&nbsp;format&nbsp;query&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetFormat(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetFormat(self, val)</dt></dl>
+</dd>
+</dl>
+<dl><dt><strong>lr</strong></dt>
+<dd><tt>The&nbsp;lr&nbsp;(language&nbsp;restriction)&nbsp;query&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetLanguageRestriction(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetLanguageRestriction(self, val)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>orderby</strong></dt>
 <dd><tt>The&nbsp;orderby&nbsp;query&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetOrderBy(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetOrderBy(self, val)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>racy</strong></dt>
 <dd><tt>The&nbsp;racy&nbsp;query&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetRacy(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetRacy(self, val)</dt></dl>
+</dd>
 </dl>
-<dl><dt><strong>start_max</strong></dt>
-<dd><tt>The&nbsp;start-max&nbsp;query&nbsp;parameter</tt></dd>
-</dl>
-<dl><dt><strong>start_min</strong></dt>
-<dd><tt>The&nbsp;start-min&nbsp;query&nbsp;parameter</tt></dd>
+<dl><dt><strong>restriction</strong></dt>
+<dd><tt>The&nbsp;restriction&nbsp;query&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetIPRestriction(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetIPRestriction(self, val)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>time</strong></dt>
 <dd><tt>The&nbsp;time&nbsp;query&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetTime(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetTime(self, val)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>vq</strong></dt>
-<dd><tt>The&nbsp;vq&nbsp;(video&nbsp;query)&nbsp;query&nbsp;parameter</tt></dd>
+<dd><tt>The&nbsp;video&nbsp;query&nbsp;(vq)&nbsp;query&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetVideoQuery(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetVideoQuery(self, val)</dt></dl>
+</dd>
 </dl>
 <hr>
 Methods inherited from <a href="gdata.service.html#Query">gdata.service.Query</a>:<br>
@@ -1263,40 +1704,76 @@ Methods inherited from <a href="gdata.service.html#Query">gdata.service.Query</a
 <dl><dt><a name="YouTubeVideoQuery-__str__"><strong>__str__</strong></a>(self)</dt></dl>
 
 <hr>
-Data descriptors inherited from <a href="gdata.service.html#Query">gdata.service.Query</a>:<br>
-<dl><dt><strong>__dict__</strong></dt>
-<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-<dl><dt><strong>__weakref__</strong></dt>
-<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
+Properties inherited from <a href="gdata.service.html#Query">gdata.service.Query</a>:<br>
 <dl><dt><strong>alt</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;alt&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetAlt(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetAlt(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>author</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;author&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetAuthor(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetAuthor(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>max_results</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;max-results&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetMaxResults(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetMaxResults(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>published_max</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;published-max&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetPublishedMax(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetPublishedMax(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>published_min</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;published-min&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetPublishedMin(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetPublishedMin(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>start_index</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;start-index&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetStartIndex(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetStartIndex(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>text_query</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;q&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetTextQuery(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetTextQuery(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>updated_max</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;updated-max&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetUpdatedMax(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetUpdatedMax(self, query)</dt></dl>
+</dd>
 </dl>
 <dl><dt><strong>updated_min</strong></dt>
 <dd><tt>The&nbsp;feed&nbsp;query's&nbsp;updated-min&nbsp;parameter</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _GetUpdatedMin(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _SetUpdatedMin(self, query)</dt></dl>
+</dd>
 </dl>
+<hr>
+Data and other attributes inherited from <a href="gdata.service.html#Query">gdata.service.Query</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'Query' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
 <hr>
 Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><a name="YouTubeVideoQuery-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#YouTubeVideoQuery-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
@@ -1364,9 +1841,9 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 
 <hr>
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x301ec0&gt;<dd><tt>T.<a href="#YouTubeVideoQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#YouTubeVideoQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0x6555a0&gt;<dd><tt>dict.<a href="#YouTubeVideoQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object&gt;<dd><tt>dict.<a href="#YouTubeVideoQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table></td></tr></table><p>
@@ -1388,6 +1865,7 @@ v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 <strong>YOUTUBE_INVALID_CONTENT_TYPE</strong> = 602<br>
 <strong>YOUTUBE_INVALID_KIND</strong> = 604<br>
 <strong>YOUTUBE_NOT_A_VIDEO</strong> = 603<br>
+<strong>YOUTUBE_PLAYLIST_FEED_URI</strong> = 'http://gdata.youtube.com/feeds/api/playlists'<br>
 <strong>YOUTUBE_QUERY_VALID_FORMAT_PARAMETERS</strong> = ('1', '5', '6')<br>
 <strong>YOUTUBE_QUERY_VALID_ORDERBY_PARAMETERS</strong> = ('updated', 'viewCount', 'rating', 'relevance')<br>
 <strong>YOUTUBE_QUERY_VALID_RACY_PARAMETERS</strong> = ('include', 'exclude')<br>
@@ -1408,7 +1886,8 @@ v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 <strong>YOUTUBE_STANDARD_WATCH_ON_MOBILE_URI</strong> = 'http://gdata.youtube.com/feeds/api/standardfeeds/watch_on_mobile'<br>
 <strong>YOUTUBE_SUPPORTED_UPLOAD_TYPES</strong> = ('mov', 'avi', 'wmv', 'mpg', 'quicktime')<br>
 <strong>YOUTUBE_UPLOAD_TOKEN_URI</strong> = 'http://gdata.youtube.com/action/GetUploadToken'<br>
-<strong>YOUTUBE_USER_FEED_URI</strong> = 'http://gdata.youtube.com/feeds/api/users/'<br>
+<strong>YOUTUBE_UPLOAD_URI</strong> = 'http://uploads.gdata.youtube.com/feeds/api/users'<br>
+<strong>YOUTUBE_USER_FEED_URI</strong> = 'http://gdata.youtube.com/feeds/api/users'<br>
 <strong>YOUTUBE_VIDEO_URI</strong> = 'http://gdata.youtube.com/feeds/api/videos'<br>
 <strong>__author__</strong> = 'api.stephaniel@gmail.com (Stephanie Liu), api.jhartmann@gmail.com (Jochen Hartmann)'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">

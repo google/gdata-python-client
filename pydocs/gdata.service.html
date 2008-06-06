@@ -86,6 +86,7 @@
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="gdata.service.html#BadAuthentication">BadAuthentication</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.service.html#BadAuthenticationServiceURL">BadAuthenticationServiceURL</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.service.html#CaptchaRequired">CaptchaRequired</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.service.html#NonAuthSubToken">NonAuthSubToken</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.service.html#NotAuthenticated">NotAuthenticated</a>
@@ -115,6 +116,26 @@ Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception<
 <dl><dt><a name="BadAuthentication-__init__"><strong>__init__</strong></a>(...)</dt></dl>
 
 <dl><dt><a name="BadAuthentication-__str__"><strong>__str__</strong></a>(...)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BadAuthenticationServiceURL">class <strong>BadAuthenticationServiceURL</strong></a>(<a href="gdata.service.html#Error">Error</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.service.html#BadAuthenticationServiceURL">BadAuthenticationServiceURL</a></dd>
+<dd><a href="gdata.service.html#Error">Error</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="BadAuthenticationServiceURL-__getitem__"><strong>__getitem__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BadAuthenticationServiceURL-__init__"><strong>__init__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BadAuthenticationServiceURL-__str__"><strong>__str__</strong></a>(...)</dt></dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -169,7 +190,7 @@ services&nbsp;to&nbsp;allow&nbsp;a&nbsp;user&nbsp;to&nbsp;perform&nbsp;inserts,&
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="GDataService-ClientLogin"><strong>ClientLogin</strong></a>(self, username, password, account_type<font color="#909090">=None</font>, service<font color="#909090">=None</font>, source<font color="#909090">=None</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Convenience&nbsp;method&nbsp;for&nbsp;authenticating&nbsp;using&nbsp;ProgrammaticLogin.&nbsp;<br>
+<dl><dt><a name="GDataService-ClientLogin"><strong>ClientLogin</strong></a>(self, username, password, account_type<font color="#909090">=None</font>, service<font color="#909090">=None</font>, auth_service_url<font color="#909090">=None</font>, source<font color="#909090">=None</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Convenience&nbsp;method&nbsp;for&nbsp;authenticating&nbsp;using&nbsp;ProgrammaticLogin.&nbsp;<br>
 &nbsp;<br>
 Sets&nbsp;values&nbsp;for&nbsp;email,&nbsp;password,&nbsp;and&nbsp;other&nbsp;optional&nbsp;members.<br>
 &nbsp;<br>
@@ -178,6 +199,7 @@ Args:<br>
 &nbsp;&nbsp;password:<br>
 &nbsp;&nbsp;account_type:&nbsp;string&nbsp;(optional)<br>
 &nbsp;&nbsp;service:&nbsp;string&nbsp;(optional)<br>
+&nbsp;&nbsp;auth_service_url:&nbsp;string&nbsp;(optional)<br>
 &nbsp;&nbsp;captcha_token:&nbsp;string&nbsp;(optional)<br>
 &nbsp;&nbsp;captcha_response:&nbsp;string&nbsp;(optional)</tt></dd></dl>
 
@@ -252,7 +274,16 @@ Returns:<br>
 &nbsp;&nbsp;return&nbsp;a&nbsp;string.&nbsp;If&nbsp;there&nbsp;is&nbsp;a&nbsp;ResultsTransformer,&nbsp;the&nbsp;returned&nbsp;value&nbsp;<br>
 &nbsp;&nbsp;will&nbsp;be&nbsp;that&nbsp;of&nbsp;the&nbsp;ResultsTransformer&nbsp;function.</tt></dd></dl>
 
-<dl><dt><a name="GDataService-GetAuthSubToken"><strong>GetAuthSubToken</strong></a>(self)</dt></dl>
+<dl><dt><a name="GDataService-GetAuthSubToken"><strong>GetAuthSubToken</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;AuthSub&nbsp;Token&nbsp;after&nbsp;removing&nbsp;the&nbsp;AuthSub&nbsp;Authorization<br>
+Label.<br>
+&nbsp;<br>
+The&nbsp;AuthSub&nbsp;Authorization&nbsp;Label&nbsp;reads:&nbsp;"AuthSub&nbsp;token"<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;If&nbsp;the&nbsp;AuthSub&nbsp;Token&nbsp;is&nbsp;set&nbsp;AND&nbsp;it&nbsp;begins&nbsp;with&nbsp;the&nbsp;AuthSub&nbsp;<br>
+&nbsp;&nbsp;Authorization&nbsp;Label,&nbsp;the&nbsp;AuthSub&nbsp;Token&nbsp;is&nbsp;returned&nbsp;minus&nbsp;the&nbsp;AuthSub<br>
+&nbsp;&nbsp;Label.&nbsp;If&nbsp;the&nbsp;AuthSub&nbsp;Token&nbsp;does&nbsp;not&nbsp;start&nbsp;with&nbsp;the&nbsp;AuthSub<br>
+&nbsp;&nbsp;Authorization&nbsp;Label&nbsp;or&nbsp;it&nbsp;is&nbsp;not&nbsp;set,&nbsp;None&nbsp;is&nbsp;returned.</tt></dd></dl>
 
 <dl><dt><a name="GDataService-GetClientLoginToken"><strong>GetClientLoginToken</strong></a>(self)</dt></dl>
 
@@ -433,7 +464,7 @@ Raises:<br>
 Raises:<br>
 &nbsp;&nbsp;<a href="#NonAuthSubToken">NonAuthSubToken</a>&nbsp;if&nbsp;the&nbsp;user's&nbsp;auth&nbsp;token&nbsp;is&nbsp;not&nbsp;an&nbsp;AuthSub&nbsp;token</tt></dd></dl>
 
-<dl><dt><a name="GDataService-__init__"><strong>__init__</strong></a>(self, email<font color="#909090">=None</font>, password<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, service<font color="#909090">=None</font>, source<font color="#909090">=None</font>, server<font color="#909090">=None</font>, additional_headers<font color="#909090">=None</font>, handler<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;an&nbsp;object&nbsp;of&nbsp;type&nbsp;<a href="#GDataService">GDataService</a>.<br>
+<dl><dt><a name="GDataService-__init__"><strong>__init__</strong></a>(self, email<font color="#909090">=None</font>, password<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, service<font color="#909090">=None</font>, auth_service_url<font color="#909090">=None</font>, source<font color="#909090">=None</font>, server<font color="#909090">=None</font>, additional_headers<font color="#909090">=None</font>, handler<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;an&nbsp;object&nbsp;of&nbsp;type&nbsp;<a href="#GDataService">GDataService</a>.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;email:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;user's&nbsp;email&nbsp;address,&nbsp;used&nbsp;for<br>
@@ -446,6 +477,8 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOOGLE&nbsp;account.&nbsp;Default&nbsp;value:&nbsp;'HOSTED_OR_GOOGLE'.<br>
 &nbsp;&nbsp;service:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;service&nbsp;for&nbsp;which&nbsp;credentials<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;be&nbsp;obtained.<br>
+&nbsp;&nbsp;auth_service_url:&nbsp;string&nbsp;(optional)&nbsp;User-defined&nbsp;auth&nbsp;token&nbsp;request&nbsp;URL<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allows&nbsp;users&nbsp;to&nbsp;explicitly&nbsp;specify&nbsp;where&nbsp;to&nbsp;send&nbsp;auth&nbsp;token&nbsp;requests.<br>
 &nbsp;&nbsp;source:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;user's&nbsp;application.<br>
 &nbsp;&nbsp;server:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;server&nbsp;to&nbsp;which&nbsp;a&nbsp;connection<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;be&nbsp;opened.&nbsp;Default&nbsp;value:&nbsp;'base.google.com'.<br>

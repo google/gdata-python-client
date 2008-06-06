@@ -157,7 +157,7 @@ Yields:<br>
 
 <hr>
 Methods inherited from <a href="gdata.service.html#GDataService">gdata.service.GDataService</a>:<br>
-<dl><dt><a name="DocsService-ClientLogin"><strong>ClientLogin</strong></a>(self, username, password, account_type<font color="#909090">=None</font>, service<font color="#909090">=None</font>, source<font color="#909090">=None</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Convenience&nbsp;method&nbsp;for&nbsp;authenticating&nbsp;using&nbsp;ProgrammaticLogin.&nbsp;<br>
+<dl><dt><a name="DocsService-ClientLogin"><strong>ClientLogin</strong></a>(self, username, password, account_type<font color="#909090">=None</font>, service<font color="#909090">=None</font>, auth_service_url<font color="#909090">=None</font>, source<font color="#909090">=None</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Convenience&nbsp;method&nbsp;for&nbsp;authenticating&nbsp;using&nbsp;ProgrammaticLogin.&nbsp;<br>
 &nbsp;<br>
 Sets&nbsp;values&nbsp;for&nbsp;email,&nbsp;password,&nbsp;and&nbsp;other&nbsp;optional&nbsp;members.<br>
 &nbsp;<br>
@@ -166,6 +166,7 @@ Args:<br>
 &nbsp;&nbsp;password:<br>
 &nbsp;&nbsp;account_type:&nbsp;string&nbsp;(optional)<br>
 &nbsp;&nbsp;service:&nbsp;string&nbsp;(optional)<br>
+&nbsp;&nbsp;auth_service_url:&nbsp;string&nbsp;(optional)<br>
 &nbsp;&nbsp;captcha_token:&nbsp;string&nbsp;(optional)<br>
 &nbsp;&nbsp;captcha_response:&nbsp;string&nbsp;(optional)</tt></dd></dl>
 
@@ -240,7 +241,16 @@ Returns:<br>
 &nbsp;&nbsp;return&nbsp;a&nbsp;string.&nbsp;If&nbsp;there&nbsp;is&nbsp;a&nbsp;ResultsTransformer,&nbsp;the&nbsp;returned&nbsp;value&nbsp;<br>
 &nbsp;&nbsp;will&nbsp;be&nbsp;that&nbsp;of&nbsp;the&nbsp;ResultsTransformer&nbsp;function.</tt></dd></dl>
 
-<dl><dt><a name="DocsService-GetAuthSubToken"><strong>GetAuthSubToken</strong></a>(self)</dt></dl>
+<dl><dt><a name="DocsService-GetAuthSubToken"><strong>GetAuthSubToken</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;AuthSub&nbsp;Token&nbsp;after&nbsp;removing&nbsp;the&nbsp;AuthSub&nbsp;Authorization<br>
+Label.<br>
+&nbsp;<br>
+The&nbsp;AuthSub&nbsp;Authorization&nbsp;Label&nbsp;reads:&nbsp;"AuthSub&nbsp;token"<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;If&nbsp;the&nbsp;AuthSub&nbsp;Token&nbsp;is&nbsp;set&nbsp;AND&nbsp;it&nbsp;begins&nbsp;with&nbsp;the&nbsp;AuthSub&nbsp;<br>
+&nbsp;&nbsp;Authorization&nbsp;Label,&nbsp;the&nbsp;AuthSub&nbsp;Token&nbsp;is&nbsp;returned&nbsp;minus&nbsp;the&nbsp;AuthSub<br>
+&nbsp;&nbsp;Label.&nbsp;If&nbsp;the&nbsp;AuthSub&nbsp;Token&nbsp;does&nbsp;not&nbsp;start&nbsp;with&nbsp;the&nbsp;AuthSub<br>
+&nbsp;&nbsp;Authorization&nbsp;Label&nbsp;or&nbsp;it&nbsp;is&nbsp;not&nbsp;set,&nbsp;None&nbsp;is&nbsp;returned.</tt></dd></dl>
 
 <dl><dt><a name="DocsService-GetClientLoginToken"><strong>GetClientLoginToken</strong></a>(self)</dt></dl>
 
