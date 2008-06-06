@@ -862,5 +862,17 @@ class CalendarWebContentTest(unittest.TestCase):
     self.assertEquals(expected_pref_value, 
         web_content_element.gadget_pref[0].value)
 
+
+class ExtendedPropertyTest(unittest.TestCase):
+
+  def testExtendedPropertyToAndFromXml(self):
+    ep = gdata.calendar.ExtendedProperty(name='test')
+    ep.value = 'val'
+    xml_string = ep.ToString()
+    ep2 = gdata.ExtendedPropertyFromString(xml_string)
+    self.assertEquals(ep.name, ep2.name)
+    self.assertEquals(ep.value, ep2.value)
+      
+
 if __name__ == '__main__':
   unittest.main()

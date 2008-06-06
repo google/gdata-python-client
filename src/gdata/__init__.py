@@ -237,6 +237,29 @@ def ItemsPerPageFromString(xml_string):
   return atom.CreateClassFromXMLString(ItemsPerPage, xml_string)
 
 
+class ExtendedProperty(atom.AtomBase):
+  """The Google Calendar extendedProperty element"""
+
+  _tag = 'extendedProperty'
+  _namespace = GDATA_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['name'] = 'name'
+  _attributes['value'] = 'value'
+
+  def __init__(self, name=None, value=None, extension_elements=None,
+      extension_attributes=None, text=None):
+    self.name = name
+    self.value = value
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+
+def ExtendedPropertyFromString(xml_string):
+  return atom.CreateClassFromXMLString(ExtendedProperty, xml_string)
+
+
 class GDataEntry(atom.Entry, LinkFinder):
   """Extends Atom Entry to provide data processing"""
 
