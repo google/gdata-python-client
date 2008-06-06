@@ -18,15 +18,15 @@ __author__ = 'api.jhartmann@gmail.com (Jochen Hartmann)'
 
 import getpass
 import time
-import unittest
 import StringIO
-import gdata.youtube.service
-import gdata.youtube
-import atom
 import random
+import unittest
+import atom
+import gdata.youtube
+import gdata.youtube.service
 
-YOUTUBE_TEMPLATE = '{http://gdata.youtube.com/schemas/2007}%s'
 YOUTUBE_TEST_CLIENT_ID = 'ytapi-pythonclientlibrary_servicetest'
+
 
 class YouTubeServiceTest(unittest.TestCase):
 
@@ -123,8 +123,8 @@ class YouTubeServiceTest(unittest.TestCase):
     self.assertEquals(len(feed.entry), 8)
 
   def testDirectVideoUploadStatusUpdateAndDeletion(self):
-    self.assertEquals(self.client._developer_key, developer_key)
-    self.assertEquals(self.client._client_id, YOUTUBE_TEST_CLIENT_ID)
+    self.assertEquals(self.client.developer_key, developer_key)
+    self.assertEquals(self.client.client_id, YOUTUBE_TEST_CLIENT_ID)
     self.assertEquals(self.client.additional_headers['X-GData-Key'],
         'key=' + developer_key)
     self.assertEquals(self.client.additional_headers['X-Gdata-Client'],
@@ -183,9 +183,77 @@ class YouTubeServiceTest(unittest.TestCase):
 
     self.assert_(value == True)
 
+  def testDirectVideoUploadWithDeveloperTags(self):
+    self.assertEquals(self.client.developer_key, developer_key)
+    self.assertEquals(self.client.client_id, YOUTUBE_TEST_CLIENT_ID)
+    self.assertEquals(self.client.additional_headers['X-GData-Key'],
+        'key=' + developer_key)
+    self.assertEquals(self.client.additional_headers['X-Gdata-Client'],
+        YOUTUBE_TEST_CLIENT_ID)
+
+    test_video_title = 'my cool video ' + str(random.randint(1000,5000))
+    test_video_description = 'description ' + str(random.randint(1000,5000))
+
+    test_developer_tag_01 = 'tag' + str(random.randint(1000,5000))
+    test_developer_tag_02 = 'tag' + str(random.randint(1000,5000))
+    test_developer_tag_03 = 'tag' + str(random.randint(1000,5000)) 
+
+    my_media_group = gdata.media.Group(
+      title = gdata.media.Title(text=test_video_title),
+      description = gdata.media.Description(description_type='plain',
+                                            text=test_video_description),
+      keywords = gdata.media.Keywords(text='video, foo'),
+      category = [gdata.media.Category(
+          text='Autos',
+          scheme='http://gdata.youtube.com/schemas/2007/categories.cat',
+          label='Autos')],
+      player=None
+    )
+
+    self.assert_(isinstance(my_media_group, gdata.media.Group))
+
+    video_entry = gdata.youtube.YouTubeVideoEntry(media=my_media_group)
+    original_developer_tags = [test_developer_tag_01, test_developer_tag_02,
+                               test_developer_tag_03]
+
+    dev_tags = video_entry.AddDeveloperTags(original_developer_tags)
+
+    for dev_tag in dev_tags:
+      self.assert_(dev_tag.text in original_developer_tags) 
+
+    self.assert_(isinstance(video_entry, gdata.youtube.YouTubeVideoEntry))
+
+    new_entry = self.client.InsertVideoEntry(video_entry, video_file_location)
+
+    self.assert_(isinstance(new_entry, gdata.youtube.YouTubeVideoEntry))
+    self.assertEquals(new_entry.title.text, test_video_title)
+    self.assertEquals(new_entry.media.description.text, test_video_description)
+    self.assert_(new_entry.id.text)
+
+    developer_tags_from_new_entry = new_entry.GetDeveloperTags()
+    for dev_tag in developer_tags_from_new_entry:
+      self.assert_(dev_tag.text in original_developer_tags) 
+
+    self.assertEquals(len(developer_tags_from_new_entry),
+        len(original_developer_tags))
+
+    # sleep for 10 seconds
+    time.sleep(10)
+
+    # test to delete the entry
+    value = self.client.DeleteVideoEntry(new_entry)
+
+    if not value:
+      # sleep more and try again
+      time.sleep(20)
+      # test to delete the entry
+      value = self.client.DeleteVideoEntry(new_entry)
+
+    self.assert_(value == True)
+
   def testBrowserBasedVideoUpload(self):
-    self.assertEquals(self.client._developer_key, developer_key)
-    self.assertEquals(self.client._client_id, YOUTUBE_TEST_CLIENT_ID)
+    self.assertEquals(self.client.developer_key, developer_key)
+    self.assertEquals(self.client.client_id, YOUTUBE_TEST_CLIENT_ID)
     self.assertEquals(self.client.additional_headers['X-GData-Key'],
         'key=' + developer_key)
     self.assertEquals(self.client.additional_headers['X-Gdata-Client'],
@@ -333,24 +401,21 @@ class YouTubeServiceTest(unittest.TestCase):
                                        test_playlist_description)
     self.assert_(isinstance(response, gdata.youtube.YouTubePlaylistEntry))
 
-    # add a video entry to the playlist with custom title and description
     custom_video_title = 'my test video on my test playlist'
     custom_video_description = 'this is a test video on my test playlist'
     video_id = 'Ncakifd_16k'
     playlist_uri = response.feed_link[0].href
-
+    time.sleep(10)
     response = self.client.AddPlaylistVideoEntryToPlaylist(
-        playlist_uri,
-        video_id,
-        custom_video_title,
-        custom_video_description)
+        playlist_uri, video_id, custom_video_title, custom_video_description)
+
     self.assert_(isinstance(response, gdata.youtube.YouTubePlaylistVideoEntry))
 
-    # update the title and description of the YouTubePlaylistVideoEntry
     playlist_entry_id = response.id.text.split('/')[-1]
     playlist_uri = response.id.text.split(playlist_entry_id)[0][:-1]
     new_video_title = 'video number ' + str(random.randint(1000,3000))
     new_video_description = 'test video'
+    time.sleep(10)
     response = self.client.UpdatePlaylistVideoEntryMetaData(
         playlist_uri,
         playlist_entry_id,
@@ -358,8 +423,7 @@ class YouTubeServiceTest(unittest.TestCase):
         new_video_description,
         1)
     self.assert_(isinstance(response, gdata.youtube.YouTubePlaylistVideoEntry))
-
-    # delete the playlist
+    time.sleep(10)
     playlist_uri = response.id.text
     response = self.client.DeletePlaylist(playlist_uri)
     self.assertEquals(response, True)
@@ -405,7 +469,7 @@ class YouTubeServiceTest(unittest.TestCase):
     video_entry = self.client.GetYouTubeVideoEntry(video_id=video_id)
     response = self.client.AddVideoEntryToFavorites(video_entry)
     self.assert_(isinstance(response, gdata.GDataEntry))
-    # delete it
+    time.sleep(10)
     response = self.client.DeleteVideoEntryFromFavorites(video_id)
     self.assertEquals(response, True)
 

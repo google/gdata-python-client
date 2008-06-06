@@ -16,6 +16,7 @@
 
 __author__ = 'api.jfisher (Jeff Fisher)'
 
+import time
 import getpass
 import unittest
 import StringIO
@@ -45,12 +46,13 @@ class DocumentListServiceTest(unittest.TestCase):
     virtual_media_source = gdata.MediaSource(file_handle=virtual_csv_file, content_type='text/csv', content_length=3)
     entry = self.gd_client.UploadSpreadsheet(virtual_media_source, 'test title')
     self.assertTrue(entry.title.text == 'test title')
+    time.sleep(10)
     self.gd_client.Delete(entry.GetEditLink().href)
 
 
 if __name__ == '__main__':
-  print ('NOTE: Please run these tests only with a test account. ' +
-      'The tests may delete or update your data.')
+  print ('DocList API Tests\nNOTE: Please run these tests only with a test '
+         'account. The tests may delete or update your data.')
   username = raw_input('Please enter your username: ')
   password = getpass.getpass()
   unittest.main()

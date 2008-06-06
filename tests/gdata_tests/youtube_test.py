@@ -22,7 +22,6 @@ from gdata import test_data
 import gdata.youtube
 import gdata.youtube.service
 import atom
-from pprint import pprint as px
 
 YOUTUBE_TEMPLATE = '{http://gdata.youtube.com/schemas/2007}%s'
 YT_FORMAT = YOUTUBE_TEMPLATE % ('format')
@@ -41,6 +40,7 @@ class VideoEntryTest(unittest.TestCase):
     for entry in self.video_feed.entry:
       if (entry.id.text ==
           'http://gdata.youtube.com/feeds/api/videos/C71ypXYGho8'):
+
         self.assertEquals(entry.published.text, '2008-03-20T10:17:27.000-07:00')
         self.assertEquals(entry.updated.text, '2008-05-14T04:26:37.000-07:00')
         self.assertEquals(entry.category[0].scheme,
@@ -81,10 +81,18 @@ class VideoEntryTest(unittest.TestCase):
         self.assertEquals(entry.media.keywords.text,
             'amar, boyfriend, garcia, karyn, me, odeio, por, te')
         self.assertEquals(entry.media.duration.seconds, '203')
-        self.assertEquals(entry.media.category.label, 'Music')
-        self.assertEquals(entry.media.category.scheme,
+        self.assertEquals(entry.media.category[0].label, 'Music')
+        self.assertEquals(entry.media.category[0].scheme,
             'http://gdata.youtube.com/schemas/2007/categories.cat')
-        self.assertEquals(entry.media.category.text, 'Music')
+        self.assertEquals(entry.media.category[0].text, 'Music')
+        self.assertEquals(entry.media.category[1].label, 'test111')
+        self.assertEquals(entry.media.category[1].scheme,
+            'http://gdata.youtube.com/schemas/2007/developertags.cat')
+        self.assertEquals(entry.media.category[1].text, 'test111')
+        self.assertEquals(entry.media.category[2].label, 'test222')
+        self.assertEquals(entry.media.category[2].scheme,
+            'http://gdata.youtube.com/schemas/2007/developertags.cat')
+        self.assertEquals(entry.media.category[2].text, 'test222')
         self.assertEquals(entry.media.content[0].url,
             'http://www.youtube.com/v/C71ypXYGho8')
         self.assertEquals(entry.media.content[0].type,
@@ -160,6 +168,8 @@ class VideoEntryTest(unittest.TestCase):
 
         self.assertEquals(entry.GetSwfUrl(),
             'http://www.youtube.com/v/C71ypXYGho8')
+        self.assertEquals(entry.GetYouTubeCategoryAsString(), 'Music')
+
 
 class VideoEntryPrivateTest(unittest.TestCase):
 

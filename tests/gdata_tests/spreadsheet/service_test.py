@@ -120,8 +120,6 @@ class SpreadsheetsServiceTest(unittest.TestCase):
     self.gd_client.ProgrammaticLogin()
     
   def testGetSpreadsheetsFeed(self):
-    #feed = self.gd_client.GetSpreadsheetsFeed()
-    #self.assert_(isinstance(feed, gdata.spreadsheet.SpreadsheetsSpreadsheetsFeed))
     entry = self.gd_client.GetSpreadsheetsFeed(self.key)
     self.assert_(isinstance(entry, gdata.spreadsheet.SpreadsheetsSpreadsheet))
     
@@ -182,7 +180,8 @@ class SpreadsheetsServiceTest(unittest.TestCase):
 
   def testWorksheetCRUD(self):
     # Add a new worksheet.
-    new_worksheet = self.gd_client.AddWorksheet('worksheet_title_test_12', '2', 3, self.key)
+    new_worksheet = self.gd_client.AddWorksheet('worksheet_title_test_12', '2',
+                                                3, self.key)
     self.assertEquals(new_worksheet.col_count.text, '3')
     self.assertEquals(new_worksheet.row_count.text, '2')
     self.assertEquals(new_worksheet.title.text, 'worksheet_title_test_12')
@@ -203,8 +202,8 @@ class SpreadsheetsServiceTest(unittest.TestCase):
     
 
 if __name__ == '__main__':
-  print ('NOTE: Please run these tests only with a test account. ' +
-      'The tests may delete or update your data.')
+  print ('Spreadsheet Tests\nNOTE: Please run these tests only with a test '
+         'account. The tests may delete or update your data.')
   username = raw_input('Please enter your username: ')
   password = getpass.getpass()
   ss_key = raw_input('Please enter your spreadsheet key: ')

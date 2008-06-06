@@ -206,6 +206,8 @@ class Thumbnail(MediaBaseElement):
     self.url = url
     self.width = width
     self.height = height
+
+
 def ThumbnailFromString(xml_string):
   return atom.CreateClassFromXMLString(Thumbnail, xml_string)
 
@@ -301,7 +303,7 @@ class Group(MediaBaseElement):
   _children['{%s}keywords' % MEDIA_NAMESPACE] = ('keywords', Keywords) 
   _children['{%s}thumbnail' % MEDIA_NAMESPACE] = ('thumbnail', [Thumbnail,])
   _children['{%s}title' % MEDIA_NAMESPACE] = ('title', Title) 
-  _children['{%s}category' % MEDIA_NAMESPACE] = ('category', Category) 
+  _children['{%s}category' % MEDIA_NAMESPACE] = ('category', [Category,]) 
   _children['{%s}duration' % YOUTUBE_NAMESPACE] = ('duration', Duration)
   _children['{%s}private' % YOUTUBE_NAMESPACE] = ('private', Private)
   _children['{%s}player' % MEDIA_NAMESPACE] = ('player', Player)
@@ -322,7 +324,7 @@ class Group(MediaBaseElement):
     self.title=title
     self.duration=duration
     self.private=private
-    self.category=category
+    self.category=category or []
     self.player=player
 
 def GroupFromString(xml_string):

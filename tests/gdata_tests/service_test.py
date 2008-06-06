@@ -471,8 +471,8 @@ class GetNextPageInFeedTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-  print ('NOTE: Please run these tests only with a test account. ' +
-      'The tests may delete or update your data.')
+  print ('GData Service Media Unit Tests\nNOTE: Please run these tests only '
+         'with a test  account. The tests may delete or update your data.')
   username = raw_input('Please enter your username: ')
   password = getpass.getpass()
   unittest.main()

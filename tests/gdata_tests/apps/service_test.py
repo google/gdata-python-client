@@ -483,7 +483,6 @@ class AppsServiceUnitTest03(unittest.TestCase):
     list_nums = 101
     for i in range(list_nums):
       list_name = 'list%03d-' % i + self.postfix
-      #print 'creating list named:', list_name
       try:
         created_email_list = self.apps_client.CreateEmailList(list_name)
       except Exception, e:
@@ -494,8 +493,9 @@ class AppsServiceUnitTest03(unittest.TestCase):
     self.assertEquals(len(list_feed.entry), list_nums + quantity)
 
 if __name__ == '__main__':
-  print ('NOTE: Please run these tests only with a test domain. ' +
-         'The tests may delete or update your domain\'s account data.')
+  print ('Google Apps Service Tests\nNOTE: Please run these tests only with '
+         'a test domain. The tests may delete or update your domain\'s '
+         'account data.')
   apps_domain = raw_input('Please enter your domain: ')
   apps_username = raw_input('Please enter your username of admin account: ')
   apps_password = getpass.getpass()

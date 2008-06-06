@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
+import time
 import unittest
 import getpass
 import gdata.spreadsheet.text_db
@@ -45,6 +45,7 @@ class FactoryTest(unittest.TestCase):
     self.client.SetCredentials(username, password)
     db = self.client.CreateDatabase(db_title)
     # Test finding the database using the name
+    time.sleep(5)
     db_list = self.client.GetDatabases(name=db_title)
     self.assertTrue(len(db_list) >= 1)
     if len(db_list) >= 1:
@@ -54,6 +55,7 @@ class FactoryTest(unittest.TestCase):
     self.assertTrue(len(db_list) == 1)
     self.assertTrue(db_list[0].entry.title.text == db_title)
     # Delete the test spreadsheet
+    time.sleep(10)
     db.Delete()
 
 
@@ -64,6 +66,7 @@ class DatabaseTest(unittest.TestCase):
     self.db = client.CreateDatabase('google_spreadsheets_db unit test 2')
 
   def tearDown(self):
+    time.sleep(10)
     self.db.Delete()
 
   def testCreateGetAndDeleteTable(self):
@@ -88,6 +91,7 @@ class TableTest(unittest.TestCase):
     self.table = self.db.CreateTable('test1', ['a','b','c_d','a', 'd:e'])
 
   def tearDown(self):
+    time.sleep(10)
     self.db.Delete()
 
   def testCreateGetAndDeleteRecord(self):
@@ -103,6 +107,7 @@ class TableTest(unittest.TestCase):
     record_list = self.table.GetRecord(row_id=new_record.row_id)
     self.assertTrue(record is not None)
     # Delete the record.
+    time.sleep(10)
     new_record.Delete()
 
   def testPushPullSyncing(self):
@@ -149,7 +154,8 @@ class TableTest(unittest.TestCase):
     self.table.AddRecord({'a':'hi hi hi', 'b':'2', 'cd':'15', 'de':'7'})
     self.table.AddRecord({'a':'"5"', 'b':'5', 'cd':'15', 'de':'7'})
     self.table.AddRecord({'a':'5', 'b':'5', 'cd':'15', 'de':'7'})
-
+    
+    time.sleep(10)
     matches = self.table.FindRecords('a == 1')
     self.assertTrue(len(matches) == 1)
     self.assertTrue(matches[0].content['a'] == '1')
@@ -159,7 +165,6 @@ class TableTest(unittest.TestCase):
     self.assertTrue(len(matches) == 4)
     matches = self.table.FindRecords('cd < de')
     self.assertTrue(len(matches) == 7)
-    self.assertTrue(len(matches) == 1)
     matches = self.table.FindRecords('a == b')
     self.assertTrue(len(matches) == 0)
     matches = self.table.FindRecords('a == 5')
@@ -197,7 +202,8 @@ class TableTest(unittest.TestCase):
 
 if __name__ == '__main__':
   if not username:
-    username = raw_input('Please enter your username: ')
+    username = raw_input('Spreadsheets API | Text DB Tests\n'
+                         'Please enter your username: ')
   if not password:
     password = getpass.getpass()  
   unittest.main()

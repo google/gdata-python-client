@@ -104,8 +104,8 @@ def DeleteTestContact(client):
   
 
 if __name__ == '__main__':
-  print ('NOTE: Please run these tests only with a test account. ' +
-      'The tests may delete or update your data.')
+  print ('Contacts Tests\nNOTE: Please run these tests only with a test '
+         'account. The tests may delete or update your data.')
   username = raw_input('Please enter your username: ')
   password = getpass.getpass()
   unittest.main()

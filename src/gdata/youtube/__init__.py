@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# Copyright (C) 2006 Google Inc.
+# Copyright (C) 2008 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 __author__ = ('api.stephaniel@gmail.com (Stephanie Liu)'
               ', api.jhartmann@gmail.com (Jochen Hartmann)')
 
@@ -23,10 +22,10 @@ import gdata
 import gdata.media as Media
 import gdata.geo as Geo
 
-# XML namespaces which are often used in YouTube entities.
 YOUTUBE_NAMESPACE = 'http://gdata.youtube.com/schemas/2007'
-YOUTUBE_TEMPLATE = '{http://gdata.youtube.com/schemas/2007}%s'
 YOUTUBE_FORMAT = '{http://gdata.youtube.com/schemas/2007}format'
+YOUTUBE_DEVELOPER_TAG_SCHEME = '%s/%s' % (YOUTUBE_NAMESPACE,
+                                          'developertags.cat')
 
 class Username(atom.AtomBase):
   """The YouTube Username element"""
@@ -125,7 +124,7 @@ class Recorded(atom.AtomBase):
 
 
 class Statistics(atom.AtomBase):
-  """The YouTube Statistics element"""
+  """The YouTube Statistics element."""
   _tag = 'statistics'
   _namespace = YOUTUBE_NAMESPACE
   _attributes = atom.AtomBase._attributes.copy() 
@@ -225,6 +224,7 @@ class Rating(atom.AtomBase):
 
 
 class YouTubePlaylistVideoEntry(gdata.GDataEntry):
+  """Represents a YouTubeVideoEntry on a YouTubePlaylist."""
   _tag = gdata.GDataEntry._tag
   _namespace = gdata.GDataEntry._namespace
   _children = gdata.GDataEntry._children.copy()
@@ -265,6 +265,7 @@ class YouTubePlaylistVideoEntry(gdata.GDataEntry):
 
 
 class YouTubeVideoCommentEntry(gdata.GDataEntry):
+  """Represents a comment on YouTube."""
   _tag = gdata.GDataEntry._tag
   _namespace = gdata.GDataEntry._namespace
   _children = gdata.GDataEntry._children.copy()
@@ -272,6 +273,7 @@ class YouTubeVideoCommentEntry(gdata.GDataEntry):
 
 
 class YouTubeSubscriptionEntry(gdata.GDataEntry):
+  """Represents a subscription entry on YouTube."""
   _tag = gdata.GDataEntry._tag
   _namespace = gdata.GDataEntry._namespace
   _children = gdata.GDataEntry._children.copy()
@@ -294,6 +296,7 @@ class YouTubeSubscriptionEntry(gdata.GDataEntry):
 
 
 class YouTubeVideoResponseEntry(gdata.GDataEntry):
+  """Represents a video response. """
   _tag = gdata.GDataEntry._tag
   _namespace = gdata.GDataEntry._namespace
   _children = gdata.GDataEntry._children.copy()
@@ -321,6 +324,7 @@ class YouTubeVideoResponseEntry(gdata.GDataEntry):
 
 
 class YouTubeContactEntry(gdata.GDataEntry):
+  """Represents a contact entry."""
   _tag = gdata.GDataEntry._tag
   _namespace = gdata.GDataEntry._namespace
   _children = gdata.GDataEntry._children.copy()
@@ -343,6 +347,7 @@ class YouTubeContactEntry(gdata.GDataEntry):
 
 
 class YouTubeVideoEntry(gdata.GDataEntry):
+  """Represents a video on YouTube."""
   _tag = gdata.GDataEntry._tag
   _namespace = gdata.GDataEntry._namespace
   _children = gdata.GDataEntry._children.copy()
@@ -390,8 +395,45 @@ class YouTubeVideoEntry(gdata.GDataEntry):
     else:
       return None
 
+  def AddDeveloperTags(self, developer_tags):
+    """Add a developer tag for this entry.
+
+    Developer tags can only be set during the initial upload.
+
+    Arguments:
+      developer_tags: A list of developer tags as strings.
+
+    Returns:
+      A list of all developer tags for this video entry.
+    """
+    for tag_text in developer_tags:
+      self.media.category.append(gdata.media.Category(
+          text=tag_text, label=tag_text, scheme=YOUTUBE_DEVELOPER_TAG_SCHEME))
+
+    return self.GetDeveloperTags()
+
+  def GetDeveloperTags(self):
+    """Retrieve developer tags for this video entry."""
+    developer_tags = []
+    for category in self.media.category:
+      if category.scheme == YOUTUBE_DEVELOPER_TAG_SCHEME:
+        developer_tags.append(category)
+    if len(developer_tags) > 0:
+      return developer_tags
+
+  def GetYouTubeCategoryAsString(self):
+    """Convenience method to return the YouTube category as string.
+
+    YouTubeVideoEntries can contain multiple Category objects with differing 
+        schemes. This method returns only the category with the correct
+        scheme, ignoring developer tags.
+    """
+    for category in self.media.category:
+      if category.scheme != YOUTUBE_DEVELOPER_TAG_SCHEME:
+        return category.text
 
 class YouTubeUserEntry(gdata.GDataEntry):
+  """Represents a user on YouTube."""
   _tag = gdata.GDataEntry._tag
   _namespace = gdata.GDataEntry._namespace
   _children = gdata.GDataEntry._children.copy()
@@ -458,6 +500,7 @@ class YouTubeUserEntry(gdata.GDataEntry):
 
 
 class YouTubeVideoFeed(gdata.GDataFeed, gdata.LinkFinder):
+  """Represents a video feed on YouTube."""
   _tag = gdata.GDataFeed._tag
   _namespace = gdata.GDataFeed._namespace
   _children = gdata.GDataFeed._children.copy()
@@ -465,6 +508,7 @@ class YouTubeVideoFeed(gdata.GDataFeed, gdata.LinkFinder):
   _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', [YouTubeVideoEntry])
 
 class YouTubePlaylistEntry(gdata.GDataEntry):
+  """Represents a playlist in YouTube."""
   _tag = gdata.GDataEntry._tag
   _namespace = gdata.GDataEntry._namespace
   _children = gdata.GDataEntry._children.copy()
@@ -496,7 +540,7 @@ class YouTubePlaylistEntry(gdata.GDataEntry):
 
 
 class YouTubePlaylistFeed(gdata.GDataFeed, gdata.LinkFinder):
-  """ A feed of a user's playlists """
+  """Represents a feed of a user's playlists """
   _tag = gdata.GDataFeed._tag
   _namespace = gdata.GDataFeed._namespace
   _children = gdata.GDataFeed._children.copy()
@@ -506,7 +550,7 @@ class YouTubePlaylistFeed(gdata.GDataFeed, gdata.LinkFinder):
 
 
 class YouTubePlaylistVideoFeed(gdata.GDataFeed, gdata.LinkFinder):
-  """ A feed of videos in a user's playlist """
+  """Represents a feed of video entry on a playlist."""
   _tag = gdata.GDataFeed._tag
   _namespace = gdata.GDataFeed._namespace
   _children = gdata.GDataFeed._children.copy()
@@ -516,6 +560,7 @@ class YouTubePlaylistVideoFeed(gdata.GDataFeed, gdata.LinkFinder):
 
 
 class YouTubeContactFeed(gdata.GDataFeed, gdata.LinkFinder):
+  """Represents a feed of a users contacts."""
   _tag = gdata.GDataFeed._tag
   _namespace = gdata.GDataFeed._namespace
   _children = gdata.GDataFeed._children.copy()
@@ -525,6 +570,7 @@ class YouTubeContactFeed(gdata.GDataFeed, gdata.LinkFinder):
 
 
 class YouTubeSubscriptionFeed(gdata.GDataFeed, gdata.LinkFinder):
+  """Represents a feed of a users subscriptions."""
   _tag = gdata.GDataFeed._tag
   _namespace = gdata.GDataFeed._namespace
   _children = gdata.GDataFeed._children.copy()
@@ -534,6 +580,7 @@ class YouTubeSubscriptionFeed(gdata.GDataFeed, gdata.LinkFinder):
 
 
 class YouTubeVideoCommentFeed(gdata.GDataFeed, gdata.LinkFinder):
+  """Represents a feed of comments for a video."""
   _tag = gdata.GDataFeed._tag
   _namespace = gdata.GDataFeed._namespace
   _children = gdata.GDataFeed._children.copy()
@@ -543,6 +590,7 @@ class YouTubeVideoCommentFeed(gdata.GDataFeed, gdata.LinkFinder):
 
 
 class YouTubeVideoResponseFeed(gdata.GDataFeed, gdata.LinkFinder):
+  """Represents a feed of video responses."""
   _tag = gdata.GDataFeed._tag
   _namespace = gdata.GDataFeed._namespace
   _children = gdata.GDataFeed._children.copy()
