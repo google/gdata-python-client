@@ -63,33 +63,8 @@ class BloggerEntry(gdata.GDataEntry):
     return None
 
 
-class BlogCommentEntry(BloggerEntry):
-  """Describes a blog comment entry in the feed of a blog's comments.
-
-  """
-  pass
-
-
-def BlogCommentEntryFromString(xml_string):
-  return atom.CreateClassFromXMLString(BlogCommentEntry, xml_string)
-
-
-class BlogCommentFeed(gdata.GDataFeed):
-  """Describes a feed of a blog's comments.
-
-  """
-  pass
-
-
-def BlogCommentFeedFromString(xml_string):
-  return atom.CreateClassFromXMLString(BlogCommentFeed, xml_string)
-
-
 class BlogEntry(BloggerEntry):
-  """Describes a blog entry in the feed of a user's blogs.
-
-  """
-  pass
+  """Describes a blog entry in the feed listing a user's blogs."""
 
 
 def BlogEntryFromString(xml_string):
@@ -97,21 +72,21 @@ def BlogEntryFromString(xml_string):
 
 
 class BlogFeed(gdata.GDataFeed):
-  """Describes a feed of a user's blogs.
+  """Describes a feed of a user's blogs."""
 
-  """
+  _children = gdata.GDataFeed._children.copy()
+  _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', [BlogEntry])
   
-
 
 def BlogFeedFromString(xml_string):
   return atom.CreateClassFromXMLString(BlogFeed, xml_string)
 
 
 class BlogPostEntry(BloggerEntry):
-  """Describes a blog post entry in the feed of a blog's posts.
+  """Describes a blog post entry in the feed of a blog's posts."""
 
-  """
-
+  post_id_pattern = re.compile('(tag:blogger.com,1999:blog-)(\w*)(.post-)(\w*)')
+  
   def AddLabel(self, label):
     """Adds a label to the blog post. 
 
@@ -123,52 +98,59 @@ class BlogPostEntry(BloggerEntry):
     """
     self.category.append(atom.Category(scheme=LABEL_SCHEME, term=label))
 
+  def GetPostId(self):
+    """Extracts the postID string from the entry's Atom id.
+    
+    Returns: A string of digits which identify this post within the blog.
+    """
+    if self.id.text:
+      return self.post_id_pattern.match(self.id.text).group(4)
+    return None
+
 
 def BlogPostEntryFromString(xml_string):
   return atom.CreateClassFromXMLString(BlogPostEntry, xml_string)
 
 
 class BlogPostFeed(gdata.GDataFeed):
-  """Describes a feed of a blog's posts.
-
-  """
-  pass
+  """Describes a feed of a blog's posts."""
+  
+  _children = gdata.GDataFeed._children.copy()
+  _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', [BlogPostEntry])
 
 
 def BlogPostFeedFromString(xml_string):
   return atom.CreateClassFromXMLString(BlogPostFeed, xml_string)
 
 
-class BloggerLink(atom.Link):
-  """Extends the base Link class with Blogger extensions.
+class CommentEntry(BloggerEntry):
+  """Describes a blog post comment entry in the feed of a blog post's 
+  comments."""
 
-  """
-  pass
+  comment_id_pattern = re.compile('.*-(\w*)$')
 
+  def GetCommentId(self):
+    """Extracts the commentID string from the entry's Atom id.
+    
+    Returns: A string of digits which identify this post within the blog.
+    """
+    if self.id.text:
+      return self.comment_id_pattern.match(self.id.text).group(1)
+    return None
+    
 
-def BloggerLinkFromString(xml_string):
-  return atom.CreateClassFromXMLString(BloggerLink, xml_string)
-
-
-class PostCommentEntry(BloggerEntry):
-  """Describes a blog post comment entry in the feed of a blog post's comments.
-
-  """
-  pass
-
-
-def PostCommentEntryFromString(xml_string):
-  return atom.CreateClassFromXMLString(PostCommentEntry, xml_string)
+def CommentEntryFromString(xml_string):
+  return atom.CreateClassFromXMLString(CommentEntry, xml_string)
 
 
-class PostCommentFeed(gdata.GDataFeed):
-  """Describes a feed of a blog post's comments.
+class CommentFeed(gdata.GDataFeed):
+  """Describes a feed of a blog post's comments."""
 
-  """
-  pass
+  _children = gdata.GDataFeed._children.copy()
+  _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', [CommentEntry])
 
 
-def PostCommentFeedFromString(xml_string):
-  return atom.CreateClassFromXMLString(PostCommentFeed, xml_string)
+def CommentFeedFromString(xml_string):
+  return atom.CreateClassFromXMLString(CommentFeed, xml_string)
 
 
