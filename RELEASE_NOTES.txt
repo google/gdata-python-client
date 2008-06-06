@@ -1,3 +1,22 @@
+=== 1.1.0 ===
+June 6, 2008 (revision 401)
+
+- Added modules for YouTube.
+- Added modules for Blogger to simplify using the Blogger API.
+- New member in service object to allow the ClientLogin server to be changed.
+    Required to be able to use ClientLogin with YouTube.
+- Iterating over Google Apps Feeds can now be accomplished using a generator.
+- New unit tests for the Google Apps Provisioning API.
+- Bug fixes to the mock_service module used in unit tests.
+- Fixed a bug in Query string generation when using category queries.
+- Improved ease of use for Calendar query construction, URL components are
+    now escaped automatically by default.
+- Bug fix, added timezone element to CalendarEventFeed.
+- Improved docstrings to describe token access methods (specifically 
+    GetAuthSubToken).
+- Moved ExtendedProperty class into gdata module from gdata.calendar since
+    it is now also used in the Google Contacts Data API. 
+
 === 1.0.13 ===
 May 8, 2008 (revision 357)
 

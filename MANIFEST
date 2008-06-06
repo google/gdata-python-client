@@ -30,6 +30,10 @@ src/gdata/exif/__init__.py
 src/gdata/media/__init__.py
 src/gdata/photos/__init__.py
 src/gdata/photos/service.py
+src/gdata/youtube/__init__.py
+src/gdata/youtube/service.py
+src/gdata/blogger/__init__.py
+src/gdata/blogger/service.py
 samples/base/baseQueryExample.py
 samples/base/dryRunInsert.py
 samples/calendar/calendarExample.py
@@ -67,6 +71,12 @@ tests/gdata_tests/photos/service_test.py
 tests/gdata_tests/contacts_test.py
 tests/gdata_tests/contacts/__init__.py
 tests/gdata_tests/contacts/service_test.py
+tests/gdata_tests/youtube_test.py
+tests/gdata_tests/youtube/__init__.py
+tests/gdata_tests/youtube/service_test.py
+tests/gdata_tests/blogger_test.py
+tests/gdata_tests/blogger/__init__.py
+tests/gdata_tests/blogger/service_test.py
 tests/module_test_runner.py
 tests/run_all_tests.py
 tests/run_data_tests.py
