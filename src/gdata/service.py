@@ -754,7 +754,7 @@ class GDataService(atom.service.AtomService):
     elif media_source or isinstance(data, gdata.MediaSource):
       if isinstance(data, gdata.MediaSource):
         media_source = data
-      extra_headers['Content-Length'] = media_source.content_length
+      extra_headers['Content-Length'] = str(media_source.content_length)
       server_response = self.handler.HttpRequest(self, verb, 
           media_source.file_handle, uri, extra_headers=extra_headers, 
           url_params=url_params, escape_params=escape_params, 

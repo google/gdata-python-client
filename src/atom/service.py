@@ -301,7 +301,7 @@ def HttpRequest(service, operation, data, uri, extra_headers=None,
       not extra_headers.has_key('Content-Length')):
     content_length = __CalculateDataLength(data)
     if content_length:
-      extra_headers['Content-Length'] = content_length
+      extra_headers['Content-Length'] = str(content_length)
 
   if content_type:
     extra_headers['Content-Type'] = content_type 
