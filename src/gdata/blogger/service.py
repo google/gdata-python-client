@@ -31,6 +31,7 @@ class BloggerService(gdata.service.GDataService):
                                         service='blogger', source=source,
                                         server=server,
                                         additional_headers=additional_headers)
+    self.accountType = 'GOOGLE'
 
   def GetBlogFeed(self, uri=None):
     """Retrieve a list of the blogs to which the current user may manage."""
