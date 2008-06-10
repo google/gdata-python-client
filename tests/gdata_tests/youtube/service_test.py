@@ -460,7 +460,15 @@ class YouTubeServiceTest(unittest.TestCase):
         1)
     self.assert_(isinstance(response, gdata.youtube.YouTubePlaylistVideoEntry))
     time.sleep(10)
-    playlist_uri = response.id.text
+
+    playlist_entry_id = response.id.text.split('/')[-1]
+    # remove video from playlist
+    response = self.client.DeletePlaylistVideoEntry(playlist_uri,
+                                                    playlist_entry_id)
+    self.assertEquals(response, True)
+
+    time.sleep(10)
+    # delete the playlist
     response = self.client.DeletePlaylist(playlist_uri)
     self.assertEquals(response, True)
 

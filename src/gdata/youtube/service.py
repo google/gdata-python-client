@@ -1015,6 +1015,22 @@ class YouTubeService(gdata.service.GDataService):
     return self.Put(playlist_video_entry, playlist_put_uri,
                     converter=gdata.youtube.YouTubePlaylistVideoEntryFromString)
 
+  def DeletePlaylistVideoEntry(self, playlist_uri, playlist_video_entry_id):
+    """Delete a playlist video entry from a playlist.
+
+    Needs authentication.
+
+    Args:
+      playlist_uri: A URI representing the playlist from which the playlist
+          video entry is to be removed from.
+      playlist_video_entry_id: A string representing id of the playlist video
+          entry that is to be removed.
+
+    Returns:
+        True if entry was successfully deleted.
+    """
+    delete_uri = '%s/%s' % (playlist_uri, playlist_video_entry_id)
+    return self.Delete(delete_uri)
 
   def AddSubscriptionToChannel(self, username):
     """Add a new channel subscription to the currently authenticated users
