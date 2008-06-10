@@ -313,6 +313,36 @@ class BatchFeedTest(unittest.TestCase):
                       'http://example.com/1')
     self.assertEquals(self.batch_feed.entry[0].text, 'This is a test')
 
-    
+
+class ExtendedPropertyTest(unittest.TestCase):
+  
+  def testXmlBlobRoundTrip(self):
+    ep = gdata.ExtendedProperty(name='blobby')
+    ep.SetXmlBlob('<some_xml attr="test"/>')
+    extension = ep.GetXmlBlobExtensionElement()
+    self.assertEquals(extension.tag, 'some_xml')
+    self.assert_(extension.namespace is None)
+    self.assertEquals(extension.attributes['attr'], 'test')
+
+    ep2 = gdata.ExtendedPropertyFromString(ep.ToString())
+
+    extension = ep2.GetXmlBlobExtensionElement()
+    self.assertEquals(extension.tag, 'some_xml')
+    self.assert_(extension.namespace is None)
+    self.assertEquals(extension.attributes['attr'], 'test')
+
+  def testGettersShouldReturnNoneWithNoBlob(self):
+    ep = gdata.ExtendedProperty(name='no blob')
+    self.assert_(ep.GetXmlBlobExtensionElement() is None)
+    self.assert_(ep.GetXmlBlobString() is None)
+
+  def testGettersReturnCorrectTypes(self):
+    ep = gdata.ExtendedProperty(name='has blob')
+    ep.SetXmlBlob('<some_xml attr="test"/>')
+    self.assert_(isinstance(ep.GetXmlBlobExtensionElement(), 
+        atom.ExtensionElement))
+    self.assert_(isinstance(ep.GetXmlBlobString(), str))
+
+
 if __name__ == '__main__':
   unittest.main()
