@@ -477,7 +477,7 @@ Needs&nbsp;authentication.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;username:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;username&nbsp;of&nbsp;the&nbsp;channel&nbsp;to<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subscribe&nbsp;to.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;we&nbsp;want&nbsp;to&nbsp;subscribe&nbsp;to.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;YouTubeSubscriptionEntry&nbsp;if&nbsp;successfully&nbsp;posted.</tt></dd></dl>
@@ -683,14 +683,15 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;YouTubeContactEntry&nbsp;if&nbsp;successfully&nbsp;retrieved.</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-GetYouTubeContactFeed"><strong>GetYouTubeContactFeed</strong></a>(self, uri<font color="#909090">=None</font>, username<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubeContactFeed.<br>
+<dl><dt><a name="YouTubeService-GetYouTubeContactFeed"><strong>GetYouTubeContactFeed</strong></a>(self, uri<font color="#909090">=None</font>, username<font color="#909090">='default'</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubeContactFeed.<br>
 &nbsp;<br>
 Either&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;username&nbsp;must&nbsp;be&nbsp;provided.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;uri:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;contact&nbsp;feed&nbsp;that<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;to&nbsp;be&nbsp;retrieved.<br>
-&nbsp;&nbsp;username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;username.<br>
+&nbsp;&nbsp;username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;username.&nbsp;Defaults&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;currently&nbsp;authenticated&nbsp;user.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;YouTubeContactFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.<br>
@@ -708,14 +709,15 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;YouTubePlaylistEntry&nbsp;if&nbsp;successfully&nbsp;retrieved.</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-GetYouTubePlaylistFeed"><strong>GetYouTubePlaylistFeed</strong></a>(self, uri<font color="#909090">=None</font>, username<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubePlaylistFeed&nbsp;(a&nbsp;feed&nbsp;of&nbsp;playlists&nbsp;for&nbsp;a&nbsp;user).<br>
+<dl><dt><a name="YouTubeService-GetYouTubePlaylistFeed"><strong>GetYouTubePlaylistFeed</strong></a>(self, uri<font color="#909090">=None</font>, username<font color="#909090">='default'</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubePlaylistFeed&nbsp;(a&nbsp;feed&nbsp;of&nbsp;playlists&nbsp;for&nbsp;a&nbsp;user).<br>
 &nbsp;<br>
 Either&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;username&nbsp;must&nbsp;be&nbsp;provided.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;uri:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;playlist&nbsp;feed&nbsp;that<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;to&nbsp;be&nbsp;retrieved.<br>
-&nbsp;&nbsp;username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;username.<br>
+&nbsp;&nbsp;username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;username.&nbsp;Defaults&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;currently&nbsp;authenticated&nbsp;user.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;YouTubePlaylistFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.<br>
@@ -766,7 +768,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;YouTubeVideoSubscriptionEntry&nbsp;if&nbsp;successfully&nbsp;retrieved.</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-GetYouTubeSubscriptionFeed"><strong>GetYouTubeSubscriptionFeed</strong></a>(self, uri<font color="#909090">=None</font>, username<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubeSubscriptionFeed.<br>
+<dl><dt><a name="YouTubeService-GetYouTubeSubscriptionFeed"><strong>GetYouTubeSubscriptionFeed</strong></a>(self, uri<font color="#909090">=None</font>, username<font color="#909090">='default'</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubeSubscriptionFeed.<br>
 &nbsp;<br>
 Either&nbsp;the&nbsp;uri&nbsp;of&nbsp;the&nbsp;feed&nbsp;or&nbsp;a&nbsp;username&nbsp;must&nbsp;be&nbsp;provided.<br>
 &nbsp;<br>
@@ -774,7 +776,7 @@ Args:<br>
 &nbsp;&nbsp;uri:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;feed&nbsp;that&nbsp;is&nbsp;to<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;retrieved.<br>
 &nbsp;&nbsp;username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;username&nbsp;whose&nbsp;subscription<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed&nbsp;is&nbsp;to&nbsp;be&nbsp;retrieved.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed&nbsp;is&nbsp;to&nbsp;be&nbsp;retrieved.&nbsp;Defaults&nbsp;to&nbsp;the&nbsp;currently&nbsp;authenticted&nbsp;user.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;YouTubeVideoSubscriptionFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.<br>
@@ -831,8 +833,8 @@ Either&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;video_id&nbsp;must&nbsp;be&nbsp;provi
 Args:<br>
 &nbsp;&nbsp;uri:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;URI&nbsp;of&nbsp;the&nbsp;comment&nbsp;feed&nbsp;that<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;to&nbsp;be&nbsp;retrieved.<br>
-&nbsp;&nbsp;username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;ID&nbsp;of&nbsp;the&nbsp;video&nbsp;for&nbsp;which&nbsp;to<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;retrieve&nbsp;the&nbsp;comment&nbsp;feed.<br>
+&nbsp;&nbsp;video_id:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;ID&nbsp;of&nbsp;the&nbsp;video&nbsp;for&nbsp;which<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;retrieve&nbsp;the&nbsp;comment&nbsp;feed.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;YouTubeVideoCommentFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.<br>
@@ -953,6 +955,23 @@ Returns:<br>
 Raises:<br>
 &nbsp;&nbsp;<a href="#YouTubeError">YouTubeError</a>:&nbsp;New&nbsp;contact&nbsp;status&nbsp;must&nbsp;be&nbsp;within&nbsp;the&nbsp;accepted&nbsp;values.&nbsp;Or<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new&nbsp;contact&nbsp;category&nbsp;must&nbsp;be&nbsp;within&nbsp;the&nbsp;accepted&nbsp;categories.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-UpdatePlaylist"><strong>UpdatePlaylist</strong></a>(self, playlist_id, new_playlist_title, new_playlist_description, playlist_private<font color="#909090">=None</font>, username<font color="#909090">='default'</font>)</dt><dd><tt>Update&nbsp;a&nbsp;playlist&nbsp;with&nbsp;new&nbsp;meta-data.<br>
+&nbsp;<br>
+&nbsp;Needs&nbsp;authentication.<br>
+&nbsp;<br>
+&nbsp;Args:<br>
+&nbsp;&nbsp;&nbsp;playlist_id:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;ID&nbsp;of&nbsp;the&nbsp;playlist&nbsp;to&nbsp;be&nbsp;updated.<br>
+&nbsp;&nbsp;&nbsp;new_playlist_title:&nbsp;A&nbsp;string&nbsp;representing&nbsp;a&nbsp;new&nbsp;title&nbsp;for&nbsp;the&nbsp;playlist.<br>
+&nbsp;&nbsp;&nbsp;new_playlist_description:&nbsp;A&nbsp;string&nbsp;representing&nbsp;a&nbsp;new&nbsp;description&nbsp;for&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;playlist.<br>
+&nbsp;&nbsp;&nbsp;playlist_private:&nbsp;An&nbsp;optional&nbsp;boolean,&nbsp;set&nbsp;to&nbsp;True&nbsp;if&nbsp;the&nbsp;playlist&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;be&nbsp;private.<br>
+&nbsp;&nbsp;&nbsp;username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;username&nbsp;whose&nbsp;playlist&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;be&nbsp;updated.&nbsp;Defaults&nbsp;to&nbsp;the&nbsp;currently&nbsp;authenticated&nbsp;user.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;A&nbsp;YouTubePlaylistEntry&nbsp;if&nbsp;the&nbsp;update&nbsp;was&nbsp;successful.</tt></dd></dl>
 
 <dl><dt><a name="YouTubeService-UpdatePlaylistVideoEntryMetaData"><strong>UpdatePlaylistVideoEntryMetaData</strong></a>(self, playlist_uri, playlist_entry_id, new_video_title, new_video_description, new_video_position)</dt><dd><tt>Update&nbsp;the&nbsp;meta&nbsp;data&nbsp;for&nbsp;a&nbsp;YouTubePlaylistVideoEntry.<br>
 &nbsp;<br>
