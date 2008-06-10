@@ -146,7 +146,13 @@ class YouTubeServiceTest(unittest.TestCase):
     )
     self.assert_(isinstance(my_media_group, gdata.media.Group))
 
-    video_entry = gdata.youtube.YouTubeVideoEntry(media=my_media_group)
+    # Set Geo location to 37,-122 lat, long
+    where = gdata.geo.Where()
+    where.set_location((37.0,-122.0))
+    
+    video_entry = gdata.youtube.YouTubeVideoEntry(media=my_media_group,
+                                                  geo=where)
+    
     self.assert_(isinstance(video_entry, gdata.youtube.YouTubeVideoEntry))
 
     new_entry = self.client.InsertVideoEntry(video_entry, video_file_location)
