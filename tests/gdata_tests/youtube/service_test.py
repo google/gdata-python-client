@@ -311,18 +311,6 @@ class YouTubeServiceTest(unittest.TestCase):
     self.assert_(isinstance(feed, gdata.youtube.YouTubeVideoResponseFeed))
     self.assert_(len(feed.entry) > 0)
 
-  def testAddVideoResponse(self):
-    # TODO (jhartmann) - this works but needs to be removed since others can't
-    # post my video as a response
-    video_id_to_respond_to = 'Ncakifd_16k'
-    response_video_id = '9g6buYJTt_g'
-    video_entry = self.client.GetYouTubeVideoEntry(video_id=response_video_id)
-    self.client.AddVideoResponse(video_id_to_respond_to, video_entry)
-    response_feed = self.client.GetYouTubeVideoResponseFeed(
-        video_id='Ncakifd_16k')
-    self.assert_(isinstance(response_feed,
-                            gdata.youtube.YouTubeVideoResponseFeed))
-
   def testRetrieveVideoCommentFeedByUri(self):
     feed = self.client.GetYouTubeVideoCommentFeed(
         'http://gdata.youtube.com/feeds/api/videos/Ncakifd_16k/comments')
@@ -372,31 +360,73 @@ class YouTubeServiceTest(unittest.TestCase):
     self.assert_(isinstance(feed.entry[0],
         gdata.youtube.YouTubePlaylistVideoEntry))
 
-  def testAddAndDeletePlaylist(self):
+  def testAddUpdateAndDeletePlaylist(self):
     test_playlist_title = 'my test playlist ' + str(random.randint(1000,3000))
     test_playlist_description = 'test playlist '
     response = self.client.AddPlaylist(test_playlist_title,
                                        test_playlist_description)
     self.assert_(isinstance(response, gdata.youtube.YouTubePlaylistEntry))
+
+    new_playlist_title = 'my updated playlist ' + str(random.randint(1000,4000))
+    new_playlist_description = 'my updated playlist '
+    playlist_entry_id = response.id.text.split('/')[-1]
+
+    updated_playlist = self.client.UpdatePlaylist(playlist_entry_id,
+                                                  new_playlist_title,
+                                                  new_playlist_description)
+
+    playlist_feed = self.client.GetYouTubePlaylistFeed()
+
+    update_successful = False
+
+    for playlist_entry in playlist_feed.entry:
+      if playlist_entry.title.text == new_playlist_title:
+        update_successful = True
+        break
+
+    self.assertEquals(update_successful, True)
+
     # wait
     time.sleep(10)
     # delete it
-    playlist_uri = response.id.text
+    playlist_uri = updated_playlist.id.text
     response = self.client.DeletePlaylist(playlist_uri)
     self.assertEquals(response, True)
 
-  def testAddAndDeletePrivatePlaylist(self):
-    test_playlist_title = ('my private test playlist ' + 
-        str(random.randint(1000,3000)))
-    test_playlist_description = 'test private playlist '
+  def testAddUpdateAndDeletePrivatePlaylist(self):
+    test_playlist_title = 'my test playlist ' + str(random.randint(1000,3000))
+    test_playlist_description = 'test playlist '
     response = self.client.AddPlaylist(test_playlist_title,
                                        test_playlist_description,
                                        playlist_private=True)
     self.assert_(isinstance(response, gdata.youtube.YouTubePlaylistEntry))
+
+    new_playlist_title = 'my updated playlist ' + str(random.randint(1000,4000))
+    new_playlist_description = 'my updated playlist '
+    playlist_entry_id = response.id.text.split('/')[-1]
+
+    updated_playlist = self.client.UpdatePlaylist(playlist_entry_id,
+                                                  new_playlist_title,
+                                                  new_playlist_description,
+                                                  playlist_private=True)
+
+    playlist_feed = self.client.GetYouTubePlaylistFeed()
+
+    update_successful = False
+    playlist_still_private = False
+    for playlist_entry in playlist_feed.entry:
+      if playlist_entry.title.text == new_playlist_title:
+        update_successful = True
+        if playlist_entry.private is not None:
+          playlist_still_private = True
+
+    self.assertEquals(update_successful, True)
+    self.assertEquals(playlist_still_private, True)
+
     # wait
     time.sleep(10)
     # delete it
-    playlist_uri = response.id.text
+    playlist_uri = updated_playlist.id.text
     response = self.client.DeletePlaylist(playlist_uri)
     self.assertEquals(response, True)
 

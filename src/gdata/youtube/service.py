@@ -178,7 +178,7 @@ class YouTubeService(gdata.service.GDataService):
       uri = '%s/%s' % (YOUTUBE_VIDEO_URI, video_id)
     return self.Get(uri, converter=gdata.youtube.YouTubeVideoEntryFromString)
 
-  def GetYouTubeContactFeed(self, uri=None, username=None):
+  def GetYouTubeContactFeed(self, uri=None, username='default'):
     """Retrieve a YouTubeContactFeed.
 
     Either a uri or a username must be provided.
@@ -186,7 +186,8 @@ class YouTubeService(gdata.service.GDataService):
     Args:
       uri: An optional string representing the URI of the contact feed that
           is to be retrieved.
-      username: An optional string representing the username.
+      username: An optional string representing the username. Defaults to the
+          currently authenticated user.
 
     Returns:
       A YouTubeContactFeed if successfully retrieved.
@@ -195,10 +196,7 @@ class YouTubeService(gdata.service.GDataService):
       YouTubeError: You must provide at least a uri or a username to the
           GetYouTubeContactFeed() method.
     """
-    if uri is None and username is None:
-      raise YouTubeError('You must provide at least a uri or a username '
-                         'to the GetYouTubeContactFeed() method')
-    elif username and not uri:
+    if uri is None:
       uri = '%s/%s/%s' % (YOUTUBE_USER_FEED_URI, username, 'contacts')
     return self.Get(uri, converter=gdata.youtube.YouTubeContactFeedFromString)
 
@@ -222,8 +220,8 @@ class YouTubeService(gdata.service.GDataService):
     Args:
       uri: An optional string representing the URI of the comment feed that
           is to be retrieved.
-      username: An optional string representing the ID of the video for which to
-          retrieve the comment feed.
+      video_id: An optional string representing the ID of the video for which
+          to retrieve the comment feed.
 
     Returns:
       A YouTubeVideoCommentFeed if successfully retrieved.
@@ -301,7 +299,7 @@ class YouTubeService(gdata.service.GDataService):
       uri = '%s/%s' % (YOUTUBE_USER_FEED_URI, username)
     return self.Get(uri, converter=gdata.youtube.YouTubeUserEntryFromString)
 
-  def GetYouTubePlaylistFeed(self, uri=None, username=None):
+  def GetYouTubePlaylistFeed(self, uri=None, username='default'):
     """Retrieve a YouTubePlaylistFeed (a feed of playlists for a user).
 
     Either a uri or a username must be provided.
@@ -309,7 +307,8 @@ class YouTubeService(gdata.service.GDataService):
     Args:
       uri: An optional string representing the URI of the playlist feed that
           is to be retrieved.
-      username: An optional string representing the username.
+      username: An optional string representing the username. Defaults to the
+          currently authenticated user.
 
     Returns:
       A YouTubePlaylistFeed if successfully retrieved.
@@ -318,10 +317,7 @@ class YouTubeService(gdata.service.GDataService):
       YouTubeError: You must provide at least a uri or a username to the
           GetYouTubePlaylistFeed() method.
     """
-    if uri is None and username is None:
-      raise YouTubeError('You must provide at least a uri or a username '
-                         'to the GetYouTubePlaylistFeed() method')
-    elif username and not uri:
+    if uri is None:
       uri = '%s/%s/%s' % (YOUTUBE_USER_FEED_URI, username, 'playlists')
     return self.Get(uri, converter=gdata.youtube.YouTubePlaylistFeedFromString)
 
@@ -402,7 +398,7 @@ class YouTubeService(gdata.service.GDataService):
     return self.Get(
         uri, converter=gdata.youtube.YouTubeVideoResponseEntryFromString)
 
-  def GetYouTubeSubscriptionFeed(self, uri=None, username=None):
+  def GetYouTubeSubscriptionFeed(self, uri=None, username='default'):
     """Retrieve a YouTubeSubscriptionFeed.
 
     Either the uri of the feed or a username must be provided.
@@ -411,7 +407,7 @@ class YouTubeService(gdata.service.GDataService):
       uri: An optional string representing the URI of the feed that is to
           be retrieved.
       username: An optional string representing the username whose subscription
-          feed is to be retrieved.
+          feed is to be retrieved. Defaults to the currently authenticted user.
 
     Returns:
       A YouTubeVideoSubscriptionFeed if successfully retrieved.
@@ -420,10 +416,7 @@ class YouTubeService(gdata.service.GDataService):
       YouTubeError: You must provide at least a uri or a username to the
           GetYouTubeSubscriptionFeed() method.
     """
-    if uri is None and username is None:
-      raise YouTubeError('You must provide at least a uri or a username '
-                         'to the GetYouTubeSubscriptionFeed() method')
-    elif username and not uri:
+    if uri is None:
       uri = '%s/%s/%s' % (YOUTUBE_USER_FEED_URI, username, 'subscriptions')
     return self.Get(
         uri, converter=gdata.youtube.YouTubeSubscriptionFeedFromString)
@@ -914,6 +907,38 @@ class YouTubeService(gdata.service.GDataService):
     return self.Post(playlist_entry, playlist_post_uri,
                      converter=gdata.youtube.YouTubePlaylistEntryFromString)
 
+  def UpdatePlaylist(self, playlist_id, new_playlist_title,
+                     new_playlist_description, playlist_private=None,
+                     username='default'):
+    """Update a playlist with new meta-data.
+
+    Needs authentication.
+
+    Args:
+      playlist_id: A string representing the ID of the playlist to be updated.
+      new_playlist_title: A string representing a new title for the playlist.
+      new_playlist_description: A string representing a new description for the
+          playlist.
+      playlist_private: An optional boolean, set to True if the playlist is
+          to be private.
+      username: An optional string representing the username whose playlist is
+          to be updated. Defaults to the currently authenticated user.
+
+   Returns:
+      A YouTubePlaylistEntry if the update was successful.
+    """
+    updated_playlist = gdata.youtube.YouTubePlaylistEntry(
+        title=atom.Title(text=new_playlist_title),
+        description=gdata.youtube.Description(text=new_playlist_description))
+    if playlist_private:
+      updated_playlist.private = gdata.youtube.Private()
+
+    playlist_put_uri = '%s/%s/playlists/%s' % (YOUTUBE_USER_FEED_URI, username,
+                                               playlist_id)
+
+    return self.Put(updated_playlist, playlist_put_uri,
+                    converter=gdata.youtube.YouTubePlaylistEntryFromString)
+
   def DeletePlaylist(self, playlist_uri):
     """Delete a playlist from the currently authenticated users playlists.
 
@@ -999,7 +1024,7 @@ class YouTubeService(gdata.service.GDataService):
 
     Args:
       username: A string representing the username of the channel to
-          subscribe to.
+          which we want to subscribe to.
 
     Returns:
       A new YouTubeSubscriptionEntry if successfully posted.
