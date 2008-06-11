@@ -470,19 +470,21 @@ Returns:<br>
 Raises:<br>
 &nbsp;&nbsp;<a href="#YouTubeError">YouTubeError</a>:&nbsp;rating_value&nbsp;must&nbsp;be&nbsp;between&nbsp;1&nbsp;and&nbsp;5&nbsp;in&nbsp;<a href="#YouTubeService-AddRating">AddRating</a>().</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-AddSubscriptionToChannel"><strong>AddSubscriptionToChannel</strong></a>(self, username)</dt><dd><tt>Add&nbsp;a&nbsp;new&nbsp;channel&nbsp;subscription&nbsp;to&nbsp;the&nbsp;currently&nbsp;authenticated&nbsp;users<br>
+<dl><dt><a name="YouTubeService-AddSubscriptionToChannel"><strong>AddSubscriptionToChannel</strong></a>(self, username_to_subscribe_to, my_username<font color="#909090">='default'</font>)</dt><dd><tt>Add&nbsp;a&nbsp;new&nbsp;channel&nbsp;subscription&nbsp;to&nbsp;the&nbsp;currently&nbsp;authenticated&nbsp;users<br>
 account.<br>
 &nbsp;<br>
 Needs&nbsp;authentication.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;username:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;username&nbsp;of&nbsp;the&nbsp;channel&nbsp;to<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;we&nbsp;want&nbsp;to&nbsp;subscribe&nbsp;to.<br>
+&nbsp;&nbsp;username_to_subscribe_to:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;username&nbsp;of&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;channel&nbsp;to&nbsp;which&nbsp;we&nbsp;want&nbsp;to&nbsp;subscribe&nbsp;to.<br>
+&nbsp;&nbsp;my_username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;user&nbsp;which<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;we&nbsp;want&nbsp;to&nbsp;subscribe.&nbsp;Defaults&nbsp;to&nbsp;currently&nbsp;authenticated&nbsp;user.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;YouTubeSubscriptionEntry&nbsp;if&nbsp;successfully&nbsp;posted.</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-AddSubscriptionToFavorites"><strong>AddSubscriptionToFavorites</strong></a>(self, username)</dt><dd><tt>Add&nbsp;a&nbsp;new&nbsp;subscription&nbsp;to&nbsp;a&nbsp;users&nbsp;favorites&nbsp;to&nbsp;the&nbsp;currently<br>
+<dl><dt><a name="YouTubeService-AddSubscriptionToFavorites"><strong>AddSubscriptionToFavorites</strong></a>(self, username, my_username<font color="#909090">='default'</font>)</dt><dd><tt>Add&nbsp;a&nbsp;new&nbsp;subscription&nbsp;to&nbsp;a&nbsp;users&nbsp;favorites&nbsp;to&nbsp;the&nbsp;currently<br>
 authenticated&nbsp;user's&nbsp;account.<br>
 &nbsp;<br>
 Needs&nbsp;authentication<br>
@@ -490,6 +492,21 @@ Needs&nbsp;authentication<br>
 Args:<br>
 &nbsp;&nbsp;username:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;username&nbsp;of&nbsp;the&nbsp;user's&nbsp;favorite&nbsp;feed<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;subscribe&nbsp;to.<br>
+&nbsp;&nbsp;my_username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;username&nbsp;of&nbsp;the&nbsp;user<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;is&nbsp;to&nbsp;be&nbsp;subscribed.&nbsp;Defaults&nbsp;to&nbsp;currently&nbsp;authenticated&nbsp;user.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;new&nbsp;YouTubeSubscriptionEntry&nbsp;if&nbsp;successful.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-AddSubscriptionToQuery"><strong>AddSubscriptionToQuery</strong></a>(self, query, my_username<font color="#909090">='default'</font>)</dt><dd><tt>Add&nbsp;a&nbsp;new&nbsp;subscription&nbsp;to&nbsp;a&nbsp;specific&nbsp;keyword&nbsp;query&nbsp;to&nbsp;the&nbsp;currently<br>
+authenticated&nbsp;user's&nbsp;account.<br>
+&nbsp;<br>
+Needs&nbsp;authentication<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;query:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;keyword&nbsp;query&nbsp;to&nbsp;subscribe&nbsp;to.<br>
+&nbsp;&nbsp;my_username:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;username&nbsp;of&nbsp;the&nbsp;user<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;is&nbsp;to&nbsp;be&nbsp;subscribed.&nbsp;Defaults&nbsp;to&nbsp;currently&nbsp;authenticated&nbsp;user.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;new&nbsp;YouTubeSubscriptionEntry&nbsp;if&nbsp;successful.</tt></dd></dl>
@@ -792,11 +809,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed&nbsp;is&nbsp;to&nbsp;be&nbsp;retrieved.&nbsp;Defaults&nbsp;to&nbsp;the&nbsp;currently&nbsp;authenticted&nbsp;user.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;YouTubeVideoSubscriptionFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.<br>
-&nbsp;<br>
-Raises:<br>
-&nbsp;&nbsp;<a href="#YouTubeError">YouTubeError</a>:&nbsp;You&nbsp;must&nbsp;provide&nbsp;at&nbsp;least&nbsp;a&nbsp;uri&nbsp;or&nbsp;a&nbsp;username&nbsp;to&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#YouTubeService-GetYouTubeSubscriptionFeed">GetYouTubeSubscriptionFeed</a>()&nbsp;method.</tt></dd></dl>
+&nbsp;&nbsp;A&nbsp;YouTubeVideoSubscriptionFeed&nbsp;if&nbsp;successfully&nbsp;retrieved.</tt></dd></dl>
 
 <dl><dt><a name="YouTubeService-GetYouTubeUserEntry"><strong>GetYouTubeUserEntry</strong></a>(self, uri<font color="#909090">=None</font>, username<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;YouTubeUserEntry.<br>
 &nbsp;<br>
@@ -1887,7 +1900,7 @@ v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><strong>UNKOWN_ERROR</strong> = 1000<br>
 <strong>YOUTUBE_BAD_REQUEST</strong> = 400<br>
-<strong>YOUTUBE_COMPLAINT_CATEGORY_SCHEME</strong> = 'http://gdata.youtube.com/schemas/2007/complaint-reasons.cat'<br>
+<strong>YOUTUBE_COMPLAINT_CATEGORY_SCHEME</strong> = 'http://gdata.youtube.com/schemas/complaint-reasons.cat'<br>
 <strong>YOUTUBE_COMPLAINT_CATEGORY_TERMS</strong> = ('PORN', 'VIOLENCE', 'HATE', 'DANGEROUS', 'RIGHTS', 'SPAM')<br>
 <strong>YOUTUBE_CONFLICT</strong> = 409<br>
 <strong>YOUTUBE_CONTACT_CATEGORY</strong> = ('Friends', 'Family')<br>
@@ -1902,7 +1915,8 @@ v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 <strong>YOUTUBE_QUERY_VALID_ORDERBY_PARAMETERS</strong> = ('updated', 'viewCount', 'rating', 'relevance')<br>
 <strong>YOUTUBE_QUERY_VALID_RACY_PARAMETERS</strong> = ('include', 'exclude')<br>
 <strong>YOUTUBE_QUERY_VALID_TIME_PARAMETERS</strong> = ('today', 'this_week', 'this_month', 'all_time')<br>
-<strong>YOUTUBE_RATING_LINK_REL</strong> = 'http://gdata.youtube.com/schemas/2007#video.ratings'<br>
+<strong>YOUTUBE_RATING_LINK_REL</strong> = 'http://gdata.youtube.com/schemas#video.ratings'<br>
+<strong>YOUTUBE_SCHEMA</strong> = 'http://gdata.youtube.com/schemas'<br>
 <strong>YOUTUBE_SERVER</strong> = 'gdata.youtube.com'<br>
 <strong>YOUTUBE_SERVICE</strong> = 'youtube'<br>
 <strong>YOUTUBE_STANDARDFEEDS</strong> = ('most_recent', 'recently_featured', 'top_rated', 'most_viewed', 'watch_on_mobile')<br>
@@ -1916,6 +1930,7 @@ v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 <strong>YOUTUBE_STANDARD_TOP_FAVORITES_URI</strong> = 'http://gdata.youtube.com/feeds/api/standardfeeds/top_favorites'<br>
 <strong>YOUTUBE_STANDARD_TOP_RATED_URI</strong> = 'http://gdata.youtube.com/feeds/api/standardfeeds/top_rated'<br>
 <strong>YOUTUBE_STANDARD_WATCH_ON_MOBILE_URI</strong> = 'http://gdata.youtube.com/feeds/api/standardfeeds/watch_on_mobile'<br>
+<strong>YOUTUBE_SUBSCRIPTION_CATEGORY_SCHEME</strong> = 'http://gdata.youtube.com/schemas/subscriptiontypes.cat'<br>
 <strong>YOUTUBE_SUPPORTED_UPLOAD_TYPES</strong> = ('mov', 'avi', 'wmv', 'mpg', 'quicktime')<br>
 <strong>YOUTUBE_UPLOAD_TOKEN_URI</strong> = 'http://gdata.youtube.com/action/GetUploadToken'<br>
 <strong>YOUTUBE_UPLOAD_URI</strong> = 'http://uploads.gdata.youtube.com/feeds/api/users'<br>

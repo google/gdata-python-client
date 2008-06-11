@@ -69,11 +69,15 @@ YOUTUBE_STANDARD_MOST_LINKED_URI = '%s/%s' % (YOUTUBE_STANDARD_FEEDS,
     'most_linked')
 YOUTUBE_STANDARD_MOST_RESPONDED_URI = '%s/%s' % (YOUTUBE_STANDARD_FEEDS,
     'most_responded')
+YOUTUBE_SCHEMA = 'http://gdata.youtube.com/schemas'
 
-YOUTUBE_RATING_LINK_REL = 'http://gdata.youtube.com/schemas/2007#video.ratings'
+YOUTUBE_RATING_LINK_REL = '%s#video.ratings' % YOUTUBE_SCHEMA
 
-YOUTUBE_COMPLAINT_CATEGORY_SCHEME = ('http://gdata.youtube.com/schemas/2007/'
-    'complaint-reasons.cat')
+YOUTUBE_COMPLAINT_CATEGORY_SCHEME = '%s/%s' % (YOUTUBE_SCHEMA,
+                                               'complaint-reasons.cat')
+YOUTUBE_SUBSCRIPTION_CATEGORY_SCHEME = '%s/%s' % (YOUTUBE_SCHEMA,
+                                                  'subscriptiontypes.cat')
+
 YOUTUBE_COMPLAINT_CATEGORY_TERMS = ('PORN', 'VIOLENCE', 'HATE', 'DANGEROUS',
                                     'RIGHTS', 'SPAM')
 YOUTUBE_CONTACT_STATUS = ('accepted', 'rejected')
@@ -411,10 +415,6 @@ class YouTubeService(gdata.service.GDataService):
 
     Returns:
       A YouTubeVideoSubscriptionFeed if successfully retrieved.
-
-    Raises:
-      YouTubeError: You must provide at least a uri or a username to the
-          GetYouTubeSubscriptionFeed() method.
     """
     if uri is None:
       uri = '%s/%s/%s' % (YOUTUBE_USER_FEED_URI, username, 'subscriptions')
@@ -1032,34 +1032,39 @@ class YouTubeService(gdata.service.GDataService):
     delete_uri = '%s/%s' % (playlist_uri, playlist_video_entry_id)
     return self.Delete(delete_uri)
 
-  def AddSubscriptionToChannel(self, username):
+  def AddSubscriptionToChannel(self, username_to_subscribe_to,
+                               my_username = 'default'):
     """Add a new channel subscription to the currently authenticated users
     account.
 
     Needs authentication.
 
     Args:
-      username: A string representing the username of the channel to
-          which we want to subscribe to.
+      username_to_subscribe_to: A string representing the username of the 
+          channel to which we want to subscribe to.
+      my_username: An optional string representing the name of the user which
+          we want to subscribe. Defaults to currently authenticated user.
 
     Returns:
       A new YouTubeSubscriptionEntry if successfully posted.
     """
     subscription_category = atom.Category(
-        scheme='http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat',
+        scheme=YOUTUBE_SUBSCRIPTION_CATEGORY_SCHEME,
         term='channel')
-    subscription_username = gdata.youtube.Username(text=username)
+    subscription_username = gdata.youtube.Username(
+        text=username_to_subscribe_to)
 
     subscription_entry = gdata.youtube.YouTubeSubscriptionEntry(
         category=subscription_category,
         username=subscription_username)
 
-    post_uri = '%s/%s/%s' % (YOUTUBE_USER_FEED_URI, username, 'subscriptions')
+    post_uri = '%s/%s/%s' % (YOUTUBE_USER_FEED_URI, my_username, 
+                             'subscriptions')
 
     return self.Post(subscription_entry, post_uri,
                      converter=gdata.youtube.YouTubeSubscriptionEntryFromString)
 
-  def AddSubscriptionToFavorites(self, username):
+  def AddSubscriptionToFavorites(self, username, my_username = 'default'):
     """Add a new subscription to a users favorites to the currently
     authenticated user's account.
 
@@ -1068,12 +1073,14 @@ class YouTubeService(gdata.service.GDataService):
     Args:
       username: A string representing the username of the user's favorite feed
           to subscribe to.
+      my_username: An optional string representing the username of the user
+          that is to be subscribed. Defaults to currently authenticated user.
 
     Returns:
         A new YouTubeSubscriptionEntry if successful.
     """
     subscription_category = atom.Category(
-        scheme='http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat',
+        scheme=YOUTUBE_SUBSCRIPTION_CATEGORY_SCHEME,
         term='favorites')
     subscription_username = gdata.youtube.Username(text=username)
 
@@ -1081,10 +1088,42 @@ class YouTubeService(gdata.service.GDataService):
         category=subscription_category,
         username=subscription_username)
 
-    post_uri = '%s/%s/%s' % (YOUTUBE_USER_FEED_URI, username, 'subscriptions')
+    post_uri = '%s/%s/%s' % (YOUTUBE_USER_FEED_URI, my_username,
+                             'subscriptions')
 
     return self.Post(subscription_entry, post_uri,
                      converter=gdata.youtube.YouTubeSubscriptionEntryFromString)
+
+  def AddSubscriptionToQuery(self, query, my_username = 'default'):
+    """Add a new subscription to a specific keyword query to the currently
+    authenticated user's account.
+
+    Needs authentication
+
+    Args:
+      query: A string representing the keyword query to subscribe to.
+      my_username: An optional string representing the username of the user
+          that is to be subscribed. Defaults to currently authenticated user.
+
+    Returns:
+        A new YouTubeSubscriptionEntry if successful.
+    """
+    subscription_category = atom.Category(
+        scheme=YOUTUBE_SUBSCRIPTION_CATEGORY_SCHEME,
+        term='query')
+    subscription_query_string = gdata.youtube.QueryString(text=query)
+
+    subscription_entry = gdata.youtube.YouTubeSubscriptionEntry(
+        category=subscription_category,
+        query_string=subscription_query_string)
+
+    post_uri = '%s/%s/%s' % (YOUTUBE_USER_FEED_URI, my_username,
+                             'subscriptions')
+
+    return self.Post(subscription_entry, post_uri,
+                     converter=gdata.youtube.YouTubeSubscriptionEntryFromString)
+
+
 
   def DeleteSubscription(self, subscription_uri):
     """Delete a subscription from the currently authenticated user's account.

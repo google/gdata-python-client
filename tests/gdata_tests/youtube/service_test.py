@@ -476,16 +476,53 @@ class YouTubeServiceTest(unittest.TestCase):
     feed = self.client.GetYouTubeSubscriptionFeed(
         'http://gdata.youtube.com/feeds/users/gdpython/subscriptions')
     self.assert_(isinstance(feed, gdata.youtube.YouTubeSubscriptionFeed))
-    self.assertEquals(len(feed.entry), 1)
+    self.assert_(len(feed.entry) == 3)
+
+    subscription_to_channel_found = False
+    subscription_to_favorites_found = False
+    subscription_to_query_found = False
+    all_types_found = False
+
     for entry in feed.entry:
       self.assert_(isinstance(entry, gdata.youtube.YouTubeSubscriptionEntry))
+      subscription_type = entry.GetSubscriptionType()
+      if subscription_type == 'channel':
+        subscription_to_channel_found = True
+      elif subscription_type == 'favorites':
+        subscription_to_favorites_found = True
+      elif subscription_type == 'query':
+        subscription_to_query_found = True
+
+    if (subscription_to_channel_found and subscription_to_favorites_found and
+        subscription_to_query_found):
+      all_types_found = True
+
+    self.assertEquals(all_types_found, True)
 
   def testRetrieveSubscriptionFeedByUsername(self):
     feed = self.client.GetYouTubeSubscriptionFeed(username='gdpython')
     self.assert_(isinstance(feed, gdata.youtube.YouTubeSubscriptionFeed))
-    self.assertEquals(len(feed.entry), 1)
+    self.assert_(len(feed.entry) == 3)
+
+    subscription_to_channel_found = False
+    subscription_to_favorites_found = False
+    subscription_to_query_found = False
+    all_types_found = False
+
     for entry in feed.entry:
       self.assert_(isinstance(entry, gdata.youtube.YouTubeSubscriptionEntry))
+      subscription_type = entry.GetSubscriptionType()
+      if subscription_type == 'channel':
+        subscription_to_channel_found = True
+      elif subscription_type == 'favorites':
+        subscription_to_favorites_found = True
+      elif subscription_type == 'query':
+        subscription_to_query_found = True
+
+    if (subscription_to_channel_found and subscription_to_favorites_found and
+        subscription_to_query_found):
+      all_types_found = True
+    self.assertEquals(all_types_found, True)
 
   def testRetrieveUserProfileByUri(self):
     user = self.client.GetYouTubeUserEntry(

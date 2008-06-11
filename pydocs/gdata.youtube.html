@@ -58,6 +58,7 @@
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.youtube.html#Occupation">Occupation</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.youtube.html#Position">Position</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.youtube.html#Private">Private</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.youtube.html#QueryString">QueryString</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.youtube.html#Racy">Racy</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.youtube.html#Rating">Rating</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.youtube.html#Recorded">Recorded</a>
@@ -886,6 +887,53 @@ Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
 <hr>
 Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
 <dl><dt><a name="Private-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="QueryString">class <strong>QueryString</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;YouTube&nbsp;<a href="#QueryString">QueryString</a>&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.youtube.html#QueryString">QueryString</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="QueryString-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="QueryString-__init__"><strong>__init__</strong></a>(self, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="QueryString-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="QueryString-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
 &nbsp;<br>
 Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
 and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
@@ -2014,7 +2062,12 @@ Methods inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="YouTubeSubscriptionEntry-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, content<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, published<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, username<font color="#909090">=None</font>, feed_link<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="YouTubeSubscriptionEntry-GetSubscriptionType"><strong>GetSubscriptionType</strong></a>(self)</dt><dd><tt>Retrieve&nbsp;the&nbsp;type&nbsp;of&nbsp;this&nbsp;subscription.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;string&nbsp;that&nbsp;is&nbsp;either&nbsp;'channel,&nbsp;'query'&nbsp;or&nbsp;'favorites'</tt></dd></dl>
+
+<dl><dt><a name="YouTubeSubscriptionEntry-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, content<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, published<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, username<font color="#909090">=None</font>, query_string<font color="#909090">=None</font>, feed_link<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt></dl>
 
 <hr>
 Methods inherited from <a href="gdata.html#GDataEntry">gdata.GDataEntry</a>:<br>
@@ -3116,6 +3169,7 @@ Methods inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
 <td width="100%"><strong>YOUTUBE_DEVELOPER_TAG_SCHEME</strong> = 'http://gdata.youtube.com/schemas/2007/developertags.cat'<br>
 <strong>YOUTUBE_FORMAT</strong> = '{http://gdata.youtube.com/schemas/2007}format'<br>
 <strong>YOUTUBE_NAMESPACE</strong> = 'http://gdata.youtube.com/schemas/2007'<br>
+<strong>YOUTUBE_SUBSCRIPTION_TYPE_SCHEME</strong> = 'http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'<br>
 <strong>__author__</strong> = 'api.stephaniel@gmail.com (Stephanie Liu), api.jhartmann@gmail.com (Jochen Hartmann)'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#7799ee">

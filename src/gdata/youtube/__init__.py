@@ -26,10 +26,17 @@ YOUTUBE_NAMESPACE = 'http://gdata.youtube.com/schemas/2007'
 YOUTUBE_FORMAT = '{http://gdata.youtube.com/schemas/2007}format'
 YOUTUBE_DEVELOPER_TAG_SCHEME = '%s/%s' % (YOUTUBE_NAMESPACE,
                                           'developertags.cat')
+YOUTUBE_SUBSCRIPTION_TYPE_SCHEME = '%s/%s' % (YOUTUBE_NAMESPACE,
+                                              'subscriptiontypes.cat')
 
 class Username(atom.AtomBase):
   """The YouTube Username element"""
   _tag = 'username'
+  _namespace = YOUTUBE_NAMESPACE
+
+class QueryString(atom.AtomBase):
+  """The YouTube QueryString element"""
+  _tag = 'queryString'
   _namespace = YOUTUBE_NAMESPACE
 
 
@@ -279,12 +286,14 @@ class YouTubeSubscriptionEntry(gdata.GDataEntry):
   _children = gdata.GDataEntry._children.copy()
   _attributes = gdata.GDataEntry._attributes.copy()
   _children['{%s}username' % YOUTUBE_NAMESPACE] = ('username', Username)
+  _children['{%s}queryString' % YOUTUBE_NAMESPACE] = (
+      'query_string', QueryString)
   _children['{%s}feedLink' % gdata.GDATA_NAMESPACE] = ('feed_link',
                                                         [gdata.FeedLink])
 
   def __init__(self, author=None, category=None, content=None,
                atom_id=None, link=None, published=None, title=None,
-               updated=None, username=None, feed_link=None,
+               updated=None, username=None, query_string=None, feed_link=None,
                extension_elements=None, extension_attributes=None):
 
     gdata.GDataEntry.__init__(self, author=author, category=category,
@@ -292,7 +301,19 @@ class YouTubeSubscriptionEntry(gdata.GDataEntry):
                               published=published, title=title, updated=updated)
 
     self.username = username
+    self.query_string = query_string
     self.feed_link = feed_link
+
+
+  def GetSubscriptionType(self):
+    """Retrieve the type of this subscription.
+
+    Returns:
+      A string that is either 'channel, 'query' or 'favorites'
+    """
+    for category in self.category:
+      if category.scheme == YOUTUBE_SUBSCRIPTION_TYPE_SCHEME:
+        return category.term
 
 
 class YouTubeVideoResponseEntry(gdata.GDataEntry):
