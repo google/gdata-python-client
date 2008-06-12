@@ -120,6 +120,11 @@ class ContactsFeedTest(unittest.TestCase):
     self.assertEquals(self.feed.total_results.text, '1')
     self.assertEquals(len(self.feed.entry), 1)
     self.assert_(isinstance(self.feed.entry[0], gdata.contacts.ContactEntry))
+    self.assertEquals(self.feed.entry[0].GetPhotoLink().href, 
+        'http://google.com/m8/feeds/photos/media/liz%40gmail.com/c9012de')
+    self.assertEquals(self.feed.entry[0].GetPhotoEditLink().href, 
+        'http://www.google.com/m8/feeds/photos/media/liz%40gmail.com/'
+        'c9012de/photo4524')
    
   def testToAndFromString(self):
     copied_feed = gdata.contacts.ContactsFeedFromString(str(self.feed))
