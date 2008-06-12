@@ -29,36 +29,57 @@ class ContactEntryTest(unittest.TestCase):
     self.entry = gdata.contacts.ContactEntryFromString(test_data.NEW_CONTACT)
 
   def testParsingTestEntry(self):
-    self.assertEquals(self.entry.title.text, 'Elizabeth Bennet')
+    self.assertEquals(self.entry.title.text, 'Fitzgerald')
     self.assertEquals(len(self.entry.email), 2)
     for email in self.entry.email:
       if email.rel == 'http://schemas.google.com/g/2005#work':
         self.assertEquals(email.address, 'liz@gmail.com')
       elif email.rel == 'http://schemas.google.com/g/2005#home':
         self.assertEquals(email.address, 'liz@example.org')
-    self.assertEquals(len(self.entry.phone_number), 2)
+    self.assertEquals(len(self.entry.phone_number), 3)
     self.assertEquals(len(self.entry.postal_address), 1)
     self.assertEquals(self.entry.postal_address[0].primary, 'true')
     self.assertEquals(self.entry.postal_address[0].text, 
         '1600 Amphitheatre Pkwy Mountain View')
     self.assertEquals(len(self.entry.im), 1)
-
+    self.assertEquals(len(self.entry.group_membership_info), 1)
+    self.assertEquals(self.entry.group_membership_info[0].href, 
+        'http://google.com/m8/feeds/groups/liz%40gmail.com/base/270f')
+    self.assertEquals(self.entry.group_membership_info[0].deleted, 'false')
+    self.assertEquals(len(self.entry.extended_property), 2)
+    self.assertEquals(self.entry.extended_property[0].name, 'pet')
+    self.assertEquals(self.entry.extended_property[0].value, 'hamster')
+    self.assertEquals(self.entry.extended_property[1].name, 'cousine')
+    self.assertEquals(
+        self.entry.extended_property[1].GetXmlBlobExtensionElement().tag, 
+        'italian')
 
   def testToAndFromString(self):
     copied_entry = gdata.contacts.ContactEntryFromString(str(self.entry))   
-    self.assertEquals(copied_entry.title.text, 'Elizabeth Bennet')
+    self.assertEquals(copied_entry.title.text, 'Fitzgerald')
     self.assertEquals(len(copied_entry.email), 2)
     for email in copied_entry.email:
       if email.rel == 'http://schemas.google.com/g/2005#work':
         self.assertEquals(email.address, 'liz@gmail.com')
       elif email.rel == 'http://schemas.google.com/g/2005#home':
         self.assertEquals(email.address, 'liz@example.org')
-    self.assertEquals(len(copied_entry.phone_number), 2)
+    self.assertEquals(len(copied_entry.phone_number), 3)
     self.assertEquals(len(copied_entry.postal_address), 1)
     self.assertEquals(copied_entry.postal_address[0].primary, 'true')
     self.assertEquals(copied_entry.postal_address[0].text, 
         '1600 Amphitheatre Pkwy Mountain View')
     self.assertEquals(len(copied_entry.im), 1)
+    self.assertEquals(len(copied_entry.group_membership_info), 1)
+    self.assertEquals(copied_entry.group_membership_info[0].href, 
+        'http://google.com/m8/feeds/groups/liz%40gmail.com/base/270f')
+    self.assertEquals(copied_entry.group_membership_info[0].deleted, 'false')
+    self.assertEquals(len(copied_entry.extended_property), 2)
+    self.assertEquals(copied_entry.extended_property[0].name, 'pet')
+    self.assertEquals(copied_entry.extended_property[0].value, 'hamster')
+    self.assertEquals(copied_entry.extended_property[1].name, 'cousine')
+    self.assertEquals(
+        copied_entry.extended_property[1].GetXmlBlobExtensionElement().tag, 
+        'italian')
 
   def testCreateContactFromScratch(self):
     # Create a new entry
@@ -87,7 +108,7 @@ class ContactEntryTest(unittest.TestCase):
     self.assertEquals(entry_copy.organization.org_name.text, 'TestCo.')
 
 
-class ContactFeedTest(unittest.TestCase):
+class ContactsFeedTest(unittest.TestCase):
 
   def setUp(self):
     self.feed = gdata.contacts.ContactsFeedFromString(test_data.CONTACTS_FEED)
@@ -109,6 +130,41 @@ class ContactFeedTest(unittest.TestCase):
     self.assertEquals(len(copied_feed.entry), 1)
     self.assert_(isinstance(copied_feed.entry[0], gdata.contacts.ContactEntry))
 
+
+class GroupsFeedTest(unittest.TestCase):
+
+  def setUp(self):
+    self.feed = gdata.contacts.GroupsFeedFromString(
+        test_data.CONTACT_GROUPS_FEED)
+
+  def testParsingGroupsFeed(self):
+    self.assertEquals(self.feed.id.text, 'jo@gmail.com')
+    self.assertEquals(self.feed.title.text, 'Jo\'s Contact Groups')
+    self.assertEquals(self.feed.total_results.text, '3')
+    self.assertEquals(len(self.feed.entry), 1)
+    self.assert_(isinstance(self.feed.entry[0], gdata.contacts.GroupEntry))
+
+
+class GroupEntryTest(unittest.TestCase):
+  
+  def setUp(self):
+    self.entry = gdata.contacts.GroupEntryFromString(
+        test_data.CONTACT_GROUP_ENTRY)
+      
+  def testParsingTestEntry(self):
+    self.assertEquals(self.entry.title.text, 'Salsa group')
+    self.assertEquals(len(self.entry.extended_property), 1)
+    self.assertEquals(self.entry.extended_property[0].name, 
+        'more info about the group')
+    self.assertEquals(
+        self.entry.extended_property[0].GetXmlBlobExtensionElement().namespace,
+        atom.ATOM_NAMESPACE)
+    self.assertEquals(
+        self.entry.extended_property[0].GetXmlBlobExtensionElement().tag, 
+        'info')
+    self.assertEquals(
+        self.entry.extended_property[0].GetXmlBlobExtensionElement().text, 
+        'Very nice people.')
 
 if __name__ == '__main__':
   unittest.main()

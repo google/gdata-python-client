@@ -39,6 +39,9 @@ IM_ICQ = 'http://schemas.google.com/g/2005#ICQ' # ICQ protocol
 IM_JABBER = 'http://schemas.google.com/g/2005#JABBER' # Jabber protocol
 
 
+CONTACTS_NAMESPACE = 'http://schemas.google.com/contact/2008'
+
+
 class OrgName(atom.AtomBase):
   _tag = 'orgName'
   _namespace = gdata.GDATA_NAMESPACE
@@ -51,6 +54,7 @@ class OrgName(atom.AtomBase):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
+
 class OrgTitle(atom.AtomBase):
   _tag = 'orgTitle'
   _namespace = gdata.GDATA_NAMESPACE
@@ -62,6 +66,7 @@ class OrgTitle(atom.AtomBase):
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
+
 
 class Organization(atom.AtomBase):
   _tag = 'organization'
@@ -88,6 +93,7 @@ class Organization(atom.AtomBase):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
+
 class PostalAddress(atom.AtomBase):
   _tag = 'postalAddress'
   _namespace = gdata.GDATA_NAMESPACE
@@ -104,6 +110,7 @@ class PostalAddress(atom.AtomBase):
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
+
 
 class IM(atom.AtomBase):
   _tag = 'im'
@@ -129,6 +136,7 @@ class IM(atom.AtomBase):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
+
 class Email(atom.AtomBase):
   _tag = 'email'
   _namespace = gdata.GDATA_NAMESPACE
@@ -150,6 +158,7 @@ class Email(atom.AtomBase):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
+
 class PhoneNumber(atom.AtomBase):
   _tag = 'phoneNumber'
   _namespace = gdata.GDATA_NAMESPACE
@@ -167,6 +176,7 @@ class PhoneNumber(atom.AtomBase):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
+
 class Deleted(atom.AtomBase):
   _tag = 'deleted'
   _namespace = gdata.GDATA_NAMESPACE
@@ -177,41 +187,56 @@ class Deleted(atom.AtomBase):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
+
+class GroupMembershipInfo(atom.AtomBase):
+  _tag = 'groupMembershipInfo'
+  _namespace = CONTACTS_NAMESPACE
+  _attributes = atom.AtomBase._attributes.copy()
+
+  _attributes['deleted'] = 'deleted'
+  _attributes['href'] = 'href'
+
+  def __init__(self, deleted=None, href=None, text=None,
+      extension_elements=None, extension_attributes=None):
+    self.deleted = deleted
+    self.href = href
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+
 class ContactEntry(gdata.BatchEntry):
   """A Google Contact flavor of an Atom Entry """
 
-  _tag = gdata.BatchEntry._tag
-  _namespace = gdata.BatchEntry._namespace
   _children = gdata.BatchEntry._children.copy()
-  _attributes = gdata.BatchEntry._attributes.copy()
 
-  _children['{%s}postalAddress' % gdata.GDATA_NAMESPACE] = ('postal_address', [PostalAddress])
-  _children['{%s}phoneNumber' % gdata.GDATA_NAMESPACE] = ('phone_number', [PhoneNumber])
-  _children['{%s}organization' % gdata.GDATA_NAMESPACE] = ('organization', Organization)
+  _children['{%s}postalAddress' % gdata.GDATA_NAMESPACE] = ('postal_address',
+      [PostalAddress])
+  _children['{%s}phoneNumber' % gdata.GDATA_NAMESPACE] = ('phone_number',
+      [PhoneNumber])
+  _children['{%s}organization' % gdata.GDATA_NAMESPACE] = ('organization',
+      Organization)
   _children['{%s}email' % gdata.GDATA_NAMESPACE] = ('email', [Email])
   _children['{%s}im' % gdata.GDATA_NAMESPACE] = ('im', [IM])
   _children['{%s}deleted' % gdata.GDATA_NAMESPACE] = ('deleted', Deleted)
+  _children['{%s}groupMembershipInfo' % CONTACTS_NAMESPACE] = (
+      'group_membership_info', [GroupMembershipInfo])
+  _children['{%s}extendedProperty' % gdata.GDATA_NAMESPACE] = (
+      'extended_property', [gdata.ExtendedProperty])
   
   def __init__(self, author=None, category=None, content=None,
       atom_id=None, link=None, published=None, 
-      title=None, updated=None, 
-      transparency=None, comments=None, email=None,
-      postal_address=None, deleted=None,
-      organization=None, phone_number=None, im=None,
-      extended_property=None, original_event=None,
+      title=None, updated=None, email=None, postal_address=None, 
+      deleted=None, organization=None, phone_number=None, im=None,
+      extended_property=None, group_membership_info=None,
       batch_operation=None, batch_id=None, batch_status=None,
       extension_elements=None, extension_attributes=None, text=None):
-
-
     gdata.BatchEntry.__init__(self, author=author, category=category, 
                         content=content,
                         atom_id=atom_id, link=link, published=published,
                         batch_operation=batch_operation, batch_id=batch_id, 
                         batch_status=batch_status,
                         title=title, updated=updated)
-    
-    self.transparency = transparency 
-    self.comments = comments
     self.organization = organization
     self.deleted = deleted
     self.phone_number = phone_number or []
@@ -219,20 +244,20 @@ class ContactEntry(gdata.BatchEntry):
     self.im = im or []  
     self.extended_property = extended_property or []
     self.email = email or []
+    self.group_membership_info = group_membership_info or []
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
+
 def ContactEntryFromString(xml_string):
   return atom.CreateClassFromXMLString(ContactEntry, xml_string)
 
-class ContactsFeed(gdata.GDataFeed, gdata.LinkFinder):
+
+class ContactsFeed(gdata.BatchFeed, gdata.LinkFinder):
   """A Google Contacts feed flavor of an Atom Feed"""
 
-  _tag = gdata.GDataFeed._tag
-  _namespace = gdata.GDataFeed._namespace
-  _children = gdata.GDataFeed._children.copy()
-  _attributes = gdata.GDataFeed._attributes.copy()
+  _children = gdata.BatchFeed._children.copy()
 
   _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', [ContactEntry])
 
@@ -242,7 +267,7 @@ class ContactsFeed(gdata.GDataFeed, gdata.LinkFinder):
                entry=None, total_results=None, start_index=None,
                items_per_page=None, extension_elements=None,
                extension_attributes=None, text=None):
-    gdata.GDataFeed.__init__(self, author=author, category=category,
+    gdata.BatchFeed.__init__(self, author=author, category=category,
                              contributor=contributor, generator=generator,
                              icon=icon,  atom_id=atom_id, link=link,
                              logo=logo, rights=rights, subtitle=subtitle,
@@ -254,5 +279,41 @@ class ContactsFeed(gdata.GDataFeed, gdata.LinkFinder):
                              extension_attributes=extension_attributes,
                              text=text)
                              
+
 def ContactsFeedFromString(xml_string):
   return atom.CreateClassFromXMLString(ContactsFeed, xml_string)
+
+
+class GroupEntry(gdata.BatchEntry):
+  """Represents a contact group."""
+  _children = gdata.BatchEntry._children.copy()
+  _children['{%s}extendedProperty' % gdata.GDATA_NAMESPACE] = (
+      'extended_property', [gdata.ExtendedProperty])
+
+  def __init__(self, author=None, category=None, content=None,
+      contributor=None, atom_id=None, link=None, published=None, rights=None,
+      source=None, summary=None, control=None, title=None, updated=None,
+      extended_property=None, batch_operation=None, batch_id=None, 
+      batch_status=None, 
+      extension_elements=None, extension_attributes=None, text=None):
+    gdata.BatchEntry.__init__(self, author=author, category=category, 
+                        content=content,
+                        atom_id=atom_id, link=link, published=published,
+                        batch_operation=batch_operation, batch_id=batch_id, 
+                        batch_status=batch_status,
+                        title=title, updated=updated)
+    self.extended_property = extended_property or []
+
+
+def GroupEntryFromString(xml_string):
+  return atom.CreateClassFromXMLString(GroupEntry, xml_string)
+
+
+class GroupsFeed(gdata.BatchFeed):
+  """A Google contact groups feed flavor of an Atom Feed"""
+  _children = gdata.BatchFeed._children.copy()
+  _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', [GroupEntry])
+
+
+def GroupsFeedFromString(xml_string):
+  return atom.CreateClassFromXMLString(GroupsFeed, xml_string)

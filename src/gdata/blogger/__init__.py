@@ -27,6 +27,7 @@ import re
 
 
 LABEL_SCHEME = 'http://www.blogger.com/atom/ns#'
+THR_NAMESPACE = 'http://purl.org/syndication/thread/1.0'
 
 
 class BloggerEntry(gdata.GDataEntry):
@@ -123,11 +124,51 @@ def BlogPostFeedFromString(xml_string):
   return atom.CreateClassFromXMLString(BlogPostFeed, xml_string)
 
 
+class InReplyTo(atom.AtomBase):
+  _tag = 'in-reply-to'
+  _namespace = THR_NAMESPACE
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['href'] = 'href'
+  _attributes['ref'] = 'ref'
+  _attributes['source'] = 'source'
+  _attributes['type'] = 'type'
+
+  def __init__(self, href=None, ref=None, source=None, type=None, 
+      extension_elements=None, extension_attributes=None, text=None):
+    self.href = href
+    self.ref = ref
+    self.source = source
+    self.type = type
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+    self.text = text
+
+
+def InReplyToFromString(xml_string):
+  return atom.CreateClassFromXMLString(InReplyTo, xml_string)
+
+
 class CommentEntry(BloggerEntry):
   """Describes a blog post comment entry in the feed of a blog post's 
   comments."""
 
+  _children = BloggerEntry._children.copy()
+  _children['{%s}in-reply-to' % THR_NAMESPACE] = ('in_reply_to', InReplyTo)
+
   comment_id_pattern = re.compile('.*-(\w*)$')
+
+  def __init__(self, author=None, category=None, content=None, 
+      contributor=None, atom_id=None, link=None, published=None, rights=None,
+      source=None, summary=None, control=None, title=None, updated=None,
+      in_reply_to=None, extension_elements=None, extension_attributes=None, 
+      text=None):
+    BloggerEntry.__init__(self, author=author, category=category, 
+        content=content, contributor=contributor, atom_id=atom_id, link=link,
+        published=published, rights=rights, source=source, summary=summary, 
+        control=control, title=title, updated=updated, 
+        extension_elements=extension_elements, 
+        extension_attributes=extension_attributes, text=text)
+    self.in_reply_to = in_reply_to
 
   def GetCommentId(self):
     """Extracts the commentID string from the entry's Atom id.

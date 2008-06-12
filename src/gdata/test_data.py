@@ -2470,32 +2470,47 @@ YOUTUBE_CONTACTS_FEED = """<?xml version='1.0' encoding='UTF-8'?><feed xmlns='ht
       <id>http://gdata.youtube.com/feeds/users/apitestjhartmann/contacts/testjfisher</id><published>2008-02-26T14:13:03.000-08:00</published><updated>2008-05-16T19:24:34.916Z</updated><category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#friend'/><title type='text'>testjfisher</title><link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/users/testjfisher'/><link rel='alternate' type='text/html' href='http://www.youtube.com/profile?user=testjfisher'/><link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/users/apitestjhartmann/contacts/testjfisher'/><link rel='edit' type='application/atom+xml' href='http://gdata.youtube.com/feeds/users/apitestjhartmann/contacts/testjfisher'/><author><name>apitestjhartmann</name><uri>http://gdata.youtube.com/feeds/users/apitestjhartmann</uri></author><yt:username>testjfisher</yt:username><yt:status>pending</yt:status></entry>
 </feed>"""
 
-
 NEW_CONTACT = """<?xml version='1.0' encoding='UTF-8'?>
-<atom:entry xmlns:atom='http://www.w3.org/2005/Atom'
-    xmlns:gd='http://schemas.google.com/g/2005'>
-  <atom:category scheme='http://schemas.google.com/g/2005#kind'
+<entry xmlns='http://www.w3.org/2005/Atom' 
+       xmlns:gd='http://schemas.google.com/g/2005'
+       xmlns:gContact='http://schemas.google.com/contact/2008'>
+  <id>http://www.google.com/m8/feeds/contacts/liz%40gmail.com/base/8411573</id>
+  <updated>2008-02-28T18:47:02.303Z</updated>
+  <category scheme='http://schemas.google.com/g/2005#kind'
     term='http://schemas.google.com/contact/2008#contact' />
-  <atom:title type='text'>Elizabeth Bennet</atom:title>
-  <atom:content type='text'>Notes</atom:content>
+  <title type='text'>Fitzgerald</title>
+  <content type='text'>Notes</content>
+  <link rel='self' type='application/atom+xml'
+    href='http://www.google.com/m8/feeds/contacts/liz%40gmail.com/full/8411573' />
+  <link rel='edit' type='application/atom+xml'
+    href='http://www.google.com/m8/feeds/contacts/liz%40gmail.com/full/8411573/1204224422303000' />
   <gd:email rel='http://schemas.google.com/g/2005#work'
     address='liz@gmail.com' />
   <gd:email rel='http://schemas.google.com/g/2005#home'
     address='liz@example.org' />
   <gd:phoneNumber rel='http://schemas.google.com/g/2005#work'
     primary='true'>(206)555-1212</gd:phoneNumber>
+  <gd:phoneNumber rel='http://schemas.google.com/g/2005#other' 
+    primary='true'>456-123-2133</gd:phoneNumber>
   <gd:phoneNumber rel='http://schemas.google.com/g/2005#home'>(206)555-1213</gd:phoneNumber>
+  <gd:extendedProperty name="pet" value="hamster" />
+  <gd:extendedProperty name="cousine"> 
+    <italian />
+  </gd:extendedProperty>
+  <gContact:groupMembershipInfo deleted="false" href="http://google.com/m8/feeds/groups/liz%40gmail.com/base/270f" /> 
   <gd:im address='liz@gmail.com'
     protocol='http://schemas.google.com/g/2005#GOOGLE_TALK'
     rel='http://schemas.google.com/g/2005#home' />
   <gd:postalAddress rel='http://schemas.google.com/g/2005#work'
     primary='true'>1600 Amphitheatre Pkwy Mountain View</gd:postalAddress>
-</atom:entry>"""
+</entry>"""
 
 CONTACTS_FEED = """<?xml version='1.0' encoding='UTF-8'?>
 <feed xmlns='http://www.w3.org/2005/Atom'
     xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
-    xmlns:gd='http://schemas.google.com/g/2005'>
+    xmlns:gd='http://schemas.google.com/g/2005'
+    xmlns:gContact='http://schemas.google.com/contact/2008'
+    xmlns:batch='http://schemas.google.com/gdata/batch'>
   <id>http://www.google.com/m8/feeds/contacts/liz%40gmail.com/base</id>
   <updated>2008-03-05T12:36:38.836Z</updated>
   <category scheme='http://schemas.google.com/g/2005#kind'
@@ -2503,34 +2518,113 @@ CONTACTS_FEED = """<?xml version='1.0' encoding='UTF-8'?>
   <title type='text'>Contacts</title>
   <link rel='http://schemas.google.com/g/2005#feed'
     type='application/atom+xml'
-    href='http://www.google.com/m8/feeds/contacts/liz%40gmail.com/base' />
+    href='http://www.google.com/m8/feeds/contacts/liz%40gmail.com/full' />
   <link rel='http://schemas.google.com/g/2005#post'
     type='application/atom+xml'
-    href='http://www.google.com/m8/feeds/contacts/liz%40gmail.com/base' />
+    href='http://www.google.com/m8/feeds/contacts/liz%40gmail.com/full' />
+  <link rel='http://schemas.google.com/g/2005#batch'
+    type='application/atom+xml'
+    href='http://www.google.com/m8/feeds/contacts/liz%40gmail.com/full/batch' />
   <link rel='self' type='application/atom+xml'
-    href='http://www.google.com/m8/feeds/contacts/liz%40gmail.com/base?max-results=25' />
+    href='http://www.google.com/m8/feeds/contacts/liz%40gmail.com/full?max-results=25' />
   <author>
     <name>Elizabeth Bennet</name>
     <email>liz@gmail.com</email>
   </author>
-  <generator version='1.0' uri='http://www.google.com/m8/feeds/contacts'>Contacts</generator>
+  <generator version='1.0' uri='http://www.google.com/m8/feeds/contacts'>
+    Contacts
+  </generator>
   <openSearch:totalResults>1</openSearch:totalResults>
   <openSearch:startIndex>1</openSearch:startIndex>
   <openSearch:itemsPerPage>25</openSearch:itemsPerPage>
   <entry>
-    <id>http://www.google.com/m8/feeds/contacts/liz%40gmail.com/base/c9012de</id>
+    <id>
+      http://www.google.com/m8/feeds/contacts/liz%40gmail.com/base/c9012de
+    </id>
     <updated>2008-03-05T12:36:38.835Z</updated>
     <category scheme='http://schemas.google.com/g/2005#kind'
       term='http://schemas.google.com/contact/2008#contact' />
     <title type='text'>Fitzgerald</title>
+    <link rel="http://schemas.google.com/contacts/2008/rel#photo" type="image/*" 
+      href="http://google.com/m8/feeds/photos/media/liz%40gmail.com/c9012de"/>
+    <link rel="http://schemas.google.com/contacts/2008/rel#edit-photo" type="image/*" 
+      href="http://www.google.com/m8/feeds/photos/media/liz%40gmail.com/c9012de/photo4524"/>
     <link rel='self' type='application/atom+xml'
-      href='http://www.google.com/m8/feeds/contacts/liz%40gmail.com/base/c9012de' />
+      href='http://www.google.com/m8/feeds/contacts/liz%40gmail.com/full/c9012de' />
     <link rel='edit' type='application/atom+xml'
-      href='http://www.google.com/m8/feeds/contacts/liz%40gmail.com/base/c9012de/1204720598835000' />
+      href='http://www.google.com/m8/feeds/contacts/liz%40gmail.com/full/c9012de/1204720598835000' />
     <gd:phoneNumber rel='http://schemas.google.com/g/2005#home'
-      primary='true'>456</gd:phoneNumber>
+      primary='true'>
+      456
+    </gd:phoneNumber>
+    <gd:extendedProperty name="pet" value="hamster" />
+    <gContact:groupMembershipInfo deleted="false" href="http://google.com/m8/feeds/groups/liz%40gmail.com/base/270f" />
   </entry>
 </feed>"""
+
+
+CONTACT_GROUPS_FEED = """<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" 
+  xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/" 
+  xmlns:gContact="http://schemas.google.com/contact/2008" 
+  xmlns:batch="http://schemas.google.com/gdata/batch" 
+  xmlns:gd="http://schemas.google.com/g/2005">
+  <id>jo@gmail.com</id>
+  <updated>2008-05-21T21:11:25.237Z</updated>
+  <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/contact/2008#group"/>
+  <title type="text">Jo's Contact Groups</title>
+  <link rel="alternate" type="text/html" href="http://www.google.com/"/>
+  <link rel="http://schemas.google.com/g/2005#feed" 
+    type="application/atom+xml" 
+    href="http://google.m/m8/feeds/groups/jo%40gmail.com/thin"/>
+  <link rel="http://schemas.google.com/g/2005#post" 
+      type="application/atom+xml" 
+      href="http://google.m/m8/feeds/groups/jo%40gmail.com/thin"/>
+  <link rel="http://schemas.google.com/g/2005#batch" 
+      type="application/atom+xml" 
+      href="http://googleom/m8/feeds/groups/jo%40gmail.com/thin/batch"/>
+  <link rel="self" 
+      type="application/atom+xml" 
+      href="http://google.com/m8/feeds/groups/jo%40gmail.com/thin?max-results=25"/>
+  <author>
+    <name>Jo Brown</name>
+    <email>jo@gmail.com</email>
+  </author>
+  <generator version="1.0" uri="http://google.com/m8/feeds">Contacts</generator>
+  <openSearch:totalResults>3</openSearch:totalResults>
+  <openSearch:startIndex>1</openSearch:startIndex>
+  <openSearch:itemsPerPage>25</openSearch:itemsPerPage>
+  <entry>
+    <id>http://google.com/m8/feeds/groups/jo%40gmail.com/base/270f</id>
+    <updated>2008-05-14T13:10:19.070Z</updated>
+    <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/contact/2008#group"/>
+    <title type="text">joggers</title>
+    <content type="text">joggers</content>
+    <link rel="self" type="application/atom+xml" 
+        href="http://google.com/m8/feeds/groups/jo%40gmail.com/thin/270f"/>
+    <link rel="edit" type="application/atom+xml"
+        href="http://google.com/m8/feeds/groups/jo%40gmail.com/thin/270f/1210770619070000"/>
+  </entry>
+</feed>"""
+
+CONTACT_GROUP_ENTRY = """<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns='http://www.w3.org/2005/Atom'
+       xmlns:gd="http://schemas.google.com/g/2005">
+    <category scheme="http://schemas.google.com/g/2005#kind"
+        term="http://schemas.google.com/g/2005#group"/>
+    <id>http://www.google.com/feeds/groups/jo%40gmail.com/base/1234</id>
+    <published>2005-01-18T21:00:00Z</published>
+    <updated>2006-01-01T00:00:00Z</updated>
+    <title type="text">Salsa group</title>
+    <content type="text">Salsa group</content>
+    <link rel='self' type='application/atom+xml'
+        href= 'http://www.google.com/m8/feeds/groups/jo%40gmail.com/full/2' />
+    <link rel='edit' type='application/atom+xml'
+        href='http://www.google.com/m8/feeds/groups/jo%40gmail.com/full/2/0'/>
+    <gd:extendedProperty name="more info about the group">
+        <info>Very nice people.</info>
+    </gd:extendedProperty>
+</entry>"""
 
 BLOG_ENTRY = """<entry xmlns='http://www.w3.org/2005/Atom'>
   <id>tag:blogger.com,1999:blog-blogID.post-postID</id>
@@ -2643,5 +2737,10 @@ BLOG_COMMENTS_FEED = """<feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSear
     <author>
       <name>Blog Author name</name>
     </author>
+    <thr:in-reply-to xmlns:thr='http://purl.org/syndication/thread/1.0' 
+        href='http://blogName.blogspot.com/2007/04/first-post.html' 
+        ref='tag:blogger.com,1999:blog-blogID.post-postID' 
+        source='http://blogName.blogspot.com/feeds/posts/default/postID'
+        type='text/html' />
   </entry>
 </feed>"""
