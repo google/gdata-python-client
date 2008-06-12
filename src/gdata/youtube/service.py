@@ -1208,7 +1208,7 @@ class YouTubeService(gdata.service.GDataService):
         status=contact_status)
 
     contact_put_uri = '%s/%s/%s/%s' % (YOUTUBE_USER_FEED_URI, my_username,
-                                       'contacts', contact_id)
+                                       'contacts', contact_username)
 
     return self.Put(contact_entry, contact_put_uri,
                     converter=gdata.youtube.YouTubeContactEntryFromString)
@@ -1371,7 +1371,7 @@ class YouTubeVideoQuery(gdata.service.Query):
                                  params=params, categories=categories)
  
   def _GetVideoQuery(self):
-    if 'vq' in self.__dict__:
+    if 'vq' in self:
       return self['vq']
     else:
       return None
@@ -1383,7 +1383,7 @@ class YouTubeVideoQuery(gdata.service.Query):
                 doc="""The video query (vq) query parameter""")
 
   def _GetOrderBy(self):
-    if 'orderby' in self.__dict__:
+    if 'orderby' in self:
       return self['orderby']
     else:
       return None
@@ -1398,7 +1398,7 @@ class YouTubeVideoQuery(gdata.service.Query):
                      doc="""The orderby query parameter""")
 
   def _GetTime(self):
-    if 'time' in self.__dict__:
+    if 'time' in self:
       return self['time']
     else:
       return None
@@ -1413,7 +1413,7 @@ class YouTubeVideoQuery(gdata.service.Query):
                   doc="""The time query parameter""")
 
   def _GetFormat(self):
-    if 'format' in self.__dict__:
+    if 'format' in self:
       return self['format']
     else:
       return None
@@ -1428,7 +1428,7 @@ class YouTubeVideoQuery(gdata.service.Query):
                     doc="""The format query parameter""")
 
   def _GetRacy(self):
-    if 'racy' in self.__dict__:
+    if 'racy' in self:
       return self['racy']
     else:
       return None
@@ -1443,7 +1443,7 @@ class YouTubeVideoQuery(gdata.service.Query):
                   doc="""The racy query parameter""")
 
   def _GetLanguageRestriction(self):
-    if 'lr' in self.__dict__:
+    if 'lr' in self:
       return self['lr']
     else:
       return None
@@ -1455,7 +1455,7 @@ class YouTubeVideoQuery(gdata.service.Query):
                 doc="""The lr (language restriction) query parameter""")
 
   def _GetIPRestriction(self):
-    if 'restriction' in self.__dict__:
+    if 'restriction' in self:
       return self['restriction']
     else:
       return None
