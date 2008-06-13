@@ -39,7 +39,7 @@ YOUTUBE_SERVICE = 'youtube'
 YOUTUBE_SUPPORTED_UPLOAD_TYPES = ('mov', 'avi', 'wmv', 'mpg', 'quicktime')
 YOUTUBE_QUERY_VALID_TIME_PARAMETERS = ('today', 'this_week', 'this_month',
                                        'all_time')
-YOUTUBE_QUERY_VALID_ORDERBY_PARAMETERS = ('updated', 'viewCount', 'rating',
+YOUTUBE_QUERY_VALID_ORDERBY_PARAMETERS = ('published', 'viewCount', 'rating',
                                           'relevance')
 YOUTUBE_QUERY_VALID_RACY_PARAMETERS = ('include', 'exclude')
 YOUTUBE_QUERY_VALID_FORMAT_PARAMETERS = ('1', '5', '6')
