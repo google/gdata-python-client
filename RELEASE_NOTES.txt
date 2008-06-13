@@ -1,3 +1,21 @@
+=== 1.1.1 ===
+June 13, 2008 (revision 421)
+
+- Added support for new feeds available in the Google Contacts API. Adding
+    contact groups, querying for contacts in a group, specifying extended
+    properties, and setting the contact's photo are now supported.
+- The ExtendedProperty class can now contain a blob of XML instead of just
+    an attribute value. This is used in the Google Contacts Data API. 
+- The YouTube service now has methods for updating playlists and removing a
+    video from a playlist.
+- Added geo-location to the YouTube service class.
+- When using ClientLogin with Blogger, the default account type is now set
+    to 'GOOGLE'. This prevents the rare problem of a user having a Google
+    Apps account which conflicts with his or her Google Account used for
+    Blogger.
+- Added support for the in-reply-to element which appears in Blogger 
+    comments.
+
 === 1.1.0 ===
 June 6, 2008 (revision 403)
 
