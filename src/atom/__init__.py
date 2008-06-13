@@ -275,7 +275,7 @@ class AtomBase(ExtensionContainer):
     for xml_attribute, member_name in self.__class__._attributes.iteritems():
       member = getattr(self, member_name)
       if member is not None:
-        tree.attrib[xml_attribute] = member
+        tree.attrib[xml_attribute] = member.decode(MEMBER_STRING_ENCODING)
     # Lastly, call the ExtensionContainers's _AddMembersToElementTree to 
     # convert any extension attributes.
     ExtensionContainer._AddMembersToElementTree(self, tree)
