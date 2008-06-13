@@ -15,10 +15,6 @@
 # limitations under the License.
 
 
-# TODO:
-#   add text=none to all inits
-
-
 """Contains extensions to ElementWrapper objects used with Google Calendar."""
 
 
@@ -171,7 +167,6 @@ class CalendarListFeed(gdata.GDataFeed, gdata.LinkFinder):
   _children = gdata.GDataFeed._children.copy()
   _attributes = gdata.GDataFeed._attributes.copy()
   _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', [CalendarListEntry])
-  #_attributes = {}
 
 
 class Scope(atom.AtomBase):
@@ -221,10 +216,8 @@ class CalendarAclEntry(gdata.GDataEntry, gdata.LinkFinder):
                         content=content, atom_id=atom_id, link=link, 
                         published=published, title=title, 
                         updated=updated, text=None)
-
     self.scope = scope
     self.role = role
-
 
 
 class CalendarAclFeed(gdata.GDataFeed, gdata.LinkFinder):
@@ -257,9 +250,9 @@ class CalendarEventCommentFeed(gdata.GDataFeed, gdata.LinkFinder):
       [CalendarEventCommentEntry])
 
 
-# Map gdata.ExtendedProperty class into this module for backwards 
-# compatibility.
-ExtendedProperty = gdata.ExtendedProperty
+class ExtendedProperty(gdata.ExtendedProperty):
+  """A transparent subclass of gdata.ExtendedProperty added to this module
+  for backwards compatibility."""
 
     
 class Reminder(atom.AtomBase):

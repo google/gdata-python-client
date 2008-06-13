@@ -89,8 +89,7 @@ class MediaSource(object):
 
     if (file_handle is None and content_type is not None and
         file_path is not None):
-
-        self.setFile(file_path, content_type)
+      self.setFile(file_path, content_type)
 
   def setFile(self, file_name, content_type):
     """A helper function which can create a file handle from a given filename

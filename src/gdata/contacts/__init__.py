@@ -39,6 +39,10 @@ IM_ICQ = 'http://schemas.google.com/g/2005#ICQ' # ICQ protocol
 IM_JABBER = 'http://schemas.google.com/g/2005#JABBER' # Jabber protocol
 
 
+PHOTO_LINK_REL = 'http://schemas.google.com/contacts/2008/rel#photo'
+PHOTO_EDIT_LINK_REL = 'http://schemas.google.com/contacts/2008/rel#edit-photo'
+
+
 CONTACTS_NAMESPACE = 'http://schemas.google.com/contact/2008'
 
 
@@ -232,11 +236,9 @@ class ContactEntry(gdata.BatchEntry):
       batch_operation=None, batch_id=None, batch_status=None,
       extension_elements=None, extension_attributes=None, text=None):
     gdata.BatchEntry.__init__(self, author=author, category=category, 
-                        content=content,
-                        atom_id=atom_id, link=link, published=published,
-                        batch_operation=batch_operation, batch_id=batch_id, 
-                        batch_status=batch_status,
-                        title=title, updated=updated)
+        content=content, atom_id=atom_id, link=link, published=published,
+        batch_operation=batch_operation, batch_id=batch_id, 
+        batch_status=batch_status, title=title, updated=updated)
     self.organization = organization
     self.deleted = deleted
     self.phone_number = phone_number or []
@@ -248,6 +250,18 @@ class ContactEntry(gdata.BatchEntry):
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
+
+  def GetPhotoLink(self):
+    for a_link in self.link:
+      if a_link.rel == PHOTO_LINK_REL:
+        return a_link
+    return None
+
+  def GetPhotoEditLink(self):
+    for a_link in self.link:
+      if a_link.rel == PHOTO_EDIT_LINK_REL:
+        return a_link
+    return None
 
 
 def ContactEntryFromString(xml_string):
