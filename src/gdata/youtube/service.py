@@ -132,9 +132,10 @@ class YouTubeService(gdata.service.GDataService):
   def __init__(self, email=None, password=None, source=None,
                server=YOUTUBE_SERVER, additional_headers=None, client_id=None,
                developer_key=None):
+    self.additional_headers = {}
     if client_id is not None and developer_key is not None:
-      self.additional_headers = {'X-Gdata-Client': self.client_id,
-                                 'X-GData-Key': 'key=%s' % self.developer_key}
+      self.additional_headers = {'X-Gdata-Client': client_id,
+                                 'X-GData-Key': 'key=%s' % developer_key}
 
       gdata.service.GDataService.__init__(
           self, email=email, password=password, service=YOUTUBE_SERVICE, 
