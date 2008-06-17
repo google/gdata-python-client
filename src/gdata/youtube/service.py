@@ -1390,8 +1390,9 @@ class YouTubeVideoQuery(gdata.service.Query):
 
   def _SetOrderBy(self, val):
     if val not in YOUTUBE_QUERY_VALID_ORDERBY_PARAMETERS:
-      raise YouTubeError('OrderBy must be one of: %s ' %
-                         ' '.join(YOUTUBE_QUERY_VALID_ORDERBY_PARAMETERS))
+      if val.startswith('relevance_lang_') is False:
+        raise YouTubeError('OrderBy must be one of: %s ' %
+                           ' '.join(YOUTUBE_QUERY_VALID_ORDERBY_PARAMETERS))
     self['orderby'] = val
 
   orderby = property(_GetOrderBy, _SetOrderBy,
