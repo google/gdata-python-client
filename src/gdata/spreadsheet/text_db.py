@@ -247,10 +247,13 @@ class Database(object):
           spreadsheet_key=self.spreadsheet_key)]
     else:
       matching_tables = []
-      title_query = gdata.spreadsheet.service.DocumentQuery()
-      title_query.title = name
+      query = None
+      if name:
+        query = gdata.spreadsheet.service.DocumentQuery()
+        query.title = name
+ 
       worksheet_feed = self.client._GetSpreadsheetsClient().GetWorksheetsFeed(
-          self.spreadsheet_key, query=title_query)
+          self.spreadsheet_key, query=query)
       for entry in worksheet_feed.entry:
         matching_tables.append(Table(name=entry.title.text, 
             worksheet_entry=entry, database_client=self.client, 
