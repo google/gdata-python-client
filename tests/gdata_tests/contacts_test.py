@@ -93,6 +93,11 @@ class ContactEntryTest(unittest.TestCase):
         rel='http://schemas.google.com/g/2005#work', text='(206)555-1212'))
     new_entry.organization = gdata.contacts.Organization(
         org_name=gdata.contacts.OrgName(text='TestCo.'))
+    new_entry.extended_property.append(gdata.ExtendedProperty(name='test',
+        value='1234'))
+    sports_property = gdata.ExtendedProperty(name='sports')
+    sports_property.SetXmlBlob('<dance><salsa/><ballroom_dancing/></dance>')
+    new_entry.extended_property.append(sports_property)
 
     # Generate and parse the XML for the new entry.
     entry_copy = gdata.contacts.ContactEntryFromString(str(new_entry))
@@ -106,6 +111,9 @@ class ContactEntryTest(unittest.TestCase):
         new_entry.phone_number[0].rel)
     self.assertEquals(entry_copy.phone_number[0].text, '(206)555-1212')
     self.assertEquals(entry_copy.organization.org_name.text, 'TestCo.')
+    self.assertEquals(len(entry_copy.extended_property), 2)
+    self.assertEquals(entry_copy.extended_property[0].name, 'test')
+    self.assertEquals(entry_copy.extended_property[0].value, '1234')
 
 
 class ContactsFeedTest(unittest.TestCase):

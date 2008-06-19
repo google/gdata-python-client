@@ -66,11 +66,43 @@ class ContactsSample(object):
       for email in entry.email:
         if email.primary and email.primary == 'true':
           print '    %s' % (email.address)
+      # Show the contact groups that this contact is a member of.
+      for group in entry.group_membership_info:
+        print '    Member of group: %s' % (group.href)
+      # Display extended properties.
+      for extended_property in entry.extended_property:
+        if extended_property.value:
+          value = extended_property.value
+        else:
+          value = extended_property.GetXmlBlobString()
+        print '    Extended Property %s: %s' % (extended_property.name, value)
 
   def ListAllContacts(self):
     """Retrieves a list of contacts and displays name and primary email."""
     feed = self.gd_client.GetContactsFeed()
     self.PrintFeed(feed)
+
+  def PrintGroupsFeed(self, feed):
+    print '\n'
+    if not feed.entry:
+      print 'No groups in feed.\n'
+    for i, entry in enumerate(feed.entry):
+      print '\n%s %s' % (i+1, entry.title.text)
+      if entry.content:
+        print '    %s' % (entry.content.text)
+      # Display the group id which can be used to query the contacts feed.
+      print '    Group ID: %s' % entry.id.text
+      # Display extended properties.
+      for extended_property in entry.extended_property:
+        if extended_property.value:
+          value = extended_property.value
+        else:
+          value = extended_property.GetXmlBlobString()
+        print '    Extended Property %s: %s' % (extended_property.name, value)
+
+  def ListAllGroups(self):
+    feed = self.gd_client.GetGroupsFeed()
+    self.PrintGroupsFeed(feed)
 
   def CreateMenu(self):
     """Prompts that enable a user to create a contact."""
@@ -99,6 +131,15 @@ class ContactsSample(object):
     query.updated_min = updated_min
     feed = self.gd_client.GetContactsFeed(query.ToUri())
     self.PrintFeed(feed)
+
+  def QueryGroupsMenu(self):
+    """Prompts for updated-min query parameters and displays results."""
+    updated_min = raw_input(
+        'Enter updated min (example: 2007-03-16T00:00:00): ')
+    query = gdata.service.Query(feed='/m8/feeds/groups/default/full')
+    query.updated_min = updated_min
+    feed = self.gd_client.GetGroupsFeed(query.ToUri())
+    self.PrintGroupsFeed(feed)
    
   def _SelectContact(self):
     feed = self.gd_client.GetContactsFeed()
@@ -126,10 +167,12 @@ class ContactsSample(object):
     print ('\nDocument List Sample\n'
            '1) List all of your contacts.\n'
            '2) Create a contact.\n'
-           '3) Query on updated time.\n'
+           '3) Query contacts on updated time.\n'
            '4) Modify a contact.\n'
            '5) Delete a contact.\n'
-           '6) Exit.\n')
+           '6) List all of your contact groups.\n'
+           '7) Query your groups on updated time.\n'
+           '8) Exit.\n')
 
   def GetMenuChoice(self, max):
     """Retrieves the menu selection from the user.
@@ -161,7 +204,7 @@ class ContactsSample(object):
 
         self.PrintMenu()
 
-        choice = self.GetMenuChoice(6)
+        choice = self.GetMenuChoice(8)
 
         if choice == 1:
           self.ListAllContacts()
@@ -174,6 +217,10 @@ class ContactsSample(object):
         elif choice == 5:
           self.DeleteContactMenu()
         elif choice == 6:
+          self.ListAllGroups()
+        elif choice == 7:
+          self.QueryGroupsMenu()
+        elif choice == 8:
           return
 
     except KeyboardInterrupt:

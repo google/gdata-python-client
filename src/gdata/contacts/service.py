@@ -244,8 +244,10 @@ class ContactsService(gdata.service.GDataService):
 class ContactsQuery(gdata.service.Query):
 
   def __init__(self, feed=None, text_query=None, params=None,
-      categories=None):
+      categories=None, group=None):
     self.feed = feed or '/m8/feeds/contacts/default/full'
+    if group:
+      self._SetGroup(group)
     gdata.service.Query.__init__(self, feed=self.feed, text_query=text_query,
         params=params, categories=categories)
 
@@ -260,3 +262,11 @@ class ContactsQuery(gdata.service.Query):
 
   group = property(_GetGroup, _SetGroup, 
       doc='The group query parameter to find only contacts in this group')
+
+class GroupsQuery(gdata.service.Query):
+  
+  def __init__(self, feed=None, text_query=None, params=None,
+      categories=None):
+    self.feed = feed or '/m8/feeds/groups/default/full'
+    gdata.service.Query.__init__(self, feed=self.feed, text_query=text_query,
+        params=params, categories=categories)
