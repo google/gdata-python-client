@@ -1355,6 +1355,9 @@ class YouTubeVideoQuery(gdata.service.Query):
     restriction: The restriction parameter identifies the IP address that
         should be used to filter videos that can only be played in specific
         countries.
+    location: A string of geo coordinates. Note that this is not used when the
+        search is performed but rather to filter the returned videos for ones
+        that match to the location entered.
   """
 
   def __init__(self, video_id=None, feed_type=None, text_query=None,
@@ -1467,6 +1470,19 @@ class YouTubeVideoQuery(gdata.service.Query):
 
   restriction = property(_GetIPRestriction, _SetIPRestriction,
                          doc="""The restriction query parameter""")
+
+  def _GetLocation(self):
+    if 'location' in self:
+      return self['location']
+    else:
+      return None
+
+  def _SetLocation(self, val):
+    self['location'] = val
+
+  location = property(_GetLocation, _SetLocation,
+                      doc="""The location query parameter""")
+
 
 
 class YouTubeUserQuery(YouTubeVideoQuery):
