@@ -36,7 +36,9 @@ import gdata.youtube
 
 YOUTUBE_SERVER = 'gdata.youtube.com'
 YOUTUBE_SERVICE = 'youtube'
-YOUTUBE_SUPPORTED_UPLOAD_TYPES = ('mov', 'avi', 'wmv', 'mpg', 'quicktime')
+YOUTUBE_CLIENTLOGIN_AUTHENTICATION_URL = 'https://www.google.com/youtube/accounts/ClientLogin'
+YOUTUBE_SUPPORTED_UPLOAD_TYPES = ('mov', 'avi', 'wmv', 'mpg', 'quicktime',
+                                  'flv')
 YOUTUBE_QUERY_VALID_TIME_PARAMETERS = ('today', 'this_week', 'this_month',
                                        'all_time')
 YOUTUBE_QUERY_VALID_ORDERBY_PARAMETERS = ('published', 'viewCount', 'rating',
@@ -147,6 +149,7 @@ class YouTubeService(gdata.service.GDataService):
       gdata.service.GDataService.__init__(
           self, email=email, password=password, service=YOUTUBE_SERVICE,
           source=source, server=server, additional_headers=additional_headers)
+    self.auth_service_url = YOUTUBE_CLIENTLOGIN_AUTHENTICATION_URL
 
   def GetYouTubeVideoFeed(self, uri):
     """Retrieve a YouTubeVideoFeed.
