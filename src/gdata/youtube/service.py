@@ -570,6 +570,7 @@ class YouTubeService(gdata.service.GDataService):
             o video/quicktime
             o video/x-msvideo
             o video/mp4
+            o video/x-flv
 
     Returns:
       The newly created YouTubeVideoEntry if successful.
