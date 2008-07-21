@@ -434,9 +434,7 @@ class GDataService(atom.service.AtomService):
 
     response_body = response.read()
     if response.status == 200:
-      for response_line in response_body.splitlines():
-        if response_line.startswith('Token='):
-          self.SetAuthSubToken(response_line.lstrip('Token='))
+      self.__auth_token = gdata.auth.AuthSubTokenFromHttpBody(response_body)
 
   def RevokeAuthSubToken(self):
     """Revokes an existing AuthSub token.
