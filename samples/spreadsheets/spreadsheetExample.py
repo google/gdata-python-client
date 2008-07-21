@@ -144,8 +144,10 @@ class SimpleCRUD:
       if isinstance(feed, gdata.spreadsheet.SpreadsheetsCellsFeed):
         print '%s %s\n' % (entry.title.text, entry.content.text)
       elif isinstance(feed, gdata.spreadsheet.SpreadsheetsListFeed):
-        #print '%s %s %s\n' % (i, entry.title.text.encode('UTF-8'), entry.content.text.encode('UTF-8'))
-        print '%s %s %s\n' % (i, entry.title.text, entry.content.text)
+        print '%s %s %s' % (i, entry.title.text, entry.content.text)
+        for key in entry.custom:  
+          print '%s: %s' % (key, entry.custom[key].text) 
+        print '\n',
       else:
         print '%s %s\n' % (i, entry.title.text)
         
