@@ -5,6 +5,7 @@ MANIFEST
 setup.py
 src/atom/__init__.py
 src/atom/service.py
+src/atom/mock_service.py
 src/gdata/__init__.py
 src/gdata/test_data.py
 src/gdata/service.py
