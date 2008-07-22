@@ -91,7 +91,7 @@ class AppsService(gdata.service.GDataService):
   def _baseURL(self):
     return "/a/feeds/%s" % self.domain 
 
-  def GetGenaratorFromLinkFinder(self, link_finder, func):
+  def GetGeneratorFromLinkFinder(self, link_finder, func):
     """returns a generator for pagination"""
     yield link_finder
     next = link_finder.GetNextLink()
@@ -372,7 +372,7 @@ class AppsService(gdata.service.GDataService):
   def GetGeneratorForAllUsers(self):
     """Retrieve a generator for all users in this domain."""
     first_page = self.RetrievePageOfUsers()
-    return self.GetGenaratorFromLinkFinder(first_page,
+    return self.GetGeneratorFromLinkFinder(first_page,
                                            gdata.apps.UserFeedFromString)
 
   def RetrieveAllUsers(self):
