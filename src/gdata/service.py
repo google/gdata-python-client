@@ -160,8 +160,8 @@ class GDataService(atom.service.AtomService):
     self.server = server
     self.additional_headers = additional_headers or {}
     self.handler = handler or http_request_handler
+    self.auth_token = None
     self.__SetSource(source)
-    self.__auth_token = None
     self.__captcha_token = None
     self.__captcha_url = None
     self.__gsessionid = None
@@ -179,7 +179,7 @@ class GDataService(atom.service.AtomService):
       auth_token: string The token returned by the AuthSub service.
     """
 
-    self.__auth_token = '%s=%s' % (AUTHSUB_AUTH_LABEL, auth_token)
+    self.auth_token = '%s=%s' % (AUTHSUB_AUTH_LABEL, auth_token)
     # The auth token is only set externally when using AuthSub authentication,
     # so set the auth_type to indicate AuthSub.
 
@@ -193,13 +193,7 @@ class GDataService(atom.service.AtomService):
       string
     """
 
-    return self.__auth_token
-
-  def __GetAuthToken(self):
-    return self._GetAuthToken()
-
-  auth_token = property(__GetAuthToken, __SetAuthSubToken,
-      doc="""Get or set the token used for authentication.""")
+    return self.auth_token
 
   def _GetCaptchaToken(self):
     """Returns a captcha token if the most recent login attempt generated one.
@@ -249,26 +243,26 @@ class GDataService(atom.service.AtomService):
       Label. If the AuthSub Token does not start with the AuthSub
       Authorization Label or it is not set, None is returned.
     """
-    if self.__auth_token.startswith(AUTHSUB_AUTH_LABEL):
+    if self.auth_token.startswith(AUTHSUB_AUTH_LABEL):
       # Strip off the leading 'AUTHSUB_AUTH_LABEL=' and just return the
       # token value.
-      return self.__auth_token[len(AUTHSUB_AUTH_LABEL)+1:]
+      return self.auth_token[len(AUTHSUB_AUTH_LABEL)+1:]
     else:
       return None
 
   def SetAuthSubToken(self, token):
-    self.__auth_token = '%s=%s' % (AUTHSUB_AUTH_LABEL, token)
+    self.auth_token = '%s=%s' % (AUTHSUB_AUTH_LABEL, token)
 
   def GetClientLoginToken(self):
-    if self.__auth_token.startswith(PROGRAMMATIC_AUTH_LABEL):
+    if self.auth_token.startswith(PROGRAMMATIC_AUTH_LABEL):
       # Strip off the leading 'PROGRAMMATIC_AUTH_LABEL=' and just return the
       # token value.
-      return self.__auth_token[len(PROGRAMMATIC_AUTH_LABEL)+1:]
+      return self.auth_token[len(PROGRAMMATIC_AUTH_LABEL)+1:]
     else:
       return None
 
   def SetClientLoginToken(self, token):
-    self.__auth_token = '%s=%s' % (PROGRAMMATIC_AUTH_LABEL, token)
+    self.auth_token = '%s=%s' % (PROGRAMMATIC_AUTH_LABEL, token)
 
   # Private methods to create the source property.
   def __GetSource(self):
@@ -326,7 +320,7 @@ class GDataService(atom.service.AtomService):
     response_body = auth_response.read()
 
     if auth_response.status == 200:
-      self.__auth_token = gdata.auth.GenerateClientLoginAuthToken(
+      self.auth_token = gdata.auth.GenerateClientLoginAuthToken(
            response_body)
       self.__captcha_token = None
       self.__captcha_url = None
@@ -385,7 +379,8 @@ class GDataService(atom.service.AtomService):
 
     self.ProgrammaticLogin(captcha_token, captcha_response)
 
-  def GenerateAuthSubURL(self, next, scope, secure=False, session=True):
+  def GenerateAuthSubURL(self, next, scope, secure=False, session=True, 
+      domain='default'):
     """Generate a URL at which the user will login and be redirected back.
 
     Users enter their credentials on a Google login page and a token is sent
@@ -414,7 +409,8 @@ class GDataService(atom.service.AtomService):
       session = 0
 
     request_params = urllib.urlencode({'next': next, 'scope': scope,
-                                    'secure': secure, 'session': session})
+                                       'secure': secure, 'session': session,
+                                       'hd': domain})
     return '%s/accounts/AuthSubRequest?%s' % (AUTH_SERVER_HOST, request_params)
 
   def UpgradeToSessionToken(self):
@@ -424,17 +420,17 @@ class GDataService(atom.service.AtomService):
       NonAuthSubToken if the user's auth token is not an AuthSub token
     """
    
-    if not self.__auth_token.startswith(AUTHSUB_AUTH_LABEL):
+    if not self.auth_token.startswith(AUTHSUB_AUTH_LABEL):
       raise NonAuthSubToken
 
     response = self.handler.HttpRequest(self, 'GET', None, 
         AUTH_SERVER_HOST + '/accounts/AuthSubSessionToken', 
-        extra_headers={'Authorization':self.__auth_token}, 
+        extra_headers={'Authorization':self.auth_token}, 
         content_type='application/x-www-form-urlencoded')
 
     response_body = response.read()
     if response.status == 200:
-      self.__auth_token = gdata.auth.AuthSubTokenFromHttpBody(response_body)
+      self.auth_token = gdata.auth.AuthSubTokenFromHttpBody(response_body)
 
   def RevokeAuthSubToken(self):
     """Revokes an existing AuthSub token.
@@ -443,15 +439,15 @@ class GDataService(atom.service.AtomService):
       NonAuthSubToken if the user's auth token is not an AuthSub token
     """
 
-    if not self.__auth_token.startswith(AUTHSUB_AUTH_LABEL):
+    if not self.auth_token.startswith(AUTHSUB_AUTH_LABEL):
       raise NonAuthSubToken
     
     response = self.handler.HttpRequest(self, 'GET', None, 
         AUTH_SERVER_HOST + '/accounts/AuthSubRevokeToken', 
-        extra_headers={'Authorization':self.__auth_token}, 
+        extra_headers={'Authorization':self.auth_token}, 
         content_type='application/x-www-form-urlencoded')
     if response.status == 200:
-      self.__auth_token = None
+      self.auth_token = None
 
   # CRUD operations
   def Get(self, uri, extra_headers=None, redirects_remaining=4, 
@@ -497,8 +493,8 @@ class GDataService(atom.service.AtomService):
       extra_headers = {}
 
     # Add the authentication header to the Get request
-    if self.__auth_token:
-      extra_headers['Authorization'] = self.__auth_token
+    if self.auth_token:
+      extra_headers['Authorization'] = self.auth_token
 
     if self.__gsessionid is not None:
       if uri.find('gsessionid=') < 0:
@@ -713,8 +709,8 @@ class GDataService(atom.service.AtomService):
       extra_headers = {}
 
     # Add the authentication header to the Get request
-    if self.__auth_token:
-      extra_headers['Authorization'] = self.__auth_token
+    if self.auth_token:
+      extra_headers['Authorization'] = self.auth_token
 
     if self.__gsessionid is not None:
       if uri.find('gsessionid=') < 0:
@@ -866,8 +862,8 @@ class GDataService(atom.service.AtomService):
       extra_headers = {}
 
     # Add the authentication header to the Get request
-    if self.__auth_token:
-      extra_headers['Authorization'] = self.__auth_token
+    if self.auth_token:
+      extra_headers['Authorization'] = self.auth_token
 
     if self.__gsessionid is not None:
       if uri.find('gsessionid=') < 0:

@@ -122,6 +122,11 @@ class ExtractAuthSubTokensTest(unittest.TestCase):
     url = 'http://www.yourwebapp.com/showcalendar.html?token=CKF50YzIH'
     self.assert_(gdata.auth.AuthSubTokenFromUrl(url) == 
         'AuthSub token=CKF50YzIH')
+    self.assert_(gdata.auth.TokenFromUrl(url) == 'CKF50YzIH')
+    url = 'http://www.yourwebapp.com/showcalendar.html?token==tokenCKF50YzIH='
+    self.assert_(gdata.auth.AuthSubTokenFromUrl(url) == 
+        'AuthSub token==tokenCKF50YzIH=')
+    self.assert_(gdata.auth.TokenFromUrl(url) == '=tokenCKF50YzIH=')
 
   def testGetTokenFromHttpResponse(self):
     response_body = ('Token=DQAA...7DCTN\r\n'

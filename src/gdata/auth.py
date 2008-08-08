@@ -22,9 +22,6 @@ import urllib
 __author__ = 'api.jscudder (Jeffrey Scudder)'
 
 
-AUTH_SUB_KEY_PATTERN = re.compile('.*\?.*token=(.*)(&?)')
-
-
 def GenerateClientLoginRequestBody(email, password, service, source, 
     account_type='HOSTED_OR_GOOGLE', captcha_token=None, 
     captcha_response=None):
@@ -120,7 +117,8 @@ def GetCaptchChallenge(http_body,
 
 
 def GenerateAuthSubUrl(next, scope, secure=False, session=True, 
-    request_url='https://www.google.com/accounts/AuthSubRequest'):
+    request_url='https://www.google.com/accounts/AuthSubRequest',
+    domain='default'):
   """Generate a URL at which the user will login and be redirected back.
 
   Users enter their credentials on a Google login page and a token is sent
@@ -151,7 +149,8 @@ def GenerateAuthSubUrl(next, scope, secure=False, session=True,
     session = 0
 
   request_params = urllib.urlencode({'next': next, 'scope': scope,
-                                  'secure': secure, 'session': session})
+                                     'secure': secure, 'session': session, 
+                                     'hd': domain})
   if request_url.find('?') == -1:
     return '%s?%s' % (request_url, request_params)
   else:
@@ -164,15 +163,35 @@ def AuthSubTokenFromUrl(url):
   """Extracts the AuthSub token from the URL. 
 
   Used after the AuthSub redirect has sent the user to the 'next' page and
-  appended the token to the URL.
+  appended the token to the URL. This function returns the value to be used
+  in the Authorization header. 
 
   Args:
     url: str The URL of the current page which contains the AuthSub token as
         a URL parameter.
   """
-  m = AUTH_SUB_KEY_PATTERN.match(url)
-  if m:
-    return 'AuthSub token=%s' % m.group(1)
+  token = TokenFromUrl(url)
+  if token:
+    return 'AuthSub token=%s' % token
+  return None
+
+
+def TokenFromUrl(url):
+  """Extracts the AuthSub token from the URL.
+
+  Returns the raw token value.
+
+  Args:
+    url: str The URL or the query portion of the URL string (after the ?) of
+        the current page which contains the AuthSub token as a URL parameter.
+  """
+  if url.find('?') > -1:
+    query_params = url.split('?')[1]
+  else:
+    query_params = url
+  for pair in query_params.split('&'):
+    if pair.startswith('token='):
+      return pair[6:]
   return None
 
 
