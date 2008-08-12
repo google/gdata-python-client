@@ -530,7 +530,7 @@ class GDataService(atom.service.AtomService):
           m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
           if m is not None:
             self.__gsessionid = m.group(1)
-          return self.Get(location, extra_headers, redirects_remaining - 1, 
+          return GDataService.Get(self, location, extra_headers, redirects_remaining - 1, 
               encoding=encoding, converter=converter)
         else:
           raise RequestError, {'status': server_response.status,
@@ -543,6 +543,7 @@ class GDataService(atom.service.AtomService):
     else:
       raise RequestError, {'status': server_response.status,
           'reason': server_response.reason, 'body': result_body}
+
 
   def GetMedia(self, uri, extra_headers=None):
     """Returns a MediaSource containing media and its metadata from the given
@@ -572,7 +573,8 @@ class GDataService(atom.service.AtomService):
       A GDataEntry built from the XML in the server's response.
     """
 
-    result = self.Get(uri, extra_headers, converter=atom.EntryFromString)
+    result = GDataService.Get(self, uri, extra_headers, 
+        converter=atom.EntryFromString)
     if isinstance(result, atom.Entry):
       return result
     else:
@@ -597,7 +599,7 @@ class GDataService(atom.service.AtomService):
       A GDataFeed built from the XML in the server's response.
     """
 
-    result = self.Get(uri, extra_headers, converter=converter)
+    result = GDataService.Get(self, uri, extra_headers, converter=converter)
     if isinstance(result, atom.Feed):
       return result
     else:
@@ -627,7 +629,8 @@ class GDataService(atom.service.AtomService):
     # Make a GET request on the next link and use the above closure for the
     # converted which processes the XML string from the server.
     if next_link and next_link.href:
-      return self.Get(next_link.href, converter=ConvertToFeedClass)
+      return GDataService.Get(self, next_link.href, 
+          converter=ConvertToFeedClass)
     else:
       return None
 
@@ -665,9 +668,9 @@ class GDataService(atom.service.AtomService):
       or the results of running converter on the server's result body (if
       converter was specified).
     """
-    return self.PostOrPut('POST', data, uri, extra_headers=extra_headers, 
-        url_params=url_params, escape_params=escape_params, 
-        redirects_remaining=redirects_remaining, 
+    return GDataService.PostOrPut(self, 'POST', data, uri, 
+        extra_headers=extra_headers, url_params=url_params, 
+        escape_params=escape_params, redirects_remaining=redirects_remaining,
         media_source=media_source, converter=converter)
 
   def PostOrPut(self, verb, data, uri, extra_headers=None, url_params=None, 
@@ -783,9 +786,9 @@ class GDataService(atom.service.AtomService):
           m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
           if m is not None:
             self.__gsessionid = m.group(1) 
-          return self.Post(data, location, extra_headers, url_params,
-              escape_params, redirects_remaining - 1, media_source, 
-              converter=converter)
+          return GDataService.Post(self, data, location, extra_headers, 
+              url_params, escape_params, redirects_remaining - 1, 
+              media_source, converter=converter)
         else:
           raise RequestError, {'status': server_response.status,
               'reason': '302 received without Location header',
@@ -830,9 +833,9 @@ class GDataService(atom.service.AtomService):
       or the results of running converter on the server's result body (if
       converter was specified).
     """
-    return self.PostOrPut('PUT', data, uri, extra_headers=extra_headers, 
-        url_params=url_params, escape_params=escape_params, 
-        redirects_remaining=redirects_remaining, 
+    return GDataService.PostOrPut(self, 'PUT', data, uri, 
+        extra_headers=extra_headers, url_params=url_params, 
+        escape_params=escape_params, redirects_remaining=redirects_remaining,
         media_source=media_source, converter=converter)
 
   def Delete(self, uri, extra_headers=None, url_params=None, 
@@ -886,8 +889,8 @@ class GDataService(atom.service.AtomService):
           m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
           if m is not None:
             self.__gsessionid = m.group(1) 
-          return self.Delete(location, extra_headers, url_params,
-              escape_params, redirects_remaining - 1)
+          return GDataService.Delete(self, location, extra_headers, 
+              url_params, escape_params, redirects_remaining - 1)
         else:
           raise RequestError, {'status': server_response.status,
               'reason': '302 received without Location header',
