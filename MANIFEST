@@ -9,6 +9,7 @@ src/atom/mock_service.py
 src/gdata/__init__.py
 src/gdata/test_data.py
 src/gdata/service.py
+src/gdata/client.py
 src/gdata/urlfetch.py
 src/gdata/auth.py
 src/gdata/base/__init__.py
@@ -48,6 +49,8 @@ tests/atom_tests/service_test.py
 tests/atom_tests/__init__.py
 tests/gdata_tests/__init__.py
 tests/gdata_tests/service_test.py
+tests/gdata_tests/client_test.py
+tests/gdata_tests/client_online_test.py
 tests/gdata_tests/auth_test.py
 tests/gdata_tests/codesearch_test.py
 tests/gdata_tests/calendar/__init__.py
