@@ -33,6 +33,9 @@ import gdata.service
 import gdata.calendar
 import atom
 
+DEFAULT_BATCH_URL = ('http://www.google.com/m8/feeds/contacts/default/full'
+                     '/batch')
+
 class Error(Exception):
   pass
 
@@ -240,6 +243,26 @@ class ContactsService(gdata.service.GDataService):
       url = contact_entry_or_url
     if url:
       self.Delete(url)
+
+  def ExecuteBatch(self, batch_feed, url,
+                   converter=gdata.contacts.ContactsFeedFromString):
+    """Sends a batch request feed to the server.
+    
+    Args:
+      batch_feed: gdata.contacts.ContactFeed A feed containing batch
+          request entries. Each entry contains the operation to be performed
+          on the data contained in the entry. For example an entry with an
+          operation type of insert will be used as if the individual entry
+          had been inserted.
+      url: str The batch URL to which these operations should be applied.
+      converter: Function (optional) The function used to convert the server's
+          response to an object. The default value is ContactsFeedFromString.
+    
+    Returns:
+      The results of the batch request's execution on the server. If the
+      default converter is used, this is stored in a ContactsFeed.
+    """
+    return self.Post(batch_feed, url, converter=converter)
 
 class ContactsQuery(gdata.service.Query):
 

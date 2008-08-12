@@ -17,7 +17,10 @@
 __author__ = 'api.jscudder (Jeff Scudder)'
 
 import getpass
+import random
+import re
 import unittest
+import urllib
 import atom
 import gdata.contacts.service
 
@@ -96,6 +99,60 @@ class ContactsServiceTest(unittest.TestCase):
 
     # Delete the entry.
     self.gd_client.DeleteContact(updated.GetEditLink().href)
+
+  def testCreateAndDeleteContactUsingBatch(self):
+    # Get random data for creating contact
+    r = random.Random()
+    random_contact_number = str(r.randint(100000, 1000000))
+    random_contact_title = 'Random Contact %s' % (
+        random_contact_number)
+    
+    # Set contact data
+    contact = gdata.contacts.ContactEntry()
+    contact.title = atom.Title(text=random_contact_title)
+    contact.email = gdata.contacts.Email(
+        address='user%s@example.com' % random_contact_number,
+        primary='true',
+        rel=gdata.contacts.REL_WORK)
+    contact.content = atom.Content(text='Contact created by '
+                                   'gdata-python-client automated test '
+                                   'suite.')
+    
+    # Form a batch request
+    batch_request = gdata.contacts.ContactsFeed()
+    batch_request.AddInsert(entry=contact)
+    
+    # Execute the batch request to insert the contact.
+    self.gd_client.ProgrammaticLogin()
+    default_batch_url = gdata.contacts.service.DEFAULT_BATCH_URL
+    batch_result = self.gd_client.ExecuteBatch(batch_request,
+                                               default_batch_url)
+    
+    self.assertEquals(len(batch_result.entry), 1)
+    self.assertEquals(batch_result.entry[0].title.text,
+                      random_contact_title)
+    self.assertEquals(batch_result.entry[0].batch_operation.type,
+                      gdata.BATCH_INSERT)
+    self.assertEquals(batch_result.entry[0].batch_status.code,
+                      '201')
+    expected_batch_url = re.compile('default').sub(
+        urllib.quote(self.gd_client.email),
+        gdata.contacts.service.DEFAULT_BATCH_URL)
+    self.failUnless(batch_result.GetBatchLink().href,
+                    expected_batch_url)
+    
+    # Create a batch request to delete the newly created entry.
+    batch_delete_request = gdata.contacts.ContactsFeed()
+    batch_delete_request.AddDelete(entry=batch_result.entry[0])
+    
+    batch_delete_result = self.gd_client.ExecuteBatch(
+        batch_delete_request,
+        batch_result.GetBatchLink().href)
+    self.assertEquals(len(batch_delete_result.entry), 1)
+    self.assertEquals(batch_delete_result.entry[0].batch_operation.type,
+                      gdata.BATCH_DELETE)
+    self.assertEquals(batch_result.entry[0].batch_status.code,
+                      '201')
 
 
 class ContactsQueryTest(unittest.TestCase):
