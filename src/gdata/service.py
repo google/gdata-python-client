@@ -60,6 +60,7 @@ __author__ = 'api.jscudder (Jeffrey Scudder)'
 import re
 import httplib
 import urllib
+import urlparse
 try:
   from xml.etree import cElementTree as ElementTree
 except ImportError:
@@ -79,6 +80,27 @@ import gdata.auth
 PROGRAMMATIC_AUTH_LABEL = 'GoogleLogin auth'
 AUTHSUB_AUTH_LABEL = 'AuthSub token'
 AUTH_SERVER_HOST = 'https://www.google.com'
+
+# When requesting an AuthSub token, it is often helpful to track the scope
+# which is being requested. One way to accomplish this is to add a URL 
+# parameter to the 'next' URL which contains the requested scope. This
+# constant is the default name (AKA key) for the URL parameter.
+SCOPE_URL_PARAM_NAME = 'authsub_token_scope'
+# Maps the service names used in ClientLogin to scope URLs.
+CLIENT_LOGIN_SCOPES = {
+    'cl': 'http://www.google.com/calendar/feeds/', # Google Calendar
+    'gbase': 'http://www.google.com/base/feeds/', # Google Base
+    'blogger': 'http://www.blogger.com/feeds/', # Blogger
+    'codesearch': 'http://www.google.com/codesearch/feeds/', # Google Code Search
+    'cp': 'http://www.google.com/m8/feeds/', # Contacts API
+    'finance': 'http://finance.google.com/finance/feeds/', # Google Finance
+    'health': 'https://www.google.com/health/feeds/', # Google Health
+    'writely': 'http://docs.google.com/feeds/documents/', # Documents List API
+    'lh2': 'http://picasaweb.google.com/data/feed/api/', # Picasa Web Albums
+    'apps': 'https://www.google.com/a/feeds/', # Google Apps Provisioning API
+    'wise': 'http://spreadsheets.google.com/feeds/', # Spreadsheets Data API
+    'sitemaps': 'https://www.google.com/webmasters/tools/feeds/', # Google Webmaster Tools
+    'youtube': 'http://gdata.youtube.com/feeds/api/'} # YouTube
 
 
 # Module level variable specifies which module should be used by GDataService
@@ -122,6 +144,11 @@ class BadAuthenticationServiceURL(Error):
 class TokenUpgradeFailed(Error):
   pass
 
+
+class AuthorizationRequired(Error):
+  pass
+
+
 class GDataService(atom.service.AtomService):
   """Contains elements needed for GData login and CRUD request headers.
 
@@ -131,7 +158,7 @@ class GDataService(atom.service.AtomService):
 
   def __init__(self, email=None, password=None, account_type='HOSTED_OR_GOOGLE',
                service=None, auth_service_url=None, source=None, server=None, 
-               additional_headers=None, handler=None):
+               additional_headers=None, handler=None, tokens=None):
     """Creates an object of type GDataService.
 
     Args:
@@ -166,6 +193,8 @@ class GDataService(atom.service.AtomService):
     self.additional_headers = additional_headers or {}
     self.handler = handler or http_request_handler
     self.auth_token = None
+    # dict which uses the scope URL as the key, and the token as the value.
+    self.tokens = tokens or {}
     self.__SetSource(source)
     self.__captcha_token = None
     self.__captcha_url = None
@@ -383,6 +412,7 @@ class GDataService(atom.service.AtomService):
       self.auth_service_url = auth_service_url
 
     self.ProgrammaticLogin(captcha_token, captcha_response)
+    self.tokens[CLIENT_LOGIN_SCOPES[service]] = self.auth_token
 
   def GenerateAuthSubURL(self, next, scope, secure=False, session=True, 
       domain='default'):
@@ -441,6 +471,15 @@ class GDataService(atom.service.AtomService):
                                 'reason': 'Non 200 response on upgrade',
                                 'body': result_body})
 
+  def UpgradeAndStoreAuthSubToken(self, token, scopes):
+    self.auth_token = token
+    self.UpgradeToSessionToken()
+    self.StoreAuthSubToken(service.auth_token, scopes)
+
+  def StoreAuthSubToken(self, token, scopes):
+    for scope in scopes:
+      self.tokens[scope] = token
+
   def RevokeAuthSubToken(self):
     """Revokes an existing AuthSub token.
 
@@ -457,6 +496,27 @@ class GDataService(atom.service.AtomService):
         content_type='application/x-www-form-urlencoded')
     if response.status == 200:
       self.auth_token = None
+
+  def FindTokenForScope(self, url):
+    # Attempt a direct match lookup first.
+    if url in self.tokens:
+      return self.tokens[url]
+    # If the scope is not an exact match, look for a scope which is broader
+    # than the current request.
+    else:
+      for scope in self.tokens:
+        if url.startswith(scope):
+          return self.tokens[scope]
+    return None
+
+  def RemoveTokenForScope(self, url):
+    if url in self.tokens:
+      del self.tokens[url]
+    else:
+      for scope in self.tokens:
+        if url.startswith(scope):
+          del self.tokens[scope]
+          return
 
   # CRUD operations
   def Get(self, uri, extra_headers=None, redirects_remaining=4, 
@@ -553,6 +613,32 @@ class GDataService(atom.service.AtomService):
       raise RequestError, {'status': server_response.status,
           'reason': server_response.reason, 'body': result_body}
 
+  def get(self, url, parser):
+    """Simplified interface for Get.
+
+    Automaticall sets the Authorization header to one of the tokens
+    in self.tokens based on the requested url.
+
+    Args:
+      url: A string or something that can be converted to a string using str.
+          The URL of the requested resource.
+      parser: A function which takes the HTTP body from the server as it's
+          only result. Common values would include str, 
+          gdata.GDataEntryFromString, and gdata.GDataFeedFromString.
+
+    Returns: The result of calling parser(http_response_body).
+    """
+    token = self.FindTokenForScope(url)
+    if token:
+      self.auth_token = token
+      try:
+        return gdata.service.GDataService.Get(self, uri=str(url), converter=parser)
+      except gdata.service.RequestError, inst:
+        if inst[0]['status'] == 403 or inst[0]['status'] == 401:
+          self.RemoveTokenForScope(url)
+        raise
+    else:
+      return gdata.service.GDataService.Get(self, uri=url, converter=parser)
 
   def GetMedia(self, uri, extra_headers=None):
     """Returns a MediaSource containing media and its metadata from the given
@@ -681,6 +767,25 @@ class GDataService(atom.service.AtomService):
         extra_headers=extra_headers, url_params=url_params, 
         escape_params=escape_params, redirects_remaining=redirects_remaining,
         media_source=media_source, converter=converter)
+
+  def post(self, data, url, parser, media_source=None):
+    """Streamlined version of Post.
+
+    Automaticall sets the Authorization header to one of the tokens
+    in self.tokens based on the requested url.
+    """
+    token = self.FindTokenForScope(url)
+    if token:
+      self.auth_token = token
+      try:
+        return gdata.service.GDataService.Post(self, data=data, uri=url,
+            media_source=media_source, converter=parser)
+      except gdata.service.RequestError, inst:
+        if inst[0]['status'] == 403 or inst[0]['status'] == 401:
+          self.RemoveTokenForScope(url)
+        raise
+    else:
+      raise AuthorizationRequired('Cannot Post to %s without an authorization token' % url)
 
   def PostOrPut(self, verb, data, uri, extra_headers=None, url_params=None, 
            escape_params=True, redirects_remaining=4, media_source=None, 
@@ -847,6 +952,25 @@ class GDataService(atom.service.AtomService):
         escape_params=escape_params, redirects_remaining=redirects_remaining,
         media_source=media_source, converter=converter)
 
+  def put(self, data, url, parser):
+    """Simplified version of Put.
+
+    Automaticall sets the Authorization header to one of the tokens
+    in self.tokens based on the requested url.
+    """
+    token = self.FindTokenForScope(url)
+    if token:
+      self.auth_token = token
+      try:
+        return gdata.service.GDataService.Put(self, data=data, uri=url,
+          converter=parser)
+      except gdata.service.RequestError, inst:
+        if inst[0]['status'] == 403 or inst[0]['status'] == 401:
+          self.RemoveTokenForScope(url)
+        raise
+    else:
+      raise AuthorizationRequired('Cannot Put to %s without an authorization token' % url)
+
   def Delete(self, uri, extra_headers=None, url_params=None, 
              escape_params=True, redirects_remaining=4):
     """Deletes the entry at the given URI.
@@ -911,6 +1035,104 @@ class GDataService(atom.service.AtomService):
     else:
       raise RequestError, {'status': server_response.status,
           'reason': server_response.reason, 'body': result_body}
+
+  def delete(self, url):
+    """Simplified version of Delete.
+
+    Automaticall sets the Authorization header to one of the tokens
+    in self.tokens based on the requested url.
+    """
+    token = self.FindTokenForScope(url)
+    if token:
+      self.auth_token = token
+      try:
+        return gdata.service.GDataService.Delete(self, uri=url)
+      except gdata.service.RequestError, inst:
+        if inst[0]['status'] == 403 or inst[0]['status'] == 401:
+          self.RemoveTokenForScope(url)
+        raise
+    else:
+      raise AuthorizationRequired('Cannot Delete %s without an authorization token' % url)
+
+
+def ExtractToken(url, scopes_included_in_next=True):
+  """Gets the AuthSub token from the current page's URL.
+
+  Designed to be used on the URL that the browser is sent to after the user
+  authorizes this application at the page given by GenerateAuthSubRequestUrl.
+
+  Args:
+    url: The current page's URL. It should contain the token as a URL
+        parameter. Example: 'http://example.com/?...&token=abcd435'
+    scopes_included_in_next: If True, this function looks for a scope value
+        associated with the token. The scope is a URL parameter with the
+        key set to SCOPE_URL_PARAM_NAME. This parameter should be present
+        if the AuthSub request URL was generated using
+        GenerateAuthSubRequestUrl with include_scope_in_next set to True.
+
+  Returns:
+    A tuple containing the token string and a list of scope strings for which
+    this token should be valid. If the scope was not included in the URL, the
+    tuple will contain (token, None).
+  """
+  parsed = urlparse.urlparse(url)
+  token = gdata.auth.AuthSubTokenFromUrl(parsed[4])
+  scopes = ''
+  if scopes_included_in_next:
+    for pair in parsed[4].split('&'):
+      if pair.startswith('%s=' % SCOPE_URL_PARAM_NAME):
+        scopes = urllib.unquote_plus(pair.split('=')[1])
+  return (token, scopes.split(' '))
+
+
+def GenerateAuthSubRequestUrl(next, scopes, hd='default', secure=False,
+    session=True, request_url='http://www.google.com/accounts/AuthSubRequest',
+    include_scopes_in_next=True):
+  """Creates a URL to request an AuthSub token to access Google services.
+
+  For more details on AuthSub, see the documentation here:
+  http://code.google.com/apis/accounts/docs/AuthSub.html
+
+  Args:
+    next: The URL where the browser should be sent after the user authorizes
+        the application. This page is responsible for receiving the token
+        which is embeded in the URL as a parameter.
+    scopes: The base URL to which access will be granted. Example:
+        'http://www.google.com/calendar/feeds' will grant access to all
+        URLs in the Google Calendar data API. If you would like a token for
+        multiple scopes, pass in a list of URL strings.
+    hd: The domain to which the user's account belongs. This is set to the
+        domain name if you are using Google Apps. Example: 'example.org'
+        Defaults to 'default'
+    secure: If set to True, all requests should be signed. The default is
+        False.
+    session: If set to True, the token received by the 'next' URL can be
+        upgraded to a multiuse session token. If session is set to False, the
+        token may only be used once and cannot be upgraded. Default is True.
+    request_url: The base of the URL to which the user will be sent to
+        authorize this application to access their data. The default is
+        'http://www.google.com/accounts/AuthSubRequest'.
+    include_scopes_in_next: Boolean if set to true, the 'next' parameter will
+        be modified to include the requested scope as a URL parameter. The
+        key for the next's scope parameter will be SCOPE_URL_PARAM_NAME. The
+        benefit of including the scope URL as a parameter to the next URL, is
+        that the page which receives the AuthSub token will be able to tell
+        which URLs the token grants access to.
+
+  Returns:
+    A URL string to which the browser should be sent.
+  """
+  if isinstance(scopes, list):
+    scope = ' '.join(scopes)
+  else:
+    scope = scopes
+  if include_scopes_in_next:
+    if next.find('?') > -1:
+      next += '&%s' % urllib.urlencode({SCOPE_URL_PARAM_NAME:scope})
+    else:
+      next += '?%s' % urllib.urlencode({SCOPE_URL_PARAM_NAME:scope})
+  return gdata.auth.GenerateAuthSubUrl(next=next, scope=scope, secure=secure,
+      session=session, request_url=request_url, domain=hd)
 
 
 class Query(dict):
