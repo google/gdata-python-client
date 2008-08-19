@@ -1,4 +1,4 @@
-!/usr/bin/python
+#!/usr/bin/python
 #
 # Copyright (C) 2008 Google Inc.
 #
@@ -66,11 +66,19 @@ class Url(object):
     if self.path:
       url_parts[2] = self.path
     if self.params:
-      param_pairs = []
-      for key, value in self.params.iteritems():
-        param_pairs.append('='.join((urllib.quote_plus(key), urllib.quote_plus(value))))
-      url_parts[4] = '&'.join(param_pairs)
+      url_parts[4] = self.get_param_string()
     return urlparse.urlunparse(url_parts)
+
+  def get_param_string(self):
+    param_pairs = []
+    for key, value in self.params.iteritems():
+      param_pairs.append('='.join((urllib.quote_plus(key), 
+          urllib.quote_plus(value))))
+    return '&'.join(param_pairs)
+
+  def get_request_uri(self):
+    """Returns the path with the parameters escaped and appended."""
+    return '?'.join([self.path, self.get_param_string()])
 
   def __str__(self):
     return self.to_string()
