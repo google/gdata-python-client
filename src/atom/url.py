@@ -47,7 +47,8 @@ def parse_url(url_string):
   return url   
    
 class Url(object):
-  def __init__(self, protocol=None, host=None, port=None, path=None, params=None):
+  def __init__(self, protocol=None, host=None, port=None, path=None, 
+               params=None):
     self.protocol = protocol
     self.host = host
     self.port = port

@@ -60,6 +60,14 @@ class UrlTest(unittest.TestCase):
     url.params['has spaces'] = 'sneaky=values?&!'
     self.assertTrue(url.to_string() == (
         'http://example.com/feed?has+spaces=sneaky%3Dvalues%3F%26%21'))
+
+  def testGetRequestUri(self):
+    url = atom.url.Url(protocol='http', host='example.com', path='/feed')
+    url.params['has spaces'] = 'sneaky=values?&!'
+    self.assertTrue(url.get_request_uri() == (
+        '/feed?has+spaces=sneaky%3Dvalues%3F%26%21'))
+    self.assertTrue(url.get_param_string() == (
+        'has+spaces=sneaky%3Dvalues%3F%26%21'))
      
 
 if __name__ == '__main__':
