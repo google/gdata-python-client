@@ -31,7 +31,7 @@ def RunAllTests(username, password, spreadsheet_key, worksheet_key,
                          gdata_tests.docs.service_test, 
                          gdata_tests.spreadsheet.service_test,
                          gdata_tests.spreadsheet.text_db_test,
-                         #gdata_tests.contacts.service_test,
+                         gdata_tests.contacts.service_test,
                          gdata_tests.photos.service_test]
   test_runner.settings = {'username':username, 'password':password, 
                           'test_image_location':'testimage.jpg',
