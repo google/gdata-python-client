@@ -412,7 +412,8 @@ class GDataService(atom.service.AtomService):
       self.auth_service_url = auth_service_url
 
     self.ProgrammaticLogin(captcha_token, captcha_response)
-    self.tokens[CLIENT_LOGIN_SCOPES[service]] = self.auth_token
+    if service in CLIENT_LOGIN_SCOPES:
+      self.tokens[CLIENT_LOGIN_SCOPES[service]] = self.auth_token
 
   def GenerateAuthSubURL(self, next, scope, secure=False, session=True, 
       domain='default'):
