@@ -84,15 +84,15 @@ class HttpClient(object):
         raise atom.http_interface.UnparsableUrlObject('Unable to parse url '
             'parameter because it was not a string or atom.url.Url')
                                   
-    connection = self._prepare_connection(url, headers)
-
     if headers is None:
       headers = {}
+
+    connection = self._prepare_connection(url, headers)
 
     if self.debug:
       connection.debuglevel = 1
 
-    connection.putrequest(operation, url.get_request_uri())
+    connection.putrequest(operation, self._get_access_url(url))
 
     # If the list of headers does not include a Content-Length, attempt to
     # calculate it based on the data object.
@@ -140,6 +140,9 @@ class HttpClient(object):
         url.port = 80
       return httplib.HTTPConnection(url.host, url.port)
 
+  def _get_access_url(self, url):
+    return url.get_request_uri()
+
 
 class ProxiedHttpClient(HttpClient):
   """Performs an HTTP request through a proxy.
@@ -168,7 +171,7 @@ class ProxiedHttpClient(HttpClient):
         # Construct the proxy connect command.
         port = url.port
         if not port:
-          port = '80'
+          port = '443'
         proxy_connect = 'CONNECT %s:%s HTTP/1.0\r\n' % (url.host, port)
         
         # Set the user agent to send to the proxy
@@ -186,7 +189,7 @@ class ProxiedHttpClient(HttpClient):
         
         # Connect to the proxy server, very simple recv and error checking
         p_sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        p_sock.connect((proxy_url.host, proxy_url.port))
+        p_sock.connect((proxy_url.host, int(proxy_url.port)))
         p_sock.sendall(proxy_pieces)
         response = ''
 
@@ -207,7 +210,7 @@ class ProxiedHttpClient(HttpClient):
         connection.sock=fake_sock
         return connection
       else:
-        # The request was HTTPS, but there was no http_proxy set.
+        # The request was HTTPS, but there was no https_proxy set.
         return HttpClient._prepare_connection(self, url, headers)
     else:
       proxy = os.environ.get('http_proxy')
@@ -225,8 +228,15 @@ class ProxiedHttpClient(HttpClient):
         # The request was HTTP, but there was no http_proxy set.
         return HttpClient._prepare_connection(self, url, headers)
 
+  def _get_access_url(self, url):
+    proxy = os.environ.get('http_proxy')
+    if url.protocol == 'http' and proxy:
+      return url.to_string()
+    else:
+      return url.get_request_uri()
 
-def _get_proxy_auth(self):
+
+def _get_proxy_auth():
   proxy_username = os.environ.get('proxy-username')
   if not proxy_username:
     proxy_username = os.environ.get('proxy_username')
