@@ -55,7 +55,7 @@ class MockResponse(atom.http_interface.HttpResponse):
 
 
 class MockHttpClient(atom.http_interface.GenericHttpClient):
-  def __init__(self, recordings=None, real_client=None):
+  def __init__(self, headers=None, recordings=None, real_client=None):
     """An HttpClient which responds to request with stored data.
 
     The request-response pairs are stored as tuples in a member list named
@@ -75,6 +75,7 @@ class MockHttpClient(atom.http_interface.GenericHttpClient):
     """
     self.recordings = recordings or []
     self.real_client = real_client
+    self.headers = headers or {}
 
   def add_response(self, response, operation, url, data=None, headers=None):
     """Adds a request-response pair to the recordings list.

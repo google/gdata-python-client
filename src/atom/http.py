@@ -51,8 +51,9 @@ DEFAULT_CONTENT_TYPE = 'application/atom+xml'
 
 
 class HttpClient(object):
-  def __init__(self):
+  def __init__(self, headers=None):
     self.debug = False
+    self.headers = headers or {}
 
   def request(self, operation, url, data=None, headers=None):
     """Performs an HTTP call to the server, supports GET, POST, PUT, and 
@@ -83,11 +84,12 @@ class HttpClient(object):
       else:
         raise atom.http_interface.UnparsableUrlObject('Unable to parse url '
             'parameter because it was not a string or atom.url.Url')
-                                  
-    if headers is None:
-      headers = {}
+    
+    all_headers = self.headers.copy()
+    if headers:
+      all_headers.update(headers) 
 
-    connection = self._prepare_connection(url, headers)
+    connection = self._prepare_connection(url, all_headers)
 
     if self.debug:
       connection.debuglevel = 1
@@ -96,21 +98,21 @@ class HttpClient(object):
 
     # If the list of headers does not include a Content-Length, attempt to
     # calculate it based on the data object.
-    if data and 'Content-Length' not in headers:
+    if data and 'Content-Length' not in all_headers:
       if isinstance(data, types.StringType):
-        headers['Content-Length'] = len(data)
+        all_headers['Content-Length'] = len(data)
       else:
         raise atom.http_interface.ContentLengthRequired('Unable to calculate '
             'the length of the data parameter. Specify a value for '
             'Content-Length')
 
     # Set the content type to the default value if none was set.
-    if 'Content-Type' not in headers:
-      headers['Content-Type'] = DEFAULT_CONTENT_TYPE
+    if 'Content-Type' not in all_headers:
+      all_headers['Content-Type'] = DEFAULT_CONTENT_TYPE
 
     # Send the HTTP headers.
-    for header_name in headers:
-      connection.putheader(header_name, headers[header_name])
+    for header_name in all_headers:
+      connection.putheader(header_name, all_headers[header_name])
     connection.endheaders()
 
     # If there is data, send it in the request.
