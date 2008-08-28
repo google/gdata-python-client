@@ -79,7 +79,11 @@ class Url(object):
 
   def get_request_uri(self):
     """Returns the path with the parameters escaped and appended."""
-    return '?'.join([self.path, self.get_param_string()])
+    param_string = self.get_param_string()
+    if param_string:
+      return '?'.join([self.path, param_string])
+    else:
+      return self.path
 
   def __str__(self):
     return self.to_string()
