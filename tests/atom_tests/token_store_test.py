@@ -20,6 +20,7 @@ __author__ = 'api.jscudder (Jeff Scudder)'
 
 import unittest
 import atom.token_store
+import atom.http_interface
 
 class TokenStoreTest(unittest.TestCase):
 
@@ -34,15 +35,19 @@ class TokenStoreTest(unittest.TestCase):
     self.assert_(self.tokens.find_token('http://example.org/') == self.token)
     self.assert_(self.tokens.find_token('http://example.org/foo?ok=1') == (
         self.token))
-    self.assert_(self.tokens.find_token('http://example.net/') is None)
-    self.assert_(self.tokens.find_token('example.com/') is None)
+    self.assert_(isinstance(self.tokens.find_token('http://example.net/'),
+        atom.http_interface.GenericToken))
+    self.assert_(isinstance(self.tokens.find_token('example.com/'), 
+        atom.http_interface.GenericToken))
 
   def testRemoveTokens(self):
     self.assert_(self.tokens.remove_token('http://example.com/') == True)
     self.assert_(self.tokens.find_token('http://example.org/') == self.token)
-    self.assert_(self.tokens.find_token('http://example.com/') is None)
+    self.assert_(isinstance(self.tokens.find_token('http://example.com/'),
+        atom.http_interface.GenericToken))
     self.assert_(self.tokens.remove_token('http://example.org/fo/ba') == True)
-    self.assert_(self.tokens.find_token('http://example.org/') is None)
+    self.assert_(isinstance(self.tokens.find_token('http://example.org/'),
+        atom.http_interface.GenericToken))
     self.assert_(self.tokens.remove_token('http://example.net/') == False)
 
 
