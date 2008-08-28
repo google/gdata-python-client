@@ -67,6 +67,8 @@ class MockHttpClient(atom.http_interface.GenericHttpClient):
     recordings.
     
     Args:
+      headers: dict containing HTTP headers which should be included in all
+          HTTP requests.
       recordings: The initial recordings to be used for responses. This list
           contains tuples in the form: (MockRequest, MockResponse)
       real_client: An HttpClient which will make a real HTTP request. The 

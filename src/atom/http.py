@@ -43,6 +43,7 @@ import atom.http_interface
 import socket
 import base64
 
+
 class ProxyError(atom.http_interface.Error):
   pass
 
@@ -50,7 +51,7 @@ class ProxyError(atom.http_interface.Error):
 DEFAULT_CONTENT_TYPE = 'application/atom+xml'
 
 
-class HttpClient(object):
+class HttpClient(atom.http_interface.GenericHttpClient):
   def __init__(self, headers=None):
     self.debug = False
     self.headers = headers or {}
