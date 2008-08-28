@@ -28,6 +28,9 @@ it will not be used in future requests.
 __author__ = 'api.jscudder (Jeff Scudder)'
 
 
+import http_interface
+
+
 SCOPE_ALL = 'http://'
 
 
@@ -40,8 +43,8 @@ class TokenStore(object):
     """Adds a new token to the store (replaces tokens with the same scope).
 
     Args:
-      token: str The token value to be sent as the value for the 
-          Authorization header in an HTTP request.
+      token: A subclass of http_interface.GenericToken. The token object is 
+          responsible for adding the Authorization header to the HTTP request.
       scopes: list of atom.url.Url objects, or strings which specify the
           URLs for which this token can be used. These do not need to be
           full URLs, any URL that begins with the scope will be considered
@@ -67,8 +70,11 @@ class TokenStore(object):
           of the URL. The first match found is returned.
 
     Returns:
-      The token string to be used in the Authorization headers, or None, if 
-      the url did not begin with any of the token scopes available. 
+      The token object which should execute the HTTP request. If there was
+      no token for the url (the url did not begin with any of the token
+      scopes available), then the http_interface.GenericToken will be 
+      returned because the GenericToken calls through to the http client
+      without adding an Authorization header.
     """
     url = str(url)
     if url in self._tokens:
@@ -77,7 +83,7 @@ class TokenStore(object):
       for scope, token in self._tokens.iteritems():
         if url.startswith(scope):
           return token
-    return None
+    return http_interface.GenericToken()
 
   def remove_token(self, url):
     """Removes the first token which is considered valid for the URL.

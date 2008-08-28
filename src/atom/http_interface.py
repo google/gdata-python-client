@@ -28,6 +28,9 @@ __author__ = 'api.jscudder (Jeff Scudder)'
 import StringIO
 
 
+USER_AGENT = '%s GData-Python/1.2.0'
+
+
 class Error(Exception):
   pass
 
@@ -84,3 +87,54 @@ class HttpResponse(object):
       return self._body.read()
     else:
       return self._body.read(amt)
+
+
+class GenericHttpClient(object):
+  def __init__(self, http_client, headers=None):
+    """
+    
+    Args:
+      http_client: An object which provides a request method to make an HTTP 
+          request. The request method in GenericHttpClient performs a 
+          call-through to the contained HTTP client object.
+      headers: A dictionary containing HTTP headers which should be included
+          in every HTTP request. Common persistent headers include 
+          'User-Agent'.
+    """
+    self.http_client = http_client
+    self.headers = headers or {}
+
+  def request(self, operation, url, data=None, headers=None):
+    all_headers = self.headers.copy()
+    if headers:
+      all_headers.update(headers)
+    return self.http_client.request(operation, url, data=data, 
+        headers=all_headers)
+
+  def get(self, url, headers=None):
+    return self.request('GET', url, headers=headers)
+
+  def post(self, url, data, headers=None):
+    return self.request('POST', url, data=data, headers=headers)
+
+  def put(self, url, data, headers=None):
+    return self.request('PUT', url, data=data, headers=headers)
+
+  def delete(self, url, headers=None):
+    return self.request('DELETE', url, headers=headers)
+
+
+class GenericToken(object):
+  """Represents an Authorization token to be added to HTTP requests.
+  
+  Some Authorization headers included calculated fields (digital
+  signatures for example) which are based on the parameters of the HTTP
+  request. Therefore the token is responsible for signing the request
+  and adding the Authorization header. 
+  """
+  def perform_request(self, http_client, operation, url, data=None, 
+                      headers=None):
+    """For the GenericToken, no Authorization token is set."""
+    return http_client.request(operation, url, data=data, headers=headers)
+
+
