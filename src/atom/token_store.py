@@ -31,7 +31,7 @@ __author__ = 'api.jscudder (Jeff Scudder)'
 import http_interface
 
 
-SCOPE_ALL = 'http://'
+SCOPE_ALL = 'http'
 
 
 class TokenStore(object):
