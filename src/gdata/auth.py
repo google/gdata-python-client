@@ -17,9 +17,14 @@
 
 import re
 import urllib
+import atom.http_interface
 
 
-__author__ = 'api.jscudder (Jeffrey Scudder)'
+__author__ = 'api.jscudder (Jeff Scudder)'
+
+
+PROGRAMMATIC_AUTH_LABEL = 'GoogleLogin auth='
+AUTHSUB_AUTH_LABEL = 'AuthSub token='
 
 
 def GenerateClientLoginRequestBody(email, password, service, source, 
@@ -216,3 +221,47 @@ def AuthSubTokenFromHttpBody(http_body):
       auth_token = response_line[6:]
       return 'AuthSub token=%s' % auth_token
   return None
+
+
+class ClientLoginToken(http_interface.GenericToken):
+  """Stores the Authorization header in auth_header and adds to requests.
+
+  This token will add it's Authorization header to an HTTP request
+  as it is made. Ths token class is simple but
+  some Token classes must calculate portions of the Authorization header
+  based on the request being made, which is why the token is responsible
+  for making requests via an http_client parameter.
+  """
+  def __init__(self, auth_header=None):
+    self.auth_header = auth_header
+
+  def __str__(self):
+    return self.auth_header
+
+  def perform_request(self, http_client, operation, url, data=None,
+                      headers=None):
+    """Sets the Authorization header and makes the HTTP request."""
+    if headers is None:
+      headers = {'Authorization':self.auth_header}
+    else:
+      headers['Authorization'] = self.auth_header
+    return http_client.request(operation, url, data=data, headers=headers)
+
+  def get_token_string(self):
+    """Removes PROGRAMMATIC_AUTH_LABEL to give just the token value."""
+    return self.auth_header[len(PROGRAMMATIC_AUTH_LABEL):]
+
+  def set_token_string(self, token_string):
+    self.auth_header = '%s%s' % (PROGRAMMATIC_AUTH_LABEL, token_string)
+    
+
+class AuthSubToken(ClientLoginToken):
+  def get_token_string(self):
+    """Removes AUTHSUB_AUTH_LABEL to give just the token value."""
+    return self.auth_header[len(AUTHSUB_AUTH_LABEL):]
+
+  def set_token_string(self, token_string):
+    self.auth_header = '%s%s' % (AUTHSUB_AUTH_LABEL, token_string)
+
+
+#TODO: Add classes for SecureAuthSubToken and OAuthToken.
