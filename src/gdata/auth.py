@@ -75,10 +75,29 @@ def GenerateClientLoginAuthToken(http_body):
   Returns:
     The value half of an Authorization header.
   """
+  token = get_client_login_token(http_body)
+  if token:
+    return 'GoogleLogin auth=%s' % token
+  return None
+
+
+def get_client_login_token(http_body):
+  """Returns the token value for a ClientLoginToken.
+
+  Reads the token from the server's response to a Client Login request and
+  creates the token value string to use in requests.
+
+  Args:
+    http_body: str The body of the server's HTTP response to a Client Login
+        request
+ 
+  Returns:
+    The token value for a ClientLoginToken.
+  """
   for response_line in http_body.splitlines():
     if response_line.startswith('Auth='):
       # Strip off the leading Auth= and return the Authorization value.
-      return 'GoogleLogin auth=%s' % response_line[5:]
+      return response_line[5:]
   return None
 
 
@@ -223,7 +242,7 @@ def AuthSubTokenFromHttpBody(http_body):
   return None
 
 
-class ClientLoginToken(http_interface.GenericToken):
+class ClientLoginToken(atom.http_interface.GenericToken):
   """Stores the Authorization header in auth_header and adds to requests.
 
   This token will add it's Authorization header to an HTTP request
@@ -231,9 +250,18 @@ class ClientLoginToken(http_interface.GenericToken):
   some Token classes must calculate portions of the Authorization header
   based on the request being made, which is why the token is responsible
   for making requests via an http_client parameter.
+
+  Args:
+    auth_header: str The value for the Authorization header.
+    scopes: list of str or atom.url.Url specifying the beginnings of URLs
+        for which this token can be used. For example, if scopes contains
+        'http://example.com/foo', then this token can be used for a request to
+        'http://example.com/foo/bar' but it cannot be used for a request to
+        'http://example.com/baz'
   """
-  def __init__(self, auth_header=None):
+  def __init__(self, auth_header=None, scopes=None):
     self.auth_header = auth_header
+    self.scopes = scopes or []
 
   def __str__(self):
     return self.auth_header
@@ -253,7 +281,19 @@ class ClientLoginToken(http_interface.GenericToken):
 
   def set_token_string(self, token_string):
     self.auth_header = '%s%s' % (PROGRAMMATIC_AUTH_LABEL, token_string)
-    
+  
+  def valid_for_scope(self, url):
+    """Tells the caller if the token authorizes access to the desired URL.
+
+    Since the generic token doesn't add an auth header, it is not valid for
+    any scope.
+    """
+    for scope in self.scopes:
+      scope = str(scope)
+      url = str(url)
+      if url.startswith(scope):
+        return True
+    return False
 
 class AuthSubToken(ClientLoginToken):
   def get_token_string(self):
