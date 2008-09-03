@@ -137,4 +137,12 @@ class GenericToken(object):
     """For the GenericToken, no Authorization token is set."""
     return http_client.request(operation, url, data=data, headers=headers)
 
+  def valid_for_scope(self, url):
+    """Tells the caller if the token authorizes access to the desired URL.
+    
+    Since the generic token doesn't add an auth header, it is not valid for
+    any scope.
+    """
+    return False
+
 
