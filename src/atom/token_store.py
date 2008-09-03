@@ -28,7 +28,7 @@ it will not be used in future requests.
 __author__ = 'api.jscudder (Jeff Scudder)'
 
 
-import http_interface
+import atom.http_interface
 
 
 SCOPE_ALL = 'http'
@@ -71,7 +71,7 @@ class TokenStore(object):
     Returns:
       The token object which should execute the HTTP request. If there was
       no token for the url (the url did not begin with any of the token
-      scopes available), then the http_interface.GenericToken will be 
+      scopes available), then the atom.http_interface.GenericToken will be 
       returned because the GenericToken calls through to the http client
       without adding an Authorization header.
     """
@@ -83,28 +83,30 @@ class TokenStore(object):
       if token.valid_for_scope(url):
         return token
       else:
-        self.remove_token(url)
+        del self._tokens[url]
     for scope, token in self._tokens.iteritems():
       if token.valid_for_scope(url):
         return token
-    return http_interface.GenericToken()
+    return atom.http_interface.GenericToken()
 
-  def remove_token(self, url):
-    """Removes the first token which is considered valid for the URL.
+  def remove_token(self, token):
+    """Removes the token from the token_store.
 
-    See find_token for information on how the correct token for the URL is
-    found.
+    This method is used when a token is determined to be invalid. If the
+    token was found by find_token, but resulted in a 401 or 403 error stating
+    that the token was invlid, then the token should be removed to prevent
+    future use.
 
     Returns:
-      True if a token was found for the url and then removed from the token
-      store. False if no token was found that matches the URL.
+      True if a token was found and then removed from the token
+      store. False if the token was not in the TokenStore.
     """
-    url = str(url)
-    if url in self._tokens:
-      del self._tokens[url]
-      return True
-    for scope, token in self._tokens.iteritems():
-      if token.valid_for_scope(url):
-        del self._tokens[scope]
-        return True
-    return False
+    token_found = False
+    scopes_to_delete = []
+    for scope, stored_token in self._tokens.iteritems():
+      if stored_token == token:
+        scopes_to_delete.append(scope)
+        token_found = True
+    for scope in scopes_to_delete:
+      del self._tokens[scope]
+    return token_found
