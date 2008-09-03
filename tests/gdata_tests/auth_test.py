@@ -134,6 +134,18 @@ class ExtractAuthSubTokensTest(unittest.TestCase):
     self.assert_(gdata.auth.AuthSubTokenFromHttpBody(response_body) == 
         'AuthSub token=DQAA...7DCTN')
 
+
+class TokenClassesTest(unittest.TestCase):
+
+  def testClientLoginToAndFromSting(self):
+    token = gdata.auth.ClientLoginToken()
+    token.set_token_string('foo')
+    self.assertEquals(token.get_token_string(), 'foo')
+    self.assertEquals(token.auth_header, '%s%s' % (
+        gdata.auth.PROGRAMMATIC_AUTH_LABEL, 'foo'))
+    token.set_token_string(token.get_token_string())
+    self.assertEquals(token.get_token_string(), 'foo')
+
     
 if __name__ == '__main__':
   unittest.main()
