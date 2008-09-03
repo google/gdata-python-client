@@ -39,33 +39,32 @@ class TokenStore(object):
   def __init__(self, scoped_tokens=None):
     self._tokens = scoped_tokens or {}
 
-  def add_token(self, token, scopes):
+  def add_token(self, token):
     """Adds a new token to the store (replaces tokens with the same scope).
 
     Args:
       token: A subclass of http_interface.GenericToken. The token object is 
           responsible for adding the Authorization header to the HTTP request.
-      scopes: list of atom.url.Url objects, or strings which specify the
-          URLs for which this token can be used. These do not need to be
-          full URLs, any URL that begins with the scope will be considered
-          a match.
+          The scopes defined in the token are used to determine if the token
+          is valid for a requested scope when find_token is called.
 
     Returns:
       True if the token was added, False if the token was not added becase
       no scopes were provided.
     """
-    if scopes:
-      for scope in scopes:
-        self._tokens[str(scope)] = token
-      return True
-    else:
+    if not hasattr(token, 'scopes') or not token.scopes:
       return False
+
+    for scope in token.scopes:
+      self._tokens[str(scope)] = token
+    return True  
 
   def find_token(self, url):
     """Selects an Authorization header token which can be used for the URL.
 
     Args:
-      url: str or atom.url.Url The URL which is going to be requested. All
+      url: str or atom.url.Url or a list containing the same.
+          The URL which is going to be requested. All
           tokens are examined to see if any scopes begin match the beginning
           of the URL. The first match found is returned.
 
@@ -76,13 +75,18 @@ class TokenStore(object):
       returned because the GenericToken calls through to the http client
       without adding an Authorization header.
     """
+    if url is None:
+      return None
     url = str(url)
     if url in self._tokens:
-      return self._tokens[url]
-    else:
-      for scope, token in self._tokens.iteritems():
-        if url.startswith(scope):
-          return token
+      token = self._tokens[url]
+      if token.valid_for_scope(url):
+        return token
+      else:
+        self.remove_token(url)
+    for scope, token in self._tokens.iteritems():
+      if token.valid_for_scope(url):
+        return token
     return http_interface.GenericToken()
 
   def remove_token(self, url):
@@ -99,9 +103,8 @@ class TokenStore(object):
     if url in self._tokens:
       del self._tokens[url]
       return True
-    else:
-      for scope in self._tokens:
-        if url.startswith(scope):
-          del self._tokens[scope]
-          return True
+    for scope, token in self._tokens.iteritems():
+      if token.valid_for_scope(url):
+        del self._tokens[scope]
+        return True
     return False

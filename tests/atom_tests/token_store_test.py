@@ -21,14 +21,15 @@ __author__ = 'api.jscudder (Jeff Scudder)'
 import unittest
 import atom.token_store
 import atom.http_interface
+import atom.service
 
 class TokenStoreTest(unittest.TestCase):
 
   def setUp(self):
-    self.token = 'aaa1'
+    self.token = atom.service.BasicAuthToken('aaa1', scopes=[
+        'http://example.com/', 'http://example.org'])
     self.tokens = atom.token_store.TokenStore()
-    self.tokens.add_token(self.token, ['http://example.com/', 
-                                       'http://example.org'])
+    self.tokens.add_token(self.token)
 
   def testAddAndFindTokens(self):
     self.assert_(self.tokens.find_token('http://example.com/') == self.token)
@@ -38,6 +39,17 @@ class TokenStoreTest(unittest.TestCase):
     self.assert_(isinstance(self.tokens.find_token('http://example.net/'),
         atom.http_interface.GenericToken))
     self.assert_(isinstance(self.tokens.find_token('example.com/'), 
+        atom.http_interface.GenericToken))
+
+  def testFindTokenUsingMultipleUrls(self):
+    self.assert_(self.tokens.find_token(
+        'http://example.com/') == self.token)
+    self.assert_(self.tokens.find_token(
+        'http://example.org/bar') == self.token)
+    self.assert_(isinstance(self.tokens.find_token(''), 
+        atom.http_interface.GenericToken))
+    self.assert_(isinstance(self.tokens.find_token(
+            'http://example.net/'), 
         atom.http_interface.GenericToken))
 
   def testRemoveTokens(self):
