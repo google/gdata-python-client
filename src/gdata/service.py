@@ -90,6 +90,7 @@ SCOPE_URL_PARAM_NAME = 'authsub_token_scope'
 # Maps the service names used in ClientLogin to scope URLs.
 CLIENT_LOGIN_SCOPES = {
     'cl': [ # Google Calendar
+        'https://www.google.com/calendar/feeds/',
         'http://www.google.com/calendar/feeds/'],
     'gbase': [ # Google Base
         'http://base.google.com/base/feeds/',
@@ -99,12 +100,14 @@ CLIENT_LOGIN_SCOPES = {
     'codesearch': [ # Google Code Search
         'http://www.google.com/codesearch/feeds/'],
     'cp': [ # Contacts API
+        'https://www.google.com/m8/feeds/',
         'http://www.google.com/m8/feeds/'],
     'finance': [ # Google Finance
         'http://finance.google.com/finance/feeds/'],
     'health': [ # Google Health
         'https://www.google.com/health/feeds/'],
     'writely': [ # Documents List API
+        'https://docs.google.com/feeds/',
         'http://docs.google.com/feeds/'],
     'lh2': [ # Picasa Web Albums
         'http://picasaweb.google.com/data/'],
@@ -112,6 +115,7 @@ CLIENT_LOGIN_SCOPES = {
         'http://www.google.com/a/feeds/',
         'https://www.google.com/a/feeds/'],
     'wise': [ # Spreadsheets Data API
+        'https://spreadsheets.google.com/feeds/',
         'http://spreadsheets.google.com/feeds/'],
     'sitemaps': [ # Google Webmaster Tools
         'https://www.google.com/webmasters/tools/feeds/'],
