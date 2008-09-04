@@ -22,6 +22,7 @@ try:
 except ImportError:
   from elementtree import ElementTree
 import atom
+import atom.mock_http
 import gdata.calendar
 import gdata.calendar.service
 import random
@@ -325,6 +326,21 @@ class CalendarServiceUnitTest(unittest.TestCase):
     result = self.cal_client.GetCalendarEventFeed()
     self.assertEquals(isinstance(result, gdata.calendar.CalendarEventFeed), 
                       True)
+
+  def testValidHostName(self):
+    mock_http = atom.mock_http.MockHttpClient()
+    response = atom.mock_http.MockResponse(body='<entry/>', status=200,
+        reason='OK')
+    mock_http.add_response(response, 'GET',
+        'https://www.google.com/calendar/feeds/default/allcalendars/full')
+    self.cal_client.ssl = True
+    self.cal_client.http_client = mock_http
+    self.cal_client.SetAuthSubToken('foo')
+    self.assertEquals(str(self.cal_client.token_store.find_token(
+        'https://www.google.com/calendar/feeds/default/allcalendars/full')),
+        'AuthSub token=foo')
+    resp = self.cal_client.Get('/calendar/feeds/default/allcalendars/full')
+    self.assert_(resp is not None)
 
 
 class CalendarEventQueryUnitTest(unittest.TestCase):
