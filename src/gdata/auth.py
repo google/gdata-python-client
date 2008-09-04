@@ -234,11 +234,30 @@ def AuthSubTokenFromHttpBody(http_body):
     The header value to use for Authorization which contains the AuthSub
     token.
   """
+  token_value = TokenFromHttpBody(http_body)
+  if token_value:
+    return 'AuthSub token=%s' % token_value
+  return None
+
+
+def TokenFromHttpBody(http_body):
+  """Extracts the AuthSub token from an HTTP body string.
+
+  Used to find the new session token after making a request to upgrade a 
+  single use AuthSub token.
+
+  Args:
+    http_body: str The repsonse from the server which contains the AuthSub 
+        key. For example, this function would find the new session token
+        from the server's response to an upgrade token request.
+
+  Returns:
+    The raw token value to use in an AuthSubToken object.
+  """
   for response_line in http_body.splitlines():
     if response_line.startswith('Token='):
-      # Strip off Token= and construct the Authorization value.
-      auth_token = response_line[6:]
-      return 'AuthSub token=%s' % auth_token
+      # Strip off Token= and return the token value string.
+      return response_line[6:]
   return None
 
 
