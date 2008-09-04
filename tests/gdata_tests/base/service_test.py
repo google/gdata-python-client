@@ -109,7 +109,7 @@ class GBaseServiceUnitTest(unittest.TestCase):
   def testInsertItemUpdateItemAndDeleteItem(self):
     try:
       self.gd_client.ProgrammaticLogin()
-      self.assert_(self.gd_client.auth_token is not None)
+      self.assert_(self.gd_client.GetClientLoginToken() is not None)
       self.assert_(self.gd_client.captcha_token is None)
       self.assert_(self.gd_client.captcha_url is None)
     except gdata.service.CaptchaRequired:
@@ -145,7 +145,7 @@ class GBaseServiceUnitTest(unittest.TestCase):
   def testInsertItemUpdateItemAndDeleteItemWithConverter(self):
     try:
       self.gd_client.ProgrammaticLogin()
-      self.assert_(self.gd_client.auth_token is not None)
+      self.assert_(self.gd_client.GetClientLoginToken() is not None)
       self.assert_(self.gd_client.captcha_token is None)
       self.assert_(self.gd_client.captcha_url is None)
     except gdata.service.CaptchaRequired:
@@ -173,7 +173,7 @@ class GBaseServiceUnitTest(unittest.TestCase):
   def testMakeBatchRequests(self):
     try:
       self.gd_client.ProgrammaticLogin()
-      self.assert_(self.gd_client.auth_token is not None)
+      self.assert_(self.gd_client.GetClientLoginToken() is not None)
       self.assert_(self.gd_client.captcha_token is None)
       self.assert_(self.gd_client.captcha_url is None)
     except gdata.service.CaptchaRequired:

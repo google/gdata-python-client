@@ -63,7 +63,7 @@ class AtomServiceUnitTest(unittest.TestCase):
   def testParseHttpUrl(self):
     as = atom.service.AtomService('code.google.com')
     self.assertEquals(as.server, 'code.google.com')
-    (host, port, ssl, path) =  as._ProcessUrl(
+    (host, port, ssl, path) =  atom.service.ProcessUrl(as,
         'http://www.google.com/service/subservice?name=value')
 
     self.assertEquals(ssl, False)
@@ -74,44 +74,52 @@ class AtomServiceUnitTest(unittest.TestCase):
   def testParseHttpUrlWithPort(self):
     as = atom.service.AtomService('code.google.com')
     self.assertEquals(as.server, 'code.google.com')
-    (host, port, ssl, path) =  as._ProcessUrl(
+    (host, port, ssl, path) =  atom.service.ProcessUrl(as,
         'http://www.google.com:12/service/subservice?name=value&newname=newvalue')
 
     self.assertEquals(ssl, False)
     self.assertEquals(host, 'www.google.com')
     self.assertEquals(port, 12)
-    self.assertEquals(path, '/service/subservice?name=value&newname=newvalue')
+    self.assert_(path.startswith('/service/subservice?'))
+    self.assert_(path.find('name=value') >= len('/service/subservice?'))
+    self.assert_(path.find('newname=newvalue') >= len('/service/subservice?'))
 
   def testParseHttpsUrl(self):
     as = atom.service.AtomService('code.google.com')
     self.assertEquals(as.server, 'code.google.com')
-    (host, port, ssl, path) =  as._ProcessUrl(
+    (host, port, ssl, path) =  atom.service.ProcessUrl(as,
         'https://www.google.com/service/subservice?name=value&newname=newvalue')
 
     self.assertEquals(ssl, True)
     self.assertEquals(host, 'www.google.com')
     self.assertEquals(port, 443)
-    self.assertEquals(path, '/service/subservice?name=value&newname=newvalue')
+    self.assert_(path.startswith('/service/subservice?'))
+    self.assert_(path.find('name=value') >= len('/service/subservice?'))
+    self.assert_(path.find('newname=newvalue') >= len('/service/subservice?'))
 
   def testParseHttpsUrlWithPort(self):
     as = atom.service.AtomService('code.google.com')
     self.assertEquals(as.server, 'code.google.com')
-    (host, port, ssl, path) =  as._ProcessUrl(
+    (host, port, ssl, path) =  atom.service.ProcessUrl(as,
         'https://www.google.com:13981/service/subservice?name=value&newname=newvalue')
 
     self.assertEquals(ssl, True)
     self.assertEquals(host, 'www.google.com')
     self.assertEquals(port, 13981)
-    self.assertEquals(path, '/service/subservice?name=value&newname=newvalue')
+    self.assert_(path.startswith('/service/subservice?'))
+    self.assert_(path.find('name=value') >= len('/service/subservice?'))
+    self.assert_(path.find('newname=newvalue') >= len('/service/subservice?'))
 
   def testSetBasicAuth(self):
     client = atom.service.AtomService()
     client.UseBasicAuth('foo', 'bar')
-    self.assertEquals(client.additional_headers['Authorization'], 
-        'Basic Zm9vOmJhcg==')
+    token = client.token_store.find_token('http://')
+    self.assert_(isinstance(token, atom.service.BasicAuthToken))
+    self.assertEquals(token.auth_header, 'Basic Zm9vOmJhcg==')
     client.UseBasicAuth('','')
-    self.assertEquals(client.additional_headers['Authorization'],
-        'Basic Og==')
+    token = client.token_store.find_token('http://')
+    self.assert_(isinstance(token, atom.service.BasicAuthToken))
+    self.assertEquals(token.auth_header, 'Basic Og==')
 
   def testProcessUrlWithStringForService(self):
     (server, port, ssl, uri) = atom.service.ProcessUrl(
@@ -119,7 +127,7 @@ class AtomServiceUnitTest(unittest.TestCase):
     self.assertEquals(server, 'www.google.com')
     self.assertEquals(port, 80)
     self.assertEquals(ssl, False)
-    self.assertEquals(uri, '/base/feeds/items')
+    self.assert_(uri.startswith('/base/feeds/items'))
 
     client = atom.service.AtomService()
     client.server = 'www.google.com'
@@ -128,14 +136,14 @@ class AtomServiceUnitTest(unittest.TestCase):
         service=client, url='/base/feeds/items')
     self.assertEquals(server, 'www.google.com')
     self.assertEquals(ssl, True)
-    self.assertEquals(uri, '/base/feeds/items')
+    self.assert_(uri.startswith('/base/feeds/items'))
 
     (server, port, ssl, uri) = atom.service.ProcessUrl(service=None,
         url='https://www.google.com/base/feeds/items')
     self.assertEquals(server, 'www.google.com')
     self.assertEquals(port, 443)
     self.assertEquals(ssl, True)
-    self.assertEquals(uri, '/base/feeds/items')
+    self.assert_(uri.startswith('/base/feeds/items'))
 
 
 if __name__ == '__main__':

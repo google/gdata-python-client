@@ -24,12 +24,14 @@ except ImportError:
   from elementtree import ElementTree
 import gdata.service
 import gdata
+import gdata.auth
 import atom
 import atom.service
+import atom.token_store
 import gdata.base
 import os.path
 from gdata import test_data
-import atom.mock_service
+import atom.mock_http
 
 
 username = ''
@@ -191,15 +193,20 @@ class GDataServiceUnitTest(unittest.TestCase):
   def testCorrectLogin(self):
     try:
       self.gd_client.ProgrammaticLogin()
-      self.assert_(self.gd_client.auth_token is not None)
+      self.assert_(isinstance(
+          self.gd_client.token_store.find_token(
+              'http://base.google.com/base/feeds/'),
+          gdata.auth.ClientLoginToken))
+      #self.assert_(self.gd_client.auth_token is not None)
       self.assert_(self.gd_client.captcha_token is None)
       self.assert_(self.gd_client.captcha_url is None)
     except gdata.service.CaptchaRequired:
-    
       self.fail('Required Captcha')
 
-  def testDefaultHandler(self):
-    self.assertEquals(self.gd_client.handler, atom.service)
+  def testDefaultHttpClient(self):
+    self.assert_(isinstance(self.gd_client.http_client, 
+                            atom.http.HttpClient))
+
 
   def testGet(self):
     try:
@@ -360,19 +367,19 @@ class GDataServiceUnitTest(unittest.TestCase):
   def testCaptchaUrlGeneration(self):
     # Populate the mock server with a pairing for a ClientLogin request to a
     # CAPTCHA challenge.
-    login_request = atom.mock_service.MockRequest(operation='POST', 
-        uri='https://www.google.com/accounts/ClientLogin')
-    captcha_response = atom.mock_service.MockHttpResponse(
+    mock_client = atom.mock_http.MockHttpClient()
+    captcha_response = atom.mock_http.MockResponse(
         body="""Url=http://www.google.com/login/captcha
 Error=CaptchaRequired
 CaptchaToken=DQAAAGgAdkI1LK9
 CaptchaUrl=Captcha?ctoken=HiteT4b0Bk5Xg18_AcVoP6-yFkHPibe7O9EqxeiI7lUSN
 """, status=403, reason='Access Forbidden')
-    atom.mock_service.recordings.append((login_request, captcha_response))
+    mock_client.add_response(captcha_response, 'POST', 
+        'https://www.google.com/accounts/ClientLogin')
 
     # Set the exising client's handler so that it will make requests to the
     # mock service instead of the real server.
-    self.gd_client.handler = atom.mock_service
+    self.gd_client.http_client = mock_client
 
     try:
       self.gd_client.ProgrammaticLogin()
@@ -468,6 +475,67 @@ class GetNextPageInFeedTest(unittest.TestCase):
     next_id = feed2.entry[0].id.text
     self.assert_(first_id != next_id)
     self.assert_(feed2.__class__ == feed.__class__)
+
+
+class ScopeLookupTest(unittest.TestCase):
+
+  def testLookupScopes(self):
+    scopes = gdata.service.lookup_scopes('cl')
+    self.assertEquals(scopes, gdata.service.CLIENT_LOGIN_SCOPES['cl'])
+    scopes = gdata.service.lookup_scopes(None)
+    self.assert_(scopes is None)
+    scopes = gdata.service.lookup_scopes('UNKNOWN_SERVICE')
+    self.assert_(scopes is None)
+
+
+class TokenLookupTest(unittest.TestCase):
+
+  def setUp(self):
+    self.client = gdata.service.GDataService()
+
+  def testSetAndGetClientLoginTokenWithNoService(self):
+    self.assert_(self.client.auth_token is None)
+    self.client.SetClientLoginToken('foo')
+    self.assert_(self.client.auth_token is not None)
+    self.assertEquals(self.client.GetClientLoginToken(), 'foo')
+    self.client.SetClientLoginToken('foo2')
+    self.assertEquals(self.client.GetClientLoginToken(), 'foo2')
+
+  def testSetAndGetClientLoginTokenWithService(self):
+    self.client.service = 'cp'
+    self.client.SetClientLoginToken('bar')
+    self.assertEquals(self.client.GetClientLoginToken(), 'bar')
+    # Changing the service should cause the token to no longer be found.
+    self.client.service = 'gbase'
+    self.assert_(self.client.GetClientLoginToken() is None)
+
+  def testSetAndGetClientLoginTokenWithScopes(self):
+    scopes = gdata.service.CLIENT_LOGIN_SCOPES['cl'][:]
+    scopes.extend(gdata.service.CLIENT_LOGIN_SCOPES['gbase'])
+    self.client.SetClientLoginToken('baz', scopes=scopes)
+    self.assert_(self.client.GetClientLoginToken() is None)
+    self.client.service = 'cl'
+    self.assertEquals(self.client.GetClientLoginToken(), 'baz')
+    self.client.service = 'gbase'
+    self.assertEquals(self.client.GetClientLoginToken(), 'baz')
+    self.client.service = 'wise'
+    self.assert_(self.client.GetClientLoginToken() is None)
+
+  def testLookupUsingTokenStore(self):
+    scopes = gdata.service.CLIENT_LOGIN_SCOPES['cl'][:]
+    scopes.extend(gdata.service.CLIENT_LOGIN_SCOPES['gbase'])
+    self.client.SetClientLoginToken('baz', scopes=scopes)
+    token = self.client.token_store.find_token(
+        'http://www.google.com/calendar/feeds/foo')
+    self.assertEquals(token.get_token_string(), 'baz')
+    self.assertEquals(token.auth_header, '%s%s' % (
+        gdata.auth.PROGRAMMATIC_AUTH_LABEL, 'baz'))
+    token = self.client.token_store.find_token(
+        'http://www.google.com/calendar/')
+    self.assert_(isinstance(token, gdata.auth.ClientLoginToken) == False)
+    token = self.client.token_store.find_token(
+        'http://www.google.com/base/feeds/snippets')
+    self.assertEquals(token.get_token_string(), 'baz')
 
 
 if __name__ == '__main__':

@@ -20,9 +20,10 @@ __author__ = 'api.jscudder (Jeff Scudder)'
 
 import unittest
 import getpass
-import atom.mock_service
 import gdata.client
+import gdata.auth
 import gdata.service
+import atom.http_interface
 
 
 class AuthSubUrlTest(unittest.TestCase):
@@ -71,15 +72,25 @@ class GDataClientTest(unittest.TestCase):
     token = 'AuthSub token=KyeF3E6Mma'
     scope1 = 'http://www.google.com/calendar/feeds/'
     scope2 = 'http://spreadsheets.google.com/feeds/'
-    self.client.StoreAuthSubToken(token, [scope1, scope2])
-    self.assert_(self.client.FindTokenForScope(scope1) == token)
-    self.assert_(self.client.FindTokenForScope(scope2) == token)
-    self.assert_(self.client.FindTokenForScope('foo') == None)
-    self.assert_(self.client.FindTokenForScope('foo%s' % scope1) == None)
-    self.assert_(self.client.FindTokenForScope('%sfoo' % scope1) == token)
-    del self.client.tokens[scope1]
-    self.assert_(self.client.FindTokenForScope('%sfoo' % scope1) == None)
-    self.assert_(self.client.FindTokenForScope(scope2) == token)
+    auth_token = gdata.auth.AuthSubToken(token, [scope1, scope2])
+    self.client.token_store.add_token(auth_token)
+    self.assert_(self.client.token_store.find_token(scope1) == auth_token)
+    self.assert_(self.client.token_store.find_token(scope2) == auth_token)
+    self.assert_(isinstance(self.client.token_store.find_token('foo'), 
+        atom.http_interface.GenericToken))
+    self.assert_(
+        self.client.token_store.find_token('foo%s' % scope1) != auth_token)
+    self.assert_(isinstance(self.client.token_store.find_token(
+            'foo%s' % scope1), 
+        atom.http_interface.GenericToken))
+    self.assert_(
+        self.client.token_store.find_token('%sfoo' % scope1) == auth_token)
+    self.client.token_store.remove_token(auth_token)
+    self.assert_(self.client.token_store.find_token('%sfoo' % scope1) != auth_token) 
+    self.assert_(isinstance(self.client.token_store.find_token(
+            '%sfoo' % scope1), 
+        atom.http_interface.GenericToken))
+    self.assert_(self.client.token_store.find_token(scope2) != auth_token)
 
 
 if __name__ == '__main__':

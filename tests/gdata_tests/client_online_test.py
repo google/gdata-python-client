@@ -20,7 +20,6 @@ __author__ = 'api.jscudder (Jeff Scudder)'
 
 import unittest
 import getpass
-import atom.mock_service
 import gdata.client
 import gdata.service
 import gdata
@@ -64,23 +63,6 @@ class ClientLiveTest(unittest.TestCase):
         parser=Utf8String)
     self.assert_(feed_str.startswith('<?xml'))
 
-  def testUnauthenticatedWrites(self):
-    try:
-      self.client.Post('foo', 'http://www.example.com', parser=Utf8String)
-      self.fail()
-    except gdata.client.AuthorizationRequired:
-      pass
-    try:
-      self.client.Put('foo', 'http://www.example.com', parser=Utf8String)
-      self.fail()
-    except gdata.client.AuthorizationRequired:
-      pass
-    try:
-      self.client.Delete('http://www.example.com')
-      self.fail()
-    except gdata.client.AuthorizationRequired:
-      pass
-
   def testAuthenticatedWrites(self):
     self.client.ClientLogin(username, password, 'gbase')
     entry = """<entry xmlns='http://www.w3.org/2005/Atom'
@@ -105,34 +87,8 @@ class ClientLiveTest(unittest.TestCase):
     self.client.Delete(new_entry.GetEditLink().href)
     
 
-  def testRemoveInvalidToken(self):
-    self.client.tokens[
-        'http://www.google.com/calendar/feeds/'] = 'AuthSub token=abcdefg'
-    self.client.tokens[
-        'http://www.google.com/m8/feeds/contacts/default/full'] = (
-            'AuthSub token=abcdefg')
-    self.assertTrue(len(self.client.tokens) == 2)
-    try:
-      feed_str = self.client.Get(
-          'http://www.google.com/calendar/feeds/default/allcalendars/full', 
-          parser=Utf8String)
-      self.fail()
-    except gdata.service.RequestError, get_inst:
-      self.assertTrue(get_inst[0]['status'] == 403 or get_inst[0]['status'] == 401)
-    self.assertTrue(len(self.client.tokens) == 1)
-    try:
-      entry = self.client.Post('foo',
-          'http://www.google.com/m8/feeds/contacts/default/full', 
-          parser=Utf8String)
-      self.fail()
-    except gdata.service.RequestError, post_inst:
-      self.assertTrue(post_inst[0]['status'] == 403 or post_inst[0]['status'] == 401)
-    self.assertTrue(len(self.client.tokens) == 0)
-
-  
-
 if __name__ == '__main__':
-  print ('GData Service Media Unit Tests\nNOTE: Please run these tests only '
+  print ('GData Client Unit Tests\nNOTE: Please run these tests only '
          'with a test  account. The tests may delete or update your data.')
   username = raw_input('Please enter your username: ')
   password = getpass.getpass()

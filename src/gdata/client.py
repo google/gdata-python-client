@@ -50,10 +50,43 @@ class GDataClient(gdata.service.GDataService):
         auth_service_url=auth_url, source=source, captcha_token=login_token,
         captcha_response=login_captcha)
 
-  Get = gdata.service.GDataService.get
-  Post = gdata.service.GDataService.post
-  Put = gdata.service.GDataService.put
-  Delete = gdata.service.GDataService.delete
+  def Get(self, url, parser):
+    """Simplified interface for Get.
+
+    Requires a parser function which takes the server response's body as
+    the only argument.
+
+    Args:
+      url: A string or something that can be converted to a string using str.
+          The URL of the requested resource.
+      parser: A function which takes the HTTP body from the server as it's
+          only result. Common values would include str, 
+          gdata.GDataEntryFromString, and gdata.GDataFeedFromString.
+
+    Returns: The result of calling parser(http_response_body).
+    """
+    return gdata.service.GDataService.Get(self, uri=str(url), converter=parser)
+
+  def Post(self, data, url, parser, media_source=None):
+    """Streamlined version of Post.
+
+    Requires a parser function which takes the server response's body as
+    the only argument.
+    """
+    return gdata.service.GDataService.Post(self, data=data, uri=url,
+        media_source=media_source, converter=parser)
+
+  def Put(self, data, url, parser, media_source=None):
+    """Streamlined version of Put.
+
+    Requires a parser function which takes the server response's body as
+    the only argument.
+    """
+    return gdata.service.GDataService.Put(self, data=data, uri=url,
+        media_source=media_source, converter=parser)
+
+  def Delete(self, url):
+    return gdata.service.GDataService.Delete(self, uri=str(url))
 
 
 ExtractToken = gdata.service.ExtractToken
