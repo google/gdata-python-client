@@ -197,7 +197,6 @@ class GDataServiceUnitTest(unittest.TestCase):
           self.gd_client.token_store.find_token(
               'http://base.google.com/base/feeds/'),
           gdata.auth.ClientLoginToken))
-      #self.assert_(self.gd_client.auth_token is not None)
       self.assert_(self.gd_client.captcha_token is None)
       self.assert_(self.gd_client.captcha_url is None)
     except gdata.service.CaptchaRequired:
@@ -496,7 +495,9 @@ class TokenLookupTest(unittest.TestCase):
   def testSetAndGetClientLoginTokenWithNoService(self):
     self.assert_(self.client.auth_token is None)
     self.client.SetClientLoginToken('foo')
-    self.assert_(self.client.auth_token is not None)
+    self.assert_(self.client.auth_token is None)
+    self.assert_(self.client.token_store.find_token(
+        atom.token_store.SCOPE_ALL) is not None)
     self.assertEquals(self.client.GetClientLoginToken(), 'foo')
     self.client.SetClientLoginToken('foo2')
     self.assertEquals(self.client.GetClientLoginToken(), 'foo2')

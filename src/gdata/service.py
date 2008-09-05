@@ -314,7 +314,10 @@ class GDataService(atom.service.AtomService):
       if isinstance(token, gdata.auth.AuthSubToken):
         return token.get_token_string()
     else:
-      return self.auth_token
+      token = self.token_store.find_token(atom.token_store.SCOPE_ALL)
+      if isinstance(token, gdata.auth.ClientLoginToken):
+        return token.get_token_string()
+      return None
 
   def SetAuthSubToken(self, token, scopes=None):
     """Sets the token sent in requests to an AuthSub token.
@@ -338,7 +341,8 @@ class GDataService(atom.service.AtomService):
     if scopes is not None:
       self.token_store.add_token(authsub_token)
     else:
-      self.auth_token = authsub_token.get_token_string()
+      authsub_token.scopes = [atom.token_store.SCOPE_ALL]
+      self.token_store.add_token(authsub_token)
 
   def GetClientLoginToken(self):
     """Returns the token string for the current request scope.
@@ -353,7 +357,10 @@ class GDataService(atom.service.AtomService):
       if isinstance(token, gdata.auth.ClientLoginToken):
         return token.get_token_string()
     else:
-      return self.auth_token
+      token = self.token_store.find_token(atom.token_store.SCOPE_ALL)
+      if isinstance(token, gdata.auth.ClientLoginToken):
+        return token.get_token_string()
+      return None
 
   def SetClientLoginToken(self, token, scopes=None):
     """Sets the token sent in requests to an ClientLogin token.
@@ -376,8 +383,8 @@ class GDataService(atom.service.AtomService):
     if scopes:
       self.token_store.add_token(client_login_token)
     else:
-      self.auth_token = client_login_token.get_token_string()
-    
+      client_login_token.scopes = [atom.token_store.SCOPE_ALL]
+      self.token_store.add_token(client_login_token)
 
   # Private methods to create the source property.
   def __GetSource(self):
@@ -535,7 +542,11 @@ class GDataService(atom.service.AtomService):
     Raises:
       NonAuthSubToken if the user's auth token is not an AuthSub token
     """
-    token = self.token_store.find_token(lookup_scopes(self.service)[0])
+    scopes = lookup_scopes(self.service)
+    if scopes:
+      token = self.token_store.find_token(scopes[0])
+    else:
+      token = self.token_store.find_token(atom.token_store.SCOPE_ALL)
     if not isinstance(token, gdata.auth.AuthSubToken):
       raise NonAuthSubToken
 
