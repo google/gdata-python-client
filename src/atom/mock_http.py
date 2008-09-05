@@ -19,6 +19,7 @@ __author__ = 'api.jscudder (Jeff Scudder)'
 
 
 import atom.http_interface
+import atom.url
 
 
 class Error(Exception):
@@ -32,6 +33,8 @@ class NoRecordingFound(Error):
 class MockRequest(object):
   def __init__(self, operation, url, data=None, headers=None):
     self.operation = operation
+    if isinstance(url, (str, unicode)):
+      url = atom.url.parse_url(url)
     self.url = url
     self.data = data
     self.headers = headers
@@ -94,7 +97,7 @@ class MockHttpClient(atom.http_interface.GenericHttpClient):
       headers: dict of strings: Currently the headers are ignored when
           looking for matching requests.
     """
-    request = MockRequest(operation, str(url), data=data, headers=headers)
+    request = MockRequest(operation, url, data=data, headers=headers)
     self.recordings.append((request, response))
 
   def request(self, operation, url, data=None, headers=None):
@@ -106,8 +109,8 @@ class MockHttpClient(atom.http_interface.GenericHttpClient):
     If there is no match, a NoRecordingFound error will be raised.
     """
     if self.real_client is None:
-      if url:
-        url = str(url)
+      if isinstance(url, (str, unicode)):
+        url = atom.url.parse_url(url)
       for recording in self.recordings:
         if recording[0].operation == operation and recording[0].url == url:
           return recording[1]

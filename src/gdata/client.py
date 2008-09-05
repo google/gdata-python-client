@@ -65,7 +65,7 @@ class GDataClient(gdata.service.GDataService):
 
     Returns: The result of calling parser(http_response_body).
     """
-    return gdata.service.GDataService.Get(self, uri=str(url), converter=parser)
+    return gdata.service.GDataService.Get(self, uri=url, converter=parser)
 
   def Post(self, data, url, parser, media_source=None):
     """Streamlined version of Post.
@@ -86,7 +86,7 @@ class GDataClient(gdata.service.GDataService):
         media_source=media_source, converter=parser)
 
   def Delete(self, url):
-    return gdata.service.GDataService.Delete(self, uri=str(url))
+    return gdata.service.GDataService.Delete(self, uri=url)
 
 
 ExtractToken = gdata.service.ExtractToken

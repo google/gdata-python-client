@@ -29,6 +29,7 @@ __author__ = 'api.jscudder (Jeff Scudder)'
 
 
 import atom.http_interface
+import atom.url
 
 
 SCOPE_ALL = 'http'
@@ -77,7 +78,8 @@ class TokenStore(object):
     """
     if url is None:
       return None
-    url = str(url)
+    if isinstance(url, (str, unicode)):
+      url = atom.url.parse_url(url)
     if url in self._tokens:
       token = self._tokens[url]
       if token.valid_for_scope(url):

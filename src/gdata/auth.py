@@ -18,6 +18,7 @@
 import re
 import urllib
 import atom.http_interface
+import atom.url
 
 
 __author__ = 'api.jscudder (Jeff Scudder)'
@@ -303,16 +304,31 @@ class ClientLoginToken(atom.http_interface.GenericToken):
   
   def valid_for_scope(self, url):
     """Tells the caller if the token authorizes access to the desired URL.
-
-    Since the generic token doesn't add an auth header, it is not valid for
-    any scope.
     """
+    if isinstance(url, (str, unicode)):
+      url = atom.url.parse_url(url)
     for scope in self.scopes:
-      scope = str(scope)
-      url = str(url)
-      if url.startswith(scope):
+      if scope == atom.token_store.SCOPE_ALL:
+        return True
+      if isinstance(scope, (str, unicode)):
+        scope = atom.url.parse_url(scope)
+      if scope == url:
+        return True
+      # Check to see if the port or protocol are set, if so are they different
+      # Port and protocol should be checked first because they have default
+      # values.
+      elif scope.port and url.port and scope.port != url.port:
+        continue
+      elif scope.protocol and url.protocol and scope.protocol != url.protocol:
+        continue
+      elif scope.host == url.host and not scope.path:
+        return True
+      elif scope.host == url.host and scope.path and not url.path:
+        continue
+      elif scope.host == url.host and url.path.startswith(scope.path):
         return True
     return False
+
 
 class AuthSubToken(ClientLoginToken):
   def get_token_string(self):
