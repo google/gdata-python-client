@@ -22,6 +22,10 @@ import urlparse
 import urllib
 
 
+DEFAULT_PROTOCOL = 'http'
+DEFAULT_PORT = 80
+
+
 def parse_url(url_string):
   parts = urlparse.urlparse(url_string)
   url = Url()
@@ -44,7 +48,7 @@ def parse_url(url_string):
             urllib.unquote_plus(pair_parts[1]))
       elif len(pair_parts) == 1:
         url.params[urllib.unquote_plus(pair_parts[0])] = None
-  return url   
+  return url
    
 class Url(object):
   def __init__(self, protocol=None, host=None, port=None, path=None, 
@@ -84,6 +88,39 @@ class Url(object):
       return '?'.join([self.path, param_string])
     else:
       return self.path
+
+  def __cmp__(self, other):
+    if not isinstance(other, Url):
+      return cmp(self.to_string(), str(other))
+    difference = 0
+    # Compare the protocol
+    if self.protocol and other.protocol:
+      difference = cmp(self.protocol, other.protocol)
+    elif self.protocol and not other.protocol:
+      difference = cmp(self.protocol, DEFAULT_PROTOCOL)
+    elif not self.protocol and other.protocol:
+      difference = cmp(DEFAULT_PROTOCOL, other.protocol)
+    if difference != 0:
+      return difference
+    # Compare the host
+    difference = cmp(self.host, other.host)
+    if difference != 0:
+      return difference
+    # Compare the port
+    if self.port and other.port:
+      difference = cmp(self.port, other.port)
+    elif self.port and not other.port:
+      difference = cmp(self.port, DEFAULT_PORT)
+    elif not self.port and other.port:
+      difference = cmp(DEFAULT_PORT, other.port)
+    if difference != 0:
+      return difference
+    # Compare the path
+    difference = cmp(self.path, other.path)
+    if difference != 0:
+      return difference
+    # Compare the parameters
+    return cmp(self.params, other.params)
 
   def __str__(self):
     return self.to_string()

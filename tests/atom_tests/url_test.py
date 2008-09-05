@@ -68,6 +68,23 @@ class UrlTest(unittest.TestCase):
         '/feed?has+spaces=sneaky%3Dvalues%3F%26%21'))
     self.assertTrue(url.get_param_string() == (
         'has+spaces=sneaky%3Dvalues%3F%26%21'))
+
+  def testComparistons(self):
+    url1 = atom.url.Url(protocol='http', host='example.com', path='/feed', 
+                        params={'x':'1', 'y':'2'})
+    url2 = atom.url.Url(host='example.com', port=80, path='/feed', 
+                        params={'y':'2', 'x':'1'})
+    self.assertEquals(url1, url2)
+    url3 = atom.url.Url(host='example.com', port=81, path='/feed', 
+                        params={'x':'1', 'y':'2'})
+    self.assert_(url1 != url3)
+    self.assert_(url2 != url3)
+    url4 = atom.url.Url(protocol='ftp', host='example.com', path='/feed',
+                        params={'x':'1', 'y':'2'})
+    self.assert_(url1 != url4)
+    self.assert_(url2 != url4)
+    self.assert_(url3 != url4)
+
      
 
 if __name__ == '__main__':

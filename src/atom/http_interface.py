@@ -90,6 +90,8 @@ class HttpResponse(object):
 
 
 class GenericHttpClient(object):
+  debug = False
+
   def __init__(self, http_client, headers=None):
     """
     
