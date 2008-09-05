@@ -22,6 +22,7 @@ import unittest
 import atom.token_store
 import atom.http_interface
 import atom.service
+import atom.url
 
 class TokenStoreTest(unittest.TestCase):
 
@@ -50,6 +51,22 @@ class TokenStoreTest(unittest.TestCase):
         atom.http_interface.GenericToken))
     self.assert_(isinstance(self.tokens.find_token(
             'http://example.net/'), 
+        atom.http_interface.GenericToken))
+
+  def testFindTokenWithPartialScopes(self):
+    token = atom.service.BasicAuthToken('aaa1', 
+        scopes=[atom.url.Url(host='www.example.com', path='/foo'), 
+                atom.url.Url(host='www.example.net')])
+    token_store = atom.token_store.TokenStore()
+    token_store.add_token(token)
+    self.assert_(token_store.find_token(
+        'http://www.example.com/foobar') == token)
+    self.assert_(token_store.find_token(
+        'https://www.example.com:443/foobar') == token)
+    self.assert_(token_store.find_token(
+        'http://www.example.net/xyz') == token)
+    self.assert_(token_store.find_token('http://www.example.org/') != token)
+    self.assert_(isinstance(token_store.find_token('http://example.org/'), 
         atom.http_interface.GenericToken))
 
   def testRemoveTokens(self):

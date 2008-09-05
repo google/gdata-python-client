@@ -314,13 +314,7 @@ class ClientLoginToken(atom.http_interface.GenericToken):
         scope = atom.url.parse_url(scope)
       if scope == url:
         return True
-      # Check to see if the port or protocol are set, if so are they different
-      # Port and protocol should be checked first because they have default
-      # values.
-      elif scope.port and url.port and scope.port != url.port:
-        continue
-      elif scope.protocol and url.protocol and scope.protocol != url.protocol:
-        continue
+      # Check the host and the path, but ignore the port and protocol.
       elif scope.host == url.host and not scope.path:
         return True
       elif scope.host == url.host and scope.path and not url.path:

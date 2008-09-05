@@ -136,11 +136,11 @@ class HttpClient(atom.http_interface.GenericHttpClient):
             'parameter because it was not a string or atom.url.Url')
     if url.protocol == 'https':
       if not url.port:
-        url.port = 443
+        return httplib.HTTPSConnection(url.host)
       return httplib.HTTPSConnection(url.host, url.port)
     else:
       if not url.port:
-        url.port = 80
+        return httplib.HTTPConnection(url.host)
       return httplib.HTTPConnection(url.host, url.port)
 
   def _get_access_url(self, url):
