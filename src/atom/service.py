@@ -63,8 +63,6 @@ class AtomService(object):
   # Default values for members
   port = 80
   ssl = False
-  # If debug is True, the HTTPConnection will display debug information
-  debug = False
 
   def __init__(self, server=None, additional_headers=None, 
       application_name='', http_client=None, token_store=None):
@@ -83,6 +81,17 @@ class AtomService(object):
     self.additional_headers = additional_headers or {}
     self.additional_headers['User-Agent'] = atom.http_interface.USER_AGENT % (
         application_name,)
+    # If debug is True, the HTTPConnection will display debug information
+    self._set_debug(False)
+
+  def _get_debug(self):
+    return self.http_client.debug
+
+  def _set_debug(self, value):
+    self.http_client.debug = value
+
+  debug = property(_get_debug, _set_debug, 
+      doc='If True, HTTP debug information is printed.')
 
   def use_basic_auth(self, username, password, scopes=None):
     if username is not None and password is not None:
