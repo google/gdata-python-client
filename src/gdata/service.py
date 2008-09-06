@@ -137,6 +137,8 @@ def lookup_scopes(service_name):
 # Module level variable specifies which module should be used by GDataService
 # objects to make HttpRequests. This setting can be overridden on each 
 # instance of GDataService.
+# This module level variable is deprecated. Reassign the http_client member
+# of a GDataService object instead.
 http_request_handler = atom.service
 
 
