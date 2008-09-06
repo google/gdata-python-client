@@ -59,7 +59,7 @@ class AppEngineHttpClient(atom.http_interface.GenericHttpClient):
     self.debug = False
     self.headers = headers or {}
 
- def request(self, operation, url, data=None, headers=None):
+  def request(self, operation, url, data=None, headers=None):
     """Performs an HTTP call to the server, supports GET, POST, PUT, and
     DELETE.
 
