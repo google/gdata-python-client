@@ -33,7 +33,6 @@ __author__ = 'api.jscudder (Jeff Scudder)'
 
 
 import StringIO
-import atom.service
 import atom.http_interface
 from google.appengine.api import urlfetch
 
