@@ -188,6 +188,12 @@ class LinkFinder(atom.LinkFinder):
         return a_link
     return None
 
+  def GetPrevLink(self):
+    for a_link in self.link:
+      if a_link.rel == 'previous':
+        return a_link
+    return None
+
 
 class TotalResults(atom.AtomBase):
   """opensearch:TotalResults for a GData feed"""
