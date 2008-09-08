@@ -61,7 +61,7 @@ tests/run_service_tests.py
 tests/testimage.jpg
 tests/atom_tests/__init__.py
 tests/atom_tests/http_interface_test.py
-tests/atom_tests/mock_client_test.py
+tests/atom_tests/mock_http_test.py
 tests/atom_tests/mock_server_test.py
 tests/atom_tests/service_test.py
 tests/atom_tests/token_store_test.py
