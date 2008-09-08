@@ -563,7 +563,7 @@ class GDataService(atom.service.AtomService):
     else:
       raise TokenUpgradeFailed({'status': response.status,
                                 'reason': 'Non 200 response on upgrade',
-                                'body': result_body})
+                                'body': response_body})
 
   def RevokeAuthSubToken(self):
     """Revokes an existing AuthSub token.
