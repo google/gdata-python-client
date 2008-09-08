@@ -63,10 +63,10 @@ class ContactsService(gdata.service.GDataService):
   def CreateContact(self, new_contact, 
       insert_uri='/m8/feeds/contacts/default/full', url_params=None, 
       escape_params=True):
-    """Adds an event to Google Contacts.
+    """Adds an new contact to Google Contacts.
 
     Args: 
-      new_contact: atom.Entry or subclass A new event which is to be added to
+      new_contact: atom.Entry or subclass A new contact which is to be added to
                 Google Contacts.
       insert_uri: the URL to post new contacts to the feed
       url_params: dict (optional) Additional URL parameters to be included
@@ -93,7 +93,7 @@ class ContactsService(gdata.service.GDataService):
     Args:
       edit_uri: string The edit link URI for the element being updated
       updated_contact: string, atom.Entry or subclass containing
-                    the Atom Entry which will replace the event which is 
+                    the Atom Entry which will replace the contact which is 
                     stored at the edit_url 
       url_params: dict (optional) Additional URL parameters to be included
                   in the update request.
@@ -118,7 +118,7 @@ class ContactsService(gdata.service.GDataService):
 
   def DeleteContact(self, edit_uri, extra_headers=None, 
       url_params=None, escape_params=True):
-    """Removes an event with the specified ID from Google Contacts.
+    """Removes an contact with the specified ID from Google Contacts.
 
     Args:
       edit_uri: string The edit URL of the entry to be deleted. Example:
