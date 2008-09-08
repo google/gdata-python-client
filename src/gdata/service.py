@@ -561,7 +561,7 @@ class GDataService(atom.service.AtomService):
       # TODO: add the token to the token_store directly.
       self.SetAuthSubToken(gdata.auth.TokenFromHttpBody(response_body))
     else:
-      raise TokenUpgradeFailed({'status': server_response.status,
+      raise TokenUpgradeFailed({'status': response.status,
                                 'reason': 'Non 200 response on upgrade',
                                 'body': result_body})
 
