@@ -58,7 +58,6 @@ __author__ = 'api.jscudder (Jeffrey Scudder)'
 
 
 import re
-import httplib
 import urllib
 import urlparse
 try:
@@ -74,6 +73,7 @@ except ImportError:
 import atom.service
 import gdata
 import atom
+import atom.http_interface
 import atom.token_store
 import gdata.auth
 
@@ -395,8 +395,8 @@ class GDataService(atom.service.AtomService):
   def __SetSource(self, new_source):
     self.__source = new_source
     # Update the UserAgent header to include the new application name.
-    self.additional_headers['User-Agent'] = '%s GData-Python/1.1.1' % (
-        self.__source)
+    self.additional_headers['User-Agent'] = atom.http_interface.USER_AGENT % (
+        self.__source,)
 
   source = property(__GetSource, __SetSource, 
       doc="""The source is the name of the application making the request. 
