@@ -160,7 +160,6 @@ class ProxiedHttpClient(HttpClient):
   After connecting to the proxy server, the request is completed as in 
   HttpClient.request.
   """
-        
   def _prepare_connection(self, url, headers):
     proxy_auth = _get_proxy_auth()
     if url.protocol == 'https':

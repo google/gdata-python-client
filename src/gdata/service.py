@@ -225,8 +225,15 @@ class GDataService(atom.service.AtomService):
           should be included with CRUD operations.
       handler: module (optional) This parameter is deprecated and has been
           replaced by http_client.
-      http_client:
-      token_store:
+      tokens: This parameter is deprecated, calls should be made to 
+          token_store instead.
+      http_client: An object responsible for making HTTP requests using a
+          request method. If none is provided, a new instance of
+          atom.http.ProxiedHttpClient will be used.
+      token_store: Keeps a collection of authorization tokens which can be
+          applied to requests for a specific URLs. Critical methods are
+          find_token based on a URL (atom.url.Url or a string), add_token,
+          and remove_token.
     """
     atom.service.AtomService.__init__(self, http_client=http_client, 
         token_store=token_store)

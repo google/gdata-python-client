@@ -31,6 +31,8 @@ class NoRecordingFound(Error):
 
 
 class MockRequest(object):
+  """Holds parameters of an HTTP request for matching against future requests.
+  """
   def __init__(self, operation, url, data=None, headers=None):
     self.operation = operation
     if isinstance(url, (str, unicode)):
@@ -41,6 +43,7 @@ class MockRequest(object):
 
 
 class MockResponse(atom.http_interface.HttpResponse):
+  """Simulates an httplib.HTTPResponse object."""
   def __init__(self, body=None, status=None, reason=None, headers=None):
     if body and hasattr(body, 'read'):
       self.body = body.read()

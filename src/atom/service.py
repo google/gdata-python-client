@@ -74,6 +74,13 @@ class AtomService(object):
               'www.google.com'
       additional_headers: dict (optional) Any additional HTTP headers which
                           should be included with CRUD operations.
+      http_client: An object responsible for making HTTP requests using a
+                   request method. If none is provided, a new instance of
+                   atom.http.ProxiedHttpClient will be used.
+      token_store: Keeps a collection of authorization tokens which can be
+                   applied to requests for a specific URLs. Critical methods are
+                   find_token based on a URL (atom.url.Url or a string), add_token,
+                   and remove_token.
     """
     self.http_client = http_client or atom.http.ProxiedHttpClient()
     self.token_store = token_store or atom.token_store.TokenStore()

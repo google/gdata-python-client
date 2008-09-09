@@ -19,6 +19,14 @@
   HttpResponse: Represents the server's response to an HTTP request. Provides
       an interface identical to httplib.HTTPResponse which is the response
       expected from higher level classes which use HttpClient.request.
+
+  GenericHttpClient: Provides an interface (superclass) for an object 
+      responsible for making HTTP requests. Subclasses of this object are
+      used in AtomService and GDataService to make requests to the server. By
+      changing the http_client member object, the AtomService is able to make
+      HTTP requests using different logic (for example, when running on 
+      Google App Engine, the http_client makes requests using the App Engine
+      urlfetch API). 
 """
 
 

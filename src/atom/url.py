@@ -27,6 +27,11 @@ DEFAULT_PORT = 80
 
 
 def parse_url(url_string):
+  """Creates a Url object which corresponds to the URL string.
+  
+  This method can accept partial URLs, but it will leave missing
+  members of the Url unset.
+  """
   parts = urlparse.urlparse(url_string)
   url = Url()
   if parts[0]:
@@ -51,6 +56,13 @@ def parse_url(url_string):
   return url
    
 class Url(object):
+  """Represents a URL and implements comparison logic.
+  
+  URL strings which are not identical can still be equivalent, so this object
+  provides a better interface for comparing and manipulating URLs than 
+  strings. URL parameters are represented as a dictionary of strings, and
+  defaults are used for the protocol (http) and port (80) if not provided.
+  """
   def __init__(self, protocol=None, host=None, port=None, path=None, 
                params=None):
     self.protocol = protocol
