@@ -1,5 +1,5 @@
 === 1.2.0 ===
-Sep 9, 2008 (revision 519)
+Sep 9, 2008 (revision 522)
 
 - Refactored HTTP request mechanisms and the way that Authorization headers
     are created and applied to requests. These changes make it easier to 
