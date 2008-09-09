@@ -50,6 +50,6 @@ service.
     packages=['atom', 'gdata', 'gdata.calendar', 'gdata.base',
         'gdata.spreadsheet', 'gdata.apps', 'gdata.docs', 'gdata.codesearch',
         'gdata.photos', 'gdata.exif', 'gdata.geo', 'gdata.media', 
-        'gdata.contacts', 'gdata.youtube', 'gdata.blogger'],
+        'gdata.contacts', 'gdata.youtube', 'gdata.blogger', 'gdata.alt'],
     package_dir = {'gdata':'src/gdata', 'atom':'src/atom'}
 )

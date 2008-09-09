@@ -1,3 +1,39 @@
+=== 1.2.0 ===
+Sep 9, 2008 (revision 519)
+
+- Refactored HTTP request mechanisms and the way that Authorization headers
+    are created and applied to requests. These changes make it easier to 
+    swap out the HTTP layer to allow the library to be used in different
+    environments (like Google App Engine). The changes in Auth token logic
+    should make it much easier to add support for secure AuthSub and OAuth.
+    For more details on this change, see the following wiki page:
+    http://code.google.com/p/gdata-python-client/wiki/HTTPRequestRefactoring
+- Fixed issues with token string modification which caused certain AuthSub 
+    token values to become invalid.
+- Created a new module for parsing and constructing URLs (atom.url).
+- Created a module for token storage which will lookup the correct auth token
+    to be used for a particular URL.
+- Auth tokens are now represented as objects and contain information about the
+    scopes (URLs) for which they can be used. The token object is responsible
+    for adding the Authorization header to the request.
+- Added new functions to gdata.auth for extracting the raw token string from
+    a response to an AuthSub token upgrade request.
+- Added support for the location query parameter in YouTube queries.
+- Added groups functionality to the Contacts API library.
+- Batch request support added for Contacts API operations.
+- Added default behavior to text_db GetTables: when no worksheet name or ID
+    is specified, all tables are retrieved.
+- Fixed client login for YouTube.
+- Fixed issue in YouTube service when setting the developer key.
+- Fixed bug in YouTube service which raised an exception when inserting a
+    video using a file-like object.
+- Added a method to Feed and Entry classes to find the "previous" link.
+- A failure when attempting to upgrade a single use AuthSub token to a session
+    token will now raise an exception.
+- AppsForYourDomainException now uses Python2.5 style exception construction.
+- Moved the logic for using this library on Google App Engine into a new 
+    module: gdata.alt.appengine.
+
 === 1.1.1 ===
 June 13, 2008 (revision 421)
 
