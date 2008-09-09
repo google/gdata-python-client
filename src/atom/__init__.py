@@ -166,7 +166,10 @@ class ExtensionContainer(object):
     for attribute, value in self.extension_attributes.iteritems():
       if value:
         # Decode the value from the desired encoding (default UTF-8).
-        tree.attrib[attribute] = value.decode(MEMBER_STRING_ENCODING)
+        if not isinstance(value, unicode):
+          tree.attrib[attribute] = value.decode(MEMBER_STRING_ENCODING)
+        else:
+          tree.attrib[attribute] = value
     if self.text and not isinstance(self.text, unicode):
       tree.text = self.text.decode(MEMBER_STRING_ENCODING)
     else:
@@ -275,7 +278,10 @@ class AtomBase(ExtensionContainer):
     for xml_attribute, member_name in self.__class__._attributes.iteritems():
       member = getattr(self, member_name)
       if member is not None:
-        tree.attrib[xml_attribute] = member.decode(MEMBER_STRING_ENCODING)
+        if not isinstance(member, unicode):
+          tree.attrib[xml_attribute] = member.decode(MEMBER_STRING_ENCODING)
+        else:
+          tree.attrib[xml_attribute] = member
     # Lastly, call the ExtensionContainers's _AddMembersToElementTree to 
     # convert any extension attributes.
     ExtensionContainer._AddMembersToElementTree(self, tree)
