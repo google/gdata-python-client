@@ -1,4 +1,4 @@
-export PYTHONPATH=../src:$PYTHONPATH
+export PYTHONPATH=../src:../../googleappengine-read-only:$PYTHONPATH
 pydoc -w atom
 pydoc -w atom.http_interface
 pydoc -w atom.mock_http
@@ -10,7 +10,7 @@ pydoc -w gdata
 pydoc -w gdata.auth
 pydoc -w gdata.service
 pydoc -w gdata.client
-#pydoc -w gdata.urlfetch
+pydoc -w gdata.urlfetch
 pydoc -w gdata.alt.appengine
 pydoc -w gdata.apps
 pydoc -w gdata.apps.service

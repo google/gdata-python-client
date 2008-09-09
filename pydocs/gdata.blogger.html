@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.blogger</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/jhartmann/gdata-python-client2/src/gdata/blogger/__init__.py">/home/jhartmann/gdata-python-client2/src/gdata/blogger/__init__.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client-release/src/gdata/blogger/__init__.py">/usr/local/svn/gdata-python-client-release/src/gdata/blogger/__init__.py</a></font></td></tr></table>
     <p><tt>Contains&nbsp;extensions&nbsp;to&nbsp;Atom&nbsp;objects&nbsp;used&nbsp;with&nbsp;Blogger.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -26,6 +26,12 @@
     
 <tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="atom.html#AtomBase">atom.AtomBase</a>(<a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.blogger.html#InReplyTo">InReplyTo</a>
+</font></dt></dl>
+</dd>
 <dt><font face="helvetica, arial"><a href="gdata.html#GDataEntry">gdata.GDataEntry</a>(<a href="atom.html#Entry">atom.Entry</a>, <a href="gdata.html#LinkFinder">gdata.LinkFinder</a>)
 </font></dt><dd>
 <dl>
@@ -190,6 +196,8 @@ The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;ne
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;link&nbsp;object&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
 
+<dl><dt><a name="BlogEntry-GetPrevLink"><strong>GetPrevLink</strong></a>(self)</dt></dl>
+
 <dl><dt><a name="BlogEntry-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
 &nbsp;<br>
 Returns:<br>
@@ -318,6 +326,8 @@ The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;ne
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;link&nbsp;object&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="BlogFeed-GetPrevLink"><strong>GetPrevLink</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="BlogFeed-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
 &nbsp;<br>
@@ -490,6 +500,8 @@ The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;ne
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;link&nbsp;object&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
 
+<dl><dt><a name="BlogPostEntry-GetPrevLink"><strong>GetPrevLink</strong></a>(self)</dt></dl>
+
 <dl><dt><a name="BlogPostEntry-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
 &nbsp;<br>
 Returns:<br>
@@ -618,6 +630,8 @@ The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;ne
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;link&nbsp;object&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="BlogPostFeed-GetPrevLink"><strong>GetPrevLink</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="BlogPostFeed-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
 &nbsp;<br>
@@ -771,6 +785,8 @@ The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;ne
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;link&nbsp;object&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
 
+<dl><dt><a name="BloggerEntry-GetPrevLink"><strong>GetPrevLink</strong></a>(self)</dt></dl>
+
 <dl><dt><a name="BloggerEntry-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
 &nbsp;<br>
 Returns:<br>
@@ -809,6 +825,8 @@ Methods defined here:<br>
 <dl><dt><a name="CommentEntry-GetCommentId"><strong>GetCommentId</strong></a>(self)</dt><dd><tt>Extracts&nbsp;the&nbsp;commentID&nbsp;string&nbsp;from&nbsp;the&nbsp;entry's&nbsp;Atom&nbsp;id.<br>
 &nbsp;<br>
 Returns:&nbsp;A&nbsp;string&nbsp;of&nbsp;digits&nbsp;which&nbsp;identify&nbsp;this&nbsp;post&nbsp;within&nbsp;the&nbsp;blog.</tt></dd></dl>
+
+<dl><dt><a name="CommentEntry-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, content<font color="#909090">=None</font>, contributor<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, published<font color="#909090">=None</font>, rights<font color="#909090">=None</font>, source<font color="#909090">=None</font>, summary<font color="#909090">=None</font>, control<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, in_reply_to<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
 
 <hr>
 Data and other attributes defined here:<br>
@@ -854,32 +872,6 @@ Properties inherited from <a href="gdata.html#GDataEntry">gdata.GDataEntry</a>:<
 #&nbsp;text&nbsp;node.</tt></dd></dl>
 </dd>
 </dl>
-<hr>
-Methods inherited from <a href="atom.html#Entry">atom.Entry</a>:<br>
-<dl><dt><a name="CommentEntry-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, content<font color="#909090">=None</font>, contributor<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, published<font color="#909090">=None</font>, rights<font color="#909090">=None</font>, source<font color="#909090">=None</font>, summary<font color="#909090">=None</font>, control<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;atom:entry<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;author:&nbsp;list&nbsp;A&nbsp;list&nbsp;of&nbsp;Author&nbsp;instances&nbsp;which&nbsp;belong&nbsp;to&nbsp;this&nbsp;class.<br>
-&nbsp;&nbsp;category:&nbsp;list&nbsp;A&nbsp;list&nbsp;of&nbsp;Category&nbsp;instances<br>
-&nbsp;&nbsp;content:&nbsp;Content&nbsp;The&nbsp;entry's&nbsp;Content<br>
-&nbsp;&nbsp;contributor:&nbsp;list&nbsp;A&nbsp;list&nbsp;on&nbsp;Contributor&nbsp;instances<br>
-&nbsp;&nbsp;id:&nbsp;Id&nbsp;The&nbsp;entry's&nbsp;Id&nbsp;element<br>
-&nbsp;&nbsp;link:&nbsp;list&nbsp;A&nbsp;list&nbsp;of&nbsp;Link&nbsp;instances<br>
-&nbsp;&nbsp;published:&nbsp;Published&nbsp;The&nbsp;entry's&nbsp;Published&nbsp;element<br>
-&nbsp;&nbsp;rights:&nbsp;Rights&nbsp;The&nbsp;entry's&nbsp;Rights&nbsp;element<br>
-&nbsp;&nbsp;source:&nbsp;Source&nbsp;the&nbsp;entry's&nbsp;source&nbsp;element<br>
-&nbsp;&nbsp;summary:&nbsp;Summary&nbsp;the&nbsp;entry's&nbsp;summary&nbsp;element<br>
-&nbsp;&nbsp;title:&nbsp;Title&nbsp;the&nbsp;entry's&nbsp;title&nbsp;element<br>
-&nbsp;&nbsp;updated:&nbsp;Updated&nbsp;the&nbsp;entry's&nbsp;updated&nbsp;element<br>
-&nbsp;&nbsp;control:&nbsp;The&nbsp;entry's&nbsp;app:control&nbsp;element&nbsp;which&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;mark&nbsp;an&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;as&nbsp;a&nbsp;draft&nbsp;which&nbsp;should&nbsp;not&nbsp;be&nbsp;publicly&nbsp;viewable.<br>
-&nbsp;&nbsp;text:&nbsp;String&nbsp;The&nbsp;text&nbsp;contents&nbsp;of&nbsp;the&nbsp;element.&nbsp;This&nbsp;is&nbsp;the&nbsp;contents<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;Entry's&nbsp;XML&nbsp;text&nbsp;node.&nbsp;(Example:&nbsp;&lt;foo&gt;This&nbsp;is&nbsp;the&nbsp;text&lt;/foo&gt;)<br>
-&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;list&nbsp;of&nbsp;ExtensionElement&nbsp;instances&nbsp;which&nbsp;are<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;children&nbsp;of&nbsp;this&nbsp;element.<br>
-&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;strings&nbsp;which&nbsp;are&nbsp;the&nbsp;values<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;additional&nbsp;XML&nbsp;attributes&nbsp;of&nbsp;this&nbsp;element.</tt></dd></dl>
-
 <hr>
 Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
 <dl><dt><a name="CommentEntry-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
@@ -934,6 +926,8 @@ The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;ne
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;link&nbsp;object&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="CommentEntry-GetPrevLink"><strong>GetPrevLink</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="CommentEntry-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
 &nbsp;<br>
@@ -1064,6 +1058,8 @@ The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;ne
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;link&nbsp;object&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
 
+<dl><dt><a name="CommentFeed-GetPrevLink"><strong>GetPrevLink</strong></a>(self)</dt></dl>
+
 <dl><dt><a name="CommentFeed-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
 &nbsp;<br>
 Returns:<br>
@@ -1074,6 +1070,53 @@ Methods inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
 <dl><dt><a name="CommentFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="CommentFeed-GetLicenseLink"><strong>GetLicenseLink</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="InReplyTo">class <strong>InReplyTo</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.blogger.html#InReplyTo">InReplyTo</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="InReplyTo-__init__"><strong>__init__</strong></a>(self, href<font color="#909090">=None</font>, ref<font color="#909090">=None</font>, source<font color="#909090">=None</font>, type<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="InReplyTo-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="InReplyTo-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="InReplyTo-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
 
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -1088,6 +1131,7 @@ Methods inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
  <dl><dt><a name="-BlogPostFeedFromString"><strong>BlogPostFeedFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-CommentEntryFromString"><strong>CommentEntryFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-CommentFeedFromString"><strong>CommentFeedFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-InReplyToFromString"><strong>InReplyToFromString</strong></a>(xml_string)</dt></dl>
 </td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
@@ -1096,6 +1140,7 @@ Methods inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><strong>LABEL_SCHEME</strong> = 'http://www.blogger.com/atom/ns#'<br>
+<strong>THR_NAMESPACE</strong> = 'http://purl.org/syndication/thread/1.0'<br>
 <strong>__author__</strong> = 'api.jscudder (Jeffrey Scudder)'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#7799ee">

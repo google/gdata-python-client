@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="atom.html"><font color="#ffffff">atom</font></a>.service</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/jhartmann/gdata-python-client2/src/atom/service.py">/home/jhartmann/gdata-python-client2/src/atom/service.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client-release/src/atom/service.py">/usr/local/svn/gdata-python-client-release/src/atom/service.py</a></font></td></tr></table>
     <p><tt><a href="#AtomService">AtomService</a>&nbsp;provides&nbsp;CRUD&nbsp;ops.&nbsp;in&nbsp;line&nbsp;with&nbsp;the&nbsp;Atom&nbsp;Publishing&nbsp;Protocol.<br>
 &nbsp;<br>
 <a href="#AtomService">AtomService</a>:&nbsp;Encapsulates&nbsp;the&nbsp;ability&nbsp;to&nbsp;perform&nbsp;insert,&nbsp;update&nbsp;and&nbsp;delete<br>
@@ -26,14 +26,16 @@ HttpRequest:&nbsp;Function&nbsp;that&nbsp;performs&nbsp;a&nbsp;GET,&nbsp;POST,&n
 <font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="elementtree.ElementTree.html">elementtree.ElementTree</a><br>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="cElementTree.html">cElementTree</a><br>
+<a href="atom.html">atom</a><br>
 <a href="base64.html">base64</a><br>
 </td><td width="25%" valign=top><a href="httplib.html">httplib</a><br>
 <a href="os.html">os</a><br>
-</td><td width="25%" valign=top><a href="re.html">re</a><br>
-<a href="socket.html">socket</a><br>
-</td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
-</td></tr></table></td></tr></table><p>
+<a href="re.html">re</a><br>
+</td><td width="25%" valign=top><a href="socket.html">socket</a><br>
+<a href="urllib.html">urllib</a><br>
+<a href="warnings.html">warnings</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -45,6 +47,12 @@ HttpRequest:&nbsp;Function&nbsp;that&nbsp;performs&nbsp;a&nbsp;GET,&nbsp;POST,&n
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="atom.service.html#AtomService">AtomService</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="atom.http_interface.html#GenericToken">atom.http_interface.GenericToken</a>(<a href="__builtin__.html#object">__builtin__.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="atom.service.html#BasicAuthToken">BasicAuthToken</a>
 </font></dt></dl>
 </dd>
 </dl>
@@ -136,22 +144,6 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;httplib.HTTPResponse&nbsp;Server's&nbsp;response&nbsp;to&nbsp;the&nbsp;POST&nbsp;request.</tt></dd></dl>
 
-<dl><dt><a name="AtomService-PrepareConnection"><strong>PrepareConnection</strong></a>(self, full_uri)</dt><dd><tt>Opens&nbsp;a&nbsp;connection&nbsp;to&nbsp;the&nbsp;server&nbsp;based&nbsp;on&nbsp;the&nbsp;full&nbsp;URI.<br>
-&nbsp;<br>
-Examines&nbsp;the&nbsp;target&nbsp;URI&nbsp;and&nbsp;the&nbsp;proxy&nbsp;settings,&nbsp;which&nbsp;are&nbsp;set&nbsp;as&nbsp;<br>
-environment&nbsp;variables,&nbsp;to&nbsp;open&nbsp;a&nbsp;connection&nbsp;with&nbsp;the&nbsp;server.&nbsp;This&nbsp;<br>
-connection&nbsp;is&nbsp;used&nbsp;to&nbsp;make&nbsp;an&nbsp;HTTP&nbsp;request.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;full_uri:&nbsp;str&nbsp;Which&nbsp;is&nbsp;the&nbsp;target&nbsp;relative&nbsp;(lacks&nbsp;protocol&nbsp;and&nbsp;host)&nbsp;or<br>
-&nbsp;&nbsp;absolute&nbsp;URL&nbsp;to&nbsp;be&nbsp;opened.&nbsp;Example:<br>
-&nbsp;&nbsp;'https://www.google.com/accounts/ClientLogin'&nbsp;or<br>
-&nbsp;&nbsp;'base/feeds/snippets'&nbsp;where&nbsp;the&nbsp;server&nbsp;is&nbsp;set&nbsp;to&nbsp;www.google.com.<br>
-&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;A&nbsp;tuple&nbsp;containing&nbsp;the&nbsp;httplib.HTTPConnection&nbsp;and&nbsp;the&nbsp;full_uri&nbsp;for&nbsp;the<br>
-&nbsp;&nbsp;request.</tt></dd></dl>
-
 <dl><dt><a name="AtomService-Put"><strong>Put</strong></a>(self, data, uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, content_type<font color="#909090">='application/atom+xml'</font>)</dt><dd><tt>Updates&nbsp;an&nbsp;entry&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.<br>
 &nbsp;<br>
 Args:<br>
@@ -177,6 +169,8 @@ Returns:<br>
 
 <dl><dt><a name="AtomService-UseBasicAuth"><strong>UseBasicAuth</strong></a>(self, username, password, for_proxy<font color="#909090">=False</font>)</dt><dd><tt>Sets&nbsp;an&nbsp;Authenticaiton:&nbsp;Basic&nbsp;HTTP&nbsp;header&nbsp;containing&nbsp;plaintext.<br>
 &nbsp;<br>
+Deprecated,&nbsp;use&nbsp;use_basic_auth&nbsp;instead.<br>
+&nbsp;<br>
 The&nbsp;username&nbsp;and&nbsp;password&nbsp;are&nbsp;base64&nbsp;encoded&nbsp;and&nbsp;added&nbsp;to&nbsp;an&nbsp;HTTP&nbsp;header<br>
 which&nbsp;will&nbsp;be&nbsp;included&nbsp;in&nbsp;each&nbsp;request.&nbsp;Note&nbsp;that&nbsp;your&nbsp;username&nbsp;and&nbsp;<br>
 password&nbsp;are&nbsp;sent&nbsp;in&nbsp;plaintext.<br>
@@ -185,26 +179,80 @@ Args:<br>
 &nbsp;&nbsp;username:&nbsp;str<br>
 &nbsp;&nbsp;password:&nbsp;str</tt></dd></dl>
 
-<dl><dt><a name="AtomService-__init__"><strong>__init__</strong></a>(self, server<font color="#909090">=None</font>, additional_headers<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;<a href="#AtomService">AtomService</a>&nbsp;client.<br>
+<dl><dt><a name="AtomService-__init__"><strong>__init__</strong></a>(self, server<font color="#909090">=None</font>, additional_headers<font color="#909090">=None</font>, application_name<font color="#909090">=''</font>, http_client<font color="#909090">=None</font>, token_store<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;<a href="#AtomService">AtomService</a>&nbsp;client.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;server:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;start&nbsp;of&nbsp;a&nbsp;URL&nbsp;for&nbsp;the&nbsp;server<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;which&nbsp;all&nbsp;operations&nbsp;should&nbsp;be&nbsp;directed.&nbsp;Example:&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'www.google.com'<br>
 &nbsp;&nbsp;additional_headers:&nbsp;dict&nbsp;(optional)&nbsp;Any&nbsp;additional&nbsp;HTTP&nbsp;headers&nbsp;which<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should&nbsp;be&nbsp;included&nbsp;with&nbsp;CRUD&nbsp;operations.</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should&nbsp;be&nbsp;included&nbsp;with&nbsp;CRUD&nbsp;operations.<br>
+&nbsp;&nbsp;http_client:&nbsp;An&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;responsible&nbsp;for&nbsp;making&nbsp;HTTP&nbsp;requests&nbsp;using&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request&nbsp;method.&nbsp;If&nbsp;none&nbsp;is&nbsp;provided,&nbsp;a&nbsp;new&nbsp;instance&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;atom.http.ProxiedHttpClient&nbsp;will&nbsp;be&nbsp;used.<br>
+&nbsp;&nbsp;token_store:&nbsp;Keeps&nbsp;a&nbsp;collection&nbsp;of&nbsp;authorization&nbsp;tokens&nbsp;which&nbsp;can&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;applied&nbsp;to&nbsp;requests&nbsp;for&nbsp;a&nbsp;specific&nbsp;URLs.&nbsp;Critical&nbsp;methods&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;find_token&nbsp;based&nbsp;on&nbsp;a&nbsp;URL&nbsp;(atom.url.Url&nbsp;or&nbsp;a&nbsp;string),&nbsp;add_token,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;remove_token.</tt></dd></dl>
 
+<dl><dt><a name="AtomService-request"><strong>request</strong></a>(self, operation, url, data<font color="#909090">=None</font>, headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="AtomService-use_basic_auth"><strong>use_basic_auth</strong></a>(self, username, password, scopes<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Properties defined here:<br>
+<dl><dt><strong>debug</strong></dt>
+<dd><tt>If&nbsp;True,&nbsp;HTTP&nbsp;debug&nbsp;information&nbsp;is&nbsp;printed.</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _get_debug(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _set_debug(self, value)</dt></dl>
+</dd>
+</dl>
 <hr>
 Data and other attributes defined here:<br>
 <dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
 
 <dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'AtomService' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
 
-<dl><dt><strong>debug</strong> = False</dl>
-
 <dl><dt><strong>port</strong> = 80</dl>
 
 <dl><dt><strong>ssl</strong> = False</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BasicAuthToken">class <strong>BasicAuthToken</strong></a>(<a href="atom.http_interface.html#GenericToken">atom.http_interface.GenericToken</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.service.html#BasicAuthToken">BasicAuthToken</a></dd>
+<dd><a href="atom.http_interface.html#GenericToken">atom.http_interface.GenericToken</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="BasicAuthToken-__init__"><strong>__init__</strong></a>(self, auth_header, scopes<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;a&nbsp;token&nbsp;used&nbsp;to&nbsp;add&nbsp;Basic&nbsp;Auth&nbsp;headers&nbsp;to&nbsp;HTTP&nbsp;requests.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;auth_header:&nbsp;str&nbsp;The&nbsp;value&nbsp;for&nbsp;the&nbsp;Authorization&nbsp;header.<br>
+&nbsp;&nbsp;scopes:&nbsp;list&nbsp;of&nbsp;str&nbsp;or&nbsp;atom.url.Url&nbsp;specifying&nbsp;the&nbsp;beginnings&nbsp;of&nbsp;URLs<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;which&nbsp;this&nbsp;token&nbsp;can&nbsp;be&nbsp;used.&nbsp;For&nbsp;example,&nbsp;if&nbsp;scopes&nbsp;contains<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<a href="http://example.com/foo">http://example.com/foo</a>',&nbsp;then&nbsp;this&nbsp;token&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;a&nbsp;request&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<a href="http://example.com/foo/bar">http://example.com/foo/bar</a>'&nbsp;but&nbsp;it&nbsp;cannot&nbsp;be&nbsp;used&nbsp;for&nbsp;a&nbsp;request&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<a href="http://example.com/baz">http://example.com/baz</a>'</tt></dd></dl>
+
+<dl><dt><a name="BasicAuthToken-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="BasicAuthToken-perform_request"><strong>perform_request</strong></a>(self, http_client, operation, url, data<font color="#909090">=None</font>, headers<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;the&nbsp;Authorization&nbsp;header&nbsp;to&nbsp;the&nbsp;basic&nbsp;auth&nbsp;string.</tt></dd></dl>
+
+<dl><dt><a name="BasicAuthToken-valid_for_scope"><strong>valid_for_scope</strong></a>(self, url)</dt><dd><tt>Tells&nbsp;the&nbsp;caller&nbsp;if&nbsp;the&nbsp;token&nbsp;authorizes&nbsp;access&nbsp;to&nbsp;the&nbsp;desired&nbsp;URL.</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.http_interface.html#GenericToken">atom.http_interface.GenericToken</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'GenericToken' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
 
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -214,6 +262,8 @@ Data and other attributes defined here:<br>
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl><dt><a name="-BuildUri"><strong>BuildUri</strong></a>(uri, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>)</dt><dd><tt>Converts&nbsp;a&nbsp;uri&nbsp;string&nbsp;and&nbsp;a&nbsp;collection&nbsp;of&nbsp;parameters&nbsp;into&nbsp;a&nbsp;URI.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;is&nbsp;deprcated,&nbsp;use&nbsp;atom.url.Url&nbsp;instead.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;uri:&nbsp;string<br>
@@ -235,7 +285,17 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;string&nbsp;The&nbsp;URI&nbsp;consisting&nbsp;of&nbsp;the&nbsp;escaped&nbsp;URL&nbsp;parameters&nbsp;appended&nbsp;to&nbsp;the<br>
 &nbsp;&nbsp;initial&nbsp;uri&nbsp;string.</tt></dd></dl>
+ <dl><dt><a name="-CalculateDataLength"><strong>CalculateDataLength</strong></a>(data)</dt><dd><tt>Attempts&nbsp;to&nbsp;determine&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;data&nbsp;to&nbsp;send.&nbsp;<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;will&nbsp;respond&nbsp;with&nbsp;a&nbsp;length&nbsp;only&nbsp;if&nbsp;the&nbsp;data&nbsp;is&nbsp;a&nbsp;string&nbsp;or<br>
+and&nbsp;ElementTree&nbsp;element.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;data:&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;If&nbsp;this&nbsp;is&nbsp;not&nbsp;a&nbsp;string&nbsp;or&nbsp;ElementTree&nbsp;element&nbsp;this&nbsp;funtion<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;return&nbsp;None.</tt></dd></dl>
  <dl><dt><a name="-DictionaryToParamList"><strong>DictionaryToParamList</strong></a>(url_parameters, escape_params<font color="#909090">=True</font>)</dt><dd><tt>Convert&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;URL&nbsp;arguments&nbsp;into&nbsp;a&nbsp;URL&nbsp;parameter&nbsp;string.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;is&nbsp;deprcated,&nbsp;use&nbsp;atom.url.Url&nbsp;instead.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;url_parameters:&nbsp;The&nbsp;dictionaty&nbsp;of&nbsp;key-value&nbsp;pairs&nbsp;which&nbsp;will&nbsp;be&nbsp;converted<br>
@@ -247,6 +307,8 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;list&nbsp;which&nbsp;contains&nbsp;a&nbsp;string&nbsp;for&nbsp;each&nbsp;key-value&nbsp;pair.&nbsp;The&nbsp;strings&nbsp;are<br>
 &nbsp;&nbsp;ready&nbsp;to&nbsp;be&nbsp;incorporated&nbsp;into&nbsp;a&nbsp;URL&nbsp;by&nbsp;using&nbsp;'&amp;'.join([]&nbsp;+&nbsp;parameter_list)</tt></dd></dl>
  <dl><dt><a name="-HttpRequest"><strong>HttpRequest</strong></a>(service, operation, data, uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, content_type<font color="#909090">='application/atom+xml'</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;HTTP&nbsp;call&nbsp;to&nbsp;the&nbsp;server,&nbsp;supports&nbsp;GET,&nbsp;POST,&nbsp;PUT,&nbsp;and&nbsp;DELETE.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;is&nbsp;deprecated,&nbsp;use&nbsp;atom.http.HttpClient.request&nbsp;instead.<br>
 &nbsp;<br>
 Usage&nbsp;example,&nbsp;perform&nbsp;and&nbsp;HTTP&nbsp;GET&nbsp;on&nbsp;<a href="http://www.google.com/">http://www.google.com/</a>:<br>
 &nbsp;&nbsp;import&nbsp;atom.service<br>
@@ -287,6 +349,8 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'application/atom+xml',&nbsp;this&nbsp;is&nbsp;only&nbsp;used&nbsp;if&nbsp;data&nbsp;is&nbsp;set.</tt></dd></dl>
  <dl><dt><a name="-PrepareConnection"><strong>PrepareConnection</strong></a>(service, full_uri)</dt><dd><tt>Opens&nbsp;a&nbsp;connection&nbsp;to&nbsp;the&nbsp;server&nbsp;based&nbsp;on&nbsp;the&nbsp;full&nbsp;URI.<br>
 &nbsp;<br>
+This&nbsp;method&nbsp;is&nbsp;deprecated,&nbsp;instead&nbsp;use&nbsp;atom.http.HttpClient.request.<br>
+&nbsp;<br>
 Examines&nbsp;the&nbsp;target&nbsp;URI&nbsp;and&nbsp;the&nbsp;proxy&nbsp;settings,&nbsp;which&nbsp;are&nbsp;set&nbsp;as<br>
 environment&nbsp;variables,&nbsp;to&nbsp;open&nbsp;a&nbsp;connection&nbsp;with&nbsp;the&nbsp;server.&nbsp;This<br>
 connection&nbsp;is&nbsp;used&nbsp;to&nbsp;make&nbsp;an&nbsp;HTTP&nbsp;request.<br>
@@ -304,8 +368,12 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;tuple&nbsp;containing&nbsp;the&nbsp;httplib.HTTPConnection&nbsp;and&nbsp;the&nbsp;full_uri&nbsp;for&nbsp;the<br>
 &nbsp;&nbsp;request.</tt></dd></dl>
  <dl><dt><a name="-ProcessUrl"><strong>ProcessUrl</strong></a>(service, url, for_proxy<font color="#909090">=False</font>)</dt><dd><tt>Processes&nbsp;a&nbsp;passed&nbsp;URL.&nbsp;&nbsp;If&nbsp;the&nbsp;URL&nbsp;does&nbsp;not&nbsp;begin&nbsp;with&nbsp;https?,&nbsp;then<br>
-the&nbsp;default&nbsp;value&nbsp;for&nbsp;server&nbsp;is&nbsp;used</tt></dd></dl>
+the&nbsp;default&nbsp;value&nbsp;for&nbsp;server&nbsp;is&nbsp;used<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;is&nbsp;deprecated,&nbsp;use&nbsp;atom.url.parse_url&nbsp;instead.</tt></dd></dl>
  <dl><dt><a name="-UseBasicAuth"><strong>UseBasicAuth</strong></a>(service, username, password, for_proxy<font color="#909090">=False</font>)</dt><dd><tt>Sets&nbsp;an&nbsp;Authenticaiton:&nbsp;Basic&nbsp;HTTP&nbsp;header&nbsp;containing&nbsp;plaintext.<br>
+&nbsp;<br>
+Deprecated,&nbsp;use&nbsp;<a href="#AtomService">AtomService</a>.use_basic_auth&nbsp;insread.<br>
 &nbsp;<br>
 The&nbsp;username&nbsp;and&nbsp;password&nbsp;are&nbsp;base64&nbsp;encoded&nbsp;and&nbsp;added&nbsp;to&nbsp;an&nbsp;HTTP&nbsp;header<br>
 which&nbsp;will&nbsp;be&nbsp;included&nbsp;in&nbsp;each&nbsp;request.&nbsp;Note&nbsp;that&nbsp;your&nbsp;username&nbsp;and&nbsp;<br>
@@ -317,6 +385,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;additional_headers&nbsp;dict&nbsp;as&nbsp;a&nbsp;member.<br>
 &nbsp;&nbsp;username:&nbsp;str<br>
 &nbsp;&nbsp;password:&nbsp;str</tt></dd></dl>
+ <dl><dt><a name="-deprecation"><strong>deprecation</strong></a>(message)</dt></dl>
 </td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
@@ -324,13 +393,12 @@ Args:<br>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>URL_REGEX</strong> = &lt;_sre.SRE_Pattern object&gt;<br>
-<strong>__author__</strong> = 'api.jscudder (Jeffrey Scudder)'</td></tr></table><p>
+<td width="100%"><strong>__author__</strong> = 'api.jscudder (Jeff Scudder)'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#7799ee">
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
     
 <tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%">api.jscudder&nbsp;(Jeffrey&nbsp;Scudder)</td></tr></table>
+<td width="100%">api.jscudder&nbsp;(Jeff&nbsp;Scudder)</td></tr></table>
 </body></html>
