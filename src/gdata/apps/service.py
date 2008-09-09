@@ -66,7 +66,7 @@ class AppsForYourDomainException(Error):
 
   def __init__(self, response):
 
-    self.args = response
+    Error.__init__(self, response)
     try:
       self.element_tree = ElementTree.fromstring(response['body'])
       self.error_code = int(self.element_tree[0].attrib['errorCode'])
