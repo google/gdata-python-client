@@ -45,6 +45,7 @@ def run_on_appengine(gdata_service):
         of their subclasses which has an http_client member.
   """
   gdata_service.http_client = AppEngineHttpClient()
+  return gdata_service
 
 
 class AppEngineHttpClient(atom.http_interface.GenericHttpClient):
