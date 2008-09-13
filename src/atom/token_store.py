@@ -112,3 +112,6 @@ class TokenStore(object):
     for scope in scopes_to_delete:
       del self._tokens[scope]
     return token_found
+
+  def remove_all_tokens(self):
+    self._tokens = {} 

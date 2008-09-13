@@ -90,7 +90,7 @@ class Url(object):
     param_pairs = []
     for key, value in self.params.iteritems():
       param_pairs.append('='.join((urllib.quote_plus(key), 
-          urllib.quote_plus(value))))
+          urllib.quote_plus(str(value)))))
     return '&'.join(param_pairs)
 
   def get_request_uri(self):

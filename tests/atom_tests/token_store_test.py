@@ -69,15 +69,6 @@ class TokenStoreTest(unittest.TestCase):
     self.assert_(isinstance(token_store.find_token('http://example.org/'), 
         atom.http_interface.GenericToken))
 
-  def testRemoveTokens(self):
-    self.assert_(self.tokens.remove_token(self.token) == True)
-    self.assert_(self.tokens.find_token('http://example.org/') != self.token)
-    self.assert_(isinstance(self.tokens.find_token('http://example.com/'),
-        atom.http_interface.GenericToken))
-    self.assert_(self.tokens.remove_token(self.token) == False)
-    self.assert_(isinstance(self.tokens.find_token('http://example.org/'),
-        atom.http_interface.GenericToken))
-
 
 if __name__ == '__main__':
   unittest.main()

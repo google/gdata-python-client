@@ -33,8 +33,13 @@ __author__ = 'api.jscudder (Jeff Scudder)'
 
 
 import StringIO
+import pickle
 import atom.http_interface
+import atom.token_store
 from google.appengine.api import urlfetch
+from google.appengine.ext import db
+from google.appengine.api import users
+from google.appengine.api import memcache
 
 
 def run_on_appengine(gdata_service):
@@ -45,6 +50,7 @@ def run_on_appengine(gdata_service):
         of their subclasses which has an http_client member.
   """
   gdata_service.http_client = AppEngineHttpClient()
+  gdata_service.token_store = AppEngineTokenStore()
   return gdata_service
 
 
@@ -87,15 +93,15 @@ class AppEngineHttpClient(atom.http_interface.GenericHttpClient):
       if isinstance(data, list):
         # If data is a list of different objects, convert them all to strings
         # and join them together.
-        converted_parts = [__ConvertDataPart(x) for x in data]
+        converted_parts = [_convert_data_part(x) for x in data]
         data_str = ''.join(converted_parts)
       else:
-        data_str = __ConvertDataPart(data)
+        data_str = _convert_data_part(data)
 
     # If the list of headers does not include a Content-Length, attempt to
     # calculate it based on the data object.
     if data and 'Content-Length' not in all_headers:
-      all_headers['Content-Length'] = len(data_str)
+      all_headers['Content-Length'] = str(len(data_str))
 
     # Set the content type to the default value if none was set.
     if 'Content-Type' not in all_headers:
@@ -116,7 +122,7 @@ class AppEngineHttpClient(atom.http_interface.GenericHttpClient):
         method=method, headers=all_headers))
 
 
-def __ConvertDataPart(data):
+def _convert_data_part(data):
   if not data or isinstance(data, str):
     return data
   elif hasattr(data, 'read'):
@@ -150,4 +156,83 @@ class HttpResponse(object):
     if not self.headers.has_key(name):
       return self.headers[name.lower()]
     return self.headers[name]
+
+
+class TokenCollection(db.Model):
+  user = db.UserProperty()
+  pickled_tokens = db.BlobProperty()
+
+
+class AppEngineTokenStore(atom.token_store.TokenStore):
+  def __init__(self):
+    pass
+
+  def add_token(self, token):
+    tokens = load_auth_tokens()
+    if not hasattr(token, 'scopes') or not token.scopes:
+      return False
+    for scope in token.scopes:
+      tokens[str(scope)] = token
+    key = save_auth_tokens(tokens)
+    if key:
+      return True
+    return False
+
+  def find_token(self, url):
+    if url is None:
+      return None
+    if isinstance(url, (str, unicode)):
+      url = atom.url.parse_url(url)
+    tokens = load_auth_tokens()
+    if url in tokens:
+      token = tokens[url]
+      if token.valid_for_scope(url):
+        return token
+      else:
+        del tokens[url]
+        save_auth_tokens(tokens)
+    for scope, token in tokens.iteritems():
+      if token.valid_for_scope(url):
+        return token
+    return atom.http_interface.GenericToken()
+
+  def remove_token(self, token):
+    token_found = False
+    scopes_to_delete = []
+    tokens = load_auth_tokens()
+    for scope, stored_token in tokens.iteritems():
+      if stored_token == token:
+        scopes_to_delete.append(scope)
+        token_found = True
+    for scope in scopes_to_delete:
+      del tokens[scope]
+    if token_found:
+      save_auth_tokens(tokens)
+    return token_found
+
+  def remove_all_tokens(self):
+    save_auth_tokens({})
+
+
+def save_auth_tokens(token_dict):
+  if users.get_current_user() is None:
+    return
+  user_tokens = TokenCollection.all().filter('user =', users.get_current_user()).get()
+  if user_tokens:
+    user_tokens.pickled_tokens = pickle.dumps(token_dict)
+    return user_tokens.put()
+  else:
+    user_tokens = TokenCollection(
+        user=users.get_current_user(), 
+        pickled_tokens=pickle.dumps(token_dict))
+    return user_tokens.put()
+     
+
+def load_auth_tokens():
+  if users.get_current_user() is None:
+    return {}
+  user_tokens = TokenCollection.all().filter('user =', users.get_current_user()).get()
+  if user_tokens:
+    return pickle.loads(user_tokens.pickled_tokens)
+  return {}
 

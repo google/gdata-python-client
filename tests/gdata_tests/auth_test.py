@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# Copyright (C) 2007 Google Inc.
+# Copyright (C) 2007, 2008 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 # limitations under the License.
 
 
-__author__ = 'api.jscudder (Jeffrey Scudder)'
+__author__ = 'api.jscudder (Jeff Scudder)'
 
 
 import unittest
@@ -23,9 +23,6 @@ import urllib
 import gdata.auth
 
 class AuthModuleUtilitiesTest(unittest.TestCase):
-
-  def setUp(self):
-    pass
 
   def testGenerateClientLoginRequestBody(self):
     body = gdata.auth.GenerateClientLoginRequestBody('jo@gmail.com', 
@@ -134,10 +131,79 @@ class ExtractAuthSubTokensTest(unittest.TestCase):
     self.assert_(gdata.auth.AuthSubTokenFromHttpBody(response_body) == 
         'AuthSub token=DQAA...7DCTN')
 
+class CreateAuthSubTokenFlowTest(unittest.TestCase):
+
+  def testGenerateRequest(self):
+    request_url = gdata.auth.generate_auth_sub_url(next='http://example.com', 
+        scopes=['http://www.blogger.com/feeds/', 
+                'http://www.google.com/base/feeds/'])
+    self.assertEquals(request_url.protocol, 'https')
+    self.assertEquals(request_url.host, 'www.google.com')
+    self.assertEquals(request_url.params['scope'], 
+        'http://www.blogger.com/feeds/ http://www.google.com/base/feeds/')
+    self.assertEquals(request_url.params['hd'], 'default')
+    self.assert_(request_url.params['next'].find('auth_sub_scopes') > -1)
+    self.assert_(request_url.params['next'].startswith('http://example.com'))
+
+    # Use a more complicated 'next' URL.
+    request_url = gdata.auth.generate_auth_sub_url(
+      next='http://example.com/?token_scope=http://www.blogger.com/feeds/',
+      scopes=['http://www.blogger.com/feeds/',
+              'http://www.google.com/base/feeds/'])
+    self.assert_(request_url.params['next'].find('auth_sub_scopes') > -1)
+    self.assert_(request_url.params['next'].find('token_scope') > -1)
+    self.assert_(request_url.params['next'].startswith('http://example.com/'))
+
+  def testParseNextUrl(self):
+    url = ('http://example.com/?auth_sub_scopes=http%3A%2F%2Fwww.blogger.com'
+           '%2Ffeeds%2F+http%3A%2F%2Fwww.google.com%2Fbase%2Ffeeds%2F&'
+           'token=my_nifty_token')
+    token = gdata.auth.extract_auth_sub_token_from_url(url)
+    self.assertEquals(token.get_token_string(), 'my_nifty_token')
+    self.assert_(isinstance(token, gdata.auth.AuthSubToken))
+    self.assert_(token.valid_for_scope('http://www.blogger.com/feeds/'))
+    self.assert_(token.valid_for_scope('http://www.google.com/base/feeds/'))
+    self.assert_(
+        not token.valid_for_scope('http://www.google.com/calendar/feeds/'))
+
+    # Parse a more complicated response.
+    url = ('http://example.com/?auth_sub_scopes=http%3A%2F%2Fwww.blogger.com'
+           '%2Ffeeds%2F+http%3A%2F%2Fwww.google.com%2Fbase%2Ffeeds%2F&'
+           'token_scope=http%3A%2F%2Fwww.blogger.com%2Ffeeds%2F&'
+           'token=second_token')
+    token = gdata.auth.extract_auth_sub_token_from_url(url)
+    self.assertEquals(token.get_token_string(), 'second_token')
+    self.assert_(isinstance(token, gdata.auth.AuthSubToken))
+    self.assert_(token.valid_for_scope('http://www.blogger.com/feeds/'))
+    self.assert_(token.valid_for_scope('http://www.google.com/base/feeds/'))
+    self.assert_(
+        not token.valid_for_scope('http://www.google.com/calendar/feeds/'))
+
+  def testParseNextWithNoToken(self):
+    token = gdata.auth.extract_auth_sub_token_from_url('http://example.com/')
+    self.assert_(token is None)
+    token = gdata.auth.extract_auth_sub_token_from_url(
+        'http://example.com/?no_token=foo&other=1')
+    self.assert_(token is None)
+
+
+class ExtractClientLoginTokenTest(unittest.TestCase):
+  
+  def testExtractFromBodyWithScopes(self):
+    http_body_string = ('SID=DQAAAGgA7Zg8CTN\r\n'
+                        'LSID=DQAAAGsAlk8BBbG\r\n'
+                        'Auth=DQAAAGgAdk3fA5N')
+    token = gdata.auth.extract_client_login_token(http_body_string, 
+         ['http://docs.google.com/feeds/'])
+    self.assertEquals(token.get_token_string(), 'DQAAAGgAdk3fA5N')
+    self.assert_(isinstance(token, gdata.auth.ClientLoginToken))
+    self.assert_(token.valid_for_scope('http://docs.google.com/feeds/'))
+    self.assert_(not token.valid_for_scope('http://www.blogger.com/feeds'))
+
 
 class TokenClassesTest(unittest.TestCase):
 
-  def testClientLoginToAndFromSting(self):
+  def testClientLoginToAndFromString(self):
     token = gdata.auth.ClientLoginToken()
     token.set_token_string('foo')
     self.assertEquals(token.get_token_string(), 'foo')
@@ -146,7 +212,7 @@ class TokenClassesTest(unittest.TestCase):
     token.set_token_string(token.get_token_string())
     self.assertEquals(token.get_token_string(), 'foo')
 
-  def testAuthSubToAndFromSting(self):
+  def testAuthSubToAndFromString(self):
     token = gdata.auth.AuthSubToken()
     token.set_token_string('foo')
     self.assertEquals(token.get_token_string(), 'foo')

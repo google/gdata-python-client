@@ -1,6 +1,6 @@
 #/usr/bin/python
 #
-# Copyright (C) 2007 Google Inc.
+# Copyright (C) 2007, 2008 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 import re
 import urllib
 import atom.http_interface
+import atom.token_store
 import atom.url
 
 
@@ -28,7 +29,39 @@ PROGRAMMATIC_AUTH_LABEL = 'GoogleLogin auth='
 AUTHSUB_AUTH_LABEL = 'AuthSub token='
 
 
-def GenerateClientLoginRequestBody(email, password, service, source, 
+"""This module provides functions and objects used with Google authentication.
+
+Details on Google authorization mechanisms used with the Google Data APIs can
+be found here: 
+http://code.google.com/apis/gdata/auth.html
+http://code.google.com/apis/accounts/
+
+The essential functions are the following.
+Related to ClientLogin:
+  generate_client_login_request_body: Constructs the body of an HTTP request to
+                                      obtain a ClientLogin token for a specific
+                                      service. 
+  extract_client_login_token: Creates a ClientLoginToken with the token from a
+                              success response to a ClientLogin request.
+  get_captcha_challenge: If the server responded to the ClientLogin request
+                         with a CAPTCHA challenge, this method extracts the
+                         CAPTCHA URL and identifying CAPTCHA token.
+
+Related to AuthSub:
+  generate_auth_sub_url: Constructs a full URL for a AuthSub request. The 
+                         user's browser must be sent to this Google Accounts
+                         URL and redirected back to the app to obtain the
+                         AuthSub token.
+  extract_auth_sub_token_from_url: Once the user's browser has been 
+                                   redirected back to the web app, use this
+                                   function to create an AuthSubToken with
+                                   the correct authorization token and scope.
+  token_from_http_body: Extracts the AuthSubToken value string from the 
+                        server's response to an AuthSub session token upgrade
+                        request.
+"""
+
+def generate_client_login_request_body(email, password, service, source, 
     account_type='HOSTED_OR_GOOGLE', captcha_token=None, 
     captcha_response=None):
   """Creates the body of the autentication request
@@ -63,6 +96,9 @@ def GenerateClientLoginRequestBody(email, password, service, source,
   return urllib.urlencode(request_fields)
 
 
+GenerateClientLoginRequestBody = generate_client_login_request_body
+
+
 def GenerateClientLoginAuthToken(http_body):
   """Returns the token value to use in Authorization headers.
 
@@ -93,7 +129,7 @@ def get_client_login_token(http_body):
         request
  
   Returns:
-    The token value for a ClientLoginToken.
+    The token value string for a ClientLoginToken.
   """
   for response_line in http_body.splitlines():
     if response_line.startswith('Auth='):
@@ -102,9 +138,30 @@ def get_client_login_token(http_body):
   return None
 
 
-def GetCaptchChallenge(http_body, 
+def extract_client_login_token(http_body, scopes):
+  """Parses the server's response and returns a ClientLoginToken.
+  
+  Args:
+    http_body: str The body of the server's HTTP response to a Client Login
+               request. It is assumed that the login request was successful.
+    scopes: list containing atom.url.Urls or strs. The scopes list contains
+            all of the partial URLs under which the client login token is
+            valid. For example, if scopes contains ['http://example.com/foo']
+            then the client login token would be valid for 
+            http://example.com/foo/bar/baz
+
+  Returns:
+    A ClientLoginToken which is valid for the specified scopes.
+  """
+  token_string = get_client_login_token(http_body)
+  token = ClientLoginToken(scopes=scopes)
+  token.set_token_string(token_string)
+  return token
+
+
+def get_captcha_challenge(http_body, 
     captcha_base_url='http://www.google.com/accounts/'):
-  """Returns the URL and token for a CAPTCHA challenge issued bu the server.
+  """Returns the URL and token for a CAPTCHA challenge issued by the server.
 
   Args:
     http_body: str The body of the HTTP response from the server which 
@@ -141,6 +198,8 @@ def GetCaptchChallenge(http_body,
     return None
 
 
+GetCaptchaChallenge = get_captcha_challenge
+
 def GenerateAuthSubUrl(next, scope, secure=False, session=True, 
     request_url='https://www.google.com/accounts/AuthSubRequest',
     domain='default'):
@@ -160,6 +219,9 @@ def GenerateAuthSubUrl(next, scope, secure=False, session=True,
             is a secure token.
     session: boolean (optional) Determines whether or not the issued token
              can be upgraded to a session token.
+    domain: str (optional) The Google Apps domain for this account. If this
+            is not a Google Apps account, use 'default' which is the default
+            value.
   """
   # Translate True/False values for parameters into numeric values acceoted
   # by the AuthSub service.
@@ -182,6 +244,65 @@ def GenerateAuthSubUrl(next, scope, secure=False, session=True,
     # The request URL already contained url parameters so we should add
     # the parameters using the & seperator
     return '%s&%s' % (request_url, request_params)
+
+
+def generate_auth_sub_url(next, scopes, secure=False, session=True,
+    request_url='https://www.google.com/accounts/AuthSubRequest', 
+    domain='default', scopes_param_prefix='auth_sub_scopes'):
+  """Constructs a URL string for requesting a multiscope AuthSub token.
+
+  The generated token will contain a URL parameter to pass along the 
+  requested scopes to the next URL. When the Google Accounts page 
+  redirects the broswser to the 'next' URL, it appends the single use
+  AuthSub token value to the URL as a URL parameter with the key 'token'.
+  However, the information about which scopes were requested is not
+  included by Google Accounts. This method adds the scopes to the next
+  URL before making the request so that the redirect will be sent to 
+  a page, and both the token value and the list of scopes can be 
+  extracted from the request URL. 
+
+  Args:
+    next: atom.url.URL or string The URL user will be sent to after
+          authorizing this web application to access their data.
+    scopes: list containint strings The URLs of the services to be accessed.
+    secure: boolean (optional) Determines whether or not the issued token
+            is a secure token.
+    session: boolean (optional) Determines whether or not the issued token
+             can be upgraded to a session token.
+    request_url: atom.url.Url or str The beginning of the request URL. This
+        is normally 'http://www.google.com/accounts/AuthSubRequest' or 
+        '/accounts/AuthSubRequest'
+    domain: The domain which the account is part of. This is used for Google
+        Apps accounts, the default value is 'default' which means that the
+        requested account is a Google Account (@gmail.com for example)
+    scopes_param_prefix: str (optional) The requested scopes are added as a 
+        URL parameter to the next URL so that the page at the 'next' URL can
+        extract the token value and the valid scopes from the URL. The key
+        for the URL parameter defaults to 'auth_sub_scopes'
+
+  Returns:
+    An atom.url.Url which the user's browser should be directed to in order
+    to authorize this application to access their information.
+  """
+  if isinstance(next, (str, unicode)):
+    next = atom.url.parse_url(next)
+  scopes_string = ' '.join([str(scope) for scope in scopes])
+  next.params[scopes_param_prefix] = scopes_string
+
+  if isinstance(request_url, (str, unicode)):
+    request_url = atom.url.parse_url(request_url)
+  request_url.params['next'] = str(next)
+  request_url.params['scope'] = scopes_string
+  if session:
+    request_url.params['session'] = 1
+  else:
+    request_url.params['session'] = 0
+  if secure:
+    request_url.params['secure'] = 1
+  else:
+    request_url.params['secure'] = 0
+  request_url.params['hd'] = domain
+  return request_url
 
 
 def AuthSubTokenFromUrl(url):
@@ -220,14 +341,50 @@ def TokenFromUrl(url):
   return None
 
 
+def extract_auth_sub_token_from_url(url, 
+    scopes_param_prefix='auth_sub_scopes'):
+  """Creates an AuthSubToken and sets the token value and scopes from the URL.
+  
+  After the Google Accounts AuthSub pages redirect the user's broswer back to 
+  the web application (using the 'next' URL from the request) the web app must
+  extract the token from the current page's URL. The token is provided as a 
+  URL parameter named 'token' and if generate_auth_sub_url was used to create
+  the request, the token's valid scopes are included in a URL parameter whose
+  name is specified in scopes_param_prefix.
+
+  Args:
+    url: atom.url.Url or str representing the current URL. The token value
+         and valid scopes should be included as URL parameters.
+    scopes_param_prefix: str (optional) The URL parameter key which maps to
+                         the list of valid scopes for the token.
+
+  Returns:
+    An AuthSubToken with the token value from the URL and set to be valid for
+    the scopes passed in on the URL. If no scopes were included in the URL,
+    the AuthSubToken defaults to being valid for no scopes. If there was no
+    'token' parameter in the URL, this function returns None.
+  """
+  if isinstance(url, (str, unicode)):
+    url = atom.url.parse_url(url)
+  if 'token' not in url.params:
+    return None
+  scopes = []
+  if scopes_param_prefix in url.params:
+    scopes = url.params[scopes_param_prefix].split(' ')
+  token_value = url.params['token']
+  token = AuthSubToken(scopes=scopes)
+  token.set_token_string(token_value)
+  return token
+
+
 def AuthSubTokenFromHttpBody(http_body):
   """Extracts the AuthSub token from an HTTP body string.
 
-  Used to find the new session token after making a request to upgrade a 
+  Used to find the new session token after making a request to upgrade a
   single use AuthSub token.
 
   Args:
-    http_body: str The repsonse from the server which contains the AuthSub 
+    http_body: str The repsonse from the server which contains the AuthSub
         key. For example, this function would find the new session token
         from the server's response to an upgrade token request.
 
@@ -235,13 +392,13 @@ def AuthSubTokenFromHttpBody(http_body):
     The header value to use for Authorization which contains the AuthSub
     token.
   """
-  token_value = TokenFromHttpBody(http_body)
+  token_value = token_from_http_body(http_body)
   if token_value:
-    return 'AuthSub token=%s' % token_value
+    return '%s%s' % (AUTHSUB_AUTH_LABEL, token_value)
   return None
 
 
-def TokenFromHttpBody(http_body):
+def token_from_http_body(http_body):
   """Extracts the AuthSub token from an HTTP body string.
 
   Used to find the new session token after making a request to upgrade a 
@@ -260,6 +417,9 @@ def TokenFromHttpBody(http_body):
       # Strip off Token= and return the token value string.
       return response_line[6:]
   return None
+
+
+TokenFromHttpBody = token_from_http_body
 
 
 class ClientLoginToken(atom.http_interface.GenericToken):

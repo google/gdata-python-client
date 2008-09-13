@@ -78,9 +78,8 @@ import atom.token_store
 import gdata.auth
 
 
-#PROGRAMMATIC_AUTH_LABEL = 'GoogleLogin auth'
-#AUTHSUB_AUTH_LABEL = 'AuthSub token'
 AUTH_SERVER_HOST = 'https://www.google.com'
+
 
 # When requesting an AuthSub token, it is often helpful to track the scope
 # which is being requested. One way to accomplish this is to add a URL 
@@ -332,26 +331,34 @@ class GDataService(atom.service.AtomService):
     """Sets the token sent in requests to an AuthSub token.
 
     Only use this method if you have received a token from the AuthSub
-    service. The auth_token is set automatically when UpgradeToSessionToken()
+    service. The authi token is set automatically when UpgradeToSessionToken()
     is used. See documentation for Google AuthSub here:
     http://code.google.com/apis/accounts/AuthForWebApps.html 
 
     Args:
-     token: string The token returned by the AuthSub service.
+     token: gdata.auth.AuthSubToken or string The token returned by the
+            AuthSub service. If the token is an AuthSubToken, the scope
+            information stored in the AuthSubToken is used. If the token
+            is a string, the scopes parameter is used to determine the
+            valid scopes.
+     scopes: list of URLs for which the token is valid. This is only used
+             if the token parameter is a string.
     """
-    if scopes is None:
-      # If there is no scope provided, pick a scope that will match the
-      # current target service, or will match all HTTP requests if the
-      # service name is not set.
-      scopes = lookup_scopes(self.service)
+    if not isinstance(token, gdata.auth.AuthSubToken):
+      token_string = token
+      token = gdata.auth.AuthSubToken()
+      token.set_token_string(token_string)
 
-    authsub_token = gdata.auth.AuthSubToken(scopes=scopes)
-    authsub_token.set_token_string(token)
-    if scopes is not None:
-      self.token_store.add_token(authsub_token)
-    else:
-      authsub_token.scopes = [atom.token_store.SCOPE_ALL]
-      self.token_store.add_token(authsub_token)
+    # If no scopes were set for the token, use the scopes passed in, or
+    # try to determine the scopes based on the current service name. If
+    # all else fails, set the token to match all requests.
+    if not token.scopes:
+      if scopes is None:
+        scopes = lookup_scopes(self.service)
+        if scopes is None:
+          scopes = [atom.token_store.SCOPE_ALL]
+      token.scopes = scopes
+    self.token_store.add_token(token)
 
   def GetClientLoginToken(self):
     """Returns the token string for the current request scope.
@@ -382,18 +389,18 @@ class GDataService(atom.service.AtomService):
     Args:
       token: string The token returned by the ClientLogin service.
     """
-    if scopes is None:
-      # If there is no scope provided, pick a scope that will match the
-      # current target service, or will match all HTTP requests if the
-      # service name is not set.
-      scopes = lookup_scopes(self.service)
-    client_login_token = gdata.auth.ClientLoginToken(scopes=scopes)
-    client_login_token.set_token_string(token)
-    if scopes:
-      self.token_store.add_token(client_login_token)
-    else:
-      client_login_token.scopes = [atom.token_store.SCOPE_ALL]
-      self.token_store.add_token(client_login_token)
+    if not isinstance(token, gdata.auth.ClientLoginToken):
+      token_string = token
+      token = gdata.auth.ClientLoginToken()
+      token.set_token_string(token_string)
+
+    if not token.scopes:
+      if scopes is None:
+        scopes = lookup_scopes(self.service)
+        if scopes is None:
+          scopes = [atom.token_store.SCOPE_ALL]
+      token.scopes = scopes
+    self.token_store.add_token(token)
 
   # Private methods to create the source property.
   def __GetSource(self):
@@ -433,8 +440,8 @@ class GDataService(atom.service.AtomService):
       BadAuthentication if the login service rejected the username or password
       Error if the login service responded with a 403 different from the above
     """
-    request_body = gdata.auth.GenerateClientLoginRequestBody(self.email, 
-        self.password, self.service, self.source, self.account_type, 
+    request_body = gdata.auth.generate_client_login_request_body(self.email,
+        self.password, self.service, self.source, self.account_type,
         captcha_token, captcha_response)
 
     # If the user has defined their own authentication service URL, 
@@ -459,7 +466,7 @@ class GDataService(atom.service.AtomService):
     elif auth_response.status == 403:
       # Examine each line to find the error type and the captcha token and
       # captch URL if they are present.
-      captcha_parameters = gdata.auth.GetCaptchChallenge(response_body, 
+      captcha_parameters = gdata.auth.get_captcha_challenge(response_body,
           captcha_base_url='%s/accounts/' % AUTH_SERVER_HOST)
       if captcha_parameters:
         self.__captcha_token = captcha_parameters['token']
@@ -521,52 +528,67 @@ class GDataService(atom.service.AtomService):
 
     Args:
       next: string The URL user will be sent to after logging in.
-      scope: string The URL of the service to be accessed.
+      scope: string or list of strings. The URLs of the services to be 
+             accessed.
       secure: boolean (optional) Determines whether or not the issued token
               is a secure token.
       session: boolean (optional) Determines whether or not the issued token
                can be upgraded to a session token.
     """
-    # TODO: use gdata.auth instead.
-    # Translate True/False values for parameters into numeric values acceoted
-    # by the AuthSub service.
-    if secure:
-      secure = 1
-    else:
-      secure = 0
+    if not isinstance(scope, (list, tuple)):
+      scope = (scope,)
+    return gdata.auth.generate_auth_sub_url(next, scope, secure=secure, 
+        session=session, 
+        request_url='%s/accounts/AuthSubRequest' % AUTH_SERVER_HOST, 
+        domain=domain)
 
-    if session:
-      session = 1
-    else:
-      session = 0
-
-    request_params = urllib.urlencode({'next': next, 'scope': scope,
-                                       'secure': secure, 'session': session,
-                                       'hd': domain})
-    return '%s/accounts/AuthSubRequest?%s' % (AUTH_SERVER_HOST, request_params)
-
-  def UpgradeToSessionToken(self):
+  def UpgradeToSessionToken(self, token=None):
     """Upgrades a single use AuthSub token to a session token.
+
+    Args:
+      token: A gdata.auth.AuthSubToken (optional) which is good for a single
+             use but can be upgraded to a session token. If no token is 
+             passed in, the AuthSubToken is found by looking in the 
+             token_store by looking for a token for the current scope.
 
     Raises:
       NonAuthSubToken if the user's auth token is not an AuthSub token
+      TokenUpgradeFailed if the server responded to the request with an 
+      error.
     """
-    scopes = lookup_scopes(self.service)
-    if scopes:
-      token = self.token_store.find_token(scopes[0])
-    else:
-      token = self.token_store.find_token(atom.token_store.SCOPE_ALL)
+    if token is None:
+      scopes = lookup_scopes(self.service)
+      if scopes:
+        token = self.token_store.find_token(scopes[0])
+      else:
+        token = self.token_store.find_token(atom.token_store.SCOPE_ALL)
     if not isinstance(token, gdata.auth.AuthSubToken):
       raise NonAuthSubToken
 
+    self.SetAuthSubToken(self.upgrade_to_session_token(token))
+
+  def upgrade_to_session_token(self, token):
+    """Upgrades a single use AuthSub token to a session token.
+
+    Args:
+      token: A gdata.auth.AuthSubToken (optional) which is good for a single
+             use but can be upgraded to a session token.
+
+    Returns:
+      The upgraded token as a gdata.auth.AuthSubToken object.
+
+    Raises:
+      TokenUpgradeFailed if the server responded to the request with an 
+      error.
+    """
     response = token.perform_request(self.http_client, 'GET', 
         AUTH_SERVER_HOST + '/accounts/AuthSubSessionToken', 
         headers={'Content-Type':'application/x-www-form-urlencoded'})
-
     response_body = response.read()
     if response.status == 200:
-      # TODO: add the token to the token_store directly.
-      self.SetAuthSubToken(gdata.auth.TokenFromHttpBody(response_body))
+      token.set_token_string(
+          gdata.auth.token_from_http_body(response_body))
+      return token
     else:
       raise TokenUpgradeFailed({'status': response.status,
                                 'reason': 'Non 200 response on upgrade',

@@ -63,6 +63,9 @@ class AtomService(object):
   # Default values for members
   port = 80
   ssl = False
+  # Set the override_token to force the AtomService to use this token
+  # instead of searching for an appropriate token in the token_store.
+  override_token = None
 
   def __init__(self, server=None, additional_headers=None, 
       application_name='', http_client=None, token_store=None):
@@ -152,7 +155,10 @@ class AtomService(object):
         all_headers['Content-Length'] = str(content_length)
 
     # Find an Authorization token for this URL if one is available.
-    auth_token = self.token_store.find_token(url)
+    if self.override_token:
+      auth_token = self.override_token
+    else:
+      auth_token = self.token_store.find_token(url)
     return auth_token.perform_request(self.http_client, operation, url, 
         data=data, headers=all_headers)
 
