@@ -47,7 +47,8 @@ def run_on_appengine(gdata_service):
 
   Args:
     gdata_service: An instance of AtomService, GDataService, or any
-        of their subclasses which has an http_client member.
+        of their subclasses which has an http_client member and a 
+        token_store member.
   """
   gdata_service.http_client = AppEngineHttpClient()
   gdata_service.token_store = AppEngineTokenStore()
@@ -159,15 +160,28 @@ class HttpResponse(object):
 
 
 class TokenCollection(db.Model):
+  """Datastore Model which associates auth tokens with the current user."""
   user = db.UserProperty()
   pickled_tokens = db.BlobProperty()
 
 
 class AppEngineTokenStore(atom.token_store.TokenStore):
+  """Stores the user's auth tokens in the App Engine datastore.
+
+  Tokens are only written to the datastore if a user is signed in (if 
+  users.get_current_user() returns a user object).
+  """
   def __init__(self):
     pass
 
   def add_token(self, token):
+    """Associates the token with the current user and stores it.
+    
+    If there is no current user, the token will not be stored.
+
+    Returns:
+      False if the token was not stored. 
+    """
     tokens = load_auth_tokens()
     if not hasattr(token, 'scopes') or not token.scopes:
       return False
@@ -179,6 +193,14 @@ class AppEngineTokenStore(atom.token_store.TokenStore):
     return False
 
   def find_token(self, url):
+    """Searches the current user's collection of token for a token which can
+    be used for a request to the url.
+
+    Returns:
+      The stored token which belongs to the current user and is valid for the
+      desired URL. If there is no current user, or there is no valid user 
+      token in the datastore, a atom.http_interface.GenericToken is returned.
+    """
     if url is None:
       return None
     if isinstance(url, (str, unicode)):
@@ -197,6 +219,12 @@ class AppEngineTokenStore(atom.token_store.TokenStore):
     return atom.http_interface.GenericToken()
 
   def remove_token(self, token):
+    """Removes the token from the current user's collection in the datastore.
+    
+    Returns:
+      False if the token was not removed, this could be because the token was
+      not in the datastore, or because there is no current user.
+    """
     token_found = False
     scopes_to_delete = []
     tokens = load_auth_tokens()
@@ -211,12 +239,22 @@ class AppEngineTokenStore(atom.token_store.TokenStore):
     return token_found
 
   def remove_all_tokens(self):
+    """Removes all of the current user's tokens from the datastore."""
     save_auth_tokens({})
 
 
 def save_auth_tokens(token_dict):
+  """Associates the tokens with the current user and writes to the datastore.
+  
+  If there us no current user, the tokens are not written and this function
+  returns None.
+
+  Returns:
+    The key of the datastore entity containing the user's tokens, or None if
+    there was no current user.
+  """
   if users.get_current_user() is None:
-    return
+    return None
   user_tokens = TokenCollection.all().filter('user =', users.get_current_user()).get()
   if user_tokens:
     user_tokens.pickled_tokens = pickle.dumps(token_dict)
@@ -229,6 +267,11 @@ def save_auth_tokens(token_dict):
      
 
 def load_auth_tokens():
+  """Reads a dictionary of the current user's tokens from the datastore.
+  
+  If there is no current user (a user is not signed in to the app) or the user
+  does not have any tokens, an empty dictionary is returned.
+  """
   if users.get_current_user() is None:
     return {}
   user_tokens = TokenCollection.all().filter('user =', users.get_current_user()).get()

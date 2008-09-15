@@ -1,3 +1,29 @@
+=== 1.2.1 ===
+Sep 15, 2008 (revision 528)
+
+- The gdata.alt.appengine module now replaces a Service object's token_store
+    with an AppEngineTokenStore which automatically associates auth tokens 
+    with the current user and stores the auth tokens in the datastore.
+- Streamlined the gdata.auth module. There are now six recommended functions
+    for using Google auth mechanisms. GDataService now uses these six
+    functions.
+- Added an override_token in Service objects (AtomService, GDataService) 
+    which bypasses the token_store. This member is helpful when using a 
+    single use AuthSub token which is only valid for one request and so
+    would not be reused.
+- gdata.alt.appengin.run_on_appengine will now return the modified Service
+    object. This allows statements like:
+    client = gdata.alt.appengin.run_on_appengine(
+        gdata.blogger.service.BloggerService())
+- Fixed content length header issue in gdata.alt.appengine which caused
+    errors when running on App Engine when HTTP headers are set to 
+    non-string values.
+- Fixed function naming issue in gdata.alt.appengine, a "private" function
+    was not accessible in some import styles.
+- Fixed issue in atom.http which surfaces when passing in a string for the
+    port number. Ports are now cast to ints. 
+- Updated pydocs.
+
 === 1.2.0 ===
 Sep 9, 2008 (revision 522)
 
