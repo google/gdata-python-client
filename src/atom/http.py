@@ -137,11 +137,11 @@ class HttpClient(atom.http_interface.GenericHttpClient):
     if url.protocol == 'https':
       if not url.port:
         return httplib.HTTPSConnection(url.host)
-      return httplib.HTTPSConnection(url.host, url.port)
+      return httplib.HTTPSConnection(url.host, int(url.port))
     else:
       if not url.port:
         return httplib.HTTPConnection(url.host)
-      return httplib.HTTPConnection(url.host, url.port)
+      return httplib.HTTPConnection(url.host, int(url.port))
 
   def _get_access_url(self, url):
     return url.get_request_uri()
@@ -225,7 +225,7 @@ class ProxiedHttpClient(HttpClient):
         if proxy_auth:
           headers['Proxy-Authorization'] = proxy_auth.strip()
 
-        return httplib.HTTPConnection(proxy_url.host, proxy_url.port)
+        return httplib.HTTPConnection(proxy_url.host, int(proxy_url.port))
       else:
         # The request was HTTP, but there was no http_proxy set.
         return HttpClient._prepare_connection(self, url, headers)
