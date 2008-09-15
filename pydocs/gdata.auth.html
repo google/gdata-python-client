@@ -11,7 +11,7 @@
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client-release/src/gdata/auth.py">/usr/local/svn/gdata-python-client-release/src/gdata/auth.py</a></font></td></tr></table>
     <p><tt>#/usr/bin/python<br>
 #<br>
-#&nbsp;Copyright&nbsp;(C)&nbsp;2007&nbsp;Google&nbsp;Inc.<br>
+#&nbsp;Copyright&nbsp;(C)&nbsp;2007,&nbsp;2008&nbsp;Google&nbsp;Inc.<br>
 #<br>
 #&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;"License");<br>
 #&nbsp;you&nbsp;may&nbsp;not&nbsp;use&nbsp;this&nbsp;file&nbsp;except&nbsp;in&nbsp;compliance&nbsp;with&nbsp;the&nbsp;License.<br>
@@ -146,11 +146,11 @@ Data and other attributes inherited from <a href="atom.http_interface.html#Gener
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl><dt><a name="-AuthSubTokenFromHttpBody"><strong>AuthSubTokenFromHttpBody</strong></a>(http_body)</dt><dd><tt>Extracts&nbsp;the&nbsp;AuthSub&nbsp;token&nbsp;from&nbsp;an&nbsp;HTTP&nbsp;body&nbsp;string.<br>
 &nbsp;<br>
-Used&nbsp;to&nbsp;find&nbsp;the&nbsp;new&nbsp;session&nbsp;token&nbsp;after&nbsp;making&nbsp;a&nbsp;request&nbsp;to&nbsp;upgrade&nbsp;a&nbsp;<br>
+Used&nbsp;to&nbsp;find&nbsp;the&nbsp;new&nbsp;session&nbsp;token&nbsp;after&nbsp;making&nbsp;a&nbsp;request&nbsp;to&nbsp;upgrade&nbsp;a<br>
 single&nbsp;use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;http_body:&nbsp;str&nbsp;The&nbsp;repsonse&nbsp;from&nbsp;the&nbsp;server&nbsp;which&nbsp;contains&nbsp;the&nbsp;AuthSub&nbsp;<br>
+&nbsp;&nbsp;http_body:&nbsp;str&nbsp;The&nbsp;repsonse&nbsp;from&nbsp;the&nbsp;server&nbsp;which&nbsp;contains&nbsp;the&nbsp;AuthSub<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key.&nbsp;For&nbsp;example,&nbsp;this&nbsp;function&nbsp;would&nbsp;find&nbsp;the&nbsp;new&nbsp;session&nbsp;token<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;the&nbsp;server's&nbsp;response&nbsp;to&nbsp;an&nbsp;upgrade&nbsp;token&nbsp;request.<br>
 &nbsp;<br>
@@ -181,7 +181,10 @@ Args:<br>
 &nbsp;&nbsp;secure:&nbsp;boolean&nbsp;(optional)&nbsp;Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;issued&nbsp;token<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;a&nbsp;secure&nbsp;token.<br>
 &nbsp;&nbsp;session:&nbsp;boolean&nbsp;(optional)&nbsp;Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;issued&nbsp;token<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;be&nbsp;upgraded&nbsp;to&nbsp;a&nbsp;session&nbsp;token.</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;be&nbsp;upgraded&nbsp;to&nbsp;a&nbsp;session&nbsp;token.<br>
+&nbsp;&nbsp;domain:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;Google&nbsp;Apps&nbsp;domain&nbsp;for&nbsp;this&nbsp;account.&nbsp;If&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;not&nbsp;a&nbsp;Google&nbsp;Apps&nbsp;account,&nbsp;use&nbsp;'default'&nbsp;which&nbsp;is&nbsp;the&nbsp;default<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value.</tt></dd></dl>
  <dl><dt><a name="-GenerateClientLoginAuthToken"><strong>GenerateClientLoginAuthToken</strong></a>(http_body)</dt><dd><tt>Returns&nbsp;the&nbsp;token&nbsp;value&nbsp;to&nbsp;use&nbsp;in&nbsp;Authorization&nbsp;headers.<br>
 &nbsp;<br>
 Reads&nbsp;the&nbsp;token&nbsp;from&nbsp;the&nbsp;server's&nbsp;response&nbsp;to&nbsp;a&nbsp;Client&nbsp;Login&nbsp;request&nbsp;and<br>
@@ -193,7 +196,7 @@ Args:<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;value&nbsp;half&nbsp;of&nbsp;an&nbsp;Authorization&nbsp;header.</tt></dd></dl>
- <dl><dt><a name="-GenerateClientLoginRequestBody"><strong>GenerateClientLoginRequestBody</strong></a>(email, password, service, source, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;autentication&nbsp;request<br>
+ <dl><dt><a name="-GenerateClientLoginRequestBody"><strong>GenerateClientLoginRequestBody</strong></a> = generate_client_login_request_body(email, password, service, source, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;autentication&nbsp;request<br>
 &nbsp;<br>
 See&nbsp;<a href="http://code.google.com/apis/accounts/AuthForInstalledApps.html#Request">http://code.google.com/apis/accounts/AuthForInstalledApps.html#Request</a><br>
 for&nbsp;more&nbsp;details.<br>
@@ -210,7 +213,7 @@ Args:<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;HTTP&nbsp;body&nbsp;to&nbsp;send&nbsp;in&nbsp;a&nbsp;request&nbsp;for&nbsp;a&nbsp;client&nbsp;login&nbsp;token.</tt></dd></dl>
- <dl><dt><a name="-GetCaptchChallenge"><strong>GetCaptchChallenge</strong></a>(http_body, captcha_base_url<font color="#909090">='http://www.google.com/accounts/'</font>)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;and&nbsp;token&nbsp;for&nbsp;a&nbsp;CAPTCHA&nbsp;challenge&nbsp;issued&nbsp;bu&nbsp;the&nbsp;server.<br>
+ <dl><dt><a name="-GetCaptchaChallenge"><strong>GetCaptchaChallenge</strong></a> = get_captcha_challenge(http_body, captcha_base_url<font color="#909090">='http://www.google.com/accounts/'</font>)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;and&nbsp;token&nbsp;for&nbsp;a&nbsp;CAPTCHA&nbsp;challenge&nbsp;issued&nbsp;by&nbsp;the&nbsp;server.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;http_body:&nbsp;str&nbsp;The&nbsp;body&nbsp;of&nbsp;the&nbsp;HTTP&nbsp;response&nbsp;from&nbsp;the&nbsp;server&nbsp;which&nbsp;<br>
@@ -229,7 +232,7 @@ Returns:<br>
 &nbsp;&nbsp;{'token':&nbsp;string&nbsp;identifying&nbsp;the&nbsp;CAPTCHA&nbsp;image,<br>
 &nbsp;&nbsp;&nbsp;'url':&nbsp;string&nbsp;containing&nbsp;the&nbsp;URL&nbsp;of&nbsp;the&nbsp;image}<br>
 &nbsp;&nbsp;Returns&nbsp;None&nbsp;if&nbsp;there&nbsp;was&nbsp;no&nbsp;CAPTCHA&nbsp;challenge&nbsp;in&nbsp;the&nbsp;response.</tt></dd></dl>
- <dl><dt><a name="-TokenFromHttpBody"><strong>TokenFromHttpBody</strong></a>(http_body)</dt><dd><tt>Extracts&nbsp;the&nbsp;AuthSub&nbsp;token&nbsp;from&nbsp;an&nbsp;HTTP&nbsp;body&nbsp;string.<br>
+ <dl><dt><a name="-TokenFromHttpBody"><strong>TokenFromHttpBody</strong></a> = token_from_http_body(http_body)</dt><dd><tt>Extracts&nbsp;the&nbsp;AuthSub&nbsp;token&nbsp;from&nbsp;an&nbsp;HTTP&nbsp;body&nbsp;string.<br>
 &nbsp;<br>
 Used&nbsp;to&nbsp;find&nbsp;the&nbsp;new&nbsp;session&nbsp;token&nbsp;after&nbsp;making&nbsp;a&nbsp;request&nbsp;to&nbsp;upgrade&nbsp;a&nbsp;<br>
 single&nbsp;use&nbsp;AuthSub&nbsp;token.<br>
@@ -248,6 +251,109 @@ Returns&nbsp;the&nbsp;raw&nbsp;token&nbsp;value.<br>
 Args:<br>
 &nbsp;&nbsp;url:&nbsp;str&nbsp;The&nbsp;URL&nbsp;or&nbsp;the&nbsp;query&nbsp;portion&nbsp;of&nbsp;the&nbsp;URL&nbsp;string&nbsp;(after&nbsp;the&nbsp;?)&nbsp;of<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;current&nbsp;page&nbsp;which&nbsp;contains&nbsp;the&nbsp;AuthSub&nbsp;token&nbsp;as&nbsp;a&nbsp;URL&nbsp;parameter.</tt></dd></dl>
+ <dl><dt><a name="-extract_auth_sub_token_from_url"><strong>extract_auth_sub_token_from_url</strong></a>(url, scopes_param_prefix<font color="#909090">='auth_sub_scopes'</font>)</dt><dd><tt>Creates&nbsp;an&nbsp;<a href="#AuthSubToken">AuthSubToken</a>&nbsp;and&nbsp;sets&nbsp;the&nbsp;token&nbsp;value&nbsp;and&nbsp;scopes&nbsp;from&nbsp;the&nbsp;URL.<br>
+&nbsp;<br>
+After&nbsp;the&nbsp;Google&nbsp;Accounts&nbsp;AuthSub&nbsp;pages&nbsp;redirect&nbsp;the&nbsp;user's&nbsp;broswer&nbsp;back&nbsp;to&nbsp;<br>
+the&nbsp;web&nbsp;application&nbsp;(using&nbsp;the&nbsp;'next'&nbsp;URL&nbsp;from&nbsp;the&nbsp;request)&nbsp;the&nbsp;web&nbsp;app&nbsp;must<br>
+extract&nbsp;the&nbsp;token&nbsp;from&nbsp;the&nbsp;current&nbsp;page's&nbsp;URL.&nbsp;The&nbsp;token&nbsp;is&nbsp;provided&nbsp;as&nbsp;a&nbsp;<br>
+URL&nbsp;parameter&nbsp;named&nbsp;'token'&nbsp;and&nbsp;if&nbsp;generate_auth_sub_url&nbsp;was&nbsp;used&nbsp;to&nbsp;create<br>
+the&nbsp;request,&nbsp;the&nbsp;token's&nbsp;valid&nbsp;scopes&nbsp;are&nbsp;included&nbsp;in&nbsp;a&nbsp;URL&nbsp;parameter&nbsp;whose<br>
+name&nbsp;is&nbsp;specified&nbsp;in&nbsp;scopes_param_prefix.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;url:&nbsp;atom.url.Url&nbsp;or&nbsp;str&nbsp;representing&nbsp;the&nbsp;current&nbsp;URL.&nbsp;The&nbsp;token&nbsp;value<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;valid&nbsp;scopes&nbsp;should&nbsp;be&nbsp;included&nbsp;as&nbsp;URL&nbsp;parameters.<br>
+&nbsp;&nbsp;scopes_param_prefix:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;parameter&nbsp;key&nbsp;which&nbsp;maps&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;list&nbsp;of&nbsp;valid&nbsp;scopes&nbsp;for&nbsp;the&nbsp;token.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;<a href="#AuthSubToken">AuthSubToken</a>&nbsp;with&nbsp;the&nbsp;token&nbsp;value&nbsp;from&nbsp;the&nbsp;URL&nbsp;and&nbsp;set&nbsp;to&nbsp;be&nbsp;valid&nbsp;for<br>
+&nbsp;&nbsp;the&nbsp;scopes&nbsp;passed&nbsp;in&nbsp;on&nbsp;the&nbsp;URL.&nbsp;If&nbsp;no&nbsp;scopes&nbsp;were&nbsp;included&nbsp;in&nbsp;the&nbsp;URL,<br>
+&nbsp;&nbsp;the&nbsp;<a href="#AuthSubToken">AuthSubToken</a>&nbsp;defaults&nbsp;to&nbsp;being&nbsp;valid&nbsp;for&nbsp;no&nbsp;scopes.&nbsp;If&nbsp;there&nbsp;was&nbsp;no<br>
+&nbsp;&nbsp;'token'&nbsp;parameter&nbsp;in&nbsp;the&nbsp;URL,&nbsp;this&nbsp;function&nbsp;returns&nbsp;None.</tt></dd></dl>
+ <dl><dt><a name="-extract_client_login_token"><strong>extract_client_login_token</strong></a>(http_body, scopes)</dt><dd><tt>Parses&nbsp;the&nbsp;server's&nbsp;response&nbsp;and&nbsp;returns&nbsp;a&nbsp;<a href="#ClientLoginToken">ClientLoginToken</a>.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;http_body:&nbsp;str&nbsp;The&nbsp;body&nbsp;of&nbsp;the&nbsp;server's&nbsp;HTTP&nbsp;response&nbsp;to&nbsp;a&nbsp;Client&nbsp;Login<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request.&nbsp;It&nbsp;is&nbsp;assumed&nbsp;that&nbsp;the&nbsp;login&nbsp;request&nbsp;was&nbsp;successful.<br>
+&nbsp;&nbsp;scopes:&nbsp;list&nbsp;containing&nbsp;atom.url.Urls&nbsp;or&nbsp;strs.&nbsp;The&nbsp;scopes&nbsp;list&nbsp;contains<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all&nbsp;of&nbsp;the&nbsp;partial&nbsp;URLs&nbsp;under&nbsp;which&nbsp;the&nbsp;client&nbsp;login&nbsp;token&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;valid.&nbsp;For&nbsp;example,&nbsp;if&nbsp;scopes&nbsp;contains&nbsp;['<a href="http://example.com/foo">http://example.com/foo</a>']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;the&nbsp;client&nbsp;login&nbsp;token&nbsp;would&nbsp;be&nbsp;valid&nbsp;for&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://example.com/foo/bar/baz">http://example.com/foo/bar/baz</a><br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;<a href="#ClientLoginToken">ClientLoginToken</a>&nbsp;which&nbsp;is&nbsp;valid&nbsp;for&nbsp;the&nbsp;specified&nbsp;scopes.</tt></dd></dl>
+ <dl><dt><a name="-generate_auth_sub_url"><strong>generate_auth_sub_url</strong></a>(next, scopes, secure<font color="#909090">=False</font>, session<font color="#909090">=True</font>, request_url<font color="#909090">='https://www.google.com/accounts/AuthSubRequest'</font>, domain<font color="#909090">='default'</font>, scopes_param_prefix<font color="#909090">='auth_sub_scopes'</font>)</dt><dd><tt>Constructs&nbsp;a&nbsp;URL&nbsp;string&nbsp;for&nbsp;requesting&nbsp;a&nbsp;multiscope&nbsp;AuthSub&nbsp;token.<br>
+&nbsp;<br>
+The&nbsp;generated&nbsp;token&nbsp;will&nbsp;contain&nbsp;a&nbsp;URL&nbsp;parameter&nbsp;to&nbsp;pass&nbsp;along&nbsp;the&nbsp;<br>
+requested&nbsp;scopes&nbsp;to&nbsp;the&nbsp;next&nbsp;URL.&nbsp;When&nbsp;the&nbsp;Google&nbsp;Accounts&nbsp;page&nbsp;<br>
+redirects&nbsp;the&nbsp;broswser&nbsp;to&nbsp;the&nbsp;'next'&nbsp;URL,&nbsp;it&nbsp;appends&nbsp;the&nbsp;single&nbsp;use<br>
+AuthSub&nbsp;token&nbsp;value&nbsp;to&nbsp;the&nbsp;URL&nbsp;as&nbsp;a&nbsp;URL&nbsp;parameter&nbsp;with&nbsp;the&nbsp;key&nbsp;'token'.<br>
+However,&nbsp;the&nbsp;information&nbsp;about&nbsp;which&nbsp;scopes&nbsp;were&nbsp;requested&nbsp;is&nbsp;not<br>
+included&nbsp;by&nbsp;Google&nbsp;Accounts.&nbsp;This&nbsp;method&nbsp;adds&nbsp;the&nbsp;scopes&nbsp;to&nbsp;the&nbsp;next<br>
+URL&nbsp;before&nbsp;making&nbsp;the&nbsp;request&nbsp;so&nbsp;that&nbsp;the&nbsp;redirect&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;<br>
+a&nbsp;page,&nbsp;and&nbsp;both&nbsp;the&nbsp;token&nbsp;value&nbsp;and&nbsp;the&nbsp;list&nbsp;of&nbsp;scopes&nbsp;can&nbsp;be&nbsp;<br>
+extracted&nbsp;from&nbsp;the&nbsp;request&nbsp;URL.&nbsp;<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;next:&nbsp;atom.url.URL&nbsp;or&nbsp;string&nbsp;The&nbsp;URL&nbsp;user&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;after<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authorizing&nbsp;this&nbsp;web&nbsp;application&nbsp;to&nbsp;access&nbsp;their&nbsp;data.<br>
+&nbsp;&nbsp;scopes:&nbsp;list&nbsp;containint&nbsp;strings&nbsp;The&nbsp;URLs&nbsp;of&nbsp;the&nbsp;services&nbsp;to&nbsp;be&nbsp;accessed.<br>
+&nbsp;&nbsp;secure:&nbsp;boolean&nbsp;(optional)&nbsp;Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;issued&nbsp;token<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;a&nbsp;secure&nbsp;token.<br>
+&nbsp;&nbsp;session:&nbsp;boolean&nbsp;(optional)&nbsp;Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;issued&nbsp;token<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;be&nbsp;upgraded&nbsp;to&nbsp;a&nbsp;session&nbsp;token.<br>
+&nbsp;&nbsp;request_url:&nbsp;atom.url.Url&nbsp;or&nbsp;str&nbsp;The&nbsp;beginning&nbsp;of&nbsp;the&nbsp;request&nbsp;URL.&nbsp;This<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;normally&nbsp;'<a href="http://www.google.com/accounts/AuthSubRequest">http://www.google.com/accounts/AuthSubRequest</a>'&nbsp;or&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/accounts/AuthSubRequest'<br>
+&nbsp;&nbsp;domain:&nbsp;The&nbsp;domain&nbsp;which&nbsp;the&nbsp;account&nbsp;is&nbsp;part&nbsp;of.&nbsp;This&nbsp;is&nbsp;used&nbsp;for&nbsp;Google<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apps&nbsp;accounts,&nbsp;the&nbsp;default&nbsp;value&nbsp;is&nbsp;'default'&nbsp;which&nbsp;means&nbsp;that&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested&nbsp;account&nbsp;is&nbsp;a&nbsp;Google&nbsp;Account&nbsp;(@gmail.com&nbsp;for&nbsp;example)<br>
+&nbsp;&nbsp;scopes_param_prefix:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;requested&nbsp;scopes&nbsp;are&nbsp;added&nbsp;as&nbsp;a&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;URL&nbsp;parameter&nbsp;to&nbsp;the&nbsp;next&nbsp;URL&nbsp;so&nbsp;that&nbsp;the&nbsp;page&nbsp;at&nbsp;the&nbsp;'next'&nbsp;URL&nbsp;can<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extract&nbsp;the&nbsp;token&nbsp;value&nbsp;and&nbsp;the&nbsp;valid&nbsp;scopes&nbsp;from&nbsp;the&nbsp;URL.&nbsp;The&nbsp;key<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;the&nbsp;URL&nbsp;parameter&nbsp;defaults&nbsp;to&nbsp;'auth_sub_scopes'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.url.Url&nbsp;which&nbsp;the&nbsp;user's&nbsp;browser&nbsp;should&nbsp;be&nbsp;directed&nbsp;to&nbsp;in&nbsp;order<br>
+&nbsp;&nbsp;to&nbsp;authorize&nbsp;this&nbsp;application&nbsp;to&nbsp;access&nbsp;their&nbsp;information.</tt></dd></dl>
+ <dl><dt><a name="-generate_client_login_request_body"><strong>generate_client_login_request_body</strong></a>(email, password, service, source, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;autentication&nbsp;request<br>
+&nbsp;<br>
+See&nbsp;<a href="http://code.google.com/apis/accounts/AuthForInstalledApps.html#Request">http://code.google.com/apis/accounts/AuthForInstalledApps.html#Request</a><br>
+for&nbsp;more&nbsp;details.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;email:&nbsp;str<br>
+&nbsp;&nbsp;password:&nbsp;str<br>
+&nbsp;&nbsp;service:&nbsp;str<br>
+&nbsp;&nbsp;source:&nbsp;str<br>
+&nbsp;&nbsp;account_type:&nbsp;str&nbsp;(optional)&nbsp;Defaul&nbsp;is&nbsp;'HOSTED_OR_GOOGLE',&nbsp;other&nbsp;valid<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;values&nbsp;are&nbsp;'GOOGLE'&nbsp;and&nbsp;'HOSTED'<br>
+&nbsp;&nbsp;captcha_token:&nbsp;str&nbsp;(optional)<br>
+&nbsp;&nbsp;captcha_response:&nbsp;str&nbsp;(optional)<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;HTTP&nbsp;body&nbsp;to&nbsp;send&nbsp;in&nbsp;a&nbsp;request&nbsp;for&nbsp;a&nbsp;client&nbsp;login&nbsp;token.</tt></dd></dl>
+ <dl><dt><a name="-get_captcha_challenge"><strong>get_captcha_challenge</strong></a>(http_body, captcha_base_url<font color="#909090">='http://www.google.com/accounts/'</font>)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;and&nbsp;token&nbsp;for&nbsp;a&nbsp;CAPTCHA&nbsp;challenge&nbsp;issued&nbsp;by&nbsp;the&nbsp;server.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;http_body:&nbsp;str&nbsp;The&nbsp;body&nbsp;of&nbsp;the&nbsp;HTTP&nbsp;response&nbsp;from&nbsp;the&nbsp;server&nbsp;which&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contains&nbsp;the&nbsp;CAPTCHA&nbsp;challenge.<br>
+&nbsp;&nbsp;captcha_base_url:&nbsp;str&nbsp;This&nbsp;function&nbsp;returns&nbsp;a&nbsp;full&nbsp;URL&nbsp;for&nbsp;viewing&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;challenge&nbsp;image&nbsp;which&nbsp;is&nbsp;built&nbsp;from&nbsp;the&nbsp;server's&nbsp;response.&nbsp;This<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base_url&nbsp;is&nbsp;used&nbsp;as&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;URL&nbsp;because&nbsp;the&nbsp;server<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;only&nbsp;provides&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;URL.&nbsp;For&nbsp;example&nbsp;the&nbsp;server&nbsp;provides<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Captcha?ctoken=Hi...N'&nbsp;and&nbsp;the&nbsp;URL&nbsp;for&nbsp;the&nbsp;image&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<a href="http://www.google.com/accounts/Captcha?ctoken=Hi...N">http://www.google.com/accounts/Captcha?ctoken=Hi...N</a>'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;dictionary&nbsp;containing&nbsp;the&nbsp;information&nbsp;needed&nbsp;to&nbsp;repond&nbsp;to&nbsp;the&nbsp;CAPTCHA<br>
+&nbsp;&nbsp;challenge,&nbsp;the&nbsp;image&nbsp;URL&nbsp;and&nbsp;the&nbsp;ID&nbsp;token&nbsp;of&nbsp;the&nbsp;challenge.&nbsp;The&nbsp;<br>
+&nbsp;&nbsp;dictionary&nbsp;is&nbsp;in&nbsp;the&nbsp;form:<br>
+&nbsp;&nbsp;{'token':&nbsp;string&nbsp;identifying&nbsp;the&nbsp;CAPTCHA&nbsp;image,<br>
+&nbsp;&nbsp;&nbsp;'url':&nbsp;string&nbsp;containing&nbsp;the&nbsp;URL&nbsp;of&nbsp;the&nbsp;image}<br>
+&nbsp;&nbsp;Returns&nbsp;None&nbsp;if&nbsp;there&nbsp;was&nbsp;no&nbsp;CAPTCHA&nbsp;challenge&nbsp;in&nbsp;the&nbsp;response.</tt></dd></dl>
  <dl><dt><a name="-get_client_login_token"><strong>get_client_login_token</strong></a>(http_body)</dt><dd><tt>Returns&nbsp;the&nbsp;token&nbsp;value&nbsp;for&nbsp;a&nbsp;<a href="#ClientLoginToken">ClientLoginToken</a>.<br>
 &nbsp;<br>
 Reads&nbsp;the&nbsp;token&nbsp;from&nbsp;the&nbsp;server's&nbsp;response&nbsp;to&nbsp;a&nbsp;Client&nbsp;Login&nbsp;request&nbsp;and<br>
@@ -258,7 +364,19 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;The&nbsp;token&nbsp;value&nbsp;for&nbsp;a&nbsp;<a href="#ClientLoginToken">ClientLoginToken</a>.</tt></dd></dl>
+&nbsp;&nbsp;The&nbsp;token&nbsp;value&nbsp;string&nbsp;for&nbsp;a&nbsp;<a href="#ClientLoginToken">ClientLoginToken</a>.</tt></dd></dl>
+ <dl><dt><a name="-token_from_http_body"><strong>token_from_http_body</strong></a>(http_body)</dt><dd><tt>Extracts&nbsp;the&nbsp;AuthSub&nbsp;token&nbsp;from&nbsp;an&nbsp;HTTP&nbsp;body&nbsp;string.<br>
+&nbsp;<br>
+Used&nbsp;to&nbsp;find&nbsp;the&nbsp;new&nbsp;session&nbsp;token&nbsp;after&nbsp;making&nbsp;a&nbsp;request&nbsp;to&nbsp;upgrade&nbsp;a&nbsp;<br>
+single&nbsp;use&nbsp;AuthSub&nbsp;token.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;http_body:&nbsp;str&nbsp;The&nbsp;repsonse&nbsp;from&nbsp;the&nbsp;server&nbsp;which&nbsp;contains&nbsp;the&nbsp;AuthSub&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key.&nbsp;For&nbsp;example,&nbsp;this&nbsp;function&nbsp;would&nbsp;find&nbsp;the&nbsp;new&nbsp;session&nbsp;token<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;the&nbsp;server's&nbsp;response&nbsp;to&nbsp;an&nbsp;upgrade&nbsp;token&nbsp;request.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;raw&nbsp;token&nbsp;value&nbsp;to&nbsp;use&nbsp;in&nbsp;an&nbsp;<a href="#AuthSubToken">AuthSubToken</a>&nbsp;object.</tt></dd></dl>
 </td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">

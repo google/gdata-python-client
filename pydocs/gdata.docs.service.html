@@ -199,7 +199,8 @@ to&nbsp;the&nbsp;URL&nbsp;specified&nbsp;in&nbsp;next.&nbsp;See&nbsp;documentati
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;next:&nbsp;string&nbsp;The&nbsp;URL&nbsp;user&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;after&nbsp;logging&nbsp;in.<br>
-&nbsp;&nbsp;scope:&nbsp;string&nbsp;The&nbsp;URL&nbsp;of&nbsp;the&nbsp;service&nbsp;to&nbsp;be&nbsp;accessed.<br>
+&nbsp;&nbsp;scope:&nbsp;string&nbsp;or&nbsp;list&nbsp;of&nbsp;strings.&nbsp;The&nbsp;URLs&nbsp;of&nbsp;the&nbsp;services&nbsp;to&nbsp;be&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;accessed.<br>
 &nbsp;&nbsp;secure:&nbsp;boolean&nbsp;(optional)&nbsp;Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;issued&nbsp;token<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;a&nbsp;secure&nbsp;token.<br>
 &nbsp;&nbsp;session:&nbsp;boolean&nbsp;(optional)&nbsp;Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;issued&nbsp;token<br>
@@ -429,12 +430,18 @@ Raises:<br>
 <dl><dt><a name="DocsService-SetAuthSubToken"><strong>SetAuthSubToken</strong></a>(self, token, scopes<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;the&nbsp;token&nbsp;sent&nbsp;in&nbsp;requests&nbsp;to&nbsp;an&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 Only&nbsp;use&nbsp;this&nbsp;method&nbsp;if&nbsp;you&nbsp;have&nbsp;received&nbsp;a&nbsp;token&nbsp;from&nbsp;the&nbsp;AuthSub<br>
-service.&nbsp;The&nbsp;auth_token&nbsp;is&nbsp;set&nbsp;automatically&nbsp;when&nbsp;<a href="#DocsService-UpgradeToSessionToken">UpgradeToSessionToken</a>()<br>
+service.&nbsp;The&nbsp;authi&nbsp;token&nbsp;is&nbsp;set&nbsp;automatically&nbsp;when&nbsp;<a href="#DocsService-UpgradeToSessionToken">UpgradeToSessionToken</a>()<br>
 is&nbsp;used.&nbsp;See&nbsp;documentation&nbsp;for&nbsp;Google&nbsp;AuthSub&nbsp;here:<br>
 <a href="http://code.google.com/apis/accounts/AuthForWebApps.html">http://code.google.com/apis/accounts/AuthForWebApps.html</a>&nbsp;<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;token:&nbsp;string&nbsp;The&nbsp;token&nbsp;returned&nbsp;by&nbsp;the&nbsp;AuthSub&nbsp;service.</tt></dd></dl>
+&nbsp;token:&nbsp;gdata.auth.AuthSubToken&nbsp;or&nbsp;string&nbsp;The&nbsp;token&nbsp;returned&nbsp;by&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AuthSub&nbsp;service.&nbsp;If&nbsp;the&nbsp;token&nbsp;is&nbsp;an&nbsp;AuthSubToken,&nbsp;the&nbsp;scope<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;information&nbsp;stored&nbsp;in&nbsp;the&nbsp;AuthSubToken&nbsp;is&nbsp;used.&nbsp;If&nbsp;the&nbsp;token<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;a&nbsp;string,&nbsp;the&nbsp;scopes&nbsp;parameter&nbsp;is&nbsp;used&nbsp;to&nbsp;determine&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;valid&nbsp;scopes.<br>
+&nbsp;scopes:&nbsp;list&nbsp;of&nbsp;URLs&nbsp;for&nbsp;which&nbsp;the&nbsp;token&nbsp;is&nbsp;valid.&nbsp;This&nbsp;is&nbsp;only&nbsp;used<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;the&nbsp;token&nbsp;parameter&nbsp;is&nbsp;a&nbsp;string.</tt></dd></dl>
 
 <dl><dt><a name="DocsService-SetClientLoginToken"><strong>SetClientLoginToken</strong></a>(self, token, scopes<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;the&nbsp;token&nbsp;sent&nbsp;in&nbsp;requests&nbsp;to&nbsp;an&nbsp;ClientLogin&nbsp;token.<br>
 &nbsp;<br>
@@ -446,10 +453,31 @@ is&nbsp;used.&nbsp;See&nbsp;documentation&nbsp;for&nbsp;Google&nbsp;ClientLogin&
 Args:<br>
 &nbsp;&nbsp;token:&nbsp;string&nbsp;The&nbsp;token&nbsp;returned&nbsp;by&nbsp;the&nbsp;ClientLogin&nbsp;service.</tt></dd></dl>
 
-<dl><dt><a name="DocsService-UpgradeToSessionToken"><strong>UpgradeToSessionToken</strong></a>(self)</dt><dd><tt>Upgrades&nbsp;a&nbsp;single&nbsp;use&nbsp;AuthSub&nbsp;token&nbsp;to&nbsp;a&nbsp;session&nbsp;token.<br>
+<dl><dt><a name="DocsService-UpgradeToSessionToken"><strong>UpgradeToSessionToken</strong></a>(self, token<font color="#909090">=None</font>)</dt><dd><tt>Upgrades&nbsp;a&nbsp;single&nbsp;use&nbsp;AuthSub&nbsp;token&nbsp;to&nbsp;a&nbsp;session&nbsp;token.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;token:&nbsp;A&nbsp;gdata.auth.AuthSubToken&nbsp;(optional)&nbsp;which&nbsp;is&nbsp;good&nbsp;for&nbsp;a&nbsp;single<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use&nbsp;but&nbsp;can&nbsp;be&nbsp;upgraded&nbsp;to&nbsp;a&nbsp;session&nbsp;token.&nbsp;If&nbsp;no&nbsp;token&nbsp;is&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;passed&nbsp;in,&nbsp;the&nbsp;AuthSubToken&nbsp;is&nbsp;found&nbsp;by&nbsp;looking&nbsp;in&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token_store&nbsp;by&nbsp;looking&nbsp;for&nbsp;a&nbsp;token&nbsp;for&nbsp;the&nbsp;current&nbsp;scope.<br>
 &nbsp;<br>
 Raises:<br>
-&nbsp;&nbsp;NonAuthSubToken&nbsp;if&nbsp;the&nbsp;user's&nbsp;auth&nbsp;token&nbsp;is&nbsp;not&nbsp;an&nbsp;AuthSub&nbsp;token</tt></dd></dl>
+&nbsp;&nbsp;NonAuthSubToken&nbsp;if&nbsp;the&nbsp;user's&nbsp;auth&nbsp;token&nbsp;is&nbsp;not&nbsp;an&nbsp;AuthSub&nbsp;token<br>
+&nbsp;&nbsp;TokenUpgradeFailed&nbsp;if&nbsp;the&nbsp;server&nbsp;responded&nbsp;to&nbsp;the&nbsp;request&nbsp;with&nbsp;an&nbsp;<br>
+&nbsp;&nbsp;error.</tt></dd></dl>
+
+<dl><dt><a name="DocsService-upgrade_to_session_token"><strong>upgrade_to_session_token</strong></a>(self, token)</dt><dd><tt>Upgrades&nbsp;a&nbsp;single&nbsp;use&nbsp;AuthSub&nbsp;token&nbsp;to&nbsp;a&nbsp;session&nbsp;token.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;token:&nbsp;A&nbsp;gdata.auth.AuthSubToken&nbsp;(optional)&nbsp;which&nbsp;is&nbsp;good&nbsp;for&nbsp;a&nbsp;single<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use&nbsp;but&nbsp;can&nbsp;be&nbsp;upgraded&nbsp;to&nbsp;a&nbsp;session&nbsp;token.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;upgraded&nbsp;token&nbsp;as&nbsp;a&nbsp;gdata.auth.AuthSubToken&nbsp;object.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;TokenUpgradeFailed&nbsp;if&nbsp;the&nbsp;server&nbsp;responded&nbsp;to&nbsp;the&nbsp;request&nbsp;with&nbsp;an&nbsp;<br>
+&nbsp;&nbsp;error.</tt></dd></dl>
 
 <hr>
 Properties inherited from <a href="gdata.service.html#GDataService">gdata.service.GDataService</a>:<br>
@@ -511,6 +539,8 @@ Data and other attributes inherited from <a href="atom.service.html#AtomService"
 <dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
 
 <dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'AtomService' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>override_token</strong> = None</dl>
 
 <dl><dt><strong>port</strong> = 80</dl>
 
