@@ -1,5 +1,5 @@
 === 1.2.1 ===
-Sep 15, 2008 (revision 528)
+Sep 15, 2008 (revision 529)
 
 - The gdata.alt.appengine module now replaces a Service object's token_store
     with an AppEngineTokenStore which automatically associates auth tokens 
