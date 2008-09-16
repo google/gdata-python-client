@@ -97,6 +97,22 @@ class HttpClient(atom.http_interface.GenericHttpClient):
 
     connection.putrequest(operation, self._get_access_url(url))
 
+    # Overcome a bug in Python 2.4 and 2.5
+    # httplib.HTTPConnection.putrequest adding
+    # HTTP request header 'Host: www.google.com:443' instead of
+    # 'Host: www.google.com', and thus resulting the error message
+    # 'Token invalid - AuthSub token has wrong scope' in the HTTP response.
+    if (url.protocol == 'https' and int(url.port or 443) == 443 and
+        hasattr(connection, '_buffer') and
+        isinstance(connection._buffer, list)):
+      header_line = 'Host: %s:443' % url.host
+      replacement_header_line = 'Host: %s' % url.host
+      try:
+        connection._buffer[connection._buffer.index(header_line)] = (
+            replacement_header_line)
+      except ValueError:  # header_line missing from connection._buffer
+        pass
+
     # If the list of headers does not include a Content-Length, attempt to
     # calculate it based on the data object.
     if data and 'Content-Length' not in all_headers:
