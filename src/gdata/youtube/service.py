@@ -28,7 +28,6 @@ try:
 except ImportError:
   from elementtree import ElementTree
 import os
-import urllib
 import atom
 import gdata
 import gdata.service

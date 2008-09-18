@@ -119,7 +119,8 @@ CLIENT_LOGIN_SCOPES = {
     'sitemaps': [ # Google Webmaster Tools
         'https://www.google.com/webmasters/tools/feeds/'],
     'youtube': [ # YouTube
-        'http://gdata.youtube.com/feeds/api/']}
+        'http://gdata.youtube.com/feeds/api/',
+        'http://uploads.gdata.youtube.com/feeds/api']}
 
 
 def lookup_scopes(service_name):
