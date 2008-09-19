@@ -120,7 +120,8 @@ CLIENT_LOGIN_SCOPES = {
         'https://www.google.com/webmasters/tools/feeds/'],
     'youtube': [ # YouTube
         'http://gdata.youtube.com/feeds/api/',
-        'http://uploads.gdata.youtube.com/feeds/api']}
+        'http://uploads.gdata.youtube.com/feeds/api',
+        'http://gdata.youtube.com/action/GetUploadToken']}
 
 
 def lookup_scopes(service_name):
