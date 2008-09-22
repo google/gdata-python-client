@@ -937,9 +937,9 @@ class GDataService(atom.service.AtomService):
           m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
           if m is not None:
             self.__gsessionid = m.group(1) 
-          return GDataService.Post(self, data, location, extra_headers, 
-              url_params, escape_params, redirects_remaining - 1, 
-              media_source, converter=converter)
+          return GDataService.PostOrPut(self, verb, data, location, 
+              extra_headers, url_params, escape_params, 
+              redirects_remaining - 1, media_source, converter=converter)
         else:
           raise RequestError, {'status': server_response.status,
               'reason': '302 received without Location header',
