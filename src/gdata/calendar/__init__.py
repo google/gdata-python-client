@@ -536,17 +536,18 @@ class Who(UriEnumElement):
               'http://schemas.google.com/g/2005#message.reply-to' : 'REPLY_TO',
               'http://schemas.google.com/g/2005#message.to' : 'TO' }
   
-  def __init__(self, extension_elements=None, 
-    extension_attributes=None, text=None):
+  def __init__(self, name=None, email=None, attendee_status=None, 
+      attendee_type=None, rel=None, extension_elements=None, 
+      extension_attributes=None, text=None):
     UriEnumElement.__init__(self, 'who', Who.relEnum, attrib_name='rel',
                             extension_elements=extension_elements,
                             extension_attributes=extension_attributes, 
                             text=text)
-    self.name=None
-    self.email=None
-    self.attendee_status=None
-    self.attendee_type=None
-    self.rel=None
+    self.name = name
+    self.email = email
+    self.attendee_status = attendee_status
+    self.attendee_type = attendee_type
+    self.rel = rel
 
 
 class OriginalEvent(atom.AtomBase):
