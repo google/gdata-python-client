@@ -178,7 +178,7 @@ class GBaseService(gdata.service.GDataService):
       True if the delete succeeded.
     """
     
-    return self.Delete('/%s' % (item_id.lstrip('http://www.google.com/')),
+    return self.Delete('%s' % (item_id[len('http://www.google.com'):],),
                        url_params=url_params, escape_params=escape_params)
                            
   def UpdateItem(self, item_id, updated_item, url_params=None, 
