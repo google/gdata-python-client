@@ -785,7 +785,7 @@ class EntryLink(atom.AtomBase):
   _attributes = atom.AtomBase._attributes.copy()
   # The entry used to be an atom.Entry, now it is a GDataEntry.
   _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', GDataEntry)
-  _attributes['rel'] = 'rel',
+  _attributes['rel'] = 'rel'
   _attributes['readOnly'] = 'read_only'
   _attributes['href'] = 'href'
   
