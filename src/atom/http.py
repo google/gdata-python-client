@@ -95,7 +95,9 @@ class HttpClient(atom.http_interface.GenericHttpClient):
     if self.debug:
       connection.debuglevel = 1
 
-    connection.putrequest(operation, self._get_access_url(url))
+    connection.putrequest(operation, self._get_access_url(url), 
+        skip_host=True)
+    connection.putheader('Host', url.host)
 
     # Overcome a bug in Python 2.4 and 2.5
     # httplib.HTTPConnection.putrequest adding
@@ -160,7 +162,7 @@ class HttpClient(atom.http_interface.GenericHttpClient):
       return httplib.HTTPConnection(url.host, int(url.port))
 
   def _get_access_url(self, url):
-    return url.get_request_uri()
+    return url.to_string()
 
 
 class ProxiedHttpClient(HttpClient):
@@ -247,11 +249,7 @@ class ProxiedHttpClient(HttpClient):
         return HttpClient._prepare_connection(self, url, headers)
 
   def _get_access_url(self, url):
-    proxy = os.environ.get('http_proxy')
-    if url.protocol == 'http' and proxy:
-      return url.to_string()
-    else:
-      return url.get_request_uri()
+    return url.to_string()
 
 
 def _get_proxy_auth():
