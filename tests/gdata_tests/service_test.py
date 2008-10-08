@@ -508,12 +508,14 @@ class TokenLookupTest(unittest.TestCase):
     self.assertEquals(self.client.GetClientLoginToken(), 'bar')
     # Changing the service should cause the token to no longer be found.
     self.client.service = 'gbase'
+    self.client.current_token = None
     self.assert_(self.client.GetClientLoginToken() is None)
 
   def testSetAndGetClientLoginTokenWithScopes(self):
     scopes = gdata.service.CLIENT_LOGIN_SCOPES['cl'][:]
     scopes.extend(gdata.service.CLIENT_LOGIN_SCOPES['gbase'])
     self.client.SetClientLoginToken('baz', scopes=scopes)
+    self.client.current_token = None
     self.assert_(self.client.GetClientLoginToken() is None)
     self.client.service = 'cl'
     self.assertEquals(self.client.GetClientLoginToken(), 'baz')

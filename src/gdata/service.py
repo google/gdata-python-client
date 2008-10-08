@@ -265,7 +265,7 @@ class GDataService(atom.service.AtomService):
     Returns:
       string
     """
-    current_scopes = lookup_scopes(self.service, use_default=False)
+    current_scopes = lookup_scopes(self.service)
     if current_scopes:
       token = self.token_store.find_token(current_scopes[0])
       if hasattr(token, 'auth_header'):
@@ -307,18 +307,26 @@ class GDataService(atom.service.AtomService):
       doc="""Get the captcha URL for a login request.""")
 
   def GetAuthSubToken(self):
-    """Returns the AuthSub Token after removing the AuthSub Authorization
-    Label.
+    """Returns the AuthSub token string (after removing the AuthSub 
+    Authorization Label).    
      
     The AuthSub Authorization Label reads: "AuthSub token"
 
+    This method examines the current_token to see if it is an AuthSubToken.
+    If not, it searches the token_store for a token which matches the 
+    current scope.
+    
+    The current scope is determined by the service name string member.
+    
     Returns:
-      If the AuthSub Token is set AND it begins with the AuthSub 
-      Authorization Label, the AuthSub Token is returned minus the AuthSub
-      Label. If the AuthSub Token does not start with the AuthSub
-      Authorization Label or it is not set, None is returned.
+      If the current_token is set to an AuthSubToken, return the token
+      string. If there is no current_token, a token string for a token
+      which matches the service object's default scope is returned. If
+      there are no tokens valid for the scope, returns None.
     """
-    current_scopes = lookup_scopes(self.service)#, use_default=False)
+    if isinstance(self.current_token, gdata.auth.AuthSubToken):
+      return self.current_token.get_token_string()
+    current_scopes = lookup_scopes(self.service)
     if current_scopes:
       token = self.token_store.find_token(current_scopes[0])
       if isinstance(token, gdata.auth.AuthSubToken):
@@ -332,8 +340,10 @@ class GDataService(atom.service.AtomService):
   def SetAuthSubToken(self, token, scopes=None):
     """Sets the token sent in requests to an AuthSub token.
 
+    Sets the current_token and attempts to add the token to the token_store.
+    
     Only use this method if you have received a token from the AuthSub
-    service. The authi token is set automatically when UpgradeToSessionToken()
+    service. The auth token is set automatically when UpgradeToSessionToken()
     is used. See documentation for Google AuthSub here:
     http://code.google.com/apis/accounts/AuthForWebApps.html 
 
@@ -360,15 +370,24 @@ class GDataService(atom.service.AtomService):
         if scopes is None:
           scopes = [atom.token_store.SCOPE_ALL]
       token.scopes = scopes
+    self.current_token = token
     self.token_store.add_token(token)
 
   def GetClientLoginToken(self):
-    """Returns the token string for the current request scope.
-  
+    """Returns the token string for the current token or a token matching the 
+    service scope.
+
+    If the current_token is a ClientLoginToken, the token string for 
+    the current token is returned. If the current_token is not set, this method
+    searches for a token in the token_store which is valid for the service 
+    object's current scope.
+
     The current scope is determined by the service name string member.
     The token string is the end of the Authorization header, it doesn not
     include the ClientLogin label.
     """
+    if isinstance(self.current_token, gdata.auth.ClientLoginToken):
+      return self.current_token.get_token_string()
     current_scopes = lookup_scopes(self.service)
     if current_scopes:
       token = self.token_store.find_token(current_scopes[0])
@@ -381,15 +400,18 @@ class GDataService(atom.service.AtomService):
       return None
 
   def SetClientLoginToken(self, token, scopes=None):
-    """Sets the token sent in requests to an ClientLogin token.
+    """Sets the token sent in requests to a ClientLogin token.
 
+    This method sets the current_token to a new ClientLoginToken and it 
+    also attempts to add the ClientLoginToken to the token_store.
+    
     Only use this method if you have received a token from the ClientLogin
     service. The auth_token is set automatically when ProgrammaticLogin()
     is used. See documentation for Google ClientLogin here:
     http://code.google.com/apis/accounts/docs/AuthForInstalledApps.html
 
     Args:
-      token: string The token returned by the ClientLogin service.
+      token: string or instance of a ClientLoginToken. 
     """
     if not isinstance(token, gdata.auth.ClientLoginToken):
       token_string = token
@@ -402,6 +424,7 @@ class GDataService(atom.service.AtomService):
         if scopes is None:
           scopes = [atom.token_store.SCOPE_ALL]
       token.scopes = scopes
+    self.current_token = token
     self.token_store.add_token(token)
 
   # Private methods to create the source property.

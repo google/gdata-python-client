@@ -54,6 +54,7 @@ class ClientLiveTest(unittest.TestCase):
   def testAuthenticatedReads(self):
     self.client.ClientLogin(username, password, 'cl')
     self.client.ClientLogin(username, password, 'cp')
+    self.client.current_token = None
     feed_str = self.client.Get(
         'http://www.google.com/calendar/feeds/default/allcalendars/full', 
         parser=Utf8String)

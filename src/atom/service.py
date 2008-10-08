@@ -63,9 +63,17 @@ class AtomService(object):
   # Default values for members
   port = 80
   ssl = False
-  # Set the override_token to force the AtomService to use this token
+  # Set the current_token to force the AtomService to use this token
   # instead of searching for an appropriate token in the token_store.
-  override_token = None
+  current_token = None
+
+  def _get_override_token(self):
+    return self.current_token
+
+  def _set_override_token(self, token):
+    self.current_token = token
+
+  override_token = property(_get_override_token, _set_override_token)
 
   def __init__(self, server=None, additional_headers=None, 
       application_name='', http_client=None, token_store=None):
@@ -472,7 +480,6 @@ def ProcessUrl(service, url, for_proxy=False):
 
   This method is deprecated, use atom.url.parse_url instead.
   """
-  deprecation('call to deprecated function ProcessUrl')
   if not isinstance(url, atom.url.Url):
     url = atom.url.parse_url(url)
 
@@ -516,7 +523,6 @@ def DictionaryToParamList(url_parameters, escape_params=True):
     A list which contains a string for each key-value pair. The strings are
     ready to be incorporated into a URL by using '&'.join([] + parameter_list)
   """
-  deprecation('call to deprecated function DictionaryToParamList')
   # Choose which function to use when modifying the query and parameters.
   # Use quote_plus when escape_params is true.
   transform_op = [str, urllib.quote_plus][bool(escape_params)]
@@ -555,7 +561,6 @@ def BuildUri(uri, url_params=None, escape_params=True):
     string The URI consisting of the escaped URL parameters appended to the
     initial uri string.
   """
-  deprecation('call to deprecated function BuildUri')
   # Prepare URL parameters for inclusion into the GET request.
   parameter_list = DictionaryToParamList(url_params, escape_params)
 
