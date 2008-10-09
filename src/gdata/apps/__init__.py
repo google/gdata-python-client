@@ -442,10 +442,55 @@ def EmailListRecipientFeedFromString(xml_string):
   return atom.CreateClassFromXMLString(EmailListRecipientFeed, xml_string)
 
 
+class Property(atom.AtomBase):
+  """The Google Apps Property element"""
+
+  _tag = 'property'
+  _namespace = APPS_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['name'] = 'name'
+  _attributes['value'] = 'value'
+
+  def __init__(self, name=None, value=None, extension_elements=None,
+               extension_attributes=None, text=None):
+    self.name = name
+    self.value = value
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
 
 
+def PropertyFromString(xml_string):
+  return atom.CreateClassFromXMLString(Property, xml_string)
 
 
+class PropertyEntry(gdata.GDataEntry):
+  """A Google Apps Property flavor of an Atom Entry"""
+
+  _tag = 'entry'
+  _namespace = atom.ATOM_NAMESPACE
+  _children = gdata.GDataEntry._children.copy()
+  _attributes = gdata.GDataEntry._attributes.copy()
+  _children['{%s}property' % APPS_NAMESPACE] = ('property', [Property])
+
+  def __init__(self, author=None, category=None, content=None,
+               atom_id=None, link=None, published=None,
+               title=None, updated=None,
+               property=None,
+               extended_property=None,
+               extension_elements=None, extension_attributes=None, text=None):
+
+    gdata.GDataEntry.__init__(self, author=author, category=category,
+                              content=content,
+                              atom_id=atom_id, link=link, published=published,
+                              title=title, updated=updated)
+    self.property = property
+    self.extended_property = extended_property or []
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
 
 
-
+def PropertyEntryFromString(xml_string):
+  return atom.CreateClassFromXMLString(PropertyEntry, xml_string)

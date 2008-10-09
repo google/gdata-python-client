@@ -112,7 +112,9 @@ CLIENT_LOGIN_SCOPES = {
         'http://picasaweb.google.com/data/'],
     'apps': [ # Google Apps Provisioning API
         'http://www.google.com/a/feeds/',
-        'https://www.google.com/a/feeds/'],
+        'https://www.google.com/a/feeds/',
+        'http://apps-apis.google.com/a/feeds/',
+        'https://apps-apis.google.com/a/feeds/'],
     'wise': [ # Spreadsheets Data API
         'https://spreadsheets.google.com/feeds/',
         'http://spreadsheets.google.com/feeds/'],

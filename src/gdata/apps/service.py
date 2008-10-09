@@ -383,3 +383,54 @@ class AppsService(gdata.service.GDataService):
     return self.AddAllElementsFromAllPages(
       ret, gdata.apps.UserFeedFromString)
 
+
+class PropertyService(gdata.service.GDataService):
+  """Client for the Google Apps Property service."""
+
+  def __init__(self, email=None, password=None, domain=None, source=None,
+               server='apps-apis.google.com', additional_headers=None):
+    gdata.service.GDataService.__init__(self, email=email, password=password,
+                                        service='apps', source=source,
+                                        server=server,
+                                        additional_headers=additional_headers)
+    self.ssl = True
+    self.port = 443
+    self.domain = domain
+
+  def _GetPropertyEntry(self, properties):
+    property_entry = gdata.apps.PropertyEntry()
+    property = []
+    for name, value in properties.iteritems():
+      if name is not None and value is not None:
+        property.append(gdata.apps.Property(name=name, value=value))
+    property_entry.property = property
+    return property_entry
+
+  def _PropertyEntry2Dict(self, property_entry):
+    properties = {}
+    for i, property in enumerate(property_entry.property):
+      properties[property.name] = property.value
+    return properties
+
+  def _GetProperties(self, uri):
+    try:
+      return self._PropertyEntry2Dict(gdata.apps.PropertyEntryFromString(
+        str(self.Get(uri))))
+    except gdata.service.RequestError, e:
+      raise gdata.apps.service.AppsForYourDomainException(e.args[0])
+
+  def _PostProperties(self, uri, properties):
+    property_entry = self._GetPropertyEntry(properties)
+    try:
+      return self._PropertyEntry2Dict(gdata.apps.PropertyEntryFromString(
+        str(self.Post(property_entry, uri))))
+    except gdata.service.RequestError, e:
+      raise gdata.apps.service.AppsForYourDomainException(e.args[0])
+
+  def _PutProperties(self, uri, properties):
+    property_entry = self._GetPropertyEntry(properties)
+    try:
+      return self._PropertyEntry2Dict(gdata.apps.PropertyEntryFromString(
+        str(self.Put(property_entry, uri))))
+    except gdata.service.RequestError, e:
+      raise gdata.apps.service.AppsForYourDomainException(e.args[0])
