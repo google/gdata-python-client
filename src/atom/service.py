@@ -66,6 +66,8 @@ class AtomService(object):
   # Set the current_token to force the AtomService to use this token
   # instead of searching for an appropriate token in the token_store.
   current_token = None
+  auto_store_tokens = True
+  auto_set_current_token = True
 
   def _get_override_token(self):
     return self.current_token
@@ -118,7 +120,10 @@ class AtomService(object):
       base_64_string = base64.encodestring('%s:%s' % (username, password))
       token = BasicAuthToken('Basic %s' % base_64_string.strip(), 
           scopes=[atom.token_store.SCOPE_ALL])
-      self.token_store.add_token(token)
+      if self.auto_set_current_token:
+        self.current_token = token
+      if self.auto_store_tokens:
+        return self.token_store.add_token(token)
       return True
     return False
 

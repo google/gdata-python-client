@@ -372,8 +372,10 @@ class GDataService(atom.service.AtomService):
         if scopes is None:
           scopes = [atom.token_store.SCOPE_ALL]
       token.scopes = scopes
-    self.current_token = token
-    self.token_store.add_token(token)
+    if self.auto_set_current_token:
+      self.current_token = token
+    if self.auto_store_token:
+      self.token_store.add_token(token)
 
   def GetClientLoginToken(self):
     """Returns the token string for the current token or a token matching the 
@@ -426,8 +428,10 @@ class GDataService(atom.service.AtomService):
         if scopes is None:
           scopes = [atom.token_store.SCOPE_ALL]
       token.scopes = scopes
-    self.current_token = token
-    self.token_store.add_token(token)
+    if self.auto_set_current_token:
+      self.current_token = token
+    if self.auto_store_token:
+      self.token_store.add_token(token)
 
   # Private methods to create the source property.
   def __GetSource(self):

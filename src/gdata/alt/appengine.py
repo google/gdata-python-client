@@ -42,16 +42,37 @@ from google.appengine.api import users
 from google.appengine.api import memcache
 
 
-def run_on_appengine(gdata_service):
+def run_on_appengine(gdata_service, store_tokens=True, 
+    single_user_mode=False):
   """Modifies a GDataService object to allow it to run on App Engine.
 
   Args:
     gdata_service: An instance of AtomService, GDataService, or any
         of their subclasses which has an http_client member and a 
         token_store member.
+    store_tokens: Boolean, defaults to True. If True, the gdata_service
+                  will attempt to add each token to it's token_store when
+                  SetClientLoginToken or SetAuthSubToken is called. If False
+                  the tokens will not automatically be added to the 
+                  token_store.
+    single_user_mode: Boolean, defaults to False. If True, the current_token
+                      member of gdata_service will be set when 
+                      SetClientLoginToken or SetAuthTubToken is called. If set
+                      to True, the current_token is set in the gdata_service
+                      and anyone who accesses the object will use the same 
+                      token. 
+                      
+                      Note: If store_tokens is set to False and 
+                      single_user_mode is set to False, all tokens will be 
+                      ignored, since the library assumes: the tokens should not
+                      be stored in the datastore and they should not be stored
+                      in the gdata_service object. This will make it 
+                      impossible to make requests which require authorization.
   """
   gdata_service.http_client = AppEngineHttpClient()
   gdata_service.token_store = AppEngineTokenStore()
+  gdata_service.auto_store_tokens = store_tokens
+  gdata_service.auto_set_current_token = single_user_mode
   return gdata_service
 
 
