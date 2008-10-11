@@ -374,7 +374,7 @@ class GDataService(atom.service.AtomService):
       token.scopes = scopes
     if self.auto_set_current_token:
       self.current_token = token
-    if self.auto_store_token:
+    if self.auto_store_tokens:
       self.token_store.add_token(token)
 
   def GetClientLoginToken(self):
@@ -430,7 +430,7 @@ class GDataService(atom.service.AtomService):
       token.scopes = scopes
     if self.auto_set_current_token:
       self.current_token = token
-    if self.auto_store_token:
+    if self.auto_store_tokens:
       self.token_store.add_token(token)
 
   # Private methods to create the source property.
