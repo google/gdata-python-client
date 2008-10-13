@@ -28,8 +28,8 @@ import getpass
 username = ''
 password = ''
 
-#username = raw_input('Please enter your username: ')
-#password = getpass.getpass()
+username = raw_input('Please enter your username: ')
+password = getpass.getpass()
 
 client = gdata.webmastertools.service.GWebmasterToolsService(
     email=username, 
