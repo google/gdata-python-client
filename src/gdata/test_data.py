@@ -2744,3 +2744,95 @@ BLOG_COMMENTS_FEED = """<feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSear
         type='text/html' />
   </entry>
 </feed>"""
+
+
+SITES_FEED = """<feed xmlns="http://www.w3.org/2005/Atom"
+  xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/"
+  xmlns:gd="http://schemas.google.com/g/2005"
+  xmlns:wt="http://schemas.google.com/webmasters/tools/2007">
+  <id>https://www.google.com/webmasters/tools/feeds/sites</id>
+  <title>Sites</title>
+  <openSearch:startIndex>1</openSearch:startIndex>
+  <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/webmasters/tools/2007#sites-feed" />
+  <link href="http://www.google.com/webmasters/tools/feeds/sites" rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml" />
+  <link href="http://www.google.com/webmasters/tools/feeds/sites" rel="http://schemas.google.com/g/2005#post" type="application/atom+xml" />
+  <link href="http://www.google.com/webmasters/tools/feeds/sites" rel="self" type="application/atom+xml" />
+  <updated>2008-10-02T07:26:51.833Z</updated>
+  <entry>
+    <id>http://www.example.com</id>
+    <title type="text">http://www.example.com</title>
+    <link href="http://www.google.com/webmasters/tools/feeds/sites/http%3A%2F%2Fwww.example.com%2F" rel="self" type="application/atom+xml"/>
+    <link href="http://www.google.com/webmasters/tools/feeds/sites/http%3A%2F%2Fwww.example.com%2F" rel="edit" type="application/atom+xml"/>
+    <content src="http://www.example.com"/>
+    <updated>2007-11-17T18:27:32.543Z</updated>
+    <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/webmasters/tools/2007#site-info"/>
+    <gd:entryLink rel="http://schemas.google.com/webmasters/tools/2007#verification" 
+      href="https://www.google.com/webmasters/tools/feeds/http%3A%2F%2Fwww%2Eexample%2Ecom%2F/verification" />
+    <gd:entryLink rel="http://schemas.google.com/webmasters/tools/2007#sitemaps" 
+      href="https://www.google.com/webmasters/tools/feeds/http%3A%2F%2Fwww%2Eexample%2Ecom%2F/sitemaps" />
+    <wt:indexed>true</wt:indexed>
+    <wt:crawled>2008-09-14T08:59:28.000</wt:crawled>
+    <wt:geolocation>US</wt:geolocation>
+    <wt:preferred-domain>none</wt:preferred-domain>
+    <wt:crawl-rate>normal</wt:crawl-rate>
+    <wt:enhanced-image-search>true</wt:enhanced-image-search>
+    <wt:verified>false</wt:verified>
+    <wt:verification-method type="metatag" in-use="false"><meta name="verify-v1" content="a2Ai"/>
+      </wt:verification-method>
+    <wt:verification-method type="htmlpage" in-use="false">456456-google.html</wt:verification-method>
+  </entry>
+</feed>"""
+
+
+SITEMAPS_FEED = """<feed xmlns="http://www.w3.org/2005/Atom" 
+  xmlns:wt="http://schemas.google.com/webmasters/tools/2007">
+  <id>http://www.example.com</id>
+  <title type="text">http://www.example.com/</title>
+  <updated>2006-11-17T18:27:32.543Z</updated>
+  <link rel="self" type="application/atom+xml" 
+    href="https://www.google.com/webmasters/tools/feeds/http%3A%2F%2Fwww%2Eexample%2Ecom%2F/sitemaps" />
+  <category scheme='http://schemas.google.com/g/2005#kind' 
+    term='http://schemas.google.com/webmasters/tools/2007#sitemaps-feed'/>
+  <wt:sitemap-mobile>
+    <wt:markup-language>HTML</wt:markup-language>
+    <wt:markup-language>WAP</wt:markup-language>
+  </wt:sitemap-mobile>
+  <wt:sitemap-news>
+    <wt:publication-label>Value1</wt:publication-label>
+    <wt:publication-label>Value2</wt:publication-label>
+    <wt:publication-label>Value3</wt:publication-label>
+  </wt:sitemap-news>
+  <entry>
+    <id>http://www.example.com/sitemap-index.xml</id>
+    <title type="text">http://www.example.com/sitemap-index.xml</title>
+    <category scheme='http://schemas.google.com/g/2005#kind' 
+      term='http://schemas.google.com/webmasters/tools/2007#sitemap-regular'/>
+    <updated>2006-11-17T18:27:32.543Z</updated>
+    <wt:sitemap-type>WEB</wt:sitemap-type>
+    <wt:sitemap-status>StatusValue</wt:sitemap-status>
+    <wt:sitemap-last-downloaded>2006-11-18T19:27:32.543Z</wt:sitemap-last-downloaded>
+    <wt:sitemap-url-count>102</wt:sitemap-url-count>
+  </entry>
+  <entry>
+    <id>http://www.example.com/mobile/sitemap-index.xml</id>
+    <title type="text">http://www.example.com/mobile/sitemap-index.xml</title>
+    <category scheme='http://schemas.google.com/g/2005#kind' 
+      term='http://schemas.google.com/webmasters/tools/2007#sitemap-mobile'/>
+    <updated>2006-11-17T18:27:32.543Z</updated>
+    <wt:sitemap-status>StatusValue</wt:sitemap-status>
+    <wt:sitemap-last-downloaded>2006-11-18T19:27:32.543Z</wt:sitemap-last-downloaded>
+    <wt:sitemap-url-count>102</wt:sitemap-url-count>
+    <wt:sitemap-mobile-markup-language>HTML</wt:sitemap-mobile-markup-language>
+  </entry>
+  <entry>
+    <id>http://www.example.com/news/sitemap-index.xml</id>
+    <title type="text">http://www.example.com/news/sitemap-index.xml</title>
+    <category scheme='http://schemas.google.com/g/2005#kind' 
+      term='http://schemas.google.com/webmasters/tools/2007#sitemap-news'/>
+    <updated>2006-11-17T18:27:32.543Z</updated>
+    <wt:sitemap-status>StatusValue</wt:sitemap-status>
+    <wt:sitemap-last-downloaded>2006-11-18T19:27:32.543Z</wt:sitemap-last-downloaded>
+    <wt:sitemap-url-count>102</wt:sitemap-url-count>
+    <wt:sitemap-news-publication-label>LabelValue</wt:sitemap-news-publication-label>
+  </entry>
+</feed>"""
