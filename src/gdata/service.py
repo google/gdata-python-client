@@ -251,6 +251,10 @@ class GDataService(atom.service.AtomService):
     self.__captcha_token = None
     self.__captcha_url = None
     self.__gsessionid = None
+
+    if http_request_handler.__name__ == 'gdata.urlfetch':
+      import gdata.alt.appengine
+      self.http_client = gdata.alt.appengine.AppEngineHttpClient()
  
   # Define properties for GDataService
   def _SetAuthSubToken(self, auth_token, scopes=None):
