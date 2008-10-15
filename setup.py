@@ -20,7 +20,7 @@ from distutils.core import setup
 
 setup(
     name='gdata.py',
-    version='1.2.1',
+    version='1.2.2',
     description='Python client library for Google data APIs',
     long_description = """\
 The Google data Python client library makes it easy to access data
@@ -32,9 +32,12 @@ service modules for the the following Google data services:
 - Google Document List data APIs
 - Google Base data API
 - Google Apps Provisioning API
+- Google Apps Email Migration API
+- Google Apps Email Settings API
 - Picasa Web Albums Data API
 - Google Code Search Data API
 - YouTube Data API
+- Google Webmaster Tools Data API
 - Blogger Data API
 - core Google data API functionality 
 The core Google data code provides sufficient functionality to use this 
@@ -48,8 +51,10 @@ service.
     license='Apache 2.0',
     url='http://code.google.com/p/gdata-python-client/',
     packages=['atom', 'gdata', 'gdata.calendar', 'gdata.base',
-        'gdata.spreadsheet', 'gdata.apps', 'gdata.docs', 'gdata.codesearch',
+        'gdata.spreadsheet', 'gdata.apps', 'gdata.apps.emailsettings', 
+        'gdata.apps.migration', 'gdata.docs', 'gdata.codesearch',
         'gdata.photos', 'gdata.exif', 'gdata.geo', 'gdata.media', 
-        'gdata.contacts', 'gdata.youtube', 'gdata.blogger', 'gdata.alt'],
+        'gdata.contacts', 'gdata.youtube', 'gdata.webmastertools', 
+        'gdata.blogger', 'gdata.alt'],
     package_dir = {'gdata':'src/gdata', 'atom':'src/atom'}
 )

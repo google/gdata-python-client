@@ -1,3 +1,32 @@
+=== 1.2.2 ===
+Oct 15, 2008 (revision 556)
+
+- Added support for the following APIs:
+      Google Apps Email Migration API
+      Google Apps Email Settings API
+      Google Webmaster Tools Data API
+    Some modules for the above are not yet fully tested, so please file an 
+    issue if you notice something is not working as expected.
+- Restored support for gdata.http_request_handler when using App Engine to
+    preserve backwards compatibility.
+- Simplified auth token management by adding a current_token member to 
+    service classes. Also added settings to control when the token_store
+    is updated when using SetXToken() methods. The token_store will only be
+    queried if there is no current_token.
+- Fixed issue with requests to HTTPS URLs in which an AuthSub token was seen
+    as invalid because the request contained the default poert number (443).
+    The library no longer includes the port in the Host header if it is using
+    the default.
+- Resolved issues with YouTube token scopes.
+- Fixed issue which appeared when the Calendar API issues a redirect to a 
+    PUT request. The library now correctly retries with a PUT (instead of
+    a POST).
+- Added workaround for differences in how the App Engine SDK handles 
+    redirects.
+- Fixed typo in gdata.EntryLink declaration.
+- Fixed invalid host errors seen when using some HTTP proxies.
+
+
 === 1.2.1 ===
 Sep 15, 2008 (revision 529)
 

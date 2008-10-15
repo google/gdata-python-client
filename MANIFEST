@@ -122,7 +122,11 @@ pydocs/atom.service.html
 pydocs/atom.token_store.html
 pydocs/atom.url.html
 pydocs/gdata.alt.appengine.html
+pydocs/gdata.apps.emailsettings.html
+pydocs/gdata.apps.emailsettings.service.html
 pydocs/gdata.apps.html
+pydocs/gdata.apps.migration.html
+pydocs/gdata.apps.migration.service.html
 pydocs/gdata.apps.service.html
 pydocs/gdata.auth.html
 pydocs/gdata.base.html
@@ -149,6 +153,8 @@ pydocs/gdata.spreadsheet.html
 pydocs/gdata.spreadsheet.service.html
 pydocs/gdata.spreadsheet.text_db.html
 pydocs/gdata.urlfetch.html
+pydocs/gdata.webmastertools.html
+pydocs/gdata.webmastertools.service.html
 pydocs/gdata.youtube.html
 pydocs/gdata.youtube.service.html
 pydocs/generate_docs
