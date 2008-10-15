@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="atom.html"><font color="#ffffff">atom</font></a>.service</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client-release/src/atom/service.py">/usr/local/svn/gdata-python-client-release/src/atom/service.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client/src/atom/service.py">/usr/local/svn/gdata-python-client/src/atom/service.py</a></font></td></tr></table>
     <p><tt><a href="#AtomService">AtomService</a>&nbsp;provides&nbsp;CRUD&nbsp;ops.&nbsp;in&nbsp;line&nbsp;with&nbsp;the&nbsp;Atom&nbsp;Publishing&nbsp;Protocol.<br>
 &nbsp;<br>
 <a href="#AtomService">AtomService</a>:&nbsp;Encapsulates&nbsp;the&nbsp;ability&nbsp;to&nbsp;perform&nbsp;insert,&nbsp;update&nbsp;and&nbsp;delete<br>
@@ -26,7 +26,7 @@ HttpRequest:&nbsp;Function&nbsp;that&nbsp;performs&nbsp;a&nbsp;GET,&nbsp;POST,&n
 <font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="cElementTree.html">cElementTree</a><br>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="xml.etree.cElementTree.html">xml.etree.cElementTree</a><br>
 <a href="atom.html">atom</a><br>
 <a href="base64.html">base64</a><br>
 </td><td width="25%" valign=top><a href="httplib.html">httplib</a><br>
@@ -200,21 +200,25 @@ Args:<br>
 <dl><dt><a name="AtomService-use_basic_auth"><strong>use_basic_auth</strong></a>(self, username, password, scopes<font color="#909090">=None</font>)</dt></dl>
 
 <hr>
-Properties defined here:<br>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 <dl><dt><strong>debug</strong></dt>
 <dd><tt>If&nbsp;True,&nbsp;HTTP&nbsp;debug&nbsp;information&nbsp;is&nbsp;printed.</tt></dd>
-<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _get_debug(self)</dt></dl>
-</dd>
-<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _set_debug(self, value)</dt></dl>
-</dd>
+</dl>
+<dl><dt><strong>override_token</strong></dt>
 </dl>
 <hr>
 Data and other attributes defined here:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+<dl><dt><strong>auto_set_current_token</strong> = True</dl>
 
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'AtomService' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+<dl><dt><strong>auto_store_tokens</strong> = True</dl>
 
-<dl><dt><strong>override_token</strong> = None</dl>
+<dl><dt><strong>current_token</strong> = None</dl>
 
 <dl><dt><strong>port</strong> = 80</dl>
 
@@ -251,11 +255,13 @@ Args:<br>
 <dl><dt><a name="BasicAuthToken-valid_for_scope"><strong>valid_for_scope</strong></a>(self, url)</dt><dd><tt>Tells&nbsp;the&nbsp;caller&nbsp;if&nbsp;the&nbsp;token&nbsp;authorizes&nbsp;access&nbsp;to&nbsp;the&nbsp;desired&nbsp;URL.</tt></dd></dl>
 
 <hr>
-Data and other attributes inherited from <a href="atom.http_interface.html#GenericToken">atom.http_interface.GenericToken</a>:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
-
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'GenericToken' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
-
+Data descriptors inherited from <a href="atom.http_interface.html#GenericToken">atom.http_interface.GenericToken</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#eeaa77">

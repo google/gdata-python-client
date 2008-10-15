@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>gdata</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client-release/src/gdata/__init__.py">/usr/local/svn/gdata-python-client-release/src/gdata/__init__.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client/src/gdata/__init__.py">/usr/local/svn/gdata-python-client/src/gdata/__init__.py</a></font></td></tr></table>
     <p><tt>Contains&nbsp;classes&nbsp;representing&nbsp;Google&nbsp;Data&nbsp;elements.<br>
 &nbsp;<br>
 Extends&nbsp;Atom&nbsp;classes&nbsp;to&nbsp;add&nbsp;Google&nbsp;Data&nbsp;specific&nbsp;elements.</tt></p>
@@ -37,6 +37,7 @@ Extends&nbsp;Atom&nbsp;classes&nbsp;to&nbsp;add&nbsp;Google&nbsp;Data&nbsp;speci
 </td><td width="25%" valign=top><a href="gdata.spreadsheet.html"><strong>spreadsheet</strong>&nbsp;(package)</a><br>
 <a href="gdata.test_data.html">test_data</a><br>
 <a href="gdata.urlfetch.html">urlfetch</a><br>
+<a href="gdata.webmastertools.html"><strong>webmastertools</strong>&nbsp;(package)</a><br>
 <a href="gdata.youtube.html"><strong>youtube</strong>&nbsp;(package)</a><br>
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -111,7 +112,7 @@ Extends&nbsp;Atom&nbsp;classes&nbsp;to&nbsp;add&nbsp;Google&nbsp;Data&nbsp;speci
 </dd>
 </dl>
 </dd>
-<dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>
+<dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>(<a href="exceptions.html#BaseException">exceptions.BaseException</a>)
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="gdata.html#Error">Error</a>
@@ -160,13 +161,8 @@ Otherwise&nbsp;returns&nbsp;None.</tt></dd></dl>
 <dl><dt><a name="BatchEntry-IsMedia"><strong>IsMedia</strong></a>(self)</dt><dd><tt>Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;an&nbsp;entry&nbsp;is&nbsp;a&nbsp;GData&nbsp;Media&nbsp;entry.</tt></dd></dl>
 
 <hr>
-Properties inherited from <a href="gdata.html#GDataEntry">GDataEntry</a>:<br>
+Data descriptors inherited from <a href="gdata.html#GDataEntry">GDataEntry</a>:<br>
 <dl><dt><strong>id</strong></dt>
-<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetId(self)</dt></dl>
-</dd>
-<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetId(self, id)</dt><dd><tt>#&nbsp;This&nbsp;method&nbsp;was&nbsp;created&nbsp;to&nbsp;strip&nbsp;the&nbsp;unwanted&nbsp;whitespace&nbsp;from&nbsp;the&nbsp;id's&nbsp;<br>
-#&nbsp;text&nbsp;node.</tt></dd></dl>
-</dd>
 </dl>
 <hr>
 Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
@@ -193,11 +189,13 @@ Returns:<br>
 &nbsp;&nbsp;values</tt></dd></dl>
 
 <hr>
-Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
-
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
-
+Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 <hr>
 Methods inherited from <a href="gdata.html#LinkFinder">LinkFinder</a>:<br>
 <dl><dt><a name="BatchEntry-GetAclLink"><strong>GetAclLink</strong></a>(self)</dt></dl>
@@ -366,18 +364,10 @@ Args:<br>
 <dl><dt><a name="BatchFeed-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, contributor<font color="#909090">=None</font>, generator<font color="#909090">=None</font>, icon<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, logo<font color="#909090">=None</font>, rights<font color="#909090">=None</font>, subtitle<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, entry<font color="#909090">=None</font>, total_results<font color="#909090">=None</font>, start_index<font color="#909090">=None</font>, items_per_page<font color="#909090">=None</font>, interrupted<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
 
 <hr>
-Properties inherited from <a href="gdata.html#GDataFeed">GDataFeed</a>:<br>
+Data descriptors inherited from <a href="gdata.html#GDataFeed">GDataFeed</a>:<br>
 <dl><dt><strong>generator</strong></dt>
-<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetGenerator(self)</dt></dl>
-</dd>
-<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetGenerator(self, generator)</dt></dl>
-</dd>
 </dl>
 <dl><dt><strong>id</strong></dt>
-<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetId(self)</dt></dl>
-</dd>
-<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetId(self, id)</dt></dl>
-</dd>
 </dl>
 <hr>
 Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
@@ -404,11 +394,13 @@ Returns:<br>
 &nbsp;&nbsp;values</tt></dd></dl>
 
 <hr>
-Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
-
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
-
+Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 <hr>
 Methods inherited from <a href="gdata.html#LinkFinder">LinkFinder</a>:<br>
 <dl><dt><a name="BatchFeed-GetAclLink"><strong>GetAclLink</strong></a>(self)</dt></dl>
@@ -487,11 +479,13 @@ Returns:<br>
 &nbsp;&nbsp;values</tt></dd></dl>
 
 <hr>
-Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
-
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
-
+Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -539,11 +533,13 @@ Returns:<br>
 &nbsp;&nbsp;values</tt></dd></dl>
 
 <hr>
-Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
-
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
-
+Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -586,11 +582,13 @@ Returns:<br>
 &nbsp;&nbsp;values</tt></dd></dl>
 
 <hr>
-Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
-
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
-
+Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -643,11 +641,13 @@ Returns:<br>
 &nbsp;&nbsp;values</tt></dd></dl>
 
 <hr>
-Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
-
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
-
+Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -692,11 +692,13 @@ Returns:<br>
 &nbsp;&nbsp;values</tt></dd></dl>
 
 <hr>
-Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
-
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
-
+Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -704,13 +706,56 @@ Data and other attributes inherited from <a href="atom.html#ExtensionContainer">
 <font color="#000000" face="helvetica, arial"><a name="Error">class <strong>Error</strong></a>(<a href="exceptions.html#Exception">exceptions.Exception</a>)</font></td></tr>
     
 <tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%">Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><a name="Error-__getitem__"><strong>__getitem__</strong></a>(...)</dt></dl>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.html#Error">Error</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="Error-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
 
-<dl><dt><a name="Error-__init__"><strong>__init__</strong></a>(...)</dt></dl>
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#Error-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><a name="Error-__str__"><strong>__str__</strong></a>(...)</dt></dl>
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="Error-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
 
+<dl><dt><a name="Error-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="Error-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="Error-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="Error-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="Error-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="Error-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="Error-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="Error-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+<dd><tt>exception&nbsp;message</tt></dd>
+</dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -783,11 +828,13 @@ Returns:<br>
 &nbsp;&nbsp;values</tt></dd></dl>
 
 <hr>
-Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
-
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
-
+Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -832,11 +879,13 @@ Returns:<br>
 &nbsp;&nbsp;values</tt></dd></dl>
 
 <hr>
-Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
-
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
-
+Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -864,13 +913,8 @@ Otherwise&nbsp;returns&nbsp;None.</tt></dd></dl>
 <dl><dt><a name="GDataEntry-IsMedia"><strong>IsMedia</strong></a>(self)</dt><dd><tt>Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;an&nbsp;entry&nbsp;is&nbsp;a&nbsp;GData&nbsp;Media&nbsp;entry.</tt></dd></dl>
 
 <hr>
-Properties defined here:<br>
+Data descriptors defined here:<br>
 <dl><dt><strong>id</strong></dt>
-<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetId(self)</dt></dl>
-</dd>
-<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetId(self, id)</dt><dd><tt>#&nbsp;This&nbsp;method&nbsp;was&nbsp;created&nbsp;to&nbsp;strip&nbsp;the&nbsp;unwanted&nbsp;whitespace&nbsp;from&nbsp;the&nbsp;id's&nbsp;<br>
-#&nbsp;text&nbsp;node.</tt></dd></dl>
-</dd>
 </dl>
 <hr>
 Methods inherited from <a href="atom.html#Entry">atom.Entry</a>:<br>
@@ -923,11 +967,13 @@ Returns:<br>
 &nbsp;&nbsp;values</tt></dd></dl>
 
 <hr>
-Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
-
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
-
+Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 <hr>
 Methods inherited from <a href="gdata.html#LinkFinder">LinkFinder</a>:<br>
 <dl><dt><a name="GDataEntry-GetAclLink"><strong>GetAclLink</strong></a>(self)</dt></dl>
@@ -1015,18 +1061,10 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;values&nbsp;for&nbsp;additional&nbsp;XML&nbsp;attributes&nbsp;of&nbsp;this&nbsp;element.</tt></dd></dl>
 
 <hr>
-Properties defined here:<br>
+Data descriptors defined here:<br>
 <dl><dt><strong>generator</strong></dt>
-<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetGenerator(self)</dt></dl>
-</dd>
-<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetGenerator(self, generator)</dt></dl>
-</dd>
 </dl>
 <dl><dt><strong>id</strong></dt>
-<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetId(self)</dt></dl>
-</dd>
-<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetId(self, id)</dt></dl>
-</dd>
 </dl>
 <hr>
 Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
@@ -1053,11 +1091,13 @@ Returns:<br>
 &nbsp;&nbsp;values</tt></dd></dl>
 
 <hr>
-Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
-
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
-
+Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 <hr>
 Methods inherited from <a href="gdata.html#LinkFinder">LinkFinder</a>:<br>
 <dl><dt><a name="GDataFeed-GetAclLink"><strong>GetAclLink</strong></a>(self)</dt></dl>
@@ -1140,11 +1180,13 @@ Returns:<br>
 &nbsp;&nbsp;values</tt></dd></dl>
 
 <hr>
-Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
-
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
-
+Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -1205,11 +1247,13 @@ Methods inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
 <dl><dt><a name="LinkFinder-GetLicenseLink"><strong>GetLicenseLink</strong></a>(self)</dt></dl>
 
 <hr>
-Data and other attributes inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
-
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'LinkFinder' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
-
+Data descriptors inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -1243,11 +1287,13 @@ Args:<br>
 &nbsp;&nbsp;content_type:&nbsp;string&nbsp;A&nbsp;MIME&nbsp;type&nbsp;representing&nbsp;the&nbsp;type&nbsp;of&nbsp;the&nbsp;media</tt></dd></dl>
 
 <hr>
-Data and other attributes defined here:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
-
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'MediaSource' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
-
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -1259,15 +1305,53 @@ Data and other attributes defined here:<br>
 <dd><a href="gdata.html#MissingRequiredParameters">MissingRequiredParameters</a></dd>
 <dd><a href="gdata.html#Error">Error</a></dd>
 <dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="gdata.html#Error">Error</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
 <hr>
 Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><a name="MissingRequiredParameters-__getitem__"><strong>__getitem__</strong></a>(...)</dt></dl>
+<dl><dt><a name="MissingRequiredParameters-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#MissingRequiredParameters-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
 
-<dl><dt><a name="MissingRequiredParameters-__init__"><strong>__init__</strong></a>(...)</dt></dl>
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#MissingRequiredParameters-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><a name="MissingRequiredParameters-__str__"><strong>__str__</strong></a>(...)</dt></dl>
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="MissingRequiredParameters-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#MissingRequiredParameters-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
 
+<dl><dt><a name="MissingRequiredParameters-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#MissingRequiredParameters-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="MissingRequiredParameters-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#MissingRequiredParameters-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="MissingRequiredParameters-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#MissingRequiredParameters-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="MissingRequiredParameters-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="MissingRequiredParameters-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#MissingRequiredParameters-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="MissingRequiredParameters-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#MissingRequiredParameters-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="MissingRequiredParameters-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="MissingRequiredParameters-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#MissingRequiredParameters-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+<dd><tt>exception&nbsp;message</tt></dd>
+</dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -1312,11 +1396,13 @@ Returns:<br>
 &nbsp;&nbsp;values</tt></dd></dl>
 
 <hr>
-Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
-
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
-
+Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -1361,11 +1447,13 @@ Returns:<br>
 &nbsp;&nbsp;values</tt></dd></dl>
 
 <hr>
-Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
-
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
-
+Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#eeaa77">
