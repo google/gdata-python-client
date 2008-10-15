@@ -21,6 +21,10 @@ src/gdata/alt/__init__.py
 src/gdata/alt/appengine.py
 src/gdata/apps/__init__.py
 src/gdata/apps/service.py
+src/gdata/apps/emailsettings/__init__.py
+src/gdata/apps/emailsettings/service.py
+src/gdata/apps/migration/__init__.py
+src/gdata/apps/migration/service.py
 src/gdata/base/__init__.py
 src/gdata/base/service.py
 src/gdata/blogger/__init__.py
@@ -41,6 +45,8 @@ src/gdata/photos/service.py
 src/gdata/spreadsheet/__init__.py
 src/gdata/spreadsheet/service.py
 src/gdata/spreadsheet/text_db.py
+src/gdata/webmastertools/__init__.py
+src/gdata/webmastertools/service.py
 src/gdata/youtube/__init__.py
 src/gdata/youtube/service.py
 samples/base/baseQueryExample.py
@@ -51,6 +57,9 @@ samples/contacts/contacts_example.py
 samples/docs/docs_example.py
 samples/mashups/birthdaySample.py
 samples/spreadsheets/spreadsheetExample.py
+samples/webmastertools/AddDeleteExampleDotCom.py
+samples/webmastertools/SitemapsFeedSummary.py
+samples/webmastertools/SitesFeedSummary.py
 tests/__init__.py
 tests/atom_test.py
 tests/gdata_test.py
@@ -83,6 +92,10 @@ tests/gdata_tests/spreadsheet_test.py
 tests/gdata_tests/youtube_test.py
 tests/gdata_tests/apps/__init__.py
 tests/gdata_tests/apps/service_test.py
+tests/gdata_tests/apps/emailsettings/__init__.py
+tests/gdata_tests/apps/emailsettings/service_test.py
+tests/gdata_tests/apps/migration/__init__.py
+tests/gdata_tests/apps/migration/service_test.py
 tests/gdata_tests/base/__init__.py
 tests/gdata_tests/base/service_test.py
 tests/gdata_tests/blogger/__init__.py
