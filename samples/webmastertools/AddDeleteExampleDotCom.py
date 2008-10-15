@@ -66,6 +66,15 @@ print "  Preferred: %-23s Indexed: %5s        GeoLoc: %10s" % (
 print "  Crawl rate: %-10s            Verified: %5s" % (
   safeElementText(entry.crawl_rate)[:10], entry.verified.text[:5])
 
+# Verifying a site. This sample won't do this since we don't own example.com
+#client.VerifySite(EXAMPLE_SITE, 'htmlpage')
+
+# The following needs the ownership of the site
+#client.UpdateGeoLocation(EXAMPLE_SITE, 'US')
+#client.UpdateCrawlRate(EXAMPLE_SITE, 'normal')
+#client.UpdatePreferredDomain(EXAMPLE_SITE, 'preferwww')
+#client.UpdateEnhancedImageSearch(EXAMPLE_SITE, 'true')
+
 print
 print 'Adding sitemap: %s' % EXAMPLE_SITEMAP
 entry = client.AddSitemap(EXAMPLE_SITE, EXAMPLE_SITEMAP)
@@ -76,6 +85,13 @@ print "  Last Updated   : %29s              Status: %10s" % (
 print "  Last Downloaded: %29s           URL Count: %10s" % (
     safeElementText(entry.sitemap_last_downloaded)[:29],
     safeElementText(entry.sitemap_url_count)[:10])
+
+# Add a mobile sitemap
+#entry = client.AddMobileSitemap(EXAMPLE_SITE, 'http://.../sitemap-mobile-example.xml', 'XHTML')
+
+# Add a news sitemap, your site must be included in Google News.
+# See also http://google.com/support/webmasters/bin/answer.py?answer=42738
+#entry = client.AddNewsSitemap(EXAMPLE_SITE, 'http://.../sitemap-news-example.xml', 'Label')
 
 print
 print 'Deleting sitemap: %s' % EXAMPLE_SITEMAP

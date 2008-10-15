@@ -31,7 +31,7 @@ import gdata.webmastertools as webmastertools
 import atom
 
 
-FEED_BASE = '/webmasters/tools/feeds/'
+FEED_BASE = 'https://www.google.com/webmasters/tools/feeds/'
 SITES_FEED = FEED_BASE + 'sites/'
 SITE_TEMPLATE = SITES_FEED + '%s'
 SITEMAPS_FEED_TEMPLATE = FEED_BASE + '%(site_id)s/sitemaps/'
@@ -126,6 +126,212 @@ class GWebmasterToolsService(gdata.service.GDataService):
         uri % urllib.quote_plus(site_uri),
         url_params=url_params, escape_params=escape_params)
 
+  def VerifySite(self, site_uri, verification_method, uri=SITE_TEMPLATE,
+      url_params=None, escape_params=True, converter=None):
+    """Requests a verification of a site.
+
+    Args: 
+      site_uri: str URI of which site to add sitemap for.
+      verification_method: str The method to verify a site. Valid values are
+                           'htmlpage', and 'metatag'.
+      uri: str (optional) URI template to update a site.
+           Default SITE_TEMPLATE.
+      url_params: dict (optional) Additional URL parameters to be included
+                  in the insertion request. 
+      escape_params: boolean (optional) If true, the url_parameters will be
+                     escaped before they are included in the request.
+      converter: func (optional) Function which is executed on the server's
+          response before it is returned. Usually this is a function like
+          SitemapsEntryFromString which will parse the response and turn it into
+          an object.
+
+    Returns:
+      If converter is defined, the results of running converter on the server's
+      response. Otherwise, it will be a SitesEntry object.
+    """
+
+    site_entry = webmastertools.SitesEntry(
+        atom_id=atom.Id(text=site_uri),
+        category=atom.Category(
+            scheme='http://schemas.google.com/g/2005#kind',
+            term='http://schemas.google.com/webmasters/tools/2007#sites-info'),
+        verification_method=webmastertools.VerificationMethod(
+            type=verification_method, in_user='true')
+        )
+    response = self.Put(
+        site_entry,
+        uri % urllib.quote_plus(site_uri),
+        url_params=url_params,
+        escape_params=escape_params, converter=converter)
+    if not converter and isinstance(response, atom.Entry):
+      return webmastertools.SitesEntryFromString(response.ToString())
+    return response
+
+
+  def UpdateGeoLocation(self, site_uri, geolocation, uri=SITE_TEMPLATE,
+      url_params=None, escape_params=True, converter=None):
+    """Updates geolocation setting of a site.
+
+    Args: 
+      site_uri: str URI of which site to add sitemap for.
+      geolocation: str The geographic location. Valid values are listed in
+                   http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+      uri: str (optional) URI template to update a site.
+           Default SITE_TEMPLATE.
+      url_params: dict (optional) Additional URL parameters to be included
+                  in the insertion request. 
+      escape_params: boolean (optional) If true, the url_parameters will be
+                     escaped before they are included in the request.
+      converter: func (optional) Function which is executed on the server's
+          response before it is returned. Usually this is a function like
+          SitemapsEntryFromString which will parse the response and turn it into
+          an object.
+
+    Returns:
+      If converter is defined, the results of running converter on the server's
+      response. Otherwise, it will be a SitesEntry object.
+    """
+
+    site_entry = webmastertools.SitesEntry(
+        atom_id=atom.Id(text=site_uri),
+        category=atom.Category(
+            scheme='http://schemas.google.com/g/2005#kind',
+            term='http://schemas.google.com/webmasters/tools/2007#sites-info'),
+        geolocation=webmastertools.GeoLocation(text=geolocation)
+        )
+    response = self.Put(
+        site_entry,
+        uri % urllib.quote_plus(site_uri),
+        url_params=url_params,
+        escape_params=escape_params, converter=converter)
+    if not converter and isinstance(response, atom.Entry):
+      return webmastertools.SitesEntryFromString(response.ToString())
+    return response
+
+  def UpdateCrawlRate(self, site_uri, crawl_rate, uri=SITE_TEMPLATE,
+      url_params=None, escape_params=True, converter=None):
+    """Updates crawl rate setting of a site.
+
+    Args: 
+      site_uri: str URI of which site to add sitemap for.
+      crawl_rate: str The crawl rate for a site. Valid values are 'slower',
+                  'normal', and 'faster'.
+      uri: str (optional) URI template to update a site.
+           Default SITE_TEMPLATE.
+      url_params: dict (optional) Additional URL parameters to be included
+                  in the insertion request. 
+      escape_params: boolean (optional) If true, the url_parameters will be
+                     escaped before they are included in the request.
+      converter: func (optional) Function which is executed on the server's
+          response before it is returned. Usually this is a function like
+          SitemapsEntryFromString which will parse the response and turn it into
+          an object.
+
+    Returns:
+      If converter is defined, the results of running converter on the server's
+      response. Otherwise, it will be a SitesEntry object.
+    """
+
+    site_entry = webmastertools.SitesEntry(
+        atom_id=atom.Id(text=site_uri),
+        category=atom.Category(
+            scheme='http://schemas.google.com/g/2005#kind',
+            term='http://schemas.google.com/webmasters/tools/2007#sites-info'),
+        crawl_rate=webmastertools.CrawlRate(text=crawl_rate)
+        )
+    response = self.Put(
+        site_entry,
+        uri % urllib.quote_plus(site_uri),
+        url_params=url_params,
+        escape_params=escape_params, converter=converter)
+    if not converter and isinstance(response, atom.Entry):
+      return webmastertools.SitesEntryFromString(response.ToString())
+    return response
+
+  def UpdatePreferredDomain(self, site_uri, preferred_domain, uri=SITE_TEMPLATE,
+      url_params=None, escape_params=True, converter=None):
+    """Updates preferred domain setting of a site.
+
+    Note that if using 'preferwww', will also need www.example.com in account to
+    take effect.
+
+    Args: 
+      site_uri: str URI of which site to add sitemap for.
+      preferred_domain: str The preferred domain for a site. Valid values are 'none',
+                        'preferwww', and 'prefernowww'.
+      uri: str (optional) URI template to update a site.
+           Default SITE_TEMPLATE.
+      url_params: dict (optional) Additional URL parameters to be included
+                  in the insertion request. 
+      escape_params: boolean (optional) If true, the url_parameters will be
+                     escaped before they are included in the request.
+      converter: func (optional) Function which is executed on the server's
+          response before it is returned. Usually this is a function like
+          SitemapsEntryFromString which will parse the response and turn it into
+          an object.
+
+    Returns:
+      If converter is defined, the results of running converter on the server's
+      response. Otherwise, it will be a SitesEntry object.
+    """
+
+    site_entry = webmastertools.SitesEntry(
+        atom_id=atom.Id(text=site_uri),
+        category=atom.Category(
+            scheme='http://schemas.google.com/g/2005#kind',
+            term='http://schemas.google.com/webmasters/tools/2007#sites-info'),
+        preferred_domain=webmastertools.PreferredDomain(text=preferred_domain)
+        )
+    response = self.Put(
+        site_entry,
+        uri % urllib.quote_plus(site_uri),
+        url_params=url_params,
+        escape_params=escape_params, converter=converter)
+    if not converter and isinstance(response, atom.Entry):
+      return webmastertools.SitesEntryFromString(response.ToString())
+    return response
+
+  def UpdateEnhancedImageSearch(self, site_uri, enhanced_image_search,
+      uri=SITE_TEMPLATE, url_params=None, escape_params=True, converter=None):
+    """Updates enhanced image search setting of a site.
+
+    Args: 
+      site_uri: str URI of which site to add sitemap for.
+      enhanced_image_search: str The enhanced image search setting for a site.
+                             Valid values are 'true', and 'false'.
+      uri: str (optional) URI template to update a site.
+           Default SITE_TEMPLATE.
+      url_params: dict (optional) Additional URL parameters to be included
+                  in the insertion request. 
+      escape_params: boolean (optional) If true, the url_parameters will be
+                     escaped before they are included in the request.
+      converter: func (optional) Function which is executed on the server's
+          response before it is returned. Usually this is a function like
+          SitemapsEntryFromString which will parse the response and turn it into
+          an object.
+
+    Returns:
+      If converter is defined, the results of running converter on the server's
+      response. Otherwise, it will be a SitesEntry object.
+    """
+
+    site_entry = webmastertools.SitesEntry(
+        atom_id=atom.Id(text=site_uri),
+        category=atom.Category(
+            scheme='http://schemas.google.com/g/2005#kind',
+            term='http://schemas.google.com/webmasters/tools/2007#sites-info'),
+        enhanced_image_search=webmastertools.EnhancedImageSearch(
+            text=enhanced_image_search)
+        )
+    response = self.Put(
+        site_entry,
+        uri % urllib.quote_plus(site_uri),
+        url_params=url_params,
+        escape_params=escape_params, converter=converter)
+    if not converter and isinstance(response, atom.Entry):
+      return webmastertools.SitesEntryFromString(response.ToString())
+    return response
+
   def GetSitemapsFeed(self, site_uri, uri=SITEMAPS_FEED_TEMPLATE,
       converter=webmastertools.SitemapsFeedFromString):
     """Gets sitemaps feed of a site.
@@ -155,7 +361,7 @@ class GWebmasterToolsService(gdata.service.GDataService):
       sitemap_uri: str URI of sitemap to add to a site.
       sitemap_type: str Type of added sitemap. Valid types: WEB, VIDEO, or CODE.
       uri: str (optional) URI template to add a sitemap.
-           Default SITEMAP_TEMPLATE.
+           Default SITEMAP_FEED_TEMPLATE.
       url_params: dict (optional) Additional URL parameters to be included
                   in the insertion request. 
       escape_params: boolean (optional) If true, the url_parameters will be
@@ -185,13 +391,97 @@ class GWebmasterToolsService(gdata.service.GDataService):
       return webmastertools.SitemapsEntryFromString(response.ToString())
     return response
 
-  def AddMobileSitemap(self):
-    # TODO
-    pass
+  def AddMobileSitemap(self, site_uri, sitemap_uri,
+      sitemap_mobile_markup_language='XHTML', uri=SITEMAPS_FEED_TEMPLATE,
+      url_params=None, escape_params=True, converter=None):
+    """Adds a mobile sitemap to a site.
 
-  def AddNewsSitemap(self):
-    # TODO
-    pass
+    Args: 
+      site_uri: str URI of which site to add sitemap for.
+      sitemap_uri: str URI of sitemap to add to a site.
+      sitemap_mobile_markup_language: str Format of added sitemap. Valid types:
+                                      XHTML, WML, or cHTML.
+      uri: str (optional) URI template to add a sitemap.
+           Default SITEMAP_FEED_TEMPLATE.
+      url_params: dict (optional) Additional URL parameters to be included
+                  in the insertion request. 
+      escape_params: boolean (optional) If true, the url_parameters will be
+                     escaped before they are included in the request.
+      converter: func (optional) Function which is executed on the server's
+          response before it is returned. Usually this is a function like
+          SitemapsEntryFromString which will parse the response and turn it into
+          an object.
+
+    Returns:
+      If converter is defined, the results of running converter on the server's
+      response. Otherwise, it will be a SitemapsEntry object.
+    """
+    # FIXME
+    sitemap_entry = webmastertools.SitemapsEntry(
+        atom_id=atom.Id(text=sitemap_uri),
+        category=atom.Category(
+            scheme='http://schemas.google.com/g/2005#kind',
+            term='http://schemas.google.com/webmasters/tools/2007#sitemap-mobile'),
+        sitemap_mobile_markup_language=\
+            webmastertools.SitemapMobileMarkupLanguage(
+                text=sitemap_mobile_markup_language))
+    print sitemap_entry
+    response = self.Post(
+        sitemap_entry,
+        uri % {'site_id': urllib.quote_plus(site_uri)},
+        url_params=url_params,
+        escape_params=escape_params, converter=converter)
+    if not converter and isinstance(response, atom.Entry):
+      return webmastertools.SitemapsEntryFromString(response.ToString())
+    return response
+
+  def AddNewsSitemap(self, site_uri, sitemap_uri,
+      sitemap_news_publication_label, uri=SITEMAPS_FEED_TEMPLATE,
+      url_params=None, escape_params=True, converter=None):
+    """Adds a news sitemap to a site.
+
+    Args: 
+      site_uri: str URI of which site to add sitemap for.
+      sitemap_uri: str URI of sitemap to add to a site.
+      sitemap_news_publication_label: str, list of str Publication Labels for
+                                      sitemap.
+      uri: str (optional) URI template to add a sitemap.
+           Default SITEMAP_FEED_TEMPLATE.
+      url_params: dict (optional) Additional URL parameters to be included
+                  in the insertion request. 
+      escape_params: boolean (optional) If true, the url_parameters will be
+                     escaped before they are included in the request.
+      converter: func (optional) Function which is executed on the server's
+          response before it is returned. Usually this is a function like
+          SitemapsEntryFromString which will parse the response and turn it into
+          an object.
+
+    Returns:
+      If converter is defined, the results of running converter on the server's
+      response. Otherwise, it will be a SitemapsEntry object.
+    """
+
+    sitemap_entry = webmastertools.SitemapsEntry(
+        atom_id=atom.Id(text=sitemap_uri),
+        category=atom.Category(
+            scheme='http://schemas.google.com/g/2005#kind',
+            term='http://schemas.google.com/webmasters/tools/2007#sitemap-news'),
+        sitemap_news_publication_label=[],
+        )
+    if isinstance(sitemap_news_publication_label, str):
+      sitemap_news_publication_label = [sitemap_news_publication_label]
+    for label in sitemap_news_publication_label:
+      sitemap_entry.sitemap_news_publication_label.append(
+          webmastertools.SitemapNewsPublicationLabel(text=label))
+    print sitemap_entry
+    response = self.Post(
+        sitemap_entry,
+        uri % {'site_id': urllib.quote_plus(site_uri)},
+        url_params=url_params,
+        escape_params=escape_params, converter=converter)
+    if not converter and isinstance(response, atom.Entry):
+      return webmastertools.SitemapsEntryFromString(response.ToString())
+    return response
 
   def DeleteSitemap(self, site_uri, sitemap_uri, uri=SITEMAP_TEMPLATE,
       url_params=None, escape_params=True):

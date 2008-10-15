@@ -31,7 +31,7 @@ site_uri = ''
 
 username = raw_input('Please enter your username: ')
 password = getpass.getpass()
-site_uri = escape raw_input('Please enter your site url: ')
+site_uri = raw_input('Please enter your site url: ')
 
 client = gdata.webmastertools.service.GWebmasterToolsService(
     email=username, 
