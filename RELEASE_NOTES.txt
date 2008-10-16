@@ -14,7 +14,7 @@ Oct 15, 2008 (revision 556)
     is updated when using SetXToken() methods. The token_store will only be
     queried if there is no current_token.
 - Fixed issue with requests to HTTPS URLs in which an AuthSub token was seen
-    as invalid because the request contained the default poert number (443).
+    as invalid because the request contained the default port number (443).
     The library no longer includes the port in the Host header if it is using
     the default.
 - Resolved issues with YouTube token scopes.
