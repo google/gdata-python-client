@@ -89,6 +89,7 @@ tests/gdata_tests/docs_test.py
 tests/gdata_tests/photos_test.py
 tests/gdata_tests/service_test.py
 tests/gdata_tests/spreadsheet_test.py
+tests/gdata_tests/webmastertools_test.py
 tests/gdata_tests/youtube_test.py
 tests/gdata_tests/apps/__init__.py
 tests/gdata_tests/apps/service_test.py
