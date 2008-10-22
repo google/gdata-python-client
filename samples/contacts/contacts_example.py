@@ -164,7 +164,7 @@ class ContactsSample(object):
 
   def PrintMenu(self):
     """Displays a menu of options for the user to choose from."""
-    print ('\nDocument List Sample\n'
+    print ('\nContacts Sample\n'
            '1) List all of your contacts.\n'
            '2) Create a contact.\n'
            '3) Query contacts on updated time.\n'
