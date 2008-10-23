@@ -50,17 +50,25 @@ class ContactsSample(object):
     self.gd_client.source = 'GoogleInc-ContactsPythonSample-1'
     self.gd_client.ProgrammaticLogin()
 
-  def PrintFeed(self, feed):
+  def PrintFeed(self, feed, ctr=0):
     """Prints out the contents of a feed to the console.
    
     Args:
       feed: A gdata.contacts.ContactsFeed instance.
+      ctr: [int] The number of entries in this feed previously printed. This
+          allows continuous entry numbers when paging through a feed.
+    
+    Returns:
+      The number of entries printed, including those previously printed as
+      specified in ctr. This is for passing as an argument to ctr on
+      successive calls to this method.
+    
     """
-    print '\n'
     if not feed.entry:
-      print 'No entries in feed.\n'
+      print '\nNo entries in feed.\n'
+      return 0
     for i, entry in enumerate(feed.entry):
-      print '\n%s %s' % (i+1, entry.title.text)
+      print '\n%s %s' % (ctr+i+1, entry.title.text)
       if entry.content:
         print '    %s' % (entry.content.text)
       for email in entry.email:
@@ -76,18 +84,67 @@ class ContactsSample(object):
         else:
           value = extended_property.GetXmlBlobString()
         print '    Extended Property %s: %s' % (extended_property.name, value)
+    return len(feed.entry) + ctr
+
+  def PrintPaginatedFeed(self, feed, print_method):
+    """ Print all pages of a paginated feed.
+    
+    This will iterate through a paginated feed, requesting each page and
+    printing the entries contained therein.
+    
+    Args:
+      feed: A gdata.contacts.ContactsFeed instance.
+      print_method: The method which will be used to print each page of the
+          feed. Must accept these two named arguments:
+              feed: A gdata.contacts.ContactsFeed instance.
+              ctr: [int] The number of entries in this feed previously
+                  printed. This allows continuous entry numbers when paging
+                  through a feed.
+    """
+    ctr = 0
+    while feed:
+      # Print contents of current feed
+      ctr = print_method(feed=feed, ctr=ctr)
+      # Prepare for next feed iteration
+      next = feed.GetNextLink()
+      feed = None
+      if next:
+        if self.PromptOperationShouldContinue():
+          # Another feed is available, and the user has given us permission
+          # to fetch it
+          feed = self.gd_client.GetContactsFeed(next.href)
+        else:
+          # User has asked us to terminate
+          feed = None
+
+  def PromptOperationShouldContinue(self):
+    """ Display a "Continue" prompt.
+    
+    This give is used to give users a chance to break out of a loop, just in
+    case they have too many contacts/groups.
+    
+    Returns:
+      A boolean value, True if the current operation should continue, False if
+      the current operation should terminate.
+    """
+    while True:
+      input = raw_input("Continue [Y/n]? ")
+      if input is 'N' or input is 'n':
+        return False
+      elif input is 'Y' or input is 'y' or input is '':
+        return True
 
   def ListAllContacts(self):
     """Retrieves a list of contacts and displays name and primary email."""
     feed = self.gd_client.GetContactsFeed()
-    self.PrintFeed(feed)
+    self.PrintPaginatedFeed(feed, self.PrintGroupsFeed)
 
-  def PrintGroupsFeed(self, feed):
-    print '\n'
+  def PrintGroupsFeed(self, feed, ctr):
     if not feed.entry:
-      print 'No groups in feed.\n'
+      print '\nNo groups in feed.\n'
+      return 0
     for i, entry in enumerate(feed.entry):
-      print '\n%s %s' % (i+1, entry.title.text)
+      print '\n%s %s' % (ctr+i+1, entry.title.text)
       if entry.content:
         print '    %s' % (entry.content.text)
       # Display the group id which can be used to query the contacts feed.
@@ -99,10 +156,11 @@ class ContactsSample(object):
         else:
           value = extended_property.GetXmlBlobString()
         print '    Extended Property %s: %s' % (extended_property.name, value)
+    return len(feed.entry) + ctr
 
   def ListAllGroups(self):
     feed = self.gd_client.GetGroupsFeed()
-    self.PrintGroupsFeed(feed)
+    self.PrintPaginatedFeed(feed, self.PrintGroupsFeed)
 
   def CreateMenu(self):
     """Prompts that enable a user to create a contact."""
