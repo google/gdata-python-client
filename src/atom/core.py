@@ -235,7 +235,7 @@ class XmlElement(object):
 
   def _to_tree(self, version=1):
     new_tree = ElementTree.Element(_get_qname(self, version))
-    self._attach_members(new_tree)
+    self._attach_members(new_tree, version)
     return new_tree
 
   def _attach_members(self, tree, version=1):
@@ -283,7 +283,7 @@ class XmlElement(object):
     new_child = ElementTree.Element('')
     tree.append(new_child)
     new_child.tag = _get_qname(self, version)
-    self._attach_members(new_child)
+    self._attach_members(new_child, version)
 
 
 def _get_qname(element, version):
