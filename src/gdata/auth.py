@@ -15,12 +15,20 @@
 # limitations under the License.
 
 
+import cgi
+import math
+import random
 import re
+import time
+import types
 import urllib
 import atom.http_interface
 import atom.token_store
 import atom.url
-
+import oauth
+import oauth.rsa
+import tlslite.utils.keyfactory as keyfactory
+import tlslite.utils.cryptomath as cryptomath
 
 __author__ = 'api.jscudder (Jeff Scudder)'
 
@@ -200,6 +208,118 @@ def get_captcha_challenge(http_body,
 
 GetCaptchaChallenge = get_captcha_challenge
 
+
+def GenerateOAuthRequestTokenUrl(
+    oauth_input_params, scopes,
+    request_token_url='https://www.google.com/accounts/OAuthGetRequestToken',
+    extra_parameters=None):
+  """Generate a URL at which a request for OAuth request token is to be sent.
+  
+  Args:
+    oauth_input_params: OAuthInputParams OAuth input parameters.
+    scopes: list of strings The URLs of the services to be accessed.
+    request_token_url: string The beginning of the request token URL. This is
+        normally 'https://www.google.com/accounts/OAuthGetRequestToken' or
+        '/accounts/OAuthGetRequestToken'
+    extra_parameters: dict (optional) key-value pairs as any additional
+        parameters to be included in the URL and signature while making a
+        request for fetching an OAuth request token. All the OAuth parameters
+        are added by default. But if provided through this argument, any
+        default parameters will be overwritten. For e.g. a default parameter
+        oauth_version 1.0 can be overwritten if
+        extra_parameters = {'oauth_version': '2.0'}
+  
+  Returns:
+    atom.url.Url OAuth request token URL.
+  """
+  scopes_string = ' '.join([str(scope) for scope in scopes])
+  parameters = {'scope': scopes_string}
+  if extra_parameters:
+    parameters.update(extra_parameters)
+  oauth_request = oauth.OAuthRequest.from_consumer_and_token(
+      oauth_input_params.GetConsumer(), http_url=request_token_url,
+      parameters=parameters)
+  oauth_request.sign_request(oauth_input_params.GetSignatureMethod(),
+                             oauth_input_params.GetConsumer(), None)
+  return atom.url.parse_url(oauth_request.to_url())
+
+
+def GenerateOAuthAuthorizationUrl(
+    request_token,
+    authorization_url='https://www.google.com/accounts/OAuthAuthorizeToken',
+    callback_url=None, extra_params=None,
+    include_scopes_in_callback=False, scopes_param_prefix='oauth_token_scope'):
+  """Generates URL at which user will login to authorize the request token.
+  
+  Args:
+    request_token: gdata.auth.OAuthToken OAuth request token.
+    authorization_url: string The beginning of the authorization URL. This is
+        normally 'https://www.google.com/accounts/OAuthAuthorizeToken' or
+        '/accounts/OAuthAuthorizeToken'
+    callback_url: string (optional) The URL user will be sent to after
+        logging in and granting access.
+    extra_params: dict (optional) Additional parameters to be sent.
+    include_scopes_in_callback: Boolean (default=False) if set to True, and
+        if 'callback_url' is present, the 'callback_url' will be modified to
+        include the scope(s) from the request token as a URL parameter. The
+        key for the 'callback' URL's scope parameter will be
+        OAUTH_SCOPE_URL_PARAM_NAME. The benefit of including the scope URL as
+        a parameter to the 'callback' URL, is that the page which receives
+        the OAuth token will be able to tell which URLs the token grants
+        access to.
+    scopes_param_prefix: string (default='oauth_token_scope') The URL
+        parameter key which maps to the list of valid scopes for the token.
+        This URL parameter will be included in the callback URL along with
+        the scopes of the token as value if include_scopes_in_callback=True.
+
+  Returns:
+    atom.url.Url OAuth authorization URL.
+  """
+  scopes = request_token.scopes
+  if isinstance(scopes, list):
+    scopes = ' '.join(scopes)  
+  if include_scopes_in_callback and callback_url:
+    if callback_url.find('?') > -1:
+      callback_url += '&'
+    else:
+      callback_url += '?'
+    callback_url += urllib.urlencode({scopes_param_prefix:scopes})  
+  oauth_token = oauth.OAuthToken(request_token.key, request_token.secret)
+  oauth_request = oauth.OAuthRequest.from_token_and_callback(
+      token=oauth_token, callback=callback_url,
+      http_url=authorization_url, parameters=extra_params)
+  return atom.url.parse_url(oauth_request.to_url())
+
+
+def GenerateOAuthAccessTokenUrl(
+    authorized_request_token,
+    oauth_input_params,
+    access_token_url='https://www.google.com/accounts/OAuthGetAccessToken',
+    oauth_version='1.0'):
+  """Generates URL at which user will login to authorize the request token.
+  
+  Args:
+    authorized_request_token: gdata.auth.OAuthToken OAuth authorized request
+        token.
+    oauth_input_params: OAuthInputParams OAuth input parameters.    
+    access_token_url: string The beginning of the authorization URL. This is
+        normally 'https://www.google.com/accounts/OAuthGetAccessToken' or
+        '/accounts/OAuthGetAccessToken'
+    oauth_version: str (default='1.0') oauth_version parameter.
+
+  Returns:
+    atom.url.Url OAuth access token URL.
+  """
+  oauth_token = oauth.OAuthToken(authorized_request_token.key,
+                                 authorized_request_token.secret)
+  oauth_request = oauth.OAuthRequest.from_consumer_and_token(
+      oauth_input_params.GetConsumer(), token=oauth_token,
+      http_url=access_token_url, parameters={'oauth_version': oauth_version})
+  oauth_request.sign_request(oauth_input_params.GetSignatureMethod(),
+                             oauth_input_params.GetConsumer(), oauth_token)
+  return atom.url.parse_url(oauth_request.to_url())
+
+
 def GenerateAuthSubUrl(next, scope, secure=False, session=True, 
     request_url='https://www.google.com/accounts/AuthSubRequest',
     domain='default'):
@@ -342,7 +462,7 @@ def TokenFromUrl(url):
 
 
 def extract_auth_sub_token_from_url(url, 
-    scopes_param_prefix='auth_sub_scopes'):
+    scopes_param_prefix='auth_sub_scopes', rsa_key=None):
   """Creates an AuthSubToken and sets the token value and scopes from the URL.
   
   After the Google Accounts AuthSub pages redirect the user's broswer back to 
@@ -372,7 +492,10 @@ def extract_auth_sub_token_from_url(url,
   if scopes_param_prefix in url.params:
     scopes = url.params[scopes_param_prefix].split(' ')
   token_value = url.params['token']
-  token = AuthSubToken(scopes=scopes)
+  if rsa_key:
+    token = SecureAuthSubToken(rsa_key, scopes=scopes)
+  else:
+    token = AuthSubToken(scopes=scopes)
   token.set_token_string(token_value)
   return token
 
@@ -420,6 +543,131 @@ def token_from_http_body(http_body):
 
 
 TokenFromHttpBody = token_from_http_body
+
+
+def OAuthTokenFromUrl(url, scopes_param_prefix='oauth_token_scope'):
+  """Creates an OAuthToken and sets token key and scopes (if present) from URL.
+  
+  After the Google Accounts OAuth pages redirect the user's broswer back to 
+  the web application (using the 'callback' URL from the request) the web app
+  can extract the token from the current page's URL. The token is same as the
+  request token, but it is either authorized (if user grants access) or
+  unauthorized (if user denies access). The token is provided as a 
+  URL parameter named 'oauth_token' and if it was chosen to use
+  GenerateOAuthAuthorizationUrl with include_scopes_in_param=True, the token's
+  valid scopes are included in a URL parameter whose name is specified in
+  scopes_param_prefix.
+
+  Args:
+    url: atom.url.Url or str representing the current URL. The token value
+        and valid scopes should be included as URL parameters.
+    scopes_param_prefix: str (optional) The URL parameter key which maps to
+        the list of valid scopes for the token.
+
+  Returns:
+    An OAuthToken with the token key from the URL and set to be valid for
+    the scopes passed in on the URL. If no scopes were included in the URL,
+    the OAuthToken defaults to being valid for no scopes. If there was no
+    'oauth_token' parameter in the URL, this function returns None.
+  """
+  if isinstance(url, (str, unicode)):
+    url = atom.url.parse_url(url)
+  if 'oauth_token' not in url.params:
+    return None
+  scopes = []
+  if scopes_param_prefix in url.params:
+    scopes = url.params[scopes_param_prefix].split(' ')
+  token_key = url.params['oauth_token']
+  token = OAuthToken(key=token_key, scopes=scopes)
+  return token
+
+
+def OAuthTokenFromHttpBody(http_body):
+  """Parses the HTTP response body and returns an OAuth token.
+  
+  The returned OAuth token will just have key and secret parameters set.
+  It won't have any knowledge about the scopes or oauth_input_params. It is
+  your responsibility to make it aware of the remaining parameters.
+  
+  Returns:
+    OAuthToken OAuth token.
+  """
+  token = oauth.OAuthToken.from_string(http_body)
+  oauth_token = OAuthToken(key=token.key, secret=token.secret)
+  return oauth_token
+  
+
+class OAuthSignatureMethod(object):
+  """Holds valid OAuth signature methods.
+  
+  RSA_SHA1: Class to build signature according to RSA-SHA1 algorithm.
+  HMAC_SHA1: Class to build signature according to HMAC-SHA1 algorithm.
+  """
+  
+  HMAC_SHA1 = oauth.OAuthSignatureMethod_HMAC_SHA1  
+  
+  class RSA_SHA1(oauth.rsa.OAuthSignatureMethod_RSA_SHA1):
+    """Provides implementation for abstract methods to return RSA certs."""
+
+    def __init__(self, private_key, public_cert):
+      self.private_key = private_key
+      self.public_cert = public_cert
+  
+    def _fetch_public_cert(self, unused_oauth_request):
+      return self.public_cert
+  
+    def _fetch_private_cert(self, unused_oauth_request):
+      return self.private_key
+  
+
+class OAuthInputParams(object):
+  """Stores OAuth input parameters.
+  
+  This class is a store for OAuth input parameters viz. consumer key and secret,
+  signature method and RSA key.
+  """
+  
+  def __init__(self, signature_method, consumer_key, consumer_secret=None,
+               rsa_key=None):
+    """Initializes object with parameters required for using OAuth mechanism.
+    
+    NOTE: Though consumer_secret and rsa_key are optional, either of the two
+    is required depending on the value of the signature_method.
+    
+    Args:
+      signature_method: class which provides implementation for strategy class
+          oauth.oauth.OAuthSignatureMethod. Signature method to be used for
+          signing each request. Valid implementations are provided as the
+          constants defined by gdata.auth.OAuthSignatureMethod. Currently
+          they are gdata.auth.OAuthSignatureMethod.RSA_SHA1 and
+          gdata.auth.OAuthSignatureMethod.HMAC_SHA1
+      consumer_key: string Domain identifying third_party web application.
+      consumer_secret: string (optional) Secret generated during registration.
+          Required only for HMAC_SHA1 signature method.
+      rsa_key: string (optional) Private key required for RSA_SHA1 signature
+          method.
+    """
+    if signature_method == OAuthSignatureMethod.RSA_SHA1:
+      self._signature_method = signature_method(rsa_key, None)
+    else:
+      self._signature_method = signature_method()
+    self._consumer = oauth.OAuthConsumer(consumer_key, consumer_secret)
+    
+  def GetSignatureMethod(self):
+    """Gets the OAuth signature method.
+
+    Returns:
+      object of supertype <oauth.oauth.OAuthSignatureMethod>
+    """
+    return self._signature_method
+  
+  def GetConsumer(self):
+    """Gets the OAuth consumer.
+    
+    Returns:
+      object of type <oauth.oauth.Consumer>
+    """
+    return self._consumer
 
 
 class ClientLoginToken(atom.http_interface.GenericToken):
@@ -493,4 +741,189 @@ class AuthSubToken(ClientLoginToken):
     self.auth_header = '%s%s' % (AUTHSUB_AUTH_LABEL, token_string)
 
 
-#TODO: Add classes for SecureAuthSubToken and OAuthToken.
+class OAuthToken(atom.http_interface.GenericToken):
+  """Stores the token key, token secret and scopes for which token is valid.
+  
+  This token adds the authorization header to each request made. It
+  re-calculates authorization header for every request since the OAuth
+  signature to be added to the authorization header is dependent on the
+  request parameters.
+  
+  Attributes:
+    key: str The value for the OAuth token i.e. token key.
+    secret: str The value for the OAuth token secret.
+    scopes: list of str or atom.url.Url specifying the beginnings of URLs
+        for which this token can be used. For example, if scopes contains
+        'http://example.com/foo', then this token can be used for a request to
+        'http://example.com/foo/bar' but it cannot be used for a request to
+        'http://example.com/baz'
+    oauth_input_params: OAuthInputParams OAuth input parameters.      
+  """
+  
+  def __init__(self, key=None, secret=None, scopes=None,
+               oauth_input_params=None):
+    self.key = key
+    self.secret = secret
+    self.scopes = scopes or []
+    self.oauth_input_params = oauth_input_params
+  
+  def __str__(self):
+    return self.get_token_string()
+
+  def get_token_string(self):
+    """Returns the token string.
+    
+    The token string returned is of format
+    oauth_token=[0]&oauth_token_secret=[1], where [0] and [1] are some strings.
+    
+    Returns:
+      A token string of format oauth_token=[0]&oauth_token_secret=[1],
+      where [0] and [1] are some strings. If self.secret is absent, it just
+      returns oauth_token=[0]. If self.key is absent, it just returns
+      oauth_token_secret=[1]. If both are absent, it returns None.
+    """
+    if self.key and self.secret:
+      return urllib.urlencode({'oauth_token': self.key,
+                               'oauth_token_secret': self.secret})
+    elif self.key:
+      return 'oauth_token=%s' % self.key
+    elif self.secret:
+      return 'oauth_token_secret=%s' % self.secret
+    else:
+      return None
+
+  def set_token_string(self, token_string):
+    """Sets the token key and secret from the token string.
+    
+    Args:
+      token_string: str Token string of form
+          oauth_token=[0]&oauth_token_secret=[1]. If oauth_token is not present,
+          self.key will be None. If oauth_token_secret is not present,
+          self.secret will be None.
+    """
+    token_params = cgi.parse_qs(token_string, keep_blank_values=False)
+    if 'oauth_token' in token_params:
+      self.key = token_params['oauth_token'][0]
+    if 'oauth_token_secret' in token_params:
+      self.secret = token_params['oauth_token_secret'][0]
+    
+  def GetAuthHeader(self, http_method, http_url, realm=''):
+    """Get the authentication header.
+
+    Args:
+      http_method: string HTTP method i.e. operation e.g. GET, POST, PUT, etc.
+      http_url: string or atom.url.Url HTTP URL to which request is made.
+      realm: string (default='') realm parameter to be included in the
+          authorization header.
+
+    Returns:
+      dict Header to be sent with every subsequent request after
+      authentication.
+    """
+    if isinstance(http_url, types.StringTypes):
+      http_url = atom.url.parse_url(http_url)
+    header = None
+    token = None
+    if self.key or self.secret:
+      token = oauth.OAuthToken(self.key, self.secret)
+    oauth_request = oauth.OAuthRequest.from_consumer_and_token(
+        self.oauth_input_params.GetConsumer(), token=token,
+        http_url=str(http_url), http_method=http_method,
+        parameters=http_url.params)
+    oauth_request.sign_request(self.oauth_input_params.GetSignatureMethod(),
+                               self.oauth_input_params.GetConsumer(), token)
+    header = oauth_request.to_header(realm=realm)
+    header['Authorization'] = header['Authorization'].replace('+', '%2B')
+    return header
+  
+  def perform_request(self, http_client, operation, url, data=None, 
+                      headers=None):
+    """Sets the Authorization header and makes the HTTP request."""
+    if not headers:
+      headers = {}
+    headers.update(self.GetAuthHeader(operation, url))
+    return http_client.request(operation, url, data=data, headers=headers)
+    
+  def valid_for_scope(self, url):
+    if isinstance(url, (str, unicode)):
+      url = atom.url.parse_url(url)
+    for scope in self.scopes:
+      if scope == atom.token_store.SCOPE_ALL:
+        return True
+      if isinstance(scope, (str, unicode)):
+        scope = atom.url.parse_url(scope)
+      if scope == url:
+        return True
+      # Check the host and the path, but ignore the port and protocol.
+      elif scope.host == url.host and not scope.path:
+        return True
+      elif scope.host == url.host and scope.path and not url.path:
+        continue
+      elif scope.host == url.host and url.path.startswith(scope.path):
+        return True
+    return False    
+    
+
+class SecureAuthSubToken(AuthSubToken):
+  """Stores the rsa private key, token, and scopes for the secure AuthSub token.
+  
+  This token adds the authorization header to each request made. It
+  re-calculates authorization header for every request since the secure AuthSub
+  signature to be added to the authorization header is dependent on the
+  request parameters.
+  
+  Attributes:
+    rsa_key: string The RSA private key in PEM format that the token will
+             use to sign requests
+    token_string: string (optional) The value for the AuthSub token.
+    scopes: list of str or atom.url.Url specifying the beginnings of URLs
+        for which this token can be used. For example, if scopes contains
+        'http://example.com/foo', then this token can be used for a request to
+        'http://example.com/foo/bar' but it cannot be used for a request to
+        'http://example.com/baz'     
+  """
+  
+  def __init__(self, rsa_key, token_string=None, scopes=None):
+    self.rsa_key = keyfactory.parsePEMKey(rsa_key)
+    self.token_string = token_string or ''
+    self.scopes = scopes or [] 
+   
+  def __str__(self):
+    return self.get_token_string()
+
+  def get_token_string(self):
+    return str(self.token_string)
+
+  def set_token_string(self, token_string):
+    self.token_string = token_string
+    
+  def GetAuthHeader(self, http_method, http_url):
+    """Generates the Authorization header.
+
+    The form of the secure AuthSub Authorization header is
+    Authorization: AuthSub token="token" sigalg="sigalg" data="data" sig="sig"
+    and  data represents a string in the form
+    data = http_method http_url timestamp nonce
+
+    Args:
+      http_method: string HTTP method i.e. operation e.g. GET, POST, PUT, etc.
+      http_url: string or atom.url.Url HTTP URL to which request is made.
+      
+    Returns:
+      dict Header to be sent with every subsequent request after authentication.
+    """
+    timestamp = int(math.floor(time.time()))
+    nonce = '%lu' % random.getrandbits(64)
+    data = '%s %s %d %s' % (http_method, str(http_url), timestamp, nonce)
+    sig = cryptomath.bytesToBase64(self.rsa_key.hashAndSign(data))
+    header = {'Authorization': '%s"%s" data="%s" sig="%s" sigalg="rsa-sha1"' %
+              (AUTHSUB_AUTH_LABEL, self.token_string, data, sig)}
+    return header
+  
+  def perform_request(self, http_client, operation, url, data=None, 
+                      headers=None):
+    """Sets the Authorization header and makes the HTTP request."""
+    if not headers:
+      headers = {}
+    headers.update(self.GetAuthHeader(operation, url))
+    return http_client.request(operation, url, data=data, headers=headers)

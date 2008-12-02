@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# Copyright (C) 2006 Google Inc.
+# Copyright (C) 2006,2008 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,7 +33,11 @@
 
   NonAuthSubToken: Raised if a method to modify an AuthSub token is used when
                    the user is either not authenticated or is authenticated
-                   through programmatic login.
+                   through another authentication mechanism.
+
+  NonOAuthToken: Raised if a method to modify an OAuth token is used when the
+                 user is either not authenticated or is authenticated through
+                 another authentication mechanism.
 
   RequestError: Raised if a CRUD request returned a non-success code. 
 
@@ -86,6 +90,12 @@ AUTH_SERVER_HOST = 'https://www.google.com'
 # parameter to the 'next' URL which contains the requested scope. This
 # constant is the default name (AKA key) for the URL parameter.
 SCOPE_URL_PARAM_NAME = 'authsub_token_scope'
+# When requesting an OAuth access token or authorization of an existing OAuth
+# request token, it is often helpful to track the scope(s) which is/are being
+# requested. One way to accomplish this is to add a URL parameter to the
+# 'callback' URL which contains the requested scope. This constant is the
+# default name (AKA key) for the URL parameter.
+OAUTH_SCOPE_URL_PARAM_NAME = 'oauth_token_scope'
 # Maps the service names used in ClientLogin to scope URLs.
 CLIENT_LOGIN_SCOPES = {
     'cl': [ # Google Calendar
@@ -115,6 +125,8 @@ CLIENT_LOGIN_SCOPES = {
         'https://www.google.com/a/feeds/',
         'http://apps-apis.google.com/a/feeds/',
         'https://apps-apis.google.com/a/feeds/'],
+    'weaver': [ # Health H9 Sandbox
+        'https://www.google.com/h9/'],
     'wise': [ # Spreadsheets Data API
         'https://spreadsheets.google.com/feeds/',
         'http://spreadsheets.google.com/feeds/'],
@@ -165,6 +177,10 @@ class NonAuthSubToken(Error):
   pass
 
 
+class NonOAuthToken(Error):
+  pass
+
+
 class RequestError(Error):
   pass
 
@@ -177,7 +193,15 @@ class BadAuthenticationServiceURL(Error):
   pass
 
 
-class TokenUpgradeFailed(Error):
+class FetchingOAuthRequestTokenFailed(RequestError):
+  pass
+
+
+class TokenUpgradeFailed(RequestError):
+  pass
+
+
+class RevokingOAuthTokenFailed(RequestError):
   pass
 
 
@@ -247,6 +271,7 @@ class GDataService(atom.service.AtomService):
     self.auth_service_url = auth_service_url
     self.server = server
     self.additional_headers = additional_headers or {}
+    self._oauth_input_params = None
     self.__SetSource(source)
     self.__captcha_token = None
     self.__captcha_url = None
@@ -312,23 +337,238 @@ class GDataService(atom.service.AtomService):
   captcha_url = property(__GetCaptchaURL,
       doc="""Get the captcha URL for a login request.""")
 
-  def GetAuthSubToken(self):
-    """Returns the AuthSub token string (after removing the AuthSub 
-    Authorization Label).    
-     
-    The AuthSub Authorization Label reads: "AuthSub token"
+  def SetOAuthInputParameters(self, signature_method, consumer_key,
+                              consumer_secret=None, rsa_key=None,
+                              two_legged_oauth=False):
+    """Sets parameters required for using OAuth authentication mechanism.
+    
+    NOTE: Though consumer_secret and rsa_key are optional, either of the two
+    is required depending on the value of the signature_method.
+    
+    Args:
+      signature_method: class which provides implementation for strategy class
+          oauth.oauth.OAuthSignatureMethod. Signature method to be used for
+          signing each request. Valid implementations are provided as the
+          constants defined by gdata.auth.OAuthSignatureMethod. Currently
+          they are gdata.auth.OAuthSignatureMethod.RSA_SHA1 and
+          gdata.auth.OAuthSignatureMethod.HMAC_SHA1
+      consumer_key: string Domain identifying third_party web application.
+      consumer_secret: string (optional) Secret generated during registration.
+          Required only for HMAC_SHA1 signature method.
+      rsa_key: string (optional) Private key required for RSA_SHA1 signature
+          method.
+      two_legged_oauth: string (default=False) Enables two-legged OAuth process.
+    """
+    self._oauth_input_params = gdata.auth.OAuthInputParams(
+        signature_method, consumer_key, consumer_secret=consumer_secret,
+        rsa_key=rsa_key)
+    if two_legged_oauth:
+      oauth_token = gdata.auth.OAuthToken(
+          oauth_input_params=self._oauth_input_params)
+      self.SetOAuthToken(oauth_token)
+  
+  def FetchOAuthRequestToken(self, scopes=None, extra_parameters=None):
+    """Fetches OAuth request token and returns it.
+    
+    Args:
+      scopes: string or list of string base URL(s) of the service(s) to be
+          accessed. If None, then this method tries to determine the
+          scope(s) from the current service.
+      extra_parameters: dict (optional) key-value pairs as any additional
+          parameters to be included in the URL and signature while making a
+          request for fetching an OAuth request token. All the OAuth parameters
+          are added by default. But if provided through this argument, any
+          default parameters will be overwritten. For e.g. a default parameter
+          oauth_version 1.0 can be overwritten if
+          extra_parameters = {'oauth_version': '2.0'}
+      
+    Returns:
+      The fetched request token as a gdata.auth.OAuthToken object.
+      
+    Raises:
+      FetchingOAuthRequestTokenFailed if the server responded to the request
+      with an error.
+    """
+    if scopes is None:
+      scopes = lookup_scopes(self.service)
+    if not isinstance(scopes, (list, tuple)):
+      scopes = [scopes,]
+    request_token_url = gdata.auth.GenerateOAuthRequestTokenUrl(
+        self._oauth_input_params, scopes,
+        request_token_url='%s/accounts/OAuthGetRequestToken' % AUTH_SERVER_HOST,
+        extra_parameters=extra_parameters)
+    response = self.http_client.request('GET', str(request_token_url))
+    if response.status == 200:
+      token = gdata.auth.OAuthToken()
+      token.set_token_string(response.read())
+      token.scopes = scopes
+      token.oauth_input_params = self._oauth_input_params
+      return token
+    error = {
+        'status': response.status,
+        'reason': 'Non 200 response on upgrade',
+        'body': response.read()
+        }
+    raise FetchingOAuthRequestTokenFailed(error)    
+  
+  def SetOAuthToken(self, oauth_token):
+    """Attempts to set the current token and add it to the token store.
+    
+    The oauth_token can be any OAuth token i.e. unauthorized request token,
+    authorized request token or access token.
+    This method also attempts to add the token to the token store.
+    Use this method any time you want the current token to point to the
+    oauth_token passed. For e.g. call this method with the request token
+    you receive from FetchOAuthRequestToken.
+    
+    Args:
+      request_token: gdata.auth.OAuthToken OAuth request token.
+    """
+    if self.auto_set_current_token:
+      self.current_token = oauth_token
+    if self.auto_store_tokens:
+      self.token_store.add_token(oauth_token)
+    
+  def GenerateOAuthAuthorizationURL(
+      self, request_token=None, callback_url=None, extra_params=None,
+      include_scopes_in_callback=False,
+      scopes_param_prefix=OAUTH_SCOPE_URL_PARAM_NAME):
+    """Generates URL at which user will login to authorize the request token.
+    
+    Args:
+      request_token: gdata.auth.OAuthToken (optional) OAuth request token.
+          If not specified, then the current token will be used if it is of
+          type <gdata.auth.OAuthToken>, else it is found by looking in the
+          token_store by looking for a token for the current scope.    
+      callback_url: string (optional) The URL user will be sent to after
+          logging in and granting access.
+      extra_params: dict (optional) Additional parameters to be sent.
+      include_scopes_in_callback: Boolean (default=False) if set to True, and
+          if 'callback_url' is present, the 'callback_url' will be modified to
+          include the scope(s) from the request token as a URL parameter. The
+          key for the 'callback' URL's scope parameter will be
+          OAUTH_SCOPE_URL_PARAM_NAME. The benefit of including the scope URL as
+          a parameter to the 'callback' URL, is that the page which receives
+          the OAuth token will be able to tell which URLs the token grants
+          access to.
+      scopes_param_prefix: string (default='oauth_token_scope') The URL
+          parameter key which maps to the list of valid scopes for the token.
+          This URL parameter will be included in the callback URL along with
+          the scopes of the token as value if include_scopes_in_callback=True.
+          
+    Returns:
+      A string URL at which the user is required to login.
+    
+    Raises:
+      NonOAuthToken if the user's request token is not an OAuth token or if a
+      request token was not available.
+    """
+    if request_token and not isinstance(request_token, gdata.auth.OAuthToken):
+      raise NonOAuthToken
+    if not request_token:
+      if isinstance(self.current_token, gdata.auth.OAuthToken):
+        request_token = self.current_token
+      else:
+        current_scopes = lookup_scopes(self.service)
+        if current_scopes:
+          token = self.token_store.find_token(current_scopes[0])
+          if isinstance(token, gdata.auth.OAuthToken):
+            request_token = token
+    if not request_token:
+      raise NonOAuthToken
+    return str(gdata.auth.GenerateOAuthAuthorizationUrl(
+        request_token,
+        authorization_url='%s/accounts/OAuthAuthorizeToken' % AUTH_SERVER_HOST,
+        callback_url=callback_url, extra_params=extra_params,
+        include_scopes_in_callback=include_scopes_in_callback,
+        scopes_param_prefix=scopes_param_prefix))   
+  
+  def UpgradeToOAuthAccessToken(self, authorized_request_token=None,
+                                oauth_version='1.0'):
+    """Upgrades the authorized request token to an access token.
+    
+    Args:
+      authorized_request_token: gdata.auth.OAuthToken (optional) OAuth request
+          token. If not specified, then the current token will be used if it is
+          of type <gdata.auth.OAuthToken>, else it is found by looking in the
+          token_store by looking for a token for the current scope.
+      oauth_version: str (default='1.0') oauth_version parameter. All other
+          'oauth_' parameters are added by default. This parameter too, is
+          added by default but here you can override it's value.
+          
+    Raises:
+      NonOAuthToken if the user's authorized request token is not an OAuth
+      token or if an authorized request token was not available.
+      TokenUpgradeFailed if the server responded to the request with an 
+      error.
+    """
+    if (authorized_request_token and
+        not isinstance(authorized_request_token, gdata.auth.OAuthToken)):
+      raise NonOAuthToken
+    if not authorized_request_token:
+      if isinstance(self.current_token, gdata.auth.OAuthToken):
+        authorized_request_token = self.current_token
+      else:
+        current_scopes = lookup_scopes(self.service)
+        if current_scopes:
+          token = self.token_store.find_token(current_scopes[0])
+          if isinstance(token, gdata.auth.OAuthToken):
+            authorized_request_token = token
+    if not authorized_request_token:
+      raise NonOAuthToken
+    access_token_url = gdata.auth.GenerateOAuthAccessTokenUrl(
+        authorized_request_token,
+        self._oauth_input_params,
+        access_token_url='%s/accounts/OAuthGetAccessToken' % AUTH_SERVER_HOST,
+        oauth_version=oauth_version)
+    response = self.http_client.request('GET', str(access_token_url))
+    if response.status == 200:
+      token = gdata.auth.OAuthTokenFromHttpBody(response.read())
+      token.scopes = authorized_request_token.scopes
+      token.oauth_input_params = authorized_request_token.oauth_input_params
+      self.SetOAuthToken(token)
+    else:
+      raise TokenUpgradeFailed({'status': response.status,
+                                'reason': 'Non 200 response on upgrade',
+                                'body': response.read()})      
+  
+  def RevokeOAuthToken(self):
+    """Revokes an existing OAuth token.
+    
+    Raises:
+      NonOAuthToken if the user's auth token is not an OAuth token.
+      RevokingOAuthTokenFailed if request for revoking an OAuth token failed.
+    """
+    scopes = lookup_scopes(self.service)
+    token = self.token_store.find_token(scopes[0])
+    if not isinstance(token, gdata.auth.OAuthToken):
+      raise NonOAuthToken
 
-    This method examines the current_token to see if it is an AuthSubToken.
-    If not, it searches the token_store for a token which matches the 
-    current scope.
+    response = token.perform_request(self.http_client, 'GET', 
+        AUTH_SERVER_HOST + '/accounts/AuthSubRevokeToken', 
+        headers={'Content-Type':'application/x-www-form-urlencoded'})
+    if response.status == 200:
+      self.token_store.remove_token(token)
+    else:
+      raise RevokingOAuthTokenFailed
+  
+  def GetAuthSubToken(self):
+    """Returns the AuthSub token as a string.
+     
+    If the token is an gdta.auth.AuthSubToken, the Authorization Label
+    ("AuthSub token") is removed.
+
+    This method examines the current_token to see if it is an AuthSubToken
+    or SecureAuthSubToken. If not, it searches the token_store for a token
+    which matches the current scope.
     
     The current scope is determined by the service name string member.
     
     Returns:
-      If the current_token is set to an AuthSubToken, return the token
-      string. If there is no current_token, a token string for a token
-      which matches the service object's default scope is returned. If
-      there are no tokens valid for the scope, returns None.
+      If the current_token is set to an AuthSubToken/SecureAuthSubToken,
+      return the token string. If there is no current_token, a token string
+      for a token which matches the service object's default scope is returned.
+      If there are no tokens valid for the scope, returns None.
     """
     if isinstance(self.current_token, gdata.auth.AuthSubToken):
       return self.current_token.get_token_string()
@@ -343,7 +583,7 @@ class GDataService(atom.service.AtomService):
         return token.get_token_string()
       return None
 
-  def SetAuthSubToken(self, token, scopes=None):
+  def SetAuthSubToken(self, token, scopes=None, rsa_key=None):
     """Sets the token sent in requests to an AuthSub token.
 
     Sets the current_token and attempts to add the token to the token_store.
@@ -354,19 +594,26 @@ class GDataService(atom.service.AtomService):
     http://code.google.com/apis/accounts/AuthForWebApps.html 
 
     Args:
-     token: gdata.auth.AuthSubToken or string The token returned by the
-            AuthSub service. If the token is an AuthSubToken, the scope
-            information stored in the AuthSubToken is used. If the token
-            is a string, the scopes parameter is used to determine the
-            valid scopes.
+     token: gdata.auth.AuthSubToken or gdata.auth.SecureAuthSubToken or string
+            The token returned by the AuthSub service. If the token is an
+            AuthSubToken or SecureAuthSubToken, the scope information stored in
+            the token is used. If the token is a string, the scopes parameter is
+            used to determine the valid scopes.
      scopes: list of URLs for which the token is valid. This is only used
              if the token parameter is a string.
+     rsa_key: string (optional) Private key required for RSA_SHA1 signature
+              method.  This parameter is necessary if the token is a string
+              representing a secure token.
     """
     if not isinstance(token, gdata.auth.AuthSubToken):
       token_string = token
-      token = gdata.auth.AuthSubToken()
-      token.set_token_string(token_string)
+      if rsa_key:
+        token = gdata.auth.SecureAuthSubToken(rsa_key)
+      else:
+        token = gdata.auth.AuthSubToken()
 
+      token.set_token_string(token_string)
+        
     # If no scopes were set for the token, use the scopes passed in, or
     # try to determine the scopes based on the current service name. If
     # all else fails, set the token to match all requests.
@@ -559,7 +806,7 @@ class GDataService(atom.service.AtomService):
 
     Users enter their credentials on a Google login page and a token is sent
     to the URL specified in next. See documentation for AuthSub login at:
-    http://code.google.com/apis/accounts/AuthForWebApps.html
+    http://code.google.com/apis/accounts/docs/AuthSub.html
 
     Args:
       next: string The URL user will be sent to after logging in.
@@ -581,10 +828,11 @@ class GDataService(atom.service.AtomService):
     """Upgrades a single use AuthSub token to a session token.
 
     Args:
-      token: A gdata.auth.AuthSubToken (optional) which is good for a single
-             use but can be upgraded to a session token. If no token is 
-             passed in, the AuthSubToken is found by looking in the 
-             token_store by looking for a token for the current scope.
+      token: A gdata.auth.AuthSubToken or gdata.auth.SecureAuthSubToken
+             (optional) which is good for a single use but can be upgraded
+             to a session token. If no token is passed in, the token
+             is found by looking in the token_store by looking for a token
+             for the current scope.
 
     Raises:
       NonAuthSubToken if the user's auth token is not an AuthSub token
@@ -606,8 +854,9 @@ class GDataService(atom.service.AtomService):
     """Upgrades a single use AuthSub token to a session token.
 
     Args:
-      token: A gdata.auth.AuthSubToken (optional) which is good for a single
-             use but can be upgraded to a session token.
+      token: A gdata.auth.AuthSubToken or gdata.auth.SecureAuthSubToken
+             which is good for a single use but can be upgraded to a
+             session token.
 
     Returns:
       The upgraded token as a gdata.auth.AuthSubToken object.
@@ -636,7 +885,7 @@ class GDataService(atom.service.AtomService):
       NonAuthSubToken if the user's auth token is not an AuthSub token
     """
     scopes = lookup_scopes(self.service)
-    token = self.token_store.find_token(scopes)
+    token = self.token_store.find_token(scopes[0])
     if not isinstance(token, gdata.auth.AuthSubToken):
       raise NonAuthSubToken
 
@@ -645,6 +894,27 @@ class GDataService(atom.service.AtomService):
         headers={'Content-Type':'application/x-www-form-urlencoded'})
     if response.status == 200:
       self.token_store.remove_token(token)
+
+  def AuthSubTokenInfo(self):
+    """Fetches the AuthSub token's metadata from the server.
+
+    Raises:
+      NonAuthSubToken if the user's auth token is not an AuthSub token
+    """
+    scopes = lookup_scopes(self.service)
+    token = self.token_store.find_token(scopes[0])
+    if not isinstance(token, gdata.auth.AuthSubToken):
+      raise NonAuthSubToken
+
+    response = token.perform_request(self.http_client, 'GET', 
+        AUTH_SERVER_HOST + '/accounts/AuthSubTokenInfo', 
+        headers={'Content-Type':'application/x-www-form-urlencoded'})
+    result_body = response.read()
+    if response.status == 200:
+      return result_body
+    else:
+      raise RequestError, {'status': response.status,
+          'body': result_body}
 
   # CRUD operations
   def Get(self, uri, extra_headers=None, redirects_remaining=4, 
