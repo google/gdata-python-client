@@ -57,6 +57,14 @@ class BlogEntryTest(unittest.TestCase):
         'http://blogName.blogspot.com/2007/04/first-post.html')
     self.assertEquals(feed.entry[0].in_reply_to.type, 'text/html') 
 
+  def testIdParsing(self):
+    entry = gdata.blogger.BlogEntry()
+    entry.id = atom.Id(
+        text='tag:blogger.com,1999:user-146606542.blog-4023408167658848')
+    self.assertEquals(entry.GetBlogId(), '4023408167658848')
+    entry.id = atom.Id(text='tag:blogger.com,1999:blog-4023408167658848')
+    self.assertEquals(entry.GetBlogId(), '4023408167658848')
+
 
 class InReplyToTest(unittest.TestCase):
 

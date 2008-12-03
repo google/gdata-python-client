@@ -32,10 +32,11 @@ THR_NAMESPACE = 'http://purl.org/syndication/thread/1.0'
 
 class BloggerEntry(gdata.GDataEntry):
   """Adds convenience methods inherited by all Blogger entries."""
-
+  
   blog_name_pattern = re.compile('(http://)(\w*)')
   blog_id_pattern = re.compile('(tag:blogger.com,1999:blog-)(\w*)')
-
+  blog_id2_pattern = re.compile('tag:blogger.com,1999:user-(\d+)\.blog-(\d+)')
+  
   def GetBlogId(self):
     """Extracts the Blogger id of this blog.
     This method is useful when contructing URLs by hand. The blog id is
@@ -47,7 +48,11 @@ class BloggerEntry(gdata.GDataEntry):
       The blog's unique id as a string.
     """
     if self.id.text:
-      return self.blog_id_pattern.match(self.id.text).group(2)
+      match = self.blog_id_pattern.match(self.id.text)
+      if match:
+        return match.group(2)
+      else:
+        return self.blog_id2_pattern.match(self.id.text).group(2)
     return None
 
   def GetBlogName(self):
