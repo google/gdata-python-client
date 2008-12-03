@@ -913,7 +913,7 @@ class SecureAuthSubToken(AuthSubToken):
       dict Header to be sent with every subsequent request after authentication.
     """
     timestamp = int(math.floor(time.time()))
-    nonce = '%lu' % random.getrandbits(64)
+    nonce = '%lu' % random.randrange(1, 2**64)
     data = '%s %s %d %s' % (http_method, str(http_url), timestamp, nonce)
     sig = cryptomath.bytesToBase64(self.rsa_key.hashAndSign(data))
     header = {'Authorization': '%s"%s" data="%s" sig="%s" sigalg="rsa-sha1"' %
