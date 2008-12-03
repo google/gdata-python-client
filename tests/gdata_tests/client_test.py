@@ -32,17 +32,17 @@ class AuthSubUrlTest(unittest.TestCase):
     next = 'http://example.com/test'
     scope = 'http://www.google.com/calendar/feeds/'
     request_url = gdata.client.GenerateAuthSubRequestUrl(next, scope)
-    self.assertTrue(request_url.find('example.com') > -1)
-    self.assertTrue(request_url.find('calendar') > -1)
+    self.assert_(request_url.find('example.com') > -1)
+    self.assert_(request_url.find('calendar') > -1)
 
   def testGenerateNextWithMultipleScopes(self):
     next = 'http://example.com/test'
     scope = ['http://www.google.com/calendar/feeds/', 
              'http://spreadsheets.google.com/feeds/']
     request_url = gdata.client.GenerateAuthSubRequestUrl(next, scope)
-    self.assertTrue(request_url.find('example.com') > -1)
-    self.assertTrue(request_url.find('calendar') > -1)
-    self.assertTrue(request_url.find('spreadsheets') > -1)
+    self.assert_(request_url.find('example.com') > -1)
+    self.assert_(request_url.find('calendar') > -1)
+    self.assert_(request_url.find('spreadsheets') > -1)
 
   def testExtractTokenWithScope(self):
     url = ('http://example.com/test?authsub_token_scope=http%3A%2F%2F'

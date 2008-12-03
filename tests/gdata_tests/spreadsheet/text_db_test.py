@@ -47,13 +47,13 @@ class FactoryTest(unittest.TestCase):
     # Test finding the database using the name
     time.sleep(5)
     db_list = self.client.GetDatabases(name=db_title)
-    self.assertTrue(len(db_list) >= 1)
+    self.assert_(len(db_list) >= 1)
     if len(db_list) >= 1:
-      self.assertTrue(db_list[0].entry.title.text == db_title)
+      self.assert_(db_list[0].entry.title.text == db_title)
     # Test finding the database using the spreadsheet key
     db_list = self.client.GetDatabases(spreadsheet_key=db.spreadsheet_key)
-    self.assertTrue(len(db_list) == 1)
-    self.assertTrue(db_list[0].entry.title.text == db_title)
+    self.assert_(len(db_list) == 1)
+    self.assert_(db_list[0].entry.title.text == db_title)
     # Delete the test spreadsheet
     time.sleep(10)
     db.Delete()
@@ -73,12 +73,12 @@ class DatabaseTest(unittest.TestCase):
     table = self.db.CreateTable('test1', ['1','2','3'])
     # Try to get the new table using the worksheet id.
     table_list = self.db.GetTables(worksheet_id=table.worksheet_id)
-    self.assertTrue(len(table_list) == 1)
-    self.assertTrue(table_list[0].entry.title.text, 'test1')
+    self.assert_(len(table_list) == 1)
+    self.assert_(table_list[0].entry.title.text, 'test1')
     # Try to get the table using the name
     table_list = self.db.GetTables(name='test1')
-    self.assertTrue(len(table_list) == 1)
-    self.assertTrue(table_list[0].entry.title.text, 'test1')
+    self.assert_(len(table_list) == 1)
+    self.assert_(table_list[0].entry.title.text, 'test1')
     # Delete the table
     table.Delete()
 
@@ -98,14 +98,14 @@ class TableTest(unittest.TestCase):
     new_record = self.table.AddRecord({'a':'test1', 'b':'test2', 'cd':'test3', 'a_2':'test4', 'de':'test5'})
     # Test getting record by line number.
     record = self.table.GetRecord(row_number=1)
-    self.assertTrue(record is not None)
-    self.assertTrue(record.content['a'] == 'test1')
-    self.assertTrue(record.content['b'] == 'test2')
-    self.assertTrue(record.content['cd'] == 'test3')
-    self.assertTrue(record.content['a_2'] == 'test4')
+    self.assert_(record is not None)
+    self.assert_(record.content['a'] == 'test1')
+    self.assert_(record.content['b'] == 'test2')
+    self.assert_(record.content['cd'] == 'test3')
+    self.assert_(record.content['a_2'] == 'test4')
     # Test getting record using the id.
     record_list = self.table.GetRecord(row_id=new_record.row_id)
-    self.assertTrue(record is not None)
+    self.assert_(record is not None)
     # Delete the record.
     time.sleep(10)
     new_record.Delete()
@@ -121,14 +121,14 @@ class TableTest(unittest.TestCase):
     
     # Try to get the changes before they've been committed
     second_copy.Pull()
-    self.assertTrue(second_copy.content['a'] == '1')
-    self.assertTrue(second_copy.content['b'] == '2')
+    self.assert_(second_copy.content['a'] == '1')
+    self.assert_(second_copy.content['b'] == '2')
 
     # Commit the changes, the content should now be different
     first_copy.Push()
     second_copy.Pull()
-    self.assertTrue(second_copy.content['a'] == '7')
-    self.assertTrue(second_copy.content['b'] == '9')
+    self.assert_(second_copy.content['a'] == '7')
+    self.assert_(second_copy.content['b'] == '9')
 
     # Make changes to the second copy, push, then try to push changes from
     # the first copy.
@@ -157,18 +157,18 @@ class TableTest(unittest.TestCase):
     
     time.sleep(10)
     matches = self.table.FindRecords('a == 1')
-    self.assertTrue(len(matches) == 1)
-    self.assertTrue(matches[0].content['a'] == '1')
-    self.assertTrue(matches[0].content['b'] == '2')
+    self.assert_(len(matches) == 1)
+    self.assert_(matches[0].content['a'] == '1')
+    self.assert_(matches[0].content['b'] == '2')
 
     matches = self.table.FindRecords('a > 1 && cd < 20')
-    self.assertTrue(len(matches) == 4)
+    self.assert_(len(matches) == 4)
     matches = self.table.FindRecords('cd < de')
-    self.assertTrue(len(matches) == 7)
+    self.assert_(len(matches) == 7)
     matches = self.table.FindRecords('a == b')
-    self.assertTrue(len(matches) == 0)
+    self.assert_(len(matches) == 0)
     matches = self.table.FindRecords('a == 5')
-    self.assertTrue(len(matches) == 1)
+    self.assert_(len(matches) == 1)
 
   def testIterateResultSet(self):
     # Populate the table with test data.
@@ -182,17 +182,17 @@ class TableTest(unittest.TestCase):
 
     # Get the first two rows.
     records = self.table.GetRecords(1, 2)
-    self.assertTrue(len(records) == 2)
-    self.assertTrue(records[0].content['a'] == '1')
-    self.assertTrue(records[1].content['a'] == 'hi')
+    self.assert_(len(records) == 2)
+    self.assert_(records[0].content['a'] == '1')
+    self.assert_(records[1].content['a'] == 'hi')
 
     # Then get the next two rows.
     next_records = records.GetNext()
-    self.assertTrue(len(next_records) == 2)
-    self.assertTrue(next_records[0].content['a'] == '2')
-    self.assertTrue(next_records[0].content['cd'] == '3')
-    self.assertTrue(next_records[1].content['cd'] == '15')
-    self.assertTrue(next_records[1].content['de'] == '7')
+    self.assert_(len(next_records) == 2)
+    self.assert_(next_records[0].content['a'] == '2')
+    self.assert_(next_records[0].content['cd'] == '3')
+    self.assert_(next_records[1].content['cd'] == '15')
+    self.assert_(next_records[1].content['de'] == '7')
 
   def testLookupFieldsOnPreexistingTable(self):
     existing_table = self.db.GetTables(name='test1')[0]

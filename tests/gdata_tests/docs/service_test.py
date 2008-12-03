@@ -45,7 +45,7 @@ class DocumentListServiceTest(unittest.TestCase):
     virtual_csv_file = StringIO.StringIO(',,,')
     virtual_media_source = gdata.MediaSource(file_handle=virtual_csv_file, content_type='text/csv', content_length=3)
     entry = self.gd_client.UploadSpreadsheet(virtual_media_source, 'test title')
-    self.assertTrue(entry.title.text == 'test title')
+    self.assert_(entry.title.text == 'test title')
     time.sleep(10)
     self.gd_client.Delete(entry.GetEditLink().href)
 

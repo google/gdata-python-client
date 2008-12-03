@@ -84,7 +84,7 @@ class ClientLiveTest(unittest.TestCase):
     new_entry = self.client.Post(entry, 
         'http://www.google.com/base/feeds/items', 
         parser=gdata.GDataEntryFromString)
-    self.assertTrue(isinstance(new_entry, gdata.GDataEntry))
+    self.assert_(isinstance(new_entry, gdata.GDataEntry))
     self.client.Delete(new_entry.GetEditLink().href)
     
 
