@@ -56,6 +56,8 @@ service.
         'gdata.photos', 'gdata.exif', 'gdata.geo', 'gdata.media', 
         'gdata.contacts', 'gdata.youtube', 'gdata.webmastertools', 
         'gdata.blogger', 'gdata.alt', 'gdata.oauth', 'gdata.tlslite', 
-        'gdata.Crypto'],
+        'gdata.Crypto', 'gdata.Crypto.Cipher', 'gdata.Crypto.Hash', 
+        'gdata.Crypto.Protocol', 'gdata.Crypto.PublicKey', 'gdata.Crypto.Util',
+        'gdata.tlslite.utils', 'gdata.tlslite.integration'],
     package_dir = {'gdata':'src/gdata', 'atom':'src/atom'}
 )
