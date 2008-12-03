@@ -55,6 +55,7 @@ service.
         'gdata.apps.migration', 'gdata.docs', 'gdata.codesearch',
         'gdata.photos', 'gdata.exif', 'gdata.geo', 'gdata.media', 
         'gdata.contacts', 'gdata.youtube', 'gdata.webmastertools', 
-        'gdata.blogger', 'gdata.alt', 'gdata.oauth', 'gdata.tlslite'],
+        'gdata.blogger', 'gdata.alt', 'gdata.oauth', 'gdata.tlslite', 
+        'gdata.Crypto'],
     package_dir = {'gdata':'src/gdata', 'atom':'src/atom'}
 )
