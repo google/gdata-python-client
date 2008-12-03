@@ -80,7 +80,7 @@ class HttpClient(atom.http_interface.GenericHttpClient):
           in the request. 
     """
     if not isinstance(url, atom.url.Url):
-      if isinstance(url, types.StringType):
+      if isinstance(url, types.StringTypes):
         url = atom.url.parse_url(url)
       else:
         raise atom.http_interface.UnparsableUrlObject('Unable to parse url '
@@ -118,7 +118,7 @@ class HttpClient(atom.http_interface.GenericHttpClient):
     # If the list of headers does not include a Content-Length, attempt to
     # calculate it based on the data object.
     if data and 'Content-Length' not in all_headers:
-      if isinstance(data, types.StringType):
+      if isinstance(data, types.StringTypes):
         all_headers['Content-Length'] = len(data)
       else:
         raise atom.http_interface.ContentLengthRequired('Unable to calculate '
@@ -147,7 +147,7 @@ class HttpClient(atom.http_interface.GenericHttpClient):
     
   def _prepare_connection(self, url, headers):
     if not isinstance(url, atom.url.Url):
-      if isinstance(url, types.StringType):
+      if isinstance(url, types.StringTypes):
         url = atom.url.parse_url(url)
       else:
         raise atom.http_interface.UnparsableUrlObject('Unable to parse url '
@@ -268,7 +268,7 @@ def _get_proxy_auth():
 
 
 def _send_data_part(data, connection):
-  if isinstance(data, types.StringType):
+  if isinstance(data, types.StringTypes):
     connection.send(data)
     return
   # Check to see if data is a file-like object that has a read method.
