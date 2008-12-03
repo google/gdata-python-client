@@ -29,7 +29,7 @@ except ImportError:
       from xml.etree import ElementTree
     except ImportError:
       from elementtree import ElementTree
-import atom.data
+import atom.core
 
 
 SAMPLE_XML = ('<outer xmlns="http://example.com/xml/1" '
@@ -63,15 +63,15 @@ V2_XML = ('<alpha xmlns="http://example.com/2" '
           '</alpha>')
 
 
-class Child(atom.data.XmlElement):
+class Child(atom.core.XmlElement):
   _qname = ('{http://example.com/1}child', '{http://example.com/2}child')
 
 
-class Foo(atom.data.XmlElement):
+class Foo(atom.core.XmlElement):
   _qname = 'foo'
 
 
-class Example(atom.data.XmlElement):
+class Example(atom.core.XmlElement):
   _qname = '{http://example.com}foo'
   child = Child
   foos = [Foo]
@@ -80,12 +80,12 @@ class Example(atom.data.XmlElement):
 
 
 # Example XmlElement subclass declarations.
-class Inner(atom.data.XmlElement):
+class Inner(atom.core.XmlElement):
   _qname = '{http://example.com/xml/1}inner'
   my_x = 'x'
 
 
-class Outer(atom.data.XmlElement):
+class Outer(atom.core.XmlElement):
   _qname = '{http://example.com/xml/1}outer'
   innards = [Inner]
 
@@ -93,20 +93,20 @@ class Outer(atom.data.XmlElement):
 class XmlElementTest(unittest.TestCase):
 
   def testGetQName(self):
-    class Unversioned(atom.data.XmlElement):
+    class Unversioned(atom.core.XmlElement):
       _qname = '{http://example.com}foo'
 
-    class Versioned(atom.data.XmlElement):
+    class Versioned(atom.core.XmlElement):
       _qname = ('{http://example.com/1}foo', '{http://example.com/2}foo') 
 
     self.assert_(
-        atom.data._get_qname(Unversioned, 1) == '{http://example.com}foo')
+        atom.core._get_qname(Unversioned, 1) == '{http://example.com}foo')
     self.assert_(
-        atom.data._get_qname(Unversioned, 2) == '{http://example.com}foo')
+        atom.core._get_qname(Unversioned, 2) == '{http://example.com}foo')
     self.assert_(
-        atom.data._get_qname(Versioned, 1) == '{http://example.com/1}foo')
+        atom.core._get_qname(Versioned, 1) == '{http://example.com/1}foo')
     self.assert_(
-        atom.data._get_qname(Versioned, 2) == '{http://example.com/2}foo')
+        atom.core._get_qname(Versioned, 2) == '{http://example.com/2}foo')
 
   def testConstructor(self):
     e = Example()
@@ -142,10 +142,10 @@ class XmlElementTest(unittest.TestCase):
     e.foos[0].text = 'foo1'
     e.foos.append(Foo())
     e.foos[1].text = 'foo2'
-    e._other_elements.append(atom.data.XmlElement())
+    e._other_elements.append(atom.core.XmlElement())
     e._other_elements[0]._qname = 'bar'
     e._other_elements[0].text = 'other1'
-    e._other_elements.append(atom.data.XmlElement())
+    e._other_elements.append(atom.core.XmlElement())
     e._other_elements[1]._qname = 'child'
     e._other_elements[1].text = 'other2'
     
@@ -193,8 +193,8 @@ class XmlElementTest(unittest.TestCase):
     self.assert_(e.tag == 'ok')
   
   def testParseBasicXmlElement(self):
-    element = atom.data.xml_element_from_string(SAMPLE_XML, 
-        atom.data.XmlElement)
+    element = atom.core.xml_element_from_string(SAMPLE_XML, 
+        atom.core.XmlElement)
     inners = element.get_elements('inner')
     self.assert_(len(inners) == 3)
     self.assert_(inners[0].get_attributes('x')[0].value == '123')
@@ -216,20 +216,20 @@ class XmlElementTest(unittest.TestCase):
     self.assert_(len(inners) == 0)
 
   def testBasicXmlElementPreservesMarkup(self):
-    element = atom.data.xml_element_from_string(SAMPLE_XML,
-        atom.data.XmlElement)
+    element = atom.core.xml_element_from_string(SAMPLE_XML,
+        atom.core.XmlElement)
     tree1 = ElementTree.fromstring(SAMPLE_XML)
     tree2 = ElementTree.fromstring(element.to_string())
     self.assert_trees_similar(tree1, tree2)
 
   def testSchemaParse(self):
-    outer = atom.data.xml_element_from_string(SAMPLE_XML, Outer)
+    outer = atom.core.xml_element_from_string(SAMPLE_XML, Outer)
     self.assert_(isinstance(outer.innards, list))
     self.assert_(len(outer.innards) == 3)
     self.assert_(outer.innards[0].my_x == '123')
 
   def testSchemaParsePreservesMarkup(self):
-    outer = atom.data.xml_element_from_string(SAMPLE_XML, Outer)
+    outer = atom.core.xml_element_from_string(SAMPLE_XML, Outer)
     tree1 = ElementTree.fromstring(SAMPLE_XML)
     tree2 = ElementTree.fromstring(outer.to_string())
     self.assert_trees_similar(tree1, tree2)
@@ -262,41 +262,41 @@ class XmlElementTest(unittest.TestCase):
 class UtilityFunctionTest(unittest.TestCase):
 
   def testMatchQnames(self):
-    self.assert_(atom.data._qname_matches(
+    self.assert_(atom.core._qname_matches(
         'foo', 'http://example.com', '{http://example.com}foo'))
-    self.assert_(atom.data._qname_matches(
+    self.assert_(atom.core._qname_matches(
         None, None, '{http://example.com}foo'))
-    self.assert_(atom.data._qname_matches(
+    self.assert_(atom.core._qname_matches(
         None, None, 'foo'))
-    self.assert_(atom.data._qname_matches(
+    self.assert_(atom.core._qname_matches(
         None, None, None))
-    self.assert_(atom.data._qname_matches(
+    self.assert_(atom.core._qname_matches(
         None, None, '{http://example.com}'))
-    self.assert_(atom.data._qname_matches(
+    self.assert_(atom.core._qname_matches(
         'foo', None, '{http://example.com}foo'))
-    self.assert_(atom.data._qname_matches(
+    self.assert_(atom.core._qname_matches(
         None, 'http://example.com', '{http://example.com}foo'))
-    self.assert_(atom.data._qname_matches(
+    self.assert_(atom.core._qname_matches(
         None, '', 'foo'))
-    self.assert_(atom.data._qname_matches(
+    self.assert_(atom.core._qname_matches(
         'foo', '', 'foo'))
-    self.assert_(atom.data._qname_matches(
+    self.assert_(atom.core._qname_matches(
         'foo', '', 'foo'))
-    self.assert_(atom.data._qname_matches(
+    self.assert_(atom.core._qname_matches(
         'foo', 'http://google.com', '{http://example.com}foo') == False)
-    self.assert_(atom.data._qname_matches(
+    self.assert_(atom.core._qname_matches(
         'foo', 'http://example.com', '{http://example.com}bar') == False)
-    self.assert_(atom.data._qname_matches(
+    self.assert_(atom.core._qname_matches(
         'foo', 'http://example.com', '{http://google.com}foo') == False)
-    self.assert_(atom.data._qname_matches(
+    self.assert_(atom.core._qname_matches(
         'bar', 'http://example.com', '{http://google.com}foo') == False)
-    self.assert_(atom.data._qname_matches(
+    self.assert_(atom.core._qname_matches(
         'foo', None, '{http://example.com}bar') == False)
-    self.assert_(atom.data._qname_matches(
+    self.assert_(atom.core._qname_matches(
         None, 'http://google.com', '{http://example.com}foo') == False)
-    self.assert_(atom.data._qname_matches(
+    self.assert_(atom.core._qname_matches(
         None, '', '{http://example.com}foo') == False)
-    self.assert_(atom.data._qname_matches(
+    self.assert_(atom.core._qname_matches(
         'foo', '', 'bar') == False)
 
 

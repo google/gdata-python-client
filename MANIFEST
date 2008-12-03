@@ -4,6 +4,7 @@ INSTALL.txt
 MANIFEST
 setup.py
 src/atom/__init__.py
+src/atom/core.py
 src/atom/http.py
 src/atom/http_interface.py
 src/atom/mock_http.py
@@ -75,6 +76,7 @@ tests/atom_tests/mock_server_test.py
 tests/atom_tests/service_test.py
 tests/atom_tests/token_store_test.py
 tests/atom_tests/url_test.py
+tests/atom_tests/mock_client_test.py
 tests/gdata_tests/__init__.py
 tests/gdata_tests/apps_test.py
 tests/gdata_tests/auth_test.py
