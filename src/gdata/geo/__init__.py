@@ -106,7 +106,7 @@ class Where(GeoBaseElement):
   As a convenience, you can get a tuple of (lat, lon) with Where.location(),
   and set the same data with Where.setLocation( (lat, lon) ).
 
-  Similarly, there are methods to set and get only latitude and longtitude.
+  Similarly, there are methods to set and get only latitude and longitude.
   """
   
   _tag = 'where'
@@ -149,10 +149,12 @@ class Where(GeoBaseElement):
     lat, lon = self.location()
     return lat
   
-  def longtitude(self):
+  def longitude(self):
     "(float) Get the longtitude value of the geo-tag. See also .location()"
     lat, lon = self.location()
     return lon
+
+  longtitude = longitude
 
   def set_latitude(self, lat):
     """(bool) Set the latitude value of the geo-tag.
@@ -165,7 +167,7 @@ class Where(GeoBaseElement):
     _lat, lon = self.location()
     return self.set_location(lat, lon)
   
-  def set_longtitude(self, lon):
+  def set_longitude(self, lon):
     """(bool) Set the longtitude value of the geo-tag.
     
     Args:
@@ -175,6 +177,8 @@ class Where(GeoBaseElement):
     """
     lat, _lon = self.location()
     return self.set_location(lat, lon)
+
+  set_longtitude = set_longitude
 
 def WhereFromString(xml_string):
   return atom.CreateClassFromXMLString(Where, xml_string)
