@@ -3,7 +3,7 @@ A helper class for using TLS Lite with stdlib clients
 (httplib, xmlrpclib, imaplib, poplib).
 """
 
-from tlslite.Checker import Checker
+from gdata.tlslite.Checker import Checker
 
 class ClientHelper:
     """This is a helper class used to integrate TLS Lite with various

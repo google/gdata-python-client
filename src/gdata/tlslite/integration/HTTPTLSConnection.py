@@ -2,8 +2,8 @@
 
 import socket
 import httplib
-from tlslite.TLSConnection import TLSConnection
-from tlslite.integration.ClientHelper import ClientHelper
+from gdata.tlslite.TLSConnection import TLSConnection
+from gdata.tlslite.integration.ClientHelper import ClientHelper
 
 
 class HTTPBaseTLSConnection(httplib.HTTPConnection):

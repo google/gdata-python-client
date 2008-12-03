@@ -2,7 +2,7 @@
 
 
 import asyncore
-from tlslite.TLSConnection import TLSConnection
+from gdata.tlslite.TLSConnection import TLSConnection
 from AsyncStateMachine import AsyncStateMachine
 
 

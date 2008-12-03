@@ -2,8 +2,8 @@
 
 import socket
 from imaplib import IMAP4
-from tlslite.TLSConnection import TLSConnection
-from tlslite.integration.ClientHelper import ClientHelper
+from gdata.tlslite.TLSConnection import TLSConnection
+from gdata.tlslite.integration.ClientHelper import ClientHelper
 
 # IMAP TLS PORT
 IMAP4_TLS_PORT = 993

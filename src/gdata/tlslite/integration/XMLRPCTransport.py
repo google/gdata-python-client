@@ -2,8 +2,8 @@
 
 import xmlrpclib
 import httplib
-from tlslite.integration.HTTPTLSConnection import HTTPTLSConnection
-from tlslite.integration.ClientHelper import ClientHelper
+from gdata.tlslite.integration.HTTPTLSConnection import HTTPTLSConnection
+from gdata.tlslite.integration.ClientHelper import ClientHelper
 
 
 class XMLRPCTransport(xmlrpclib.Transport, ClientHelper):

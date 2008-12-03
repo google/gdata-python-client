@@ -2,8 +2,8 @@
 
 import socket
 from poplib import POP3
-from tlslite.TLSConnection import TLSConnection
-from tlslite.integration.ClientHelper import ClientHelper
+from gdata.tlslite.TLSConnection import TLSConnection
+from gdata.tlslite.integration.ClientHelper import ClientHelper
 
 # POP TLS PORT
 POP3_TLS_PORT = 995

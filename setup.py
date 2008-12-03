@@ -20,7 +20,7 @@ from distutils.core import setup
 
 setup(
     name='gdata.py',
-    version='1.2.2',
+    version='1.2.3',
     description='Python client library for Google data APIs',
     long_description = """\
 The Google data Python client library makes it easy to access data
@@ -55,6 +55,6 @@ service.
         'gdata.apps.migration', 'gdata.docs', 'gdata.codesearch',
         'gdata.photos', 'gdata.exif', 'gdata.geo', 'gdata.media', 
         'gdata.contacts', 'gdata.youtube', 'gdata.webmastertools', 
-        'gdata.blogger', 'gdata.alt'],
+        'gdata.blogger', 'gdata.alt', 'gdata.oauth', 'gdata.tlslite'],
     package_dir = {'gdata':'src/gdata', 'atom':'src/atom'}
 )

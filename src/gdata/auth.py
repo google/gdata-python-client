@@ -25,10 +25,10 @@ import urllib
 import atom.http_interface
 import atom.token_store
 import atom.url
-import oauth
-import oauth.rsa
-import tlslite.utils.keyfactory as keyfactory
-import tlslite.utils.cryptomath as cryptomath
+import gdata.oauth as oauth
+import gdata.oauth.rsa as oauth_rsa
+import gdata.tlslite.utils.keyfactory as keyfactory
+import gdata.tlslite.utils.cryptomath as cryptomath
 
 __author__ = 'api.jscudder (Jeff Scudder)'
 
@@ -606,7 +606,7 @@ class OAuthSignatureMethod(object):
   
   HMAC_SHA1 = oauth.OAuthSignatureMethod_HMAC_SHA1  
   
-  class RSA_SHA1(oauth.rsa.OAuthSignatureMethod_RSA_SHA1):
+  class RSA_SHA1(oauth_rsa.OAuthSignatureMethod_RSA_SHA1):
     """Provides implementation for abstract methods to return RSA certs."""
 
     def __init__(self, private_key, public_cert):
