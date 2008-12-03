@@ -34,13 +34,35 @@ IM_MSN = 'http://schemas.google.com/g/2005#MSN' # MSN Messenger protocol
 IM_YAHOO = 'http://schemas.google.com/g/2005#YAHOO' # Yahoo Messenger protocol
 IM_SKYPE = 'http://schemas.google.com/g/2005#SKYPE' # Skype protocol
 IM_QQ = 'http://schemas.google.com/g/2005#QQ' # QQ protocol
-IM_GOOGLE_TALK = 'http://schemas.google.com/g/2005#GOOGLE_TALK' # Google Talk protocol
+# Google Talk protocol
+IM_GOOGLE_TALK = 'http://schemas.google.com/g/2005#GOOGLE_TALK'
 IM_ICQ = 'http://schemas.google.com/g/2005#ICQ' # ICQ protocol
 IM_JABBER = 'http://schemas.google.com/g/2005#JABBER' # Jabber protocol
 
 
 PHOTO_LINK_REL = 'http://schemas.google.com/contacts/2008/rel#photo'
 PHOTO_EDIT_LINK_REL = 'http://schemas.google.com/contacts/2008/rel#edit-photo'
+
+
+PHONE_CAR = 'http://schemas.google.com/g/2005#car' #  Number of a car phone.
+PHONE_FAX = 'http://schemas.google.com/g/2005#fax'
+# Unknown or unspecified type, such as a business phone number that doesn't
+# belong to a particular person. 
+PHONE_GENERAL = 'http://schemas.google.com/g/2005#general'
+PHONE_HOME = REL_HOME
+PHONE_HOME_FAX = 'http://schemas.google.com/g/2005#home_fax' 
+# Phone number that makes sense only in a context known to the user (such as
+# an enterprise PBX).
+PHONE_INTERNAL = 'http://schemas.google.com/g/2005#internal-extension'
+PHONE_MOBILE = 'http://schemas.google.com/g/2005#mobile' 
+# A special type of number for which no other rel value makes sense. 
+# For example, a TTY device. label can be used to indicate the actual type.
+PHONE_OTHER = REL_OTHER
+PHONE_PAGER = 'http://schemas.google.com/g/2005#pager'
+PHONE_SATELLITE = 'http://schemas.google.com/g/2005#satellite'
+PHONE_VOIP = 'http://schemas.google.com/g/2005#voip'
+PHONE_WORK = REL_WORK
+PHONE_WORK_FAX = 'http://schemas.google.com/g/2005#work_fax'
 
 
 CONTACTS_NAMESPACE = 'http://schemas.google.com/contact/2008'
