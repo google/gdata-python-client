@@ -32,9 +32,18 @@
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="atom.html">atom</a><br>
-</td><td width="25%" valign=top><a href="re.html">re</a><br>
-</td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
-</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<a href="cgi.html">cgi</a><br>
+<a href="gdata.tlslite.utils.cryptomath.html">gdata.tlslite.utils.cryptomath</a><br>
+</td><td width="25%" valign=top><a href="gdata.tlslite.utils.keyfactory.html">gdata.tlslite.utils.keyfactory</a><br>
+<a href="math.html">math</a><br>
+<a href="gdata.oauth.html">gdata.oauth</a><br>
+</td><td width="25%" valign=top><a href="gdata.oauth.rsa.html">gdata.oauth.rsa</a><br>
+<a href="random.html">random</a><br>
+<a href="re.html">re</a><br>
+</td><td width="25%" valign=top><a href="time.html">time</a><br>
+<a href="types.html">types</a><br>
+<a href="urllib.html">urllib</a><br>
+</td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -42,6 +51,13 @@
     
 <tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.auth.html#OAuthInputParams">OAuthInputParams</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.auth.html#OAuthSignatureMethod">OAuthSignatureMethod</a>
+</font></dt></dl>
+</dd>
 <dt><font face="helvetica, arial"><a href="atom.http_interface.html#GenericToken">atom.http_interface.GenericToken</a>(<a href="__builtin__.html#object">__builtin__.object</a>)
 </font></dt><dd>
 <dl>
@@ -49,9 +65,15 @@
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="gdata.auth.html#AuthSubToken">AuthSubToken</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.auth.html#SecureAuthSubToken">SecureAuthSubToken</a>
 </font></dt></dl>
 </dd>
 </dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gdata.auth.html#OAuthToken">OAuthToken</a>
+</font></dt></dl>
 </dd>
 </dl>
  <p>
@@ -141,6 +163,227 @@ Data descriptors inherited from <a href="atom.http_interface.html#GenericToken">
 <dl><dt><strong>__weakref__</strong></dt>
 <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="OAuthInputParams">class <strong>OAuthInputParams</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Stores&nbsp;OAuth&nbsp;input&nbsp;parameters.<br>
+&nbsp;<br>
+This&nbsp;class&nbsp;is&nbsp;a&nbsp;store&nbsp;for&nbsp;OAuth&nbsp;input&nbsp;parameters&nbsp;viz.&nbsp;consumer&nbsp;key&nbsp;and&nbsp;secret,<br>
+signature&nbsp;method&nbsp;and&nbsp;RSA&nbsp;key.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="OAuthInputParams-GetConsumer"><strong>GetConsumer</strong></a>(self)</dt><dd><tt>Gets&nbsp;the&nbsp;OAuth&nbsp;consumer.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;of&nbsp;type&nbsp;&lt;oauth.oauth.Consumer&gt;</tt></dd></dl>
+
+<dl><dt><a name="OAuthInputParams-GetSignatureMethod"><strong>GetSignatureMethod</strong></a>(self)</dt><dd><tt>Gets&nbsp;the&nbsp;OAuth&nbsp;signature&nbsp;method.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;of&nbsp;supertype&nbsp;&lt;oauth.oauth.<a href="#OAuthSignatureMethod">OAuthSignatureMethod</a>&gt;</tt></dd></dl>
+
+<dl><dt><a name="OAuthInputParams-__init__"><strong>__init__</strong></a>(self, signature_method, consumer_key, consumer_secret<font color="#909090">=None</font>, rsa_key<font color="#909090">=None</font>)</dt><dd><tt>Initializes&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;parameters&nbsp;required&nbsp;for&nbsp;using&nbsp;OAuth&nbsp;mechanism.<br>
+&nbsp;<br>
+NOTE:&nbsp;Though&nbsp;consumer_secret&nbsp;and&nbsp;rsa_key&nbsp;are&nbsp;optional,&nbsp;either&nbsp;of&nbsp;the&nbsp;two<br>
+is&nbsp;required&nbsp;depending&nbsp;on&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;signature_method.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;signature_method:&nbsp;class&nbsp;which&nbsp;provides&nbsp;implementation&nbsp;for&nbsp;strategy&nbsp;class<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;oauth.oauth.<a href="#OAuthSignatureMethod">OAuthSignatureMethod</a>.&nbsp;Signature&nbsp;method&nbsp;to&nbsp;be&nbsp;used&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;signing&nbsp;each&nbsp;request.&nbsp;Valid&nbsp;implementations&nbsp;are&nbsp;provided&nbsp;as&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;constants&nbsp;defined&nbsp;by&nbsp;gdata.auth.<a href="#OAuthSignatureMethod">OAuthSignatureMethod</a>.&nbsp;Currently<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;they&nbsp;are&nbsp;gdata.auth.<a href="#OAuthSignatureMethod">OAuthSignatureMethod</a>.RSA_SHA1&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.auth.<a href="#OAuthSignatureMethod">OAuthSignatureMethod</a>.HMAC_SHA1<br>
+&nbsp;&nbsp;consumer_key:&nbsp;string&nbsp;Domain&nbsp;identifying&nbsp;third_party&nbsp;web&nbsp;application.<br>
+&nbsp;&nbsp;consumer_secret:&nbsp;string&nbsp;(optional)&nbsp;Secret&nbsp;generated&nbsp;during&nbsp;registration.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Required&nbsp;only&nbsp;for&nbsp;HMAC_SHA1&nbsp;signature&nbsp;method.<br>
+&nbsp;&nbsp;rsa_key:&nbsp;string&nbsp;(optional)&nbsp;Private&nbsp;key&nbsp;required&nbsp;for&nbsp;RSA_SHA1&nbsp;signature<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="OAuthSignatureMethod">class <strong>OAuthSignatureMethod</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Holds&nbsp;valid&nbsp;OAuth&nbsp;signature&nbsp;methods.<br>
+&nbsp;<br>
+RSA_SHA1:&nbsp;Class&nbsp;to&nbsp;build&nbsp;signature&nbsp;according&nbsp;to&nbsp;RSA-SHA1&nbsp;algorithm.<br>
+HMAC_SHA1:&nbsp;Class&nbsp;to&nbsp;build&nbsp;signature&nbsp;according&nbsp;to&nbsp;HMAC-SHA1&nbsp;algorithm.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>HMAC_SHA1</strong> = &lt;class 'gdata.oauth.OAuthSignatureMethod_HMAC_SHA1'&gt;</dl>
+
+<dl><dt><strong>RSA_SHA1</strong> = &lt;class 'gdata.auth.RSA_SHA1'&gt;<dd><tt>Provides&nbsp;implementation&nbsp;for&nbsp;abstract&nbsp;methods&nbsp;to&nbsp;return&nbsp;RSA&nbsp;certs.</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="OAuthToken">class <strong>OAuthToken</strong></a>(<a href="atom.http_interface.html#GenericToken">atom.http_interface.GenericToken</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Stores&nbsp;the&nbsp;token&nbsp;key,&nbsp;token&nbsp;secret&nbsp;and&nbsp;scopes&nbsp;for&nbsp;which&nbsp;token&nbsp;is&nbsp;valid.<br>
+&nbsp;<br>
+This&nbsp;token&nbsp;adds&nbsp;the&nbsp;authorization&nbsp;header&nbsp;to&nbsp;each&nbsp;request&nbsp;made.&nbsp;It<br>
+re-calculates&nbsp;authorization&nbsp;header&nbsp;for&nbsp;every&nbsp;request&nbsp;since&nbsp;the&nbsp;OAuth<br>
+signature&nbsp;to&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;authorization&nbsp;header&nbsp;is&nbsp;dependent&nbsp;on&nbsp;the<br>
+request&nbsp;parameters.<br>
+&nbsp;<br>
+Attributes:<br>
+&nbsp;&nbsp;key:&nbsp;str&nbsp;The&nbsp;value&nbsp;for&nbsp;the&nbsp;OAuth&nbsp;token&nbsp;i.e.&nbsp;token&nbsp;key.<br>
+&nbsp;&nbsp;secret:&nbsp;str&nbsp;The&nbsp;value&nbsp;for&nbsp;the&nbsp;OAuth&nbsp;token&nbsp;secret.<br>
+&nbsp;&nbsp;scopes:&nbsp;list&nbsp;of&nbsp;str&nbsp;or&nbsp;atom.url.Url&nbsp;specifying&nbsp;the&nbsp;beginnings&nbsp;of&nbsp;URLs<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;which&nbsp;this&nbsp;token&nbsp;can&nbsp;be&nbsp;used.&nbsp;For&nbsp;example,&nbsp;if&nbsp;scopes&nbsp;contains<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<a href="http://example.com/foo">http://example.com/foo</a>',&nbsp;then&nbsp;this&nbsp;token&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;a&nbsp;request&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<a href="http://example.com/foo/bar">http://example.com/foo/bar</a>'&nbsp;but&nbsp;it&nbsp;cannot&nbsp;be&nbsp;used&nbsp;for&nbsp;a&nbsp;request&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<a href="http://example.com/baz">http://example.com/baz</a>'<br>
+&nbsp;&nbsp;oauth_input_params:&nbsp;<a href="#OAuthInputParams">OAuthInputParams</a>&nbsp;OAuth&nbsp;input&nbsp;parameters.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.auth.html#OAuthToken">OAuthToken</a></dd>
+<dd><a href="atom.http_interface.html#GenericToken">atom.http_interface.GenericToken</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="OAuthToken-GetAuthHeader"><strong>GetAuthHeader</strong></a>(self, http_method, http_url, realm<font color="#909090">=''</font>)</dt><dd><tt>Get&nbsp;the&nbsp;authentication&nbsp;header.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;http_method:&nbsp;string&nbsp;HTTP&nbsp;method&nbsp;i.e.&nbsp;operation&nbsp;e.g.&nbsp;GET,&nbsp;POST,&nbsp;PUT,&nbsp;etc.<br>
+&nbsp;&nbsp;http_url:&nbsp;string&nbsp;or&nbsp;atom.url.Url&nbsp;HTTP&nbsp;URL&nbsp;to&nbsp;which&nbsp;request&nbsp;is&nbsp;made.<br>
+&nbsp;&nbsp;realm:&nbsp;string&nbsp;(default='')&nbsp;realm&nbsp;parameter&nbsp;to&nbsp;be&nbsp;included&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authorization&nbsp;header.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;dict&nbsp;Header&nbsp;to&nbsp;be&nbsp;sent&nbsp;with&nbsp;every&nbsp;subsequent&nbsp;request&nbsp;after<br>
+&nbsp;&nbsp;authentication.</tt></dd></dl>
+
+<dl><dt><a name="OAuthToken-__init__"><strong>__init__</strong></a>(self, key<font color="#909090">=None</font>, secret<font color="#909090">=None</font>, scopes<font color="#909090">=None</font>, oauth_input_params<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="OAuthToken-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="OAuthToken-get_token_string"><strong>get_token_string</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;token&nbsp;string.<br>
+&nbsp;<br>
+The&nbsp;token&nbsp;string&nbsp;returned&nbsp;is&nbsp;of&nbsp;format<br>
+oauth_token=[0]&amp;oauth_token_secret=[1],&nbsp;where&nbsp;[0]&nbsp;and&nbsp;[1]&nbsp;are&nbsp;some&nbsp;strings.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;token&nbsp;string&nbsp;of&nbsp;format&nbsp;oauth_token=[0]&amp;oauth_token_secret=[1],<br>
+&nbsp;&nbsp;where&nbsp;[0]&nbsp;and&nbsp;[1]&nbsp;are&nbsp;some&nbsp;strings.&nbsp;If&nbsp;self.<strong>secret</strong>&nbsp;is&nbsp;absent,&nbsp;it&nbsp;just<br>
+&nbsp;&nbsp;returns&nbsp;oauth_token=[0].&nbsp;If&nbsp;self.<strong>key</strong>&nbsp;is&nbsp;absent,&nbsp;it&nbsp;just&nbsp;returns<br>
+&nbsp;&nbsp;oauth_token_secret=[1].&nbsp;If&nbsp;both&nbsp;are&nbsp;absent,&nbsp;it&nbsp;returns&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="OAuthToken-perform_request"><strong>perform_request</strong></a>(self, http_client, operation, url, data<font color="#909090">=None</font>, headers<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;the&nbsp;Authorization&nbsp;header&nbsp;and&nbsp;makes&nbsp;the&nbsp;HTTP&nbsp;request.</tt></dd></dl>
+
+<dl><dt><a name="OAuthToken-set_token_string"><strong>set_token_string</strong></a>(self, token_string)</dt><dd><tt>Sets&nbsp;the&nbsp;token&nbsp;key&nbsp;and&nbsp;secret&nbsp;from&nbsp;the&nbsp;token&nbsp;string.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;token_string:&nbsp;str&nbsp;Token&nbsp;string&nbsp;of&nbsp;form<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;oauth_token=[0]&amp;oauth_token_secret=[1].&nbsp;If&nbsp;oauth_token&nbsp;is&nbsp;not&nbsp;present,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.<strong>key</strong>&nbsp;will&nbsp;be&nbsp;None.&nbsp;If&nbsp;oauth_token_secret&nbsp;is&nbsp;not&nbsp;present,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.<strong>secret</strong>&nbsp;will&nbsp;be&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="OAuthToken-valid_for_scope"><strong>valid_for_scope</strong></a>(self, url)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.http_interface.html#GenericToken">atom.http_interface.GenericToken</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SecureAuthSubToken">class <strong>SecureAuthSubToken</strong></a>(<a href="gdata.auth.html#AuthSubToken">AuthSubToken</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Stores&nbsp;the&nbsp;rsa&nbsp;private&nbsp;key,&nbsp;token,&nbsp;and&nbsp;scopes&nbsp;for&nbsp;the&nbsp;secure&nbsp;AuthSub&nbsp;token.<br>
+&nbsp;<br>
+This&nbsp;token&nbsp;adds&nbsp;the&nbsp;authorization&nbsp;header&nbsp;to&nbsp;each&nbsp;request&nbsp;made.&nbsp;It<br>
+re-calculates&nbsp;authorization&nbsp;header&nbsp;for&nbsp;every&nbsp;request&nbsp;since&nbsp;the&nbsp;secure&nbsp;AuthSub<br>
+signature&nbsp;to&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;authorization&nbsp;header&nbsp;is&nbsp;dependent&nbsp;on&nbsp;the<br>
+request&nbsp;parameters.<br>
+&nbsp;<br>
+Attributes:<br>
+&nbsp;&nbsp;rsa_key:&nbsp;string&nbsp;The&nbsp;RSA&nbsp;private&nbsp;key&nbsp;in&nbsp;PEM&nbsp;format&nbsp;that&nbsp;the&nbsp;token&nbsp;will<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use&nbsp;to&nbsp;sign&nbsp;requests<br>
+&nbsp;&nbsp;token_string:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;value&nbsp;for&nbsp;the&nbsp;AuthSub&nbsp;token.<br>
+&nbsp;&nbsp;scopes:&nbsp;list&nbsp;of&nbsp;str&nbsp;or&nbsp;atom.url.Url&nbsp;specifying&nbsp;the&nbsp;beginnings&nbsp;of&nbsp;URLs<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;which&nbsp;this&nbsp;token&nbsp;can&nbsp;be&nbsp;used.&nbsp;For&nbsp;example,&nbsp;if&nbsp;scopes&nbsp;contains<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<a href="http://example.com/foo">http://example.com/foo</a>',&nbsp;then&nbsp;this&nbsp;token&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;a&nbsp;request&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<a href="http://example.com/foo/bar">http://example.com/foo/bar</a>'&nbsp;but&nbsp;it&nbsp;cannot&nbsp;be&nbsp;used&nbsp;for&nbsp;a&nbsp;request&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<a href="http://example.com/baz">http://example.com/baz</a>'<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.auth.html#SecureAuthSubToken">SecureAuthSubToken</a></dd>
+<dd><a href="gdata.auth.html#AuthSubToken">AuthSubToken</a></dd>
+<dd><a href="gdata.auth.html#ClientLoginToken">ClientLoginToken</a></dd>
+<dd><a href="atom.http_interface.html#GenericToken">atom.http_interface.GenericToken</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SecureAuthSubToken-GetAuthHeader"><strong>GetAuthHeader</strong></a>(self, http_method, http_url)</dt><dd><tt>Generates&nbsp;the&nbsp;Authorization&nbsp;header.<br>
+&nbsp;<br>
+The&nbsp;form&nbsp;of&nbsp;the&nbsp;secure&nbsp;AuthSub&nbsp;Authorization&nbsp;header&nbsp;is<br>
+Authorization:&nbsp;AuthSub&nbsp;token="token"&nbsp;sigalg="sigalg"&nbsp;data="data"&nbsp;sig="sig"<br>
+and&nbsp;&nbsp;data&nbsp;represents&nbsp;a&nbsp;string&nbsp;in&nbsp;the&nbsp;form<br>
+data&nbsp;=&nbsp;http_method&nbsp;http_url&nbsp;timestamp&nbsp;nonce<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;http_method:&nbsp;string&nbsp;HTTP&nbsp;method&nbsp;i.e.&nbsp;operation&nbsp;e.g.&nbsp;GET,&nbsp;POST,&nbsp;PUT,&nbsp;etc.<br>
+&nbsp;&nbsp;http_url:&nbsp;string&nbsp;or&nbsp;atom.url.Url&nbsp;HTTP&nbsp;URL&nbsp;to&nbsp;which&nbsp;request&nbsp;is&nbsp;made.<br>
+&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;dict&nbsp;Header&nbsp;to&nbsp;be&nbsp;sent&nbsp;with&nbsp;every&nbsp;subsequent&nbsp;request&nbsp;after&nbsp;authentication.</tt></dd></dl>
+
+<dl><dt><a name="SecureAuthSubToken-__init__"><strong>__init__</strong></a>(self, rsa_key, token_string<font color="#909090">=None</font>, scopes<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="SecureAuthSubToken-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SecureAuthSubToken-get_token_string"><strong>get_token_string</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SecureAuthSubToken-perform_request"><strong>perform_request</strong></a>(self, http_client, operation, url, data<font color="#909090">=None</font>, headers<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;the&nbsp;Authorization&nbsp;header&nbsp;and&nbsp;makes&nbsp;the&nbsp;HTTP&nbsp;request.</tt></dd></dl>
+
+<dl><dt><a name="SecureAuthSubToken-set_token_string"><strong>set_token_string</strong></a>(self, token_string)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.auth.html#ClientLoginToken">ClientLoginToken</a>:<br>
+<dl><dt><a name="SecureAuthSubToken-valid_for_scope"><strong>valid_for_scope</strong></a>(self, url)</dt><dd><tt>Tells&nbsp;the&nbsp;caller&nbsp;if&nbsp;the&nbsp;token&nbsp;authorizes&nbsp;access&nbsp;to&nbsp;the&nbsp;desired&nbsp;URL.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.http_interface.html#GenericToken">atom.http_interface.GenericToken</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#eeaa77">
@@ -217,6 +460,62 @@ Args:<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;HTTP&nbsp;body&nbsp;to&nbsp;send&nbsp;in&nbsp;a&nbsp;request&nbsp;for&nbsp;a&nbsp;client&nbsp;login&nbsp;token.</tt></dd></dl>
+ <dl><dt><a name="-GenerateOAuthAccessTokenUrl"><strong>GenerateOAuthAccessTokenUrl</strong></a>(authorized_request_token, oauth_input_params, access_token_url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>, oauth_version<font color="#909090">='1.0'</font>)</dt><dd><tt>Generates&nbsp;URL&nbsp;at&nbsp;which&nbsp;user&nbsp;will&nbsp;login&nbsp;to&nbsp;authorize&nbsp;the&nbsp;request&nbsp;token.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;authorized_request_token:&nbsp;gdata.auth.<a href="#OAuthToken">OAuthToken</a>&nbsp;OAuth&nbsp;authorized&nbsp;request<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token.<br>
+&nbsp;&nbsp;oauth_input_params:&nbsp;<a href="#OAuthInputParams">OAuthInputParams</a>&nbsp;OAuth&nbsp;input&nbsp;parameters.&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;access_token_url:&nbsp;string&nbsp;The&nbsp;beginning&nbsp;of&nbsp;the&nbsp;authorization&nbsp;URL.&nbsp;This&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;normally&nbsp;'https://www.google.com/accounts/OAuthGetAccessToken'&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/accounts/OAuthGetAccessToken'<br>
+&nbsp;&nbsp;oauth_version:&nbsp;str&nbsp;(default='1.0')&nbsp;oauth_version&nbsp;parameter.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;atom.url.Url&nbsp;OAuth&nbsp;access&nbsp;token&nbsp;URL.</tt></dd></dl>
+ <dl><dt><a name="-GenerateOAuthAuthorizationUrl"><strong>GenerateOAuthAuthorizationUrl</strong></a>(request_token, authorization_url<font color="#909090">='https://www.google.com/accounts/OAuthAuthorizeToken'</font>, callback_url<font color="#909090">=None</font>, extra_params<font color="#909090">=None</font>, include_scopes_in_callback<font color="#909090">=False</font>, scopes_param_prefix<font color="#909090">='oauth_token_scope'</font>)</dt><dd><tt>Generates&nbsp;URL&nbsp;at&nbsp;which&nbsp;user&nbsp;will&nbsp;login&nbsp;to&nbsp;authorize&nbsp;the&nbsp;request&nbsp;token.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;request_token:&nbsp;gdata.auth.<a href="#OAuthToken">OAuthToken</a>&nbsp;OAuth&nbsp;request&nbsp;token.<br>
+&nbsp;&nbsp;authorization_url:&nbsp;string&nbsp;The&nbsp;beginning&nbsp;of&nbsp;the&nbsp;authorization&nbsp;URL.&nbsp;This&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;normally&nbsp;'https://www.google.com/accounts/OAuthAuthorizeToken'&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/accounts/OAuthAuthorizeToken'<br>
+&nbsp;&nbsp;callback_url:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;user&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;after<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logging&nbsp;in&nbsp;and&nbsp;granting&nbsp;access.<br>
+&nbsp;&nbsp;extra_params:&nbsp;dict&nbsp;(optional)&nbsp;Additional&nbsp;parameters&nbsp;to&nbsp;be&nbsp;sent.<br>
+&nbsp;&nbsp;include_scopes_in_callback:&nbsp;Boolean&nbsp;(default=False)&nbsp;if&nbsp;set&nbsp;to&nbsp;True,&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;'callback_url'&nbsp;is&nbsp;present,&nbsp;the&nbsp;'callback_url'&nbsp;will&nbsp;be&nbsp;modified&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;include&nbsp;the&nbsp;scope(s)&nbsp;from&nbsp;the&nbsp;request&nbsp;token&nbsp;as&nbsp;a&nbsp;URL&nbsp;parameter.&nbsp;The<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key&nbsp;for&nbsp;the&nbsp;'callback'&nbsp;URL's&nbsp;scope&nbsp;parameter&nbsp;will&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAUTH_SCOPE_URL_PARAM_NAME.&nbsp;The&nbsp;benefit&nbsp;of&nbsp;including&nbsp;the&nbsp;scope&nbsp;URL&nbsp;as<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;parameter&nbsp;to&nbsp;the&nbsp;'callback'&nbsp;URL,&nbsp;is&nbsp;that&nbsp;the&nbsp;page&nbsp;which&nbsp;receives<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;OAuth&nbsp;token&nbsp;will&nbsp;be&nbsp;able&nbsp;to&nbsp;tell&nbsp;which&nbsp;URLs&nbsp;the&nbsp;token&nbsp;grants<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;access&nbsp;to.<br>
+&nbsp;&nbsp;scopes_param_prefix:&nbsp;string&nbsp;(default='oauth_token_scope')&nbsp;The&nbsp;URL<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameter&nbsp;key&nbsp;which&nbsp;maps&nbsp;to&nbsp;the&nbsp;list&nbsp;of&nbsp;valid&nbsp;scopes&nbsp;for&nbsp;the&nbsp;token.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;URL&nbsp;parameter&nbsp;will&nbsp;be&nbsp;included&nbsp;in&nbsp;the&nbsp;callback&nbsp;URL&nbsp;along&nbsp;with<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;scopes&nbsp;of&nbsp;the&nbsp;token&nbsp;as&nbsp;value&nbsp;if&nbsp;include_scopes_in_callback=True.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;atom.url.Url&nbsp;OAuth&nbsp;authorization&nbsp;URL.</tt></dd></dl>
+ <dl><dt><a name="-GenerateOAuthRequestTokenUrl"><strong>GenerateOAuthRequestTokenUrl</strong></a>(oauth_input_params, scopes, request_token_url<font color="#909090">='https://www.google.com/accounts/OAuthGetRequestToken'</font>, extra_parameters<font color="#909090">=None</font>)</dt><dd><tt>Generate&nbsp;a&nbsp;URL&nbsp;at&nbsp;which&nbsp;a&nbsp;request&nbsp;for&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;is&nbsp;to&nbsp;be&nbsp;sent.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;oauth_input_params:&nbsp;<a href="#OAuthInputParams">OAuthInputParams</a>&nbsp;OAuth&nbsp;input&nbsp;parameters.<br>
+&nbsp;&nbsp;scopes:&nbsp;list&nbsp;of&nbsp;strings&nbsp;The&nbsp;URLs&nbsp;of&nbsp;the&nbsp;services&nbsp;to&nbsp;be&nbsp;accessed.<br>
+&nbsp;&nbsp;request_token_url:&nbsp;string&nbsp;The&nbsp;beginning&nbsp;of&nbsp;the&nbsp;request&nbsp;token&nbsp;URL.&nbsp;This&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;normally&nbsp;'https://www.google.com/accounts/OAuthGetRequestToken'&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/accounts/OAuthGetRequestToken'<br>
+&nbsp;&nbsp;extra_parameters:&nbsp;dict&nbsp;(optional)&nbsp;key-value&nbsp;pairs&nbsp;as&nbsp;any&nbsp;additional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameters&nbsp;to&nbsp;be&nbsp;included&nbsp;in&nbsp;the&nbsp;URL&nbsp;and&nbsp;signature&nbsp;while&nbsp;making&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request&nbsp;for&nbsp;fetching&nbsp;an&nbsp;OAuth&nbsp;request&nbsp;token.&nbsp;All&nbsp;the&nbsp;OAuth&nbsp;parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;added&nbsp;by&nbsp;default.&nbsp;But&nbsp;if&nbsp;provided&nbsp;through&nbsp;this&nbsp;argument,&nbsp;any<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;parameters&nbsp;will&nbsp;be&nbsp;overwritten.&nbsp;For&nbsp;e.g.&nbsp;a&nbsp;default&nbsp;parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;oauth_version&nbsp;1.0&nbsp;can&nbsp;be&nbsp;overwritten&nbsp;if<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extra_parameters&nbsp;=&nbsp;{'oauth_version':&nbsp;'2.0'}<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;atom.url.Url&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;URL.</tt></dd></dl>
  <dl><dt><a name="-GetCaptchaChallenge"><strong>GetCaptchaChallenge</strong></a> = get_captcha_challenge(http_body, captcha_base_url<font color="#909090">='http://www.google.com/accounts/'</font>)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;and&nbsp;token&nbsp;for&nbsp;a&nbsp;CAPTCHA&nbsp;challenge&nbsp;issued&nbsp;by&nbsp;the&nbsp;server.<br>
 &nbsp;<br>
 Args:<br>
@@ -236,6 +535,37 @@ Returns:<br>
 &nbsp;&nbsp;{'token':&nbsp;string&nbsp;identifying&nbsp;the&nbsp;CAPTCHA&nbsp;image,<br>
 &nbsp;&nbsp;&nbsp;'url':&nbsp;string&nbsp;containing&nbsp;the&nbsp;URL&nbsp;of&nbsp;the&nbsp;image}<br>
 &nbsp;&nbsp;Returns&nbsp;None&nbsp;if&nbsp;there&nbsp;was&nbsp;no&nbsp;CAPTCHA&nbsp;challenge&nbsp;in&nbsp;the&nbsp;response.</tt></dd></dl>
+ <dl><dt><a name="-OAuthTokenFromHttpBody"><strong>OAuthTokenFromHttpBody</strong></a>(http_body)</dt><dd><tt>Parses&nbsp;the&nbsp;HTTP&nbsp;response&nbsp;body&nbsp;and&nbsp;returns&nbsp;an&nbsp;OAuth&nbsp;token.<br>
+&nbsp;<br>
+The&nbsp;returned&nbsp;OAuth&nbsp;token&nbsp;will&nbsp;just&nbsp;have&nbsp;key&nbsp;and&nbsp;secret&nbsp;parameters&nbsp;set.<br>
+It&nbsp;won't&nbsp;have&nbsp;any&nbsp;knowledge&nbsp;about&nbsp;the&nbsp;scopes&nbsp;or&nbsp;oauth_input_params.&nbsp;It&nbsp;is<br>
+your&nbsp;responsibility&nbsp;to&nbsp;make&nbsp;it&nbsp;aware&nbsp;of&nbsp;the&nbsp;remaining&nbsp;parameters.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;<a href="#OAuthToken">OAuthToken</a>&nbsp;OAuth&nbsp;token.</tt></dd></dl>
+ <dl><dt><a name="-OAuthTokenFromUrl"><strong>OAuthTokenFromUrl</strong></a>(url, scopes_param_prefix<font color="#909090">='oauth_token_scope'</font>)</dt><dd><tt>Creates&nbsp;an&nbsp;<a href="#OAuthToken">OAuthToken</a>&nbsp;and&nbsp;sets&nbsp;token&nbsp;key&nbsp;and&nbsp;scopes&nbsp;(if&nbsp;present)&nbsp;from&nbsp;URL.<br>
+&nbsp;<br>
+After&nbsp;the&nbsp;Google&nbsp;Accounts&nbsp;OAuth&nbsp;pages&nbsp;redirect&nbsp;the&nbsp;user's&nbsp;broswer&nbsp;back&nbsp;to&nbsp;<br>
+the&nbsp;web&nbsp;application&nbsp;(using&nbsp;the&nbsp;'callback'&nbsp;URL&nbsp;from&nbsp;the&nbsp;request)&nbsp;the&nbsp;web&nbsp;app<br>
+can&nbsp;extract&nbsp;the&nbsp;token&nbsp;from&nbsp;the&nbsp;current&nbsp;page's&nbsp;URL.&nbsp;The&nbsp;token&nbsp;is&nbsp;same&nbsp;as&nbsp;the<br>
+request&nbsp;token,&nbsp;but&nbsp;it&nbsp;is&nbsp;either&nbsp;authorized&nbsp;(if&nbsp;user&nbsp;grants&nbsp;access)&nbsp;or<br>
+unauthorized&nbsp;(if&nbsp;user&nbsp;denies&nbsp;access).&nbsp;The&nbsp;token&nbsp;is&nbsp;provided&nbsp;as&nbsp;a&nbsp;<br>
+URL&nbsp;parameter&nbsp;named&nbsp;'oauth_token'&nbsp;and&nbsp;if&nbsp;it&nbsp;was&nbsp;chosen&nbsp;to&nbsp;use<br>
+GenerateOAuthAuthorizationUrl&nbsp;with&nbsp;include_scopes_in_param=True,&nbsp;the&nbsp;token's<br>
+valid&nbsp;scopes&nbsp;are&nbsp;included&nbsp;in&nbsp;a&nbsp;URL&nbsp;parameter&nbsp;whose&nbsp;name&nbsp;is&nbsp;specified&nbsp;in<br>
+scopes_param_prefix.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;url:&nbsp;atom.url.Url&nbsp;or&nbsp;str&nbsp;representing&nbsp;the&nbsp;current&nbsp;URL.&nbsp;The&nbsp;token&nbsp;value<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;valid&nbsp;scopes&nbsp;should&nbsp;be&nbsp;included&nbsp;as&nbsp;URL&nbsp;parameters.<br>
+&nbsp;&nbsp;scopes_param_prefix:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;parameter&nbsp;key&nbsp;which&nbsp;maps&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;list&nbsp;of&nbsp;valid&nbsp;scopes&nbsp;for&nbsp;the&nbsp;token.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;<a href="#OAuthToken">OAuthToken</a>&nbsp;with&nbsp;the&nbsp;token&nbsp;key&nbsp;from&nbsp;the&nbsp;URL&nbsp;and&nbsp;set&nbsp;to&nbsp;be&nbsp;valid&nbsp;for<br>
+&nbsp;&nbsp;the&nbsp;scopes&nbsp;passed&nbsp;in&nbsp;on&nbsp;the&nbsp;URL.&nbsp;If&nbsp;no&nbsp;scopes&nbsp;were&nbsp;included&nbsp;in&nbsp;the&nbsp;URL,<br>
+&nbsp;&nbsp;the&nbsp;<a href="#OAuthToken">OAuthToken</a>&nbsp;defaults&nbsp;to&nbsp;being&nbsp;valid&nbsp;for&nbsp;no&nbsp;scopes.&nbsp;If&nbsp;there&nbsp;was&nbsp;no<br>
+&nbsp;&nbsp;'oauth_token'&nbsp;parameter&nbsp;in&nbsp;the&nbsp;URL,&nbsp;this&nbsp;function&nbsp;returns&nbsp;None.</tt></dd></dl>
  <dl><dt><a name="-TokenFromHttpBody"><strong>TokenFromHttpBody</strong></a> = token_from_http_body(http_body)</dt><dd><tt>Extracts&nbsp;the&nbsp;AuthSub&nbsp;token&nbsp;from&nbsp;an&nbsp;HTTP&nbsp;body&nbsp;string.<br>
 &nbsp;<br>
 Used&nbsp;to&nbsp;find&nbsp;the&nbsp;new&nbsp;session&nbsp;token&nbsp;after&nbsp;making&nbsp;a&nbsp;request&nbsp;to&nbsp;upgrade&nbsp;a&nbsp;<br>
@@ -247,7 +577,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;the&nbsp;server's&nbsp;response&nbsp;to&nbsp;an&nbsp;upgrade&nbsp;token&nbsp;request.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;The&nbsp;raw&nbsp;token&nbsp;value&nbsp;to&nbsp;use&nbsp;in&nbsp;an&nbsp;<a href="#AuthSubToken">AuthSubToken</a>&nbsp;object.</tt></dd></dl>
+&nbsp;&nbsp;The&nbsp;raw&nbsp;token&nbsp;value&nbsp;to&nbsp;use&nbsp;in&nbsp;an&nbsp;<a href="#AuthSubToken">AuthSubToken</a>&nbsp;<a href="__builtin__.html#object">object</a>.</tt></dd></dl>
  <dl><dt><a name="-TokenFromUrl"><strong>TokenFromUrl</strong></a>(url)</dt><dd><tt>Extracts&nbsp;the&nbsp;AuthSub&nbsp;token&nbsp;from&nbsp;the&nbsp;URL.<br>
 &nbsp;<br>
 Returns&nbsp;the&nbsp;raw&nbsp;token&nbsp;value.<br>
@@ -255,7 +585,7 @@ Returns&nbsp;the&nbsp;raw&nbsp;token&nbsp;value.<br>
 Args:<br>
 &nbsp;&nbsp;url:&nbsp;str&nbsp;The&nbsp;URL&nbsp;or&nbsp;the&nbsp;query&nbsp;portion&nbsp;of&nbsp;the&nbsp;URL&nbsp;string&nbsp;(after&nbsp;the&nbsp;?)&nbsp;of<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;current&nbsp;page&nbsp;which&nbsp;contains&nbsp;the&nbsp;AuthSub&nbsp;token&nbsp;as&nbsp;a&nbsp;URL&nbsp;parameter.</tt></dd></dl>
- <dl><dt><a name="-extract_auth_sub_token_from_url"><strong>extract_auth_sub_token_from_url</strong></a>(url, scopes_param_prefix<font color="#909090">='auth_sub_scopes'</font>)</dt><dd><tt>Creates&nbsp;an&nbsp;<a href="#AuthSubToken">AuthSubToken</a>&nbsp;and&nbsp;sets&nbsp;the&nbsp;token&nbsp;value&nbsp;and&nbsp;scopes&nbsp;from&nbsp;the&nbsp;URL.<br>
+ <dl><dt><a name="-extract_auth_sub_token_from_url"><strong>extract_auth_sub_token_from_url</strong></a>(url, scopes_param_prefix<font color="#909090">='auth_sub_scopes'</font>, rsa_key<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;an&nbsp;<a href="#AuthSubToken">AuthSubToken</a>&nbsp;and&nbsp;sets&nbsp;the&nbsp;token&nbsp;value&nbsp;and&nbsp;scopes&nbsp;from&nbsp;the&nbsp;URL.<br>
 &nbsp;<br>
 After&nbsp;the&nbsp;Google&nbsp;Accounts&nbsp;AuthSub&nbsp;pages&nbsp;redirect&nbsp;the&nbsp;user's&nbsp;broswer&nbsp;back&nbsp;to&nbsp;<br>
 the&nbsp;web&nbsp;application&nbsp;(using&nbsp;the&nbsp;'next'&nbsp;URL&nbsp;from&nbsp;the&nbsp;request)&nbsp;the&nbsp;web&nbsp;app&nbsp;must<br>
@@ -380,7 +710,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;the&nbsp;server's&nbsp;response&nbsp;to&nbsp;an&nbsp;upgrade&nbsp;token&nbsp;request.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;The&nbsp;raw&nbsp;token&nbsp;value&nbsp;to&nbsp;use&nbsp;in&nbsp;an&nbsp;<a href="#AuthSubToken">AuthSubToken</a>&nbsp;object.</tt></dd></dl>
+&nbsp;&nbsp;The&nbsp;raw&nbsp;token&nbsp;value&nbsp;to&nbsp;use&nbsp;in&nbsp;an&nbsp;<a href="#AuthSubToken">AuthSubToken</a>&nbsp;<a href="__builtin__.html#object">object</a>.</tt></dd></dl>
 </td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">

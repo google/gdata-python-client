@@ -230,7 +230,7 @@ This&nbsp;reflects&nbsp;the&nbsp;names&nbsp;of&nbsp;elements&nbsp;in&nbsp;the&nb
 As&nbsp;a&nbsp;convenience,&nbsp;you&nbsp;can&nbsp;get&nbsp;a&nbsp;tuple&nbsp;of&nbsp;(lat,&nbsp;lon)&nbsp;with&nbsp;<a href="#Where">Where</a>.<a href="#Where-location">location</a>(),<br>
 and&nbsp;set&nbsp;the&nbsp;same&nbsp;data&nbsp;with&nbsp;<a href="#Where">Where</a>.setLocation(&nbsp;(lat,&nbsp;lon)&nbsp;).<br>
 &nbsp;<br>
-Similarly,&nbsp;there&nbsp;are&nbsp;methods&nbsp;to&nbsp;set&nbsp;and&nbsp;get&nbsp;only&nbsp;latitude&nbsp;and&nbsp;longtitude.<br>&nbsp;</tt></td></tr>
+Similarly,&nbsp;there&nbsp;are&nbsp;methods&nbsp;to&nbsp;set&nbsp;and&nbsp;get&nbsp;only&nbsp;latitude&nbsp;and&nbsp;longitude.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.geo.html#Where">Where</a></dd>
@@ -247,7 +247,9 @@ Methods defined here:<br>
 
 <dl><dt><a name="Where-location"><strong>location</strong></a>(self)</dt><dd><tt>(float,&nbsp;float)&nbsp;Return&nbsp;<a href="#Where">Where</a>.<a href="#Point">Point</a>.pos.text&nbsp;as&nbsp;a&nbsp;(lat,lon)&nbsp;tuple</tt></dd></dl>
 
-<dl><dt><a name="Where-longtitude"><strong>longtitude</strong></a>(self)</dt><dd><tt>(float)&nbsp;Get&nbsp;the&nbsp;longtitude&nbsp;value&nbsp;of&nbsp;the&nbsp;geo-tag.&nbsp;See&nbsp;also&nbsp;.<a href="#Where-location">location</a>()</tt></dd></dl>
+<dl><dt><a name="Where-longitude"><strong>longitude</strong></a>(self)</dt><dd><tt>(float)&nbsp;Get&nbsp;the&nbsp;longtitude&nbsp;value&nbsp;of&nbsp;the&nbsp;geo-tag.&nbsp;See&nbsp;also&nbsp;.<a href="#Where-location">location</a>()</tt></dd></dl>
+
+<dl><dt><a name="Where-longtitude"><strong>longtitude</strong></a> = <a href="#Where-longitude">longitude</a>(self)</dt></dl>
 
 <dl><dt><a name="Where-set_latitude"><strong>set_latitude</strong></a>(self, lat)</dt><dd><tt>(bool)&nbsp;Set&nbsp;the&nbsp;latitude&nbsp;value&nbsp;of&nbsp;the&nbsp;geo-tag.<br>
 &nbsp;<br>
@@ -264,12 +266,14 @@ lon&nbsp;(float):&nbsp;The&nbsp;longitude&nbsp;in&nbsp;degrees,&nbsp;from&nbsp;-
 &nbsp;<br>
 Returns&nbsp;True&nbsp;on&nbsp;success.</tt></dd></dl>
 
-<dl><dt><a name="Where-set_longtitude"><strong>set_longtitude</strong></a>(self, lon)</dt><dd><tt>(bool)&nbsp;Set&nbsp;the&nbsp;longtitude&nbsp;value&nbsp;of&nbsp;the&nbsp;geo-tag.<br>
+<dl><dt><a name="Where-set_longitude"><strong>set_longitude</strong></a>(self, lon)</dt><dd><tt>(bool)&nbsp;Set&nbsp;the&nbsp;longtitude&nbsp;value&nbsp;of&nbsp;the&nbsp;geo-tag.<br>
 &nbsp;<br>
 Args:<br>
 lat&nbsp;(float):&nbsp;The&nbsp;new&nbsp;latitude&nbsp;value<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;.<a href="#Where-set_location">set_location</a>()</tt></dd></dl>
+
+<dl><dt><a name="Where-set_longtitude"><strong>set_longtitude</strong></a> = <a href="#Where-set_longitude">set_longitude</a>(self, lon)</dt></dl>
 
 <hr>
 Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
