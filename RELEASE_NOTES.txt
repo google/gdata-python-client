@@ -1,3 +1,32 @@
+=== 1.2.3 ===
+Dec 3, 2008 (revision 585)
+
+- Added support for OAuth (thanks to Kunal Shah!). Your client can now obtain 
+    an authorization token using the OAuth protocol.
+- Added support for Secure AuthSub (thanks Eric Bidelman!). Your client can
+    digitally sign requests using RSA allowing Google service to verify that
+    the request came from your application.
+- Added a new module for parsing XML which will be used in future versions to
+    support version of the Google Data APIs protocol. This new library handles
+    versioning of XML schemas.
+- The Google Contacts API sample now pages through results.
+- Added phone number rel types using in the Google Contacts API.
+- The YouTube service module will use cElementTree if it is available. 
+    Improves XML parsing speed.
+- Fixed typo in gdata.geo, changed longtitude to longitude but kept an alias
+    for backwards compatibility.
+- Fixed Blogger's GetBlogId regular expressions to extract the ID from 
+    multiple kinds of entries.
+- Fixed type check in atom.http to allow unicode URL strings.
+- Added webmastertools test to the packaged download which fixed failures 
+    when running all data tests.
+- Improved compatibility of unit tests with Python2.3.
+- Added copies of tlslite and dependencies to support secure AuthSub and
+    OAuth.
+- Changed the default host for Google Apps API requests to 
+    apps-apis.google.com.
+
+
 === 1.2.2 ===
 Oct 15, 2008 (revision 556)
 
