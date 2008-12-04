@@ -79,7 +79,7 @@ class AppsService(gdata.service.GDataService):
   """Client for the Google Apps Provisioning service."""
 
   def __init__(self, email=None, password=None, domain=None, source=None,
-               server='www.google.com', additional_headers=None):
+               server='apps-apis.google.com', additional_headers=None):
     gdata.service.GDataService.__init__(self, email=email, password=password,
                                         service='apps', source=source,
                                         server=server,

@@ -1217,15 +1217,15 @@ NICK_ENTRY = """<?xml version="1.0" encoding="UTF-8"?>
 <atom:entry xmlns:atom="http://www.w3.org/2005/Atom"
   xmlns:apps="http://schemas.google.com/apps/2006"
   xmlns:gd="http://schemas.google.com/g/2005">
-  <atom:id>https://www.google.com/a/feeds/example.com/nickname/2.0/Foo</atom:id>
+  <atom:id>https://apps-apis.google.com/a/feeds/example.com/nickname/2.0/Foo</atom:id>
   <atom:updated>1970-01-01T00:00:00.000Z</atom:updated>
   <atom:category scheme='http://schemas.google.com/g/2005#kind'
     term='http://schemas.google.com/apps/2006#nickname'/>
   <atom:title type="text">Foo</atom:title>
   <atom:link rel="self" type="application/atom+xml"
-    href="https://www.google.com/a/feeds/example.com/nickname/2.0/Foo"/>
+    href="https://apps-apis.google.com/a/feeds/example.com/nickname/2.0/Foo"/>
   <atom:link rel="edit" type="application/atom+xml"
-    href="https://www.google.com/a/feeds/example.com/nickname/2.0/Foo"/>
+    href="https://apps-apis.google.com/a/feeds/example.com/nickname/2.0/Foo"/>
   <apps:nickname name="Foo"/>
   <apps:login userName="TestUser"/>
 </atom:entry>"""
@@ -1235,7 +1235,7 @@ NICK_FEED = """<?xml version="1.0" encoding="UTF-8"?>
   xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/"
   xmlns:apps="http://schemas.google.com/apps/2006">
   <atom:id>
-    http://www.google.com/a/feeds/example.com/nickname/2.0
+    http://apps-apis.google.com/a/feeds/example.com/nickname/2.0
   </atom:id>
   <atom:updated>1970-01-01T00:00:00.000Z</atom:updated>
   <atom:category scheme='http://schemas.google.com/g/2005#kind'
@@ -1243,39 +1243,39 @@ NICK_FEED = """<?xml version="1.0" encoding="UTF-8"?>
   <atom:title type="text">Nicknames for user SusanJones</atom:title>
   <atom:link rel='http://schemas.google.com/g/2005#feed'
     type="application/atom+xml"
-    href="http://www.google.com/a/feeds/example.com/nickname/2.0"/>
+    href="http://apps-apis.google.com/a/feeds/example.com/nickname/2.0"/>
   <atom:link rel='http://schemas.google.com/g/2005#post'
     type="application/atom+xml"
-    href="http://www.google.com/a/feeds/example.com/nickname/2.0"/>
+    href="http://apps-apis.google.com/a/feeds/example.com/nickname/2.0"/>
   <atom:link rel="self" type="application/atom+xml"
-    href="http://www.google.com/a/feeds/example.com/nickname/2.0?username=TestUser"/>
+    href="http://apps-apis.google.com/a/feeds/example.com/nickname/2.0?username=TestUser"/>
   <openSearch:startIndex>1</openSearch:startIndex>
   <openSearch:itemsPerPage>2</openSearch:itemsPerPage>
   <atom:entry>
     <atom:id>
-      http://www.google.com/a/feeds/example.com/nickname/2.0/Foo
+      http://apps-apis.google.com/a/feeds/example.com/nickname/2.0/Foo
     </atom:id>
     <atom:category scheme='http://schemas.google.com/g/2005#kind'
       term='http://schemas.google.com/apps/2006#nickname'/>
     <atom:title type="text">Foo</atom:title>
     <atom:link rel="self" type="application/atom+xml"
-      href="http://www.google.com/a/feeds/example.com/nickname/2.0/Foo"/>
+      href="http://apps-apis.google.com/a/feeds/example.com/nickname/2.0/Foo"/>
     <atom:link rel="edit" type="application/atom+xml"
-      href="http://www.google.com/a/feeds/example.com/nickname/2.0/Foo"/>
+      href="http://apps-apis.google.com/a/feeds/example.com/nickname/2.0/Foo"/>
     <apps:nickname name="Foo"/>
     <apps:login userName="TestUser"/>
   </atom:entry>
   <atom:entry>
     <atom:id>
-      http://www.google.com/a/feeds/example.com/nickname/2.0/suse
+      http://apps-apis.google.com/a/feeds/example.com/nickname/2.0/suse
     </atom:id>
     <atom:category scheme='http://schemas.google.com/g/2005#kind'
       term='http://schemas.google.com/apps/2006#nickname'/>
     <atom:title type="text">suse</atom:title>
     <atom:link rel="self" type="application/atom+xml"
-      href="http://www.google.com/a/feeds/example.com/nickname/2.0/Bar"/>
+      href="http://apps-apis.google.com/a/feeds/example.com/nickname/2.0/Bar"/>
     <atom:link rel="edit" type="application/atom+xml"
-      href="http://www.google.com/a/feeds/example.com/nickname/2.0/Bar"/>
+      href="http://apps-apis.google.com/a/feeds/example.com/nickname/2.0/Bar"/>
     <apps:nickname name="Bar"/>
     <apps:login userName="TestUser"/>
   </atom:entry>
@@ -1285,23 +1285,23 @@ USER_ENTRY = """<?xml version="1.0" encoding="UTF-8"?>
 <atom:entry xmlns:atom="http://www.w3.org/2005/Atom"
             xmlns:apps="http://schemas.google.com/apps/2006"
             xmlns:gd="http://schemas.google.com/g/2005">
-  <atom:id>https://www.google.com/a/feeds/example.com/user/2.0/TestUser</atom:id>
+  <atom:id>https://apps-apis.google.com/a/feeds/example.com/user/2.0/TestUser</atom:id>
   <atom:updated>1970-01-01T00:00:00.000Z</atom:updated>
   <atom:category scheme='http://schemas.google.com/g/2005#kind'
     term='http://schemas.google.com/apps/2006#user'/>
   <atom:title type="text">TestUser</atom:title>
   <atom:link rel="self" type="application/atom+xml"
-    href="https://www.google.com/a/feeds/example.com/user/2.0/TestUser"/>
+    href="https://apps-apis.google.com/a/feeds/example.com/user/2.0/TestUser"/>
   <atom:link rel="edit" type="application/atom+xml"
-    href="https://www.google.com/a/feeds/example.com/user/2.0/TestUser"/>
+    href="https://apps-apis.google.com/a/feeds/example.com/user/2.0/TestUser"/>
   <apps:login userName="TestUser" password="password" suspended="false"
     ipWhitelisted='false' hashFunctionName="SHA-1"/>
   <apps:name familyName="Test" givenName="User"/>
   <apps:quota limit="1024"/>
   <gd:feedLink rel='http://schemas.google.com/apps/2006#user.nicknames'
-    href="https://www.google.com/a/feeds/example.com/nickname/2.0?username=Test-3121"/>
+    href="https://apps-apis.google.com/a/feeds/example.com/nickname/2.0?username=Test-3121"/>
   <gd:feedLink rel='http://schemas.google.com/apps/2006#user.emailLists'
-    href="https://www.google.com/a/feeds/example.com/emailList/2.0?recipient=testlist@example.com"/>
+    href="https://apps-apis.google.com/a/feeds/example.com/emailList/2.0?recipient=testlist@example.com"/>
 </atom:entry>"""
 
 USER_FEED = """<?xml version="1.0" encoding="UTF-8"?>
@@ -1310,64 +1310,64 @@ USER_FEED = """<?xml version="1.0" encoding="UTF-8"?>
   xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/"
   xmlns:gd="http://schemas.google.com/g/2005">
     <atom:id>
-        http://www.google.com/a/feeds/example.com/user/2.0
+        http://apps-apis.google.com/a/feeds/example.com/user/2.0
     </atom:id>
     <atom:updated>1970-01-01T00:00:00.000Z</atom:updated>
     <atom:category scheme='http://schemas.google.com/g/2005#kind' 
         term='http://schemas.google.com/apps/2006#user'/>
     <atom:title type="text">Users</atom:title>
     <atom:link rel="next" type="application/atom+xml" 
-        href="http://www.google.com/a/feeds/example.com/user/2.0?startUsername=john"/>
+        href="http://apps-apis.google.com/a/feeds/example.com/user/2.0?startUsername=john"/>
     <atom:link rel='http://schemas.google.com/g/2005#feed' 
         type="application/atom+xml" 
-        href="http://www.google.com/a/feeds/example.com/user/2.0"/>
+        href="http://apps-apis.google.com/a/feeds/example.com/user/2.0"/>
     <atom:link rel='http://schemas.google.com/g/2005#post'
         type="application/atom+xml"
-        href="http://www.google.com/a/feeds/example.com/user/2.0"/>
+        href="http://apps-apis.google.com/a/feeds/example.com/user/2.0"/>
     <atom:link rel="self" type="application/atom+xml" 
-        href="http://www.google.com/a/feeds/example.com/user/2.0"/>
+        href="http://apps-apis.google.com/a/feeds/example.com/user/2.0"/>
     <openSearch:startIndex>1</openSearch:startIndex>
     <atom:entry>
         <atom:id>
-            http://www.google.com/a/feeds/example.com/user/2.0/TestUser
+            http://apps-apis.google.com/a/feeds/example.com/user/2.0/TestUser
         </atom:id>
         <atom:category scheme='http://schemas.google.com/g/2005#kind'
             term='http://schemas.google.com/apps/2006#user'/>
         <atom:title type="text">TestUser</atom:title>
         <atom:link rel="self" type="application/atom+xml" 
-            href="http://www.google.com/a/feeds/example.com/user/2.0/TestUser"/>
+            href="http://apps-apis.google.com/a/feeds/example.com/user/2.0/TestUser"/>
         <atom:link rel="edit" type="application/atom+xml"
-            href="http://www.google.com/a/feeds/example.com/user/2.0/TestUser"/>
+            href="http://apps-apis.google.com/a/feeds/example.com/user/2.0/TestUser"/>
         <gd:who rel='http://schemas.google.com/apps/2006#user.recipient' 
             email="TestUser@example.com"/>
         <apps:login userName="TestUser" suspended="false"/>
         <apps:quota limit="2048"/>
         <apps:name familyName="Test" givenName="User"/>
         <gd:feedLink rel='http://schemas.google.com/apps/2006#user.nicknames'
-            href="http://www.google.com/a/feeds/example.com/nickname/2.0?username=TestUser"/>
+            href="http://apps-apis.google.com/a/feeds/example.com/nickname/2.0?username=TestUser"/>
         <gd:feedLink rel='http://schemas.google.com/apps/2006#user.emailLists'
-            href="http://www.google.com/a/feeds/example.com/emailList/2.0?recipient=TestUser@example.com"/>
+            href="http://apps-apis.google.com/a/feeds/example.com/emailList/2.0?recipient=TestUser@example.com"/>
     </atom:entry>
     <atom:entry>
         <atom:id>
-            http://www.google.com/a/feeds/example.com/user/2.0/JohnSmith
+            http://apps-apis.google.com/a/feeds/example.com/user/2.0/JohnSmith
         </atom:id>
         <atom:category scheme='http://schemas.google.com/g/2005#kind'
             term='http://schemas.google.com/apps/2006#user'/>
         <atom:title type="text">JohnSmith</atom:title>
         <atom:link rel="self" type="application/atom+xml" 
-            href="http://www.google.com/a/feeds/example.com/user/2.0/JohnSmith"/>
+            href="http://apps-apis.google.com/a/feeds/example.com/user/2.0/JohnSmith"/>
         <atom:link rel="edit" type="application/atom+xml"
-            href="http://www.google.com/a/feeds/example.com/user/2.0/JohnSmith"/>
+            href="http://apps-apis.google.com/a/feeds/example.com/user/2.0/JohnSmith"/>
         <gd:who rel='http://schemas.google.com/apps/2006#user.recipient'
             email="JohnSmith@example.com"/>
         <apps:login userName="JohnSmith" suspended="false"/>
         <apps:quota limit="2048"/>
         <apps:name familyName="Smith" givenName="John"/>
         <gd:feedLink rel='http://schemas.google.com/apps/2006#user.nicknames'
-            href="http://www.google.com/a/feeds/example.com/nickname/2.0?username=JohnSmith"/>
+            href="http://apps-apis.google.com/a/feeds/example.com/nickname/2.0?username=JohnSmith"/>
         <gd:feedLink rel='http://schemas.google.com/apps/2006#user.emailLists'
-            href="http://www.google.com/a/feeds/example.com/emailList/2.0?recipient=JohnSmith@example.com"/>
+            href="http://apps-apis.google.com/a/feeds/example.com/emailList/2.0?recipient=JohnSmith@example.com"/>
     </atom:entry>
 </atom:feed>"""
 
@@ -1376,19 +1376,19 @@ EMAIL_LIST_ENTRY = """<?xml version="1.0" encoding="UTF-8"?>
   xmlns:apps="http://schemas.google.com/apps/2006"
   xmlns:gd="http://schemas.google.com/g/2005">
     <atom:id>
-      https://www.google.com/a/feeds/example.com/emailList/2.0/testlist
+      https://apps-apis.google.com/a/feeds/example.com/emailList/2.0/testlist
     </atom:id>
     <atom:updated>1970-01-01T00:00:00.000Z</atom:updated>
     <atom:category scheme='http://schemas.google.com/g/2005#kind'
       term='http://schemas.google.com/apps/2006#emailList'/>
     <atom:title type="text">testlist</atom:title>
     <atom:link rel="self" type="application/atom+xml" 
-      href="https://www.google.com/a/feeds/example.com/emailList/2.0/testlist"/>
+      href="https://apps-apis.google.com/a/feeds/example.com/emailList/2.0/testlist"/>
     <atom:link rel="edit" type="application/atom+xml" 
-      href="https://www.google.com/a/feeds/example.com/emailList/2.0/testlist"/>
+      href="https://apps-apis.google.com/a/feeds/example.com/emailList/2.0/testlist"/>
     <apps:emailList name="testlist"/>
     <gd:feedLink rel='http://schemas.google.com/apps/2006#emailList.recipients'
-        href="http://www.google.com/a/feeds/example.com/emailList/2.0/testlist/recipient/"/>
+        href="http://apps-apis.google.com/a/feeds/example.com/emailList/2.0/testlist/recipient/"/>
 </atom:entry>"""
 
 EMAIL_LIST_FEED = """<?xml version="1.0" encoding="UTF-8"?>
@@ -1397,54 +1397,54 @@ EMAIL_LIST_FEED = """<?xml version="1.0" encoding="UTF-8"?>
   xmlns:apps="http://schemas.google.com/apps/2006"
   xmlns:gd="http://schemas.google.com/g/2005">
     <atom:id>
-        http://www.google.com/a/feeds/example.com/emailList/2.0
+        http://apps-apis.google.com/a/feeds/example.com/emailList/2.0
     </atom:id>
     <atom:updated>1970-01-01T00:00:00.000Z</atom:updated>
     <atom:category scheme='http://schemas.google.com/g/2005#kind'
         term='http://schemas.google.com/apps/2006#emailList'/>
     <atom:title type="text">EmailLists</atom:title>
     <atom:link rel="next" type="application/atom+xml" 
-        href="http://www.google.com/a/feeds/example.com/emailList/2.0?startEmailListName=john"/>
+        href="http://apps-apis.google.com/a/feeds/example.com/emailList/2.0?startEmailListName=john"/>
     <atom:link rel='http://schemas.google.com/g/2005#feed'
         type="application/atom+xml" 
-        href="http://www.google.com/a/feeds/example.com/emailList/2.0"/>
+        href="http://apps-apis.google.com/a/feeds/example.com/emailList/2.0"/>
     <atom:link rel='http://schemas.google.com/g/2005#post' 
         type="application/atom+xml"
-        href="http://www.google.com/a/feeds/example.com/emailList/2.0"/>
+        href="http://apps-apis.google.com/a/feeds/example.com/emailList/2.0"/>
     <atom:link rel="self" type="application/atom+xml" 
-        href="http://www.google.com/a/feeds/example.com/emailList/2.0"/>
+        href="http://apps-apis.google.com/a/feeds/example.com/emailList/2.0"/>
     <openSearch:startIndex>1</openSearch:startIndex>
     <atom:entry>
         <atom:id>
-            http://www.google.com/a/feeds/example.com/emailList/2.0/us-sales
+            http://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-sales
         </atom:id>
         <atom:updated>1970-01-01T00:00:00.000Z</atom:updated>
         <atom:category scheme='http://schemas.google.com/g/2005#kind'
             term='http://schemas.google.com/apps/2006#emailList'/>
         <atom:title type="text">us-sales</atom:title>
         <atom:link rel="self" type="application/atom+xml" 
-            href="http://www.google.com/a/feeds/example.com/emailList/2.0/us-sales"/>
+            href="http://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-sales"/>
         <atom:link rel="edit" type="application/atom+xml"
-            href="http://www.google.com/a/feeds/example.com/emailList/2.0/us-sales"/>
+            href="http://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-sales"/>
         <apps:emailList name="us-sales"/>
         <gd:feedLink rel='http://schemas.google.com/apps/2006#emailList.recipients'
-            href="http://www.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/"/>
+            href="http://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/"/>
     </atom:entry>
     <atom:entry>
         <atom:id>
-            http://www.google.com/a/feeds/example.com/emailList/2.0/us-eng
+            http://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-eng
         </atom:id>
         <atom:updated>1970-01-01T00:00:00.000Z</atom:updated>
         <atom:category scheme='http://schemas.google.com/g/2005#kind'
             term='http://schemas.google.com/apps/2006#emailList'/>
         <atom:title type="text">us-eng</atom:title>
         <atom:link rel="self" type="application/atom+xml" 
-            href="http://www.google.com/a/feeds/example.com/emailList/2.0/us-eng"/>
+            href="http://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-eng"/>
         <atom:link rel="edit" type="application/atom+xml"
-            href="http://www.google.com/a/feeds/example.com/emailList/2.0/us-eng"/>
+            href="http://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-eng"/>
         <apps:emailList name="us-eng"/>
         <gd:feedLink rel='http://schemas.google.com/apps/2006#emailList.recipients'
-            href="http://www.google.com/a/feeds/example.com/emailList/2.0/us-eng/recipient/"/>
+            href="http://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-eng/recipient/"/>
     </atom:entry>
 </atom:feed>"""
 
@@ -1452,15 +1452,15 @@ EMAIL_LIST_RECIPIENT_ENTRY = """<?xml version="1.0" encoding="UTF-8"?>
 <atom:entry xmlns:atom="http://www.w3.org/2005/Atom"
   xmlns:apps="http://schemas.google.com/apps/2006"
   xmlns:gd="http://schemas.google.com/g/2005">
-    <atom:id>https://www.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/TestUser%40example.com</atom:id>
+    <atom:id>https://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/TestUser%40example.com</atom:id>
     <atom:updated>1970-01-01T00:00:00.000Z</atom:updated>
     <atom:category scheme='http://schemas.google.com/g/2005#kind'
         term='http://schemas.google.com/apps/2006#emailList.recipient'/>
     <atom:title type="text">TestUser</atom:title>
     <atom:link rel="self" type="application/atom+xml" 
-        href="https://www.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/TestUser%40example.com"/>
+        href="https://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/TestUser%40example.com"/>
     <atom:link rel="edit" type="application/atom+xml" 
-        href="https://www.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/TestUser%40example.com"/>
+        href="https://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/TestUser%40example.com"/>
     <gd:who email="TestUser@example.com"/>
 </atom:entry>"""
 
@@ -1469,49 +1469,49 @@ EMAIL_LIST_RECIPIENT_FEED = """<?xml version="1.0" encoding="UTF-8"?>
   xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/"
   xmlns:gd="http://schemas.google.com/g/2005">
     <atom:id>
-        http://www.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient
+        http://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient
     </atom:id>
     <atom:updated>1970-01-01T00:00:00.000Z</atom:updated>
     <atom:category scheme='http://schemas.google.com/g/2005#kind'
         term='http://schemas.google.com/apps/2006#emailList.recipient'/>
     <atom:title type="text">Recipients for email list us-sales</atom:title>
     <atom:link rel="next" type="application/atom+xml" 
-        href="http://www.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/?startRecipient=terry@example.com"/>
+        href="http://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/?startRecipient=terry@example.com"/>
     <atom:link rel='http://schemas.google.com/g/2005#feed'
         type="application/atom+xml" 
-        href="http://www.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient"/>
+        href="http://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient"/>
     <atom:link rel='http://schemas.google.com/g/2005#post'
         type="application/atom+xml"
-        href="http://www.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient"/>
+        href="http://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient"/>
     <atom:link rel="self" type="application/atom+xml" 
-        href="http://www.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient"/>
+        href="http://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient"/>
     <openSearch:startIndex>1</openSearch:startIndex>
     <atom:entry>
         <atom:id>
-            http://www.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/joe%40example.com
+            http://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/joe%40example.com
         </atom:id>
         <atom:updated>1970-01-01T00:00:00.000Z</atom:updated>
         <atom:category scheme='http://schemas.google.com/g/2005#kind'
             term='http://schemas.google.com/apps/2006#emailList.recipient'/>
         <atom:title type="text">joe@example.com</atom:title>
         <atom:link rel="self" type="application/atom+xml" 
-            href="http://www.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/joe%40example.com"/>
+            href="http://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/joe%40example.com"/>
         <atom:link rel="edit" type="application/atom+xml"
-            href="http://www.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/joe%40example.com"/>
+            href="http://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/joe%40example.com"/>
         <gd:who email="joe@example.com"/>
     </atom:entry>
     <atom:entry>
         <atom:id>
-            http://www.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/susan%40example.com
+            http://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/susan%40example.com
         </atom:id>
         <atom:updated>1970-01-01T00:00:00.000Z</atom:updated>
         <atom:category scheme='http://schemas.google.com/g/2005#kind'
             term='http://schemas.google.com/apps/2006#emailList.recipient'/>
         <atom:title type="text">susan@example.com</atom:title>
         <atom:link rel="self" type="application/atom+xml" 
-            href="http://www.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/susan%40example.com"/>
+            href="http://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/susan%40example.com"/>
         <atom:link rel="edit" type="application/atom+xml"
-            href="http://www.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/susan%40example.com"/>
+            href="http://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-sales/recipient/susan%40example.com"/>
         <gd:who email="susan@example.com"/>
     </atom:entry>
 </atom:feed>"""

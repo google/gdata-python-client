@@ -169,7 +169,7 @@ class AppsNicknameFeedTest(unittest.TestCase):
         "atom.Id: %s" % self.nick_feed.id)
 
     self.assertEquals(self.nick_feed.id.text,
-                      "http://www.google.com/a/feeds/example.com/nickname/2.0")
+                      "http://apps-apis.google.com/a/feeds/example.com/nickname/2.0")
 
   def testStartItem(self):
     """Tests the existence of <openSearch:startIndex> in NicknameFeed
@@ -228,7 +228,7 @@ class AppsEmailListRecipientEntryTest(unittest.TestCase):
 
     self.assertEquals(
       self.rcpt_entry.id.text,
-      'https://www.google.com/a/feeds/example.com/emailList/2.0/us-sales/' +
+      'https://apps-apis.google.com/a/feeds/example.com/emailList/2.0/us-sales/' +
       'recipient/TestUser%40example.com')
 
   def testUpdated(self):
@@ -305,7 +305,7 @@ class AppsEmailListEntryTest(unittest.TestCase):
 
     self.assertEquals(
       self.list_entry.id.text,
-      'https://www.google.com/a/feeds/example.com/emailList/2.0/testlist')
+      'https://apps-apis.google.com/a/feeds/example.com/emailList/2.0/testlist')
 
   def testUpdated(self):
     """Tests the existence of <atom:updated> in EmailListEntry and
@@ -374,7 +374,7 @@ class AppsEmailListEntryTest(unittest.TestCase):
                       'http://schemas.google.com/apps/2006#' +
                       'emailList.recipients')
     self.assertEquals(self.list_entry.feed_link[0].href,
-                      'http://www.google.com/a/feeds/example.com/emailList/' +
+                      'http://apps-apis.google.com/a/feeds/example.com/emailList/' +
                       '2.0/testlist/recipient/')
 
 class AppsNicknameEntryTest(unittest.TestCase):
@@ -393,7 +393,7 @@ class AppsNicknameEntryTest(unittest.TestCase):
 
     self.assertEquals(
       self.nick_entry.id.text,
-      'https://www.google.com/a/feeds/example.com/nickname/2.0/Foo')
+      'https://apps-apis.google.com/a/feeds/example.com/nickname/2.0/Foo')
 
   def testCategory(self):
     """Tests the existence of <atom:category> in NicknameEntry and
@@ -462,7 +462,7 @@ class AppsUserEntryTest(unittest.TestCase):
 
     self.assertEquals(
       self.user_entry.id.text,
-      'https://www.google.com/a/feeds/example.com/user/2.0/TestUser')
+      'https://apps-apis.google.com/a/feeds/example.com/user/2.0/TestUser')
 
   def testUpdated(self):
     """Tests the existence of <atom:updated> in UserEntry and verifies
@@ -554,12 +554,12 @@ class AppsUserEntryTest(unittest.TestCase):
     self.assertEquals(self.user_entry.feed_link[0].rel,
                       'http://schemas.google.com/apps/2006#user.nicknames')
     self.assertEquals(self.user_entry.feed_link[0].href,
-                      'https://www.google.com/a/feeds/example.com/nickname/' +
+                      'https://apps-apis.google.com/a/feeds/example.com/nickname/' +
                       '2.0?username=Test-3121')
     self.assertEquals(self.user_entry.feed_link[1].rel,
                       'http://schemas.google.com/apps/2006#user.emailLists')
     self.assertEquals(self.user_entry.feed_link[1].href,
-                      'https://www.google.com/a/feeds/example.com/emailList/' +
+                      'https://apps-apis.google.com/a/feeds/example.com/emailList/' +
                       '2.0?recipient=testlist@example.com')
 
   def testUpdate(self):
