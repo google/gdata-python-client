@@ -590,6 +590,38 @@ class UtfParsingTest(unittest.TestCase):
     self.assert_(atom_entry.title.type == u'\u03B1\u03BB\u03C6\u03B1'.encode('utf-8'))
     self.assert_(atom_entry.title.text == u'\u03B1\u03BB\u03C6\u03B1'.encode('utf-8'))
 
+    # Setting object members to unicode strings is supported even if 
+    # MEMBER_STRING_ENCODING is set 'utf-8' (should it be?)
+    atom_entry.title.type = u'\u03B1\u03BB\u03C6\u03B1'
+    xml = atom_entry.ToString()
+    self.assert_(u'\u03B1\u03BB\u03C6\u03B1'.encode('utf-8') in xml)
+
+    # Make sure that we can use plain text when MEMBER_STRING_ENCODING is utf8
+    atom_entry.title.type = "plain text"
+    atom_entry.title.text = "more text"
+    xml = atom_entry.ToString()
+    self.assert_("plain text" in xml)
+    self.assert_("more text" in xml)
+
+    # Test something else than utf-8
+    atom.MEMBER_STRING_ENCODING = 'iso8859_7'
+    atom_entry = atom.EntryFromString(self.test_xml)
+    self.assert_(atom_entry.title.type == u'\u03B1\u03BB\u03C6\u03B1'.encode('iso8859_7'))
+    self.assert_(atom_entry.title.text == u'\u03B1\u03BB\u03C6\u03B1'.encode('iso8859_7'))
+
+    # Test using unicode strings directly for object members
+    atom.MEMBER_STRING_ENCODING = unicode
+    atom_entry = atom.EntryFromString(self.test_xml)
+    self.assert_(atom_entry.title.type == u'\u03B1\u03BB\u03C6\u03B1')
+    self.assert_(atom_entry.title.text == u'\u03B1\u03BB\u03C6\u03B1')
+    
+    # Make sure that we can use plain text when MEMBER_STRING_ENCODING is unicode
+    atom_entry.title.type = "plain text"
+    atom_entry.title.text = "more text"
+    xml = atom_entry.ToString()
+    self.assert_("plain text" in xml)
+    self.assert_("more text" in xml)
+
   def testConvertExampleXML(self):
     try:
       entry = atom.CreateClassFromXMLString(atom.Entry, test_data.GBASE_STRING_ENCODING_ENTRY)

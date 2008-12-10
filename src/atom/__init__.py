@@ -65,9 +65,11 @@ APP_TEMPLATE = '{http://purl.org/atom/app#}%s'
 # This encoding is used for converting strings before translating the XML
 # into an object.
 XML_STRING_ENCODING = 'utf-8'
-# The desired string encoding for object members.
+# The desired string encoding for object members. set or monkey-patch to 
+# unicode if you want object members to be Python unicode strings, instead of
+# encoded strings
 MEMBER_STRING_ENCODING = 'utf-8'
-
+#MEMBER_STRING_ENCODING = unicode
 
 def CreateClassFromXMLString(target_class, xml_string, string_encoding=None):
   """Creates an instance of the target class from the string contents.
@@ -147,7 +149,10 @@ class ExtensionContainer(object):
       self._ConvertElementAttributeToMember(attribute, value)
     # Encode the text string according to the desired encoding type. (UTF-8)
     if tree.text:
-      self.text = tree.text.encode(MEMBER_STRING_ENCODING)
+      if MEMBER_STRING_ENCODING is unicode:
+        self.text = tree.text
+      else:
+        self.text = tree.text.encode(MEMBER_STRING_ENCODING)
     
   def _ConvertElementTreeToMember(self, child_tree, current_class=None):
     self.extension_elements.append(_ExtensionElementFromElementTree(
@@ -156,7 +161,10 @@ class ExtensionContainer(object):
   def _ConvertElementAttributeToMember(self, attribute, value):
     # Encode the attribute value's string with the desired type Default UTF-8
     if value:
-      self.extension_attributes[attribute] = value.encode(
+      if MEMBER_STRING_ENCODING is unicode:
+        self.extension_attributes[attribute] = value
+      else:
+        self.extension_attributes[attribute] = value.encode(
           MEMBER_STRING_ENCODING)
 
   # One method to create an ElementTree from an object
@@ -165,15 +173,16 @@ class ExtensionContainer(object):
       child._BecomeChildElement(tree)
     for attribute, value in self.extension_attributes.iteritems():
       if value:
-        # Decode the value from the desired encoding (default UTF-8).
-        if not isinstance(value, unicode):
-          tree.attrib[attribute] = value.decode(MEMBER_STRING_ENCODING)
-        else:
+        if isinstance(value, unicode) or MEMBER_STRING_ENCODING is unicode:
           tree.attrib[attribute] = value
-    if self.text and not isinstance(self.text, unicode):
-      tree.text = self.text.decode(MEMBER_STRING_ENCODING)
-    else:
-      tree.text = self.text 
+        else:
+          # Decode the value from the desired encoding (default UTF-8).
+          tree.attrib[attribute] = value.decode(MEMBER_STRING_ENCODING)
+    if self.text:
+      if isinstance(self.text, unicode) or MEMBER_STRING_ENCODING is unicode:
+        tree.text = self.text 
+      else:
+        tree.text = self.text.decode(MEMBER_STRING_ENCODING)
 
   def FindExtensions(self, tag=None, namespace=None):
     """Searches extension elements for child nodes with the desired name.
@@ -252,7 +261,10 @@ class AtomBase(ExtensionContainer):
       # desired value (using self.__dict__).
       if value:
         # Encode the string to capture non-ascii characters (default UTF-8)
-        setattr(self, self.__class__._attributes[attribute], 
+        if MEMBER_STRING_ENCODING is unicode:
+          setattr(self, self.__class__._attributes[attribute], value)
+        else:
+          setattr(self, self.__class__._attributes[attribute], 
                 value.encode(MEMBER_STRING_ENCODING))
     else:
       ExtensionContainer._ConvertElementAttributeToMember(self, attribute, 
@@ -278,10 +290,10 @@ class AtomBase(ExtensionContainer):
     for xml_attribute, member_name in self.__class__._attributes.iteritems():
       member = getattr(self, member_name)
       if member is not None:
-        if not isinstance(member, unicode):
-          tree.attrib[xml_attribute] = member.decode(MEMBER_STRING_ENCODING)
-        else:
+        if isinstance(member, unicode) or MEMBER_STRING_ENCODING is unicode:
           tree.attrib[xml_attribute] = member
+        else:
+          tree.attrib[xml_attribute] = member.decode(MEMBER_STRING_ENCODING)
     # Lastly, call the ExtensionContainers's _AddMembersToElementTree to 
     # convert any extension attributes.
     ExtensionContainer._AddMembersToElementTree(self, tree)
