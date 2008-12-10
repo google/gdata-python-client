@@ -23,9 +23,9 @@ setup(
     version='1.2.3',
     description='Python client library for Google data APIs',
     long_description = """\
-The Google data Python client library makes it easy to access data
-through the Google data APIs. This library provides data model and
-service modules for the the following Google data services:
+The Google data Python client library makes it easy to interact with
+Google services through the Google Data APIs. This library provides data 
+models and service modules for the the following Google data services:
 - Google Calendar data API
 - Google Contacts data API
 - Google Spreadsheets data API
@@ -42,9 +42,9 @@ service modules for the the following Google data services:
 - core Google data API functionality 
 The core Google data code provides sufficient functionality to use this 
 library with any Google data API (even if a module hasn't been written for 
-it yet). For example, this client can be used with the Notebook API. 
-This library may also be used with any Atom Publishing Protocol
-service.
+it yet). For example, this client can be used with the Notebook API and the 
+Google Health API. This library may also be used with any Atom Publishing 
+Protocol service.
 """,
     author='Jeffrey Scudder',
     author_email='api.jscudder@gmail.com',
