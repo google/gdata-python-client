@@ -367,7 +367,9 @@ class GDataService(atom.service.AtomService):
           oauth_input_params=self._oauth_input_params)
       self.SetOAuthToken(oauth_token)
   
-  def FetchOAuthRequestToken(self, scopes=None, extra_parameters=None):
+  def FetchOAuthRequestToken(self, scopes=None, extra_parameters=None,
+                             request_url='%s/accounts/OAuthGetRequestToken' % \
+                             AUTH_SERVER_HOST):
     """Fetches OAuth request token and returns it.
     
     Args:
@@ -381,6 +383,8 @@ class GDataService(atom.service.AtomService):
           default parameters will be overwritten. For e.g. a default parameter
           oauth_version 1.0 can be overwritten if
           extra_parameters = {'oauth_version': '2.0'}
+      request_url: Request token URL. The default is
+          'https://www.google.com/accounts/OAuthGetRequestToken'.
       
     Returns:
       The fetched request token as a gdata.auth.OAuthToken object.
@@ -395,7 +399,7 @@ class GDataService(atom.service.AtomService):
       scopes = [scopes,]
     request_token_url = gdata.auth.GenerateOAuthRequestTokenUrl(
         self._oauth_input_params, scopes,
-        request_token_url='%s/accounts/OAuthGetRequestToken' % AUTH_SERVER_HOST,
+        request_token_url=request_url,
         extra_parameters=extra_parameters)
     response = self.http_client.request('GET', str(request_token_url))
     if response.status == 200:
@@ -432,7 +436,8 @@ class GDataService(atom.service.AtomService):
   def GenerateOAuthAuthorizationURL(
       self, request_token=None, callback_url=None, extra_params=None,
       include_scopes_in_callback=False,
-      scopes_param_prefix=OAUTH_SCOPE_URL_PARAM_NAME):
+      scopes_param_prefix=OAUTH_SCOPE_URL_PARAM_NAME,
+      request_url='%s/accounts/OAuthAuthorizeToken' % AUTH_SERVER_HOST):
     """Generates URL at which user will login to authorize the request token.
     
     Args:
@@ -455,7 +460,8 @@ class GDataService(atom.service.AtomService):
           parameter key which maps to the list of valid scopes for the token.
           This URL parameter will be included in the callback URL along with
           the scopes of the token as value if include_scopes_in_callback=True.
-          
+      request_url: Authorization URL. The default is
+          'https://www.google.com/accounts/OAuthAuthorizeToken'.
     Returns:
       A string URL at which the user is required to login.
     
@@ -478,13 +484,14 @@ class GDataService(atom.service.AtomService):
       raise NonOAuthToken
     return str(gdata.auth.GenerateOAuthAuthorizationUrl(
         request_token,
-        authorization_url='%s/accounts/OAuthAuthorizeToken' % AUTH_SERVER_HOST,
+        authorization_url=request_url,
         callback_url=callback_url, extra_params=extra_params,
         include_scopes_in_callback=include_scopes_in_callback,
         scopes_param_prefix=scopes_param_prefix))   
   
   def UpgradeToOAuthAccessToken(self, authorized_request_token=None,
-                                oauth_version='1.0'):
+                                request_url='%s/accounts/OAuthGetAccessToken' \
+                                % AUTH_SERVER_HOST, oauth_version='1.0'):
     """Upgrades the authorized request token to an access token.
     
     Args:
@@ -495,6 +502,8 @@ class GDataService(atom.service.AtomService):
       oauth_version: str (default='1.0') oauth_version parameter. All other
           'oauth_' parameters are added by default. This parameter too, is
           added by default but here you can override it's value.
+      request_url: Access token URL. The default is
+          'https://www.google.com/accounts/OAuthGetAccessToken'.
           
     Raises:
       NonOAuthToken if the user's authorized request token is not an OAuth
@@ -519,7 +528,7 @@ class GDataService(atom.service.AtomService):
     access_token_url = gdata.auth.GenerateOAuthAccessTokenUrl(
         authorized_request_token,
         self._oauth_input_params,
-        access_token_url='%s/accounts/OAuthGetAccessToken' % AUTH_SERVER_HOST,
+        access_token_url=request_url,
         oauth_version=oauth_version)
     response = self.http_client.request('GET', str(access_token_url))
     if response.status == 200:
@@ -532,9 +541,12 @@ class GDataService(atom.service.AtomService):
                                 'reason': 'Non 200 response on upgrade',
                                 'body': response.read()})      
   
-  def RevokeOAuthToken(self):
+  def RevokeOAuthToken(self, request_url='%s/accounts/AuthSubRevokeToken' % \
+                       AUTH_SERVER_HOST):
     """Revokes an existing OAuth token.
-    
+
+    request_url: Token revoke URL. The default is
+          'https://www.google.com/accounts/AuthSubRevokeToken'.
     Raises:
       NonOAuthToken if the user's auth token is not an OAuth token.
       RevokingOAuthTokenFailed if request for revoking an OAuth token failed.
@@ -544,8 +556,7 @@ class GDataService(atom.service.AtomService):
     if not isinstance(token, gdata.auth.OAuthToken):
       raise NonOAuthToken
 
-    response = token.perform_request(self.http_client, 'GET', 
-        AUTH_SERVER_HOST + '/accounts/AuthSubRevokeToken', 
+    response = token.perform_request(self.http_client, 'GET', request_url,
         headers={'Content-Type':'application/x-www-form-urlencoded'})
     if response.status == 200:
       self.token_store.remove_token(token)
