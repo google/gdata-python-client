@@ -479,6 +479,42 @@ class FeedTest(unittest.TestCase):
     self.assert_(new_feed.generator.text == 'gen')    
     self.assert_(new_feed.entry[0].author[0].name.text == 'entry author')
 
+  def testPreserveEntryOrder(self):
+    test_xml = (
+        '<feed xmlns="http://www.w3.org/2005/Atom">'
+          '<entry><id>0</id></entry>'
+          '<entry><id>1</id></entry>'
+          '<title>Testing Order</title>'
+          '<entry><id>2</id></entry>'
+          '<entry><id>3</id></entry>'
+          '<entry><id>4</id></entry>'
+          '<entry><id>5</id></entry>'
+          '<entry><id>6</id></entry>'
+          '<entry><id>7</id></entry>'
+          '<author/>'
+          '<entry><id>8</id></entry>'
+          '<id>feed_id</id>'
+          '<entry><id>9</id></entry>'
+        '</feed>')
+    feed = atom.FeedFromString(test_xml)
+    for i in xrange(10):
+      self.assert_(feed.entry[i].id.text == str(i))
+    feed = atom.FeedFromString(feed.ToString())
+    for i in xrange(10):
+      self.assert_(feed.entry[i].id.text == str(i))
+    temp = feed.entry[3]
+    feed.entry[3] = feed.entry[4]
+    feed.entry[4] = temp
+    self.assert_(feed.entry[2].id.text == '2')
+    self.assert_(feed.entry[3].id.text == '4')
+    self.assert_(feed.entry[4].id.text == '3')
+    self.assert_(feed.entry[5].id.text == '5')
+    feed = atom.FeedFromString(feed.ToString())
+    self.assert_(feed.entry[2].id.text == '2')
+    self.assert_(feed.entry[3].id.text == '4')
+    self.assert_(feed.entry[4].id.text == '3')
+    self.assert_(feed.entry[5].id.text == '5')
+
 
 class ContentEntryParentTest(unittest.TestCase):
   """The test accesses hidden methods in atom.FeedEntryParent"""
