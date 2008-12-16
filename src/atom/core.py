@@ -62,7 +62,7 @@ class XmlElement(object):
     foo = SomeElement - indicates an XML child element
     foo = [AnElement] - indicates a repeating XML child element, each instance
         will be stored in a list in this member
-    foo = ('att1', '{http://example.com/namespace}att2' - indicates an XML
+    foo = ('att1', '{http://example.com/namespace}att2') - indicates an XML
         attribute which has different parsing rules in different versions of 
         the protocol. Version 1 of the XML parsing rules will look for an
         attribute with the qname 'att1' but verion 2 of the parsing rules will
