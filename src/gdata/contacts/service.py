@@ -43,18 +43,27 @@ class RequestError(Error):
   pass
 
 class ContactsService(gdata.service.GDataService):
-  """Client for the Google Contats service."""
+  """Client for the Google Contacts service."""
 
-  def __init__(self, email=None, password=None, source=None, 
-               server='www.google.com', 
-               additional_headers=None):
+  def __init__(self, email=None, password=None, source=None,
+               server='www.google.com', **kwargs):
+    """Creates a client for the Contacts service.
+
+    Args:
+      email: string (optional) The user's email address, used for
+          authentication.
+      password: string (optional) The user's password.
+      source: string (optional) The name of the user's application.
+      server: string (optional) The name of the server to which a connection
+          will be opened. Default value: 'www.google.com'.
+      **kwargs: The other parameters to pass to gdata.service.GDataService
+          constructor.
+    """
     gdata.service.GDataService.__init__(self, email=email, password=password,
-                                        service='cp', source=source, 
-                                        server=server, 
-                                        additional_headers=additional_headers)
+                                        service='cp', source=source,
+                                        server=server, **kwargs)
 
-  def GetContactsFeed(self, 
-      uri='http://www.google.com/m8/feeds/contacts/default/full'):
+  def GetContactsFeed(self, uri='/m8/feeds/contacts/default/full'):
     return self.Get(uri, converter=gdata.contacts.ContactsFeedFromString)
 
   def GetContact(self, uri):
@@ -108,12 +117,9 @@ class ContactsService(gdata.service.GDataService):
          'reason': HTTP reason from the server, 
          'body': HTTP body of the server's response}
     """
-    url_prefix = 'http://%s/' % self.server
-    if edit_uri.startswith(url_prefix):
-      edit_uri = edit_uri[len(url_prefix):]
-    return self.Put(updated_contact, '/%s' % edit_uri,
-                    url_params=url_params, 
-                    escape_params=escape_params, 
+    return self.Put(updated_contact, self.__CleanUri(edit_uri),
+                    url_params=url_params,
+                    escape_params=escape_params,
                     converter=gdata.contacts.ContactEntryFromString)
 
   def DeleteContact(self, edit_uri, extra_headers=None, 
@@ -136,14 +142,10 @@ class ContactsService(gdata.service.GDataService):
          'reason': HTTP reason from the server, 
          'body': HTTP body of the server's response}
     """
-    url_prefix = 'http://%s/' % self.server
-    if edit_uri.startswith(url_prefix):
-      edit_uri = edit_uri[len(url_prefix):]
-    return self.Delete('/%s' % edit_uri,
+    return self.Delete(self.__CleanUri(edit_uri),
                        url_params=url_params, escape_params=escape_params)
 
-  def GetGroupsFeed(self,
-      uri='http://www.google.com/m8/feeds/groups/default/full'):
+  def GetGroupsFeed(self, uri='/m8/feeds/groups/default/full'):
     return self.Get(uri, converter=gdata.contacts.GroupsFeedFromString)
 
   def CreateGroup(self, new_group, 
@@ -155,20 +157,14 @@ class ContactsService(gdata.service.GDataService):
 
   def UpdateGroup(self, edit_uri, updated_group, url_params=None, 
                   escape_params=True):
-    url_prefix = 'http://%s/' % self.server
-    if edit_uri.startswith(url_prefix):
-      edit_uri = edit_uri[len(url_prefix):]
-    return self.Put(updated_group, '/%s' % edit_uri,
-                    url_params=url_params, 
-                    escape_params=escape_params, 
+    return self.Put(updated_group, self.__CleanUri(edit_uri),
+                    url_params=url_params,
+                    escape_params=escape_params,
                     converter=gdata.contacts.GroupEntryFromString)
 
   def DeleteGroup(self, edit_uri, extra_headers=None, 
       url_params=None, escape_params=True):
-    url_prefix = 'http://%s/' % self.server
-    if edit_uri.startswith(url_prefix):
-      edit_uri = edit_uri[len(url_prefix):]
-    return self.Delete('/%s' % edit_uri,
+    return self.Delete(self.__CleanUri(edit_uri),
                        url_params=url_params, escape_params=escape_params)
 
   def ChangePhoto(self, media, contact_entry_or_url, content_type=None, 
@@ -263,6 +259,21 @@ class ContactsService(gdata.service.GDataService):
       default converter is used, this is stored in a ContactsFeed.
     """
     return self.Post(batch_feed, url, converter=converter)
+
+  def __CleanUri(self, uri):
+    """Sanitizes a feed URI.
+
+    Args:
+      uri: The URI to sanitize, can be relative or absolute.
+
+    Returns:
+      The given URI without its http://server prefix, if any.
+      Keeps the leading slash of the URI.
+    """
+    url_prefix = 'http://%s/' % self.server
+    if uri.startswith(url_prefix):
+      uri = uri[len(url_prefix)-1:]
+    return uri
 
 class ContactsQuery(gdata.service.Query):
 

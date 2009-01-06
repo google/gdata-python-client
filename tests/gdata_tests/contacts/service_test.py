@@ -61,8 +61,7 @@ class ContactsServiceTest(unittest.TestCase):
         org_name=gdata.contacts.OrgName(text='TestCo.'), 
         rel='http://schemas.google.com/g/2005#work')
 
-    entry = self.gd_client.CreateContact(new_entry, 
-        '/m8/feeds/contacts/%s/full' % username)
+    entry = self.gd_client.CreateContact(new_entry)
 
     # Generate and parse the XML for the new entry.
     self.assertEquals(entry.title.text, new_entry.title.text)
@@ -200,7 +199,7 @@ class ContactsGroupsTest(unittest.TestCase):
 
 def DeleteTestContact(client):
   # Get test contact
-  feed = client.GetContactsFeed(uri='/m8/feeds/contacts/%s/full' % username)
+  feed = client.GetContactsFeed()
   for entry in feed.entry:
     if (entry.title.text == 'Elizabeth Bennet' and 
           entry.content.text == 'Test Notes' and 
