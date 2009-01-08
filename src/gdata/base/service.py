@@ -49,16 +49,28 @@ class RequestError(Error):
 class GBaseService(gdata.service.GDataService):
   """Client for the Google Base service."""
 
-  def __init__(self, email=None, password=None, source=None, 
-               server='base.google.com', api_key=None, 
-               additional_headers=None, handler=None):
-    gdata.service.GDataService.__init__(self, email=email, password=password,
-                                        service='gbase', source=source, 
-                                        server=server, 
-                                        additional_headers=additional_headers,
-                                        handler=handler)
+  def __init__(self, email=None, password=None, source=None,
+               server='base.google.com', api_key=None, additional_headers=None,
+               handler=None, **kwargs):
+    """Creates a client for the Google Base service.
+
+    Args:
+      email: string (optional) The user's email address, used for
+          authentication.
+      password: string (optional) The user's password.
+      source: string (optional) The name of the user's application.
+      server: string (optional) The name of the server to which a connection
+          will be opened. Default value: 'base.google.com'.
+      api_key: string (optional) The Google Base API key to use.
+      **kwargs: The other parameters to pass to gdata.service.GDataService
+          constructor.
+    """
+    gdata.service.GDataService.__init__(
+        self, email=email, password=password, service='gbase', source=source,
+        server=server, additional_headers=additional_headers, handler=handler,
+        **kwargs)
     self.api_key = api_key
-  
+
   def _SetAPIKey(self, api_key):
     if not isinstance(self.additional_headers, dict):
       self.additional_headers = {}

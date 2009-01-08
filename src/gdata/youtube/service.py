@@ -138,22 +138,34 @@ class YouTubeService(gdata.service.GDataService):
 
   def __init__(self, email=None, password=None, source=None,
                server=YOUTUBE_SERVER, additional_headers=None, client_id=None,
-               developer_key=None):
+               developer_key=None, **kwargs):
+    """Creates a client for the YouTube service.
+
+    Args:
+      email: string (optional) The user's email address, used for
+          authentication.
+      password: string (optional) The user's password.
+      source: string (optional) The name of the user's application.
+      server: string (optional) The name of the server to which a connection
+          will be opened. Default value: 'gdata.youtube.com'.
+      client_id: string (optional) Identifies your application, required for
+          authenticated requests, along with a developer key.
+      developer_key: string (optional) Register your application at
+          http://code.google.com/apis/youtube/dashboard to obtain a (free) key.
+      **kwargs: The other parameters to pass to gdata.service.GDataService
+          constructor.
+    """
     self.additional_headers = {}
     if client_id is not None and developer_key is not None:
       self.additional_headers = {'X-Gdata-Client': client_id,
                                  'X-GData-Key': 'key=%s' % developer_key}
-
-      gdata.service.GDataService.__init__(
-          self, email=email, password=password, service=YOUTUBE_SERVICE, 
-          source=source, server=server,
-          additional_headers=self.additional_headers)
     elif developer_key and not client_id:
       raise YouTubeError('You must also specify the clientId')
-    else:
-      gdata.service.GDataService.__init__(
-          self, email=email, password=password, service=YOUTUBE_SERVICE,
-          source=source, server=server, additional_headers=additional_headers)
+
+    gdata.service.GDataService.__init__(
+        self, email=email, password=password, service=YOUTUBE_SERVICE,
+        source=source, server=server, additional_headers=additional_headers,
+        **kwargs)
     self.auth_service_url = YOUTUBE_CLIENTLOGIN_AUTHENTICATION_URL
 
   def GetYouTubeVideoFeed(self, uri):

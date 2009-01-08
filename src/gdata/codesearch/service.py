@@ -29,31 +29,26 @@ import gdata.codesearch
 
 class CodesearchService(gdata.service.GDataService): 
     """Client extension for Google codesearch service"""
-    
-    def __init__(self, email=None, password=None, source=None, 
-            server='www.google.com', additional_headers=None):
-        """Constructor for the CodesearchService.
+
+    def __init__(self, email=None, password=None, source=None,
+                 server='www.google.com',  additional_headers=None, **kwargs):
+        """Creates a client for the Google codesearch service.
 
         Args:
-            email: string (optional) The e-mail address of the account to use for
-                   authentication.
-            password: string (optional) The password of the account to use for
-                      authentication.
-            source: string (optional) The name of the user's application.
-            server: string (optional) The server the feed is hosted on.
-            additional_headers: dict (optional) Any additional HTTP headers to be
-                                transmitted to the service in the form of key-value
-                                pairs.
-        Yields:
-            A CodesearchService object used to communicate with the Google Codesearch
-            service.
+          email: string (optional) The user's email address, used for
+              authentication.
+          password: string (optional) The user's password.
+          source: string (optional) The name of the user's application.
+          server: string (optional) The name of the server to which a connection
+              will be opened. Default value: 'www.google.com'.
+          **kwargs: The other parameters to pass to gdata.service.GDataService
+              constructor.
         """
+        gdata.service.GDataService.__init__(
+            self, email=email, password=password, service='codesearch',
+            source=source, server=server, additional_headers=additional_headers,
+            **kwargs)
 
-        gdata.service.GDataService.__init__(self,
-                email=email, password=password, service='codesearch',
-                source=source,server=server,
-                additional_headers=additional_headers)
-    
     def Query(self, uri, converter=gdata.codesearch.CodesearchFeedFromString):
         """Queries the Codesearch feed and returns the resulting feed of
            entries.

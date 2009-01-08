@@ -51,13 +51,23 @@ class RequestError(Error):
 class CalendarService(gdata.service.GDataService):
   """Client for the Google Calendar service."""
 
-  def __init__(self, email=None, password=None, source=None, 
-               server='www.google.com', 
-               additional_headers=None):
-    gdata.service.GDataService.__init__(self, email=email, password=password,
-                                        service='cl', source=source, 
-                                        server=server, 
-                                        additional_headers=additional_headers)
+  def __init__(self, email=None, password=None, source=None,
+               server='www.google.com', additional_headers=None, **kwargs):
+    """Creates a client for the Google Calendar service.
+
+    Args:
+      email: string (optional) The user's email address, used for
+          authentication.
+      password: string (optional) The user's password.
+      source: string (optional) The name of the user's application.
+      server: string (optional) The name of the server to which a connection
+          will be opened. Default value: 'www.google.com'.
+      **kwargs: The other parameters to pass to gdata.service.GDataService
+          constructor.
+    """
+    gdata.service.GDataService.__init__(
+        self, email=email, password=password, service='cl', source=source,
+        server=server, additional_headers=additional_headers, **kwargs)
 
   def GetCalendarEventFeed(self, uri='/calendar/feeds/default/private/full'):
     return self.Get(uri, converter=gdata.calendar.CalendarEventFeedFromString)

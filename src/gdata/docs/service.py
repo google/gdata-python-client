@@ -61,28 +61,22 @@ class DocsService(gdata.service.GDataService):
   """Client extension for the Google Documents service Document List feed."""
 
   def __init__(self, email=None, password=None, source=None,
-      server='docs.google.com', additional_headers=None):
-    """Constructor for the DocsService.
+               server='docs.google.com', additional_headers=None, **kwargs):
+    """Creates a client for the Google Documents service.
 
     Args:
-      email: string (optional) The e-mail address of the account to use for
-             authentication.
-      password: string (optional) The password of the account to use for
-                authentication.
+      email: string (optional) The user's email address, used for
+          authentication.
+      password: string (optional) The user's password.
       source: string (optional) The name of the user's application.
-      server: string (optional) The server the feed is hosted on.
-      additional_headers: dict (optional) Any additional HTTP headers to be
-                          transmitted to the service in the form of key-value
-                          pairs.
-
-    Yields:
-      A DocsService object used to communicate with the Google Documents
-      service.
+      server: string (optional) The name of the server to which a connection
+          will be opened. Default value: 'docs.google.com'.
+      **kwargs: The other parameters to pass to gdata.service.GDataService
+          constructor.
     """
-    gdata.service.GDataService.__init__(self, email=email, password=password,
-                                        service='writely', source=source,
-                                        server=server,
-                                        additional_headers=additional_headers)
+    gdata.service.GDataService.__init__(
+        self, email=email, password=password, service='writely', source=source,
+        server=server, additional_headers=additional_headers, **kwargs)
 
   def Query(self, uri, converter=gdata.docs.DocumentListFeedFromString):
     """Queries the Document List feed and returns the resulting feed of

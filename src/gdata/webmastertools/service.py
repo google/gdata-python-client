@@ -49,14 +49,23 @@ class RequestError(Error):
 class GWebmasterToolsService(gdata.service.GDataService):
   """Client for the Google Webmaster Tools service."""
 
-  def __init__(self, email=None, password=None, source=None, 
-               server='www.google.com', api_key=None, 
-               additional_headers=None, handler=None):
-    gdata.service.GDataService.__init__(self, email=email, password=password,
-                                        service='sitemaps', source=source, 
-                                        server=server, 
-                                        additional_headers=additional_headers,
-                                        handler=handler)
+  def __init__(self, email=None, password=None, source=None,
+               server='www.google.com', **kwargs):
+    """Creates a client for the Google Webmaster Tools service.
+
+    Args:
+      email: string (optional) The user's email address, used for
+          authentication.
+      password: string (optional) The user's password.
+      source: string (optional) The name of the user's application.
+      server: string (optional) The name of the server to which a connection
+          will be opened. Default value: 'www.google.com'.
+      **kwargs: The other parameters to pass to gdata.service.GDataService
+          constructor.
+    """
+    gdata.service.GDataService.__init__(
+        self, email=email, password=password, service='sitemaps', source=source,
+        server=server, **kwargs)
 
   def GetSitesFeed(self, uri=SITES_FEED,
       converter=webmastertools.SitesFeedFromString):

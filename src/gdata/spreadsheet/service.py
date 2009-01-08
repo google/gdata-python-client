@@ -48,13 +48,24 @@ class SpreadsheetsService(gdata.service.GDataService):
   """Client for the Google Spreadsheets service."""
 
   def __init__(self, email=None, password=None, source=None,
-               server='spreadsheets.google.com',
-               additional_headers=None):
-    gdata.service.GDataService.__init__(self, email=email, password=password,
-                                        service='wise', source=source,
-                                        server=server,
-                                        additional_headers=additional_headers)
-                                        
+               server='spreadsheets.google.com', additional_headers=None,
+               **kwargs):
+    """Creates a client for the Google Spreadsheets service.
+
+    Args:
+      email: string (optional) The user's email address, used for
+          authentication.
+      password: string (optional) The user's password.
+      source: string (optional) The name of the user's application.
+      server: string (optional) The name of the server to which a connection
+          will be opened. Default value: 'spreadsheets.google.com'.
+      **kwargs: The other parameters to pass to gdata.service.GDataService
+          constructor.
+    """
+    gdata.service.GDataService.__init__(
+        self, email=email, password=password, service='wise', source=source,
+        server=server, additional_headers=additional_headers, **kwargs)
+
   def GetSpreadsheetsFeed(self, key=None, query=None, visibility='private', 
       projection='full'):
     """Gets a spreadsheets feed or a specific entry if a key is defined

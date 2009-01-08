@@ -46,7 +46,7 @@ class ContactsService(gdata.service.GDataService):
   """Client for the Google Contacts service."""
 
   def __init__(self, email=None, password=None, source=None,
-               server='www.google.com', **kwargs):
+               server='www.google.com', additional_headers=None, **kwargs):
     """Creates a client for the Contacts service.
 
     Args:
@@ -59,9 +59,9 @@ class ContactsService(gdata.service.GDataService):
       **kwargs: The other parameters to pass to gdata.service.GDataService
           constructor.
     """
-    gdata.service.GDataService.__init__(self, email=email, password=password,
-                                        service='cp', source=source,
-                                        server=server, **kwargs)
+    gdata.service.GDataService.__init__(
+        self, email=email, password=password, service='cp', source=source,
+        server=server, additional_headers=additional_headers, **kwargs)
 
   def GetContactsFeed(self, uri='/m8/feeds/contacts/default/full'):
     return self.Get(uri, converter=gdata.contacts.ContactsFeedFromString)

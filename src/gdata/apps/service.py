@@ -79,11 +79,24 @@ class AppsService(gdata.service.GDataService):
   """Client for the Google Apps Provisioning service."""
 
   def __init__(self, email=None, password=None, domain=None, source=None,
-               server='apps-apis.google.com', additional_headers=None):
-    gdata.service.GDataService.__init__(self, email=email, password=password,
-                                        service='apps', source=source,
-                                        server=server,
-                                        additional_headers=additional_headers)
+               server='apps-apis.google.com', additional_headers=None,
+               **kwargs):
+    """Creates a client for the Google Apps Provisioning service.
+
+    Args:
+      email: string (optional) The user's email address, used for
+          authentication.
+      password: string (optional) The user's password.
+      domain: string (optional) The Google Apps domain name.
+      source: string (optional) The name of the user's application.
+      server: string (optional) The name of the server to which a connection
+          will be opened. Default value: 'apps-apis.google.com'.
+      **kwargs: The other parameters to pass to gdata.service.GDataService
+          constructor.
+    """
+    gdata.service.GDataService.__init__(
+        self, email=email, password=password, service='apps', source=source,
+        server=server, additional_headers=additional_headers, **kwargs)
     self.ssl = True
     self.port = 443
     self.domain = domain

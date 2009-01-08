@@ -124,31 +124,26 @@ class GooglePhotosException(Exception):
 class PhotosService(gdata.service.GDataService):
   userUri = '/data/feed/api/user/%s'
   
-  def __init__(self, email=None, password=None, 
-    source=None, server='picasaweb.google.com', additional_headers=None):
-    """ GooglePhotosService constructor.
-      
-    Arguments:
-    email: string (optional) The e-mail address of the account to use for
-           authentication.
-    password: string (optional) The password of the account to use for
-              authentication.
-    source: string (optional) The name of the user's application.
-    server: string (optional) The server the feed is hosted on.
-    additional_headers: dict (optional) Any additional HTTP headers to be
-                        transmitted to the service in the form of key-value
-                        pairs.
+  def __init__(self, email=None, password=None, source=None,
+               server='picasaweb.google.com', additional_headers=None,
+               **kwargs):
+    """Creates a client for the Google Photos service.
 
-    Returns:
-    A PhotosService object used to communicate with the Google Photos
-    service.
+    Args:
+      email: string (optional) The user's email address, used for
+          authentication.
+      password: string (optional) The user's password.
+      source: string (optional) The name of the user's application.
+      server: string (optional) The name of the server to which a connection
+          will be opened. Default value: 'picasaweb.google.com'.
+      **kwargs: The other parameters to pass to gdata.service.GDataService
+          constructor.
     """
     self.email = email
     self.client = source
-    gdata.service.GDataService.__init__(self, email=self.email, password=password,
-                                        service='lh2', source=source,
-                                        server=server,
-                                        additional_headers=additional_headers)
+    gdata.service.GDataService.__init__(
+        self, email=email, password=password, service='lh2', source=source,
+        server=server, additional_headers=additional_headers, **kwargs)
 
   def GetFeed(self, uri, limit=None, start_index=None):
     """Get a feed.
