@@ -28,7 +28,6 @@ import gdata.contacts.service
 username = ''
 password = ''
 test_image_location = '../../testimage.jpg'
-test_image_name = 'testimage.jpg'
 
 
 class ContactsServiceTest(unittest.TestCase):
@@ -44,8 +43,29 @@ class ContactsServiceTest(unittest.TestCase):
     feed = self.gd_client.GetContactsFeed()
     self.assert_(isinstance(feed, gdata.contacts.ContactsFeed))
 
+  def testDefaultContactList(self):
+    self.assertEquals('default', self.gd_client.contact_list)
+
+  def testCustomContactList(self):
+    self.gd_client.contact_list = username
+    feed = self.gd_client.GetContactsFeed()
+    self.assert_(isinstance(feed, gdata.contacts.ContactsFeed))
+
+  def testGetFeedUriDefault(self):
+    self.gd_client.contact_list = 'domain.com'
+    self.assertEquals('/m8/feeds/contacts/domain.com/full',
+                      self.gd_client.GetFeedUri())
+
+  def testGetFeedUriCustom(self):
+    uri = self.gd_client.GetFeedUri(kind='groups',
+                                    contact_list='example.com',
+                                    projection='base/batch',
+                                    scheme='https')
+    self.assertEquals(
+        'https://www.google.com/m8/feeds/groups/example.com/base/batch', uri)
+
   def testCreateUpdateDeleteContactAndUpdatePhoto(self):
-    #DeleteTestContact(self.gd_client)
+    DeleteTestContact(self.gd_client)
 
     # Create a new entry
     new_entry = gdata.contacts.ContactEntry()
@@ -153,15 +173,29 @@ class ContactsServiceTest(unittest.TestCase):
     self.assertEquals(batch_result.entry[0].batch_status.code,
                       '201')
 
+  def testCleanUriNeedsCleaning(self):
+    self.assertEquals('/relative/uri', self.gd_client._CleanUri(
+        'http://www.google.com/relative/uri'))
+
+  def testCleanUriDoesNotNeedCleaning(self):
+    self.assertEquals('/relative/uri', self.gd_client._CleanUri(
+        '/relative/uri'))
+
 
 class ContactsQueryTest(unittest.TestCase):
 
-  def testConvertToString(self):
+  def testConvertToStringDefaultFeed(self):
     query = gdata.contacts.service.ContactsQuery()
     self.assertEquals(str(query), '/m8/feeds/contacts/default/full')
-    query.max_results = '10'
-    self.assertEquals(query.ToUri(), 
+    query.max_results = 10
+    self.assertEquals(query.ToUri(),
         '/m8/feeds/contacts/default/full?max-results=10')
+
+  def testConvertToStringCustomFeed(self):
+    query = gdata.contacts.service.ContactsQuery('/custom/feed/uri')
+    self.assertEquals(str(query), '/custom/feed/uri')
+    query.max_results = '10'
+    self.assertEquals(query.ToUri(), '/custom/feed/uri?max-results=10')
 
   def testGroupQueryParameter(self):
     query = gdata.contacts.service.ContactsQuery()

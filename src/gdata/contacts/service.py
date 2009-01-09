@@ -46,7 +46,8 @@ class ContactsService(gdata.service.GDataService):
   """Client for the Google Contacts service."""
 
   def __init__(self, email=None, password=None, source=None,
-               server='www.google.com', additional_headers=None, **kwargs):
+               server='www.google.com', additional_headers=None,
+               contact_list='default', **kwargs):
     """Creates a client for the Contacts service.
 
     Args:
@@ -56,22 +57,48 @@ class ContactsService(gdata.service.GDataService):
       source: string (optional) The name of the user's application.
       server: string (optional) The name of the server to which a connection
           will be opened. Default value: 'www.google.com'.
+      contact_list: string (optional) The name of the default contact list to
+          use when no URI is specified to the methods of the service.
+          Default value: 'default' (the logged in user's contact list).
       **kwargs: The other parameters to pass to gdata.service.GDataService
           constructor.
     """
+    self.contact_list = contact_list
     gdata.service.GDataService.__init__(
         self, email=email, password=password, service='cp', source=source,
         server=server, additional_headers=additional_headers, **kwargs)
 
-  def GetContactsFeed(self, uri='/m8/feeds/contacts/default/full'):
+  def GetFeedUri(self, kind='contacts', contact_list=None, projection='full',
+                 scheme=None):
+    """Builds a feed URI.
+
+    Args:
+      kind: The type of feed to return, typically 'groups' or 'contacts'.
+        Default value: 'contacts'.
+      contact_list: The contact list to return a feed for.
+        Default value: self.contact_list.
+      projection: The projection to apply to the feed contents, for example
+        'full', 'base', 'base/12345', 'full/batch'. Default value: 'full'.
+      scheme: The URL scheme such as 'http' or 'https', None to return a
+          relative URI without hostname.
+
+    Returns:
+      A feed URI using the given kind, contact list, and projection.
+      Example: '/m8/feeds/contacts/default/full'.
+    """
+    contact_list = contact_list or self.contact_list
+    prefix = scheme and '%s://%s' % (scheme, self.server) or ''
+    return '%s/m8/feeds/%s/%s/%s' % (prefix, kind, contact_list, projection)
+
+  def GetContactsFeed(self, uri=None):
+    uri = uri or self.GetFeedUri()
     return self.Get(uri, converter=gdata.contacts.ContactsFeedFromString)
 
   def GetContact(self, uri):
     return self.Get(uri, converter=gdata.contacts.ContactEntryFromString)
 
-  def CreateContact(self, new_contact, 
-      insert_uri='/m8/feeds/contacts/default/full', url_params=None, 
-      escape_params=True):
+  def CreateContact(self, new_contact, insert_uri=None, url_params=None,
+                    escape_params=True):
     """Adds an new contact to Google Contacts.
 
     Args: 
@@ -90,6 +117,7 @@ class ContactsService(gdata.service.GDataService):
          'reason': HTTP reason from the server, 
          'body': HTTP body of the server's response}
     """
+    insert_uri = insert_uri or self.GetFeedUri()
     return self.Post(new_contact, insert_uri, url_params=url_params,
         escape_params=escape_params,
         converter=gdata.contacts.ContactEntryFromString)
@@ -117,7 +145,7 @@ class ContactsService(gdata.service.GDataService):
          'reason': HTTP reason from the server, 
          'body': HTTP body of the server's response}
     """
-    return self.Put(updated_contact, self.__CleanUri(edit_uri),
+    return self.Put(updated_contact, self._CleanUri(edit_uri),
                     url_params=url_params,
                     escape_params=escape_params,
                     converter=gdata.contacts.ContactEntryFromString)
@@ -128,7 +156,7 @@ class ContactsService(gdata.service.GDataService):
 
     Args:
       edit_uri: string The edit URL of the entry to be deleted. Example:
-               'http://www.google.com/m8/feeds/contacts/default/full/xxx/yyy'
+               '/m8/feeds/contacts/default/full/xxx/yyy'
       url_params: dict (optional) Additional URL parameters to be included
                   in the deletion request.
       escape_params: boolean (optional) If true, the url_parameters will be
@@ -142,29 +170,30 @@ class ContactsService(gdata.service.GDataService):
          'reason': HTTP reason from the server, 
          'body': HTTP body of the server's response}
     """
-    return self.Delete(self.__CleanUri(edit_uri),
+    return self.Delete(self._CleanUri(edit_uri),
                        url_params=url_params, escape_params=escape_params)
 
-  def GetGroupsFeed(self, uri='/m8/feeds/groups/default/full'):
+  def GetGroupsFeed(self, uri=None):
+    uri = uri or self.GetFeedUri('groups')
     return self.Get(uri, converter=gdata.contacts.GroupsFeedFromString)
 
-  def CreateGroup(self, new_group, 
-      insert_uri='/m8/feeds/groups/default/full', url_params=None, 
-      escape_params=True):
+  def CreateGroup(self, new_group, insert_uri=None, url_params=None,
+                  escape_params=True):
+    insert_uri = insert_uri or self.GetFeedUri('groups')
     return self.Post(new_group, insert_uri, url_params=url_params,
         escape_params=escape_params,
         converter=gdata.contacts.GroupEntryFromString)
 
   def UpdateGroup(self, edit_uri, updated_group, url_params=None, 
                   escape_params=True):
-    return self.Put(updated_group, self.__CleanUri(edit_uri),
+    return self.Put(updated_group, self._CleanUri(edit_uri),
                     url_params=url_params,
                     escape_params=escape_params,
                     converter=gdata.contacts.GroupEntryFromString)
 
   def DeleteGroup(self, edit_uri, extra_headers=None, 
       url_params=None, escape_params=True):
-    return self.Delete(self.__CleanUri(edit_uri),
+    return self.Delete(self._CleanUri(edit_uri),
                        url_params=url_params, escape_params=escape_params)
 
   def ChangePhoto(self, media, contact_entry_or_url, content_type=None, 
@@ -260,7 +289,7 @@ class ContactsService(gdata.service.GDataService):
     """
     return self.Post(batch_feed, url, converter=converter)
 
-  def __CleanUri(self, uri):
+  def _CleanUri(self, uri):
     """Sanitizes a feed URI.
 
     Args:
@@ -270,9 +299,9 @@ class ContactsService(gdata.service.GDataService):
       The given URI without its http://server prefix, if any.
       Keeps the leading slash of the URI.
     """
-    url_prefix = 'http://%s/' % self.server
+    url_prefix = 'http://%s' % self.server
     if uri.startswith(url_prefix):
-      uri = uri[len(url_prefix)-1:]
+      uri = uri[len(url_prefix):]
     return uri
 
 class ContactsQuery(gdata.service.Query):
@@ -298,7 +327,7 @@ class ContactsQuery(gdata.service.Query):
       doc='The group query parameter to find only contacts in this group')
 
 class GroupsQuery(gdata.service.Query):
-  
+
   def __init__(self, feed=None, text_query=None, params=None,
       categories=None):
     self.feed = feed or '/m8/feeds/groups/default/full'
