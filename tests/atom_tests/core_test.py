@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 #
 # Copyright (C) 2008 Google Inc.
 #
@@ -13,6 +13,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+
+# This module is used for version 2 of the Google Data APIs.
 
 
 __author__ = 'j.s@google.com (Jeff Scudder)'
@@ -298,6 +301,11 @@ class UtilityFunctionTest(unittest.TestCase):
         None, '', '{http://example.com}foo') == False)
     self.assert_(atom.core._qname_matches(
         'foo', '', 'bar') == False)
+
+
+def suite():
+  return unittest.TestSuite((unittest.makeSuite(XmlElementTest, 'test'),
+                             unittest.makeSuite(UtilityFunctionTest, 'test')))
 
 
 if __name__ == '__main__':

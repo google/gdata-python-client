@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+#
 #    Copyright (C) 2008 Google Inc.
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,6 +13,10 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
+
+
+# This module is used for version 2 of the Google Data APIs.
+# TODO: handle UTF-8 and unicode as done in src/atom/__init__.py
 
 
 __author__ = 'j.s@google.com (Jeff Scudder)'
@@ -175,6 +181,8 @@ class XmlElement(object):
       if _qname_matches(tag, namespace, element._qname):
         matches.append(element)
     return matches
+
+  GetElements = get_elements
     
   def get_attributes(self, tag=None, namespace=None, version=1):
     """Find all attributes which match the tag and namespace.
@@ -206,6 +214,8 @@ class XmlElement(object):
       if _qname_matches(tag, namespace, qname):
         matches.append(XmlAttribute(qname, value))
     return matches
+
+  GetAttributes = get_attributes
   
   def _harvest_tree(self, tree, version=1):
     """Populates object members from the data in the tree Element."""
@@ -277,6 +287,8 @@ class XmlElement(object):
   def to_string(self, version=1):
     """Converts this object to XML."""
     return ElementTree.tostring(self._to_tree(version))
+
+  ToString = to_string
 
   def _become_child(self, tree, version=1):
     """Adds a child element to tree with the XML data in self."""
@@ -353,10 +365,11 @@ def xml_element_from_string(xml_string, target_class,
     version: int (optional) The version of the schema which should be used when
              converting the XML into an object. The default is 1.
   """
-#  xml_string = xml_string.encode('UTF-8')
   tree = ElementTree.fromstring(xml_string)
-  #tree = ElementTree.fromstring(unicode(xml_string, encoding))
   return _xml_element_from_tree(tree, target_class, version)
+
+
+XmlElementFromString = xml_element_from_string
 
 
 def _xml_element_from_tree(tree, target_class, version=1):
