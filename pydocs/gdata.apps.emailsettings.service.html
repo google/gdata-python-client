@@ -210,7 +210,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;entry&nbsp;was&nbsp;deleted.</tt></dd></dl>
 
-<dl><dt><a name="EmailSettingsService-FetchOAuthRequestToken"><strong>FetchOAuthRequestToken</strong></a>(self, scopes<font color="#909090">=None</font>, extra_parameters<font color="#909090">=None</font>)</dt><dd><tt>Fetches&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;and&nbsp;returns&nbsp;it.<br>
+<dl><dt><a name="EmailSettingsService-FetchOAuthRequestToken"><strong>FetchOAuthRequestToken</strong></a>(self, scopes<font color="#909090">=None</font>, extra_parameters<font color="#909090">=None</font>, request_url<font color="#909090">='https://www.google.com/accounts/OAuthGetRequestToken'</font>)</dt><dd><tt>Fetches&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;and&nbsp;returns&nbsp;it.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;scopes:&nbsp;string&nbsp;or&nbsp;list&nbsp;of&nbsp;string&nbsp;base&nbsp;URL(s)&nbsp;of&nbsp;the&nbsp;service(s)&nbsp;to&nbsp;be<br>
@@ -223,6 +223,8 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;parameters&nbsp;will&nbsp;be&nbsp;overwritten.&nbsp;For&nbsp;e.g.&nbsp;a&nbsp;default&nbsp;parameter<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;oauth_version&nbsp;1.0&nbsp;can&nbsp;be&nbsp;overwritten&nbsp;if<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extra_parameters&nbsp;=&nbsp;{'oauth_version':&nbsp;'2.0'}<br>
+&nbsp;&nbsp;request_url:&nbsp;Request&nbsp;token&nbsp;URL.&nbsp;The&nbsp;default&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'https://www.google.com/accounts/OAuthGetRequestToken'.<br>
 &nbsp;&nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;fetched&nbsp;request&nbsp;token&nbsp;as&nbsp;a&nbsp;gdata.auth.OAuthToken&nbsp;object.<br>
@@ -246,7 +248,7 @@ Args:<br>
 &nbsp;&nbsp;session:&nbsp;boolean&nbsp;(optional)&nbsp;Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;issued&nbsp;token<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;be&nbsp;upgraded&nbsp;to&nbsp;a&nbsp;session&nbsp;token.</tt></dd></dl>
 
-<dl><dt><a name="EmailSettingsService-GenerateOAuthAuthorizationURL"><strong>GenerateOAuthAuthorizationURL</strong></a>(self, request_token<font color="#909090">=None</font>, callback_url<font color="#909090">=None</font>, extra_params<font color="#909090">=None</font>, include_scopes_in_callback<font color="#909090">=False</font>, scopes_param_prefix<font color="#909090">='oauth_token_scope'</font>)</dt><dd><tt>Generates&nbsp;URL&nbsp;at&nbsp;which&nbsp;user&nbsp;will&nbsp;login&nbsp;to&nbsp;authorize&nbsp;the&nbsp;request&nbsp;token.<br>
+<dl><dt><a name="EmailSettingsService-GenerateOAuthAuthorizationURL"><strong>GenerateOAuthAuthorizationURL</strong></a>(self, request_token<font color="#909090">=None</font>, callback_url<font color="#909090">=None</font>, extra_params<font color="#909090">=None</font>, include_scopes_in_callback<font color="#909090">=False</font>, scopes_param_prefix<font color="#909090">='oauth_token_scope'</font>, request_url<font color="#909090">='https://www.google.com/accounts/OAuthAuthorizeToken'</font>)</dt><dd><tt>Generates&nbsp;URL&nbsp;at&nbsp;which&nbsp;user&nbsp;will&nbsp;login&nbsp;to&nbsp;authorize&nbsp;the&nbsp;request&nbsp;token.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;request_token:&nbsp;gdata.auth.OAuthToken&nbsp;(optional)&nbsp;OAuth&nbsp;request&nbsp;token.<br>
@@ -268,7 +270,8 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameter&nbsp;key&nbsp;which&nbsp;maps&nbsp;to&nbsp;the&nbsp;list&nbsp;of&nbsp;valid&nbsp;scopes&nbsp;for&nbsp;the&nbsp;token.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;URL&nbsp;parameter&nbsp;will&nbsp;be&nbsp;included&nbsp;in&nbsp;the&nbsp;callback&nbsp;URL&nbsp;along&nbsp;with<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;scopes&nbsp;of&nbsp;the&nbsp;token&nbsp;as&nbsp;value&nbsp;if&nbsp;include_scopes_in_callback=True.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;request_url:&nbsp;Authorization&nbsp;URL.&nbsp;The&nbsp;default&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'https://www.google.com/accounts/OAuthAuthorizeToken'.<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;string&nbsp;URL&nbsp;at&nbsp;which&nbsp;the&nbsp;user&nbsp;is&nbsp;required&nbsp;to&nbsp;login.<br>
 &nbsp;<br>
@@ -357,7 +360,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="EmailSettingsService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x7f4e2d52eb18&gt;</font>)</dt><dd><tt>Query&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
+<dl><dt><a name="EmailSettingsService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x8ef1b8&gt;</font>)</dt><dd><tt>Query&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;gdata.service.Get<br>
 &nbsp;<br>
@@ -509,8 +512,10 @@ Returns:<br>
 Raises:<br>
 &nbsp;&nbsp;NonAuthSubToken&nbsp;if&nbsp;the&nbsp;user's&nbsp;auth&nbsp;token&nbsp;is&nbsp;not&nbsp;an&nbsp;AuthSub&nbsp;token</tt></dd></dl>
 
-<dl><dt><a name="EmailSettingsService-RevokeOAuthToken"><strong>RevokeOAuthToken</strong></a>(self)</dt><dd><tt>Revokes&nbsp;an&nbsp;existing&nbsp;OAuth&nbsp;token.<br>
+<dl><dt><a name="EmailSettingsService-RevokeOAuthToken"><strong>RevokeOAuthToken</strong></a>(self, request_url<font color="#909090">='https://www.google.com/accounts/AuthSubRevokeToken'</font>)</dt><dd><tt>Revokes&nbsp;an&nbsp;existing&nbsp;OAuth&nbsp;token.<br>
 &nbsp;<br>
+request_url:&nbsp;Token&nbsp;revoke&nbsp;URL.&nbsp;The&nbsp;default&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'https://www.google.com/accounts/AuthSubRevokeToken'.<br>
 Raises:<br>
 &nbsp;&nbsp;NonOAuthToken&nbsp;if&nbsp;the&nbsp;user's&nbsp;auth&nbsp;token&nbsp;is&nbsp;not&nbsp;an&nbsp;OAuth&nbsp;token.<br>
 &nbsp;&nbsp;RevokingOAuthTokenFailed&nbsp;if&nbsp;request&nbsp;for&nbsp;revoking&nbsp;an&nbsp;OAuth&nbsp;token&nbsp;failed.</tt></dd></dl>
@@ -580,7 +585,7 @@ you&nbsp;receive&nbsp;from&nbsp;FetchOAuthRequestToken.<br>
 Args:<br>
 &nbsp;&nbsp;request_token:&nbsp;gdata.auth.OAuthToken&nbsp;OAuth&nbsp;request&nbsp;token.</tt></dd></dl>
 
-<dl><dt><a name="EmailSettingsService-UpgradeToOAuthAccessToken"><strong>UpgradeToOAuthAccessToken</strong></a>(self, authorized_request_token<font color="#909090">=None</font>, oauth_version<font color="#909090">='1.0'</font>)</dt><dd><tt>Upgrades&nbsp;the&nbsp;authorized&nbsp;request&nbsp;token&nbsp;to&nbsp;an&nbsp;access&nbsp;token.<br>
+<dl><dt><a name="EmailSettingsService-UpgradeToOAuthAccessToken"><strong>UpgradeToOAuthAccessToken</strong></a>(self, authorized_request_token<font color="#909090">=None</font>, request_url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>, oauth_version<font color="#909090">='1.0'</font>)</dt><dd><tt>Upgrades&nbsp;the&nbsp;authorized&nbsp;request&nbsp;token&nbsp;to&nbsp;an&nbsp;access&nbsp;token.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;authorized_request_token:&nbsp;gdata.auth.OAuthToken&nbsp;(optional)&nbsp;OAuth&nbsp;request<br>
@@ -590,6 +595,8 @@ Args:<br>
 &nbsp;&nbsp;oauth_version:&nbsp;str&nbsp;(default='1.0')&nbsp;oauth_version&nbsp;parameter.&nbsp;All&nbsp;other<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'oauth_'&nbsp;parameters&nbsp;are&nbsp;added&nbsp;by&nbsp;default.&nbsp;This&nbsp;parameter&nbsp;too,&nbsp;is<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;added&nbsp;by&nbsp;default&nbsp;but&nbsp;here&nbsp;you&nbsp;can&nbsp;override&nbsp;it's&nbsp;value.<br>
+&nbsp;&nbsp;request_url:&nbsp;Access&nbsp;token&nbsp;URL.&nbsp;The&nbsp;default&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'https://www.google.com/accounts/OAuthGetAccessToken'.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
 Raises:<br>
 &nbsp;&nbsp;NonOAuthToken&nbsp;if&nbsp;the&nbsp;user's&nbsp;authorized&nbsp;request&nbsp;token&nbsp;is&nbsp;not&nbsp;an&nbsp;OAuth<br>
