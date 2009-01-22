@@ -234,9 +234,15 @@ tests/gdata_tests/spreadsheet/service_test.py
 tests/gdata_tests/spreadsheet/text_db_test.py
 tests/gdata_tests/youtube/__init__.py
 tests/gdata_tests/youtube/service_test.py
+pydocs/atom.auth.html
+pydocs/atom.client.html
+pydocs/atom.core.html
 pydocs/atom.html
+pydocs/atom.http.html
+pydocs/atom.http_core.html
 pydocs/atom.http_interface.html
 pydocs/atom.mock_http.html
+pydocs/atom.mock_http_core.html
 pydocs/atom.mock_service.html
 pydocs/atom.service.html
 pydocs/atom.token_store.html
