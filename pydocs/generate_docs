@@ -1,7 +1,13 @@
 export PYTHONPATH=../src:../../googleappengine-read-only:$PYTHONPATH
 pydoc -w atom
+pydoc -w atom.auth
+pydoc -w atom.client
+pydoc -w atom.core
+pydoc -w atom.http
+pydoc -w atom.http_core
 pydoc -w atom.http_interface
 pydoc -w atom.mock_http
+pydoc -w atom.mock_http_core
 pydoc -w atom.mock_service
 pydoc -w atom.service
 pydoc -w atom.token_store
