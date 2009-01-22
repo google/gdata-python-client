@@ -80,6 +80,74 @@ class AtomPubClientEchoTest(unittest.TestCase):
         http_request=atom.http_core.HttpRequest(port=99))
     self.assert_(response.getheader('Echo-Host') == 'example.com:99')
 
+  def test_get(self):
+    client = atom.client.AtomPubClient(atom.mock_http_core.EchoHttpClient())
+    response = client.get('http://example.com/simple')
+    self.assert_(response.getheader('Echo-Host') == 'example.com:None')
+    self.assert_(response.getheader('Echo-Uri') == '/simple')
+    self.assert_(response.getheader('Echo-Method') == 'GET')
+    response = client.Get(uri='http://example.com/simple2')
+    self.assert_(response.getheader('Echo-Uri') == '/simple2')
+    self.assert_(response.getheader('Echo-Method') == 'GET')
+
+  def test_modify_request_using_args(self):
+    client = atom.client.AtomPubClient(atom.mock_http_core.EchoHttpClient())
+    class RequestModifier(object):
+      def modify_request(self, http_request):
+        http_request.headers['Special'] = 'Set'
+    response = client.get('http://example.com/modified', 
+                          extra=RequestModifier())
+    self.assert_(response.getheader('Echo-Host') == 'example.com:None')
+    self.assert_(response.getheader('Echo-Uri') == '/modified')
+    self.assert_(response.getheader('Echo-Method') == 'GET')
+    self.assert_(response.getheader('Special') == 'Set')
+
+  def test_post(self):
+    client = atom.client.AtomPubClient(atom.mock_http_core.EchoHttpClient())
+    class TestData(object): 
+      def modify_request(self, http_request):
+        http_request.add_body_part('test body', 'text/testdata')
+    response = client.Post(uri='http://example.com/', data=TestData())
+    self.assert_(response.getheader('Echo-Host') == 'example.com:None')
+    self.assert_(response.getheader('Echo-Uri') == '/')
+    self.assert_(response.getheader('Echo-Method') == 'POST')
+    self.assert_(response.getheader('Content-Length') == str(len('test body')))
+    self.assert_(response.getheader('Content-Type') == 'text/testdata')
+    self.assert_(response.read(2) == 'te')
+    self.assert_(response.read() == 'st body')
+    response = client.post(data=TestData(), uri='http://example.com/')
+    self.assert_(response.read() == 'test body')
+    self.assert_(response.getheader('Content-Type') == 'text/testdata')
+    # Don't pass in a body, but use an extra kwarg to add the body to the
+    # http_request.
+    response = client.post(x=TestData(), uri='http://example.com/')
+    self.assert_(response.read() == 'test body')
+
+  def test_put(self):
+    body_text = '<put>test</put>' 
+    client = atom.client.AtomPubClient(atom.mock_http_core.EchoHttpClient())
+    class TestData(object): 
+      def modify_request(self, http_request):
+        http_request.add_body_part(body_text, 'application/xml')
+    response = client.put('http://example.org', TestData())
+    self.assert_(response.getheader('Echo-Host') == 'example.org:None')
+    self.assert_(response.getheader('Echo-Uri') == '/')
+    self.assert_(response.getheader('Echo-Method') == 'PUT')
+    self.assert_(response.getheader('Content-Length') == str(len(body_text)))
+    self.assert_(response.getheader('Content-Type') == 'application/xml')
+    response = client.put(uri='http://example.org', data=TestData())
+    self.assert_(response.getheader('Content-Length') == str(len(body_text)))
+    self.assert_(response.getheader('Content-Type') == 'application/xml')
+
+  def test_delete(self):
+    client = atom.client.AtomPubClient(atom.mock_http_core.EchoHttpClient())
+    response = client.Delete('http://example.com/simple')
+    self.assert_(response.getheader('Echo-Host') == 'example.com:None')
+    self.assert_(response.getheader('Echo-Uri') == '/simple')
+    self.assert_(response.getheader('Echo-Method') == 'DELETE')
+    response = client.delete(uri='http://example.com/d')
+    self.assert_(response.getheader('Echo-Uri') == '/d')
+    self.assert_(response.getheader('Echo-Method') == 'DELETE')
 
 def suite():
   return unittest.TestSuite((unittest.makeSuite(AtomPubClientEchoTest, 'test'),

@@ -15,14 +15,22 @@
 # limitations under the License.
 
 
-__author__ = 'api.jscudder (Jeff Scudder)'
+__author__ = 'j.s@google.com (Jeff Scudder)'
 
 
+import atom.client
+
+
+# Old imports
 import urllib
 import urlparse
 import gdata.auth
 import gdata.service
 import atom.service
+
+
+class GDClient(atom.client.AtomPubClient):
+  pass
 
 
 SCOPE_URL_PARAM_NAME = gdata.service.SCOPE_URL_PARAM_NAME 
