@@ -1,3 +1,24 @@
+=== 1.2.4 ===
+Jan 22, 2009 (revision 603)
+
+- Added a new AtomPubClient class (and supporting classes) which begins a
+    foundation on which support for version two of the Google Data protocol
+    will be built.
+- OAuth methods can now specify the desired OAuth server with the default
+    being the Google Accounts end point (thanks Dag Brattli!).
+- Improved support for unicode strings in XML element class attributes and
+    text nodes (thanks again to Dag).
+- Fixed constructors for Service classes which inherit from GDataService
+    to ensure that all parameters are passed up to the superclass 
+    constructor (thanks Guillaume Ryder!).
+- Added a 'contact_list' property to ContactsService to simplify API usage
+    for shared contacts (thanks Guillaume once again).
+- For Google Contacts, added a GetFeedUri method to help users generating
+     feed URIs (Guillaume for a hat-trick).
+- New unit tests to ensure that the ordering of entry objects within a feed
+    is preserved when converting to and from XML.
+
+
 === 1.2.3 ===
 Dec 3, 2008 (revision 585)
 
@@ -82,6 +103,7 @@ Sep 15, 2008 (revision 529)
     port number. Ports are now cast to ints. 
 - Updated pydocs.
 
+
 === 1.2.0 ===
 Sep 9, 2008 (revision 522)
 
@@ -118,6 +140,7 @@ Sep 9, 2008 (revision 522)
 - Moved the logic for using this library on Google App Engine into a new 
     module: gdata.alt.appengine.
 
+
 === 1.1.1 ===
 June 13, 2008 (revision 421)
 
@@ -135,6 +158,7 @@ June 13, 2008 (revision 421)
     Blogger.
 - Added support for the in-reply-to element which appears in Blogger 
     comments.
+
 
 === 1.1.0 ===
 June 6, 2008 (revision 403)
@@ -156,6 +180,7 @@ June 6, 2008 (revision 403)
 - Moved ExtendedProperty class into gdata module from gdata.calendar since
     it is now also used in the Google Contacts Data API. 
 
+
 === 1.0.13 ===
 May 8, 2008 (revision 357)
 
@@ -170,11 +195,13 @@ May 8, 2008 (revision 357)
 - Service unit tests should run correctly when using run_service_tests 
     and run_all_tests now that the subtests have been made into packages.
 
+
 === 1.0.12.1 ===
 April 10, 2008 (revision 341)
 
 - Added new import statements so that xml.etree.ElementTree can be used. 
     Needed for the library to run on Google App Engine.
+
 
 === 1.0.12 ===
 April 8, 2008 (revision 334)
@@ -203,6 +230,7 @@ March 13, 2008 (revision 314)
 - Changed the blogger sample to use orderby=updated so that queries on 
     updated min or max will work.
 - Fix to string encoding in the atom core when converting text members to XML.
+
 
 === 1.0.11 ===
 February 11, 2008 (revision 290)
@@ -239,6 +267,7 @@ December 20, 2007 (revision 265)
 - For Document List queries, added the ability to construct schema-qualified
     named folder queries.
 
+
 === 1.0.9 === 
 October 15, 2007 (revision 213)
 
@@ -250,6 +279,7 @@ October 15, 2007 (revision 213)
 - User Agent headers now fit the pattern used in other Google data client 
     libraries.
 - Made it easier to access custom elements for Google Base items. 
+
 
 === 1.0.8 ===
 August 31, 2007 (revision 192)
@@ -270,11 +300,13 @@ August 31, 2007 (revision 192)
 - Added timezone parameter to Google Calendar queries. This allows the client
     to request that event times be expressed in a specific timezone.
 
+
 === 1.0.7 ===
 August 7, 2007
 
 - Added new test for the Documents List data API's service module.
 - Updated setup.py to include the docs package in the installation.
+
 
 === 1.0.6 ===
 Aug 2, 2007
@@ -294,6 +326,7 @@ July 31, 2007
 - New calendar functionality for add/edit/delete calendar and add/edit/delete 
     subscriptions. Also, added new functionality for Calendar Gadgets.
 
+
 === 1.0.4 ===
 June 23, 2007
 
@@ -305,6 +338,7 @@ June 23, 2007
 - Fixed a type in the Google Base dry-run sample.
 - Calendar's Who element no longer requires a name when converting to XML.
 
+
 === 1.0.3 ===
 May 30, 2007
 
@@ -315,6 +349,7 @@ May 30, 2007
 - Fixed bugs in spreadsheetsExample.py.
 - Spreadsheet entries now inherit from GDataEntry and have gdata specific 
     convenience methods. 
+
 
 === 1.0.2 ===
 May 4, 2007
@@ -328,6 +363,7 @@ May 4, 2007
 - Made finding links of a specific type easier when dealing with Atom elements.
     Atom Entries now have GetXLink methods.
 - Simplified finding license links in Atom Entries. 
+
 
 === 1.0.1 ===
 April 20, 2007
@@ -343,6 +379,7 @@ April 20, 2007
 - Fixed delete and update operations in the spreadsheetExample script.
 - Fixed setting sort order and order by in calendar's service module.
 - Added HTTP BasicAuth for AtomService.
+
 
 === 1.0 ===
 March 26, 2007
