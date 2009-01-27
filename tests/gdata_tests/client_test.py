@@ -1,6 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 #
-# Copyright (C) 2008 Google Inc.
+# Copyright (C) 2008, 2009 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,17 +15,39 @@
 # limitations under the License.
 
 
-__author__ = 'api.jscudder (Jeff Scudder)'
+# This module is used for version 2 of the Google Data APIs.
+
+
+__author__ = 'j.s@google.com (Jeff Scudder)'
 
 
 import unittest
-import getpass
 import gdata.client
+import gdata.gauth
+import atom.mock_http_core
+
+
+# old imports
+import getpass
 import gdata.auth
 import gdata.service
 import atom.http_interface
 
 
+class ClientLoginTest(unittest.TestCase):
+
+  def test_token_request(self):
+    client = gdata.client.GDClient()
+    client.http_client = atom.mock_http_core.SettableHttpClient(200, 'OK', 
+        'SID=DQAAAGgA...7Zg8CTN\n'
+        'LSID=DQAAAGsA...lk8BBbG\n'
+        'Auth=DQAAAGgA...dk3fA5N', {'Content-Type': 'text/plain'})
+    token = client.request_client_login_token('email', 'pw', 'cp', 'test')
+    self.assert_(isinstance(token, gdata.gauth.ClientLoginToken))
+    self.assert_(token.token_string == 'DQAAAGgA...dk3fA5N')
+
+
+# Tests for v1 client code
 class AuthSubUrlTest(unittest.TestCase):
   
   def testGenerateNextWithScope(self):
@@ -91,6 +113,12 @@ class GDataClientTest(unittest.TestCase):
             '%sfoo' % scope1), 
         atom.http_interface.GenericToken))
     self.assert_(self.client.token_store.find_token(scope2) != auth_token)
+# End tests for v1 client code
+
+
+def suite():
+  return unittest.TestSuite((unittest.makeSuite(ClientLoginTest, 'test'),
+                             ))
 
 
 if __name__ == '__main__':

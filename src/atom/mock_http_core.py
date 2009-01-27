@@ -139,3 +139,27 @@ class EchoHttpClient(object):
         body.write(part.read())
     body.seek(0)
     return response
+
+
+class SettableHttpClient(object):
+  """An HTTP Client which responds with the data given in set_response."""
+
+  def __init__(self, status, reason, body, headers):
+    self.set_response(status, reason, body, headers)
+
+  def set_response(self, status, reason, body, headers):
+    """Determines the response which will be sent for each request.
+
+    Args:
+      status: An int for the HTTP status code, example: 200, 404, etc.
+      reason: String for the HTTP reason, example: OK, NOT FOUND, etc.
+      body: The body of the HTTP response as a string or a file-like 
+            object (something with a read method). 
+      headers: dict of strings containing the HTTP headers in the response.
+    """
+    self.response = atom.http_core.HttpResponse(status=status, reason=reason,
+        body=body)
+    self.response._headers = headers.copy()
+
+  def request(self, http_request):
+    return self.response

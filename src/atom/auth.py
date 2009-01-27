@@ -35,3 +35,9 @@ class BasicAuth(object):
     http_request.headers['Authorization'] = 'Basic %s' % self.basic_cookie
 
   ModifyRequest = modify_request
+
+
+class NoAuth(object):
+
+  def modify_request(self, http_request):
+    pass

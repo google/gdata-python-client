@@ -185,10 +185,14 @@ class Uri(object):
 
     Args:
       scheme: str This is usually 'http' or 'https'.
-      ... TODO
+      host: str The host name or IP address of the desired server.
+      post: int The server's port number.
+      path: str The path of the resource following the host. This begins with
+            a /, example: '/calendar/feeds/default/allcalendars/full'
       query: dict of strings The URL query parameters. The keys and values are
              both escaped so this dict should contain the unescaped values.
-
+             For example {'my key': 'val', 'second': '!!!'} will become
+             '?my+key=val&second=%21%21%21' which is appended to the path.
     """
     self.query = query or {}
     if scheme is not None:

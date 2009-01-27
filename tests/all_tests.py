@@ -27,6 +27,7 @@ import atom_tests.http_core_test
 import atom_tests.auth_test
 import atom_tests.mock_http_core_test
 import atom_tests.client_test
+import gdata_tests.client_test
 
 
 def suite():
@@ -34,7 +35,8 @@ def suite():
                              atom_tests.http_core_test.suite(),
                              atom_tests.mock_http_core_test.suite(),
                              atom_tests.client_test.suite(),
-                             atom_tests.auth_test.suite()))
+                             atom_tests.auth_test.suite(),
+                             gdata_tests.client_test.suite()))
 
 
 if __name__ == '__main__':

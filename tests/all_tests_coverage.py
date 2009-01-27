@@ -29,6 +29,8 @@ import atom.http_core
 import atom.mock_http_core
 import atom.auth
 import atom.client
+import gdata.gauth
+import gdata.client
 
 
 def suite():
@@ -40,4 +42,4 @@ if __name__ == '__main__':
   unittest.TextTestRunner().run(all_tests.suite())
   coverage.stop()
   coverage.report([atom.core, atom.http_core, atom.auth, atom.mock_http_core,
-                   atom.client])
+                   atom.client, gdata.gauth, gdata.client])

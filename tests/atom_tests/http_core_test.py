@@ -58,7 +58,7 @@ class UriTest(unittest.TestCase):
     self.assert_(uri.host == 'example.com')
     self.assert_(uri.port is None)
     
-    uri.modify_request(request)
+    uri.ModifyRequest(request)
     self.assert_(request.host == 'example.com')
     # If no scheme was provided, the URI will not add one, but the HttpClient
     # should assume the request is HTTP.
