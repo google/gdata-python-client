@@ -126,7 +126,7 @@ CLIENT_LOGIN_SCOPES = {
         'http://apps-apis.google.com/a/feeds/',
         'https://apps-apis.google.com/a/feeds/'],
     'weaver': [ # Health H9 Sandbox
-        'https://www.google.com/h9/'],
+        'https://www.google.com/h9/feeds/'],
     'wise': [ # Spreadsheets Data API
         'https://spreadsheets.google.com/feeds/',
         'http://spreadsheets.google.com/feeds/'],
