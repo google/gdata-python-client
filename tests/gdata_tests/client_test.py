@@ -43,8 +43,42 @@ class ClientLoginTest(unittest.TestCase):
         'LSID=DQAAAGsA...lk8BBbG\n'
         'Auth=DQAAAGgA...dk3fA5N', {'Content-Type': 'text/plain'})
     token = client.request_client_login_token('email', 'pw', 'cp', 'test')
-    self.assert_(isinstance(token, gdata.gauth.ClientLoginToken))
-    self.assert_(token.token_string == 'DQAAAGgA...dk3fA5N')
+    self.assertTrue(isinstance(token, gdata.gauth.ClientLoginToken))
+    self.assertEqual(token.token_string, 'DQAAAGgA...dk3fA5N')
+
+    # Test a server response without a ClientLogin token.`
+    client.http_client.set_response(200, 'OK', 'SID=12345\nLSID=34567', {})
+    self.assertRaises(gdata.client.ClientLoginTokenMissing,
+        client.request_client_login_token, 'email', 'pw', '', '')
+
+    # Test a 302 redirect from the server on a login request.
+    client.http_client.set_response(302, 'ignored', '', {})
+    # TODO: change the exception class to one in gdata.client.
+    self.assertRaises(gdata.service.BadAuthenticationServiceURL,
+        client.request_client_login_token, 'email', 'pw', '', '')
+
+    # Test a CAPTCHA challenge from the server
+    client.http_client.set_response(403, 'Access Forbidden', 
+        'Url=http://www.google.com/login/captcha\n'
+        'Error=CaptchaRequired\n'
+        'CaptchaToken=DQAAAGgA...dkI1LK9\n'
+        # TODO: verify this sample CAPTCHA URL matches an
+        # actual challenge from the server.
+        'CaptchaUrl=Captcha?ctoken=HiteT4bVoP6-yFkHPibe7O9EqxeiI7lUSN', {})
+    try:
+      token = client.request_client_login_token('email', 'pw', '', '')
+      self.fail('should raise a CaptchaChallenge on a 403 with a '
+                'CaptchRequired error.')
+    except gdata.client.CaptchaChallenge, challenge:
+      self.assertEquals(challenge.captcha_url, 
+          'http://www.google.com/accounts/'
+          'Captcha?ctoken=HiteT4bVoP6-yFkHPibe7O9EqxeiI7lUSN')
+      self.assertEquals(challenge.captcha_token, 'DQAAAGgA...dkI1LK9')
+
+    # Test an unexpected response, a 404 for example.
+    client.http_client.set_response(404, 'ignored', '', {})
+    self.assertRaises(gdata.client.ClientLoginFailed,
+        client.request_client_login_token, 'email', 'pw', '', '')
 
 
 # Tests for v1 client code
