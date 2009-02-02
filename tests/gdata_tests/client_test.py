@@ -81,6 +81,45 @@ class ClientLoginTest(unittest.TestCase):
         client.request_client_login_token, 'email', 'pw', '', '')
 
 
+class RequestTest(unittest.TestCase):
+
+  def test_simple_request(self):
+    client = gdata.client.GDClient()
+    client.http_client = atom.mock_http_core.EchoHttpClient()
+    response = client.request('GET', 'https://example.com/test')
+    self.assertEqual(response.getheader('Echo-Host'), 'example.com:None')
+    self.assertEqual(response.getheader('Echo-Uri'), '/test')
+    self.assertEqual(response.getheader('Echo-Scheme'), 'https')
+    self.assertEqual(response.getheader('Echo-Method'), 'GET')
+
+    http_request = atom.http_core.HttpRequest(scheme='http', 
+        host='example.net', port=8080, method='POST', headers={'X': 1})
+    http_request.add_body_part('test', 'text/plain')
+    response = client.request(http_request=http_request)
+    self.assertEqual(response.getheader('Echo-Host'), 'example.net:8080')
+    self.assertEqual(response.getheader('Echo-Uri'), None)
+    self.assertEqual(response.getheader('Echo-Scheme'), 'http')
+    self.assertEqual(response.getheader('Echo-Method'), 'POST')
+    self.assertEqual(response.getheader('Content-Type'), 'text/plain')
+    self.assertEqual(response.getheader('X'), '1')
+    self.assertEqual(response.read(), 'test')
+
+    # Use the same request object from above, but overwrite the request path
+    # by passing in a URI.
+    response = client.request(uri='/new/path?p=1', http_request=http_request)
+    self.assertEqual(response.getheader('Echo-Host'), 'example.net:8080')
+    self.assertEqual(response.getheader('Echo-Uri'), '/new/path?p=1')
+    self.assertEqual(response.getheader('Echo-Scheme'), 'http')
+    self.assertEqual(response.read(), 'test')
+
+  def test_redirects(self):
+    pass
+
+  def test_exercise_exceptions(self):
+    pass  
+  
+
+
 # Tests for v1 client code
 class AuthSubUrlTest(unittest.TestCase):
   
@@ -152,7 +191,7 @@ class GDataClientTest(unittest.TestCase):
 
 def suite():
   return unittest.TestSuite((unittest.makeSuite(ClientLoginTest, 'test'),
-                             ))
+                             unittest.makeSuite(RequestTest, 'test')))
 
 
 if __name__ == '__main__':
