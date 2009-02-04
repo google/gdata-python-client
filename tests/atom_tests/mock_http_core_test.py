@@ -34,8 +34,8 @@ class EchoClientTest(unittest.TestCase):
   def test_echo_response(self):
     client = atom.mock_http_core.EchoHttpClient()
     # Send a bare-bones POST request.
-    request = atom.http_core.HttpRequest(host='www.jeffscudder.com', 
-                                         method='POST', uri='/')
+    request = atom.http_core.HttpRequest(method='POST', 
+        uri=atom.http_core.Uri(host='www.jeffscudder.com', path='/'))
     request.add_body_part('hello world!', 'text/plain')
     response = client.request(request)
     self.assert_(response.getheader('Echo-Host') == 'www.jeffscudder.com:None')
@@ -46,11 +46,20 @@ class EchoClientTest(unittest.TestCase):
         'hello world!')))
     self.assert_(response.getheader('Content-Type') == 'text/plain')
     self.assert_(response.read() == 'hello world!')
+
+    # Test a path of None should default to /
+    request = atom.http_core.HttpRequest(method='POST', 
+        uri=atom.http_core.Uri(host='www.jeffscudder.com', path=None))
+    response = client.request(request)
+    self.assert_(response.getheader('Echo-Host') == 'www.jeffscudder.com:None')
+    self.assert_(response.getheader('Echo-Method') == 'POST')
+    self.assert_(response.getheader('Echo-Uri') == '/')
     
     # Send a multipart request.
-    request = atom.http_core.HttpRequest(scheme='https', 
-        host='www.jeffscudder.com', port=8080, method='POST', 
-        uri='/multipart?test=true&happy=yes', 
+    request = atom.http_core.HttpRequest(method='POST',
+        uri=atom.http_core.Uri(scheme='https', host='www.jeffscudder.com', 
+                               port=8080, path='/multipart', 
+                               query={'test': 'true', 'happy': 'yes'}), 
         headers={'Authorization':'Test xyzzy', 'Testing':'True'})
     request.add_body_part('start', 'text/plain')
     request.add_body_part(StringIO.StringIO('<html><body>hi</body></html>'),

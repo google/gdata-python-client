@@ -38,10 +38,12 @@ class AtomPubClientEchoTest(unittest.TestCase):
     # Make several equivalent requests.
     responses = [client.request('GET', 'http://example.org/'),
                  client.request(http_request=atom.http_core.HttpRequest(
-                     'http', 'example.org', uri='/', method='GET')),
+                     uri=atom.http_core.Uri('http', 'example.org', path='/'),
+                     method='GET')),
                  client.request('GET', 
-                     http_request=atom.http_core.HttpRequest('http', 
-                         'example.org', uri='/'))]
+                     http_request=atom.http_core.HttpRequest(
+                         uri=atom.http_core.Uri('http', 'example.org', 
+                                                path='/')))]
     for response in responses:
       self.assert_(response.getheader('Echo-Host') == 'example.org:None')
       self.assert_(response.getheader('Echo-Uri') == '/')
@@ -77,8 +79,10 @@ class AtomPubClientEchoTest(unittest.TestCase):
     self.assert_(response.getheader('Echo-Scheme') == 'http')
     self.assert_(response.getheader('Authorization') == 'Basic SmVmZjoxMjM=')
     response = client.request('GET', '/', 
-        http_request=atom.http_core.HttpRequest(port=99))
+        http_request=atom.http_core.HttpRequest(
+            uri=atom.http_core.Uri(port=99)))
     self.assert_(response.getheader('Echo-Host') == 'example.com:99')
+    self.assert_(response.getheader('Echo-Uri') == '/')
 
   def test_get(self):
     client = atom.client.AtomPubClient(atom.mock_http_core.EchoHttpClient())

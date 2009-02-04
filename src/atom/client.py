@@ -30,6 +30,20 @@ class AtomPubClient(object):
   auth_token = None
 
   def __init__(self, http_client=None, host=None, auth_token=None, **kwargs):
+    """Creates a new AtomPubClient instance.
+    
+    Args:
+      http_client: An object capable of performing HTTP requests through a
+                   request method. This object is used to perform the request
+                   when the AtomPubClient's request method is called. Used to
+                   allow HTTP requests to be directed to a mock server, or use
+                   an alternate library instead of the default of httplib to
+                   make HTTP requests.
+      host: str The default host name to use if a host is not specified in the
+            requested URI.
+      auth_token: An object which sets the HTTP Authorization header when its
+                  modify_request method is called.
+    """
     self.http_client = http_client or atom.http_core.HttpClient()
     if host is not None:
       self.host = host
@@ -54,8 +68,8 @@ class AtomPubClient(object):
       http_request = atom.http_core.HttpRequest()
     # If the http_request didn't specify the target host, use the client's
     # default host (if set).
-    if self.host is not None and http_request.host is None:
-      http_request.host = self.host
+    if self.host is not None and http_request.uri.host is None:
+      http_request.uri.host = self.host
     # Modify the request based on the AtomPubClient settings and parameters
     # passed in to the request.
     if isinstance(uri, (str, unicode)):
@@ -70,8 +84,10 @@ class AtomPubClient(object):
       if value is not None:
         value.modify_request(http_request)
     # Default to an http request if the protocol scheme is not set.
-    if http_request.scheme is None:
-      http_request.scheme = 'http'
+    if http_request.uri.scheme is None:
+      http_request.uri.scheme = 'http'
+    if http_request.uri.path is None:
+      http_request.uri.path = '/'
     # Add the Authorization header at the very end. The Authorization header
     # value may need to be calculated using information in the request.
     if auth_token:

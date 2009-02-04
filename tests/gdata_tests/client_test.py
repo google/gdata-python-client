@@ -92,12 +92,14 @@ class RequestTest(unittest.TestCase):
     self.assertEqual(response.getheader('Echo-Scheme'), 'https')
     self.assertEqual(response.getheader('Echo-Method'), 'GET')
 
-    http_request = atom.http_core.HttpRequest(scheme='http', 
-        host='example.net', port=8080, method='POST', headers={'X': 1})
+    http_request = atom.http_core.HttpRequest(
+        uri=atom.http_core.Uri(scheme='http', host='example.net', port=8080),
+        method='POST', headers={'X': 1})
     http_request.add_body_part('test', 'text/plain')
     response = client.request(http_request=http_request)
     self.assertEqual(response.getheader('Echo-Host'), 'example.net:8080')
-    self.assertEqual(response.getheader('Echo-Uri'), None)
+    # A Uri with path set to None should default to /.
+    self.assertEqual(response.getheader('Echo-Uri'), '/')
     self.assertEqual(response.getheader('Echo-Scheme'), 'http')
     self.assertEqual(response.getheader('Echo-Method'), 'POST')
     self.assertEqual(response.getheader('Content-Type'), 'text/plain')
@@ -113,10 +115,12 @@ class RequestTest(unittest.TestCase):
     self.assertEqual(response.read(), 'test')
 
   def test_redirects(self):
+    # TODO:
     pass
 
   def test_exercise_exceptions(self):
-    pass  
+    # TODO
+    pass
   
 
 

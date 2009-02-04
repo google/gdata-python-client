@@ -116,21 +116,23 @@ class EchoHttpClient(object):
   """
   
   def request(self, http_request):
-    return self._http_request(http_request.host, http_request.method, 
-        http_request.uri, http_request.scheme, http_request.port, 
-        http_request.headers, http_request._body_parts)
+    return self._http_request(http_request.uri, http_request.method, 
+                              http_request.headers, http_request._body_parts)
 
-  def _http_request(self, host, method, uri, scheme=None,  port=None, 
-      headers=None, body_parts=None):
+  def _http_request(self, uri, method, headers=None, body_parts=None):
     body = StringIO.StringIO()
     response = atom.http_core.HttpResponse(status=200, reason='OK', body=body)
     if headers is None:
       response._headers = {}
     else:
-      response._headers = headers.copy()
-    response._headers['Echo-Host'] = '%s:%s' % (host, str(port))
-    response._headers['Echo-Uri'] = uri
-    response._headers['Echo-Scheme'] = scheme
+      # Copy headers from the request to the response but convert values to
+      # strings. Server response headers always come in as strings, so an int
+      # should be converted to a corresponding string when echoing.
+      for header, value in headers.iteritems():
+        response._headers[header] = str(value)
+    response._headers['Echo-Host'] = '%s:%s' % (uri.host, str(uri.port))
+    response._headers['Echo-Uri'] = uri._get_relative_path()
+    response._headers['Echo-Scheme'] = uri.scheme
     response._headers['Echo-Method'] = method
     for part in body_parts:
       if isinstance(part, str):

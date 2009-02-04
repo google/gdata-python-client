@@ -46,14 +46,10 @@ class HttpRequest(object):
   responsibility of the user to ensure that duplicate field names are combined
   into one header value according to the rules in section 4.2 of RFC 2616.
   """
-  scheme = None
-  host = None
-  port = None
   method = None
   uri = None
  
-  def __init__(self, scheme=None, host=None, port=None, method=None, uri=None,
-      headers=None):
+  def __init__(self, uri=None, method=None, headers=None):
     """Construct an HTTP request.
 
     Args:
@@ -67,16 +63,10 @@ class HttpRequest(object):
     """
     self.headers = headers or {}
     self._body_parts = []
-    if scheme is not None:
-      self.scheme = scheme
-    if host is not None:
-      self.host = host
-    if port is not None:
-      self.port = port
     if method is not None:
       self.method = method
-    if uri is not None:
-      self.uri = uri
+    self.uri = uri or Uri()
+
 
   def add_body_part(self, data, mime_type, size=None):
     """Adds data to the HTTP request body.
@@ -158,19 +148,21 @@ class HttpRequest(object):
   AddFormInputs = add_form_inputs
 
   def _copy(self):
-    new_request = HttpRequest(scheme=self.scheme, host=self.host,
-        port=self.port, method=self.method, uri=self.uri,
-        headers=self.headers.copy())
+    """Creates a deep copy of this request."""
+    copied_uri = Uri(self.uri.scheme, self.uri.host, self.uri.port,
+                     self.uri.path, self.uri.query)
+    new_request = HttpRequest(uri=copied_uri, method=self.method,
+                              headers=self.headers.copy())
     new_request._body_parts = self._body_parts[:]
     return new_request
 
 
 def _apply_defaults(http_request):
-  if http_request.scheme is None:
-    if http_request.port == 443:
-      http_request.scheme = 'https'
+  if http_request.uri.scheme is None:
+    if http_request.uri.port == 443:
+      http_request.uri.scheme = 'https'
     else:
-      http_request.scheme = 'http'
+      http_request.uri.scheme = 'http'
 
 
 class Uri(object):
@@ -244,20 +236,20 @@ class Uri(object):
     """Sets HTTP request components based on the URI."""
     if http_request is None:
       http_request = HttpRequest()
+    if http_request.uri is None:
+      http_request.uri = Uri()
     # Determine the correct scheme.
     if self.scheme:
-      http_request.scheme = self.scheme
+      http_request.uri.scheme = self.scheme
     if self.port:
-      http_request.port = self.port
+      http_request.uri.port = self.port
     if self.host:
-      http_request.host = self.host
+      http_request.uri.host = self.host
     # Set the relative uri path
     if self.path:
-      http_request.uri = self._get_relative_path()
-    elif not self.path and self.query:
-      http_request.uri = '/%s' % self._get_relative_path()
-    elif not self.path and not self.query and not http_request.uri:
-      http_request.uri = '/'
+      http_request.uri.path = self.path
+    if self.query:
+      http_request.uri.query = self.query.copy()
     return http_request
 
   ModifyRequest = modify_request
@@ -331,29 +323,33 @@ class HttpClient(object):
   debug = None
  
   def request(self, http_request):
-    return self._http_request(http_request.host, http_request.method,
-        http_request.uri, http_request.scheme, http_request.port,
-        http_request.headers, http_request._body_parts)
+    return self._http_request(http_request.method, http_request.uri, 
+                              http_request.headers, http_request._body_parts)
 
   Request = request
  
-  def _http_request(self, host, method, uri, scheme=None,  port=None,
-      headers=None, body_parts=None):
+  def _http_request(self, method, uri, headers=None, body_parts=None):
     """Makes an HTTP request using httplib.
    
     Args:
-      uri: str
+      method: str example: 'GET', 'POST', 'PUT', 'DELETE', etc.
+      uri: str or atom.http_core.Uri
+      headers: dict of strings mapping to strings which will be sent as HTTP 
+               headers in the request.
+      body_parts: list of strings, objects with a read method, or objects
+                  which can be converted to strings using str. Each of these
+                  will be sent in order as the body of the HTTP request.
     """
-    if scheme == 'https':
-      if not port:
-        connection = httplib.HTTPSConnection(host)
+    if uri.scheme == 'https':
+      if not uri.port:
+        connection = httplib.HTTPSConnection(uri.host)
       else:
-        connection = httplib.HTTPSConnection(host, int(port))
+        connection = httplib.HTTPSConnection(uri.host, int(uri.port))
     else:
-      if not port:
-        connection = httplib.HTTPConnection(host)
+      if not uri.port:
+        connection = httplib.HTTPConnection(uri.host)
       else:
-        connection = httplib.HTTPConnection(host, int(port))
+        connection = httplib.HTTPConnection(uri.host, int(uri.port))
    
     if self.debug:
       connection.debuglevel = 1
@@ -365,11 +361,11 @@ class HttpClient(object):
     # HTTP request header 'Host: www.google.com:443' instead of
     # 'Host: www.google.com', and thus resulting the error message
     # 'Token invalid - AuthSub token has wrong scope' in the HTTP response.
-    if (scheme == 'https' and int(port or 443) == 443 and
+    if (uri.scheme == 'https' and int(uri.port or 443) == 443 and
         hasattr(connection, '_buffer') and
         isinstance(connection._buffer, list)):
-      header_line = 'Host: %s:443' % host
-      replacement_header_line = 'Host: %s' % host
+      header_line = 'Host: %s:443' % uri.host
+      replacement_header_line = 'Host: %s' % uri.host
       try:
         connection._buffer[connection._buffer.index(header_line)] = (
             replacement_header_line)
