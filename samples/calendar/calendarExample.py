@@ -96,7 +96,8 @@ class CalendarExample:
       for p, a_participant in zip(xrange(len(an_event.who)), an_event.who):
         print '\t\t%s. %s' % (p, a_participant.email,)
         print '\t\t\t%s' % (a_participant.name,)
-        print '\t\t\t%s' % (a_participant.attendee_status.value,)
+        if a_participant.attendee_status:
+          print '\t\t\t%s' % (a_participant.attendee_status.value,)
 
   def _FullTextQuery(self, text_query='Tennis'):
     """Retrieves events from the calendar which match the specified full-text
