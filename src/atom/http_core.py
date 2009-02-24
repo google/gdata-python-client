@@ -53,18 +53,17 @@ class HttpRequest(object):
     """Construct an HTTP request.
 
     Args:
-      scheme: str The protocol to be used, usually this is 'http' or 'https'
-      host: str The name or IP address string of the server.
-      port: int The port number to connect to on the server.
+      uri: The full path or partial path as a Uri object or a string.
       method: The HTTP method for the request, examples include 'GET', 'POST',
               etc.
-      uri: str The relative path inclusing escaped query parameters.
       headers: dict of strings The HTTP headers to include in the request.
     """
     self.headers = headers or {}
     self._body_parts = []
     if method is not None:
       self.method = method
+    if isinstance(uri, (str, unicode)):
+      uri = Uri.parse_uri(uri)
     self.uri = uri or Uri()
 
 
@@ -150,7 +149,7 @@ class HttpRequest(object):
   def _copy(self):
     """Creates a deep copy of this request."""
     copied_uri = Uri(self.uri.scheme, self.uri.host, self.uri.port,
-                     self.uri.path, self.uri.query)
+                     self.uri.path, self.uri.query.copy())
     new_request = HttpRequest(uri=copied_uri, method=self.method,
                               headers=self.headers.copy())
     new_request._body_parts = self._body_parts[:]
@@ -254,38 +253,44 @@ class Uri(object):
 
   ModifyRequest = modify_request
 
+  def parse_uri(uri_string):
+    """Creates a Uri object which corresponds to the URI string.
  
-def parse_uri(uri_string):
-  """Creates a Uri object which corresponds to the URI string.
- 
-  This method can accept partial URIs, but it will leave missing
-  members of the Uri unset.
-  """
-  parts = urlparse.urlparse(uri_string)
-  uri = Uri()
-  if parts[0]:
-    uri.scheme = parts[0]
-  if parts[1]:
-    host_parts = parts[1].split(':')
-    if host_parts[0]:
-      uri.host = host_parts[0]
-    if len(host_parts) > 1:
-      uri.port = int(host_parts[1])
-  if parts[2]:
-    uri.path = parts[2]
-  if parts[4]:
-    param_pairs = parts[4].split('&')
-    for pair in param_pairs:
-      pair_parts = pair.split('=')
-      if len(pair_parts) > 1:
-        uri.query[urllib.unquote_plus(pair_parts[0])] = (
-            urllib.unquote_plus(pair_parts[1]))
-      elif len(pair_parts) == 1:
-        uri.query[urllib.unquote_plus(pair_parts[0])] = None
-  return uri
+    This method can accept partial URIs, but it will leave missing
+    members of the Uri unset.
+    """
+    parts = urlparse.urlparse(uri_string)
+    uri = Uri()
+    if parts[0]:
+      uri.scheme = parts[0]
+    if parts[1]:
+      host_parts = parts[1].split(':')
+      if host_parts[0]:
+        uri.host = host_parts[0]
+      if len(host_parts) > 1:
+        uri.port = int(host_parts[1])
+    if parts[2]:
+      uri.path = parts[2]
+    if parts[4]:
+      param_pairs = parts[4].split('&')
+      for pair in param_pairs:
+        pair_parts = pair.split('=')
+        if len(pair_parts) > 1:
+          uri.query[urllib.unquote_plus(pair_parts[0])] = (
+              urllib.unquote_plus(pair_parts[1]))
+        elif len(pair_parts) == 1:
+          uri.query[urllib.unquote_plus(pair_parts[0])] = None
+    return uri
+
+  parse_uri = staticmethod(parse_uri)
+
+  ParseUri = parse_uri
 
 
-ParseUri = parse_uri
+parse_uri = Uri.parse_uri
+
+
+ParseUri = Uri.parse_uri
 
 
 class HttpResponse(object):
@@ -312,6 +317,8 @@ class HttpResponse(object):
       return default
    
   def read(self, amt=None):
+    if self._body is None:
+      return None
     if not amt:
       return self._body.read()
     else:
@@ -340,6 +347,8 @@ class HttpClient(object):
                   which can be converted to strings using str. Each of these
                   will be sent in order as the body of the HTTP request.
     """
+    if isinstance(uri, (str, unicode)):
+      uri = Uri.parse_uri(uri)
     if uri.scheme == 'https':
       if not uri.port:
         connection = httplib.HTTPSConnection(uri.host)
@@ -354,7 +363,7 @@ class HttpClient(object):
     if self.debug:
       connection.debuglevel = 1
 
-    connection.putrequest(method, uri)
+    connection.putrequest(method, uri._get_relative_path())
 
     # Overcome a bug in Python 2.4 and 2.5
     # httplib.HTTPConnection.putrequest adding

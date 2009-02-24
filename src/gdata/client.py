@@ -67,6 +67,15 @@ class GDClient(atom.client.AtomPubClient):
     
     See also documentation for atom.client.AtomPubClient.request.
 
+    If a 302 redirect is sent from the server to the client, this client
+    assumes that the redirect is in the form used by the Google Calendar API.
+    The same request URI and method will be used as in the original request,
+    but a gsessionid URL parameter will be added to the request URI with
+    the value provided in the server's 302 redirect response. If the 302
+    redirect is not in the format specified by the Google Calendar API, a
+    RedirectError will be raised containing the body of the server's
+    response.
+
     Args:
       method: str
       uri: atom.http_core.Uri, str, or unicode
@@ -89,20 +98,36 @@ class GDClient(atom.client.AtomPubClient):
       calling the converter are returned.
     """
     if isinstance(uri, (str, unicode)):
-      uri = atom.http_core.parse_uri(uri)
+      uri = atom.http_core.Uri.parse_uri(uri)
 
     # Add the gsession ID to the URL to prevent further redirects.
-    if self.__gsessionid is not None:
+    # TODO: If different sessions are using the same client, there will be a
+    # multitude of redirects and session ID shuffling.
+    # If the gsession ID is in the URL, adopt it as the standard location.
+    if uri is not None and uri.query is not None and 'gsessionid' in uri.query:
+      self.__gsessionid = uri.query['gsessionid']
+    # The gsession ID could also be in the HTTP request.
+    elif (http_request is not None and http_request.uri is not None
+          and http_request.uri.query is not None
+          and 'gsessionid' in http_request.uri.query):
+      self.__gsessionid = http_request.uri.query['gsessionid']
+    # If the gsession ID is stored in the client, and was not present in the
+    # URI then add it to the URI.
+    elif self.__gsessionid is not None:
       uri.query['gsessionid'] = self.__gsessionid
 
     response = atom.client.AtomPubClient.request(self, method=method, 
         uri=uri, auth_token=auth_token, http_request=http_request, **kwargs)
     # On success, convert the response body using the desired converter 
     # function if present.
+    if response is None:
+      raise gdata.service.RequestError('Response was None')
     if response.status == 200 or response.status == 201:
       if converter is not None:
         return converter(response.read())
       return response
+    # TODO: move the redirect logic into the Google Calendar client once it
+    # exists since the redirects are only used in the calendar API.
     elif response.status == 302:
       if redirects_remaining > 0:
         location = response.getheader('Location')
@@ -141,9 +166,9 @@ class GDClient(atom.client.AtomPubClient):
         'application/x-www-form-urlencoded')
     http_request.method = 'POST'
     # Set the target URL.
-    atom.http_core.parse_uri(auth_url).modify_request(http_request)
+    atom.http_core.Uri.parse_uri(auth_url).modify_request(http_request)
 
-    # Use the underlyinh http_client to make the request.
+    # Use the underlying http_client to make the request.
     response = self.http_client.request(http_request)
 
     response_body = response.read()

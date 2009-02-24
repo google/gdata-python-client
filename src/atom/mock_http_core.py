@@ -44,10 +44,14 @@ class MockHttpClient(object):
         copied_body = body.read()
       else:
         copied_body = body
+    else:
+      copied_body = None
     response = atom.http_core.HttpResponse(status, reason, headers, 
                                            copied_body)
     # TODO Scrub the request and the response.
     self._recordings.append((http_request._copy(), response))
+
+  AddResponse = add_response
   
   def request(self, http_request):
     """Provide a recorded response, or record a response for replay.
@@ -71,6 +75,8 @@ class MockHttpClient(object):
       # Return the recording which we just added.
       return self._recordings[-1][1]
     return None
+
+  Request = request
     
   def _save_recordings(self, filename):
     recording_file = open(os.path.join(tempfile.gettempdir(), filename), 
@@ -82,21 +88,56 @@ class MockHttpClient(object):
                           'rb')
     self._recordings = pickle.load(recording_file)
 
+  def _delete_recordings(self, filename):
+    # TODO: add tests for this method.
+    os.remove(os.path.join(tempfile.gettempdir(), filename))
+
   def _load_or_use_client(self, filename, http_client):
     if os.path.exists(os.path.join(tempfile.gettempdir(), filename)):
       self._load_recordings(filename)
     else:
       self.real_client = http_client
 
+
 def _match_request(http_request, stored_request):
   """Determines whether a request is similar enough to a stored request 
      to cause the stored response to be returned."""
+  # Check to see if the host names match.
+  if (http_request.uri.host is not None 
+      and http_request.uri.host != stored_request.uri.host):
+    return False
+  # Check the request path in the URL (/feeds/private/full/x)
+  elif http_request.uri.path != stored_request.uri.path:
+    return False
+  # Check the method used in the request (GET, POST, etc.)
+  elif http_request.method != stored_request.method:
+    return False
+  # If there is a gsession ID in either request, make sure that it is matched
+  # exactly.
+  elif ('gsessionid' in http_request.uri.query 
+        or 'gsessionid' in stored_request.uri.query):
+    if 'gsessionid' not in stored_request.uri.query:
+      return False
+    elif 'gsessionid' not in http_request.uri.query:
+      return False
+    elif (http_request.uri.query['gsessionid'] 
+          != stored_request.uri.query['gsessionid']):
+      return False
+  # Ignores differences in the query params (?start-index=5&max-results=20),
+  # the body of the request, the port number, HTTP headers, just to name a 
+  # few.
   return True
 
+
 def _scrub_request(http_request):
+  # TODO: Remove authorization token from the request.
+  # TODO: Remove an email address and password from a client login request. 
   pass
 
+
 def _scrub_response(http_response):
+  # TODO: Remove authorization token from the response.
+  # TODO: Might want to remove email addresses as well.
   pass
 
     

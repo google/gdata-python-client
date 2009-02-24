@@ -115,8 +115,31 @@ class RequestTest(unittest.TestCase):
     self.assertEqual(response.read(), 'test')
 
   def test_redirects(self):
-    # TODO:
-    pass
+    client = gdata.client.GDClient()
+    client.http_client = atom.mock_http_core.MockHttpClient()
+    # Add the redirect response for the initial request.
+    first_request = atom.http_core.HttpRequest('http://example.com/1', 
+                                               'POST')
+    client.http_client.add_response(first_request, 302, None, 
+        {'Location': 'http://example.com/1?gsessionid=12'})
+    second_request = atom.http_core.HttpRequest(
+        'http://example.com/1?gsessionid=12', 'POST')
+    client.http_client.AddResponse(second_request, 200, 'OK', body='Done')
+
+    response = client.Request('POST', 'http://example.com/1')
+    self.assertEqual(response.status, 200)
+    self.assertEqual(response.reason, 'OK')
+    self.assertEqual(response.read(), 'Done')
+
+    redirect_loop_request = atom.http_core.HttpRequest(
+        'http://example.com/2?gsessionid=loop', 'PUT')
+    client.http_client.add_response(redirect_loop_request, 302, None, 
+        {'Location': 'http://example.com/2?gsessionid=loop'})
+    try:
+      response = client.request(method='PUT', uri='http://example.com/2?gsessionid=loop')
+      self.fail('Loop URL should have redirected forever.')
+    except gdata.client.RedirectError, err:
+      self.assert_(str(err).startswith('Too many redirects from server'))
 
   def test_exercise_exceptions(self):
     # TODO

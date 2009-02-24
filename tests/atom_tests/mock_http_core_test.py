@@ -134,6 +134,26 @@ class MockHttpClientTest(unittest.TestCase):
     body = response.read()
     self.assert_(body.startswith('<html><head>'))
 
+  def test_match_request(self):
+    x = atom.http_core.HttpRequest('http://example.com/', 'GET')
+    y = atom.http_core.HttpRequest('http://example.com/', 'GET')
+    self.assertTrue(atom.mock_http_core._match_request(x, y))
+    y = atom.http_core.HttpRequest('http://example.com/', 'POST')
+    self.assertFalse(atom.mock_http_core._match_request(x, y))
+    y = atom.http_core.HttpRequest('http://example.com/1', 'GET')
+    self.assertFalse(atom.mock_http_core._match_request(x, y))
+    y = atom.http_core.HttpRequest('http://example.com/?gsessionid=1', 'GET')
+    self.assertFalse(atom.mock_http_core._match_request(x, y))
+    y = atom.http_core.HttpRequest('http://example.com/?start_index=1', 'GET')
+    self.assertTrue(atom.mock_http_core._match_request(x, y))
+    x = atom.http_core.HttpRequest('http://example.com/?gsessionid=1', 'GET')
+    y = atom.http_core.HttpRequest('http://example.com/?gsessionid=1', 'GET')
+    self.assertTrue(atom.mock_http_core._match_request(x, y))
+    y = atom.http_core.HttpRequest('http://example.com/?gsessionid=2', 'GET')
+    self.assertFalse(atom.mock_http_core._match_request(x, y))
+    y = atom.http_core.HttpRequest('http://example.com/', 'GET')
+    self.assertFalse(atom.mock_http_core._match_request(x, y))
+
 
 def suite():
   return unittest.TestSuite((unittest.makeSuite(MockHttpClientTest, 'test'),

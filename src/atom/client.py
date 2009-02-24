@@ -73,7 +73,7 @@ class AtomPubClient(object):
     # Modify the request based on the AtomPubClient settings and parameters
     # passed in to the request.
     if isinstance(uri, (str, unicode)):
-      uri = atom.http_core.parse_uri(uri)
+      uri = atom.http_core.Uri.parse_uri(uri)
     if uri is not None:
       uri.modify_request(http_request)
     if isinstance(method, (str, unicode)):
