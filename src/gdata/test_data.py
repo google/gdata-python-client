@@ -1613,7 +1613,7 @@ ACL_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
   </entry>"""
 
 DOCUMENT_LIST_FEED = """<?xml version='1.0' encoding='UTF-8'?>
-<ns0:feed xmlns:ns0="http://www.w3.org/2005/Atom"><ns1:totalResults
+<ns0:feed xmlns:ns0="http://www.w3.org/2005/Atom" ><ns1:totalResults
 xmlns:ns1="http://a9.com/-/spec/opensearchrss/1.0/">2</ns1:totalResults><ns1:startIndex
 xmlns:ns1="http://a9.com/-/spec/opensearchrss/1.0/">1</ns1:startIndex><ns0:entry><ns0:content
 src="http://foo.com/fm?fmcmd=102&amp;key=supercalifragilisticexpeadocious"
@@ -1628,7 +1628,9 @@ href="http://foo.com/feeds/worksheets/supercalifragilisticexpeadocious/private/f
 rel="http://schemas.google.com/spreadsheets/2006#worksheetsfeed"
 type="application/atom+xml" /><ns0:link
 href="http://docs.google.com/feeds/documents/private/full/spreadsheet%3Asupercalifragilisticexpeadocious"
-rel="self" type="application/atom+xml" /><ns0:title type="text">Test Spreadsheet</ns0:title><ns0:updated>2007-07-03T18:03:32.045Z</ns0:updated></ns0:entry><ns0:entry><ns0:content
+rel="self" type="application/atom+xml" /><ns0:title type="text">Test Spreadsheet</ns0:title><ns0:updated>2007-07-03T18:03:32.045Z</ns0:updated>
+<ns2:feedLink href="http://docs.google.com/feeds/acl/private/full/spreadsheet%3Afoofoofoo" rel="http://schemas.google.com/acl/2007#accessControlList" xmlns:ns2="http://schemas.google.com/g/2005" />
+</ns0:entry><ns0:entry><ns0:content
 src="http://docs.google.com/RawDocContents?action=fetch&amp;docID=gr00vy"
 type="text/html"
 /><ns0:author><ns0:name>test.user</ns0:name><ns0:email>test.user@gmail.com</ns0:email></ns0:author><ns0:category
@@ -1638,7 +1640,9 @@ term="http://schemas.google.com/docs/2007#document"
 href="http://foobar.com/Doc?id=gr00vy" rel="alternate" type="text/html"
 /><ns0:link
 href="http://docs.google.com/feeds/documents/private/full/document%3Agr00vy"
-rel="self" type="application/atom+xml" /><ns0:title type="text">Test Document</ns0:title><ns0:updated>2007-07-03T18:02:50.338Z</ns0:updated></ns0:entry><ns0:id>http://docs.google.com/feeds/documents/private/full</ns0:id><ns0:link
+rel="self" type="application/atom+xml" /><ns0:title type="text">Test Document</ns0:title><ns0:updated>2007-07-03T18:02:50.338Z</ns0:updated>
+<ns2:feedLink href="http://docs.google.com/feeds/acl/private/full/document%3Afoofoofoo" rel="http://schemas.google.com/acl/2007#accessControlList" xmlns:ns2="http://schemas.google.com/g/2005" />
+</ns0:entry><ns0:id>http://docs.google.com/feeds/documents/private/full</ns0:id><ns0:link
 href="http://docs.google.com" rel="alternate" type="text/html" /><ns0:link
 href="http://docs.google.com/feeds/documents/private/full"
 rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml"
@@ -1647,11 +1651,12 @@ rel="http://schemas.google.com/g/2005#post" type="application/atom+xml"
 /><ns0:link href="http://docs.google.com/feeds/documents/private/full"
 rel="self" type="application/atom+xml" /><ns0:title type="text">Available
 Documents -
-test.user@gmail.com</ns0:title><ns0:updated>2007-07-09T23:07:21.898Z</ns0:updated></ns0:feed>
+test.user@gmail.com</ns0:title><ns0:updated>2007-07-09T23:07:21.898Z</ns0:updated>
+</ns0:feed>
 """
 
 DOCUMENT_LIST_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
-<ns0:entry xmlns:ns0="http://www.w3.org/2005/Atom"><ns0:content
+<ns0:entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://schemas.google.com/g/2005"><ns0:content
 src="http://foo.com/fm?fmcmd=102&amp;key=supercalifragilisticexpealidocious"
 type="text/html"
 /><ns0:author><ns0:name>test.user</ns0:name><ns0:email>test.user@gmail.com</ns0:email></ns0:author><ns0:category
@@ -1664,8 +1669,55 @@ href="http://foo.com/feeds/worksheets/supercalifragilisticexpealidocious/private
 rel="http://schemas.google.com/spreadsheets/2006#worksheetsfeed"
 type="application/atom+xml" /><ns0:link
 href="http://docs.google.com/feeds/documents/private/full/spreadsheet%3Asupercalifragilisticexpealidocious"
-rel="self" type="application/atom+xml" /><ns0:title type="text">Test Spreadsheet</ns0:title><ns0:updated>2007-07-03T18:03:32.045Z</ns0:updated></ns0:entry>
+rel="self" type="application/atom+xml" /><ns0:title type="text">Test Spreadsheet</ns0:title><ns0:updated>2007-07-03T18:03:32.045Z</ns0:updated>
+</ns0:entry>
 """
+
+DOCUMENT_LIST_ACL_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
+<entry xmlns="http://www.w3.org/2005/Atom"
+       xmlns:gAcl='http://schemas.google.com/acl/2007'>
+  <category scheme='http://schemas.google.com/g/2005#kind'
+            term='http://schemas.google.com/acl/2007#accessRule'/>
+  <gAcl:role value='writer'/>
+  <gAcl:scope type='user' value='user@gmail.com'/>
+</entry>"""
+
+DOCUMENT_LIST_ACL_FEED = """<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/"
+         xmlns:gAcl="http://schemas.google.com/acl/2007" 
+	 xmlns:batch="http://schemas.google.com/gdata/batch">
+<id>http://docs.google.com/feeds/acl/private/full/spreadsheet%3ApFrmMi8feTQYCgZpwUQ</id>
+<updated>2009-02-22T03:48:25.895Z</updated>
+<category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/acl/2007#accessRule"/>
+<title type="text">Document Permissions</title>
+<link rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml" href="http://docs.google.com/feeds/acl/private/full/spreadsheet%3ApFrmMi8feTQYCgZpwUQ"/>
+<link rel="http://schemas.google.com/g/2005#post" type="application/atom+xml" href="http://docs.google.com/feeds/acl/private/full/spreadsheet%3ApFrmMi8feTQYCgZpwUQ"/>
+<link rel="http://schemas.google.com/g/2005#batch" type="application/atom+xml" href="http://docs.google.com/feeds/acl/private/full/spreadsheet%3ApFrmMi8feTQYCgZpwUQ/batch"/>
+<link rel="self" type="application/atom+xml" href="http://docs.google.com/feeds/acl/private/full/spreadsheet%3ApFrmMi8feTQYCgZpwUQ"/>
+<openSearch:totalResults>2</openSearch:totalResults>
+<openSearch:startIndex>1</openSearch:startIndex>
+<entry>
+    <id>http://docs.google.com/feeds/acl/private/full/spreadsheet%3ApFrmMi8feTQp4pwUwUQ/user%3Auser%40gmail.com</id>
+    <updated>2009-02-22T03:48:25.896Z</updated>
+    <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/acl/2007#accessRule"/>
+    <title type="text">Document Permission - user@gmail.com</title>
+    <link rel="self" type="application/atom+xml" href="http://docs.google.com/feeds/acl/private/full/spreadsheet%3ApFrmMi8feTQp4pwUwUQ/user%3Auser%40gmail.com"/>
+    <link rel="edit" type="application/atom+xml" href="http://docs.google.com/feeds/acl/private/full/spreadsheet%3ApFrmMi8feTQp4pwUwUQ/user%3Auser%40gmail.com"/>
+    <gAcl:role value="owner"/>
+    <gAcl:scope type="user" value="user@gmail.com"/>
+</entry>
+<entry>
+    <id>http://docs.google.com/feeds/acl/private/full/spreadsheet%3ApFrmMi8fCgZp4pwUwUQ/user%3Auser2%40google.com</id>
+    <updated>2009-02-22T03:48:26.257Z</updated>
+    <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/acl/2007#accessRule"/>
+    <title type="text">Document Permission - user2@google.com</title>
+    <link rel="self" type="application/atom+xml" href="http://docs.google.com/feeds/acl/private/full/spreadsheet%3ApFrmMi8feTQYCgZp4pwUwUQ/user%3Auser2%40google.com"/>
+    <link rel="edit" type="application/atom+xml" href="http://docs.google.com/feeds/acl/private/full/spreadsheet%3ApFrmMi8feTQYCgZp4pwUwUQ/user%3Auser2%40google.com"/>
+    <gAcl:role value="writer"/>
+    <gAcl:scope type="domain" value="google.com"/>
+</entry>
+</feed>"""
+
 
 BATCH_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
 <entry xmlns="http://www.w3.org/2005/Atom"

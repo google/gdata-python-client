@@ -1048,6 +1048,12 @@ class LinkFinder(object):
         return a_link
     return None
 
+  def GetEditMediaLink(self):
+    for a_link in self.link:
+      if a_link.rel == 'edit-media':
+        return a_link
+    return None
+
   def GetNextLink(self):
     for a_link in self.link:
       if a_link.rel == 'next':
