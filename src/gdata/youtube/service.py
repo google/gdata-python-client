@@ -277,9 +277,11 @@ class YouTubeService(gdata.service.GDataService):
         uri, converter=gdata.youtube.YouTubeVideoCommentEntryFromString)
 
   def GetYouTubeUserFeed(self, uri=None, username=None):
-    """Retrieve a YouTubeUserFeed.
+    """Retrieve a YouTubeVideoFeed of user uploaded videos
 
-    Either a uri or a username must be provided.
+    Either a uri or a username must be provided.  This will retrieve list
+    of videos uploaded by specified user.  The uri will be of format
+    "http://gdata.youtube.com/feeds/api/users/{username}/uploads".
 
     Args:
       uri: An optional string representing the URI of the user feed that is

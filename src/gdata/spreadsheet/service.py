@@ -17,8 +17,8 @@
 """SpreadsheetsService extends the GDataService to streamline Google
 Spreadsheets operations.
 
-  GBaseService: Provides methods to query feeds and manipulate items. Extends
-                GDataService.
+  SpreadsheetService: Provides methods to query feeds and manipulate items.
+                      Extends GDataService.
 
   DictionaryToParamList: Function which converts a dictionary into a list of
                          URL arguments (represented as strings). This is a
@@ -303,7 +303,7 @@ class SpreadsheetsService(gdata.service.GDataService):
       converter: Function (optional) Function to be executed on the server's
           response. This function should take one string as a parameter. The
           default value is SpreadsheetsCellsFeedFromString which will turn the result
-          into a gdata.base.GBaseItem object.
+          into a gdata.spreadsheet.SpreadsheetsCellsFeed object.
 
     Returns:
       A gdata.BatchFeed containing the results.

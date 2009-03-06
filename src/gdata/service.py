@@ -492,7 +492,7 @@ class GDataService(atom.service.AtomService):
   def UpgradeToOAuthAccessToken(self, authorized_request_token=None,
                                 request_url='%s/accounts/OAuthGetAccessToken' \
                                 % AUTH_SERVER_HOST, oauth_version='1.0'):
-    """Upgrades the authorized request token to an access token.
+    """Upgrades the authorized request token to an access token and returns it
     
     Args:
       authorized_request_token: gdata.auth.OAuthToken (optional) OAuth request
@@ -504,6 +504,9 @@ class GDataService(atom.service.AtomService):
           added by default but here you can override it's value.
       request_url: Access token URL. The default is
           'https://www.google.com/accounts/OAuthGetAccessToken'.
+    
+    Returns:
+      Access token
           
     Raises:
       NonOAuthToken if the user's authorized request token is not an OAuth
@@ -536,6 +539,7 @@ class GDataService(atom.service.AtomService):
       token.scopes = authorized_request_token.scopes
       token.oauth_input_params = authorized_request_token.oauth_input_params
       self.SetOAuthToken(token)
+      return token
     else:
       raise TokenUpgradeFailed({'status': response.status,
                                 'reason': 'Non 200 response on upgrade',
