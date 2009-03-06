@@ -70,11 +70,11 @@ class DocsSample(object):
     print '\n'
     if not feed.entry:
       print 'No entries in feed.\n'
-    print '%-18s %-12s %s' % ('TITLE', 'TYPE', 'OBJECT_ID')
+    print '%-18s %-12s %s' % ('TITLE', 'TYPE', 'RESOURCE ID')
     for entry in feed.entry:
       print '%-18s %-12s %s' % (truncate(entry.title.text.encode('UTF-8')),
                                 entry.GetDocumentType(),
-                                entry.GetDocumentResourceId())
+                                entry.resourceId.text)
 
   def _GetFileExtension(self, file_name):
     """Returns the uppercase file extension for a file.
@@ -138,14 +138,14 @@ class DocsSample(object):
 
   def _DownloadMenu(self):
     """Prompts that enable a user to download a local copy of a document."""
-    object_id = ''
-    object_id = raw_input('Enter an object id: ')
+    resource_id = ''
+    resource_id = raw_input('Enter an resource id: ')
     file_path = ''
     file_path = raw_input('Save file to: ')
 
-    if not file_path or not object_id:
+    if not file_path or not resource_id:
       return
-    
+
     file_name = os.path.basename(file_path)
     ext = self._GetFileExtension(file_name)
 
@@ -155,7 +155,7 @@ class DocsSample(object):
     else:
       content_type = gdata.docs.service.SUPPORTED_FILETYPES[ext]
 
-    doc_type = object_id[:object_id.find('%3A')]
+    doc_type = resource_id[:resource_id.find(':')]
 
     # When downloading a spreadsheet, the authenicated request needs to be
     # sent with the spreadsheet service's auth token.
@@ -163,11 +163,11 @@ class DocsSample(object):
       print 'Downloading spreadsheet to %s...' % (file_path,)
       docs_token = self.gd_client.GetClientLoginToken()
       self.gd_client.SetClientLoginToken(self.gs_client.GetClientLoginToken())
-      self.gd_client.DownloadSpreadsheet(object_id, file_path)
+      self.gd_client.DownloadSpreadsheet(resource_id, file_path)
       self.gd_client.SetClientLoginToken(docs_token)
     else:
       print 'Downloading document to %s...' % (file_path,)
-      self.gd_client.DownloadDocument(object_id, file_path)
+      self.gd_client.DownloadDocument(resource_id, file_path)
 
   def _ListDocuments(self):
     """Retrieves and displays a list of documents based on the user's choice."""
@@ -188,8 +188,8 @@ class DocsSample(object):
 
   def _ListAclPermissions(self):
     """Retrieves a list of a user's folders and displays them."""
-    object_id = raw_input('Enter an object id: ')
-    query = gdata.docs.service.DocumentAclQuery(object_id)
+    resource_id = raw_input('Enter an resource id: ')
+    query = gdata.docs.service.DocumentAclQuery(resource_id)
     print '\nListing document permissions:'
     feed = self.gd_client.GetDocumentListAclFeed(query.ToUri())
     for acl_entry in feed.entry:
@@ -198,11 +198,11 @@ class DocsSample(object):
 
   def _ModifyAclPermissions(self):
     """Create or updates the ACL entry on an existing document."""
-    object_id = raw_input('Enter an object id: ')
+    resource_id = raw_input('Enter an resource id: ')
     email = raw_input('Enter an email address: ')
     role_value = raw_input('Enter a permission (reader/writer/owner/remove): ')
 
-    uri = gdata.docs.service.DocumentAclQuery(object_id).ToUri()
+    uri = gdata.docs.service.DocumentAclQuery(resource_id).ToUri()
     acl_feed = self.gd_client.GetDocumentListAclFeed(uri)
 
     found_acl_entry = None
@@ -227,7 +227,6 @@ class DocsSample(object):
       acl_entry = gdata.docs.DocumentListAclEntry(scope=scope, role=role)
       inserted_entry = self.gd_client.Post(
         acl_entry, uri, converter=gdata.docs.DocumentListAclEntryFromString)
-      print inserted_entry
 
     print '\nListing document permissions:'
     acl_feed = self.gd_client.GetDocumentListAclFeed(uri)
@@ -261,10 +260,10 @@ class DocsSample(object):
 
   def _GetMenuChoice(self, max):
     """Retrieves the menu selection from the user.
-    
+
     Args:
       max: [int] The maximum number of allowed choices (inclusive)
-      
+
     Returns:
       The integer of the menu item chosen by the user.
     """
@@ -276,7 +275,7 @@ class DocsSample(object):
       except ValueError:
         print 'Invalid choice. Please choose a value between 1 and', max
         continue
-      
+
       if num > max or num < 1:
         print 'Invalid choice. Please choose a value between 1 and', max
       else:

@@ -62,7 +62,7 @@ class Role(atom.AtomBase):
 
 class FeedLink(atom.AtomBase):
   """The DocList gd:feedLink element"""
- 
+
   _tag = 'feedLink'
   _namespace = gdata.GDATA_NAMESPACE
   _attributes = atom.AtomBase._attributes.copy()
@@ -76,6 +76,38 @@ class FeedLink(atom.AtomBase):
     atom.AtomBase.__init__(self, extension_elements=extension_elements,
                            extension_attributes=extension_attributes, text=text)
 
+
+class ResourceId(atom.AtomBase):
+  """The DocList gd:resourceId element"""
+
+  _tag = 'resourceId'
+  _namespace = gdata.GDATA_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['value'] = 'value'
+
+  def __init__(self, value=None, extension_elements=None,
+               extension_attributes=None, text=None):
+    self.value = value
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+
+class LastModifiedBy(atom.Person):
+  """The DocList gd:lastModifiedBy element"""
+
+  _tag = 'lastModifiedBy'
+  _namespace = gdata.GDATA_NAMESPACE
+
+
+class LastViewed(atom.Person):
+  """The DocList gd:lastModifiedBy element"""
+
+  _tag = 'lastViewed'
+  _namespace = gdata.GDATA_NAMESPACE
+
+
 class DocumentListEntry(gdata.GDataEntry):
   """The Google Documents version of an Atom Entry"""
 
@@ -84,12 +116,22 @@ class DocumentListEntry(gdata.GDataEntry):
   _children = gdata.GDataEntry._children.copy()
   _attributes = gdata.GDataEntry._attributes.copy()
   _children['{%s}feedLink' % gdata.GDATA_NAMESPACE] = ('feedLink', FeedLink)
+  _children['{%s}resourceId' % gdata.GDATA_NAMESPACE] = ('resourceId',
+                                                         ResourceId)
+  _children['{%s}lastModifiedBy' % gdata.GDATA_NAMESPACE] = ('lastModifiedBy',
+                                                             LastModifiedBy)
+  _children['{%s}lastViewed' % gdata.GDATA_NAMESPACE] = ('lastViewed',
+                                                         LastViewed)
 
-  def __init__(self, feedLink=None, author=None, category=None, content=None,
+  def __init__(self, resourceId=None, feedLink=None, lastViewed=None,
+               lastModifiedBy=None, author=None, category=None, content=None,
                atom_id=None, link=None, published=None, title=None,
                updated=None, text=None, extension_elements=None,
                extension_attributes=None):
-    self.feedLink = feedLink or None
+    self.feedLink = feedLink
+    self.lastViewed = feedLink
+    self.lastModifiedBy = feedLink
+    self.resourceId = feedLink
     gdata.GDataEntry.__init__(
         self, author=author, category=category, content=content,
         atom_id=atom_id, link=link, published=published, title=title,
@@ -121,26 +163,6 @@ class DocumentListEntry(gdata.GDataEntry):
     else:
       return None
 
-  def GetDocumentResourceId(self):
-    """Extracts the document/presentation/spreadsheet/folder id of document.
-
-    The object/resource ids are of the form document%3A123456789,
-    folder%3A123456789, etc. This method is should be used to extract
-    the object id for use in exporting or querying for particular
-    documents.  Note: the object id which this method returns is a part
-    of the Atom id.
-
-    Returns:
-      The document's unique id as a string.
-    """
-    doc_type = self.GetDocumentType()
-
-    if self.id.text:
-      match = re.search('(' + doc_type + '%3A[^\/]+)\/?.*$', self.id.text)
-      if match:
-        return match.group(1)
-    return None
-
 
 def DocumentListEntryFromString(xml_string):
   """Converts an XML string into a DocumentListEntry object.
@@ -156,7 +178,7 @@ def DocumentListEntryFromString(xml_string):
 
 class DocumentListAclEntry(gdata.GDataEntry):
   """A DocList ACL Entry flavor of an Atom Entry"""
-  
+
   _tag = gdata.GDataEntry._tag
   _namespace = gdata.GDataEntry._namespace
   _children = gdata.GDataEntry._children.copy()
@@ -189,7 +211,7 @@ def DocumentListAclEntryFromString(xml_string):
 
 class DocumentListFeed(gdata.GDataFeed):
   """A feed containing a list of Google Documents Items"""
-  
+
   _tag = gdata.GDataFeed._tag
   _namespace = atom.ATOM_NAMESPACE
   _children = gdata.GDataFeed._children.copy()

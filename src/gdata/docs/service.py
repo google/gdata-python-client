@@ -246,7 +246,7 @@ class DocsService(gdata.service.GDataService):
 
     Args:
       uri: string The URI of a document's Acl feed to retrieve.
-      
+
     Returns:
       A DocumentListAclFeed object representing the ACL feed
       returned by the server.
@@ -324,7 +324,7 @@ class DocsService(gdata.service.GDataService):
 
     Args:
       entry_or_resource_id: DoclistEntry or string of the document
-        resource id to download.
+          resource id to download.
       file_path: string The full path to save the file to.  The export
           format is inferred from the the file extension.
     """
@@ -334,15 +334,17 @@ class DocsService(gdata.service.GDataService):
       ext = match.group(1)
 
     if isinstance(entry_or_resource_id, gdata.docs.DocumentListEntry):
-      object_id = entry_or_resource_id.GetDocumentResourceId()
+      resource_id = entry_or_resource_id.resourceId.text
     else:
-      object_id = entry_or_resource_id  
-    doc_id = object_id[object_id.find('%3A') + 3:]
+      resource_id = entry_or_resource_id
+
+    resource_id = resource_id.replace(':', '%3A')
+    doc_id = resource_id[resource_id.find('%3A') + 3:]
 
     export_uri = '/feeds/download/documents/Export'
     export_uri += '?docID=%s&exportFormat=%s' % (doc_id, ext)
     self._DownloadFile(export_uri, file_path)
-    
+
   def DownloadPresentation(self, entry_or_resource_id, file_path):
     """Downloads a presentation from the Document List.
 
@@ -358,15 +360,17 @@ class DocsService(gdata.service.GDataService):
       ext = match.group(1)
 
     if isinstance(entry_or_resource_id, gdata.docs.DocumentListEntry):
-      object_id = entry_or_resource_id.GetDocumentResourceId()
+      resource_id = entry_or_resource_id.resourceId.text
     else:
-      object_id = entry_or_resource_id 
-    doc_id = object_id[object_id.find('%3A') + 3:]
-      
+      resource_id = entry_or_resource_id
+
+    resource_id = resource_id.replace(':', '%3A')
+    doc_id = resource_id[resource_id.find('%3A') + 3:]
+
     export_uri = '/feeds/download/presentations/Export'
     export_uri += '?docID=%s&exportFormat=%s' % (doc_id, ext)
     self._DownloadFile(export_uri, file_path)
-    
+
   def DownloadSpreadsheet(self, entry_or_resource_id, file_path, gid=0):
     """Downloads a spreadsheet from the Document List.
 
@@ -384,11 +388,13 @@ class DocsService(gdata.service.GDataService):
       ext = match.group(1)
 
     if isinstance(entry_or_resource_id, gdata.docs.DocumentListEntry):
-      object_id = entry_or_resource_id.GetDocumentResourceId()
+      resource_id = entry_or_resource_id.resourceId.text
     else:
-      object_id = entry_or_resource_id  
-    key = object_id[object_id.find('%3A') + 3:]
-      
+      resource_id = entry_or_resource_id
+
+    resource_id = resource_id.replace(':', '%3A')
+    key = resource_id[resource_id.find('%3A') + 3:]
+
     export_uri = ('http://spreadsheets.google.com'
                   '/feeds/download/spreadsheets/Export')
     export_uri += '?key=%s&fmcmd=%s' % (key,
@@ -399,7 +405,7 @@ class DocsService(gdata.service.GDataService):
 
   def CreateFolder(self, title, folder_or_uri=None):
     """Creates a folder in the Document List feed.
-    
+
     Args:
       title: string The title of the folder on the server after being created.
       folder_or_uri: DocumentListEntry or string (optional) An object with a

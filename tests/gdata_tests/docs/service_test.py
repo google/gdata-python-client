@@ -34,7 +34,7 @@ class DocumentListQueryTest(unittest.TestCase):
   def setUp(self):
     self.doclist = client
     self.feed = self.doclist.GetDocumentListFeed()
-    
+
   def testGetDocumentsListFeed(self):
     self.assert_(isinstance(self.feed, gdata.docs.DocumentListFeed))
     uri = 'http://docs.google.com/feeds/documents/private/full/?max-results=1'
@@ -51,14 +51,18 @@ class DocumentListQueryTest(unittest.TestCase):
     self.assertEqual(len(feed2.entry), 1)
     self.assertEqual(self.feed.entry[0].id.text, feed2.entry[0].id.text)
     self.assertEqual(self.feed.entry[0].title.text, feed2.entry[0].title.text)
-    
+
   def testGetDocumentsListEntry(self):
     self_link = self.feed.entry[0].GetSelfLink().href
     entry = self.doclist.GetDocumentListEntry(self_link)
     self.assert_(isinstance(entry, gdata.docs.DocumentListEntry))
     self.assertEqual(self.feed.entry[0].id.text, entry.id.text)
     self.assertEqual(self.feed.entry[0].title.text, entry.title.text)
-  
+
+    self.assert_(self.feed.entry[0].resourceId.text is not None)
+    self.assert_(self.feed.entry[0].lastModifiedBy is not None)
+    self.assert_(self.feed.entry[0].lastViewed is not None)
+
   def testGetDocumentsListAclFeed(self):
     uri = ('http://docs.google.com/feeds/documents/private/full/'
            '-/mine?max-results=1')
@@ -100,7 +104,7 @@ class DocumentListAclTest(unittest.TestCase):
     # Update the user's role
     ROLE_VALUE = 'writer'     
     acl_entry.role.value = ROLE_VALUE
-    
+
     updated_acl_entry = self.doclist.Put(
         acl_entry, acl_entry.GetEditLink().href,
         converter=gdata.docs.DocumentListAclEntryFromString)
@@ -117,9 +121,8 @@ class DocumentListAclTest(unittest.TestCase):
         self.feed.entry[0].GetAclLink().href)
     for acl_entry in acl_feed.entry:
       self.assert_(acl_entry.scope.value != self.EMAIL)
-      
 
-    
+
 class DocumentListCreateAndDeleteTest(unittest.TestCase):
   def setUp(self):
     self.doclist = client
@@ -128,7 +131,7 @@ class DocumentListCreateAndDeleteTest(unittest.TestCase):
     category = gdata.atom.Category(scheme=gdata.docs.service.DATA_KIND_SCHEME,
                                    term=gdata.docs.service.DOCUMENT_KIND_TERM)
     self.new_entry.category.append(category)
-    
+
   def testCreateAndDeleteEmptyDocumentSlugHeaderTitle(self):
     created_entry = self.doclist.Post(self.new_entry,
                                       '/feeds/documents/private/full',
@@ -188,7 +191,7 @@ class DocumentListCreateAndDeleteTest(unittest.TestCase):
     uri += '/-/folder?q=%s&showfolders=true' % (CREATED_FOLDER_NAME,)
     folders = self.doclist.GetDocumentListFeed(uri)
     self.doclist.Delete(folders.entry[0].GetEditLink().href)
-    
+
 class DocumentListMoveInAndOutOfFolderTest(unittest.TestCase):
   def setUp(self):
     self.doclist = client
@@ -198,11 +201,11 @@ class DocumentListMoveInAndOutOfFolderTest(unittest.TestCase):
     self.doc_title = 'TestDoc'
     self.ms = gdata.MediaSource(file_path='test.doc',
                                 content_type='application/msword')
-    
+
   def tearDown(self):
     folder = self.doclist.Get(self.folder.GetSelfLink().href)
     self.doclist.Delete(folder.GetEditLink().href)
-    
+
   def testUploadDocumentToFolder(self):
     created_entry = self.doclist.UploadDocument(self.ms, self.doc_title,
                                                 self.folder)
@@ -218,7 +221,7 @@ class DocumentListMoveInAndOutOfFolderTest(unittest.TestCase):
     edit_uri = 'http://docs.google.com/feeds/documents/private/full/'
     edit_uri += '%s/%s' % (match.group(1), match.group(2))
     self.doclist.Delete(edit_uri)
-     
+
   def testMoveDocumentInAndOutOfFolder(self):
     created_entry = self.doclist.UploadDocument(self.ms, self.doc_title)  
     moved_entry = self.doclist.MoveDocumentIntoFolder(created_entry,
@@ -227,7 +230,7 @@ class DocumentListMoveInAndOutOfFolderTest(unittest.TestCase):
       if category.scheme.startswith(gdata.docs.service.FOLDERS_SCHEME_PREFIX):
         self.assertEqual(category.label, self.folder_name)
         break
-        
+
     self.doclist.MoveOutOfFolder(moved_entry)
     moved_entry = self.doclist.Get(moved_entry.GetSelfLink().href)
     for category in moved_entry.category:
@@ -237,7 +240,7 @@ class DocumentListMoveInAndOutOfFolderTest(unittest.TestCase):
 
     created_entry = self.doclist.Get(created_entry.GetSelfLink().href)
     self.doclist.Delete(created_entry.GetEditLink().href)
-    
+
   def testMoveFolderIntoFolder(self):
     dest_folder_name = 'DestFolderName'
     dest_folder = self.doclist.CreateFolder(dest_folder_name)
@@ -254,12 +257,12 @@ class DocumentListMoveInAndOutOfFolderTest(unittest.TestCase):
     #cleanup
     dest_folder = self.doclist.Get(dest_folder.GetSelfLink().href)
     self.doclist.Delete(dest_folder.GetEditLink().href)
-    
+
 class DocumentListUploadTest(unittest.TestCase):
 
   def setUp(self):
     self.doclist = client
-    
+
   def testUploadAndDeleteDocument(self):
     ms = gdata.MediaSource(file_path='test.doc',
                            content_type='application/msword')
@@ -277,7 +280,7 @@ class DocumentListUploadTest(unittest.TestCase):
     self.assertEqual(entry.category[0].label, 'presentation')
     self.assert_(isinstance(entry, gdata.docs.DocumentListEntry))
     self.doclist.Delete(entry.GetEditLink().href)
-    
+
   def testUploadAndDeleteSpreadsheet(self):
     ms = gdata.MediaSource(file_path='test.csv',
                            content_type='text/csv')
@@ -287,7 +290,7 @@ class DocumentListUploadTest(unittest.TestCase):
     self.assert_(isinstance(entry, gdata.docs.DocumentListEntry))
     self.doclist.Delete(entry.GetEditLink().href)
 
-    
+
 class DocumentListUpdateTest(unittest.TestCase):
   def setUp(self):
     self.doclist = client
@@ -303,8 +306,8 @@ class DocumentListUpdateTest(unittest.TestCase):
     # Delete the test doc we created
     self_link = self.created_entry.GetSelfLink().href
     entry = self.doclist.GetDocumentListEntry(self_link)
-    self.doclist.Delete(entry.GetEditLink().href) 
-  
+    self.doclist.Delete(entry.GetEditLink().href)
+
   def testUpdateDocumentMetadataAndContent(self):
     title = 'UpdatedTestDoc'
     # Update metadata
@@ -334,7 +337,7 @@ class DocumentListExportTest(unittest.TestCase):
   def setUp(self):
     self.doclist = client
     self.spreadsheets = spreadsheets
-    
+
   def testExportDocument(self):
     query = ('http://docs.google.com/feeds/documents/private/full'
              '/-/document?max-results=1')
@@ -353,11 +356,10 @@ class DocumentListExportTest(unittest.TestCase):
     query = ('http://docs.google.com/feeds/documents/private/full'
              '/-/presentation?max-results=1')
     feed = self.doclist.QueryDocumentListFeed(query)
-    resource_id = feed.entry[0].GetDocumentResourceId()
     file_paths = ['./downloadedTest.pdf', './downloadedTest.ppt',
                   './downloadedTest.swf', './downloadedTest.txt']
     for path in file_paths:
-      self.doclist.DownloadPresentation(resource_id, path)
+      self.doclist.DownloadPresentation(feed.entry[0].resourceId.text, path)
       self.assert_(os.path.exists(path))
       self.assert_(os.path.getsize(path))
       os.remove(path)
@@ -379,7 +381,7 @@ class DocumentListExportTest(unittest.TestCase):
       self.assert_(os.path.getsize(path))
       os.remove(path)
     self.doclist.SetClientLoginToken(docs_token)
-  
+
 if __name__ == '__main__':
   print ('DocList API Tests\nNOTE: Please run these tests only with a test '
          'account. The tests may delete or update your data.')
