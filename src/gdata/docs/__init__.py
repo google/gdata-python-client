@@ -17,9 +17,8 @@
 """Contains extensions to Atom objects used with Google Documents."""
 
 __author__ = ('api.jfisher (Jeff Fisher), '
-              'api.eric@google.com (Eric Bidelman')
+              'api.eric@google.com (Eric Bidelman)')
 
-import re
 import atom
 import gdata
 
@@ -135,14 +134,14 @@ class DocumentListEntry(gdata.GDataEntry):
     gdata.GDataEntry.__init__(
         self, author=author, category=category, content=content,
         atom_id=atom_id, link=link, published=published, title=title,
-        updated=updated, extension_elements=extension_elements, 
+        updated=updated, extension_elements=extension_elements,
         extension_attributes=extension_attributes, text=text)
 
   def GetAclLink(self):
     """Extracts the DocListEntry's <gd:feedLink>.
 
     Returns:
-      A FeedLink object. 
+      A FeedLink object.
     """
     return self.feedLink
 
@@ -154,7 +153,7 @@ class DocumentListEntry(gdata.GDataEntry):
     spreadsheet, folder, or pdf.
 
     Returns:
-      A string representing the type of document. 
+      A string representing the type of document.
     """
     if self.category:
       for category in self.category:

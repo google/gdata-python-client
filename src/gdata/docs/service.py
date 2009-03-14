@@ -21,6 +21,8 @@
                     Extends GDataService.
 
   DocumentQuery: Queries a Google Document list feed.
+
+  DocumentAclQuery: Queries a Google Document Acl feed.
 """
 
 
@@ -28,7 +30,6 @@ __author__ = ('api.jfisher (Jeff Fisher), '
               'api.eric@google.com (Eric Bidelman)')
 
 import re
-import urllib
 import atom
 import gdata.service
 import gdata.docs
