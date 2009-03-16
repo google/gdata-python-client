@@ -1399,7 +1399,7 @@ def ExtractToken(url, scopes_included_in_next=True):
 
 
 def GenerateAuthSubRequestUrl(next, scopes, hd='default', secure=False,
-    session=True, request_url='http://www.google.com/accounts/AuthSubRequest',
+    session=True, request_url='https://www.google.com/accounts/AuthSubRequest',
     include_scopes_in_next=True):
   """Creates a URL to request an AuthSub token to access Google services.
 
@@ -1424,7 +1424,7 @@ def GenerateAuthSubRequestUrl(next, scopes, hd='default', secure=False,
         token may only be used once and cannot be upgraded. Default is True.
     request_url: The base of the URL to which the user will be sent to
         authorize this application to access their data. The default is
-        'http://www.google.com/accounts/AuthSubRequest'.
+        'https://www.google.com/accounts/AuthSubRequest'.
     include_scopes_in_next: Boolean if set to true, the 'next' parameter will
         be modified to include the requested scope as a URL parameter. The
         key for the next's scope parameter will be SCOPE_URL_PARAM_NAME. The
