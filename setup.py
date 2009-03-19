@@ -58,6 +58,6 @@ Protocol service.
         'gdata.blogger', 'gdata.alt', 'gdata.oauth', 'gdata.tlslite', 
         'gdata.Crypto', 'gdata.Crypto.Cipher', 'gdata.Crypto.Hash', 
         'gdata.Crypto.Protocol', 'gdata.Crypto.PublicKey', 'gdata.Crypto.Util',
-        'gdata.tlslite.utils', 'gdata.tlslite.integration'],
+        'gdata.tlslite.utils', 'gdata.tlslite.integration', 'gdata.health'],
     package_dir = {'gdata':'src/gdata', 'atom':'src/atom'}
 )
