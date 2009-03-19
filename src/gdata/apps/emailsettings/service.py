@@ -120,6 +120,20 @@ class EmailSettingsService(gdata.apps.service.PropertyService):
     properties['makeDefault'] = self._bool2str(make_default)
     return self._PostProperties(uri, properties)
 
+  def UpdateWebClipSettings(self, username, enable):
+    """Update WebClip Settings
+
+    Args:
+      username: User to update forwarding for.
+      enable: Boolean whether to enable Web Clip.
+    Returns:
+      A dict containing the result of the update operation.
+    """
+    uri = self._serviceUrl('webclip', username)
+    properties = {}
+    properties['enable'] = self._bool2str(enable)
+    return self._PutProperties(uri, properties)
+
   def UpdateForwarding(self, username, enable, forward_to=None, action=None):
     """Update forwarding settings.
 

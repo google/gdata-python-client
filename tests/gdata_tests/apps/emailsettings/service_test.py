@@ -66,6 +66,10 @@ class EmailSettingsTest(unittest.TestCase):
                                        make_default=True)
     self.assertEquals(result['name'], 'Send-as Alias')
 
+  def testUpdateWebClipSettings(self):
+    result = self.es.UpdateWebClipSettings(username, enable=True)
+    self.assertEquals(result['enable'], 'true')
+
   def testUpdateForwarding(self):
     result = self.es.UpdateForwarding(username,
                                       enable=True,
