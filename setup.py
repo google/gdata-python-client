@@ -19,8 +19,8 @@ from distutils.core import setup
 
 
 setup(
-    name='gdata.py',
-    version='1.2.4',
+    name='gdata',
+    version='1.3.0',
     description='Python client library for Google data APIs',
     long_description = """\
 The Google data Python client library makes it easy to interact with
@@ -59,5 +59,6 @@ Protocol service.
         'gdata.Crypto', 'gdata.Crypto.Cipher', 'gdata.Crypto.Hash', 
         'gdata.Crypto.Protocol', 'gdata.Crypto.PublicKey', 'gdata.Crypto.Util',
         'gdata.tlslite.utils', 'gdata.tlslite.integration', 'gdata.health'],
-    package_dir = {'gdata':'src/gdata', 'atom':'src/atom'}
+    package_dir = {'gdata':'src/gdata', 'atom':'src/atom'},
+    install_requires=['elementtree']
 )
