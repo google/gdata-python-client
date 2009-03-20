@@ -1,3 +1,29 @@
+=== 1.3.0 ===
+Mar 20, 2009 (revision 665)
+
+- Added support for the Google Health API. (Thanks Eric Bidelman!)
+- Added support for the groups management in the Google Apps Provisioning
+    API. (Thanks to Tony Chen and Oskar Casquero!)
+- Added the following new features for the Google Documents List API:
+    (Thanks again to Eric Bidelman for adding all of these!)
+  - Folder create, move docs/folders in and out of other folders.
+  - Suppport for modifications to Access Control Lists for documents.
+  - Export functionality for documents, spreadsheets, and presentations.
+  - Updated the docs_example.py sample app.
+  - New new XML elements: resourceID, lastViewed, and lastModifiedBy.
+- Added ability to update web clip settings in the Google Apps email settigns
+    API. (Thanks Takashi Matsuo.)
+- Fixed a bug in calendarExample that would cause execution to fail when an
+    event attendee does not have any attendeeStatus data. (Thanks Trevor
+    Johns!)
+- Fixed AuthSub request URLs which should be https. (Yay Eric!)
+- Fixed logic when changing email settings when using the Google Apps API to
+    only send properties which have been specified. (Thanks Jay Lee!)
+- Includes a new and experimental client class (gdata.client.GDClient) which
+    can be used with version two of the Google Data API protocol. This class
+    may change in backwards incompatible ways before the 2.0.0 release, so
+    use at your own risk. 
+
 === 1.2.4 ===
 Jan 22, 2009 (revision 603)
 
