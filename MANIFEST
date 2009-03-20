@@ -49,6 +49,8 @@ src/gdata/docs/__init__.py
 src/gdata/docs/service.py
 src/gdata/exif/__init__.py
 src/gdata/geo/__init__.py
+src/gdata/health/__init__.py
+src/gdata/health/service.py
 src/gdata/media/__init__.py
 src/gdata/photos/__init__.py
 src/gdata/photos/service.py
