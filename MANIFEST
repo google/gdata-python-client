@@ -1,7 +1,7 @@
-README.txt
-RELEASE_NOTES.txt
 INSTALL.txt
 MANIFEST
+README.txt
+RELEASE_NOTES.txt
 setup.py
 src/atom/__init__.py
 src/atom/auth.py
@@ -19,7 +19,10 @@ src/atom/url.py
 src/gdata/__init__.py
 src/gdata/auth.py
 src/gdata/client.py
+src/gdata/gauth.py
 src/gdata/service.py
+src/gdata/test_config.py
+src/gdata/test_config_template.py
 src/gdata/test_data.py
 src/gdata/urlfetch.py
 src/gdata/alt/__init__.py
@@ -28,6 +31,8 @@ src/gdata/apps/__init__.py
 src/gdata/apps/service.py
 src/gdata/apps/emailsettings/__init__.py
 src/gdata/apps/emailsettings/service.py
+src/gdata/apps/groups/__init__.py
+src/gdata/apps/groups/service.py
 src/gdata/apps/migration/__init__.py
 src/gdata/apps/migration/service.py
 src/gdata/base/__init__.py
@@ -170,6 +175,7 @@ samples/oauth/oauth_example.py
 samples/authsub/secure_authsub.py
 tests/__init__.py
 tests/all_tests.py
+tests/all_tests_clear_cache.py
 tests/all_tests_coverage.py
 tests/atom_test.py
 tests/coverage.py
@@ -192,8 +198,6 @@ tests/atom_tests/mock_server_test.py
 tests/atom_tests/service_test.py
 tests/atom_tests/token_store_test.py
 tests/atom_tests/url_test.py
-tests/atom_tests/mock_client_test.py
-tests/atom_tests/core_test.py
 tests/gdata_tests/__init__.py
 tests/gdata_tests/apps_test.py
 tests/gdata_tests/auth_test.py
@@ -204,7 +208,10 @@ tests/gdata_tests/client_online_test.py
 tests/gdata_tests/client_test.py
 tests/gdata_tests/codesearch_test.py
 tests/gdata_tests/contacts_test.py
+tests/gdata_tests/data_test.py
 tests/gdata_tests/docs_test.py
+tests/gdata_tests/health_test.py
+tests/gdata_tests/live_client_test.py
 tests/gdata_tests/photos_test.py
 tests/gdata_tests/service_test.py
 tests/gdata_tests/spreadsheet_test.py
@@ -214,6 +221,8 @@ tests/gdata_tests/apps/__init__.py
 tests/gdata_tests/apps/service_test.py
 tests/gdata_tests/apps/emailsettings/__init__.py
 tests/gdata_tests/apps/emailsettings/service_test.py
+tests/gdata_tests/apps/groups/__init__.py
+tests/gdata_tests/apps/groups/service_test.py
 tests/gdata_tests/apps/migration/__init__.py
 tests/gdata_tests/apps/migration/service_test.py
 tests/gdata_tests/base/__init__.py
@@ -227,6 +236,8 @@ tests/gdata_tests/contacts/__init__.py
 tests/gdata_tests/contacts/service_test.py
 tests/gdata_tests/docs/__init__.py
 tests/gdata_tests/docs/service_test.py
+tests/gdata_tests/health/__init__.py
+tests/gdata_tests/health/service_test.py
 tests/gdata_tests/photos/__init__.py
 tests/gdata_tests/photos/service_test.py
 tests/gdata_tests/spreadsheet/__init__.py
