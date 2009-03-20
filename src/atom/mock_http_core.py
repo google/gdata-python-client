@@ -118,6 +118,13 @@ class MockHttpClient(object):
     if self.real_client is not None:
       self._save_recordings(self._recordings_cache_name)
 
+  def delete_session(self, name=None):
+    """Removes recordings from a previous live request."""
+    if name is None:
+      self._delete_recordings(self._recordings_cache_name)
+    else:
+      self._delete_recordings(name)
+
 
 def _match_request(http_request, stored_request):
   """Determines whether a request is similar enough to a stored request 

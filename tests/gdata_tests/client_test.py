@@ -24,7 +24,9 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 import unittest
 import gdata.client
 import gdata.gauth
+import gdata.data
 import atom.mock_http_core
+import StringIO
 
 
 # old imports
@@ -166,7 +168,17 @@ class RequestTest(unittest.TestCase):
     # TODO
     pass
   
-
+class CreateConverterTest(unittest.TestCase):
+  
+  def test_create_converter(self):
+    e = gdata.data.GEntry()
+    fake_response = StringIO.StringIO(
+        '<entry xmlns="http://www.w3.org/2005/Atom"><title>x</title></entry>')
+    converter_function = gdata.client.create_converter(e)
+    entry = converter_function(fake_response.read())
+    self.assertTrue(isinstance(entry, gdata.data.GEntry))
+    self.assertEqual(entry.get_elements('title')[0].text, 'x')
+    
 
 # Tests for v1 client code
 class AuthSubUrlTest(unittest.TestCase):
@@ -239,7 +251,8 @@ class GDataClientTest(unittest.TestCase):
 
 def suite():
   return unittest.TestSuite((unittest.makeSuite(ClientLoginTest, 'test'),
-                             unittest.makeSuite(RequestTest, 'test')))
+                             unittest.makeSuite(RequestTest, 'test'),
+                             unittest.makeSuite(CreateConverterTest, 'test')))
 
 
 if __name__ == '__main__':

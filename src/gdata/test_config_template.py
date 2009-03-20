@@ -31,31 +31,47 @@ RUN_LIVE_TESTS = False
 # them in future runs of the test.
 CACHE_RESPONSES = True
 
+# If set to True, the client will make HTTP requests to the server regardless
+# of a cache file. If True, caches from previous sessions will be deleted.
+# If False (the default) cached sessions will be reused if they exist.
+CLEAR_CACHE = False
+
 
 GOOGLE_ACCOUNT_EMAIL = '<your email>'
 GOOGLE_ACCOUNT_PASSWORD = '<your password>'
 
 
-def blogger_email():
-  """Provides email to log into the test Blogger account.
+class TestConfig(object):
+  service = None
+  auth_token = None
+
+  def email(cls):
+    """Provides email to log into the test account for this service.
   
-  By default uses GOOGLE_ACCOUNT_EMAIL, so edit this function if you have
-  a Blogger-specific test account.
-  """
-  return GOOGLE_ACCOUNT_EMAIL
+    By default uses GOOGLE_ACCOUNT_EMAIL, so overwrite this function if you
+    have a service-specific test account.
+    """
+    return GOOGLE_ACCOUNT_EMAIL
 
+  email = classmethod(email)
 
-def blogger_password():
-  """Provides password to log into the test Blogger account.
+  def password(cls):
+    """Provides password to log into the test account for this service.
   
-  By default uses GOOGLE_ACCOUNT_PASSWORD, so edit this function if you have
-  a Blogger-specific test account.
-  """
-  return GOOGLE_ACCOUNT_PASSWORD
+    By default uses GOOGLE_ACCOUNT_PASSWORD, so overwrite this function if
+    you have a service-specific test account.
+    """
+    return GOOGLE_ACCOUNT_PASSWORD
+
+  password = classmethod(password)
 
 
-BLOGGER_CONFIG = {'title': 'A Test Post',
-                  'content': 'This is a <b>test</b>.',
-                  'blog_id': '<your test blog\'s id>',
-                  'auth_token': None,
-                  }
+class BloggerConfig(TestConfig):
+  service = 'blogger'
+  title = 'A Test Post'
+  content = 'This is a <b>test</b>.'
+  blog_id = '<your test blog\'s id>'
+
+
+class ContactsConfig(TestConfig):
+  service = 'cp'

@@ -22,25 +22,17 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 
 
 import unittest
-import coverage
 import all_tests
-import atom.core
-import atom.http_core
-import atom.mock_http_core
-import atom.auth
-import atom.client
-import gdata.gauth
-import gdata.client
-import gdata.data
+from gdata.test_config import settings
+
+
+settings.RUN_LIVE_TESTS = True
+settings.CACHE_RESPONSES = True
+settings.CLEAR_CACHE = True
 
 
 def suite():
   return unittest.TestSuite((atom_tests.core_test.suite(),))
 
 if __name__ == '__main__':
-  coverage.erase()
-  coverage.start()
   unittest.TextTestRunner().run(all_tests.suite())
-  coverage.stop()
-  coverage.report([atom.core, atom.http_core, atom.auth, atom.mock_http_core,
-                   atom.client, gdata.gauth, gdata.client, gdata.data])
