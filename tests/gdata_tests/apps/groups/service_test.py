@@ -67,6 +67,7 @@ class GroupsTest(unittest.TestCase):
       self.user_yuji = self.apps_client.CreateUser(
           user_name=user_name, family_name=family_name, given_name=given_name,
           password=password, suspended=suspended)
+      print 'User ' + user.login.user_name + ' created'
     except Exception, e:
       self.fail('Unexpected exception occurred: %s' % e)
 
@@ -82,6 +83,7 @@ class GroupsTest(unittest.TestCase):
       self.user_taro = self.apps_client.CreateUser(
           user_name=user_name, family_name=family_name, given_name=given_name,
           password=password, suspended=suspended)
+      print 'User ' + user.login.user_name + ' created'
     except Exception, e:
       self.fail('Unexpected exception occurred: %s' % e)
 
@@ -165,7 +167,6 @@ class GroupsTest(unittest.TestCase):
           self.user_yuji.login.user_name, True)
       retrieved_groups = self.groups_client.RetrieveGroups(
           self.user_yuji.login.user_name, False)
-      print self.groups_client.RetrieveAllMembers(group02_id)
     except Exception, e:
       self.fail('Unexpected exception occurred: %s' % e)
 
