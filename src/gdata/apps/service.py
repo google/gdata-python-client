@@ -117,7 +117,7 @@ class AppsService(gdata.service.GDataService):
     """retrieve all pages and add all elements"""
     next = link_finder.GetNextLink()
     while next is not None:
-      next_feed = func(str(self.Get(next.href)))
+      next_feed = self.Get(next.href, converter=func)
       for a_entry in next_feed.entry:
         link_finder.entry.append(a_entry)
       next = next_feed.GetNextLink()
@@ -396,7 +396,6 @@ class AppsService(gdata.service.GDataService):
     return self.AddAllElementsFromAllPages(
       ret, gdata.apps.UserFeedFromString)
 
-
 class PropertyService(gdata.service.GDataService):
   """Client for the Google Apps Property service."""
 
@@ -409,6 +408,16 @@ class PropertyService(gdata.service.GDataService):
     self.ssl = True
     self.port = 443
     self.domain = domain
+
+  def AddAllElementsFromAllPages(self, link_finder, func):
+    """retrieve all pages and add all elements"""
+    next = link_finder.GetNextLink()
+    while next is not None:
+      next_feed = self.Get(next.href, converter=func)
+      for a_entry in next_feed.entry:
+        link_finder.entry.append(a_entry)
+      next = next_feed.GetNextLink()
+    return link_finder
 
   def _GetPropertyEntry(self, properties):
     property_entry = gdata.apps.PropertyEntry()
@@ -424,6 +433,22 @@ class PropertyService(gdata.service.GDataService):
     for i, property in enumerate(property_entry.property):
       properties[property.name] = property.value
     return properties
+
+  def _GetPropertyFeed(self, uri):
+    try:
+      return gdata.apps.PropertyFeedFromString(str(self.Get(uri)))
+    except gdata.service.RequestError, e:
+      raise gdata.apps.service.AppsForYourDomainException(e.args[0])
+
+  def _GetPropertiesList(self, uri):
+    property_feed = self._GetPropertyFeed(uri)
+    # pagination
+    property_feed = self.AddAllElementsFromAllPages(
+      property_feed, gdata.apps.PropertyFeedFromString)
+    properties_list = []
+    for property_entry in property_feed.entry:
+      properties_list.append(self._PropertyEntry2Dict(property_entry))
+    return properties_list
 
   def _GetProperties(self, uri):
     try:
@@ -445,5 +470,11 @@ class PropertyService(gdata.service.GDataService):
     try:
       return self._PropertyEntry2Dict(gdata.apps.PropertyEntryFromString(
         str(self.Put(property_entry, uri))))
+    except gdata.service.RequestError, e:
+      raise gdata.apps.service.AppsForYourDomainException(e.args[0])
+
+  def _DeleteProperties(self, uri):
+    try:
+      self.Delete(uri)
     except gdata.service.RequestError, e:
       raise gdata.apps.service.AppsForYourDomainException(e.args[0])
