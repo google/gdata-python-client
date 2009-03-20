@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.alt.html"><font color="#ffffff">alt</font></a>.appengine</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client-release/src/gdata/alt/appengine.py">/usr/local/svn/gdata-python-client-release/src/gdata/alt/appengine.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client/src/gdata/alt/appengine.py">/usr/local/svn/gdata-python-client/src/gdata/alt/appengine.py</a></font></td></tr></table>
     <p><tt>Provides&nbsp;HTTP&nbsp;functions&nbsp;for&nbsp;gdata.service&nbsp;to&nbsp;use&nbsp;on&nbsp;Google&nbsp;App&nbsp;Engine<br>
 &nbsp;<br>
 <a href="#AppEngineHttpClient">AppEngineHttpClient</a>:&nbsp;Provides&nbsp;an&nbsp;HTTP&nbsp;request&nbsp;method&nbsp;which&nbsp;uses&nbsp;App&nbsp;Engine's<br>
@@ -116,11 +116,15 @@ Methods inherited from <a href="atom.http_interface.html#GenericHttpClient">atom
 <dl><dt><a name="AppEngineHttpClient-put"><strong>put</strong></a>(self, url, data, headers<font color="#909090">=None</font>)</dt></dl>
 
 <hr>
+Data descriptors inherited from <a href="atom.http_interface.html#GenericHttpClient">atom.http_interface.GenericHttpClient</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
 Data and other attributes inherited from <a href="atom.http_interface.html#GenericHttpClient">atom.http_interface.GenericHttpClient</a>:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
-
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'GenericHttpClient' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
-
 <dl><dt><strong>debug</strong> = False</dl>
 
 </td></tr></table> <p>
@@ -168,11 +172,13 @@ Returns:<br>
 &nbsp;&nbsp;not&nbsp;in&nbsp;the&nbsp;datastore,&nbsp;or&nbsp;because&nbsp;there&nbsp;is&nbsp;no&nbsp;current&nbsp;user.</tt></dd></dl>
 
 <hr>
-Data and other attributes inherited from <a href="atom.token_store.html#TokenStore">atom.token_store.TokenStore</a>:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
-
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'TokenStore' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
-
+Data descriptors inherited from <a href="atom.token_store.html#TokenStore">atom.token_store.TokenStore</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -193,11 +199,13 @@ methods.<br>&nbsp;</tt></td></tr>
 <dl><dt><a name="HttpResponse-read"><strong>read</strong></a>(self, length<font color="#909090">=None</font>)</dt></dl>
 
 <hr>
-Data and other attributes defined here:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
-
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'HttpResponse' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
-
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -213,14 +221,16 @@ Data and other attributes defined here:<br>
 <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
 </dl>
 <hr>
-Data and other attributes defined here:<br>
-<dl><dt><strong>pickled_tokens</strong> = &lt;google.appengine.ext.db.BlobProperty object&gt;<dd><tt>A&nbsp;string&nbsp;that&nbsp;can&nbsp;be&nbsp;longer&nbsp;than&nbsp;500&nbsp;bytes.<br>
+Data descriptors defined here:<br>
+<dl><dt><strong>pickled_tokens</strong></dt>
+<dd><tt>A&nbsp;string&nbsp;that&nbsp;can&nbsp;be&nbsp;longer&nbsp;than&nbsp;500&nbsp;bytes.<br>
 &nbsp;<br>
 This&nbsp;type&nbsp;should&nbsp;be&nbsp;used&nbsp;for&nbsp;large&nbsp;binary&nbsp;values&nbsp;to&nbsp;make&nbsp;sure&nbsp;the&nbsp;datastore<br>
-has&nbsp;good&nbsp;performance&nbsp;for&nbsp;queries.</tt></dl>
-
-<dl><dt><strong>user</strong> = &lt;google.appengine.ext.db.UserProperty object&gt;<dd><tt>A&nbsp;user&nbsp;property.</tt></dl>
-
+has&nbsp;good&nbsp;performance&nbsp;for&nbsp;queries.</tt></dd>
+</dl>
+<dl><dt><strong>user</strong></dt>
+<dd><tt>A&nbsp;user&nbsp;property.</tt></dd>
+</dl>
 <hr>
 Methods inherited from <a href="google.appengine.ext.db.html#Model">google.appengine.ext.db.Model</a>:<br>
 <dl><dt><a name="TokenCollection-__init__"><strong>__init__</strong></a>(self, parent<font color="#909090">=None</font>, key_name<font color="#909090">=None</font>, _app<font color="#909090">=None</font>, **kwds)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;instance&nbsp;of&nbsp;this&nbsp;model.<br>
@@ -454,9 +464,15 @@ We&nbsp;just&nbsp;use&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;model&nbsp;for&nb
 <dl><dt><a name="TokenCollection-properties"><strong>properties</strong></a>(cls)<font color="#909090"><font face="helvetica, arial"> from <a href="google.appengine.ext.db.html#PropertiedClass">google.appengine.ext.db.PropertiedClass</a></font></font></dt><dd><tt>Returns&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;all&nbsp;the&nbsp;properties&nbsp;defined&nbsp;for&nbsp;this&nbsp;model.</tt></dd></dl>
 
 <hr>
+Data descriptors inherited from <a href="google.appengine.ext.db.html#Model">google.appengine.ext.db.Model</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
 Data and other attributes inherited from <a href="google.appengine.ext.db.html#Model">google.appengine.ext.db.Model</a>:<br>
-<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
-
 <dl><dt><strong>__metaclass__</strong> = &lt;class 'google.appengine.ext.db.PropertiedClass'&gt;<dd><tt>Meta-class&nbsp;for&nbsp;initializing&nbsp;<a href="google.appengine.ext.db.html#Model">Model</a>&nbsp;classes&nbsp;properties.<br>
 &nbsp;<br>
 Used&nbsp;for&nbsp;initializing&nbsp;Properties&nbsp;defined&nbsp;in&nbsp;the&nbsp;context&nbsp;of&nbsp;a&nbsp;model.<br>
@@ -467,8 +483,6 @@ belong&nbsp;to&nbsp;and&nbsp;what&nbsp;attribute&nbsp;they&nbsp;are&nbsp;associa
 do&nbsp;appropriate&nbsp;initialization&nbsp;via&nbsp;__property_config__.<br>
 &nbsp;<br>
 Duplicate&nbsp;properties&nbsp;are&nbsp;not&nbsp;permitted.</tt></dl>
-
-<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'Model' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
 
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -481,12 +495,30 @@ Duplicate&nbsp;properties&nbsp;are&nbsp;not&nbsp;permitted.</tt></dl>
 &nbsp;<br>
 If&nbsp;there&nbsp;is&nbsp;no&nbsp;current&nbsp;user&nbsp;(a&nbsp;user&nbsp;is&nbsp;not&nbsp;signed&nbsp;in&nbsp;to&nbsp;the&nbsp;app)&nbsp;or&nbsp;the&nbsp;user<br>
 does&nbsp;not&nbsp;have&nbsp;any&nbsp;tokens,&nbsp;an&nbsp;empty&nbsp;dictionary&nbsp;is&nbsp;returned.</tt></dd></dl>
- <dl><dt><a name="-run_on_appengine"><strong>run_on_appengine</strong></a>(gdata_service)</dt><dd><tt>Modifies&nbsp;a&nbsp;GDataService&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;allow&nbsp;it&nbsp;to&nbsp;run&nbsp;on&nbsp;App&nbsp;Engine.<br>
+ <dl><dt><a name="-run_on_appengine"><strong>run_on_appengine</strong></a>(gdata_service, store_tokens<font color="#909090">=True</font>, single_user_mode<font color="#909090">=False</font>)</dt><dd><tt>Modifies&nbsp;a&nbsp;GDataService&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;allow&nbsp;it&nbsp;to&nbsp;run&nbsp;on&nbsp;App&nbsp;Engine.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;gdata_service:&nbsp;An&nbsp;instance&nbsp;of&nbsp;AtomService,&nbsp;GDataService,&nbsp;or&nbsp;any<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;their&nbsp;subclasses&nbsp;which&nbsp;has&nbsp;an&nbsp;http_client&nbsp;member&nbsp;and&nbsp;a&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token_store&nbsp;member.</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token_store&nbsp;member.<br>
+&nbsp;&nbsp;store_tokens:&nbsp;Boolean,&nbsp;defaults&nbsp;to&nbsp;True.&nbsp;If&nbsp;True,&nbsp;the&nbsp;gdata_service<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;attempt&nbsp;to&nbsp;add&nbsp;each&nbsp;token&nbsp;to&nbsp;it's&nbsp;token_store&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SetClientLoginToken&nbsp;or&nbsp;SetAuthSubToken&nbsp;is&nbsp;called.&nbsp;If&nbsp;False<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;tokens&nbsp;will&nbsp;not&nbsp;automatically&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token_store.<br>
+&nbsp;&nbsp;single_user_mode:&nbsp;Boolean,&nbsp;defaults&nbsp;to&nbsp;False.&nbsp;If&nbsp;True,&nbsp;the&nbsp;current_token<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;member&nbsp;of&nbsp;gdata_service&nbsp;will&nbsp;be&nbsp;set&nbsp;when&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SetClientLoginToken&nbsp;or&nbsp;SetAuthTubToken&nbsp;is&nbsp;called.&nbsp;If&nbsp;set<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;True,&nbsp;the&nbsp;current_token&nbsp;is&nbsp;set&nbsp;in&nbsp;the&nbsp;gdata_service<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;anyone&nbsp;who&nbsp;accesses&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;will&nbsp;use&nbsp;the&nbsp;same&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note:&nbsp;If&nbsp;store_tokens&nbsp;is&nbsp;set&nbsp;to&nbsp;False&nbsp;and&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;single_user_mode&nbsp;is&nbsp;set&nbsp;to&nbsp;False,&nbsp;all&nbsp;tokens&nbsp;will&nbsp;be&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ignored,&nbsp;since&nbsp;the&nbsp;library&nbsp;assumes:&nbsp;the&nbsp;tokens&nbsp;should&nbsp;not<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;stored&nbsp;in&nbsp;the&nbsp;datastore&nbsp;and&nbsp;they&nbsp;should&nbsp;not&nbsp;be&nbsp;stored<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;gdata_service&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;This&nbsp;will&nbsp;make&nbsp;it&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;impossible&nbsp;to&nbsp;make&nbsp;requests&nbsp;which&nbsp;require&nbsp;authorization.</tt></dd></dl>
  <dl><dt><a name="-save_auth_tokens"><strong>save_auth_tokens</strong></a>(token_dict)</dt><dd><tt>Associates&nbsp;the&nbsp;tokens&nbsp;with&nbsp;the&nbsp;current&nbsp;user&nbsp;and&nbsp;writes&nbsp;to&nbsp;the&nbsp;datastore.<br>
 &nbsp;<br>
 If&nbsp;there&nbsp;us&nbsp;no&nbsp;current&nbsp;user,&nbsp;the&nbsp;tokens&nbsp;are&nbsp;not&nbsp;written&nbsp;and&nbsp;this&nbsp;function<br>

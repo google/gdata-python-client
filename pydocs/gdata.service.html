@@ -667,7 +667,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="GDataService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x8ef1b8&gt;</font>)</dt><dd><tt><a href="#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
+<dl><dt><a name="GDataService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x7fb6476cede8&gt;</font>)</dt><dd><tt><a href="#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;gdata.service.Get<br>
 &nbsp;<br>
@@ -892,7 +892,7 @@ you&nbsp;receive&nbsp;from&nbsp;FetchOAuthRequestToken.<br>
 Args:<br>
 &nbsp;&nbsp;request_token:&nbsp;gdata.auth.OAuthToken&nbsp;OAuth&nbsp;request&nbsp;token.</tt></dd></dl>
 
-<dl><dt><a name="GDataService-UpgradeToOAuthAccessToken"><strong>UpgradeToOAuthAccessToken</strong></a>(self, authorized_request_token<font color="#909090">=None</font>, request_url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>, oauth_version<font color="#909090">='1.0'</font>)</dt><dd><tt>Upgrades&nbsp;the&nbsp;authorized&nbsp;request&nbsp;token&nbsp;to&nbsp;an&nbsp;access&nbsp;token.<br>
+<dl><dt><a name="GDataService-UpgradeToOAuthAccessToken"><strong>UpgradeToOAuthAccessToken</strong></a>(self, authorized_request_token<font color="#909090">=None</font>, request_url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>, oauth_version<font color="#909090">='1.0'</font>)</dt><dd><tt>Upgrades&nbsp;the&nbsp;authorized&nbsp;request&nbsp;token&nbsp;to&nbsp;an&nbsp;access&nbsp;token&nbsp;and&nbsp;returns&nbsp;it<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;authorized_request_token:&nbsp;gdata.auth.OAuthToken&nbsp;(optional)&nbsp;OAuth&nbsp;request<br>
@@ -904,6 +904,9 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;added&nbsp;by&nbsp;default&nbsp;but&nbsp;here&nbsp;you&nbsp;can&nbsp;override&nbsp;it's&nbsp;value.<br>
 &nbsp;&nbsp;request_url:&nbsp;Access&nbsp;token&nbsp;URL.&nbsp;The&nbsp;default&nbsp;is<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'https://www.google.com/accounts/OAuthGetAccessToken'.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;Access&nbsp;token<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
 Raises:<br>
 &nbsp;&nbsp;<a href="#NonOAuthToken">NonOAuthToken</a>&nbsp;if&nbsp;the&nbsp;user's&nbsp;authorized&nbsp;request&nbsp;token&nbsp;is&nbsp;not&nbsp;an&nbsp;OAuth<br>
@@ -1363,7 +1366,7 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x72b260&gt;<dd><tt>T.<a href="#Query-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xd04de0&gt;<dd><tt><a href="__builtin__.html#dict">dict</a>.<a href="#Query-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;<a href="__builtin__.html#dict">dict</a>&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xc43ca0&gt;<dd><tt><a href="__builtin__.html#dict">dict</a>.<a href="#Query-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;<a href="__builtin__.html#dict">dict</a>&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -1683,7 +1686,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;tuple&nbsp;containing&nbsp;the&nbsp;token&nbsp;string&nbsp;and&nbsp;a&nbsp;list&nbsp;of&nbsp;scope&nbsp;strings&nbsp;for&nbsp;which<br>
 &nbsp;&nbsp;this&nbsp;token&nbsp;should&nbsp;be&nbsp;valid.&nbsp;If&nbsp;the&nbsp;scope&nbsp;was&nbsp;not&nbsp;included&nbsp;in&nbsp;the&nbsp;URL,&nbsp;the<br>
 &nbsp;&nbsp;tuple&nbsp;will&nbsp;contain&nbsp;(token,&nbsp;None).</tt></dd></dl>
- <dl><dt><a name="-GenerateAuthSubRequestUrl"><strong>GenerateAuthSubRequestUrl</strong></a>(next, scopes, hd<font color="#909090">='default'</font>, secure<font color="#909090">=False</font>, session<font color="#909090">=True</font>, request_url<font color="#909090">='http://www.google.com/accounts/AuthSubRequest'</font>, include_scopes_in_next<font color="#909090">=True</font>)</dt><dd><tt>Creates&nbsp;a&nbsp;URL&nbsp;to&nbsp;request&nbsp;an&nbsp;AuthSub&nbsp;token&nbsp;to&nbsp;access&nbsp;Google&nbsp;services.<br>
+ <dl><dt><a name="-GenerateAuthSubRequestUrl"><strong>GenerateAuthSubRequestUrl</strong></a>(next, scopes, hd<font color="#909090">='default'</font>, secure<font color="#909090">=False</font>, session<font color="#909090">=True</font>, request_url<font color="#909090">='https://www.google.com/accounts/AuthSubRequest'</font>, include_scopes_in_next<font color="#909090">=True</font>)</dt><dd><tt>Creates&nbsp;a&nbsp;URL&nbsp;to&nbsp;request&nbsp;an&nbsp;AuthSub&nbsp;token&nbsp;to&nbsp;access&nbsp;Google&nbsp;services.<br>
 &nbsp;<br>
 For&nbsp;more&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see&nbsp;the&nbsp;documentation&nbsp;here:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -1706,7 +1709,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token&nbsp;may&nbsp;only&nbsp;be&nbsp;used&nbsp;once&nbsp;and&nbsp;cannot&nbsp;be&nbsp;upgraded.&nbsp;Default&nbsp;is&nbsp;True.<br>
 &nbsp;&nbsp;request_url:&nbsp;The&nbsp;base&nbsp;of&nbsp;the&nbsp;URL&nbsp;to&nbsp;which&nbsp;the&nbsp;user&nbsp;will&nbsp;be&nbsp;sent&nbsp;to<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authorize&nbsp;this&nbsp;application&nbsp;to&nbsp;access&nbsp;their&nbsp;data.&nbsp;The&nbsp;default&nbsp;is<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<a href="http://www.google.com/accounts/AuthSubRequest">http://www.google.com/accounts/AuthSubRequest</a>'.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'https://www.google.com/accounts/AuthSubRequest'.<br>
 &nbsp;&nbsp;include_scopes_in_next:&nbsp;Boolean&nbsp;if&nbsp;set&nbsp;to&nbsp;true,&nbsp;the&nbsp;'next'&nbsp;parameter&nbsp;will<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;modified&nbsp;to&nbsp;include&nbsp;the&nbsp;requested&nbsp;scope&nbsp;as&nbsp;a&nbsp;URL&nbsp;parameter.&nbsp;The<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key&nbsp;for&nbsp;the&nbsp;next's&nbsp;scope&nbsp;parameter&nbsp;will&nbsp;be&nbsp;SCOPE_URL_PARAM_NAME.&nbsp;The<br>

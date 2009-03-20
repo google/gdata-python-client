@@ -12,8 +12,8 @@
     <p><tt><a href="#SpreadsheetsService">SpreadsheetsService</a>&nbsp;extends&nbsp;the&nbsp;<a href="gdata.service.html#GDataService">GDataService</a>&nbsp;to&nbsp;streamline&nbsp;Google<br>
 Spreadsheets&nbsp;operations.<br>
 &nbsp;<br>
-&nbsp;&nbsp;GBaseService:&nbsp;Provides&nbsp;methods&nbsp;to&nbsp;query&nbsp;feeds&nbsp;and&nbsp;manipulate&nbsp;items.&nbsp;Extends<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="gdata.service.html#GDataService">GDataService</a>.<br>
+&nbsp;&nbsp;SpreadsheetService:&nbsp;Provides&nbsp;methods&nbsp;to&nbsp;query&nbsp;feeds&nbsp;and&nbsp;manipulate&nbsp;items.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extends&nbsp;<a href="gdata.service.html#GDataService">GDataService</a>.<br>
 &nbsp;<br>
 &nbsp;&nbsp;DictionaryToParamList:&nbsp;Function&nbsp;which&nbsp;converts&nbsp;a&nbsp;dictionary&nbsp;into&nbsp;a&nbsp;list&nbsp;of<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;URL&nbsp;arguments&nbsp;(represented&nbsp;as&nbsp;strings).&nbsp;This&nbsp;is&nbsp;a<br>
@@ -223,7 +223,7 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x72b260&gt;<dd><tt>T.<a href="#CellQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xd154d0&gt;<dd><tt>dict.<a href="#CellQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xc11cc0&gt;<dd><tt>dict.<a href="#CellQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -376,7 +376,7 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x72b260&gt;<dd><tt>T.<a href="#DocumentQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xd142c0&gt;<dd><tt>dict.<a href="#DocumentQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xc11760&gt;<dd><tt>dict.<a href="#DocumentQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -588,7 +588,7 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x72b260&gt;<dd><tt>T.<a href="#ListQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xd15e80&gt;<dd><tt>dict.<a href="#ListQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xc12670&gt;<dd><tt>dict.<a href="#ListQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -702,7 +702,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;worksheet&nbsp;was&nbsp;deleted&nbsp;successfully.</tt></dd></dl>
 
-<dl><dt><a name="SpreadsheetsService-ExecuteBatch"><strong>ExecuteBatch</strong></a>(self, batch_feed, url<font color="#909090">=None</font>, spreadsheet_key<font color="#909090">=None</font>, worksheet_id<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function SpreadsheetsCellsFeedFromString at 0x935050&gt;</font>)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;feed&nbsp;to&nbsp;the&nbsp;server.<br>
+<dl><dt><a name="SpreadsheetsService-ExecuteBatch"><strong>ExecuteBatch</strong></a>(self, batch_feed, url<font color="#909090">=None</font>, spreadsheet_key<font color="#909090">=None</font>, worksheet_id<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function SpreadsheetsCellsFeedFromString at 0x9dcaa0&gt;</font>)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;feed&nbsp;to&nbsp;the&nbsp;server.<br>
 &nbsp;<br>
 The&nbsp;batch&nbsp;request&nbsp;needs&nbsp;to&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;batch&nbsp;URL&nbsp;for&nbsp;a&nbsp;particular&nbsp;<br>
 worksheet.&nbsp;You&nbsp;can&nbsp;specify&nbsp;the&nbsp;worksheet&nbsp;by&nbsp;providing&nbsp;the&nbsp;spreadsheet_key<br>
@@ -724,7 +724,7 @@ Args:<br>
 &nbsp;&nbsp;converter:&nbsp;Function&nbsp;(optional)&nbsp;Function&nbsp;to&nbsp;be&nbsp;executed&nbsp;on&nbsp;the&nbsp;server's<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response.&nbsp;This&nbsp;function&nbsp;should&nbsp;take&nbsp;one&nbsp;string&nbsp;as&nbsp;a&nbsp;parameter.&nbsp;The<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;value&nbsp;is&nbsp;SpreadsheetsCellsFeedFromString&nbsp;which&nbsp;will&nbsp;turn&nbsp;the&nbsp;result<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;into&nbsp;a&nbsp;gdata.base.GBaseItem&nbsp;object.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;into&nbsp;a&nbsp;gdata.spreadsheet.SpreadsheetsCellsFeed&nbsp;object.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;gdata.BatchFeed&nbsp;containing&nbsp;the&nbsp;results.</tt></dd></dl>
@@ -1015,7 +1015,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="SpreadsheetsService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x8ef1b8&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
+<dl><dt><a name="SpreadsheetsService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x7fb8ec8b6de8&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;gdata.service.Get<br>
 &nbsp;<br>
@@ -1240,7 +1240,7 @@ you&nbsp;receive&nbsp;from&nbsp;FetchOAuthRequestToken.<br>
 Args:<br>
 &nbsp;&nbsp;request_token:&nbsp;gdata.auth.OAuthToken&nbsp;OAuth&nbsp;request&nbsp;token.</tt></dd></dl>
 
-<dl><dt><a name="SpreadsheetsService-UpgradeToOAuthAccessToken"><strong>UpgradeToOAuthAccessToken</strong></a>(self, authorized_request_token<font color="#909090">=None</font>, request_url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>, oauth_version<font color="#909090">='1.0'</font>)</dt><dd><tt>Upgrades&nbsp;the&nbsp;authorized&nbsp;request&nbsp;token&nbsp;to&nbsp;an&nbsp;access&nbsp;token.<br>
+<dl><dt><a name="SpreadsheetsService-UpgradeToOAuthAccessToken"><strong>UpgradeToOAuthAccessToken</strong></a>(self, authorized_request_token<font color="#909090">=None</font>, request_url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>, oauth_version<font color="#909090">='1.0'</font>)</dt><dd><tt>Upgrades&nbsp;the&nbsp;authorized&nbsp;request&nbsp;token&nbsp;to&nbsp;an&nbsp;access&nbsp;token&nbsp;and&nbsp;returns&nbsp;it<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;authorized_request_token:&nbsp;gdata.auth.OAuthToken&nbsp;(optional)&nbsp;OAuth&nbsp;request<br>
@@ -1252,6 +1252,9 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;added&nbsp;by&nbsp;default&nbsp;but&nbsp;here&nbsp;you&nbsp;can&nbsp;override&nbsp;it's&nbsp;value.<br>
 &nbsp;&nbsp;request_url:&nbsp;Access&nbsp;token&nbsp;URL.&nbsp;The&nbsp;default&nbsp;is<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'https://www.google.com/accounts/OAuthGetAccessToken'.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;Access&nbsp;token<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
 Raises:<br>
 &nbsp;&nbsp;NonOAuthToken&nbsp;if&nbsp;the&nbsp;user's&nbsp;authorized&nbsp;request&nbsp;token&nbsp;is&nbsp;not&nbsp;an&nbsp;OAuth<br>

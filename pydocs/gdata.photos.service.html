@@ -837,7 +837,7 @@ you&nbsp;receive&nbsp;from&nbsp;FetchOAuthRequestToken.<br>
 Args:<br>
 &nbsp;&nbsp;request_token:&nbsp;gdata.auth.OAuthToken&nbsp;OAuth&nbsp;request&nbsp;token.</tt></dd></dl>
 
-<dl><dt><a name="PhotosService-UpgradeToOAuthAccessToken"><strong>UpgradeToOAuthAccessToken</strong></a>(self, authorized_request_token<font color="#909090">=None</font>, request_url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>, oauth_version<font color="#909090">='1.0'</font>)</dt><dd><tt>Upgrades&nbsp;the&nbsp;authorized&nbsp;request&nbsp;token&nbsp;to&nbsp;an&nbsp;access&nbsp;token.<br>
+<dl><dt><a name="PhotosService-UpgradeToOAuthAccessToken"><strong>UpgradeToOAuthAccessToken</strong></a>(self, authorized_request_token<font color="#909090">=None</font>, request_url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>, oauth_version<font color="#909090">='1.0'</font>)</dt><dd><tt>Upgrades&nbsp;the&nbsp;authorized&nbsp;request&nbsp;token&nbsp;to&nbsp;an&nbsp;access&nbsp;token&nbsp;and&nbsp;returns&nbsp;it<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;authorized_request_token:&nbsp;gdata.auth.OAuthToken&nbsp;(optional)&nbsp;OAuth&nbsp;request<br>
@@ -849,6 +849,9 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;added&nbsp;by&nbsp;default&nbsp;but&nbsp;here&nbsp;you&nbsp;can&nbsp;override&nbsp;it's&nbsp;value.<br>
 &nbsp;&nbsp;request_url:&nbsp;Access&nbsp;token&nbsp;URL.&nbsp;The&nbsp;default&nbsp;is<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'https://www.google.com/accounts/OAuthGetAccessToken'.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;Access&nbsp;token<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
 Raises:<br>
 &nbsp;&nbsp;NonOAuthToken&nbsp;if&nbsp;the&nbsp;user's&nbsp;authorized&nbsp;request&nbsp;token&nbsp;is&nbsp;not&nbsp;an&nbsp;OAuth<br>

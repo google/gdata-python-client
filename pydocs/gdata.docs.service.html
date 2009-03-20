@@ -15,7 +15,9 @@ operations.<br>
 <a href="#DocsService">DocsService</a>:&nbsp;Provides&nbsp;methods&nbsp;to&nbsp;query&nbsp;feeds&nbsp;and&nbsp;manipulate&nbsp;items.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extends&nbsp;<a href="gdata.service.html#GDataService">GDataService</a>.<br>
 &nbsp;<br>
-<a href="#DocumentQuery">DocumentQuery</a>:&nbsp;Queries&nbsp;a&nbsp;Google&nbsp;Document&nbsp;list&nbsp;feed.</tt></p>
+<a href="#DocumentQuery">DocumentQuery</a>:&nbsp;Queries&nbsp;a&nbsp;Google&nbsp;Document&nbsp;list&nbsp;feed.<br>
+&nbsp;<br>
+<a href="#DocumentAclQuery">DocumentAclQuery</a>:&nbsp;Queries&nbsp;a&nbsp;Google&nbsp;Document&nbsp;Acl&nbsp;feed.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -25,7 +27,7 @@ operations.<br>
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="atom.html">atom</a><br>
 </td><td width="25%" valign=top><a href="gdata.html">gdata</a><br>
-</td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
+</td><td width="25%" valign=top><a href="re.html">re</a><br>
 </td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
@@ -43,7 +45,8 @@ operations.<br>
 <dt><font face="helvetica, arial"><a href="gdata.service.html#Query">gdata.service.Query</a>(<a href="__builtin__.html#dict">__builtin__.dict</a>)
 </font></dt><dd>
 <dl>
-<dt><font face="helvetica, arial"><a href="gdata.docs.service.html#DocumentQuery">DocumentQuery</a>
+<dt><font face="helvetica, arial"><a href="gdata.docs.service.html#DocumentAclQuery">DocumentAclQuery</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.docs.service.html#DocumentQuery">DocumentQuery</a>
 </font></dt></dl>
 </dd>
 </dl>
@@ -64,6 +67,62 @@ operations.<br>
 </dl>
 <hr>
 Methods defined here:<br>
+<dl><dt><a name="DocsService-CreateFolder"><strong>CreateFolder</strong></a>(self, title, folder_or_uri<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;a&nbsp;folder&nbsp;in&nbsp;the&nbsp;Document&nbsp;List&nbsp;feed.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;title:&nbsp;string&nbsp;The&nbsp;title&nbsp;of&nbsp;the&nbsp;folder&nbsp;on&nbsp;the&nbsp;server&nbsp;after&nbsp;being&nbsp;created.<br>
+&nbsp;&nbsp;folder_or_uri:&nbsp;DocumentListEntry&nbsp;or&nbsp;string&nbsp;(optional)&nbsp;An&nbsp;object&nbsp;with&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;link&nbsp;to&nbsp;a&nbsp;folder&nbsp;or&nbsp;a&nbsp;uri&nbsp;to&nbsp;a&nbsp;folder&nbsp;to&nbsp;upload&nbsp;to.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note:&nbsp;A&nbsp;valid&nbsp;uri&nbsp;for&nbsp;a&nbsp;folder&nbsp;is&nbsp;of&nbsp;the&nbsp;form:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/feeds/folders/private/full/folder%3Afolder_id<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;folder&nbsp;created&nbsp;on<br>
+&nbsp;&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
+
+<dl><dt><a name="DocsService-DownloadDocument"><strong>DownloadDocument</strong></a>(self, entry_or_resource_id, file_path)</dt><dd><tt>Downloads&nbsp;a&nbsp;document&nbsp;from&nbsp;the&nbsp;Document&nbsp;List.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry_or_resource_id:&nbsp;DoclistEntry&nbsp;or&nbsp;string&nbsp;of&nbsp;the&nbsp;document<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource&nbsp;id&nbsp;to&nbsp;download.<br>
+&nbsp;&nbsp;file_path:&nbsp;string&nbsp;The&nbsp;full&nbsp;path&nbsp;to&nbsp;save&nbsp;the&nbsp;file&nbsp;to.&nbsp;&nbsp;The&nbsp;export<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format&nbsp;is&nbsp;inferred&nbsp;from&nbsp;the&nbsp;the&nbsp;file&nbsp;extension.</tt></dd></dl>
+
+<dl><dt><a name="DocsService-DownloadPresentation"><strong>DownloadPresentation</strong></a>(self, entry_or_resource_id, file_path)</dt><dd><tt>Downloads&nbsp;a&nbsp;presentation&nbsp;from&nbsp;the&nbsp;Document&nbsp;List.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry_or_resource_id:&nbsp;DoclistEntry&nbsp;or&nbsp;string&nbsp;of&nbsp;the&nbsp;presentation<br>
+&nbsp;&nbsp;&nbsp;&nbsp;resource&nbsp;id&nbsp;to&nbsp;download.<br>
+&nbsp;&nbsp;file_path:&nbsp;string&nbsp;The&nbsp;full&nbsp;path&nbsp;to&nbsp;save&nbsp;the&nbsp;file&nbsp;to.&nbsp;&nbsp;The&nbsp;export<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format&nbsp;is&nbsp;inferred&nbsp;from&nbsp;the&nbsp;the&nbsp;file&nbsp;extension.</tt></dd></dl>
+
+<dl><dt><a name="DocsService-DownloadSpreadsheet"><strong>DownloadSpreadsheet</strong></a>(self, entry_or_resource_id, file_path, gid<font color="#909090">=0</font>)</dt><dd><tt>Downloads&nbsp;a&nbsp;spreadsheet&nbsp;from&nbsp;the&nbsp;Document&nbsp;List.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry_or_resource_id:&nbsp;DoclistEntry&nbsp;or&nbsp;string&nbsp;of&nbsp;the&nbsp;spreadsheet<br>
+&nbsp;&nbsp;&nbsp;&nbsp;resource&nbsp;id&nbsp;to&nbsp;download.<br>
+&nbsp;&nbsp;file_path:&nbsp;string&nbsp;The&nbsp;full&nbsp;path&nbsp;to&nbsp;save&nbsp;the&nbsp;file&nbsp;to.&nbsp;&nbsp;The&nbsp;export<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format&nbsp;is&nbsp;inferred&nbsp;from&nbsp;the&nbsp;the&nbsp;file&nbsp;extension.<br>
+&nbsp;&nbsp;gid:&nbsp;string&nbsp;or&nbsp;int&nbsp;(optional)&nbsp;The&nbsp;grid/sheet&nbsp;number&nbsp;to&nbsp;download.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used&nbsp;only&nbsp;for&nbsp;tsv&nbsp;and&nbsp;csv&nbsp;exports.</tt></dd></dl>
+
+<dl><dt><a name="DocsService-GetDocumentListAclEntry"><strong>GetDocumentListAclEntry</strong></a>(self, uri)</dt><dd><tt>Retrieves&nbsp;a&nbsp;particular&nbsp;DocumentListAclEntry&nbsp;by&nbsp;its&nbsp;unique&nbsp;URI.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;string&nbsp;The&nbsp;unique&nbsp;URI&nbsp;of&nbsp;an&nbsp;entry&nbsp;in&nbsp;a&nbsp;Document&nbsp;List&nbsp;feed.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;DocumentListAclEntry&nbsp;object&nbsp;representing&nbsp;the&nbsp;retrieved&nbsp;entry.</tt></dd></dl>
+
+<dl><dt><a name="DocsService-GetDocumentListAclFeed"><strong>GetDocumentListAclFeed</strong></a>(self, uri)</dt><dd><tt>Retrieves&nbsp;a&nbsp;feed&nbsp;containing&nbsp;all&nbsp;of&nbsp;a&nbsp;user's&nbsp;documents.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;string&nbsp;The&nbsp;URI&nbsp;of&nbsp;a&nbsp;document's&nbsp;Acl&nbsp;feed&nbsp;to&nbsp;retrieve.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;DocumentListAclFeed&nbsp;object&nbsp;representing&nbsp;the&nbsp;ACL&nbsp;feed<br>
+&nbsp;&nbsp;returned&nbsp;by&nbsp;the&nbsp;server.</tt></dd></dl>
+
 <dl><dt><a name="DocsService-GetDocumentListEntry"><strong>GetDocumentListEntry</strong></a>(self, uri)</dt><dd><tt>Retrieves&nbsp;a&nbsp;particular&nbsp;DocumentListEntry&nbsp;by&nbsp;its&nbsp;unique&nbsp;URI.<br>
 &nbsp;<br>
 Args:<br>
@@ -72,21 +131,81 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;DocumentListEntry&nbsp;object&nbsp;representing&nbsp;the&nbsp;retrieved&nbsp;entry.</tt></dd></dl>
 
-<dl><dt><a name="DocsService-GetDocumentListFeed"><strong>GetDocumentListFeed</strong></a>(self)</dt><dd><tt>Retrieves&nbsp;a&nbsp;feed&nbsp;containing&nbsp;all&nbsp;of&nbsp;a&nbsp;user's&nbsp;documents.</tt></dd></dl>
+<dl><dt><a name="DocsService-GetDocumentListFeed"><strong>GetDocumentListFeed</strong></a>(self, uri<font color="#909090">=None</font>)</dt><dd><tt>Retrieves&nbsp;a&nbsp;feed&nbsp;containing&nbsp;all&nbsp;of&nbsp;a&nbsp;user's&nbsp;documents.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;string&nbsp;A&nbsp;full&nbsp;URI&nbsp;to&nbsp;query&nbsp;the&nbsp;Document&nbsp;List&nbsp;feed.</tt></dd></dl>
 
-<dl><dt><a name="DocsService-Query"><strong>Query</strong></a>(self, uri, converter<font color="#909090">=&lt;function DocumentListFeedFromString at 0x8d7ed8&gt;</font>)</dt><dd><tt>Queries&nbsp;the&nbsp;Document&nbsp;List&nbsp;feed&nbsp;and&nbsp;returns&nbsp;the&nbsp;resulting&nbsp;feed&nbsp;of<br>
+<dl><dt><a name="DocsService-MoveDocumentIntoFolder"><strong>MoveDocumentIntoFolder</strong></a>(self, document_entry, folder_entry)</dt><dd><tt>Moves&nbsp;a&nbsp;document&nbsp;into&nbsp;a&nbsp;folder&nbsp;in&nbsp;the&nbsp;Document&nbsp;List&nbsp;Feed.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;document_entry:&nbsp;DocumentListEntry&nbsp;An&nbsp;object&nbsp;representing&nbsp;the&nbsp;source<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.<br>
+&nbsp;&nbsp;folder_entry:&nbsp;DocumentListEntry&nbsp;An&nbsp;object&nbsp;representing&nbsp;the&nbsp;destination<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;folder.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;document&nbsp;created&nbsp;on<br>
+&nbsp;&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
+
+<dl><dt><a name="DocsService-MoveFolderIntoFolder"><strong>MoveFolderIntoFolder</strong></a>(self, src_folder_entry, dest_folder_entry)</dt><dd><tt>Moves&nbsp;a&nbsp;folder&nbsp;into&nbsp;another&nbsp;folder.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;src_folder_entry:&nbsp;DocumentListEntry&nbsp;An&nbsp;object&nbsp;with&nbsp;a&nbsp;link&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source&nbsp;folder.<br>
+&nbsp;&nbsp;dest_folder_entry:&nbsp;DocumentListEntry&nbsp;An&nbsp;object&nbsp;with&nbsp;a&nbsp;link&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destination&nbsp;folder.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;folder&nbsp;created&nbsp;on<br>
+&nbsp;&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
+
+<dl><dt><a name="DocsService-MoveOutOfFolder"><strong>MoveOutOfFolder</strong></a>(self, source_entry)</dt><dd><tt>Moves&nbsp;a&nbsp;document&nbsp;into&nbsp;a&nbsp;folder&nbsp;in&nbsp;the&nbsp;Document&nbsp;List&nbsp;Feed.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;source_entry:&nbsp;DocumentListEntry&nbsp;An&nbsp;object&nbsp;representing&nbsp;the&nbsp;source<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document/folder.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;entry&nbsp;was&nbsp;moved&nbsp;out.</tt></dd></dl>
+
+<dl><dt><a name="DocsService-MovePresentationIntoFolder"><strong>MovePresentationIntoFolder</strong></a>(self, document_entry, folder_entry)</dt><dd><tt>Moves&nbsp;a&nbsp;presentation&nbsp;into&nbsp;a&nbsp;folder&nbsp;in&nbsp;the&nbsp;Document&nbsp;List&nbsp;Feed.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;document_entry:&nbsp;DocumentListEntry&nbsp;An&nbsp;object&nbsp;representing&nbsp;the&nbsp;source<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.<br>
+&nbsp;&nbsp;folder_entry:&nbsp;DocumentListEntry&nbsp;An&nbsp;object&nbsp;representing&nbsp;the&nbsp;destination<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;folder.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;document&nbsp;created&nbsp;on<br>
+&nbsp;&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
+
+<dl><dt><a name="DocsService-MoveSpreadsheetIntoFolder"><strong>MoveSpreadsheetIntoFolder</strong></a>(self, document_entry, folder_entry)</dt><dd><tt>Moves&nbsp;a&nbsp;spreadsheet&nbsp;into&nbsp;a&nbsp;folder&nbsp;in&nbsp;the&nbsp;Document&nbsp;List&nbsp;Feed.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;document_entry:&nbsp;DocumentListEntry&nbsp;An&nbsp;object&nbsp;representing&nbsp;the&nbsp;source<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.<br>
+&nbsp;&nbsp;folder_entry:&nbsp;DocumentListEntry&nbsp;An&nbsp;object&nbsp;representing&nbsp;the&nbsp;destination<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;folder.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;document&nbsp;created&nbsp;on<br>
+&nbsp;&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
+
+<dl><dt><a name="DocsService-Query"><strong>Query</strong></a>(self, uri, converter<font color="#909090">=&lt;function DocumentListFeedFromString at 0x9d98c0&gt;</font>)</dt><dd><tt>Queries&nbsp;the&nbsp;Document&nbsp;List&nbsp;feed&nbsp;and&nbsp;returns&nbsp;the&nbsp;resulting&nbsp;feed&nbsp;of<br>
 &nbsp;&nbsp;&nbsp;entries.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;uri:&nbsp;string&nbsp;The&nbsp;full&nbsp;URI&nbsp;to&nbsp;be&nbsp;queried.&nbsp;This&nbsp;can&nbsp;contain&nbsp;query<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameters,&nbsp;a&nbsp;hostname,&nbsp;or&nbsp;simply&nbsp;the&nbsp;relative&nbsp;path&nbsp;to&nbsp;a&nbsp;Document<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&nbsp;feed.&nbsp;The&nbsp;<a href="#DocumentQuery">DocumentQuery</a>&nbsp;object&nbsp;is&nbsp;useful&nbsp;when&nbsp;constructing<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query&nbsp;parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameters,&nbsp;a&nbsp;hostname,&nbsp;or&nbsp;simply&nbsp;the&nbsp;relative&nbsp;path&nbsp;to&nbsp;a&nbsp;Document<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&nbsp;feed.&nbsp;The&nbsp;<a href="#DocumentQuery">DocumentQuery</a>&nbsp;object&nbsp;is&nbsp;useful&nbsp;when&nbsp;constructing<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query&nbsp;parameters.<br>
 &nbsp;&nbsp;converter:&nbsp;func&nbsp;(optional)&nbsp;A&nbsp;function&nbsp;which&nbsp;will&nbsp;be&nbsp;executed&nbsp;on&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;retrieved&nbsp;item,&nbsp;generally&nbsp;to&nbsp;render&nbsp;it&nbsp;into&nbsp;a&nbsp;Python&nbsp;object.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By&nbsp;default&nbsp;the&nbsp;DocumentListFeedFromString&nbsp;function&nbsp;is&nbsp;used&nbsp;to<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;a&nbsp;DocumentListFeed&nbsp;object.&nbsp;This&nbsp;is&nbsp;because&nbsp;most&nbsp;feed<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;queries&nbsp;will&nbsp;result&nbsp;in&nbsp;a&nbsp;feed&nbsp;and&nbsp;not&nbsp;a&nbsp;single&nbsp;entry.</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;retrieved&nbsp;item,&nbsp;generally&nbsp;to&nbsp;render&nbsp;it&nbsp;into&nbsp;a&nbsp;Python&nbsp;object.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By&nbsp;default&nbsp;the&nbsp;DocumentListFeedFromString&nbsp;function&nbsp;is&nbsp;used&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;a&nbsp;DocumentListFeed&nbsp;object.&nbsp;This&nbsp;is&nbsp;because&nbsp;most&nbsp;feed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;queries&nbsp;will&nbsp;result&nbsp;in&nbsp;a&nbsp;feed&nbsp;and&nbsp;not&nbsp;a&nbsp;single&nbsp;entry.</tt></dd></dl>
 
 <dl><dt><a name="DocsService-QueryDocumentListFeed"><strong>QueryDocumentListFeed</strong></a>(self, uri)</dt><dd><tt>Retrieves&nbsp;a&nbsp;DocumentListFeed&nbsp;by&nbsp;retrieving&nbsp;a&nbsp;URI&nbsp;based&nbsp;off&nbsp;the&nbsp;Document<br>
 &nbsp;&nbsp;&nbsp;List&nbsp;feed,&nbsp;including&nbsp;any&nbsp;query&nbsp;parameters.&nbsp;A&nbsp;<a href="#DocumentQuery">DocumentQuery</a>&nbsp;object&nbsp;can<br>
@@ -94,25 +213,29 @@ Args:<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;uri:&nbsp;string&nbsp;The&nbsp;URI&nbsp;of&nbsp;the&nbsp;feed&nbsp;being&nbsp;retrieved&nbsp;possibly&nbsp;with&nbsp;query<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameters.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;DocumentListFeed&nbsp;object&nbsp;representing&nbsp;the&nbsp;feed&nbsp;returned&nbsp;by&nbsp;the&nbsp;server.</tt></dd></dl>
 
-<dl><dt><a name="DocsService-UploadDocument"><strong>UploadDocument</strong></a>(self, media_source, title)</dt><dd><tt>Uploads&nbsp;a&nbsp;document&nbsp;inside&nbsp;of&nbsp;a&nbsp;MediaSource&nbsp;object&nbsp;to&nbsp;the&nbsp;Document&nbsp;List<br>
+<dl><dt><a name="DocsService-UploadDocument"><strong>UploadDocument</strong></a>(self, media_source, title, folder_or_uri<font color="#909090">=None</font>)</dt><dd><tt>Uploads&nbsp;a&nbsp;document&nbsp;inside&nbsp;of&nbsp;a&nbsp;MediaSource&nbsp;object&nbsp;to&nbsp;the&nbsp;Document&nbsp;List<br>
 &nbsp;&nbsp;&nbsp;feed&nbsp;with&nbsp;the&nbsp;given&nbsp;title.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;media_source:&nbsp;MediaSource&nbsp;The&nbsp;gdata.MediaSource&nbsp;object&nbsp;containing&nbsp;a<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document&nbsp;file&nbsp;to&nbsp;be&nbsp;uploaded.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document&nbsp;file&nbsp;to&nbsp;be&nbsp;uploaded.<br>
 &nbsp;&nbsp;title:&nbsp;string&nbsp;The&nbsp;title&nbsp;of&nbsp;the&nbsp;document&nbsp;on&nbsp;the&nbsp;server&nbsp;after&nbsp;being<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploaded.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploaded.<br>
+&nbsp;&nbsp;folder_or_uri:&nbsp;DocumentListEntry&nbsp;or&nbsp;string&nbsp;(optional)&nbsp;An&nbsp;object&nbsp;with&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;link&nbsp;to&nbsp;a&nbsp;folder&nbsp;or&nbsp;a&nbsp;uri&nbsp;to&nbsp;a&nbsp;folder&nbsp;to&nbsp;upload&nbsp;to.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note:&nbsp;A&nbsp;valid&nbsp;uri&nbsp;for&nbsp;a&nbsp;folder&nbsp;is&nbsp;of&nbsp;the&nbsp;form:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/feeds/folders/private/full/folder%3Afolder_id<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;document&nbsp;created&nbsp;on&nbsp;the<br>
 &nbsp;&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
 
-<dl><dt><a name="DocsService-UploadPresentation"><strong>UploadPresentation</strong></a>(self, media_source, title)</dt><dd><tt>Uploads&nbsp;a&nbsp;presentation&nbsp;inside&nbsp;of&nbsp;a&nbsp;MediaSource&nbsp;object&nbsp;to&nbsp;the&nbsp;Document<br>
+<dl><dt><a name="DocsService-UploadPresentation"><strong>UploadPresentation</strong></a>(self, media_source, title, folder_or_uri<font color="#909090">=None</font>)</dt><dd><tt>Uploads&nbsp;a&nbsp;presentation&nbsp;inside&nbsp;of&nbsp;a&nbsp;MediaSource&nbsp;object&nbsp;to&nbsp;the&nbsp;Document<br>
 &nbsp;&nbsp;&nbsp;List&nbsp;feed&nbsp;with&nbsp;the&nbsp;given&nbsp;title.<br>
 &nbsp;<br>
 Args:<br>
@@ -120,19 +243,27 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;presentation&nbsp;file&nbsp;to&nbsp;be&nbsp;uploaded.<br>
 &nbsp;&nbsp;title:&nbsp;string&nbsp;The&nbsp;title&nbsp;of&nbsp;the&nbsp;presentation&nbsp;on&nbsp;the&nbsp;server&nbsp;after&nbsp;being<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploaded.<br>
+&nbsp;&nbsp;folder_or_uri:&nbsp;DocumentListEntry&nbsp;or&nbsp;string&nbsp;(optional)&nbsp;An&nbsp;object&nbsp;with&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;link&nbsp;to&nbsp;a&nbsp;folder&nbsp;or&nbsp;a&nbsp;uri&nbsp;to&nbsp;a&nbsp;folder&nbsp;to&nbsp;upload&nbsp;to.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note:&nbsp;A&nbsp;valid&nbsp;uri&nbsp;for&nbsp;a&nbsp;folder&nbsp;is&nbsp;of&nbsp;the&nbsp;form:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/feeds/folders/private/full/folder%3Afolder_id<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;presentation&nbsp;created&nbsp;on&nbsp;the<br>
 &nbsp;&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
 
-<dl><dt><a name="DocsService-UploadSpreadsheet"><strong>UploadSpreadsheet</strong></a>(self, media_source, title)</dt><dd><tt>Uploads&nbsp;a&nbsp;spreadsheet&nbsp;inside&nbsp;of&nbsp;a&nbsp;MediaSource&nbsp;object&nbsp;to&nbsp;the&nbsp;Document<br>
+<dl><dt><a name="DocsService-UploadSpreadsheet"><strong>UploadSpreadsheet</strong></a>(self, media_source, title, folder_or_uri<font color="#909090">=None</font>)</dt><dd><tt>Uploads&nbsp;a&nbsp;spreadsheet&nbsp;inside&nbsp;of&nbsp;a&nbsp;MediaSource&nbsp;object&nbsp;to&nbsp;the&nbsp;Document<br>
 &nbsp;&nbsp;&nbsp;List&nbsp;feed&nbsp;with&nbsp;the&nbsp;given&nbsp;title.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;media_source:&nbsp;MediaSource&nbsp;The&nbsp;MediaSource&nbsp;object&nbsp;containing&nbsp;a&nbsp;spreadsheet<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file&nbsp;to&nbsp;be&nbsp;uploaded.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file&nbsp;to&nbsp;be&nbsp;uploaded.<br>
 &nbsp;&nbsp;title:&nbsp;string&nbsp;The&nbsp;title&nbsp;of&nbsp;the&nbsp;spreadsheet&nbsp;on&nbsp;the&nbsp;server&nbsp;after&nbsp;being<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploaded.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploaded.<br>
+&nbsp;&nbsp;folder_or_uri:&nbsp;DocumentListEntry&nbsp;or&nbsp;string&nbsp;(optional)&nbsp;An&nbsp;object&nbsp;with&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;link&nbsp;to&nbsp;a&nbsp;folder&nbsp;or&nbsp;a&nbsp;uri&nbsp;to&nbsp;a&nbsp;folder&nbsp;to&nbsp;upload&nbsp;to.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note:&nbsp;A&nbsp;valid&nbsp;uri&nbsp;for&nbsp;a&nbsp;folder&nbsp;is&nbsp;of&nbsp;the&nbsp;form:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/feeds/folders/private/full/folder%3Afolder_id<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;spreadsheet&nbsp;created&nbsp;on&nbsp;the<br>
@@ -341,7 +472,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="DocsService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x8ef1b8&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
+<dl><dt><a name="DocsService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x7f1b68f47de8&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;gdata.service.Get<br>
 &nbsp;<br>
@@ -566,7 +697,7 @@ you&nbsp;receive&nbsp;from&nbsp;FetchOAuthRequestToken.<br>
 Args:<br>
 &nbsp;&nbsp;request_token:&nbsp;gdata.auth.OAuthToken&nbsp;OAuth&nbsp;request&nbsp;token.</tt></dd></dl>
 
-<dl><dt><a name="DocsService-UpgradeToOAuthAccessToken"><strong>UpgradeToOAuthAccessToken</strong></a>(self, authorized_request_token<font color="#909090">=None</font>, request_url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>, oauth_version<font color="#909090">='1.0'</font>)</dt><dd><tt>Upgrades&nbsp;the&nbsp;authorized&nbsp;request&nbsp;token&nbsp;to&nbsp;an&nbsp;access&nbsp;token.<br>
+<dl><dt><a name="DocsService-UpgradeToOAuthAccessToken"><strong>UpgradeToOAuthAccessToken</strong></a>(self, authorized_request_token<font color="#909090">=None</font>, request_url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>, oauth_version<font color="#909090">='1.0'</font>)</dt><dd><tt>Upgrades&nbsp;the&nbsp;authorized&nbsp;request&nbsp;token&nbsp;to&nbsp;an&nbsp;access&nbsp;token&nbsp;and&nbsp;returns&nbsp;it<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;authorized_request_token:&nbsp;gdata.auth.OAuthToken&nbsp;(optional)&nbsp;OAuth&nbsp;request<br>
@@ -578,6 +709,9 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;added&nbsp;by&nbsp;default&nbsp;but&nbsp;here&nbsp;you&nbsp;can&nbsp;override&nbsp;it's&nbsp;value.<br>
 &nbsp;&nbsp;request_url:&nbsp;Access&nbsp;token&nbsp;URL.&nbsp;The&nbsp;default&nbsp;is<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'https://www.google.com/accounts/OAuthGetAccessToken'.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;Access&nbsp;token<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
 Raises:<br>
 &nbsp;&nbsp;NonOAuthToken&nbsp;if&nbsp;the&nbsp;user's&nbsp;authorized&nbsp;request&nbsp;token&nbsp;is&nbsp;not&nbsp;an&nbsp;OAuth<br>
@@ -680,6 +814,155 @@ Data and other attributes inherited from <a href="atom.service.html#AtomService"
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="DocumentAclQuery">class <strong>DocumentAclQuery</strong></a>(<a href="gdata.service.html#Query">gdata.service.Query</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Object&nbsp;used&nbsp;to&nbsp;construct&nbsp;a&nbsp;URI&nbsp;to&nbsp;query&nbsp;a&nbsp;Document's&nbsp;ACL&nbsp;feed<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.docs.service.html#DocumentAclQuery">DocumentAclQuery</a></dd>
+<dd><a href="gdata.service.html#Query">gdata.service.Query</a></dd>
+<dd><a href="__builtin__.html#dict">__builtin__.dict</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="DocumentAclQuery-ToUri"><strong>ToUri</strong></a>(self)</dt><dd><tt>Generates&nbsp;a&nbsp;URI&nbsp;from&nbsp;the&nbsp;query&nbsp;parameters&nbsp;set&nbsp;in&nbsp;the&nbsp;object.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;string&nbsp;containing&nbsp;the&nbsp;URI&nbsp;used&nbsp;to&nbsp;retrieve&nbsp;entries&nbsp;from&nbsp;the&nbsp;Document<br>
+&nbsp;&nbsp;ACL&nbsp;feed.</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-__init__"><strong>__init__</strong></a>(self, resource_id, feed<font color="#909090">='/feeds/acl/private/full'</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;Document&nbsp;ACL&nbsp;<a href="gdata.service.html#Query">Query</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;resource_id:&nbsp;string&nbsp;The&nbsp;resource&nbsp;id.&nbsp;(e.g.&nbsp;'document%3Adocument_id',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'spreadsheet%3Aspreadsheet_id',&nbsp;etc.)<br>
+&nbsp;&nbsp;feed:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;path&nbsp;for&nbsp;the&nbsp;feed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(e.g.&nbsp;'/feeds/acl/private/full')<br>
+&nbsp;<br>
+Yields:<br>
+&nbsp;&nbsp;A&nbsp;<a href="#DocumentAclQuery">DocumentAclQuery</a>&nbsp;object&nbsp;used&nbsp;to&nbsp;construct&nbsp;a&nbsp;URI&nbsp;based&nbsp;on&nbsp;the&nbsp;Document<br>
+&nbsp;&nbsp;ACL&nbsp;feed.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="gdata.service.html#Query">gdata.service.Query</a>:<br>
+<dl><dt><a name="DocumentAclQuery-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="gdata.service.html#Query">gdata.service.Query</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>alt</strong></dt>
+<dd><tt>The&nbsp;feed&nbsp;query's&nbsp;alt&nbsp;parameter</tt></dd>
+</dl>
+<dl><dt><strong>author</strong></dt>
+<dd><tt>The&nbsp;feed&nbsp;query's&nbsp;author&nbsp;parameter</tt></dd>
+</dl>
+<dl><dt><strong>max_results</strong></dt>
+<dd><tt>The&nbsp;feed&nbsp;query's&nbsp;max-results&nbsp;parameter</tt></dd>
+</dl>
+<dl><dt><strong>orderby</strong></dt>
+<dd><tt>The&nbsp;feed&nbsp;query's&nbsp;orderby&nbsp;parameter</tt></dd>
+</dl>
+<dl><dt><strong>published_max</strong></dt>
+<dd><tt>The&nbsp;feed&nbsp;query's&nbsp;published-max&nbsp;parameter</tt></dd>
+</dl>
+<dl><dt><strong>published_min</strong></dt>
+<dd><tt>The&nbsp;feed&nbsp;query's&nbsp;published-min&nbsp;parameter</tt></dd>
+</dl>
+<dl><dt><strong>start_index</strong></dt>
+<dd><tt>The&nbsp;feed&nbsp;query's&nbsp;start-index&nbsp;parameter</tt></dd>
+</dl>
+<dl><dt><strong>text_query</strong></dt>
+<dd><tt>The&nbsp;feed&nbsp;query's&nbsp;q&nbsp;parameter</tt></dd>
+</dl>
+<dl><dt><strong>updated_max</strong></dt>
+<dd><tt>The&nbsp;feed&nbsp;query's&nbsp;updated-max&nbsp;parameter</tt></dd>
+</dl>
+<dl><dt><strong>updated_min</strong></dt>
+<dd><tt>The&nbsp;feed&nbsp;query's&nbsp;updated-min&nbsp;parameter</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
+<dl><dt><a name="DocumentAclQuery-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentAclQuery-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-__contains__"><strong>__contains__</strong></a>(...)</dt><dd><tt>D.<a href="#DocumentAclQuery-__contains__">__contains__</a>(k)&nbsp;-&gt;&nbsp;True&nbsp;if&nbsp;D&nbsp;has&nbsp;a&nbsp;key&nbsp;k,&nbsp;else&nbsp;False</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-__delitem__"><strong>__delitem__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentAclQuery-__delitem__">__delitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;del&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-__eq__"><strong>__eq__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentAclQuery-__eq__">__eq__</a>(y)&nbsp;&lt;==&gt;&nbsp;x==y</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-__ge__"><strong>__ge__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentAclQuery-__ge__">__ge__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&gt;=y</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentAclQuery-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentAclQuery-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-__gt__"><strong>__gt__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentAclQuery-__gt__">__gt__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&gt;y</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentAclQuery-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-__iter__"><strong>__iter__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentAclQuery-__iter__">__iter__</a>()&nbsp;&lt;==&gt;&nbsp;iter(x)</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-__le__"><strong>__le__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentAclQuery-__le__">__le__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&lt;=y</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-__len__"><strong>__len__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentAclQuery-__len__">__len__</a>()&nbsp;&lt;==&gt;&nbsp;len(x)</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-__lt__"><strong>__lt__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentAclQuery-__lt__">__lt__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&lt;y</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-__ne__"><strong>__ne__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentAclQuery-__ne__">__ne__</a>(y)&nbsp;&lt;==&gt;&nbsp;x!=y</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentAclQuery-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-__setitem__"><strong>__setitem__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentAclQuery-__setitem__">__setitem__</a>(i,&nbsp;y)&nbsp;&lt;==&gt;&nbsp;x[i]=y</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-clear"><strong>clear</strong></a>(...)</dt><dd><tt>D.<a href="#DocumentAclQuery-clear">clear</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Remove&nbsp;all&nbsp;items&nbsp;from&nbsp;D.</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-copy"><strong>copy</strong></a>(...)</dt><dd><tt>D.<a href="#DocumentAclQuery-copy">copy</a>()&nbsp;-&gt;&nbsp;a&nbsp;shallow&nbsp;copy&nbsp;of&nbsp;D</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-get"><strong>get</strong></a>(...)</dt><dd><tt>D.<a href="#DocumentAclQuery-get">get</a>(k[,d])&nbsp;-&gt;&nbsp;D[k]&nbsp;if&nbsp;k&nbsp;in&nbsp;D,&nbsp;else&nbsp;d.&nbsp;&nbsp;d&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-has_key"><strong>has_key</strong></a>(...)</dt><dd><tt>D.<a href="#DocumentAclQuery-has_key">has_key</a>(k)&nbsp;-&gt;&nbsp;True&nbsp;if&nbsp;D&nbsp;has&nbsp;a&nbsp;key&nbsp;k,&nbsp;else&nbsp;False</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-items"><strong>items</strong></a>(...)</dt><dd><tt>D.<a href="#DocumentAclQuery-items">items</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;(key,&nbsp;value)&nbsp;pairs,&nbsp;as&nbsp;2-tuples</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-iteritems"><strong>iteritems</strong></a>(...)</dt><dd><tt>D.<a href="#DocumentAclQuery-iteritems">iteritems</a>()&nbsp;-&gt;&nbsp;an&nbsp;iterator&nbsp;over&nbsp;the&nbsp;(key,&nbsp;value)&nbsp;items&nbsp;of&nbsp;D</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-iterkeys"><strong>iterkeys</strong></a>(...)</dt><dd><tt>D.<a href="#DocumentAclQuery-iterkeys">iterkeys</a>()&nbsp;-&gt;&nbsp;an&nbsp;iterator&nbsp;over&nbsp;the&nbsp;keys&nbsp;of&nbsp;D</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-itervalues"><strong>itervalues</strong></a>(...)</dt><dd><tt>D.<a href="#DocumentAclQuery-itervalues">itervalues</a>()&nbsp;-&gt;&nbsp;an&nbsp;iterator&nbsp;over&nbsp;the&nbsp;values&nbsp;of&nbsp;D</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-keys"><strong>keys</strong></a>(...)</dt><dd><tt>D.<a href="#DocumentAclQuery-keys">keys</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;keys</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-pop"><strong>pop</strong></a>(...)</dt><dd><tt>D.<a href="#DocumentAclQuery-pop">pop</a>(k[,d])&nbsp;-&gt;&nbsp;v,&nbsp;remove&nbsp;specified&nbsp;key&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;value<br>
+If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nbsp;given,&nbsp;otherwise&nbsp;KeyError&nbsp;is&nbsp;raised</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-popitem"><strong>popitem</strong></a>(...)</dt><dd><tt>D.<a href="#DocumentAclQuery-popitem">popitem</a>()&nbsp;-&gt;&nbsp;(k,&nbsp;v),&nbsp;remove&nbsp;and&nbsp;return&nbsp;some&nbsp;(key,&nbsp;value)&nbsp;pair&nbsp;as&nbsp;a<br>
+2-tuple;&nbsp;but&nbsp;raise&nbsp;KeyError&nbsp;if&nbsp;D&nbsp;is&nbsp;empty</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-setdefault"><strong>setdefault</strong></a>(...)</dt><dd><tt>D.<a href="#DocumentAclQuery-setdefault">setdefault</a>(k[,d])&nbsp;-&gt;&nbsp;D.<a href="#DocumentAclQuery-get">get</a>(k,d),&nbsp;also&nbsp;set&nbsp;D[k]=d&nbsp;if&nbsp;k&nbsp;not&nbsp;in&nbsp;D</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#DocumentAclQuery-update">update</a>(E,&nbsp;**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;E&nbsp;and&nbsp;F:&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
+(if&nbsp;E&nbsp;has&nbsp;keys&nbsp;else:&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v)&nbsp;then:&nbsp;for&nbsp;k&nbsp;in&nbsp;F:&nbsp;D[k]&nbsp;=&nbsp;F[k]</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-values"><strong>values</strong></a>(...)</dt><dd><tt>D.<a href="#DocumentAclQuery-values">values</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x72b260&gt;<dd><tt>T.<a href="#DocumentAclQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xc4e5f0&gt;<dd><tt>dict.<a href="#DocumentAclQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="DocumentQuery">class <strong>DocumentQuery</strong></a>(<a href="gdata.service.html#Query">gdata.service.Query</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
@@ -729,11 +1012,11 @@ Args:<br>
 &nbsp;&nbsp;text_query:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;contents&nbsp;of&nbsp;the&nbsp;q&nbsp;query&nbsp;parameter.&nbsp;This<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;is&nbsp;URL&nbsp;escaped&nbsp;upon&nbsp;conversion&nbsp;to&nbsp;a&nbsp;URI.<br>
 &nbsp;&nbsp;params:&nbsp;dict&nbsp;(optional)&nbsp;Parameter&nbsp;value&nbsp;string&nbsp;pairs&nbsp;which&nbsp;become&nbsp;URL<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params&nbsp;when&nbsp;translated&nbsp;to&nbsp;a&nbsp;URI.&nbsp;These&nbsp;parameters&nbsp;are&nbsp;added&nbsp;to<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;query's&nbsp;items.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params&nbsp;when&nbsp;translated&nbsp;to&nbsp;a&nbsp;URI.&nbsp;These&nbsp;parameters&nbsp;are&nbsp;added&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;query's&nbsp;items.<br>
 &nbsp;&nbsp;categories:&nbsp;list&nbsp;(optional)&nbsp;List&nbsp;of&nbsp;category&nbsp;strings&nbsp;which&nbsp;should&nbsp;be<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;included&nbsp;as&nbsp;query&nbsp;categories.&nbsp;See&nbsp;gdata.service.<a href="gdata.service.html#Query">Query</a>&nbsp;for<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;additional&nbsp;documentation.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;included&nbsp;as&nbsp;query&nbsp;categories.&nbsp;See&nbsp;gdata.service.<a href="gdata.service.html#Query">Query</a>&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;additional&nbsp;documentation.<br>
 &nbsp;<br>
 Yields:<br>
 &nbsp;&nbsp;A&nbsp;<a href="#DocumentQuery">DocumentQuery</a>&nbsp;object&nbsp;used&nbsp;to&nbsp;construct&nbsp;a&nbsp;URI&nbsp;based&nbsp;on&nbsp;the&nbsp;Document<br>
@@ -850,7 +1133,7 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x72b260&gt;<dd><tt>T.<a href="#DocumentQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xb1b8c0&gt;<dd><tt>dict.<a href="#DocumentQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xc4f290&gt;<dd><tt>dict.<a href="#DocumentQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table></td></tr></table><p>
@@ -862,15 +1145,26 @@ v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><strong>DATA_KIND_SCHEME</strong> = 'http://schemas.google.com/g/2005#kind'<br>
 <strong>DOCUMENT_KIND_TERM</strong> = 'http://schemas.google.com/docs/2007#document'<br>
+<strong>DOWNLOAD_SPREADSHEET_FORMATS</strong> = {'csv': '5', 'html': '102', 'ods': '13', 'pdf': '12', 'tsv': '23', 'xls': '4'}<br>
+<strong>FOLDERS_SCHEME_PREFIX</strong> = 'http://schemas.google.com/docs/2007/folders/'<br>
+<strong>FOLDER_KIND_TERM</strong> = 'http://schemas.google.com/docs/2007#folder'<br>
+<strong>HIDDEN_LABEL_TERM</strong> = 'http://schemas.google.com/g/2005/labels#hidden'<br>
+<strong>LABEL_SCHEME</strong> = 'http://schemas.google.com/g/2005/labels'<br>
+<strong>MINE_LABEL_TERM</strong> = 'http://schemas.google.com/g/2005/labels#mine'<br>
+<strong>PDF_KIND_TERM</strong> = 'http://schemas.google.com/docs/2007#pdf'<br>
 <strong>PRESENTATION_KIND_TERM</strong> = 'http://schemas.google.com/docs/2007#presentation'<br>
+<strong>PRIVATE_LABEL_TERM</strong> = 'http://schemas.google.com/g/2005/labels#private'<br>
+<strong>SHARED_WITH_DOMAIN_LABEL_TERM</strong> = 'http://schemas.google.com/g/2005/labels#shared-with-domain'<br>
 <strong>SPREADSHEET_KIND_TERM</strong> = 'http://schemas.google.com/docs/2007#spreadsheet'<br>
-<strong>SUPPORTED_FILETYPES</strong> = {'CSV': 'text/csv', 'DOC': 'application/msword', 'HTM': 'text/html', 'HTML': 'text/html', 'ODS': 'application/x-vnd.oasis.opendocument.spreadsheet', 'ODT': 'application/vnd.oasis.opendocument.text', 'PPS': 'application/vnd.ms-powerpoint', 'PPT': 'application/vnd.ms-powerpoint', 'RTF': 'application/rtf', 'SXW': 'application/vnd.sun.xml.writer', ...}<br>
-<strong>__author__</strong> = 'api.jfisher (Jeff Fisher)'</td></tr></table><p>
+<strong>STARRED_LABEL_TERM</strong> = 'http://schemas.google.com/g/2005/labels#starred'<br>
+<strong>SUPPORTED_FILETYPES</strong> = {'CSV': 'text/csv', 'DOC': 'application/msword', 'HTM': 'text/html', 'HTML': 'text/html', 'ODS': 'application/x-vnd.oasis.opendocument.spreadsheet', 'ODT': 'application/vnd.oasis.opendocument.text', 'PDF': 'application/pdf', 'PNG': 'image/png', 'PPS': 'application/vnd.ms-powerpoint', 'PPT': 'application/vnd.ms-powerpoint', ...}<br>
+<strong>TRASHED_LABEL_TERM</strong> = 'http://schemas.google.com/g/2005/labels#trashed'<br>
+<strong>__author__</strong> = 'api.jfisher (Jeff Fisher), api.eric@google.com (Eric Bidelman)'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#7799ee">
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
     
 <tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%">api.jfisher&nbsp;(Jeff&nbsp;Fisher)</td></tr></table>
+<td width="100%">api.jfisher&nbsp;(Jeff&nbsp;Fisher),&nbsp;api.eric@google.com&nbsp;(Eric&nbsp;Bidelman)</td></tr></table>
 </body></html>

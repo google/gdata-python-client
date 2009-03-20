@@ -165,8 +165,18 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;dict&nbsp;containing&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;update&nbsp;operation.</tt></dd></dl>
 
+<dl><dt><a name="EmailSettingsService-UpdateWebClipSettings"><strong>UpdateWebClipSettings</strong></a>(self, username, enable)</dt><dd><tt>Update&nbsp;WebClip&nbsp;Settings<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;username:&nbsp;User&nbsp;to&nbsp;update&nbsp;forwarding&nbsp;for.<br>
+&nbsp;&nbsp;enable:&nbsp;Boolean&nbsp;whether&nbsp;to&nbsp;enable&nbsp;Web&nbsp;Clip.<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;dict&nbsp;containing&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;update&nbsp;operation.</tt></dd></dl>
+
 <hr>
 Methods inherited from <a href="gdata.apps.service.html#PropertyService">gdata.apps.service.PropertyService</a>:<br>
+<dl><dt><a name="EmailSettingsService-AddAllElementsFromAllPages"><strong>AddAllElementsFromAllPages</strong></a>(self, link_finder, func)</dt><dd><tt>retrieve&nbsp;all&nbsp;pages&nbsp;and&nbsp;add&nbsp;all&nbsp;elements</tt></dd></dl>
+
 <dl><dt><a name="EmailSettingsService-__init__"><strong>__init__</strong></a>(self, email<font color="#909090">=None</font>, password<font color="#909090">=None</font>, domain<font color="#909090">=None</font>, source<font color="#909090">=None</font>, server<font color="#909090">='apps-apis.google.com'</font>, additional_headers<font color="#909090">=None</font>)</dt></dl>
 
 <hr>
@@ -360,7 +370,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="EmailSettingsService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x8ef1b8&gt;</font>)</dt><dd><tt>Query&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
+<dl><dt><a name="EmailSettingsService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x7f5cd01eede8&gt;</font>)</dt><dd><tt>Query&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;gdata.service.Get<br>
 &nbsp;<br>
@@ -585,7 +595,7 @@ you&nbsp;receive&nbsp;from&nbsp;FetchOAuthRequestToken.<br>
 Args:<br>
 &nbsp;&nbsp;request_token:&nbsp;gdata.auth.OAuthToken&nbsp;OAuth&nbsp;request&nbsp;token.</tt></dd></dl>
 
-<dl><dt><a name="EmailSettingsService-UpgradeToOAuthAccessToken"><strong>UpgradeToOAuthAccessToken</strong></a>(self, authorized_request_token<font color="#909090">=None</font>, request_url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>, oauth_version<font color="#909090">='1.0'</font>)</dt><dd><tt>Upgrades&nbsp;the&nbsp;authorized&nbsp;request&nbsp;token&nbsp;to&nbsp;an&nbsp;access&nbsp;token.<br>
+<dl><dt><a name="EmailSettingsService-UpgradeToOAuthAccessToken"><strong>UpgradeToOAuthAccessToken</strong></a>(self, authorized_request_token<font color="#909090">=None</font>, request_url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>, oauth_version<font color="#909090">='1.0'</font>)</dt><dd><tt>Upgrades&nbsp;the&nbsp;authorized&nbsp;request&nbsp;token&nbsp;to&nbsp;an&nbsp;access&nbsp;token&nbsp;and&nbsp;returns&nbsp;it<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;authorized_request_token:&nbsp;gdata.auth.OAuthToken&nbsp;(optional)&nbsp;OAuth&nbsp;request<br>
@@ -597,6 +607,9 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;added&nbsp;by&nbsp;default&nbsp;but&nbsp;here&nbsp;you&nbsp;can&nbsp;override&nbsp;it's&nbsp;value.<br>
 &nbsp;&nbsp;request_url:&nbsp;Access&nbsp;token&nbsp;URL.&nbsp;The&nbsp;default&nbsp;is<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'https://www.google.com/accounts/OAuthGetAccessToken'.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;Access&nbsp;token<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
 Raises:<br>
 &nbsp;&nbsp;NonOAuthToken&nbsp;if&nbsp;the&nbsp;user's&nbsp;authorized&nbsp;request&nbsp;token&nbsp;is&nbsp;not&nbsp;an&nbsp;OAuth<br>
