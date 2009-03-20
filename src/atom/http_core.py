@@ -141,6 +141,14 @@ class HttpRequest(object):
 
   def add_form_inputs(self, form_data,
                       mime_type='application/x-www-form-urlencoded'):
+    """Form-encodes and adds data to the request body.
+    
+    Args:
+      form_data: dict or sequnce or two member tuples which contains the
+                 form keys and values.
+      mime_type: str The MIME type of the form data being sent. Defaults
+                 to 'application/x-www-form-urlencoded'.
+    """
     body = urllib.urlencode(form_data)
     self.add_body_part(body, mime_type)
 
@@ -315,6 +323,9 @@ class HttpResponse(object):
       return self._headers[name]
     else:
       return default
+
+  def getheaders(self):
+    return self._headers
    
   def read(self, amt=None):
     if self._body is None:

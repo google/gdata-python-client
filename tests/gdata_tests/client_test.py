@@ -80,6 +80,16 @@ class ClientLoginTest(unittest.TestCase):
     self.assertRaises(gdata.client.ClientLoginFailed,
         client.request_client_login_token, 'email', 'pw', '', '')
 
+  def test_client_login(self):
+    client = gdata.client.GDClient()
+    client.http_client = atom.mock_http_core.SettableHttpClient(200, 'OK', 
+        'SID=DQAAAGgA...7Zg8CTN\n'
+        'LSID=DQAAAGsA...lk8BBbG\n'
+        'Auth=DQAAAGgA...dk3fA5N', {'Content-Type': 'text/plain'})
+    client.client_login('me@example.com', 'password', 'wise', 'unit test')
+    self.assertTrue(isinstance(client.auth_token, gdata.gauth.ClientLoginToken))
+    self.assertEqual(client.auth_token.token_string, 'DQAAAGgA...dk3fA5N')
+
 
 class RequestTest(unittest.TestCase):
 
@@ -113,6 +123,17 @@ class RequestTest(unittest.TestCase):
     self.assertEqual(response.getheader('Echo-Uri'), '/new/path?p=1')
     self.assertEqual(response.getheader('Echo-Scheme'), 'http')
     self.assertEqual(response.read(), 'test')
+
+  def test_gdata_version_header(self):
+    client = gdata.client.GDClient()
+    client.http_client = atom.mock_http_core.EchoHttpClient()
+
+    response = client.request('GET', 'http://example.com')
+    self.assertEqual(response.getheader('GData-Version'), None)
+
+    client.api_version = '2'
+    response = client.request('GET', 'http://example.com')
+    self.assertEqual(response.getheader('GData-Version'), '2')
 
   def test_redirects(self):
     client = gdata.client.GDClient()

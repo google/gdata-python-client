@@ -59,6 +59,7 @@ class ClientLoginFailed(Error):
 class GDClient(atom.client.AtomPubClient):
   # The gsessionid is used by Google Calendar to prevent redirects.
   __gsessionid = None
+  api_version = None
 
   def request(self, method=None, uri=None, auth_token=None,
               http_request=None, converter=None, redirects_remaining=4,
@@ -75,6 +76,11 @@ class GDClient(atom.client.AtomPubClient):
     redirect is not in the format specified by the Google Calendar API, a
     RedirectError will be raised containing the body of the server's
     response.
+
+    The method calls the client's modify_request method to make any changes
+    required by the client before the request is made. For example, a
+    version 2 client could add a GData-Version: 2 header to the request in
+    its modify_request method.
 
     Args:
       method: str
@@ -115,6 +121,8 @@ class GDClient(atom.client.AtomPubClient):
     # URI then add it to the URI.
     elif self.__gsessionid is not None:
       uri.query['gsessionid'] = self.__gsessionid
+
+    http_request = self.modify_request(http_request)
 
     response = atom.client.AtomPubClient.request(self, method=method, 
         uri=uri, auth_token=auth_token, http_request=http_request, **kwargs)
@@ -216,6 +224,20 @@ class GDClient(atom.client.AtomPubClient):
 
   ClientLogin = client_login
 
+  def modify_request(self, http_request):
+    """Adds or changes request before making the HTTP request.
+    
+    This client will add the API version if it is specified. 
+    Subclasses may override this method to add their own request 
+    modifications before the request is made.
+    """
+    if self.api_version is not None:
+      if http_request is None:
+        http_request = atom.http_core.HttpRequest()
+      http_request.headers['GData-Version'] = self.api_version
+    return http_request
+
+  ModifyRequest = modify_request
 
 # Version 1 code.
 SCOPE_URL_PARAM_NAME = gdata.service.SCOPE_URL_PARAM_NAME 

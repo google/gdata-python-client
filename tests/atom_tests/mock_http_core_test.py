@@ -154,6 +154,37 @@ class MockHttpClientTest(unittest.TestCase):
     y = atom.http_core.HttpRequest('http://example.com/', 'GET')
     self.assertFalse(atom.mock_http_core._match_request(x, y))
 
+  def test_use_named_sessions(self):
+    self.client._delete_recordings('mock_http_test.test_use_named_sessions')
+    self.client.use_cached_session('mock_http_test.test_use_named_sessions',
+                                   atom.mock_http_core.EchoHttpClient())
+    request = atom.http_core.HttpRequest('http://example.com', 'GET')
+    response = self.client.request(request)
+    self.assertEqual(response.getheader('Echo-Method'), 'GET')
+    self.assertEqual(response.getheader('Echo-Host'), 'example.com:None')
+    # We will insert a Cache-Marker header to indicate that this is a
+    # recorded response, but initially it should not be present. 
+    self.assertEqual(response.getheader('Cache-Marker'), None)
+    # Modify the recorded response to allow us to identify a cached result
+    # from an echoed result. We need to be able to check to see if this
+    # came from a recording.
+    self.assertFalse('Cache-Marker' in self.client._recordings[0][1]._headers)
+    self.client._recordings[0][1]._headers['Cache-Marker'] = '1'
+    self.assertTrue('Cache-Marker' in self.client._recordings[0][1]._headers)
+    # Save the recorded responses.
+    self.client.close_session()
+
+    # Create a new client, and have it use the recorded session.
+    client = atom.mock_http_core.MockHttpClient()
+    client.use_cached_session('mock_http_test.test_use_named_sessions',
+                              atom.mock_http_core.EchoHttpClient())
+    # Make the same request, which should use the recorded result. 
+    response = client.request(request)
+    self.assertEqual(response.getheader('Echo-Method'), 'GET')
+    self.assertEqual(response.getheader('Echo-Host'), 'example.com:None')
+    # We should now see the cache market since the response is replayed.
+    self.assertEqual(response.getheader('Cache-Marker'), '1')
+
 
 def suite():
   return unittest.TestSuite((unittest.makeSuite(MockHttpClientTest, 'test'),
