@@ -1,0 +1,188 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.gauth</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.gauth</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client/src/gdata/gauth.py">/usr/local/svn/gdata-python-client/src/gdata/gauth.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;Copyright&nbsp;(C)&nbsp;2009&nbsp;Google&nbsp;Inc.<br>
+#<br>
+#&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;"License");<br>
+#&nbsp;you&nbsp;may&nbsp;not&nbsp;use&nbsp;this&nbsp;file&nbsp;except&nbsp;in&nbsp;compliance&nbsp;with&nbsp;the&nbsp;License.<br>
+#&nbsp;You&nbsp;may&nbsp;obtain&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;License&nbsp;at<br>
+#<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a><br>
+#<br>
+#&nbsp;Unless&nbsp;required&nbsp;by&nbsp;applicable&nbsp;law&nbsp;or&nbsp;agreed&nbsp;to&nbsp;in&nbsp;writing,&nbsp;software<br>
+#&nbsp;distributed&nbsp;under&nbsp;the&nbsp;License&nbsp;is&nbsp;distributed&nbsp;on&nbsp;an&nbsp;"AS&nbsp;IS"&nbsp;BASIS,<br>
+#&nbsp;WITHOUT&nbsp;WARRANTIES&nbsp;OR&nbsp;CONDITIONS&nbsp;OF&nbsp;ANY&nbsp;KIND,&nbsp;either&nbsp;express&nbsp;or&nbsp;implied.<br>
+#&nbsp;See&nbsp;the&nbsp;License&nbsp;for&nbsp;the&nbsp;specific&nbsp;language&nbsp;governing&nbsp;permissions&nbsp;and<br>
+#&nbsp;limitations&nbsp;under&nbsp;the&nbsp;License.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.gauth.html#ClientLoginToken">ClientLoginToken</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ClientLoginToken">class <strong>ClientLoginToken</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ClientLoginToken-ModifyRequest"><strong>ModifyRequest</strong></a> = <a href="#ClientLoginToken-modify_request">modify_request</a>(self, http_request)</dt></dl>
+
+<dl><dt><a name="ClientLoginToken-__init__"><strong>__init__</strong></a>(self, token_string)</dt></dl>
+
+<dl><dt><a name="ClientLoginToken-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-GenerateClientLoginRequestBody"><strong>GenerateClientLoginRequestBody</strong></a> = generate_client_login_request_body(email, password, service, source, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;autentication&nbsp;request<br>
+&nbsp;<br>
+See&nbsp;<a href="http://code.google.com/apis/accounts/AuthForInstalledApps.html#Request">http://code.google.com/apis/accounts/AuthForInstalledApps.html#Request</a><br>
+for&nbsp;more&nbsp;details.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;email:&nbsp;str<br>
+&nbsp;&nbsp;password:&nbsp;str<br>
+&nbsp;&nbsp;service:&nbsp;str<br>
+&nbsp;&nbsp;source:&nbsp;str<br>
+&nbsp;&nbsp;account_type:&nbsp;str&nbsp;(optional)&nbsp;Defaul&nbsp;is&nbsp;'HOSTED_OR_GOOGLE',&nbsp;other&nbsp;valid<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;values&nbsp;are&nbsp;'GOOGLE'&nbsp;and&nbsp;'HOSTED'<br>
+&nbsp;&nbsp;captcha_token:&nbsp;str&nbsp;(optional)<br>
+&nbsp;&nbsp;captcha_response:&nbsp;str&nbsp;(optional)<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;HTTP&nbsp;body&nbsp;to&nbsp;send&nbsp;in&nbsp;a&nbsp;request&nbsp;for&nbsp;a&nbsp;client&nbsp;login&nbsp;token.</tt></dd></dl>
+ <dl><dt><a name="-GetCaptchaChallenge"><strong>GetCaptchaChallenge</strong></a> = get_captcha_challenge(http_body, captcha_base_url<font color="#909090">='http://www.google.com/accounts/'</font>)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;and&nbsp;token&nbsp;for&nbsp;a&nbsp;CAPTCHA&nbsp;challenge&nbsp;issued&nbsp;by&nbsp;the&nbsp;server.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;http_body:&nbsp;str&nbsp;The&nbsp;body&nbsp;of&nbsp;the&nbsp;HTTP&nbsp;response&nbsp;from&nbsp;the&nbsp;server&nbsp;which&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contains&nbsp;the&nbsp;CAPTCHA&nbsp;challenge.<br>
+&nbsp;&nbsp;captcha_base_url:&nbsp;str&nbsp;This&nbsp;function&nbsp;returns&nbsp;a&nbsp;full&nbsp;URL&nbsp;for&nbsp;viewing&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;challenge&nbsp;image&nbsp;which&nbsp;is&nbsp;built&nbsp;from&nbsp;the&nbsp;server's&nbsp;response.&nbsp;This<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base_url&nbsp;is&nbsp;used&nbsp;as&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;URL&nbsp;because&nbsp;the&nbsp;server<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;only&nbsp;provides&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;URL.&nbsp;For&nbsp;example&nbsp;the&nbsp;server&nbsp;provides<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Captcha?ctoken=Hi...N'&nbsp;and&nbsp;the&nbsp;URL&nbsp;for&nbsp;the&nbsp;image&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<a href="http://www.google.com/accounts/Captcha?ctoken=Hi...N">http://www.google.com/accounts/Captcha?ctoken=Hi...N</a>'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;dictionary&nbsp;containing&nbsp;the&nbsp;information&nbsp;needed&nbsp;to&nbsp;repond&nbsp;to&nbsp;the&nbsp;CAPTCHA<br>
+&nbsp;&nbsp;challenge,&nbsp;the&nbsp;image&nbsp;URL&nbsp;and&nbsp;the&nbsp;ID&nbsp;token&nbsp;of&nbsp;the&nbsp;challenge.&nbsp;The&nbsp;<br>
+&nbsp;&nbsp;dictionary&nbsp;is&nbsp;in&nbsp;the&nbsp;form:<br>
+&nbsp;&nbsp;{'token':&nbsp;string&nbsp;identifying&nbsp;the&nbsp;CAPTCHA&nbsp;image,<br>
+&nbsp;&nbsp;&nbsp;'url':&nbsp;string&nbsp;containing&nbsp;the&nbsp;URL&nbsp;of&nbsp;the&nbsp;image}<br>
+&nbsp;&nbsp;Returns&nbsp;None&nbsp;if&nbsp;there&nbsp;was&nbsp;no&nbsp;CAPTCHA&nbsp;challenge&nbsp;in&nbsp;the&nbsp;response.</tt></dd></dl>
+ <dl><dt><a name="-GetClientLoginTokenString"><strong>GetClientLoginTokenString</strong></a> = get_client_login_token_string(http_body)</dt><dd><tt>Returns&nbsp;the&nbsp;token&nbsp;value&nbsp;for&nbsp;a&nbsp;<a href="#ClientLoginToken">ClientLoginToken</a>.<br>
+&nbsp;<br>
+Reads&nbsp;the&nbsp;token&nbsp;from&nbsp;the&nbsp;server's&nbsp;response&nbsp;to&nbsp;a&nbsp;Client&nbsp;Login&nbsp;request&nbsp;and<br>
+creates&nbsp;the&nbsp;token&nbsp;value&nbsp;string&nbsp;to&nbsp;use&nbsp;in&nbsp;requests.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;http_body:&nbsp;str&nbsp;The&nbsp;body&nbsp;of&nbsp;the&nbsp;server's&nbsp;HTTP&nbsp;response&nbsp;to&nbsp;a&nbsp;Client&nbsp;Login<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;token&nbsp;value&nbsp;string&nbsp;for&nbsp;a&nbsp;<a href="#ClientLoginToken">ClientLoginToken</a>.</tt></dd></dl>
+ <dl><dt><a name="-generate_client_login_request_body"><strong>generate_client_login_request_body</strong></a>(email, password, service, source, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;autentication&nbsp;request<br>
+&nbsp;<br>
+See&nbsp;<a href="http://code.google.com/apis/accounts/AuthForInstalledApps.html#Request">http://code.google.com/apis/accounts/AuthForInstalledApps.html#Request</a><br>
+for&nbsp;more&nbsp;details.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;email:&nbsp;str<br>
+&nbsp;&nbsp;password:&nbsp;str<br>
+&nbsp;&nbsp;service:&nbsp;str<br>
+&nbsp;&nbsp;source:&nbsp;str<br>
+&nbsp;&nbsp;account_type:&nbsp;str&nbsp;(optional)&nbsp;Defaul&nbsp;is&nbsp;'HOSTED_OR_GOOGLE',&nbsp;other&nbsp;valid<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;values&nbsp;are&nbsp;'GOOGLE'&nbsp;and&nbsp;'HOSTED'<br>
+&nbsp;&nbsp;captcha_token:&nbsp;str&nbsp;(optional)<br>
+&nbsp;&nbsp;captcha_response:&nbsp;str&nbsp;(optional)<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;HTTP&nbsp;body&nbsp;to&nbsp;send&nbsp;in&nbsp;a&nbsp;request&nbsp;for&nbsp;a&nbsp;client&nbsp;login&nbsp;token.</tt></dd></dl>
+ <dl><dt><a name="-get_captcha_challenge"><strong>get_captcha_challenge</strong></a>(http_body, captcha_base_url<font color="#909090">='http://www.google.com/accounts/'</font>)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;and&nbsp;token&nbsp;for&nbsp;a&nbsp;CAPTCHA&nbsp;challenge&nbsp;issued&nbsp;by&nbsp;the&nbsp;server.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;http_body:&nbsp;str&nbsp;The&nbsp;body&nbsp;of&nbsp;the&nbsp;HTTP&nbsp;response&nbsp;from&nbsp;the&nbsp;server&nbsp;which&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contains&nbsp;the&nbsp;CAPTCHA&nbsp;challenge.<br>
+&nbsp;&nbsp;captcha_base_url:&nbsp;str&nbsp;This&nbsp;function&nbsp;returns&nbsp;a&nbsp;full&nbsp;URL&nbsp;for&nbsp;viewing&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;challenge&nbsp;image&nbsp;which&nbsp;is&nbsp;built&nbsp;from&nbsp;the&nbsp;server's&nbsp;response.&nbsp;This<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base_url&nbsp;is&nbsp;used&nbsp;as&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;URL&nbsp;because&nbsp;the&nbsp;server<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;only&nbsp;provides&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;URL.&nbsp;For&nbsp;example&nbsp;the&nbsp;server&nbsp;provides<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Captcha?ctoken=Hi...N'&nbsp;and&nbsp;the&nbsp;URL&nbsp;for&nbsp;the&nbsp;image&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<a href="http://www.google.com/accounts/Captcha?ctoken=Hi...N">http://www.google.com/accounts/Captcha?ctoken=Hi...N</a>'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;dictionary&nbsp;containing&nbsp;the&nbsp;information&nbsp;needed&nbsp;to&nbsp;repond&nbsp;to&nbsp;the&nbsp;CAPTCHA<br>
+&nbsp;&nbsp;challenge,&nbsp;the&nbsp;image&nbsp;URL&nbsp;and&nbsp;the&nbsp;ID&nbsp;token&nbsp;of&nbsp;the&nbsp;challenge.&nbsp;The&nbsp;<br>
+&nbsp;&nbsp;dictionary&nbsp;is&nbsp;in&nbsp;the&nbsp;form:<br>
+&nbsp;&nbsp;{'token':&nbsp;string&nbsp;identifying&nbsp;the&nbsp;CAPTCHA&nbsp;image,<br>
+&nbsp;&nbsp;&nbsp;'url':&nbsp;string&nbsp;containing&nbsp;the&nbsp;URL&nbsp;of&nbsp;the&nbsp;image}<br>
+&nbsp;&nbsp;Returns&nbsp;None&nbsp;if&nbsp;there&nbsp;was&nbsp;no&nbsp;CAPTCHA&nbsp;challenge&nbsp;in&nbsp;the&nbsp;response.</tt></dd></dl>
+ <dl><dt><a name="-get_client_login_token_string"><strong>get_client_login_token_string</strong></a>(http_body)</dt><dd><tt>Returns&nbsp;the&nbsp;token&nbsp;value&nbsp;for&nbsp;a&nbsp;<a href="#ClientLoginToken">ClientLoginToken</a>.<br>
+&nbsp;<br>
+Reads&nbsp;the&nbsp;token&nbsp;from&nbsp;the&nbsp;server's&nbsp;response&nbsp;to&nbsp;a&nbsp;Client&nbsp;Login&nbsp;request&nbsp;and<br>
+creates&nbsp;the&nbsp;token&nbsp;value&nbsp;string&nbsp;to&nbsp;use&nbsp;in&nbsp;requests.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;http_body:&nbsp;str&nbsp;The&nbsp;body&nbsp;of&nbsp;the&nbsp;server's&nbsp;HTTP&nbsp;response&nbsp;to&nbsp;a&nbsp;Client&nbsp;Login<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;token&nbsp;value&nbsp;string&nbsp;for&nbsp;a&nbsp;<a href="#ClientLoginToken">ClientLoginToken</a>.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>AUTHSUB_AUTH_LABEL</strong> = 'AuthSub token='<br>
+<strong>PROGRAMMATIC_AUTH_LABEL</strong> = 'GoogleLogin auth='<br>
+<strong>__author__</strong> = 'j.s@google.com (Jeff Scudder)'</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">j.s@google.com&nbsp;(Jeff&nbsp;Scudder)</td></tr></table>
+</body></html>
