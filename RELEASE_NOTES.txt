@@ -6,7 +6,8 @@ Mar 20, 2009 (revision 665)
     API. (Thanks to Tony Chen and Oskar Casquero!)
 - Added the following new features for the Google Documents List API:
     (Thanks again to Eric Bidelman for adding all of these!)
-  - Folder create, move docs/folders in and out of other folders.
+  - Folder create, move docs/folders in and out of other folders. (Thanks
+      Nizam Sayeed!)
   - Suppport for modifications to Access Control Lists for documents.
   - Export functionality for documents, spreadsheets, and presentations.
   - Updated the docs_example.py sample app.
