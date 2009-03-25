@@ -30,6 +30,7 @@ import atom_tests.client_test
 import gdata_tests.client_test
 import gdata_tests.data_test
 import gdata_tests.live_client_test
+import gdata_tests.gauth_test
 
 
 def suite():
@@ -40,6 +41,7 @@ def suite():
                              atom_tests.auth_test.suite(),
                              gdata_tests.client_test.suite(),
                              gdata_tests.data_test.suite(),
+                             gdata_tests.gauth_test.suite(),
                              gdata_tests.live_client_test.suite()))
 
 

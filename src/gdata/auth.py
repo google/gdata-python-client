@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# Copyright (C) 2007, 2008 Google Inc.
+# Copyright (C) 2007 - 2009 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,6 +29,8 @@ import gdata.oauth as oauth
 import gdata.oauth.rsa as oauth_rsa
 import gdata.tlslite.utils.keyfactory as keyfactory
 import gdata.tlslite.utils.cryptomath as cryptomath
+
+import gdata.gauth
 
 __author__ = 'api.jscudder (Jeff Scudder)'
 
@@ -90,18 +92,8 @@ def generate_client_login_request_body(email, password, service, source,
   Returns:
     The HTTP body to send in a request for a client login token.
   """
-  # Create a POST body containing the user's credentials.
-  request_fields = {'Email': email,
-                    'Passwd': password,
-                    'accountType': account_type,
-                    'service': service,
-                    'source': source}
-  if captcha_token and captcha_response:
-    # Send the captcha token and response as part of the POST body if the
-    # user is responding to a captch challenge.
-    request_fields['logintoken'] = captcha_token
-    request_fields['logincaptcha'] = captcha_response
-  return urllib.urlencode(request_fields)
+  return gdata.gauth.generate_client_login_request_body(email, password,
+      service, source, account_type, captcha_token, captcha_response)
 
 
 GenerateClientLoginRequestBody = generate_client_login_request_body
@@ -139,11 +131,7 @@ def get_client_login_token(http_body):
   Returns:
     The token value string for a ClientLoginToken.
   """
-  for response_line in http_body.splitlines():
-    if response_line.startswith('Auth='):
-      # Strip off the leading Auth= and return the Authorization value.
-      return response_line[5:]
-  return None
+  return gdata.gauth.get_client_login_token_string(http_body)
 
 
 def extract_client_login_token(http_body, scopes):
@@ -189,21 +177,7 @@ def get_captcha_challenge(http_body,
      'url': string containing the URL of the image}
     Returns None if there was no CAPTCHA challenge in the response.
   """
-  contains_captcha_challenge = False
-  captcha_parameters = {}
-  for response_line in http_body.splitlines():
-    if response_line.startswith('Error=CaptchaRequired'):
-      contains_captcha_challenge = True
-    elif response_line.startswith('CaptchaToken='):
-      # Strip off the leading CaptchaToken=
-      captcha_parameters['token'] = response_line[13:]
-    elif response_line.startswith('CaptchaUrl='):
-      captcha_parameters['url'] = '%s%s' % (captcha_base_url,
-          response_line[11:])
-  if contains_captcha_challenge:
-    return captcha_parameters
-  else:
-    return None
+  return gdata.gauth.get_captcha_challenge(http_body, captcha_base_url)
 
 
 GetCaptchaChallenge = get_captcha_challenge

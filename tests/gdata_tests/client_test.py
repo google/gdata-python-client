@@ -93,6 +93,42 @@ class ClientLoginTest(unittest.TestCase):
     self.assertEqual(client.auth_token.token_string, 'DQAAAGgA...dk3fA5N')
 
 
+class AuthSubTest(unittest.TestCase):
+
+  def test_get_and_upgrade_token(self):
+    client = gdata.client.GDClient()
+    client.http_client = atom.mock_http_core.SettableHttpClient(200, 'OK', 
+        'Token=UpgradedTokenVal\n'
+        'Extra data', {'Content-Type': 'text/plain'})
+
+    page_url = 'http://example.com/showcalendar.html?token=CKF50YzIHxCTKMAg'
+
+    client.auth_token = gdata.gauth.AuthSubToken.from_url(page_url)
+
+    self.assertTrue(isinstance(client.auth_token, gdata.gauth.AuthSubToken))
+    self.assertEqual(client.auth_token.token_string, 'CKF50YzIHxCTKMAg')
+
+    upgraded = client.upgrade_token()
+
+    self.assertTrue(isinstance(client.auth_token, gdata.gauth.AuthSubToken))
+    self.assertEqual(client.auth_token.token_string, 'UpgradedTokenVal')
+    self.assertEqual(client.auth_token, upgraded)
+
+    # Ensure passing in a token returns without modifying client's auth_token.
+    client.http_client.set_response(200, 'OK', 'Token=4567', {})
+    upgraded = client.upgrade_token(
+        gdata.gauth.AuthSubToken.from_url('?token=1234'))
+    self.assertEqual(upgraded.token_string, '4567')
+    self.assertEqual(client.auth_token.token_string, 'UpgradedTokenVal')
+    self.assertNotEqual(client.auth_token, upgraded)
+
+    # Test exception cases
+    client.auth_token = None
+    self.assertRaises(gdata.client.UnableToUpgradeToken, client.upgrade_token,
+                      None)
+    self.assertRaises(gdata.client.UnableToUpgradeToken, client.upgrade_token)
+
+
 class RequestTest(unittest.TestCase):
 
   def test_simple_request(self):
@@ -251,6 +287,7 @@ class GDataClientTest(unittest.TestCase):
 
 def suite():
   return unittest.TestSuite((unittest.makeSuite(ClientLoginTest, 'test'),
+                             unittest.makeSuite(AuthSubTest, 'test'),
                              unittest.makeSuite(RequestTest, 'test'),
                              unittest.makeSuite(CreateConverterTest, 'test')))
 

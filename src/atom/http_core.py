@@ -238,6 +238,9 @@ class Uri(object):
     else:
       return '%s://%s:%s%s' % (scheme, self.host, str(self.port),
                                self._get_relative_path())
+
+  def __str__(self):
+    return self._to_string()
      
   def modify_request(self, http_request=None):
     """Sets HTTP request components based on the URI."""
