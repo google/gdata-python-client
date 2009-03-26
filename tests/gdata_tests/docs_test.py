@@ -43,6 +43,7 @@ class DocumentListEntryTest(unittest.TestCase):
     self.assertEqual(entry.lastModifiedBy.name.text,'test.user')
     self.assertEqual(entry.lastModifiedBy.email.text,'test.user@gmail.com')
     self.assertEqual(entry.lastViewed.text,'2009-03-05T07:48:21.493Z')
+    self.assertEqual(entry.writersCanInvite.value, 'true')
 
 
 class DocumentListFeedTest(unittest.TestCase):
@@ -69,8 +70,10 @@ class DocumentListFeedTest(unittest.TestCase):
       self.assertEqual(an_entry.lastViewed.text,'2009-03-05T07:48:21.493Z')
       if(an_entry.GetDocumentType() == 'spreadsheet'):
         self.assertEqual(an_entry.title.text, 'Test Spreadsheet')
+        self.assertEqual(an_entry.writersCanInvite.value, 'true')
       elif(an_entry.GetDocumentType() == 'document'):
         self.assertEqual(an_entry.title.text, 'Test Document')
+        self.assertEqual(an_entry.writersCanInvite.value, 'false')
 
   def testLinkFinderFindsLinks(self):
     for entry in self.dl_feed.entry:

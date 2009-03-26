@@ -23,6 +23,9 @@ import atom
 import gdata
 
 
+DOCUMENTS_NAMESPACE = 'http://schemas.google.com/docs/2007'
+
+
 class Scope(atom.AtomBase):
   """The DocList ACL scope element"""
 
@@ -101,10 +104,19 @@ class LastModifiedBy(atom.Person):
 
 
 class LastViewed(atom.Person):
-  """The DocList gd:lastModifiedBy element"""
+  """The DocList gd:lastViewed element"""
 
   _tag = 'lastViewed'
   _namespace = gdata.GDATA_NAMESPACE
+
+
+class WritersCanInvite(atom.AtomBase):
+  """The DocList docs:writersCanInvite element"""
+
+  _tag = 'writersCanInvite'
+  _namespace = DOCUMENTS_NAMESPACE
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['value'] = 'value'
 
 
 class DocumentListEntry(gdata.GDataEntry):
@@ -121,16 +133,19 @@ class DocumentListEntry(gdata.GDataEntry):
                                                              LastModifiedBy)
   _children['{%s}lastViewed' % gdata.GDATA_NAMESPACE] = ('lastViewed',
                                                          LastViewed)
+  _children['{%s}writersCanInvite' % DOCUMENTS_NAMESPACE] = (
+      'writersCanInvite', WritersCanInvite)
 
   def __init__(self, resourceId=None, feedLink=None, lastViewed=None,
-               lastModifiedBy=None, author=None, category=None, content=None,
-               atom_id=None, link=None, published=None, title=None,
-               updated=None, text=None, extension_elements=None,
-               extension_attributes=None):
+               lastModifiedBy=None, writersCanInvite=None, author=None,
+               category=None, content=None, atom_id=None, link=None,
+               published=None, title=None, updated=None, text=None,
+               extension_elements=None, extension_attributes=None):
     self.feedLink = feedLink
-    self.lastViewed = feedLink
-    self.lastModifiedBy = feedLink
-    self.resourceId = feedLink
+    self.lastViewed = lastViewed
+    self.lastModifiedBy = lastModifiedBy
+    self.resourceId = resourceId
+    self.writersCanInvite = writersCanInvite
     gdata.GDataEntry.__init__(
         self, author=author, category=category, content=content,
         atom_id=atom_id, link=link, published=published, title=title,

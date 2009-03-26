@@ -36,14 +36,14 @@ import gdata.docs
 
 
 # XML Namespaces used in Google Documents entities.
-DATA_KIND_SCHEME = 'http://schemas.google.com/g/2005#kind'
-DOCUMENT_KIND_TERM = 'http://schemas.google.com/docs/2007#document'
-SPREADSHEET_KIND_TERM = 'http://schemas.google.com/docs/2007#spreadsheet'
-PRESENTATION_KIND_TERM = 'http://schemas.google.com/docs/2007#presentation'
-FOLDER_KIND_TERM = 'http://schemas.google.com/docs/2007#folder'
-PDF_KIND_TERM = 'http://schemas.google.com/docs/2007#pdf'
+DATA_KIND_SCHEME = gdata.GDATA_NAMESPACE + '#kind'
+DOCUMENT_KIND_TERM = gdata.docs.DOCUMENTS_NAMESPACE + '#document'
+SPREADSHEET_KIND_TERM = gdata.docs.DOCUMENTS_NAMESPACE + '#spreadsheet'
+PRESENTATION_KIND_TERM = gdata.docs.DOCUMENTS_NAMESPACE + '#presentation'
+FOLDER_KIND_TERM = gdata.docs.DOCUMENTS_NAMESPACE + '#folder'
+PDF_KIND_TERM = gdata.docs.DOCUMENTS_NAMESPACE + '#pdf'
 
-LABEL_SCHEME = 'http://schemas.google.com/g/2005/labels'
+LABEL_SCHEME = gdata.GDATA_NAMESPACE + '/labels'
 STARRED_LABEL_TERM = LABEL_SCHEME + '#starred'
 TRASHED_LABEL_TERM = LABEL_SCHEME + '#trashed'
 HIDDEN_LABEL_TERM = LABEL_SCHEME + '#hidden'
@@ -51,7 +51,7 @@ MINE_LABEL_TERM = LABEL_SCHEME + '#mine'
 PRIVATE_LABEL_TERM = LABEL_SCHEME + '#private'
 SHARED_WITH_DOMAIN_LABEL_TERM = LABEL_SCHEME + '#shared-with-domain'
 
-FOLDERS_SCHEME_PREFIX = 'http://schemas.google.com/docs/2007/folders/'
+FOLDERS_SCHEME_PREFIX = gdata.docs.DOCUMENTS_NAMESPACE + '/folders/'
 
 DOWNLOAD_SPREADSHEET_FORMATS = {
   'xls': '4',
@@ -273,7 +273,7 @@ class DocsService(gdata.service.GDataService):
       Google Documents service.
     """
     category = atom.Category(scheme=DATA_KIND_SCHEME,
-                             term=PRESENTATION_KIND_TERM)
+                             term=PRESENTATION_KIND_TERM, label='presentation')
     return self._UploadFile(media_source, title, category, folder_or_uri)
 
   def UploadSpreadsheet(self, media_source, title, folder_or_uri=None):
@@ -295,7 +295,7 @@ class DocsService(gdata.service.GDataService):
       Google Documents service.
     """
     category = atom.Category(scheme=DATA_KIND_SCHEME,
-                             term=SPREADSHEET_KIND_TERM)
+                             term=SPREADSHEET_KIND_TERM, label='spreadsheet')
     return self._UploadFile(media_source, title, category, folder_or_uri)
 
   def UploadDocument(self, media_source, title, folder_or_uri=None):
@@ -317,7 +317,7 @@ class DocsService(gdata.service.GDataService):
       Google Documents service.
     """
     category = atom.Category(scheme=DATA_KIND_SCHEME,
-                             term=DOCUMENT_KIND_TERM)
+                             term=DOCUMENT_KIND_TERM, label='document')
     return self._UploadFile(media_source, title, category, folder_or_uri)
 
   def DownloadDocument(self, entry_or_resource_id, file_path):
@@ -426,7 +426,8 @@ class DocsService(gdata.service.GDataService):
     else:
       uri = '/feeds/documents/private/full'
 
-    category = atom.Category(scheme=DATA_KIND_SCHEME, term=FOLDER_KIND_TERM)
+    category = atom.Category(scheme=DATA_KIND_SCHEME, term=FOLDER_KIND_TERM,
+                             label='folder')
     folder_entry = gdata.GDataEntry()
     folder_entry.title = atom.Title(text=title)
     folder_entry.category.append(category)
@@ -448,7 +449,7 @@ class DocsService(gdata.service.GDataService):
       the Google Documents service.
     """
     category = atom.Category(scheme=DATA_KIND_SCHEME,
-                             term=DOCUMENT_KIND_TERM)
+                             term=DOCUMENT_KIND_TERM, label='document')
     return self._MoveIntoFolder(document_entry, folder_entry, category)
 
   def MovePresentationIntoFolder(self, document_entry, folder_entry):
@@ -465,7 +466,7 @@ class DocsService(gdata.service.GDataService):
       the Google Documents service.
     """
     category = atom.Category(scheme=DATA_KIND_SCHEME,
-                             term=PRESENTATION_KIND_TERM)
+                             term=PRESENTATION_KIND_TERM, label='presentation')
     return self._MoveIntoFolder(document_entry, folder_entry, category)
 
   def MoveSpreadsheetIntoFolder(self, document_entry, folder_entry):
@@ -482,7 +483,7 @@ class DocsService(gdata.service.GDataService):
       the Google Documents service.
     """
     category = atom.Category(scheme=DATA_KIND_SCHEME,
-                             term=SPREADSHEET_KIND_TERM)
+                             term=SPREADSHEET_KIND_TERM, label='spreadsheet')
     return self._MoveIntoFolder(document_entry, folder_entry, category)
 
   def MoveFolderIntoFolder(self, src_folder_entry, dest_folder_entry):
@@ -499,7 +500,7 @@ class DocsService(gdata.service.GDataService):
       the Google Documents service.
     """
     category = atom.Category(scheme=DATA_KIND_SCHEME,
-                             term=FOLDER_KIND_TERM)
+                             term=FOLDER_KIND_TERM, label='folder')
     return self._MoveIntoFolder(src_folder_entry, dest_folder_entry, category)
 
   def MoveOutOfFolder(self, source_entry):
