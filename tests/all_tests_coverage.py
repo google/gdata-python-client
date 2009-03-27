@@ -32,6 +32,13 @@ import atom.client
 import gdata.gauth
 import gdata.client
 import gdata.data
+from gdata.test_config import settings
+
+
+# Ensure that coverage tests execute the live requests to the servers, but
+# allow use of cached server responses to speed up repeated runs.
+settings.RUN_LIVE_TESTS = True
+settings.CLEAR_CACHE = False
 
 
 def suite():
