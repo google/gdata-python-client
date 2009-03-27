@@ -34,7 +34,7 @@ CACHE_RESPONSES = True
 # If set to True, the client will make HTTP requests to the server regardless
 # of a cache file. If True, caches from previous sessions will be deleted.
 # If False (the default) cached sessions will be reused if they exist.
-CLEAR_CACHE = False
+CLEAR_CACHE = True
 
 
 GOOGLE_ACCOUNT_EMAIL = '<your email>'
