@@ -16,6 +16,7 @@
 
 
 import gdata.test_config_template
+import atom.mock_http_core
 
 
 """Loads configuration for tests which connect to Google servers.
