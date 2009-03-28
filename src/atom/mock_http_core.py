@@ -121,8 +121,11 @@ class MockHttpClient(object):
     """
     if real_http_client is None:
       real_http_client = atom.http_core.HttpClient()
-    self._recordings_cache_name = self.get_cache_file_name()
-    self._load_or_use_client(name, real_http_client)
+    if name is None:
+      self._recordings_cache_name = self.get_cache_file_name()
+    else:
+      self._recordings_cache_name = name
+    self._load_or_use_client(self._recordings_cache_name, real_http_client)
 
   def close_session(self):
     """Saves recordings in the temporary file named in use_cached_session."""

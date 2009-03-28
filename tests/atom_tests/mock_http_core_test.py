@@ -182,7 +182,7 @@ class MockHttpClientTest(unittest.TestCase):
     response = client.request(request)
     self.assertEqual(response.getheader('Echo-Method'), 'GET')
     self.assertEqual(response.getheader('Echo-Host'), 'example.com:None')
-    # We should now see the cache market since the response is replayed.
+    # We should now see the cache marker since the response is replayed.
     self.assertEqual(response.getheader('Cache-Marker'), '1')
 
 
