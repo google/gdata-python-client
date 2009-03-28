@@ -31,98 +31,41 @@ import atom.core
 import gdata.data
 # TODO: switch to using v2 atom data once it is available.
 import atom
-from gdata.test_config import settings
+import gdata.test_config as conf
 
-class MockHttpTest(unittest.TestCase):
-  
-  def configure_client(self, config, case_name):
-    """Sets up a mock client which will reuse a saved session.
 
-    Handles authentication to allow the GDClient to make requests which
-    require an auth header.
-    
-    Assumes that a gdata.GDClient exists as self.client.
-    
-    Args:
-      config: a dict of test specific settings from the gdata.test_config
-              module. Examples can be found in gdata.test_config_template
-              look at BloggerConfig and ContactsConfig.
-      case_name: str The name of the test case class. Examples: 'BloggerTest',
-                 'ContactsTest'. Used to save a session
-                 for the ClientLogin auth token request, so the case_name
-                 should be reused if and only if the same username, password,
-                 and service are being used.
-    """
-    self.config = config
-    self.case_name = case_name
-    # Use a mock HTTP client which will record and replay the HTTP traffic
-    # from these tests.
-    self.client.http_client = atom.mock_http_core.MockHttpClient()
-    self._obtain_auth_token()
+class BloggerTest(unittest.TestCase):
 
-  def _obtain_auth_token(self):
-    # Getting the auth token only needs to be done once in the course of test
-    # runs.
-    if self.config.auth_token is None:
-      cache_name = 'gdata_live_test.%s.client_login' % self.case_name
-      if settings.CLEAR_CACHE:
-        self.client.http_client.delete_session(cache_name)
-      self.client.http_client.use_cached_session(cache_name)
-      self.config.auth_token = self.client.request_client_login_token(
-          self.config.email(),self.config.password(), self.config.service,
-          self.case_name)
-      self.client.http_client.close_session()
-    self.client.auth_token = self.config.auth_token
-
-  def configure_cache(self, test_name):
-    """Loads or beings a cached session to record HTTP traffic.
-    
-    Args:
-      test_name: str The name of this test method. Examples: 'test_x_works',
-                 'test_crud_operations'. This is used to name the recording
-                 of the HTTP requests and responses, so it should be unique
-                 to each test method in the test case.
-    """
-    # Auth token is obtained in configure_client which is called as part of
-    # setUp.
-    cache_name = 'gdata_live_test.%s.%s' % (self.case_name, test_name)
-    if settings.CLEAR_CACHE:
-      self.client.http_client.delete_session(cache_name)
-    self.client.http_client.use_cached_session(cache_name)
+  def setUp(self):
+    if conf.settings.RUN_LIVE_TESTS:
+      self.client = gdata.client.GDClient()
+      conf.configure_client(self.client, conf.settings.BloggerConfig, 
+          'BloggerTest')
 
   def tearDown(self):
-    if settings.CACHE_RESPONSES:
+    if conf.settings.CACHE_RESPONSES:
       # If this was a live request, save the recording.
       self.client.http_client.close_session()
 
-
-class BloggerTest(MockHttpTest):
-
-  def setUp(self):
-    if settings.RUN_LIVE_TESTS:
-      self.client = gdata.client.GDClient()
-      self.configure_client(settings.BloggerConfig, 'BloggerTest')
-
   def test_create_update_delete(self):
-    if not settings.RUN_LIVE_TESTS:
+    if not conf.settings.RUN_LIVE_TESTS:
       return
-
     # Either load the recording or prepare to make a live request.
-    self.configure_cache('test_create_update_delete')
+    conf.configure_cache(self.client, 'test_create_update_delete')
 
     blog_post = atom.Entry(
-        title=atom.Title(text=settings.BloggerConfig.title),
-        content=atom.Content(text=settings.BloggerConfig.content))
+        title=atom.Title(text=conf.settings.BloggerConfig.title),
+        content=atom.Content(text=conf.settings.BloggerConfig.content))
     http_request = atom.http_core.HttpRequest()
     http_request.add_body_part(str(blog_post), 'application/atom+xml')
 
     entry = self.client.request('POST', 
         'http://www.blogger.com/feeds/%s/posts/default' % (
-            settings.BloggerConfig.blog_id),
+            conf.settings.BloggerConfig.blog_id),
          converter=atom.EntryFromString, http_request=http_request)
-    self.assertEqual(entry.title.text, settings.BloggerConfig.title)
+    self.assertEqual(entry.title.text, conf.settings.BloggerConfig.title)
     # TODO: uncomment once server bug is fixed
-    #self.assertEqual(entry.content.text, settings.BloggerConfig.content)
+    #self.assertEqual(entry.content.text, conf.settings.BloggerConfig.content)
 
     # Edit the test entry.
     edit_link = None
@@ -148,9 +91,9 @@ class BloggerTest(MockHttpTest):
     self.assertEqual(response.status, 200)
 
   def test_use_version_two(self):
-    if not settings.RUN_LIVE_TESTS:
+    if not conf.settings.RUN_LIVE_TESTS:
       return
-    self.configure_cache('test_use_version_two')
+    conf.configure_cache(self.client, 'test_use_version_two')
 
     # Use version 2 of the Blogger API. 
     self.client.api_version = '2'
@@ -174,7 +117,7 @@ class BloggerTest(MockHttpTest):
     http_request.add_body_part(entry.to_string(), 'application/atom+xml')
     posted = self.client.request('POST', 
         'http://www.blogger.com/feeds/%s/posts/default' % (
-            settings.BloggerConfig.blog_id),
+            conf.settings.BloggerConfig.blog_id),
          converter=element_from_string, http_request=http_request)
     # Verify that the blog post content is correct.
     self.assertEqual(posted.get_elements('title', ATOM)[0].text, 'Marriage!')
@@ -213,18 +156,24 @@ class BloggerTest(MockHttpTest):
     self.client.request('DELETE', edit_link)
 
 
-class ContactsTest(MockHttpTest):
+class ContactsTest(unittest.TestCase):
 
   def setUp(self):
-    if settings.RUN_LIVE_TESTS:
+    if conf.settings.RUN_LIVE_TESTS:
       self.client = gdata.client.GDClient()
-      self.configure_client(settings.ContactsConfig, 'ContactsTest')
+      conf.configure_client(self.client, conf.settings.ContactsConfig,
+          'ContactsTest')
+
+  def tearDown(self):
+    if conf.settings.CACHE_RESPONSES:
+      # If this was a live request, save the recording.
+      self.client.http_client.close_session()
 
   def test_crud_version_two(self):
-    if not settings.RUN_LIVE_TESTS:
+    if not conf.settings.RUN_LIVE_TESTS:
       return
 
-    self.configure_cache('test_crud_version_two')
+    conf.configure_cache(self.client, 'test_crud_version_two')
 
     self.client.api_version = '2'
 
@@ -261,19 +210,24 @@ class ContactsTest(MockHttpTest):
     self.client.request('DELETE', edit_link, http_request=http_request)
 
 
-class VersionTwoClientContactsTest(MockHttpTest):
+class VersionTwoClientContactsTest(unittest.TestCase):
 
   def setUp(self):
-    if settings.RUN_LIVE_TESTS:
+    if conf.settings.RUN_LIVE_TESTS:
       self.client = gdata.client.GDClient()
       self.client.api_version = '2'
-      self.configure_client(settings.ContactsConfig,
+      conf.configure_client(self.client, conf.settings.ContactsConfig,
                             'VersionTwoClientContactsTest')
 
+  def tearDown(self):
+    if conf.settings.CACHE_RESPONSES:
+      # If this was a live request, save the recording.
+      self.client.http_client.close_session()
+
   def test_version_two_client(self):
-    if not settings.RUN_LIVE_TESTS:
+    if not conf.settings.RUN_LIVE_TESTS:
       return
-    self.configure_cache('test_version_two_client')
+    conf.configure_cache(self.client, 'test_version_two_client')
 
     entry = gdata.data.GEntry()
     entry._other_elements.append(
