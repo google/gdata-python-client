@@ -24,10 +24,11 @@ import urllib
 import atom
 import gdata.contacts.service
 
+import gdata.test_config as conf
 
-username = ''
-password = ''
-test_image_location = '../../testimage.jpg'
+#username = ''
+#password = ''
+#test_image_location = '../../testimage.jpg'
 
 
 class ContactsServiceTest(unittest.TestCase):
@@ -105,7 +106,9 @@ class ContactsServiceTest(unittest.TestCase):
     self.assertEquals(updated.phone_number[0].text, '(555)555-1212')
 
     # Change the contact's photo.
-    updated_photo = self.gd_client.ChangePhoto(test_image_location, updated, 
+#    updated_photo = self.gd_client.ChangePhoto(test_image_location, updated, 
+    updated_photo = self.gd_client.ChangePhoto(
+        conf.settings.ContactsConfig.get_image_location(), updated, 
         content_type='image/jpeg')
 
     # Refetch the contact so that it has the new photo link
@@ -238,13 +241,14 @@ def DeleteTestContact(client):
     if (entry.title.text == 'Elizabeth Bennet' and 
           entry.content.text == 'Test Notes' and 
           entry.email[0].address == 'liz@gmail.com'):
-      print 'Deleting test contact'
       client.DeleteContact(entry.GetEditLink().href)
   
 
 if __name__ == '__main__':
   print ('Contacts Tests\nNOTE: Please run these tests only with a test '
          'account. The tests may delete or update your data.')
-  username = raw_input('Please enter your username: ')
-  password = getpass.getpass()
+  #username = raw_input('Please enter your username: ')
+  #password = getpass.getpass()
+  username = conf.settings.ContactsConfig.email()
+  password = conf.settings.ContactsConfig.password()
   unittest.main()

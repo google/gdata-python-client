@@ -21,6 +21,8 @@
 See comments in the source code for explanations of the settings.
 """
 
+import os
+
 
 # To actually run the tests which use this configuration information you must
 # change RUN_LIVE_TESTS to True.
@@ -39,6 +41,9 @@ CLEAR_CACHE = True
 
 GOOGLE_ACCOUNT_EMAIL = '<your email>'
 GOOGLE_ACCOUNT_PASSWORD = '<your password>'
+# For example, the TEST_FILES_DIR might be
+# '/home/username/svn/gdata-python-client/tests'
+TEST_FILES_DIR = '<location of the tests directory>'
 
 
 class TestConfig(object):
@@ -75,3 +80,8 @@ class BloggerConfig(TestConfig):
 
 class ContactsConfig(TestConfig):
   service = 'cp'
+
+  def get_image_location(cls):
+    return os.path.join(TEST_FILES_DIR, 'files', 'testimage.jpg')
+
+  get_image_location = classmethod(get_image_location)
