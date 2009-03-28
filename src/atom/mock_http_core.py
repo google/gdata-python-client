@@ -32,6 +32,14 @@ class MockHttpClient(object):
 
   real_client = None
 
+  # The following members are used to construct the session cache temp file
+  # name.
+  # These are combined to form the file name 
+  # /tmp/cache_prefix.cache_case_name.cache_test_name
+  cache_name_prefix = 'gdata_live_test'
+  cache_case_name = ''
+  cache_test_name = ''
+
   def __init__(self, recordings=None, real_client=None):
     self._recordings = recordings or []
     if real_client is not None:
@@ -91,7 +99,7 @@ class MockHttpClient(object):
     else:
       self.real_client = http_client
 
-  def use_cached_session(self, name, real_http_client=None):
+  def use_cached_session(self, name=None, real_http_client=None):
     """Attempts to load recordings from a previous live request.
     
     If a temp file with the recordings exists, then it is used to fulfill
@@ -101,8 +109,11 @@ class MockHttpClient(object):
     close_session is called.
 
     Args:
-      name: str The name of the temporary file which should hold the cached
-            HTTP requests and responses.
+      name: str (optional) The file name of session file to be used. The file
+            is loaded from the temporary directory of this machine. If no name
+            is passed in, a default name will be constructed using the 
+            cache_name_prefix, cache_case_name, and cache_test_name of this
+            object.
       real_http_client: atom.http_core.HttpClient the real client to be used
                         if the cached recordings are not found. If the default
                         value is used, this will be an 
@@ -110,7 +121,7 @@ class MockHttpClient(object):
     """
     if real_http_client is None:
       real_http_client = atom.http_core.HttpClient()
-    self._recordings_cache_name = name
+    self._recordings_cache_name = self.get_cache_file_name()
     self._load_or_use_client(name, real_http_client)
 
   def close_session(self):
@@ -124,6 +135,10 @@ class MockHttpClient(object):
       self._delete_recordings(self._recordings_cache_name)
     else:
       self._delete_recordings(name)
+
+  def get_cache_file_name(self):
+    return '%s.%s.%s' % (self.cache_name_prefix, self.cache_case_name,
+                         self.cache_test_name)
 
 
 def _match_request(http_request, stored_request):
