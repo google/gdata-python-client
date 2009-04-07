@@ -39,6 +39,7 @@ import atom.core
 import gdata.service
 import atom.http_core
 import gdata.gauth
+import gdata.data
 
 
 # Old imports
@@ -73,14 +74,18 @@ class UnableToUpgradeToken(Error):
   pass
 
 
-def v2_entry_from_response(response):
+class Unauthorized(Error):
+  pass
+
+
+def v2_entry_from_response(response_body):
   """Experimental converter which gets an Atom entry from the response."""
-  return gdata.data.entry_from_string(response.read(), version=2)
+  return gdata.data.entry_from_string(response_body, version=2)
 
 
-def v2_feed_from_response(response):
+def v2_feed_from_response(response_body):
   """Experimental converter which gets an Atom feed from the response."""
-  return gdata.data.feed_from_string(response.read(), version=2)
+  return gdata.data.feed_from_string(response_body, version=2)
 
 
 def create_converter(obj):
@@ -239,6 +244,11 @@ class GDClient(atom.client.AtomPubClient):
       else:
         raise RedirectError('Too many redirects from server %s' % (
             response.read(),))
+    elif response.status == 401:
+      error = Unauthorized('Server responded with %i, %s' % (
+          response.status, response.read()))
+      error.http_status = 401
+      raise error
     else:
       raise gdata.service.RequestError('Server responded with %i, %s' % (
           response.status, response.read()))
@@ -307,7 +317,8 @@ class GDClient(atom.client.AtomPubClient):
 
   ClientLogin = client_login
 
-  def upgrade_token(self, token=None, url=atom.http_core.Uri.parse_uri):
+  def upgrade_token(self, token=None, url=atom.http_core.Uri.parse_uri(
+      'https://www.google.com/accounts/AuthSubSessionToken')):
     """Asks the Google auth server for a multi-use AuthSub token.
 
     For details on AuthSub, see:
