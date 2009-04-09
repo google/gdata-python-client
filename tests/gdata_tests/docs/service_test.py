@@ -102,7 +102,7 @@ class DocumentListAclTest(unittest.TestCase):
     self.assertEqual(acl_entry.role.value, self.ROLE_VALUE)
 
     # Update the user's role
-    ROLE_VALUE = 'writer'     
+    ROLE_VALUE = 'writer'
     acl_entry.role.value = ROLE_VALUE
 
     updated_acl_entry = self.doclist.Put(
@@ -127,9 +127,10 @@ class DocumentListCreateAndDeleteTest(unittest.TestCase):
   def setUp(self):
     self.doclist = client
     self.TITLE = 'Test title'
-    self.new_entry = gdata.GDataEntry()
+    self.new_entry = gdata.docs.DocumentListEntry()
     category = gdata.atom.Category(scheme=gdata.docs.service.DATA_KIND_SCHEME,
-                                   term=gdata.docs.service.DOCUMENT_KIND_TERM)
+                                   term=gdata.docs.service.DOCUMENT_KIND_TERM,
+                                   label='document')
     self.new_entry.category.append(category)
 
   def testCreateAndDeleteEmptyDocumentSlugHeaderTitle(self):
@@ -146,11 +147,12 @@ class DocumentListCreateAndDeleteTest(unittest.TestCase):
                                       '/feeds/documents/private/full')
     self.doclist.Delete(created_entry.GetEditLink().href)
     self.assertEqual(created_entry.title.text, self.TITLE)
-    self.assertEqual(created_entry.category[0].label, 'document')   
+    self.assertEqual(created_entry.category[0].label, 'document')
 
   def testCreateAndDeleteEmptySpreadsheet(self):
     self.new_entry.title = gdata.atom.Title(text=self.TITLE)
     self.new_entry.category[0].term = gdata.docs.service.SPREADSHEET_KIND_TERM
+    self.new_entry.category[0].label = 'spreadsheet'
     created_entry = self.doclist.Post(self.new_entry,
                                       '/feeds/documents/private/full')
     self.doclist.Delete(created_entry.GetEditLink().href)
@@ -160,6 +162,7 @@ class DocumentListCreateAndDeleteTest(unittest.TestCase):
   def testCreateAndDeleteEmptyPresentation(self):
     self.new_entry.title = gdata.atom.Title(text=self.TITLE)
     self.new_entry.category[0].term = gdata.docs.service.PRESENTATION_KIND_TERM
+    self.new_entry.category[0].label = 'presentation'
     created_entry = self.doclist.Post(self.new_entry,
                                       '/feeds/documents/private/full')
     self.doclist.Delete(created_entry.GetEditLink().href)
@@ -192,6 +195,7 @@ class DocumentListCreateAndDeleteTest(unittest.TestCase):
     folders = self.doclist.GetDocumentListFeed(uri)
     self.doclist.Delete(folders.entry[0].GetEditLink().href)
 
+
 class DocumentListMoveInAndOutOfFolderTest(unittest.TestCase):
   def setUp(self):
     self.doclist = client
@@ -215,7 +219,7 @@ class DocumentListMoveInAndOutOfFolderTest(unittest.TestCase):
         break
 
     # delete the doc we created
-    created_entry = self.doclist.Get(created_entry.GetSelfLink().href) 
+    created_entry = self.doclist.Get(created_entry.GetSelfLink().href)
     match = re.search('\/(document%3A[^\/]*)\/?.*?\/(.*)$',
                       created_entry.GetEditLink().href)
     edit_uri = 'http://docs.google.com/feeds/documents/private/full/'
@@ -223,7 +227,7 @@ class DocumentListMoveInAndOutOfFolderTest(unittest.TestCase):
     self.doclist.Delete(edit_uri)
 
   def testMoveDocumentInAndOutOfFolder(self):
-    created_entry = self.doclist.UploadDocument(self.ms, self.doc_title)  
+    created_entry = self.doclist.UploadDocument(self.ms, self.doc_title)
     moved_entry = self.doclist.MoveDocumentIntoFolder(created_entry,
                                                       self.folder)
     for category in moved_entry.category:
@@ -257,6 +261,7 @@ class DocumentListMoveInAndOutOfFolderTest(unittest.TestCase):
     #cleanup
     dest_folder = self.doclist.Get(dest_folder.GetSelfLink().href)
     self.doclist.Delete(dest_folder.GetEditLink().href)
+
 
 class DocumentListUploadTest(unittest.TestCase):
 
@@ -295,13 +300,15 @@ class DocumentListUpdateTest(unittest.TestCase):
   def setUp(self):
     self.doclist = client
     self.TITLE = 'CreatedTestDoc'
-    new_entry = gdata.GDataEntry()
+    new_entry = gdata.docs.DocumentListEntry()
     new_entry.title = gdata.atom.Title(text=self.TITLE)
     new_entry.category.append(
         gdata.atom.Category(scheme=gdata.docs.service.DATA_KIND_SCHEME,
-                            term=gdata.docs.service.DOCUMENT_KIND_TERM))
+                            term=gdata.docs.service.DOCUMENT_KIND_TERM,
+                            label='document'))
     self.created_entry = self.doclist.Post(new_entry,
                                            '/feeds/documents/private/full')
+
   def tearDown(self):
     # Delete the test doc we created
     self_link = self.created_entry.GetSelfLink().href
@@ -368,8 +375,6 @@ class DocumentListExportTest(unittest.TestCase):
     query = ('http://docs.google.com/feeds/documents/private/full'
              '/-/spreadsheet?max-results=1')
     feed = self.doclist.QueryDocumentListFeed(query)
-    entry_id = feed.entry[0].id.text
-    key = entry_id[entry_id.find('%3A') + 3:]
     file_paths = ['./downloadedTest.xls', './downloadedTest.csv',
                   './downloadedTest.pdf', './downloadedTest.ods',
                   './downloadedTest.tsv', './downloadedTest.html']
@@ -381,6 +386,16 @@ class DocumentListExportTest(unittest.TestCase):
       self.assert_(os.path.getsize(path))
       os.remove(path)
     self.doclist.SetClientLoginToken(docs_token)
+
+  def testExportNonExistentDocument(self):
+    path = './ned.txt'
+    exception_raised = False
+    try:
+      self.doclist.DownloadDocument('non_existent_doc', path)
+    except Exception, e:  # expected
+      exception_raised = True
+      self.assert_(exception_raised)
+      self.assert_(not os.path.exists(path))
 
 if __name__ == '__main__':
   print ('DocList API Tests\nNOTE: Please run these tests only with a test '

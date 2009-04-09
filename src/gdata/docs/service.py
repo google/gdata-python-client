@@ -125,7 +125,7 @@ class DocsService(gdata.service.GDataService):
                 /feeds/folders/private/full/folder%3Afolder_id
 
     Returns:
-      A GDataEntry containing information about the document created on
+      A DocumentListEntry containing information about the document created on
       the Google Documents service.
     """
     if folder_or_uri:
@@ -136,7 +136,7 @@ class DocsService(gdata.service.GDataService):
     else:
       uri = '/feeds/documents/private/full'
 
-    entry = gdata.GDataEntry()
+    entry = gdata.docs.DocumentListEntry()
     entry.title = atom.Title(text=title)
     entry.category.append(category)
     entry = self.Post(entry, uri, media_source=media_source,
@@ -148,13 +148,17 @@ class DocsService(gdata.service.GDataService):
     """Downloads a file from the Document List.
 
     Args:
-      uri: string The full Export URL to download the document from.
-      file_path: string The full path to save the file to.  The export
-          format is inferred from the the file extension.
+      uri: string The full Export URL to download the file from.
+      file_path: string The full path to save the file to.
     """
-    media_source = self.GetMedia(uri)
+    server_response = self.request('GET', uri)
+    response_body = server_response.read()
+    if server_response.status != 200:
+      raise gdata.service.RequestError, {'status': server_response.status,
+                                         'reason': server_response.reason,
+                                         'body': response_body}
     f = open(file_path, 'wb')
-    f.write(media_source.file_handle.read())
+    f.write(response_body)
     f.flush()
     f.close()
 
@@ -162,21 +166,22 @@ class DocsService(gdata.service.GDataService):
     """Moves a document into a folder in the Document List Feed.
 
     Args:
-      source_entry: DocumentListEntry An object representing the source 
+      source_entry: DocumentListEntry An object representing the source
           document/folder.
-      folder_entry: DocumentListEntry An object with a link to the destination 
+      folder_entry: DocumentListEntry An object with a link to the destination
           folder.
       category: atom.Category An object specifying the appropriate document
           type.
 
     Returns:
-      A GDataEntry containing information about the document created on
+      A DocumentListEntry containing information about the document created on
       the Google Documents service.
     """
-    entry = gdata.GDataEntry()
+    entry = gdata.docs.DocumentListEntry()
     entry.id = source_entry.id
     entry.category.append(category)
-    entry = self.Post(entry, folder_entry.content.src)
+    entry = self.Post(entry, folder_entry.content.src,
+                      converter=gdata.docs.DocumentListEntryFromString)
     return entry
 
   def Query(self, uri, converter=gdata.docs.DocumentListFeedFromString):
@@ -269,8 +274,8 @@ class DocsService(gdata.service.GDataService):
                 /feeds/folders/private/full/folder%3Afolder_id
 
     Returns:
-      A GDataEntry containing information about the presentation created on the
-      Google Documents service.
+      A DocumentListEntry containing information about the presentation created
+      on the Google Documents service.
     """
     category = atom.Category(scheme=DATA_KIND_SCHEME,
                              term=PRESENTATION_KIND_TERM, label='presentation')
@@ -291,8 +296,8 @@ class DocsService(gdata.service.GDataService):
                 /feeds/folders/private/full/folder%3Afolder_id
 
     Returns:
-      A GDataEntry containing information about the spreadsheet created on the
-      Google Documents service.
+      A DocumentListEntry containing information about the spreadsheet created
+      on the Google Documents service.
     """
     category = atom.Category(scheme=DATA_KIND_SCHEME,
                              term=SPREADSHEET_KIND_TERM, label='spreadsheet')
@@ -313,8 +318,8 @@ class DocsService(gdata.service.GDataService):
                 /feeds/folders/private/full/folder%3Afolder_id
 
     Returns:
-      A GDataEntry containing information about the document created on the
-      Google Documents service.
+      A DocumentListEntry containing information about the document created
+      on the Google Documents service.
     """
     category = atom.Category(scheme=DATA_KIND_SCHEME,
                              term=DOCUMENT_KIND_TERM, label='document')
@@ -415,7 +420,7 @@ class DocsService(gdata.service.GDataService):
                 /feeds/folders/private/full/folder%3Afolder_id
 
     Returns:
-      A GDataEntry containing information about the folder created on
+      A DocumentListEntry containing information about the folder created on
       the Google Documents service.
     """
     if folder_or_uri:
@@ -428,10 +433,11 @@ class DocsService(gdata.service.GDataService):
 
     category = atom.Category(scheme=DATA_KIND_SCHEME, term=FOLDER_KIND_TERM,
                              label='folder')
-    folder_entry = gdata.GDataEntry()
+    folder_entry = gdata.docs.DocumentListEntry()
     folder_entry.title = atom.Title(text=title)
     folder_entry.category.append(category)
-    folder_entry = self.Post(folder_entry, uri)
+    folder_entry = self.Post(folder_entry, uri,
+                             converter=gdata.docs.DocumentListEntryFromString)
 
     return folder_entry
 
@@ -445,7 +451,7 @@ class DocsService(gdata.service.GDataService):
           folder.
 
     Returns:
-      A GDataEntry containing information about the document created on
+      A DocumentListEntry containing information about the document created on
       the Google Documents service.
     """
     category = atom.Category(scheme=DATA_KIND_SCHEME,
@@ -462,7 +468,7 @@ class DocsService(gdata.service.GDataService):
           folder.
 
     Returns:
-      A GDataEntry containing information about the document created on
+      A DocumentListEntry containing information about the document created on
       the Google Documents service.
     """
     category = atom.Category(scheme=DATA_KIND_SCHEME,
@@ -479,7 +485,7 @@ class DocsService(gdata.service.GDataService):
           folder.
 
     Returns:
-      A GDataEntry containing information about the document created on
+      A DocumentListEntry containing information about the document created on
       the Google Documents service.
     """
     category = atom.Category(scheme=DATA_KIND_SCHEME,
@@ -496,7 +502,7 @@ class DocsService(gdata.service.GDataService):
           destination folder.
 
     Returns:
-      A GDataEntry containing information about the folder created on
+      A DocumentListEntry containing information about the folder created on
       the Google Documents service.
     """
     category = atom.Category(scheme=DATA_KIND_SCHEME,
