@@ -78,14 +78,14 @@ class Unauthorized(Error):
   pass
 
 
-def v2_entry_from_response(response_body):
+def v2_entry_from_response(response):
   """Experimental converter which gets an Atom entry from the response."""
-  return gdata.data.entry_from_string(response_body, version=2)
+  return gdata.data.entry_from_string(response.read(), version=2)
 
 
-def v2_feed_from_response(response_body):
+def v2_feed_from_response(response):
   """Experimental converter which gets an Atom feed from the response."""
-  return gdata.data.feed_from_string(response_body, version=2)
+  return gdata.data.feed_from_string(response.read(), version=2)
 
 
 def create_converter(obj):
@@ -100,8 +100,8 @@ def create_converter(obj):
     A function which takes an XML string as the only parameter and returns an
     object of the same type as obj.
   """
-  return lambda response_body: atom.core.xml_element_from_string(
-      response_body, obj.__class__, version=2, encoding='UTF-8')
+  return lambda response: atom.core.xml_element_from_string(
+      response.read(), obj.__class__, version=2, encoding='UTF-8')
 
 
 class GDClient(atom.client.AtomPubClient):
@@ -221,7 +221,7 @@ class GDClient(atom.client.AtomPubClient):
       return None
     if response.status == 200 or response.status == 201:
       if converter is not None:
-        return converter(response.read())
+        return converter(response)
       return response
     # TODO: move the redirect logic into the Google Calendar client once it
     # exists since the redirects are only used in the calendar API.

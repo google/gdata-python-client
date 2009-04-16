@@ -188,6 +188,10 @@ def _scrub_request(http_request):
     http_request._body_parts = []
     http_request.add_form_inputs(
         {'form_data': 'client login request has been scrubbed'})
+  else:
+    # We can remove the body of the post from the recorded request, since
+    # the request body is not used when finding a matching recording.
+    http_request._body_parts = []
   return http_request
 
 

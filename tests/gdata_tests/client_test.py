@@ -211,7 +211,7 @@ class CreateConverterTest(unittest.TestCase):
     fake_response = StringIO.StringIO(
         '<entry xmlns="http://www.w3.org/2005/Atom"><title>x</title></entry>')
     converter_function = gdata.client.create_converter(e)
-    entry = converter_function(fake_response.read())
+    entry = converter_function(fake_response)
     self.assertTrue(isinstance(entry, gdata.data.GEntry))
     self.assertEqual(entry.get_elements('title')[0].text, 'x')
     

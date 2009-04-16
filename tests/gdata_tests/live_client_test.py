@@ -59,10 +59,13 @@ class BloggerTest(unittest.TestCase):
     http_request = atom.http_core.HttpRequest()
     http_request.add_body_part(str(blog_post), 'application/atom+xml')
 
+    def entry_from_string_wrapper(response):
+      return atom.EntryFromString(response.read())
+
     entry = self.client.request('POST', 
         'http://www.blogger.com/feeds/%s/posts/default' % (
             conf.settings.BloggerConfig.blog_id),
-         converter=atom.EntryFromString, http_request=http_request)
+         converter=entry_from_string_wrapper, http_request=http_request)
     self.assertEqual(entry.title.text, conf.settings.BloggerConfig.title)
     # TODO: uncomment once server bug is fixed
     #self.assertEqual(entry.content.text, conf.settings.BloggerConfig.content)
@@ -77,7 +80,7 @@ class BloggerTest(unittest.TestCase):
     http_request = atom.http_core.HttpRequest()
     http_request.add_body_part(str(entry), 'application/atom+xml')
     edited_entry = self.client.request('PUT', edit_link,
-         converter=atom.EntryFromString, http_request=http_request)
+         converter=entry_from_string_wrapper, http_request=http_request)
     self.assertEqual(edited_entry.title.text, 'Edited')
     # TODO: uncomment once server bug is fixed
     #self.assertEqual(edited_entry.content.text, entry.content.text)
@@ -274,8 +277,8 @@ def create_element(tag, namespace=ATOM, text=None, attributes=None):
   return element
 
 
-def element_from_string(text):
-  return atom.core.xml_element_from_string(text, atom.core.XmlElement)
+def element_from_string(response):
+  return atom.core.xml_element_from_string(response.read(), atom.core.XmlElement)
 
 
 def suite():
