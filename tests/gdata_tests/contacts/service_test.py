@@ -17,30 +17,31 @@
 __author__ = 'api.jscudder (Jeff Scudder)'
 
 import getpass
-import random
 import re
 import unittest
 import urllib
 import atom
 import gdata.contacts.service
-
 import gdata.test_config as conf
-
-#username = ''
-#password = ''
-#test_image_location = '../../testimage.jpg'
 
 
 class ContactsServiceTest(unittest.TestCase):
 
   def setUp(self):
     self.gd_client = gdata.contacts.service.ContactsService()
-    self.gd_client.email = username
-    self.gd_client.password = password
-    self.gd_client.source = 'GoogleInc-ContactsPythonTest-1'
-    self.gd_client.ProgrammaticLogin()
+
+    conf.configure_service(self.gd_client, conf.settings.ContactsConfig,
+                           'ContactsServiceTest')
+
+    self.gd_client.email = conf.settings.ContactsConfig.email()
+
+  def tearDown(self):
+    conf.close_service(self.gd_client)
 
   def testGetContactsFeed(self):
+    if not conf.settings.RUN_LIVE_TESTS:
+      return
+    conf.configure_service_cache(self.gd_client, 'testGetContactsFeed')
     feed = self.gd_client.GetContactsFeed()
     self.assert_(isinstance(feed, gdata.contacts.ContactsFeed))
 
@@ -48,7 +49,11 @@ class ContactsServiceTest(unittest.TestCase):
     self.assertEquals('default', self.gd_client.contact_list)
 
   def testCustomContactList(self):
-    self.gd_client.contact_list = username
+    if not conf.settings.RUN_LIVE_TESTS:
+      return
+    conf.configure_service_cache(self.gd_client, 'testCustomContactList')
+
+    self.gd_client.contact_list = conf.settings.ContactsConfig.email() 
     feed = self.gd_client.GetContactsFeed()
     self.assert_(isinstance(feed, gdata.contacts.ContactsFeed))
 
@@ -66,6 +71,10 @@ class ContactsServiceTest(unittest.TestCase):
         'https://www.google.com/m8/feeds/groups/example.com/base/batch', uri)
 
   def testCreateUpdateDeleteContactAndUpdatePhoto(self):
+    if not conf.settings.RUN_LIVE_TESTS:
+      return
+    conf.configure_service_cache(self.gd_client, 'testCreateUpdateDeleteContactAndUpdatePhoto')
+
     DeleteTestContact(self.gd_client)
 
     # Create a new entry
@@ -106,7 +115,6 @@ class ContactsServiceTest(unittest.TestCase):
     self.assertEquals(updated.phone_number[0].text, '(555)555-1212')
 
     # Change the contact's photo.
-#    updated_photo = self.gd_client.ChangePhoto(test_image_location, updated, 
     updated_photo = self.gd_client.ChangePhoto(
         conf.settings.ContactsConfig.get_image_location(), updated, 
         content_type='image/jpeg')
@@ -123,9 +131,12 @@ class ContactsServiceTest(unittest.TestCase):
     self.gd_client.DeleteContact(updated.GetEditLink().href)
 
   def testCreateAndDeleteContactUsingBatch(self):
+    if not conf.settings.RUN_LIVE_TESTS:
+      return
+    conf.configure_service_cache(self.gd_client, 'testCreateAndDeleteContactUsingBatch')
+
     # Get random data for creating contact
-    r = random.Random()
-    random_contact_number = str(r.randint(100000, 1000000))
+    random_contact_number = 'notRandom5'
     random_contact_title = 'Random Contact %s' % (
         random_contact_number)
     
@@ -145,7 +156,6 @@ class ContactsServiceTest(unittest.TestCase):
     batch_request.AddInsert(entry=contact)
     
     # Execute the batch request to insert the contact.
-    self.gd_client.ProgrammaticLogin()
     default_batch_url = gdata.contacts.service.DEFAULT_BATCH_URL
     batch_result = self.gd_client.ExecuteBatch(batch_request,
                                                default_batch_url)
@@ -212,12 +222,18 @@ class ContactsGroupsTest(unittest.TestCase):
 
   def setUp(self):
     self.gd_client = gdata.contacts.service.ContactsService()
-    self.gd_client.email = username
-    self.gd_client.password = password
-    self.gd_client.source = 'GoogleInc-ContactsPythonTest-1'
-    self.gd_client.ProgrammaticLogin()
+    conf.configure_service(self.gd_client, conf.settings.ContactsConfig,
+                           'ContactsServiceTest')
+
+  def tearDown(self):
+    conf.close_service(self.gd_client)
 
   def testCreateUpdateDeleteGroup(self):
+    if not conf.settings.RUN_LIVE_TESTS:
+      return
+    conf.configure_service_cache(self.gd_client, 
+                                 'testCreateUpdateDeleteGroup')
+
     test_group = gdata.contacts.GroupEntry(title=atom.Title(
         text='test group py'))
     new_group = self.gd_client.CreateGroup(test_group)
@@ -234,6 +250,7 @@ class ContactsGroupsTest(unittest.TestCase):
     self.gd_client.DeleteGroup(updated_group.GetEditLink().href)
 
 
+# Utility methods.
 def DeleteTestContact(client):
   # Get test contact
   feed = client.GetContactsFeed()
@@ -242,13 +259,15 @@ def DeleteTestContact(client):
           entry.content.text == 'Test Notes' and 
           entry.email[0].address == 'liz@gmail.com'):
       client.DeleteContact(entry.GetEditLink().href)
-  
+
+
+def suite():
+  return unittest.TestSuite((unittest.makeSuite(ContactsServiceTest, 'test'),
+                             unittest.makeSuite(ContactsQueryTest, 'test'),
+                             unittest.makeSuite(ContactsGroupsTest, 'test'),))
+
 
 if __name__ == '__main__':
   print ('Contacts Tests\nNOTE: Please run these tests only with a test '
          'account. The tests may delete or update your data.')
-  #username = raw_input('Please enter your username: ')
-  #password = getpass.getpass()
-  username = conf.settings.ContactsConfig.email()
-  password = conf.settings.ContactsConfig.password()
   unittest.main()

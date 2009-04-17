@@ -72,11 +72,15 @@ def configure_client(client, config, case_name):
 
 
 def configure_cache(client, test_name):
-  """Loads or beings a cached session to record HTTP traffic.
+  """Loads or begins a cached session to record HTTP traffic.
 
   Should be called at the beginning of each test method.
 
   Args:
+    client: a gdata.GDClient whose http_client member has been replaced
+            with a atom.mock_http_core.MockHttpClient so that repeated
+            executions can used cached responses instead of contacting
+            the server.
     test_name: str The name of this test method. Examples: 
                'TestClass.test_x_works', 'TestClass.test_crud_operations'.
                This is used to name the recording of the HTTP requests and
@@ -103,4 +107,49 @@ def close_client(client):
   if settings.CACHE_RESPONSES:
     # If this was a live request, save the recording.
     client.http_client.close_session()
+
+
+def configure_service(service, config, case_name):
+  """Sets up a mock GDataService v1 client to reuse recorded sessions.
+  
+  Should be called during setUp of each unit test. This is a duplicate of
+  configure_client, modified to handle old v1 service classes.
+  """
+  service.http_client.v2_http_client = atom.mock_http_core.MockHttpClient()
+  service.http_client.v2_http_client.cache_case_name = case_name
+  # Getting the auth token only needs to be done once in the course of test
+  # runs.
+  if config.auth_token is None:
+    service.http_client.v2_http_client.cache_test_name = 'client_login'
+    cache_name = service.http_client.v2_http_client.get_cache_file_name()
+    if settings.CLEAR_CACHE:
+      service.http_client.v2_http_client.delete_session(cache_name)
+    service.http_client.v2_http_client.use_cached_session(cache_name)
+    service.ClientLogin(config.email(), config.password(), 
+                        service=config.service, source=case_name)
+    config.auth_token = service.GetClientLoginToken()
+    service.http_client.v2_http_client.close_session()
+  if isinstance(config.auth_token, gdata.gauth.ClientLoginToken):
+    service.SetClientLoginToken(config.auth_token.token_string)
+  else:
+    service.SetClientLoginToken(config.auth_token)
+
+
+def configure_service_cache(service, test_name):
+  """Loads or starts a session recording for a v1 Service object.
+  
+  Duplicates the behavior of configure_cache, but the target for this
+  function is a v1 Service object instead of a v2 Client.
+  """
+  service.http_client.v2_http_client.cache_test_name = test_name
+  cache_name = service.http_client.v2_http_client.get_cache_file_name()
+  if settings.CLEAR_CACHE:
+    service.http_client.v2_http_client.delete_session(cache_name)
+  service.http_client.v2_http_client.use_cached_session(cache_name)
+
+
+def close_service(service):
+  if settings.CACHE_RESPONSES:
+    # If this was a live request, save the recording.
+    service.http_client.v2_http_client.close_session()
 

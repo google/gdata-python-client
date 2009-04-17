@@ -43,9 +43,7 @@ class BloggerTest(unittest.TestCase):
           'BloggerTest')
 
   def tearDown(self):
-    if conf.settings.CACHE_RESPONSES:
-      # If this was a live request, save the recording.
-      self.client.http_client.close_session()
+    conf.close_client(self.client)
 
   def test_create_update_delete(self):
     if not conf.settings.RUN_LIVE_TESTS:
@@ -168,9 +166,7 @@ class ContactsTest(unittest.TestCase):
           'ContactsTest')
 
   def tearDown(self):
-    if conf.settings.CACHE_RESPONSES:
-      # If this was a live request, save the recording.
-      self.client.http_client.close_session()
+    conf.close_client(self.client)
 
   def test_crud_version_two(self):
     if not conf.settings.RUN_LIVE_TESTS:
@@ -223,9 +219,7 @@ class VersionTwoClientContactsTest(unittest.TestCase):
                             'VersionTwoClientContactsTest')
 
   def tearDown(self):
-    if conf.settings.CACHE_RESPONSES:
-      # If this was a live request, save the recording.
-      self.client.http_client.close_session()
+    conf.close_client(self.client)
 
   def test_version_two_client(self):
     if not conf.settings.RUN_LIVE_TESTS:
