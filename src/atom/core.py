@@ -35,7 +35,14 @@ except ImportError:
       from elementtree import ElementTree
 
 
+STRING_ENCODING = 'utf-8'
+
+
 class XmlElement(object):
+  """Represents an element node in an XML document.
+  
+  The text member is a UTF-8 encoded str.
+  """
   _qname = None
   _other_elements = None
   _other_attributes = None
@@ -243,12 +250,12 @@ class XmlElement(object):
     if tree.text:
       self.text = tree.text
 
-  def _to_tree(self, version=1):
+  def _to_tree(self, version=1, encoding=None):
     new_tree = ElementTree.Element(_get_qname(self, version))
-    self._attach_members(new_tree, version)
+    self._attach_members(new_tree, version, encoding)
     return new_tree
 
-  def _attach_members(self, tree, version=1):
+  def _attach_members(self, tree, version=1, encoding=None):
     """Convert members to XML elements/attributes and add them to the tree.
     
     Args:
@@ -282,11 +289,16 @@ class XmlElement(object):
     for key, value in self._other_attributes.iteritems():
       tree.attrib[key] = value
     if self.text:
-      tree.text = self.text
+      if isinstance(self.text, unicode):
+        tree.text = self.text
+      elif encoding is not None:
+        tree.text = self.text.decode(encoding)
+      else:
+        tree.text = self.text.decode(STRING_ENCODING)
 
-  def to_string(self, version=1):
+  def to_string(self, version=1, encoding=None):
     """Converts this object to XML."""
-    return ElementTree.tostring(self._to_tree(version))
+    return ElementTree.tostring(self._to_tree(version, encoding))
 
   ToString = to_string
 
@@ -356,7 +368,7 @@ def _qname_matches(tag, namespace, qname):
 
 
 def xml_element_from_string(xml_string, target_class, 
-    version=1, encoding='UTF-8'):
+    version=1, encoding=None):
   """Parses the XML string according to the rules for the target_class.
 
   Args:
@@ -365,6 +377,11 @@ def xml_element_from_string(xml_string, target_class,
     version: int (optional) The version of the schema which should be used when
              converting the XML into an object. The default is 1.
   """
+  if isinstance(xml_string, unicode):
+    if encoding is None:
+      xml_string = xml_string.encode(STRING_ENCODING)
+    else:
+      xml_string = xml_string.encode(encoding)
   tree = ElementTree.fromstring(xml_string)
   return _xml_element_from_tree(tree, target_class, version)
 

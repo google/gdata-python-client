@@ -303,9 +303,97 @@ class UtilityFunctionTest(unittest.TestCase):
         'foo', '', 'bar') == False)
 
 
+class Chars(atom.core.XmlElement):
+  _qname = u'{http://example.com/}chars'
+  y = 'y'
+  alpha = 'a'
+
+
+class Strs(atom.core.XmlElement):
+  _qname = '{http://example.com/}strs'
+  chars = [Chars]
+  delta = u'd'
+
+
+def parse(string):
+  return atom.core.xml_element_from_string(string, atom.core.XmlElement)
+
+
+def create(tag, string):
+  element = atom.core.XmlElement(text=string)
+  element._qname = tag
+  return element
+
+
+class CharacterEncodingTest(unittest.TestCase):
+
+  def testUnicodeInputString(self):
+    # Test parsing the inner text.
+    self.assertEqual(parse(u'<x>&#948;</x>').text, u'\u03b4')
+    self.assertEqual(parse(u'<x>\u03b4</x>').text, u'\u03b4')
+
+    # Test output valid XML.
+    self.assertEqual(parse(u'<x>&#948;</x>').to_string(), '<x>&#948;</x>')
+    self.assertEqual(parse(u'<x>\u03b4</x>').to_string(), '<x>&#948;</x>')
+
+    # Test setting the inner text and output valid XML.
+    e = create(u'x', u'\u03b4')
+    self.assertEqual(e.to_string(), '<x>&#948;</x>')
+    self.assertEqual(e.text, u'\u03b4')
+    self.assertTrue(isinstance(e.text, unicode))
+    self.assertEqual(create(u'x', '\xce\xb4'.decode('utf-8')).to_string(),
+                     '<x>&#948;</x>')
+
+
+  def testUtf8InputString(self):
+    # Test parsing inner text.
+    self.assertEqual(parse('<x>&#948;</x>').text, u'\u03b4')
+    self.assertEqual(parse(u'<x>\u03b4</x>'.encode('utf-8')).text, u'\u03b4')
+    self.assertEqual(parse('<x>\xce\xb4</x>').text, u'\u03b4')
+
+    # Test output valid XML.
+    self.assertEqual(parse('<x>&#948;</x>').to_string(), '<x>&#948;</x>')
+    self.assertEqual(parse(u'<x>\u03b4</x>'.encode('utf-8')).to_string(),
+                     '<x>&#948;</x>')
+    self.assertEqual(parse('<x>\xce\xb4</x>').to_string(), '<x>&#948;</x>')
+
+    # Test setting the inner text and output valid XML.
+    e = create('x', '\xce\xb4')
+    self.assertEqual(e.to_string(), '<x>&#948;</x>')
+    # Don't change the encoding until the we convert to an XML string.
+    self.assertEqual(e.text, '\xce\xb4')
+    self.assertTrue(isinstance(e.text, str))
+    self.assertTrue(isinstance(e.to_string(), str))
+    self.assertEqual(create('x', u'\u03b4'.encode('utf-8')).to_string(),
+                     '<x>&#948;</x>')
+
+
+
+  def testOtherEncodingOnInputString(self):
+    # Test parsing inner text.
+    self.assertEqual(parse(u'<x>\u03b4</x>'.encode('utf-16')).text, u'\u03b4')
+
+    # Test output valid XML.
+    self.assertEqual(parse(u'<x>\u03b4</x>'.encode('utf-16')).to_string(),
+                     '<x>&#948;</x>')
+
+    # Test setting the inner text and output valid XML.
+    e = create('x', u'\u03b4'.encode('utf-16'))
+    self.assertEqual(e.to_string(encoding='utf-16'), '<x>&#948;</x>')
+    # Don't change the encoding until the we convert to an XML string.
+    self.assertEqual(e.text, '\xff\xfe\xb4\x03')
+    self.assertTrue(isinstance(e.text, str))
+    self.assertTrue(isinstance(e.to_string(encoding='utf-16'), str))
+    self.assertEqual(
+        create('x', '\xff\xfe\xb4\x03').to_string(encoding='utf-16'),
+        '<x>&#948;</x>')
+    
+
+
 def suite():
   return unittest.TestSuite((unittest.makeSuite(XmlElementTest, 'test'),
-                             unittest.makeSuite(UtilityFunctionTest, 'test')))
+                             unittest.makeSuite(UtilityFunctionTest, 'test'),
+                             unittest.makeSuite(CharacterEncodingTest, 'test'),))
 
 
 if __name__ == '__main__':
