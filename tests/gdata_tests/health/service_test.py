@@ -25,11 +25,11 @@ import gdata.health.service
 username = ''
 password = ''
 
-
 class HealthQueryProfileListTest(unittest.TestCase):
 
   def setUp(self):
-    self.health = health
+    self.health = gdata.health.service.HealthService()
+    self.health.ClientLogin(username, password, source='Health Client Unit Tests')
     self.profile_list_feed = self.health.GetProfileListFeed()
 
   def testGetProfileListFeed(self):
@@ -53,7 +53,8 @@ class HealthQueryProfileListTest(unittest.TestCase):
 class H9QueryProfileListTest(unittest.TestCase):
 
   def setUp(self):
-    self.h9 = h9
+    self.h9 = gdata.health.service.HealthService(use_h9_sandbox=True)
+    self.h9.ClientLogin(username, password, source='H9 Client Unit Tests')
     self.profile_list_feed = self.h9.GetProfileListFeed()
 
   def testGetProfileListFeed(self):
@@ -77,7 +78,8 @@ class H9QueryProfileListTest(unittest.TestCase):
 class HealthQueryProfileTest(unittest.TestCase):
 
   def setUp(self):
-    self.health = health
+    self.health = gdata.health.service.HealthService()
+    self.health.ClientLogin(username, password, source='Health Client Unit Tests')
     self.profile_list_feed = self.health.GetProfileListFeed()
     self.profile_id = self.profile_list_feed.entry[0].GetProfileId()
 
@@ -106,7 +108,8 @@ class HealthQueryProfileTest(unittest.TestCase):
         params={'digest': 'true'}, categories=['medication|condition'])
     feed = self.health.GetProfileFeed(query=query)
     self.assertEqual(len(feed.entry), 1)
-    self.assert_(feed.entry[0].ccr.GetMedications()[0] is not None)
+    if feed.entry[0].ccr.GetMedications() is not None:
+      self.assert_(feed.entry[0].ccr.GetMedications()[0] is not None)
     self.assert_(feed.entry[0].ccr.GetConditions()[0] is not None)
     self.assert_(feed.entry[0].ccr.GetAllergies() is None)
     self.assert_(feed.entry[0].ccr.GetAlerts() is None)
@@ -116,7 +119,8 @@ class HealthQueryProfileTest(unittest.TestCase):
 class H9QueryProfileTest(unittest.TestCase):
 
   def setUp(self):
-    self.h9 = h9
+    self.h9 = gdata.health.service.HealthService(use_h9_sandbox=True)
+    self.h9.ClientLogin(username, password, source='H9 Client Unit Tests')
     self.profile_list_feed = self.h9.GetProfileListFeed()
     self.profile_id = self.profile_list_feed.entry[0].GetProfileId()
 
@@ -136,7 +140,8 @@ class H9QueryProfileTest(unittest.TestCase):
 class HealthNoticeTest(unittest.TestCase):
 
   def setUp(self):
-    self.health = health
+    self.health = gdata.health.service.HealthService()
+    self.health.ClientLogin(username, password, source='Health Client Unit Tests')
     self.profile_list_feed = self.health.GetProfileListFeed()
     self.profile_id = self.profile_list_feed.entry[0].GetProfileId()
 
@@ -161,7 +166,8 @@ class HealthNoticeTest(unittest.TestCase):
 class H9NoticeTest(unittest.TestCase):
 
   def setUp(self):
-    self.h9 = h9
+    self.h9 = gdata.health.service.HealthService(use_h9_sandbox=True)
+    self.h9.ClientLogin(username, password, source='H9 Client Unit Tests')
     self.profile_list_feed = self.h9.GetProfileListFeed()
     self.profile_id = self.profile_list_feed.entry[0].GetProfileId()
 
@@ -186,11 +192,4 @@ if __name__ == '__main__':
          'account. The tests may delete or update your data.')
   username = raw_input('Please enter your username: ')
   password = getpass.getpass()
-
-  health = gdata.health.service.HealthService()
-  health.ClientLogin(username, password, source='Health Client Unit Tests')
-
-  h9 = gdata.health.service.HealthService(use_h9_sandbox=True)
-  h9.ClientLogin(username, password, source='H9 Client Unit Tests')
-
   unittest.main()
