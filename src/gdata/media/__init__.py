@@ -55,6 +55,7 @@ import gdata
 MEDIA_NAMESPACE = 'http://search.yahoo.com/mrss/'
 YOUTUBE_NAMESPACE = 'http://gdata.youtube.com/schemas/2007'
 
+
 class MediaBaseElement(atom.AtomBase):
   """Base class for elements in the MEDIA_NAMESPACE. 
   To add new elements, you only need to add the element tag name to self._tag
@@ -72,6 +73,7 @@ class MediaBaseElement(atom.AtomBase):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
+
 class Content(MediaBaseElement):
   """(attribute container) This element describes the original content,
     e.g. an image or a video. There may be multiple Content elements
@@ -83,14 +85,15 @@ class Content(MediaBaseElement):
     element that specifies the URL of the video itself.
   
   Attributes:
-  url: non-ambigous reference to online object
-  width: width of the object frame, in pixels
-  height: width of the object frame, in pixels
-  medium: one of `image' or `video', allowing the api user to quickly
-    determine the object's type
-  type: Internet media Type[1] (a.k.a. mime type) of the object -- a more
-    verbose way of determining the media type
-  (optional) fileSize: the size of the object, in bytes
+    url: non-ambigous reference to online object
+    width: width of the object frame, in pixels
+    height: width of the object frame, in pixels
+    medium: one of `image' or `video', allowing the api user to quickly
+            determine the object's type
+    type: Internet media Type[1] (a.k.a. mime type) of the object -- a more
+          verbose way of determining the media type. To set the type member
+          in the contructor, use the content_type parameter.
+    (optional) fileSize: the size of the object, in bytes
   
   [1]: http://en.wikipedia.org/wiki/Internet_media_type
   """
@@ -117,8 +120,10 @@ class Content(MediaBaseElement):
     self.type = content_type
     self.fileSize = fileSize
 
+
 def ContentFromString(xml_string):
   return atom.CreateClassFromXMLString(Content, xml_string)
+
 
 class Credit(MediaBaseElement):
   """(string) Contains the nickname of the user who created the content,
@@ -131,8 +136,11 @@ class Credit(MediaBaseElement):
   """
   
   _tag = 'credit'
+
+
 def CreditFromString(xml_string):
   return atom.CreateClassFromXMLString(Credit, xml_string)
+
 
 class Description(MediaBaseElement):
   """(string) A description of the media object.
@@ -145,7 +153,8 @@ class Description(MediaBaseElement):
   for `base' projections, the description is in HTML.
   
   Attributes:
-  type: either `text' or `html'. 
+    type: either `text' or `html'. To set the type member in the contructor,
+          use the description_type parameter.
   """
   
   _tag = 'description'
@@ -158,8 +167,11 @@ class Description(MediaBaseElement):
                               text=text)
     
     self.type = description_type
+
+
 def DescriptionFromString(xml_string):
   return atom.CreateClassFromXMLString(Description, xml_string)
+
 
 class Keywords(MediaBaseElement):
   """(string) Lists the tags associated with the entry,
@@ -170,8 +182,11 @@ class Keywords(MediaBaseElement):
   """
   
   _tag = 'keywords'
+
+
 def KeywordsFromString(xml_string):
   return atom.CreateClassFromXMLString(Keywords, xml_string)
+
 
 class Thumbnail(MediaBaseElement):
   """(attributes) Contains the URL of a thumbnail of a photo or album cover.
@@ -211,11 +226,13 @@ class Thumbnail(MediaBaseElement):
 def ThumbnailFromString(xml_string):
   return atom.CreateClassFromXMLString(Thumbnail, xml_string)
 
+
 class Title(MediaBaseElement):
   """(string) Contains the title of the entry's media content, in plain text.
   
   Attributes:
-  type: Always set to plain
+    type: Always set to plain. To set the type member in the constructor, use
+          the title_type parameter.
   """
   
   _tag = 'title'
@@ -227,8 +244,11 @@ class Title(MediaBaseElement):
                               extension_attributes=extension_attributes,
                               text=text)
     self.type = title_type
+
+
 def TitleFromString(xml_string):
   return atom.CreateClassFromXMLString(Title, xml_string)
+
 
 class Player(MediaBaseElement):
   """(string) Contains the embeddable player URL for the entry's media content 
@@ -248,10 +268,12 @@ class Player(MediaBaseElement):
                               extension_attributes=extension_attributes)
     self.url= player_url
 
+
 class Private(atom.AtomBase):
   """The YouTube Private element"""
   _tag = 'private'
   _namespace = YOUTUBE_NAMESPACE
+
 
 class Duration(atom.AtomBase):
   """The YouTube Duration element"""
@@ -259,6 +281,7 @@ class Duration(atom.AtomBase):
   _namespace = YOUTUBE_NAMESPACE
   _attributes = atom.AtomBase._attributes.copy()
   _attributes['seconds'] = 'seconds'
+
 
 class Category(MediaBaseElement):
   """The mediagroup:category element"""
@@ -326,6 +349,7 @@ class Group(MediaBaseElement):
     self.private=private
     self.category=category or []
     self.player=player
+
 
 def GroupFromString(xml_string):
   return atom.CreateClassFromXMLString(Group, xml_string)
