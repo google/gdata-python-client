@@ -144,7 +144,7 @@ class AtomService(object):
 
   def request(self, operation, url, data=None, headers=None, 
       url_params=None):
-    if isinstance(url, str):
+    if isinstance(url, (str, unicode)):
       if not url.startswith('http') and self.ssl:
         url = atom.url.parse_url('https://%s%s' % (self.server, url))
       elif not url.startswith('http'):
