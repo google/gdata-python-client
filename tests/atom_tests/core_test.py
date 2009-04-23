@@ -344,6 +344,14 @@ class CharacterEncodingTest(unittest.TestCase):
     self.assertEqual(create(u'x', '\xce\xb4'.decode('utf-8')).to_string(),
                      '<x>&#948;</x>')
 
+  def testUnicodeTagsAndAttributes(self):
+    # Begin with test to show underlying ElementTree behavior.
+    t = ElementTree.fromstring(u'<del\u03b4ta>test</del\u03b4ta>'.encode('utf-8'))
+    self.assertEqual(t.tag, u'del\u03b4ta')
+    self.assertEqual(parse(u'<\u03b4elta>test</\u03b4elta>')._qname,
+                     u'\u03b4elta')
+    #self.assertEqual(parse(u'<\u03b4elta>test</\u03b4elta>').to_string(), 
+    #                 '<&#948;elta>test</&#948;elta>')
 
   def testUtf8InputString(self):
     # Test parsing inner text.
@@ -367,6 +375,12 @@ class CharacterEncodingTest(unittest.TestCase):
     self.assertEqual(create('x', u'\u03b4'.encode('utf-8')).to_string(),
                      '<x>&#948;</x>')
 
+  def testUtf8TagsAndAttributes(self):
+    self.assertEqual(
+        parse(u'<\u03b4elta>test</\u03b4elta>'.encode('utf-8'))._qname,
+        u'\u03b4elta')
+    self.assertEqual(parse('<\xce\xb4elta>test</\xce\xb4elta>')._qname,
+                     u'\u03b4elta')
 
 
   def testOtherEncodingOnInputString(self):
@@ -387,7 +401,11 @@ class CharacterEncodingTest(unittest.TestCase):
     self.assertEqual(
         create('x', '\xff\xfe\xb4\x03').to_string(encoding='utf-16'),
         '<x>&#948;</x>')
-    
+
+  def testOtherEncodingInTagsAndAttributes(self):
+    self.assertEqual(
+        parse(u'<\u03b4elta>test</\u03b4elta>'.encode('utf-16'))._qname,
+        u'\u03b4elta')
 
 
 def suite():
