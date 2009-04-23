@@ -1,3 +1,28 @@
+=== 1.3.1 ===
+April 23, 2009 (revision 692)
+
+- Fixed issues with setting the developer key in the YouTubeService
+    constructor.
+- For the Document List API (thanks Eric!):
+  - Added writersCanInvite element
+  - Fixed a small errors in Document Entry
+  - Added category label when creating different types of docs
+  - Fixed DownLoad helpers which shouldn't write a file if server returns
+      error. Fixes issue 240.
+  - Addied DocumentListEntryFromString converter and using DocumentListEntry
+      class instead of GDataEntry class to create entries.
+- URLs in HTTP requests can now be unicode strings. Resolves issue 233.
+- Improvements for the upcoming version 2.0.0 release:
+  - The v2 auth code now support AuthSub and has been tested on App Engine.
+  - Unit tests for the v2 client code will default to not use the local file
+      cache but will make live requests unless cached responses is set to
+      True in the test configuration module.
+  - Older v1 unit tests can now use the v2 testing framework, migrated 
+      contacts API tests as a proof of concept. This will come in handy when
+      testing backwards compatibility for the 2.0 release.
+  - Improved support for unicode and other character encodings in the v2 XML
+      core module.
+
 === 1.3.0 ===
 Mar 20, 2009 (revision 665)
 

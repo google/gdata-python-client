@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# Copyright (C) 2008 Google Inc.
+# Copyright (C) 2009 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ from distutils.core import setup
 
 setup(
     name='gdata',
-    version='1.3.0',
+    version='1.3.1',
     description='Python client library for Google data APIs',
     long_description = """\
 The Google data Python client library makes it easy to interact with
@@ -39,15 +39,15 @@ models and service modules for the the following Google data services:
 - YouTube Data API
 - Google Webmaster Tools Data API
 - Blogger Data API
+- Google Health API
 - core Google data API functionality 
 The core Google data code provides sufficient functionality to use this 
 library with any Google data API (even if a module hasn't been written for 
-it yet). For example, this client can be used with the Notebook API and the 
-Google Health API. This library may also be used with any Atom Publishing 
-Protocol service.
+it yet). For example, this client can be used with the Notebook API. This
+library may also be used with any Atom Publishing Protocol service (AtomPub).
 """,
     author='Jeffrey Scudder',
-    author_email='api.jscudder@gmail.com',
+    author_email='j.s@google.com',
     license='Apache 2.0',
     url='http://code.google.com/p/gdata-python-client/',
     packages=['atom', 'gdata', 'gdata.calendar', 'gdata.base',
