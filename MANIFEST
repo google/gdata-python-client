@@ -19,6 +19,7 @@ src/atom/url.py
 src/gdata/__init__.py
 src/gdata/auth.py
 src/gdata/client.py
+src/gdata/data.py
 src/gdata/gauth.py
 src/gdata/service.py
 src/gdata/test_config.py
