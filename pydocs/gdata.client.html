@@ -52,6 +52,8 @@ the&nbsp;release&nbsp;of&nbsp;version&nbsp;2.0.0.&nbsp;The&nbsp;primary&nbsp;cla
 <dl>
 <dt><font face="helvetica, arial"><a href="gdata.client.html#ClientLoginFailed">ClientLoginFailed</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.client.html#ClientLoginTokenMissing">ClientLoginTokenMissing</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.client.html#UnableToUpgradeToken">UnableToUpgradeToken</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.client.html#Unauthorized">Unauthorized</a>
 </font></dt></dl>
 </dd>
 </dl>
@@ -407,9 +409,15 @@ of&nbsp;the&nbsp;HTTP&nbsp;requests&nbsp;to&nbsp;set&nbsp;the&nbsp;Authorization
 &nbsp;<br>
 You&nbsp;may&nbsp;also&nbsp;want&nbsp;to&nbsp;set&nbsp;the&nbsp;auth_token&nbsp;member&nbsp;to&nbsp;a&nbsp;an&nbsp;object&nbsp;which&nbsp;can<br>
 use&nbsp;modify_request&nbsp;to&nbsp;set&nbsp;the&nbsp;Authorization&nbsp;header&nbsp;in&nbsp;the&nbsp;HTTP&nbsp;request.<br>
+&nbsp;<br>
 If&nbsp;you&nbsp;are&nbsp;authenticating&nbsp;using&nbsp;the&nbsp;email&nbsp;address&nbsp;and&nbsp;password,&nbsp;you&nbsp;can<br>
 use&nbsp;the&nbsp;client_login&nbsp;method&nbsp;to&nbsp;obtain&nbsp;an&nbsp;auth&nbsp;token&nbsp;and&nbsp;set&nbsp;the<br>
 auth_token&nbsp;member.<br>
+&nbsp;<br>
+If&nbsp;you&nbsp;are&nbsp;using&nbsp;browser&nbsp;redirects,&nbsp;specifically&nbsp;AuthSub,&nbsp;you&nbsp;will&nbsp;want<br>
+to&nbsp;use&nbsp;gdata.gauth.AuthSubToken.from_url&nbsp;to&nbsp;obtain&nbsp;the&nbsp;token&nbsp;after&nbsp;the<br>
+redirect,&nbsp;and&nbsp;you&nbsp;will&nbsp;probably&nbsp;want&nbsp;to&nbsp;updgrade&nbsp;this&nbsp;since&nbsp;use&nbsp;token<br>
+to&nbsp;a&nbsp;multiple&nbsp;use&nbsp;(session)&nbsp;token&nbsp;using&nbsp;the&nbsp;upgrade_token&nbsp;method.<br>
 &nbsp;<br>
 API&nbsp;Versions:<br>
 &nbsp;<br>
@@ -428,9 +436,9 @@ Methods defined here:<br>
 
 <dl><dt><a name="GDClient-Delete"><strong>Delete</strong></a> = <a href="#GDClient-delete">delete</a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="GDClient-GetEntry"><strong>GetEntry</strong></a> = <a href="#GDClient-get_entry">get_entry</a>(self, url, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function v2_entry_from_response at 0xac4488&gt;</font>, **kwargs)</dt></dl>
+<dl><dt><a name="GDClient-GetEntry"><strong>GetEntry</strong></a> = <a href="#GDClient-get_entry">get_entry</a>(self, url, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function v2_entry_from_response at 0xac5c80&gt;</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="GDClient-GetFeed"><strong>GetFeed</strong></a> = <a href="#GDClient-get_feed">get_feed</a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function v2_feed_from_response at 0xac4410&gt;</font>, **kwargs)</dt></dl>
+<dl><dt><a name="GDClient-GetFeed"><strong>GetFeed</strong></a> = <a href="#GDClient-get_feed">get_feed</a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function v2_feed_from_response at 0xac77d0&gt;</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="GDClient-GetNext"><strong>GetNext</strong></a> = <a href="#GDClient-get_next">get_next</a>(self, feed, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
@@ -440,17 +448,19 @@ Methods defined here:<br>
 
 <dl><dt><a name="GDClient-Request"><strong>Request</strong></a> = <a href="#GDClient-request">request</a>(self, method<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="GDClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = <a href="#GDClient-request_client_login_token">request_client_login_token</a>(self, email, password, service, source, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">='https://www.google.com/accounts/ClientLogin'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="GDClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = <a href="#GDClient-request_client_login_token">request_client_login_token</a>(self, email, password, service, source, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc117d0&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="GDClient-Update"><strong>Update</strong></a> = <a href="#GDClient-update">update</a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="GDClient-UpgradeToken"><strong>UpgradeToken</strong></a> = <a href="#GDClient-upgrade_token">upgrade_token</a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc11810&gt;</font>)</dt></dl>
 
 <dl><dt><a name="GDClient-client_login"><strong>client_login</strong></a>(self, email, password, service, source, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">='https://www.google.com/accounts/ClientLogin'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="GDClient-delete"><strong>delete</strong></a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="GDClient-get_entry"><strong>get_entry</strong></a>(self, url, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function v2_entry_from_response at 0xac4488&gt;</font>, **kwargs)</dt></dl>
+<dl><dt><a name="GDClient-get_entry"><strong>get_entry</strong></a>(self, url, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function v2_entry_from_response at 0xac5c80&gt;</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="GDClient-get_feed"><strong>get_feed</strong></a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function v2_feed_from_response at 0xac4410&gt;</font>, **kwargs)</dt></dl>
+<dl><dt><a name="GDClient-get_feed"><strong>get_feed</strong></a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function v2_feed_from_response at 0xac77d0&gt;</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="GDClient-get_next"><strong>get_next</strong></a>(self, feed, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Fetches&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;results&nbsp;from&nbsp;the&nbsp;feed.&nbsp;<br>
 &nbsp;<br>
@@ -510,7 +520,7 @@ Returns:<br>
 &nbsp;&nbsp;specified.&nbsp;If&nbsp;a&nbsp;converter&nbsp;function&nbsp;was&nbsp;provided,&nbsp;the&nbsp;results&nbsp;of<br>
 &nbsp;&nbsp;calling&nbsp;the&nbsp;converter&nbsp;are&nbsp;returned.</tt></dd></dl>
 
-<dl><dt><a name="GDClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, service, source, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">='https://www.google.com/accounts/ClientLogin'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="GDClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, service, source, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc117d0&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="GDClient-update"><strong>update</strong></a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
 &nbsp;<br>
@@ -529,6 +539,23 @@ Args:<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
+
+<dl><dt><a name="GDClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc11810&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+&nbsp;<br>
+For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
+<a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;token:&nbsp;gdata.gauth.AuthSubToken&nbsp;(optional)&nbsp;If&nbsp;no&nbsp;token&nbsp;is&nbsp;passed&nbsp;in,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;client's&nbsp;auth_token&nbsp;member&nbsp;is&nbsp;used&nbsp;to&nbsp;request&nbsp;the&nbsp;new&nbsp;token.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;token&nbsp;object&nbsp;will&nbsp;be&nbsp;modified&nbsp;to&nbsp;contain&nbsp;the&nbsp;new&nbsp;session&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token&nbsp;string.<br>
+&nbsp;&nbsp;url:&nbsp;str&nbsp;or&nbsp;atom.http_core.Uri&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;the&nbsp;token<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upgrade&nbsp;request&nbsp;should&nbsp;be&nbsp;sent.&nbsp;Defaults&nbsp;to:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.google.com/accounts/AuthSubSessionToken<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
 
 <hr>
 Data and other attributes defined here:<br>
@@ -742,7 +769,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="GDataClient-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x7f2b4b81ade8&gt;</font>)</dt><dd><tt>Query&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
+<dl><dt><a name="GDataClient-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x7f03c9df7de8&gt;</font>)</dt><dd><tt>Query&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;gdata.service.Get<br>
 &nbsp;<br>
@@ -1069,6 +1096,122 @@ Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd
 <dl><dt><a name="RedirectError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
 
 <dl><dt><a name="RedirectError-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#RedirectError-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+<dd><tt>exception&nbsp;message</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="UnableToUpgradeToken">class <strong>UnableToUpgradeToken</strong></a>(<a href="gdata.client.html#Error">Error</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.client.html#UnableToUpgradeToken">UnableToUpgradeToken</a></dd>
+<dd><a href="gdata.client.html#Error">Error</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="gdata.client.html#Error">Error</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="UnableToUpgradeToken-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#UnableToUpgradeToken-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#UnableToUpgradeToken-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="UnableToUpgradeToken-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#UnableToUpgradeToken-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="UnableToUpgradeToken-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#UnableToUpgradeToken-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="UnableToUpgradeToken-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#UnableToUpgradeToken-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="UnableToUpgradeToken-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#UnableToUpgradeToken-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="UnableToUpgradeToken-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="UnableToUpgradeToken-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#UnableToUpgradeToken-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="UnableToUpgradeToken-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#UnableToUpgradeToken-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="UnableToUpgradeToken-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="UnableToUpgradeToken-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#UnableToUpgradeToken-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+<dd><tt>exception&nbsp;message</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Unauthorized">class <strong>Unauthorized</strong></a>(<a href="gdata.client.html#Error">Error</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.client.html#Unauthorized">Unauthorized</a></dd>
+<dd><a href="gdata.client.html#Error">Error</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="gdata.client.html#Error">Error</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="Unauthorized-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#Unauthorized-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#Unauthorized-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="Unauthorized-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#Unauthorized-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="Unauthorized-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#Unauthorized-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="Unauthorized-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#Unauthorized-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="Unauthorized-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#Unauthorized-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="Unauthorized-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="Unauthorized-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#Unauthorized-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="Unauthorized-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#Unauthorized-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="Unauthorized-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="Unauthorized-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#Unauthorized-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>

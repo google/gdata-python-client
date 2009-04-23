@@ -33,6 +33,7 @@
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.docs.html#ResourceId">ResourceId</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.docs.html#Role">Role</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.docs.html#Scope">Scope</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.docs.html#WritersCanInvite">WritersCanInvite</a>
 </font></dt></dl>
 </dd>
 <dt><font face="helvetica, arial"><a href="atom.html#Person">atom.Person</a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)
@@ -323,7 +324,7 @@ spreadsheet,&nbsp;folder,&nbsp;or&nbsp;pdf.<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;type&nbsp;of&nbsp;document.</tt></dd></dl>
 
-<dl><dt><a name="DocumentListEntry-__init__"><strong>__init__</strong></a>(self, resourceId<font color="#909090">=None</font>, feedLink<font color="#909090">=None</font>, lastViewed<font color="#909090">=None</font>, lastModifiedBy<font color="#909090">=None</font>, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, content<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, published<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="DocumentListEntry-__init__"><strong>__init__</strong></a>(self, resourceId<font color="#909090">=None</font>, feedLink<font color="#909090">=None</font>, lastViewed<font color="#909090">=None</font>, lastModifiedBy<font color="#909090">=None</font>, writersCanInvite<font color="#909090">=None</font>, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, content<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, published<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt></dl>
 
 <hr>
 Methods inherited from <a href="gdata.html#GDataEntry">gdata.GDataEntry</a>:<br>
@@ -653,7 +654,7 @@ Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.Exte
 <font color="#000000" face="helvetica, arial"><a name="LastViewed">class <strong>LastViewed</strong></a>(<a href="atom.html#Person">atom.Person</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>The&nbsp;DocList&nbsp;gd:lastModifiedBy&nbsp;element<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt>The&nbsp;DocList&nbsp;gd:lastViewed&nbsp;element<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.docs.html#LastViewed">LastViewed</a></dd>
@@ -865,6 +866,55 @@ Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.Exte
 <dl><dt><strong>__weakref__</strong></dt>
 <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="WritersCanInvite">class <strong>WritersCanInvite</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;DocList&nbsp;docs:writersCanInvite&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.docs.html#WritersCanInvite">WritersCanInvite</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="WritersCanInvite-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="WritersCanInvite-__init__"><strong>__init__</strong></a>(self, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="WritersCanInvite-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="WritersCanInvite-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#eeaa77">
@@ -907,7 +957,8 @@ Returns:<br>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>__author__</strong> = 'api.jfisher (Jeff Fisher), api.eric@google.com (Eric Bidelman)'</td></tr></table><p>
+<td width="100%"><strong>DOCUMENTS_NAMESPACE</strong> = 'http://schemas.google.com/docs/2007'<br>
+<strong>__author__</strong> = 'api.jfisher (Jeff Fisher), api.eric@google.com (Eric Bidelman)'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#7799ee">
 <td colspan=3 valign=bottom>&nbsp;<br>

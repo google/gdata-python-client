@@ -146,14 +146,15 @@ Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.Exte
 &nbsp;&nbsp;element&nbsp;that&nbsp;specifies&nbsp;the&nbsp;URL&nbsp;of&nbsp;the&nbsp;video&nbsp;itself.<br>
 &nbsp;<br>
 Attributes:<br>
-url:&nbsp;non-ambigous&nbsp;reference&nbsp;to&nbsp;online&nbsp;object<br>
-width:&nbsp;width&nbsp;of&nbsp;the&nbsp;object&nbsp;frame,&nbsp;in&nbsp;pixels<br>
-height:&nbsp;width&nbsp;of&nbsp;the&nbsp;object&nbsp;frame,&nbsp;in&nbsp;pixels<br>
-medium:&nbsp;one&nbsp;of&nbsp;`image'&nbsp;or&nbsp;`video',&nbsp;allowing&nbsp;the&nbsp;api&nbsp;user&nbsp;to&nbsp;quickly<br>
-&nbsp;&nbsp;determine&nbsp;the&nbsp;object's&nbsp;type<br>
-type:&nbsp;Internet&nbsp;media&nbsp;Type[1]&nbsp;(a.k.a.&nbsp;mime&nbsp;type)&nbsp;of&nbsp;the&nbsp;object&nbsp;--&nbsp;a&nbsp;more<br>
-&nbsp;&nbsp;verbose&nbsp;way&nbsp;of&nbsp;determining&nbsp;the&nbsp;media&nbsp;type<br>
-(optional)&nbsp;fileSize:&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;object,&nbsp;in&nbsp;bytes<br>
+&nbsp;&nbsp;url:&nbsp;non-ambigous&nbsp;reference&nbsp;to&nbsp;online&nbsp;object<br>
+&nbsp;&nbsp;width:&nbsp;width&nbsp;of&nbsp;the&nbsp;object&nbsp;frame,&nbsp;in&nbsp;pixels<br>
+&nbsp;&nbsp;height:&nbsp;width&nbsp;of&nbsp;the&nbsp;object&nbsp;frame,&nbsp;in&nbsp;pixels<br>
+&nbsp;&nbsp;medium:&nbsp;one&nbsp;of&nbsp;`image'&nbsp;or&nbsp;`video',&nbsp;allowing&nbsp;the&nbsp;api&nbsp;user&nbsp;to&nbsp;quickly<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;determine&nbsp;the&nbsp;object's&nbsp;type<br>
+&nbsp;&nbsp;type:&nbsp;Internet&nbsp;media&nbsp;Type[1]&nbsp;(a.k.a.&nbsp;mime&nbsp;type)&nbsp;of&nbsp;the&nbsp;object&nbsp;--&nbsp;a&nbsp;more<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;verbose&nbsp;way&nbsp;of&nbsp;determining&nbsp;the&nbsp;media&nbsp;type.&nbsp;To&nbsp;set&nbsp;the&nbsp;type&nbsp;member<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;contructor,&nbsp;use&nbsp;the&nbsp;content_type&nbsp;parameter.<br>
+&nbsp;&nbsp;(optional)&nbsp;fileSize:&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;object,&nbsp;in&nbsp;bytes<br>
 &nbsp;<br>
 [1]:&nbsp;<a href="http://en.wikipedia.org/wiki/Internet_media_type">http://en.wikipedia.org/wiki/Internet_media_type</a><br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
@@ -275,7 +276,8 @@ For&nbsp;`api'&nbsp;projections,&nbsp;the&nbsp;description&nbsp;is&nbsp;in&nbsp;
 for&nbsp;`base'&nbsp;projections,&nbsp;the&nbsp;description&nbsp;is&nbsp;in&nbsp;HTML.<br>
 &nbsp;<br>
 Attributes:<br>
-type:&nbsp;either&nbsp;`text'&nbsp;or&nbsp;`html'.<br>&nbsp;</tt></td></tr>
+&nbsp;&nbsp;type:&nbsp;either&nbsp;`text'&nbsp;or&nbsp;`html'.&nbsp;To&nbsp;set&nbsp;the&nbsp;type&nbsp;member&nbsp;in&nbsp;the&nbsp;contructor,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use&nbsp;the&nbsp;description_type&nbsp;parameter.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.media.html#Description">Description</a></dd>
@@ -714,7 +716,8 @@ Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.Exte
 <td colspan=2><tt>(string)&nbsp;Contains&nbsp;the&nbsp;title&nbsp;of&nbsp;the&nbsp;entry's&nbsp;media&nbsp;content,&nbsp;in&nbsp;plain&nbsp;text.<br>
 &nbsp;<br>
 Attributes:<br>
-type:&nbsp;Always&nbsp;set&nbsp;to&nbsp;plain<br>&nbsp;</tt></td></tr>
+&nbsp;&nbsp;type:&nbsp;Always&nbsp;set&nbsp;to&nbsp;plain.&nbsp;To&nbsp;set&nbsp;the&nbsp;type&nbsp;member&nbsp;in&nbsp;the&nbsp;constructor,&nbsp;use<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;title_type&nbsp;parameter.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.media.html#Title">Title</a></dd>

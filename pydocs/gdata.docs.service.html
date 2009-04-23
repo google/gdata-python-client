@@ -77,7 +77,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/feeds/folders/private/full/folder%3Afolder_id<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;folder&nbsp;created&nbsp;on<br>
+&nbsp;&nbsp;A&nbsp;DocumentListEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;folder&nbsp;created&nbsp;on<br>
 &nbsp;&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
 
 <dl><dt><a name="DocsService-DownloadDocument"><strong>DownloadDocument</strong></a>(self, entry_or_resource_id, file_path)</dt><dd><tt>Downloads&nbsp;a&nbsp;document&nbsp;from&nbsp;the&nbsp;Document&nbsp;List.<br>
@@ -145,7 +145,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;folder.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;document&nbsp;created&nbsp;on<br>
+&nbsp;&nbsp;A&nbsp;DocumentListEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;document&nbsp;created&nbsp;on<br>
 &nbsp;&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
 
 <dl><dt><a name="DocsService-MoveFolderIntoFolder"><strong>MoveFolderIntoFolder</strong></a>(self, src_folder_entry, dest_folder_entry)</dt><dd><tt>Moves&nbsp;a&nbsp;folder&nbsp;into&nbsp;another&nbsp;folder.<br>
@@ -157,7 +157,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destination&nbsp;folder.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;folder&nbsp;created&nbsp;on<br>
+&nbsp;&nbsp;A&nbsp;DocumentListEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;folder&nbsp;created&nbsp;on<br>
 &nbsp;&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
 
 <dl><dt><a name="DocsService-MoveOutOfFolder"><strong>MoveOutOfFolder</strong></a>(self, source_entry)</dt><dd><tt>Moves&nbsp;a&nbsp;document&nbsp;into&nbsp;a&nbsp;folder&nbsp;in&nbsp;the&nbsp;Document&nbsp;List&nbsp;Feed.<br>
@@ -178,7 +178,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;folder.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;document&nbsp;created&nbsp;on<br>
+&nbsp;&nbsp;A&nbsp;DocumentListEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;document&nbsp;created&nbsp;on<br>
 &nbsp;&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
 
 <dl><dt><a name="DocsService-MoveSpreadsheetIntoFolder"><strong>MoveSpreadsheetIntoFolder</strong></a>(self, document_entry, folder_entry)</dt><dd><tt>Moves&nbsp;a&nbsp;spreadsheet&nbsp;into&nbsp;a&nbsp;folder&nbsp;in&nbsp;the&nbsp;Document&nbsp;List&nbsp;Feed.<br>
@@ -190,10 +190,10 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;folder.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;document&nbsp;created&nbsp;on<br>
+&nbsp;&nbsp;A&nbsp;DocumentListEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;document&nbsp;created&nbsp;on<br>
 &nbsp;&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
 
-<dl><dt><a name="DocsService-Query"><strong>Query</strong></a>(self, uri, converter<font color="#909090">=&lt;function DocumentListFeedFromString at 0x9d98c0&gt;</font>)</dt><dd><tt>Queries&nbsp;the&nbsp;Document&nbsp;List&nbsp;feed&nbsp;and&nbsp;returns&nbsp;the&nbsp;resulting&nbsp;feed&nbsp;of<br>
+<dl><dt><a name="DocsService-Query"><strong>Query</strong></a>(self, uri, converter<font color="#909090">=&lt;function DocumentListFeedFromString at 0x9d9938&gt;</font>)</dt><dd><tt>Queries&nbsp;the&nbsp;Document&nbsp;List&nbsp;feed&nbsp;and&nbsp;returns&nbsp;the&nbsp;resulting&nbsp;feed&nbsp;of<br>
 &nbsp;&nbsp;&nbsp;entries.<br>
 &nbsp;<br>
 Args:<br>
@@ -232,8 +232,8 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/feeds/folders/private/full/folder%3Afolder_id<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;document&nbsp;created&nbsp;on&nbsp;the<br>
-&nbsp;&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
+&nbsp;&nbsp;A&nbsp;DocumentListEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;document&nbsp;created<br>
+&nbsp;&nbsp;on&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
 
 <dl><dt><a name="DocsService-UploadPresentation"><strong>UploadPresentation</strong></a>(self, media_source, title, folder_or_uri<font color="#909090">=None</font>)</dt><dd><tt>Uploads&nbsp;a&nbsp;presentation&nbsp;inside&nbsp;of&nbsp;a&nbsp;MediaSource&nbsp;object&nbsp;to&nbsp;the&nbsp;Document<br>
 &nbsp;&nbsp;&nbsp;List&nbsp;feed&nbsp;with&nbsp;the&nbsp;given&nbsp;title.<br>
@@ -249,8 +249,8 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/feeds/folders/private/full/folder%3Afolder_id<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;presentation&nbsp;created&nbsp;on&nbsp;the<br>
-&nbsp;&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
+&nbsp;&nbsp;A&nbsp;DocumentListEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;presentation&nbsp;created<br>
+&nbsp;&nbsp;on&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
 
 <dl><dt><a name="DocsService-UploadSpreadsheet"><strong>UploadSpreadsheet</strong></a>(self, media_source, title, folder_or_uri<font color="#909090">=None</font>)</dt><dd><tt>Uploads&nbsp;a&nbsp;spreadsheet&nbsp;inside&nbsp;of&nbsp;a&nbsp;MediaSource&nbsp;object&nbsp;to&nbsp;the&nbsp;Document<br>
 &nbsp;&nbsp;&nbsp;List&nbsp;feed&nbsp;with&nbsp;the&nbsp;given&nbsp;title.<br>
@@ -266,8 +266,8 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/feeds/folders/private/full/folder%3Afolder_id<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;spreadsheet&nbsp;created&nbsp;on&nbsp;the<br>
-&nbsp;&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
+&nbsp;&nbsp;A&nbsp;DocumentListEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;spreadsheet&nbsp;created<br>
+&nbsp;&nbsp;on&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
 
 <dl><dt><a name="DocsService-__init__"><strong>__init__</strong></a>(self, email<font color="#909090">=None</font>, password<font color="#909090">=None</font>, source<font color="#909090">=None</font>, server<font color="#909090">='docs.google.com'</font>, additional_headers<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;client&nbsp;for&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.<br>
 &nbsp;<br>
@@ -472,7 +472,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="DocsService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x7f1b68f47de8&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
+<dl><dt><a name="DocsService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x7f71c2898de8&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;gdata.service.Get<br>
 &nbsp;<br>
@@ -956,7 +956,7 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x72b260&gt;<dd><tt>T.<a href="#DocumentAclQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xc4e5f0&gt;<dd><tt>dict.<a href="#DocumentAclQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xa8c1a0&gt;<dd><tt>dict.<a href="#DocumentAclQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -1133,7 +1133,7 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x72b260&gt;<dd><tt>T.<a href="#DocumentQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xc4f290&gt;<dd><tt>dict.<a href="#DocumentQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xc58ad0&gt;<dd><tt>dict.<a href="#DocumentQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table></td></tr></table><p>

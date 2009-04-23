@@ -71,13 +71,17 @@ Data descriptors defined here:<br>
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="XmlElement">class <strong>XmlElement</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
     
-<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Represents&nbsp;an&nbsp;element&nbsp;node&nbsp;in&nbsp;an&nbsp;XML&nbsp;document.<br>
+&nbsp;<br>
+The&nbsp;text&nbsp;member&nbsp;is&nbsp;a&nbsp;UTF-8&nbsp;encoded&nbsp;str.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
 <dl><dt><a name="XmlElement-GetAttributes"><strong>GetAttributes</strong></a> = <a href="#XmlElement-get_attributes">get_attributes</a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt></dl>
 
 <dl><dt><a name="XmlElement-GetElements"><strong>GetElements</strong></a> = <a href="#XmlElement-get_elements">get_elements</a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt></dl>
 
-<dl><dt><a name="XmlElement-ToString"><strong>ToString</strong></a> = <a href="#XmlElement-to_string">to_string</a>(self, version<font color="#909090">=1</font>)</dt></dl>
+<dl><dt><a name="XmlElement-ToString"><strong>ToString</strong></a> = <a href="#XmlElement-to_string">to_string</a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="XmlElement-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
 
@@ -114,7 +118,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
 
-<dl><dt><a name="XmlElement-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;XML.</tt></dd></dl>
+<dl><dt><a name="XmlElement-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;XML.</tt></dd></dl>
 
 <hr>
 Data descriptors defined here:<br>
@@ -135,14 +139,14 @@ Data and other attributes defined here:<br>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt><a name="-XmlElementFromString"><strong>XmlElementFromString</strong></a> = xml_element_from_string(xml_string, target_class, version<font color="#909090">=1</font>, encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Parses&nbsp;the&nbsp;XML&nbsp;string&nbsp;according&nbsp;to&nbsp;the&nbsp;rules&nbsp;for&nbsp;the&nbsp;target_class.<br>
+<td width="100%"><dl><dt><a name="-XmlElementFromString"><strong>XmlElementFromString</strong></a> = xml_element_from_string(xml_string, target_class, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Parses&nbsp;the&nbsp;XML&nbsp;string&nbsp;according&nbsp;to&nbsp;the&nbsp;rules&nbsp;for&nbsp;the&nbsp;target_class.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;xml_string:&nbsp;str&nbsp;or&nbsp;unicode<br>
 &nbsp;&nbsp;target_class:&nbsp;<a href="#XmlElement">XmlElement</a>&nbsp;or&nbsp;a&nbsp;subclass.<br>
 &nbsp;&nbsp;version:&nbsp;int&nbsp;(optional)&nbsp;The&nbsp;version&nbsp;of&nbsp;the&nbsp;schema&nbsp;which&nbsp;should&nbsp;be&nbsp;used&nbsp;when<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;converting&nbsp;the&nbsp;XML&nbsp;into&nbsp;an&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;The&nbsp;default&nbsp;is&nbsp;1.</tt></dd></dl>
- <dl><dt><a name="-xml_element_from_string"><strong>xml_element_from_string</strong></a>(xml_string, target_class, version<font color="#909090">=1</font>, encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Parses&nbsp;the&nbsp;XML&nbsp;string&nbsp;according&nbsp;to&nbsp;the&nbsp;rules&nbsp;for&nbsp;the&nbsp;target_class.<br>
+ <dl><dt><a name="-xml_element_from_string"><strong>xml_element_from_string</strong></a>(xml_string, target_class, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Parses&nbsp;the&nbsp;XML&nbsp;string&nbsp;according&nbsp;to&nbsp;the&nbsp;rules&nbsp;for&nbsp;the&nbsp;target_class.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;xml_string:&nbsp;str&nbsp;or&nbsp;unicode<br>
@@ -156,7 +160,8 @@ Args:<br>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>__author__</strong> = 'j.s@google.com (Jeff Scudder)'</td></tr></table><p>
+<td width="100%"><strong>STRING_ENCODING</strong> = 'utf-8'<br>
+<strong>__author__</strong> = 'j.s@google.com (Jeff Scudder)'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#7799ee">
 <td colspan=3 valign=bottom>&nbsp;<br>

@@ -108,6 +108,8 @@ Data descriptors defined here:<br>
 
 <dl><dt><a name="MockHttpClient-delete_session"><strong>delete_session</strong></a>(self, name<font color="#909090">=None</font>)</dt><dd><tt>Removes&nbsp;recordings&nbsp;from&nbsp;a&nbsp;previous&nbsp;live&nbsp;request.</tt></dd></dl>
 
+<dl><dt><a name="MockHttpClient-get_cache_file_name"><strong>get_cache_file_name</strong></a>(self)</dt></dl>
+
 <dl><dt><a name="MockHttpClient-request"><strong>request</strong></a>(self, http_request)</dt><dd><tt>Provide&nbsp;a&nbsp;recorded&nbsp;response,&nbsp;or&nbsp;record&nbsp;a&nbsp;response&nbsp;for&nbsp;replay.<br>
 &nbsp;<br>
 If&nbsp;the&nbsp;real_client&nbsp;is&nbsp;set,&nbsp;the&nbsp;request&nbsp;will&nbsp;be&nbsp;made&nbsp;using&nbsp;the<br>
@@ -115,7 +117,7 @@ real_client,&nbsp;and&nbsp;the&nbsp;response&nbsp;from&nbsp;the&nbsp;server&nbsp
 If&nbsp;the&nbsp;real_client&nbsp;is&nbsp;None&nbsp;(the&nbsp;default),&nbsp;this&nbsp;method&nbsp;will&nbsp;examine<br>
 the&nbsp;recordings&nbsp;and&nbsp;find&nbsp;the&nbsp;first&nbsp;which&nbsp;matches.</tt></dd></dl>
 
-<dl><dt><a name="MockHttpClient-use_cached_session"><strong>use_cached_session</strong></a>(self, name, real_http_client<font color="#909090">=None</font>)</dt><dd><tt>Attempts&nbsp;to&nbsp;load&nbsp;recordings&nbsp;from&nbsp;a&nbsp;previous&nbsp;live&nbsp;request.<br>
+<dl><dt><a name="MockHttpClient-use_cached_session"><strong>use_cached_session</strong></a>(self, name<font color="#909090">=None</font>, real_http_client<font color="#909090">=None</font>)</dt><dd><tt>Attempts&nbsp;to&nbsp;load&nbsp;recordings&nbsp;from&nbsp;a&nbsp;previous&nbsp;live&nbsp;request.<br>
 &nbsp;<br>
 If&nbsp;a&nbsp;temp&nbsp;file&nbsp;with&nbsp;the&nbsp;recordings&nbsp;exists,&nbsp;then&nbsp;it&nbsp;is&nbsp;used&nbsp;to&nbsp;fulfill<br>
 requests.&nbsp;If&nbsp;the&nbsp;file&nbsp;does&nbsp;not&nbsp;exist,&nbsp;then&nbsp;a&nbsp;real&nbsp;client&nbsp;is&nbsp;used&nbsp;to&nbsp;<br>
@@ -124,8 +126,11 @@ recorded&nbsp;and&nbsp;will&nbsp;be&nbsp;written&nbsp;to&nbsp;the&nbsp;desired&n
 close_session&nbsp;is&nbsp;called.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;name:&nbsp;str&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;temporary&nbsp;file&nbsp;which&nbsp;should&nbsp;hold&nbsp;the&nbsp;cached<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTTP&nbsp;requests&nbsp;and&nbsp;responses.<br>
+&nbsp;&nbsp;name:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;file&nbsp;name&nbsp;of&nbsp;session&nbsp;file&nbsp;to&nbsp;be&nbsp;used.&nbsp;The&nbsp;file<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;loaded&nbsp;from&nbsp;the&nbsp;temporary&nbsp;directory&nbsp;of&nbsp;this&nbsp;machine.&nbsp;If&nbsp;no&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;passed&nbsp;in,&nbsp;a&nbsp;default&nbsp;name&nbsp;will&nbsp;be&nbsp;constructed&nbsp;using&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache_name_prefix,&nbsp;cache_case_name,&nbsp;and&nbsp;cache_test_name&nbsp;of&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="__builtin__.html#object">object</a>.<br>
 &nbsp;&nbsp;real_http_client:&nbsp;atom.http_core.HttpClient&nbsp;the&nbsp;real&nbsp;client&nbsp;to&nbsp;be&nbsp;used<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;the&nbsp;cached&nbsp;recordings&nbsp;are&nbsp;not&nbsp;found.&nbsp;If&nbsp;the&nbsp;default<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value&nbsp;is&nbsp;used,&nbsp;this&nbsp;will&nbsp;be&nbsp;an&nbsp;<br>
@@ -141,6 +146,12 @@ Data descriptors defined here:<br>
 </dl>
 <hr>
 Data and other attributes defined here:<br>
+<dl><dt><strong>cache_case_name</strong> = ''</dl>
+
+<dl><dt><strong>cache_name_prefix</strong> = 'gdata_live_test'</dl>
+
+<dl><dt><strong>cache_test_name</strong> = ''</dl>
+
 <dl><dt><strong>real_client</strong> = None</dl>
 
 </td></tr></table> <p>
