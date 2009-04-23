@@ -37,8 +37,8 @@ import gdata.test_config as conf
 class BloggerTest(unittest.TestCase):
 
   def setUp(self):
+    self.client = gdata.client.GDClient()
     if conf.settings.RUN_LIVE_TESTS:
-      self.client = gdata.client.GDClient()
       conf.configure_client(self.client, conf.settings.BloggerConfig, 
           'BloggerTest')
 
@@ -160,8 +160,8 @@ class BloggerTest(unittest.TestCase):
 class ContactsTest(unittest.TestCase):
 
   def setUp(self):
+    self.client = gdata.client.GDClient()
     if conf.settings.RUN_LIVE_TESTS:
-      self.client = gdata.client.GDClient()
       conf.configure_client(self.client, conf.settings.ContactsConfig,
           'ContactsTest')
 
@@ -212,8 +212,8 @@ class ContactsTest(unittest.TestCase):
 class VersionTwoClientContactsTest(unittest.TestCase):
 
   def setUp(self):
+    self.client = gdata.client.GDClient()
     if conf.settings.RUN_LIVE_TESTS:
-      self.client = gdata.client.GDClient()
       self.client.api_version = '2'
       conf.configure_client(self.client, conf.settings.ContactsConfig,
                             'VersionTwoClientContactsTest')

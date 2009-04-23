@@ -215,6 +215,7 @@ tests/gdata_tests/codesearch_test.py
 tests/gdata_tests/contacts_test.py
 tests/gdata_tests/data_test.py
 tests/gdata_tests/docs_test.py
+tests/gdata_tests/gauth_test.py
 tests/gdata_tests/health_test.py
 tests/gdata_tests/live_client_test.py
 tests/gdata_tests/photos_test.py
