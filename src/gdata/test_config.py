@@ -104,7 +104,7 @@ def close_client(client):
   Checks to see if settings.CACHE_RESPONSES is True, to make sure we only
   save sessions to repeat if the user desires.
   """
-  if settings.CACHE_RESPONSES:
+  if client and settings.CACHE_RESPONSES:
     # If this was a live request, save the recording.
     client.http_client.close_session()
 
@@ -149,7 +149,7 @@ def configure_service_cache(service, test_name):
 
 
 def close_service(service):
-  if settings.CACHE_RESPONSES:
+  if service and settings.CACHE_RESPONSES:
     # If this was a live request, save the recording.
     service.http_client.v2_http_client.close_session()
 
