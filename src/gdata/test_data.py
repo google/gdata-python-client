@@ -1613,7 +1613,7 @@ ACL_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
   </entry>"""
 
 DOCUMENT_LIST_FEED = """<?xml version='1.0' encoding='UTF-8'?>
-<ns0:feed xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns2="http://schemas.google.com/g/2005" xmlns:ns3="http://schemas.google.com/docs/2007"><ns1:totalResults
+<ns0:feed xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns2="http://schemas.google.com/g/2005"><ns1:totalResults
 xmlns:ns1="http://a9.com/-/spec/opensearchrss/1.0/">2</ns1:totalResults><ns1:startIndex
 xmlns:ns1="http://a9.com/-/spec/opensearchrss/1.0/">1</ns1:startIndex><ns0:entry><ns0:content
 src="http://foo.com/fm?fmcmd=102&amp;key=supercalifragilisticexpeadocious"
@@ -1636,7 +1636,6 @@ rel="self" type="application/atom+xml" /><ns0:title type="text">Test Spreadsheet
     <ns0:email>test.user@gmail.com</ns0:email>
 </ns2:lastModifiedBy>
 <ns2:lastViewed>2009-03-05T07:48:21.493Z</ns2:lastViewed>
-<ns3:writersCanInvite value='true'/>
 </ns0:entry><ns0:entry><ns0:content
 src="http://docs.google.com/RawDocContents?action=fetch&amp;docID=gr00vy"
 type="text/html"
@@ -1653,7 +1652,6 @@ rel="self" type="application/atom+xml" /><ns0:title type="text">Test Document</n
     <ns0:name>test.user</ns0:name>
     <ns0:email>test.user@gmail.com</ns0:email>
 </ns2:lastModifiedBy>
-<ns3:writersCanInvite value='false'/>
  <ns2:lastViewed>2009-03-05T07:48:21.493Z</ns2:lastViewed>
 </ns0:entry><ns0:id>http://docs.google.com/feeds/documents/private/full</ns0:id><ns0:link
 href="http://docs.google.com" rel="alternate" type="text/html" /><ns0:link
@@ -1669,7 +1667,7 @@ test.user@gmail.com</ns0:title><ns0:updated>2007-07-09T23:07:21.898Z</ns0:update
 """
 
 DOCUMENT_LIST_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
-<ns0:entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://schemas.google.com/g/2005" xmlns:ns2="http://schemas.google.com/docs/2007"><ns0:content
+<ns0:entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://schemas.google.com/g/2005"><ns0:content
 src="http://foo.com/fm?fmcmd=102&amp;key=supercalifragilisticexpealidocious"
 type="text/html"
 /><ns0:author><ns0:name>test.user</ns0:name><ns0:email>test.user@gmail.com</ns0:email></ns0:author><ns0:category
@@ -1689,7 +1687,6 @@ rel="self" type="application/atom+xml" /><ns0:title type="text">Test Spreadsheet
     <ns0:email>test.user@gmail.com</ns0:email>
 </ns1:lastModifiedBy>
 <ns1:lastViewed>2009-03-05T07:48:21.493Z</ns1:lastViewed>
-<ns2:writersCanInvite value='true'/>
 </ns0:entry>
 """
 
@@ -4453,3 +4450,76 @@ xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'>
     <name>user@gmail.com</name>
   </author>
 </entry>"""
+
+BOOK_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>"""\
+    """<entry xmlns='http://www.w3.org/2005/Atom' xmlns:gbs='http://schemas.google.com/books/2008' xmlns:dc='http://purl.org/dc/terms' xmlns:gd='http://schemas.google.com/g/2005'>"""\
+    """<id>http://www.google.com/books/feeds/volumes/b7GZr5Btp30C</id>"""\
+    """<updated>2009-04-24T23:35:16.000Z</updated>"""\
+    """<category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/books/2008#volume'/>"""\
+    """<title type='text'>A theory of justice</title>"""\
+    """<link rel='http://schemas.google.com/books/2008/thumbnail' type='image/x-unknown' href='http://bks0.books.google.com/books?id=b7GZr5Btp30C&amp;printsec=frontcover&amp;img=1&amp;zoom=5&amp;sig=ACfU3U121bWZsbjBfVwVRSK2o982jJTd1w&amp;source=gbs_gdata'/>"""\
+    """<link rel='http://schemas.google.com/books/2008/info' type='text/html' href='http://books.google.com/books?id=b7GZr5Btp30C&amp;ie=ISO-8859-1&amp;source=gbs_gdata'/>"""\
+    """<link rel='http://schemas.google.com/books/2008/annotation' type='application/atom+xml' href='http://www.google.com/books/feeds/users/me/volumes'/>"""\
+    """<link rel='alternate' type='text/html' href='http://books.google.com/books?id=b7GZr5Btp30C&amp;ie=ISO-8859-1'/>"""\
+    """<link rel='self' type='application/atom+xml' href='http://www.google.com/books/feeds/volumes/b7GZr5Btp30C'/>"""\
+    """<gbs:embeddability value='http://schemas.google.com/books/2008#embeddable'/>"""\
+    """<gbs:openAccess value='http://schemas.google.com/books/2008#disabled'/>"""\
+    """<gd:rating min='1' max='5' average='4.00'/>"""\
+    """<gbs:viewability value='http://schemas.google.com/books/2008#view_partial'/>"""\
+    """<dc:creator>John Rawls</dc:creator>"""\
+    """<dc:date>1999</dc:date>"""\
+    """<dc:description>p Since it appeared in 1971, John Rawls's i A Theory of Justice /i has become a classic. The author has now revised the original edition to clear up a number of difficulties he and others have found in the original book. /p p Rawls aims to express an essential part of the common core of the democratic tradition--justice as fairness--and to provide an alternative to utilitarianism, which had dominated the Anglo-Saxon tradition of political thought since the nineteenth century. Rawls substitutes the ideal of the social contract as a more satisfactory account of the basic rights and liberties of citizens as free and equal persons. "Each person," writes Rawls, "possesses an inviolability founded on justice that even the welfare of society as a whole cannot override." Advancing the ideas of Rousseau, Kant, Emerson, and Lincoln, Rawls's theory is as powerful today as it was when first published. /p</dc:description>"""\
+    """<dc:format>538 pages</dc:format>"""\
+    """<dc:identifier>b7GZr5Btp30C</dc:identifier>"""\
+    """<dc:identifier>ISBN:0198250541</dc:identifier>"""\
+    """<dc:identifier>ISBN:9780198250548</dc:identifier>"""\
+    """<dc:language>en</dc:language>"""\
+    """<dc:publisher>Oxford University Press</dc:publisher>"""\
+    """<dc:title>A theory of justice</dc:title>"""\
+"""</entry>"""
+
+
+
+
+BOOK_FEED = """<?xml version='1.0' encoding='UTF-8'?>"""\
+    """<feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:gbs='http://schemas.google.com/books/2008' xmlns:dc='http://purl.org/dc/terms' xmlns:gd='http://schemas.google.com/g/2005'>"""\
+    """<id>http://www.google.com/books/feeds/volumes</id>"""\
+    """<updated>2009-04-24T23:39:47.000Z</updated>"""\
+    """<category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/books/2008#volume'/>"""\
+    """<title type='text'>Search results for 9780198250548</title>"""\
+    """<link rel='alternate' type='text/html' href='http://www.google.com'/>"""\
+    """<link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='http://www.google.com/books/feeds/volumes'/>"""\
+    """<link rel='self' type='application/atom+xml' href='http://www.google.com/books/feeds/volumes?q=9780198250548'/>"""\
+    """<author>"""\
+    """<name>Google Books Search</name>"""\
+    """<uri>http://www.google.com</uri>"""\
+    """</author>"""\
+    """<generator version='beta'>Google Book Search data API</generator>"""\
+    """<openSearch:totalResults>1</openSearch:totalResults>"""\
+    """<openSearch:startIndex>1</openSearch:startIndex>"""\
+    """<openSearch:itemsPerPage>20</openSearch:itemsPerPage>"""\
+    """<entry>"""\
+    """<id>http://www.google.com/books/feeds/volumes/b7GZr5Btp30C</id>"""\
+    """<updated>2009-04-24T23:39:47.000Z</updated>"""\
+    """<category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/books/2008#volume'/>"""\
+    """<title type='text'>A theory of justice</title>"""\
+    """<link rel='http://schemas.google.com/books/2008/thumbnail' type='image/x-unknown' href='http://bks9.books.google.com/books?id=b7GZr5Btp30C&amp;printsec=frontcover&amp;img=1&amp;zoom=5&amp;sig=ACfU3U121bWZsbjBfVwVRSK2o982jJTd1w&amp;source=gbs_gdata'/>"""\
+    """<link rel='http://schemas.google.com/books/2008/info' type='text/html' href='http://books.google.com/books?id=b7GZr5Btp30C&amp;dq=9780198250548&amp;ie=ISO-8859-1&amp;source=gbs_gdata'/>"""\
+    """<link rel='http://schemas.google.com/books/2008/preview' type='text/html' href='http://books.google.com/books?id=b7GZr5Btp30C&amp;pg=PA494&amp;dq=9780198250548&amp;ie=ISO-8859-1&amp;source=gbs_gdata'/>"""\
+    """<link rel='http://schemas.google.com/books/2008/annotation' type='application/atom+xml' href='http://www.google.com/books/feeds/users/me/volumes'/>"""\
+    """<link rel='alternate' type='text/html' href='http://books.google.com/books?id=b7GZr5Btp30C&amp;dq=9780198250548&amp;ie=ISO-8859-1'/>"""\
+    """<link rel='self' type='application/atom+xml' href='http://www.google.com/books/feeds/volumes/b7GZr5Btp30C'/>"""\
+    """<gbs:embeddability value='http://schemas.google.com/books/2008#embeddable'/>"""\
+    """<gbs:openAccess value='http://schemas.google.com/books/2008#disabled'/>"""\
+    """<gbs:viewability value='http://schemas.google.com/books/2008#view_partial'/>"""\
+    """<dc:creator>John Rawls</dc:creator>"""\
+    """<dc:date>1999</dc:date>"""\
+    """<dc:description>... 9780198250548 ...</dc:description>"""\
+    """<dc:format>538 pages</dc:format>"""\
+    """<dc:identifier>b7GZr5Btp30C</dc:identifier>"""\
+    """<dc:identifier>ISBN:0198250541</dc:identifier>"""\
+    """<dc:identifier>ISBN:9780198250548</dc:identifier>"""\
+    """<dc:subject>Law</dc:subject>"""\
+    """<dc:title>A theory of justice</dc:title>"""\
+    """</entry>"""\
+"""</feed>"""
