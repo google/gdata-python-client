@@ -9,7 +9,7 @@ April 23, 2009 (revision 695)
   - Added category label when creating different types of docs
   - Fixed DownLoad helpers which shouldn't write a file if server returns
       error. Fixes issue 240.
-  - Addied DocumentListEntryFromString converter and using DocumentListEntry
+  - Added DocumentListEntryFromString converter and using DocumentListEntry
       class instead of GDataEntry class to create entries.
 - URLs in HTTP requests can now be unicode strings. Resolves issue 233.
 - Improvements for the upcoming version 2.0.0 release:

@@ -171,9 +171,13 @@ class GDClient(atom.client.AtomPubClient):
     its modify_request method.
 
     Args:
-      method: str
-      uri: atom.http_core.Uri, str, or unicode
-      auth_token:
+      method: str The HTTP verb for this request, usually 'GET', 'POST', 
+              'PUT', or 'DELETE'
+      uri: atom.http_core.Uri, str, or unicode The URL being requested.
+      auth_token: An object which sets the Authorization HTTP header in its
+                  modify_request method. Recommended classes include 
+                  gdata.gauth.ClientLoginToken and gdata.gauth.AuthSubToken
+                  among others.
       http_request: (optional) atom.http_core.HttpRequest
       converter: function which takes the body of the response as it's only
                  argument and returns the desired object.

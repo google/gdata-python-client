@@ -16,6 +16,7 @@ import atom_tests.core_test
 import gdata_tests.apps_test
 import gdata_tests.auth_test
 import gdata_tests.base_test
+import gdata_tests.books_test
 import gdata_tests.blogger_test
 import gdata_tests.calendar_test
 import gdata_tests.client_test
@@ -38,7 +39,7 @@ def RunAllTests():
                          atom_tests.token_store_test,
                          gdata_tests.client_test,
                          gdata_tests.apps_test, gdata_tests.auth_test, 
-                         gdata_tests.base_test, 
+                         gdata_tests.base_test, gdata_tests.books_test,
                          gdata_tests.calendar_test, gdata_tests.docs_test,
                          gdata_tests.health_test, gdata_tests.spreadsheet_test,
                          gdata_tests.photos_test, gdata_tests.codesearch_test,
