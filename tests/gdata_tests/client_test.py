@@ -203,6 +203,24 @@ class RequestTest(unittest.TestCase):
   def test_exercise_exceptions(self):
     # TODO
     pass
+
+  def test_converter_vs_desired_class(self):
+
+    def bad_converter(string):
+      return 1
+  
+    class TestClass(atom.core.XmlElement):
+      _qname = '{http://www.w3.org/2005/Atom}entry'
+    
+    client = gdata.client.GDClient()
+    client.http_client = atom.mock_http_core.EchoHttpClient()
+    test_entry = gdata.data.GEntry()
+    result = client.post(test_entry, 'http://example.com')
+    self.assertTrue(isinstance(result, gdata.data.GEntry))
+    result = client.post(test_entry, 'http://example.com', converter=bad_converter)
+    self.assertEquals(result, 1)
+    result = client.post(test_entry, 'http://example.com', desired_class=TestClass)
+    self.assertTrue(isinstance(result, TestClass))
   
 class CreateConverterTest(unittest.TestCase):
   

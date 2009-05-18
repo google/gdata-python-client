@@ -53,7 +53,14 @@ class Error(Exception):
   pass
 
 
-class RedirectError(gdata.service.RequestError):
+class RequestError(gdata.service.RequestError):
+  status = None
+  reason = None
+  body = None
+  headers = None
+
+
+class RedirectError(RequestError):
   pass
 
 
@@ -66,7 +73,7 @@ class ClientLoginTokenMissing(Error):
   pass
 
 
-class ClientLoginFailed(Error):
+class ClientLoginFailed(RequestError):
   pass
 
 
@@ -75,6 +82,11 @@ class UnableToUpgradeToken(Error):
 
 
 class Unauthorized(Error):
+  pass
+
+
+class BadAuthenticationServiceURL(RedirectError,
+    gdata.service.BadAuthenticationServiceURL):
   pass
 
 
@@ -102,6 +114,30 @@ def create_converter(obj):
   """
   return lambda response: atom.core.xml_element_from_string(
       response.read(), obj.__class__, version=2, encoding='UTF-8')
+
+
+def error_from_response(message, http_response, error_class, response_body=None):
+  """Creates a new exception and sets the HTTP information in the error.
+  
+  Args:
+   message: str human readable message to be displayed if the exception is
+            not caught.
+   http_response: The response from the server, contains error information.
+   error_class: The exception to be instantiated and populated with
+                information from the http_response
+   response_body: str (optional) specify if the response has already been read
+                  from the http_response object.
+  """
+  if response_body is None:
+    body = http_response.read()
+  else:
+    body = response_body
+  error = error_class('%s: %i, %s' % (message, http_response.status, body))
+  error.status = http_response.status
+  error.reason = http_response.reason
+  error.body = body
+  error.headers = http_response.getheaders()
+  return error
 
 
 class GDClient(atom.client.AtomPubClient):
@@ -150,8 +186,8 @@ class GDClient(atom.client.AtomPubClient):
   api_version = None
 
   def request(self, method=None, uri=None, auth_token=None,
-              http_request=None, converter=None, redirects_remaining=4,
-              **kwargs):
+              http_request=None, converter=None, desired_class=None,
+              redirects_remaining=4, **kwargs):
     """Make an HTTP request to the server.
     
     See also documentation for atom.client.AtomPubClient.request.
@@ -181,6 +217,13 @@ class GDClient(atom.client.AtomPubClient):
       http_request: (optional) atom.http_core.HttpRequest
       converter: function which takes the body of the response as it's only
                  argument and returns the desired object.
+      desired_class: class descended from atom.core.XmlElement to which a
+                     successful response should be converted. If there is no
+                     converter function specified (converter=None) then the
+                     desired_class will be used in calling the
+                     atom.core.xml_element_from_string function. If neither
+                     the desired_class nor the converter is specified, an
+                     HTTP reponse object will be returned.
       redirects_remaining: (optional) int, if this number is 0 and the
                            server sends a 302 redirect, the request method
                            will raise an exception. This parameter is used in
@@ -192,8 +235,11 @@ class GDClient(atom.client.AtomPubClient):
     Returns:
       An HTTP response object (see atom.http_core.HttpResponse for a
       description of the object's interface) if no converter was
-      specified. If a converter function was provided, the results of
-      calling the converter are returned.
+      specified and no desired_class was specified. If a converter function
+      was provided, the results of calling the converter are returned. If no
+      converter was specified but a desired_class was provided, the response
+      body will be converted to the class using 
+      atom.core.xml_element_from_string.
     """
     if isinstance(uri, (str, unicode)):
       uri = atom.http_core.Uri.parse_uri(uri)
@@ -221,12 +267,21 @@ class GDClient(atom.client.AtomPubClient):
     # On success, convert the response body using the desired converter 
     # function if present.
     if response is None:
-      #raise gdata.service.RequestError('Response was None')
       return None
     if response.status == 200 or response.status == 201:
       if converter is not None:
         return converter(response)
-      return response
+      elif desired_class is not None:
+        if self.api_version is not None:
+          return atom.core.xml_element_from_string(response.read(),
+              desired_class, version=self.api_version)
+        else:
+          # No API version was specified, so allow xml_element_from_string to
+          # use the default version.
+          return atom.core.xml_element_from_string(response.read(),
+              desired_class)
+      else:
+        return response
     # TODO: move the redirect logic into the Google Calendar client once it
     # exists since the redirects are only used in the calendar API.
     elif response.status == 302:
@@ -240,22 +295,23 @@ class GDClient(atom.client.AtomPubClient):
           # the redirect.
           return self.request(method=method, uri=uri, auth_token=auth_token,
                               http_request=http_request, converter=converter,
+                              desired_class=desired_class,
                               redirects_remaining=redirects_remaining-1,
                               **kwargs)
         else:
-          raise RedirectError('302 received without Location header %s' % (
-              response.read(),))
+          raise error_from_response('302 received without Location header',
+                                    response, RedirectError)
       else:
-        raise RedirectError('Too many redirects from server %s' % (
-            response.read(),))
+        raise error_from_response('Too many redirects from server', 
+                                  response, RedirectError)
     elif response.status == 401:
-      error = Unauthorized('Server responded with %i, %s' % (
-          response.status, response.read()))
-      error.http_status = 401
-      raise error
+      raise error_from_response('Unauthorized - Server responded with',
+                                response, Unauthorized)
+    # If the server's response was not a 200, 201, 302, or 401, raise an 
+    # exception.
     else:
-      raise gdata.service.RequestError('Server responded with %i, %s' % (
-          response.status, response.read()))
+      raise error_from_response('Server responded with', response,
+                                RequestError)
 
   Request = request
 
@@ -296,18 +352,19 @@ class GDClient(atom.client.AtomPubClient):
         raise gdata.service.BadAuthentication(
             'Incorrect username or password')
       else:
-        raise gdata.service.Error('Server responded with a 403 code')
+        raise error_from_response('Server responded with a 403 code',
+                                  response, RequestError, response_body)
     elif response.status == 302:
       # Google tries to redirect all bad URLs back to
       # http://www.google.<locale>. If a redirect
       # attempt is made, assume the user has supplied an incorrect
       # authentication URL
-      raise gdata.service.BadAuthenticationServiceURL(
-          'Server responded with a 302 code.')
+      raise error_from_response('Server responded with a redirect',
+                                response, BadAuthenticationServiceURL,
+                                response_body)
     else:
-      raise ClientLoginFailed(
-          'Server responded to ClientLogin request with %i: %s' % (
-              response.status, response_body))
+      raise error_from_response('Server responded to ClientLogin request',
+                                response, ClientLoginFailed, response_body)
 
   RequestClientLoginToken = request_client_login_token
 
@@ -378,21 +435,24 @@ class GDClient(atom.client.AtomPubClient):
 
   ModifyRequest = modify_request
 
-  def get_feed(self, uri, auth_token=None, converter=v2_feed_from_response,
-               **kwargs):
+  def get_feed(self, uri, auth_token=None, converter=None, 
+               desired_class=gdata.data.GEntry, **kwargs):
     return self.request(method='GET', uri=uri, auth_token=auth_token,
-                        converter=converter, **kwargs)
+                        converter=converter, desired_class=desired_class,
+                        **kwargs)
 
   GetFeed = get_feed
 
-  def get_entry(self, url, auth_token=None, converter=v2_entry_from_response,
-                **kwargs):
+  def get_entry(self, url, auth_token=None, converter=None,
+                desired_class=gdata.data.GEntry, **kwargs):
     return self.request(method='GET', uri=uri, auth_token=auth_token,
-                        converter=converter, **kwargs)
+                        converter=converter, desired_class=desired_class,
+                        **kwargs)
 
   GetEntry = get_entry
 
-  def get_next(self, feed, auth_token=None, converter=None, **kwargs):
+  def get_next(self, feed, auth_token=None, converter=None, 
+               desired_class=None, **kwargs):
     """Fetches the next set of results from the feed. 
     
     When requesting a feed, the number of entries returned is capped at a
@@ -404,24 +464,26 @@ class GDClient(atom.client.AtomPubClient):
     Returns:
       A new feed object containing the next set of entries in this feed.
     """
-    if converter is None:
-      converter = create_converter(feed)
+    if converter is None and desired_class is None:
+      desired_class = feed.__class__
     return self.get_feed(feed.get_next_url(), auth_token=auth_token,
-                         converter=converter, **kwargs)
+                         converter=converter, desired_class=desired_class,
+                         **kwargs)
 
   GetNext = get_next
 
   # TODO: add a refresh method to re-fetch the entry/feed from the server
   # if it has been updated.
 
-  def post(self, entry, uri, auth_token=None, converter=None, **kwargs):
-    if converter is None:
-      converter = create_converter(entry)
+  def post(self, entry, uri, auth_token=None, converter=None, 
+           desired_class=None, **kwargs):
+    if converter is None and desired_class is None:
+      desired_class = entry.__class__
     http_request = atom.http_core.HttpRequest()
     http_request.add_body_part(entry.to_string(), 'application/atom+xml')
     return self.request(method='POST', uri=uri, auth_token=auth_token,
-                        http_request=http_request, converter=converter, 
-                        **kwargs)
+                        http_request=http_request, converter=converter,
+                        desired_class=desired_class, **kwargs)
 
   Post = post
 
@@ -454,8 +516,7 @@ class GDClient(atom.client.AtomPubClient):
         http_request.headers['If-Match'] = entry.etag
     return self.request(method='PUT', uri=entry.get_edit_url(), 
                         auth_token=auth_token, http_request=http_request, 
-                        converter=create_converter(entry), 
-                        **kwargs)
+                        desired_class=entry.__class__, **kwargs)
 
   Update = update
 
