@@ -39,7 +39,7 @@
                  user is either not authenticated or is authenticated through
                  another authentication mechanism.
 
-  RequestError: Raised if a CRUD request returned a non-success code. 
+  RequestError: Raised if a CRUD request returned a non-success code.
 
   UnexpectedReturnType: Raised if the response from the server was not of the
                         desired type. For example, this would be raised if the
@@ -324,7 +324,7 @@ class GDataService(atom.service.AtomService):
 
   def _GetCaptchaURL(self):
     """Returns the URL of the captcha image if a login attempt generated one.
-     
+
     The captcha URL is only set if the Programmatic Login attempt failed
     because the Google service issued a captcha challenge.
 
@@ -339,14 +339,17 @@ class GDataService(atom.service.AtomService):
   captcha_url = property(__GetCaptchaURL,
       doc="""Get the captcha URL for a login request.""")
 
+  def GetOAuthInputParameters(self):
+    return self._oauth_input_params
+
   def SetOAuthInputParameters(self, signature_method, consumer_key,
                               consumer_secret=None, rsa_key=None,
-                              two_legged_oauth=False):
+                              two_legged_oauth=False, requestor_id=None):
     """Sets parameters required for using OAuth authentication mechanism.
-    
+
     NOTE: Though consumer_secret and rsa_key are optional, either of the two
     is required depending on the value of the signature_method.
-    
+
     Args:
       signature_method: class which provides implementation for strategy class
           oauth.oauth.OAuthSignatureMethod. Signature method to be used for
@@ -359,21 +362,24 @@ class GDataService(atom.service.AtomService):
           Required only for HMAC_SHA1 signature method.
       rsa_key: string (optional) Private key required for RSA_SHA1 signature
           method.
-      two_legged_oauth: string (default=False) Enables two-legged OAuth process.
+      two_legged_oauth: boolean (optional) Enables two-legged OAuth process.
+      requestor_id: string (optional) User email adress to make requests on
+          their behalf.  This parameter should only be set when two_legged_oauth
+          is True.
     """
     self._oauth_input_params = gdata.auth.OAuthInputParams(
         signature_method, consumer_key, consumer_secret=consumer_secret,
-        rsa_key=rsa_key)
+        rsa_key=rsa_key, requestor_id=requestor_id)
     if two_legged_oauth:
       oauth_token = gdata.auth.OAuthToken(
           oauth_input_params=self._oauth_input_params)
       self.SetOAuthToken(oauth_token)
-  
+
   def FetchOAuthRequestToken(self, scopes=None, extra_parameters=None,
                              request_url='%s/accounts/OAuthGetRequestToken' % \
                              AUTH_SERVER_HOST):
     """Fetches OAuth request token and returns it.
-    
+
     Args:
       scopes: string or list of string base URL(s) of the service(s) to be
           accessed. If None, then this method tries to determine the
@@ -387,10 +393,10 @@ class GDataService(atom.service.AtomService):
           extra_parameters = {'oauth_version': '2.0'}
       request_url: Request token URL. The default is
           'https://www.google.com/accounts/OAuthGetRequestToken'.
-      
+
     Returns:
       The fetched request token as a gdata.auth.OAuthToken object.
-      
+
     Raises:
       FetchingOAuthRequestTokenFailed if the server responded to the request
       with an error.

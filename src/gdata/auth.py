@@ -602,7 +602,7 @@ class OAuthInputParams(object):
   """
   
   def __init__(self, signature_method, consumer_key, consumer_secret=None,
-               rsa_key=None):
+               rsa_key=None, requestor_id=None):
     """Initializes object with parameters required for using OAuth mechanism.
     
     NOTE: Though consumer_secret and rsa_key are optional, either of the two
@@ -620,13 +620,17 @@ class OAuthInputParams(object):
           Required only for HMAC_SHA1 signature method.
       rsa_key: string (optional) Private key required for RSA_SHA1 signature
           method.
+      requestor_id: string (optional) User email adress to make requests on
+          their behalf.  This parameter should only be set when performing
+          2 legged OAuth requests.
     """
     if signature_method == OAuthSignatureMethod.RSA_SHA1:
       self._signature_method = signature_method(rsa_key, None)
     else:
       self._signature_method = signature_method()
     self._consumer = oauth.OAuthConsumer(consumer_key, consumer_secret)
-    
+    self.requestor_id = requestor_id
+
   def GetSignatureMethod(self):
     """Gets the OAuth signature method.
 
@@ -634,10 +638,10 @@ class OAuthInputParams(object):
       object of supertype <oauth.oauth.OAuthSignatureMethod>
     """
     return self._signature_method
-  
+
   def GetConsumer(self):
     """Gets the OAuth consumer.
-    
+
     Returns:
       object of type <oauth.oauth.Consumer>
     """
@@ -810,11 +814,13 @@ class OAuthToken(atom.http_interface.GenericToken):
     header['Authorization'] = header['Authorization'].replace('+', '%2B')
     return header
   
-  def perform_request(self, http_client, operation, url, data=None, 
+  def perform_request(self, http_client, operation, url, data=None,
                       headers=None):
     """Sets the Authorization header and makes the HTTP request."""
     if not headers:
       headers = {}
+    if self.oauth_input_params.requestor_id:
+      url.params['xoauth_requestor_id'] = self.oauth_input_params.requestor_id
     headers.update(self.GetAuthHeader(operation, url))
     return http_client.request(operation, url, data=data, headers=headers)
     
