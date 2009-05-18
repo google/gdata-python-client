@@ -40,6 +40,8 @@ models and service modules for the the following Google data services:
 - Google Webmaster Tools Data API
 - Blogger Data API
 - Google Health API
+- Google Book Search API
+- Google Analytics API
 - core Google data API functionality 
 The core Google data code provides sufficient functionality to use this 
 library with any Google data API (even if a module hasn't been written for 
@@ -53,7 +55,7 @@ library may also be used with any Atom Publishing Protocol service (AtomPub).
     packages=['atom', 'gdata', 'gdata.calendar', 'gdata.base',
         'gdata.spreadsheet', 'gdata.apps', 'gdata.apps.emailsettings', 
         'gdata.apps.migration', 'gdata.apps.groups',
-        'gdata.docs', 'gdata.codesearch',
+        'gdata.docs', 'gdata.codesearch', 'gdata.books',
         'gdata.photos', 'gdata.exif', 'gdata.geo', 'gdata.media', 
         'gdata.contacts', 'gdata.youtube', 'gdata.webmastertools', 
         'gdata.blogger', 'gdata.alt', 'gdata.oauth', 'gdata.tlslite', 

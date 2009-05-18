@@ -135,7 +135,9 @@ CLIENT_LOGIN_SCOPES = {
     'youtube': [ # YouTube
         'http://gdata.youtube.com/feeds/api/',
         'http://uploads.gdata.youtube.com/feeds/api',
-        'http://gdata.youtube.com/action/GetUploadToken']}
+        'http://gdata.youtube.com/action/GetUploadToken'],
+    'books': ['http://www.google.com/books/feeds/'],
+    'analytics': ['https://www.google.com/analytics/feeds/']}
 
 
 def lookup_scopes(service_name):
