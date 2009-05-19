@@ -80,6 +80,28 @@ class SimpleV2FeedTest(unittest.TestCase):
     self.assertEqual(feed.get_next_url(),
         'http://www.google.com/m8/feeds/contacts/.../more')
 
+  def test_constructor_defauls(self):
+    feed = gdata.data.GFeed()
+    self.assertTrue(feed.etag is None)
+    self.assertEqual(feed.link, [])
+    self.assertEqual(feed.entry, [])
+    entry = gdata.data.GEntry()
+    self.assertTrue(entry.etag is None)
+    self.assertEqual(entry.link, [])
+    link = gdata.data.Link()
+    self.assertTrue(link.href is None)
+    self.assertTrue(link.rel is None)
+    link1 = gdata.data.Link(href='http://example.com', rel='test')
+    self.assertEqual(link1.href, 'http://example.com')
+    self.assertEqual(link1.rel, 'test')
+    link2 = gdata.data.Link(href='http://example.org/', rel='alternate')
+    entry = gdata.data.GEntry(etag='foo', link=[link1, link2])
+    feed = gdata.data.GFeed(etag='12345', entry=[entry])
+    self.assertEqual(feed.etag, '12345')
+    self.assertEqual(len(feed.entry), 1)
+    self.assertEqual(feed.entry[0].etag, 'foo')
+    self.assertEqual(len(feed.entry[0].link), 2)
+
 
 def suite():
   return unittest.TestSuite((unittest.makeSuite(SimpleV2FeedTest, 'test'),))
