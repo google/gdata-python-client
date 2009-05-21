@@ -125,3 +125,14 @@ class AtomPubClient(object):
                         http_request=http_request, **kwargs)
 
   Delete = delete
+
+  def modify_request(self, http_request):
+    if self.host is not None:
+      if http_request is None:
+        http_request = atom.http_core.HttpRequest(
+            uri=atom.http_core.Uri(host=self.host))
+      elif http_request.uri.host is None:
+        http_request.uri.host = self.host
+    return http_request
+
+  ModifyRequest = modify_request

@@ -427,6 +427,7 @@ class GDClient(atom.client.AtomPubClient):
     Subclasses may override this method to add their own request 
     modifications before the request is made.
     """
+    atom.client.AtomPubClient.modify_request(self, http_request)
     if self.api_version is not None:
       if http_request is None:
         http_request = atom.http_core.HttpRequest()
@@ -436,14 +437,14 @@ class GDClient(atom.client.AtomPubClient):
   ModifyRequest = modify_request
 
   def get_feed(self, uri, auth_token=None, converter=None, 
-               desired_class=gdata.data.GEntry, **kwargs):
+               desired_class=gdata.data.GFeed, **kwargs):
     return self.request(method='GET', uri=uri, auth_token=auth_token,
                         converter=converter, desired_class=desired_class,
                         **kwargs)
 
   GetFeed = get_feed
 
-  def get_entry(self, url, auth_token=None, converter=None,
+  def get_entry(self, uri, auth_token=None, converter=None,
                 desired_class=gdata.data.GEntry, **kwargs):
     return self.request(method='GET', uri=uri, auth_token=auth_token,
                         converter=converter, desired_class=desired_class,
@@ -537,6 +538,19 @@ class GDClient(atom.client.AtomPubClient):
   #TODO: implement batch requests.
   #def batch(feed, uri, auth_token=None, converter=None, **kwargs):
   #  pass
+
+class GDQuery(atom.http_core.Uri):
+
+  def _get_text_query(self):
+    return self.query['q']
+
+  def _set_text_query(self, value):
+    self.query['q'] = value
+
+  text_query = property(_get_text_query, _set_text_query, 
+      doc='The q parameter for searching for an exact text match on content')
+    
+
 
 
 # Version 1 code.
