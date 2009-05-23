@@ -272,6 +272,8 @@ pydocs/atom.service.html
 pydocs/atom.token_store.html
 pydocs/atom.url.html
 pydocs/gdata.alt.appengine.html
+pydocs/gdata.analytics.html
+pydocs/gdata.analytics.service.html
 pydocs/gdata.apps.emailsettings.html
 pydocs/gdata.apps.emailsettings.service.html
 pydocs/gdata.apps.groups.html
@@ -285,6 +287,8 @@ pydocs/gdata.base.html
 pydocs/gdata.base.service.html
 pydocs/gdata.blogger.html
 pydocs/gdata.blogger.service.html
+pydocs/gdata.books.html
+pydocs/gdata.books.service.html
 pydocs/gdata.calendar.html
 pydocs/gdata.calendar.service.html
 pydocs/gdata.client.html

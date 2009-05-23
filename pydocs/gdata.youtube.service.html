@@ -402,7 +402,7 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x72b260&gt;<dd><tt>T.<a href="#YouTubePlaylistQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xc794d0&gt;<dd><tt>dict.<a href="#YouTubePlaylistQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xc79b50&gt;<dd><tt>dict.<a href="#YouTubePlaylistQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -1185,10 +1185,10 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extra_parameters&nbsp;=&nbsp;{'oauth_version':&nbsp;'2.0'}<br>
 &nbsp;&nbsp;request_url:&nbsp;Request&nbsp;token&nbsp;URL.&nbsp;The&nbsp;default&nbsp;is<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'https://www.google.com/accounts/OAuthGetRequestToken'.<br>
-&nbsp;&nbsp;<br>
+&nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;fetched&nbsp;request&nbsp;token&nbsp;as&nbsp;a&nbsp;gdata.auth.OAuthToken&nbsp;object.<br>
-&nbsp;&nbsp;<br>
+&nbsp;<br>
 Raises:<br>
 &nbsp;&nbsp;FetchingOAuthRequestTokenFailed&nbsp;if&nbsp;the&nbsp;server&nbsp;responded&nbsp;to&nbsp;the&nbsp;request<br>
 &nbsp;&nbsp;with&nbsp;an&nbsp;error.</tt></dd></dl>
@@ -1320,7 +1320,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x7fbc03824de8&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
+<dl><dt><a name="YouTubeService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x7fe3bad3ede8&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;gdata.service.Get<br>
 &nbsp;<br>
@@ -1353,6 +1353,8 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;feed&nbsp;representing&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;results&nbsp;in&nbsp;the&nbsp;server's&nbsp;feed.<br>
 &nbsp;&nbsp;The&nbsp;type&nbsp;of&nbsp;this&nbsp;feed&nbsp;will&nbsp;match&nbsp;that&nbsp;of&nbsp;the&nbsp;feed&nbsp;argument.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetOAuthInputParameters"><strong>GetOAuthInputParameters</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="YouTubeService-Post"><strong>Post</strong></a>(self, data, uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, redirects_remaining<font color="#909090">=4</font>, media_source<font color="#909090">=None</font>, converter<font color="#909090">=None</font>)</dt><dd><tt>Insert&nbsp;or&nbsp;update&nbsp;&nbsp;data&nbsp;into&nbsp;a&nbsp;GData&nbsp;service&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.<br>
 &nbsp;<br>
@@ -1514,7 +1516,7 @@ is&nbsp;used.&nbsp;See&nbsp;documentation&nbsp;for&nbsp;Google&nbsp;ClientLogin&
 Args:<br>
 &nbsp;&nbsp;token:&nbsp;string&nbsp;or&nbsp;instance&nbsp;of&nbsp;a&nbsp;ClientLoginToken.</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-SetOAuthInputParameters"><strong>SetOAuthInputParameters</strong></a>(self, signature_method, consumer_key, consumer_secret<font color="#909090">=None</font>, rsa_key<font color="#909090">=None</font>, two_legged_oauth<font color="#909090">=False</font>)</dt><dd><tt>Sets&nbsp;parameters&nbsp;required&nbsp;for&nbsp;using&nbsp;OAuth&nbsp;authentication&nbsp;mechanism.<br>
+<dl><dt><a name="YouTubeService-SetOAuthInputParameters"><strong>SetOAuthInputParameters</strong></a>(self, signature_method, consumer_key, consumer_secret<font color="#909090">=None</font>, rsa_key<font color="#909090">=None</font>, two_legged_oauth<font color="#909090">=False</font>, requestor_id<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;parameters&nbsp;required&nbsp;for&nbsp;using&nbsp;OAuth&nbsp;authentication&nbsp;mechanism.<br>
 &nbsp;<br>
 NOTE:&nbsp;Though&nbsp;consumer_secret&nbsp;and&nbsp;rsa_key&nbsp;are&nbsp;optional,&nbsp;either&nbsp;of&nbsp;the&nbsp;two<br>
 is&nbsp;required&nbsp;depending&nbsp;on&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;signature_method.<br>
@@ -1531,7 +1533,10 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Required&nbsp;only&nbsp;for&nbsp;HMAC_SHA1&nbsp;signature&nbsp;method.<br>
 &nbsp;&nbsp;rsa_key:&nbsp;string&nbsp;(optional)&nbsp;Private&nbsp;key&nbsp;required&nbsp;for&nbsp;RSA_SHA1&nbsp;signature<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method.<br>
-&nbsp;&nbsp;two_legged_oauth:&nbsp;string&nbsp;(default=False)&nbsp;Enables&nbsp;two-legged&nbsp;OAuth&nbsp;process.</tt></dd></dl>
+&nbsp;&nbsp;two_legged_oauth:&nbsp;boolean&nbsp;(optional)&nbsp;Enables&nbsp;two-legged&nbsp;OAuth&nbsp;process.<br>
+&nbsp;&nbsp;requestor_id:&nbsp;string&nbsp;(optional)&nbsp;User&nbsp;email&nbsp;adress&nbsp;to&nbsp;make&nbsp;requests&nbsp;on<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;their&nbsp;behalf.&nbsp;&nbsp;This&nbsp;parameter&nbsp;should&nbsp;only&nbsp;be&nbsp;set&nbsp;when&nbsp;two_legged_oauth<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;True.</tt></dd></dl>
 
 <dl><dt><a name="YouTubeService-SetOAuthToken"><strong>SetOAuthToken</strong></a>(self, oauth_token)</dt><dd><tt>Attempts&nbsp;to&nbsp;set&nbsp;the&nbsp;current&nbsp;token&nbsp;and&nbsp;add&nbsp;it&nbsp;to&nbsp;the&nbsp;token&nbsp;store.<br>
 &nbsp;<br>
@@ -1818,7 +1823,7 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x72b260&gt;<dd><tt>T.<a href="#YouTubeUserQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xc78de0&gt;<dd><tt>dict.<a href="#YouTubeUserQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xc79460&gt;<dd><tt>dict.<a href="#YouTubeUserQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -2008,7 +2013,7 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x72b260&gt;<dd><tt>T.<a href="#YouTubeVideoQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xc7adf0&gt;<dd><tt>dict.<a href="#YouTubeVideoQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xc7ac80&gt;<dd><tt>dict.<a href="#YouTubeVideoQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table></td></tr></table><p>

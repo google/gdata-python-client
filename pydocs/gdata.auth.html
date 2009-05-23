@@ -185,7 +185,7 @@ Returns:<br>
 Returns:<br>
 &nbsp;&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;of&nbsp;supertype&nbsp;&lt;oauth.oauth.<a href="#OAuthSignatureMethod">OAuthSignatureMethod</a>&gt;</tt></dd></dl>
 
-<dl><dt><a name="OAuthInputParams-__init__"><strong>__init__</strong></a>(self, signature_method, consumer_key, consumer_secret<font color="#909090">=None</font>, rsa_key<font color="#909090">=None</font>)</dt><dd><tt>Initializes&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;parameters&nbsp;required&nbsp;for&nbsp;using&nbsp;OAuth&nbsp;mechanism.<br>
+<dl><dt><a name="OAuthInputParams-__init__"><strong>__init__</strong></a>(self, signature_method, consumer_key, consumer_secret<font color="#909090">=None</font>, rsa_key<font color="#909090">=None</font>, requestor_id<font color="#909090">=None</font>)</dt><dd><tt>Initializes&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;parameters&nbsp;required&nbsp;for&nbsp;using&nbsp;OAuth&nbsp;mechanism.<br>
 &nbsp;<br>
 NOTE:&nbsp;Though&nbsp;consumer_secret&nbsp;and&nbsp;rsa_key&nbsp;are&nbsp;optional,&nbsp;either&nbsp;of&nbsp;the&nbsp;two<br>
 is&nbsp;required&nbsp;depending&nbsp;on&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;signature_method.<br>
@@ -201,7 +201,10 @@ Args:<br>
 &nbsp;&nbsp;consumer_secret:&nbsp;string&nbsp;(optional)&nbsp;Secret&nbsp;generated&nbsp;during&nbsp;registration.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Required&nbsp;only&nbsp;for&nbsp;HMAC_SHA1&nbsp;signature&nbsp;method.<br>
 &nbsp;&nbsp;rsa_key:&nbsp;string&nbsp;(optional)&nbsp;Private&nbsp;key&nbsp;required&nbsp;for&nbsp;RSA_SHA1&nbsp;signature<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method.</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method.<br>
+&nbsp;&nbsp;requestor_id:&nbsp;string&nbsp;(optional)&nbsp;User&nbsp;email&nbsp;adress&nbsp;to&nbsp;make&nbsp;requests&nbsp;on<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;their&nbsp;behalf.&nbsp;&nbsp;This&nbsp;parameter&nbsp;should&nbsp;only&nbsp;be&nbsp;set&nbsp;when&nbsp;performing<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;legged&nbsp;OAuth&nbsp;requests.</tt></dd></dl>
 
 <hr>
 Data descriptors defined here:<br>

@@ -45,6 +45,8 @@
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="gdata.data.html#GEntry">GEntry</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.data.html#GEntry">GEntry</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.data.html#GFeed">GFeed</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.data.html#GFeed">GFeed</a>
 </font></dt></dl>
 </dd>
@@ -149,6 +151,244 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
 
 <dl><dt><a name="FeedEntryParent-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><strong>GDEntry</strong> = <a name="GDEntry">class GEntry</a>(<a href="gdata.data.html#FeedEntryParent">FeedEntryParent</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>#&nbsp;TODO:&nbsp;once&nbsp;atom&nbsp;Entry&nbsp;exists,&nbsp;inherit&nbsp;from&nbsp;that.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.data.html#GEntry">GEntry</a></dd>
+<dd><a href="gdata.data.html#FeedEntryParent">FeedEntryParent</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="GEntry-GetEditUrl"><strong>GetEditUrl</strong></a> = <a href="#GEntry-get_edit_url">get_edit_url</a>(self)</dt></dl>
+
+<dl><dt><a name="GEntry-get_edit_url"><strong>get_edit_url</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.data.html#FeedEntryParent">FeedEntryParent</a>:<br>
+<dl><dt><a name="GEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="gdata.data.html#FeedEntryParent">FeedEntryParent</a>:<br>
+<dl><dt><strong>etag</strong> = '{http://schemas.google.com/g/2005}etag'</dl>
+
+<dl><dt><strong>link</strong> = [&lt;class 'gdata.data.Link'&gt;]</dl>
+
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="GEntry-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in&nbsp;<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="GEntry-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="GEntry-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="GEntry-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="GEntry-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in&nbsp;<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="GEntry-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="GEntry-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><strong>GDFeed</strong> = <a name="GDFeed">class GFeed</a>(<a href="gdata.data.html#FeedEntryParent">FeedEntryParent</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>#&nbsp;TODO:&nbsp;once&nbsp;atom&nbsp;Feed&nbsp;exists,&nbsp;inherit&nbsp;from&nbsp;that.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.data.html#GFeed">GFeed</a></dd>
+<dd><a href="gdata.data.html#FeedEntryParent">FeedEntryParent</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="GFeed-GetNextUrl"><strong>GetNextUrl</strong></a> = <a href="#GFeed-get_next_url">get_next_url</a>(self)</dt></dl>
+
+<dl><dt><a name="GFeed-get_next_url"><strong>get_next_url</strong></a>(self)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>entry</strong> = [&lt;class 'gdata.data.GEntry'&gt;]</dl>
+
+<hr>
+Methods inherited from <a href="gdata.data.html#FeedEntryParent">FeedEntryParent</a>:<br>
+<dl><dt><a name="GFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="gdata.data.html#FeedEntryParent">FeedEntryParent</a>:<br>
+<dl><dt><strong>etag</strong> = '{http://schemas.google.com/g/2005}etag'</dl>
+
+<dl><dt><strong>link</strong> = [&lt;class 'gdata.data.Link'&gt;]</dl>
+
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="GFeed-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in&nbsp;<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="GFeed-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="GFeed-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="GFeed-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="GFeed-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in&nbsp;<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="GFeed-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="GFeed-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
