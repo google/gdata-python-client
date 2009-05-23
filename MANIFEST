@@ -28,6 +28,8 @@ src/gdata/test_data.py
 src/gdata/urlfetch.py
 src/gdata/alt/__init__.py
 src/gdata/alt/appengine.py
+src/gdata/analytics/__init__.py
+src/gdata/analytics/appengine.py
 src/gdata/apps/__init__.py
 src/gdata/apps/service.py
 src/gdata/apps/emailsettings/__init__.py
@@ -40,6 +42,8 @@ src/gdata/base/__init__.py
 src/gdata/base/service.py
 src/gdata/blogger/__init__.py
 src/gdata/blogger/service.py
+src/gdata/books/__init__.py
+src/gdata/books/service.py
 src/gdata/calendar/__init__.py
 src/gdata/calendar/service.py
 src/gdata/codesearch/__init__.py
@@ -208,6 +212,7 @@ tests/gdata_tests/apps_test.py
 tests/gdata_tests/auth_test.py
 tests/gdata_tests/base_test.py
 tests/gdata_tests/blogger_test.py
+tests/gdata_tests/books_test.py
 tests/gdata_tests/calendar_test.py
 tests/gdata_tests/client_online_test.py
 tests/gdata_tests/client_test.py
@@ -235,6 +240,8 @@ tests/gdata_tests/base/__init__.py
 tests/gdata_tests/base/service_test.py
 tests/gdata_tests/blogger/__init__.py
 tests/gdata_tests/blogger/service_test.py
+tests/gdata_tests/books/__init__.py
+tests/gdata_tests/books/service_test.py
 tests/gdata_tests/calendar/__init__.py
 tests/gdata_tests/calendar/calendar_acl_test.py
 tests/gdata_tests/calendar/service_test.py
