@@ -1,3 +1,13 @@
+=== 1.3.2 ===
+May 22, 2009 (revision 711)
+
+- Added support for the Google Analytics API. Thanks Sal Uryasev!
+- Added support for the Google Book Search API. Thanks James Sams!
+- Improved support for 2 legged OAuth and added a sample app. Thanks Eric
+    Bidelman!
+- Simplified the way an XML response from the server is parsed into the
+    desired class for the version 2.0 API client (gdata.client.GDClient).
+
 === 1.3.1 ===
 April 23, 2009 (revision 695)
 
