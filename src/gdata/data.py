@@ -78,4 +78,10 @@ def feed_from_string(xml_string, version=1, encoding='UTF-8'):
 
 
 FeedFromString = feed_from_string
-  
+
+
+# Used as a placeholder until the GDEntry is fully specified.
+# GDEntry is used in 
+# http://code.google.com/p/gdata-python-client/wiki/WritingDataModelClasses
+GDEntry = GEntry
+GDFeed = GFeed
