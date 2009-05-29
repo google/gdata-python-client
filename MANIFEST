@@ -53,6 +53,8 @@ src/gdata/contacts/service.py
 src/gdata/docs/__init__.py
 src/gdata/docs/service.py
 src/gdata/exif/__init__.py
+src/gdata/finance/__init__.py
+src/gdata/finance/service.py
 src/gdata/geo/__init__.py
 src/gdata/health/__init__.py
 src/gdata/health/service.py
@@ -173,6 +175,7 @@ samples/blogger/BloggerExample.py
 samples/calendar/calendarExample.py
 samples/contacts/contacts_example.py
 samples/docs/docs_example.py
+samples/finance/test_finance.py
 samples/mashups/birthdaySample.py
 samples/spreadsheets/spreadsheetExample.py
 samples/webmastertools/AddDeleteExampleDotCom.py
