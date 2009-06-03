@@ -268,6 +268,7 @@ class XmlElement(object):
       version: int Ingnored in this method but used by VersionedElement.
     """
     qname, elements, attributes = self.__class__._get_rules(version)
+    encoding = encoding or STRING_ENCODING
     # Add the expected elements and attributes to the tree.
     if elements:
       for tag, element_def in elements.iteritems():
@@ -287,14 +288,16 @@ class XmlElement(object):
     for element in self._other_elements:
       element._become_child(tree, version)
     for key, value in self._other_attributes.iteritems():
+      # I'm not sure if unicode can be used in the attribute name, so for now
+      # we assume the encoding is correct for the attribute name.
+      if not isinstance(value, unicode):
+        value = value.decode(encoding)
       tree.attrib[key] = value
     if self.text:
       if isinstance(self.text, unicode):
         tree.text = self.text
-      elif encoding is not None:
-        tree.text = self.text.decode(encoding)
       else:
-        tree.text = self.text.decode(STRING_ENCODING)
+        tree.text = self.text.decode(encoding)
 
   def to_string(self, version=1, encoding=None):
     """Converts this object to XML."""

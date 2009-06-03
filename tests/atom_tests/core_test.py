@@ -351,8 +351,14 @@ class CharacterEncodingTest(unittest.TestCase):
     self.assertEqual(t.tag, u'del\u03b4ta')
     self.assertEqual(parse(u'<\u03b4elta>test</\u03b4elta>')._qname,
                      u'\u03b4elta')
-    #self.assertEqual(parse(u'<\u03b4elta>test</\u03b4elta>').to_string(), 
-    #                 '<&#948;elta>test</&#948;elta>')
+    # Test unicode attribute names and values.
+    t = ElementTree.fromstring(u'<x \u03b4a="\u03b4b" />'.encode('utf-8'))
+    self.assertEqual(t.attrib, {u'\u03b4a': u'\u03b4b'})
+    self.assertEqual(parse(u'<x \u03b4a="\u03b4b" />').get_attributes(
+        u'\u03b4a')[0].value, u'\u03b4b')
+    x = create('x', None)
+    x._other_attributes[u'a'] = u'\u03b4elta'
+    self.assertTrue(x.to_string().startswith('<x a="&#948;elta"'))
 
   def testUtf8InputString(self):
     # Test parsing inner text.
@@ -375,6 +381,9 @@ class CharacterEncodingTest(unittest.TestCase):
     self.assertTrue(isinstance(e.to_string(), str))
     self.assertEqual(create('x', u'\u03b4'.encode('utf-8')).to_string(),
                      '<x>&#948;</x>')
+    # Test attributes and values with UTF-8 inputs.
+    self.assertEqual(parse('<x \xce\xb4a="\xce\xb4b" />').get_attributes(
+        u'\u03b4a')[0].value, u'\u03b4b')
 
   def testUtf8TagsAndAttributes(self):
     self.assertEqual(
@@ -382,7 +391,11 @@ class CharacterEncodingTest(unittest.TestCase):
         u'\u03b4elta')
     self.assertEqual(parse('<\xce\xb4elta>test</\xce\xb4elta>')._qname,
                      u'\u03b4elta')
-
+    # Test an element with UTF-8 in the attribute value.
+    x = create('x', None)
+    x._other_attributes[u'a'] = '\xce\xb4'
+    self.assertTrue(x.to_string(encoding='UTF-8').startswith('<x a="&#948;"'))
+    self.assertTrue(x.to_string().startswith('<x a="&#948;"'))
 
   def testOtherEncodingOnInputString(self):
     # Test parsing inner text.
@@ -407,6 +420,10 @@ class CharacterEncodingTest(unittest.TestCase):
     self.assertEqual(
         parse(u'<\u03b4elta>test</\u03b4elta>'.encode('utf-16'))._qname,
         u'\u03b4elta')
+    # Test an element with UTF-16 in the attribute value.
+    x = create('x', None)
+    x._other_attributes[u'a'] = u'\u03b4'.encode('utf-16')
+    self.assertTrue(x.to_string(encoding='UTF-16').startswith('<x a="&#948;"'))
 
 
 def suite():
