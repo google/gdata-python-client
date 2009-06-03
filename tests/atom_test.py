@@ -27,6 +27,7 @@ except ImportError:
   from elementtree import ElementTree
 import atom
 from gdata import test_data
+import gdata.test_config as conf
 
 
 class AuthorTest(unittest.TestCase):
@@ -235,7 +236,6 @@ class SubtitleTest(unittest.TestCase):
     new_subtitle = atom.SubtitleFromString(self.subtitle.ToString())
     self.assert_(self.subtitle.type == new_subtitle.type)
     self.assert_(self.subtitle.text == new_subtitle.text)
-
 
 
 class SummaryTest(unittest.TestCase):
@@ -468,7 +468,8 @@ class FeedTest(unittest.TestCase):
     feed.author.append(atom.Author(name=atom.Name(text='js')))
     feed.title = atom.Title(text='my test source')
     feed.generator = atom.Generator(text='gen')
-    feed.entry.append(atom.Entry(author=[atom.Author(name=atom.Name(text='entry author'))]))
+    feed.entry.append(atom.Entry(author=[atom.Author(name=atom.Name(
+        text='entry author'))]))
     self.assert_(feed.author[0].name.text == 'js')
     self.assert_(feed.title.text == 'my test source')
     self.assert_(feed.generator.text == 'gen')
@@ -600,7 +601,8 @@ class AtomBaseTest(unittest.TestCase):
      # Using Id because it adds no additional members.
      atom_base = atom.Id()
      extension_child = atom.ExtensionElement('foo', namespace='http://ns0.com')
-     extension_grandchild = atom.ExtensionElement('bar', namespace='http://ns0.com')
+     extension_grandchild = atom.ExtensionElement('bar', 
+         namespace='http://ns0.com')
      extension_child.children.append(extension_grandchild)
      atom_base.extension_elements.append(extension_child)
      self.assertEquals(len(atom_base.extension_elements), 1)
@@ -610,21 +612,25 @@ class AtomBaseTest(unittest.TestCase):
      
      element_tree = atom_base._ToElementTree()
      self.assert_(element_tree.find('{http://ns0.com}foo') is not None)
-     self.assert_(element_tree.find('{http://ns0.com}foo').find('{http://ns0.com}bar') is not None)
+     self.assert_(element_tree.find('{http://ns0.com}foo').find(
+         '{http://ns0.com}bar') is not None)
 
 
 class UtfParsingTest(unittest.TestCase):
   
   def setUp(self):
-    self.test_xml = u"""<?xml version="1.0" encoding="utf-8"?><entry xmlns='http://www.w3.org/2005/Atom'>
+    self.test_xml = u"""<?xml version="1.0" encoding="utf-8"?>
+<entry xmlns='http://www.w3.org/2005/Atom'>
   <id>http://www.google.com/test/id/url</id>
   <title type='\u03B1\u03BB\u03C6\u03B1'>\u03B1\u03BB\u03C6\u03B1</title>
 </entry>"""
 
   def testMemberStringEncoding(self):
     atom_entry = atom.EntryFromString(self.test_xml)
-    self.assert_(atom_entry.title.type == u'\u03B1\u03BB\u03C6\u03B1'.encode('utf-8'))
-    self.assert_(atom_entry.title.text == u'\u03B1\u03BB\u03C6\u03B1'.encode('utf-8'))
+    self.assert_(atom_entry.title.type == u'\u03B1\u03BB\u03C6\u03B1'.encode(
+        'utf-8'))
+    self.assert_(atom_entry.title.text == u'\u03B1\u03BB\u03C6\u03B1'.encode(
+        'utf-8'))
 
     # Setting object members to unicode strings is supported even if 
     # MEMBER_STRING_ENCODING is set 'utf-8' (should it be?)
@@ -642,8 +648,10 @@ class UtfParsingTest(unittest.TestCase):
     # Test something else than utf-8
     atom.MEMBER_STRING_ENCODING = 'iso8859_7'
     atom_entry = atom.EntryFromString(self.test_xml)
-    self.assert_(atom_entry.title.type == u'\u03B1\u03BB\u03C6\u03B1'.encode('iso8859_7'))
-    self.assert_(atom_entry.title.text == u'\u03B1\u03BB\u03C6\u03B1'.encode('iso8859_7'))
+    self.assert_(atom_entry.title.type == u'\u03B1\u03BB\u03C6\u03B1'.encode(
+        'iso8859_7'))
+    self.assert_(atom_entry.title.text == u'\u03B1\u03BB\u03C6\u03B1'.encode(
+        'iso8859_7'))
 
     # Test using unicode strings directly for object members
     atom.MEMBER_STRING_ENCODING = unicode
@@ -651,7 +659,8 @@ class UtfParsingTest(unittest.TestCase):
     self.assert_(atom_entry.title.type == u'\u03B1\u03BB\u03C6\u03B1')
     self.assert_(atom_entry.title.text == u'\u03B1\u03BB\u03C6\u03B1')
     
-    # Make sure that we can use plain text when MEMBER_STRING_ENCODING is unicode
+    # Make sure that we can use plain text when MEMBER_STRING_ENCODING is 
+    # unicode
     atom_entry.title.type = "plain text"
     atom_entry.title.text = "more text"
     xml = atom_entry.ToString()
@@ -660,10 +669,21 @@ class UtfParsingTest(unittest.TestCase):
 
   def testConvertExampleXML(self):
     try:
-      entry = atom.CreateClassFromXMLString(atom.Entry, test_data.GBASE_STRING_ENCODING_ENTRY)
+      entry = atom.CreateClassFromXMLString(atom.Entry, 
+          test_data.GBASE_STRING_ENCODING_ENTRY)
     except UnicodeDecodeError:
       self.fail('Error when converting XML')
 
-  
+def suite():
+  return conf.build_suite([AuthorTest, EmailTest, NameTest, 
+                           ExtensionElementTest, LinkTest, GeneratorTest,
+                           TitleTest, SubtitleTest, SummaryTest, IdTest,
+                           IconTest, LogoTest, RightsTest, UpdatedTest,
+                           PublishedTest, FeedEntryParentTest, EntryTest,
+                           ContentEntryParentTest, PreserveUnkownElementTest,
+                           FeedTest, LinkFinderTest, AtomBaseTest, 
+                           UtfParsingTest])
+
+
 if __name__ == '__main__':
   unittest.main()

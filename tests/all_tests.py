@@ -34,6 +34,8 @@ import gdata_tests.live_client_test
 import gdata_tests.gauth_test
 # Compatibility tests for requests to v1 feeds.
 import gdata_tests.contacts.service_test
+# Tests for v1 classes.
+import atom_test
 
 
 def suite():
@@ -46,7 +48,8 @@ def suite():
                              gdata_tests.data_test.suite(),
                              gdata_tests.gauth_test.suite(),
                              gdata_tests.live_client_test.suite(),
-                             gdata_tests.contacts.service_test.suite(),))
+                             gdata_tests.contacts.service_test.suite(),
+                             atom_test.suite()))
 
 
 if __name__ == '__main__':

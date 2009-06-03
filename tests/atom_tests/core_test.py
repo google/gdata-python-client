@@ -33,6 +33,7 @@ except ImportError:
     except ImportError:
       from elementtree import ElementTree
 import atom.core
+import gdata.test_config as conf 
 
 
 SAMPLE_XML = ('<outer xmlns="http://example.com/xml/1" '
@@ -409,9 +410,8 @@ class CharacterEncodingTest(unittest.TestCase):
 
 
 def suite():
-  return unittest.TestSuite((unittest.makeSuite(XmlElementTest, 'test'),
-                             unittest.makeSuite(UtilityFunctionTest, 'test'),
-                             unittest.makeSuite(CharacterEncodingTest, 'test'),))
+  return conf.build_suite([XmlElementTest, UtilityFunctionTest, 
+                           CharacterEncodingTest])
 
 
 if __name__ == '__main__':

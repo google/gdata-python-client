@@ -279,9 +279,8 @@ def element_from_string(response):
 
 
 def suite():
-  return unittest.TestSuite((unittest.makeSuite(BloggerTest, 'test'),
-                             unittest.makeSuite(ContactsTest, 'test'),
-                             unittest.makeSuite(VersionTwoClientContactsTest, 'test')))
+  return conf.build_suite([BloggerTest, ContactsTest, 
+                           VersionTwoClientContactsTest])
 
 
 if __name__ == '__main__':

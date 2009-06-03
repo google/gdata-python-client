@@ -20,7 +20,7 @@ from distutils.core import setup
 
 setup(
     name='gdata',
-    version='1.3.2',
+    version='1.3.3',
     description='Python client library for Google data APIs',
     long_description = """\
 The Google data Python client library makes it easy to interact with
@@ -42,6 +42,7 @@ models and service modules for the the following Google data services:
 - Google Health API
 - Google Book Search API
 - Google Analytics API
+- Google Finance API
 - core Google data API functionality 
 The core Google data code provides sufficient functionality to use this 
 library with any Google data API (even if a module hasn't been written for 

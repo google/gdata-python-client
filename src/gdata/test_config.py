@@ -15,6 +15,7 @@
 # limitations under the License.
 
 
+import unittest
 import gdata.test_config_template
 import atom.mock_http_core
 
@@ -153,3 +154,14 @@ def close_service(service):
     # If this was a live request, save the recording.
     service.http_client.v2_http_client.close_session()
 
+def build_suite(classes):
+  """Creates a TestSuite for all unit test classes in the list.
+  
+  Assumes that each of the classes in the list has unit test methods which
+  begin with 'test'. Calls unittest.makeSuite.
+
+  Returns: 
+    A new unittest.TestSuite containing a test suite for all classes.   
+  """
+  suites = [unittest.makeSuite(a_class, 'test') for a_class in classes]
+  return unittest.TestSuite(suites)
