@@ -61,9 +61,9 @@ class AtomServiceUnitTest(unittest.TestCase):
     self.assert_(x.index('bq=digital camera') != -1)
 
   def testParseHttpUrl(self):
-    as = atom.service.AtomService('code.google.com')
-    self.assertEquals(as.server, 'code.google.com')
-    (host, port, ssl, path) =  atom.service.ProcessUrl(as,
+    atom_service = atom.service.AtomService('code.google.com')
+    self.assertEquals(atom_service.server, 'code.google.com')
+    (host, port, ssl, path) =  atom.service.ProcessUrl(atom_service,
         'http://www.google.com/service/subservice?name=value')
 
     self.assertEquals(ssl, False)
@@ -72,9 +72,9 @@ class AtomServiceUnitTest(unittest.TestCase):
     self.assertEquals(path, '/service/subservice?name=value')
 
   def testParseHttpUrlWithPort(self):
-    as = atom.service.AtomService('code.google.com')
-    self.assertEquals(as.server, 'code.google.com')
-    (host, port, ssl, path) =  atom.service.ProcessUrl(as,
+    atom_service = atom.service.AtomService('code.google.com')
+    self.assertEquals(atom_service.server, 'code.google.com')
+    (host, port, ssl, path) =  atom.service.ProcessUrl(atom_service,
         'http://www.google.com:12/service/subservice?name=value&newname=newvalue')
 
     self.assertEquals(ssl, False)
@@ -85,9 +85,9 @@ class AtomServiceUnitTest(unittest.TestCase):
     self.assert_(path.find('newname=newvalue') >= len('/service/subservice?'))
 
   def testParseHttpsUrl(self):
-    as = atom.service.AtomService('code.google.com')
-    self.assertEquals(as.server, 'code.google.com')
-    (host, port, ssl, path) =  atom.service.ProcessUrl(as,
+    atom_service = atom.service.AtomService('code.google.com')
+    self.assertEquals(atom_service.server, 'code.google.com')
+    (host, port, ssl, path) =  atom.service.ProcessUrl(atom_service,
         'https://www.google.com/service/subservice?name=value&newname=newvalue')
 
     self.assertEquals(ssl, True)
@@ -98,9 +98,9 @@ class AtomServiceUnitTest(unittest.TestCase):
     self.assert_(path.find('newname=newvalue') >= len('/service/subservice?'))
 
   def testParseHttpsUrlWithPort(self):
-    as = atom.service.AtomService('code.google.com')
-    self.assertEquals(as.server, 'code.google.com')
-    (host, port, ssl, path) =  atom.service.ProcessUrl(as,
+    atom_service = atom.service.AtomService('code.google.com')
+    self.assertEquals(atom_service.server, 'code.google.com')
+    (host, port, ssl, path) =  atom.service.ProcessUrl(atom_service,
         'https://www.google.com:13981/service/subservice?name=value&newname=newvalue')
 
     self.assertEquals(ssl, True)
