@@ -282,6 +282,10 @@ class GDataService(atom.service.AtomService):
     if http_request_handler.__name__ == 'gdata.urlfetch':
       import gdata.alt.appengine
       self.http_client = gdata.alt.appengine.AppEngineHttpClient()
+
+  def _SetSessionId(self, session_id):
+    """Used in unit tests to simulate a 302 which sets a gsessionid."""
+    self.__gsessionid = session_id
  
   # Define properties for GDataService
   def _SetAuthSubToken(self, auth_token, scopes=None):
@@ -1213,10 +1217,9 @@ class GDataService(atom.service.AtomService):
 
     if self.__gsessionid is not None:
       if uri.find('gsessionid=') < 0:
-        if uri.find('?') > -1:
-          uri += '&gsessionid=%s' % (self.__gsessionid,)
-        else:
-          uri += '?gsessionid=%s' % (self.__gsessionid,)
+        if url_params is None:
+          url_params = {}
+        url_params['gsessionid'] = self.__gsessionid
 
     if data and media_source:
       if ElementTree.iselement(data):
@@ -1239,7 +1242,7 @@ class GDataService(atom.service.AtomService):
       extra_headers['Content-Type'] = 'multipart/related; boundary=END_OF_PART'
       server_response = self.request(verb, uri, 
           data=[multipart[0], data_str, multipart[1], media_source.file_handle,
-              multipart[2]], headers=extra_headers)
+              multipart[2]], headers=extra_headers, url_params=url_params)
       result_body = server_response.read()
       
     elif media_source or isinstance(data, gdata.MediaSource):
@@ -1248,7 +1251,8 @@ class GDataService(atom.service.AtomService):
       extra_headers['Content-Length'] = str(media_source.content_length)
       extra_headers['Content-Type'] = media_source.content_type
       server_response = self.request(verb, uri, 
-          data=media_source.file_handle, headers=extra_headers)
+          data=media_source.file_handle, headers=extra_headers,
+          url_params=url_params)
       result_body = server_response.read()
 
     else:
@@ -1256,7 +1260,7 @@ class GDataService(atom.service.AtomService):
       content_type = 'application/atom+xml'
       extra_headers['Content-Type'] = content_type
       server_response = self.request(verb, uri, data=http_data,
-          headers=extra_headers)
+          headers=extra_headers, url_params=url_params)
       result_body = server_response.read()
 
     # Server returns 201 for most post requests, but when performing a batch
@@ -1358,13 +1362,12 @@ class GDataService(atom.service.AtomService):
 
     if self.__gsessionid is not None:
       if uri.find('gsessionid=') < 0:
-        if uri.find('?') > -1:
-          uri += '&gsessionid=%s' % (self.__gsessionid,)
-        else:
-          uri += '?gsessionid=%s' % (self.__gsessionid,)
+        if url_params is None:
+          url_params = {}
+        url_params['gsessionid'] = self.__gsessionid
  
     server_response = self.request('DELETE', uri, 
-        headers=extra_headers)
+        headers=extra_headers, url_params=url_params)
     result_body = server_response.read()
 
     if server_response.status == 200:

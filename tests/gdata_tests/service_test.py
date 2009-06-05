@@ -32,6 +32,7 @@ import gdata.base
 import os.path
 from gdata import test_data
 import atom.mock_http
+import atom.mock_http_core
 
 
 username = ''
@@ -387,6 +388,34 @@ CaptchaUrl=Captcha?ctoken=HiteT4b0Bk5Xg18_AcVoP6-yFkHPibe7O9EqxeiI7lUSN
       self.assertEquals(self.gd_client.captcha_url, 
           ('https://www.google.com/accounts/Captcha?ctoken=HiteT4b0Bk5Xg18_'
            'AcVoP6-yFkHPibe7O9EqxeiI7lUSN'))
+
+
+class DeleteWithUrlParamsTest(unittest.TestCase):
+
+  def setUp(self):
+    self.gd_client = gdata.service.GDataService()
+    # Set the client to echo the request back in the response.
+    self.gd_client.http_client.v2_http_client = (
+        atom.mock_http_core.SettableHttpClient(200, 'OK', '', {}))
+    
+  def testDeleteWithUrlParams(self):
+    self.assertTrue(self.gd_client.Delete('http://example.com/test', 
+        {'TestHeader': '123'}, {'urlParam1': 'a', 'urlParam2': 'test'}))
+    request = self.gd_client.http_client.v2_http_client.last_request
+    self.assertEqual(request.uri.host, 'example.com')
+    self.assertEqual(request.uri.path, '/test')
+    self.assertEqual(request.uri.query, 
+        {'urlParam1': 'a', 'urlParam2': 'test'})
+
+  def testDeleteWithSessionId(self):
+    self.gd_client._SetSessionId('test_session_id')
+    self.assertTrue(self.gd_client.Delete('http://example.com/test', 
+        {'TestHeader': '123'}, {'urlParam1': 'a', 'urlParam2': 'test'}))
+    request = self.gd_client.http_client.v2_http_client.last_request
+    self.assertEqual(request.uri.host, 'example.com')
+    self.assertEqual(request.uri.path, '/test')
+    self.assertEqual(request.uri.query, {'urlParam1': 'a', 
+        'urlParam2': 'test', 'gsessionid': 'test_session_id'})
       
 
 class QueryTest(unittest.TestCase):

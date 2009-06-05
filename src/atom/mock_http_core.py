@@ -246,7 +246,12 @@ class SettableHttpClient(object):
   """An HTTP Client which responds with the data given in set_response."""
 
   def __init__(self, status, reason, body, headers):
+    """Configures the response for the server.
+    
+    See set_response for details on the arguments to the constructor.
+    """
     self.set_response(status, reason, body, headers)
+    self.last_request = None
 
   def set_response(self, status, reason, body, headers):
     """Determines the response which will be sent for each request.
@@ -263,6 +268,7 @@ class SettableHttpClient(object):
     self.response._headers = headers.copy()
 
   def request(self, http_request):
+    self.last_request = http_request
     return self.response
 
 
