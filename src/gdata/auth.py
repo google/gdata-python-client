@@ -269,7 +269,8 @@ def GenerateOAuthAccessTokenUrl(
     authorized_request_token,
     oauth_input_params,
     access_token_url='https://www.google.com/accounts/OAuthGetAccessToken',
-    oauth_version='1.0'):
+    oauth_version='1.0',
+    oauth_verifier=None):
   """Generates URL at which user will login to authorize the request token.
   
   Args:
@@ -280,15 +281,21 @@ def GenerateOAuthAccessTokenUrl(
         normally 'https://www.google.com/accounts/OAuthGetAccessToken' or
         '/accounts/OAuthGetAccessToken'
     oauth_version: str (default='1.0') oauth_version parameter.
+    oauth_verifier: str (optional) If present, it is assumed that the client
+        will use the OAuth v1.0a protocol which includes passing the
+        oauth_verifier (as returned by the SP) in the access token step.
 
   Returns:
     atom.url.Url OAuth access token URL.
   """
   oauth_token = oauth.OAuthToken(authorized_request_token.key,
                                  authorized_request_token.secret)
+  parameters = {'oauth_version': oauth_version}
+  if oauth_verifier is not None:
+    parameters['oauth_verifier'] = oauth_verifier
   oauth_request = oauth.OAuthRequest.from_consumer_and_token(
       oauth_input_params.GetConsumer(), token=oauth_token,
-      http_url=access_token_url, parameters={'oauth_version': oauth_version})
+      http_url=access_token_url, parameters=parameters)
   oauth_request.sign_request(oauth_input_params.GetSignatureMethod(),
                              oauth_input_params.GetConsumer(), oauth_token)
   return atom.url.parse_url(oauth_request.to_url())

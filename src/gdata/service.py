@@ -377,8 +377,8 @@ class GDataService(atom.service.AtomService):
 
   def FetchOAuthRequestToken(self, scopes=None, extra_parameters=None,
                              request_url='%s/accounts/OAuthGetRequestToken' % \
-                             AUTH_SERVER_HOST):
-    """Fetches OAuth request token and returns it.
+                             AUTH_SERVER_HOST, oauth_callback=None):
+    """Fetches and sets the OAuth request token and returns it.
 
     Args:
       scopes: string or list of string base URL(s) of the service(s) to be
@@ -393,6 +393,10 @@ class GDataService(atom.service.AtomService):
           extra_parameters = {'oauth_version': '2.0'}
       request_url: Request token URL. The default is
           'https://www.google.com/accounts/OAuthGetRequestToken'.
+      oauth_callback: str (optional) If set, it is assume the client is using
+          the OAuth v1.0a protocol where the callback url is sent in the
+          request token step.  If the oauth_callback is also set in
+          extra_params, this value will override that one.
 
     Returns:
       The fetched request token as a gdata.auth.OAuthToken object.
@@ -405,6 +409,11 @@ class GDataService(atom.service.AtomService):
       scopes = lookup_scopes(self.service)
     if not isinstance(scopes, (list, tuple)):
       scopes = [scopes,]
+    if oauth_callback:
+      if extra_parameters is not None:
+        extra_parameters['oauth_callback'] = oauth_callback
+      else:
+        extra_parameters = {'oauth_callback': oauth_callback}
     request_token_url = gdata.auth.GenerateOAuthRequestTokenUrl(
         self._oauth_input_params, scopes,
         request_token_url=request_url,
@@ -415,10 +424,11 @@ class GDataService(atom.service.AtomService):
       token.set_token_string(response.read())
       token.scopes = scopes
       token.oauth_input_params = self._oauth_input_params
+      self.SetOAuthToken(token)
       return token
     error = {
         'status': response.status,
-        'reason': 'Non 200 response on upgrade',
+        'reason': 'Non 200 response on fetch request token',
         'body': response.read()
         }
     raise FetchingOAuthRequestTokenFailed(error)    
@@ -499,7 +509,8 @@ class GDataService(atom.service.AtomService):
   
   def UpgradeToOAuthAccessToken(self, authorized_request_token=None,
                                 request_url='%s/accounts/OAuthGetAccessToken' \
-                                % AUTH_SERVER_HOST, oauth_version='1.0'):
+                                % AUTH_SERVER_HOST, oauth_version='1.0',
+                                oauth_verifier=None):
     """Upgrades the authorized request token to an access token and returns it
     
     Args:
@@ -507,11 +518,14 @@ class GDataService(atom.service.AtomService):
           token. If not specified, then the current token will be used if it is
           of type <gdata.auth.OAuthToken>, else it is found by looking in the
           token_store by looking for a token for the current scope.
+      request_url: Access token URL. The default is
+          'https://www.google.com/accounts/OAuthGetAccessToken'.
       oauth_version: str (default='1.0') oauth_version parameter. All other
           'oauth_' parameters are added by default. This parameter too, is
           added by default but here you can override it's value.
-      request_url: Access token URL. The default is
-          'https://www.google.com/accounts/OAuthGetAccessToken'.
+      oauth_verifier: str (optional) If present, it is assumed that the client
+        will use the OAuth v1.0a protocol which includes passing the
+        oauth_verifier (as returned by the SP) in the access token step.
     
     Returns:
       Access token
@@ -540,7 +554,8 @@ class GDataService(atom.service.AtomService):
         authorized_request_token,
         self._oauth_input_params,
         access_token_url=request_url,
-        oauth_version=oauth_version)
+        oauth_version=oauth_version,
+        oauth_verifier=oauth_verifier)
     response = self.http_client.request('GET', str(access_token_url))
     if response.status == 200:
       token = gdata.auth.OAuthTokenFromHttpBody(response.read())
