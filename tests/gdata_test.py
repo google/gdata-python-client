@@ -344,5 +344,14 @@ class ExtendedPropertyTest(unittest.TestCase):
     self.assert_(isinstance(ep.GetXmlBlobString(), str))
 
 
+class FeedLinkTest(unittest.TestCase):
+  
+  def testCorrectFromStringType(self):
+    link = gdata.FeedLinkFromString(
+        '<feedLink xmlns="http://schemas.google.com/g/2005" countHint="5"/>')
+    self.assertTrue(isinstance(link, gdata.FeedLink))
+    self.assertEqual(link.count_hint, '5')
+
+
 if __name__ == '__main__':
   unittest.main()

@@ -832,4 +832,4 @@ class FeedLink(atom.AtomBase):
 
 
 def FeedLinkFromString(xml_string):
-  return atom.CreateClassFromXMLString(EntryLink, xml_string)
+  return atom.CreateClassFromXMLString(FeedLink, xml_string)
