@@ -3,6 +3,7 @@ pydoc -w atom
 pydoc -w atom.auth
 pydoc -w atom.client
 pydoc -w atom.core
+pydoc -w atom.data
 pydoc -w atom.http
 pydoc -w atom.http_core
 pydoc -w atom.http_interface
@@ -47,6 +48,8 @@ pydoc -w gdata.contacts.service
 pydoc -w gdata.docs
 pydoc -w gdata.docs.service
 pydoc -w gdata.exif
+pydoc -w gdata.finance
+pydoc -w gdata.finance.service
 pydoc -w gdata.geo
 pydoc -w gdata.health
 pydoc -w gdata.health.service
