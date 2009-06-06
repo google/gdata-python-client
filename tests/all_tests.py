@@ -24,6 +24,7 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 import unittest
 # Tests for v2 features.
 import atom_tests.core_test
+import atom_tests.data_test
 import atom_tests.http_core_test
 import atom_tests.auth_test
 import atom_tests.mock_http_core_test
@@ -40,6 +41,7 @@ import atom_test
 
 def suite():
   return unittest.TestSuite((atom_tests.core_test.suite(),
+                             atom_tests.data_test.suite(),
                              atom_tests.http_core_test.suite(),
                              atom_tests.mock_http_core_test.suite(),
                              atom_tests.client_test.suite(),

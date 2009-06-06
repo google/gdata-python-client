@@ -25,64 +25,71 @@ try:
   from xml.etree import ElementTree
 except ImportError:
   from elementtree import ElementTree
-import atom
-from gdata import test_data
+import atom.data
+import atom.core
 import gdata.test_config as conf
+import gdata.test_data as test_data
 
 
 class AuthorTest(unittest.TestCase):
   
   def setUp(self):
-    self.author = atom.Author()
+    self.author = atom.data.Author()
     
-  def testEmptyAuthorShouldHaveEmptyExtensionsList(self):
-    self.assert_(isinstance(self.author.extension_elements, list))
-    self.assert_(len(self.author.extension_elements) == 0)
+  def testEmptyAuthorShouldHaveEmptyExtensionLists(self):
+    self.assertTrue(isinstance(self.author._other_elements, list))
+    self.assertEqual(len(self.author._other_elements), 0)
+    self.assertTrue(isinstance(self.author._other_attributes, dict))
+    self.assertEqual(len(self.author._other_attributes), 0)
     
   def testNormalAuthorShouldHaveNoExtensionElements(self):
-    self.author.name = atom.Name(text='Jeff Scudder')
-    self.assert_(self.author.name.text == 'Jeff Scudder')
-    self.assert_(len(self.author.extension_elements) == 0)
-    new_author = atom.AuthorFromString(self.author.ToString())
-    self.assert_(len(self.author.extension_elements) == 0)
+    self.author.name = atom.data.Name(text='Jeff Scudder')
+    self.assertEqual(self.author.name.text, 'Jeff Scudder')
+    self.assertEqual(len(self.author._other_elements), 0)
+    new_author = atom.core.XmlElementFromString(self.author.ToString(),
+        atom.data.Author)
+    self.assertEqual(len(new_author._other_elements), 0)
+    self.assertEqual(new_author.name.text, 'Jeff Scudder')
     
-    self.author.extension_elements.append(atom.ExtensionElement(
+    self.author.extension_elements.append(atom.data.ExtensionElement(
         'foo', text='bar'))
-    self.assert_(len(self.author.extension_elements) == 1)
-    self.assert_(self.author.name.text == 'Jeff Scudder')
+    self.assertEqual(len(self.author.extension_elements), 1)
+    self.assertEqual(self.author.name.text, 'Jeff Scudder')
     new_author = atom.AuthorFromString(self.author.ToString())
-    self.assert_(len(self.author.extension_elements) == 1)
-    self.assert_(new_author.name.text == 'Jeff Scudder')
+    self.assertEqual(len(self.author.extension_elements), 1)
+    self.assertEqual(new_author.name.text, 'Jeff Scudder')
 
   def testEmptyAuthorToAndFromStringShouldMatch(self):
     string_from_author = self.author.ToString()
-    new_author = atom.AuthorFromString(string_from_author)
+    new_author = atom.core.XmlElementFromString(string_from_author,
+        atom.data.Author)
     string_from_new_author = new_author.ToString()
-    self.assert_(string_from_author == string_from_new_author)
+    self.assertEqual(string_from_author, string_from_new_author)
     
   def testAuthorWithNameToAndFromStringShouldMatch(self):
-    self.author.name = atom.Name()
+    self.author.name = atom.data.Name()
     self.author.name.text = 'Jeff Scudder'
     string_from_author = self.author.ToString()
-    new_author = atom.AuthorFromString(string_from_author)
+    new_author = atom.core.XmlElementFromString(string_from_author,
+        atom.data.Author)
     string_from_new_author = new_author.ToString()
-    self.assert_(string_from_author == string_from_new_author)
-    self.assert_(self.author.name.text == new_author.name.text)
+    self.assertEqual(string_from_author, string_from_new_author)
+    self.assertEqual(self.author.name.text, new_author.name.text)
   
   def testExtensionElements(self):
     self.author.extension_attributes['foo1'] = 'bar'
     self.author.extension_attributes['foo2'] = 'rab'
-    self.assert_(self.author.extension_attributes['foo1'] == 'bar')
-    self.assert_(self.author.extension_attributes['foo2'] == 'rab')
+    self.assertEqual(self.author.extension_attributes['foo1'], 'bar')
+    self.assertEqual(self.author.extension_attributes['foo2'], 'rab')
     new_author = atom.AuthorFromString(self.author.ToString())
-    self.assert_(new_author.extension_attributes['foo1'] == 'bar')
-    self.assert_(new_author.extension_attributes['foo2'] == 'rab')
+    self.assertEqual(new_author.extension_attributes['foo1'], 'bar')
+    self.assertEqual(new_author.extension_attributes['foo2'], 'rab')
     
   def testConvertFullAuthorToAndFromString(self):
     author = atom.AuthorFromString(test_data.TEST_AUTHOR)
-    self.assert_(author.name.text == 'John Doe')
-    self.assert_(author.email.text == 'johndoes@someemailadress.com')
-    self.assert_(author.uri.text == 'http://www.google.com')
+    self.assertEqual(author.name.text, 'John Doe')
+    self.assertEqual(author.email.text, 'johndoes@someemailadress.com')
+    self.assertEqual(author.uri.text, 'http://www.google.com')
     
     
 class EmailTest(unittest.TestCase):
@@ -93,48 +100,50 @@ class EmailTest(unittest.TestCase):
   def testEmailToAndFromString(self):
     self.email.text = 'This is a test'
     new_email = atom.EmailFromString(self.email.ToString())
-    self.assert_(self.email.text == new_email.text)
-    self.assert_(self.email.extension_elements == 
+    self.assertEqual(self.email.text, new_email.text)
+    self.assertEqual(self.email.extension_elements, 
         new_email.extension_elements)
     
   
 class NameTest(unittest.TestCase):
 
   def setUp(self):
-    self.name = atom.Name()
+    self.name = atom.data.Name()
     
   def testEmptyNameToAndFromStringShouldMatch(self):
     string_from_name = self.name.ToString()
-    new_name = atom.NameFromString(string_from_name)
+    new_name = atom.core.XmlElementFromString(string_from_name,
+        atom.data.Name)
     string_from_new_name = new_name.ToString()
-    self.assert_(string_from_name == string_from_new_name)
+    self.assertEqual(string_from_name, string_from_new_name)
     
   def testText(self):
-    self.assert_(self.name.text is None)
+    self.assertTrue(self.name.text is None)
     self.name.text = 'Jeff Scudder'
-    self.assert_(self.name.text == 'Jeff Scudder')
+    self.assertEqual(self.name.text, 'Jeff Scudder')
     new_name = atom.NameFromString(self.name.ToString())
-    self.assert_(new_name.text == self.name.text)
+    self.assertEqual(new_name.text, self.name.text)
     
   def testExtensionElements(self):
     self.name.extension_attributes['foo'] = 'bar'
-    self.assert_(self.name.extension_attributes['foo'] == 'bar')
+    self.assertEqual(self.name.extension_attributes['foo'], 'bar')
     new_name = atom.NameFromString(self.name.ToString())
-    self.assert_(new_name.extension_attributes['foo'] == 'bar')
+    self.assertEqual(new_name.extension_attributes['foo'], 'bar')
     
     
 class ExtensionElementTest(unittest.TestCase):
   
   def setUp(self):
-    self.ee = atom.ExtensionElement('foo')
+    self.ee = atom.data.ExtensionElement('foo')
     
   def testEmptyEEShouldProduceEmptyString(self):
     pass
     
   def testEEParsesTreeCorrectly(self):
-    deep_tree = atom.ExtensionElementFromString(test_data.EXTENSION_TREE)
-    self.assert_(deep_tree.tag == 'feed')
-    self.assert_(deep_tree.namespace == 'http://www.w3.org/2005/Atom')
+    deep_tree = atom.core.xml_element_from_string(test_data.EXTENSION_TREE,
+        atom.data.ExtensionElement)
+    self.assertEqual(deep_tree.tag, 'feed')
+    self.assertEqual(deep_tree.namespace, 'http://www.w3.org/2005/Atom')
     self.assert_(deep_tree.children[0].tag == 'author')
     self.assert_(deep_tree.children[0].namespace == 'http://www.google.com')
     self.assert_(deep_tree.children[0].children[0].tag == 'name')
@@ -152,13 +161,16 @@ class ExtensionElementTest(unittest.TestCase):
   
   def testEEToAndFromStringShouldMatch(self):
     string_from_ee = self.ee.ToString()
-    new_ee = atom.ExtensionElementFromString(string_from_ee)
+    new_ee = atom.core.xml_element_from_string(string_from_ee,
+        atom.data.ExtensionElement)
     string_from_new_ee = new_ee.ToString()
     self.assert_(string_from_ee == string_from_new_ee)
     
-    deep_tree = atom.ExtensionElementFromString(test_data.EXTENSION_TREE)    
+    deep_tree = atom.core.xml_element_from_string(test_data.EXTENSION_TREE,
+        atom.data.ExtensionElement)
     string_from_deep_tree = deep_tree.ToString()
-    new_deep_tree = atom.ExtensionElementFromString(string_from_deep_tree)
+    new_deep_tree = atom.core.xml_element_from_string(string_from_deep_tree,
+        atom.data.ExtensionElement)
     string_from_new_deep_tree = new_deep_tree.ToString()
     self.assert_(string_from_deep_tree == string_from_new_deep_tree)
     
@@ -600,8 +612,9 @@ class AtomBaseTest(unittest.TestCase):
    def testAtomBaseConvertsExtensions(self):
      # Using Id because it adds no additional members.
      atom_base = atom.Id()
-     extension_child = atom.ExtensionElement('foo', namespace='http://ns0.com')
-     extension_grandchild = atom.ExtensionElement('bar', 
+     extension_child = atom.data.ExtensionElement('foo',
+         namespace='http://ns0.com')
+     extension_grandchild = atom.data.ExtensionElement('bar', 
          namespace='http://ns0.com')
      extension_child.children.append(extension_grandchild)
      atom_base.extension_elements.append(extension_child)
@@ -627,10 +640,10 @@ class UtfParsingTest(unittest.TestCase):
 
   def testMemberStringEncoding(self):
     atom_entry = atom.EntryFromString(self.test_xml)
-    #self.assertEqual(atom_entry.title.type.encode('utf-8'), 
-    #    u'\u03B1\u03BB\u03C6\u03B1'.encode('utf-8'))
-    #self.assertEqual(atom_entry.title.text.encode('utf-8'), 
-    #    u'\u03B1\u03BB\u03C6\u03B1'.encode('utf-8'))
+    self.assert_(atom_entry.title.type == u'\u03B1\u03BB\u03C6\u03B1'.encode(
+        'utf-8'))
+    self.assert_(atom_entry.title.text == u'\u03B1\u03BB\u03C6\u03B1'.encode(
+        'utf-8'))
 
     # Setting object members to unicode strings is supported even if 
     # MEMBER_STRING_ENCODING is set 'utf-8' (should it be?)

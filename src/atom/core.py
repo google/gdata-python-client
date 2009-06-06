@@ -312,6 +312,54 @@ class XmlElement(object):
     new_child.tag = _get_qname(self, version)
     self._attach_members(new_child, version)
 
+  def __get_extension_elements(self):
+    return self._other_elements
+
+  def __set_extension_elements(self, elements):
+    self._other_elements = elements
+
+  extension_elements = property(__get_extension_elements, 
+      __set_extension_elements, 
+      """Provides backwards compatibility for v1 atom.AtomBase classes.""")
+
+  def __get_extension_attributes(self):
+    return self._other_attributes
+
+  def __set_extension_attributes(self, attributes):
+    self._other_attributes = attributes
+
+  extension_attributes = property(__get_extension_attributes, 
+      __set_extension_attributes, 
+      """Provides backwards compatibility for v1 atom.AtomBase classes.""")
+
+  def __get_tag(self):
+    return self._qname[self._qname.find('}')+1:]
+
+  def __get_namespace(self):
+    if self._qname.startswith('{'):
+      return self._qname[1:self._qname.find('}')]
+    else:
+      return None
+
+  def __set_tag(self, tag):
+    if self._qname.startswith('{'):
+      self._qname = '{%s}%s' % (self.__get_namespace(), tag)
+    else:
+      self._qname = tag
+
+  def __set_namespace(self, namespace):
+    self._qname = '{%s}%s' % (namespace, self.__get_tag())
+
+  tag = property(__get_tag, __set_tag, 
+      """Provides backwards compatibility for v1 atom.AtomBase classes.""")
+
+  namespace = property(__get_namespace, __set_namespace, 
+      """Provides backwards compatibility for v1 atom.AtomBase classes.""")
+
+  # Provided for backwards compatibility to atom.ExtensionElement
+  children = extension_elements
+  attributes = extension_attributes
+
 
 def _get_qname(element, version):
   if isinstance(element._qname, tuple):
@@ -413,3 +461,4 @@ class XmlAttribute(object):
   def __init__(self, qname, value):
     self._qname = qname
     self.value = value
+
