@@ -20,6 +20,7 @@
 
 import urllib
 import atom.http_core
+import gdata.experimental_oauth as oauth
 
 
 __author__ = 'j.s@google.com (Jeff Scudder)'
@@ -311,3 +312,26 @@ class AuthSubToken(object):
     auth_sub_string_from_body.
     """
     self.token_string = auth_sub_string_from_body(http_body)
+
+
+class OAuthHmacToken(object):
+  SIGNATURE_METHOD = 'HMAC-SHA1'
+
+  def __init__(self, consumer_key, token):
+    self.consumer_key = consumer_key
+    self.token = token
+
+  def calculate_signature(self, http_request, oauth_params):
+    return oauth.build_hmac_signature(http_request, oauth_params, 
+        self.consumer_key, self.token)
+  
+  def modify_request(self, http_request):
+    oauth_params = {'oauth_consumer_key': self.consumer_key,
+        'oauth_nonce': oauth.generate_nonce(),
+        'oauth_signature_method': self.SIGNATURE_METHOD,
+        'oauth_timestamp': oauth.timestamp(),
+        'oauth_token': self.token,
+        'oauth_version': oauth.OATH_VERSION}
+    # At this point the request should contain all necessary information for
+    # calculating the OAuth signature.
+    oauth_signature = self.calculate_signature(http_request, oauth_params)

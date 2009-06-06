@@ -27,8 +27,9 @@ def generate_nonce(length=8):
 def timestamp():
   return int(time.time())
 
-def get_normalized_parameters(http_request):
-  params = http_request.uri.query.copy()
+def get_normalized_parameters(http_request, oauth_params):
+  params = oauth_params.copy()
+  params.update(http_request.uri.query)
   if 'oauth_signature' in params:
     del params['oauth_signature']
   pairs = params.items()
@@ -38,14 +39,15 @@ def get_normalized_parameters(http_request):
   x = '&'.join(['%s=%s' % (escape(str(k)), escape(str(v))) for k, v in pairs])
   return x
 
-def build_signature_base_string(http_request):
+def build_signature_base_string(http_request, oauth_params):
   return '&'.join(
       escape(http_request.method.upper()),
       escape(get_normalized_http_url(http_request)),
-      escape(get_normalized_parameters(http_request)))
+      escape(get_normalized_parameters(http_request, oauth_params)))
 
-def build_hmac_signature(self, http_request, consumer_secret, token_secret):
-  raw = build_signature_base_string(http_request)
+def build_hmac_signature(self, http_request, oauth_params, consumer_secret,
+    token_secret):
+  raw = build_signature_base_string(http_request, oauth_params)
   key = None
   hashed = None
   if token_secret:
@@ -62,8 +64,8 @@ def build_hmac_signature(self, http_request, consumer_secret, token_secret):
   return binascii.b2a_base64(hashed.digest())[:-1]
 
 #?
-def build_rsa_signature(self, http_request, cert):
-  base_string = build_signature_base_string(http_request)
+def build_rsa_signature(self, http_request, oauth_params, cert):
+  base_string = build_signature_base_string(http_request, oauth_params)
   # Pull the private key from the certificate
   privatekey = keyfactory.parsePrivateKey(cert)
   # Sign using the key
@@ -71,9 +73,9 @@ def build_rsa_signature(self, http_request, cert):
   return binascii.b2a_base64(signed)[:-1]
 
 #?  
-def check_signature(self, http_request, cert, signature):
+def check_signature(self, http_request, oauth_params, cert, signature):
   decoded_sig = base64.b64decode(signature);
-  base_string = build_signature_base_string(http_request)
+  base_string = build_signature_base_string(http_request, oauth_params)
   # Pull the public key from the certificate
   publickey = keyfactory.parsePEMKey(cert, public=True)
   # Check the signature
