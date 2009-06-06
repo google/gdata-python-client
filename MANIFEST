@@ -7,6 +7,7 @@ src/atom/__init__.py
 src/atom/auth.py
 src/atom/client.py
 src/atom/core.py
+src/atom/data.py
 src/atom/http.py
 src/atom/http_core.py
 src/atom/http_interface.py
@@ -201,6 +202,7 @@ tests/atom_tests/__init__.py
 tests/atom_tests/auth_test.py
 tests/atom_tests/client_test.py
 tests/atom_tests/core_test.py
+tests/atom_tests/data_test.py
 tests/atom_tests/http_core_test.py
 tests/atom_tests/http_interface_test.py
 tests/atom_tests/mock_client_test.py
