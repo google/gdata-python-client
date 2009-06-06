@@ -81,8 +81,12 @@ def check_signature(self, http_request, oauth_params, cert, signature):
   # Check the signature
   return publickey.hashAndVerify(decoded_sig, base_string)
 
-
-
+def to_auth_header(oauth_params):
+  # Create a tuple containing key value pairs with an = between.
+  # Example: oauth_token="ad180jjd733klru7"
+  pairs = ('%s="%s"' % (escape(k), escape(v)) for k, v in oauth_params.iteritems())
+  # Place a , between each pair and return as an OAuth auth header value.
+  return 'OAuth %s' % (','.join(pairs)) 
 
 
 

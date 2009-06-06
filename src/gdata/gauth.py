@@ -334,4 +334,6 @@ class OAuthHmacToken(object):
         'oauth_version': oauth.OATH_VERSION}
     # At this point the request should contain all necessary information for
     # calculating the OAuth signature.
-    oauth_signature = self.calculate_signature(http_request, oauth_params)
+    oauth_params['oauth_signature']  = self.calculate_signature(http_request,
+        oauth_params)
+    http_request.headers['Authorization'] = oauth.to_auth_header(oauth_params)
