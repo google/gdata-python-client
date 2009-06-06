@@ -264,6 +264,7 @@ tests/gdata_tests/youtube/service_test.py
 pydocs/atom.auth.html
 pydocs/atom.client.html
 pydocs/atom.core.html
+pydocs/atom.data.html
 pydocs/atom.html
 pydocs/atom.http.html
 pydocs/atom.http_core.html
@@ -303,6 +304,8 @@ pydocs/gdata.data.html
 pydocs/gdata.docs.html
 pydocs/gdata.docs.service.html
 pydocs/gdata.exif.html
+pydocs/gdata.finance.html
+pydocs/gdata.finance.service.html
 pydocs/gdata.gauth.html
 pydocs/gdata.geo.html
 pydocs/gdata.html

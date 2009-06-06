@@ -208,7 +208,7 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x72b260&gt;<dd><tt>T.<a href="#AccountQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xc57e90&gt;<dd><tt>dict.<a href="#AccountQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xac4980&gt;<dd><tt>dict.<a href="#AccountQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -302,7 +302,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;entry&nbsp;was&nbsp;deleted.</tt></dd></dl>
 
-<dl><dt><a name="AccountsService-FetchOAuthRequestToken"><strong>FetchOAuthRequestToken</strong></a>(self, scopes<font color="#909090">=None</font>, extra_parameters<font color="#909090">=None</font>, request_url<font color="#909090">='https://www.google.com/accounts/OAuthGetRequestToken'</font>)</dt><dd><tt>Fetches&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;and&nbsp;returns&nbsp;it.<br>
+<dl><dt><a name="AccountsService-FetchOAuthRequestToken"><strong>FetchOAuthRequestToken</strong></a>(self, scopes<font color="#909090">=None</font>, extra_parameters<font color="#909090">=None</font>, request_url<font color="#909090">='https://www.google.com/accounts/OAuthGetRequestToken'</font>, oauth_callback<font color="#909090">=None</font>)</dt><dd><tt>Fetches&nbsp;and&nbsp;sets&nbsp;the&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;and&nbsp;returns&nbsp;it.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;scopes:&nbsp;string&nbsp;or&nbsp;list&nbsp;of&nbsp;string&nbsp;base&nbsp;URL(s)&nbsp;of&nbsp;the&nbsp;service(s)&nbsp;to&nbsp;be<br>
@@ -317,6 +317,10 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extra_parameters&nbsp;=&nbsp;{'oauth_version':&nbsp;'2.0'}<br>
 &nbsp;&nbsp;request_url:&nbsp;Request&nbsp;token&nbsp;URL.&nbsp;The&nbsp;default&nbsp;is<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'https://www.google.com/accounts/OAuthGetRequestToken'.<br>
+&nbsp;&nbsp;oauth_callback:&nbsp;str&nbsp;(optional)&nbsp;If&nbsp;set,&nbsp;it&nbsp;is&nbsp;assume&nbsp;the&nbsp;client&nbsp;is&nbsp;using<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;OAuth&nbsp;v1.0a&nbsp;protocol&nbsp;where&nbsp;the&nbsp;callback&nbsp;url&nbsp;is&nbsp;sent&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request&nbsp;token&nbsp;step.&nbsp;&nbsp;If&nbsp;the&nbsp;oauth_callback&nbsp;is&nbsp;also&nbsp;set&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extra_params,&nbsp;this&nbsp;value&nbsp;will&nbsp;override&nbsp;that&nbsp;one.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;fetched&nbsp;request&nbsp;token&nbsp;as&nbsp;a&nbsp;gdata.auth.OAuthToken&nbsp;object.<br>
@@ -452,7 +456,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="AccountsService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x7f2fa43c0de8&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
+<dl><dt><a name="AccountsService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x7f0084354de8&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;gdata.service.Get<br>
 &nbsp;<br>
@@ -682,18 +686,21 @@ you&nbsp;receive&nbsp;from&nbsp;FetchOAuthRequestToken.<br>
 Args:<br>
 &nbsp;&nbsp;request_token:&nbsp;gdata.auth.OAuthToken&nbsp;OAuth&nbsp;request&nbsp;token.</tt></dd></dl>
 
-<dl><dt><a name="AccountsService-UpgradeToOAuthAccessToken"><strong>UpgradeToOAuthAccessToken</strong></a>(self, authorized_request_token<font color="#909090">=None</font>, request_url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>, oauth_version<font color="#909090">='1.0'</font>)</dt><dd><tt>Upgrades&nbsp;the&nbsp;authorized&nbsp;request&nbsp;token&nbsp;to&nbsp;an&nbsp;access&nbsp;token&nbsp;and&nbsp;returns&nbsp;it<br>
+<dl><dt><a name="AccountsService-UpgradeToOAuthAccessToken"><strong>UpgradeToOAuthAccessToken</strong></a>(self, authorized_request_token<font color="#909090">=None</font>, request_url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>, oauth_version<font color="#909090">='1.0'</font>, oauth_verifier<font color="#909090">=None</font>)</dt><dd><tt>Upgrades&nbsp;the&nbsp;authorized&nbsp;request&nbsp;token&nbsp;to&nbsp;an&nbsp;access&nbsp;token&nbsp;and&nbsp;returns&nbsp;it<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;authorized_request_token:&nbsp;gdata.auth.OAuthToken&nbsp;(optional)&nbsp;OAuth&nbsp;request<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token.&nbsp;If&nbsp;not&nbsp;specified,&nbsp;then&nbsp;the&nbsp;current&nbsp;token&nbsp;will&nbsp;be&nbsp;used&nbsp;if&nbsp;it&nbsp;is<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;type&nbsp;&lt;gdata.auth.OAuthToken&gt;,&nbsp;else&nbsp;it&nbsp;is&nbsp;found&nbsp;by&nbsp;looking&nbsp;in&nbsp;the<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token_store&nbsp;by&nbsp;looking&nbsp;for&nbsp;a&nbsp;token&nbsp;for&nbsp;the&nbsp;current&nbsp;scope.<br>
+&nbsp;&nbsp;request_url:&nbsp;Access&nbsp;token&nbsp;URL.&nbsp;The&nbsp;default&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'https://www.google.com/accounts/OAuthGetAccessToken'.<br>
 &nbsp;&nbsp;oauth_version:&nbsp;str&nbsp;(default='1.0')&nbsp;oauth_version&nbsp;parameter.&nbsp;All&nbsp;other<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'oauth_'&nbsp;parameters&nbsp;are&nbsp;added&nbsp;by&nbsp;default.&nbsp;This&nbsp;parameter&nbsp;too,&nbsp;is<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;added&nbsp;by&nbsp;default&nbsp;but&nbsp;here&nbsp;you&nbsp;can&nbsp;override&nbsp;it's&nbsp;value.<br>
-&nbsp;&nbsp;request_url:&nbsp;Access&nbsp;token&nbsp;URL.&nbsp;The&nbsp;default&nbsp;is<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'https://www.google.com/accounts/OAuthGetAccessToken'.<br>
+&nbsp;&nbsp;oauth_verifier:&nbsp;str&nbsp;(optional)&nbsp;If&nbsp;present,&nbsp;it&nbsp;is&nbsp;assumed&nbsp;that&nbsp;the&nbsp;client<br>
+&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;use&nbsp;the&nbsp;OAuth&nbsp;v1.0a&nbsp;protocol&nbsp;which&nbsp;includes&nbsp;passing&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;oauth_verifier&nbsp;(as&nbsp;returned&nbsp;by&nbsp;the&nbsp;SP)&nbsp;in&nbsp;the&nbsp;access&nbsp;token&nbsp;step.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;Access&nbsp;token<br>
@@ -918,7 +925,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;entry&nbsp;was&nbsp;deleted.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsDataService-FetchOAuthRequestToken"><strong>FetchOAuthRequestToken</strong></a>(self, scopes<font color="#909090">=None</font>, extra_parameters<font color="#909090">=None</font>, request_url<font color="#909090">='https://www.google.com/accounts/OAuthGetRequestToken'</font>)</dt><dd><tt>Fetches&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;and&nbsp;returns&nbsp;it.<br>
+<dl><dt><a name="AnalyticsDataService-FetchOAuthRequestToken"><strong>FetchOAuthRequestToken</strong></a>(self, scopes<font color="#909090">=None</font>, extra_parameters<font color="#909090">=None</font>, request_url<font color="#909090">='https://www.google.com/accounts/OAuthGetRequestToken'</font>, oauth_callback<font color="#909090">=None</font>)</dt><dd><tt>Fetches&nbsp;and&nbsp;sets&nbsp;the&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;and&nbsp;returns&nbsp;it.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;scopes:&nbsp;string&nbsp;or&nbsp;list&nbsp;of&nbsp;string&nbsp;base&nbsp;URL(s)&nbsp;of&nbsp;the&nbsp;service(s)&nbsp;to&nbsp;be<br>
@@ -933,6 +940,10 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extra_parameters&nbsp;=&nbsp;{'oauth_version':&nbsp;'2.0'}<br>
 &nbsp;&nbsp;request_url:&nbsp;Request&nbsp;token&nbsp;URL.&nbsp;The&nbsp;default&nbsp;is<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'https://www.google.com/accounts/OAuthGetRequestToken'.<br>
+&nbsp;&nbsp;oauth_callback:&nbsp;str&nbsp;(optional)&nbsp;If&nbsp;set,&nbsp;it&nbsp;is&nbsp;assume&nbsp;the&nbsp;client&nbsp;is&nbsp;using<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;OAuth&nbsp;v1.0a&nbsp;protocol&nbsp;where&nbsp;the&nbsp;callback&nbsp;url&nbsp;is&nbsp;sent&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request&nbsp;token&nbsp;step.&nbsp;&nbsp;If&nbsp;the&nbsp;oauth_callback&nbsp;is&nbsp;also&nbsp;set&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extra_params,&nbsp;this&nbsp;value&nbsp;will&nbsp;override&nbsp;that&nbsp;one.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;fetched&nbsp;request&nbsp;token&nbsp;as&nbsp;a&nbsp;gdata.auth.OAuthToken&nbsp;object.<br>
@@ -1068,7 +1079,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsDataService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x7f2fa43c0de8&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
+<dl><dt><a name="AnalyticsDataService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x7f0084354de8&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;gdata.service.Get<br>
 &nbsp;<br>
@@ -1298,18 +1309,21 @@ you&nbsp;receive&nbsp;from&nbsp;FetchOAuthRequestToken.<br>
 Args:<br>
 &nbsp;&nbsp;request_token:&nbsp;gdata.auth.OAuthToken&nbsp;OAuth&nbsp;request&nbsp;token.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsDataService-UpgradeToOAuthAccessToken"><strong>UpgradeToOAuthAccessToken</strong></a>(self, authorized_request_token<font color="#909090">=None</font>, request_url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>, oauth_version<font color="#909090">='1.0'</font>)</dt><dd><tt>Upgrades&nbsp;the&nbsp;authorized&nbsp;request&nbsp;token&nbsp;to&nbsp;an&nbsp;access&nbsp;token&nbsp;and&nbsp;returns&nbsp;it<br>
+<dl><dt><a name="AnalyticsDataService-UpgradeToOAuthAccessToken"><strong>UpgradeToOAuthAccessToken</strong></a>(self, authorized_request_token<font color="#909090">=None</font>, request_url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>, oauth_version<font color="#909090">='1.0'</font>, oauth_verifier<font color="#909090">=None</font>)</dt><dd><tt>Upgrades&nbsp;the&nbsp;authorized&nbsp;request&nbsp;token&nbsp;to&nbsp;an&nbsp;access&nbsp;token&nbsp;and&nbsp;returns&nbsp;it<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;authorized_request_token:&nbsp;gdata.auth.OAuthToken&nbsp;(optional)&nbsp;OAuth&nbsp;request<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token.&nbsp;If&nbsp;not&nbsp;specified,&nbsp;then&nbsp;the&nbsp;current&nbsp;token&nbsp;will&nbsp;be&nbsp;used&nbsp;if&nbsp;it&nbsp;is<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;type&nbsp;&lt;gdata.auth.OAuthToken&gt;,&nbsp;else&nbsp;it&nbsp;is&nbsp;found&nbsp;by&nbsp;looking&nbsp;in&nbsp;the<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token_store&nbsp;by&nbsp;looking&nbsp;for&nbsp;a&nbsp;token&nbsp;for&nbsp;the&nbsp;current&nbsp;scope.<br>
+&nbsp;&nbsp;request_url:&nbsp;Access&nbsp;token&nbsp;URL.&nbsp;The&nbsp;default&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'https://www.google.com/accounts/OAuthGetAccessToken'.<br>
 &nbsp;&nbsp;oauth_version:&nbsp;str&nbsp;(default='1.0')&nbsp;oauth_version&nbsp;parameter.&nbsp;All&nbsp;other<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'oauth_'&nbsp;parameters&nbsp;are&nbsp;added&nbsp;by&nbsp;default.&nbsp;This&nbsp;parameter&nbsp;too,&nbsp;is<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;added&nbsp;by&nbsp;default&nbsp;but&nbsp;here&nbsp;you&nbsp;can&nbsp;override&nbsp;it's&nbsp;value.<br>
-&nbsp;&nbsp;request_url:&nbsp;Access&nbsp;token&nbsp;URL.&nbsp;The&nbsp;default&nbsp;is<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'https://www.google.com/accounts/OAuthGetAccessToken'.<br>
+&nbsp;&nbsp;oauth_verifier:&nbsp;str&nbsp;(optional)&nbsp;If&nbsp;present,&nbsp;it&nbsp;is&nbsp;assumed&nbsp;that&nbsp;the&nbsp;client<br>
+&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;use&nbsp;the&nbsp;OAuth&nbsp;v1.0a&nbsp;protocol&nbsp;which&nbsp;includes&nbsp;passing&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;oauth_verifier&nbsp;(as&nbsp;returned&nbsp;by&nbsp;the&nbsp;SP)&nbsp;in&nbsp;the&nbsp;access&nbsp;token&nbsp;step.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;Access&nbsp;token<br>
@@ -1578,7 +1592,7 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x72b260&gt;<dd><tt>T.<a href="#DataQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xc56a00&gt;<dd><tt>dict.<a href="#DataQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xa403c0&gt;<dd><tt>dict.<a href="#DataQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table></td></tr></table><p>

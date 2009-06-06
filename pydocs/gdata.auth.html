@@ -462,7 +462,7 @@ Args:<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;HTTP&nbsp;body&nbsp;to&nbsp;send&nbsp;in&nbsp;a&nbsp;request&nbsp;for&nbsp;a&nbsp;client&nbsp;login&nbsp;token.</tt></dd></dl>
- <dl><dt><a name="-GenerateOAuthAccessTokenUrl"><strong>GenerateOAuthAccessTokenUrl</strong></a>(authorized_request_token, oauth_input_params, access_token_url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>, oauth_version<font color="#909090">='1.0'</font>)</dt><dd><tt>Generates&nbsp;URL&nbsp;at&nbsp;which&nbsp;user&nbsp;will&nbsp;login&nbsp;to&nbsp;authorize&nbsp;the&nbsp;request&nbsp;token.<br>
+ <dl><dt><a name="-GenerateOAuthAccessTokenUrl"><strong>GenerateOAuthAccessTokenUrl</strong></a>(authorized_request_token, oauth_input_params, access_token_url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>, oauth_version<font color="#909090">='1.0'</font>, oauth_verifier<font color="#909090">=None</font>)</dt><dd><tt>Generates&nbsp;URL&nbsp;at&nbsp;which&nbsp;user&nbsp;will&nbsp;login&nbsp;to&nbsp;authorize&nbsp;the&nbsp;request&nbsp;token.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;authorized_request_token:&nbsp;gdata.auth.<a href="#OAuthToken">OAuthToken</a>&nbsp;OAuth&nbsp;authorized&nbsp;request<br>
@@ -472,6 +472,9 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;normally&nbsp;'https://www.google.com/accounts/OAuthGetAccessToken'&nbsp;or<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/accounts/OAuthGetAccessToken'<br>
 &nbsp;&nbsp;oauth_version:&nbsp;str&nbsp;(default='1.0')&nbsp;oauth_version&nbsp;parameter.<br>
+&nbsp;&nbsp;oauth_verifier:&nbsp;str&nbsp;(optional)&nbsp;If&nbsp;present,&nbsp;it&nbsp;is&nbsp;assumed&nbsp;that&nbsp;the&nbsp;client<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;use&nbsp;the&nbsp;OAuth&nbsp;v1.0a&nbsp;protocol&nbsp;which&nbsp;includes&nbsp;passing&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;oauth_verifier&nbsp;(as&nbsp;returned&nbsp;by&nbsp;the&nbsp;SP)&nbsp;in&nbsp;the&nbsp;access&nbsp;token&nbsp;step.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;atom.url.Url&nbsp;OAuth&nbsp;access&nbsp;token&nbsp;URL.</tt></dd></dl>
