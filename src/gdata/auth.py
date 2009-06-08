@@ -621,7 +621,15 @@ class OAuthInputParams(object):
           signing each request. Valid implementations are provided as the
           constants defined by gdata.auth.OAuthSignatureMethod. Currently
           they are gdata.auth.OAuthSignatureMethod.RSA_SHA1 and
-          gdata.auth.OAuthSignatureMethod.HMAC_SHA1
+          gdata.auth.OAuthSignatureMethod.HMAC_SHA1. Instead of passing in
+          the strategy class, you may pass in a string for 'RSA_SHA1' or 
+          'HMAC_SHA1'. If you plan to use OAuth on App Engine (or another
+          WSGI environment) I recommend specifying signature method using a
+          string (the only options are 'RSA_SHA1' and 'HMAC_SHA1'). In these
+          environments there are sometimes issues with pickling an object in 
+          which a member references a class or function. Storing a string to
+          refer to the signature method mitigates complications when
+          pickling.
       consumer_key: string Domain identifying third_party web application.
       consumer_secret: string (optional) Secret generated during registration.
           Required only for HMAC_SHA1 signature method.
@@ -631,12 +639,40 @@ class OAuthInputParams(object):
           their behalf.  This parameter should only be set when performing
           2 legged OAuth requests.
     """
-    if signature_method == OAuthSignatureMethod.RSA_SHA1:
-      self._signature_method = signature_method(rsa_key, None)
+    if (signature_method == OAuthSignatureMethod.RSA_SHA1
+        or signature_method == 'RSA_SHA1'):
+      self.__signature_strategy = 'RSA_SHA1'
+    elif (signature_method == OAuthSignatureMethod.HMAC_SHA1
+        or signature_method == 'HMAC_SHA1'):
+      self.__signature_strategy = 'HMAC_SHA1'
     else:
-      self._signature_method = signature_method()
+      self.__signature_strategy = signature_method
+    self.rsa_key = rsa_key
     self._consumer = oauth.OAuthConsumer(consumer_key, consumer_secret)
     self.requestor_id = requestor_id
+
+  def __get_signature_method(self):
+    if self.__signature_strategy == 'RSA_SHA1':
+      return OAuthSignatureMethod.RSA_SHA1(self.rsa_key, None)
+    elif self.__signature_strategy == 'HMAC_SHA1':
+      return OAuthSignatureMethod.HMAC_SHA1()
+    else:
+      return self.__signature_strategy()
+
+  def __set_signature_method(self, signature_method):
+    if (signature_method == OAuthSignatureMethod.RSA_SHA1
+        or signature_method == 'RSA_SHA1'):
+      self.__signature_strategy = 'RSA_SHA1'
+    elif (signature_method == OAuthSignatureMethod.HMAC_SHA1
+        or signature_method == 'HMAC_SHA1'):
+      self.__signature_strategy = 'HMAC_SHA1'
+    else:
+      self.__signature_strategy = signature_method
+
+  _signature_method = property(__get_signature_method, __set_signature_method,
+      doc="""Returns object capable of signing the request using RSA of HMAC.
+      
+      Replaces the _signature_method member to avoid pickle errors.""")
 
   def GetSignatureMethod(self):
     """Gets the OAuth signature method.
