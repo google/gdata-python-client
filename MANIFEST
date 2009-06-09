@@ -211,6 +211,7 @@ samples/oauth/oauth_on_appengine/index.yaml
 samples/oauth/oauth_on_appengine/index.html
 samples/oauth/oauth_on_appengine/js
 samples/oauth/oauth_on_appengine/js/jquery.corners.min.js
+samples/oauth/oauth_on_appengine/README.txt
 tests/__init__.py
 tests/all_tests.py
 tests/all_tests_cached.py
