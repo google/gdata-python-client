@@ -16,7 +16,7 @@
 # limitations under the License.
 
 
-__author__ = 'api.jscudder@gmail.com (Jeff Scudder)'
+__author__ = 'j.s@google.com (Jeff Scudder)'
 
 
 import sys
@@ -676,13 +676,11 @@ class UtfParsingTest(unittest.TestCase):
 
 def suite():
   return conf.build_suite([AuthorTest, EmailTest, NameTest, 
-                           ExtensionElementTest, LinkTest, GeneratorTest,
-                           TitleTest, SubtitleTest, SummaryTest, IdTest,
-                           IconTest, LogoTest, RightsTest, UpdatedTest,
-                           PublishedTest, FeedEntryParentTest, EntryTest,
-                           ContentEntryParentTest, PreserveUnkownElementTest,
-                           FeedTest, LinkFinderTest, AtomBaseTest, 
-                           UtfParsingTest])
+      ExtensionElementTest, LinkTest, GeneratorTest, TitleTest, SubtitleTest,
+      SummaryTest, IdTest, IconTest, LogoTest, RightsTest, UpdatedTest,
+      PublishedTest, FeedEntryParentTest, EntryTest, ContentEntryParentTest,
+      PreserveUnkownElementTest, FeedTest, LinkFinderTest, AtomBaseTest, 
+      UtfParsingTest])
 
 
 if __name__ == '__main__':

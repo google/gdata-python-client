@@ -305,6 +305,9 @@ class XmlElement(object):
 
   ToString = to_string
 
+  def __str__(self):
+    return self.to_string()
+
   def _become_child(self, tree, version=1):
     """Adds a child element to tree with the XML data in self."""
     new_child = ElementTree.Element('')

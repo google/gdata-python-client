@@ -15,7 +15,7 @@
 # limitations under the License.
 
 
-__author__ = 'api.jscudder@gmail.com (Jeff Scudder)'
+__author__ = 'j.s@google.com (Jeff Scudder)'
 
 
 import unittest
@@ -26,6 +26,7 @@ except ImportError:
 import gdata
 import atom
 from gdata import test_data
+import gdata.test_config as conf
 
 
 class StartIndexTest(unittest.TestCase):
@@ -351,6 +352,12 @@ class FeedLinkTest(unittest.TestCase):
         '<feedLink xmlns="http://schemas.google.com/g/2005" countHint="5"/>')
     self.assertTrue(isinstance(link, gdata.FeedLink))
     self.assertEqual(link.count_hint, '5')
+
+
+def suite():
+  return conf.build_suite([StartIndexTest, StartIndexTest, GDataEntryTest,
+      LinkFinderTest, GDataFeedTest, BatchEntryTest, BatchFeedTest,
+      ExtendedPropertyTest, FeedLinkTest])
 
 
 if __name__ == '__main__':

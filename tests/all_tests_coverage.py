@@ -49,5 +49,6 @@ if __name__ == '__main__':
   coverage.start()
   unittest.TextTestRunner().run(all_tests.suite())
   coverage.stop()
-  coverage.report([atom.core, atom.http_core, atom.auth, atom.mock_http_core,
-                   atom.client, gdata.gauth, gdata.client, gdata.data])
+  coverage.report([atom.core, atom.http_core, atom.auth, atom.data,
+      atom.mock_http_core, atom.client, gdata.gauth, gdata.client,
+      gdata.data])

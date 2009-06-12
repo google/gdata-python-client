@@ -207,13 +207,15 @@ class LinkFinder(object):
   
   FindEditLink = find_edit_link
   
-
   def find_edit_media_link(self):
-    return self.find_url('edit-media')
+    link = self.find_url('edit-media')
+    # Search for media-edit as well since Picasa API used media-edit instead.
+    if link is None:
+      return self.find_url('media-edit')
+    return link
   
   FindEditMediaLink = find_edit_media_link
   
-
   def find_next_link(self):
     return self.find_url('next')
   
@@ -240,6 +242,11 @@ class FeedEntryParent(atom.core.XmlElement, LinkFinder):
   rights = Rights
   title = Title
   updated = Updated
+
+  def __init__(self, atom_id=None, text=None, *args, **kwargs):
+    if atom_id is not None:
+      self.id = atom_id
+    atom.core.XmlElement.__init__(self, text=text, *args, **kwargs)
 
 
 class Source(FeedEntryParent):

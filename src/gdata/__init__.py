@@ -21,7 +21,7 @@
 """
 
 
-__author__ = 'api.jscudder (Jeffrey Scudder)'
+__author__ = 'j.s@google.com (Jeffrey Scudder)'
 
 import os
 import atom
