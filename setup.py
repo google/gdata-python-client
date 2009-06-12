@@ -20,7 +20,7 @@ from distutils.core import setup
 
 setup(
     name='gdata',
-    version='1.3.3',
+    version='1.3.4',
     description='Python client library for Google data APIs',
     long_description = """\
 The Google data Python client library makes it easy to interact with
@@ -62,7 +62,8 @@ library may also be used with any Atom Publishing Protocol service (AtomPub).
         'gdata.blogger', 'gdata.alt', 'gdata.oauth', 'gdata.tlslite', 
         'gdata.Crypto', 'gdata.Crypto.Cipher', 'gdata.Crypto.Hash', 
         'gdata.Crypto.Protocol', 'gdata.Crypto.PublicKey', 'gdata.Crypto.Util',
-        'gdata.tlslite.utils', 'gdata.tlslite.integration', 'gdata.health'],
+        'gdata.tlslite.utils', 'gdata.tlslite.integration', 'gdata.health',
+        'gdata.analytics', 'gdata.finance'],
     package_dir = {'gdata':'src/gdata', 'atom':'src/atom'},
     install_requires=['elementtree']
 )
