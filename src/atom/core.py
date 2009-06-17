@@ -421,16 +421,20 @@ def _qname_matches(tag, namespace, qname):
           and member_namespace is None))
 
 
-def xml_element_from_string(xml_string, target_class, 
-    version=1, encoding=None):
+def parse(xml_string, target_class=None, version=1, encoding=None):
   """Parses the XML string according to the rules for the target_class.
 
   Args:
     xml_string: str or unicode
-    target_class: XmlElement or a subclass.
+    target_class: XmlElement or a subclass. If None is specified, the
+        XmlElement class is used.
     version: int (optional) The version of the schema which should be used when
-             converting the XML into an object. The default is 1.
+        converting the XML into an object. The default is 1.
+    encoding: str (optional) The character encoding of the bytes in the
+        xml_string. Default is 'UTF-8'. 
   """
+  if target_class is None:
+    target_class = XmlElement
   if isinstance(xml_string, unicode):
     if encoding is None:
       xml_string = xml_string.encode(STRING_ENCODING)
@@ -440,6 +444,7 @@ def xml_element_from_string(xml_string, target_class,
   return _xml_element_from_tree(tree, target_class, version)
 
 
+xml_element_from_string = parse
 XmlElementFromString = xml_element_from_string
 
 

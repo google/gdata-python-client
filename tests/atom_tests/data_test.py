@@ -551,6 +551,12 @@ class ContentEntryParentTest(unittest.TestCase):
     new_content = atom.Content(src='abcd')
     self.assertEquals(new_content.src, 'abcd')
 
+  def testContentFromString(self):
+    content_xml = '<content xmlns="http://www.w3.org/2005/Atom" type="test"/>'
+    content = atom.core.parse(content_xml, atom.data.Content)
+    self.assertTrue(isinstance(content, atom.data.Content))
+    self.assertEqual(content.type, 'test')
+
 
 class PreserveUnkownElementTest(unittest.TestCase):
   """Tests correct preservation of XML elements which are non Atom"""

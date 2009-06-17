@@ -116,7 +116,7 @@ class Summary(Text):
 
 class Content(Text):
   """The atom:content element."""
-  _qname = ATOM_TEMPLATE % 'summary'
+  _qname = ATOM_TEMPLATE % 'content'
   src = 'src'
 
 

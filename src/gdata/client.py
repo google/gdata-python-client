@@ -437,7 +437,7 @@ class GDClient(atom.client.AtomPubClient):
   ModifyRequest = modify_request
 
   def get_feed(self, uri, auth_token=None, converter=None, 
-               desired_class=gdata.data.GFeed, **kwargs):
+               desired_class=gdata.data.GDFeed, **kwargs):
     return self.request(method='GET', uri=uri, auth_token=auth_token,
                         converter=converter, desired_class=desired_class,
                         **kwargs)
@@ -445,7 +445,7 @@ class GDClient(atom.client.AtomPubClient):
   GetFeed = get_feed
 
   def get_entry(self, uri, auth_token=None, converter=None,
-                desired_class=gdata.data.GEntry, **kwargs):
+                desired_class=gdata.data.GDEntry, **kwargs):
     return self.request(method='GET', uri=uri, auth_token=auth_token,
                         converter=converter, desired_class=desired_class,
                         **kwargs)
