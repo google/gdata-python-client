@@ -149,8 +149,7 @@ class ExtendedProperty(atom.core.XmlElement):
     if isinstance(blob, atom.core.XmlElement):
       self._other_elements = [blob]
     else:
-      self._other_elements = [atom.core.xml_element_from_string(str(blob),
-          atom.core.XmlElement)]
+      self._other_elements = [atom.core.parse(str(blob))]
 
   SetXmlBlob = set_xml_blob
 
@@ -457,8 +456,7 @@ class GEntry(FeedEntryParent):
 
 
 def entry_from_string(xml_string, version=1, encoding='UTF-8'):
-  return atom.core.xml_element_from_string(xml_string, GEntry, version, 
-                                           encoding)
+  return atom.core.parse(xml_string, GEntry, version, encoding)
 
 
 EntryFromString = entry_from_string
@@ -476,8 +474,7 @@ class GFeed(FeedEntryParent):
 
 
 def feed_from_string(xml_string, version=1, encoding='UTF-8'):
-  return atom.core.xml_element_from_string(xml_string, GFeed, version, 
-                                           encoding)
+  return atom.core.parse(xml_string, GFeed, version, encoding)
 
 
 FeedFromString = feed_from_string

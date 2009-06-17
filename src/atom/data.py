@@ -184,12 +184,26 @@ class LinkFinder(object):
   """
 
   def find_url(self, rel):
+    """Returns the URL in a link with the desired rel value."""
     for link in self.link:
       if link.rel == rel and link.href:
         return link.href
     return None
 
   FindUrl = find_url
+
+  def get_link(self, rel):
+    """Returns a link object which has the desired rel value.
+    
+    If you are interested in the URL instead of the link object,
+    consider using find_url instead.
+    """
+    for link in self.link:
+      if link.rel == rel and link.href:
+        return link
+    return None
+
+  GetLink = get_link
 
   def find_self_link(self):
     """Find the first link with rel set to 'self'

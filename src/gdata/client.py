@@ -112,7 +112,7 @@ def create_converter(obj):
     A function which takes an XML string as the only parameter and returns an
     object of the same type as obj.
   """
-  return lambda response: atom.core.xml_element_from_string(
+  return lambda response: atom.core.parse(
       response.read(), obj.__class__, version=2, encoding='UTF-8')
 
 
@@ -221,7 +221,7 @@ class GDClient(atom.client.AtomPubClient):
                      successful response should be converted. If there is no
                      converter function specified (converter=None) then the
                      desired_class will be used in calling the
-                     atom.core.xml_element_from_string function. If neither
+                     atom.core.parse function. If neither
                      the desired_class nor the converter is specified, an
                      HTTP reponse object will be returned.
       redirects_remaining: (optional) int, if this number is 0 and the
@@ -239,7 +239,7 @@ class GDClient(atom.client.AtomPubClient):
       was provided, the results of calling the converter are returned. If no
       converter was specified but a desired_class was provided, the response
       body will be converted to the class using 
-      atom.core.xml_element_from_string.
+      atom.core.parse.
     """
     if isinstance(uri, (str, unicode)):
       uri = atom.http_core.Uri.parse_uri(uri)
@@ -273,13 +273,12 @@ class GDClient(atom.client.AtomPubClient):
         return converter(response)
       elif desired_class is not None:
         if self.api_version is not None:
-          return atom.core.xml_element_from_string(response.read(),
-              desired_class, version=self.api_version)
+          return atom.core.parse(response.read(), desired_class,
+                                 version=self.api_version)
         else:
-          # No API version was specified, so allow xml_element_from_string to
+          # No API version was specified, so allow parse to
           # use the default version.
-          return atom.core.xml_element_from_string(response.read(),
-              desired_class)
+          return atom.core.parse(response.read(), desired_class)
       else:
         return response
     # TODO: move the redirect logic into the Google Calendar client once it

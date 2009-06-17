@@ -16,7 +16,6 @@
 
 
 # This module is used for version 2 of the Google Data APIs.
-# TODO: handle UTF-8 and unicode as done in src/atom/__init__.py
 
 
 __author__ = 'j.s@google.com (Jeff Scudder)'
@@ -41,11 +40,13 @@ STRING_ENCODING = 'utf-8'
 class XmlElement(object):
   """Represents an element node in an XML document.
   
-  The text member is a UTF-8 encoded str.
+  The text member is a UTF-8 encoded str or unicode.
   """
   _qname = None
   _other_elements = None
   _other_attributes = None
+  # The rule set contains mappings for XML qnames to child members and the
+  # appropriate member classes.
   _rule_set = None
   _members = None
   text = None
@@ -96,6 +97,33 @@ class XmlElement(object):
   _list_xml_members = classmethod(_list_xml_members)
 
   def _get_rules(cls, version):
+    """Initializes the _rule_set for the class which is used when parsing XML.
+
+    This method is used internally for parsing and generating XML for an
+    XmlElement. It is not recommended that you call this method directly.
+    
+    Returns:
+      A tuple containing the XML parsing rules for the appropriate version.
+
+      The tuple looks like: 
+      (qname, {sub_element_qname: (member_name, member_class, repeating), ..},
+       {attribute_qname: member_name})
+
+      To give a couple of concrete example, the atom.data.Control _get_rules
+      with version of 2 will return:
+      ('{http://www.w3.org/2007/app}control',
+       {'{http://www.w3.org/2007/app}draft': ('draft',
+                                              <class 'atom.data.Draft'>,
+                                              False)}, 
+       {})
+      Calling _get_rules with version 1 on gdata.data.FeedLink will produce:
+      ('{http://schemas.google.com/g/2005}feedLink',
+       {'{http://www.w3.org/2005/Atom}feed': ('feed',
+                                              <class 'gdata.data.GDFeed'>,
+                                              False)},
+       {'href': 'href', 'readOnly': 'read_only', 'countHint': 'count_hint',
+        'rel': 'rel'})
+    """
     # Initialize the _rule_set to make sure there is a slot available to store
     # the parsing rules for this version of the XML schema.
     # Look for rule set in the class __dict__ proxy so that only the 
@@ -190,6 +218,14 @@ class XmlElement(object):
     return matches
 
   GetElements = get_elements
+  # FindExtensions and FindChildren are provided for backwards compatibility
+  # to the atom.AtomBase class.
+  # However, FindExtensions may return more results than the v1 atom.AtomBase
+  # method does, because get_elements searches both the expected children
+  # and the unexpected "other elements". The old AtomBase.FindExtensions
+  # method searched only "other elements" AKA extension_elements.
+  FindExtensions = get_elements
+  FindChildren = get_elements
     
   def get_attributes(self, tag=None, namespace=None, version=1):
     """Find all attributes which match the tag and namespace.
@@ -266,6 +302,7 @@ class XmlElement(object):
             other_attributes and other_elements are also added a children
             of this tree.
       version: int Ingnored in this method but used by VersionedElement.
+      encoding: str (optional)
     """
     qname, elements, attributes = self.__class__._get_rules(version)
     encoding = encoding or STRING_ENCODING
@@ -335,28 +372,47 @@ class XmlElement(object):
       __set_extension_attributes, 
       """Provides backwards compatibility for v1 atom.AtomBase classes.""")
 
-  def __get_tag(self):
-    return self._qname[self._qname.find('}')+1:]
+  def _get_tag(self, version=1):
+    qname = _get_qname(self, version)
+    return qname[qname.find('}')+1:]
 
-  def __get_namespace(self):
-    if self._qname.startswith('{'):
-      return self._qname[1:self._qname.find('}')]
+  def _get_namespace(self, version=1):
+    qname = _get_qname(self, version)
+    if qname.startswith('{'):
+      return qname[1:qname.find('}')]
     else:
       return None
 
-  def __set_tag(self, tag):
-    if self._qname.startswith('{'):
-      self._qname = '{%s}%s' % (self.__get_namespace(), tag)
+  def _set_tag(self, tag):
+    if isinstance(self._qname, tuple):
+      self._qname = self._qname.copy()
+      if self._qname[0].startswith('{'):
+        self._qname[0] = '{%s}%s' % (self._get_namespace(1), tag)
+      else:
+        self._qname[0] = tag
     else:
-      self._qname = tag
+      if self._qname.startswith('{'):
+        self._qname = '{%s}%s' % (self._get_namespace(), tag)
+      else:
+        self._qname = tag
 
-  def __set_namespace(self, namespace):
-    self._qname = '{%s}%s' % (namespace, self.__get_tag())
+  def _set_namespace(self, namespace):
+    if isinstance(self._qname, tuple):
+      self._qname = self._qname.copy()
+      if namespace:
+         self._qname[0] = '{%s}%s' % (namespace, self._get_tag(1))
+      else:
+         self._qname[0] = self._get_tag(1)
+    else:
+      if namespace:
+         self._qname = '{%s}%s' % (namespace, self._get_tag(1))
+      else:
+         self._qname = self._get_tag(1)
 
-  tag = property(__get_tag, __set_tag, 
+  tag = property(_get_tag, _set_tag, 
       """Provides backwards compatibility for v1 atom.AtomBase classes.""")
 
-  namespace = property(__get_namespace, __set_namespace, 
+  namespace = property(_get_namespace, _set_namespace, 
       """Provides backwards compatibility for v1 atom.AtomBase classes.""")
 
   # Provided for backwards compatibility to atom.ExtensionElement
@@ -444,6 +500,7 @@ def parse(xml_string, target_class=None, version=1, encoding=None):
   return _xml_element_from_tree(tree, target_class, version)
 
 
+Parse = parse
 xml_element_from_string = parse
 XmlElementFromString = xml_element_from_string
 
@@ -457,7 +514,7 @@ def _xml_element_from_tree(tree, target_class, version=1):
   # TODO handle the namespace-only case
   # Namespace only will be used with Google Spreadsheets rows and 
   # Google Base item attributes.
-  elif tree.tag == target_class._qname:
+  elif tree.tag == _get_qname(target_class, version):
     instance = target_class()
     instance._harvest_tree(tree, version)
     return instance
