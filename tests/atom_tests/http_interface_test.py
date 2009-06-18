@@ -28,15 +28,15 @@ class HttpResponseTest(unittest.TestCase):
   def testConstructorWithStrings(self):
     resp = atom.http_interface.HttpResponse(body='Hi there!', status=200, 
         reason='OK', headers={'Content-Length':'9'})
-    self.assert_(resp.read(amt=1) == 'H')
-    self.assert_(resp.read(amt=2) == 'i ')
-    self.assert_(resp.read() == 'there!')
-    self.assert_(resp.read() == '')
-    self.assert_(resp.reason == 'OK')
-    self.assert_(resp.status == 200)
-    self.assert_(resp.getheader('Content-Length') == '9')
-    self.assert_(resp.getheader('Missing') is None)
-    self.assert_(resp.getheader('Missing', default='yes') == 'yes')
+    self.assertEqual(resp.read(amt=1), 'H')
+    self.assertEqual(resp.read(amt=2), 'i ')
+    self.assertEqual(resp.read(), 'there!')
+    self.assertEqual(resp.read(), '')
+    self.assertEqual(resp.reason, 'OK')
+    self.assertEqual(resp.status, 200)
+    self.assertEqual(resp.getheader('Content-Length'), '9')
+    self.assertTrue(resp.getheader('Missing') is None)
+    self.assertEqual(resp.getheader('Missing', default='yes'), 'yes')
 
 
 if __name__ == '__main__':

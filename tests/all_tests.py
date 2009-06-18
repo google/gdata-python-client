@@ -38,6 +38,8 @@ import gdata_tests.contacts.service_test
 # Tests for v1 classes.
 import atom_test
 import gdata_test
+import atom_tests.service_test
+import atom_tests.url_test
 
 
 def suite():
@@ -52,7 +54,9 @@ def suite():
                              gdata_tests.gauth_test.suite(),
                              gdata_tests.live_client_test.suite(),
                              gdata_tests.contacts.service_test.suite(),
-                             atom_test.suite(), gdata_test.suite()))
+                             atom_test.suite(), gdata_test.suite(),
+                             atom_tests.service_test.suite(),
+                             atom_tests.url_test.suite()))
 
 
 if __name__ == '__main__':

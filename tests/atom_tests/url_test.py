@@ -15,11 +15,12 @@
 # limitations under the License.
 
 
-__author__ = 'api.jscudder (Jeff Scudder)'
+__author__ = 'j.s@google.com (Jeff Scudder)'
 
 
 import unittest
 import atom.url
+import gdata.test_config as conf
 
 
 class UrlTest(unittest.TestCase):
@@ -27,6 +28,7 @@ class UrlTest(unittest.TestCase):
   def testParseUrl(self):
     url = atom.url.parse_url('http://www.google.com/calendar/feeds')
     self.assert_(url.protocol == 'http')
+    self.assertTrue(url.port is None)
     self.assert_(url.host == 'www.google.com')
     self.assert_(url.path == '/calendar/feeds')
     self.assert_(url.params == {})
@@ -85,7 +87,10 @@ class UrlTest(unittest.TestCase):
     self.assert_(url2 != url4)
     self.assert_(url3 != url4)
 
-     
+
+def suite():
+  return conf.build_suite([UrlTest])
+
 
 if __name__ == '__main__':
   unittest.main()

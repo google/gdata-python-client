@@ -14,19 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-__author__ = 'jscudder@google.com (Jeff Scudder)'
+__author__ = 'j.s@google.com (Jeff Scudder)'
 
 import unittest
 import atom.service
+import atom.mock_http_core
+import gdata.test_config as conf
 
 class AtomServiceUnitTest(unittest.TestCase):
   
-  def setUp(self):
-    pass
-
-  def tearDown(self):
-    pass
-
   def testBuildUriWithNoParams(self):
     x = atom.service.BuildUri('/base/feeds/snippets')
     self.assert_(x == '/base/feeds/snippets')
@@ -144,6 +140,22 @@ class AtomServiceUnitTest(unittest.TestCase):
     self.assertEquals(port, 443)
     self.assertEquals(ssl, True)
     self.assert_(uri.startswith('/base/feeds/items'))
+
+  def testHostHeaderContainsNonDefaultPort(self):
+    client = atom.service.AtomService()
+    client.http_client.v2_http_client = atom.mock_http_core.EchoHttpClient()
+    response = client.Get('http://example.com')
+    self.assertEqual(response.getheader('Echo-Host'), 'example.com:None')
+    response = client.Get('https://example.com')
+    self.assertEqual(response.getheader('Echo-Host'), 'example.com:None')
+    response = client.Get('https://example.com:8080')
+    self.assertEqual(response.getheader('Echo-Host'), 'example.com:8080')
+    response = client.Get('http://example.com:1234')
+    self.assertEqual(response.getheader('Echo-Host'), 'example.com:1234')
+
+
+def suite():
+  return conf.build_suite([AtomServiceUnitTest])
 
 
 if __name__ == '__main__':

@@ -128,7 +128,10 @@ class HttpClient(atom.http_interface.GenericHttpClient):
 
     connection.putrequest(operation, self._get_access_url(url), 
         skip_host=True)
-    connection.putheader('Host', url.host)
+    if url.port is not None:
+      connection.putheader('Host', '%s:%s' % (url.host, url.port))
+    else:
+      connection.putheader('Host', url.host)
 
     # Overcome a bug in Python 2.4 and 2.5
     # httplib.HTTPConnection.putrequest adding
