@@ -216,10 +216,20 @@ class LinkFinder(object):
 
   FindSelfLink = find_self_link
 
+  def get_self_link(self):
+    return self.get_link('self')
+
+  GetSelfLink = get_self_link
+
   def find_edit_link(self):
     return self.find_url('edit')
   
   FindEditLink = find_edit_link
+  
+  def get_edit_link(self):
+    return self.get_link('edit')
+
+  GetEditLink = get_edit_link
   
   def find_edit_media_link(self):
     link = self.find_url('edit-media')
@@ -230,21 +240,44 @@ class LinkFinder(object):
   
   FindEditMediaLink = find_edit_media_link
   
+  def get_edit_media_link(self):
+    link = self.get_link('edit-media')
+    if link is None:
+      return self.get_link('media-edit')
+    return link
+
+  GetEditMediaLink = get_edit_media_link
+
   def find_next_link(self):
     return self.find_url('next')
   
   FindNextLink = find_next_link
 
+  def get_next_link(self):
+    return self.get_link('next')
+
+  GetNextLink = get_next_link
+  
   def find_license_link(self):
     return self.find_url('license')
   
   FindLicenseLink = find_license_link
+  
+  def get_license_link(self):
+    return self.get_link('license')
+
+  GetLicenseLink = get_license_link
   
   def find_alternate_link(self):
     return self.find_url('alternate')
   
   FindAlternateLink = find_alternate_link
 
+  def get_alternate_link(self):
+    return self.get_link('alternate')
+
+  GetAlternateLink = get_alternate_link
+  
 
 class FeedEntryParent(atom.core.XmlElement, LinkFinder):
   """A super class for atom:feed and entry, contains shared attributes"""

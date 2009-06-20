@@ -61,6 +61,14 @@ class LinkFinder(atom.data.LinkFinder):
 
   FindHtmlLink = find_html_link
 
+  def get_html_link(self):
+    for a_link in self.link:
+      if a_link.rel == 'alternate' and a_link.type == 'text/html':
+        return a_link
+    return None
+
+  GetHtmlLink = get_html_link
+
   def find_post_link(self):
     """Get the URL to which new entries should be POSTed.
 
@@ -73,21 +81,42 @@ class LinkFinder(atom.data.LinkFinder):
 
   FindPostLink = find_post_link
 
+  def get_post_link(self):
+    return self.get_link('http://schemas.google.com/g/2005#post')
+
+  GetPostLink = get_post_link
+
   def find_acl_link(self):
     return self.find_url(
         'http://schemas.google.com/acl/2007#accessControlList')
 
   FindAclLink = find_acl_link
 
+  def get_acl_link(self):
+    return self.get_link(
+        'http://schemas.google.com/acl/2007#accessControlList')
+
+  GetAclLink = get_acl_link
+
   def find_feed_link(self):
     return self.find_url('http://schemas.google.com/g/2005#feed')
 
   FindFeedLink = find_feed_link
 
+  def get_feed_link(self):
+    return self.get_link('http://schemas.google.com/g/2005#feed')
+
+  GetFeedLink = get_feed_link
+
   def find_previous_link(self):
     return self.find_url('previous')
 
   FindPreviousLink = find_previous_link
+
+  def get_previous_link(self):
+    return self.get_link('previous')
+
+  GetPreviousLink = get_previous_link
 
 
 class TotalResults(atom.core.XmlElement):

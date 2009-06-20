@@ -626,7 +626,10 @@ class LinkFinderTest(unittest.TestCase):
 
   def testLinkFinderGetsLicenseLink(self):
     self.assertTrue(isinstance(self.entry.GetLink('license'), atom.data.Link))
+    self.assertTrue(isinstance(self.entry.GetLicenseLink(), atom.data.Link))
     self.assertEquals(self.entry.GetLink('license').href,
+                      'http://creativecommons.org/licenses/by-nc/2.5/rdf')
+    self.assertEquals(self.entry.get_license_link().href,
                       'http://creativecommons.org/licenses/by-nc/2.5/rdf')
     self.assertEquals(self.entry.GetLink('license').rel, 'license')
     self.assertEquals(self.entry.FindLicenseLink(),
