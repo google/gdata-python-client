@@ -250,6 +250,16 @@ class CalendarFeedTest(unittest.TestCase):
         entry.recurrence_exception[0].entry_link.entry.author[0].name.text, 
         'gdata ops')
 
+  def testSequence(self):
+    entry = gdata.calendar.CalendarEventEntry(
+        sequence=gdata.calendar.Sequence(value='1'))
+    entry2 = gdata.calendar.CalendarEventEntryFromString(str(entry))
+    self.assertEqual(entry.sequence.value, entry2.sequence.value)
+    entry = gdata.calendar.CalendarEventEntryFromString(
+        '<entry xmlns="%s"><sequence xmlns="%s" value="7" /></entry>' % (
+            atom.ATOM_NAMESPACE, gdata.calendar.GCAL_NAMESPACE))
+    self.assertEqual(entry.sequence.value, '7')
+
   def testOriginalEntry(self):
     """Make sure original entry in the private composite feed are parsed."""
 
