@@ -15,7 +15,7 @@
 # limitations under the License.
 
 
-__author__ = 'api.jscudder (Jeff Scudder)'
+__author__ = 'j.s@google.com (Jeff Scudder)'
 
 
 import unittest
@@ -68,6 +68,10 @@ class TokenStoreTest(unittest.TestCase):
     self.assert_(token_store.find_token('http://www.example.org/') != token)
     self.assert_(isinstance(token_store.find_token('http://example.org/'), 
         atom.http_interface.GenericToken))
+
+
+def suite():
+  return unittest.TestSuite((unittest.makeSuite(TokenStoreTest,'test'),))
 
 
 if __name__ == '__main__':

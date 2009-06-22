@@ -674,13 +674,31 @@ class UtfParsingTest(unittest.TestCase):
     except UnicodeDecodeError:
       self.fail('Error when converting XML')
 
+
+class DeprecationDecoratorTest(unittest.TestCase):
+
+  def testDeprecationWarning(self):
+    def to_deprecate():
+      return 5
+    self.assertEqual(to_deprecate.func_name, 'to_deprecate')
+    deprecated = atom.deprecated('test')(to_deprecate)
+    self.assertNotEqual(to_deprecate, deprecated)
+    # After decorating a function as deprecated, the function name should
+    # still be the name of the original function.
+    self.assertEqual(deprecated.func_name, 'to_deprecate')
+    @atom.deprecated()
+    def also_deprecated():
+      return 6
+    self.assertEqual(also_deprecated.func_name, 'also_deprecated')
+
+
 def suite():
   return conf.build_suite([AuthorTest, EmailTest, NameTest, 
       ExtensionElementTest, LinkTest, GeneratorTest, TitleTest, SubtitleTest,
       SummaryTest, IdTest, IconTest, LogoTest, RightsTest, UpdatedTest,
       PublishedTest, FeedEntryParentTest, EntryTest, ContentEntryParentTest,
       PreserveUnkownElementTest, FeedTest, LinkFinderTest, AtomBaseTest, 
-      UtfParsingTest])
+      UtfParsingTest, DeprecationDecoratorTest])
 
 
 if __name__ == '__main__':

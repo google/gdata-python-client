@@ -15,7 +15,7 @@
 # limitations under the License.
 
 
-__author__ = 'api.jscudder (Jeff Scudder)'
+__author__ = 'j.s@google.com (Jeff Scudder)'
 
 
 import unittest
@@ -66,6 +66,9 @@ class MockHttpClientUnitTest(unittest.TestCase):
     except atom.mock_http.NoRecordingFound:
       pass
 
+def suite():
+  return unittest.TestSuite(
+      (unittest.makeSuite(MockHttpClientUnitTest,'test'),))
 
 if __name__ == '__main__':
   unittest.main()

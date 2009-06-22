@@ -39,5 +39,9 @@ class HttpResponseTest(unittest.TestCase):
     self.assertEqual(resp.getheader('Missing', default='yes'), 'yes')
 
 
+def suite():
+  return unittest.TestSuite((unittest.makeSuite(HttpResponseTest,'test'),))
+
+
 if __name__ == '__main__':
   unittest.main()

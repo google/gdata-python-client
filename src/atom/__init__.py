@@ -54,6 +54,7 @@ except ImportError:
       from xml.etree import ElementTree
     except ImportError:
       from elementtree import ElementTree
+import warnings
 
 
 # XML namespaces which are often used in Atom entities.
@@ -1411,3 +1412,23 @@ def _ExtensionElementFromElementTree(element_tree):
     extension.children.append(_ExtensionElementFromElementTree(child))
   extension.text = element_tree.text
   return extension
+
+
+def deprecated(warning=None):
+  """Decorator to raise warning each time the function is called.
+  
+  Args:
+    warning: The warning message to be displayed as a string (optinoal).
+  """
+  warning = warning or ''
+  # This closure is what is returned from the deprecated function.
+  def mark_deprecated(f):
+    # The deprecated_function wraps the actual call to f.
+    def deprecated_function(*args, **kwargs):
+      warnings.warn(warning, DeprecationWarning, stacklevel=2)
+      return f(*args, **kwargs)
+    # Preserve the original name to avoid masking all decorated functions as
+    # 'deprecated_function'
+    deprecated_function.func_name = f.func_name
+    return deprecated_function
+  return mark_deprecated

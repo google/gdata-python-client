@@ -514,7 +514,7 @@ class GDClient(atom.client.AtomPubClient):
         http_request.headers['If-Match'] = '*'
       elif hasattr(entry, 'etag') and entry.etag:
         http_request.headers['If-Match'] = entry.etag
-    return self.request(method='PUT', uri=entry.get_edit_url(), 
+    return self.request(method='PUT', uri=entry.find_edit_link(), 
                         auth_token=auth_token, http_request=http_request, 
                         desired_class=entry.__class__, **kwargs)
 
@@ -528,7 +528,7 @@ class GDClient(atom.client.AtomPubClient):
         http_request.headers['If-Match'] = '*'
       elif hasattr(entry, 'etag') and entry.etag:
         http_request.headers['If-Match'] = entry.etag
-    return self.request(method='DELETE', uri=entry.get_edit_url(), 
+    return self.request(method='DELETE', uri=entry.find_edit_link(), 
                         http_request=http_request, auth_token=auth_token,
                         **kwargs)
 

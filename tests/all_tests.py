@@ -39,6 +39,11 @@ import gdata_tests.contacts.service_test
 import atom_test
 import gdata_test
 import atom_tests.service_test
+import atom_tests.auth_test
+import atom_tests.http_interface_test
+import atom_tests.mock_client_test
+import atom_tests.mock_http_test
+import atom_tests.token_store_test
 import atom_tests.url_test
 
 
@@ -56,6 +61,11 @@ def suite():
                              gdata_tests.contacts.service_test.suite(),
                              atom_test.suite(), gdata_test.suite(),
                              atom_tests.service_test.suite(),
+                             atom_tests.auth_test.suite(),
+                             atom_tests.http_interface_test.suite(),
+                             atom_tests.mock_client_test.suite(),
+                             atom_tests.mock_http_test.suite(),
+                             atom_tests.token_store_test.suite(),
                              atom_tests.url_test.suite()))
 
 
