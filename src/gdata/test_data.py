@@ -1613,7 +1613,7 @@ ACL_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
   </entry>"""
 
 DOCUMENT_LIST_FEED = """<?xml version='1.0' encoding='UTF-8'?>
-<ns0:feed xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns2="http://schemas.google.com/g/2005"><ns1:totalResults
+<ns0:feed xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns2="http://schemas.google.com/g/2005" xmlns:ns3="http://schemas.google.com/docs/2007"><ns1:totalResults
 xmlns:ns1="http://a9.com/-/spec/opensearchrss/1.0/">2</ns1:totalResults><ns1:startIndex
 xmlns:ns1="http://a9.com/-/spec/opensearchrss/1.0/">1</ns1:startIndex><ns0:entry><ns0:content
 src="http://foo.com/fm?fmcmd=102&amp;key=supercalifragilisticexpeadocious"
@@ -1635,6 +1635,7 @@ rel="self" type="application/atom+xml" /><ns0:title type="text">Test Spreadsheet
     <ns0:name>test.user</ns0:name>
     <ns0:email>test.user@gmail.com</ns0:email>
 </ns2:lastModifiedBy>
+<ns3:writersCanInvite value='true'/>
 <ns2:lastViewed>2009-03-05T07:48:21.493Z</ns2:lastViewed>
 </ns0:entry><ns0:entry><ns0:content
 src="http://docs.google.com/RawDocContents?action=fetch&amp;docID=gr00vy"
@@ -1652,6 +1653,7 @@ rel="self" type="application/atom+xml" /><ns0:title type="text">Test Document</n
     <ns0:name>test.user</ns0:name>
     <ns0:email>test.user@gmail.com</ns0:email>
 </ns2:lastModifiedBy>
+<ns3:writersCanInvite value='true'/>
  <ns2:lastViewed>2009-03-05T07:48:21.493Z</ns2:lastViewed>
 </ns0:entry><ns0:id>http://docs.google.com/feeds/documents/private/full</ns0:id><ns0:link
 href="http://docs.google.com" rel="alternate" type="text/html" /><ns0:link
@@ -1667,7 +1669,7 @@ test.user@gmail.com</ns0:title><ns0:updated>2007-07-09T23:07:21.898Z</ns0:update
 """
 
 DOCUMENT_LIST_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
-<ns0:entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://schemas.google.com/g/2005"><ns0:content
+<ns0:entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://schemas.google.com/g/2005" xmlns:ns2="http://schemas.google.com/docs/2007"><ns0:content
 src="http://foo.com/fm?fmcmd=102&amp;key=supercalifragilisticexpealidocious"
 type="text/html"
 /><ns0:author><ns0:name>test.user</ns0:name><ns0:email>test.user@gmail.com</ns0:email></ns0:author><ns0:category
@@ -1687,6 +1689,7 @@ rel="self" type="application/atom+xml" /><ns0:title type="text">Test Spreadsheet
     <ns0:email>test.user@gmail.com</ns0:email>
 </ns1:lastModifiedBy>
 <ns1:lastViewed>2009-03-05T07:48:21.493Z</ns1:lastViewed>
+<ns2:writersCanInvite value='true'/>
 </ns0:entry>
 """
 
