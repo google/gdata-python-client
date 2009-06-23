@@ -221,7 +221,8 @@ class RequestTest(unittest.TestCase):
     self.assertEquals(result, 1)
     result = client.post(test_entry, 'http://example.com', desired_class=TestClass)
     self.assertTrue(isinstance(result, TestClass))
-  
+
+
 class CreateConverterTest(unittest.TestCase):
   
   def test_create_converter(self):
@@ -232,7 +233,28 @@ class CreateConverterTest(unittest.TestCase):
     entry = converter_function(fake_response)
     self.assertTrue(isinstance(entry, gdata.data.GEntry))
     self.assertEqual(entry.get_elements('title')[0].text, 'x')
-    
+
+
+class QueryTest(unittest.TestCase):
+
+  def test_query_modifies_request(self):
+    request = atom.http_core.HttpRequest()
+    gdata.client.Query(
+        text_query='foo', categories=['a', 'b']).modify_request(request)
+    self.assertEqual(request.uri.query, {'q': 'foo', 'categories': 'a,b'})
+
+  def test_client_uses_query_modification(self):
+    """If the Query is passed as an unexpected param it should apply"""
+    client = gdata.client.GDClient()
+    client.http_client = atom.mock_http_core.EchoHttpClient()
+    query = gdata.client.Query(max_results=7)
+
+    client.http_client = atom.mock_http_core.SettableHttpClient(
+        201, 'CREATED', gdata.data.GDEntry().ToString(), {})
+    response = client.get('https://example.com/foo', a_random_param=query)
+    self.assertEqual(
+        client.http_client.last_request.uri.query['max-results'], '7')
+
 
 # Tests for v1 client code
 class AuthSubUrlTest(unittest.TestCase):
@@ -307,6 +329,7 @@ def suite():
   return unittest.TestSuite((unittest.makeSuite(ClientLoginTest, 'test'),
                              unittest.makeSuite(AuthSubTest, 'test'),
                              unittest.makeSuite(RequestTest, 'test'),
+                             unittest.makeSuite(QueryTest, 'test'),
                              unittest.makeSuite(CreateConverterTest, 'test')))
 
 

@@ -538,6 +538,103 @@ class GDClient(atom.client.AtomPubClient):
   #def batch(feed, uri, auth_token=None, converter=None, **kwargs):
   #  pass
 
+  # TODO: add a refresh method to request a conditional update to an entry
+  # or feed.
+
+
+def _add_query_param(param_string, value, http_request):
+  if value:
+    http_request.uri.query[param_string] = value
+
+
+class Query(object):
+
+  def __init__(self, text_query=None, categories=None, author=None, alt=None,
+               updated_min=None, updated_max=None, pretty_print=False,
+               published_min=None, published_max=None, start_index=None,
+               max_results=None, strict=False):
+    """Constructs a Google Data Query to filter feed contents serverside.
+    
+    Args:
+      text_query: Full text search str (optional)
+      categories: list of strings (optional). Each string is a required
+          category. To include an 'or' query, put a | in the string between
+          terms. For example, to find everything in the Fitz category and
+          the Laurie or Jane category (Fitz and (Laurie or Jane)) you would
+          set categories to ['Fitz', 'Laurie|Jane'].
+      author: str (optional) The service returns entries where the author
+          name and/or email address match your query string.
+      alt: str (optional) for the Alternative representation type you'd like
+          the feed in. If you don't specify an alt parameter, the service
+          returns an Atom feed. This is equivalent to alt='atom'.
+          alt='rss' returns an RSS 2.0 result feed.
+          alt='json' returns a JSON representation of the feed.
+          alt='json-in-script' Requests a response that wraps JSON in a script
+          tag.
+          alt='atom-in-script' Requests an Atom response that wraps an XML
+          string in a script tag.
+          alt='rss-in-script' Requests an RSS response that wraps an XML
+          string in a script tag.
+      updated_min: str (optional), RFC 3339 timestamp format, lower bounds. 
+          For example: 2005-08-09T10:57:00-08:00
+      updated_max: str (optional) updated time must be earlier than timestamp.
+      pretty_print: boolean (optional) If True the server's XML response will
+          be indented to make it more human readable. Defaults to False.
+      published_min: str (optional), Similar to updated_min but for published
+          time.
+      published_max: str (optional), Similar to updated_max but for published
+          time.
+      start_index: int or str (optional) 1-based index of the first result to
+          be retrieved. Note that this isn't a general cursoring mechanism. 
+          If you first send a query with ?start-index=1&max-results=10 and
+          then send another query with ?start-index=11&max-results=10, the
+          service cannot guarantee that the results are equivalent to
+          ?start-index=1&max-results=20, because insertions and deletions
+          could have taken place in between the two queries.
+      max_results: int or str (optional) Maximum number of results to be
+          retrieved. Each service has a default max (usually 25) which can
+          vary from service to service. There is also a service-specific
+          limit to the max_results you can fetch in a request.
+      strict: boolean (optional) If True, the server will return an error if
+          the server does not recognize any of the parameters in the request
+          URL. Defaults to False.
+    """
+    self.text_query = text_query
+    self.categories = categories or []
+    self.author = author
+    self.alt = alt
+    self.updated_min = updated_min
+    self.updated_max = updated_max
+    self.pretty_print = pretty_print
+    self.published_min = published_min
+    self.published_max = published_max
+    self.start_index = start_index
+    self.max_results = max_results
+    self.strict = strict
+
+  def modify_request(self, http_request):
+    _add_query_param('q', self.text_query, http_request)
+    if self.categories:
+      http_request.uri.query['categories'] = ','.join(self.categories)
+    _add_query_param('author', self.author, http_request)
+    _add_query_param('alt', self.alt, http_request)
+    _add_query_param('updated-min', self.updated_min, http_request)
+    _add_query_param('updated-max', self.updated_max, http_request)
+    if self.pretty_print:
+      http_request.uri.query['prettyprint'] = 'true'
+    _add_query_param('published-min', self.published_min, http_request)
+    _add_query_param('published-max', self.published_max, http_request)
+    if self.start_index is not None:
+      http_request.uri.query['start-index'] = str(self.start_index)
+    if self.max_results is not None:
+      http_request.uri.query['max-results'] = str(self.max_results)
+    if self.strict:
+      http_request.uri.query['strict'] = 'true'
+
+
+  ModifyRequest = modify_request
+
+
 class GDQuery(atom.http_core.Uri):
 
   def _get_text_query(self):
