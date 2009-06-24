@@ -24,6 +24,7 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 import unittest
 import gdata.gauth
 import atom.http_core
+import gdata.test_config as conf
 
 
 class AuthSubTest(unittest.TestCase):
@@ -65,14 +66,36 @@ class AuthSubTest(unittest.TestCase):
         'http://example.com?token=123abc')
     self.assertTrue(isinstance(token, gdata.gauth.AuthSubToken))
     self.assertEqual(token.token_string, '123abc')
-    self.assertEqual(token.scopes, None)
+    self.assertEqual(token.scopes, [])
     token._upgrade_token('Token=456def')
     self.assertEqual(token.token_string, '456def')
-    self.assertEqual(token.scopes, None)
+    self.assertEqual(token.scopes, [])
+
+
+class TokensToAndFromBlobs(unittest.TestCase):
+
+  def test_client_login_conversion(self):
+    token = gdata.gauth.ClientLoginToken('test|key')
+    copy = gdata.gauth.token_from_blob(gdata.gauth.token_to_blob(token))
+    self.assertEqual(token.token_string, copy.token_string)
+    self.assertTrue(isinstance(copy, gdata.gauth.ClientLoginToken))
+
+  def test_authsub_conversion(self):
+    token = gdata.gauth.AuthSubToken('test|key')
+    copy = gdata.gauth.token_from_blob(gdata.gauth.token_to_blob(token))
+    self.assertEqual(token.token_string, copy.token_string)
+    self.assertTrue(isinstance(copy, gdata.gauth.AuthSubToken))
+    
+    scopes = ['http://example.com', 'http://other||test', 'thir|d']
+    token = gdata.gauth.AuthSubToken('key-=', scopes)
+    copy = gdata.gauth.token_from_blob(gdata.gauth.token_to_blob(token))
+    self.assertEqual(token.token_string, copy.token_string)
+    self.assertTrue(isinstance(copy, gdata.gauth.AuthSubToken))
+    self.assertEqual(token.scopes, scopes)
 
 
 def suite():
-  return unittest.TestSuite((unittest.makeSuite(AuthSubTest, 'test'),))
+  return conf.build_suite([AuthSubTest, TokensToAndFromBlobs])
 
 
 if __name__ == '__main__':

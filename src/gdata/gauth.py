@@ -280,7 +280,7 @@ class AuthSubToken(object):
 
   def __init__(self, token_string, scopes=None):
     self.token_string = token_string
-    self.scopes = scopes
+    self.scopes = scopes or []
 
   def modify_request(self, http_request):
     http_request.headers['Authorization'] = '%s%s' % (AUTHSUB_AUTH_LABEL,
@@ -337,3 +337,57 @@ class OAuthHmacToken(object):
     oauth_params['oauth_signature']  = self.calculate_signature(http_request,
         oauth_params)
     http_request.headers['Authorization'] = oauth.to_auth_header(oauth_params)
+
+
+def token_to_blob(token):
+  """Serializes the token data as a string for storage in a datastore.
+  
+  Supported token classes: ClientLoginToken, AuthSubToken.
+
+  Args:
+    token: A token object which must be of one of the supported token classes.
+  """
+  if isinstance(token, ClientLoginToken):
+    return '|'.join(('1c', urllib.quote_plus(token.token_string)))
+  elif isinstance(token, AuthSubToken):
+    token_string_parts = ['1a', urllib.quote_plus(token.token_string)]
+    if token.scopes:
+      token_string_parts.extend([urllib.quote_plus(url) for url in token.scopes])
+    return '|'.join(token_string_parts)
+
+def token_from_blob(blob):
+  if blob.startswith('1c|'):
+    return ClientLoginToken(urllib.unquote_plus(blob.split('|')[1]))
+  elif blob.startswith('1a|'):
+    parts = [urllib.unquote_plus(part) for part in blob.split('|')]
+    return AuthSubToken(parts[1], parts[2:])
+
+
+def dump_tokens(tokens):
+  return ','.join([token_to_blob(t) for t in tokens])
+
+
+def load_tokens(blob):
+  return [token_from_blob(s) for s in blob.split(',')]
+
+
+def ae_save(token, unique_key):
+  import gdata.alt.app_engine
+  key_name = ''.join(('gd_auth_token'. unique_key))
+  return gdata.alt.app_engine.set_token(key_name, token_to_blob(token))
+
+
+def ae_load(token_key):
+  import gdata.alt.app_engine
+  key_name = ''.join(('gd_auth_token'. unique_key))
+  token_string = gdata.alt.app_engine.get_token(key_name)
+  if token_string is not None:
+    return token_from_blob(token_string)
+  else:
+    return None
+
+
+def ae_delete(token_key):
+  import gdata.alt.app_engine
+  key_name = ''.join(('gd_auth_token'. unique_key))
+  gdata.alt.app_engine.delete_token(key_name)
