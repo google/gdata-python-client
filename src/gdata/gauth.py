@@ -371,15 +371,15 @@ def load_tokens(blob):
   return [token_from_blob(s) for s in blob.split(',')]
 
 
-def ae_save(token, unique_key):
+def ae_save(token, token_key):
   import gdata.alt.app_engine
-  key_name = ''.join(('gd_auth_token'. unique_key))
+  key_name = ''.join(('gd_auth_token', token_key))
   return gdata.alt.app_engine.set_token(key_name, token_to_blob(token))
 
 
 def ae_load(token_key):
   import gdata.alt.app_engine
-  key_name = ''.join(('gd_auth_token'. unique_key))
+  key_name = ''.join(('gd_auth_token', token_key))
   token_string = gdata.alt.app_engine.get_token(key_name)
   if token_string is not None:
     return token_from_blob(token_string)
@@ -389,5 +389,5 @@ def ae_load(token_key):
 
 def ae_delete(token_key):
   import gdata.alt.app_engine
-  key_name = ''.join(('gd_auth_token'. unique_key))
+  key_name = ''.join(('gd_auth_token', token_key))
   gdata.alt.app_engine.delete_token(key_name)
