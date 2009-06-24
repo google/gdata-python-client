@@ -89,7 +89,7 @@ def set_token(unique_key, token_str):
     if result == 0:
       return False
   # Save to the datastore.
-  if Token(key_name=unique_key, t=token_str).put()
+  if Token(key_name=unique_key, t=token_str).put():
     return True
   return None
   
