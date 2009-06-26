@@ -43,7 +43,7 @@ def get_auth_token(request):
     but no AuthSub token, it returns None.
   """
   current_user = users.get_current_user()
-  if current_user is None:
+  if current_user is None or current_user.user_id() is None:
     return False
   # Look for the token string in the current page's URL.
   token_string, token_scopes = gdata.gauth.auth_sub_string_from_url(
