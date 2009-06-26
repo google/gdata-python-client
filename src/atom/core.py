@@ -272,12 +272,13 @@ class XmlElement(object):
           if getattr(self, definition[0]) is None:
             setattr(self, definition[0], [])
           getattr(self, definition[0]).append(_xml_element_from_tree(element,
-              definition[1]))
+              definition[1], version))
         else:
           setattr(self, definition[0], _xml_element_from_tree(element, 
-              definition[1]))
+              definition[1], version))
       else:
-        self._other_elements.append(_xml_element_from_tree(element, XmlElement))
+        self._other_elements.append(_xml_element_from_tree(element, XmlElement,
+                                                           version))
     for attrib, value in tree.attrib.iteritems():
       if attributes and attrib in attributes:
         setattr(self, attributes[attrib], value)

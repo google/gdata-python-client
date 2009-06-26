@@ -140,6 +140,19 @@ def error_from_response(message, http_response, error_class, response_body=None)
   return error
 
 
+def get_xml_version(version):
+  """Determines which XML schema to use based on the client API version.
+  
+  Args:
+    version: string which is converted to an int. The version string is in
+             the form 'Major.Minor.x.y.z' and only the major version number
+             is considered. If None is provided assume version 1. 
+  """
+  if version is None:
+    return 1
+  return int(version.split('.')[0])
+
+
 class GDClient(atom.client.AtomPubClient):
   """Communicates with Google Data servers to perform CRUD operations.
 
@@ -276,7 +289,7 @@ class GDClient(atom.client.AtomPubClient):
       elif desired_class is not None:
         if self.api_version is not None:
           return atom.core.parse(response.read(), desired_class,
-                                 version=self.api_version)
+                                 version=get_xml_version(self.api_version))
         else:
           # No API version was specified, so allow parse to
           # use the default version.
@@ -484,7 +497,9 @@ class GDClient(atom.client.AtomPubClient):
     if converter is None and desired_class is None:
       desired_class = entry.__class__
     http_request = atom.http_core.HttpRequest()
-    http_request.add_body_part(entry.to_string(), 'application/atom+xml')
+    http_request.add_body_part(
+        entry.to_string(get_xml_version(self.api_version)),
+        'application/atom+xml')
     return self.request(method='POST', uri=uri, auth_token=auth_token,
                         http_request=http_request, converter=converter,
                         desired_class=desired_class, **kwargs)
@@ -511,7 +526,9 @@ class GDClient(atom.client.AtomPubClient):
       A new Entry object of a matching type to the entry which was passed in.
     """
     http_request = atom.http_core.HttpRequest()
-    http_request.add_body_part(entry.to_string(), 'application/atom+xml')
+    http_request.add_body_part(
+        entry.to_string(get_xml_version(self.api_version)),
+        'application/atom+xml')
     # Include the ETag in the request if this is version 2 of the API.
     if self.api_version and self.api_version.startswith('2'):
       if force:

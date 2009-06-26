@@ -34,6 +34,7 @@ import gdata_tests.data_test
 import gdata_tests.live_client_test
 import gdata_tests.gauth_test
 import gdata_tests.blogger.data_test
+import gdata_tests.blogger.live_client_test
 # Compatibility tests for requests to v1 feeds.
 import gdata_tests.contacts.service_test
 # Tests for v1 classes.
@@ -52,14 +53,15 @@ def suite():
   return unittest.TestSuite((atom_tests.core_test.suite(),
                              atom_tests.data_test.suite(),
                              atom_tests.http_core_test.suite(),
+                             atom_tests.auth_test.suite(),
                              atom_tests.mock_http_core_test.suite(),
                              atom_tests.client_test.suite(),
-                             atom_tests.auth_test.suite(),
                              gdata_tests.client_test.suite(),
                              gdata_tests.data_test.suite(),
+                             gdata_tests.live_client_test.suite(),
                              gdata_tests.gauth_test.suite(),
                              gdata_tests.blogger.data_test.suite(),
-                             gdata_tests.live_client_test.suite(),
+                             gdata_tests.blogger.live_client_test.suite(),
                              gdata_tests.contacts.service_test.suite(),
                              atom_test.suite(), gdata_test.suite(),
                              atom_tests.service_test.suite(),

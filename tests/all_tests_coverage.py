@@ -32,6 +32,8 @@ import atom.client
 import gdata.gauth
 import gdata.client
 import gdata.data
+import gdata.blogger.data
+import gdata.blogger.client
 from gdata.test_config import settings
 
 
@@ -51,4 +53,4 @@ if __name__ == '__main__':
   coverage.stop()
   coverage.report([atom.core, atom.http_core, atom.auth, atom.data,
       atom.mock_http_core, atom.client, gdata.gauth, gdata.client,
-      gdata.data])
+      gdata.data, gdata.blogger.data, gdata.blogger.client])

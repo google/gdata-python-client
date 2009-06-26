@@ -256,6 +256,17 @@ class QueryTest(unittest.TestCase):
         client.http_client.last_request.uri.query['max-results'], '7')
 
 
+class VersionConversionTest(unittest.TestCase):
+
+  def test_use_default_version(self):
+    self.assertEquals(gdata.client.get_xml_version(None), 1)
+
+  def test_str_to_int_version(self):
+    self.assertEquals(gdata.client.get_xml_version('1'), 1)
+    self.assertEquals(gdata.client.get_xml_version('2'), 2)
+    self.assertEquals(gdata.client.get_xml_version('2.1.2'), 2)
+    self.assertEquals(gdata.client.get_xml_version('10.4'), 10)
+
 # Tests for v1 client code
 class AuthSubUrlTest(unittest.TestCase):
   

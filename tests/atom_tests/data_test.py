@@ -722,6 +722,35 @@ class UtfParsingTest(unittest.TestCase):
       self.fail('Error when converting XML')
 
 
+class VersionedXmlTest(unittest.TestCase):
+
+  def test_monoversioned_parent_with_multiversioned_child(self):
+    v2_rules = atom.data.Entry._get_rules(2)
+    self.assertTrue('{http://www.w3.org/2007/app}control' in v2_rules[1])
+
+    entry_xml = """<entry xmlns='http://www.w3.org/2005/Atom'>
+                     <app:control xmlns:app='http://www.w3.org/2007/app'>
+                       <app:draft>yes</app:draft>
+                     </app:control>
+                   </entry>"""
+
+    entry = e = atom.core.parse(entry_xml, atom.data.Entry, version=2)
+    self.assertTrue(entry is not None)
+    self.assertTrue(entry.control is not None)
+    self.assertTrue(entry.control.draft is not None)
+    self.assertEqual(entry.control.draft.text, 'yes')
+
+    # v1 rules should not parse v2 XML.
+    entry = e = atom.core.parse(entry_xml, atom.data.Entry, version=1)
+    self.assertTrue(entry is not None)
+    self.assertTrue(entry.control is None)
+    
+    # The default version should be v1.
+    entry = e = atom.core.parse(entry_xml, atom.data.Entry)
+    self.assertTrue(entry is not None)
+    self.assertTrue(entry.control is None)
+
+
 def suite():
   return conf.build_suite([AuthorTest, EmailTest, NameTest, 
                            ExtensionElementTest, LinkTest, GeneratorTest,
@@ -730,7 +759,7 @@ def suite():
                            PublishedTest, FeedEntryParentTest, EntryTest,
                            ContentEntryParentTest, PreserveUnkownElementTest,
                            FeedTest, LinkFinderTest, AtomBaseTest, 
-                           UtfParsingTest])
+                           UtfParsingTest, VersionedXmlTest])
 
 
 if __name__ == '__main__':
