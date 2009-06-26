@@ -52,6 +52,7 @@ except ImportError:
       from xml.etree import ElementTree
     except ImportError:
       from elementtree import ElementTree
+import atom
 
 
 class AtomService(object):
@@ -77,6 +78,7 @@ class AtomService(object):
 
   override_token = property(_get_override_token, _set_override_token)
 
+  @atom.v1_deprecated('Please use atom.client.AtomPubClient instead.')
   def __init__(self, server=None, additional_headers=None, 
       application_name='', http_client=None, token_store=None):
     """Creates a new AtomService client.
@@ -142,6 +144,7 @@ class AtomService(object):
     """
     self.use_basic_auth(username, password)
 
+  @atom.v1_deprecated('Please use atom.client.AtomPubClient for requests.')
   def request(self, operation, url, data=None, headers=None, 
       url_params=None):
     if isinstance(url, (str, unicode)):
