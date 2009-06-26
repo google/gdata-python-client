@@ -99,8 +99,6 @@ class BloggerClientTest(unittest.TestCase):
     if updated.control is not None and updated.control.draft is not None:
       self.assertNotEqual(updated.control.draft.text, 'yes')
       
-    raw_input('pause')
-
     # Delete the test entry from the blog.
     self.client.delete(updated)
 

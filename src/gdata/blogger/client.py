@@ -96,8 +96,6 @@ class BloggerClient(gdata.client.GDClient):
         new_entry.add_label(label)
     if draft:
       new_entry.control = atom.data.Control(draft=atom.data.Draft(text='yes'))
-    print 'here is your new post:'
-    print str(new_entry)
     return self.post(new_entry, BLOG_POST_URL % blog_id, auth_token=auth_token, **kwargs)
 
   AddPost = add_post
