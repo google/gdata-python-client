@@ -184,6 +184,8 @@ class GDClient(atom.client.AtomPubClient):
   # The gsessionid is used by Google Calendar to prevent redirects.
   __gsessionid = None
   api_version = None
+  auth_service = None
+  auth_scopes = None
 
   def request(self, method=None, uri=None, auth_token=None,
               http_request=None, converter=None, desired_class=None,
@@ -314,11 +316,12 @@ class GDClient(atom.client.AtomPubClient):
 
   Request = request
 
-  def request_client_login_token(self, email, password, service, source,
+  def request_client_login_token(self, email, password, source, service=None,
       account_type='HOSTED_OR_GOOGLE', 
       auth_url=atom.http_core.Uri.parse_uri(
           'https://www.google.com/accounts/ClientLogin'), 
       captcha_token=None, captcha_response=None):
+    service = service or self.auth_service
     # Set the target URL.
     http_request = atom.http_core.HttpRequest(uri=auth_url, method='POST')
     http_request.add_body_part(
@@ -367,12 +370,13 @@ class GDClient(atom.client.AtomPubClient):
 
   RequestClientLoginToken = request_client_login_token
 
-  def client_login(self, email, password, service, source,
+  def client_login(self, email, password, source, service=None,
                    account_type='HOSTED_OR_GOOGLE',
                    auth_url='https://www.google.com/accounts/ClientLogin',
                    captcha_token=None, captcha_response=None):
+    service = service or self.auth_service
     self.auth_token = self.request_client_login_token(email, password,
-        service, source, account_type=account_type, auth_url=auth_url,
+        source, service=service, account_type=account_type, auth_url=auth_url,
         captcha_token=captcha_token, captcha_response=captcha_response)
 
   ClientLogin = client_login

@@ -67,7 +67,7 @@ def configure_client(client, config, case_name):
       client.http_client.delete_session(cache_name)
     client.http_client.use_cached_session(cache_name)
     config.auth_token = client.request_client_login_token(
-        config.email(), config.password(), config.service, case_name)
+        config.email(), config.password(), case_name, service=config.service)
     client.http_client.close_session()
   client.auth_token = config.auth_token
 

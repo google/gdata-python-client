@@ -132,7 +132,7 @@ class MockHttpClientTest(unittest.TestCase):
     self.assert_(response.reason == 'OK')
     self.assert_(response.getheader('server') == 'gws')
     body = response.read()
-    self.assert_(body.startswith('<html><head>'))
+    self.assert_(body.startswith('<!doctype html>'))
 
   def test_match_request(self):
     x = atom.http_core.HttpRequest('http://example.com/', 'GET')

@@ -229,7 +229,7 @@ class VersionTwoClientContactsTest(unittest.TestCase):
       return
     conf.configure_cache(self.client, 'test_version_two_client')
 
-    entry = gdata.data.GEntry()
+    entry = gdata.data.GDEntry()
     entry._other_elements.append(
         create_element('title', ATOM, 'Test', {'type': 'text'}))
     entry._other_elements.append(
@@ -239,14 +239,14 @@ class VersionTwoClientContactsTest(unittest.TestCase):
     # Create the test contact.
     posted = self.client.post(entry,
         'http://www.google.com/m8/feeds/contacts/default/full')
-    self.assertTrue(isinstance(posted, gdata.data.GEntry))
+    self.assertTrue(isinstance(posted, gdata.data.GDEntry))
     self.assertEqual(posted.get_elements('title')[0].text, 'Test')
     self.assertEqual(posted.get_elements('email')[0].get_attributes(
         'address')[0].value, 'test@example.com')
 
     posted.get_elements('title')[0].text = 'Doug'
     edited = self.client.update(posted)
-    self.assertTrue(isinstance(edited, gdata.data.GEntry))
+    self.assertTrue(isinstance(edited, gdata.data.GDEntry))
     self.assertEqual(edited.get_elements('title')[0].text, 'Doug')
     self.assertEqual(edited.get_elements('email')[0].get_attributes(
         'address')[0].value, 'test@example.com')

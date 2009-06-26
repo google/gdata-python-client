@@ -185,6 +185,7 @@ class ExtendedProperty(atom.core.XmlElement):
 
 class GDEntry(atom.data.Entry, LinkFinder):
   """Extends Atom Entry to provide data processing"""
+  etag = '{http://schemas.google.com/g/2005}etag'
 
   def get_id(self):
     if self.id is not None and self.id.text is not None:
@@ -213,6 +214,7 @@ class GDEntry(atom.data.Entry, LinkFinder):
 
 class GDFeed(atom.data.Feed, LinkFinder):
   """A Feed from a GData service."""
+  etag = '{http://schemas.google.com/g/2005}etag'
   total_results = TotalResults
   start_index = StartIndex
   items_per_page = ItemsPerPage
