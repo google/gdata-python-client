@@ -72,6 +72,33 @@ XML_STRING_ENCODING = 'utf-8'
 MEMBER_STRING_ENCODING = 'utf-8'
 #MEMBER_STRING_ENCODING = unicode
 
+# If True, all methods which are exclusive to v1 will raise a
+# DeprecationWarning
+ENABLE_V1_WARNINGS = False
+
+
+def v1_deprecated(warning=None):
+  """Shows a warning if ENABLE_V1_WARNINGS is True.
+  
+  Function decorator used to mark methods used in v1 classes which
+  may be removed in future versions of the library.
+  """
+  warning = warning or ''
+  # This closure is what is returned from the deprecated function.
+  def mark_deprecated(f):
+    # The deprecated_function wraps the actual call to f.
+    def optional_warn_function(*args, **kwargs):
+      if ENABLE_V1_WARNINGS:
+        warnings.warn(warning, DeprecationWarning, stacklevel=2)
+      return f(*args, **kwargs)
+    # Preserve the original name to avoid masking all decorated functions as
+    # 'deprecated_function'
+    optional_warn_function.func_name = f.func_name
+    return optional_warn_function
+  return mark_deprecated
+
+
+@v1_deprecated('Please use atom.core.parse with atom.data classes instead.')
 def CreateClassFromXMLString(target_class, xml_string, string_encoding=None):
   """Creates an instance of the target class from the string contents.
   
@@ -134,7 +161,8 @@ def _CreateClassFromElementTree(target_class, tree, namespace=None, tag=None):
 
 
 class ExtensionContainer(object):
-  
+ 
+  @v1_deprecated('Please use data model classes in atom.data instead.')
   def __init__(self, extension_elements=None, extension_attributes=None,
       text=None):
     self.extension_elements = extension_elements or []
@@ -229,6 +257,7 @@ class AtomBase(ExtensionContainer):
   _children = {}
   _attributes = {}
 
+  @v1_deprecated('Please use data model classes in atom.data instead.')
   def __init__(self, extension_elements=None, extension_attributes=None,
       text=None):
     self.extension_elements = extension_elements or []
@@ -1179,6 +1208,7 @@ class Entry(FeedEntryParent):
   _children['{%s}summary' % ATOM_NAMESPACE] = ('summary', Summary)
   _children['{%s}control' % APP_NAMESPACE] = ('control', Control)
 
+  @v1_deprecated('Please use atom.data.Entry instead.')
   def __init__(self, author=None, category=None, content=None, 
       contributor=None, atom_id=None, link=None, published=None, rights=None,
       source=None, summary=None, control=None, title=None, updated=None,
@@ -1239,6 +1269,7 @@ class Feed(Source):
   _attributes = Source._attributes.copy()
   _children['{%s}entry' % ATOM_NAMESPACE] = ('entry', [Entry])
 
+  @v1_deprecated('Please use atom.data.Feed instead.')
   def __init__(self, author=None, category=None, contributor=None,
       generator=None, icon=None, atom_id=None, link=None, logo=None, 
       rights=None, subtitle=None, title=None, updated=None, entry=None, 
