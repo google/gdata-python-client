@@ -28,6 +28,7 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 import gdata.client
 import gdata.blogger.data
 import atom.data
+import atom.http_core
 
 
 # List user's blogs, takes a user ID, or 'default'.
@@ -122,14 +123,32 @@ class BloggerClient(gdata.client.GDClient):
 
   Update = update
 
-  def delete(self, entry, auth_token=None, **kwargs):
+  def delete(self, entry_or_uri, auth_token=None, **kwargs):
+    if isinstance(entry_or_uri, (str, unicode, atom.http_core.Uri)):
+      return gdata.client.GDClient.delete(self, entry_or_uri,
+                                          auth_token=auth_token, **kwargs)
     # The Blogger API does not currently support ETags, so for now remove
     # the ETag before performing a delete.
-    old_etag = entry.etag
-    entry.etag = None
-    response = gdata.client.GDClient.delete(self, entry,
+    old_etag = entry_or_uri.etag
+    entry_or_uri.etag = None
+    response = gdata.client.GDClient.delete(self, entry_or_uri,
                                             auth_token=auth_token, **kwargs)
-    entry.etag = old_etag
+    # TODO: if GDClient.delete raises and exception, the entry's etag may be
+    # left as None. Should revisit this logic.  
+    entry_or_uri.etag = old_etag
     return response
 
   Delete = delete
+
+
+class Query(gdata.client.Query):
+
+  def __init__(self, order_by=None, **kwargs):
+    gdata.client.Query.__init__(self, **kwargs)
+    self.order_by = order_by
+
+  def modify_request(self, http_request):
+    gdata.client._add_query_param('orderby', self.order_by, http_request)
+    gdata.client.Query.modify_request(self, http_request)
+
+  ModifyRequest = modify_request

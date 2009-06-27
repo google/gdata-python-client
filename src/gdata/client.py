@@ -541,15 +541,20 @@ class GDClient(atom.client.AtomPubClient):
 
   Update = update
 
-  def delete(self, entry, auth_token=None, force=False, **kwargs):
+  def delete(self, entry_or_uri, auth_token=None, force=False, **kwargs):
+    # If the user passes in a URL, just delete directly, may not work as
+    # the service might require an ETag.
+    if isinstance(entry_or_uri, (str, unicode, atom.http_core.Uri)):
+      return self.request(method='DELETE', uri=entry_or_uri,
+                          auth_token=auth_token, **kwargs)
     http_request = atom.http_core.HttpRequest()
     # Include the ETag in the request if this is version 2 of the API.
     if self.api_version and self.api_version.startswith('2'):
       if force:
         http_request.headers['If-Match'] = '*'
-      elif hasattr(entry, 'etag') and entry.etag:
-        http_request.headers['If-Match'] = entry.etag
-    return self.request(method='DELETE', uri=entry.find_edit_link(), 
+      elif hasattr(entry_or_uri, 'etag') and entry_or_uri.etag:
+        http_request.headers['If-Match'] = entry_or_uri.etag
+    return self.request(method='DELETE', uri=entry_or_uri.find_edit_link(), 
                         http_request=http_request, auth_token=auth_token,
                         **kwargs)
 

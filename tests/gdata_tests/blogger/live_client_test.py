@@ -99,8 +99,8 @@ class BloggerClientTest(unittest.TestCase):
     if updated.control is not None and updated.control.draft is not None:
       self.assertNotEqual(updated.control.draft.text, 'yes')
       
-    # Delete the test entry from the blog.
-    self.client.delete(updated)
+    # Delete the test entry from the blog using the URL instead of the entry.
+    self.client.delete(updated.find_edit_link())
 
 
 def suite():

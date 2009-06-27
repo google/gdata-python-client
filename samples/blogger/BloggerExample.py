@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# Copyright (C) 2007 Google Inc.
+# Copyright (C) 2009 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,42 +32,37 @@
 __author__ = 'lkeppler@google.com (Luke Keppler)'
 
 
-from gdata import service
-import gdata
-import atom
-import getopt
-import sys
+import gdata.blogger.client
+import gdata.client
+import gdata.sample_util
+import gdata.data
+import atom.data
 
 
 class BloggerExample:
 
-  def __init__(self, email, password):
+  def __init__(self):
     """Creates a GDataService and provides ClientLogin auth details to it.
     The email and password are required arguments for ClientLogin.  The
     'source' defined below is an arbitrary string, but should be used to
     reference your name or the name of your organization, the app name and
     version, with '-' between each of the three values."""
 
-    # Authenticate using ClientLogin.
-    self.service = service.GDataService(email, password)
-    self.service.source = 'Blogger_Python_Sample-1.0'
-    self.service.service = 'blogger'
-    self.service.server = 'www.blogger.com'
-    self.service.ProgrammaticLogin()
+    # Authenticate using ClientLogin, AuthSub, or OAuth.
+    self.client = gdata.blogger.client.BloggerClient()
+    gdata.sample_util.authorize_client(
+        self.client, service='blogger', source='Blogger_Python_Sample-2.0',
+        scopes=['http://www.blogger.com/feeds/'])
 
     # Get the blog ID for the first blog.
-    feed = self.service.Get('/feeds/default/blogs')
-    self_link = feed.entry[0].GetSelfLink()
-    if self_link:
-      self.blog_id = self_link.href.split('/')[-1]
+    feed = self.client.get_blogs()
+    self.blog_id = feed.entry[0].get_blog_id()
 
   def PrintUserBlogTitles(self):
     """Prints a list of all the user's blogs."""
 
     # Request the feed.
-    query = service.Query()
-    query.feed = '/feeds/default/blogs'
-    feed = self.service.Get(query.ToUri())
+    feed = self.client.get_blogs()
 
     # Print the results.
     print feed.title.text
@@ -75,7 +70,7 @@ class BloggerExample:
       print "\t" + entry.title.text
     print
 
-  def CreatePost(self, title, content, author_name, is_draft):
+  def CreatePost(self, title, content, is_draft):
     """This method creates a new post on a blog.  The new post can be stored as
     a draft or published based on the value of the is_draft parameter.  The
     method creates an GDataEntry for the new post using the title, content,
@@ -84,20 +79,7 @@ class BloggerExample:
     GDataService to insert the new post.  If the insertion is successful, the
     added post (GDataEntry) will be returned.
     """
-
-    # Create the entry to insert.
-    entry = gdata.GDataEntry()
-    entry.author.append(atom.Author(atom.Name(text=author_name)))
-    entry.title = atom.Title(title_type='xhtml', text=title)
-    entry.content = atom.Content(content_type='html', text=content)
-    if is_draft:
-      control = atom.Control()
-      control.draft = atom.Draft(text='yes')
-      entry.control = control
-
-    # Ask the service to insert the new entry.
-    return self.service.Post(entry, 
-      '/feeds/' + self.blog_id + '/posts/default')
+    return self.client.add_post(self.blog_id, title, content, draft=is_draft)
 
   def PrintAllPosts(self):
     """This method displays the titles of all the posts in a blog.  First it
@@ -105,7 +87,7 @@ class BloggerExample:
     """
 
     # Request the feed.
-    feed = self.service.GetFeed('/feeds/' + self.blog_id + '/posts/default')
+    feed = self.client.get_posts(self.blog_id)
 
     # Print the results.
     print feed.title.text
@@ -131,12 +113,12 @@ class BloggerExample:
     """
 
     # Create query and submit a request.
-    query = service.Query()
-    query.feed = '/feeds/' + self.blog_id + '/posts/default'
-    query.updated_min = start_time
-    query.updated_max = end_time
-    query.orderby = 'updated'
-    feed = self.service.Get(query.ToUri())
+    query = gdata.blogger.client.Query(updated_min=start_time,
+                                       updated_max=end_time,
+                                       order_by='updated')
+    print query.updated_min
+    print query.order_by
+    feed = self.client.get_posts(self.blog_id, query=query)
 
     # Print the results.
     print feed.title.text + " posts between " + start_time + " and " + end_time
@@ -162,12 +144,8 @@ class BloggerExample:
     """
     
     # Set the new title in the Entry object
-    entry_to_update.title = atom.Title('xhtml', new_title)
-    
-    # Grab the edit URI
-    edit_uri = entry_to_update.GetEditLink().href  
-
-    return self.service.Put(entry_to_update, edit_uri)
+    entry_to_update.title = atom.data.Title(type='xhtml', text=new_title)
+    return self.client.update(entry_to_update)
 
   def CreateComment(self, post_id, comment_text):
     """This method adds a comment to the specified post.  First the comment
@@ -178,14 +156,7 @@ class BloggerExample:
 
     NOTE: This functionality is not officially supported yet.
     """
-
-    # Build the comment feed URI
-    feed_uri = '/feeds/' + self.blog_id + '/' + post_id + '/comments/default'
-
-    # Create a new entry for the comment and submit it to the GDataService
-    entry = gdata.GDataEntry()
-    entry.content = atom.Content(content_type='xhtml', text=comment_text)
-    return self.service.Post(entry, feed_uri)
+    return self.client.add_comment(self.blog_id, post_id, None, comment_text)
 
   def PrintAllComments(self, post_id):
     """This method displays all the comments for the given post.  First the
@@ -194,9 +165,7 @@ class BloggerExample:
     of the post on which to view comments. 
     """
 
-    # Build comment feed URI and request comments on the specified post
-    feed_url = '/feeds/' + self.blog_id + '/comments/default'
-    feed = self.service.Get(feed_url)
+    feed = self.client.get_post_comments(self.blog_id, post_id)
 
     # Display the results
     print feed.title.text
@@ -205,20 +174,19 @@ class BloggerExample:
       print "\t" + entry.updated.text
     print
 
-  def DeleteComment(self, post_id, comment_id):
+  def DeleteComment(self, comment_entry):
     """This method removes the comment specified by the given edit_link_href, the
     URI for editing the comment.
     """
-    
-    feed_uri = '/feeds/' + self.blog_id + '/' + post_id + '/comments/default/' + comment_id
-    self.service.Delete(feed_uri)
 
-  def DeletePost(self, edit_link_href):
+    self.client.delete(comment_entry)
+
+  def DeletePost(self, post_entry):
     """This method removes the post specified by the given edit_link_href, the
     URI for editing the post.
     """
 
-    self.service.Delete(edit_link_href)
+    self.client.delete(post_entry)
   
   def run(self):
     """Runs each of the example methods defined above, demonstrating how to
@@ -229,15 +197,18 @@ class BloggerExample:
     self.PrintUserBlogTitles()
   
     # Demonstrate how to create a draft post.
-    draft_post = self.CreatePost("Snorkling in Aruba",
-      "<p>We had <b>so</b> much fun snorkling in Aruba<p>",
-      "Post author", True)
-    print "Successfully created draft post: \"" + draft_post.title.text + "\".\n"
+    draft_post = self.CreatePost('Snorkling in Aruba',
+      '<p>We had <b>so</b> much fun snorkling in Aruba<p>',
+      True)
+    print 'Successfully created draft post: "' + draft_post.title.text + '".\n'
+
+    # Delete the draft blog post.
+    self.client.delete(draft_post)
   
     # Demonstrate how to publish a public post.
     public_post = self.CreatePost("Back from vacation",
       "<p>I didn't want to leave Aruba, but I ran out of money :(<p>",
-      "Post author", False)
+      False)
     print "Successfully created public post: \"" + public_post.title.text + "\".\n"
   
     # Demonstrate various feed queries.
@@ -254,62 +225,36 @@ class BloggerExample:
     # Demonstrate how to retrieve the comments for a post.
 
     # Get the post ID and build the comments feed URI for the specified post
-    self_id = public_post.id.text 
-    tokens = self_id.split("-")
-    post_id = tokens[-1]
+    post_id = public_post.get_post_id()
     
     print "Now posting a comment on the post titled: \"" + public_post.title.text + "\"."
     comment = self.CreateComment(post_id, "Did you see any sharks?")
     print "Successfully posted \"" + comment.content.text + "\" on the post titled: \"" + public_post.title.text + "\".\n"
     
-    comment_id = comment.GetEditLink().href.split("/")[-1]
+    comment_id = comment.GetCommentId()
     
     print "Now printing all comments"
     self.PrintAllComments(post_id)
-    
+   
     # Delete the comment we just posted
     print "Now deleting the comment we just posted"
-    self.DeleteComment(post_id, comment_id)
+    self.DeleteComment(comment)
     print "Successfully deleted comment." 
     self.PrintAllComments(post_id)
 
-    # Get the post's edit URI    
-    edit_uri = public_post.GetEditLink().href
-    
     # Demonstrate deleting posts.
     print "Now deleting the post titled: \"" + public_post.title.text + "\"."
-    self.DeletePost(edit_uri)
+    self.DeletePost(public_post)
     print "Successfully deleted post." 
     self.PrintAllPosts()
 
 
 def main():
-  """The main function runs the BloggerExample application with the provided
-  username and password values.  Authentication credentials are required.
-  NOTE:  It is recommended that you run this sample using a test account."""
-
-  # parse command line options
-  try:
-    opts, args = getopt.getopt(sys.argv[1:], "", ["email=", "password="])
-  except getopt.error, msg:
-    print ('python BloggerExample.py --email [email] --password [password] ')
-    sys.exit(2)
-
-  email = ''
-  password = ''
-
-  # Process options
-  for o, a in opts:
-    if o == "--email":
-      email = a
-    elif o == "--password":
-      password = a
-    
-  if email == '' or password == '':
-    print ('python BloggerExample.py --email [email] --password [password]')
-    sys.exit(2)
-
-  sample = BloggerExample(email, password)
+  """The main function runs the BloggerExample application.
+  
+  NOTE:  It is recommended that you run this sample using a test account.
+  """
+  sample = BloggerExample()
   sample.run()
 
 
