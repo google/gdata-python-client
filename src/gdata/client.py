@@ -26,7 +26,6 @@ the release of version 2.0.0. The primary class in this module is GDClient.
 
   GDClient: handles auth and CRUD operations when communicating with servers.
   GDataClient: deprecated client for version one services. Will be removed.
-  create_converter: uses a prototype object to create a converter function.
 """
 
 
@@ -36,24 +35,23 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 import re
 import atom.client
 import atom.core
-import gdata.service
 import atom.http_core
 import gdata.gauth
 import gdata.data
 
 
 # Old imports
+import gdata.service
 import urllib
 import urlparse
 import gdata.auth
-import atom.service
 
 
 class Error(Exception):
   pass
 
 
-class RequestError(gdata.service.RequestError):
+class RequestError(Error):
   status = None
   reason = None
   body = None
@@ -64,7 +62,7 @@ class RedirectError(RequestError):
   pass
 
 
-class CaptchaChallenge(gdata.service.CaptchaRequired):
+class CaptchaChallenge(RequestError):
   captcha_url = None
   captcha_token = None
 
@@ -77,7 +75,7 @@ class ClientLoginFailed(RequestError):
   pass
 
 
-class UnableToUpgradeToken(Error):
+class UnableToUpgradeToken(RequestError):
   pass
 
 
@@ -85,35 +83,12 @@ class Unauthorized(Error):
   pass
 
 
-class BadAuthenticationServiceURL(RedirectError,
-    gdata.service.BadAuthenticationServiceURL):
+class BadAuthenticationServiceURL(RedirectError):
   pass
 
 
-def v2_entry_from_response(response):
-  """Experimental converter which gets an Atom entry from the response."""
-  return gdata.data.entry_from_string(response.read(), version=2)
-
-
-def v2_feed_from_response(response):
-  """Experimental converter which gets an Atom feed from the response."""
-  return gdata.data.feed_from_string(response.read(), version=2)
-
-
-def create_converter(obj):
-  """Experimental: Generates a converter function for this object's class.
-
-  When updating an entry, the returned object should usually be of the same
-  type as the original entry. Since the client's request method takes a
-  converter funtion as an argument, we need a function which will parse the
-  XML using the desired class.
-
-  Returns:
-    A function which takes an XML string as the only parameter and returns an
-    object of the same type as obj.
-  """
-  return lambda response: atom.core.parse(
-      response.read(), obj.__class__, version=2, encoding='UTF-8')
+class BadAuthentication(RequestError):
+  pass
 
 
 def error_from_response(message, http_response, error_class, response_body=None):
@@ -364,8 +339,7 @@ class GDClient(atom.client.AtomPubClient):
         challenge.captcha_token = captcha_challenge['token']
         raise challenge
       elif response_body.splitlines()[0] == 'Error=BadAuthentication':
-        raise gdata.service.BadAuthentication(
-            'Incorrect username or password')
+        raise BadAuthentication('Incorrect username or password')
       else:
         raise error_from_response('Server responded with a 403 code',
                                   response, RequestError, response_body)

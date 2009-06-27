@@ -22,6 +22,7 @@ src/gdata/auth.py
 src/gdata/client.py
 src/gdata/data.py
 src/gdata/gauth.py
+src/gdata/sample_util.py
 src/gdata/service.py
 src/gdata/test_config.py
 src/gdata/test_config_template.py
@@ -29,8 +30,9 @@ src/gdata/test_data.py
 src/gdata/urlfetch.py
 src/gdata/alt/__init__.py
 src/gdata/alt/appengine.py
+src/gdata/alt/app_engine.py
 src/gdata/analytics/__init__.py
-src/gdata/analytics/appengine.py
+src/gdata/analytics/service.py
 src/gdata/apps/__init__.py
 src/gdata/apps/service.py
 src/gdata/apps/emailsettings/__init__.py
@@ -42,6 +44,8 @@ src/gdata/apps/migration/service.py
 src/gdata/base/__init__.py
 src/gdata/base/service.py
 src/gdata/blogger/__init__.py
+src/gdata/blogger/client.py
+src/gdata/blogger/data.py
 src/gdata/blogger/service.py
 src/gdata/books/__init__.py
 src/gdata/books/service.py
@@ -170,10 +174,19 @@ src/gdata/tlslite/TLSConnection.py
 src/gdata/tlslite/Session.py
 src/gdata/tlslite/SharedKeyDB.py
 src/gdata/tlslite/X509CertChain.py
+samples/base/baseItemTypesQueryExample.py
+samples/base/baseAttributesQueryExample.py
 samples/base/baseQueryExample.py
 samples/base/dryRunInsert.py
 samples/blogger/BloggerExample.py
+samples/blogger/BloggerExampleV1.py
+samples/blogger/app/app.yaml
+samples/blogger/app/auth_required.html
+samples/blogger/app/list_blogs.html
+samples/blogger/app/blogapp.py
+samples/blogger/app/welcome.html
 samples/calendar/calendarExample.py
+samples/codesearch/CodesearchExample.py
 samples/contacts/contacts_example.py
 samples/docs/docs_example.py
 samples/finance/test_finance.py
@@ -182,6 +195,7 @@ samples/spreadsheets/spreadsheetExample.py
 samples/webmastertools/AddDeleteExampleDotCom.py
 samples/webmastertools/SitemapsFeedSummary.py
 samples/webmastertools/SitesFeedSummary.py
+samples/oauth/2_legged_oauth.py
 samples/oauth/oauth_example.py
 samples/authsub/secure_authsub.py
 samples/oauth/oauth_on_appengine
@@ -272,6 +286,8 @@ tests/gdata_tests/apps/migration/service_test.py
 tests/gdata_tests/base/__init__.py
 tests/gdata_tests/base/service_test.py
 tests/gdata_tests/blogger/__init__.py
+tests/gdata_tests/blogger/data_test.py
+tests/gdata_tests/blogger/live_client_test.py
 tests/gdata_tests/blogger/service_test.py
 tests/gdata_tests/books/__init__.py
 tests/gdata_tests/books/service_test.py
@@ -282,6 +298,9 @@ tests/gdata_tests/contacts/__init__.py
 tests/gdata_tests/contacts/service_test.py
 tests/gdata_tests/docs/__init__.py
 tests/gdata_tests/docs/service_test.py
+tests/gdata_tests/docs/test.ppt
+tests/gdata_tests/docs/test.doc
+tests/gdata_tests/docs/test.csv
 tests/gdata_tests/health/__init__.py
 tests/gdata_tests/health/service_test.py
 tests/gdata_tests/photos/__init__.py
@@ -338,6 +357,8 @@ pydocs/gdata.finance.html
 pydocs/gdata.finance.service.html
 pydocs/gdata.gauth.html
 pydocs/gdata.geo.html
+pydocs/gdata.health.service.html
+pydocs/gdata.health.html
 pydocs/gdata.html
 pydocs/gdata.media.html
 pydocs/gdata.photos.html

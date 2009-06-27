@@ -26,6 +26,7 @@ import gdata.data
 from gdata import test_data
 import gdata.test_config as conf
 import atom.core
+import atom.data
 
 
 SIMPLE_V2_FEED_TEST_DATA = """<feed xmlns='http://www.w3.org/2005/Atom'
@@ -380,14 +381,14 @@ class FeedLinkTest(unittest.TestCase):
 class SimpleV2FeedTest(unittest.TestCase):
 
   def test_parsing_etags_and_edit_url(self):
-    feed = gdata.data.feed_from_string(SIMPLE_V2_FEED_TEST_DATA)
+    feed = atom.core.parse(SIMPLE_V2_FEED_TEST_DATA, gdata.data.GDFeed)
 
     # General parsing assertions.
     self.assertEqual(feed.get_elements('title')[0].text, 
                      'Elizabeth Bennet\'s Contacts')
     self.assertEqual(len(feed.entry), 2)
     for entry in feed.entry:
-      self.assertTrue(isinstance(entry, gdata.data.GEntry))
+      self.assertTrue(isinstance(entry, gdata.data.GDEntry))
     self.assertEqual(feed.entry[0].GetElements('title')[0].text,
                      'Fitzwilliam')
     self.assertEqual(feed.entry[0].get_elements('id')[0].text,
@@ -399,31 +400,31 @@ class SimpleV2FeedTest(unittest.TestCase):
     self.assertEqual(feed.entry[1].etag, '"123456"')
 
     # Look for Edit URLs.
-    self.assertEqual(feed.entry[0].get_edit_url(), 
+    self.assertEqual(feed.entry[0].find_edit_link(), 
         'http://www.google.com/m8/feeds/contacts/liz%40gmail.com/full/c9e')
-    self.assertEqual(feed.entry[1].GetEditUrl(), 'http://example.com/1')
+    self.assertEqual(feed.entry[1].FindEditLink(), 'http://example.com/1')
 
     # Look for Next URLs.
-    self.assertEqual(feed.get_next_url(),
+    self.assertEqual(feed.find_next_link(),
         'http://www.google.com/m8/feeds/contacts/.../more')
 
   def test_constructor_defauls(self):
-    feed = gdata.data.GFeed()
+    feed = gdata.data.GDFeed()
     self.assertTrue(feed.etag is None)
     self.assertEqual(feed.link, [])
     self.assertEqual(feed.entry, [])
-    entry = gdata.data.GEntry()
+    entry = gdata.data.GDEntry()
     self.assertTrue(entry.etag is None)
     self.assertEqual(entry.link, [])
-    link = gdata.data.Link()
+    link = atom.data.Link()
     self.assertTrue(link.href is None)
     self.assertTrue(link.rel is None)
-    link1 = gdata.data.Link(href='http://example.com', rel='test')
+    link1 = atom.data.Link(href='http://example.com', rel='test')
     self.assertEqual(link1.href, 'http://example.com')
     self.assertEqual(link1.rel, 'test')
-    link2 = gdata.data.Link(href='http://example.org/', rel='alternate')
-    entry = gdata.data.GEntry(etag='foo', link=[link1, link2])
-    feed = gdata.data.GFeed(etag='12345', entry=[entry])
+    link2 = atom.data.Link(href='http://example.org/', rel='alternate')
+    entry = gdata.data.GDEntry(etag='foo', link=[link1, link2])
+    feed = gdata.data.GDFeed(etag='12345', entry=[entry])
     self.assertEqual(feed.etag, '12345')
     self.assertEqual(len(feed.entry), 1)
     self.assertEqual(feed.entry[0].etag, 'foo')

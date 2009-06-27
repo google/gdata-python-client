@@ -56,7 +56,7 @@ class ClientLoginTest(unittest.TestCase):
     # Test a 302 redirect from the server on a login request.
     client.http_client.set_response(302, 'ignored', '', {})
     # TODO: change the exception class to one in gdata.client.
-    self.assertRaises(gdata.service.BadAuthenticationServiceURL,
+    self.assertRaises(gdata.client.BadAuthenticationServiceURL,
         client.request_client_login_token, 'email', 'pw', '', '')
 
     # Test a CAPTCHA challenge from the server
@@ -214,25 +214,13 @@ class RequestTest(unittest.TestCase):
     
     client = gdata.client.GDClient()
     client.http_client = atom.mock_http_core.EchoHttpClient()
-    test_entry = gdata.data.GEntry()
+    test_entry = gdata.data.GDEntry()
     result = client.post(test_entry, 'http://example.com')
-    self.assertTrue(isinstance(result, gdata.data.GEntry))
+    self.assertTrue(isinstance(result, gdata.data.GDEntry))
     result = client.post(test_entry, 'http://example.com', converter=bad_converter)
     self.assertEquals(result, 1)
     result = client.post(test_entry, 'http://example.com', desired_class=TestClass)
     self.assertTrue(isinstance(result, TestClass))
-
-
-class CreateConverterTest(unittest.TestCase):
-  
-  def test_create_converter(self):
-    e = gdata.data.GEntry()
-    fake_response = StringIO.StringIO(
-        '<entry xmlns="http://www.w3.org/2005/Atom"><title>x</title></entry>')
-    converter_function = gdata.client.create_converter(e)
-    entry = converter_function(fake_response)
-    self.assertTrue(isinstance(entry, gdata.data.GEntry))
-    self.assertEqual(entry.get_elements('title')[0].text, 'x')
 
 
 class QueryTest(unittest.TestCase):
@@ -340,8 +328,7 @@ def suite():
   return unittest.TestSuite((unittest.makeSuite(ClientLoginTest, 'test'),
                              unittest.makeSuite(AuthSubTest, 'test'),
                              unittest.makeSuite(RequestTest, 'test'),
-                             unittest.makeSuite(QueryTest, 'test'),
-                             unittest.makeSuite(CreateConverterTest, 'test')))
+                             unittest.makeSuite(QueryTest, 'test')))
 
 
 if __name__ == '__main__':

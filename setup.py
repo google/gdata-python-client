@@ -20,7 +20,7 @@ from distutils.core import setup
 
 setup(
     name='gdata',
-    version='1.3.4',
+    version='2.0.0',
     description='Python client library for Google data APIs',
     long_description = """\
 The Google data Python client library makes it easy to interact with
