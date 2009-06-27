@@ -1,5 +1,23 @@
 === 2.0.0 ===
-June 26, 2009 (revision ???)
+June ??, 2009 (revision ???)
+
+- Released support for version 2 of the Google Data APIs protocol.
+- Included new Blogger samples to illustrate v2 support, a command line demo
+    and an app for App Engine.
+- Added OAuth sample app which uses App Engine.
+- Added the gCal:sequence element to CalendarEventEntry (thanks Anton).
+- Added two decorators to diaply warnings when deprecated methods are used.
+- Added a login utility for command line samples to share to standardize the
+    auth process on in a sample program.
+- Fixed a bug in v2 XML parsing which prevented multiversion XML classes from
+    correctly parsing and generating v2 code.
+- Fixed v1 HTTP Host header settings, not default ports should now be
+    included in the Host header.
+- Fixed pickle error when an OAuth-RSA token is saved to the App Engine
+    datastore.
+- Fixed missing data in the Document List API unit tests.
+- Improved backwards compatibility of v2 data model classes be adding aliases
+    to v1 functions.
 
 === 1.3.3 ===
 June 5, 2009 (revision 724)
