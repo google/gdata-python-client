@@ -1653,7 +1653,7 @@ rel="self" type="application/atom+xml" /><ns0:title type="text">Test Document</n
     <ns0:name>test.user</ns0:name>
     <ns0:email>test.user@gmail.com</ns0:email>
 </ns2:lastModifiedBy>
-<ns3:writersCanInvite value='true'/>
+<ns3:writersCanInvite value='false'/>
  <ns2:lastViewed>2009-03-05T07:48:21.493Z</ns2:lastViewed>
 </ns0:entry><ns0:id>http://docs.google.com/feeds/documents/private/full</ns0:id><ns0:link
 href="http://docs.google.com" rel="alternate" type="text/html" /><ns0:link

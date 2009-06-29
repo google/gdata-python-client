@@ -1,7 +1,14 @@
 === 2.0.0 ===
-June ??, 2009 (revision ???)
+June 29, 2009 (revision 775)
 
-- Released support for version 2 of the Google Data APIs protocol.
+- Released support for version 2 of the Google Data APIs protocol. To use the
+    new version-aware code, use the gdata.client, atom.data, gdata.data
+    modules and classes that derive from them. For example, use 
+    gdata.blogger.client.BloggerClient instead of 
+    gdata.blogger.service.BloggerService. High level, service specific classes
+    are not available yet for other services, so feel free to migrate as they
+    become available. The v1 service classes are still included so your
+    existing code should be unaffected.
 - Included new Blogger samples to illustrate v2 support, a command line demo
     and an app for App Engine.
 - Added OAuth sample app which uses App Engine.
