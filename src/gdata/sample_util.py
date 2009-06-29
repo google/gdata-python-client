@@ -101,7 +101,9 @@ def authorize_client(client, auth_type=None, service=None, source=None,
       client.auth_token = single_use_token
       client.upgrade_token()
   elif auth_type == OAUTH:
-    pass
+    print ('OAuth support is not yet available for v2.0 samples. Try using'
+           ' the version 1 library, or try using AuthSub')
+    return None
   else:
     print 'Invalid authorization type.'
     return None

@@ -1,5 +1,5 @@
 === 2.0.0 ===
-June 29, 2009 (revision 775)
+June 29, 2009 (revision 776)
 
 - Released support for version 2 of the Google Data APIs protocol. To use the
     new version-aware code, use the gdata.client, atom.data, gdata.data
