@@ -70,7 +70,7 @@ def authorize_client(client, auth_type=None, service=None, source=None,
           ' http://code.google.com/apis/gdata/faq.html#clientlogin)')
     if source is None:
       source = get_param('source', ask=False)
-    client.client_login(email, password, service, source)
+    client.client_login(email, password, source=source, service=service)
   elif auth_type == AUTHSUB:
     auth_sub_token = get_param('auth_sub_token', ask=False)
     session_token = get_param('session_token', ask=False)
