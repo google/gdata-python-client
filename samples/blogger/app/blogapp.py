@@ -24,7 +24,7 @@ from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 import gdata.gauth
 import gdata.data
-import gdata.client
+import gdata.blogger.client
 
 
 def get_auth_token(request):
@@ -83,16 +83,51 @@ class ListBlogs(webapp.RequestHandler):
           '</body></html>' % users.create_login_url('/blogs'))
       return
 
-    client = gdata.client.GDClient()
-    feed = client.get_feed('http://www.blogger.com/feeds/default/blogs',
-                           auth_token=token)
+    client = gdata.blogger.client.BloggerClient()
+    feed = client.get_blogs(auth_token=token)
     template_values['feed'] = feed
     path = os.path.join(os.path.dirname(__file__), 'list_blogs.html')
     self.response.out.write(template.render(path, template_values))
 
 
+class WritePost(webapp.RequestHandler):
+
+  def get(self):
+    template_values = { 'sign_out': users.create_logout_url('/'),
+                        'blog_id': self.request.get('id') }
+    # We should have an auth token for this user.
+    token = get_auth_token(self.request)
+    if not token:
+      self.redirect('/blogs')
+      return
+    path = os.path.join(os.path.dirname(__file__), 'post_editor.html')
+    self.response.out.write(template.render(path, template_values))
+
+  def post(self):
+    token = get_auth_token(self.request)
+    if not token:
+      self.redirect('/blogs')
+      return
+    draft = False
+    if self.request.get('draft') == 'true':
+      draft = True
+    client = gdata.blogger.client.BloggerClient()
+    new_post = client.add_post(
+        self.request.get('blog_id'), self.request.get('title'),
+        self.request.get('body'), draft=draft, auth_token=token)
+    if not draft:
+      self.response.out.write(
+          'See your new post <a href="%s">here</a>.' % (
+              new_post.find_alternate_link()))
+    else:
+      self.response.out.write(
+          'This was a draft blog post, visit '
+          '<a href="http://blogger.com/">blogger.com</a> to publish')
+
+
 def main():
-  application = webapp.WSGIApplication([('/blogs', ListBlogs),],
+  application = webapp.WSGIApplication([('/blogs', ListBlogs), 
+                                        ('/write_post', WritePost)],
       debug=True)
   wsgiref.handlers.CGIHandler().run(application)
 

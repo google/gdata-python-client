@@ -183,6 +183,7 @@ samples/blogger/BloggerExampleV1.py
 samples/blogger/app/app.yaml
 samples/blogger/app/auth_required.html
 samples/blogger/app/list_blogs.html
+samples/blogger/app/post_editor.html
 samples/blogger/app/blogapp.py
 samples/blogger/app/welcome.html
 samples/calendar/calendarExample.py
