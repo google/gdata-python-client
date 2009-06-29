@@ -22,7 +22,6 @@ import time
 import random
 import urllib
 import atom.http_core
-import gdata.experimental_oauth as oauth
 
 
 __author__ = 'j.s@google.com (Jeff Scudder)'
