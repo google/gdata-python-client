@@ -16,8 +16,7 @@ experimental.&nbsp;This&nbsp;module&nbsp;may&nbsp;change&nbsp;in&nbsp;backwards&
 the&nbsp;release&nbsp;of&nbsp;version&nbsp;2.0.0.&nbsp;The&nbsp;primary&nbsp;class&nbsp;in&nbsp;this&nbsp;module&nbsp;is&nbsp;<a href="#GDClient">GDClient</a>.<br>
 &nbsp;<br>
 &nbsp;&nbsp;<a href="#GDClient">GDClient</a>:&nbsp;handles&nbsp;auth&nbsp;and&nbsp;CRUD&nbsp;operations&nbsp;when&nbsp;communicating&nbsp;with&nbsp;servers.<br>
-&nbsp;&nbsp;<a href="#GDataClient">GDataClient</a>:&nbsp;deprecated&nbsp;client&nbsp;for&nbsp;version&nbsp;one&nbsp;services.&nbsp;Will&nbsp;be&nbsp;removed.<br>
-&nbsp;&nbsp;create_converter:&nbsp;uses&nbsp;a&nbsp;prototype&nbsp;object&nbsp;to&nbsp;create&nbsp;a&nbsp;converter&nbsp;function.</tt></p>
+&nbsp;&nbsp;<a href="#GDataClient">GDataClient</a>:&nbsp;deprecated&nbsp;client&nbsp;for&nbsp;version&nbsp;one&nbsp;services.&nbsp;Will&nbsp;be&nbsp;removed.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -38,6 +37,12 @@ the&nbsp;release&nbsp;of&nbsp;version&nbsp;2.0.0.&nbsp;The&nbsp;primary&nbsp;cla
     
 <tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.client.html#Query">Query</a>
+</font></dt></dl>
+</dd>
 <dt><font face="helvetica, arial"><a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>(<a href="__builtin__.html#object">__builtin__.object</a>)
 </font></dt><dd>
 <dl>
@@ -57,17 +62,25 @@ the&nbsp;release&nbsp;of&nbsp;version&nbsp;2.0.0.&nbsp;The&nbsp;primary&nbsp;cla
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="gdata.client.html#ClientLoginTokenMissing">ClientLoginTokenMissing</a>
-</font></dt><dt><font face="helvetica, arial"><a href="gdata.client.html#UnableToUpgradeToken">UnableToUpgradeToken</a>
-</font></dt><dt><font face="helvetica, arial"><a href="gdata.client.html#Unauthorized">Unauthorized</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.client.html#RequestError">RequestError</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.client.html#BadAuthentication">BadAuthentication</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.client.html#CaptchaChallenge">CaptchaChallenge</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.client.html#ClientLoginFailed">ClientLoginFailed</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.client.html#RedirectError">RedirectError</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.client.html#BadAuthenticationServiceURL">BadAuthenticationServiceURL</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gdata.client.html#UnableToUpgradeToken">UnableToUpgradeToken</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gdata.client.html#Unauthorized">Unauthorized</a>
 </font></dt></dl>
 </dd>
 </dl>
-</dd>
-<dt><font face="helvetica, arial"><a href="gdata.service.html#CaptchaRequired">gdata.service.CaptchaRequired</a>(<a href="gdata.service.html#Error">gdata.service.Error</a>)
-</font></dt><dd>
-<dl>
-<dt><font face="helvetica, arial"><a href="gdata.client.html#CaptchaChallenge">CaptchaChallenge</a>
-</font></dt></dl>
 </dd>
 <dt><font face="helvetica, arial"><a href="gdata.service.html#Error">gdata.service.Error</a>(<a href="exceptions.html#Exception">exceptions.Exception</a>)
 </font></dt><dd>
@@ -80,23 +93,6 @@ the&nbsp;release&nbsp;of&nbsp;version&nbsp;2.0.0.&nbsp;The&nbsp;primary&nbsp;cla
 <dl>
 <dt><font face="helvetica, arial"><a href="gdata.client.html#GDataClient">GDataClient</a>
 </font></dt></dl>
-</dd>
-<dt><font face="helvetica, arial"><a href="gdata.service.html#RequestError">gdata.service.RequestError</a>(<a href="gdata.service.html#Error">gdata.service.Error</a>)
-</font></dt><dd>
-<dl>
-<dt><font face="helvetica, arial"><a href="gdata.client.html#RequestError">RequestError</a>
-</font></dt><dd>
-<dl>
-<dt><font face="helvetica, arial"><a href="gdata.client.html#ClientLoginFailed">ClientLoginFailed</a>
-</font></dt><dt><font face="helvetica, arial"><a href="gdata.client.html#RedirectError">RedirectError</a>
-</font></dt><dd>
-<dl>
-<dt><font face="helvetica, arial"><a href="gdata.client.html#BadAuthenticationServiceURL">BadAuthenticationServiceURL</a>(<a href="gdata.client.html#RedirectError">RedirectError</a>, <a href="gdata.service.html#BadAuthenticationServiceURL">gdata.service.BadAuthenticationServiceURL</a>)
-</font></dt></dl>
-</dd>
-</dl>
-</dd>
-</dl>
 </dd>
 </dl>
  <p>
@@ -124,7 +120,7 @@ Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception<
 
 <hr>
 Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#AuthorizationRequired-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#AuthorizationRequired-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
 <hr>
 Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
@@ -161,16 +157,13 @@ Data descriptors inherited from <a href="exceptions.html#BaseException">exceptio
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="BadAuthenticationServiceURL">class <strong>BadAuthenticationServiceURL</strong></a>(<a href="gdata.client.html#RedirectError">RedirectError</a>, <a href="gdata.service.html#BadAuthenticationServiceURL">gdata.service.BadAuthenticationServiceURL</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="BadAuthentication">class <strong>BadAuthentication</strong></a>(<a href="gdata.client.html#RequestError">RequestError</a>)</font></td></tr>
     
 <tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="gdata.client.html#BadAuthenticationServiceURL">BadAuthenticationServiceURL</a></dd>
-<dd><a href="gdata.client.html#RedirectError">RedirectError</a></dd>
+<dd><a href="gdata.client.html#BadAuthentication">BadAuthentication</a></dd>
 <dd><a href="gdata.client.html#RequestError">RequestError</a></dd>
-<dd><a href="gdata.service.html#RequestError">gdata.service.RequestError</a></dd>
-<dd><a href="gdata.service.html#BadAuthenticationServiceURL">gdata.service.BadAuthenticationServiceURL</a></dd>
-<dd><a href="gdata.service.html#Error">gdata.service.Error</a></dd>
+<dd><a href="gdata.client.html#Error">Error</a></dd>
 <dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
 <dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
 <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
@@ -186,7 +179,77 @@ Data and other attributes inherited from <a href="gdata.client.html#RequestError
 <dl><dt><strong>status</strong> = None</dl>
 
 <hr>
-Data descriptors inherited from <a href="gdata.service.html#Error">gdata.service.Error</a>:<br>
+Data descriptors inherited from <a href="gdata.client.html#Error">Error</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="BadAuthentication-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#BadAuthentication-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#BadAuthentication-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="BadAuthentication-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#BadAuthentication-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="BadAuthentication-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#BadAuthentication-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="BadAuthentication-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#BadAuthentication-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="BadAuthentication-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#BadAuthentication-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="BadAuthentication-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BadAuthentication-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#BadAuthentication-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="BadAuthentication-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#BadAuthentication-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="BadAuthentication-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BadAuthentication-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#BadAuthentication-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+<dd><tt>exception&nbsp;message</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BadAuthenticationServiceURL">class <strong>BadAuthenticationServiceURL</strong></a>(<a href="gdata.client.html#RedirectError">RedirectError</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.client.html#BadAuthenticationServiceURL">BadAuthenticationServiceURL</a></dd>
+<dd><a href="gdata.client.html#RedirectError">RedirectError</a></dd>
+<dd><a href="gdata.client.html#RequestError">RequestError</a></dd>
+<dd><a href="gdata.client.html#Error">Error</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="gdata.client.html#RequestError">RequestError</a>:<br>
+<dl><dt><strong>body</strong> = None</dl>
+
+<dl><dt><strong>headers</strong> = None</dl>
+
+<dl><dt><strong>reason</strong> = None</dl>
+
+<dl><dt><strong>status</strong> = None</dl>
+
+<hr>
+Data descriptors inherited from <a href="gdata.client.html#Error">Error</a>:<br>
 <dl><dt><strong>__weakref__</strong></dt>
 <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
@@ -196,7 +259,7 @@ Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception<
 
 <hr>
 Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#BadAuthenticationServiceURL-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#BadAuthenticationServiceURL-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
 <hr>
 Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
@@ -233,13 +296,13 @@ Data descriptors inherited from <a href="exceptions.html#BaseException">exceptio
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="CaptchaChallenge">class <strong>CaptchaChallenge</strong></a>(<a href="gdata.service.html#CaptchaRequired">gdata.service.CaptchaRequired</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="CaptchaChallenge">class <strong>CaptchaChallenge</strong></a>(<a href="gdata.client.html#RequestError">RequestError</a>)</font></td></tr>
     
 <tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.client.html#CaptchaChallenge">CaptchaChallenge</a></dd>
-<dd><a href="gdata.service.html#CaptchaRequired">gdata.service.CaptchaRequired</a></dd>
-<dd><a href="gdata.service.html#Error">gdata.service.Error</a></dd>
+<dd><a href="gdata.client.html#RequestError">RequestError</a></dd>
+<dd><a href="gdata.client.html#Error">Error</a></dd>
 <dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
 <dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
 <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
@@ -251,7 +314,17 @@ Data and other attributes defined here:<br>
 <dl><dt><strong>captcha_url</strong> = None</dl>
 
 <hr>
-Data descriptors inherited from <a href="gdata.service.html#Error">gdata.service.Error</a>:<br>
+Data and other attributes inherited from <a href="gdata.client.html#RequestError">RequestError</a>:<br>
+<dl><dt><strong>body</strong> = None</dl>
+
+<dl><dt><strong>headers</strong> = None</dl>
+
+<dl><dt><strong>reason</strong> = None</dl>
+
+<dl><dt><strong>status</strong> = None</dl>
+
+<hr>
+Data descriptors inherited from <a href="gdata.client.html#Error">Error</a>:<br>
 <dl><dt><strong>__weakref__</strong></dt>
 <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
@@ -261,7 +334,7 @@ Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception<
 
 <hr>
 Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#CaptchaChallenge-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#CaptchaChallenge-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
 <hr>
 Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
@@ -304,8 +377,7 @@ Data descriptors inherited from <a href="exceptions.html#BaseException">exceptio
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.client.html#ClientLoginFailed">ClientLoginFailed</a></dd>
 <dd><a href="gdata.client.html#RequestError">RequestError</a></dd>
-<dd><a href="gdata.service.html#RequestError">gdata.service.RequestError</a></dd>
-<dd><a href="gdata.service.html#Error">gdata.service.Error</a></dd>
+<dd><a href="gdata.client.html#Error">Error</a></dd>
 <dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
 <dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
 <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
@@ -321,7 +393,7 @@ Data and other attributes inherited from <a href="gdata.client.html#RequestError
 <dl><dt><strong>status</strong> = None</dl>
 
 <hr>
-Data descriptors inherited from <a href="gdata.service.html#Error">gdata.service.Error</a>:<br>
+Data descriptors inherited from <a href="gdata.client.html#Error">Error</a>:<br>
 <dl><dt><strong>__weakref__</strong></dt>
 <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
@@ -331,7 +403,7 @@ Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception<
 
 <hr>
 Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#ClientLoginFailed-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#ClientLoginFailed-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
 <hr>
 Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
@@ -389,7 +461,7 @@ Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception<
 
 <hr>
 Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#ClientLoginTokenMissing-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#ClientLoginTokenMissing-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
 <hr>
 Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
@@ -446,7 +518,7 @@ Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception<
 
 <hr>
 Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#Error-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#Error-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
 <hr>
 Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
@@ -504,10 +576,10 @@ delete.&nbsp;These&nbsp;methods&nbsp;contact&nbsp;the&nbsp;Google&nbsp;Data&nbsp
 Auth:<br>
 &nbsp;<br>
 Reading&nbsp;user-specific&nbsp;private&nbsp;data&nbsp;requires&nbsp;authorization&nbsp;from&nbsp;the&nbsp;user&nbsp;as<br>
-do&nbsp;any&nbsp;changes&nbsp;to&nbsp;user&nbsp;data.&nbsp;An&nbsp;auth_token&nbsp;object&nbsp;can&nbsp;be&nbsp;passed&nbsp;into&nbsp;any<br>
+do&nbsp;any&nbsp;changes&nbsp;to&nbsp;user&nbsp;data.&nbsp;An&nbsp;auth_token&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;can&nbsp;be&nbsp;passed&nbsp;into&nbsp;any<br>
 of&nbsp;the&nbsp;HTTP&nbsp;requests&nbsp;to&nbsp;set&nbsp;the&nbsp;Authorization&nbsp;header&nbsp;in&nbsp;the&nbsp;request.<br>
 &nbsp;<br>
-You&nbsp;may&nbsp;also&nbsp;want&nbsp;to&nbsp;set&nbsp;the&nbsp;auth_token&nbsp;member&nbsp;to&nbsp;a&nbsp;an&nbsp;object&nbsp;which&nbsp;can<br>
+You&nbsp;may&nbsp;also&nbsp;want&nbsp;to&nbsp;set&nbsp;the&nbsp;auth_token&nbsp;member&nbsp;to&nbsp;a&nbsp;an&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;which&nbsp;can<br>
 use&nbsp;modify_request&nbsp;to&nbsp;set&nbsp;the&nbsp;Authorization&nbsp;header&nbsp;in&nbsp;the&nbsp;HTTP&nbsp;request.<br>
 &nbsp;<br>
 If&nbsp;you&nbsp;are&nbsp;authenticating&nbsp;using&nbsp;the&nbsp;email&nbsp;address&nbsp;and&nbsp;password,&nbsp;you&nbsp;can<br>
@@ -532,13 +604,13 @@ api_version&nbsp;member&nbsp;to&nbsp;a&nbsp;string,&nbsp;either&nbsp;'1'&nbsp;or
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="GDClient-ClientLogin"><strong>ClientLogin</strong></a> = <a href="#GDClient-client_login">client_login</a>(self, email, password, service, source, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">='https://www.google.com/accounts/ClientLogin'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="GDClient-ClientLogin"><strong>ClientLogin</strong></a> = <a href="#GDClient-client_login">client_login</a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">='https://www.google.com/accounts/ClientLogin'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="GDClient-Delete"><strong>Delete</strong></a> = <a href="#GDClient-delete">delete</a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
+<dl><dt><a name="GDClient-Delete"><strong>Delete</strong></a> = <a href="#GDClient-delete">delete</a>(self, entry_or_uri, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="GDClient-GetEntry"><strong>GetEntry</strong></a> = <a href="#GDClient-get_entry">get_entry</a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GEntry'&gt;</font>, **kwargs)</dt></dl>
+<dl><dt><a name="GDClient-GetEntry"><strong>GetEntry</strong></a> = <a href="#GDClient-get_entry">get_entry</a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDEntry'&gt;</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="GDClient-GetFeed"><strong>GetFeed</strong></a> = <a href="#GDClient-get_feed">get_feed</a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GFeed'&gt;</font>, **kwargs)</dt></dl>
+<dl><dt><a name="GDClient-GetFeed"><strong>GetFeed</strong></a> = <a href="#GDClient-get_feed">get_feed</a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDFeed'&gt;</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="GDClient-GetNext"><strong>GetNext</strong></a> = <a href="#GDClient-get_next">get_next</a>(self, feed, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
@@ -548,19 +620,19 @@ Methods defined here:<br>
 
 <dl><dt><a name="GDClient-Request"><strong>Request</strong></a> = <a href="#GDClient-request">request</a>(self, method<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="GDClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = <a href="#GDClient-request_client_login_token">request_client_login_token</a>(self, email, password, service, source, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xbc8e50&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="GDClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = <a href="#GDClient-request_client_login_token">request_client_login_token</a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xcdf6d0&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="GDClient-Update"><strong>Update</strong></a> = <a href="#GDClient-update">update</a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="GDClient-UpgradeToken"><strong>UpgradeToken</strong></a> = <a href="#GDClient-upgrade_token">upgrade_token</a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xbc8e90&gt;</font>)</dt></dl>
+<dl><dt><a name="GDClient-UpgradeToken"><strong>UpgradeToken</strong></a> = <a href="#GDClient-upgrade_token">upgrade_token</a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xcdf710&gt;</font>)</dt></dl>
 
-<dl><dt><a name="GDClient-client_login"><strong>client_login</strong></a>(self, email, password, service, source, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">='https://www.google.com/accounts/ClientLogin'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="GDClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">='https://www.google.com/accounts/ClientLogin'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="GDClient-delete"><strong>delete</strong></a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
+<dl><dt><a name="GDClient-delete"><strong>delete</strong></a>(self, entry_or_uri, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="GDClient-get_entry"><strong>get_entry</strong></a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GEntry'&gt;</font>, **kwargs)</dt></dl>
+<dl><dt><a name="GDClient-get_entry"><strong>get_entry</strong></a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDEntry'&gt;</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="GDClient-get_feed"><strong>get_feed</strong></a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GFeed'&gt;</font>, **kwargs)</dt></dl>
+<dl><dt><a name="GDClient-get_feed"><strong>get_feed</strong></a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDFeed'&gt;</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="GDClient-get_next"><strong>get_next</strong></a>(self, feed, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Fetches&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;results&nbsp;from&nbsp;the&nbsp;feed.&nbsp;<br>
 &nbsp;<br>
@@ -571,7 +643,7 @@ are&nbsp;more&nbsp;results&nbsp;than&nbsp;could&nbsp;fit&nbsp;under&nbsp;max-res
 a&nbsp;next&nbsp;link.&nbsp;This&nbsp;method&nbsp;performs&nbsp;a&nbsp;GET&nbsp;against&nbsp;this&nbsp;next&nbsp;results&nbsp;URL.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;new&nbsp;feed&nbsp;object&nbsp;containing&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;entries&nbsp;in&nbsp;this&nbsp;feed.</tt></dd></dl>
+&nbsp;&nbsp;A&nbsp;new&nbsp;feed&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;containing&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;entries&nbsp;in&nbsp;this&nbsp;feed.</tt></dd></dl>
 
 <dl><dt><a name="GDClient-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt><dd><tt>Adds&nbsp;or&nbsp;changes&nbsp;request&nbsp;before&nbsp;making&nbsp;the&nbsp;HTTP&nbsp;request.<br>
 &nbsp;<br>
@@ -603,20 +675,20 @@ Args:<br>
 &nbsp;&nbsp;method:&nbsp;str&nbsp;The&nbsp;HTTP&nbsp;verb&nbsp;for&nbsp;this&nbsp;request,&nbsp;usually&nbsp;'GET',&nbsp;'POST',&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'PUT',&nbsp;or&nbsp;'DELETE'<br>
 &nbsp;&nbsp;uri:&nbsp;atom.http_core.<a href="atom.http_core.html#Uri">Uri</a>,&nbsp;str,&nbsp;or&nbsp;unicode&nbsp;The&nbsp;URL&nbsp;being&nbsp;requested.<br>
-&nbsp;&nbsp;auth_token:&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header&nbsp;in&nbsp;its<br>
+&nbsp;&nbsp;auth_token:&nbsp;An&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header&nbsp;in&nbsp;its<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modify_request&nbsp;method.&nbsp;Recommended&nbsp;classes&nbsp;include&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.<br>
 &nbsp;&nbsp;http_request:&nbsp;(optional)&nbsp;atom.http_core.HttpRequest<br>
 &nbsp;&nbsp;converter:&nbsp;function&nbsp;which&nbsp;takes&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;response&nbsp;as&nbsp;it's&nbsp;only<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argument&nbsp;and&nbsp;returns&nbsp;the&nbsp;desired&nbsp;object.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argument&nbsp;and&nbsp;returns&nbsp;the&nbsp;desired&nbsp;<a href="__builtin__.html#object">object</a>.<br>
 &nbsp;&nbsp;desired_class:&nbsp;class&nbsp;descended&nbsp;from&nbsp;atom.core.XmlElement&nbsp;to&nbsp;which&nbsp;a<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;successful&nbsp;response&nbsp;should&nbsp;be&nbsp;converted.&nbsp;If&nbsp;there&nbsp;is&nbsp;no<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;converter&nbsp;function&nbsp;specified&nbsp;(converter=None)&nbsp;then&nbsp;the<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;desired_class&nbsp;will&nbsp;be&nbsp;used&nbsp;in&nbsp;calling&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;atom.core.xml_element_from_string&nbsp;function.&nbsp;If&nbsp;neither<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;atom.core.parse&nbsp;function.&nbsp;If&nbsp;neither<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;desired_class&nbsp;nor&nbsp;the&nbsp;converter&nbsp;is&nbsp;specified,&nbsp;an<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTTP&nbsp;reponse&nbsp;object&nbsp;will&nbsp;be&nbsp;returned.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTTP&nbsp;reponse&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;will&nbsp;be&nbsp;returned.<br>
 &nbsp;&nbsp;redirects_remaining:&nbsp;(optional)&nbsp;int,&nbsp;if&nbsp;this&nbsp;number&nbsp;is&nbsp;0&nbsp;and&nbsp;the<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server&nbsp;sends&nbsp;a&nbsp;302&nbsp;redirect,&nbsp;the&nbsp;request&nbsp;method<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;raise&nbsp;an&nbsp;exception.&nbsp;This&nbsp;parameter&nbsp;is&nbsp;used&nbsp;in<br>
@@ -626,19 +698,19 @@ Any&nbsp;additional&nbsp;arguments&nbsp;are&nbsp;passed&nbsp;through&nbsp;to&nbs
 atom.client.<a href="atom.client.html#AtomPubClient">AtomPubClient</a>.request.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;An&nbsp;HTTP&nbsp;response&nbsp;object&nbsp;(see&nbsp;atom.http_core.HttpResponse&nbsp;for&nbsp;a<br>
-&nbsp;&nbsp;description&nbsp;of&nbsp;the&nbsp;object's&nbsp;interface)&nbsp;if&nbsp;no&nbsp;converter&nbsp;was<br>
+&nbsp;&nbsp;An&nbsp;HTTP&nbsp;response&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(see&nbsp;atom.http_core.HttpResponse&nbsp;for&nbsp;a<br>
+&nbsp;&nbsp;description&nbsp;of&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;interface)&nbsp;if&nbsp;no&nbsp;converter&nbsp;was<br>
 &nbsp;&nbsp;specified&nbsp;and&nbsp;no&nbsp;desired_class&nbsp;was&nbsp;specified.&nbsp;If&nbsp;a&nbsp;converter&nbsp;function<br>
 &nbsp;&nbsp;was&nbsp;provided,&nbsp;the&nbsp;results&nbsp;of&nbsp;calling&nbsp;the&nbsp;converter&nbsp;are&nbsp;returned.&nbsp;If&nbsp;no<br>
 &nbsp;&nbsp;converter&nbsp;was&nbsp;specified&nbsp;but&nbsp;a&nbsp;desired_class&nbsp;was&nbsp;provided,&nbsp;the&nbsp;response<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using&nbsp;<br>
-&nbsp;&nbsp;atom.core.xml_element_from_string.</tt></dd></dl>
+&nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="GDClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, service, source, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xbc8e50&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="GDClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xcdf6d0&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="GDClient-update"><strong>update</strong></a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
 &nbsp;<br>
-Performs&nbsp;a&nbsp;PUT&nbsp;and&nbsp;converts&nbsp;the&nbsp;response&nbsp;to&nbsp;a&nbsp;new&nbsp;entry&nbsp;object&nbsp;with&nbsp;a<br>
+Performs&nbsp;a&nbsp;PUT&nbsp;and&nbsp;converts&nbsp;the&nbsp;response&nbsp;to&nbsp;a&nbsp;new&nbsp;entry&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;a<br>
 matching&nbsp;class&nbsp;to&nbsp;the&nbsp;entry&nbsp;passed&nbsp;in.<br>
 &nbsp;<br>
 Args:<br>
@@ -652,9 +724,9 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;overwrite&nbsp;whatever&nbsp;version&nbsp;is&nbsp;present.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
+&nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="GDClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xbc8e90&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="GDClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xcdf710&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -662,18 +734,22 @@ For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 Args:<br>
 &nbsp;&nbsp;token:&nbsp;gdata.gauth.AuthSubToken&nbsp;(optional)&nbsp;If&nbsp;no&nbsp;token&nbsp;is&nbsp;passed&nbsp;in,&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;client's&nbsp;auth_token&nbsp;member&nbsp;is&nbsp;used&nbsp;to&nbsp;request&nbsp;the&nbsp;new&nbsp;token.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;token&nbsp;object&nbsp;will&nbsp;be&nbsp;modified&nbsp;to&nbsp;contain&nbsp;the&nbsp;new&nbsp;session&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;token&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;will&nbsp;be&nbsp;modified&nbsp;to&nbsp;contain&nbsp;the&nbsp;new&nbsp;session&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token&nbsp;string.<br>
 &nbsp;&nbsp;url:&nbsp;str&nbsp;or&nbsp;atom.http_core.<a href="atom.http_core.html#Uri">Uri</a>&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;the&nbsp;token<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upgrade&nbsp;request&nbsp;should&nbsp;be&nbsp;sent.&nbsp;Defaults&nbsp;to:&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.google.com/accounts/AuthSubSessionToken<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
+&nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;<a href="__builtin__.html#object">object</a>.</tt></dd></dl>
 
 <hr>
 Data and other attributes defined here:<br>
 <dl><dt><strong>api_version</strong> = None</dl>
+
+<dl><dt><strong>auth_scopes</strong> = None</dl>
+
+<dl><dt><strong>auth_service</strong> = None</dl>
 
 <hr>
 Methods inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
@@ -684,15 +760,15 @@ Methods inherited from <a href="atom.client.html#AtomPubClient">atom.client.Atom
 <dl><dt><a name="GDClient-__init__"><strong>__init__</strong></a>(self, http_client<font color="#909090">=None</font>, host<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;<a href="atom.client.html#AtomPubClient">AtomPubClient</a>&nbsp;instance.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;http_client:&nbsp;An&nbsp;object&nbsp;capable&nbsp;of&nbsp;performing&nbsp;HTTP&nbsp;requests&nbsp;through&nbsp;a<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request&nbsp;method.&nbsp;This&nbsp;object&nbsp;is&nbsp;used&nbsp;to&nbsp;perform&nbsp;the&nbsp;request<br>
+&nbsp;&nbsp;http_client:&nbsp;An&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;capable&nbsp;of&nbsp;performing&nbsp;HTTP&nbsp;requests&nbsp;through&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request&nbsp;method.&nbsp;This&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;is&nbsp;used&nbsp;to&nbsp;perform&nbsp;the&nbsp;request<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;when&nbsp;the&nbsp;<a href="atom.client.html#AtomPubClient">AtomPubClient</a>'s&nbsp;request&nbsp;method&nbsp;is&nbsp;called.&nbsp;Used&nbsp;to<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow&nbsp;HTTP&nbsp;requests&nbsp;to&nbsp;be&nbsp;directed&nbsp;to&nbsp;a&nbsp;mock&nbsp;server,&nbsp;or&nbsp;use<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;an&nbsp;alternate&nbsp;library&nbsp;instead&nbsp;of&nbsp;the&nbsp;default&nbsp;of&nbsp;httplib&nbsp;to<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make&nbsp;HTTP&nbsp;requests.<br>
 &nbsp;&nbsp;host:&nbsp;str&nbsp;The&nbsp;default&nbsp;host&nbsp;name&nbsp;to&nbsp;use&nbsp;if&nbsp;a&nbsp;host&nbsp;is&nbsp;not&nbsp;specified&nbsp;in&nbsp;the<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested&nbsp;URI.<br>
-&nbsp;&nbsp;auth_token:&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;HTTP&nbsp;Authorization&nbsp;header&nbsp;when&nbsp;its<br>
+&nbsp;&nbsp;auth_token:&nbsp;An&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;which&nbsp;sets&nbsp;the&nbsp;HTTP&nbsp;Authorization&nbsp;header&nbsp;when&nbsp;its<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modify_request&nbsp;method&nbsp;is&nbsp;called.</tt></dd></dl>
 
 <dl><dt><a name="GDClient-get"><strong>get</strong></a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
@@ -753,12 +829,12 @@ Args:<br>
 
 <hr>
 Static methods inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
-<dl><dt><a name="GDQuery-ParseUri"><strong>ParseUri</strong></a> = parse_uri(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;<a href="atom.http_core.html#Uri">Uri</a>&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
+<dl><dt><a name="GDQuery-ParseUri"><strong>ParseUri</strong></a> = parse_uri(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;<a href="atom.http_core.html#Uri">Uri</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
 members&nbsp;of&nbsp;the&nbsp;<a href="atom.http_core.html#Uri">Uri</a>&nbsp;unset.</tt></dd></dl>
 
-<dl><dt><a name="GDQuery-parse_uri"><strong>parse_uri</strong></a>(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;<a href="atom.http_core.html#Uri">Uri</a>&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
+<dl><dt><a name="GDQuery-parse_uri"><strong>parse_uri</strong></a>(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;<a href="atom.http_core.html#Uri">Uri</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
 members&nbsp;of&nbsp;the&nbsp;<a href="atom.http_core.html#Uri">Uri</a>&nbsp;unset.</tt></dd></dl>
@@ -858,7 +934,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extra_params,&nbsp;this&nbsp;value&nbsp;will&nbsp;override&nbsp;that&nbsp;one.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;The&nbsp;fetched&nbsp;request&nbsp;token&nbsp;as&nbsp;a&nbsp;gdata.auth.OAuthToken&nbsp;object.<br>
+&nbsp;&nbsp;The&nbsp;fetched&nbsp;request&nbsp;token&nbsp;as&nbsp;a&nbsp;gdata.auth.OAuthToken&nbsp;<a href="__builtin__.html#object">object</a>.<br>
 &nbsp;<br>
 Raises:<br>
 &nbsp;&nbsp;FetchingOAuthRequestTokenFailed&nbsp;if&nbsp;the&nbsp;server&nbsp;responded&nbsp;to&nbsp;the&nbsp;request<br>
@@ -924,7 +1000,7 @@ The&nbsp;current&nbsp;scope&nbsp;is&nbsp;determined&nbsp;by&nbsp;the&nbsp;servic
 Returns:<br>
 &nbsp;&nbsp;If&nbsp;the&nbsp;current_token&nbsp;is&nbsp;set&nbsp;to&nbsp;an&nbsp;AuthSubToken/SecureAuthSubToken,<br>
 &nbsp;&nbsp;return&nbsp;the&nbsp;token&nbsp;string.&nbsp;If&nbsp;there&nbsp;is&nbsp;no&nbsp;current_token,&nbsp;a&nbsp;token&nbsp;string<br>
-&nbsp;&nbsp;for&nbsp;a&nbsp;token&nbsp;which&nbsp;matches&nbsp;the&nbsp;service&nbsp;object's&nbsp;default&nbsp;scope&nbsp;is&nbsp;returned.<br>
+&nbsp;&nbsp;for&nbsp;a&nbsp;token&nbsp;which&nbsp;matches&nbsp;the&nbsp;service&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;default&nbsp;scope&nbsp;is&nbsp;returned.<br>
 &nbsp;&nbsp;If&nbsp;there&nbsp;are&nbsp;no&nbsp;tokens&nbsp;valid&nbsp;for&nbsp;the&nbsp;scope,&nbsp;returns&nbsp;None.</tt></dd></dl>
 
 <dl><dt><a name="GDataClient-GetClientLoginToken"><strong>GetClientLoginToken</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;token&nbsp;string&nbsp;for&nbsp;the&nbsp;current&nbsp;token&nbsp;or&nbsp;a&nbsp;token&nbsp;matching&nbsp;the&nbsp;<br>
@@ -933,13 +1009,13 @@ service&nbsp;scope.<br>
 If&nbsp;the&nbsp;current_token&nbsp;is&nbsp;a&nbsp;ClientLoginToken,&nbsp;the&nbsp;token&nbsp;string&nbsp;for&nbsp;<br>
 the&nbsp;current&nbsp;token&nbsp;is&nbsp;returned.&nbsp;If&nbsp;the&nbsp;current_token&nbsp;is&nbsp;not&nbsp;set,&nbsp;this&nbsp;method<br>
 searches&nbsp;for&nbsp;a&nbsp;token&nbsp;in&nbsp;the&nbsp;token_store&nbsp;which&nbsp;is&nbsp;valid&nbsp;for&nbsp;the&nbsp;service&nbsp;<br>
-object's&nbsp;current&nbsp;scope.<br>
+<a href="__builtin__.html#object">object</a>'s&nbsp;current&nbsp;scope.<br>
 &nbsp;<br>
 The&nbsp;current&nbsp;scope&nbsp;is&nbsp;determined&nbsp;by&nbsp;the&nbsp;service&nbsp;name&nbsp;string&nbsp;member.<br>
 The&nbsp;token&nbsp;string&nbsp;is&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;Authorization&nbsp;header,&nbsp;it&nbsp;doesn&nbsp;not<br>
 include&nbsp;the&nbsp;ClientLogin&nbsp;label.</tt></dd></dl>
 
-<dl><dt><a name="GDataClient-GetEntry"><strong>GetEntry</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>)</dt><dd><tt>Query&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;an&nbsp;Entry.<br>
+<dl><dt><a name="GDataClient-GetEntry"><strong>GetEntry</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>)</dt><dd><tt><a href="#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;an&nbsp;Entry.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;gdata.service.Get<br>
 &nbsp;<br>
@@ -955,7 +1031,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="GDataClient-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x7f4beade8de8&gt;</font>)</dt><dd><tt>Query&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
+<dl><dt><a name="GDataClient-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x8c1578&gt;</font>)</dt><dd><tt><a href="#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;gdata.service.Get<br>
 &nbsp;<br>
@@ -1027,10 +1103,10 @@ Returns:<br>
 &nbsp;<br>
 Login&nbsp;retreives&nbsp;a&nbsp;temporary&nbsp;auth&nbsp;token&nbsp;which&nbsp;must&nbsp;be&nbsp;used&nbsp;with&nbsp;all<br>
 requests&nbsp;to&nbsp;GData&nbsp;services.&nbsp;The&nbsp;auth&nbsp;token&nbsp;is&nbsp;stored&nbsp;in&nbsp;the&nbsp;GData&nbsp;client<br>
-object.<br>
+<a href="__builtin__.html#object">object</a>.<br>
 &nbsp;<br>
 Login&nbsp;is&nbsp;also&nbsp;used&nbsp;to&nbsp;respond&nbsp;to&nbsp;a&nbsp;captcha&nbsp;challenge.&nbsp;If&nbsp;the&nbsp;user's&nbsp;login<br>
-attempt&nbsp;failed&nbsp;with&nbsp;a&nbsp;<a href="gdata.service.html#CaptchaRequired">CaptchaRequired</a>&nbsp;error,&nbsp;the&nbsp;user&nbsp;can&nbsp;respond&nbsp;by<br>
+attempt&nbsp;failed&nbsp;with&nbsp;a&nbsp;CaptchaRequired&nbsp;error,&nbsp;the&nbsp;user&nbsp;can&nbsp;respond&nbsp;by<br>
 calling&nbsp;Login&nbsp;with&nbsp;the&nbsp;captcha&nbsp;token&nbsp;and&nbsp;the&nbsp;answer&nbsp;to&nbsp;the&nbsp;challenge.<br>
 &nbsp;<br>
 Args:<br>
@@ -1040,8 +1116,8 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;challenge.<br>
 &nbsp;<br>
 Raises:<br>
-&nbsp;&nbsp;<a href="gdata.service.html#CaptchaRequired">CaptchaRequired</a>&nbsp;if&nbsp;the&nbsp;login&nbsp;service&nbsp;will&nbsp;require&nbsp;a&nbsp;captcha&nbsp;response<br>
-&nbsp;&nbsp;BadAuthentication&nbsp;if&nbsp;the&nbsp;login&nbsp;service&nbsp;rejected&nbsp;the&nbsp;username&nbsp;or&nbsp;password<br>
+&nbsp;&nbsp;CaptchaRequired&nbsp;if&nbsp;the&nbsp;login&nbsp;service&nbsp;will&nbsp;require&nbsp;a&nbsp;captcha&nbsp;response<br>
+&nbsp;&nbsp;<a href="#BadAuthentication">BadAuthentication</a>&nbsp;if&nbsp;the&nbsp;login&nbsp;service&nbsp;rejected&nbsp;the&nbsp;username&nbsp;or&nbsp;password<br>
 &nbsp;&nbsp;<a href="#Error">Error</a>&nbsp;if&nbsp;the&nbsp;login&nbsp;service&nbsp;responded&nbsp;with&nbsp;a&nbsp;403&nbsp;different&nbsp;from&nbsp;the&nbsp;above</tt></dd></dl>
 
 <dl><dt><a name="GDataClient-RevokeAuthSubToken"><strong>RevokeAuthSubToken</strong></a>(self)</dt><dd><tt>Revokes&nbsp;an&nbsp;existing&nbsp;AuthSub&nbsp;token.<br>
@@ -1172,7 +1248,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session&nbsp;token.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;The&nbsp;upgraded&nbsp;token&nbsp;as&nbsp;a&nbsp;gdata.auth.AuthSubToken&nbsp;object.<br>
+&nbsp;&nbsp;The&nbsp;upgraded&nbsp;token&nbsp;as&nbsp;a&nbsp;gdata.auth.AuthSubToken&nbsp;<a href="__builtin__.html#object">object</a>.<br>
 &nbsp;<br>
 Raises:<br>
 &nbsp;&nbsp;TokenUpgradeFailed&nbsp;if&nbsp;the&nbsp;server&nbsp;responded&nbsp;to&nbsp;the&nbsp;request&nbsp;with&nbsp;an&nbsp;<br>
@@ -1212,7 +1288,7 @@ Args:<br>
 &nbsp;&nbsp;username:&nbsp;str<br>
 &nbsp;&nbsp;password:&nbsp;str</tt></dd></dl>
 
-<dl><dt><a name="GDataClient-request"><strong>request</strong></a>(self, operation, url, data<font color="#909090">=None</font>, headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="GDataClient-request"><strong>request</strong></a>(*args, **kwargs)</dt><dd><tt>#&nbsp;The&nbsp;deprecated_function&nbsp;wraps&nbsp;the&nbsp;actual&nbsp;call&nbsp;to&nbsp;f.</tt></dd></dl>
 
 <dl><dt><a name="GDataClient-use_basic_auth"><strong>use_basic_auth</strong></a>(self, username, password, scopes<font color="#909090">=None</font>)</dt></dl>
 
@@ -1245,14 +1321,79 @@ Data and other attributes inherited from <a href="atom.service.html#AtomService"
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Query">class <strong>Query</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Query-ModifyRequest"><strong>ModifyRequest</strong></a> = <a href="#Query-modify_request">modify_request</a>(self, http_request)</dt></dl>
+
+<dl><dt><a name="Query-__init__"><strong>__init__</strong></a>(self, text_query<font color="#909090">=None</font>, categories<font color="#909090">=None</font>, author<font color="#909090">=None</font>, alt<font color="#909090">=None</font>, updated_min<font color="#909090">=None</font>, updated_max<font color="#909090">=None</font>, pretty_print<font color="#909090">=False</font>, published_min<font color="#909090">=None</font>, published_max<font color="#909090">=None</font>, start_index<font color="#909090">=None</font>, max_results<font color="#909090">=None</font>, strict<font color="#909090">=False</font>)</dt><dd><tt>Constructs&nbsp;a&nbsp;Google&nbsp;Data&nbsp;<a href="#Query">Query</a>&nbsp;to&nbsp;filter&nbsp;feed&nbsp;contents&nbsp;serverside.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;text_query:&nbsp;Full&nbsp;text&nbsp;search&nbsp;str&nbsp;(optional)<br>
+&nbsp;&nbsp;categories:&nbsp;list&nbsp;of&nbsp;strings&nbsp;(optional).&nbsp;Each&nbsp;string&nbsp;is&nbsp;a&nbsp;required<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;category.&nbsp;To&nbsp;include&nbsp;an&nbsp;'or'&nbsp;query,&nbsp;put&nbsp;a&nbsp;|&nbsp;in&nbsp;the&nbsp;string&nbsp;between<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;terms.&nbsp;For&nbsp;example,&nbsp;to&nbsp;find&nbsp;everything&nbsp;in&nbsp;the&nbsp;Fitz&nbsp;category&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Laurie&nbsp;or&nbsp;Jane&nbsp;category&nbsp;(Fitz&nbsp;and&nbsp;(Laurie&nbsp;or&nbsp;Jane))&nbsp;you&nbsp;would<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;categories&nbsp;to&nbsp;['Fitz',&nbsp;'Laurie|Jane'].<br>
+&nbsp;&nbsp;author:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;service&nbsp;returns&nbsp;entries&nbsp;where&nbsp;the&nbsp;author<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;and/or&nbsp;email&nbsp;address&nbsp;match&nbsp;your&nbsp;query&nbsp;string.<br>
+&nbsp;&nbsp;alt:&nbsp;str&nbsp;(optional)&nbsp;for&nbsp;the&nbsp;Alternative&nbsp;representation&nbsp;type&nbsp;you'd&nbsp;like<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;feed&nbsp;in.&nbsp;If&nbsp;you&nbsp;don't&nbsp;specify&nbsp;an&nbsp;alt&nbsp;parameter,&nbsp;the&nbsp;service<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returns&nbsp;an&nbsp;Atom&nbsp;feed.&nbsp;This&nbsp;is&nbsp;equivalent&nbsp;to&nbsp;alt='atom'.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alt='rss'&nbsp;returns&nbsp;an&nbsp;RSS&nbsp;2.0&nbsp;result&nbsp;feed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alt='json'&nbsp;returns&nbsp;a&nbsp;JSON&nbsp;representation&nbsp;of&nbsp;the&nbsp;feed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alt='json-in-script'&nbsp;Requests&nbsp;a&nbsp;response&nbsp;that&nbsp;wraps&nbsp;JSON&nbsp;in&nbsp;a&nbsp;script<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tag.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alt='atom-in-script'&nbsp;Requests&nbsp;an&nbsp;Atom&nbsp;response&nbsp;that&nbsp;wraps&nbsp;an&nbsp;XML<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;in&nbsp;a&nbsp;script&nbsp;tag.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alt='rss-in-script'&nbsp;Requests&nbsp;an&nbsp;RSS&nbsp;response&nbsp;that&nbsp;wraps&nbsp;an&nbsp;XML<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;in&nbsp;a&nbsp;script&nbsp;tag.<br>
+&nbsp;&nbsp;updated_min:&nbsp;str&nbsp;(optional),&nbsp;<a href="http://www.rfc-editor.org/rfc/rfc3339.txt">RFC&nbsp;3339</a>&nbsp;timestamp&nbsp;format,&nbsp;lower&nbsp;bounds.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;example:&nbsp;2005-08-09T10:57:00-08:00<br>
+&nbsp;&nbsp;updated_max:&nbsp;str&nbsp;(optional)&nbsp;updated&nbsp;time&nbsp;must&nbsp;be&nbsp;earlier&nbsp;than&nbsp;timestamp.<br>
+&nbsp;&nbsp;pretty_print:&nbsp;boolean&nbsp;(optional)&nbsp;If&nbsp;True&nbsp;the&nbsp;server's&nbsp;XML&nbsp;response&nbsp;will<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;indented&nbsp;to&nbsp;make&nbsp;it&nbsp;more&nbsp;human&nbsp;readable.&nbsp;Defaults&nbsp;to&nbsp;False.<br>
+&nbsp;&nbsp;published_min:&nbsp;str&nbsp;(optional),&nbsp;Similar&nbsp;to&nbsp;updated_min&nbsp;but&nbsp;for&nbsp;published<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time.<br>
+&nbsp;&nbsp;published_max:&nbsp;str&nbsp;(optional),&nbsp;Similar&nbsp;to&nbsp;updated_max&nbsp;but&nbsp;for&nbsp;published<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time.<br>
+&nbsp;&nbsp;start_index:&nbsp;int&nbsp;or&nbsp;str&nbsp;(optional)&nbsp;1-based&nbsp;index&nbsp;of&nbsp;the&nbsp;first&nbsp;result&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;retrieved.&nbsp;Note&nbsp;that&nbsp;this&nbsp;isn't&nbsp;a&nbsp;general&nbsp;cursoring&nbsp;mechanism.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;you&nbsp;first&nbsp;send&nbsp;a&nbsp;query&nbsp;with&nbsp;?start-index=1&amp;max-results=10&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;send&nbsp;another&nbsp;query&nbsp;with&nbsp;?start-index=11&amp;max-results=10,&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;service&nbsp;cannot&nbsp;guarantee&nbsp;that&nbsp;the&nbsp;results&nbsp;are&nbsp;equivalent&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?start-index=1&amp;max-results=20,&nbsp;because&nbsp;insertions&nbsp;and&nbsp;deletions<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;could&nbsp;have&nbsp;taken&nbsp;place&nbsp;in&nbsp;between&nbsp;the&nbsp;two&nbsp;queries.<br>
+&nbsp;&nbsp;max_results:&nbsp;int&nbsp;or&nbsp;str&nbsp;(optional)&nbsp;Maximum&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;retrieved.&nbsp;Each&nbsp;service&nbsp;has&nbsp;a&nbsp;default&nbsp;max&nbsp;(usually&nbsp;25)&nbsp;which&nbsp;can<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vary&nbsp;from&nbsp;service&nbsp;to&nbsp;service.&nbsp;There&nbsp;is&nbsp;also&nbsp;a&nbsp;service-specific<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit&nbsp;to&nbsp;the&nbsp;max_results&nbsp;you&nbsp;can&nbsp;fetch&nbsp;in&nbsp;a&nbsp;request.<br>
+&nbsp;&nbsp;strict:&nbsp;boolean&nbsp;(optional)&nbsp;If&nbsp;True,&nbsp;the&nbsp;server&nbsp;will&nbsp;return&nbsp;an&nbsp;error&nbsp;if<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;server&nbsp;does&nbsp;not&nbsp;recognize&nbsp;any&nbsp;of&nbsp;the&nbsp;parameters&nbsp;in&nbsp;the&nbsp;request<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;URL.&nbsp;Defaults&nbsp;to&nbsp;False.</tt></dd></dl>
+
+<dl><dt><a name="Query-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="RedirectError">class <strong>RedirectError</strong></a>(<a href="gdata.client.html#RequestError">RequestError</a>)</font></td></tr>
     
 <tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.client.html#RedirectError">RedirectError</a></dd>
 <dd><a href="gdata.client.html#RequestError">RequestError</a></dd>
-<dd><a href="gdata.service.html#RequestError">gdata.service.RequestError</a></dd>
-<dd><a href="gdata.service.html#Error">gdata.service.Error</a></dd>
+<dd><a href="gdata.client.html#Error">Error</a></dd>
 <dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
 <dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
 <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
@@ -1268,7 +1409,7 @@ Data and other attributes inherited from <a href="gdata.client.html#RequestError
 <dl><dt><strong>status</strong> = None</dl>
 
 <hr>
-Data descriptors inherited from <a href="gdata.service.html#Error">gdata.service.Error</a>:<br>
+Data descriptors inherited from <a href="gdata.client.html#Error">Error</a>:<br>
 <dl><dt><strong>__weakref__</strong></dt>
 <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
@@ -1278,7 +1419,7 @@ Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception<
 
 <hr>
 Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#RedirectError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#RedirectError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
 <hr>
 Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
@@ -1315,13 +1456,12 @@ Data descriptors inherited from <a href="exceptions.html#BaseException">exceptio
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="RequestError">class <strong>RequestError</strong></a>(<a href="gdata.service.html#RequestError">gdata.service.RequestError</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="RequestError">class <strong>RequestError</strong></a>(<a href="gdata.client.html#Error">Error</a>)</font></td></tr>
     
 <tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.client.html#RequestError">RequestError</a></dd>
-<dd><a href="gdata.service.html#RequestError">gdata.service.RequestError</a></dd>
-<dd><a href="gdata.service.html#Error">gdata.service.Error</a></dd>
+<dd><a href="gdata.client.html#Error">Error</a></dd>
 <dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
 <dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
 <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
@@ -1337,7 +1477,7 @@ Data and other attributes defined here:<br>
 <dl><dt><strong>status</strong> = None</dl>
 
 <hr>
-Data descriptors inherited from <a href="gdata.service.html#Error">gdata.service.Error</a>:<br>
+Data descriptors inherited from <a href="gdata.client.html#Error">Error</a>:<br>
 <dl><dt><strong>__weakref__</strong></dt>
 <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
@@ -1347,7 +1487,7 @@ Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception<
 
 <hr>
 Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#RequestError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#RequestError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
 <hr>
 Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
@@ -1384,16 +1524,27 @@ Data descriptors inherited from <a href="exceptions.html#BaseException">exceptio
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="UnableToUpgradeToken">class <strong>UnableToUpgradeToken</strong></a>(<a href="gdata.client.html#Error">Error</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="UnableToUpgradeToken">class <strong>UnableToUpgradeToken</strong></a>(<a href="gdata.client.html#RequestError">RequestError</a>)</font></td></tr>
     
 <tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.client.html#UnableToUpgradeToken">UnableToUpgradeToken</a></dd>
+<dd><a href="gdata.client.html#RequestError">RequestError</a></dd>
 <dd><a href="gdata.client.html#Error">Error</a></dd>
 <dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
 <dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
 <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
 </dl>
+<hr>
+Data and other attributes inherited from <a href="gdata.client.html#RequestError">RequestError</a>:<br>
+<dl><dt><strong>body</strong> = None</dl>
+
+<dl><dt><strong>headers</strong> = None</dl>
+
+<dl><dt><strong>reason</strong> = None</dl>
+
+<dl><dt><strong>status</strong> = None</dl>
+
 <hr>
 Data descriptors inherited from <a href="gdata.client.html#Error">Error</a>:<br>
 <dl><dt><strong>__weakref__</strong></dt>
@@ -1405,7 +1556,7 @@ Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception<
 
 <hr>
 Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#UnableToUpgradeToken-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#UnableToUpgradeToken-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
 <hr>
 Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
@@ -1463,7 +1614,7 @@ Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception<
 
 <hr>
 Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#Unauthorized-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#Unauthorized-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
 <hr>
 Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
@@ -1503,17 +1654,7 @@ Data descriptors inherited from <a href="exceptions.html#BaseException">exceptio
 <font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt><a name="-create_converter"><strong>create_converter</strong></a>(obj)</dt><dd><tt>Experimental:&nbsp;Generates&nbsp;a&nbsp;converter&nbsp;function&nbsp;for&nbsp;this&nbsp;object's&nbsp;class.<br>
-&nbsp;<br>
-When&nbsp;updating&nbsp;an&nbsp;entry,&nbsp;the&nbsp;returned&nbsp;object&nbsp;should&nbsp;usually&nbsp;be&nbsp;of&nbsp;the&nbsp;same<br>
-type&nbsp;as&nbsp;the&nbsp;original&nbsp;entry.&nbsp;Since&nbsp;the&nbsp;client's&nbsp;request&nbsp;method&nbsp;takes&nbsp;a<br>
-converter&nbsp;funtion&nbsp;as&nbsp;an&nbsp;argument,&nbsp;we&nbsp;need&nbsp;a&nbsp;function&nbsp;which&nbsp;will&nbsp;parse&nbsp;the<br>
-XML&nbsp;using&nbsp;the&nbsp;desired&nbsp;class.<br>
-&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;A&nbsp;function&nbsp;which&nbsp;takes&nbsp;an&nbsp;XML&nbsp;string&nbsp;as&nbsp;the&nbsp;only&nbsp;parameter&nbsp;and&nbsp;returns&nbsp;an<br>
-&nbsp;&nbsp;object&nbsp;of&nbsp;the&nbsp;same&nbsp;type&nbsp;as&nbsp;obj.</tt></dd></dl>
- <dl><dt><a name="-error_from_response"><strong>error_from_response</strong></a>(message, http_response, error_class, response_body<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;exception&nbsp;and&nbsp;sets&nbsp;the&nbsp;HTTP&nbsp;information&nbsp;in&nbsp;the&nbsp;error.<br>
+<td width="100%"><dl><dt><a name="-error_from_response"><strong>error_from_response</strong></a>(message, http_response, error_class, response_body<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;exception&nbsp;and&nbsp;sets&nbsp;the&nbsp;HTTP&nbsp;information&nbsp;in&nbsp;the&nbsp;error.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;message:&nbsp;str&nbsp;human&nbsp;readable&nbsp;message&nbsp;to&nbsp;be&nbsp;displayed&nbsp;if&nbsp;the&nbsp;exception&nbsp;is<br>
@@ -1522,9 +1663,13 @@ Args:<br>
 &nbsp;error_class:&nbsp;The&nbsp;exception&nbsp;to&nbsp;be&nbsp;instantiated&nbsp;and&nbsp;populated&nbsp;with<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;information&nbsp;from&nbsp;the&nbsp;http_response<br>
 &nbsp;response_body:&nbsp;str&nbsp;(optional)&nbsp;specify&nbsp;if&nbsp;the&nbsp;response&nbsp;has&nbsp;already&nbsp;been&nbsp;read<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;the&nbsp;http_response&nbsp;object.</tt></dd></dl>
- <dl><dt><a name="-v2_entry_from_response"><strong>v2_entry_from_response</strong></a>(response)</dt><dd><tt>Experimental&nbsp;converter&nbsp;which&nbsp;gets&nbsp;an&nbsp;Atom&nbsp;entry&nbsp;from&nbsp;the&nbsp;response.</tt></dd></dl>
- <dl><dt><a name="-v2_feed_from_response"><strong>v2_feed_from_response</strong></a>(response)</dt><dd><tt>Experimental&nbsp;converter&nbsp;which&nbsp;gets&nbsp;an&nbsp;Atom&nbsp;feed&nbsp;from&nbsp;the&nbsp;response.</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;the&nbsp;http_response&nbsp;<a href="__builtin__.html#object">object</a>.</tt></dd></dl>
+ <dl><dt><a name="-get_xml_version"><strong>get_xml_version</strong></a>(version)</dt><dd><tt>Determines&nbsp;which&nbsp;XML&nbsp;schema&nbsp;to&nbsp;use&nbsp;based&nbsp;on&nbsp;the&nbsp;client&nbsp;API&nbsp;version.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;version:&nbsp;string&nbsp;which&nbsp;is&nbsp;converted&nbsp;to&nbsp;an&nbsp;int.&nbsp;The&nbsp;version&nbsp;string&nbsp;is&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;form&nbsp;'Major.Minor.x.y.z'&nbsp;and&nbsp;only&nbsp;the&nbsp;major&nbsp;version&nbsp;number<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;considered.&nbsp;If&nbsp;None&nbsp;is&nbsp;provided&nbsp;assume&nbsp;version&nbsp;1.</tt></dd></dl>
 </td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">

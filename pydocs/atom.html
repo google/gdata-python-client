@@ -142,7 +142,7 @@ For&nbsp;more&nbsp;information&nbsp;on&nbsp;the&nbsp;Atom&nbsp;data&nbsp;model,&
 Methods defined here:<br>
 <dl><dt><a name="AtomBase-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
 
-<dl><dt><a name="AtomBase-__init__"><strong>__init__</strong></a>(self, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="AtomBase-__init__"><strong>__init__</strong></a>(*args, **kwargs)</dt><dd><tt>#&nbsp;The&nbsp;deprecated_function&nbsp;wraps&nbsp;the&nbsp;actual&nbsp;call&nbsp;to&nbsp;f.</tt></dd></dl>
 
 <dl><dt><a name="AtomBase-__str__"><strong>__str__</strong></a>(self)</dt></dl>
 
@@ -648,29 +648,7 @@ Data descriptors inherited from <a href="atom.html#ExtensionContainer">Extension
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="Entry-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, content<font color="#909090">=None</font>, contributor<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, published<font color="#909090">=None</font>, rights<font color="#909090">=None</font>, source<font color="#909090">=None</font>, summary<font color="#909090">=None</font>, control<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;atom:entry<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;author:&nbsp;list&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#Author">Author</a>&nbsp;instances&nbsp;which&nbsp;belong&nbsp;to&nbsp;this&nbsp;class.<br>
-&nbsp;&nbsp;category:&nbsp;list&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#Category">Category</a>&nbsp;instances<br>
-&nbsp;&nbsp;content:&nbsp;<a href="#Content">Content</a>&nbsp;The&nbsp;entry's&nbsp;<a href="#Content">Content</a><br>
-&nbsp;&nbsp;contributor:&nbsp;list&nbsp;A&nbsp;list&nbsp;on&nbsp;<a href="#Contributor">Contributor</a>&nbsp;instances<br>
-&nbsp;&nbsp;id:&nbsp;<a href="#Id">Id</a>&nbsp;The&nbsp;entry's&nbsp;<a href="#Id">Id</a>&nbsp;element<br>
-&nbsp;&nbsp;link:&nbsp;list&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#Link">Link</a>&nbsp;instances<br>
-&nbsp;&nbsp;published:&nbsp;<a href="#Published">Published</a>&nbsp;The&nbsp;entry's&nbsp;<a href="#Published">Published</a>&nbsp;element<br>
-&nbsp;&nbsp;rights:&nbsp;<a href="#Rights">Rights</a>&nbsp;The&nbsp;entry's&nbsp;<a href="#Rights">Rights</a>&nbsp;element<br>
-&nbsp;&nbsp;source:&nbsp;<a href="#Source">Source</a>&nbsp;the&nbsp;entry's&nbsp;source&nbsp;element<br>
-&nbsp;&nbsp;summary:&nbsp;<a href="#Summary">Summary</a>&nbsp;the&nbsp;entry's&nbsp;summary&nbsp;element<br>
-&nbsp;&nbsp;title:&nbsp;<a href="#Title">Title</a>&nbsp;the&nbsp;entry's&nbsp;title&nbsp;element<br>
-&nbsp;&nbsp;updated:&nbsp;<a href="#Updated">Updated</a>&nbsp;the&nbsp;entry's&nbsp;updated&nbsp;element<br>
-&nbsp;&nbsp;control:&nbsp;The&nbsp;entry's&nbsp;app:control&nbsp;element&nbsp;which&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;mark&nbsp;an&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;as&nbsp;a&nbsp;draft&nbsp;which&nbsp;should&nbsp;not&nbsp;be&nbsp;publicly&nbsp;viewable.<br>
-&nbsp;&nbsp;text:&nbsp;String&nbsp;The&nbsp;text&nbsp;contents&nbsp;of&nbsp;the&nbsp;element.&nbsp;This&nbsp;is&nbsp;the&nbsp;contents<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;<a href="#Entry">Entry</a>'s&nbsp;XML&nbsp;text&nbsp;node.&nbsp;(Example:&nbsp;&lt;foo&gt;This&nbsp;is&nbsp;the&nbsp;text&lt;/foo&gt;)<br>
-&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances&nbsp;which&nbsp;are<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;children&nbsp;of&nbsp;this&nbsp;element.<br>
-&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;strings&nbsp;which&nbsp;are&nbsp;the&nbsp;values<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;additional&nbsp;XML&nbsp;attributes&nbsp;of&nbsp;this&nbsp;element.</tt></dd></dl>
+<dl><dt><a name="Entry-__init__"><strong>__init__</strong></a>(*args, **kwargs)</dt><dd><tt>#&nbsp;The&nbsp;deprecated_function&nbsp;wraps&nbsp;the&nbsp;actual&nbsp;call&nbsp;to&nbsp;f.</tt></dd></dl>
 
 <hr>
 Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
@@ -745,7 +723,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
 &nbsp;&nbsp;values</tt></dd></dl>
 
-<dl><dt><a name="ExtensionContainer-__init__"><strong>__init__</strong></a>(self, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="ExtensionContainer-__init__"><strong>__init__</strong></a>(*args, **kwargs)</dt><dd><tt>#&nbsp;The&nbsp;deprecated_function&nbsp;wraps&nbsp;the&nbsp;actual&nbsp;call&nbsp;to&nbsp;f.</tt></dd></dl>
 
 <hr>
 Data descriptors defined here:<br>
@@ -823,31 +801,7 @@ Data descriptors defined here:<br>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="Feed-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, contributor<font color="#909090">=None</font>, generator<font color="#909090">=None</font>, icon<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, logo<font color="#909090">=None</font>, rights<font color="#909090">=None</font>, subtitle<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, entry<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Source">Source</a><br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;author:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#Author">Author</a>&nbsp;instances&nbsp;which&nbsp;belong&nbsp;to&nbsp;this<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class.<br>
-&nbsp;&nbsp;category:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#Category">Category</a>&nbsp;instances<br>
-&nbsp;&nbsp;contributor:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;on&nbsp;<a href="#Contributor">Contributor</a>&nbsp;instances<br>
-&nbsp;&nbsp;generator:&nbsp;<a href="#Generator">Generator</a>&nbsp;(optional)&nbsp;<br>
-&nbsp;&nbsp;icon:&nbsp;<a href="#Icon">Icon</a>&nbsp;(optional)&nbsp;<br>
-&nbsp;&nbsp;id:&nbsp;<a href="#Id">Id</a>&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;<a href="#Id">Id</a>&nbsp;element<br>
-&nbsp;&nbsp;link:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#Link">Link</a>&nbsp;instances<br>
-&nbsp;&nbsp;logo:&nbsp;<a href="#Logo">Logo</a>&nbsp;(optional)&nbsp;<br>
-&nbsp;&nbsp;rights:&nbsp;<a href="#Rights">Rights</a>&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;<a href="#Rights">Rights</a>&nbsp;element<br>
-&nbsp;&nbsp;subtitle:&nbsp;<a href="#Subtitle">Subtitle</a>&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;subtitle&nbsp;element<br>
-&nbsp;&nbsp;title:&nbsp;<a href="#Title">Title</a>&nbsp;(optional)&nbsp;the&nbsp;entry's&nbsp;title&nbsp;element<br>
-&nbsp;&nbsp;updated:&nbsp;<a href="#Updated">Updated</a>&nbsp;(optional)&nbsp;the&nbsp;entry's&nbsp;updated&nbsp;element<br>
-&nbsp;&nbsp;entry:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;<a href="#Entry">Entry</a>&nbsp;instances&nbsp;contained&nbsp;in&nbsp;the&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed.<br>
-&nbsp;&nbsp;text:&nbsp;String&nbsp;(optional)&nbsp;The&nbsp;text&nbsp;contents&nbsp;of&nbsp;the&nbsp;element.&nbsp;This&nbsp;is&nbsp;the&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contents&nbsp;of&nbsp;the&nbsp;<a href="#Entry">Entry</a>'s&nbsp;XML&nbsp;text&nbsp;node.&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Example:&nbsp;&lt;foo&gt;This&nbsp;is&nbsp;the&nbsp;text&lt;/foo&gt;)<br>
-&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;are&nbsp;children&nbsp;of&nbsp;this&nbsp;element.<br>
-&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;strings&nbsp;which&nbsp;are&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;values&nbsp;for&nbsp;additional&nbsp;XML&nbsp;attributes&nbsp;of&nbsp;this&nbsp;element.</tt></dd></dl>
+<dl><dt><a name="Feed-__init__"><strong>__init__</strong></a>(*args, **kwargs)</dt><dd><tt>#&nbsp;The&nbsp;deprecated_function&nbsp;wraps&nbsp;the&nbsp;actual&nbsp;call&nbsp;to&nbsp;f.</tt></dd></dl>
 
 <hr>
 Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
@@ -1984,24 +1938,7 @@ Data descriptors inherited from <a href="atom.html#ExtensionContainer">Extension
  <dl><dt><a name="-ContentFromString"><strong>ContentFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-ContributorFromString"><strong>ContributorFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-ControlFromString"><strong>ControlFromString</strong></a>(xml_string)</dt></dl>
- <dl><dt><a name="-CreateClassFromXMLString"><strong>CreateClassFromXMLString</strong></a>(target_class, xml_string, string_encoding<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;an&nbsp;instance&nbsp;of&nbsp;the&nbsp;target&nbsp;class&nbsp;from&nbsp;the&nbsp;string&nbsp;contents.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;target_class:&nbsp;class&nbsp;The&nbsp;class&nbsp;which&nbsp;will&nbsp;be&nbsp;instantiated&nbsp;and&nbsp;populated<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;XML.&nbsp;This&nbsp;class&nbsp;must&nbsp;have&nbsp;a&nbsp;_tag&nbsp;and&nbsp;a<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_namespace&nbsp;class&nbsp;variable.<br>
-&nbsp;&nbsp;xml_string:&nbsp;str&nbsp;A&nbsp;string&nbsp;which&nbsp;contains&nbsp;valid&nbsp;XML.&nbsp;The&nbsp;root&nbsp;element<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;XML&nbsp;string&nbsp;should&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace&nbsp;of&nbsp;the&nbsp;desired<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class.<br>
-&nbsp;&nbsp;string_encoding:&nbsp;str&nbsp;The&nbsp;character&nbsp;encoding&nbsp;which&nbsp;the&nbsp;xml_string&nbsp;should<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;converted&nbsp;to&nbsp;before&nbsp;it&nbsp;is&nbsp;interpreted&nbsp;and&nbsp;translated&nbsp;into&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objects.&nbsp;The&nbsp;default&nbsp;is&nbsp;None&nbsp;in&nbsp;which&nbsp;case&nbsp;the&nbsp;string&nbsp;encoding<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;not&nbsp;changed.<br>
-&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;An&nbsp;instance&nbsp;of&nbsp;the&nbsp;target&nbsp;class&nbsp;with&nbsp;members&nbsp;assigned&nbsp;according&nbsp;to&nbsp;the<br>
-&nbsp;&nbsp;contents&nbsp;of&nbsp;the&nbsp;XML&nbsp;-&nbsp;or&nbsp;None&nbsp;if&nbsp;the&nbsp;root&nbsp;XML&nbsp;tag&nbsp;and&nbsp;namespace&nbsp;did&nbsp;not<br>
-&nbsp;&nbsp;match&nbsp;those&nbsp;of&nbsp;the&nbsp;target&nbsp;class.</tt></dd></dl>
+ <dl><dt><a name="-CreateClassFromXMLString"><strong>CreateClassFromXMLString</strong></a>(*args, **kwargs)</dt><dd><tt>#&nbsp;The&nbsp;deprecated_function&nbsp;wraps&nbsp;the&nbsp;actual&nbsp;call&nbsp;to&nbsp;f.</tt></dd></dl>
  <dl><dt><a name="-DraftFromString"><strong>DraftFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-EmailFromString"><strong>EmailFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-EntryFromString"><strong>EntryFromString</strong></a>(xml_string)</dt></dl>
@@ -2021,6 +1958,14 @@ Returns:<br>
  <dl><dt><a name="-TitleFromString"><strong>TitleFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-UpdatedFromString"><strong>UpdatedFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-UriFromString"><strong>UriFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-deprecated"><strong>deprecated</strong></a>(warning<font color="#909090">=None</font>)</dt><dd><tt>Decorator&nbsp;to&nbsp;raise&nbsp;warning&nbsp;each&nbsp;time&nbsp;the&nbsp;function&nbsp;is&nbsp;called.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;warning:&nbsp;The&nbsp;warning&nbsp;message&nbsp;to&nbsp;be&nbsp;displayed&nbsp;as&nbsp;a&nbsp;string&nbsp;(optinoal).</tt></dd></dl>
+ <dl><dt><a name="-v1_deprecated"><strong>v1_deprecated</strong></a>(warning<font color="#909090">=None</font>)</dt><dd><tt>Shows&nbsp;a&nbsp;warning&nbsp;if&nbsp;ENABLE_V1_WARNINGS&nbsp;is&nbsp;True.<br>
+&nbsp;<br>
+Function&nbsp;decorator&nbsp;used&nbsp;to&nbsp;mark&nbsp;methods&nbsp;used&nbsp;in&nbsp;v1&nbsp;classes&nbsp;which<br>
+may&nbsp;be&nbsp;removed&nbsp;in&nbsp;future&nbsp;versions&nbsp;of&nbsp;the&nbsp;library.</tt></dd></dl>
 </td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
@@ -2032,6 +1977,7 @@ Returns:<br>
 <strong>APP_TEMPLATE</strong> = '{http://purl.org/atom/app#}%s'<br>
 <strong>ATOM_NAMESPACE</strong> = 'http://www.w3.org/2005/Atom'<br>
 <strong>ELEMENT_TEMPLATE</strong> = '{http://www.w3.org/2005/Atom}%s'<br>
+<strong>ENABLE_V1_WARNINGS</strong> = False<br>
 <strong>MEMBER_STRING_ENCODING</strong> = 'utf-8'<br>
 <strong>XML_STRING_ENCODING</strong> = 'utf-8'<br>
 <strong>__author__</strong> = 'api.jscudder (Jeffrey Scudder)'</td></tr></table><p>

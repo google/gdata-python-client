@@ -74,9 +74,13 @@ Data descriptors defined here:<br>
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt>Represents&nbsp;an&nbsp;element&nbsp;node&nbsp;in&nbsp;an&nbsp;XML&nbsp;document.<br>
 &nbsp;<br>
-The&nbsp;text&nbsp;member&nbsp;is&nbsp;a&nbsp;UTF-8&nbsp;encoded&nbsp;str.<br>&nbsp;</tt></td></tr>
+The&nbsp;text&nbsp;member&nbsp;is&nbsp;a&nbsp;UTF-8&nbsp;encoded&nbsp;str&nbsp;or&nbsp;unicode.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
+<dl><dt><a name="XmlElement-FindChildren"><strong>FindChildren</strong></a> = <a href="#XmlElement-get_elements">get_elements</a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt></dl>
+
+<dl><dt><a name="XmlElement-FindExtensions"><strong>FindExtensions</strong></a> = <a href="#XmlElement-get_elements">get_elements</a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt></dl>
+
 <dl><dt><a name="XmlElement-GetAttributes"><strong>GetAttributes</strong></a> = <a href="#XmlElement-get_attributes">get_attributes</a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt></dl>
 
 <dl><dt><a name="XmlElement-GetElements"><strong>GetElements</strong></a> = <a href="#XmlElement-get_elements">get_elements</a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt></dl>
@@ -84,6 +88,8 @@ The&nbsp;text&nbsp;member&nbsp;is&nbsp;a&nbsp;UTF-8&nbsp;encoded&nbsp;str.<br>&n
 <dl><dt><a name="XmlElement-ToString"><strong>ToString</strong></a> = <a href="#XmlElement-to_string">to_string</a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="XmlElement-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="XmlElement-__str__"><strong>__str__</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="XmlElement-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
 &nbsp;<br>
@@ -151,20 +157,46 @@ Data and other attributes defined here:<br>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt><a name="-XmlElementFromString"><strong>XmlElementFromString</strong></a> = xml_element_from_string(xml_string, target_class, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Parses&nbsp;the&nbsp;XML&nbsp;string&nbsp;according&nbsp;to&nbsp;the&nbsp;rules&nbsp;for&nbsp;the&nbsp;target_class.<br>
+<td width="100%"><dl><dt><a name="-Parse"><strong>Parse</strong></a> = parse(xml_string, target_class<font color="#909090">=None</font>, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Parses&nbsp;the&nbsp;XML&nbsp;string&nbsp;according&nbsp;to&nbsp;the&nbsp;rules&nbsp;for&nbsp;the&nbsp;target_class.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;xml_string:&nbsp;str&nbsp;or&nbsp;unicode<br>
-&nbsp;&nbsp;target_class:&nbsp;<a href="#XmlElement">XmlElement</a>&nbsp;or&nbsp;a&nbsp;subclass.<br>
+&nbsp;&nbsp;target_class:&nbsp;<a href="#XmlElement">XmlElement</a>&nbsp;or&nbsp;a&nbsp;subclass.&nbsp;If&nbsp;None&nbsp;is&nbsp;specified,&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#XmlElement">XmlElement</a>&nbsp;class&nbsp;is&nbsp;used.<br>
 &nbsp;&nbsp;version:&nbsp;int&nbsp;(optional)&nbsp;The&nbsp;version&nbsp;of&nbsp;the&nbsp;schema&nbsp;which&nbsp;should&nbsp;be&nbsp;used&nbsp;when<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;converting&nbsp;the&nbsp;XML&nbsp;into&nbsp;an&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;The&nbsp;default&nbsp;is&nbsp;1.</tt></dd></dl>
- <dl><dt><a name="-xml_element_from_string"><strong>xml_element_from_string</strong></a>(xml_string, target_class, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Parses&nbsp;the&nbsp;XML&nbsp;string&nbsp;according&nbsp;to&nbsp;the&nbsp;rules&nbsp;for&nbsp;the&nbsp;target_class.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;converting&nbsp;the&nbsp;XML&nbsp;into&nbsp;an&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;The&nbsp;default&nbsp;is&nbsp;1.<br>
+&nbsp;&nbsp;encoding:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;character&nbsp;encoding&nbsp;of&nbsp;the&nbsp;bytes&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xml_string.&nbsp;Default&nbsp;is&nbsp;'UTF-8'.</tt></dd></dl>
+ <dl><dt><a name="-XmlElementFromString"><strong>XmlElementFromString</strong></a> = parse(xml_string, target_class<font color="#909090">=None</font>, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Parses&nbsp;the&nbsp;XML&nbsp;string&nbsp;according&nbsp;to&nbsp;the&nbsp;rules&nbsp;for&nbsp;the&nbsp;target_class.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;xml_string:&nbsp;str&nbsp;or&nbsp;unicode<br>
-&nbsp;&nbsp;target_class:&nbsp;<a href="#XmlElement">XmlElement</a>&nbsp;or&nbsp;a&nbsp;subclass.<br>
+&nbsp;&nbsp;target_class:&nbsp;<a href="#XmlElement">XmlElement</a>&nbsp;or&nbsp;a&nbsp;subclass.&nbsp;If&nbsp;None&nbsp;is&nbsp;specified,&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#XmlElement">XmlElement</a>&nbsp;class&nbsp;is&nbsp;used.<br>
 &nbsp;&nbsp;version:&nbsp;int&nbsp;(optional)&nbsp;The&nbsp;version&nbsp;of&nbsp;the&nbsp;schema&nbsp;which&nbsp;should&nbsp;be&nbsp;used&nbsp;when<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;converting&nbsp;the&nbsp;XML&nbsp;into&nbsp;an&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;The&nbsp;default&nbsp;is&nbsp;1.</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;converting&nbsp;the&nbsp;XML&nbsp;into&nbsp;an&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;The&nbsp;default&nbsp;is&nbsp;1.<br>
+&nbsp;&nbsp;encoding:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;character&nbsp;encoding&nbsp;of&nbsp;the&nbsp;bytes&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xml_string.&nbsp;Default&nbsp;is&nbsp;'UTF-8'.</tt></dd></dl>
+ <dl><dt><a name="-parse"><strong>parse</strong></a>(xml_string, target_class<font color="#909090">=None</font>, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Parses&nbsp;the&nbsp;XML&nbsp;string&nbsp;according&nbsp;to&nbsp;the&nbsp;rules&nbsp;for&nbsp;the&nbsp;target_class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;xml_string:&nbsp;str&nbsp;or&nbsp;unicode<br>
+&nbsp;&nbsp;target_class:&nbsp;<a href="#XmlElement">XmlElement</a>&nbsp;or&nbsp;a&nbsp;subclass.&nbsp;If&nbsp;None&nbsp;is&nbsp;specified,&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#XmlElement">XmlElement</a>&nbsp;class&nbsp;is&nbsp;used.<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;(optional)&nbsp;The&nbsp;version&nbsp;of&nbsp;the&nbsp;schema&nbsp;which&nbsp;should&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;converting&nbsp;the&nbsp;XML&nbsp;into&nbsp;an&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;The&nbsp;default&nbsp;is&nbsp;1.<br>
+&nbsp;&nbsp;encoding:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;character&nbsp;encoding&nbsp;of&nbsp;the&nbsp;bytes&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xml_string.&nbsp;Default&nbsp;is&nbsp;'UTF-8'.</tt></dd></dl>
+ <dl><dt><a name="-xml_element_from_string"><strong>xml_element_from_string</strong></a> = parse(xml_string, target_class<font color="#909090">=None</font>, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Parses&nbsp;the&nbsp;XML&nbsp;string&nbsp;according&nbsp;to&nbsp;the&nbsp;rules&nbsp;for&nbsp;the&nbsp;target_class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;xml_string:&nbsp;str&nbsp;or&nbsp;unicode<br>
+&nbsp;&nbsp;target_class:&nbsp;<a href="#XmlElement">XmlElement</a>&nbsp;or&nbsp;a&nbsp;subclass.&nbsp;If&nbsp;None&nbsp;is&nbsp;specified,&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#XmlElement">XmlElement</a>&nbsp;class&nbsp;is&nbsp;used.<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;(optional)&nbsp;The&nbsp;version&nbsp;of&nbsp;the&nbsp;schema&nbsp;which&nbsp;should&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;converting&nbsp;the&nbsp;XML&nbsp;into&nbsp;an&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;The&nbsp;default&nbsp;is&nbsp;1.<br>
+&nbsp;&nbsp;encoding:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;character&nbsp;encoding&nbsp;of&nbsp;the&nbsp;bytes&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xml_string.&nbsp;Default&nbsp;is&nbsp;'UTF-8'.</tt></dd></dl>
 </td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">

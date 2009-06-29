@@ -37,6 +37,8 @@ pydoc -w gdata.base
 pydoc -w gdata.base.service
 pydoc -w gdata.blogger
 pydoc -w gdata.blogger.service
+pydoc -w gdata.blogger.data
+pydoc -w gdata.blogger.client
 pydoc -w gdata.books
 pydoc -w gdata.books.service
 pydoc -w gdata.calendar

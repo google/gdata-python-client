@@ -30,8 +30,11 @@
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="atom.html">atom</a><br>
+<a href="gdata.experimental_oauth.html">gdata.experimental_oauth</a><br>
+</td><td width="25%" valign=top><a href="random.html">random</a><br>
+<a href="time.html">time</a><br>
 </td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
-</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -190,6 +193,9 @@ Args:<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;token&nbsp;value&nbsp;string&nbsp;for&nbsp;a&nbsp;<a href="#ClientLoginToken">ClientLoginToken</a>.</tt></dd></dl>
+ <dl><dt><a name="-ae_delete"><strong>ae_delete</strong></a>(token_key)</dt></dl>
+ <dl><dt><a name="-ae_load"><strong>ae_load</strong></a>(token_key)</dt></dl>
+ <dl><dt><a name="-ae_save"><strong>ae_save</strong></a>(token, token_key)</dt></dl>
  <dl><dt><a name="-auth_sub_string_from_body"><strong>auth_sub_string_from_body</strong></a>(http_body)</dt><dd><tt>Extracts&nbsp;the&nbsp;AuthSub&nbsp;token&nbsp;from&nbsp;an&nbsp;HTTP&nbsp;body&nbsp;string.<br>
 &nbsp;<br>
 Used&nbsp;to&nbsp;find&nbsp;the&nbsp;new&nbsp;session&nbsp;token&nbsp;after&nbsp;making&nbsp;a&nbsp;request&nbsp;to&nbsp;upgrade&nbsp;a<br>
@@ -225,7 +231,28 @@ Returns:<br>
 &nbsp;&nbsp;If&nbsp;no&nbsp;scopes&nbsp;were&nbsp;included&nbsp;in&nbsp;the&nbsp;URL,&nbsp;the&nbsp;second&nbsp;value&nbsp;in&nbsp;the&nbsp;tuple&nbsp;is<br>
 &nbsp;&nbsp;None.&nbsp;If&nbsp;there&nbsp;was&nbsp;no&nbsp;token&nbsp;param&nbsp;in&nbsp;the&nbsp;url,&nbsp;the&nbsp;tuple&nbsp;returned&nbsp;is&nbsp;<br>
 &nbsp;&nbsp;(None,&nbsp;None)</tt></dd></dl>
- <dl><dt><a name="-generate_auth_sub_url"><strong>generate_auth_sub_url</strong></a>(next, scopes, secure<font color="#909090">=False</font>, session<font color="#909090">=True</font>, request_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xaa7550&gt;</font>, domain<font color="#909090">='default'</font>, scopes_param_prefix<font color="#909090">='auth_sub_scopes'</font>)</dt><dd><tt>Constructs&nbsp;a&nbsp;URI&nbsp;for&nbsp;requesting&nbsp;a&nbsp;multiscope&nbsp;AuthSub&nbsp;token.<br>
+ <dl><dt><a name="-build_oauth_base_string"><strong>build_oauth_base_string</strong></a>(http_request, consumer_key, nonce, signaure_type, timestamp, version, token<font color="#909090">=None</font>)</dt><dd><tt>Generates&nbsp;the&nbsp;base&nbsp;string&nbsp;to&nbsp;be&nbsp;signed&nbsp;in&nbsp;the&nbsp;OAuth&nbsp;request.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;http_request:&nbsp;The&nbsp;request&nbsp;being&nbsp;made&nbsp;to&nbsp;the&nbsp;server.&nbsp;The&nbsp;Request's&nbsp;URL<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;must&nbsp;be&nbsp;complete&nbsp;before&nbsp;this&nbsp;signature&nbsp;is&nbsp;calculated&nbsp;as&nbsp;any&nbsp;changes<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;the&nbsp;URL&nbsp;will&nbsp;invalidate&nbsp;the&nbsp;signature.<br>
+&nbsp;&nbsp;consumer_key:&nbsp;Domain&nbsp;identifying&nbsp;the&nbsp;third-party&nbsp;web&nbsp;application.&nbsp;This&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;domain&nbsp;used&nbsp;when&nbsp;registering&nbsp;the&nbsp;application&nbsp;with&nbsp;Google.&nbsp;It<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;identifies&nbsp;who&nbsp;is&nbsp;making&nbsp;the&nbsp;request&nbsp;on&nbsp;behalf&nbsp;of&nbsp;the&nbsp;user.<br>
+&nbsp;&nbsp;nonce:&nbsp;Random&nbsp;64-bit,&nbsp;unsigned&nbsp;number&nbsp;encoded&nbsp;as&nbsp;an&nbsp;ASCII&nbsp;string&nbsp;in&nbsp;decimal<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format.&nbsp;The&nbsp;nonce/timestamp&nbsp;pair&nbsp;should&nbsp;always&nbsp;be&nbsp;unique&nbsp;to&nbsp;prevent<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;replay&nbsp;attacks.<br>
+&nbsp;&nbsp;signaure_type:&nbsp;either&nbsp;RSA_SHA1&nbsp;or&nbsp;HMAC_SHA1<br>
+&nbsp;&nbsp;timestamp:&nbsp;Integer&nbsp;representing&nbsp;the&nbsp;time&nbsp;the&nbsp;request&nbsp;is&nbsp;sent.&nbsp;The<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;timestamp&nbsp;should&nbsp;be&nbsp;expressed&nbsp;in&nbsp;number&nbsp;of&nbsp;seconds&nbsp;after&nbsp;January&nbsp;1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1970&nbsp;00:00:00&nbsp;GMT.<br>
+&nbsp;&nbsp;version:&nbsp;The&nbsp;OAuth&nbsp;version&nbsp;used&nbsp;by&nbsp;the&nbsp;requesting&nbsp;web&nbsp;application.&nbsp;This<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value&nbsp;must&nbsp;be&nbsp;'1.0'&nbsp;or&nbsp;'1.0a'.&nbsp;If&nbsp;not&nbsp;provided,&nbsp;Google&nbsp;assumes&nbsp;version<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.0&nbsp;is&nbsp;in&nbsp;use.<br>
+&nbsp;&nbsp;token:&nbsp;The&nbsp;string&nbsp;for&nbsp;the&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;or&nbsp;OAuth&nbsp;access&nbsp;token.</tt></dd></dl>
+ <dl><dt><a name="-dump_tokens"><strong>dump_tokens</strong></a>(tokens)</dt></dl>
+ <dl><dt><a name="-generate_auth_sub_url"><strong>generate_auth_sub_url</strong></a>(next, scopes, secure<font color="#909090">=False</font>, session<font color="#909090">=True</font>, request_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc57450&gt;</font>, domain<font color="#909090">='default'</font>, scopes_param_prefix<font color="#909090">='auth_sub_scopes'</font>)</dt><dd><tt>Constructs&nbsp;a&nbsp;URI&nbsp;for&nbsp;requesting&nbsp;a&nbsp;multiscope&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 The&nbsp;generated&nbsp;token&nbsp;will&nbsp;contain&nbsp;a&nbsp;URL&nbsp;parameter&nbsp;to&nbsp;pass&nbsp;along&nbsp;the<br>
 requested&nbsp;scopes&nbsp;to&nbsp;the&nbsp;next&nbsp;URL.&nbsp;When&nbsp;the&nbsp;Google&nbsp;Accounts&nbsp;page<br>
@@ -310,6 +337,14 @@ Args:<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;token&nbsp;value&nbsp;string&nbsp;for&nbsp;a&nbsp;<a href="#ClientLoginToken">ClientLoginToken</a>.</tt></dd></dl>
+ <dl><dt><a name="-load_tokens"><strong>load_tokens</strong></a>(blob)</dt></dl>
+ <dl><dt><a name="-token_from_blob"><strong>token_from_blob</strong></a>(blob)</dt></dl>
+ <dl><dt><a name="-token_to_blob"><strong>token_to_blob</strong></a>(token)</dt><dd><tt>Serializes&nbsp;the&nbsp;token&nbsp;data&nbsp;as&nbsp;a&nbsp;string&nbsp;for&nbsp;storage&nbsp;in&nbsp;a&nbsp;datastore.<br>
+&nbsp;<br>
+Supported&nbsp;token&nbsp;classes:&nbsp;<a href="#ClientLoginToken">ClientLoginToken</a>,&nbsp;<a href="#AuthSubToken">AuthSubToken</a>.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;token:&nbsp;A&nbsp;token&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;which&nbsp;must&nbsp;be&nbsp;of&nbsp;one&nbsp;of&nbsp;the&nbsp;supported&nbsp;token&nbsp;classes.</tt></dd></dl>
 </td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
@@ -318,7 +353,9 @@ Returns:<br>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><strong>AUTHSUB_AUTH_LABEL</strong> = 'AuthSub token='<br>
+<strong>HMAC_SHA1</strong> = 'HMAC-SHA1'<br>
 <strong>PROGRAMMATIC_AUTH_LABEL</strong> = 'GoogleLogin auth='<br>
+<strong>RSA_SHA1</strong> = 'RSA-SHA1'<br>
 <strong>__author__</strong> = 'j.s@google.com (Jeff Scudder)'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#7799ee">

@@ -340,6 +340,8 @@ pydocs/gdata.auth.html
 pydocs/gdata.base.html
 pydocs/gdata.base.service.html
 pydocs/gdata.blogger.html
+pydocs/gdata.blogger.client.html
+pydocs/gdata.blogger.data.html
 pydocs/gdata.blogger.service.html
 pydocs/gdata.books.html
 pydocs/gdata.books.service.html

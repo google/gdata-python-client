@@ -196,7 +196,15 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;signing&nbsp;each&nbsp;request.&nbsp;Valid&nbsp;implementations&nbsp;are&nbsp;provided&nbsp;as&nbsp;the<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;constants&nbsp;defined&nbsp;by&nbsp;gdata.auth.<a href="#OAuthSignatureMethod">OAuthSignatureMethod</a>.&nbsp;Currently<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;they&nbsp;are&nbsp;gdata.auth.<a href="#OAuthSignatureMethod">OAuthSignatureMethod</a>.RSA_SHA1&nbsp;and<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.auth.<a href="#OAuthSignatureMethod">OAuthSignatureMethod</a>.HMAC_SHA1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.auth.<a href="#OAuthSignatureMethod">OAuthSignatureMethod</a>.HMAC_SHA1.&nbsp;Instead&nbsp;of&nbsp;passing&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;strategy&nbsp;class,&nbsp;you&nbsp;may&nbsp;pass&nbsp;in&nbsp;a&nbsp;string&nbsp;for&nbsp;'RSA_SHA1'&nbsp;or&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'HMAC_SHA1'.&nbsp;If&nbsp;you&nbsp;plan&nbsp;to&nbsp;use&nbsp;OAuth&nbsp;on&nbsp;App&nbsp;Engine&nbsp;(or&nbsp;another<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WSGI&nbsp;environment)&nbsp;I&nbsp;recommend&nbsp;specifying&nbsp;signature&nbsp;method&nbsp;using&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;(the&nbsp;only&nbsp;options&nbsp;are&nbsp;'RSA_SHA1'&nbsp;and&nbsp;'HMAC_SHA1').&nbsp;In&nbsp;these<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;environments&nbsp;there&nbsp;are&nbsp;sometimes&nbsp;issues&nbsp;with&nbsp;pickling&nbsp;an&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;in&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;a&nbsp;member&nbsp;references&nbsp;a&nbsp;class&nbsp;or&nbsp;function.&nbsp;Storing&nbsp;a&nbsp;string&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;refer&nbsp;to&nbsp;the&nbsp;signature&nbsp;method&nbsp;mitigates&nbsp;complications&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pickling.<br>
 &nbsp;&nbsp;consumer_key:&nbsp;string&nbsp;Domain&nbsp;identifying&nbsp;third_party&nbsp;web&nbsp;application.<br>
 &nbsp;&nbsp;consumer_secret:&nbsp;string&nbsp;(optional)&nbsp;Secret&nbsp;generated&nbsp;during&nbsp;registration.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Required&nbsp;only&nbsp;for&nbsp;HMAC_SHA1&nbsp;signature&nbsp;method.<br>
