@@ -18,6 +18,8 @@
 # This module is used for version 2 of the Google Data APIs.
 
 
+import time
+import random
 import urllib
 import atom.http_core
 import gdata.experimental_oauth as oauth
@@ -150,6 +152,7 @@ def _to_uri(str_or_uri):
   if isinstance(str_or_uri, (str, unicode)):
     return atom.http_core.Uri.parse_uri(str_or_uri)
   return str_or_uri
+
 
 def generate_auth_sub_url(next, scopes, secure=False, session=True,
     request_url=atom.http_core.parse_uri(
@@ -314,31 +317,81 @@ class AuthSubToken(object):
     self.token_string = auth_sub_string_from_body(http_body)
 
 
-class OAuthHmacToken(object):
-  SIGNATURE_METHOD = 'HMAC-SHA1'
+# OAuth functions and classes.
+RSA_SHA1 = 'RSA-SHA1'
+HMAC_SHA1 = 'HMAC-SHA1'
 
-  def __init__(self, consumer_key, token):
-    self.consumer_key = consumer_key
-    self.token = token
 
-  def calculate_signature(self, http_request, oauth_params):
-    return oauth.build_hmac_signature(http_request, oauth_params, 
-        self.consumer_key, self.token)
+def build_oauth_base_string(http_request, consumer_key, nonce, signaure_type,
+                            timestamp, version, token=None):
+  """Generates the base string to be signed in the OAuth request.
   
-  def modify_request(self, http_request):
-    oauth_params = {'oauth_consumer_key': self.consumer_key,
-        'oauth_nonce': oauth.generate_nonce(),
-        'oauth_signature_method': self.SIGNATURE_METHOD,
-        'oauth_timestamp': oauth.timestamp(),
-        'oauth_token': self.token,
-        'oauth_version': oauth.OATH_VERSION}
-    # At this point the request should contain all necessary information for
-    # calculating the OAuth signature.
-    oauth_params['oauth_signature']  = self.calculate_signature(http_request,
-        oauth_params)
-    http_request.headers['Authorization'] = oauth.to_auth_header(oauth_params)
+  Args:
+    http_request: The request being made to the server. The Request's URL
+        must be complete before this signature is calculated as any changes
+        to the URL will invalidate the signature.
+    consumer_key: Domain identifying the third-party web application. This is
+        the domain used when registering the application with Google. It
+        identifies who is making the request on behalf of the user.
+    nonce: Random 64-bit, unsigned number encoded as an ASCII string in decimal
+        format. The nonce/timestamp pair should always be unique to prevent
+        replay attacks.
+    signaure_type: either RSA_SHA1 or HMAC_SHA1
+    timestamp: Integer representing the time the request is sent. The
+        timestamp should be expressed in number of seconds after January 1,
+        1970 00:00:00 GMT.
+    version: The OAuth version used by the requesting web application. This
+        value must be '1.0' or '1.0a'. If not provided, Google assumes version
+        1.0 is in use.
+    token: The string for the OAuth request token or OAuth access token.
+  """
+  # First we must build the canonical base string for the request.
+  params = http_request.uri.query.copy()
+  params['oauth_consumer_key'] = consumer_key
+  params['oauth_nonce'] = nonce
+  params['oauth_signature_method'] = signaure_type
+  params['oauth_timestamp'] = str(timestamp)
+  if token is not None:
+    params['oauth_token'] = token
+  if version is not None:
+    params['oauth_version'] = version
+  # We need to get the key value pairs in lexigraphically sorted order.
+  sorted_keys = sorted(params.keys())
+  pairs = []
+  for key in sorted_keys:
+    pairs.append('%s=%s' % (key, params[key]))
+  # We want to escape /'s too, so use safe='~'
+  all_parameters = urllib.quote('&'.join(pairs), safe='~')
+  normailzed_host = http_request.uri.host.lower()
+  normalized_scheme = (http_request.uri.scheme or 'http').lower()
+  non_default_port = None
+  if (http_request.uri.port is not None 
+      and ((normalized_scheme == 'https' and http_request.uri.port != 443) 
+           or (normalized_scheme == 'http' and http_request.uri.port != 80))):
+    non_default_port = http_request.uri.port
+  path = http_request.uri.path or '/'
+  request_path = None
+  if not path.startswith('/'):
+    path = '/%s' % path
+  if non_default_port is not None:
+    # Set the only safe char in url encoding to ~ since we want to escape / 
+    # as well.
+    request_path = urllib.quote('%s://%s:%s%s' % (
+        normalized_scheme, normailzed_host, non_default_port, path), safe='~')
+  else:
+    # Set the only safe char in url encoding to ~ since we want to escape / 
+    # as well.
+    request_path = urllib.quote('%s://%s%s' % (
+        normalized_scheme, normailzed_host, path), safe='~')
+  # TODO: ensure that token escaping logic is correct, not sure if the token
+  # value should be double escaped instead of single. 
+  base_string = '&'.join((http_request.method.upper(), request_path,
+                          all_parameters))
+  # Now we have the base string, we can calculate the oauth_signature.
+  return base_string
 
 
+# Methods to serialize token objects for storage in the App Engine datastore.
 def token_to_blob(token):
   """Serializes the token data as a string for storage in a datastore.
   

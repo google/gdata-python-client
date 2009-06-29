@@ -94,8 +94,74 @@ class TokensToAndFromBlobs(unittest.TestCase):
     self.assertEqual(token.scopes, scopes)
 
 
+class OAuthHmacTokenTests(unittest.TestCase):
+
+  def test_build_base_string(self):
+    request = atom.http_core.HttpRequest('http://example.com/', 'GET')
+    base_string = gdata.gauth.build_oauth_base_string(
+        request, 'example.org', '12345', gdata.gauth.HMAC_SHA1, 1246301653,
+        '1.0')
+    self.assertEqual(
+        base_string, 'GET&http%3A%2F%2Fexample.com%2F&oauth_consumer_key%3De'
+        'xample.org%26oauth_nonce%3D12345%26oauth_signature_method%3DHMAC-SH'
+        'A1%26oauth_timestamp%3D1246301653%26oauth_version%3D1.0')
+
+    # Test using example from documentation.
+    request = atom.http_core.HttpRequest(
+        'http://www.google.com/calendar/feeds/default/allcalendars/full'
+        '?orderby=starttime', 'GET')
+    base_string = gdata.gauth.build_oauth_base_string(
+        request, 'example.com', '4572616e48616d6d65724c61686176',
+        gdata.gauth.RSA_SHA1, 137131200, '1.0', token='1%2Fab3cd9j4ks73hf7g')
+    self.assertEqual(
+        base_string, 'GET&http%3A%2F%2Fwww.google.com%2Fcalendar%2Ffeeds%2Fd'
+        'efault%2Fallcalendars%2Ffull&oauth_consumer_key%3Dexample.com%26oau'
+        'th_nonce%3D4572616e48616d6d65724c61686176%26oauth_signature_method%'
+        '3DRSA-SHA1%26oauth_timestamp%3D137131200%26oauth_token%3D1%252Fab3c'
+        'd9j4ks73hf7g%26oauth_version%3D1.0%26orderby%3Dstarttime')
+
+    # Test various defaults.
+    request = atom.http_core.HttpRequest('http://eXample.COM', 'get')
+    base_string = gdata.gauth.build_oauth_base_string(
+        request, 'example.org', '12345', gdata.gauth.HMAC_SHA1, 1246301653,
+        '1.0')
+    self.assertEqual(
+        base_string, 'GET&http%3A%2F%2Fexample.com%2F&oauth_consumer_key%3De'
+        'xample.org%26oauth_nonce%3D12345%26oauth_signature_method%3DHMAC-SH'
+        'A1%26oauth_timestamp%3D1246301653%26oauth_version%3D1.0')
+    
+    request = atom.http_core.HttpRequest('https://eXample.COM:443', 'get')
+    base_string = gdata.gauth.build_oauth_base_string(
+        request, 'example.org', '12345', gdata.gauth.HMAC_SHA1, 1246301653,
+        '1.0')
+    self.assertEqual(
+        base_string, 'GET&https%3A%2F%2Fexample.com%2F&oauth_consumer_key%3De'
+        'xample.org%26oauth_nonce%3D12345%26oauth_signature_method%3DHMAC-SH'
+        'A1%26oauth_timestamp%3D1246301653%26oauth_version%3D1.0')
+
+    request = atom.http_core.HttpRequest('http://eXample.COM:443', 'get')
+    base_string = gdata.gauth.build_oauth_base_string(
+        request, 'example.org', '12345', gdata.gauth.HMAC_SHA1, 1246301653,
+        '1.0')
+    self.assertEqual(
+        base_string, 'GET&http%3A%2F%2Fexample.com%3A443%2F&oauth_consumer_k'
+        'ey%3De'
+        'xample.org%26oauth_nonce%3D12345%26oauth_signature_method%3DHMAC-SH'
+        'A1%26oauth_timestamp%3D1246301653%26oauth_version%3D1.0')
+
+    request = atom.http_core.HttpRequest(
+        atom.http_core.Uri(host='eXample.COM'), 'GET')
+    base_string = gdata.gauth.build_oauth_base_string(
+        request, 'example.org', '12345', gdata.gauth.HMAC_SHA1, 1246301653,
+        '1.0')
+    self.assertEqual(
+        base_string, 'GET&http%3A%2F%2Fexample.com%2F&oauth_consumer_key%3De'
+        'xample.org%26oauth_nonce%3D12345%26oauth_signature_method%3DHMAC-SH'
+        'A1%26oauth_timestamp%3D1246301653%26oauth_version%3D1.0')
+
+
 def suite():
-  return conf.build_suite([AuthSubTest, TokensToAndFromBlobs])
+  return conf.build_suite([AuthSubTest, TokensToAndFromBlobs, TokensToAndFromBlobs, OAuthHmacTokenTests])
 
 
 if __name__ == '__main__':
