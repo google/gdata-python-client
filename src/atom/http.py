@@ -96,7 +96,7 @@ class HttpClient(atom.http_interface.GenericHttpClient):
     # calculate it based on the data object.
     if data and 'Content-Length' not in all_headers:
       if isinstance(data, types.StringTypes):
-        all_headers['Content-Length'] = len(data)
+        all_headers['Content-Length'] = str(len(data))
       else:
         raise atom.http_interface.ContentLengthRequired('Unable to calculate '
             'the length of the data parameter. Specify a value for '
