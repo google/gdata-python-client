@@ -36,6 +36,10 @@ class UnknownSize(Error):
   pass
 
 
+class ProxyError(Error):
+  pass
+
+
 MIME_BOUNDARY = 'END_OF_PART'
 
 
@@ -348,7 +352,28 @@ class HttpClient(object):
                               http_request.headers, http_request._body_parts)
 
   Request = request
- 
+
+  def _get_connection(self, uri, headers=None):
+    """Opens a socket connection to the server to set up an HTTP request.
+    
+    Args:
+      uri: The full URL for the request as a Uri object.
+      headers: A dict of string pairs containing the HTTP headers for the
+          request.
+    """
+    connection = None
+    if uri.scheme == 'https':
+      if not uri.port:
+        connection = httplib.HTTPSConnection(uri.host)
+      else:
+        connection = httplib.HTTPSConnection(uri.host, int(uri.port))
+    else:
+      if not uri.port:
+        connection = httplib.HTTPConnection(uri.host)
+      else:
+        connection = httplib.HTTPConnection(uri.host, int(uri.port))
+    return connection
+
   def _http_request(self, method, uri, headers=None, body_parts=None):
     """Makes an HTTP request using httplib.
    
@@ -363,16 +388,7 @@ class HttpClient(object):
     """
     if isinstance(uri, (str, unicode)):
       uri = Uri.parse_uri(uri)
-    if uri.scheme == 'https':
-      if not uri.port:
-        connection = httplib.HTTPSConnection(uri.host)
-      else:
-        connection = httplib.HTTPSConnection(uri.host, int(uri.port))
-    else:
-      if not uri.port:
-        connection = httplib.HTTPConnection(uri.host)
-      else:
-        connection = httplib.HTTPConnection(uri.host, int(uri.port))
+    connection = self._get_connection(uri, headers=headers)
    
     if self.debug:
       connection.debuglevel = 1
@@ -428,3 +444,78 @@ def _send_data_part(data, connection):
     connection.send(str(data))
     return
 
+
+class ProxiedHttpClient(HttpClient):
+
+  def _get_connection(self, uri, headers=None):
+    # Check to see if there are proxy settings required for this request.
+    proxy = None
+    if uri.scheme == 'https':
+      proxy = os.environ.get('https_proxy')
+    elif uri.scheme == 'http':
+      proxy = os.environ.get('http_proxy')
+    if not proxy:
+      return HttpClient._get_connection(self, uri, headers=headers)
+    # Now we have the URL of the appropriate proxy server.
+    # Get a username and password for the proxy if required.
+    proxy_auth = _get_proxy_auth()
+    if uri.scheme == 'https':
+      import socket
+      if proxy_auth:
+        proxy_auth = 'Proxy-authorization: %s' % proxy_auth
+      # Construct the proxy connect command.
+      port = uri.port
+      if not port:
+        port = 443
+      proxy_connect = 'CONNECT %s:%s HTTP/1.0\r\n' % (uri.host, port)
+      # Set the user agent to send to the proxy
+      user_agent = ''
+      if headers and 'User-Agent' in headers:
+        user_agent = 'User-Agent: %s\r\n' % (headers['User-Agent'])
+      proxy_pieces = '%s%s%s\r\n' % (proxy_connect, proxy_auth, user_agent)
+      # Find the proxy host and port.
+      proxy_uri = Uri.parse_uri(proxy)
+      if not proxy_uri.port:
+        proxy_uri.port = '80'
+      # Connect to the proxy server, very simple recv and error checking
+      p_sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+      p_sock.connect((proxy_url.host, int(proxy_url.port)))
+      p_sock.sendall(proxy_pieces)
+      response = ''
+      # Wait for the full response.
+      while response.find("\r\n\r\n") == -1:
+        response += p_sock.recv(8192)
+      p_status = response.split()[1]
+      if p_status != str(200):
+        raise ProxyError('Error status=%s' % str(p_status))
+      # Trivial setup for ssl socket.
+      ssl = socket.ssl(p_sock, None, None)
+      fake_sock = httplib.FakeSocket(p_sock, ssl)
+      # Initalize httplib and replace with the proxy socket.
+      connection = httplib.HTTPConnection(proxy_url.host)
+      connection.sock=fake_sock
+      return connection
+    elif uri.scheme == 'http':
+      proxy_url = Uri.parse_uri(proxy)
+      if not proxy_url.port:
+        proxy_uri.port = '80'
+      if proxy_auth:
+        headers['Proxy-Authorization'] = proxy_auth.strip()
+      return httplib.HTTPConnection(proxy_uri.host, int(proxy_uri.port))
+    return None
+
+
+def _get_proxy_auth():
+  import base64
+  proxy_username = os.environ.get('proxy-username')
+  if not proxy_username:
+    proxy_username = os.environ.get('proxy_username')
+  proxy_password = os.environ.get('proxy-password')
+  if not proxy_password:
+    proxy_password = os.environ.get('proxy_password')
+  if proxy_username:
+    user_auth = base64.b64encode('%s:%s' % (proxy_username,
+                                            proxy_password))
+    return 'Basic %s\r\n' % (user_auth.strip())
+  else:
+    return ''

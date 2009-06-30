@@ -46,7 +46,7 @@ class AtomPubClient(object):
       auth_token: An object which sets the HTTP Authorization header when its
                   modify_request method is called.
     """
-    self.http_client = http_client or atom.http_core.HttpClient()
+    self.http_client = http_client or atom.http_core.ProxiedHttpClient()
     if host is not None:
       self.host = host
     if auth_token is not None:
