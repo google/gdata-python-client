@@ -49,6 +49,7 @@ class AtomPubClientEchoTest(unittest.TestCase):
       self.assert_(response.getheader('Echo-Uri') == '/')
       self.assert_(response.getheader('Echo-Scheme') == 'http')
       self.assert_(response.getheader('Echo-Method') == 'GET')
+      self.assertTrue(response.getheader('User-Agent').startswith('gdata-py/'))
 
   def test_auth_request_with_no_client_defaults(self):
     client = atom.client.AtomPubClient(atom.mock_http_core.EchoHttpClient())
@@ -144,14 +145,17 @@ class AtomPubClientEchoTest(unittest.TestCase):
     self.assert_(response.getheader('Content-Type') == 'application/xml')
 
   def test_delete(self):
-    client = atom.client.AtomPubClient(atom.mock_http_core.EchoHttpClient())
+    client = atom.client.AtomPubClient(atom.mock_http_core.EchoHttpClient(),
+                                       source='my new app')
     response = client.Delete('http://example.com/simple')
-    self.assert_(response.getheader('Echo-Host') == 'example.com:None')
-    self.assert_(response.getheader('Echo-Uri') == '/simple')
-    self.assert_(response.getheader('Echo-Method') == 'DELETE')
+    self.assertEqual(response.getheader('Echo-Host'), 'example.com:None')
+    self.assertEqual(response.getheader('Echo-Uri'), '/simple')
+    self.assertEqual(response.getheader('Echo-Method'), 'DELETE')
     response = client.delete(uri='http://example.com/d')
-    self.assert_(response.getheader('Echo-Uri') == '/d')
-    self.assert_(response.getheader('Echo-Method') == 'DELETE')
+    self.assertEqual(response.getheader('Echo-Uri'), '/d')
+    self.assertEqual(response.getheader('Echo-Method'), 'DELETE')
+    self.assertTrue(
+        response.getheader('User-Agent').startswith('my new app gdata-py/'))
 
 def suite():
   return unittest.TestSuite((unittest.makeSuite(AtomPubClientEchoTest, 'test'),

@@ -172,7 +172,9 @@ class GDClient(atom.client.AtomPubClient):
   # The gsessionid is used by Google Calendar to prevent redirects.
   __gsessionid = None
   api_version = None
+  # Name of the Google Data service when making a ClientLogin request.
   auth_service = None
+  # URL prefixes which should be requested for AuthSub and OAuth.
   auth_scopes = None
 
   def request(self, method=None, uri=None, auth_token=None,
@@ -250,7 +252,9 @@ class GDClient(atom.client.AtomPubClient):
     elif self.__gsessionid is not None:
       uri.query['gsessionid'] = self.__gsessionid
 
-    http_request = self.modify_request(http_request)
+    # The AtomPubClient should call this class' modify_request before
+    # performing the HTTP request.
+    #http_request = self.modify_request(http_request)
 
     response = atom.client.AtomPubClient.request(self, method=method, 
         uri=uri, auth_token=auth_token, http_request=http_request, **kwargs)
@@ -417,10 +421,9 @@ class GDClient(atom.client.AtomPubClient):
     Subclasses may override this method to add their own request 
     modifications before the request is made.
     """
-    atom.client.AtomPubClient.modify_request(self, http_request)
+    http_request = atom.client.AtomPubClient.modify_request(self, 
+                                                            http_request)
     if self.api_version is not None:
-      if http_request is None:
-        http_request = atom.http_core.HttpRequest()
       http_request.headers['GData-Version'] = self.api_version
     return http_request
 

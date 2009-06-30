@@ -36,7 +36,7 @@ __author__ = 'api.jscudder (Jeff Scudder)'
 import StringIO
 
 
-USER_AGENT = '%s GData-Python/1.3.2'
+USER_AGENT = '%s GData-Python/1.3.3'
 
 
 class Error(Exception):
