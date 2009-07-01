@@ -95,7 +95,7 @@ class BloggerExample:
       if not entry.title.text:
         print "\tNo Title"
       else:
-        print "\t" + entry.title.text
+        print "\t" + entry.title.text.encode('utf-8')
     print
 
   def PrintPostsInDateRange(self, start_time, end_time):
@@ -156,7 +156,7 @@ class BloggerExample:
 
     NOTE: This functionality is not officially supported yet.
     """
-    return self.client.add_comment(self.blog_id, post_id, None, comment_text)
+    return self.client.add_comment(self.blog_id, post_id, comment_text)
 
   def PrintAllComments(self, post_id):
     """This method displays all the comments for the given post.  First the
@@ -178,7 +178,6 @@ class BloggerExample:
     """This method removes the comment specified by the given edit_link_href, the
     URI for editing the comment.
     """
-
     self.client.delete(comment_entry)
 
   def DeletePost(self, post_entry):

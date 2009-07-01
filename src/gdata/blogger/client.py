@@ -101,10 +101,9 @@ class BloggerClient(gdata.client.GDClient):
 
   AddPost = add_post
 
-  def add_comment(self, blog_id, post_id, title, body, auth_token=None,
+  def add_comment(self, blog_id, post_id, body, auth_token=None,
                   title_type='text', body_type='html', **kwargs):
     new_entry = gdata.blogger.data.Comment(
-        title=atom.data.Title(text=title, type=title_type),
         content=atom.data.Content(text=body, type=body_type))
     return self.post(new_entry, BLOG_POST_COMMENTS_URL % (blog_id, post_id),
                      auth_token=auth_token, **kwargs)

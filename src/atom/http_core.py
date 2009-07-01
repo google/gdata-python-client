@@ -22,6 +22,7 @@
 __author__ = 'j.s@google.com (Jeff Scudder)'
 
 
+import os
 import StringIO
 import urlparse
 import urllib
