@@ -50,8 +50,29 @@ SIMPLE_V2_FEED_TEST_DATA = """<feed xmlns='http://www.w3.org/2005/Atom'
   <entry gd:etag='&quot;123456&quot;'>
     <link rel='edit' href='http://example.com/1' />
   </entry>
-</feed>
-"""
+</feed>"""
+
+
+XML_ENTRY_1 = """<?xml version='1.0'?>
+    <entry xmlns='http://www.w3.org/2005/Atom'
+           xmlns:g='http://base.google.com/ns/1.0'>
+      <category scheme="http://base.google.com/categories/itemtypes"
+                term="products"/>
+      <id>    http://www.google.com/test/id/url   </id>
+      <title type='text'>Testing 2000 series laptop</title>
+      <content type='xhtml'>
+        <div xmlns='http://www.w3.org/1999/xhtml'>A Testing Laptop</div>
+      </content>
+      <link rel='alternate' type='text/html'
+            href='http://www.provider-host.com/123456789'/>
+      <link rel='license'
+            href='http://creativecommons.org/licenses/by-nc/2.5/rdf'/>
+      <g:label>Computer</g:label>
+      <g:label>Laptop</g:label>
+      <g:label>testing laptop</g:label>
+      <g:item_type>products</g:item_type>
+    </entry>"""
+
 
 def parse(xml_string, target_class):
   """Convenience wrapper for converting an XML string to an XmlElement."""
@@ -87,8 +108,8 @@ class ItemsPerPageTest(unittest.TestCase):
 class GDataEntryTest(unittest.TestCase):
 
   def testIdShouldBeCleaned(self):
-    entry = parse(test_data.XML_ENTRY_1, gdata.data.GDEntry)
-    tree = parse(test_data.XML_ENTRY_1, atom.core.XmlElement)
+    entry = parse(XML_ENTRY_1, gdata.data.GDEntry)
+    tree = parse(XML_ENTRY_1, atom.core.XmlElement)
     self.assertFalse(tree.get_elements('id', 
         'http://www.w3.org/2005/Atom' == entry.id.text))
     self.assertEqual(entry.get_id(), 'http://www.google.com/test/id/url')
@@ -103,14 +124,14 @@ class GDataEntryTest(unittest.TestCase):
   def testAllowsEmptyId(self):
     entry = gdata.data.GDEntry()
     try:
-      entry.id = atom.Id()
+      entry.id = atom.data.Id()
     except AttributeError:
       self.fail('Empty id should not raise an attribute error.')
 
 class LinkFinderTest(unittest.TestCase):
 
   def setUp(self):
-    self.entry = parse(test_data.XML_ENTRY_1, gdata.data.GDEntry)
+    self.entry = parse(XML_ENTRY_1, gdata.data.GDEntry)
 
   def testLinkFinderGetsLicenseLink(self):
     self.assertEquals(isinstance(self.entry.FindLicenseLink(), str),
@@ -137,7 +158,7 @@ class GDataFeedTest(unittest.TestCase):
   def testAllowsEmptyId(self):
     feed = gdata.data.GDFeed()
     try:
-      feed.id = atom.Id()
+      feed.id = atom.data.Id()
     except AttributeError:
       self.fail('Empty id should not raise an attribute error.')
 
@@ -172,7 +193,7 @@ class BatchFeedTest(unittest.TestCase):
   def setUp(self):
     self.batch_feed = gdata.data.BatchFeed()
     self.example_entry = gdata.data.BatchEntry(
-        id=atom.Id(text='http://example.com/1'), text='This is a test')
+        id=atom.data.Id(text='http://example.com/1'), text='This is a test')
 
   def testConvertRequestFeed(self):
     batch_feed = parse(test_data.BATCH_FEED_REQUEST, gdata.data.BatchFeed)
@@ -232,13 +253,13 @@ class BatchFeedTest(unittest.TestCase):
     self.assertEquals(new_entry.id.text, 'http://example.com/1')
     self.assertEquals(new_entry.batch_id.text, '0')
 
-    to_add = gdata.data.BatchEntry(id=atom.Id(text='originalId'))
+    to_add = gdata.data.BatchEntry(id=atom.data.Id(text='originalId'))
     new_entry = self.batch_feed.AddBatchEntry(entry=to_add,
                                               batch_id_string='foo')
     self.assertEquals(new_entry.batch_id.text, 'foo')
     self.assertEquals(new_entry.id.text, 'originalId')
 
-    to_add = gdata.data.BatchEntry(id=atom.Id(text='originalId'),
+    to_add = gdata.data.BatchEntry(id=atom.data.Id(text='originalId'),
                               batch_id=gdata.data.BatchId(text='bar'))
     new_entry = self.batch_feed.AddBatchEntry(entry=to_add,
                                               id_url_string='newId',
@@ -246,14 +267,14 @@ class BatchFeedTest(unittest.TestCase):
     self.assertEquals(new_entry.batch_id.text, 'foo')
     self.assertEquals(new_entry.id.text, 'originalId')
 
-    to_add = gdata.data.BatchEntry(id=atom.Id(text='originalId'),
+    to_add = gdata.data.BatchEntry(id=atom.data.Id(text='originalId'),
                               batch_id=gdata.data.BatchId(text='bar'))
     new_entry = self.batch_feed.AddBatchEntry(entry=to_add,
                                               id_url_string='newId')
     self.assertEquals(new_entry.batch_id.text, 'bar')
     self.assertEquals(new_entry.id.text, 'originalId')
 
-    to_add = gdata.data.BatchEntry(id=atom.Id(text='originalId'),
+    to_add = gdata.data.BatchEntry(id=atom.data.Id(text='originalId'),
                               batch_id=gdata.data.BatchId(text='bar'),
                               batch_operation=gdata.data.BatchOperation(
                                   type=gdata.data.BATCH_INSERT))
@@ -266,21 +287,21 @@ class BatchFeedTest(unittest.TestCase):
   def testAddInsert(self):
 
     first_entry = gdata.data.BatchEntry(
-        id=atom.Id(text='http://example.com/1'), text='This is a test1')
+        id=atom.data.Id(text='http://example.com/1'), text='This is a test1')
     self.batch_feed.AddInsert(first_entry)
     self.assertEquals(self.batch_feed.entry[0].batch_operation.type,
                       gdata.data.BATCH_INSERT)
     self.assertEquals(self.batch_feed.entry[0].batch_id.text, '0')
 
     second_entry = gdata.data.BatchEntry(
-        id=atom.Id(text='http://example.com/2'), text='This is a test2')
+        id=atom.data.Id(text='http://example.com/2'), text='This is a test2')
     self.batch_feed.AddInsert(second_entry, batch_id_string='foo')
     self.assertEquals(self.batch_feed.entry[1].batch_operation.type,
                       gdata.data.BATCH_INSERT)
     self.assertEquals(self.batch_feed.entry[1].batch_id.text, 'foo')
 
     third_entry = gdata.data.BatchEntry(
-        id=atom.Id(text='http://example.com/3'), text='This is a test3')
+        id=atom.data.Id(text='http://example.com/3'), text='This is a test3')
     third_entry.batch_operation = gdata.data.BatchOperation(
         type=gdata.data.BATCH_DELETE)
     # Add an entry with a delete operation already assigned.
@@ -294,7 +315,7 @@ class BatchFeedTest(unittest.TestCase):
   def testAddDelete(self):
     # Try deleting an entry
     delete_entry = gdata.data.BatchEntry(
-        id=atom.Id(text='http://example.com/1'), text='This is a test')
+        id=atom.data.Id(text='http://example.com/1'), text='This is a test')
     self.batch_feed.AddDelete(entry=delete_entry)
     self.assertEquals(self.batch_feed.entry[0].batch_operation.type,
                       gdata.data.BATCH_DELETE)
@@ -313,7 +334,7 @@ class BatchFeedTest(unittest.TestCase):
   def testAddQuery(self):
     # Try querying with an existing batch entry
     delete_entry = gdata.data.BatchEntry(
-        id=atom.Id(text='http://example.com/1'))
+        id=atom.data.Id(text='http://example.com/1'))
     self.batch_feed.AddQuery(entry=delete_entry)
     self.assertEquals(self.batch_feed.entry[0].batch_operation.type,
                       gdata.data.BATCH_QUERY)
@@ -330,7 +351,7 @@ class BatchFeedTest(unittest.TestCase):
   def testAddUpdate(self):
     # Try updating an entry
     delete_entry = gdata.data.BatchEntry(
-        id=atom.Id(text='http://example.com/1'), text='This is a test')
+        id=atom.data.Id(text='http://example.com/1'), text='This is a test')
     self.batch_feed.AddUpdate(entry=delete_entry)
     self.assertEquals(self.batch_feed.entry[0].batch_operation.type,
                       gdata.data.BATCH_UPDATE)

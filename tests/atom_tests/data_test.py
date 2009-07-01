@@ -28,8 +28,27 @@ except ImportError:
 import atom.data
 import atom.core
 import gdata.test_config as conf
-import gdata.test_data as test_data
 
+
+XML_ENTRY_1 = """<?xml version='1.0'?>
+    <entry xmlns='http://www.w3.org/2005/Atom'
+           xmlns:g='http://base.google.com/ns/1.0'>
+      <category scheme="http://base.google.com/categories/itemtypes"
+                term="products"/>
+      <id>    http://www.google.com/test/id/url   </id>
+      <title type='text'>Testing 2000 series laptop</title>
+      <content type='xhtml'>
+        <div xmlns='http://www.w3.org/1999/xhtml'>A Testing Laptop</div>
+      </content>
+      <link rel='alternate' type='text/html'
+            href='http://www.provider-host.com/123456789'/>
+      <link rel='license'
+            href='http://creativecommons.org/licenses/by-nc/2.5/rdf'/>
+      <g:label>Computer</g:label>
+      <g:label>Laptop</g:label>
+      <g:label>testing laptop</g:label>
+      <g:item_type>products</g:item_type>
+    </entry>"""
 
 class AuthorTest(unittest.TestCase):
   
@@ -86,9 +105,15 @@ class AuthorTest(unittest.TestCase):
     self.assertEqual(new_author.extension_attributes['foo2'], 'rab')
     
   def testConvertFullAuthorToAndFromString(self):
-    author = atom.core.parse(test_data.TEST_AUTHOR, atom.data.Author)
+    TEST_AUTHOR = """<?xml version="1.0" encoding="utf-8"?>
+        <author xmlns="http://www.w3.org/2005/Atom">
+          <name xmlns="http://www.w3.org/2005/Atom">John Doe</name>
+          <email xmlns="http://www.w3.org/2005/Atom">john@example.com</email>
+          <uri>http://www.google.com</uri>
+        </author>"""
+    author = atom.core.parse(TEST_AUTHOR, atom.data.Author)
     self.assertEqual(author.name.text, 'John Doe')
-    self.assertEqual(author.email.text, 'johndoes@someemailadress.com')
+    self.assertEqual(author.email.text, 'john@example.com')
     self.assertEqual(author.uri.text, 'http://www.google.com')
     
     
@@ -132,15 +157,23 @@ class NameTest(unittest.TestCase):
     
     
 class ExtensionElementTest(unittest.TestCase):
-  
+
   def setUp(self):
     self.ee = atom.data.ExtensionElement('foo')
+    self.EXTENSION_TREE = """<?xml version="1.0" encoding="utf-8"?>
+        <feed xmlns="http://www.w3.org/2005/Atom">
+          <g:author xmlns:g="http://www.google.com">
+            <g:name>John Doe
+              <g:foo yes="no" up="down">Bar</g:foo>
+            </g:name>
+          </g:author>
+        </feed>"""
     
   def testEmptyEEShouldProduceEmptyString(self):
     pass
     
   def testEEParsesTreeCorrectly(self):
-    deep_tree = atom.core.xml_element_from_string(test_data.EXTENSION_TREE,
+    deep_tree = atom.core.xml_element_from_string(self.EXTENSION_TREE,
         atom.data.ExtensionElement)
     self.assertEqual(deep_tree.tag, 'feed')
     self.assertEqual(deep_tree.namespace, 'http://www.w3.org/2005/Atom')
@@ -166,7 +199,7 @@ class ExtensionElementTest(unittest.TestCase):
     string_from_new_ee = new_ee.ToString()
     self.assert_(string_from_ee == string_from_new_ee)
     
-    deep_tree = atom.core.xml_element_from_string(test_data.EXTENSION_TREE,
+    deep_tree = atom.core.xml_element_from_string(self.EXTENSION_TREE,
         atom.data.ExtensionElement)
     string_from_deep_tree = deep_tree.ToString()
     new_deep_tree = atom.core.xml_element_from_string(string_from_deep_tree,
@@ -415,7 +448,7 @@ class EntryTest(unittest.TestCase):
     self.assert_(new_entry.title.text == 'my test entry')
 
   def testEntryCorrectlyConvertsActualData(self):
-    entry = atom.core.parse(test_data.XML_ENTRY_1, atom.data.Entry)
+    entry = atom.core.parse(XML_ENTRY_1, atom.data.Entry)
     self.assert_(entry.category[0].scheme == 
         'http://base.google.com/categories/itemtypes')
     self.assert_(entry.category[0].term == 'products')
@@ -426,7 +459,28 @@ class EntryTest(unittest.TestCase):
     #TODO check all other values for the test entry
 
   def testAppControl(self):
-    entry = atom.core.parse(test_data.TEST_BASE_ENTRY, atom.data.Entry)
+    TEST_BASE_ENTRY = """<?xml version='1.0'?>
+        <entry xmlns='http://www.w3.org/2005/Atom'
+               xmlns:g='http://base.google.com/ns/1.0'>
+          <category scheme="http://base.google.com/categories/itemtypes"
+                    term="products"/>
+          <title type='text'>Testing 2000 series laptop</title>
+          <content type='xhtml'>
+            <div xmlns='http://www.w3.org/1999/xhtml'>A Testing Laptop</div>
+          </content>
+          <app:control xmlns:app='http://purl.org/atom/app#'>
+            <app:draft>yes</app:draft>
+            <gm:disapproved 
+                xmlns:gm='http://base.google.com/ns-metadata/1.0'/>
+          </app:control>
+          <link rel='alternate' type='text/html'
+                href='http://www.provider-host.com/123456789'/>
+          <g:label>Computer</g:label>
+          <g:label>Laptop</g:label>
+          <g:label>testing laptop</g:label>
+          <g:item_type>products</g:item_type>
+        </entry>""" 
+    entry = atom.core.parse(TEST_BASE_ENTRY, atom.data.Entry)
     self.assertEquals(entry.control.draft.text, 'yes')
     self.assertEquals(len(entry.control.extension_elements), 1)
     self.assertEquals(entry.control.extension_elements[0].tag, 'disapproved')
@@ -587,7 +641,47 @@ class PreserveUnkownElementTest(unittest.TestCase):
   """Tests correct preservation of XML elements which are non Atom"""
   
   def setUp(self):
-    self.feed = atom.core.parse(test_data.GBASE_ATTRIBUTE_FEED,
+    GBASE_ATTRIBUTE_FEED = """<?xml version='1.0' encoding='UTF-8'?>
+        <feed xmlns='http://www.w3.org/2005/Atom'
+              xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
+              xmlns:gm='http://base.google.com/ns-metadata/1.0'>
+          <id>http://www.google.com/base/feeds/attributes</id>
+          <updated>2006-11-01T20:35:59.578Z</updated>
+          <category scheme='http://base.google.com/categories/itemtypes'
+                    term='online jobs'></category>
+          <category scheme='http://base.google.com/categories/itemtypes'
+                    term='jobs'></category>
+          <title type='text'>histogram for query: [item type:jobs]</title>
+          <link rel='alternate' type='text/html' 
+                href='http://base.google.com'></link>
+          <link rel='self' type='application/atom+xml'
+                href='http://www.google.com/base/attributes/jobs'></link>
+          <generator version='1.0'
+                     uri='http://base.google.com'>GoogleBase</generator>
+          <openSearch:totalResults>16</openSearch:totalResults>
+          <openSearch:startIndex>1</openSearch:startIndex>
+          <openSearch:itemsPerPage>16</openSearch:itemsPerPage>
+          <entry>
+            <id>http://www.google.com/base/feeds/attributes/job+industy</id>
+            <updated>2006-11-01T20:36:00.100Z</updated>
+            <title type='text'>job industry(text)</title>
+            <content type='text'>Attribute"job industry" of type text.
+            </content>
+            <gm:attribute name='job industry' type='text' count='4416629'>
+              <gm:value count='380772'>it internet</gm:value>
+              <gm:value count='261565'>healthcare</gm:value>
+              <gm:value count='142018'>information technology</gm:value>
+              <gm:value count='124622'>accounting</gm:value>
+              <gm:value count='111311'>clerical and administrative</gm:value>
+              <gm:value count='82928'>other</gm:value>
+              <gm:value count='77620'>sales and sales management</gm:value>
+              <gm:value count='68764'>information systems</gm:value>
+              <gm:value count='65859'>engineering and architecture</gm:value>
+              <gm:value count='64757'>sales</gm:value>
+            </gm:attribute>
+          </entry>
+        </feed>"""
+    self.feed = atom.core.parse(GBASE_ATTRIBUTE_FEED,
                                 atom.data.Feed)
 
   def testCaptureOpenSearchElements(self):
@@ -622,7 +716,7 @@ class PreserveUnkownElementTest(unittest.TestCase):
 class LinkFinderTest(unittest.TestCase):
   
   def setUp(self):
-    self.entry = atom.core.parse(test_data.XML_ENTRY_1, atom.data.Entry)
+    self.entry = atom.core.parse(XML_ENTRY_1, atom.data.Entry)
 
   def testLinkFinderGetsLicenseLink(self):
     self.assertTrue(isinstance(self.entry.GetLink('license'), atom.data.Link))
@@ -715,8 +809,45 @@ class UtfParsingTest(unittest.TestCase):
     self.assert_("more text" in xml)
 
   def testConvertExampleXML(self):
+    GBASE_STRING_ENCODING_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
+        <entry xmlns='http://www.w3.org/2005/Atom'
+               xmlns:gm='http://base.google.com/ns-metadata/1.0'
+               xmlns:g='http://base.google.com/ns/1.0'
+               xmlns:batch='http://schemas.google.com/gdata/batch'>
+          <id>http://www.google.com/base/feeds/snippets/1749</id>
+          <published>2007-12-09T03:13:07.000Z</published>
+          <updated>2008-01-07T03:26:46.000Z</updated>
+          <category scheme='http://base.google.com/categories/itemtypes'
+                    term='Products'/>
+          <title type='text'>Digital Camera Cord Fits DSC-R1 S40</title>
+          <content type='html'>SONY \xC2\xB7 Cybershot Digital Camera Usb
+              Cable DESCRIPTION This is a 2.5 USB 2.0 A to Mini B (5 Pin)
+              high quality digital camera cable used for connecting your
+              Sony Digital Cameras and Camcoders. Backward
+              Compatible with USB 2.0, 1.0 and 1.1. Fully  ...</content>
+          <link rel='alternate' type='text/html'
+                href='http://adfarm.mediaplex.com/ad/ck/711-5256-8196-2mm'/>
+          <link rel='self' type='application/atom+xml'
+                href='http://www.google.com/base/feeds/snippets/1749'/>
+          <author>
+            <name>eBay</name>
+          </author>
+          <g:item_type type='text'>Products</g:item_type>
+          <g:item_language type='text'>EN</g:item_language>
+          <g:target_country type='text'>US</g:target_country>
+          <g:price type='floatUnit'>0.99 usd</g:price>
+          <g:image_link 
+              type='url'>http://www.example.com/pict/27_1.jpg</g:image_link>
+          <g:category type='text'>Cameras &amp; Photo&gt;Digital Camera 
+              Accessories&gt;Cables</g:category>
+          <g:category type='text'>Cords &amp; USB Cables</g:category>
+          <g:customer_id type='int'>11729</g:customer_id>
+          <g:id type='text'>270195049057</g:id>
+          <g:expiration_date
+              type='dateTime'>2008-02-06T03:26:46Z</g:expiration_date>
+        </entry>"""
     try:
-      entry = atom.core.parse(test_data.GBASE_STRING_ENCODING_ENTRY,
+      entry = atom.core.parse(GBASE_STRING_ENCODING_ENTRY,
                               atom.data.Entry)
     except UnicodeDecodeError:
       self.fail('Error when converting XML')
