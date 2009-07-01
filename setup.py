@@ -15,8 +15,13 @@
 # limitations under the License.
 
 
+import sys
 from distutils.core import setup
 
+required = []
+
+if sys.version_info[:3] < (2, 5, 0):
+  required.append('elementtree')
 
 setup(
     name='gdata',
@@ -65,5 +70,5 @@ library may also be used with any Atom Publishing Protocol service (AtomPub).
         'gdata.tlslite.utils', 'gdata.tlslite.integration', 'gdata.health',
         'gdata.analytics', 'gdata.finance'],
     package_dir = {'gdata':'src/gdata', 'atom':'src/atom'},
-    install_requires=['elementtree']
+    install_requires=required
 )
