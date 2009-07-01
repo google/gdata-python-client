@@ -18,6 +18,13 @@
 # This module is used for version 2 of the Google Data APIs.
 
 
+"""Provides classes and constants for the XML in the Google Data namespace.
+
+Documentation for the raw XML which these classes represent can be found here:
+http://code.google.com/apis/gdata/docs/2.0/elements.html
+"""
+
+
 __author__ = 'j.s@google.com (Jeff Scudder)'
 
 
@@ -35,6 +42,35 @@ BATCH_INSERT = 'insert'
 BATCH_UPDATE = 'update'
 BATCH_DELETE = 'delete'
 BATCH_QUERY = 'query'
+
+EVENT_LOCATION = 'http://schemas.google.com/g/2005#event'
+ALTERNATE_LOCATION = 'http://schemas.google.com/g/2005#event.alternate'
+PARKING_LOCATION = 'http://schemas.google.com/g/2005#event.parking'
+
+CANCELED_EVENT = 'http://schemas.google.com/g/2005#event.canceled'
+CONFIRMED_EVENT = 'http://schemas.google.com/g/2005#event.confirmed'
+TENTATIVE_EVENT = 'http://schemas.google.com/g/2005#event.tentative'
+
+CONFIDENTIAL_EVENT = 'http://schemas.google.com/g/2005#event.confidential'
+DEFAULT_EVENT = 'http://schemas.google.com/g/2005#event.default'
+PRIVATE_EVENT = 'http://schemas.google.com/g/2005#event.private'
+PUBLIC_EVENT = 'http://schemas.google.com/g/2005#event.public'
+
+OPAQUE_EVENT = 'http://schemas.google.com/g/2005#event.opaque'
+TRANSPARENT_EVENT = 'http://schemas.google.com/g/2005#event.transparent'
+
+CHAT_MESSAGE = 'http://schemas.google.com/g/2005#message.chat'
+INBOX_MESSAGE = 'http://schemas.google.com/g/2005#message.inbox'
+SENT_MESSAGE = 'http://schemas.google.com/g/2005#message.sent'
+SPAM_MESSAGE = 'http://schemas.google.com/g/2005#message.spam'
+STARRED_MESSAGE = 'http://schemas.google.com/g/2005#message.starred'
+UNREAD_MESSAGE = 'http://schemas.google.com/g/2005#message.unread'
+
+BCC_RECIPIENT = 'http://schemas.google.com/g/2005#message.bcc'
+CC_RECIPIENT = 'http://schemas.google.com/g/2005#message.cc'
+SENDER = 'http://schemas.google.com/g/2005#message.from'
+REPLY_TO = 'http://schemas.google.com/g/2005#message.reply-to'
+TO_RECIPIENT = 'http://schemas.google.com/g/2005#message.to'
 
 
 class Error(Exception):
@@ -439,7 +475,11 @@ class BatchFeed(GDFeed):
 
 
 class EntryLink(atom.core.XmlElement):
-  """The gd:entryLink element"""
+  """The gd:entryLink element.
+
+  Represents a logically nested entry. For example, a <gd:who> 
+  representing a contact might have a nested entry from a contact feed.
+  """
   _qname = GDATA_TEMPLATE % 'entryLink'
   entry = GDEntry
   rel = 'rel'
@@ -448,10 +488,122 @@ class EntryLink(atom.core.XmlElement):
 
 
 class FeedLink(atom.core.XmlElement):
-  """The gd:feedLink element"""
+  """The gd:feedLink element.
+
+  Represents a logically nested feed. For example, a calendar feed might
+  have a nested feed representing all comments on entries.
+  """
   _qname = GDATA_TEMPLATE % 'feedLink'
   feed = GDFeed
   rel = 'rel'
   read_only = 'readOnly'
   count_hint = 'countHint'
   href = 'href'
+
+
+class AdditionalName(atom.core.XmlElement):
+  """The gd:additionalName element.
+
+  Specifies additional (eg. middle) name of the person.
+  Contains an attribute for the phonetic representaton of the name.
+  """
+  _qname = GDATA_TEMPLATE % 'additionalName'
+  yomi = 'yomi'
+
+
+class Comments(atom.core.XmlElement):
+  """The gd:comments element.
+
+  Contains a comments feed for the enclosing entry (such as a calendar event).
+  """
+  _qname = GDATA_TEMPLATE % 'comments'
+  rel = 'rel'
+  feed_link = FeedLink
+
+
+REGULAR_COMMENTS = 'http://schemas.google.com/g/2005#regular'
+REVIEW_COMMENTS = 'http://schemas.google.com/g/2005#reviews'
+
+
+class Comments(atom.core.XmlElement):
+  """The gd:country element.
+
+  Country name along with optional country code. The country code is 
+  given in accordance with ISO 3166-1 alpha-2:
+  http://www.iso.org/iso/iso-3166-1_decoding_table
+  """
+  _qname = GDATA_TEMPLATE % 'country'
+  code = 'code'
+
+
+class EmailImParent(atom.core.XmlElement):
+  address = 'address'
+  label = 'label'
+  rel = 'rel'
+  primary = 'primary'
+
+
+class Email(EmailImParent):
+  """The gd:email element.
+
+  An email address associated with the containing entity (which is 
+  usually an entity representing a person or a location).
+  """
+  _qname = GDATA_TEMPLATE % 'email'
+  display_name = 'displayName'
+
+
+HOME_REL = 'http://schemas.google.com/g/2005#home'
+OTHER_REL = 'http://schemas.google.com/g/2005#other'
+WORK_REL = 'http://schemas.google.com/g/2005#work'
+NETMEETING_REL = 'http://schemas.google.com/g/2005#netmeeting'
+
+
+class FamilyName(atom.core.XmlElement):
+  """The gd:familyName element.
+
+  Specifies family name of the person, eg. "Smith".
+  """
+  _qname = GDATA_TEMPLATE % 'familyName'
+  yomi = 'yomi'
+
+
+class Im(EmailImParent):
+  """The gd:im element.
+
+  An instant messaging address associated with the containing entity.
+  """
+  _qname = GDATA_TEMPLATE % 'im'
+  protocol = 'protocol'
+
+
+AIM_PROTOCOL = 'http://schemas.google.com/g/2005#AIM'
+MSN_PROTOCOL = 'http://schemas.google.com/g/2005#MSN'
+YAHOO_MESSENGER_PROTOCOL = 'http://schemas.google.com/g/2005#YAHOO'
+SKYPE_PROTOCOL = 'http://schemas.google.com/g/2005#SKYPE'
+QQ_PROTOCOL = 'http://schemas.google.com/g/2005#QQ'
+GOOGLE_TALK_PROTOCOL = 'http://schemas.google.com/g/2005#GOOGLE_TALK'
+ICQ_PROTOCOL = 'http://schemas.google.com/g/2005#ICQ'
+JABBER_PROTOCOL = 'http://schemas.google.com/g/2005#JABBER'
+
+
+class GivenName(atom.core.XmlElement):
+  """The gd:givenName element.
+
+  Specifies given name of the person, eg. "John".
+  """
+  _qname = GDATA_TEMPLATE % 'givenName'
+  yomi = 'yomi'
+
+
+class Name(atom.core.XmlElement):
+  """The gd:name element.
+
+  Allows storing person's name in a structured way. Consists of 
+  given name, additional name, family name, prefix, suffix and full name.
+  """
+  _qname = GDATA_TEMPLATE % 'name'
+  given_name = GivenName
+  additional_name = AdditionalName
+  family_name = FamilyName
+  
