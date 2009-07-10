@@ -45,6 +45,7 @@ import gdata.service
 import urllib
 import urlparse
 import gdata.auth
+import atom
 
 
 class Error(Exception):
@@ -68,6 +69,10 @@ class CaptchaChallenge(RequestError):
 
 
 class ClientLoginTokenMissing(Error):
+  pass
+
+
+class MissingOAuthParameters(Error):
   pass
 
 
@@ -414,6 +419,103 @@ class GDClient(atom.client.AtomPubClient):
 
   UpgradeToken = upgrade_token
 
+  def get_oauth_token(self, scopes, next, consumer_key, consumer_secret=None, 
+                      rsa_private_key=None, 
+                      url=gdata.gauth.REQUEST_TOKEN_URL):
+    """Obtains an OAuth request token to allow the user to authorize this app.
+    
+    Once this client has a request token, the user can authorize the request
+    token by visiting the authorization URL in their browser. After being
+    redirected back to this app at the 'next' URL, this app can then exchange
+    the authorized request token for an access token.
+
+    For more information see the documentation on Google Accounts with OAuth:
+    http://code.google.com/apis/accounts/docs/OAuth.html#AuthProcess
+
+    Args:
+      scopes: list of strings or atom.http_core.Uri objects which specify the
+          URL prefixes which this app will be accessing. For example, to access
+          the Google Calendar API, you would want to use scopes:
+          ['https://www.google.com/calendar/feeds/',
+           'http://www.google.com/calendar/feeds/']
+      next: str or atom.http_core.Uri object, The URL which the user's browser
+          should be sent to after they authorize access to their data. This
+          should be a URL in your application which will read the token
+          information from the URL and upgrade the request token to an access
+          token.
+      consumer_key: str This is the identifier for this application which you
+          should have received when you registered your application with Google
+          to use OAuth.
+      consumer_secret: str (optional) The shared secret between your app and
+          Google which provides evidence that this request is coming from you
+          application and not another app. If present, this libraries assumes
+          you want to use an HMAC signature to verify requests. Keep this data
+          a secret.
+      rsa_private_key: str (optional) The RSA private key which is used to 
+          generate a digital signature which is checked by Google's server. If
+          present, this library assumes that you want to use an RSA signature
+          to verify requests. Keep this data a secret.
+      url: The URL to which a request for a token should be made. The default
+          is Google's OAuth request token provider.
+    """
+    http_request = None
+    if rsa_private_key is not None:
+      raise Error('The GDClient does not yet support RSA signatures for '
+                  'OAuth. You can use RSA signatures with GDataService.')
+    elif consumer_secret is not None:
+      http_request = gdata.gauth.generate_request_for_request_token(
+          consumer_key, gdata.gauth.HMAC_SHA1, scopes,
+          consumer_secret=consumer_secret, auth_server_url=url, next=next)
+    else:
+      raise MissingOAuthParameters(
+          'To request an OAuth token, you must provide your consumer secret'
+          ' or your private RSA key.')
+
+    response = self.http_client.request(http_request)
+    response_body = response.read()
+
+    if response.status != 200:
+      raise error_from_response('Unable to obtain OAuth request token',
+                                response, RequestError, response_body)
+
+    if rsa_private_key is not None:
+      pass
+    elif consumer_secret is not None:
+      return gdata.gauth.hmac_token_from_body(response_body, consumer_key,
+                                              consumer_secret,
+                                              gdata.gauth.REQUEST_TOKEN)
+
+  GetOAuthToken = get_oauth_token
+
+  def get_access_token(self, request_token, 
+                       url=gdata.gauth.ACCESS_TOKEN_URL):
+    """Exchanges an authorized OAuth request token for an access token.
+    
+    Contacts the Google OAuth server to upgrade a previously authorized
+    request token. Once the request token is upgraded to an access token,
+    the access token may be used to access the user's data.
+
+    For more details, see the Google Accounts OAuth documentation:
+    http://code.google.com/apis/accounts/docs/OAuth.html#AccessToken
+
+    Args:
+      request_token: An OAuth token which has been authorized by the user.
+      url: (optional) The URL to which the upgrade request should be sent.
+          Defaults to: https://www.google.com/accounts/OAuthAuthorizeToken
+    """
+    http_request = gdata.gauth.generate_request_for_access_token(
+        request_token, auth_server_url=url)
+    response = self.http_client.request(http_request)
+    response_body = response.read()
+    if response.status != 200:
+      raise error_from_response(
+          'Unable to upgrade OAuth request token to access token',
+          response, RequestError, response_body)
+
+    return gdata.gauth.upgrade_to_access_token(request_token, response_body)
+
+  GetAccessToken = get_access_token
+
   def modify_request(self, http_request):
     """Adds or changes request before making the HTTP request.
     
@@ -667,10 +769,13 @@ class GDataClient(gdata.service.GDataService):
   
   All functionality has been migrated to gdata.service.GDataService.
   """
+  @atom.deprecated('This class will be removed, use GDClient instead.')
   def __init__(self, application_name=None, tokens=None):
     gdata.service.GDataService.__init__(self, source=application_name, 
         tokens=tokens)
 
+  @atom.deprecated('The GDataClient class will be removed in a future release'
+                   ', use GDClient.ClientLogin instead')
   def ClientLogin(self, username, password, service_name, source=None, 
       account_type=None, auth_url=None, login_token=None, login_captcha=None):
     gdata.service.GDataService.ClientLogin(self, username=username, 
@@ -678,6 +783,8 @@ class GDataClient(gdata.service.GDataService):
         auth_service_url=auth_url, source=source, captcha_token=login_token,
         captcha_response=login_captcha)
 
+  @atom.deprecated('The GDataClient class will be removed in a future release'
+                   ', use GDClient.GetEntry or GDClient.GetFeed')
   def Get(self, url, parser):
     """Simplified interface for Get.
 
@@ -694,7 +801,9 @@ class GDataClient(gdata.service.GDataService):
     Returns: The result of calling parser(http_response_body).
     """
     return gdata.service.GDataService.Get(self, uri=url, converter=parser)
-
+  
+  @atom.deprecated('The GDataClient class will be removed in a future release'
+                   ', use GDClient.Post instead')
   def Post(self, data, url, parser, media_source=None):
     """Streamlined version of Post.
 
@@ -704,6 +813,8 @@ class GDataClient(gdata.service.GDataService):
     return gdata.service.GDataService.Post(self, data=data, uri=url,
         media_source=media_source, converter=parser)
 
+  @atom.deprecated('The GDataClient class will be removed in a future release'
+                   ', use GDClient.Put instead')
   def Put(self, data, url, parser, media_source=None):
     """Streamlined version of Put.
 
@@ -713,6 +824,8 @@ class GDataClient(gdata.service.GDataService):
     return gdata.service.GDataService.Put(self, data=data, uri=url,
         media_source=media_source, converter=parser)
 
+  @atom.deprecated('The GDataClient class will be removed in a future release'
+                   ', use GDClient.Delete instead')
   def Delete(self, url):
     return gdata.service.GDataService.Delete(self, uri=url)
 
