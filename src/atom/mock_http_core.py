@@ -29,7 +29,7 @@ import atom.http_core
 
 
 class MockHttpClient(object):
-
+  debug = None
   real_client = None
 
   # The following members are used to construct the session cache temp file
@@ -68,6 +68,9 @@ class MockHttpClient(object):
         if _match_request(recording[0], request):
           return recording[1]
     else:
+      # Pass along the debug settings to the real client.
+      self.real_client.debug = self.debug
+      # Make an actual request since we can use the real HTTP client.
       response = self.real_client.request(http_request)
       _scrub_response(response)
       self.add_response(request, response.status, response.reason, 

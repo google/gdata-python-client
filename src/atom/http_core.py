@@ -390,7 +390,7 @@ class HttpClient(object):
     if isinstance(uri, (str, unicode)):
       uri = Uri.parse_uri(uri)
     connection = self._get_connection(uri, headers=headers)
-   
+ 
     if self.debug:
       connection.debuglevel = 1
 

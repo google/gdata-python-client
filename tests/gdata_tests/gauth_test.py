@@ -72,7 +72,7 @@ class AuthSubTest(unittest.TestCase):
     self.assertEqual(token.scopes, [])
 
 
-class TokensToAndFromBlobs(unittest.TestCase):
+class TokensToAndFromBlobsTest(unittest.TestCase):
 
   def test_client_login_conversion(self):
     token = gdata.gauth.ClientLoginToken('test|key')
@@ -102,9 +102,10 @@ class OAuthHmacTokenTests(unittest.TestCase):
         request, 'example.org', '12345', gdata.gauth.HMAC_SHA1, 1246301653,
         '1.0')
     self.assertEqual(
-        base_string, 'GET&http%3A%2F%2Fexample.com%2F&oauth_consumer_key%3De'
-        'xample.org%26oauth_nonce%3D12345%26oauth_signature_method%3DHMAC-SH'
-        'A1%26oauth_timestamp%3D1246301653%26oauth_version%3D1.0')
+        base_string, 'GET&http%3A%2F%2Fexample.com%2F&oauth_callback%3Doob%2'
+        '6oauth_consumer_key%3Dexample.org%26oauth_nonce%3D12345%26oauth_sig'
+        'nature_method%3DHMAC-SHA1%26oauth_timestamp%3D1246301653%26oauth_ve'
+        'rsion%3D1.0')
 
     # Test using example from documentation.
     request = atom.http_core.HttpRequest(
@@ -112,13 +113,16 @@ class OAuthHmacTokenTests(unittest.TestCase):
         '?orderby=starttime', 'GET')
     base_string = gdata.gauth.build_oauth_base_string(
         request, 'example.com', '4572616e48616d6d65724c61686176',
-        gdata.gauth.RSA_SHA1, 137131200, '1.0', token='1%2Fab3cd9j4ks73hf7g')
+        gdata.gauth.RSA_SHA1, 137131200, '1.0', token='1%2Fab3cd9j4ks73hf7g',
+        next='http://googlecodesamples.com/oauth_playground/index.php')
     self.assertEqual(
         base_string, 'GET&http%3A%2F%2Fwww.google.com%2Fcalendar%2Ffeeds%2Fd'
-        'efault%2Fallcalendars%2Ffull&oauth_consumer_key%3Dexample.com%26oau'
-        'th_nonce%3D4572616e48616d6d65724c61686176%26oauth_signature_method%'
-        '3DRSA-SHA1%26oauth_timestamp%3D137131200%26oauth_token%3D1%252Fab3c'
-        'd9j4ks73hf7g%26oauth_version%3D1.0%26orderby%3Dstarttime')
+        'efault%2Fallcalendars%2Ffull&oauth_callback%3Dhttp%253A%252F%252Fgo'
+        'oglecodesamples.com%252Foauth_playground%252Findex.php%26oauth_cons'
+        'umer_key%3Dexample.com%26oauth_nonce%3D4572616e48616d6d65724c616861'
+        '76%26oauth_signature_method%3DRSA-SHA1%26oauth_timestamp%3D13713120'
+        '0%26oauth_token%3D1%25252Fab3cd9j4ks73hf7g%26oauth_version%3D1.0%26'
+        'orderby%3Dstarttime')
 
     # Test various defaults.
     request = atom.http_core.HttpRequest('http://eXample.COM', 'get')
@@ -126,26 +130,29 @@ class OAuthHmacTokenTests(unittest.TestCase):
         request, 'example.org', '12345', gdata.gauth.HMAC_SHA1, 1246301653,
         '1.0')
     self.assertEqual(
-        base_string, 'GET&http%3A%2F%2Fexample.com%2F&oauth_consumer_key%3De'
-        'xample.org%26oauth_nonce%3D12345%26oauth_signature_method%3DHMAC-SH'
-        'A1%26oauth_timestamp%3D1246301653%26oauth_version%3D1.0')
+        base_string, 'GET&http%3A%2F%2Fexample.com%2F&oauth_callback%3Doob%2'
+        '6oauth_consumer_key%3Dexample.org%26oauth_nonce%3D12345%26oauth_sig'
+        'nature_method%3DHMAC-SHA1%26oauth_timestamp%3D1246301653%26oauth_ve'
+        'rsion%3D1.0')
     
     request = atom.http_core.HttpRequest('https://eXample.COM:443', 'get')
     base_string = gdata.gauth.build_oauth_base_string(
         request, 'example.org', '12345', gdata.gauth.HMAC_SHA1, 1246301653,
-        '1.0')
+        '1.0', 'http://googlecodesamples.com/oauth_playground/index.php')
     self.assertEqual(
-        base_string, 'GET&https%3A%2F%2Fexample.com%2F&oauth_consumer_key%3De'
-        'xample.org%26oauth_nonce%3D12345%26oauth_signature_method%3DHMAC-SH'
-        'A1%26oauth_timestamp%3D1246301653%26oauth_version%3D1.0')
+        base_string, 'GET&https%3A%2F%2Fexample.com%2F&oauth_callback%3Dhttp'
+        '%253A%252F%252Fgooglecodesamples.com%252Foauth_playground%252Findex'
+        '.php%26oauth_consumer_key%3Dexample.org%26oauth_nonce%3D12345%26oau'
+        'th_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1246301653%26oa'
+        'uth_version%3D1.0')
 
     request = atom.http_core.HttpRequest('http://eXample.COM:443', 'get')
     base_string = gdata.gauth.build_oauth_base_string(
         request, 'example.org', '12345', gdata.gauth.HMAC_SHA1, 1246301653,
         '1.0')
     self.assertEqual(
-        base_string, 'GET&http%3A%2F%2Fexample.com%3A443%2F&oauth_consumer_k'
-        'ey%3De'
+        base_string, 'GET&http%3A%2F%2Fexample.com%3A443%2F&oauth_callback%3'
+        'Doob%26oauth_consumer_key%3De'
         'xample.org%26oauth_nonce%3D12345%26oauth_signature_method%3DHMAC-SH'
         'A1%26oauth_timestamp%3D1246301653%26oauth_version%3D1.0')
 
@@ -153,15 +160,147 @@ class OAuthHmacTokenTests(unittest.TestCase):
         atom.http_core.Uri(host='eXample.COM'), 'GET')
     base_string = gdata.gauth.build_oauth_base_string(
         request, 'example.org', '12345', gdata.gauth.HMAC_SHA1, 1246301653,
-        '1.0')
+        '1.0', next='oob')
     self.assertEqual(
-        base_string, 'GET&http%3A%2F%2Fexample.com%2F&oauth_consumer_key%3De'
-        'xample.org%26oauth_nonce%3D12345%26oauth_signature_method%3DHMAC-SH'
-        'A1%26oauth_timestamp%3D1246301653%26oauth_version%3D1.0')
+        base_string, 'GET&http%3A%2F%2Fexample.com%2F&oauth_callback%3Doob%2'
+        '6oauth_consumer_key%3Dexample.org%26oauth_nonce%3D12345%26oauth_sig'
+        'nature_method%3DHMAC-SHA1%26oauth_timestamp%3D1246301653%26oauth_ve'
+        'rsion%3D1.0')
+
+    request = atom.http_core.HttpRequest(
+        'https://www.google.com/accounts/OAuthGetRequestToken', 'GET')
+    request.uri.query['scope'] = ('https://docs.google.com/feeds/'
+                                  ' http://docs.google.com/feeds/')
+    base_string = gdata.gauth.build_oauth_base_string(
+        request, 'anonymous', '48522759', gdata.gauth.HMAC_SHA1, 1246489532,
+        '1.0', 'http://googlecodesamples.com/oauth_playground/index.php')
+    self.assertEqual(
+        base_string, 'GET&https%3A%2F%2Fwww.google.com%2Faccounts%2FOAuthGet'
+        'RequestToken&oauth_callback%3Dhttp%253A%252F%252Fgooglecodesamples.'
+        'com%252Foauth_playground%252Findex.php%26oauth_consumer_key%3Danony'
+        'mous%26oauth_nonce%3D4852275'
+        '9%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D12464895'
+        '32%26oauth_version%3D1.0%26scope%3Dhttps%253A%252F%252Fdocs.google.'
+        'com%252Ffeeds%252F%2520http%253A%252F%252Fdocs.google.com%252Ffeeds'
+        '%252F')
+        
+  def test_generate_hmac_signature(self):
+    # Use the example from the OAuth playground:
+    # http://googlecodesamples.com/oauth_playground/
+    request = atom.http_core.HttpRequest(
+        'https://www.google.com/accounts/OAuthGetRequestToken?'
+        'scope=http%3A%2F%2Fwww.blogger.com%2Ffeeds%2F', 'GET')
+    signature = gdata.gauth.generate_hmac_signature(
+        request, 'anonymous', 'anonymous', '1246491360', 
+        'c0155b3f28697c029e7a62efff44bd46', '1.0', 
+        next='http://googlecodesamples.com/oauth_playground/index.php')
+    self.assertEqual(signature, '5a2GPdtAY3LWYv8IdiT3wp1Coeg=')
+
+    # Try the same request but with a non escaped Uri object.
+    request = atom.http_core.HttpRequest(
+        'https://www.google.com/accounts/OAuthGetRequestToken', 'GET')
+    request.uri.query['scope'] = 'http://www.blogger.com/feeds/'
+    signature = gdata.gauth.generate_hmac_signature(
+        request, 'anonymous', 'anonymous', '1246491360', 
+        'c0155b3f28697c029e7a62efff44bd46', '1.0',
+        'http://googlecodesamples.com/oauth_playground/index.php')
+    self.assertEqual(signature, '5a2GPdtAY3LWYv8IdiT3wp1Coeg=')
+
+    # A different request also checked against the OAuth playground.
+    request = atom.http_core.HttpRequest(
+        'https://www.google.com/accounts/OAuthGetRequestToken', 'GET')
+    request.uri.query['scope'] = ('https://www.google.com/analytics/feeds/ '
+                                  'http://www.google.com/base/feeds/ '
+                                  'http://www.google.com/calendar/feeds/')
+    signature = gdata.gauth.generate_hmac_signature(
+        request, 'anonymous', 'anonymous', 1246491797, 
+        '33209c4d7a09be4eb1d6ff18e00f8548', '1.0', 
+        next='http://googlecodesamples.com/oauth_playground/index.php')
+    self.assertEqual(signature, 'kFAgTTFDIWz4/xAabIlrcZZMTq8=')
+
+
+class OAuthHeaderTest(unittest.TestCase):
+
+  def test_generate_auth_header(self):
+    header = gdata.gauth.generate_auth_header(
+        'consumerkey', 1234567890, 'mynonce', 'unknown_sig_type', 'sig')
+    self.assertTrue(header.startswith('OAuth'))
+    self.assertTrue(header.find('oauth_nonce="mynonce"') > -1)
+    self.assertTrue(header.find('oauth_timestamp="1234567890"') > -1)
+    self.assertTrue(header.find('oauth_consumer_key="consumerkey"') > -1)
+    self.assertTrue(
+        header.find('oauth_signature_method="unknown_sig_type"') > -1)
+    self.assertTrue(header.find('oauth_version="1.0"') > -1)
+    self.assertTrue(header.find('oauth_signature="sig"') > -1)
+
+    header = gdata.gauth.generate_auth_header(
+        'consumer/key', 1234567890, 'ab%&33', '', 'ab/+-_=')
+    self.assertTrue(header.find('oauth_nonce="ab%25%2633"') > -1)
+    self.assertTrue(header.find('oauth_consumer_key="consumer%2Fkey"') > -1)
+    self.assertTrue(header.find('oauth_signature_method=""') > -1)
+    self.assertTrue(header.find('oauth_signature="ab%2F%2B-_%3D"') > -1)
+
+
+class OAuthGetRequestToken(unittest.TestCase):
+
+  def test_request_hmac_request_token(self):
+    request = gdata.gauth.generate_request_for_request_token(
+        'anonymous', gdata.gauth.HMAC_SHA1, 
+        ['http://www.blogger.com/feeds/', 
+         'http://www.google.com/calendar/feeds/'], 
+        consumer_secret='anonymous')
+    request_uri = str(request.uri)
+    self.assertTrue('http%3A%2F%2Fwww.blogger.com%2Ffeeds%2F' in request_uri)
+    self.assertTrue(
+        'http%3A%2F%2Fwww.google.com%2Fcalendar%2Ffeeds%2F' in request_uri)
+    auth_header = request.headers['Authorization']
+    self.assertTrue('oauth_consumer_key="anonymous"' in auth_header)
+    self.assertTrue('oauth_signature_method="HMAC-SHA1"' in auth_header)
+    self.assertTrue('oauth_version="1.0"' in auth_header)
+    self.assertTrue('oauth_signature="' in auth_header)
+    self.assertTrue('oauth_nonce="' in auth_header)
+    self.assertTrue('oauth_timestamp="' in auth_header)
+
+  def test_extract_token_from_body(self):
+    body = ('oauth_token=4%2F5bNFM_efIu3yN-E9RrF1KfZzOAZG&oauth_token_secret='
+            '%2B4O49V9WUOkjXgpOobAtgYzy&oauth_callback_confirmed=true')
+    token, secret = gdata.gauth.oauth_token_info_from_body(body)
+    self.assertEqual(token, '4/5bNFM_efIu3yN-E9RrF1KfZzOAZG')
+    self.assertEqual(secret, '+4O49V9WUOkjXgpOobAtgYzy')
+
+  def test_hmac_request_token_from_body(self):
+    body = ('oauth_token=4%2F5bNFM_efIu3yN-E9RrF1KfZzOAZG&oauth_token_secret='
+            '%2B4O49V9WUOkjXgpOobAtgYzy&oauth_callback_confirmed=true')
+    request_token = gdata.gauth.hmac_token_from_body(body, 'myKey',
+                                                     'mySecret', True)
+    self.assertEqual(request_token.consumer_key, 'myKey')
+    self.assertEqual(request_token.consumer_secret, 'mySecret')
+    self.assertEqual(request_token.token, '4/5bNFM_efIu3yN-E9RrF1KfZzOAZG')
+    self.assertEqual(request_token.token_secret, '+4O49V9WUOkjXgpOobAtgYzy')
+    self.assertEqual(request_token.auth_state, gdata.gauth.REQUEST_TOKEN)
+
+
+class OAuthAuthorizeToken(unittest.TestCase):
+
+  def test_generate_authorization_url(self):
+    url = gdata.gauth.generate_oauth_authorization_url('/+=aosdpikk')
+    self.assertTrue(str(url).startswith(
+        'https://www.google.com/accounts/OAuthAuthorizeToken'))
+    self.assertTrue('oauth_token=%2F%2B%3Daosdpikk' in str(url))
+
+  def test_extract_auth_token(self):
+    url = ('http://www.example.com/test?oauth_token='
+           'CKF50YzIHxCT85KMAg&oauth_verifier=123zzz')
+    token = gdata.gauth.oauth_token_info_from_url(url)
+    self.assertEqual(token[0], 'CKF50YzIHxCT85KMAg')
+    self.assertEqual(token[1], '123zzz')
 
 
 def suite():
-  return conf.build_suite([AuthSubTest, TokensToAndFromBlobs, TokensToAndFromBlobs, OAuthHmacTokenTests])
+  return conf.build_suite([AuthSubTest, TokensToAndFromBlobsTest,
+                           OAuthHmacTokenTests,
+                           OAuthHeaderTest, OAuthGetRequestToken,
+                           OAuthAuthorizeToken])
 
 
 if __name__ == '__main__':

@@ -29,13 +29,6 @@ import atom.mock_http_core
 import StringIO
 
 
-# old imports
-import getpass
-import gdata.auth
-import gdata.service
-import atom.http_interface
-
-
 class ClientLoginTest(unittest.TestCase):
 
   def test_token_request(self):
@@ -127,6 +120,68 @@ class AuthSubTest(unittest.TestCase):
     self.assertRaises(gdata.client.UnableToUpgradeToken, client.upgrade_token,
                       None)
     self.assertRaises(gdata.client.UnableToUpgradeToken, client.upgrade_token)
+
+
+class OAuthTest(unittest.TestCase):
+
+  def test_hmac_flow(self):
+    client = gdata.client.GDClient()
+    client.http_client = atom.mock_http_core.SettableHttpClient(
+        200, 'OK', 'oauth_token=ab3cd9j4ks7&oauth_token_secret=ZXhhbXBsZS',
+        {})
+    request_token = client.get_oauth_token(
+        ['http://example.com/service'], 'http://example.net/myapp',
+        'consumer', consumer_secret='secret')
+    # Check that the response was correctly parsed.
+    self.assertEqual(request_token.token, 'ab3cd9j4ks7')
+    self.assertEqual(request_token.token_secret, 'ZXhhbXBsZS')
+    self.assertEqual(request_token.auth_state, gdata.gauth.REQUEST_TOKEN)
+
+    # Also check the Authorization header which was sent in the request.
+    auth_header = client.http_client.last_request.headers['Authorization']
+    self.assertTrue('OAuth' in auth_header)
+    self.assertTrue(
+        'oauth_callback="http%3A%2F%2Fexample.net%2Fmyapp"' in auth_header)
+    self.assertTrue('oauth_version="1.0"' in auth_header)
+    self.assertTrue('oauth_signature_method="HMAC-SHA1"' in auth_header)
+    self.assertTrue('oauth_consumer_key="consumer"' in auth_header)
+
+    # Check generation of the authorization URL.
+    authorize_url = request_token.generate_authorization_url()
+    self.assertTrue(str(authorize_url).startswith(
+        'https://www.google.com/accounts/OAuthAuthorizeToken'))
+    self.assertTrue('oauth_token=ab3cd9j4ks7' in str(authorize_url))
+
+    # Check that the token information from the browser's URL is parsed.
+    redirected_url = (
+        'http://example.net/myapp?oauth_token=CKF5zz&oauth_verifier=Xhhbas')
+    gdata.gauth.authorize_request_token(request_token, redirected_url)
+    self.assertEqual(request_token.token, 'CKF5zz')
+    self.assertEqual(request_token.verifier, 'Xhhbas')
+    self.assertEqual(request_token.auth_state,
+                     gdata.gauth.AUTHORIZED_REQUEST_TOKEN)
+
+    # Check that the token upgrade response was correctly parsed.
+    client.http_client.set_response(
+        200, 'OK', 'oauth_token=3cd9Fj417&oauth_token_secret=Xhrh6bXBs', {})
+    access_token = client.get_access_token(request_token)
+    self.assertEqual(request_token.token, '3cd9Fj417')
+    self.assertEqual(request_token.token_secret, 'Xhrh6bXBs')
+    self.assertTrue(request_token.verifier is None)
+    self.assertEqual(request_token.auth_state, gdata.gauth.ACCESS_TOKEN)
+    self.assertEqual(request_token.token, access_token.token)
+    self.assertEqual(request_token.token_secret, access_token.token_secret)
+    self.assertTrue(access_token.verifier is None)
+    self.assertEqual(request_token.auth_state, access_token.auth_state)
+
+    # Also check the Authorization header which was sent in the request.
+    auth_header = client.http_client.last_request.headers['Authorization']
+    self.assertTrue('OAuth' in auth_header)
+    self.assertTrue('oauth_callback="' not in auth_header)
+    self.assertTrue('oauth_version="1.0"' in auth_header)
+    self.assertTrue('oauth_verifier="Xhhbas"' in auth_header)
+    self.assertTrue('oauth_signature_method="HMAC-SHA1"' in auth_header)
+    self.assertTrue('oauth_consumer_key="consumer"' in auth_header)
 
 
 class RequestTest(unittest.TestCase):
@@ -255,79 +310,13 @@ class VersionConversionTest(unittest.TestCase):
     self.assertEquals(gdata.client.get_xml_version('2.1.2'), 2)
     self.assertEquals(gdata.client.get_xml_version('10.4'), 10)
 
-# Tests for v1 client code
-class AuthSubUrlTest(unittest.TestCase):
-  
-  def testGenerateNextWithScope(self):
-    next = 'http://example.com/test'
-    scope = 'http://www.google.com/calendar/feeds/'
-    request_url = gdata.client.GenerateAuthSubRequestUrl(next, scope)
-    self.assert_(request_url.find('example.com') > -1)
-    self.assert_(request_url.find('calendar') > -1)
-
-  def testGenerateNextWithMultipleScopes(self):
-    next = 'http://example.com/test'
-    scope = ['http://www.google.com/calendar/feeds/', 
-             'http://spreadsheets.google.com/feeds/']
-    request_url = gdata.client.GenerateAuthSubRequestUrl(next, scope)
-    self.assert_(request_url.find('example.com') > -1)
-    self.assert_(request_url.find('calendar') > -1)
-    self.assert_(request_url.find('spreadsheets') > -1)
-
-  def testExtractTokenWithScope(self):
-    url = ('http://example.com/test?authsub_token_scope=http%3A%2F%2F'
-           'www.google.com%2Fcalendar%2Ffeeds%2F&token=yeF3EE&foo=1')
-    (token, scopes) = gdata.client.ExtractToken(url)
-    self.assert_(token == 'AuthSub token=yeF3EE')
-    self.assert_(scopes[0] == 'http://www.google.com/calendar/feeds/')
-
-  def testExtractTokenWithMultipleScopes(self):
-    url = ('http://example.com/test?authsub_token_scope=http%3A%2F%2F'
-           'www.google.com%2Fcalendar%2Ffeeds%2F+http%3A%2F%2F'
-           'spreadsheets.google.com%2Ffeeds%2F&token=KyeF3E6Mma')
-    (token, scopes) = gdata.client.ExtractToken(url)
-    self.assert_(token == 'AuthSub token=KyeF3E6Mma')
-    self.assert_(len(scopes) == 2)
-    self.assert_(scopes[0] == 'http://www.google.com/calendar/feeds/')
-    self.assert_(scopes[1] == 'http://spreadsheets.google.com/feeds/')
-
-
-class GDataClientTest(unittest.TestCase):
-
-  def setUp(self):
-    self.client = gdata.client.GDataClient()
-
-  def testFindTokenForScope(self):
-    # Add a test token with two scopes
-    token = 'AuthSub token=KyeF3E6Mma'
-    scope1 = 'http://www.google.com/calendar/feeds/'
-    scope2 = 'http://spreadsheets.google.com/feeds/'
-    auth_token = gdata.auth.AuthSubToken(token, [scope1, scope2])
-    self.client.token_store.add_token(auth_token)
-    self.assert_(self.client.token_store.find_token(scope1) == auth_token)
-    self.assert_(self.client.token_store.find_token(scope2) == auth_token)
-    self.assert_(isinstance(self.client.token_store.find_token('foo'), 
-        atom.http_interface.GenericToken))
-    self.assert_(
-        self.client.token_store.find_token('foo%s' % scope1) != auth_token)
-    self.assert_(isinstance(self.client.token_store.find_token(
-            'foo%s' % scope1), 
-        atom.http_interface.GenericToken))
-    self.assert_(
-        self.client.token_store.find_token('%sfoo' % scope1) == auth_token)
-    self.client.token_store.remove_token(auth_token)
-    self.assert_(self.client.token_store.find_token('%sfoo' % scope1) != auth_token) 
-    self.assert_(isinstance(self.client.token_store.find_token(
-            '%sfoo' % scope1), 
-        atom.http_interface.GenericToken))
-    self.assert_(self.client.token_store.find_token(scope2) != auth_token)
-# End tests for v1 client code
-
 
 def suite():
   return unittest.TestSuite((unittest.makeSuite(ClientLoginTest, 'test'),
                              unittest.makeSuite(AuthSubTest, 'test'),
+                             unittest.makeSuite(OAuthTest, 'test'),
                              unittest.makeSuite(RequestTest, 'test'),
+                             unittest.makeSuite(VersionConversionTest, 'test'),
                              unittest.makeSuite(QueryTest, 'test')))
 
 

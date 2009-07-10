@@ -17,6 +17,16 @@
 
 # This module is used for version 2 of the Google Data APIs.
 
+"""Provides auth related token classes and functions for Google Data APIs.
+
+Token classes represent a user's authorization of this app to access their
+data. Usually these are not created directly but by a GDClient object.
+
+ClientLoginToken
+AuthSubToken
+OAuthHmacToken
+"""
+
 
 import time
 import random
@@ -29,6 +39,7 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 
 PROGRAMMATIC_AUTH_LABEL = 'GoogleLogin auth='
 AUTHSUB_AUTH_LABEL = 'AuthSub token='
+
 
 # ClientLogin functions and classes.
 def generate_client_login_request_body(email, password, service, source, 
@@ -322,7 +333,8 @@ HMAC_SHA1 = 'HMAC-SHA1'
 
 
 def build_oauth_base_string(http_request, consumer_key, nonce, signaure_type,
-                            timestamp, version, token=None):
+                            timestamp, version, next='oob', token=None,
+                            verifier=None):
   """Generates the base string to be signed in the OAuth request.
   
   Args:
@@ -342,7 +354,12 @@ def build_oauth_base_string(http_request, consumer_key, nonce, signaure_type,
     version: The OAuth version used by the requesting web application. This
         value must be '1.0' or '1.0a'. If not provided, Google assumes version
         1.0 is in use.
+    next: The URL the user should be redirected to after granting access
+        to a Google service(s). It can include url-encoded query parameters.
+        The default value is 'oob'. (This is the oauth_callback.)
     token: The string for the OAuth request token or OAuth access token.
+    verifier: str Sent as the oauth_verifier and required when upgrading a 
+        request token to an access token.
   """
   # First we must build the canonical base string for the request.
   params = http_request.uri.query.copy()
@@ -350,15 +367,20 @@ def build_oauth_base_string(http_request, consumer_key, nonce, signaure_type,
   params['oauth_nonce'] = nonce
   params['oauth_signature_method'] = signaure_type
   params['oauth_timestamp'] = str(timestamp)
+  if next is not None:
+    params['oauth_callback'] = str(next)
   if token is not None:
     params['oauth_token'] = token
   if version is not None:
     params['oauth_version'] = version
+  if verifier is not None:
+    params['oauth_verifier'] = verifier
   # We need to get the key value pairs in lexigraphically sorted order.
   sorted_keys = sorted(params.keys())
   pairs = []
   for key in sorted_keys:
-    pairs.append('%s=%s' % (key, params[key]))
+    pairs.append('%s=%s' % (urllib.quote(key, safe='~'),
+                            urllib.quote(params[key], safe='~')))
   # We want to escape /'s too, so use safe='~'
   all_parameters = urllib.quote('&'.join(pairs), safe='~')
   normailzed_host = http_request.uri.host.lower()
@@ -390,7 +412,362 @@ def build_oauth_base_string(http_request, consumer_key, nonce, signaure_type,
   return base_string
 
 
-# Methods to serialize token objects for storage in the App Engine datastore.
+def generate_hmac_signature(http_request, consumer_key, consumer_secret,
+                            timestamp, nonce, version, next='oob',
+                            token=None, token_secret=None, verifier=None):
+  import hmac
+  import base64
+  base_string = build_oauth_base_string(
+      http_request, consumer_key, nonce, HMAC_SHA1, timestamp, version,
+      next, token, verifier=verifier)
+  hash_key = None
+  hashed = None
+  if token_secret is not None:
+    hash_key = '%s&%s' % (urllib.quote(consumer_secret, safe='~'),
+                          urllib.quote(token_secret, safe='~'))
+  else:
+    hash_key = '%s&' % urllib.quote(consumer_secret, safe='~')
+  try:
+    import hashlib
+    hashed = hmac.new(hash_key, base_string, hashlib.sha1)
+  except ImportError:
+    import sha
+    hashed = hmac.new(hash_key, base_string, sha)
+  return base64.b64encode(hashed.digest())
+
+
+def generate_rsa_signature():
+  pass
+
+
+def generate_auth_header(consumer_key, timestamp, nonce, signature_type,
+                         signature, version='1.0', next=None, token=None,
+                         verifier=None):
+  """Builds the Authorization header to be sent in the request.
+  
+  Args:
+    consumer_key: Identifies the application making the request (str).
+    timestamp: 
+    nonce:
+    signature_type: One of either HMAC_SHA1 or RSA_SHA1
+    signature: The HMAC or RSA signature for the request as a base64
+        encoded string.
+    version: The version of the OAuth protocol that this request is using.
+        Default is '1.0'
+    next: The URL of the page that the user's browser should be sent to
+        after they authorize the token. (Optional)
+    token: str The OAuth token value to be used in the oauth_token parameter
+        of the header.
+    verifier: str The OAuth verifier which must be included when you are
+        upgrading a request token to an access token.
+  """
+  params = {
+      'oauth_consumer_key': consumer_key,
+      'oauth_version': version,
+      'oauth_nonce': nonce,
+      'oauth_timestamp': str(timestamp),
+      'oauth_signature_method': signature_type,
+      'oauth_signature': signature}
+  if next is not None:
+    params['oauth_callback'] = str(next)
+  if token is not None:
+    params['oauth_token'] = token
+  if verifier is not None:
+    params['oauth_verifier'] = verifier
+  pairs = [
+      '%s="%s"' % (
+          k, urllib.quote(v, safe='~')) for k, v in params.iteritems()]
+  return 'OAuth %s' % (', '.join(pairs))
+
+
+REQUEST_TOKEN_URL = 'https://www.google.com/accounts/OAuthGetRequestToken'
+ACCESS_TOKEN_URL = 'https://www.google.com/accounts/OAuthGetAccessToken'
+
+
+def generate_request_for_request_token(
+    consumer_key, signature_type, scopes, rsa_key=None, consumer_secret=None,
+    auth_server_url=REQUEST_TOKEN_URL, next='oob', version='1.0'):
+  """Creates request to be sent to auth server to get an OAuth request token.
+  
+  Args:
+    consumer_key: 
+    signature_type: either RSA_SHA1 or HMAC_SHA1. The rsa_key must be
+        provided if the signature type is RSA but if the signature method
+        is HMAC, the consumer_secret must be used.
+    scopes: List of URL prefixes for the data which we want to access. For
+        example, to request access to the user's Blogger and Google Calendar
+        data, we would request 
+        ['http://www.blogger.com/feeds/', 
+         'https://www.google.com/calendar/feeds/', 
+         'http://www.google.com/calendar/feeds/']
+    rsa_key: Only used if the signature method is RSA_SHA1.
+    consumer_secret: Only used if the signature method is HMAC_SHA1.
+    auth_server_url: The URL to which the token request should be directed.
+        Defaults to 'https://www.google.com/accounts/OAuthGetRequestToken'.
+    next: The URL of the page that the user's browser should be sent to
+        after they authorize the token. (Optional)
+    version: The OAuth version used by the requesting web application.
+        Defaults to '1.0a'
+
+  Returns:
+    An atom.http_core.HttpRequest object with the URL, Authorization header
+    and body filled in.
+  """
+  request = atom.http_core.HttpRequest(auth_server_url, 'POST')
+  # Add the requested auth scopes to the Auth request URL.
+  if scopes:
+    request.uri.query['scope'] = ' '.join(scopes)
+  timestamp = str(int(time.time()))
+  nonce = ''.join([str(random.randint(0, 9)) for i in xrange(15)])
+  if signature_type == HMAC_SHA1:
+    signature = generate_hmac_signature(
+        request, consumer_key, consumer_secret, timestamp, nonce, version,
+        next=next)
+    request.headers['Authorization'] = generate_auth_header(
+        consumer_key, timestamp, nonce, signature_type, signature, version,
+        next)
+    request.headers['Content-Length'] = '0'
+    return request
+  elif signature_type == RSA_SHA1:
+    return None
+  return None
+
+
+def generate_request_for_access_token(
+    request_token, auth_server_url=ACCESS_TOKEN_URL):
+  """Creates a request to ask the OAuth server for an access token.
+  
+  Requires a request token which the user has authorized. See the
+  documentation on OAuth with Google Data for more details:
+  http://code.google.com/apis/accounts/docs/OAuth.html#AccessToken
+
+  Args:
+    request_token: An OAuthHmacToken or OAuthRsaToken which the user has
+        approved using their browser.
+    auth_server_url: (optional) The URL at which the OAuth access token is
+        requested. Defaults to 
+        https://www.google.com/accounts/OAuthGetAccessToken
+
+  Returns:
+    A new HttpRequest object which can be sent to the OAuth server to
+    request an OAuth Access Token.
+  """
+  http_request = atom.http_core.HttpRequest(auth_server_url, 'POST')
+  http_request.headers['Content-Length'] = '0'
+  return request_token.modify_request(http_request)
+
+
+def oauth_token_info_from_body(http_body):
+  """Exracts an OAuth request token from the server's response.
+ 
+  Returns:
+    A tuple of strings containing the OAuth token and token secret. If
+    neither of these are present in the body, returns (None, None)
+  """
+  token = None
+  token_secret = None
+  for pair in http_body.split('&'):
+    if pair.startswith('oauth_token='):
+      token = urllib.unquote(pair[len('oauth_token='):])
+    if pair.startswith('oauth_token_secret='):
+      token_secret = urllib.unquote(pair[len('oauth_token_secret='):]) 
+  return (token, token_secret)
+
+
+def hmac_token_from_body(http_body, consumer_key, consumer_secret,
+                         auth_state):
+  token_value, token_secret = oauth_token_info_from_body(http_body)
+  token = OAuthHmacToken(consumer_key, consumer_secret, token_value,
+                         token_secret, auth_state)
+  return token
+
+
+DEFAULT_DOMAIN = 'default'
+OAUTH_AUTHORIZE_URL = 'https://www.google.com/accounts/OAuthAuthorizeToken'
+
+
+def generate_oauth_authorization_url(
+    token, next=None, hd=DEFAULT_DOMAIN, hl=None, btmpl=None,
+    auth_server=OAUTH_AUTHORIZE_URL):
+  """Creates a URL for the page where the request token can be authorized.
+  
+  Args:
+    token: str The request token from the OAuth server.
+    next: str (optional) URL the user should be redirected to after granting
+        access to a Google service(s). It can include url-encoded query
+        parameters.
+    hd: str (optional) Identifies a particular hosted domain account to be
+        accessed (for example, 'mycollege.edu'). Uses 'default' to specify a
+        regular Google account ('username@gmail.com').
+    hl: str (optional) An ISO 639 country code identifying what language the
+        approval page should be translated in (for example, 'hl=en' for
+        English). The default is the user's selected language.
+    btmpl: str (optional) Forces a mobile version of the approval page. The
+        only accepted value is 'mobile'.
+    auth_server: str (optional) The start of the token authorization web
+        page. Defaults to 
+        'https://www.google.com/accounts/OAuthAuthorizeToken'
+
+  Returns: 
+    An atom.http_core.Uri pointing to the token authorization page where the
+    user may allow or deny this app to access their Google data.
+  """
+  uri = atom.http_core.Uri.parse_uri(auth_server)
+  uri.query['oauth_token'] = token
+  uri.query['hd'] = hd
+  if next is not None:
+    uri.query['oauth_callback'] = str(next)
+  if hl is not None:
+    uri.query['hl'] = hl
+  if btmpl is not None:
+    uri.query['btmpl'] = btmpl
+  return uri
+  
+
+def oauth_token_info_from_url(url):
+  """Exracts an OAuth access token from the redirected page's URL.
+
+  Returns:
+    A tuple of strings containing the OAuth token and the OAuth verifier which
+    need to sent when upgrading a request token to an access token.
+  """
+  if isinstance(url, (str, unicode)):
+    url = atom.http_core.Uri.parse_uri(url)
+  token = None
+  verifier = None
+  if 'oauth_token' in url.query:
+    token = urllib.unquote(url.query['oauth_token'])
+  if 'oauth_verifier' in url.query:
+    verifier = urllib.unquote(url.query['oauth_verifier'])
+  return (token, verifier)
+
+
+def authorize_request_token(request_token, url):
+  """Adds information to request token to allow it to become an access token.
+
+  Modifies the request_token object passed in by setting and unsetting the
+  necessary fields to allow this token to form a valid upgrade request.
+  
+  Args:
+    request_token: The OAuth request token which has been authorized by the
+        user. In order for this token to be upgraded to an access token,
+        certain fields must be extracted from the URL and added to the token
+        so that they can be passed in an upgrade-token request.
+    url: The URL of the current page which the user's browser was redirected
+        to after they authorized access for the app. This function extracts
+        information from the URL which is needed to upgraded the token from
+        a request token to an access token.
+
+  Returns:
+    The same token object which was passed in.
+  """
+  token, verifier = oauth_token_info_from_url(url)
+  request_token.token = token
+  request_token.verifier = verifier
+  request_token.auth_state = AUTHORIZED_REQUEST_TOKEN
+  return request_token
+
+
+AuthorizeRequestToken = authorize_request_token
+
+
+def upgrade_to_access_token(request_token, server_response_body):
+  """Extracts access token information from response to an upgrade request.
+  
+  Once the server has responded with the new token info for the OAuth
+  access token, this method modifies the request_token to set and unset
+  necessary fields to create valid OAuth authorization headers for requests.
+
+  Args:
+    request_token: An OAuth token which this function modifies to allow it
+        to be used as an access token.
+    server_response_body: str The server's response to an OAuthAuthorizeToken
+        request. This should contain the new token and token_secret which
+        are used to generate the signature and parameters of the Authorization
+        header in subsequent requests to Google Data APIs.
+
+  Returns:
+    The same token object which was passed in.
+  """
+  token, token_secret = oauth_token_info_from_body(server_response_body)
+  request_token.token = token
+  request_token.token_secret = token_secret
+  request_token.auth_state = ACCESS_TOKEN
+  request_token.next = None
+  request_token.verifier = None
+  return request_token
+
+
+REQUEST_TOKEN = 1
+AUTHORIZED_REQUEST_TOKEN = 2
+ACCESS_TOKEN = 3
+
+
+class OAuthHmacToken(object):
+  SIGNATURE_METHOD = 'HMAC-SHA1'
+
+  def __init__(self, consumer_key, consumer_secret, token, token_secret,
+               auth_state, next=None, verifier=None):
+    self.consumer_key = consumer_key
+    self.consumer_secret = consumer_secret
+    self.token = token
+    self.token_secret = token_secret
+    self.auth_state = auth_state
+    self.next = next
+    self.verifier = verifier # Used to convert request token to access token.
+
+  def generate_authorization_url(
+      self, google_apps_domain=DEFAULT_DOMAIN, language=None, btmpl=None,
+      auth_server=OAUTH_AUTHORIZE_URL):
+    """Creates the URL at which the user can authorize this app to access.
+    
+    Args:
+      google_apps_domain: str (optional) If the user should be signing in
+          using an account under a known Google Apps domain, provide the
+          domain name ('example.com') here. If not provided, 'default'
+          will be used, and the user will be prompted to select an account
+          if they are signed in with a Google Account and Google Apps
+          accounts.
+      language: str (optional) An ISO 639 country code identifying what 
+          language the approval page should be translated in (for example,
+          'en' for English). The default is the user's selected language.
+      btmpl: str (optional) Forces a mobile version of the approval page. The
+        only accepted value is 'mobile'.
+      auth_server: str (optional) The start of the token authorization web
+        page. Defaults to
+        'https://www.google.com/accounts/OAuthAuthorizeToken'
+    """
+    return generate_oauth_authorization_url(
+        self.token, hd=google_apps_domain, hl=language, btmpl=btmpl,
+        auth_server=auth_server)
+
+  GenerateAuthorizationUrl = generate_authorization_url
+
+  def modify_request(self, http_request):
+    """Sets the Authorization header in the HTTP request using the token.
+
+    Calculates an HMAC signature using the information in the token to
+    indicate that the request came from this application and that this
+    application has permission to access a particular user's data.
+
+    Returns:
+      The same HTTP request object which was passed in.
+    """
+    timestamp = str(int(time.time()))
+    nonce = ''.join([str(random.randint(0, 9)) for i in xrange(15)])
+    signature = generate_hmac_signature(
+        http_request, self.consumer_key, self.consumer_secret, timestamp,
+        nonce, version='1.0', next=self.next, token=self.token,
+        token_secret=self.token_secret, verifier=self.verifier)
+    http_request.headers['Authorization'] = generate_auth_header(
+        self.consumer_key, timestamp, nonce, HMAC_SHA1, signature,
+        version='1.0', next=self.next, token=self.token,
+        verifier=self.verifier)
+    return http_request
+
+  ModifyRequest = modify_request
+
+
 def token_to_blob(token):
   """Serializes the token data as a string for storage in a datastore.
   

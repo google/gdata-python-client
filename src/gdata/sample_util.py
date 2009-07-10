@@ -21,6 +21,7 @@
 
 import sys
 import getpass
+import urllib
 import gdata.gauth
 
 __author__ = 'j.s@google.com (Jeff Scudder)'
@@ -29,6 +30,9 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 CLIENT_LOGIN = 1
 AUTHSUB = 2
 OAUTH = 3
+
+HMAC = 1
+RSA = 2
 
 
 def get_param(name, prompt='', secret=False, ask=True):
@@ -50,7 +54,8 @@ def get_param(name, prompt='', secret=False, ask=True):
 
 
 def authorize_client(client, auth_type=None, service=None, source=None,
-                     scopes=None):
+                     scopes=None, oauth_type=None, consumer_key=None,
+                     consumer_secret=None):
   """Uses command line arguments, or prompts user for token values."""
   if auth_type is None:
     auth_type = int(get_param(
@@ -59,6 +64,18 @@ def authorize_client(client, auth_type=None, service=None, source=None,
         '1. to use your email address and password (ClientLogin)\n'
         '2. to use a web browser to visit an auth web page (AuthSub)\n'
         '3. if you have registed to use OAuth\n'))
+
+  # Get the scopes for the services we want to access.
+  if auth_type == AUTHSUB or auth_type == OAUTH:
+    if scopes is None:
+      scopes = get_param(
+          'scopes', 'Enter the URL prefixes (scopes) for the resources you '
+          'would like to access.\nFor multiple scope URLs, place a comma '
+          'between each URL.\n'
+          'Example: http://www.google.com/calendar/feeds/,'
+          'http://www.google.com/m8/feeds/\n').split(',')
+    elif isinstance(scopes, (str, unicode)):
+      scopes = scopes.split(',')
 
   if auth_type == CLIENT_LOGIN:
     email = get_param('email', 'Please enter your username')
@@ -74,13 +91,6 @@ def authorize_client(client, auth_type=None, service=None, source=None,
   elif auth_type == AUTHSUB:
     auth_sub_token = get_param('auth_sub_token', ask=False)
     session_token = get_param('session_token', ask=False)
-    if scopes is None:
-      scopes = get_param(
-          'scopes', 'Enter the URL prefixes (scopes) for the resources you '
-          'would like to access.\nFor multiple scope URLs, place a comma '
-          'between each URL.\n'
-          'Example: http://www.google.com/calendar/feeds/,'
-          'http://www.google.com/m8/feeds/\n').split(',')
     if client.auth_token is None:
       if session_token:
         client.auth_token = gdata.gauth.AuthSubToken(session_token, scopes)
@@ -101,9 +111,40 @@ def authorize_client(client, auth_type=None, service=None, source=None,
       client.auth_token = single_use_token
       client.upgrade_token()
   elif auth_type == OAUTH:
-    print ('OAuth support is not yet available for v2.0 samples. Try using'
-           ' the version 1 library, or try using AuthSub')
-    return None
+    if oauth_type is None:
+      oauth_type = int(get_param(
+          'oauth_type', 'Please choose the authorization mechanism you want'
+          ' to use.\n'
+          '1. use an HMAC signature using your consumer key and secret\n'
+          '2. use RSA with your private key to sign requests\n'))
+    if oauth_type == HMAC:
+      consumer_key = get_param(
+          'consumer_key', 'Please enter your OAuth conumer key '
+          'which identifies your app.')
+      consumer_secret = get_param(
+          'consumer_secret', 'Please enter your OAuth conumer secret '
+          'which you share with the OAuth provider', True)
+      # Swap out this code once the client supports requesting an oauth token.
+      # Get a request token.
+      request_token = client.get_oauth_token(
+          scopes, 'http://gauthmachine.appspot.com/oauth', consumer_key,
+          consumer_secret=consumer_secret)
+      # Authorize the request token in the browser.
+      print 'Visit the following URL in your browser to authorize this app:'
+      print str(request_token.generate_authorization_url())
+      print 'After agreeing to authorize the app, copy URL from the browser\'s'
+      print ' address bar.'
+      url = raw_input('Please enter the url: ')
+      gdata.gauth.authorize_request_token(request_token, url)
+      # Exchange for an access token.
+      client.auth_token = client.get_access_token(request_token)
+    elif oauth_type == RSA:
+      print ('OAuth RSA support is not yet available for v2.0 samples. Try'
+             ' using the version 1 library, or try using AuthSub')
+      return None
+    else:
+      print 'Invalid OAuth signature type'
+      return None
   else:
     print 'Invalid authorization type.'
     return None

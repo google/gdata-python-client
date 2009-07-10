@@ -264,6 +264,7 @@ TAG = 'http://www.blogger.com/atom/ns#'
 GD = 'http://schemas.google.com/g/2005'
 WORK_REL = 'http://schemas.google.com/g/2005#work'
 
+
 def create_element(tag, namespace=ATOM, text=None, attributes=None):
   element = atom.core.XmlElement()
   element._qname = '{%s}%s' % (namespace, tag)
