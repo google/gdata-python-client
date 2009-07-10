@@ -46,6 +46,10 @@ GOOGLE_ACCOUNT_PASSWORD = '<your password>'
 TEST_FILES_DIR = '<location of the tests directory>'
 
 
+class NoAuthConfig(object):
+  auth_token = False
+
+
 class TestConfig(object):
   service = None
   auth_token = None

@@ -69,7 +69,10 @@ def configure_client(client, config, case_name):
     config.auth_token = client.request_client_login_token(
         config.email(), config.password(), case_name, service=config.service)
     client.http_client.close_session()
-  client.auth_token = config.auth_token
+  # Allow a config auth_token of False to prevent the client's auth header
+  # from being modified.
+  if config.auth_token:
+    client.auth_token = config.auth_token
 
 
 def configure_cache(client, test_name):
@@ -154,6 +157,7 @@ def close_service(service):
     # If this was a live request, save the recording.
     service.http_client.v2_http_client.close_session()
 
+
 def build_suite(classes):
   """Creates a TestSuite for all unit test classes in the list.
   
@@ -164,4 +168,4 @@ def build_suite(classes):
     A new unittest.TestSuite containing a test suite for all classes.   
   """
   suites = [unittest.makeSuite(a_class, 'test') for a_class in classes]
-  return unittest.TestSuite(suites)
+  return unittest.TestSuite(suites) 
