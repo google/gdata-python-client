@@ -436,8 +436,18 @@ def generate_hmac_signature(http_request, consumer_key, consumer_secret,
   return base64.b64encode(hashed.digest())
 
 
-def generate_rsa_signature():
-  pass
+def generate_rsa_signature(http_request, consumer_key, rsa_key,
+                           timestamp, nonce, version, next='oob',
+                           token=None, token_secret=None, verifier=None):
+  import base64
+  from gdata.tlslite.utils import keyfactory
+  base_string = build_oauth_base_string(
+      http_request, consumer_key, nonce, RSA_SHA1, timestamp, version,
+      next, token, verifier=verifier)
+  private_key = keyfactory.parsePrivateKey(rsa_key)
+  # Sign using the key
+  signed = private_key.hashAndSign(base_string)
+  return base64.b64encode(signed)
 
 
 def generate_auth_header(consumer_key, timestamp, nonce, signature_type,
@@ -517,20 +527,25 @@ def generate_request_for_request_token(
   # Add the requested auth scopes to the Auth request URL.
   if scopes:
     request.uri.query['scope'] = ' '.join(scopes)
+
   timestamp = str(int(time.time()))
   nonce = ''.join([str(random.randint(0, 9)) for i in xrange(15)])
+  signature = None
   if signature_type == HMAC_SHA1:
     signature = generate_hmac_signature(
         request, consumer_key, consumer_secret, timestamp, nonce, version,
         next=next)
-    request.headers['Authorization'] = generate_auth_header(
-        consumer_key, timestamp, nonce, signature_type, signature, version,
-        next)
-    request.headers['Content-Length'] = '0'
-    return request
   elif signature_type == RSA_SHA1:
+    signature = generate_rsa_signature(
+        request, consumer_key, rsa_key, timestamp, nonce, version, next=next)
+  else:
     return None
-  return None
+
+  request.headers['Authorization'] = generate_auth_header(
+      consumer_key, timestamp, nonce, signature_type, signature, version,
+      next)
+  request.headers['Content-Length'] = '0'
+  return request
 
 
 def generate_request_for_access_token(
@@ -579,6 +594,14 @@ def hmac_token_from_body(http_body, consumer_key, consumer_secret,
   token_value, token_secret = oauth_token_info_from_body(http_body)
   token = OAuthHmacToken(consumer_key, consumer_secret, token_value,
                          token_secret, auth_state)
+  return token
+
+
+def rsa_token_from_body(http_body, consumer_key, rsa_private_key,
+                        auth_state):
+  token_value, token_secret = oauth_token_info_from_body(http_body)
+  token = OAuthRsaToken(consumer_key, rsa_private_key, token_value,
+                        token_secret, auth_state)
   return token
 
 
@@ -704,7 +727,7 @@ ACCESS_TOKEN = 3
 
 
 class OAuthHmacToken(object):
-  SIGNATURE_METHOD = 'HMAC-SHA1'
+  SIGNATURE_METHOD = HMAC_SHA1
 
   def __init__(self, consumer_key, consumer_secret, token, token_secret,
                auth_state, next=None, verifier=None):
@@ -761,6 +784,44 @@ class OAuthHmacToken(object):
         token_secret=self.token_secret, verifier=self.verifier)
     http_request.headers['Authorization'] = generate_auth_header(
         self.consumer_key, timestamp, nonce, HMAC_SHA1, signature,
+        version='1.0', next=self.next, token=self.token,
+        verifier=self.verifier)
+    return http_request
+
+  ModifyRequest = modify_request
+
+
+class OAuthRsaToken(OAuthHmacToken):
+  SIGNATURE_METHOD = RSA_SHA1
+
+  def __init__(self, consumer_key, rsa_private_key, token, token_secret,
+               auth_state, next=None, verifier=None):
+    self.consumer_key = consumer_key
+    self.rsa_private_key = rsa_private_key
+    self.token = token
+    self.token_secret = token_secret
+    self.auth_state = auth_state
+    self.next = next
+    self.verifier = verifier # Used to convert request token to access token.
+
+  def modify_request(self, http_request):
+    """Sets the Authorization header in the HTTP request using the token.
+
+    Calculates an RSA signature using the information in the token to
+    indicate that the request came from this application and that this
+    application has permission to access a particular user's data.
+
+    Returns:
+      The same HTTP request object which was passed in.
+    """
+    timestamp = str(int(time.time()))
+    nonce = ''.join([str(random.randint(0, 9)) for i in xrange(15)])
+    signature = generate_rsa_signature(
+        http_request, self.consumer_key, self.rsa_private_key, timestamp,
+        nonce, version='1.0', next=self.next, token=self.token,
+        token_secret=self.token_secret, verifier=self.verifier)
+    http_request.headers['Authorization'] = generate_auth_header(
+        self.consumer_key, timestamp, nonce, RSA_SHA1, signature,
         version='1.0', next=self.next, token=self.token,
         verifier=self.verifier)
     return http_request

@@ -27,6 +27,25 @@ import atom.http_core
 import gdata.test_config as conf
 
 
+PRIVATE_TEST_KEY = """
+    -----BEGIN PRIVATE KEY-----
+    MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALRiMLAh9iimur8V
+    A7qVvdqxevEuUkW4K+2KdMXmnQbG9Aa7k7eBjK1S+0LYmVjPKlJGNXHDGuy5Fw/d
+    7rjVJ0BLB+ubPK8iA/Tw3hLQgXMRRGRXXCn8ikfuQfjUS1uZSatdLB81mydBETlJ
+    hI6GH4twrbDJCR2Bwy/XWXgqgGRzAgMBAAECgYBYWVtleUzavkbrPjy0T5FMou8H
+    X9u2AC2ry8vD/l7cqedtwMPp9k7TubgNFo+NGvKsl2ynyprOZR1xjQ7WgrgVB+mm
+    uScOM/5HVceFuGRDhYTCObE+y1kxRloNYXnx3ei1zbeYLPCHdhxRYW7T0qcynNmw
+    rn05/KO2RLjgQNalsQJBANeA3Q4Nugqy4QBUCEC09SqylT2K9FrrItqL2QKc9v0Z
+    zO2uwllCbg0dwpVuYPYXYvikNHHg+aCWF+VXsb9rpPsCQQDWR9TT4ORdzoj+Nccn
+    qkMsDmzt0EfNaAOwHOmVJ2RVBspPcxt5iN4HI7HNeG6U5YsFBb+/GZbgfBT3kpNG
+    WPTpAkBI+gFhjfJvRw38n3g/+UeAkwMI2TJQS4n8+hid0uus3/zOjDySH3XHCUno
+    cn1xOJAyZODBo47E+67R4jV1/gzbAkEAklJaspRPXP877NssM5nAZMU0/O/NGCZ+
+    3jPgDUno6WbJn5cqm8MqWhW1xGkImgRk+fkDBquiq4gPiT898jusgQJAd5Zrr6Q8
+    AO/0isr/3aa6O6NLQxISLKcPDk2NOccAfS/xOtfOz4sJYM3+Bs4Io9+dZGSDCA54
+    Lw03eHTNQghS0A==
+    -----END PRIVATE KEY-----"""
+
+
 class AuthSubTest(unittest.TestCase):
 
   def test_generate_request_url(self):
@@ -219,6 +238,23 @@ class OAuthHmacTokenTests(unittest.TestCase):
     self.assertEqual(signature, 'kFAgTTFDIWz4/xAabIlrcZZMTq8=')
 
 
+class OAuthRsaTokenTests(unittest.TestCase):
+
+  def test_generate_rsa_signature(self):
+    request = atom.http_core.HttpRequest(
+        'https://www.google.com/accounts/OAuthGetRequestToken?'
+        'scope=http%3A%2F%2Fwww.blogger.com%2Ffeeds%2F', 'GET')
+    signature = gdata.gauth.generate_rsa_signature(
+        request, 'anonymous', PRIVATE_TEST_KEY, '1246491360',
+        'c0155b3f28697c029e7a62efff44bd46', '1.0',
+        next='http://googlecodesamples.com/oauth_playground/index.php')
+    self.assertEqual(
+        signature,
+        'bfMantdttKaTrwoxU87JiXmMeXhAiXPiq79a5XmLlOYwwlX06Pu7CafMp7hW1fPeZtL'
+        '4o9Sz3NvPI8GECCaZk7n5vi1EJ5/wfIQbddrC8j45joBG6gFSf4tRJct82dSyn6bd71'
+        'knwPZH1sKK46Y0ePJvEIDI3JDd7pRZuMM2sN8=')
+
+
 class OAuthHeaderTest(unittest.TestCase):
 
   def test_generate_auth_header(self):
@@ -261,6 +297,24 @@ class OAuthGetRequestToken(unittest.TestCase):
     self.assertTrue('oauth_nonce="' in auth_header)
     self.assertTrue('oauth_timestamp="' in auth_header)
 
+  def test_request_rsa_request_token(self):
+    request = gdata.gauth.generate_request_for_request_token(
+        'anonymous', gdata.gauth.RSA_SHA1, 
+        ['http://www.blogger.com/feeds/', 
+         'http://www.google.com/calendar/feeds/'], 
+        rsa_key=PRIVATE_TEST_KEY)
+    request_uri = str(request.uri)
+    self.assertTrue('http%3A%2F%2Fwww.blogger.com%2Ffeeds%2F' in request_uri)
+    self.assertTrue(
+        'http%3A%2F%2Fwww.google.com%2Fcalendar%2Ffeeds%2F' in request_uri)
+    auth_header = request.headers['Authorization']
+    self.assertTrue('oauth_consumer_key="anonymous"' in auth_header)
+    self.assertTrue('oauth_signature_method="RSA-SHA1"' in auth_header)
+    self.assertTrue('oauth_version="1.0"' in auth_header)
+    self.assertTrue('oauth_signature="' in auth_header)
+    self.assertTrue('oauth_nonce="' in auth_header)
+    self.assertTrue('oauth_timestamp="' in auth_header)
+
   def test_extract_token_from_body(self):
     body = ('oauth_token=4%2F5bNFM_efIu3yN-E9RrF1KfZzOAZG&oauth_token_secret='
             '%2B4O49V9WUOkjXgpOobAtgYzy&oauth_callback_confirmed=true')
@@ -275,6 +329,17 @@ class OAuthGetRequestToken(unittest.TestCase):
                                                      'mySecret', True)
     self.assertEqual(request_token.consumer_key, 'myKey')
     self.assertEqual(request_token.consumer_secret, 'mySecret')
+    self.assertEqual(request_token.token, '4/5bNFM_efIu3yN-E9RrF1KfZzOAZG')
+    self.assertEqual(request_token.token_secret, '+4O49V9WUOkjXgpOobAtgYzy')
+    self.assertEqual(request_token.auth_state, gdata.gauth.REQUEST_TOKEN)
+
+  def test_rsa_request_token_from_body(self):
+    body = ('oauth_token=4%2F5bNFM_efIu3yN-E9RrF1KfZzOAZG&oauth_token_secret='
+            '%2B4O49V9WUOkjXgpOobAtgYzy&oauth_callback_confirmed=true')
+    request_token = gdata.gauth.rsa_token_from_body(body, 'myKey',
+                                                    'rsaKey', True)
+    self.assertEqual(request_token.consumer_key, 'myKey')
+    self.assertEqual(request_token.rsa_private_key, 'rsaKey')
     self.assertEqual(request_token.token, '4/5bNFM_efIu3yN-E9RrF1KfZzOAZG')
     self.assertEqual(request_token.token_secret, '+4O49V9WUOkjXgpOobAtgYzy')
     self.assertEqual(request_token.auth_state, gdata.gauth.REQUEST_TOKEN)
@@ -298,7 +363,7 @@ class OAuthAuthorizeToken(unittest.TestCase):
 
 def suite():
   return conf.build_suite([AuthSubTest, TokensToAndFromBlobsTest,
-                           OAuthHmacTokenTests,
+                           OAuthHmacTokenTests, OAuthRsaTokenTests,
                            OAuthHeaderTest, OAuthGetRequestToken,
                            OAuthAuthorizeToken])
 

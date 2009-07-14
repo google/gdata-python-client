@@ -34,5 +34,6 @@ settings.CLEAR_CACHE = True
 def suite():
   return unittest.TestSuite((atom_tests.core_test.suite(),))
 
+
 if __name__ == '__main__':
   unittest.TextTestRunner().run(all_tests.suite())

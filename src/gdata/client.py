@@ -460,8 +460,9 @@ class GDClient(atom.client.AtomPubClient):
     """
     http_request = None
     if rsa_private_key is not None:
-      raise Error('The GDClient does not yet support RSA signatures for '
-                  'OAuth. You can use RSA signatures with GDataService.')
+      http_request = gdata.gauth.generate_request_for_request_token(
+          consumer_key, gdata.gauth.RSA_SHA1, scopes,
+          rsa_key=rsa_private_key, auth_server_url=url, next=next)
     elif consumer_secret is not None:
       http_request = gdata.gauth.generate_request_for_request_token(
           consumer_key, gdata.gauth.HMAC_SHA1, scopes,
@@ -479,7 +480,9 @@ class GDClient(atom.client.AtomPubClient):
                                 response, RequestError, response_body)
 
     if rsa_private_key is not None:
-      pass
+      return gdata.gauth.rsa_token_from_body(response_body, consumer_key,
+                                             rsa_private_key,
+                                             gdata.gauth.REQUEST_TOKEN)
     elif consumer_secret is not None:
       return gdata.gauth.hmac_token_from_body(response_body, consumer_key,
                                               consumer_secret,

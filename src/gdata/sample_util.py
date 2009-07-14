@@ -117,10 +117,12 @@ def authorize_client(client, auth_type=None, service=None, source=None,
           ' to use.\n'
           '1. use an HMAC signature using your consumer key and secret\n'
           '2. use RSA with your private key to sign requests\n'))
+
+    consumer_key = get_param(
+        'consumer_key', 'Please enter your OAuth conumer key '
+        'which identifies your app.')
+
     if oauth_type == HMAC:
-      consumer_key = get_param(
-          'consumer_key', 'Please enter your OAuth conumer key '
-          'which identifies your app.')
       consumer_secret = get_param(
           'consumer_secret', 'Please enter your OAuth conumer secret '
           'which you share with the OAuth provider', True)
@@ -129,22 +131,31 @@ def authorize_client(client, auth_type=None, service=None, source=None,
       request_token = client.get_oauth_token(
           scopes, 'http://gauthmachine.appspot.com/oauth', consumer_key,
           consumer_secret=consumer_secret)
-      # Authorize the request token in the browser.
-      print 'Visit the following URL in your browser to authorize this app:'
-      print str(request_token.generate_authorization_url())
-      print 'After agreeing to authorize the app, copy URL from the browser\'s'
-      print ' address bar.'
-      url = raw_input('Please enter the url: ')
-      gdata.gauth.authorize_request_token(request_token, url)
-      # Exchange for an access token.
-      client.auth_token = client.get_access_token(request_token)
     elif oauth_type == RSA:
-      print ('OAuth RSA support is not yet available for v2.0 samples. Try'
-             ' using the version 1 library, or try using AuthSub')
-      return None
+      rsa_private_key = get_param(
+          'rsa_private_key', 
+          'Please provide the location of your RSA private key which\n'
+          ' corresponds to the certificate you have uploaded for your domain.')
+      private_key_file = open(rsa_private_key, 'rb')
+      private_key = private_key_file.read()
+      private_key_file.close()
+      request_token = client.get_oauth_token(
+          scopes, 'http://gauthmachine.appspot.com/oauth', consumer_key,
+          rsa_private_key=private_key)
     else:
       print 'Invalid OAuth signature type'
       return None
+
+    # Authorize the request token in the browser.
+    print 'Visit the following URL in your browser to authorize this app:'
+    print str(request_token.generate_authorization_url())
+    print 'After agreeing to authorize the app, copy URL from the browser\'s'
+    print ' address bar.'
+    url = raw_input('Please enter the url: ')
+    gdata.gauth.authorize_request_token(request_token, url)
+    # Exchange for an access token.
+    client.auth_token = client.get_access_token(request_token)
+
   else:
     print 'Invalid authorization type.'
     return None
