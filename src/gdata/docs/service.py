@@ -27,21 +27,21 @@
 
 
 __author__ = ('api.jfisher (Jeff Fisher), '
-              'api.eric@google.com (Eric Bidelman)')
+              'e.bidelman (Eric Bidelman)')
 
 import re
 import atom
 import gdata.service
 import gdata.docs
-
+import urllib
 
 # XML Namespaces used in Google Documents entities.
 DATA_KIND_SCHEME = gdata.GDATA_NAMESPACE + '#kind'
-DOCUMENT_KIND_TERM = gdata.docs.DOCUMENTS_NAMESPACE + '#document'
-SPREADSHEET_KIND_TERM = gdata.docs.DOCUMENTS_NAMESPACE + '#spreadsheet'
-PRESENTATION_KIND_TERM = gdata.docs.DOCUMENTS_NAMESPACE + '#presentation'
-FOLDER_KIND_TERM = gdata.docs.DOCUMENTS_NAMESPACE + '#folder'
-PDF_KIND_TERM = gdata.docs.DOCUMENTS_NAMESPACE + '#pdf'
+DOCUMENT_LABEL = 'document'
+SPREADSHEET_LABEL = 'spreadsheet'
+PRESENTATION_LABEL = 'presentation'
+FOLDER_LABEL = 'folder'
+PDF_LABEL = 'pdf'
 
 LABEL_SCHEME = gdata.GDATA_NAMESPACE + '/labels'
 STARRED_LABEL_TERM = LABEL_SCHEME + '#starred'
@@ -54,27 +54,21 @@ VIEWED_LABEL_TERM = LABEL_SCHEME + '#viewed'
 
 FOLDERS_SCHEME_PREFIX = gdata.docs.DOCUMENTS_NAMESPACE + '/folders/'
 
-DOWNLOAD_SPREADSHEET_FORMATS = {
-  'xls': '4',
-  'ods': '13',
-  'pdf': '12',
-  'csv': '5',
-  'tsv': '23',
-  'html': '102'
-  }
-
 # File extensions of documents that are permitted to be uploaded or downloaded.
 SUPPORTED_FILETYPES = {
   'CSV': 'text/csv',
   'TSV': 'text/tab-separated-values',
   'TAB': 'text/tab-separated-values',
   'DOC': 'application/msword',
+  'DOCX': ('application/vnd.openxmlformats-officedocument.'
+           'wordprocessingml.document'),
   'ODS': 'application/x-vnd.oasis.opendocument.spreadsheet',
   'ODT': 'application/vnd.oasis.opendocument.text',
   'RTF': 'application/rtf',
   'SXW': 'application/vnd.sun.xml.writer',
   'TXT': 'text/plain',
   'XLS': 'application/vnd.ms-excel',
+  'XLSX': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
   'PDF': 'application/pdf',
   'PNG': 'image/png',
   'PPT': 'application/vnd.ms-powerpoint',
@@ -91,6 +85,7 @@ class DocsService(gdata.service.GDataService):
   """Client extension for the Google Documents service Document List feed."""
 
   __FILE_EXT_PATTERN = re.compile('.*\.([a-zA-Z]{3,}$)')
+  __RESOURCE_ID_PATTERN = re.compile('^([a-z]*)(:|%3A)(.*)$')
 
   def __init__(self, email=None, password=None, source=None,
                server='docs.google.com', additional_headers=None, **kwargs):
@@ -109,6 +104,25 @@ class DocsService(gdata.service.GDataService):
     gdata.service.GDataService.__init__(
         self, email=email, password=password, service='writely', source=source,
         server=server, additional_headers=additional_headers, **kwargs)
+
+  def _MakeKindCategory(self, label):
+    if label is None:
+      return None
+    return atom.Category(scheme=DATA_KIND_SCHEME,
+        term=gdata.docs.DOCUMENTS_NAMESPACE + '#' + label, label=label)
+
+  def _MakeContentLinkFromId(self, resource_id):
+    match = self.__RESOURCE_ID_PATTERN.match(resource_id)
+    label = match.group(1)
+    doc_id = match.group(3)
+    if label == DOCUMENT_LABEL:
+      return '/feeds/download/documents/Export?docId=%s' % doc_id
+    if label == PRESENTATION_LABEL:
+      return '/feeds/download/presentations/Export?docId=%s' % doc_id
+    if label == SPREADSHEET_LABEL:
+      return ('http://spreadsheets.google.com/feeds/download/spreadsheets/'
+              'Export?key=%s' % doc_id)
+    raise ValueError, 'Invalid resource id: %s' % resource_id
 
   def _UploadFile(self, media_source, title, category, folder_or_uri=None):
     """Uploads a file to the Document List feed.
@@ -139,18 +153,22 @@ class DocsService(gdata.service.GDataService):
 
     entry = gdata.docs.DocumentListEntry()
     entry.title = atom.Title(text=title)
-    entry.category.append(category)
+    if category is not None:
+      entry.category.append(category)
     entry = self.Post(entry, uri, media_source=media_source,
                       extra_headers={'Slug': media_source.file_name},
                       converter=gdata.docs.DocumentListEntryFromString)
     return entry
 
   def _DownloadFile(self, uri, file_path):
-    """Downloads a file from the Document List.
+    """Downloads a file.
 
     Args:
       uri: string The full Export URL to download the file from.
       file_path: string The full path to save the file to.
+
+    Raises:
+      RequestError: on error response from server.
     """
     server_response = self.request('GET', uri)
     response_body = server_response.read()
@@ -163,7 +181,7 @@ class DocsService(gdata.service.GDataService):
     f.flush()
     f.close()
 
-  def _MoveIntoFolder(self, source_entry, folder_entry, category):
+  def MoveIntoFolder(self, source_entry, folder_entry):
     """Moves a document into a folder in the Document List Feed.
 
     Args:
@@ -171,8 +189,6 @@ class DocsService(gdata.service.GDataService):
           document/folder.
       folder_entry: DocumentListEntry An object with a link to the destination
           folder.
-      category: atom.Category An object specifying the appropriate document
-          type.
 
     Returns:
       A DocumentListEntry containing information about the document created on
@@ -180,7 +196,6 @@ class DocsService(gdata.service.GDataService):
     """
     entry = gdata.docs.DocumentListEntry()
     entry.id = source_entry.id
-    entry.category.append(category)
     entry = self.Post(entry, folder_entry.content.src,
                       converter=gdata.docs.DocumentListEntryFromString)
     return entry
@@ -260,51 +275,7 @@ class DocsService(gdata.service.GDataService):
     """
     return self.Get(uri, converter=gdata.docs.DocumentListAclFeedFromString)
 
-  def UploadPresentation(self, media_source, title, folder_or_uri=None):
-    """Uploads a presentation inside of a MediaSource object to the Document
-       List feed with the given title.
-
-    Args:
-      media_source: MediaSource The MediaSource object containing a
-          presentation file to be uploaded.
-      title: string The title of the presentation on the server after being
-          uploaded.
-      folder_or_uri: DocumentListEntry or string (optional) An object with a
-          link to a folder or a uri to a folder to upload to.
-          Note: A valid uri for a folder is of the form:
-                /feeds/folders/private/full/folder%3Afolder_id
-
-    Returns:
-      A DocumentListEntry containing information about the presentation created
-      on the Google Documents service.
-    """
-    category = atom.Category(scheme=DATA_KIND_SCHEME,
-                             term=PRESENTATION_KIND_TERM, label='presentation')
-    return self._UploadFile(media_source, title, category, folder_or_uri)
-
-  def UploadSpreadsheet(self, media_source, title, folder_or_uri=None):
-    """Uploads a spreadsheet inside of a MediaSource object to the Document
-       List feed with the given title.
-
-    Args:
-      media_source: MediaSource The MediaSource object containing a spreadsheet
-          file to be uploaded.
-      title: string The title of the spreadsheet on the server after being
-          uploaded.
-      folder_or_uri: DocumentListEntry or string (optional) An object with a
-          link to a folder or a uri to a folder to upload to.
-          Note: A valid uri for a folder is of the form:
-                /feeds/folders/private/full/folder%3Afolder_id
-
-    Returns:
-      A DocumentListEntry containing information about the spreadsheet created
-      on the Google Documents service.
-    """
-    category = atom.Category(scheme=DATA_KIND_SCHEME,
-                             term=SPREADSHEET_KIND_TERM, label='spreadsheet')
-    return self._UploadFile(media_source, title, category, folder_or_uri)
-
-  def UploadDocument(self, media_source, title, folder_or_uri=None):
+  def Upload(self, media_source, title, folder_or_uri=None, label=None):
     """Uploads a document inside of a MediaSource object to the Document List
        feed with the given title.
 
@@ -317,98 +288,76 @@ class DocsService(gdata.service.GDataService):
           link to a folder or a uri to a folder to upload to.
           Note: A valid uri for a folder is of the form:
                 /feeds/folders/private/full/folder%3Afolder_id
+      label: optional label describing the type of the document to be created.
 
     Returns:
       A DocumentListEntry containing information about the document created
       on the Google Documents service.
     """
-    category = atom.Category(scheme=DATA_KIND_SCHEME,
-                             term=DOCUMENT_KIND_TERM, label='document')
-    return self._UploadFile(media_source, title, category, folder_or_uri)
 
-  def DownloadDocument(self, entry_or_resource_id, file_path):
+    return self._UploadFile(media_source, title, self._MakeKindCategory(label),
+                            folder_or_uri)
+
+  def Download(self, entry_or_id_or_url, file_path, export_format=None,
+               gid=None, extra_params=None):
     """Downloads a document from the Document List.
 
     Args:
-      entry_or_resource_id: DoclistEntry or string of the document
-          resource id to download.
-      file_path: string The full path to save the file to.  The export
-          format is inferred from the the file extension.
+      entry_or_id_or_url: a DocumentListEntry, or the resource id of an entry,
+          or a url to download from (such as the content src).
+      file_path: string The full path to save the file to.
+      export_format: the format to convert to, if conversion is required.
+      gid: grid id, for downloading a single grid of a spreadsheet
+      extra_params: a map of any further parameters to control how the document
+          is downloaded
+
+    Raises:
+      RequestError if the service does not respond with success
     """
-    ext = ''
-    match = self.__FILE_EXT_PATTERN.match(file_path)
-    if match:
-      ext = match.group(1)
 
-    if isinstance(entry_or_resource_id, gdata.docs.DocumentListEntry):
-      resource_id = entry_or_resource_id.resourceId.text
+    if isinstance(entry_or_id_or_url, gdata.docs.DocumentListEntry):
+      url = entry_or_id_or_url.content.src
     else:
-      resource_id = entry_or_resource_id
+      if self.__RESOURCE_ID_PATTERN.match(entry_or_id_or_url):
+        url = self._MakeContentLinkFromId(entry_or_id_or_url)
+      else:
+        url = entry_or_id_or_url
 
-    resource_id = resource_id.replace(':', '%3A')
-    doc_id = resource_id[resource_id.find('%3A') + 3:]
+    if export_format is not None:
+      if url.find('/Export?') == -1:
+        raise Error, 'This entry cannot be exported as a different format'
+      url += '&exportFormat=%s' % export_format
 
-    export_uri = '/feeds/download/documents/Export'
-    export_uri += '?docID=%s&exportFormat=%s' % (doc_id, ext)
-    self._DownloadFile(export_uri, file_path)
+    if gid is not None:
+      if url.find('spreadsheets') == -1:
+        raise Error, 'grid id parameter is not valid for this entry'
+      url += '&gid=%s' % gid
 
-  def DownloadPresentation(self, entry_or_resource_id, file_path):
-    """Downloads a presentation from the Document List.
+    if extra_params:
+      url += '&' + urllib.urlencode(extra_params)
+
+    self._DownloadFile(url, file_path)
+
+  def Export(self, entry_or_id_or_url, file_path, gid=None, extra_params=None):
+    """Downloads a document from the Document List in a different format.
 
     Args:
-      entry_or_resource_id: DoclistEntry or string of the presentation
-        resource id to download.
+      entry_or_id_or_url: a DocumentListEntry, or the resource id of an entry,
+          or a url to download from (such as the content src).
       file_path: string The full path to save the file to.  The export
           format is inferred from the the file extension.
+      gid: grid id, for downloading a single grid of a spreadsheet
+      extra_params: a map of any further parameters to control how the document
+          is downloaded
+
+    Raises:
+      RequestError if the service does not respond with success
     """
-    ext = ''
+    ext = None
     match = self.__FILE_EXT_PATTERN.match(file_path)
     if match:
       ext = match.group(1)
-
-    if isinstance(entry_or_resource_id, gdata.docs.DocumentListEntry):
-      resource_id = entry_or_resource_id.resourceId.text
-    else:
-      resource_id = entry_or_resource_id
-
-    resource_id = resource_id.replace(':', '%3A')
-    doc_id = resource_id[resource_id.find('%3A') + 3:]
-
-    export_uri = '/feeds/download/presentations/Export'
-    export_uri += '?docID=%s&exportFormat=%s' % (doc_id, ext)
-    self._DownloadFile(export_uri, file_path)
-
-  def DownloadSpreadsheet(self, entry_or_resource_id, file_path, gid=0):
-    """Downloads a spreadsheet from the Document List.
-
-    Args:
-      entry_or_resource_id: DoclistEntry or string of the spreadsheet
-        resource id to download.
-      file_path: string The full path to save the file to.  The export
-          format is inferred from the the file extension.
-      gid: string or int (optional) The grid/sheet number to download.
-          Used only for tsv and csv exports.
-    """
-    ext = ''
-    match = self.__FILE_EXT_PATTERN.match(file_path)
-    if match:
-      ext = match.group(1)
-
-    if isinstance(entry_or_resource_id, gdata.docs.DocumentListEntry):
-      resource_id = entry_or_resource_id.resourceId.text
-    else:
-      resource_id = entry_or_resource_id
-
-    resource_id = resource_id.replace(':', '%3A')
-    key = resource_id[resource_id.find('%3A') + 3:]
-
-    export_uri = ('http://spreadsheets.google.com'
-                  '/feeds/download/spreadsheets/Export')
-    export_uri += '?key=%s&fmcmd=%s' % (key,
-                                        DOWNLOAD_SPREADSHEET_FORMATS[ext])
-    if ext == 'csv' or ext == 'tsv':
-      export_uri += '&gid=' + str(gid)
-    self._DownloadFile(export_uri, file_path)
+    self.Download(entry_or_id_or_url, file_path, ext, gid, extra_params)
 
   def CreateFolder(self, title, folder_or_uri=None):
     """Creates a folder in the Document List feed.
@@ -432,83 +381,14 @@ class DocsService(gdata.service.GDataService):
     else:
       uri = '/feeds/documents/private/full'
 
-    category = atom.Category(scheme=DATA_KIND_SCHEME, term=FOLDER_KIND_TERM,
-                             label='folder')
     folder_entry = gdata.docs.DocumentListEntry()
     folder_entry.title = atom.Title(text=title)
-    folder_entry.category.append(category)
+    folder_entry.category.append(self._MakeKindCategory(FOLDER_LABEL))
     folder_entry = self.Post(folder_entry, uri,
                              converter=gdata.docs.DocumentListEntryFromString)
 
     return folder_entry
 
-  def MoveDocumentIntoFolder(self, document_entry, folder_entry):
-    """Moves a document into a folder in the Document List Feed.
-
-    Args:
-      document_entry: DocumentListEntry An object representing the source
-          document.
-      folder_entry: DocumentListEntry An object representing the destination
-          folder.
-
-    Returns:
-      A DocumentListEntry containing information about the document created on
-      the Google Documents service.
-    """
-    category = atom.Category(scheme=DATA_KIND_SCHEME,
-                             term=DOCUMENT_KIND_TERM, label='document')
-    return self._MoveIntoFolder(document_entry, folder_entry, category)
-
-  def MovePresentationIntoFolder(self, document_entry, folder_entry):
-    """Moves a presentation into a folder in the Document List Feed.
-
-    Args:
-      document_entry: DocumentListEntry An object representing the source
-          document.
-      folder_entry: DocumentListEntry An object representing the destination
-          folder.
-
-    Returns:
-      A DocumentListEntry containing information about the document created on
-      the Google Documents service.
-    """
-    category = atom.Category(scheme=DATA_KIND_SCHEME,
-                             term=PRESENTATION_KIND_TERM, label='presentation')
-    return self._MoveIntoFolder(document_entry, folder_entry, category)
-
-  def MoveSpreadsheetIntoFolder(self, document_entry, folder_entry):
-    """Moves a spreadsheet into a folder in the Document List Feed.
-
-    Args:
-      document_entry: DocumentListEntry An object representing the source
-          document.
-      folder_entry: DocumentListEntry An object representing the destination
-          folder.
-
-    Returns:
-      A DocumentListEntry containing information about the document created on
-      the Google Documents service.
-    """
-    category = atom.Category(scheme=DATA_KIND_SCHEME,
-                             term=SPREADSHEET_KIND_TERM, label='spreadsheet')
-    return self._MoveIntoFolder(document_entry, folder_entry, category)
-
-  def MoveFolderIntoFolder(self, src_folder_entry, dest_folder_entry):
-    """Moves a folder into another folder.
-
-    Args:
-      src_folder_entry: DocumentListEntry An object with a link to the
-          source folder.
-      dest_folder_entry: DocumentListEntry An object with a link to the
-          destination folder.
-
-    Returns:
-      A DocumentListEntry containing information about the folder created on
-      the Google Documents service.
-    """
-    category = atom.Category(scheme=DATA_KIND_SCHEME,
-                             term=FOLDER_KIND_TERM, label='folder')
-    return self._MoveIntoFolder(src_folder_entry, dest_folder_entry, category)
 
   def MoveOutOfFolder(self, source_entry):
     """Moves a document into a folder in the Document List Feed.
@@ -521,6 +401,98 @@ class DocsService(gdata.service.GDataService):
       True if the entry was moved out.
     """
     return self.Delete(source_entry.GetEditLink().href)
+
+  # Deprecated methods
+
+  @atom.deprecated('Please use Upload instead')
+  def UploadPresentation(self, media_source, title, folder_or_uri=None):
+    """Uploads a presentation inside of a MediaSource object to the Document
+       List feed with the given title.
+
+    This method is deprecated, use Upload instead.
+
+    Args:
+      media_source: MediaSource The MediaSource object containing a
+          presentation file to be uploaded.
+      title: string The title of the presentation on the server after being
+          uploaded.
+      folder_or_uri: DocumentListEntry or string (optional) An object with a
+          link to a folder or a uri to a folder to upload to.
+          Note: A valid uri for a folder is of the form:
+                /feeds/folders/private/full/folder%3Afolder_id
+
+    Returns:
+      A DocumentListEntry containing information about the presentation created
+      on the Google Documents service.
+    """
+    return self._UploadFile(
+        media_source, title, self._MakeKindCategory(PRESENTATION_LABEL),
+        folder_or_uri=folder_or_uri)
+
+  @atom.deprecated('Please use Upload instead')
+  def UploadSpreadsheet(self, media_source, title, folder_or_uri=None):
+    """Uploads a spreadsheet inside of a MediaSource object to the Document
+       List feed with the given title.
+       
+    This method is deprecated, use Upload instead.
+
+    Args:
+      media_source: MediaSource The MediaSource object containing a spreadsheet
+          file to be uploaded.
+      title: string The title of the spreadsheet on the server after being
+          uploaded.
+      folder_or_uri: DocumentListEntry or string (optional) An object with a
+          link to a folder or a uri to a folder to upload to.
+          Note: A valid uri for a folder is of the form:
+                /feeds/folders/private/full/folder%3Afolder_id
+
+    Returns:
+      A DocumentListEntry containing information about the spreadsheet created
+      on the Google Documents service.
+    """
+    return self._UploadFile(
+        media_source, title, self._MakeKindCategory(SPREADSHEET_LABEL),
+        folder_or_uri=folder_or_uri)
+
+  @atom.deprecated('Please use Upload instead')
+  def UploadDocument(self, media_source, title, folder_or_uri=None):
+    """Uploads a document inside of a MediaSource object to the Document List
+       feed with the given title.
+       
+    This method is deprecated, use Upload instead.
+
+    Args:
+      media_source: MediaSource The gdata.MediaSource object containing a
+          document file to be uploaded.
+      title: string The title of the document on the server after being
+          uploaded.
+      folder_or_uri: DocumentListEntry or string (optional) An object with a
+          link to a folder or a uri to a folder to upload to.
+          Note: A valid uri for a folder is of the form:
+                /feeds/folders/private/full/folder%3Afolder_id
+
+    Returns:
+      A DocumentListEntry containing information about the document created
+      on the Google Documents service.
+    """
+    return self._UploadFile(
+        media_source, title, self._MakeKindCategory(DOCUMENT_LABEL),
+        folder_or_uri=folder_or_uri)
+
+  """Calling any of these functions is the same as calling Export"""
+  DownloadDocument = atom.deprecated('Please use Export instead')(Export)
+  DownloadPresentation = atom.deprecated('Please use Export instead')(Export)
+  DownloadSpreadsheet = atom.deprecated('Please use Export instead')(Export)
+
+  """Calling any of these functions is the same as calling MoveIntoFolder"""
+  MoveDocumentIntoFolder = atom.deprecated(
+      'Please use MoveIntoFolder instead')(MoveIntoFolder)
+  MovePresentationIntoFolder = atom.deprecated(
+      'Please use MoveIntoFolder instead')(MoveIntoFolder)
+  MoveSpreadsheetIntoFolder = atom.deprecated(
+      'Please use MoveIntoFolder instead')(MoveIntoFolder)
+  MoveFolderIntoFolder = atom.deprecated(
+      'Please use MoveIntoFolder instead')(MoveIntoFolder)
 
 
 class DocumentQuery(gdata.service.Query):

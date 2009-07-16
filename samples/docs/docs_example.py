@@ -16,7 +16,7 @@
 
 
 __author__ = ('api.jfisher (Jeff Fisher), '
-              'api.eric@google.com (Eric Bidelman)')
+              'e.bidelman (Eric Bidelman)')
 
 
 import sys
@@ -120,15 +120,14 @@ class DocsSample(object):
       print 'Problems reading file. Check permissions.'
       return
 
-    if ext in ['CSV', 'ODS', 'XLS']:
+    if ext in ['CSV', 'ODS', 'XLS', 'XLSX']:
       print 'Uploading spreadsheet...'
-      entry = self.gd_client.UploadSpreadsheet(ms, title)
     elif ext in ['PPT', 'PPS']:
       print 'Uploading presentation...'
-      entry = self.gd_client.UploadPresentation(ms, title)
     else:
       print 'Uploading word processor document...'
-      entry = self.gd_client.UploadDocument(ms, title)
+
+    entry = self.gd_client.Upload(ms, title)
 
     if entry:
       print 'Upload successful!'
@@ -157,17 +156,17 @@ class DocsSample(object):
 
     doc_type = resource_id[:resource_id.find(':')]
 
-    # When downloading a spreadsheet, the authenicated request needs to be
+    # When downloading a spreadsheet, the authenticated request needs to be
     # sent with the spreadsheet service's auth token.
     if doc_type == 'spreadsheet':
       print 'Downloading spreadsheet to %s...' % (file_path,)
       docs_token = self.gd_client.GetClientLoginToken()
       self.gd_client.SetClientLoginToken(self.gs_client.GetClientLoginToken())
-      self.gd_client.DownloadSpreadsheet(resource_id, file_path)
+      self.gd_client.Export(resource_id, file_path, gid=0)
       self.gd_client.SetClientLoginToken(docs_token)
     else:
       print 'Downloading document to %s...' % (file_path,)
-      self.gd_client.DownloadDocument(resource_id, file_path)
+      self.gd_client.Export(resource_id, file_path)
 
   def _ListDocuments(self):
     """Retrieves and displays a list of documents based on the user's choice."""
