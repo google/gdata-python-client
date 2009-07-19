@@ -60,7 +60,7 @@ def configure_client(client, config, case_name):
   client.http_client.cache_case_name = case_name
   # Getting the auth token only needs to be done once in the course of test
   # runs.
-  if config.auth_token is None:
+  if config.auth_token is None and settings.RUN_LIVE_TESTS:
     client.http_client.cache_test_name = 'client_login'
     cache_name = client.http_client.get_cache_file_name()
     if settings.CLEAR_CACHE:
@@ -123,7 +123,7 @@ def configure_service(service, config, case_name):
   service.http_client.v2_http_client.cache_case_name = case_name
   # Getting the auth token only needs to be done once in the course of test
   # runs.
-  if config.auth_token is None:
+  if config.auth_token is None and settings.RUN_LIVE_TESTS:
     service.http_client.v2_http_client.cache_test_name = 'client_login'
     cache_name = service.http_client.v2_http_client.get_cache_file_name()
     if settings.CLEAR_CACHE:
