@@ -385,13 +385,13 @@ class GDClient(atom.client.AtomPubClient):
     http://code.google.com/apis/accounts/docs/AuthSub.html
     
     Args:
-      token: gdata.gauth.AuthSubToken (optional) If no token is passed in, 
-             the client's auth_token member is used to request the new token.
-             The token object will be modified to contain the new session 
-             token string.
+      token: gdata.gauth.AuthSubToken or gdata.gauth.SecureAuthSubToken
+          (optional) If no token is passed in, the client's auth_token member
+          is used to request the new token. The token object will be modified
+          to contain the new session token string.
       url: str or atom.http_core.Uri (optional) The URL to which the token
-           upgrade request should be sent. Defaults to: 
-           https://www.google.com/accounts/AuthSubSessionToken
+          upgrade request should be sent. Defaults to: 
+          https://www.google.com/accounts/AuthSubSessionToken
 
     Returns:
       The upgraded gdata.gauth.AuthSubToken object.

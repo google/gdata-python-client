@@ -296,6 +296,7 @@ class AuthSubToken(object):
     self.scopes = scopes or []
 
   def modify_request(self, http_request):
+    """Sets Authorization header, allows app to act on the user's behalf."""
     http_request.headers['Authorization'] = '%s%s' % (AUTHSUB_AUTH_LABEL,
         self.token_string)
 
@@ -325,6 +326,90 @@ class AuthSubToken(object):
     auth_sub_string_from_body.
     """
     self.token_string = auth_sub_string_from_body(http_body)
+
+
+# Functions and classes for Secure-mode AuthSub
+def build_auth_sub_data(http_request, timestamp, nonce):
+  """Creates the data string which must be RSA-signed in secure requests.
+  
+  For more details see the documenation on secure AuthSub requests:
+  http://code.google.com/apis/accounts/docs/AuthSub.html#signingrequests
+
+  Args:
+    http_request: The request being made to the server. The Request's URL
+        must be complete before this signature is calculated as any changes
+        to the URL will invalidate the signature.
+    nonce: str Random 64-bit, unsigned number encoded as an ASCII string in
+        decimal format. The nonce/timestamp pair should always be unique to
+        prevent replay attacks.
+    timestamp: Integer representing the time the request is sent. The
+        timestamp should be expressed in number of seconds after January 1,
+        1970 00:00:00 GMT.
+  """
+  return '%s %s %s %s' % (http_request.method, str(http_request.uri),
+                          str(timestamp), nonce)
+
+
+def generate_signature(data, rsa_key):
+  """Signs the data string for a secure AuthSub request."""
+  import base64
+  try:
+    from tlslite.utils import keyfactory
+  except ImportError:
+    from gdata.tlslite.utils import keyfactory
+  private_key = keyfactory.parsePrivateKey(rsa_key)
+  signed = private_key.hashAndSign(data)
+  return base64.b64encode(signed)
+
+
+class SecureAuthSubToken(AuthSubToken):
+
+  def __init__(self, token_string, rsa_private_key, scopes=None):
+    self.token_string = token_string
+    self.scopes = scopes or []
+    self.rsa_private_key = rsa_private_key
+
+  def from_url(str_or_uri, rsa_private_key):
+    """Creates a new SecureAuthSubToken using information in the URL.
+    
+    Uses auth_sub_string_from_url.
+
+    Args:
+      str_or_uri: The current page's URL (as a str or atom.http_core.Uri)
+          which should contain a token query parameter since the Google auth
+          server redirected the user's browser to this URL.
+      rsa_private_key: str the private RSA key cert used to sign all requests
+          made with this token.
+    """
+    token_and_scopes = auth_sub_string_from_url(str_or_uri)
+    return SecureAuthSubToken(token_and_scopes[0], rsa_private_key,
+                              token_and_scopes[1])
+
+  from_url = staticmethod(from_url)
+  FromUrl = from_url
+
+  def modify_request(self, http_request):
+    """Sets the Authorization header and includes a digital signature.
+    
+    Calculates a digital signature using the private RSA key, a timestamp
+    (uses now at the time this method is called) and a random nonce. 
+
+    Args:
+      http_request: The atom.http_core.HttpRequest which contains all of the
+          information needed to send a request to the remote server. The 
+          URL and the method of the request must be already set and cannot be
+          changed after this token signs the request, or the signature will
+          not be valid.
+    """
+    timestamp = str(int(time.time()))
+    nonce = ''.join([str(random.randint(0, 9)) for i in xrange(15)])
+    data = build_auth_sub_data(http_request, timestamp, nonce)
+    signature = generate_signature(data, self.rsa_private_key)
+    http_request.headers['Authorization'] = (
+        '%s%s sigalg="rsa-sha1" data="%s" sig="%s"' % (AUTHSUB_AUTH_LABEL,
+            self.token_string, data, signature))
+
+  ModifyRequest = modify_request
 
 
 # OAuth functions and classes.
@@ -440,7 +525,10 @@ def generate_rsa_signature(http_request, consumer_key, rsa_key,
                            timestamp, nonce, version, next='oob',
                            token=None, token_secret=None, verifier=None):
   import base64
-  from gdata.tlslite.utils import keyfactory
+  try:
+    from tlslite.utils import keyfactory
+  except ImportError:
+    from gdata.tlslite.utils import keyfactory
   base_string = build_oauth_base_string(
       http_request, consumer_key, nonce, RSA_SHA1, timestamp, version,
       next, token, verifier=verifier)

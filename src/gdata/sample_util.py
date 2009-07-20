@@ -91,25 +91,66 @@ def authorize_client(client, auth_type=None, service=None, source=None,
   elif auth_type == AUTHSUB:
     auth_sub_token = get_param('auth_sub_token', ask=False)
     session_token = get_param('session_token', ask=False)
-    if client.auth_token is None:
-      if session_token:
-        client.auth_token = gdata.gauth.AuthSubToken(session_token, scopes)
-        return
-      elif auth_sub_token:
-        client.auth_token = gdata.gauth.AuthSubToken(auth_sub_token, scopes)
-        client.upgrade_token()
-        return
+    private_key = None
+    auth_url = None
+    single_use_token = None
+    rsa_private_key = get_param(
+        'rsa_private_key', 
+        'If you want to use secure mode AuthSub, please provide the\n'
+        ' location of your RSA private key which corresponds to the\n'
+        ' certificate you have uploaded for your domain. If you do not\n'
+        ' have an RSA key, simply press enter')
 
+    if rsa_private_key:
+      try:
+        private_key_file = open(rsa_private_key, 'rb')
+        private_key = private_key_file.read()
+        private_key_file.close()
+      except IOError:
+        print 'Unable to read private key from file'
+
+    if private_key is not None:
+      if client.auth_token is None:
+        if session_token:
+          client.auth_token = gdata.gauth.SecureAuthSubToken(
+              session_token, private_key, scopes)
+          return
+        elif auth_sub_token:
+          client.auth_token = gdata.gauth.SecureAuthSubToken(
+              auth_sub_token, private_key, scopes)
+          client.upgrade_token()
+          return
+ 
       auth_url = gdata.gauth.generate_auth_sub_url(
-          'http://gauthmachine.appspot.com/authsub', scopes)
-      print 'Visit the following URL in your browser to authorize this app:'
-      print str(auth_url)
-      print 'After agreeing to authorize the app, copy the token value from the'
-      print ' URL. Example: "www.google.com/?token=ab12" token value is ab12'
-      token_value = raw_input('Please enter the token value: ')
+          'http://gauthmachine.appspot.com/authsub', scopes, True)
+      print 'with a private key, get ready for this URL', auth_url
+
+    else:
+      if client.auth_token is None:
+        if session_token:
+          client.auth_token = gdata.gauth.AuthSubToken(session_token, scopes)
+          return
+        elif auth_sub_token:
+          client.auth_token = gdata.gauth.AuthSubToken(auth_sub_token, scopes)
+          client.upgrade_token()
+          return
+
+        auth_url = gdata.gauth.generate_auth_sub_url(
+            'http://gauthmachine.appspot.com/authsub', scopes)
+
+    print 'Visit the following URL in your browser to authorize this app:'
+    print str(auth_url)
+    print 'After agreeing to authorize the app, copy the token value from the'
+    print ' URL. Example: "www.google.com/?token=ab12" token value is ab12'
+    token_value = raw_input('Please enter the token value: ')
+    if private_key is not None:
+      single_use_token = gdata.gauth.SecureAuthSubToken(
+          token_value, private_key, scopes)
+    else:
       single_use_token = gdata.gauth.AuthSubToken(token_value, scopes)
-      client.auth_token = single_use_token
-      client.upgrade_token()
+    client.auth_token = single_use_token
+    client.upgrade_token()
+
   elif auth_type == OAUTH:
     if oauth_type is None:
       oauth_type = int(get_param(
@@ -120,7 +161,7 @@ def authorize_client(client, auth_type=None, service=None, source=None,
 
     consumer_key = get_param(
         'consumer_key', 'Please enter your OAuth conumer key '
-        'which identifies your app.')
+        'which identifies your app')
 
     if oauth_type == HMAC:
       consumer_secret = get_param(
@@ -136,9 +177,13 @@ def authorize_client(client, auth_type=None, service=None, source=None,
           'rsa_private_key', 
           'Please provide the location of your RSA private key which\n'
           ' corresponds to the certificate you have uploaded for your domain.')
-      private_key_file = open(rsa_private_key, 'rb')
-      private_key = private_key_file.read()
-      private_key_file.close()
+      try:
+        private_key_file = open(rsa_private_key, 'rb')
+        private_key = private_key_file.read()
+        private_key_file.close()
+      except IOError:
+        print 'Unable to read private key from file'
+        
       request_token = client.get_oauth_token(
           scopes, 'http://gauthmachine.appspot.com/oauth', consumer_key,
           rsa_private_key=private_key)

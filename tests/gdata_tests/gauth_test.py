@@ -91,6 +91,29 @@ class AuthSubTest(unittest.TestCase):
     self.assertEqual(token.scopes, [])
 
 
+class SecureAuthSubTest(unittest.TestCase):
+
+  def test_build_data(self):
+    request = atom.http_core.HttpRequest(method='PUT')
+    request.uri = atom.http_core.Uri.parse_uri('http://example.com/foo?a=1')
+    data = gdata.gauth.build_auth_sub_data(request, 1234567890, 'mynonce')
+    self.assertEqual(data,
+                     'PUT http://example.com/foo?a=1 1234567890 mynonce')
+
+  def test_generate_signature(self):
+    request = atom.http_core.HttpRequest(
+        method='GET', uri=atom.http_core.Uri(host='example.com', path='/foo',
+                                             query={'a': '1'}))
+    data = gdata.gauth.build_auth_sub_data(request, 1134567890, 'p234908')
+    self.assertEqual(data,
+                     'GET http://example.com/foo?a=1 1134567890 p234908')
+    self.assertEqual(
+        gdata.gauth.generate_signature(data, PRIVATE_TEST_KEY),
+        'GeBfeIDnT41dvLquPgDB4U5D4hfxqaHk/5LX1kccNBnL4BjsHWU1djbEp7xp3BL9ab'
+        'QtLrK7oa/aHEHtGRUZGg87O+ND8iDPR76WFXAruuN8O8GCMqCDdPduNPY++LYO4MdJ'
+        'BZNY974Nn0m6Hc0/T4M1ElqvPhl61fkXMm+ElSM=')
+
+
 class TokensToAndFromBlobsTest(unittest.TestCase):
 
   def test_client_login_conversion(self):
