@@ -452,6 +452,43 @@ class SimpleV2FeedTest(unittest.TestCase):
     self.assertEqual(len(feed.entry[0].link), 2)
 
 
+class DataClassSanityTest(unittest.TestCase):
+
+  def test_basic_element_structure(self):
+    conf.check_data_classes(self, [
+        gdata.data.TotalResults, gdata.data.StartIndex,
+        gdata.data.ItemsPerPage, gdata.data.ExtendedProperty,
+        gdata.data.GDEntry, gdata.data.GDFeed, gdata.data.BatchId,
+        gdata.data.BatchOperation, gdata.data.BatchStatus,
+        gdata.data.BatchEntry, gdata.data.BatchInterrupted,
+        gdata.data.BatchFeed, gdata.data.EntryLink, gdata.data.FeedLink,
+        gdata.data.AdditionalName, gdata.data.Comments, gdata.data.Country,
+        gdata.data.Email, gdata.data.FamilyName, gdata.data.Im,
+        gdata.data.GivenName, gdata.data.NamePrefix, gdata.data.NameSuffix,
+        gdata.data.FullName, gdata.data.Name, gdata.data.OrgDepartment,
+        gdata.data.OrgName, gdata.data.OrgSymbol, gdata.data.OrgTitle,
+        gdata.data.Organization, gdata.data.When, gdata.data.Who,
+        gdata.data.OriginalEvent, gdata.data.PhoneNumber,
+        gdata.data.PostalAddress, gdata.data.Rating, gdata.data.Recurrence,
+        gdata.data.RecurrenceException, gdata.data.Reminder,
+        gdata.data.Agent, gdata.data.HouseName, gdata.data.Street,
+        gdata.data.PoBox, gdata.data.Neighborhood, gdata.data.City,
+        gdata.data.Subregion, gdata.data.Region, gdata.data.Postcode,
+        gdata.data.Country, gdata.data.FormattedAddress,
+        gdata.data.StructuredPostalAddress, gdata.data.Where,
+        gdata.data.AttendeeType, gdata.data.AttendeeStatus])
+
+  def test_member_values(self):
+    self.assertEqual(
+        gdata.data.TotalResults._qname,
+        '{http://a9.com/-/spec/opensearch/1.1/}totalResults')
+    self.assertEqual(
+        gdata.data.RecurrenceException._qname,
+        '{http://schemas.google.com/g/2005}recurrenceException')
+    self.assertEqual(gdata.data.RecurrenceException.specialized,
+                     'specialized')
+
+
 def suite():
   return conf.build_suite([StartIndexTest, StartIndexTest, GDataEntryTest,
       LinkFinderTest, GDataFeedTest, BatchEntryTest, BatchFeedTest,

@@ -16,6 +16,7 @@
 
 
 import unittest
+import inspect
 import gdata.test_config_template
 import atom.mock_http_core
 
@@ -168,4 +169,32 @@ def build_suite(classes):
     A new unittest.TestSuite containing a test suite for all classes.   
   """
   suites = [unittest.makeSuite(a_class, 'test') for a_class in classes]
-  return unittest.TestSuite(suites) 
+  return unittest.TestSuite(suites)
+
+
+def check_data_classes(test, classes):
+  for data_class in classes:
+    test.assertTrue(data_class.__doc__ is not None,
+                    'The class %s should have a docstring' % data_class)
+    if hasattr(data_class, '_qname'):
+      test.assertTrue(isinstance(data_class._qname, str),
+                      'The class %s has a non-string _qname' % data_class)
+      test.assertFalse(data_class._qname.endswith('}'), 
+                       'The _qname for class %s is only a namespace' % (
+                           data_class))
+
+    for attribute_name, value in data_class.__dict__.iteritems():
+      # Ignore all elements that start with _ (private members)
+      if not attribute_name.startswith('_'):
+        try:
+          if not (isinstance(value, str) or inspect.isfunction(value) 
+              or (isinstance(value, list)
+                  and issubclass(value[0], atom.core.XmlElement))
+              or issubclass(value, atom.core.XmlElement)):
+            test.fail(
+                'XmlElement member should have an attribute, XML class,'
+                ' or list of XML classes as attributes.')
+
+        except TypeError:
+          test.fail('Element %s in %s was of type %s' % (
+              attribute_name, data_class._qname, type(value)))

@@ -276,7 +276,8 @@ def create_element(tag, namespace=ATOM, text=None, attributes=None):
 
 
 def element_from_string(response):
-  return atom.core.xml_element_from_string(response.read(), atom.core.XmlElement)
+  return atom.core.xml_element_from_string(response.read(),
+                                           atom.core.XmlElement)
 
 
 def suite():

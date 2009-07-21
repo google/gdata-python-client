@@ -72,6 +72,62 @@ SENDER = 'http://schemas.google.com/g/2005#message.from'
 REPLY_TO = 'http://schemas.google.com/g/2005#message.reply-to'
 TO_RECIPIENT = 'http://schemas.google.com/g/2005#message.to'
 
+ASSISTANT_REL = 'http://schemas.google.com/g/2005#assistant'
+CALLBACK_REL = 'http://schemas.google.com/g/2005#callback'
+CAR_REL = 'http://schemas.google.com/g/2005#car'
+COMPANY_MAIN_REL = 'http://schemas.google.com/g/2005#company_main'
+FAX_REL = 'http://schemas.google.com/g/2005#fax'
+HOME_REL = 'http://schemas.google.com/g/2005#home'
+HOME_FAX_REL = 'http://schemas.google.com/g/2005#home_fax'
+ISDN_REL = 'http://schemas.google.com/g/2005#isdn'
+MAIN_REL = 'http://schemas.google.com/g/2005#main'
+MOBILE_REL = 'http://schemas.google.com/g/2005#mobile'
+OTHER_REL = 'http://schemas.google.com/g/2005#other'
+OTHER_FAX_REL = 'http://schemas.google.com/g/2005#other_fax'
+PAGER_REL = 'http://schemas.google.com/g/2005#pager'
+RADIO_REL = 'http://schemas.google.com/g/2005#radio'
+TELEX_REL = 'http://schemas.google.com/g/2005#telex'
+TTL_TDD_REL = 'http://schemas.google.com/g/2005#tty_tdd'
+WORK_REL = 'http://schemas.google.com/g/2005#work'
+WORK_FAX_REL = 'http://schemas.google.com/g/2005#work_fax'
+WORK_MOBILE_REL = 'http://schemas.google.com/g/2005#work_mobile'
+WORK_PAGER_REL = 'http://schemas.google.com/g/2005#work_pager'
+NETMEETING_REL = 'http://schemas.google.com/g/2005#netmeeting'
+OVERALL_REL = 'http://schemas.google.com/g/2005#overall'
+PRICE_REL = 'http://schemas.google.com/g/2005#price'
+QUALITY_REL = 'http://schemas.google.com/g/2005#quality'
+EVENT_REL = 'http://schemas.google.com/g/2005#event'
+EVENT_ALTERNATE_REL = 'http://schemas.google.com/g/2005#event.alternate'
+EVENT_PARKING_REL = 'http://schemas.google.com/g/2005#event.parking'
+
+AIM_PROTOCOL = 'http://schemas.google.com/g/2005#AIM'
+MSN_PROTOCOL = 'http://schemas.google.com/g/2005#MSN'
+YAHOO_MESSENGER_PROTOCOL = 'http://schemas.google.com/g/2005#YAHOO'
+SKYPE_PROTOCOL = 'http://schemas.google.com/g/2005#SKYPE'
+QQ_PROTOCOL = 'http://schemas.google.com/g/2005#QQ'
+GOOGLE_TALK_PROTOCOL = 'http://schemas.google.com/g/2005#GOOGLE_TALK'
+ICQ_PROTOCOL = 'http://schemas.google.com/g/2005#ICQ'
+JABBER_PROTOCOL = 'http://schemas.google.com/g/2005#JABBER'
+
+REGULAR_COMMENTS = 'http://schemas.google.com/g/2005#regular'
+REVIEW_COMMENTS = 'http://schemas.google.com/g/2005#reviews'
+
+MAIL_BOTH = 'http://schemas.google.com/g/2005#both'
+MAIL_LETTERS = 'http://schemas.google.com/g/2005#letters'
+MAIL_PARCELS = 'http://schemas.google.com/g/2005#parcels'
+MAIL_NEITHER = 'http://schemas.google.com/g/2005#neither'
+
+GENERAL_ADDRESS = 'http://schemas.google.com/g/2005#general'
+LOCAL_ADDRESS = 'http://schemas.google.com/g/2005#local'
+
+OPTIONAL_ATENDEE = 'http://schemas.google.com/g/2005#event.optional'
+REQUIRED_ATENDEE = 'http://schemas.google.com/g/2005#event.required'
+
+ATTENDEE_ACCEPTED = 'http://schemas.google.com/g/2005#event.accepted'
+ATTENDEE_DECLINED = 'http://schemas.google.com/g/2005#event.declined'
+ATTENDEE_INVITED = 'http://schemas.google.com/g/2005#event.invited'
+ATTENDEE_TENTATIVE = 'http://schemas.google.com/g/2005#event.tentative'
+
 
 class Error(Exception):
   pass
@@ -270,10 +326,12 @@ class GDFeed(atom.data.Feed, LinkFinder):
 
 
 class BatchId(atom.core.XmlElement):
+  """Identifies a single operation in a batch request."""
   _qname = BATCH_TEMPLATE % 'id'
 
 
 class BatchOperation(atom.core.XmlElement):
+  """The CRUD operation which this batch entry represents."""
   _qname = BATCH_TEMPLATE % 'operation'
   type = 'type'
 
@@ -521,11 +579,7 @@ class Comments(atom.core.XmlElement):
   feed_link = FeedLink
 
 
-REGULAR_COMMENTS = 'http://schemas.google.com/g/2005#regular'
-REVIEW_COMMENTS = 'http://schemas.google.com/g/2005#reviews'
-
-
-class Comments(atom.core.XmlElement):
+class Country(atom.core.XmlElement):
   """The gd:country element.
 
   Country name along with optional country code. The country code is 
@@ -553,12 +607,6 @@ class Email(EmailImParent):
   display_name = 'displayName'
 
 
-HOME_REL = 'http://schemas.google.com/g/2005#home'
-OTHER_REL = 'http://schemas.google.com/g/2005#other'
-WORK_REL = 'http://schemas.google.com/g/2005#work'
-NETMEETING_REL = 'http://schemas.google.com/g/2005#netmeeting'
-
-
 class FamilyName(atom.core.XmlElement):
   """The gd:familyName element.
 
@@ -577,16 +625,6 @@ class Im(EmailImParent):
   protocol = 'protocol'
 
 
-AIM_PROTOCOL = 'http://schemas.google.com/g/2005#AIM'
-MSN_PROTOCOL = 'http://schemas.google.com/g/2005#MSN'
-YAHOO_MESSENGER_PROTOCOL = 'http://schemas.google.com/g/2005#YAHOO'
-SKYPE_PROTOCOL = 'http://schemas.google.com/g/2005#SKYPE'
-QQ_PROTOCOL = 'http://schemas.google.com/g/2005#QQ'
-GOOGLE_TALK_PROTOCOL = 'http://schemas.google.com/g/2005#GOOGLE_TALK'
-ICQ_PROTOCOL = 'http://schemas.google.com/g/2005#ICQ'
-JABBER_PROTOCOL = 'http://schemas.google.com/g/2005#JABBER'
-
-
 class GivenName(atom.core.XmlElement):
   """The gd:givenName element.
 
@@ -594,6 +632,30 @@ class GivenName(atom.core.XmlElement):
   """
   _qname = GDATA_TEMPLATE % 'givenName'
   yomi = 'yomi'
+
+
+class NamePrefix(atom.core.XmlElement):
+  """The gd:namePrefix element.
+
+  Honorific prefix, eg. 'Mr' or 'Mrs'.
+  """
+  _qname = GDATA_TEMPLATE % 'namePrefix'
+
+
+class NameSuffix(atom.core.XmlElement):
+  """The gd:nameSuffix element.
+
+  Honorific suffix, eg. 'san' or 'III'.
+  """
+  _qname = GDATA_TEMPLATE % 'nameSuffix'
+
+
+class FullName(atom.core.XmlElement):
+  """The gd:fullName element.
+
+  Unstructured representation of the name.
+  """
+  _qname = GDATA_TEMPLATE % 'fullName'
 
 
 class Name(atom.core.XmlElement):
@@ -606,4 +668,426 @@ class Name(atom.core.XmlElement):
   given_name = GivenName
   additional_name = AdditionalName
   family_name = FamilyName
+  name_prefix = NamePrefix
+  name_suffix = NameSuffix
+  full_name = FullName
+
+
+class OrgDepartment(atom.core.XmlElement):
+  """The gd:orgDepartment element.
+
+  Describes a department within an organization. Must appear within a
+  gd:organization element.
+  """
+  _qname = GDATA_TEMPLATE % 'orgDepartment'
+
+
+class OrgJobDescription(atom.core.XmlElement):
+  """The gd:orgJobDescription element.
+
+  Describes a job within an organization. Must appear within a
+  gd:organization element.
+  """
+  _qname = GDATA_TEMPLATE % 'orgJobDescription'
+
+
+class OrgName(atom.core.XmlElement):
+  """The gd:orgName element.
+
+  The name of the organization. Must appear within a gd:organization
+  element.
+
+  Contains a Yomigana attribute (Japanese reading aid) for the
+  organization name.
+  """
+  _qname = GDATA_TEMPLATE % 'orgName'
+  yomi = 'yomi'
+
+
+class OrgSymbol(atom.core.XmlElement):
+  """The gd:orgSymbol element.
+
+  Provides a symbol of an organization. Must appear within a
+  gd:organization element.
+  """
+  _qname = GDATA_TEMPLATE % 'orgSymbol'
+
+
+class OrgTitle(atom.core.XmlElement):
+  """The gd:orgTitle element.
+
+  The title of a person within an organization. Must appear within a
+  gd:organization element.
+  """
+  _qname = GDATA_TEMPLATE % 'orgTitle'
+
+
+class Organization(atom.core.XmlElement):
+  """The gd:organization element.
+
+  An organization, typically associated with a contact.
+  """
+  _qname = GDATA_TEMPLATE % 'organization'
+  label = 'label'
+  primary = 'primary'
+  rel = 'rel'
+  department = OrgDepartment
+  job_description = OrgJobDescription
+  name = OrgName
+  symbol = OrgSymbol
+  title = OrgTitle
+
+
+class When(atom.core.XmlElement):
+  """The gd:when element.
+
+  Represents a period of time or an instant.
+  """
+  _qname = GDATA_TEMPLATE % 'when'
+  end = 'endTime'
+  start = 'startTime'
+  value = 'valueString'
+
+
+class OriginalEvent(atom.core.XmlElement):
+  """The gd:originalEvent element.
+
+  Equivalent to the Recurrence ID property specified in section 4.8.4.4
+  of RFC 2445. Appears in every instance of a recurring event, to identify
+  the original event.
+
+  Contains a <gd:when> element specifying the original start time of the
+  instance that has become an exception.
+  """
+  _qname = GDATA_TEMPLATE % 'originalEvent'
+  id = 'id'
+  href = 'href'
+  when = When
+
+
+class PhoneNumber(atom.core.XmlElement):
+  """The gd:phoneNumber element.
+
+  A phone number associated with the containing entity (which is usually
+  an entity representing a person or a location).
+  """
+  _qname = GDATA_TEMPLATE % 'phoneNumber'
+  label = 'label'
+  rel = 'rel'
+  uri = 'uri'
+  primary = 'primary'
+
+
+class PostalAddress(atom.core.XmlElement):
+  """The gd:postalAddress element."""
+  _qname = GDATA_TEMPLATE % 'postalAddress'
+  label = 'label'
+  rel = 'rel'
+  uri = 'uri'
+  primary = 'primary'
+
+ 
+class Rating(atom.core.XmlElement):
+  """The gd:rating element.
+
+  Represents a numeric rating of the enclosing entity, such as a
+  comment. Each rating supplies its own scale, although it may be
+  normalized by a service; for example, some services might convert all
+  ratings to a scale from 1 to 5.
+  """
+  _qname = GDATA_TEMPLATE % 'rating'
+  average = 'average'
+  max = 'max'
+  min = 'min'
+  num_raters = 'numRaters'
+  rel = 'rel'
+  value = 'value'
+
+
+class Recurrence(atom.core.XmlElement):
+  """The gd:recurrence element.
+
+  Represents the dates and times when a recurring event takes place.
+
+  The string that defines the recurrence consists of a set of properties,
+  each of which is defined in the iCalendar standard (RFC 2445).
+
+  Specifically, the string usually begins with a DTSTART property that
+  indicates the starting time of the first instance of the event, and
+  often a DTEND property or a DURATION property to indicate when the
+  first instance ends. Next come RRULE, RDATE, EXRULE, and/or EXDATE
+  properties, which collectively define a recurring event and its
+  exceptions (but see below). (See section 4.8.5 of RFC 2445 for more
+  information about these recurrence component properties.) Last comes a
+  VTIMEZONE component, providing detailed timezone rules for any timezone
+  ID mentioned in the preceding properties.
+
+  Google services like Google Calendar don't generally generate EXRULE
+  and EXDATE properties to represent exceptions to recurring events;
+  instead, they generate <gd:recurrenceException> elements. However,
+  Google services may include EXRULE and/or EXDATE properties anyway;
+  for example, users can import events and exceptions into Calendar, and
+  if those imported events contain EXRULE or EXDATE properties, then
+  Calendar will provide those properties when it sends a <gd:recurrence>
+  element.
+
+  Note the the use of <gd:recurrenceException> means that you can't be
+  sure just from examining a <gd:recurrence> element whether there are
+  any exceptions to the recurrence description. To ensure that you find
+  all exceptions, look for <gd:recurrenceException> elements in the feed,
+  and use their <gd:originalEvent> elements to match them up with
+  <gd:recurrence> elements.
+  """
+  _qname = GDATA_TEMPLATE % 'recurrence'
+
+
+class RecurrenceException(atom.core.XmlElement):
+  """The gd:recurrenceException element.
+
+  Represents an event that's an exception to a recurring event—that is,
+  an instance of a recurring event in which one or more aspects of the
+  recurring event (such as attendance list, time, or location) have been
+  changed.
+
+  Contains a <gd:originalEvent> element that specifies the original
+  recurring event that this event is an exception to.
+
+  When you change an instance of a recurring event, that instance becomes
+  an exception. Depending on what change you made to it, the exception
+  behaves in either of two different ways when the original recurring
+  event is changed:
+
+  - If you add, change, or remove comments, attendees, or attendee
+    responses, then the exception remains tied to the original event, and
+    changes to the original event also change the exception.
+  - If you make any other changes to the exception (such as changing the
+    time or location) then the instance becomes "specialized," which means
+    that it's no longer as tightly tied to the original event. If you
+    change the original event, specialized exceptions don't change. But
+    see below.
+
+  For example, say you have a meeting every Tuesday and Thursday at
+  2:00 p.m. If you change the attendance list for this Thursday's meeting
+  (but not for the regularly scheduled meeting), then it becomes an
+  exception. If you change the time for this Thursday's meeting (but not
+  for the regularly scheduled meeting), then it becomes specialized.
+
+  Regardless of whether an exception is specialized or not, if you do
+  something that deletes the instance that the exception was derived from,
+  then the exception is deleted. Note that changing the day or time of a
+  recurring event deletes all instances, and creates new ones.
+
+  For example, after you've specialized this Thursday's meeting, say you
+  change the recurring meeting to happen on Monday, Wednesday, and Friday.
+  That change deletes all of the recurring instances of the
+  Tuesday/Thursday meeting, including the specialized one.
+
+  If a particular instance of a recurring event is deleted, then that
+  instance appears as a <gd:recurrenceException> containing a
+  <gd:entryLink> that has its <gd:eventStatus> set to
+  "http://schemas.google.com/g/2005#event.canceled". (For more
+  information about canceled events, see RFC 2445.)
+  """
+  _qname = GDATA_TEMPLATE % 'recurrenceException'
+  specialized = 'specialized'
+  entry_link = EntryLink
+  original_event = OriginalEvent
+
+
+class Reminder(atom.core.XmlElement):
+  """The gd:reminder element.
+
+  A time interval, indicating how long before the containing entity's start
+  time or due time attribute a reminder should be issued. Alternatively,
+  may specify an absolute time at which a reminder should be issued. Also
+  specifies a notification method, indicating what medium the system
+  should use to remind the user.
+  """
+  _qname = GDATA_TEMPLATE % 'reminder'
+  absolute_time = 'absoluteTime'
+  method = 'method'
+  days = 'days'
+  hours = 'hours'
+  minutes = 'minutes'
+
+
+class Agent(atom.core.XmlElement):
+  """The gd:agent element.
+
+  The agent who actually receives the mail. Used in work addresses.
+  Also for 'in care of' or 'c/o'.
+  """
+  _qname = GDATA_TEMPLATE % 'agent'
   
+
+class HouseName(atom.core.XmlElement):
+  """The gd:housename element.
+
+  Used in places where houses or buildings have names (and not
+  necessarily numbers), eg. "The Pillars".  
+  """
+  _qname = GDATA_TEMPLATE % 'housename'
+  
+
+class Street(atom.core.XmlElement):
+  """The gd:street element.
+
+  Can be street, avenue, road, etc. This element also includes the
+  house number and room/apartment/flat/floor number.  
+  """
+  _qname = GDATA_TEMPLATE % 'street'
+  
+
+class PoBox(atom.core.XmlElement):
+  """The gd:pobox element.
+
+  Covers actual P.O. boxes, drawers, locked bags, etc. This is usually
+  but not always mutually exclusive with street.
+  """
+  _qname = GDATA_TEMPLATE % 'pobox'
+  
+
+class Neighborhood(atom.core.XmlElement):
+  """The gd:neighborhood element.
+
+  This is used to disambiguate a street address when a city contains more
+  than one street with the same name, or to specify a small place whose
+  mail is routed through a larger postal town. In China it could be a
+  county or a minor city.
+  """
+  _qname = GDATA_TEMPLATE % 'neighborhood'
+  
+
+class City(atom.core.XmlElement):
+  """The gd:city element.
+
+  Can be city, village, town, borough, etc. This is the postal town and
+  not necessarily the place of residence or place of business.
+  """
+  _qname = GDATA_TEMPLATE % 'city'
+  
+
+class Subregion(atom.core.XmlElement):
+  """The gd:subregion element.
+
+  Handles administrative districts such as U.S. or U.K. counties that are
+  not used for mail addressing purposes. Subregion is not intended for
+  delivery addresses.
+  """
+  _qname = GDATA_TEMPLATE % 'subregion'
+  
+
+class Region(atom.core.XmlElement):
+  """The gd:region element.
+
+  A state, province, county (in Ireland), Land (in Germany),
+  departement (in France), etc.
+  """
+  _qname = GDATA_TEMPLATE % 'region'
+  
+
+class Postcode(atom.core.XmlElement):
+  """The gd:postcode element.
+
+  Postal code. Usually country-wide, but sometimes specific to the
+  city (e.g. "2" in "Dublin 2, Ireland" addresses).
+  """
+  _qname = GDATA_TEMPLATE % 'postcode'
+  
+
+class Country(atom.core.XmlElement):
+  """The gd:country element.
+
+  The name or code of the country.
+  """
+  _qname = GDATA_TEMPLATE % 'country'
+  
+
+class FormattedAddress(atom.core.XmlElement):
+  """The gd:formattedAddress element.
+
+  The full, unstructured postal address.
+  """
+  _qname = GDATA_TEMPLATE % 'formattedAddress'
+  
+
+class StructuredPostalAddress(atom.core.XmlElement):
+  """The gd:structuredPostalAddress element.
+
+  Postal address split into components. It allows to store the address
+  in locale independent format. The fields can be interpreted and used
+  to generate formatted, locale dependent address. The following elements
+  reperesent parts of the address: agent, house name, street, P.O. box,
+  neighborhood, city, subregion, region, postal code, country. The
+  subregion element is not used for postal addresses, it is provided for
+  extended uses of addresses only. In order to store postal address in an
+  unstructured form formatted address field is provided. 
+  """
+  _qname = GDATA_TEMPLATE % 'structuredPostalAddress'
+  rel = 'rel'
+  mail_class = 'mailClass'
+  usage = 'usage'
+  label = 'label'
+  primary = 'primary'
+  agent = Agent
+  house_name = HouseName
+  street = Street
+  po_box = PoBox
+  neighborhood = Neighborhood
+  city = City
+  subregion = Subregion
+  region = Region
+  postcode = Postcode
+  country = Country
+  formatted_address = FormattedAddress
+
+
+class Where(atom.core.XmlElement):
+  """The gd:where element.
+
+  A place (such as an event location) associated with the containing
+  entity. The type of the association is determined by the rel attribute;
+  the details of the location are contained in an embedded or linked-to
+  Contact entry.
+
+  A <gd:where> element is more general than a <gd:geoPt> element. The
+  former identifies a place using a text description and/or a Contact
+  entry, while the latter identifies a place using a specific geographic
+  location.
+  """
+  _qname = GDATA_TEMPLATE % 'where'
+  label = 'label'
+  rel = 'rel'
+  value = 'valueString'
+  entry_link = EntryLink
+
+
+class AttendeeType(atom.core.XmlElement):
+  """The gd:attendeeType element."""
+  _qname = GDATA_TEMPLATE % 'attendeeType'
+  value = 'value'
+
+
+class AttendeeStatus(atom.core.XmlElement):
+  """The gd:attendeeStatus element."""
+  _qname = GDATA_TEMPLATE % 'attendeeStatus'
+  value = 'value'
+
+
+class Who(atom.core.XmlElement):
+  """The gd:who element.
+
+  A person associated with the containing entity. The type of the
+  association is determined by the rel attribute; the details about the
+  person are contained in an embedded or linked-to Contact entry.
+
+  The <gd:who> element can be used to specify email senders and
+  recipients, calendar event organizers, and so on.
+  """
+  _qname = GDATA_TEMPLATE % 'who'
+  email = 'email'
+  rel = 'rel'
+  value = 'valueString'
+  attendee_status = AttendeeStatus
+  attendee_type = AttendeeType
+  entry_link = EntryLink
