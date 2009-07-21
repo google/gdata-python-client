@@ -844,7 +844,7 @@ class Recurrence(atom.core.XmlElement):
 class RecurrenceException(atom.core.XmlElement):
   """The gd:recurrenceException element.
 
-  Represents an event that's an exception to a recurring event—that is,
+  Represents an event that's an exception to a recurring event-that is,
   an instance of a recurring event in which one or more aspects of the
   recurring event (such as attendance list, time, or location) have been
   changed.
