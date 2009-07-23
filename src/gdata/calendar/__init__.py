@@ -772,6 +772,7 @@ class CalendarEventEntry(gdata.BatchEntry):
   _children['{%s}originalEvent' % gdata.GDATA_NAMESPACE] = ('original_event',
                                                             OriginalEvent)
   _children['{%s}sequence' % GCAL_NAMESPACE] = ('sequence', Sequence)
+  _children['{%s}reminder' % gdata.GDATA_NAMESPACE] = ('reminder', [Reminder])
   
   def __init__(self, author=None, category=None, content=None,
       atom_id=None, link=None, published=None, 
@@ -782,7 +783,7 @@ class CalendarEventEntry(gdata.BatchEntry):
       where=None, when=None, who=None, quick_add=None,
       extended_property=None, original_event=None,
       batch_operation=None, batch_id=None, batch_status=None,
-      sequence=None,
+      sequence=None, reminder=None,
       extension_elements=None, extension_attributes=None, text=None):
 
     gdata.BatchEntry.__init__(self, author=author, category=category, 
@@ -806,6 +807,7 @@ class CalendarEventEntry(gdata.BatchEntry):
     self.extended_property = extended_property or []
     self.original_event = original_event
     self.sequence = sequence
+    self.reminder = reminder or []
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
