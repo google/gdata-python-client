@@ -266,9 +266,10 @@ class Reminder(atom.AtomBase):
   _attributes['days'] = 'days'
   _attributes['hours'] = 'hours'
   _attributes['minutes'] = 'minutes'
+  _attributes['method'] = 'method'
 
   def __init__(self, absolute_time=None,
-      days=None, hours=None, minutes=None, 
+      days=None, hours=None, minutes=None, method=None,
       extension_elements=None,
       extension_attributes=None, text=None):
     self.absolute_time = absolute_time
@@ -284,6 +285,7 @@ class Reminder(atom.AtomBase):
       self.minutes = str(minutes)
     else:
       self.minutes = None
+    self.method = method
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
