@@ -193,7 +193,7 @@ class AppEngineTokenStore(atom.token_store.TokenStore):
   users.get_current_user() returns a user object).
   """
   def __init__(self):
-    pass
+    self.user = None
 
   def add_token(self, token):
     """Associates the token with the current user and stores it.
@@ -203,12 +203,12 @@ class AppEngineTokenStore(atom.token_store.TokenStore):
     Returns:
       False if the token was not stored. 
     """
-    tokens = load_auth_tokens()
+    tokens = load_auth_tokens(self.user)
     if not hasattr(token, 'scopes') or not token.scopes:
       return False
     for scope in token.scopes:
       tokens[str(scope)] = token
-    key = save_auth_tokens(tokens)
+    key = save_auth_tokens(tokens, self.user)
     if key:
       return True
     return False
@@ -226,14 +226,14 @@ class AppEngineTokenStore(atom.token_store.TokenStore):
       return None
     if isinstance(url, (str, unicode)):
       url = atom.url.parse_url(url)
-    tokens = load_auth_tokens()
+    tokens = load_auth_tokens(self.user)
     if url in tokens:
       token = tokens[url]
       if token.valid_for_scope(url):
         return token
       else:
         del tokens[url]
-        save_auth_tokens(tokens)
+        save_auth_tokens(tokens, self.user)
     for scope, token in tokens.iteritems():
       if token.valid_for_scope(url):
         return token
@@ -248,7 +248,7 @@ class AppEngineTokenStore(atom.token_store.TokenStore):
     """
     token_found = False
     scopes_to_delete = []
-    tokens = load_auth_tokens()
+    tokens = load_auth_tokens(self.user)
     for scope, stored_token in tokens.iteritems():
       if stored_token == token:
         scopes_to_delete.append(scope)
@@ -256,15 +256,15 @@ class AppEngineTokenStore(atom.token_store.TokenStore):
     for scope in scopes_to_delete:
       del tokens[scope]
     if token_found:
-      save_auth_tokens(tokens)
+      save_auth_tokens(tokens, self.user)
     return token_found
 
   def remove_all_tokens(self):
     """Removes all of the current user's tokens from the datastore."""
-    save_auth_tokens({})
+    save_auth_tokens({}, self.user)
 
 
-def save_auth_tokens(token_dict):
+def save_auth_tokens(token_dict, user):
   """Associates the tokens with the current user and writes to the datastore.
   
   If there us no current user, the tokens are not written and this function
@@ -274,28 +274,32 @@ def save_auth_tokens(token_dict):
     The key of the datastore entity containing the user's tokens, or None if
     there was no current user.
   """
-  if users.get_current_user() is None:
+  if user is None:
+    user = users.get_current_user()
+  if user is None:
     return None
-  user_tokens = TokenCollection.all().filter('user =', users.get_current_user()).get()
+  user_tokens = TokenCollection.all().filter('user =', user).get()
   if user_tokens:
     user_tokens.pickled_tokens = pickle.dumps(token_dict)
     return user_tokens.put()
   else:
     user_tokens = TokenCollection(
-        user=users.get_current_user(), 
+        user=user, 
         pickled_tokens=pickle.dumps(token_dict))
     return user_tokens.put()
      
 
-def load_auth_tokens():
+def load_auth_tokens(user):
   """Reads a dictionary of the current user's tokens from the datastore.
   
   If there is no current user (a user is not signed in to the app) or the user
   does not have any tokens, an empty dictionary is returned.
   """
-  if users.get_current_user() is None:
+  if user is None:
+    user = users.get_current_user()
+  if user is None:
     return {}
-  user_tokens = TokenCollection.all().filter('user =', users.get_current_user()).get()
+  user_tokens = TokenCollection.all().filter('user =', user).get()
   if user_tokens:
     return pickle.loads(user_tokens.pickled_tokens)
   return {}
