@@ -216,7 +216,8 @@ def AnalyticsDataFeedFromString(xml_string):
     for entry in feed.entry:
       for met in entry.metric:
         entry.__dict__[met.name.replace('ga:','')] = met
-      for dim in entry.dimension:
-        entry.__dict__[dim.name.replace('ga:','')] = dim
+      if entry.dimension is not None:
+        for dim in entry.dimension:
+          entry.__dict__[dim.name.replace('ga:','')] = dim
         
   return feed
