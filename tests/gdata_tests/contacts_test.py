@@ -95,6 +95,7 @@ class ContactEntryTest(unittest.TestCase):
         org_name=gdata.contacts.OrgName(text='TestCo.'))
     new_entry.extended_property.append(gdata.ExtendedProperty(name='test',
         value='1234'))
+    new_entry.birthday = gdata.contacts.Birthday(when='2009-7-23')
     sports_property = gdata.ExtendedProperty(name='sports')
     sports_property.SetXmlBlob('<dance><salsa/><ballroom_dancing/></dance>')
     new_entry.extended_property.append(sports_property)
@@ -109,6 +110,7 @@ class ContactEntryTest(unittest.TestCase):
     self.assertEquals(len(entry_copy.phone_number), 1) 
     self.assertEquals(entry_copy.phone_number[0].rel, 
         new_entry.phone_number[0].rel)
+    self.assertEquals(entry_copy.birthday.when, '2009-7-23')
     self.assertEquals(entry_copy.phone_number[0].text, '(206)555-1212')
     self.assertEquals(entry_copy.organization.org_name.text, 'TestCo.')
     self.assertEquals(len(entry_copy.extended_property), 2)

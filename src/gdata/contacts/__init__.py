@@ -231,6 +231,21 @@ class GroupMembershipInfo(atom.AtomBase):
     self.extension_attributes = extension_attributes or {}
 
 
+class Birthday(atom.AtomBase):
+  _tag = 'birthday'
+  _namespace = CONTACTS_NAMESPACE
+  _attributes = atom.AtomBase._attributes.copy()
+
+  _attributes['when'] = 'when'
+
+  def __init__(self, when=None, text=None, extension_elements=None, 
+      extension_attributes=None):
+    self.when = when
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+
 class ContactEntry(gdata.BatchEntry):
   """A Google Contact flavor of an Atom Entry """
 
@@ -249,12 +264,13 @@ class ContactEntry(gdata.BatchEntry):
       'group_membership_info', [GroupMembershipInfo])
   _children['{%s}extendedProperty' % gdata.GDATA_NAMESPACE] = (
       'extended_property', [gdata.ExtendedProperty])
+  _children['{%s}birthday' % CONTACTS_NAMESPACE] = ('birthday', Birthday)
   
   def __init__(self, author=None, category=None, content=None,
       atom_id=None, link=None, published=None, 
       title=None, updated=None, email=None, postal_address=None, 
       deleted=None, organization=None, phone_number=None, im=None,
-      extended_property=None, group_membership_info=None,
+      extended_property=None, group_membership_info=None, birthday=None,
       batch_operation=None, batch_id=None, batch_status=None,
       extension_elements=None, extension_attributes=None, text=None):
     gdata.BatchEntry.__init__(self, author=author, category=category, 
@@ -269,6 +285,7 @@ class ContactEntry(gdata.BatchEntry):
     self.extended_property = extended_property or []
     self.email = email or []
     self.group_membership_info = group_membership_info or []
+    self.birthday = birthday
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
