@@ -232,6 +232,7 @@ tests/all_tests.py
 tests/all_tests_cached.py
 tests/all_tests_clear_cache.py
 tests/all_tests_coverage.py
+tests/all_tests_local.py
 tests/atom_test.py
 tests/coverage.py
 tests/files/testimage.jpg

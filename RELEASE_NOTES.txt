@@ -1,5 +1,5 @@
 === 2.0.1 ===
-July 23, 2009 (revision 80?)
+July 23, 2009 (revision 805)
 
 - Added support for Secure AuthSub, OAuth with HMAC and with RSA to the
     v2 auth code.
