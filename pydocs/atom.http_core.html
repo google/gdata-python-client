@@ -26,14 +26,15 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="StringIO.html">StringIO</a><br>
-</td><td width="25%" valign=top><a href="httplib.html">httplib</a><br>
-</td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
+<a href="httplib.html">httplib</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+<a href="urllib.html">urllib</a><br>
 </td><td width="25%" valign=top><a href="urlparse.html">urlparse</a><br>
-</td></tr></table></td></tr></table><p>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -45,7 +46,12 @@
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="atom.http_core.html#HttpClient">HttpClient</a>
-</font></dt><dt><font face="helvetica, arial"><a href="atom.http_core.html#HttpRequest">HttpRequest</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="atom.http_core.html#ProxiedHttpClient">ProxiedHttpClient</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="atom.http_core.html#HttpRequest">HttpRequest</a>
 </font></dt><dt><font face="helvetica, arial"><a href="atom.http_core.html#HttpResponse">HttpResponse</a>
 </font></dt><dt><font face="helvetica, arial"><a href="atom.http_core.html#Uri">Uri</a>
 </font></dt></dl>
@@ -56,7 +62,8 @@
 <dt><font face="helvetica, arial"><a href="atom.http_core.html#Error">Error</a>
 </font></dt><dd>
 <dl>
-<dt><font face="helvetica, arial"><a href="atom.http_core.html#UnknownSize">UnknownSize</a>
+<dt><font face="helvetica, arial"><a href="atom.http_core.html#ProxyError">ProxyError</a>
+</font></dt><dt><font face="helvetica, arial"><a href="atom.http_core.html#UnknownSize">UnknownSize</a>
 </font></dt></dl>
 </dd>
 </dl>
@@ -86,7 +93,7 @@ Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception<
 
 <hr>
 Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#Error-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x74d100&gt;<dd><tt>T.<a href="#Error-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
 <hr>
 Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
@@ -110,6 +117,8 @@ Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd
 
 <dl><dt><a name="Error-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
 
+<dl><dt><a name="Error-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
 <hr>
 Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
@@ -117,7 +126,6 @@ Data descriptors inherited from <a href="exceptions.html#BaseException">exceptio
 <dl><dt><strong>args</strong></dt>
 </dl>
 <dl><dt><strong>message</strong></dt>
-<dd><tt>exception&nbsp;message</tt></dd>
 </dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -239,6 +247,95 @@ Data and other attributes defined here:<br>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ProxiedHttpClient">class <strong>ProxiedHttpClient</strong></a>(<a href="atom.http_core.html#HttpClient">HttpClient</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.http_core.html#ProxiedHttpClient">ProxiedHttpClient</a></dd>
+<dd><a href="atom.http_core.html#HttpClient">HttpClient</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.http_core.html#HttpClient">HttpClient</a>:<br>
+<dl><dt><a name="ProxiedHttpClient-Request"><strong>Request</strong></a> = request(self, http_request)</dt></dl>
+
+<dl><dt><a name="ProxiedHttpClient-request"><strong>request</strong></a>(self, http_request)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.http_core.html#HttpClient">HttpClient</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.http_core.html#HttpClient">HttpClient</a>:<br>
+<dl><dt><strong>debug</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ProxyError">class <strong>ProxyError</strong></a>(<a href="atom.http_core.html#Error">Error</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.http_core.html#ProxyError">ProxyError</a></dd>
+<dd><a href="atom.http_core.html#Error">Error</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="atom.http_core.html#Error">Error</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="ProxyError-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#ProxyError-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x74d100&gt;<dd><tt>T.<a href="#ProxyError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="ProxyError-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#ProxyError-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="ProxyError-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#ProxyError-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="ProxyError-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#ProxyError-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="ProxyError-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#ProxyError-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="ProxyError-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="ProxyError-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#ProxyError-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="ProxyError-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#ProxyError-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="ProxyError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="ProxyError-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#ProxyError-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="ProxyError-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="UnknownSize">class <strong>UnknownSize</strong></a>(<a href="atom.http_core.html#Error">Error</a>)</font></td></tr>
     
 <tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
@@ -260,7 +357,7 @@ Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception<
 
 <hr>
 Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x722d20&gt;<dd><tt>T.<a href="#UnknownSize-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x74d100&gt;<dd><tt>T.<a href="#UnknownSize-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
 <hr>
 Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
@@ -284,6 +381,8 @@ Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd
 
 <dl><dt><a name="UnknownSize-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#UnknownSize-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
 
+<dl><dt><a name="UnknownSize-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
 <hr>
 Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
@@ -291,7 +390,6 @@ Data descriptors inherited from <a href="exceptions.html#BaseException">exceptio
 <dl><dt><strong>args</strong></dt>
 </dl>
 <dl><dt><strong>message</strong></dt>
-<dd><tt>exception&nbsp;message</tt></dd>
 </dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">

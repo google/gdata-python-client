@@ -17,7 +17,7 @@ For&nbsp;documentation&nbsp;on&nbsp;the&nbsp;Blogger&nbsp;API,&nbsp;see:<br>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="atom.html">atom</a><br>
@@ -58,7 +58,7 @@ For&nbsp;documentation&nbsp;on&nbsp;the&nbsp;Blogger&nbsp;API,&nbsp;see:<br>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="BloggerClient-AddComment"><strong>AddComment</strong></a> = <a href="#BloggerClient-add_comment">add_comment</a>(self, blog_id, post_id, title, body, auth_token<font color="#909090">=None</font>, title_type<font color="#909090">='text'</font>, body_type<font color="#909090">='html'</font>, **kwargs)</dt></dl>
+<dl><dt><a name="BloggerClient-AddComment"><strong>AddComment</strong></a> = <a href="#BloggerClient-add_comment">add_comment</a>(self, blog_id, post_id, body, auth_token<font color="#909090">=None</font>, title_type<font color="#909090">='text'</font>, body_type<font color="#909090">='html'</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="BloggerClient-AddPost"><strong>AddPost</strong></a> = <a href="#BloggerClient-add_post">add_post</a>(self, blog_id, title, body, labels<font color="#909090">=None</font>, draft<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, title_type<font color="#909090">='text'</font>, body_type<font color="#909090">='html'</font>, **kwargs)</dt></dl>
 
@@ -76,7 +76,7 @@ Methods defined here:<br>
 
 <dl><dt><a name="BloggerClient-Update"><strong>Update</strong></a> = <a href="#BloggerClient-update">update</a>(self, entry, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="BloggerClient-add_comment"><strong>add_comment</strong></a>(self, blog_id, post_id, title, body, auth_token<font color="#909090">=None</font>, title_type<font color="#909090">='text'</font>, body_type<font color="#909090">='html'</font>, **kwargs)</dt></dl>
+<dl><dt><a name="BloggerClient-add_comment"><strong>add_comment</strong></a>(self, blog_id, post_id, body, auth_token<font color="#909090">=None</font>, title_type<font color="#909090">='text'</font>, body_type<font color="#909090">='html'</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="BloggerClient-add_post"><strong>add_post</strong></a>(self, blog_id, title, body, labels<font color="#909090">=None</font>, draft<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, title_type<font color="#909090">='text'</font>, body_type<font color="#909090">='html'</font>, **kwargs)</dt></dl>
 
@@ -106,6 +106,20 @@ Data and other attributes defined here:<br>
 Methods inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
 <dl><dt><a name="BloggerClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">='https://www.google.com/accounts/ClientLogin'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
+<dl><dt><a name="BloggerClient-GetAccessToken"><strong>GetAccessToken</strong></a> = get_access_token(self, request_token, url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>)</dt><dd><tt>Exchanges&nbsp;an&nbsp;authorized&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;for&nbsp;an&nbsp;access&nbsp;token.<br>
+&nbsp;<br>
+Contacts&nbsp;the&nbsp;Google&nbsp;OAuth&nbsp;server&nbsp;to&nbsp;upgrade&nbsp;a&nbsp;previously&nbsp;authorized<br>
+request&nbsp;token.&nbsp;Once&nbsp;the&nbsp;request&nbsp;token&nbsp;is&nbsp;upgraded&nbsp;to&nbsp;an&nbsp;access&nbsp;token,<br>
+the&nbsp;access&nbsp;token&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;access&nbsp;the&nbsp;user's&nbsp;data.<br>
+&nbsp;<br>
+For&nbsp;more&nbsp;details,&nbsp;see&nbsp;the&nbsp;Google&nbsp;Accounts&nbsp;OAuth&nbsp;documentation:<br>
+<a href="http://code.google.com/apis/accounts/docs/OAuth.html#AccessToken">http://code.google.com/apis/accounts/docs/OAuth.html#AccessToken</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;request_token:&nbsp;An&nbsp;OAuth&nbsp;token&nbsp;which&nbsp;has&nbsp;been&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.<br>
+&nbsp;&nbsp;url:&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;the&nbsp;upgrade&nbsp;request&nbsp;should&nbsp;be&nbsp;sent.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defaults&nbsp;to:&nbsp;https://www.google.com/accounts/OAuthAuthorizeToken</tt></dd></dl>
+
 <dl><dt><a name="BloggerClient-GetEntry"><strong>GetEntry</strong></a> = get_entry(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDEntry'&gt;</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="BloggerClient-GetFeed"><strong>GetFeed</strong></a> = get_feed(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDFeed'&gt;</font>, **kwargs)</dt></dl>
@@ -120,6 +134,42 @@ a&nbsp;next&nbsp;link.&nbsp;This&nbsp;method&nbsp;performs&nbsp;a&nbsp;GET&nbsp;
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;feed&nbsp;object&nbsp;containing&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;entries&nbsp;in&nbsp;this&nbsp;feed.</tt></dd></dl>
+
+<dl><dt><a name="BloggerClient-GetOAuthToken"><strong>GetOAuthToken</strong></a> = get_oauth_token(self, scopes, next, consumer_key, consumer_secret<font color="#909090">=None</font>, rsa_private_key<font color="#909090">=None</font>, url<font color="#909090">='https://www.google.com/accounts/OAuthGetRequestToken'</font>)</dt><dd><tt>Obtains&nbsp;an&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;to&nbsp;allow&nbsp;the&nbsp;user&nbsp;to&nbsp;authorize&nbsp;this&nbsp;app.<br>
+&nbsp;<br>
+Once&nbsp;this&nbsp;client&nbsp;has&nbsp;a&nbsp;request&nbsp;token,&nbsp;the&nbsp;user&nbsp;can&nbsp;authorize&nbsp;the&nbsp;request<br>
+token&nbsp;by&nbsp;visiting&nbsp;the&nbsp;authorization&nbsp;URL&nbsp;in&nbsp;their&nbsp;browser.&nbsp;After&nbsp;being<br>
+redirected&nbsp;back&nbsp;to&nbsp;this&nbsp;app&nbsp;at&nbsp;the&nbsp;'next'&nbsp;URL,&nbsp;this&nbsp;app&nbsp;can&nbsp;then&nbsp;exchange<br>
+the&nbsp;authorized&nbsp;request&nbsp;token&nbsp;for&nbsp;an&nbsp;access&nbsp;token.<br>
+&nbsp;<br>
+For&nbsp;more&nbsp;information&nbsp;see&nbsp;the&nbsp;documentation&nbsp;on&nbsp;Google&nbsp;Accounts&nbsp;with&nbsp;OAuth:<br>
+<a href="http://code.google.com/apis/accounts/docs/OAuth.html#AuthProcess">http://code.google.com/apis/accounts/docs/OAuth.html#AuthProcess</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;scopes:&nbsp;list&nbsp;of&nbsp;strings&nbsp;or&nbsp;atom.http_core.Uri&nbsp;objects&nbsp;which&nbsp;specify&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;URL&nbsp;prefixes&nbsp;which&nbsp;this&nbsp;app&nbsp;will&nbsp;be&nbsp;accessing.&nbsp;For&nbsp;example,&nbsp;to&nbsp;access<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Google&nbsp;Calendar&nbsp;API,&nbsp;you&nbsp;would&nbsp;want&nbsp;to&nbsp;use&nbsp;scopes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['https://www.google.com/calendar/feeds/',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<a href="http://www.google.com/calendar/feeds/">http://www.google.com/calendar/feeds/</a>']<br>
+&nbsp;&nbsp;next:&nbsp;str&nbsp;or&nbsp;atom.http_core.Uri&nbsp;object,&nbsp;The&nbsp;URL&nbsp;which&nbsp;the&nbsp;user's&nbsp;browser<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should&nbsp;be&nbsp;sent&nbsp;to&nbsp;after&nbsp;they&nbsp;authorize&nbsp;access&nbsp;to&nbsp;their&nbsp;data.&nbsp;This<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should&nbsp;be&nbsp;a&nbsp;URL&nbsp;in&nbsp;your&nbsp;application&nbsp;which&nbsp;will&nbsp;read&nbsp;the&nbsp;token<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;information&nbsp;from&nbsp;the&nbsp;URL&nbsp;and&nbsp;upgrade&nbsp;the&nbsp;request&nbsp;token&nbsp;to&nbsp;an&nbsp;access<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token.<br>
+&nbsp;&nbsp;consumer_key:&nbsp;str&nbsp;This&nbsp;is&nbsp;the&nbsp;identifier&nbsp;for&nbsp;this&nbsp;application&nbsp;which&nbsp;you<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should&nbsp;have&nbsp;received&nbsp;when&nbsp;you&nbsp;registered&nbsp;your&nbsp;application&nbsp;with&nbsp;Google<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;use&nbsp;OAuth.<br>
+&nbsp;&nbsp;consumer_secret:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;shared&nbsp;secret&nbsp;between&nbsp;your&nbsp;app&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Google&nbsp;which&nbsp;provides&nbsp;evidence&nbsp;that&nbsp;this&nbsp;request&nbsp;is&nbsp;coming&nbsp;from&nbsp;you<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;application&nbsp;and&nbsp;not&nbsp;another&nbsp;app.&nbsp;If&nbsp;present,&nbsp;this&nbsp;libraries&nbsp;assumes<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;you&nbsp;want&nbsp;to&nbsp;use&nbsp;an&nbsp;HMAC&nbsp;signature&nbsp;to&nbsp;verify&nbsp;requests.&nbsp;Keep&nbsp;this&nbsp;data<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;secret.<br>
+&nbsp;&nbsp;rsa_private_key:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;RSA&nbsp;private&nbsp;key&nbsp;which&nbsp;is&nbsp;used&nbsp;to&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;generate&nbsp;a&nbsp;digital&nbsp;signature&nbsp;which&nbsp;is&nbsp;checked&nbsp;by&nbsp;Google's&nbsp;server.&nbsp;If<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;present,&nbsp;this&nbsp;library&nbsp;assumes&nbsp;that&nbsp;you&nbsp;want&nbsp;to&nbsp;use&nbsp;an&nbsp;RSA&nbsp;signature<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;verify&nbsp;requests.&nbsp;Keep&nbsp;this&nbsp;data&nbsp;a&nbsp;secret.<br>
+&nbsp;&nbsp;url:&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;a&nbsp;request&nbsp;for&nbsp;a&nbsp;token&nbsp;should&nbsp;be&nbsp;made.&nbsp;The&nbsp;default<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;Google's&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;provider.</tt></dd></dl>
 
 <dl><dt><a name="BloggerClient-ModifyRequest"><strong>ModifyRequest</strong></a> = modify_request(self, http_request)</dt><dd><tt>Adds&nbsp;or&nbsp;changes&nbsp;request&nbsp;before&nbsp;making&nbsp;the&nbsp;HTTP&nbsp;request.<br>
 &nbsp;<br>
@@ -182,26 +232,40 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using&nbsp;<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="BloggerClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xd104d0&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="BloggerClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xd12e50&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="BloggerClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xd10510&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="BloggerClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xd12e90&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;token:&nbsp;gdata.gauth.AuthSubToken&nbsp;(optional)&nbsp;If&nbsp;no&nbsp;token&nbsp;is&nbsp;passed&nbsp;in,&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;client's&nbsp;auth_token&nbsp;member&nbsp;is&nbsp;used&nbsp;to&nbsp;request&nbsp;the&nbsp;new&nbsp;token.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;token&nbsp;object&nbsp;will&nbsp;be&nbsp;modified&nbsp;to&nbsp;contain&nbsp;the&nbsp;new&nbsp;session&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token&nbsp;string.<br>
+&nbsp;&nbsp;token:&nbsp;gdata.gauth.AuthSubToken&nbsp;or&nbsp;gdata.gauth.SecureAuthSubToken<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(optional)&nbsp;If&nbsp;no&nbsp;token&nbsp;is&nbsp;passed&nbsp;in,&nbsp;the&nbsp;client's&nbsp;auth_token&nbsp;member<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;used&nbsp;to&nbsp;request&nbsp;the&nbsp;new&nbsp;token.&nbsp;The&nbsp;token&nbsp;object&nbsp;will&nbsp;be&nbsp;modified<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;contain&nbsp;the&nbsp;new&nbsp;session&nbsp;token&nbsp;string.<br>
 &nbsp;&nbsp;url:&nbsp;str&nbsp;or&nbsp;atom.http_core.Uri&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;the&nbsp;token<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upgrade&nbsp;request&nbsp;should&nbsp;be&nbsp;sent.&nbsp;Defaults&nbsp;to:&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.google.com/accounts/AuthSubSessionToken<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upgrade&nbsp;request&nbsp;should&nbsp;be&nbsp;sent.&nbsp;Defaults&nbsp;to:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.google.com/accounts/AuthSubSessionToken<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
 
 <dl><dt><a name="BloggerClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">='https://www.google.com/accounts/ClientLogin'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="BloggerClient-get_access_token"><strong>get_access_token</strong></a>(self, request_token, url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>)</dt><dd><tt>Exchanges&nbsp;an&nbsp;authorized&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;for&nbsp;an&nbsp;access&nbsp;token.<br>
+&nbsp;<br>
+Contacts&nbsp;the&nbsp;Google&nbsp;OAuth&nbsp;server&nbsp;to&nbsp;upgrade&nbsp;a&nbsp;previously&nbsp;authorized<br>
+request&nbsp;token.&nbsp;Once&nbsp;the&nbsp;request&nbsp;token&nbsp;is&nbsp;upgraded&nbsp;to&nbsp;an&nbsp;access&nbsp;token,<br>
+the&nbsp;access&nbsp;token&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;access&nbsp;the&nbsp;user's&nbsp;data.<br>
+&nbsp;<br>
+For&nbsp;more&nbsp;details,&nbsp;see&nbsp;the&nbsp;Google&nbsp;Accounts&nbsp;OAuth&nbsp;documentation:<br>
+<a href="http://code.google.com/apis/accounts/docs/OAuth.html#AccessToken">http://code.google.com/apis/accounts/docs/OAuth.html#AccessToken</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;request_token:&nbsp;An&nbsp;OAuth&nbsp;token&nbsp;which&nbsp;has&nbsp;been&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.<br>
+&nbsp;&nbsp;url:&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;the&nbsp;upgrade&nbsp;request&nbsp;should&nbsp;be&nbsp;sent.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defaults&nbsp;to:&nbsp;https://www.google.com/accounts/OAuthAuthorizeToken</tt></dd></dl>
 
 <dl><dt><a name="BloggerClient-get_entry"><strong>get_entry</strong></a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDEntry'&gt;</font>, **kwargs)</dt></dl>
 
@@ -217,6 +281,42 @@ a&nbsp;next&nbsp;link.&nbsp;This&nbsp;method&nbsp;performs&nbsp;a&nbsp;GET&nbsp;
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;feed&nbsp;object&nbsp;containing&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;entries&nbsp;in&nbsp;this&nbsp;feed.</tt></dd></dl>
+
+<dl><dt><a name="BloggerClient-get_oauth_token"><strong>get_oauth_token</strong></a>(self, scopes, next, consumer_key, consumer_secret<font color="#909090">=None</font>, rsa_private_key<font color="#909090">=None</font>, url<font color="#909090">='https://www.google.com/accounts/OAuthGetRequestToken'</font>)</dt><dd><tt>Obtains&nbsp;an&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;to&nbsp;allow&nbsp;the&nbsp;user&nbsp;to&nbsp;authorize&nbsp;this&nbsp;app.<br>
+&nbsp;<br>
+Once&nbsp;this&nbsp;client&nbsp;has&nbsp;a&nbsp;request&nbsp;token,&nbsp;the&nbsp;user&nbsp;can&nbsp;authorize&nbsp;the&nbsp;request<br>
+token&nbsp;by&nbsp;visiting&nbsp;the&nbsp;authorization&nbsp;URL&nbsp;in&nbsp;their&nbsp;browser.&nbsp;After&nbsp;being<br>
+redirected&nbsp;back&nbsp;to&nbsp;this&nbsp;app&nbsp;at&nbsp;the&nbsp;'next'&nbsp;URL,&nbsp;this&nbsp;app&nbsp;can&nbsp;then&nbsp;exchange<br>
+the&nbsp;authorized&nbsp;request&nbsp;token&nbsp;for&nbsp;an&nbsp;access&nbsp;token.<br>
+&nbsp;<br>
+For&nbsp;more&nbsp;information&nbsp;see&nbsp;the&nbsp;documentation&nbsp;on&nbsp;Google&nbsp;Accounts&nbsp;with&nbsp;OAuth:<br>
+<a href="http://code.google.com/apis/accounts/docs/OAuth.html#AuthProcess">http://code.google.com/apis/accounts/docs/OAuth.html#AuthProcess</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;scopes:&nbsp;list&nbsp;of&nbsp;strings&nbsp;or&nbsp;atom.http_core.Uri&nbsp;objects&nbsp;which&nbsp;specify&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;URL&nbsp;prefixes&nbsp;which&nbsp;this&nbsp;app&nbsp;will&nbsp;be&nbsp;accessing.&nbsp;For&nbsp;example,&nbsp;to&nbsp;access<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Google&nbsp;Calendar&nbsp;API,&nbsp;you&nbsp;would&nbsp;want&nbsp;to&nbsp;use&nbsp;scopes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['https://www.google.com/calendar/feeds/',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<a href="http://www.google.com/calendar/feeds/">http://www.google.com/calendar/feeds/</a>']<br>
+&nbsp;&nbsp;next:&nbsp;str&nbsp;or&nbsp;atom.http_core.Uri&nbsp;object,&nbsp;The&nbsp;URL&nbsp;which&nbsp;the&nbsp;user's&nbsp;browser<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should&nbsp;be&nbsp;sent&nbsp;to&nbsp;after&nbsp;they&nbsp;authorize&nbsp;access&nbsp;to&nbsp;their&nbsp;data.&nbsp;This<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should&nbsp;be&nbsp;a&nbsp;URL&nbsp;in&nbsp;your&nbsp;application&nbsp;which&nbsp;will&nbsp;read&nbsp;the&nbsp;token<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;information&nbsp;from&nbsp;the&nbsp;URL&nbsp;and&nbsp;upgrade&nbsp;the&nbsp;request&nbsp;token&nbsp;to&nbsp;an&nbsp;access<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token.<br>
+&nbsp;&nbsp;consumer_key:&nbsp;str&nbsp;This&nbsp;is&nbsp;the&nbsp;identifier&nbsp;for&nbsp;this&nbsp;application&nbsp;which&nbsp;you<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should&nbsp;have&nbsp;received&nbsp;when&nbsp;you&nbsp;registered&nbsp;your&nbsp;application&nbsp;with&nbsp;Google<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;use&nbsp;OAuth.<br>
+&nbsp;&nbsp;consumer_secret:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;shared&nbsp;secret&nbsp;between&nbsp;your&nbsp;app&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Google&nbsp;which&nbsp;provides&nbsp;evidence&nbsp;that&nbsp;this&nbsp;request&nbsp;is&nbsp;coming&nbsp;from&nbsp;you<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;application&nbsp;and&nbsp;not&nbsp;another&nbsp;app.&nbsp;If&nbsp;present,&nbsp;this&nbsp;libraries&nbsp;assumes<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;you&nbsp;want&nbsp;to&nbsp;use&nbsp;an&nbsp;HMAC&nbsp;signature&nbsp;to&nbsp;verify&nbsp;requests.&nbsp;Keep&nbsp;this&nbsp;data<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;secret.<br>
+&nbsp;&nbsp;rsa_private_key:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;RSA&nbsp;private&nbsp;key&nbsp;which&nbsp;is&nbsp;used&nbsp;to&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;generate&nbsp;a&nbsp;digital&nbsp;signature&nbsp;which&nbsp;is&nbsp;checked&nbsp;by&nbsp;Google's&nbsp;server.&nbsp;If<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;present,&nbsp;this&nbsp;library&nbsp;assumes&nbsp;that&nbsp;you&nbsp;want&nbsp;to&nbsp;use&nbsp;an&nbsp;RSA&nbsp;signature<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;verify&nbsp;requests.&nbsp;Keep&nbsp;this&nbsp;data&nbsp;a&nbsp;secret.<br>
+&nbsp;&nbsp;url:&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;a&nbsp;request&nbsp;for&nbsp;a&nbsp;token&nbsp;should&nbsp;be&nbsp;made.&nbsp;The&nbsp;default<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;Google's&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;provider.</tt></dd></dl>
 
 <dl><dt><a name="BloggerClient-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt><dd><tt>Adds&nbsp;or&nbsp;changes&nbsp;request&nbsp;before&nbsp;making&nbsp;the&nbsp;HTTP&nbsp;request.<br>
 &nbsp;<br>
@@ -279,21 +379,21 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using&nbsp;<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="BloggerClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xd104d0&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="BloggerClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xd12e50&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="BloggerClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xd10510&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="BloggerClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xd12e90&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;token:&nbsp;gdata.gauth.AuthSubToken&nbsp;(optional)&nbsp;If&nbsp;no&nbsp;token&nbsp;is&nbsp;passed&nbsp;in,&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;client's&nbsp;auth_token&nbsp;member&nbsp;is&nbsp;used&nbsp;to&nbsp;request&nbsp;the&nbsp;new&nbsp;token.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;token&nbsp;object&nbsp;will&nbsp;be&nbsp;modified&nbsp;to&nbsp;contain&nbsp;the&nbsp;new&nbsp;session&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token&nbsp;string.<br>
+&nbsp;&nbsp;token:&nbsp;gdata.gauth.AuthSubToken&nbsp;or&nbsp;gdata.gauth.SecureAuthSubToken<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(optional)&nbsp;If&nbsp;no&nbsp;token&nbsp;is&nbsp;passed&nbsp;in,&nbsp;the&nbsp;client's&nbsp;auth_token&nbsp;member<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;used&nbsp;to&nbsp;request&nbsp;the&nbsp;new&nbsp;token.&nbsp;The&nbsp;token&nbsp;object&nbsp;will&nbsp;be&nbsp;modified<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;contain&nbsp;the&nbsp;new&nbsp;session&nbsp;token&nbsp;string.<br>
 &nbsp;&nbsp;url:&nbsp;str&nbsp;or&nbsp;atom.http_core.Uri&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;the&nbsp;token<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upgrade&nbsp;request&nbsp;should&nbsp;be&nbsp;sent.&nbsp;Defaults&nbsp;to:&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.google.com/accounts/AuthSubSessionToken<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upgrade&nbsp;request&nbsp;should&nbsp;be&nbsp;sent.&nbsp;Defaults&nbsp;to:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.google.com/accounts/AuthSubSessionToken<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
@@ -308,9 +408,10 @@ Methods inherited from <a href="atom.client.html#AtomPubClient">atom.client.Atom
 
 <dl><dt><a name="BloggerClient-Put"><strong>Put</strong></a> = put(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="BloggerClient-__init__"><strong>__init__</strong></a>(self, http_client<font color="#909090">=None</font>, host<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;AtomPubClient&nbsp;instance.<br>
+<dl><dt><a name="BloggerClient-__init__"><strong>__init__</strong></a>(self, http_client<font color="#909090">=None</font>, host<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, source<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;AtomPubClient&nbsp;instance.<br>
 &nbsp;<br>
 Args:<br>
+&nbsp;&nbsp;source:&nbsp;The&nbsp;name&nbsp;of&nbsp;your&nbsp;application.<br>
 &nbsp;&nbsp;http_client:&nbsp;An&nbsp;object&nbsp;capable&nbsp;of&nbsp;performing&nbsp;HTTP&nbsp;requests&nbsp;through&nbsp;a<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request&nbsp;method.&nbsp;This&nbsp;object&nbsp;is&nbsp;used&nbsp;to&nbsp;perform&nbsp;the&nbsp;request<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;when&nbsp;the&nbsp;AtomPubClient's&nbsp;request&nbsp;method&nbsp;is&nbsp;called.&nbsp;Used&nbsp;to<br>

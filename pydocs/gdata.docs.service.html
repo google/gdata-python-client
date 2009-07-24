@@ -22,13 +22,14 @@ operations.<br>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="atom.html">atom</a><br>
 </td><td width="25%" valign=top><a href="gdata.html">gdata</a><br>
 </td><td width="25%" valign=top><a href="re.html">re</a><br>
-</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+</td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
+</td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -80,31 +81,39 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;DocumentListEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;folder&nbsp;created&nbsp;on<br>
 &nbsp;&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
 
-<dl><dt><a name="DocsService-DownloadDocument"><strong>DownloadDocument</strong></a>(self, entry_or_resource_id, file_path)</dt><dd><tt>Downloads&nbsp;a&nbsp;document&nbsp;from&nbsp;the&nbsp;Document&nbsp;List.<br>
+<dl><dt><a name="DocsService-Download"><strong>Download</strong></a>(self, entry_or_id_or_url, file_path, export_format<font color="#909090">=None</font>, gid<font color="#909090">=None</font>, extra_params<font color="#909090">=None</font>)</dt><dd><tt>Downloads&nbsp;a&nbsp;document&nbsp;from&nbsp;the&nbsp;Document&nbsp;List.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;entry_or_resource_id:&nbsp;DoclistEntry&nbsp;or&nbsp;string&nbsp;of&nbsp;the&nbsp;document<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource&nbsp;id&nbsp;to&nbsp;download.<br>
-&nbsp;&nbsp;file_path:&nbsp;string&nbsp;The&nbsp;full&nbsp;path&nbsp;to&nbsp;save&nbsp;the&nbsp;file&nbsp;to.&nbsp;&nbsp;The&nbsp;export<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format&nbsp;is&nbsp;inferred&nbsp;from&nbsp;the&nbsp;the&nbsp;file&nbsp;extension.</tt></dd></dl>
+&nbsp;&nbsp;entry_or_id_or_url:&nbsp;a&nbsp;DocumentListEntry,&nbsp;or&nbsp;the&nbsp;resource&nbsp;id&nbsp;of&nbsp;an&nbsp;entry,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;a&nbsp;url&nbsp;to&nbsp;download&nbsp;from&nbsp;(such&nbsp;as&nbsp;the&nbsp;content&nbsp;src).<br>
+&nbsp;&nbsp;file_path:&nbsp;string&nbsp;The&nbsp;full&nbsp;path&nbsp;to&nbsp;save&nbsp;the&nbsp;file&nbsp;to.<br>
+&nbsp;&nbsp;export_format:&nbsp;the&nbsp;format&nbsp;to&nbsp;convert&nbsp;to,&nbsp;if&nbsp;conversion&nbsp;is&nbsp;required.<br>
+&nbsp;&nbsp;gid:&nbsp;grid&nbsp;id,&nbsp;for&nbsp;downloading&nbsp;a&nbsp;single&nbsp;grid&nbsp;of&nbsp;a&nbsp;spreadsheet<br>
+&nbsp;&nbsp;extra_params:&nbsp;a&nbsp;map&nbsp;of&nbsp;any&nbsp;further&nbsp;parameters&nbsp;to&nbsp;control&nbsp;how&nbsp;the&nbsp;document<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;downloaded<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;RequestError&nbsp;if&nbsp;the&nbsp;service&nbsp;does&nbsp;not&nbsp;respond&nbsp;with&nbsp;success</tt></dd></dl>
 
-<dl><dt><a name="DocsService-DownloadPresentation"><strong>DownloadPresentation</strong></a>(self, entry_or_resource_id, file_path)</dt><dd><tt>Downloads&nbsp;a&nbsp;presentation&nbsp;from&nbsp;the&nbsp;Document&nbsp;List.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;entry_or_resource_id:&nbsp;DoclistEntry&nbsp;or&nbsp;string&nbsp;of&nbsp;the&nbsp;presentation<br>
-&nbsp;&nbsp;&nbsp;&nbsp;resource&nbsp;id&nbsp;to&nbsp;download.<br>
-&nbsp;&nbsp;file_path:&nbsp;string&nbsp;The&nbsp;full&nbsp;path&nbsp;to&nbsp;save&nbsp;the&nbsp;file&nbsp;to.&nbsp;&nbsp;The&nbsp;export<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format&nbsp;is&nbsp;inferred&nbsp;from&nbsp;the&nbsp;the&nbsp;file&nbsp;extension.</tt></dd></dl>
+<dl><dt><a name="DocsService-DownloadDocument"><strong>DownloadDocument</strong></a> = Export(*args, **kwargs)</dt><dd><tt>#&nbsp;The&nbsp;deprecated_function&nbsp;wraps&nbsp;the&nbsp;actual&nbsp;call&nbsp;to&nbsp;f.</tt></dd></dl>
 
-<dl><dt><a name="DocsService-DownloadSpreadsheet"><strong>DownloadSpreadsheet</strong></a>(self, entry_or_resource_id, file_path, gid<font color="#909090">=0</font>)</dt><dd><tt>Downloads&nbsp;a&nbsp;spreadsheet&nbsp;from&nbsp;the&nbsp;Document&nbsp;List.<br>
+<dl><dt><a name="DocsService-DownloadPresentation"><strong>DownloadPresentation</strong></a> = Export(*args, **kwargs)</dt><dd><tt>#&nbsp;The&nbsp;deprecated_function&nbsp;wraps&nbsp;the&nbsp;actual&nbsp;call&nbsp;to&nbsp;f.</tt></dd></dl>
+
+<dl><dt><a name="DocsService-DownloadSpreadsheet"><strong>DownloadSpreadsheet</strong></a> = Export(*args, **kwargs)</dt><dd><tt>#&nbsp;The&nbsp;deprecated_function&nbsp;wraps&nbsp;the&nbsp;actual&nbsp;call&nbsp;to&nbsp;f.</tt></dd></dl>
+
+<dl><dt><a name="DocsService-Export"><strong>Export</strong></a>(self, entry_or_id_or_url, file_path, gid<font color="#909090">=None</font>, extra_params<font color="#909090">=None</font>)</dt><dd><tt>Downloads&nbsp;a&nbsp;document&nbsp;from&nbsp;the&nbsp;Document&nbsp;List&nbsp;in&nbsp;a&nbsp;different&nbsp;format.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;entry_or_resource_id:&nbsp;DoclistEntry&nbsp;or&nbsp;string&nbsp;of&nbsp;the&nbsp;spreadsheet<br>
-&nbsp;&nbsp;&nbsp;&nbsp;resource&nbsp;id&nbsp;to&nbsp;download.<br>
+&nbsp;&nbsp;entry_or_id_or_url:&nbsp;a&nbsp;DocumentListEntry,&nbsp;or&nbsp;the&nbsp;resource&nbsp;id&nbsp;of&nbsp;an&nbsp;entry,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;a&nbsp;url&nbsp;to&nbsp;download&nbsp;from&nbsp;(such&nbsp;as&nbsp;the&nbsp;content&nbsp;src).<br>
 &nbsp;&nbsp;file_path:&nbsp;string&nbsp;The&nbsp;full&nbsp;path&nbsp;to&nbsp;save&nbsp;the&nbsp;file&nbsp;to.&nbsp;&nbsp;The&nbsp;export<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format&nbsp;is&nbsp;inferred&nbsp;from&nbsp;the&nbsp;the&nbsp;file&nbsp;extension.<br>
-&nbsp;&nbsp;gid:&nbsp;string&nbsp;or&nbsp;int&nbsp;(optional)&nbsp;The&nbsp;grid/sheet&nbsp;number&nbsp;to&nbsp;download.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used&nbsp;only&nbsp;for&nbsp;tsv&nbsp;and&nbsp;csv&nbsp;exports.</tt></dd></dl>
+&nbsp;&nbsp;gid:&nbsp;grid&nbsp;id,&nbsp;for&nbsp;downloading&nbsp;a&nbsp;single&nbsp;grid&nbsp;of&nbsp;a&nbsp;spreadsheet<br>
+&nbsp;&nbsp;extra_params:&nbsp;a&nbsp;map&nbsp;of&nbsp;any&nbsp;further&nbsp;parameters&nbsp;to&nbsp;control&nbsp;how&nbsp;the&nbsp;document<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;downloaded<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;RequestError&nbsp;if&nbsp;the&nbsp;service&nbsp;does&nbsp;not&nbsp;respond&nbsp;with&nbsp;success</tt></dd></dl>
 
 <dl><dt><a name="DocsService-GetDocumentListAclEntry"><strong>GetDocumentListAclEntry</strong></a>(self, uri)</dt><dd><tt>Retrieves&nbsp;a&nbsp;particular&nbsp;DocumentListAclEntry&nbsp;by&nbsp;its&nbsp;unique&nbsp;URI.<br>
 &nbsp;<br>
@@ -136,28 +145,20 @@ Returns:<br>
 Args:<br>
 &nbsp;&nbsp;uri:&nbsp;string&nbsp;A&nbsp;full&nbsp;URI&nbsp;to&nbsp;query&nbsp;the&nbsp;Document&nbsp;List&nbsp;feed.</tt></dd></dl>
 
-<dl><dt><a name="DocsService-MoveDocumentIntoFolder"><strong>MoveDocumentIntoFolder</strong></a>(self, document_entry, folder_entry)</dt><dd><tt>Moves&nbsp;a&nbsp;document&nbsp;into&nbsp;a&nbsp;folder&nbsp;in&nbsp;the&nbsp;Document&nbsp;List&nbsp;Feed.<br>
+<dl><dt><a name="DocsService-MoveDocumentIntoFolder"><strong>MoveDocumentIntoFolder</strong></a> = MoveIntoFolder(*args, **kwargs)</dt><dd><tt>#&nbsp;The&nbsp;deprecated_function&nbsp;wraps&nbsp;the&nbsp;actual&nbsp;call&nbsp;to&nbsp;f.</tt></dd></dl>
+
+<dl><dt><a name="DocsService-MoveFolderIntoFolder"><strong>MoveFolderIntoFolder</strong></a> = MoveIntoFolder(*args, **kwargs)</dt><dd><tt>#&nbsp;The&nbsp;deprecated_function&nbsp;wraps&nbsp;the&nbsp;actual&nbsp;call&nbsp;to&nbsp;f.</tt></dd></dl>
+
+<dl><dt><a name="DocsService-MoveIntoFolder"><strong>MoveIntoFolder</strong></a>(self, source_entry, folder_entry)</dt><dd><tt>Moves&nbsp;a&nbsp;document&nbsp;into&nbsp;a&nbsp;folder&nbsp;in&nbsp;the&nbsp;Document&nbsp;List&nbsp;Feed.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;document_entry:&nbsp;DocumentListEntry&nbsp;An&nbsp;object&nbsp;representing&nbsp;the&nbsp;source<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.<br>
-&nbsp;&nbsp;folder_entry:&nbsp;DocumentListEntry&nbsp;An&nbsp;object&nbsp;representing&nbsp;the&nbsp;destination<br>
+&nbsp;&nbsp;source_entry:&nbsp;DocumentListEntry&nbsp;An&nbsp;object&nbsp;representing&nbsp;the&nbsp;source<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document/folder.<br>
+&nbsp;&nbsp;folder_entry:&nbsp;DocumentListEntry&nbsp;An&nbsp;object&nbsp;with&nbsp;a&nbsp;link&nbsp;to&nbsp;the&nbsp;destination<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;folder.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;DocumentListEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;document&nbsp;created&nbsp;on<br>
-&nbsp;&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
-
-<dl><dt><a name="DocsService-MoveFolderIntoFolder"><strong>MoveFolderIntoFolder</strong></a>(self, src_folder_entry, dest_folder_entry)</dt><dd><tt>Moves&nbsp;a&nbsp;folder&nbsp;into&nbsp;another&nbsp;folder.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;src_folder_entry:&nbsp;DocumentListEntry&nbsp;An&nbsp;object&nbsp;with&nbsp;a&nbsp;link&nbsp;to&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source&nbsp;folder.<br>
-&nbsp;&nbsp;dest_folder_entry:&nbsp;DocumentListEntry&nbsp;An&nbsp;object&nbsp;with&nbsp;a&nbsp;link&nbsp;to&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destination&nbsp;folder.<br>
-&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;A&nbsp;DocumentListEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;folder&nbsp;created&nbsp;on<br>
 &nbsp;&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
 
 <dl><dt><a name="DocsService-MoveOutOfFolder"><strong>MoveOutOfFolder</strong></a>(self, source_entry)</dt><dd><tt>Moves&nbsp;a&nbsp;document&nbsp;into&nbsp;a&nbsp;folder&nbsp;in&nbsp;the&nbsp;Document&nbsp;List&nbsp;Feed.<br>
@@ -169,31 +170,11 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;entry&nbsp;was&nbsp;moved&nbsp;out.</tt></dd></dl>
 
-<dl><dt><a name="DocsService-MovePresentationIntoFolder"><strong>MovePresentationIntoFolder</strong></a>(self, document_entry, folder_entry)</dt><dd><tt>Moves&nbsp;a&nbsp;presentation&nbsp;into&nbsp;a&nbsp;folder&nbsp;in&nbsp;the&nbsp;Document&nbsp;List&nbsp;Feed.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;document_entry:&nbsp;DocumentListEntry&nbsp;An&nbsp;object&nbsp;representing&nbsp;the&nbsp;source<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.<br>
-&nbsp;&nbsp;folder_entry:&nbsp;DocumentListEntry&nbsp;An&nbsp;object&nbsp;representing&nbsp;the&nbsp;destination<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;folder.<br>
-&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;A&nbsp;DocumentListEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;document&nbsp;created&nbsp;on<br>
-&nbsp;&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
+<dl><dt><a name="DocsService-MovePresentationIntoFolder"><strong>MovePresentationIntoFolder</strong></a> = MoveIntoFolder(*args, **kwargs)</dt><dd><tt>#&nbsp;The&nbsp;deprecated_function&nbsp;wraps&nbsp;the&nbsp;actual&nbsp;call&nbsp;to&nbsp;f.</tt></dd></dl>
 
-<dl><dt><a name="DocsService-MoveSpreadsheetIntoFolder"><strong>MoveSpreadsheetIntoFolder</strong></a>(self, document_entry, folder_entry)</dt><dd><tt>Moves&nbsp;a&nbsp;spreadsheet&nbsp;into&nbsp;a&nbsp;folder&nbsp;in&nbsp;the&nbsp;Document&nbsp;List&nbsp;Feed.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;document_entry:&nbsp;DocumentListEntry&nbsp;An&nbsp;object&nbsp;representing&nbsp;the&nbsp;source<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.<br>
-&nbsp;&nbsp;folder_entry:&nbsp;DocumentListEntry&nbsp;An&nbsp;object&nbsp;representing&nbsp;the&nbsp;destination<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;folder.<br>
-&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;A&nbsp;DocumentListEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;document&nbsp;created&nbsp;on<br>
-&nbsp;&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
+<dl><dt><a name="DocsService-MoveSpreadsheetIntoFolder"><strong>MoveSpreadsheetIntoFolder</strong></a> = MoveIntoFolder(*args, **kwargs)</dt><dd><tt>#&nbsp;The&nbsp;deprecated_function&nbsp;wraps&nbsp;the&nbsp;actual&nbsp;call&nbsp;to&nbsp;f.</tt></dd></dl>
 
-<dl><dt><a name="DocsService-Query"><strong>Query</strong></a>(self, uri, converter<font color="#909090">=&lt;function DocumentListFeedFromString at 0x905578&gt;</font>)</dt><dd><tt>Queries&nbsp;the&nbsp;Document&nbsp;List&nbsp;feed&nbsp;and&nbsp;returns&nbsp;the&nbsp;resulting&nbsp;feed&nbsp;of<br>
+<dl><dt><a name="DocsService-Query"><strong>Query</strong></a>(self, uri, converter<font color="#909090">=&lt;function DocumentListFeedFromString at 0x7f676e905758&gt;</font>)</dt><dd><tt>Queries&nbsp;the&nbsp;Document&nbsp;List&nbsp;feed&nbsp;and&nbsp;returns&nbsp;the&nbsp;resulting&nbsp;feed&nbsp;of<br>
 &nbsp;&nbsp;&nbsp;entries.<br>
 &nbsp;<br>
 Args:<br>
@@ -218,7 +199,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;DocumentListFeed&nbsp;object&nbsp;representing&nbsp;the&nbsp;feed&nbsp;returned&nbsp;by&nbsp;the&nbsp;server.</tt></dd></dl>
 
-<dl><dt><a name="DocsService-UploadDocument"><strong>UploadDocument</strong></a>(self, media_source, title, folder_or_uri<font color="#909090">=None</font>)</dt><dd><tt>Uploads&nbsp;a&nbsp;document&nbsp;inside&nbsp;of&nbsp;a&nbsp;MediaSource&nbsp;object&nbsp;to&nbsp;the&nbsp;Document&nbsp;List<br>
+<dl><dt><a name="DocsService-Upload"><strong>Upload</strong></a>(self, media_source, title, folder_or_uri<font color="#909090">=None</font>, label<font color="#909090">=None</font>)</dt><dd><tt>Uploads&nbsp;a&nbsp;document&nbsp;inside&nbsp;of&nbsp;a&nbsp;MediaSource&nbsp;object&nbsp;to&nbsp;the&nbsp;Document&nbsp;List<br>
 &nbsp;&nbsp;&nbsp;feed&nbsp;with&nbsp;the&nbsp;given&nbsp;title.<br>
 &nbsp;<br>
 Args:<br>
@@ -230,44 +211,17 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;link&nbsp;to&nbsp;a&nbsp;folder&nbsp;or&nbsp;a&nbsp;uri&nbsp;to&nbsp;a&nbsp;folder&nbsp;to&nbsp;upload&nbsp;to.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note:&nbsp;A&nbsp;valid&nbsp;uri&nbsp;for&nbsp;a&nbsp;folder&nbsp;is&nbsp;of&nbsp;the&nbsp;form:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/feeds/folders/private/full/folder%3Afolder_id<br>
+&nbsp;&nbsp;label:&nbsp;optional&nbsp;label&nbsp;describing&nbsp;the&nbsp;type&nbsp;of&nbsp;the&nbsp;document&nbsp;to&nbsp;be&nbsp;created.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;DocumentListEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;document&nbsp;created<br>
 &nbsp;&nbsp;on&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
 
-<dl><dt><a name="DocsService-UploadPresentation"><strong>UploadPresentation</strong></a>(self, media_source, title, folder_or_uri<font color="#909090">=None</font>)</dt><dd><tt>Uploads&nbsp;a&nbsp;presentation&nbsp;inside&nbsp;of&nbsp;a&nbsp;MediaSource&nbsp;object&nbsp;to&nbsp;the&nbsp;Document<br>
-&nbsp;&nbsp;&nbsp;List&nbsp;feed&nbsp;with&nbsp;the&nbsp;given&nbsp;title.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;media_source:&nbsp;MediaSource&nbsp;The&nbsp;MediaSource&nbsp;object&nbsp;containing&nbsp;a<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;presentation&nbsp;file&nbsp;to&nbsp;be&nbsp;uploaded.<br>
-&nbsp;&nbsp;title:&nbsp;string&nbsp;The&nbsp;title&nbsp;of&nbsp;the&nbsp;presentation&nbsp;on&nbsp;the&nbsp;server&nbsp;after&nbsp;being<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploaded.<br>
-&nbsp;&nbsp;folder_or_uri:&nbsp;DocumentListEntry&nbsp;or&nbsp;string&nbsp;(optional)&nbsp;An&nbsp;object&nbsp;with&nbsp;a<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;link&nbsp;to&nbsp;a&nbsp;folder&nbsp;or&nbsp;a&nbsp;uri&nbsp;to&nbsp;a&nbsp;folder&nbsp;to&nbsp;upload&nbsp;to.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note:&nbsp;A&nbsp;valid&nbsp;uri&nbsp;for&nbsp;a&nbsp;folder&nbsp;is&nbsp;of&nbsp;the&nbsp;form:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/feeds/folders/private/full/folder%3Afolder_id<br>
-&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;A&nbsp;DocumentListEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;presentation&nbsp;created<br>
-&nbsp;&nbsp;on&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
+<dl><dt><a name="DocsService-UploadDocument"><strong>UploadDocument</strong></a>(*args, **kwargs)</dt><dd><tt>#&nbsp;The&nbsp;deprecated_function&nbsp;wraps&nbsp;the&nbsp;actual&nbsp;call&nbsp;to&nbsp;f.</tt></dd></dl>
 
-<dl><dt><a name="DocsService-UploadSpreadsheet"><strong>UploadSpreadsheet</strong></a>(self, media_source, title, folder_or_uri<font color="#909090">=None</font>)</dt><dd><tt>Uploads&nbsp;a&nbsp;spreadsheet&nbsp;inside&nbsp;of&nbsp;a&nbsp;MediaSource&nbsp;object&nbsp;to&nbsp;the&nbsp;Document<br>
-&nbsp;&nbsp;&nbsp;List&nbsp;feed&nbsp;with&nbsp;the&nbsp;given&nbsp;title.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;media_source:&nbsp;MediaSource&nbsp;The&nbsp;MediaSource&nbsp;object&nbsp;containing&nbsp;a&nbsp;spreadsheet<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file&nbsp;to&nbsp;be&nbsp;uploaded.<br>
-&nbsp;&nbsp;title:&nbsp;string&nbsp;The&nbsp;title&nbsp;of&nbsp;the&nbsp;spreadsheet&nbsp;on&nbsp;the&nbsp;server&nbsp;after&nbsp;being<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploaded.<br>
-&nbsp;&nbsp;folder_or_uri:&nbsp;DocumentListEntry&nbsp;or&nbsp;string&nbsp;(optional)&nbsp;An&nbsp;object&nbsp;with&nbsp;a<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;link&nbsp;to&nbsp;a&nbsp;folder&nbsp;or&nbsp;a&nbsp;uri&nbsp;to&nbsp;a&nbsp;folder&nbsp;to&nbsp;upload&nbsp;to.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note:&nbsp;A&nbsp;valid&nbsp;uri&nbsp;for&nbsp;a&nbsp;folder&nbsp;is&nbsp;of&nbsp;the&nbsp;form:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/feeds/folders/private/full/folder%3Afolder_id<br>
-&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;A&nbsp;DocumentListEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;spreadsheet&nbsp;created<br>
-&nbsp;&nbsp;on&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.</tt></dd></dl>
+<dl><dt><a name="DocsService-UploadPresentation"><strong>UploadPresentation</strong></a>(*args, **kwargs)</dt><dd><tt>#&nbsp;The&nbsp;deprecated_function&nbsp;wraps&nbsp;the&nbsp;actual&nbsp;call&nbsp;to&nbsp;f.</tt></dd></dl>
+
+<dl><dt><a name="DocsService-UploadSpreadsheet"><strong>UploadSpreadsheet</strong></a>(*args, **kwargs)</dt><dd><tt>#&nbsp;The&nbsp;deprecated_function&nbsp;wraps&nbsp;the&nbsp;actual&nbsp;call&nbsp;to&nbsp;f.</tt></dd></dl>
 
 <dl><dt><a name="DocsService-__init__"><strong>__init__</strong></a>(self, email<font color="#909090">=None</font>, password<font color="#909090">=None</font>, source<font color="#909090">=None</font>, server<font color="#909090">='docs.google.com'</font>, additional_headers<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;client&nbsp;for&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;service.<br>
 &nbsp;<br>
@@ -476,7 +430,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="DocsService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x8c1578&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
+<dl><dt><a name="DocsService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x7f676e8d7488&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;gdata.service.Get<br>
 &nbsp;<br>
@@ -917,8 +871,6 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 
 <dl><dt><a name="DocumentAclQuery-__gt__"><strong>__gt__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentAclQuery-__gt__">__gt__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&gt;y</tt></dd></dl>
 
-<dl><dt><a name="DocumentAclQuery-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentAclQuery-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
-
 <dl><dt><a name="DocumentAclQuery-__iter__"><strong>__iter__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentAclQuery-__iter__">__iter__</a>()&nbsp;&lt;==&gt;&nbsp;iter(x)</tt></dd></dl>
 
 <dl><dt><a name="DocumentAclQuery-__le__"><strong>__le__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentAclQuery-__le__">__le__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&lt;=y</tt></dd></dl>
@@ -932,6 +884,8 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><a name="DocumentAclQuery-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentAclQuery-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
 
 <dl><dt><a name="DocumentAclQuery-__setitem__"><strong>__setitem__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentAclQuery-__setitem__">__setitem__</a>(i,&nbsp;y)&nbsp;&lt;==&gt;&nbsp;x[i]=y</tt></dd></dl>
+
+<dl><dt><a name="DocumentAclQuery-__sizeof__"><strong>__sizeof__</strong></a>(...)</dt><dd><tt>D.<a href="#DocumentAclQuery-__sizeof__">__sizeof__</a>()&nbsp;-&gt;&nbsp;size&nbsp;of&nbsp;D&nbsp;in&nbsp;memory,&nbsp;in&nbsp;bytes</tt></dd></dl>
 
 <dl><dt><a name="DocumentAclQuery-clear"><strong>clear</strong></a>(...)</dt><dd><tt>D.<a href="#DocumentAclQuery-clear">clear</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Remove&nbsp;all&nbsp;items&nbsp;from&nbsp;D.</tt></dd></dl>
 
@@ -966,9 +920,11 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 
 <hr>
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x72b260&gt;<dd><tt>T.<a href="#DocumentAclQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__hash__</strong> = None</dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xd1d140&gt;<dd><tt>dict.<a href="#DocumentAclQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x7569a0&gt;<dd><tt>T.<a href="#DocumentAclQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xcdf7a0&gt;<dd><tt>dict.<a href="#DocumentAclQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -1094,8 +1050,6 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 
 <dl><dt><a name="DocumentQuery-__gt__"><strong>__gt__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentQuery-__gt__">__gt__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&gt;y</tt></dd></dl>
 
-<dl><dt><a name="DocumentQuery-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentQuery-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
-
 <dl><dt><a name="DocumentQuery-__iter__"><strong>__iter__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentQuery-__iter__">__iter__</a>()&nbsp;&lt;==&gt;&nbsp;iter(x)</tt></dd></dl>
 
 <dl><dt><a name="DocumentQuery-__le__"><strong>__le__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentQuery-__le__">__le__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&lt;=y</tt></dd></dl>
@@ -1109,6 +1063,8 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><a name="DocumentQuery-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentQuery-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
 
 <dl><dt><a name="DocumentQuery-__setitem__"><strong>__setitem__</strong></a>(...)</dt><dd><tt>x.<a href="#DocumentQuery-__setitem__">__setitem__</a>(i,&nbsp;y)&nbsp;&lt;==&gt;&nbsp;x[i]=y</tt></dd></dl>
+
+<dl><dt><a name="DocumentQuery-__sizeof__"><strong>__sizeof__</strong></a>(...)</dt><dd><tt>D.<a href="#DocumentQuery-__sizeof__">__sizeof__</a>()&nbsp;-&gt;&nbsp;size&nbsp;of&nbsp;D&nbsp;in&nbsp;memory,&nbsp;in&nbsp;bytes</tt></dd></dl>
 
 <dl><dt><a name="DocumentQuery-clear"><strong>clear</strong></a>(...)</dt><dd><tt>D.<a href="#DocumentQuery-clear">clear</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Remove&nbsp;all&nbsp;items&nbsp;from&nbsp;D.</tt></dd></dl>
 
@@ -1143,9 +1099,11 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 
 <hr>
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x72b260&gt;<dd><tt>T.<a href="#DocumentQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__hash__</strong> = None</dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xd1fec0&gt;<dd><tt>dict.<a href="#DocumentQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x7569a0&gt;<dd><tt>T.<a href="#DocumentQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xcdca20&gt;<dd><tt>dict.<a href="#DocumentQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table></td></tr></table><p>
@@ -1156,28 +1114,27 @@ v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><strong>DATA_KIND_SCHEME</strong> = 'http://schemas.google.com/g/2005#kind'<br>
-<strong>DOCUMENT_KIND_TERM</strong> = 'http://schemas.google.com/docs/2007#document'<br>
-<strong>DOWNLOAD_SPREADSHEET_FORMATS</strong> = {'csv': '5', 'html': '102', 'ods': '13', 'pdf': '12', 'tsv': '23', 'xls': '4'}<br>
+<strong>DOCUMENT_LABEL</strong> = 'document'<br>
 <strong>FOLDERS_SCHEME_PREFIX</strong> = 'http://schemas.google.com/docs/2007/folders/'<br>
-<strong>FOLDER_KIND_TERM</strong> = 'http://schemas.google.com/docs/2007#folder'<br>
+<strong>FOLDER_LABEL</strong> = 'folder'<br>
 <strong>HIDDEN_LABEL_TERM</strong> = 'http://schemas.google.com/g/2005/labels#hidden'<br>
 <strong>LABEL_SCHEME</strong> = 'http://schemas.google.com/g/2005/labels'<br>
 <strong>MINE_LABEL_TERM</strong> = 'http://schemas.google.com/g/2005/labels#mine'<br>
-<strong>PDF_KIND_TERM</strong> = 'http://schemas.google.com/docs/2007#pdf'<br>
-<strong>PRESENTATION_KIND_TERM</strong> = 'http://schemas.google.com/docs/2007#presentation'<br>
+<strong>PDF_LABEL</strong> = 'pdf'<br>
+<strong>PRESENTATION_LABEL</strong> = 'presentation'<br>
 <strong>PRIVATE_LABEL_TERM</strong> = 'http://schemas.google.com/g/2005/labels#private'<br>
 <strong>SHARED_WITH_DOMAIN_LABEL_TERM</strong> = 'http://schemas.google.com/g/2005/labels#shared-with-domain'<br>
-<strong>SPREADSHEET_KIND_TERM</strong> = 'http://schemas.google.com/docs/2007#spreadsheet'<br>
+<strong>SPREADSHEET_LABEL</strong> = 'spreadsheet'<br>
 <strong>STARRED_LABEL_TERM</strong> = 'http://schemas.google.com/g/2005/labels#starred'<br>
-<strong>SUPPORTED_FILETYPES</strong> = {'CSV': 'text/csv', 'DOC': 'application/msword', 'HTM': 'text/html', 'HTML': 'text/html', 'ODS': 'application/x-vnd.oasis.opendocument.spreadsheet', 'ODT': 'application/vnd.oasis.opendocument.text', 'PDF': 'application/pdf', 'PNG': 'image/png', 'PPS': 'application/vnd.ms-powerpoint', 'PPT': 'application/vnd.ms-powerpoint', ...}<br>
+<strong>SUPPORTED_FILETYPES</strong> = {'CSV': 'text/csv', 'DOC': 'application/msword', 'DOCX': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'HTM': 'text/html', 'HTML': 'text/html', 'ODS': 'application/x-vnd.oasis.opendocument.spreadsheet', 'ODT': 'application/vnd.oasis.opendocument.text', 'PDF': 'application/pdf', 'PNG': 'image/png', 'PPS': 'application/vnd.ms-powerpoint', ...}<br>
 <strong>TRASHED_LABEL_TERM</strong> = 'http://schemas.google.com/g/2005/labels#trashed'<br>
 <strong>VIEWED_LABEL_TERM</strong> = 'http://schemas.google.com/g/2005/labels#viewed'<br>
-<strong>__author__</strong> = 'api.jfisher (Jeff Fisher), api.eric@google.com (Eric Bidelman)'</td></tr></table><p>
+<strong>__author__</strong> = 'api.jfisher (Jeff Fisher), e.bidelman (Eric Bidelman)'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#7799ee">
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
     
 <tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%">api.jfisher&nbsp;(Jeff&nbsp;Fisher),&nbsp;api.eric@google.com&nbsp;(Eric&nbsp;Bidelman)</td></tr></table>
+<td width="100%">api.jfisher&nbsp;(Jeff&nbsp;Fisher),&nbsp;e.bidelman&nbsp;(Eric&nbsp;Bidelman)</td></tr></table>
 </body></html>

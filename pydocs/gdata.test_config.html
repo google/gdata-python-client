@@ -26,14 +26,15 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="atom.html">atom</a><br>
-</td><td width="25%" valign=top><a href="gdata.html">gdata</a><br>
-</td><td width="25%" valign=top><a href="gdata.test_config_template.html">gdata.test_config_template</a><br>
+<a href="gdata.html">gdata</a><br>
+</td><td width="25%" valign=top><a href="inspect.html">inspect</a><br>
+<a href="gdata.test_config_template.html">gdata.test_config_template</a><br>
 </td><td width="25%" valign=top><a href="unittest.html">unittest</a><br>
-</td></tr></table></td></tr></table><p>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#eeaa77">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -47,6 +48,7 @@ begin&nbsp;with&nbsp;'test'.&nbsp;Calls&nbsp;unittest.makeSuite.<br>
 &nbsp;<br>
 Returns:&nbsp;<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;unittest.TestSuite&nbsp;containing&nbsp;a&nbsp;test&nbsp;suite&nbsp;for&nbsp;all&nbsp;classes.</tt></dd></dl>
+ <dl><dt><a name="-check_data_classes"><strong>check_data_classes</strong></a>(test, classes)</dt></dl>
  <dl><dt><a name="-close_client"><strong>close_client</strong></a>(client)</dt><dd><tt>Saves&nbsp;the&nbsp;recoded&nbsp;responses&nbsp;to&nbsp;a&nbsp;temp&nbsp;file&nbsp;if&nbsp;the&nbsp;config&nbsp;file&nbsp;allows.<br>
 &nbsp;<br>
 This&nbsp;should&nbsp;be&nbsp;called&nbsp;in&nbsp;the&nbsp;unit&nbsp;test's&nbsp;tearDown&nbsp;method.<br>
