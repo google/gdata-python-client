@@ -20,9 +20,8 @@
 
 """Provides a client to interact with Google Data API servers.
 
-This module is used for version 2 of the Google Data APIs and is currently
-experimental. This module may change in backwards incompatible ways before
-the release of version 2.0.0. The primary class in this module is GDClient.
+This module is used for version 2 of the Google Data APIs. The primary class
+in this module is GDClient.
 
   GDClient: handles auth and CRUD operations when communicating with servers.
   GDataClient: deprecated client for version one services. Will be removed.

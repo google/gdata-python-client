@@ -1,3 +1,28 @@
+=== 2.0.1 ===
+July 23, 2009 (revision 80?)
+
+- Added support for Secure AuthSub, OAuth with HMAC and with RSA to the
+    v2 auth code.
+- Added v2 data model classes for all XML elements in the gd namespace.
+- Usability improvements in the gdata.docs.service module, thanks Eric!
+- Made the dependency on elementtree only required if you are using
+    Python 2.4 and lower. Thanks brosner!
+- Setting the ssl member in atom.service.AtomService will now override a URL
+    which starts with http:. Many thanks to Michael Ballbach for the patch. 
+- Added a proxy HTTP client which will use proxy environment variables to
+    send all requests through the desired proxy server if present.
+- Added user agent string indicating that this is from the gdata python v2
+    library.
+- Removed unneeded title parameter from the Blogger client's add_comment
+    method.
+- Added an all_tests_local script which runs all tests except those which
+    would make HTTP requests to remote servers.
+- Added the birthday element to contacts entry, the reminder element to
+    calendar events, and the method attribute to calendar's reminder class.
+    All with great thanks to Marc!
+- The analytics GetData method no longer requires the dimenrions argument.
+    Thanks Jim!
+
 === 2.0.0 ===
 June 29, 2009 (revision 777)
 
