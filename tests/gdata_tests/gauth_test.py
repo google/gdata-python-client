@@ -135,6 +135,161 @@ class TokensToAndFromBlobsTest(unittest.TestCase):
     self.assertTrue(isinstance(copy, gdata.gauth.AuthSubToken))
     self.assertEqual(token.scopes, scopes)
 
+  def test_join_and_split(self):
+    token_string = gdata.gauth._join_token_parts('1x', 'test|string', '%x%',
+                                                 '', None)
+    self.assertEqual(token_string, '1x|test%7Cstring|%25x%25||')
+    token_type, a, b, c, d = gdata.gauth._split_token_parts(token_string)
+    self.assertEqual(token_type, '1x')
+    self.assertEqual(a, 'test|string')
+    self.assertEqual(b, '%x%')
+    self.assertTrue(c is None)
+    self.assertTrue(d is None)
+
+  def test_secure_authsub_conversion(self):
+    token = gdata.gauth.SecureAuthSubToken(
+        '%^%', 'myRsaKey', ['http://example.com', 'http://example.org'])
+    copy = gdata.gauth.token_from_blob(gdata.gauth.token_to_blob(token))
+    self.assertEqual(copy.token_string, '%^%')
+    self.assertEqual(copy.rsa_private_key, 'myRsaKey')
+    self.assertEqual(copy.scopes,
+                     ['http://example.com', 'http://example.org'])
+
+    token = gdata.gauth.SecureAuthSubToken(rsa_private_key='f',
+                                           token_string='b')
+    blob = gdata.gauth.token_to_blob(token)
+    self.assertEqual(blob, '1s|b|f')
+    copy = gdata.gauth.token_from_blob(blob)
+    self.assertEqual(copy.token_string, 'b')
+    self.assertEqual(copy.rsa_private_key, 'f')
+    self.assertEqual(copy.scopes, [])
+
+    token = gdata.gauth.SecureAuthSubToken(None, '')
+    blob = gdata.gauth.token_to_blob(token)
+    self.assertEqual(blob, '1s||')
+    copy = gdata.gauth.token_from_blob(blob)
+    self.assertEqual(copy.token_string, None)
+    self.assertEqual(copy.rsa_private_key, None)
+    self.assertEqual(copy.scopes, [])
+
+    token = gdata.gauth.SecureAuthSubToken('', None)
+    blob = gdata.gauth.token_to_blob(token)
+    self.assertEqual(blob, '1s||')
+    copy = gdata.gauth.token_from_blob(blob)
+    self.assertEqual(copy.token_string, None)
+    self.assertEqual(copy.rsa_private_key, None)
+    self.assertEqual(copy.scopes, [])
+
+    token = gdata.gauth.SecureAuthSubToken(
+        None, None, ['http://example.net', 'http://google.com'])
+    blob = gdata.gauth.token_to_blob(token)
+    self.assertEqual(
+        blob, '1s|||http%3A%2F%2Fexample.net|http%3A%2F%2Fgoogle.com')
+    copy = gdata.gauth.token_from_blob(blob)
+    self.assertTrue(copy.token_string is None)
+    self.assertTrue(copy.rsa_private_key is None)
+    self.assertEqual(copy.scopes, ['http://example.net', 'http://google.com'])
+
+  def test_oauth_rsa_conversion(self):
+    token = gdata.gauth.OAuthRsaToken(
+        'consumerKey', 'myRsa', 't', 'secret',
+        gdata.gauth.AUTHORIZED_REQUEST_TOKEN, 'http://example.com/next',
+        'verifier')
+    blob = gdata.gauth.token_to_blob(token)
+    self.assertEqual(
+        blob, '1r|consumerKey|myRsa|t|secret|2|http%3A%2F%2Fexample.com'
+            '%2Fnext|verifier')
+    copy = gdata.gauth.token_from_blob(blob)
+    self.assertTrue(isinstance(copy, gdata.gauth.OAuthRsaToken))
+    self.assertEqual(copy.consumer_key, token.consumer_key)
+    self.assertEqual(copy.rsa_private_key, token.rsa_private_key)
+    self.assertEqual(copy.token, token.token)
+    self.assertEqual(copy.token_secret, token.token_secret)
+    self.assertEqual(copy.auth_state, token.auth_state)
+    self.assertEqual(copy.next, token.next)
+    self.assertEqual(copy.verifier, token.verifier)
+
+    token = gdata.gauth.OAuthRsaToken(
+        '', 'myRsa', 't', 'secret', 0)
+    blob = gdata.gauth.token_to_blob(token)
+    self.assertEqual(blob, '1r||myRsa|t|secret|0||')
+    copy = gdata.gauth.token_from_blob(blob)
+    self.assertTrue(isinstance(copy, gdata.gauth.OAuthRsaToken))
+    self.assertFalse(copy.consumer_key == token.consumer_key)
+    self.assertTrue(copy.consumer_key is None)
+    self.assertEqual(copy.rsa_private_key, token.rsa_private_key)
+    self.assertEqual(copy.token, token.token)
+    self.assertEqual(copy.token_secret, token.token_secret)
+    self.assertEqual(copy.auth_state, token.auth_state)
+    self.assertEqual(copy.next, token.next)
+    self.assertTrue(copy.next is None)
+    self.assertEqual(copy.verifier, token.verifier)
+    self.assertTrue(copy.verifier is None)
+
+    token = gdata.gauth.OAuthRsaToken(
+        rsa_private_key='myRsa', token='t', token_secret='secret',
+        auth_state=gdata.gauth.ACCESS_TOKEN, verifier='v', consumer_key=None)
+    blob = gdata.gauth.token_to_blob(token)
+    self.assertEqual(blob, '1r||myRsa|t|secret|3||v')
+    copy = gdata.gauth.token_from_blob(blob)
+    self.assertEqual(copy.consumer_key, token.consumer_key)
+    self.assertTrue(copy.consumer_key is None)
+    self.assertEqual(copy.rsa_private_key, token.rsa_private_key)
+    self.assertEqual(copy.token, token.token)
+    self.assertEqual(copy.token_secret, token.token_secret)
+    self.assertEqual(copy.auth_state, token.auth_state)
+    self.assertEqual(copy.next, token.next)
+    self.assertTrue(copy.next is None)
+    self.assertEqual(copy.verifier, token.verifier)
+
+  def test_oauth_hmac_conversion(self):
+    token = gdata.gauth.OAuthHmacToken(
+        'consumerKey', 'consumerSecret', 't', 'secret',
+        gdata.gauth.REQUEST_TOKEN, 'http://example.com/next', 'verifier')
+    blob = gdata.gauth.token_to_blob(token)
+    self.assertEqual(
+        blob, '1h|consumerKey|consumerSecret|t|secret|1|http%3A%2F%2F'
+            'example.com%2Fnext|verifier')
+    copy = gdata.gauth.token_from_blob(blob)
+    self.assertTrue(isinstance(copy, gdata.gauth.OAuthHmacToken))
+    self.assertEqual(copy.consumer_key, token.consumer_key)
+    self.assertEqual(copy.consumer_secret, token.consumer_secret)
+    self.assertEqual(copy.token, token.token)
+    self.assertEqual(copy.token_secret, token.token_secret)
+    self.assertEqual(copy.auth_state, token.auth_state)
+    self.assertEqual(copy.next, token.next)
+    self.assertEqual(copy.verifier, token.verifier)
+
+    token = gdata.gauth.OAuthHmacToken(
+        consumer_secret='c,s', token='t', token_secret='secret',
+        auth_state=7, verifier='v', consumer_key=None)
+    blob = gdata.gauth.token_to_blob(token)
+    self.assertEqual(blob, '1h||c%2Cs|t|secret|7||v')
+    copy = gdata.gauth.token_from_blob(blob)
+    self.assertTrue(isinstance(copy, gdata.gauth.OAuthHmacToken))
+    self.assertEqual(copy.consumer_key, token.consumer_key)
+    self.assertTrue(copy.consumer_key is None)
+    self.assertEqual(copy.consumer_secret, token.consumer_secret)
+    self.assertEqual(copy.token, token.token)
+    self.assertEqual(copy.token_secret, token.token_secret)
+    self.assertEqual(copy.auth_state, token.auth_state)
+    self.assertEqual(copy.next, token.next)
+    self.assertTrue(copy.next is None)
+    self.assertEqual(copy.verifier, token.verifier)
+
+  def test_illegal_token_types(self):
+    class MyToken(object):
+      pass
+
+    token = MyToken()
+    self.assertRaises(gdata.gauth.UnsupportedTokenType,
+                      gdata.gauth.token_to_blob, token)
+
+    blob = '~~z'
+    self.assertRaises(gdata.gauth.UnsupportedTokenType,
+                      gdata.gauth.token_from_blob, blob)
+
+
 
 class OAuthHmacTokenTests(unittest.TestCase):
 

@@ -17,6 +17,7 @@
 
 # This module is used for version 2 of the Google Data APIs.
 
+
 """Provides auth related token classes and functions for Google Data APIs.
 
 Token classes represent a user's authorization of this app to access their
@@ -24,7 +25,22 @@ data. Usually these are not created directly but by a GDClient object.
 
 ClientLoginToken
 AuthSubToken
+SecureAuthSubToken
 OAuthHmacToken
+OAuthRsaToken
+
+Functions which are often used in application code (as opposed to just within
+the gdata-python-client library) are the following:
+
+generate_auth_sub_url
+authorize_request_token
+
+The following are helper functions which are used to save and load auth token
+objects in the App Engine datastore. These should only be used if you are using
+this library within App Engine:
+
+ae_load
+ae_save
 """
 
 
@@ -39,6 +55,15 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 
 PROGRAMMATIC_AUTH_LABEL = 'GoogleLogin auth='
 AUTHSUB_AUTH_LABEL = 'AuthSub token='
+
+
+class Error(Exception):
+  pass
+
+
+class UnsupportedTokenType(Error):
+  """Raised when token to or from blob is unable to convert the token."""
+  pass
 
 
 # ClientLogin functions and classes.
@@ -809,6 +834,9 @@ def upgrade_to_access_token(request_token, server_response_body):
   return request_token
 
 
+UpgradeToAccessToken = upgrade_to_access_token
+
+
 REQUEST_TOKEN = 1
 AUTHORIZED_REQUEST_TOKEN = 2
 ACCESS_TOKEN = 3
@@ -917,28 +945,125 @@ class OAuthRsaToken(OAuthHmacToken):
   ModifyRequest = modify_request
 
 
+def _join_token_parts(*args):
+  """"Escapes and combines all strings passed in.
+  
+  Used to convert a token object's members into a string instead of
+  using pickle.
+
+  Note: A None value will be converted to an empty string.
+
+  Returns:
+    A string in the form 1x|member1|member2|member3...
+  """
+  return '|'.join([urllib.quote_plus(a or '') for a in args])
+
+
+def _split_token_parts(blob):
+  """Extracts and unescapes fields from the provided binary string.
+
+  Reverses the packing performed by _join_token_parts. Used to extract
+  the members of a token object.
+
+  Note: An empty string from the blob will be interpreted as None.
+
+  Args:
+    blob: str A string of the form 1x|member1|member2|member3 as created
+        by _join_token_parts
+
+  Returns:
+    A list of unescaped strings.
+  """
+  return [urllib.unquote_plus(part) or None for part in blob.split('|')]
+
+
 def token_to_blob(token):
   """Serializes the token data as a string for storage in a datastore.
   
-  Supported token classes: ClientLoginToken, AuthSubToken.
+  Supported token classes: ClientLoginToken, AuthSubToken, SecureAuthSubToken,
+  OAuthRsaToken, and OAuthHmacToken.
 
   Args:
     token: A token object which must be of one of the supported token classes.
+
+  Raises:
+    UnsupportedTokenType if the token is not one of the supported token
+    classes listed above.
+  
+  Returns:
+    A string represenging this token. The string can be converted back into
+    an equivalent token object using token_from_blob. Note that any members
+    which are set to '' will be set to None when the token is deserialized
+    by token_from_blob.
   """
   if isinstance(token, ClientLoginToken):
-    return '|'.join(('1c', urllib.quote_plus(token.token_string)))
+    return _join_token_parts('1c', token.token_string)
+  # Check for secure auth sub type first since it is a subclass of
+  # AuthSubToken.
+  elif isinstance(token, SecureAuthSubToken):
+    return _join_token_parts('1s', token.token_string, token.rsa_private_key,
+                             *token.scopes)
   elif isinstance(token, AuthSubToken):
-    token_string_parts = ['1a', urllib.quote_plus(token.token_string)]
-    if token.scopes:
-      token_string_parts.extend([urllib.quote_plus(url) for url in token.scopes])
-    return '|'.join(token_string_parts)
+    return _join_token_parts('1a', token.token_string, *token.scopes)
+  # Check RSA OAuth token first since the OAuthRsaToken is a subclass of
+  # OAuthHmacToken.
+  elif isinstance(token, OAuthRsaToken):
+    return _join_token_parts(
+        '1r', token.consumer_key, token.rsa_private_key, token.token,
+        token.token_secret, str(token.auth_state), token.next,
+        token.verifier)
+  elif isinstance(token, OAuthHmacToken):
+    return _join_token_parts(
+        '1h', token.consumer_key, token.consumer_secret, token.token,
+        token.token_secret, str(token.auth_state), token.next,
+        token.verifier)
+  else:
+    raise UnsupportedTokenType(
+        'Unable to serialize token of type %s' % type(token))
+
+
+TokenToBlob = token_to_blob
+
 
 def token_from_blob(blob):
-  if blob.startswith('1c|'):
-    return ClientLoginToken(urllib.unquote_plus(blob.split('|')[1]))
-  elif blob.startswith('1a|'):
-    parts = [urllib.unquote_plus(part) for part in blob.split('|')]
+  """Deserializes a token string from the datastore back into a token object.
+
+  Supported token classes: ClientLoginToken, AuthSubToken, SecureAuthSubToken,
+  OAuthRsaToken, and OAuthHmacToken.
+
+  Args:
+    blob: string created by token_to_blob.
+
+  Raises:
+    UnsupportedTokenType if the token is not one of the supported token
+    classes listed above.
+ 
+  Returns:
+    A new token object with members set to the values serialized in the
+    blob string. Note that any members which were set to '' in the original
+    token will now be None.
+  """
+  parts = _split_token_parts(blob)
+  if parts[0] == '1c':
+    return ClientLoginToken(parts[1])
+  elif parts[0] == '1a':
     return AuthSubToken(parts[1], parts[2:])
+  elif parts[0] == '1s':
+    return SecureAuthSubToken(parts[1], parts[2], parts[3:])
+  elif parts[0] == '1r':
+    auth_state = int(parts[5])
+    return OAuthRsaToken(parts[1], parts[2], parts[3], parts[4], auth_state,
+                         parts[6], parts[7])
+  elif parts[0] == '1h':
+    auth_state = int(parts[5])
+    return OAuthHmacToken(parts[1], parts[2], parts[3], parts[4], auth_state,
+                          parts[6], parts[7])
+  else:
+    raise UnsupportedTokenType(
+        'Unable to deserialize token with type marker of %s' % parts[0])
+
+
+TokenFromBlob = token_from_blob
 
 
 def dump_tokens(tokens):
@@ -955,6 +1080,9 @@ def ae_save(token, token_key):
   return gdata.alt.app_engine.set_token(key_name, token_to_blob(token))
 
 
+AeSave = ae_save
+
+
 def ae_load(token_key):
   import gdata.alt.app_engine
   key_name = ''.join(('gd_auth_token', token_key))
@@ -965,7 +1093,13 @@ def ae_load(token_key):
     return None
 
 
+AeLoad = ae_load
+
+
 def ae_delete(token_key):
   import gdata.alt.app_engine
   key_name = ''.join(('gd_auth_token', token_key))
   gdata.alt.app_engine.delete_token(key_name)
+
+
+AeDelete = ae_delete
