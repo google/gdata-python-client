@@ -20,7 +20,7 @@ July 23, 2009 (revision 805)
 - Added the birthday element to contacts entry, the reminder element to
     calendar events, and the method attribute to calendar's reminder class.
     All with great thanks to Marc!
-- The analytics GetData method no longer requires the dimenrions argument.
+- The analytics GetData method no longer requires the dimensions argument.
     Thanks Jim!
 
 === 2.0.0 ===

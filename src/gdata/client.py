@@ -39,14 +39,6 @@ import gdata.gauth
 import gdata.data
 
 
-# Old imports
-import gdata.service
-import urllib
-import urlparse
-import gdata.auth
-import atom
-
-
 class Error(Exception):
   pass
 
@@ -752,85 +744,3 @@ class GDQuery(atom.http_core.Uri):
 
   text_query = property(_get_text_query, _set_text_query, 
       doc='The q parameter for searching for an exact text match on content')
-    
-
-
-
-# Version 1 code.
-SCOPE_URL_PARAM_NAME = gdata.service.SCOPE_URL_PARAM_NAME 
-# Maps the service names used in ClientLogin to scope URLs. 
-CLIENT_LOGIN_SCOPES = gdata.service.CLIENT_LOGIN_SCOPES
-
-
-class AuthorizationRequired(gdata.service.Error):
-  pass
-
-
-class GDataClient(gdata.service.GDataService):
-  """This class is deprecated. 
-  
-  All functionality has been migrated to gdata.service.GDataService.
-  """
-  @atom.deprecated('This class will be removed, use GDClient instead.')
-  def __init__(self, application_name=None, tokens=None):
-    gdata.service.GDataService.__init__(self, source=application_name, 
-        tokens=tokens)
-
-  @atom.deprecated('The GDataClient class will be removed in a future release'
-                   ', use GDClient.ClientLogin instead')
-  def ClientLogin(self, username, password, service_name, source=None, 
-      account_type=None, auth_url=None, login_token=None, login_captcha=None):
-    gdata.service.GDataService.ClientLogin(self, username=username, 
-        password=password, account_type=account_type, service=service_name,
-        auth_service_url=auth_url, source=source, captcha_token=login_token,
-        captcha_response=login_captcha)
-
-  @atom.deprecated('The GDataClient class will be removed in a future release'
-                   ', use GDClient.GetEntry or GDClient.GetFeed')
-  def Get(self, url, parser):
-    """Simplified interface for Get.
-
-    Requires a parser function which takes the server response's body as
-    the only argument.
-
-    Args:
-      url: A string or something that can be converted to a string using str.
-          The URL of the requested resource.
-      parser: A function which takes the HTTP body from the server as it's
-          only result. Common values would include str, 
-          gdata.GDataEntryFromString, and gdata.GDataFeedFromString.
-
-    Returns: The result of calling parser(http_response_body).
-    """
-    return gdata.service.GDataService.Get(self, uri=url, converter=parser)
-  
-  @atom.deprecated('The GDataClient class will be removed in a future release'
-                   ', use GDClient.Post instead')
-  def Post(self, data, url, parser, media_source=None):
-    """Streamlined version of Post.
-
-    Requires a parser function which takes the server response's body as
-    the only argument.
-    """
-    return gdata.service.GDataService.Post(self, data=data, uri=url,
-        media_source=media_source, converter=parser)
-
-  @atom.deprecated('The GDataClient class will be removed in a future release'
-                   ', use GDClient.Put instead')
-  def Put(self, data, url, parser, media_source=None):
-    """Streamlined version of Put.
-
-    Requires a parser function which takes the server response's body as
-    the only argument.
-    """
-    return gdata.service.GDataService.Put(self, data=data, uri=url,
-        media_source=media_source, converter=parser)
-
-  @atom.deprecated('The GDataClient class will be removed in a future release'
-                   ', use GDClient.Delete instead')
-  def Delete(self, url):
-    return gdata.service.GDataService.Delete(self, uri=url)
-
-
-ExtractToken = gdata.service.ExtractToken
-GenerateAuthSubRequestUrl = gdata.service.GenerateAuthSubRequestUrl    
