@@ -4526,3 +4526,236 @@ BOOK_FEED = """<?xml version='1.0' encoding='UTF-8'?>"""\
     """<dc:title>A theory of justice</dc:title>"""\
     """</entry>"""\
 """</feed>"""
+
+MAP_FEED = """<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:batch="http://schemas.google.com/gdata/batch" xmlns:gd="http://schemas.google.com/g/2005" gd:etag="W/&quot;CkIESHg4eSp7ImA9WxJbF08.&quot;">
+  <id>http://maps.google.com/maps/feeds/maps/208825816854482607313</id>
+  <updated>2009-07-27T18:48:29.631Z</updated>
+  <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/maps/2008#map"/>
+  <title>My maps</title>
+  <link rel="alternate" type="text/html" href="http://maps.google.com/maps/ms?msa=1"/>
+  <link rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml" href="http://maps.google.com/maps/feeds/maps/208825816854482607313/full"/>
+  <link rel="self" type="application/atom+xml" href="http://maps.google.com/maps/feeds/maps/208825816854482607313/full"/>
+  <link rel="http://schemas.google.com/g/2005#batch" type="application/atom+xml" href="http://maps.google.com/maps/feeds/maps/208825816854482607313/full/batch"/>
+  <link rel="http://schemas.google.com/g/2005#post" type="application/atom+xml" href="http://maps.google.com/maps/feeds/maps/208825816854482607313/full"/>
+  <author>
+    <name>Roman</name>
+  </author>
+  <openSearch:totalResults>1</openSearch:totalResults>
+  <openSearch:startIndex>1</openSearch:startIndex>
+  <openSearch:itemsPerPage>1</openSearch:itemsPerPage>
+  <entry gd:etag="W/&quot;CkIESHg4eSp7ImA9WxJbF08.&quot;">
+    <id>http://maps.google.com/maps/feeds/maps/208825816854482607313/00046fb45f88fa910bcea</id>
+    <published>2009-07-27T18:46:34.451Z</published>
+    <updated>2009-07-27T18:48:29.631Z</updated>
+    <app:edited xmlns:app="http://www.w3.org/2007/app">2009-07-27T18:48:29.631Z</app:edited>
+    <app:control xmlns:app="http://www.w3.org/2007/app">
+      <app:draft>yes</app:draft>
+    </app:control>
+    <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/maps/2008#map"/>
+    <title>Untitled</title>
+    <summary/>
+    <content src="http://maps.google.com/maps/feeds/features/208825816854482607313/00046fb45f88fa910bcea/full"/>
+    <link rel="self" type="application/atom+xml" href="http://maps.google.com/maps/feeds/maps/208825816854482607313/full/00046fb45f88fa910bcea"/>
+    <link rel="alternate" type="text/html" href="http://maps.google.com/maps/ms?msa=0&amp;msid=208825816854482607313.00046fb45f88fa910bcea"/>
+    <link rel="edit" type="application/atom+xml" href="http://maps.google.com/maps/feeds/maps/208825816854482607313/full/00046fb45f88fa910bcea"/>
+    <author>
+      <name>Roman</name>
+    </author>
+  </entry>
+</feed>
+"""
+
+MAP_ENTRY = """<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:batch="http://schemas.google.com/gdata/batch" xmlns:gd="http://schemas.google.com/g/2005" gd:etag="W/&quot;CkIESHg4eSp7ImA9WxJbF08.&quot;">
+  <id>http://maps.google.com/maps/feeds/maps/208825816854482607313/00046fb45f88fa910bcea</id>
+  <published>2009-07-27T18:46:34.451Z</published>
+  <updated>2009-07-27T18:48:29.631Z</updated>
+  <app:edited xmlns:app="http://www.w3.org/2007/app">2009-07-27T18:48:29.631Z</app:edited>
+  <app:control xmlns:app="http://www.w3.org/2007/app">
+    <app:draft>yes</app:draft>
+  </app:control>
+  <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/maps/2008#map"/>
+  <title>Untitled</title>
+  <summary/>
+  <content src="http://maps.google.com/maps/feeds/features/208825816854482607313/00046fb45f88fa910bcea/full"/>
+  <link rel="self" type="application/atom+xml" href="http://maps.google.com/maps/feeds/maps/208825816854482607313/full/00046fb45f88fa910bcea"/>
+  <link rel="alternate" type="text/html" href="http://maps.google.com/maps/ms?msa=0&amp;msid=208825816854482607313.00046fb45f88fa910bcea"/>
+  <link rel="edit" type="application/atom+xml" href="http://maps.google.com/maps/feeds/maps/208825816854482607313/full/00046fb45f88fa910bcea"/>
+  <author>
+    <name>Roman</name>
+  </author>
+</entry>
+"""
+
+MAP_FEATURE_FEED = """<?xml version="1.0" encoding="UTF-8"?>
+<atom:feed xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:batch="http://schemas.google.com/gdata/batch" xmlns:gd="http://schemas.google.com/g/2005" gd:etag="W/&quot;CkIESHg4eSp7ImA9WxJbF08.&quot;">
+  <atom:id>http://maps.google.com/maps/feeds/features/208825816854482607313/00046fb45f88fa910bcea</atom:id>
+  <atom:updated>2009-07-27T18:48:29.631Z</atom:updated>
+  <atom:category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/maps/2008#feature"/>
+  <atom:title>Untitled</atom:title>
+  <atom:link rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml" href="http://maps.google.com/maps/feeds/features/208825816854482607313/00046fb45f88fa910bcea/full"/>
+  <atom:link rel="self" type="application/atom+xml" href="http://maps.google.com/maps/feeds/features/208825816854482607313/00046fb45f88fa910bcea/full"/>
+  <atom:link rel="http://schemas.google.com/g/2005#batch" type="application/atom+xml" href="http://maps.google.com/maps/feeds/features/208825816854482607313/00046fb45f88fa910bcea/full/batch"/>
+  <atom:link rel="http://schemas.google.com/g/2005#post" type="application/atom+xml" href="http://maps.google.com/maps/feeds/features/208825816854482607313/00046fb45f88fa910bcea/full"/>
+  <openSearch:totalResults>4</openSearch:totalResults>
+  <openSearch:startIndex>1</openSearch:startIndex>
+  <openSearch:itemsPerPage>4</openSearch:itemsPerPage>
+  <atom:entry gd:etag="W/&quot;CkMBRH44fyp7ImA9WxJbF08.&quot;">
+    <atom:id>http://maps.google.com/maps/feeds/features/208825816854482607313/00046fb45f88fa910bcea/00046fb4632573b19e0b7</atom:id>
+    <atom:published>2009-07-27T18:47:35.037Z</atom:published>
+    <atom:updated>2009-07-27T18:47:35.037Z</atom:updated>
+    <app:edited xmlns:app="http://www.w3.org/2007/app">2009-07-27T18:47:35.037Z</app:edited>
+    <atom:category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/maps/2008#feature"/>
+    <atom:title>Some feature title</atom:title>
+    <atom:content type="application/vnd.google-earth.kml+xml">
+      <Placemark>
+        <name>Some feature title</name>
+        <description><![CDATA[<div dir="ltr">Some feature content</div>]]></description>
+        <Style>
+          <IconStyle>
+            <Icon>
+              <href>http://maps.gstatic.com/intl/en_us/mapfiles/ms/micons/ylw-pushpin.png</href>
+            </Icon>
+          </IconStyle>
+        </Style>
+        <Point>
+          <coordinates>-113.818359,41.442726,0.0</coordinates>
+        </Point>
+      </Placemark>
+    </atom:content>
+    <atom:link rel="self" type="application/atom+xml" href="http://maps.google.com/maps/feeds/features/208825816854482607313/00046fb45f88fa910bcea/full/00046fb4632573b19e0b7"/>
+    <atom:link rel="edit" type="application/atom+xml" href="http://maps.google.com/maps/feeds/features/208825816854482607313/00046fb45f88fa910bcea/full/00046fb4632573b19e0b7"/>
+    <atom:author>
+      <atom:name>Roman</atom:name>
+    </atom:author>
+    <atom:contributor>
+      <atom:name>Roman</atom:name>
+    </atom:contributor>
+  </atom:entry>
+  <atom:entry gd:etag="W/&quot;CkIEQ38zfCp7ImA9WxJbF08.&quot;">
+    <atom:id>http://maps.google.com/maps/feeds/features/208825816854482607313/00046fb45f88fa910bcea/00046fb46325e839a11e6</atom:id>
+    <atom:published>2009-07-27T18:47:35.067Z</atom:published>
+    <atom:updated>2009-07-27T18:48:22.184Z</atom:updated>
+    <app:edited xmlns:app="http://www.w3.org/2007/app">2009-07-27T18:48:22.184Z</app:edited>
+    <atom:category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/maps/2008#feature"/>
+    <atom:title>A cool poly!</atom:title>
+    <atom:content type="application/vnd.google-earth.kml+xml">
+      <Placemark>
+        <name>A cool poly!</name>
+        <description><![CDATA[<div dir="ltr">And a description</div>]]></description>
+        <Style>
+          <LineStyle>
+            <color>FF0066FF</color>
+            <width>3</width>
+          </LineStyle>
+          <PolyStyle>
+            <color>730099FF</color>
+            <fill>1</fill>
+            <outline>1</outline>
+          </PolyStyle>
+        </Style>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <tessellate>1</tessellate>
+              <coordinates>-109.775391,47.457809,0.0 -99.755859,51.508742,0.0 -92.900391,48.04871,0.0 -92.8125,44.339565,0.0 -95.273437,44.402392,0.0 -97.207031,46.619261,0.0 -100.898437,46.073231,0.0 -102.480469,43.068888,0.0 -110.742187,45.274886,0.0 -109.775391,47.457809,0.0 </coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+    </atom:content>
+    <atom:link rel="self" type="application/atom+xml" href="http://maps.google.com/maps/feeds/features/208825816854482607313/00046fb45f88fa910bcea/full/00046fb46325e839a11e6"/>
+    <atom:link rel="edit" type="application/atom+xml" href="http://maps.google.com/maps/feeds/features/208825816854482607313/00046fb45f88fa910bcea/full/00046fb46325e839a11e6"/>
+    <atom:author>
+      <atom:name>Roman</atom:name>
+    </atom:author>
+    <atom:contributor>
+      <atom:name>Roman</atom:name>
+    </atom:contributor>
+  </atom:entry>
+  <atom:entry gd:etag="W/&quot;CkIEQ38yfCp7ImA9WxJbF08.&quot;">
+    <atom:id>http://maps.google.com/maps/feeds/features/208825816854482607313/00046fb45f88fa910bcea/00046fb465f5002e56b7a</atom:id>
+    <atom:published>2009-07-27T18:48:22.194Z</atom:published>
+    <atom:updated>2009-07-27T18:48:22.194Z</atom:updated>
+    <app:edited xmlns:app="http://www.w3.org/2007/app">2009-07-27T18:48:22.194Z</app:edited>
+    <atom:category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/maps/2008#feature"/>
+    <atom:title>New Mexico</atom:title>
+    <atom:content type="application/vnd.google-earth.kml+xml">
+      <Placemark>
+        <name>New Mexico</name>
+        <description><![CDATA[<div dir="ltr">Word.</div>]]></description>
+        <Style>
+          <LineStyle>
+            <color>73009900</color>
+            <width>5</width>
+          </LineStyle>
+        </Style>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>-110.039062,37.788081,0.0 -103.183594,37.926868,0.0 -103.183594,32.472695,0.0 -108.896484,32.026706,0.0 -109.863281,31.203405,0.0 -110.039062,37.788081,0.0 </coordinates>
+        </LineString>
+      </Placemark>
+    </atom:content>
+    <atom:link rel="self" type="application/atom+xml" href="http://maps.google.com/maps/feeds/features/208825816854482607313/00046fb45f88fa910bcea/full/00046fb465f5002e56b7a"/>
+    <atom:link rel="edit" type="application/atom+xml" href="http://maps.google.com/maps/feeds/features/208825816854482607313/00046fb45f88fa910bcea/full/00046fb465f5002e56b7a"/>
+    <atom:author>
+      <atom:name>Roman</atom:name>
+    </atom:author>
+    <atom:contributor>
+      <atom:name>Roman</atom:name>
+    </atom:contributor>
+  </atom:entry>
+</atom:feed>
+"""
+
+MAP_FEATURE_ENTRY = """<?xml version="1.0" encoding="UTF-8"?>
+<atom:entry xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:batch="http://schemas.google.com/gdata/batch" xmlns:gd="http://schemas.google.com/g/2005" gd:etag="W/&quot;CkMBRH44fyp7ImA9WxJbF08.&quot;">
+  <atom:id>http://maps.google.com/maps/feeds/features/208825816854482607313/00046fb45f88fa910bcea/00046fb4632573b19e0b7</atom:id>
+  <atom:published>2009-07-27T18:47:35.037Z</atom:published>
+  <atom:updated>2009-07-27T18:47:35.037Z</atom:updated>
+  <app:edited xmlns:app="http://www.w3.org/2007/app">2009-07-27T18:47:35.037Z</app:edited>
+  <atom:category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/maps/2008#feature"/>
+  <atom:title>Some feature title</atom:title>
+  <atom:content type="application/vnd.google-earth.kml+xml">
+    <Placemark>
+      <name>Some feature title</name>
+      <description><![CDATA[<div dir="ltr">Some feature content</div>]]></description>
+      <Style>
+        <IconStyle>
+          <Icon>
+            <href>http://maps.gstatic.com/intl/en_us/mapfiles/ms/micons/ylw-pushpin.png</href>
+          </Icon>
+        </IconStyle>
+      </Style>
+      <Point>
+        <coordinates>-113.818359,41.442726,0.0</coordinates>
+      </Point>
+    </Placemark>
+  </atom:content>
+  <atom:link rel="self" type="application/atom+xml" href="http://maps.google.com/maps/feeds/features/208825816854482607313/00046fb45f88fa910bcea/full/00046fb4632573b19e0b7"/>
+  <atom:link rel="edit" type="application/atom+xml" href="http://maps.google.com/maps/feeds/features/208825816854482607313/00046fb45f88fa910bcea/full/00046fb4632573b19e0b7"/>
+  <atom:author>
+    <atom:name>Roman</atom:name>
+  </atom:author>
+  <atom:contributor>
+    <atom:name>Roman</atom:name>
+  </atom:contributor>
+</atom:entry>
+"""
+
+MAP_FEATURE_KML = """<Placemark>
+  <name>Some feature title</name>
+  <description><![CDATA[<div dir="ltr">Some feature content</div>]]></description>
+  <Style>
+    <IconStyle>
+      <Icon>
+        <href>http://maps.gstatic.com/intl/en_us/mapfiles/ms/micons/ylw-pushpin.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  <Point>
+    <coordinates>-113.818359,41.442726,0.0</coordinates>
+  </Point>
+</Placemark>
+"""

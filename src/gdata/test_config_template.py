@@ -89,3 +89,8 @@ class ContactsConfig(TestConfig):
     return os.path.join(TEST_FILES_DIR, 'files', 'testimage.jpg')
 
   get_image_location = classmethod(get_image_location)
+
+class MapsConfig(TestConfig):
+  service = 'local'
+  map_title = 'Some test map'
+  map_summary = 'A test description'
