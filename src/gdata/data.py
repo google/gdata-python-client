@@ -33,7 +33,8 @@ import atom.data
 
 
 GDATA_TEMPLATE = '{http://schemas.google.com/g/2005}%s'
-OPENSEARCH_TEMPLATE = '{http://a9.com/-/spec/opensearchrss/1.0/}%s'
+OPENSEARCH_TEMPLATE_V1 = '{http://a9.com/-/spec/opensearchrss/1.0/}%s'
+OPENSEARCH_TEMPLATE_V2 = '{http://a9.com/-/spec/opensearch/1.1/}%s'
 BATCH_TEMPLATE = '{http://schemas.google.com/gdata/batch}%s'
 
 
@@ -128,6 +129,13 @@ ATTENDEE_DECLINED = 'http://schemas.google.com/g/2005#event.declined'
 ATTENDEE_INVITED = 'http://schemas.google.com/g/2005#event.invited'
 ATTENDEE_TENTATIVE = 'http://schemas.google.com/g/2005#event.tentative'
 
+FULL_PROJECTION = 'full'
+VALUES_PROJECTION = 'values'
+BASIC_PROJECTION = 'basic'
+
+PRIVATE_VISIBILITY = 'private'
+PUBLIC_VISIBILITY = 'public'
+
 
 class Error(Exception):
   pass
@@ -213,17 +221,20 @@ class LinkFinder(atom.data.LinkFinder):
 
 class TotalResults(atom.core.XmlElement):
   """opensearch:TotalResults for a GData feed."""
-  _qname = OPENSEARCH_TEMPLATE % 'totalResults'
+  _qname = (OPENSEARCH_TEMPLATE_V1 % 'totalResults',
+            OPENSEARCH_TEMPLATE_V2 % 'totalResults')
 
 
 class StartIndex(atom.core.XmlElement):
   """The opensearch:startIndex element in GData feed."""
-  _qname = OPENSEARCH_TEMPLATE % 'startIndex'
+  _qname = (OPENSEARCH_TEMPLATE_V1 % 'startIndex',
+            OPENSEARCH_TEMPLATE_V2 % 'startIndex')
 
 
 class ItemsPerPage(atom.core.XmlElement):
   """The opensearch:itemsPerPage element in GData feed."""
-  _qname = OPENSEARCH_TEMPLATE % 'itemsPerPage'
+  _qname = (OPENSEARCH_TEMPLATE_V1 % 'itemsPerPage',
+            OPENSEARCH_TEMPLATE_V2 % 'itemsPerPage')
 
 
 class ExtendedProperty(atom.core.XmlElement):

@@ -177,11 +177,15 @@ def check_data_classes(test, classes):
     test.assertTrue(data_class.__doc__ is not None,
                     'The class %s should have a docstring' % data_class)
     if hasattr(data_class, '_qname'):
-      test.assertTrue(isinstance(data_class._qname, str),
-                      'The class %s has a non-string _qname' % data_class)
-      test.assertFalse(data_class._qname.endswith('}'), 
-                       'The _qname for class %s is only a namespace' % (
-                           data_class))
+      qname_versions = (data_class._qname 
+                        if isinstance(data_class._qname, tuple)
+                        else (data_class._qname,))
+      for versioned_qname in data_class._qname:
+        test.assertTrue(isinstance(versioned_qname, str),
+                        'The class %s has a non-string _qname' % data_class)
+        test.assertFalse(versioned_qname.endswith('}'), 
+                         'The _qname for class %s is only a namespace' % (
+                             data_class))
 
     for attribute_name, value in data_class.__dict__.iteritems():
       # Ignore all elements that start with _ (private members)

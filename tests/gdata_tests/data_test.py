@@ -481,7 +481,8 @@ class DataClassSanityTest(unittest.TestCase):
   def test_member_values(self):
     self.assertEqual(
         gdata.data.TotalResults._qname,
-        '{http://a9.com/-/spec/opensearch/1.1/}totalResults')
+        ('{http://a9.com/-/spec/opensearchrss/1.0/}totalResults', 
+         '{http://a9.com/-/spec/opensearch/1.1/}totalResults'))
     self.assertEqual(
         gdata.data.RecurrenceException._qname,
         '{http://schemas.google.com/g/2005}recurrenceException')
@@ -492,7 +493,8 @@ class DataClassSanityTest(unittest.TestCase):
 def suite():
   return conf.build_suite([StartIndexTest, StartIndexTest, GDataEntryTest,
       LinkFinderTest, GDataFeedTest, BatchEntryTest, BatchFeedTest,
-      ExtendedPropertyTest, FeedLinkTest, SimpleV2FeedTest])
+      ExtendedPropertyTest, FeedLinkTest, SimpleV2FeedTest,
+      DataClassSanityTest])
 
 
 if __name__ == '__main__':
