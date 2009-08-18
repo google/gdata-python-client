@@ -87,7 +87,7 @@ WORKSHEETS_FEED = """<feed xmlns="http://www.w3.org/2005/Atom"
     <link rel="self" type="application/atom+xml"
       href="http://spreadsheets.google.com/feeds/worksheets/0/private/full/1"/>
     <link rel="edit" type="application/atom+xml"
-      href="http://spreadsheets.google.com/feeds/worksheets/0/private/full/1/version"/>
+      href="http://spreadsheets.google.com/.../0/.../1/version"/>
     <gs:rowCount>100</gs:rowCount>
     <gs:colCount>20</gs:colCount>
   </entry>
@@ -104,7 +104,7 @@ NEW_WORKSHEET = """<entry xmlns="http://www.w3.org/2005/Atom"
 
 EDIT_WORKSHEET = """<entry>
   <id>
-    http://spreadsheets.google.com/feeds/worksheets/key/private/full/worksheetId
+    http://spreadsheets.google.com/feeds/worksheets/k/private/full/w
   </id>
   <updated>2007-07-30T18:51:30.666Z</updated>
   <category scheme="http://schemas.google.com/spreadsheets/2006"
@@ -112,13 +112,15 @@ EDIT_WORKSHEET = """<entry>
   <title type="text">Income</title>
   <content type="text">Expenses</content>
   <link rel="http://schemas.google.com/spreadsheets/2006#listfeed"
-    type="application/atom+xml" href="http://spreadsheets.google.com/feeds/list/key/worksheetId/private/full"/>
+    type="application/atom+xml" 
+    href="http://spreadsheets.google.com/feeds/list/k/w/private/full"/>
   <link rel="http://schemas.google.com/spreadsheets/2006#cellsfeed"
-    type="application/atom+xml" href="http://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full"/>
+    type="application/atom+xml" 
+    href="http://spreadsheets.google.com/feeds/cells/k/w/private/full"/>
   <link rel="self" type="application/atom+xml"
-    href="http://spreadsheets.google.com/feeds/worksheets/key/private/full/worksheetId"/>
+    href="http://spreadsheets.google.com/feeds/worksheets/k/private/full/w"/>
   <link rel="edit" type="application/atom+xml"
-    href="http://spreadsheets.google.com/feeds/worksheets/key/private/full/worksheetId/version"/>
+    href="http://spreadsheets.google.com/.../k/private/full/w/v"/>
   <gs:rowCount>45</gs:rowCount>
   <gs:colCount>15</gs:colCount>
 </entry>"""
@@ -203,7 +205,7 @@ TABLES_FEED = """<?xml version='1.0' encoding='utf-8'?>
     <category scheme='http://schemas.google.com/g/2005#kind'
       term='http://schemas.google.com/spreadsheets/2006#table' />
     <title>Table 2</title>
-    <summary>This is a list of detailed information about each voter.</summary>
+    <summary>List of detailed information about each voter.</summary>
     <content type='application/atom+xml;type=feed'
       src='http://spreadsheets.google.com/feeds/key/records/1' />
     <link rel='self' type='application/atom+xml'
@@ -307,19 +309,21 @@ LIST_FEED = """<feed xmlns="http://www.w3.org/2005/Atom"
     xmlns:gsx="http://schemas.google.com/spreadsheets/2006/extended"
     xmlns:gd="http://schemas.google.com/g/2005"
     gd:etag='W/"D0cERnk-eip7ImA9WBBXGEg."'>
-  <id>http://spreadsheets.google.com/feeds/list/key/worksheetId/private/full</id>
+  <id>
+    http://spreadsheets.google.com/feeds/list/key/worksheetId/private/full
+  </id>
   <updated>2006-11-17T18:23:45.173Z</updated>
   <title type="text">Sheet1</title>
   <link rel="alternate" type="text/html"
     href="http://spreadsheets.google.com/ccc?key=key"/>
   <link rel="http://schemas.google.com/g/2005#feed"
     type="application/atom+xml"
-    href="http://spreadsheets.google.com/feeds/list/key/worksheetId/private/full"/>
+    href="http://spreadsheets.google.com/feeds/list/k/w/private/full"/>
   <link rel="http://schemas.google.com/g/2005#post"
     type="application/atom+xml"
-    href="http://spreadsheets.google.com/feeds/list/key/worksheetId/private/full"/>
+    href="http://spreadsheets.google.com/feeds/list/k/w/private/full"/>
   <link rel="self" type="application/atom+xml"
-    href="http://spreadsheets.google.com/feeds/list/key/worksheetId/private/full"/>
+    href="http://spreadsheets.google.com/feeds/list/k/w/private/full"/>
   <author>
     <name>Fitzwilliam Darcy</name>
     <email>fitz@gmail.com</email>
@@ -328,32 +332,34 @@ LIST_FEED = """<feed xmlns="http://www.w3.org/2005/Atom"
   <openSearch:startIndex>1</openSearch:startIndex>
   <openSearch:itemsPerPage>8</openSearch:itemsPerPage>
   <entry gd:etag='"S0wCTlpIIip7ImA0X0QI"'>
-    <id>http://spreadsheets.google.com/feeds/list/key/worksheetId/private/full/rowId</id>
+    <id>http://spreadsheets.google.com/feeds/list/k/w/private/full/r</id>
     <updated>2006-11-17T18:23:45.173Z</updated>
     <category scheme="http://schemas.google.com/spreadsheets/2006"
       term="http://schemas.google.com/spreadsheets/2006#list"/>
     <title type="text">Bingley</title>
     <content type="text">Hours: 10, Items: 2, IPM: 0.0033</content>
     <link rel="self" type="application/atom+xml"
-      href="http://spreadsheets.google.com/feeds/list/key/worksheetId/private/full/rowId"/>
+      href="http://spreadsheets.google.com/feeds/list/k/w/private/full/r"/>
     <link rel="edit" type="application/atom+xml"
-      href="http://spreadsheets.google.com/feeds/list/key/worksheetId/private/full/rowId/version"/>
+      href="http://spreadsheets.google.com/feeds/list/k/w/private/full/r/v"/>
     <gsx:name>Bingley</gsx:name>
     <gsx:hours>10</gsx:hours>
     <gsx:items>2</gsx:items>
     <gsx:ipm>0.0033</gsx:ipm>
   </entry>
   <entry gd:etag='"AxQDSXxjfyp7ImA0ChJVSBI."'>
-    <id>http://spreadsheets.google.com/feeds/list/key/worksheetId/private/full/rowId</id>
+    <id>
+      http://spreadsheets.google.com/feeds/list/k/w/private/full/rowId
+    </id>
     <updated>2006-11-17T18:23:45.173Z</updated>
     <category scheme="http://schemas.google.com/spreadsheets/2006"
       term="http://schemas.google.com/spreadsheets/2006#list"/>
     <title type="text">Charlotte</title>
     <content type="text">Hours: 60, Items: 18000, IPM: 5</content>
     <link rel="self" type="application/atom+xml"
-      href="http://spreadsheets.google.com/feeds/list/key/worksheetId/private/full/rowId"/>
+      href="http://spreadsheets.google.com/feeds/list/k/w/private/full/r"/>
     <link rel="edit" type="application/atom+xml"
-      href="http://spreadsheets.google.com/feeds/list/key/worksheetId/private/full/rowId/version"/>
+      href="http://spreadsheets.google.com/feeds/list/k/w/private/full/r/v"/>
     <gsx:name>Charlotte</gsx:name>
     <gsx:hours>60</gsx:hours>
     <gsx:items>18000</gsx:items>
@@ -372,16 +378,18 @@ NEW_ROW = """<entry xmlns="http://www.w3.org/2005/Atom"
 
 
 UPDATED_ROW = """<entry gd:etag='"S0wCTlpIIip7ImA0X0QI"'>
-  <id>http://spreadsheets.google.com/feeds/list/key/worksheetId/private/full/rowId</id>
+  <id>
+    http://spreadsheets.google.com/feeds/list/k/w/private/full/rowId
+  </id>
   <updated>2006-11-17T18:23:45.173Z</updated>
   <category scheme="http://schemas.google.com/spreadsheets/2006"
     term="http://schemas.google.com/spreadsheets/2006#list"/>
   <title type="text">Bingley</title>
   <content type="text">Hours: 10, Items: 2, IPM: 0.0033</content>
   <link rel="self" type="application/atom+xml"
-    href="http://spreadsheets.google.com/feeds/list/key/worksheetId/private/full/rowId"/>
+    href="http://spreadsheets.google.com/feeds/list/k/w/private/full/r"/>
   <link rel="edit" type="application/atom+xml"
-    href="http://spreadsheets.google.com/feeds/list/key/worksheetId/private/full/rowId/version"/>
+    href="http://spreadsheets.google.com/feeds/list/k/w/private/full/r/v"/>
   <gsx:name>Bingley</gsx:name>
   <gsx:hours>20</gsx:hours>
   <gsx:items>4</gsx:items>
@@ -394,19 +402,22 @@ CELLS_FEED = """<feed xmlns="http://www.w3.org/2005/Atom"
     xmlns:gs="http://schemas.google.com/spreadsheets/2006"
     xmlns:gd="http://schemas.google.com/g/2005"
     gd:etag='W/"D0cERnk-eip7ImA9WBBXGEg."'>
-  <id>http://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full</id>
+  <id>
+    http://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full
+  </id>
   <updated>2006-11-17T18:27:32.543Z</updated>
   <title type="text">Sheet1</title>
   <link rel="alternate" type="text/html"
     href="http://spreadsheets.google.com/ccc?key=key"/>
   <link rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml"
-    href="http://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full"/>
-  <link rel="http://schemas.google.com/g/2005#post" type="application/atom+xml"
-  <link rel="http://schemas.google.com/g/2005#batch" type="application/atom+xml"
-    href="http://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full/batch"/>
-    href="http://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full"/>
+    href="http://spreadsheets.google.com/feeds/cells/k/w/private/full"/>
+  <link rel="http://schemas.google.com/g/2005#post" 
+    type="application/atom+xml"
+  <link rel="http://schemas.google.com/g/2005#batch"
+    type="application/atom+xml"
+    href="http://spreadsheets.google.com/feeds/cells/k/w/private/full/batch"/>
   <link rel="self" type="application/atom+xml"
-    href="http://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full"/>
+    href="http://spreadsheets.google.com/feeds/cells/k/w/private/full"/>
   <author>
     <name>Fitzwilliam Darcy</name>
     <email>fitz@gmail.com</email>
@@ -416,43 +427,50 @@ CELLS_FEED = """<feed xmlns="http://www.w3.org/2005/Atom"
   <gs:rowCount>100</gs:rowCount>
   <gs:colCount>20</gs:colCount>
   <entry gd:etag='"ImA9D1APFyp7"'>
-    <id>http://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full/R1C1</id>
+    <id>
+      http://spreadsheets.google.com/feeds/cells/k/w/private/full/R1C1
+    </id>
     <updated>2006-11-17T18:27:32.543Z</updated>
     <category scheme="http://schemas.google.com/spreadsheets/2006"
       term="http://schemas.google.com/spreadsheets/2006#cell"/>
     <title type="text">A1</title>
     <content type="text">Name</content>
     <link rel="self" type="application/atom+xml"
-      href="http://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full/R1C1"/>
+      href="http://spreadsheets.google.com/feeds/cells/k/w/pr/full/R1C1"/>
     <link rel="edit" type="application/atom+xml"
-      href="http://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full/R1C1/bgvjf"/>
+      href="http://spreadsheets.google.com/./cells/k/w/pr/full/R1C1/bgvjf"/>
     <gs:cell row="1" col="1" inputValue="Name">Name</gs:cell>
   </entry>
   <entry gd:etag='"YD0PS1YXByp7Ig.."'>
-    <id>http://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full/R1C2</id>
+    <id>
+      http://spreadsheets.google.com/feeds/cells/k/w/private/full/R1C2
+    </id>
     <updated>2006-11-17T18:27:32.543Z</updated>
     <category scheme="http://schemas.google.com/spreadsheets/2006"
       term="http://schemas.google.com/spreadsheets/2006#cell"/>
     <title type="text">B1</title>
     <content type="text">Hours</content>
     <link rel="self" type="application/atom+xml"
-      href="http://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full/R1C2"/>
+      href="http://spreadsheets.google.com/feeds/cells/k/w/pr/full/R1C2"/>
     <link rel="edit" type="application/atom+xml"
-      href="http://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full/R1C2/1pn567"/>
+      href="http://spreadsheets.google.com/./cells/k/w/pr/full/R1C2/1pn567"/>
     <gs:cell row="1" col="2" inputValue="Hours">Hours</gs:cell>
   </entry>
   <entry gd:etag='"ImB5CBYSRCp7"'>
-    <id>http://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full/R9C4</id>
+    <id>
+      http://spreadsheets.google.com/feeds/cells/k/w/private/full/R9C4
+    </id>
     <updated>2006-11-17T18:27:32.543Z</updated>
     <category scheme="http://schemas.google.com/spreadsheets/2006"
       term="http://schemas.google.com/spreadsheets/2006#cell"/>
     <title type="text">D9</title>
     <content type="text">5</content>
     <link rel="self" type="application/atom+xml"
-      href="http://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full/R9C4"/>
+      href="http://spreadsheets.google.com/feeds/cells/k/w/pr/full/R9C4"/>
     <link rel="edit" type="application/atom+xml"
-      href="http://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full/R9C4/srevc"/>
-    <gs:cell row="9" col="4" inputValue="=FLOOR(R[0]C[-1]/(R[0]C[-2]*60),.0001)"
+      href="http://spreadsheets.google.com/./cells/k/w/pr/full/R9C4/srevc"/>
+    <gs:cell row="9" col="4"
+      inputValue="=FLOOR(R[0]C[-1]/(R[0]C[-2]*60),.0001)"
       numericValue="5.0">5</gs:cell>
   </entry>
 </feed>"""
@@ -461,22 +479,28 @@ CELLS_FEED = """<feed xmlns="http://www.w3.org/2005/Atom"
 BATCH_CELLS = """<feed xmlns="http://www.w3.org/2005/Atom"
       xmlns:batch="http://schemas.google.com/gdata/batch"
       xmlns:gs="http://schemas.google.com/spreadsheets/2006">
-  <id>http://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full</id>
+  <id>
+    http://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full
+  </id>
   <entry>
     <batch:id">A1</batch:id">
     <batch:operation type="update"/>
-    <id>http://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full/cellId</id>
+    <id>
+      http://spreadsheets.google.com/feeds/cells/k/w/private/full/cellId
+    </id>
     <link rel="edit" type="application/atom+xml"
-      href="http://spreadsheets/google.com/feeds/cells/key/worksheetId/private/full/R2C4/version"/>
+      href="http://spreadsheets/google.com/./cells/k/w/pr/full/R2C4/v"/>
     <gs:cell row="2" col="4" inputValue="newData"/>
   </entry>
   <entry>
     <batch:id">A2</batch:id">
     <batch:operation type="update"/>
     <title type="text">A2</title>
-    <id>http://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full/cellId</id>
+    <id>
+      http://spreadsheets.google.com/feeds/cells/k/w/private/full/cellId
+    </id>
     <link rel="edit" type="application/atom+xml"
-      href="http://spreadsheets/google.com/feeds/cells/key/worksheetId/private/full/R2C5/version"/>
+      href="http://spreadsheets/google.com/feeds/cells/k/w/pr/full/R2C5/v"/>
     <gs:cell row="2" col="5" inputValue="moreInfo"/>
   </entry>
 </feed>"""

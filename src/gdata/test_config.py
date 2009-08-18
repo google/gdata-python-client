@@ -180,7 +180,7 @@ def check_data_classes(test, classes):
       qname_versions = (data_class._qname 
                         if isinstance(data_class._qname, tuple)
                         else (data_class._qname,))
-      for versioned_qname in data_class._qname:
+      for versioned_qname in qname_versions:
         test.assertTrue(isinstance(versioned_qname, str),
                         'The class %s has a non-string _qname' % data_class)
         test.assertFalse(versioned_qname.endswith('}'), 
