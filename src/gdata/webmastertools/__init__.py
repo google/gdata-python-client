@@ -131,12 +131,14 @@ class VerificationMethod(atom.AtomBase):
   _children['{%s}meta' % atom.ATOM_NAMESPACE] = (
     'meta', VerificationMethodMeta)
   _attributes['in-use'] = 'in_use'
+  _attributes['type'] = 'type'
 
-  def __init__(self, text=None, in_use=None, meta=None,
+  def __init__(self, text=None, in_use=None, meta=None, type=None,
       extension_elements=None, extension_attributes=None):
     self.text = text
     self.in_use = in_use
     self.meta = meta
+    self.type = type
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
