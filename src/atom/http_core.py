@@ -394,7 +394,10 @@ class HttpClient(object):
     if self.debug:
       connection.debuglevel = 1
 
-    connection.putrequest(method, uri._get_relative_path())
+    if connection.host != uri.host:
+      connection.putrequest(method, str(uri))
+    else:
+      connection.putrequest(method, uri._get_relative_path())
 
     # Overcome a bug in Python 2.4 and 2.5
     # httplib.HTTPConnection.putrequest adding
