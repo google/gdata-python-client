@@ -480,7 +480,7 @@ class ProxiedHttpClient(HttpClient):
         proxy_uri.port = '80'
       # Connect to the proxy server, very simple recv and error checking
       p_sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-      p_sock.connect((proxy_url.host, int(proxy_url.port)))
+      p_sock.connect((proxy_uri.host, int(proxy_uri.port)))
       p_sock.sendall(proxy_pieces)
       response = ''
       # Wait for the full response.
@@ -493,12 +493,12 @@ class ProxiedHttpClient(HttpClient):
       ssl = socket.ssl(p_sock, None, None)
       fake_sock = httplib.FakeSocket(p_sock, ssl)
       # Initalize httplib and replace with the proxy socket.
-      connection = httplib.HTTPConnection(proxy_url.host)
+      connection = httplib.HTTPConnection(proxy_uri.host)
       connection.sock=fake_sock
       return connection
     elif uri.scheme == 'http':
-      proxy_url = Uri.parse_uri(proxy)
-      if not proxy_url.port:
+      proxy_uri = Uri.parse_uri(proxy)
+      if not proxy_uri.port:
         proxy_uri.port = '80'
       if proxy_auth:
         headers['Proxy-Authorization'] = proxy_auth.strip()
