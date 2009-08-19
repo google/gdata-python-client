@@ -278,6 +278,7 @@ def save_auth_tokens(token_dict, user):
     user = users.get_current_user()
   if user is None:
     return None
+  memcache.set('gdata_pickled_tokens:%s' % user, pickle.dumps(token_dict))
   user_tokens = TokenCollection.all().filter('user =', user).get()
   if user_tokens:
     user_tokens.pickled_tokens = pickle.dumps(token_dict)
@@ -299,8 +300,12 @@ def load_auth_tokens(user):
     user = users.get_current_user()
   if user is None:
     return {}
+  pickled_tokens = memcache.get('gdata_pickled_tokens:%s' % user)
+  if pickled_tokens:
+    return pickle.loads(pickled_tokens)
   user_tokens = TokenCollection.all().filter('user =', user).get()
   if user_tokens:
+    memcache.set('gdata_pickled_tokens:%s' % user, user_tokens.pickled_tokens)
     return pickle.loads(user_tokens.pickled_tokens)
   return {}
 
