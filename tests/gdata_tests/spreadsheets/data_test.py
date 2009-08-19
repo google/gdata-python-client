@@ -377,10 +377,11 @@ NEW_ROW = """<entry xmlns="http://www.w3.org/2005/Atom"
 </entry>"""
 
 
-UPDATED_ROW = """<entry gd:etag='"S0wCTlpIIip7ImA0X0QI"'>
-  <id>
-    http://spreadsheets.google.com/feeds/list/k/w/private/full/rowId
-  </id>
+UPDATED_ROW = """<entry gd:etag='"S0wCTlpIIip7ImA0X0QI"'
+    xmlns="http://www.w3.org/2005/Atom"
+    xmlns:gd="http://schemas.google.com/g/2005"
+    xmlns:gsx="http://schemas.google.com/spreadsheets/2006/extended">
+  <id>http://spreadsheets.google.com/feeds/list/k/w/private/full/rowId</id>
   <updated>2006-11-17T18:23:45.173Z</updated>
   <category scheme="http://schemas.google.com/spreadsheets/2006"
     term="http://schemas.google.com/spreadsheets/2006#list"/>
@@ -525,6 +526,54 @@ class SpreadsheetEntryTest(unittest.TestCase):
     self.assertEqual(self.spreadsheet.find_self_link(),
                      'http://spreadsheets.google.com/feeds/spreadsheets'
                      '/private/full/key')
+
+
+class ListEntryTest(unittest.TestCase):
+
+  def test_get_and_set_column_value(self):
+    row = atom.core.parse(NEW_ROW, gdata.spreadsheets.data.ListEntry)
+    row.set_value('hours', '3')
+    row.set_value('name', 'Lizzy')
+    self.assertEqual(row.get_value('hours'), '3')
+    self.assertEqual(row.get_value('ipm'), '1')
+    self.assertEqual(row.get_value('items'), '60')
+    self.assertEqual(row.get_value('name'), 'Lizzy')
+    self.assertEqual(row.get_value('x'), None)
+    row.set_value('x', 'Test')
+    self.assertEqual(row.get_value('x'), 'Test')
+    row_xml = str(row)
+    self.assertTrue(row_xml.find(':x') > -1)
+    self.assertTrue(row_xml.find('>Test</') > -1)
+    self.assertTrue(row_xml.find(':hours') > -1)
+    self.assertTrue(row_xml.find('>3</') > -1)
+    self.assertTrue(row_xml.find(':ipm') > -1)
+    self.assertTrue(row_xml.find('>1</') > -1)
+    self.assertTrue(row_xml.find(':items') > -1)
+    self.assertTrue(row_xml.find('>60</') > -1)
+    self.assertTrue(row_xml.find(':name') > -1)
+    self.assertTrue(row_xml.find('>Lizzy</') > -1)
+    self.assertEqual(row_xml.find(':zzz'), -1)
+    self.assertEqual(row_xml.find('>foo</'), -1)
+
+  def test_check_parsing(self):
+    row = atom.core.parse(NEW_ROW, gdata.spreadsheets.data.ListEntry)
+    self.assertEqual(row.get_value('hours'), '1')
+    self.assertEqual(row.get_value('ipm'), '1')
+    self.assertEqual(row.get_value('items'), '60')
+    self.assertEqual(row.get_value('name'), 'Elizabeth Bennet')
+    self.assertEqual(row.get_value('none'), None)
+
+    row = atom.core.parse(UPDATED_ROW, gdata.spreadsheets.data.ListEntry)
+    self.assertEqual(row.get_value('hours'), '20')
+    self.assertEqual(row.get_value('ipm'), '0.0033')
+    self.assertEqual(row.get_value('items'), '4')
+    self.assertEqual(row.get_value('name'), 'Bingley')
+    self.assertEqual(row.get_value('x'), None)
+    self.assertEqual(
+        row.id.text, 'http://spreadsheets.google.com/feeds/list'
+            '/k/w/private/full/rowId')
+    self.assertEqual(row.updated.text, '2006-11-17T18:23:45.173Z')
+    self.assertEqual(row.content.text, 'Hours: 10, Items: 2, IPM: 0.0033')
     
 
 class DataClassSanityTest(unittest.TestCase):
@@ -543,6 +592,7 @@ class DataClassSanityTest(unittest.TestCase):
         gdata.spreadsheets.data.TablesFeed,
         gdata.spreadsheets.data.Record,
         gdata.spreadsheets.data.RecordsFeed,
+        gdata.spreadsheets.data.ListRow,
         gdata.spreadsheets.data.ListEntry,
         gdata.spreadsheets.data.ListsFeed,
         gdata.spreadsheets.data.CellEntry,
@@ -550,7 +600,8 @@ class DataClassSanityTest(unittest.TestCase):
 
 
 def suite():
-  return conf.build_suite([SpreadsheetEntryTest, DataClassSanityTest])
+  return conf.build_suite([SpreadsheetEntryTest, DataClassSanityTest,
+                           ListEntryTest])
 
 
 if __name__ == '__main__':

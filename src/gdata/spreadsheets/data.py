@@ -186,6 +186,17 @@ class RecordsFeed(gdata.data.GDFeed):
   entry = [Record]
 
 
+class ListRow(atom.core.XmlElement):
+  """A gsx column value within a row.
+
+  The local tag in the _qname is blank and must be set to the column
+  name. For example, when adding to a ListEntry, do:
+  col_value = ListRow(text='something')
+  col_value._qname = col_value._qname % 'mycolumnname'
+  """
+  _qname = '{http://schemas.google.com/spreadsheets/2006/extended}%s'
+  
+
 class ListEntry(gdata.data.GDEntry):
   """An Atom entry representing a worksheet row in the list feed.
 
@@ -195,12 +206,41 @@ class ListEntry(gdata.data.GDEntry):
   """
 
   def get_value(self, column_name):
-    #TODO: implement search through row fields for column name 
-    pass
+    """Returns the displayed text for the desired column in this row.
 
-  def set_value(self, column_name):
-    #TODO: implement find and set field in this row.
-    pass
+    The formula or input which generated the displayed value is not accessible
+    through the list feed, to see the user's input, use the cells feed. 
+
+    If a column is not present in this spreadsheet, or there is no value
+    for a column in this row, this method will return None.
+    """
+    values = self.get_elements(column_name, GSX_NAMESPACE)
+    if len(values) == 0:
+      return None
+    return values[0].text
+
+  def set_value(self, column_name, value):
+    """Changes the value of cell in this row under the desired column name.
+
+    Warning: if the cell contained a formula, it will be wiped out by setting
+    the value using the list feed since the list feed only works with
+    displayed values.
+
+    No client side checking is performed on the column_name, you need to
+    ensure that the column_name is the local tag name in the gsx tag for the
+    column. For example, the column_name will not contain special characters,
+    spaces, uppercase letters, etc. 
+    """
+    # Try to find the column in this row to change an existing value.
+    values = self.get_elements(column_name, GSX_NAMESPACE)
+    if len(values) > 0:
+      values[0].text = value
+    else:
+      # There is no value in this row for the desired column, so add a new
+      # gsx:column_name element.
+      new_value = ListRow(text=value)
+      new_value._qname = new_value._qname % (column_name,)
+      self._other_elements.append(new_value)
 
 
 class ListsFeed(gdata.data.GDFeed):
