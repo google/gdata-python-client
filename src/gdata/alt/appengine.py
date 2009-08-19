@@ -264,7 +264,7 @@ class AppEngineTokenStore(atom.token_store.TokenStore):
     save_auth_tokens({}, self.user)
 
 
-def save_auth_tokens(token_dict, user):
+def save_auth_tokens(token_dict, user=None):
   """Associates the tokens with the current user and writes to the datastore.
   
   If there us no current user, the tokens are not written and this function
@@ -290,7 +290,7 @@ def save_auth_tokens(token_dict, user):
     return user_tokens.put()
      
 
-def load_auth_tokens(user):
+def load_auth_tokens(user=None):
   """Reads a dictionary of the current user's tokens from the datastore.
   
   If there is no current user (a user is not signed in to the app) or the user
