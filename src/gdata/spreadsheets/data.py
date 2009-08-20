@@ -278,3 +278,7 @@ class CellsFeed(gdata.data.BatchFeed):
   operations in one HTTP request.
   """
   entry = [CellEntry]
+
+  def batch_set_cell(row, col, input):
+    pass
+    
