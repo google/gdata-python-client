@@ -77,7 +77,7 @@ class ColCount(atom.core.XmlElement):
 class Field(atom.core.XmlElement):
   """The gs:field element.
 
-  A field—a single cell within a record. Contained in an <atom:entry>.
+  A field single cell within a record. Contained in an <atom:entry>.
   """
   _qname = GS_TEMPLATE % 'field'
   index = 'index'
@@ -158,8 +158,8 @@ class Table(gdata.data.GDEntry):
   """An Atom entry that represents a subsection of a worksheet.
 
   A table allows you to treat part or all of a worksheet somewhat like a
-  table in a database—that is, as a set of structured data items. Tables
-  don't exist until you explicitly create them—before you can use a table
+  table in a database that is, as a set of structured data items. Tables
+  don't exist until you explicitly create them before you can use a table
   feed, you have to explicitly define where the table data comes from.
   """
   data = Data

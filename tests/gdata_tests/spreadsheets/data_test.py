@@ -574,7 +574,7 @@ class ListEntryTest(unittest.TestCase):
             '/k/w/private/full/rowId')
     self.assertEqual(row.updated.text, '2006-11-17T18:23:45.173Z')
     self.assertEqual(row.content.text, 'Hours: 10, Items: 2, IPM: 0.0033')
-    
+
 
 class DataClassSanityTest(unittest.TestCase):
 
