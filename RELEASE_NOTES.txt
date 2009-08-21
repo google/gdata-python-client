@@ -1,3 +1,17 @@
+=== 2.0.2 ===
+August 20, 2009 (revision 821)
+
+- Added support for the Google Maps Data API.
+- Added data model classes for the v3 Spreadsheets API. This API is not
+    yet fully supported by the library and the gdata.spreadsheets package
+    should be considered experimental until the next release. The v1
+    gdata.spreadsheet package is unchanged and should still work.
+- Auth token lookups when running in App Engine are now memcached which
+    should improve efficiency. Thanks Marc!
+- Fixed a bug with the v2 HTTP proxy client. If behind a proxy, the full
+    URL is now sent as the request selector. Thanks Dody!
+- Removed the gdata.client.GDataClient class which had been deprecated.
+
 === 2.0.1 ===
 July 23, 2009 (revision 805)
 
