@@ -195,7 +195,7 @@ Data and other attributes inherited from <a href="__builtin__.html#dict">__built
 
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x7569a0&gt;<dd><tt>T.<a href="#CalendarEventCommentQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xd30870&gt;<dd><tt>dict.<a href="#CalendarEventCommentQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xdf0b70&gt;<dd><tt>dict.<a href="#CalendarEventCommentQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -356,7 +356,7 @@ Data and other attributes inherited from <a href="__builtin__.html#dict">__built
 
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x7569a0&gt;<dd><tt>T.<a href="#CalendarEventQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xd323c0&gt;<dd><tt>dict.<a href="#CalendarEventQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xdf2660&gt;<dd><tt>dict.<a href="#CalendarEventQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -493,7 +493,7 @@ Data and other attributes inherited from <a href="__builtin__.html#dict">__built
 
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x7569a0&gt;<dd><tt>T.<a href="#CalendarListQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xd301d0&gt;<dd><tt>dict.<a href="#CalendarListQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xdf0470&gt;<dd><tt>dict.<a href="#CalendarListQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -568,7 +568,7 @@ Returns:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'reason':&nbsp;HTTP&nbsp;reason&nbsp;from&nbsp;the&nbsp;server,&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'body':&nbsp;HTTP&nbsp;body&nbsp;of&nbsp;the&nbsp;server's&nbsp;response}</tt></dd></dl>
 
-<dl><dt><a name="CalendarService-ExecuteBatch"><strong>ExecuteBatch</strong></a>(self, batch_feed, url, converter<font color="#909090">=&lt;function CalendarEventFeedFromString at 0xa615f0&gt;</font>)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;feed&nbsp;to&nbsp;the&nbsp;server.<br>
+<dl><dt><a name="CalendarService-ExecuteBatch"><strong>ExecuteBatch</strong></a>(self, batch_feed, url, converter<font color="#909090">=&lt;function CalendarEventFeedFromString at 0xb1e8c0&gt;</font>)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;feed&nbsp;to&nbsp;the&nbsp;server.<br>
 &nbsp;<br>
 The&nbsp;batch&nbsp;request&nbsp;needs&nbsp;to&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;batch&nbsp;URL&nbsp;for&nbsp;a&nbsp;particular&nbsp;<br>
 calendar.&nbsp;You&nbsp;can&nbsp;find&nbsp;the&nbsp;URL&nbsp;by&nbsp;calling&nbsp;GetBatchLink().href&nbsp;on&nbsp;the&nbsp;<br>
@@ -972,7 +972,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="CalendarService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x7ff50cedf488&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
+<dl><dt><a name="CalendarService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x921a28&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;gdata.service.Get<br>
 &nbsp;<br>

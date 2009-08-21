@@ -56,11 +56,14 @@ pydoc -w gdata.geo
 pydoc -w gdata.health
 pydoc -w gdata.health.service
 pydoc -w gdata.media
+pydoc -w gdata.maps.data
+pydoc -w gdata.maps.client
 pydoc -w gdata.photos
 pydoc -w gdata.photos.service
 pydoc -w gdata.spreadsheet
 pydoc -w gdata.spreadsheet.service
 pydoc -w gdata.spreadsheet.text_db
+pydoc -w gdata.spreadsheets.data
 pydoc -w gdata.webmastertools
 pydoc -w gdata.webmastertools.service
 pydoc -w gdata.youtube
