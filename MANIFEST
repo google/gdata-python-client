@@ -391,3 +391,6 @@ pydocs/gdata.webmastertools.service.html
 pydocs/gdata.youtube.html
 pydocs/gdata.youtube.service.html
 pydocs/generate_docs
+pydocs/gdata.maps.client.html
+pydocs/gdata.maps.data.html
+pydocs/gdata.spreadsheets.data.html

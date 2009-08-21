@@ -1,5 +1,5 @@
 === 2.0.2 ===
-August 20, 2009 (revision 821)
+August 20, 2009 (revision 823)
 
 - Added support for the Google Maps Data API.
 - Added data model classes for the v3 Spreadsheets API. This API is not
