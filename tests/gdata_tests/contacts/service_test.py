@@ -136,7 +136,7 @@ class ContactsServiceTest(unittest.TestCase):
     conf.configure_service_cache(self.gd_client, 'testCreateAndDeleteContactUsingBatch')
 
     # Get random data for creating contact
-    random_contact_number = 'notRandom5'
+    random_contact_number = 'notRandom6'
     random_contact_title = 'Random Contact %s' % (
         random_contact_number)
     

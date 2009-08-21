@@ -49,7 +49,6 @@ class MapsClientTest(unittest.TestCase):
 
   def test_create_update_delete_map(self):
     if not conf.settings.RUN_LIVE_TESTS:
-      print 'Skipping live tests.'
       return
     # Either load the recording or prepare to make a live request.
     conf.configure_cache(self.client, 'test_create_update_delete_map')
