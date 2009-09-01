@@ -165,7 +165,7 @@ class GWebmasterToolsService(gdata.service.GDataService):
             scheme='http://schemas.google.com/g/2005#kind',
             term='http://schemas.google.com/webmasters/tools/2007#sites-info'),
         verification_method=webmastertools.VerificationMethod(
-            type=verification_method, in_user='true')
+            type=verification_method, in_use='true')
         )
     response = self.Put(
         site_entry,
