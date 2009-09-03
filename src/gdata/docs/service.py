@@ -85,7 +85,7 @@ class DocsService(gdata.service.GDataService):
   """Client extension for the Google Documents service Document List feed."""
 
   __FILE_EXT_PATTERN = re.compile('.*\.([a-zA-Z]{3,}$)')
-  __RESOURCE_ID_PATTERN = re.compile('^([a-z]*)(:|%3A)(.*)$')
+  __RESOURCE_ID_PATTERN = re.compile('^([a-z]*)(:|%3A)(\w*)$')
 
   def __init__(self, email=None, password=None, source=None,
                server='docs.google.com', additional_headers=None, **kwargs):
