@@ -85,7 +85,7 @@ class DocsService(gdata.service.GDataService):
   """Client extension for the Google Documents service Document List feed."""
 
   __FILE_EXT_PATTERN = re.compile('.*\.([a-zA-Z]{3,}$)')
-  __RESOURCE_ID_PATTERN = re.compile('^([a-z]*)(:|%3A)(\w*)$')
+  __RESOURCE_ID_PATTERN = re.compile('^([a-z]*)(:|%3A)([\w-]*)$')
 
   def __init__(self, email=None, password=None, source=None,
                server='docs.google.com', additional_headers=None, **kwargs):
@@ -325,12 +325,13 @@ class DocsService(gdata.service.GDataService):
 
     if export_format is not None:
       if url.find('/Export?') == -1:
-        raise Error, 'This entry cannot be exported as a different format'
+        raise gdata.service.Error, ('This entry cannot be exported '
+                                    'as a different format')
       url += '&exportFormat=%s' % export_format
 
     if gid is not None:
       if url.find('spreadsheets') == -1:
-        raise Error, 'grid id parameter is not valid for this entry'
+        raise gdata.service.Error, 'grid id param is not valid for this entry'
       url += '&gid=%s' % gid
 
     if extra_params:
