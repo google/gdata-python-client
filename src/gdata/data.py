@@ -28,6 +28,7 @@ http://code.google.com/apis/gdata/docs/2.0/elements.html
 __author__ = 'j.s@google.com (Jeff Scudder)'
 
 
+import os
 import atom.core
 import atom.data
 
@@ -147,7 +148,7 @@ class MissingRequiredParameters(Error):
 
 class LinkFinder(atom.data.LinkFinder):
   """Mixin used in Feed and Entry classes to simplify link lookups by type.
-  
+
   Provides lookup methods for edit, edit-media, post, ACL and other special
   links which are common across Google Data APIs.
   """
@@ -322,7 +323,7 @@ class GDFeed(atom.data.Feed, LinkFinder):
   start_index = StartIndex
   items_per_page = ItemsPerPage
   entry = [GDEntry]
-  
+
   def get_id(self):
     if self.id is not None and self.id.text is not None:
       return self.id.text.strip()
@@ -546,7 +547,7 @@ class BatchFeed(GDFeed):
 class EntryLink(atom.core.XmlElement):
   """The gd:entryLink element.
 
-  Represents a logically nested entry. For example, a <gd:who> 
+  Represents a logically nested entry. For example, a <gd:who>
   representing a contact might have a nested entry from a contact feed.
   """
   _qname = GDATA_TEMPLATE % 'entryLink'
@@ -593,7 +594,7 @@ class Comments(atom.core.XmlElement):
 class Country(atom.core.XmlElement):
   """The gd:country element.
 
-  Country name along with optional country code. The country code is 
+  Country name along with optional country code. The country code is
   given in accordance with ISO 3166-1 alpha-2:
   http://www.iso.org/iso/iso-3166-1_decoding_table
   """
@@ -611,7 +612,7 @@ class EmailImParent(atom.core.XmlElement):
 class Email(EmailImParent):
   """The gd:email element.
 
-  An email address associated with the containing entity (which is 
+  An email address associated with the containing entity (which is
   usually an entity representing a person or a location).
   """
   _qname = GDATA_TEMPLATE % 'email'
@@ -672,7 +673,7 @@ class FullName(atom.core.XmlElement):
 class Name(atom.core.XmlElement):
   """The gd:name element.
 
-  Allows storing person's name in a structured way. Consists of 
+  Allows storing person's name in a structured way. Consists of
   given name, additional name, family name, prefix, suffix and full name.
   """
   _qname = GDATA_TEMPLATE % 'name'
@@ -797,7 +798,7 @@ class PostalAddress(atom.core.XmlElement):
   uri = 'uri'
   primary = 'primary'
 
- 
+
 class Rating(atom.core.XmlElement):
   """The gd:rating element.
 
@@ -929,25 +930,25 @@ class Agent(atom.core.XmlElement):
   Also for 'in care of' or 'c/o'.
   """
   _qname = GDATA_TEMPLATE % 'agent'
-  
+
 
 class HouseName(atom.core.XmlElement):
   """The gd:housename element.
 
   Used in places where houses or buildings have names (and not
-  necessarily numbers), eg. "The Pillars".  
+  necessarily numbers), eg. "The Pillars".
   """
   _qname = GDATA_TEMPLATE % 'housename'
-  
+
 
 class Street(atom.core.XmlElement):
   """The gd:street element.
 
   Can be street, avenue, road, etc. This element also includes the
-  house number and room/apartment/flat/floor number.  
+  house number and room/apartment/flat/floor number.
   """
   _qname = GDATA_TEMPLATE % 'street'
-  
+
 
 class PoBox(atom.core.XmlElement):
   """The gd:pobox element.
@@ -956,7 +957,7 @@ class PoBox(atom.core.XmlElement):
   but not always mutually exclusive with street.
   """
   _qname = GDATA_TEMPLATE % 'pobox'
-  
+
 
 class Neighborhood(atom.core.XmlElement):
   """The gd:neighborhood element.
@@ -967,7 +968,7 @@ class Neighborhood(atom.core.XmlElement):
   county or a minor city.
   """
   _qname = GDATA_TEMPLATE % 'neighborhood'
-  
+
 
 class City(atom.core.XmlElement):
   """The gd:city element.
@@ -976,7 +977,7 @@ class City(atom.core.XmlElement):
   not necessarily the place of residence or place of business.
   """
   _qname = GDATA_TEMPLATE % 'city'
-  
+
 
 class Subregion(atom.core.XmlElement):
   """The gd:subregion element.
@@ -986,7 +987,7 @@ class Subregion(atom.core.XmlElement):
   delivery addresses.
   """
   _qname = GDATA_TEMPLATE % 'subregion'
-  
+
 
 class Region(atom.core.XmlElement):
   """The gd:region element.
@@ -995,7 +996,7 @@ class Region(atom.core.XmlElement):
   departement (in France), etc.
   """
   _qname = GDATA_TEMPLATE % 'region'
-  
+
 
 class Postcode(atom.core.XmlElement):
   """The gd:postcode element.
@@ -1004,7 +1005,7 @@ class Postcode(atom.core.XmlElement):
   city (e.g. "2" in "Dublin 2, Ireland" addresses).
   """
   _qname = GDATA_TEMPLATE % 'postcode'
-  
+
 
 class Country(atom.core.XmlElement):
   """The gd:country element.
@@ -1012,7 +1013,7 @@ class Country(atom.core.XmlElement):
   The name or code of the country.
   """
   _qname = GDATA_TEMPLATE % 'country'
-  
+
 
 class FormattedAddress(atom.core.XmlElement):
   """The gd:formattedAddress element.
@@ -1020,7 +1021,7 @@ class FormattedAddress(atom.core.XmlElement):
   The full, unstructured postal address.
   """
   _qname = GDATA_TEMPLATE % 'formattedAddress'
-  
+
 
 class StructuredPostalAddress(atom.core.XmlElement):
   """The gd:structuredPostalAddress element.
@@ -1032,7 +1033,7 @@ class StructuredPostalAddress(atom.core.XmlElement):
   neighborhood, city, subregion, region, postal code, country. The
   subregion element is not used for postal addresses, it is provided for
   extended uses of addresses only. In order to store postal address in an
-  unstructured form formatted address field is provided. 
+  unstructured form formatted address field is provided.
   """
   _qname = GDATA_TEMPLATE % 'structuredPostalAddress'
   rel = 'rel'
@@ -1102,3 +1103,57 @@ class Who(atom.core.XmlElement):
   attendee_status = AttendeeStatus
   attendee_type = AttendeeType
   entry_link = EntryLink
+
+
+class MediaSource(object):
+  """GData Entries can refer to media sources, so this class provides a
+  place to store references to these objects along with some metadata.
+  """
+
+  def __init__(self, file_handle=None, content_type=None, content_length=None,
+      file_path=None, file_name=None):
+    """Creates an object of type MediaSource.
+
+    Args:
+      file_handle: A file handle pointing to the file to be encapsulated in the
+                   MediaSource
+      content_type: string The MIME type of the file. Required if a file_handle
+                    is given.
+      content_length: int The size of the file. Required if a file_handle is
+                      given.
+      file_path: string (optional) A full path name to the file. Used in
+                    place of a file_handle.
+      file_name: string The name of the file without any path information.
+                 Required if a file_handle is given.
+    """
+    self.file_handle = file_handle
+    self.content_type = content_type
+    self.content_length = content_length
+    self.file_name = file_name
+
+    if (file_handle is None and content_type is not None and
+        file_path is not None):
+      self.set_file_handle(file_path, content_type)
+
+  def set_file_handle(self, file_name, content_type):
+    """A helper function which can create a file handle from a given filename
+    and set the content type and length all at once.
+
+    Args:
+      file_name: string The path and file name to the file containing the media
+      content_type: string A MIME type representing the type of the media
+    """
+
+    self.file_handle = open(file_name, 'rb')
+    self.content_type = content_type
+    self.content_length = os.path.getsize(file_name)
+    self.file_name = os.path.basename(file_name)
+
+  SetFileHandle = set_file_handle
+
+  def modify_request(self, http_request):
+    http_request.add_body_part(self.file_handle, self.content_type,
+                               self.content_length)
+    return http_request
+
+  ModifyRequest = modify_request
