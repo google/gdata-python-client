@@ -340,7 +340,7 @@ class SpreadsheetsList(gdata.GDataEntry):
       if custom:
         self.custom[name] = custom
     else:
-      ExtensionContainer._ConvertElementTreeToMember(self, child_tree)
+      atom.ExtensionContainer._ConvertElementTreeToMember(self, child_tree)
   
   # We need to overwtite _AddMembersToElementTree to add special logic to
   # convert custom members to XML nodes.

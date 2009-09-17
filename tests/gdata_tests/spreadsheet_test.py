@@ -333,7 +333,8 @@ class SpreadsheetsListTest(unittest.TestCase):
     self.assert_(self.row.custom['column_1'].text == new_row.custom['column_1'].text)
     self.assert_(self.row.custom['column_2'].column == new_row.custom['column_2'].column)
     self.assert_(self.row.custom['column_2'].text == new_row.custom['column_2'].text)
-    
+
+
 class SpreadsheetsSpreadsheetsFeedTest(unittest.TestCase):
 
   def setUp(self):
