@@ -43,6 +43,13 @@ import atom.http_interface
 import socket
 import base64
 import atom.http_core
+ssl_imported = False
+try:
+  import ssl
+  ssl_imported = True
+except ImportError:
+  pass
+  
 
 
 class ProxyError(atom.http_interface.Error):
@@ -242,12 +249,16 @@ class ProxiedHttpClient(HttpClient):
           raise ProxyError('Error status=%s' % str(p_status))
 
         # Trivial setup for ssl socket.
-        ssl = socket.ssl(p_sock, None, None)
-        fake_sock = httplib.FakeSocket(p_sock, ssl)
+        sslobj = None
+        if ssl_imported:
+          sslobj = ssl.wrap_socket(p_sock, None, None)
+        else:
+          ssl = socket.ssl(p_sock, None, None)
+          sslobj = httplib.FakeSocket(p_sock, ssl)
  
         # Initalize httplib and replace with the proxy socket.
         connection = httplib.HTTPConnection(proxy_url.host)
-        connection.sock=fake_sock
+        connection.sock = sslobj
         return connection
       else:
         # The request was HTTPS, but there was no https_proxy set.
