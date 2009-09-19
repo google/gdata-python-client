@@ -23,7 +23,7 @@ import gdata_tests.contacts.service_test
 import gdata_tests.blogger.service_test
 import gdata_tests.youtube.service_test
 import gdata_tests.health.service_test
-import gdata_tests.contacts.profiles.service_test.py
+import gdata_tests.contacts.profiles.service_test
 
 
 def RunAllTests(username, password, spreadsheet_key, worksheet_key,
