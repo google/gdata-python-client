@@ -28,11 +28,12 @@ import atom.http_core
 class AtomPubClient(object):
   host = None
   auth_token = None
+  ssl = False # Whether to force all requests over https
 
   def __init__(self, http_client=None, host=None,
                auth_token=None, source=None, **kwargs):
     """Creates a new AtomPubClient instance.
-    
+
     Args:
       source: The name of your application.
       http_client: An object capable of performing HTTP requests through a
@@ -62,8 +63,8 @@ class AtomPubClient(object):
     Args:
       method: The HTTP method as a string, usually one of 'GET', 'POST',
               'PUT', or 'DELETE'
-      uri: The URI desired as a string or atom.http_core.Uri. 
-      http_request: 
+      uri: The URI desired as a string or atom.http_core.Uri.
+      http_request:
       auth_token: An authorization token object whose modify_request method
                   sets the HTTP Authorization header.
     """
@@ -84,6 +85,9 @@ class AtomPubClient(object):
     # Default to an http request if the protocol scheme is not set.
     if http_request.uri.scheme is None:
       http_request.uri.scheme = 'http'
+    # Override scheme. Force requests over https.
+    if self.ssl:
+      http_request.uri.scheme = 'https'
     if http_request.uri.path is None:
       http_request.uri.path = '/'
     # Add the Authorization header at the very end. The Authorization header
@@ -92,34 +96,34 @@ class AtomPubClient(object):
       auth_token.modify_request(http_request)
     elif self.auth_token:
       self.auth_token.modify_request(http_request)
-    # Perform the fully specified request using the http_client instance. 
+    # Perform the fully specified request using the http_client instance.
     # Sends the request to the server and returns the server's response.
     return self.http_client.request(http_request)
 
   Request = request
 
   def get(self, uri=None, auth_token=None, http_request=None, **kwargs):
-    return self.request(method='GET', uri=uri, auth_token=auth_token, 
+    return self.request(method='GET', uri=uri, auth_token=auth_token,
                         http_request=http_request, **kwargs)
 
   Get = get
 
-  def post(self, uri=None, data=None, auth_token=None, http_request=None, 
+  def post(self, uri=None, data=None, auth_token=None, http_request=None,
            **kwargs):
-    return self.request(method='POST', uri=uri, auth_token=auth_token, 
+    return self.request(method='POST', uri=uri, auth_token=auth_token,
                         http_request=http_request, data=data, **kwargs)
 
   Post = post
 
-  def put(self, uri=None, data=None, auth_token=None, http_request=None, 
+  def put(self, uri=None, data=None, auth_token=None, http_request=None,
           **kwargs):
-    return self.request(method='PUT', uri=uri, auth_token=auth_token, 
+    return self.request(method='PUT', uri=uri, auth_token=auth_token,
                         http_request=http_request, data=data, **kwargs)
 
   Put = put
 
   def delete(self, uri=None, auth_token=None, http_request=None, **kwargs):
-    return self.request(method='DELETE', uri=uri, auth_token=auth_token, 
+    return self.request(method='DELETE', uri=uri, auth_token=auth_token,
                         http_request=http_request, **kwargs)
 
   Delete = delete
