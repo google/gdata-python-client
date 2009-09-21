@@ -19,8 +19,8 @@ import sys
 import unittest
 import getpass
 import inspect
-import gdata.test_config_template
 import atom.mock_http_core
+import gdata.gauth
 
 
 """Loads configuration for tests which connect to Google servers.
