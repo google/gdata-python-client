@@ -98,9 +98,9 @@ class MapsClient(gdata.client.GDClient):
       A gdata.maps.data.Map.
     """
     new_entry = gdata.maps.data.Map(
-        title=atom.data.Title(text=title, type=title_type),
-        summary=(atom.data.Summary(text=summary, type=summary_type)
-                 if summary else None))
+        title=atom.data.Title(text=title, type=title_type))
+    if summary:
+      new_entry.summary = atom.data.Summary(text=summary, type=summary_type)
     if unlisted:
       new_entry.control = atom.data.Control(draft=atom.data.Draft(text='yes'))
     return self.post(new_entry, MAP_URL_TEMPLATE % 'default',

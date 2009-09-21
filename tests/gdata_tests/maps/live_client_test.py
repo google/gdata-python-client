@@ -38,27 +38,26 @@ class MapsClientTest(unittest.TestCase):
 
   def setUp(self):
     self.client = None
-    if conf.settings.RUN_LIVE_TESTS:
+    if conf.options.get_value('runlive') == 'true':
       self.client = gdata.maps.client.MapsClient()
-      conf.configure_client(self.client, conf.settings.MapsConfig, 
-          'MapsTest')
+      conf.configure_client(self.client, 'MapsTest', 'local')
       #self.client.http_client.debug = True
 
   def tearDown(self):
     conf.close_client(self.client)
 
   def test_create_update_delete_map(self):
-    if not conf.settings.RUN_LIVE_TESTS:
+    if not conf.options.get_value('runlive') == 'true':
       return
     # Either load the recording or prepare to make a live request.
     conf.configure_cache(self.client, 'test_create_update_delete_map')
 
     # Create a map.
-    created = self.client.create_map(conf.settings.MapsConfig.map_title,
-                                     conf.settings.MapsConfig.map_summary)
+    created = self.client.create_map('A test map',
+                                     'This map is just a little test.')
 
-    self.assertEqual(created.title.text, conf.settings.MapsConfig.map_title)
-    self.assertEqual(created.summary.text, conf.settings.MapsConfig.map_summary)
+    self.assertEqual(created.title.text, 'A test map')
+    self.assertEqual(created.summary.text, 'This map is just a little test.')
     self.assertTrue(created.control is None)
 
     # Change the title of the map we just added.
@@ -73,17 +72,17 @@ class MapsClientTest(unittest.TestCase):
     self.client.delete(updated)
 
   def test_create_unlisted_map(self):
-    if not conf.settings.RUN_LIVE_TESTS:
+    if not conf.options.get_value('runlive') == 'true':
       return
     conf.configure_cache(self.client, 'test_create_unlisted_map')
 
     # Add an unlisted map.
-    created = self.client.create_map(conf.settings.MapsConfig.map_title,
-                                     conf.settings.MapsConfig.map_summary,
+    created = self.client.create_map('An unlisted test map',
+                                     'This should be unlisted.',
                                      unlisted=True)
 
-    self.assertEqual(created.title.text, conf.settings.MapsConfig.map_title)
-    self.assertEqual(created.summary.text, conf.settings.MapsConfig.map_summary)
+    self.assertEqual(created.title.text, 'An unlisted test map')
+    self.assertEqual(created.summary.text, 'This should be unlisted.')
     self.assertTrue(created.control is not None)
     self.assertTrue(created.control.draft is not None)
     self.assertEqual(created.control.draft.text, 'yes')
@@ -104,4 +103,4 @@ def suite():
 
 
 if __name__ == '__main__':
-  unittest.main()
+  unittest.TextTestRunner().run(suite())

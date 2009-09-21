@@ -44,6 +44,7 @@ import socket
 import base64
 import atom.http_core
 ssl_imported = False
+ssl = None
 try:
   import ssl
   ssl_imported = True

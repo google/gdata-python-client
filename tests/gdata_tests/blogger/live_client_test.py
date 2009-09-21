@@ -34,32 +34,34 @@ import gdata.data
 import gdata.test_config as conf
 
 
+conf.options.register_option(conf.BLOG_ID_OPTION)
+
+
 class BloggerClientTest(unittest.TestCase):
 
   def setUp(self):
     self.client = None
-    if conf.settings.RUN_LIVE_TESTS:
+    if conf.options.get_value('runlive') == 'true':
       self.client = gdata.blogger.client.BloggerClient()
-      conf.configure_client(self.client, conf.settings.BloggerConfig, 
-          'BloggerTest')
+      conf.configure_client(self.client, 'BloggerTest', 'blogger')
 
   def tearDown(self):
     conf.close_client(self.client)
 
   def test_create_update_delete(self):
-    if not conf.settings.RUN_LIVE_TESTS:
+    if not conf.options.get_value('runlive') == 'true':
       return
     # Either load the recording or prepare to make a live request.
     conf.configure_cache(self.client, 'test_create_update_delete')
 
     # Add a blog post.
-    created = self.client.add_post(conf.settings.BloggerConfig.blog_id,
-                                   conf.settings.BloggerConfig.title,
-                                   conf.settings.BloggerConfig.content,
+    created = self.client.add_post(conf.options.get_value('blogid'),
+                                   'test post from BloggerClientTest',
+                                   'Hey look, another test!',
                                    labels=['test', 'python'])
 
-    self.assertEqual(created.title.text, conf.settings.BloggerConfig.title)
-    self.assertEqual(created.content.text, conf.settings.BloggerConfig.content)
+    self.assertEqual(created.title.text, 'test post from BloggerClientTest')
+    self.assertEqual(created.content.text, 'Hey look, another test!')
     self.assertEqual(len(created.category), 2)
     self.assertTrue(created.control is None)
 
@@ -75,18 +77,19 @@ class BloggerClientTest(unittest.TestCase):
     self.client.delete(updated)
 
   def test_create_draft_post(self):
-    if not conf.settings.RUN_LIVE_TESTS:
+    if not conf.options.get_value('runlive') == 'true':
       return
     conf.configure_cache(self.client, 'test_create_draft_post')
 
     # Add a draft blog post.
-    created = self.client.add_post(conf.settings.BloggerConfig.blog_id,
-                                   conf.settings.BloggerConfig.title,
-                                   conf.settings.BloggerConfig.content,
+    created = self.client.add_post(conf.options.get_value('blogid'),
+                                   'draft test post from BloggerClientTest',
+                                   'This should only be a draft.',
                                    labels=['test2', 'python'], draft=True)
 
-    self.assertEqual(created.title.text, conf.settings.BloggerConfig.title)
-    self.assertEqual(created.content.text, conf.settings.BloggerConfig.content)
+    self.assertEqual(created.title.text,
+                     'draft test post from BloggerClientTest')
+    self.assertEqual(created.content.text, 'This should only be a draft.')
     self.assertEqual(len(created.category), 2)
     self.assertTrue(created.control is not None)
     self.assertTrue(created.control.draft is not None)
@@ -108,4 +111,4 @@ def suite():
 
 
 if __name__ == '__main__':
-  unittest.main()
+  unittest.TextTestRunner().run(suite())

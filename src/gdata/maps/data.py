@@ -84,7 +84,10 @@ class KmlContent(atom.data.Content):
       self.kml = kwargs['kml']
 
   def _get_kml(self):
-    return self.children[0] if self.children else ''
+    if self.children:
+      return self.children[0]
+    else:
+      return ''
   
   def _set_kml(self, kml):
     if not kml:

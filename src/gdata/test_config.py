@@ -15,7 +15,9 @@
 # limitations under the License.
 
 
+import sys
 import unittest
+import getpass
 import inspect
 import gdata.test_config_template
 import atom.mock_http_core
@@ -23,17 +25,142 @@ import atom.mock_http_core
 
 """Loads configuration for tests which connect to Google servers.
 
-The test_config_template.py is an example of the settings used in the tests.
-Copy the test_config_template and insert your own values if you want to run
-the tests which communicate with the servers. Change the import above and 
-settings assignment below to use your own test configuration.
+Settings used in tests are stored in a ConfigCollection instance in this
+module called options. If your test needs to get a test related setting,
+use
+
+import gdata.test_config
+option_value = gdata.test_config.options.get_value('x')
+
+The above will check the command line for an '--x' argument, and if not
+found will either use the default value for 'x' or prompt the user to enter
+one. 
+
+Your test can override the value specified by the user by performing:
+
+gdata.test_config.options.set_value('x', 'y')
+
+If your test uses a new option which you would like to allow the user to
+specify on the command line or via a prompt, you can use the register_option
+method as follows:
+
+gdata.test_config.options.register(
+    'option_name', 'Prompt shown to the user', secret=False #As for password.
+    'This is the description of the option, shown when help is requested.',
+    'default value, provide only if you do not want the user to be prompted')
 """
 
 
-settings = gdata.test_config_template
+class Option(object):
+
+  def __init__(self, name, prompt, secret=False, description=None, default=None):
+    self.name = name
+    self.prompt = prompt
+    self.secret = secret
+    self.description = description
+    self.default = default
+
+  def get(self):
+    value = self.default
+    # Check for a command line parameter.
+    for i in xrange(len(sys.argv)):
+      if sys.argv[i].startswith('--%s=' % self.name):
+        value = sys.argv[i].split('=')[1]
+      elif sys.argv[i] == '--%s' % self.name:
+        value = sys.argv[i + 1]
+    # If it was not on the command line, ask the user to input the value.
+    # In order for this to prompt the user, the default value for the option
+    # must be None.
+    if value is None:
+      prompt = '%s: ' % self.prompt
+      if self.secret:
+        value = getpass.getpass(prompt)
+      else:
+        print 'You can specify this on the command line using --%s' % self.name
+        value = raw_input(prompt)
+    return value
 
 
-def configure_client(client, config, case_name):
+class ConfigCollection(object):
+
+  def __init__(self, options=None):
+    self.options = options or {}
+    self.values = {}
+
+  def register_option(self, option):
+    self.options[option.name] = option
+
+  def register(self, *args, **kwargs):
+    self.register_option(Option(*args, **kwargs))
+
+  def get_value(self, option_name):
+    if option_name in self.values:
+      return self.values[option_name]
+    value = self.options[option_name].get()
+    if value is not None:
+      self.values[option_name] = value
+    return value
+
+  def set_value(self, option_name, value):
+    self.values[option_name] = value
+
+  def render_usage(self):
+    message_parts = []
+    for opt_name, option in self.options.iteritems():
+      message_parts.append('--%s: %s' % (opt_name, option.description))
+    return '\n'.join(message_parts)
+
+
+options = ConfigCollection()
+
+
+# Register the default options.
+options.register(
+    'username',
+    'Please enter the email address of your test account', 
+    description=('The email address you want to sign in with. '
+                 'Make sure this is a test account as these tests may edit'
+                 ' or delete data.'))
+options.register(
+    'password',
+    'Please enter the password for your test account',
+    secret=True, description='The test accounts password.')
+options.register(
+    'clearcache',
+    'Delete cached data? (enter true or false)',
+    description=('If set to true, any temporary files which cache test'
+                 ' requests and responses will be deleted.'),
+    default='true')
+options.register(
+    'savecache',
+    'Save requests and responses in a temporary file? (enter true or false)',
+    description=('If set to true, requests to the server and responses will'
+                 ' be saved in temporary files.'),
+    default='false')
+options.register(
+    'runlive',
+    'Run the live tests which contact the server? (enter true or false)',
+    description=('If set to true, the tests will make real HTTP requests to'
+                 ' the servers. This slows down test execution and may'
+                 ' modify the users data, be sure to use a test account.'),
+    default='true')
+
+
+# Other options which may be used if needed.
+BLOG_ID_OPTION = Option(
+    'blogid',
+    'Please enter the ID of your test blog',
+    description=('The blog ID for the blog which should have test posts added'
+                 ' to it. Example 7682659670455539811'))
+TEST_IMAGE_LOCATION_OPTION = Option(
+    'imgpath',
+    'Please enter the full path to a test image to upload',
+    description=('This test image will be uploaded to a service which'
+                 ' accepts a media file, it must be a jpeg.'))
+
+
+# Functions to inject a cachable HTTP client into a service client.
+def configure_client(client, case_name, service_name):
   """Sets up a mock client which will reuse a saved session.
 
   Should be called during setUp of each unit test.
@@ -46,14 +173,14 @@ def configure_client(client, config, case_name):
             with a atom.mock_http_core.MockHttpClient so that repeated
             executions can used cached responses instead of contacting
             the server.
-    config: a dict of test specific settings from the gdata.test_config
-            module. Examples can be found in gdata.test_config_template
-            look at BloggerConfig and ContactsConfig.
     case_name: str The name of the test case class. Examples: 'BloggerTest',
                'ContactsTest'. Used to save a session
                for the ClientLogin auth token request, so the case_name
                should be reused if and only if the same username, password,
                and service are being used.
+    service_name: str The service name as used for ClientLogin to identify
+               the Google Data API being accessed. Example: 'blogger',
+               'wise', etc.
   """
   # Use a mock HTTP client which will record and replay the HTTP traffic
   # from these tests.
@@ -61,19 +188,24 @@ def configure_client(client, config, case_name):
   client.http_client.cache_case_name = case_name
   # Getting the auth token only needs to be done once in the course of test
   # runs.
-  if config.auth_token is None and settings.RUN_LIVE_TESTS:
+  auth_token_key = '%s_auth_token' % service_name
+  if (auth_token_key not in options.values
+      and options.get_value('runlive') == 'true'):
     client.http_client.cache_test_name = 'client_login'
     cache_name = client.http_client.get_cache_file_name()
-    if settings.CLEAR_CACHE:
+    if options.get_value('clearcache') == 'true':
       client.http_client.delete_session(cache_name)
     client.http_client.use_cached_session(cache_name)
-    config.auth_token = client.request_client_login_token(
-        config.email(), config.password(), case_name, service=config.service)
+    auth_token = client.request_client_login_token(
+        options.get_value('username'), options.get_value('password'),
+        case_name, service=service_name)
+    options.values[auth_token_key] = gdata.gauth.token_to_blob(auth_token)
     client.http_client.close_session()
   # Allow a config auth_token of False to prevent the client's auth header
   # from being modified.
-  if config.auth_token:
-    client.auth_token = config.auth_token
+  if auth_token_key in options.values:
+    client.auth_token = gdata.gauth.token_from_blob(
+        options.values[auth_token_key])
 
 
 def configure_cache(client, test_name):
@@ -96,7 +228,7 @@ def configure_cache(client, test_name):
   # setUp.
   client.http_client.cache_test_name = test_name
   cache_name = client.http_client.get_cache_file_name()
-  if settings.CLEAR_CACHE:
+  if options.get_value('clearcache') == 'true':
     client.http_client.delete_session(cache_name)
   client.http_client.use_cached_session(cache_name)
 
@@ -106,15 +238,15 @@ def close_client(client):
   
   This should be called in the unit test's tearDown method.
 
-  Checks to see if settings.CACHE_RESPONSES is True, to make sure we only
-  save sessions to repeat if the user desires.
+  Checks to see if the 'savecache' option is set to 'true', to make sure we
+  only save sessions to repeat if the user desires.
   """
-  if client and settings.CACHE_RESPONSES:
+  if client and options.get_value('savecache') == 'true':
     # If this was a live request, save the recording.
     client.http_client.close_session()
 
 
-def configure_service(service, config, case_name):
+def configure_service(service, case_name, service_name):
   """Sets up a mock GDataService v1 client to reuse recorded sessions.
   
   Should be called during setUp of each unit test. This is a duplicate of
@@ -124,20 +256,21 @@ def configure_service(service, config, case_name):
   service.http_client.v2_http_client.cache_case_name = case_name
   # Getting the auth token only needs to be done once in the course of test
   # runs.
-  if config.auth_token is None and settings.RUN_LIVE_TESTS:
+  auth_token_key = 'service_%s_auth_token' % service_name
+  if (auth_token_key not in options.values
+      and options.get_value('runlive') == 'true'):
     service.http_client.v2_http_client.cache_test_name = 'client_login'
     cache_name = service.http_client.v2_http_client.get_cache_file_name()
-    if settings.CLEAR_CACHE:
+    if options.get_value('clearcache') == 'true':
       service.http_client.v2_http_client.delete_session(cache_name)
     service.http_client.v2_http_client.use_cached_session(cache_name)
-    service.ClientLogin(config.email(), config.password(), 
-                        service=config.service, source=case_name)
-    config.auth_token = service.GetClientLoginToken()
+    service.ClientLogin(options.get_value('username'),
+                        options.get_value('password'),
+                        service=service_name, source=case_name)
+    options.values[auth_token_key] = service.GetClientLoginToken()
     service.http_client.v2_http_client.close_session()
-  if isinstance(config.auth_token, gdata.gauth.ClientLoginToken):
-    service.SetClientLoginToken(config.auth_token.token_string)
-  else:
-    service.SetClientLoginToken(config.auth_token)
+  if auth_token_key in options.values:
+    service.SetClientLoginToken(options.values[auth_token_key])
 
 
 def configure_service_cache(service, test_name):
@@ -148,13 +281,13 @@ def configure_service_cache(service, test_name):
   """
   service.http_client.v2_http_client.cache_test_name = test_name
   cache_name = service.http_client.v2_http_client.get_cache_file_name()
-  if settings.CLEAR_CACHE:
+  if options.get_value('clearcache') == 'true':
     service.http_client.v2_http_client.delete_session(cache_name)
   service.http_client.v2_http_client.use_cached_session(cache_name)
 
 
 def close_service(service):
-  if service and settings.CACHE_RESPONSES:
+  if service and options.get_value('savecache') == 'true':
     # If this was a live request, save the recording.
     service.http_client.v2_http_client.close_session()
 
@@ -177,9 +310,11 @@ def check_data_classes(test, classes):
     test.assertTrue(data_class.__doc__ is not None,
                     'The class %s should have a docstring' % data_class)
     if hasattr(data_class, '_qname'):
-      qname_versions = (data_class._qname 
-                        if isinstance(data_class._qname, tuple)
-                        else (data_class._qname,))
+      qname_versions = None
+      if isinstance(data_class._qname, tuple):
+        qname_versions = data_class._qname
+      else:
+        qname_versions = (data_class._qname,)
       for versioned_qname in qname_versions:
         test.assertTrue(isinstance(versioned_qname, str),
                         'The class %s has a non-string _qname' % data_class)

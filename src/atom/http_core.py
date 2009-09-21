@@ -28,6 +28,7 @@ import urlparse
 import urllib
 import httplib
 ssl_imported = False
+ssl = None
 try:
   import ssl
   ssl_imported = True

@@ -22,6 +22,7 @@
 __author__ = 'j.s@google.com (Jeff Scudder)'
 
 
+import os
 import unittest
 import gdata.gauth
 import gdata.client
@@ -34,27 +35,29 @@ import atom
 import gdata.test_config as conf
 
 
+conf.options.register_option(conf.BLOG_ID_OPTION)
+
+
 class BloggerTest(unittest.TestCase):
 
   def setUp(self):
     self.client = None
-    if conf.settings.RUN_LIVE_TESTS:
+    if conf.options.get_value('runlive') == 'true':
       self.client = gdata.client.GDClient()
-      conf.configure_client(self.client, conf.settings.BloggerConfig, 
-          'BloggerTest')
+      conf.configure_client(self.client, 'BloggerTest', 'blogger')
 
   def tearDown(self):
     conf.close_client(self.client)
 
   def test_create_update_delete(self):
-    if not conf.settings.RUN_LIVE_TESTS:
+    if not conf.options.get_value('runlive') == 'true':
       return
     # Either load the recording or prepare to make a live request.
     conf.configure_cache(self.client, 'test_create_update_delete')
 
     blog_post = atom.Entry(
-        title=atom.Title(text=conf.settings.BloggerConfig.title),
-        content=atom.Content(text=conf.settings.BloggerConfig.content))
+        title=atom.Title(text='test from python BloggerTest'),
+        content=atom.Content(text='This is only a test.'))
     http_request = atom.http_core.HttpRequest()
     http_request.add_body_part(str(blog_post), 'application/atom+xml')
 
@@ -63,11 +66,11 @@ class BloggerTest(unittest.TestCase):
 
     entry = self.client.request('POST', 
         'http://www.blogger.com/feeds/%s/posts/default' % (
-            conf.settings.BloggerConfig.blog_id),
+            conf.options.get_value('blogid')),
          converter=entry_from_string_wrapper, http_request=http_request)
-    self.assertEqual(entry.title.text, conf.settings.BloggerConfig.title)
+    self.assertEqual(entry.title.text, 'test from python BloggerTest')
     # TODO: uncomment once server bug is fixed
-    #self.assertEqual(entry.content.text, conf.settings.BloggerConfig.content)
+    self.assertEqual(entry.content.text, 'This is only a test.')
 
     # Edit the test entry.
     edit_link = None
@@ -82,7 +85,7 @@ class BloggerTest(unittest.TestCase):
          converter=entry_from_string_wrapper, http_request=http_request)
     self.assertEqual(edited_entry.title.text, 'Edited')
     # TODO: uncomment once server bug is fixed
-    #self.assertEqual(edited_entry.content.text, entry.content.text)
+    self.assertEqual(edited_entry.content.text, entry.content.text)
 
     # Delete the test entry from the blog.
     edit_link = None
@@ -93,7 +96,7 @@ class BloggerTest(unittest.TestCase):
     self.assertEqual(response.status, 200)
 
   def test_use_version_two(self):
-    if not conf.settings.RUN_LIVE_TESTS:
+    if not conf.options.get_value('runlive') == 'true':
       return
     conf.configure_cache(self.client, 'test_use_version_two')
 
@@ -119,7 +122,7 @@ class BloggerTest(unittest.TestCase):
     http_request.add_body_part(entry.to_string(), 'application/atom+xml')
     posted = self.client.request('POST', 
         'http://www.blogger.com/feeds/%s/posts/default' % (
-            conf.settings.BloggerConfig.blog_id),
+            conf.options.get_value('blogid')),
          converter=element_from_string, http_request=http_request)
     # Verify that the blog post content is correct.
     self.assertEqual(posted.get_elements('title', ATOM)[0].text, 'Marriage!')
@@ -162,16 +165,15 @@ class ContactsTest(unittest.TestCase):
 
   def setUp(self):
     self.client = None
-    if conf.settings.RUN_LIVE_TESTS:
+    if conf.options.get_value('runlive') == 'true':
       self.client = gdata.client.GDClient()
-      conf.configure_client(self.client, conf.settings.ContactsConfig,
-          'ContactsTest')
+      conf.configure_client(self.client, 'ContactsTest', 'cp')
 
   def tearDown(self):
     conf.close_client(self.client)
 
   def test_crud_version_two(self):
-    if not conf.settings.RUN_LIVE_TESTS:
+    if not conf.options.get_value('runlive') == 'true':
       return
 
     conf.configure_cache(self.client, 'test_crud_version_two')
@@ -215,17 +217,21 @@ class VersionTwoClientContactsTest(unittest.TestCase):
 
   def setUp(self):
     self.client = None
-    if conf.settings.RUN_LIVE_TESTS:
+    if conf.options.get_value('runlive') == 'true':
       self.client = gdata.client.GDClient()
       self.client.api_version = '2'
-      conf.configure_client(self.client, conf.settings.ContactsConfig,
-                            'VersionTwoClientContactsTest')
+      conf.configure_client(self.client, 'VersionTwoClientContactsTest', 'cp')
+    self.old_proxy = os.environ.get('https_proxy')
 
   def tearDown(self):
+    if self.old_proxy:
+      os.environ['https_proxy'] = self.old_proxy
+    elif 'https_proxy' in os.environ:
+      del os.environ['https_proxy']
     conf.close_client(self.client)
 
   def test_version_two_client(self):
-    if not conf.settings.RUN_LIVE_TESTS:
+    if not conf.options.get_value('runlive') == 'true':
       return
     conf.configure_cache(self.client, 'test_version_two_client')
 
@@ -238,7 +244,7 @@ class VersionTwoClientContactsTest(unittest.TestCase):
 
     # Create the test contact.
     posted = self.client.post(entry,
-        'http://www.google.com/m8/feeds/contacts/default/full')
+        'https://www.google.com/m8/feeds/contacts/default/full')
     self.assertTrue(isinstance(posted, gdata.data.GDEntry))
     self.assertEqual(posted.get_elements('title')[0].text, 'Test')
     self.assertEqual(posted.get_elements('email')[0].get_attributes(
@@ -253,6 +259,11 @@ class VersionTwoClientContactsTest(unittest.TestCase):
 
     # Delete the test contact.
     self.client.delete(edited)
+
+  def test_crud_over_https_proxy(self):
+    os.environ['https_proxy'] = '98.192.125.23'
+    # Perform the CRUD test above, this time over a proxy.
+    self.test_version_two_client()
 
 
 # Utility methods.
@@ -286,4 +297,4 @@ def suite():
 
 
 if __name__ == '__main__':
-  unittest.main()
+  unittest.TextTestRunner().run(suite())

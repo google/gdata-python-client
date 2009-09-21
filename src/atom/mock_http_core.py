@@ -85,11 +85,13 @@ class MockHttpClient(object):
     recording_file = open(os.path.join(tempfile.gettempdir(), filename), 
                           'wb')
     pickle.dump(self._recordings, recording_file)
+    recording_file.close()
 
   def _load_recordings(self, filename):
     recording_file = open(os.path.join(tempfile.gettempdir(), filename), 
                           'rb')
     self._recordings = pickle.load(recording_file)
+    recording_file.close()
 
   def _delete_recordings(self, filename):
     full_path = os.path.join(tempfile.gettempdir(), filename)

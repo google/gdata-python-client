@@ -25,21 +25,21 @@ import gdata.contacts.service
 import gdata.test_config as conf
 
 
+conf.options.register_option(conf.TEST_IMAGE_LOCATION_OPTION)
+
+
 class ContactsServiceTest(unittest.TestCase):
 
   def setUp(self):
     self.gd_client = gdata.contacts.service.ContactsService()
-
-    conf.configure_service(self.gd_client, conf.settings.ContactsConfig,
-                           'ContactsServiceTest')
-
-    self.gd_client.email = conf.settings.ContactsConfig.email()
+    conf.configure_service(self.gd_client, 'ContactsServiceTest', 'cp')
+    self.gd_client.email = conf.options.get_value('username')
 
   def tearDown(self):
     conf.close_service(self.gd_client)
 
   def testGetContactsFeed(self):
-    if not conf.settings.RUN_LIVE_TESTS:
+    if not conf.options.get_value('runlive') == 'true':
       return
     conf.configure_service_cache(self.gd_client, 'testGetContactsFeed')
     feed = self.gd_client.GetContactsFeed()
@@ -49,11 +49,11 @@ class ContactsServiceTest(unittest.TestCase):
     self.assertEquals('default', self.gd_client.contact_list)
 
   def testCustomContactList(self):
-    if not conf.settings.RUN_LIVE_TESTS:
+    if not conf.options.get_value('runlive') == 'true':
       return
     conf.configure_service_cache(self.gd_client, 'testCustomContactList')
 
-    self.gd_client.contact_list = conf.settings.ContactsConfig.email() 
+    self.gd_client.contact_list = conf.options.get_value('username')
     feed = self.gd_client.GetContactsFeed()
     self.assert_(isinstance(feed, gdata.contacts.ContactsFeed))
 
@@ -71,7 +71,7 @@ class ContactsServiceTest(unittest.TestCase):
         'https://www.google.com/m8/feeds/groups/example.com/base/batch', uri)
 
   def testCreateUpdateDeleteContactAndUpdatePhoto(self):
-    if not conf.settings.RUN_LIVE_TESTS:
+    if not conf.options.get_value('runlive') == 'true':
       return
     conf.configure_service_cache(self.gd_client, 'testCreateUpdateDeleteContactAndUpdatePhoto')
 
@@ -116,7 +116,7 @@ class ContactsServiceTest(unittest.TestCase):
 
     # Change the contact's photo.
     updated_photo = self.gd_client.ChangePhoto(
-        conf.settings.ContactsConfig.get_image_location(), updated, 
+        conf.options.get_value('imgpath'), updated,
         content_type='image/jpeg')
 
     # Refetch the contact so that it has the new photo link
@@ -131,12 +131,12 @@ class ContactsServiceTest(unittest.TestCase):
     self.gd_client.DeleteContact(updated.GetEditLink().href)
 
   def testCreateAndDeleteContactUsingBatch(self):
-    if not conf.settings.RUN_LIVE_TESTS:
+    if not conf.options.get_value('runlive') == 'true':
       return
     conf.configure_service_cache(self.gd_client, 'testCreateAndDeleteContactUsingBatch')
 
     # Get random data for creating contact
-    random_contact_number = 'notRandom6'
+    random_contact_number = 'notRandom12'
     random_contact_title = 'Random Contact %s' % (
         random_contact_number)
     
@@ -222,14 +222,13 @@ class ContactsGroupsTest(unittest.TestCase):
 
   def setUp(self):
     self.gd_client = gdata.contacts.service.ContactsService()
-    conf.configure_service(self.gd_client, conf.settings.ContactsConfig,
-                           'ContactsServiceTest')
+    conf.configure_service(self.gd_client, 'ContactsServiceTest', 'cp')
 
   def tearDown(self):
     conf.close_service(self.gd_client)
 
   def testCreateUpdateDeleteGroup(self):
-    if not conf.settings.RUN_LIVE_TESTS:
+    if not conf.options.get_value('runlive') == 'true':
       return
     conf.configure_service_cache(self.gd_client, 
                                  'testCreateUpdateDeleteGroup')
@@ -270,4 +269,4 @@ def suite():
 if __name__ == '__main__':
   print ('Contacts Tests\nNOTE: Please run these tests only with a test '
          'account. The tests may delete or update your data.')
-  unittest.main()
+  unittest.TextTestRunner().run(suite())
