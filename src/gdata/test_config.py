@@ -68,7 +68,8 @@ class Option(object):
         value = sys.argv[i].split('=')[1]
       elif sys.argv[i] == '--%s' % self.name:
         value = sys.argv[i + 1]
-    # If it was not on the command line, ask the user to input the value.
+    # If the param was not on the command line, ask the user to input the
+    # value.
     # In order for this to prompt the user, the default value for the option
     # must be None.
     if value is None:

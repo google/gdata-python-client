@@ -69,7 +69,6 @@ class BloggerTest(unittest.TestCase):
             conf.options.get_value('blogid')),
          converter=entry_from_string_wrapper, http_request=http_request)
     self.assertEqual(entry.title.text, 'test from python BloggerTest')
-    # TODO: uncomment once server bug is fixed
     self.assertEqual(entry.content.text, 'This is only a test.')
 
     # Edit the test entry.
@@ -84,7 +83,6 @@ class BloggerTest(unittest.TestCase):
     edited_entry = self.client.request('PUT', edit_link,
          converter=entry_from_string_wrapper, http_request=http_request)
     self.assertEqual(edited_entry.title.text, 'Edited')
-    # TODO: uncomment once server bug is fixed
     self.assertEqual(edited_entry.content.text, entry.content.text)
 
     # Delete the test entry from the blog.
