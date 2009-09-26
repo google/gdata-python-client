@@ -158,6 +158,11 @@ TEST_IMAGE_LOCATION_OPTION = Option(
     'Please enter the full path to a test image to upload',
     description=('This test image will be uploaded to a service which'
                  ' accepts a media file, it must be a jpeg.'))
+SPREADSHEET_ID_OPTION = Option(
+    'spreadsheetid',
+    'Please enter the ID of a spreadsheet to use in these tests',
+    description=('The spreadsheet ID for the spreadsheet which should be'
+                 ' modified by theses tests.'))
 
 
 # Functions to inject a cachable HTTP client into a service client.

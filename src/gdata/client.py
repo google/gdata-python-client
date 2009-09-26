@@ -622,7 +622,8 @@ class GDClient(atom.client.AtomPubClient):
                           auth_token=auth_token, **kwargs)
     http_request = atom.http_core.HttpRequest()
     # Include the ETag in the request if this is version 2 of the API.
-    if self.api_version and self.api_version.startswith('2'):
+    if self.api_version and (self.api_version.startswith('2')
+                             or self.api_version.startswith('3')):
       if force:
         http_request.headers['If-Match'] = '*'
       elif hasattr(entry_or_uri, 'etag') and entry_or_uri.etag:

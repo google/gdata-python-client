@@ -164,6 +164,7 @@ class Table(gdata.data.GDEntry):
   """
   data = Data
   header = Header
+  worksheet = Worksheet
 
 
 class TablesFeed(gdata.data.GDFeed):
