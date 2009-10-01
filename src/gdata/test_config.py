@@ -312,6 +312,7 @@ def build_suite(classes):
 
 
 def check_data_classes(test, classes):
+  import inspect
   for data_class in classes:
     test.assertTrue(data_class.__doc__ is not None,
                     'The class %s should have a docstring' % data_class)
@@ -335,6 +336,8 @@ def check_data_classes(test, classes):
           if not (isinstance(value, str) or inspect.isfunction(value) 
               or (isinstance(value, list)
                   and issubclass(value[0], atom.core.XmlElement))
+              or type(value) == property # Allow properties.
+              or inspect.ismethod(value) # Allow methods. 
               or issubclass(value, atom.core.XmlElement)):
             test.fail(
                 'XmlElement member should have an attribute, XML class,'

@@ -882,6 +882,14 @@ class VersionedXmlTest(unittest.TestCase):
     self.assertTrue(entry.control is None)
 
 
+class DataModelSanityTest(unittest.TestCase):
+
+  def test_xml_elements(self):
+    conf.check_data_classes(self, [
+       atom.data.Feed, atom.data.Source, atom.data.Logo,
+       atom.data.Control, atom.data.Draft, atom.data.Generator])
+
+
 def suite():
   return conf.build_suite([AuthorTest, EmailTest, NameTest, 
                            ExtensionElementTest, LinkTest, GeneratorTest,
@@ -890,7 +898,8 @@ def suite():
                            PublishedTest, FeedEntryParentTest, EntryTest,
                            ContentEntryParentTest, PreserveUnkownElementTest,
                            FeedTest, LinkFinderTest, AtomBaseTest, 
-                           UtfParsingTest, VersionedXmlTest])
+                           UtfParsingTest, VersionedXmlTest,
+                           DataModelSanityTest])
 
 
 if __name__ == '__main__':

@@ -316,6 +316,7 @@ class Entry(FeedEntryParent):
 
 
 class Feed(Source):
+  """The atom:feed element which contains entries."""
   _qname = ATOM_TEMPLATE % 'feed'
   entry = [Entry]
 
