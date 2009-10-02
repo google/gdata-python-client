@@ -1635,8 +1635,8 @@ rel="self" type="application/atom+xml" /><ns0:title type="text">Test Spreadsheet
     <ns0:name>test.user</ns0:name>
     <ns0:email>test.user@gmail.com</ns0:email>
 </ns2:lastModifiedBy>
-<ns3:writersCanInvite value='true'/>
 <ns2:lastViewed>2009-03-05T07:48:21.493Z</ns2:lastViewed>
+<ns3:writersCanInvite value='true'/>
 </ns0:entry><ns0:entry><ns0:content
 src="http://docs.google.com/RawDocContents?action=fetch&amp;docID=gr00vy"
 type="text/html"
@@ -4481,9 +4481,6 @@ BOOK_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>"""\
     """<dc:title>A theory of justice</dc:title>"""\
 """</entry>"""
 
-
-
-
 BOOK_FEED = """<?xml version='1.0' encoding='UTF-8'?>"""\
     """<feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:gbs='http://schemas.google.com/books/2008' xmlns:dc='http://purl.org/dc/terms' xmlns:gd='http://schemas.google.com/g/2005'>"""\
     """<id>http://www.google.com/books/feeds/volumes</id>"""\
@@ -4759,3 +4756,347 @@ MAP_FEATURE_KML = """<Placemark>
   </Point>
 </Placemark>
 """
+
+SITES_LISTPAGE_ENTRY = '''<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+  <id>http:///sites.google.com/feeds/content/site/gdatatestsite/1712987567114738703</id>
+  <updated>2009-06-16T00:37:37.393Z</updated>
+  <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/sites/2008#listpage"/>
+  <title type="text">ListPagesTitle</title>
+  <content type="xhtml">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+    <jot:section xmlns:jot="http://www.google.com/ns/jotspot/srvtmpl/" target="content-1">
+    <div dir="ltr">stuff go here<div>asdf</div>
+    <div>sdf</div>
+    <div>
+      <br/>
+    </div>
+  </div>
+  </jot:section>
+  </div>
+  </content>
+  <link rel="self" type="application/atom+xml" href="http:///sites.google.com/feeds/content/site/gdatatestsite/1712987567114738703"/>
+  <link rel="edit" type="application/atom+xml" href="http:///sites.google.com/feeds/content/site/gdatatestsite/1712987567114738703"/>
+  <author>
+    <name>Test User</name>
+    <email>test@gmail.com</email>
+  </author>
+  <gs:worksheet xmlns:gs="http://schemas.google.com/spreadsheets/2006" name="listpage"/>
+  <gs:header xmlns:gs="http://schemas.google.com/spreadsheets/2006" row="1"/>
+  <gs:data xmlns:gs="http://schemas.google.com/spreadsheets/2006" startRow="2">
+  <gs:column index="A" name="Owner"/>
+  <gs:column index="B" name="Description"/>
+  <gs:column index="C" name="Resolution"/>
+  <gs:column index="D" name="Complete"/>
+  <gs:column index="E" name="MyCo"/>
+  </gs:data>
+  <gd:feedLink xmlns:gd="http://schemas.google.com/g/2005" href="http:///sites.google.com/feeds/content/site/gdatatestsite?parent=abc"/>
+</entry>'''
+
+SITES_COMMENT_ENTRY = '''<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+  <id>http://sites.google.com/feeds/content/site/gdatatestsite/abc123</id>
+  <updated>2009-06-15T18:40:22.407Z</updated>
+  <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/sites/2008#comment"/>
+  <title type="text"/>
+  <content type="xhtml">
+    <div xmlns="http://www.w3.org/1999/xhtml">first comment</div>
+  </content>
+  <link rel="http://schemas.google.com/sites/2008#parent" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123parent"/>
+  <link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+  <link rel="edit" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+  <author>
+    <name>Test User</name>
+    <email>test@gmail.com</email>
+  </author>
+  <thr:in-reply-to xmlns:thr="http://purl.org/syndication/thread/1.0" href="http://sites.google.com/site/gdatatestsite/annoucment/testpost" ref="http://sites.google.com/feeds/content/site/gdatatestsite/abc123" source="http://sites.google.com/feeds/content/site/gdatatestsite" type="text/html"/>
+</entry>'''
+
+SITES_LISTITEM_ENTRY = '''<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+  <id>http://sites.google.com/feeds/content/site/gdatatestsite/abc123</id>
+  <updated>2009-06-16T00:34:55.633Z</updated>
+  <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/sites/2008#listitem"/>
+  <title type="text"/>
+  <link rel="http://schemas.google.com/sites/2008#parent" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123def"/>
+  <link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+  <link rel="edit" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+  <author>
+    <name>Test User</name>
+    <email>test@gmail.com</email>
+  </author>
+  <gs:field xmlns:gs="http://schemas.google.com/spreadsheets/2006" index="A" name="Owner">test value</gs:field>
+  <gs:field xmlns:gs="http://schemas.google.com/spreadsheets/2006" index="B" name="Description">test</gs:field>
+  <gs:field xmlns:gs="http://schemas.google.com/spreadsheets/2006" index="C" name="Resolution">90</gs:field>
+  <gs:field xmlns:gs="http://schemas.google.com/spreadsheets/2006" index="D" name="Complete"/>
+  <gs:field xmlns:gs="http://schemas.google.com/spreadsheets/2006" index="E" name="MyCo">2009-05-31</gs:field>
+</entry>'''
+
+SITES_CONTENT_FEED = '''<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearch/1.1/"
+xmlns:sites="http://schemas.google.com/sites/2008" xmlns:gs="http://schemas.google.com/spreadsheets/2006"
+xmlns:dc="http://purl.org/dc/terms" xmlns:batch="http://schemas.google.com/gdata/batch"
+xmlns:gd="http://schemas.google.com/g/2005" xmlns:thr="http://purl.org/syndication/thread/1.0">
+<id>http://sites.google.com/feeds/content/site/gdatatestsite</id>
+<updated>2009-06-15T21:35:43.282Z</updated>
+<link rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite"/>
+<link rel="http://schemas.google.com/g/2005#post" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite"/>
+<link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite"/>
+<generator version="1" uri="http://sites.google.com">Google Sites</generator>
+<openSearch:startIndex>1</openSearch:startIndex>
+<entry>
+  <id>http:///sites.google.com/feeds/content/site/gdatatestsite/1712987567114738703</id>
+  <updated>2009-06-16T00:37:37.393Z</updated>
+  <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/sites/2008#listpage"/>
+  <title type="text">ListPagesTitle</title>
+  <content type="xhtml">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+    <jot:section xmlns:jot="http://www.google.com/ns/jotspot/srvtmpl/" target="content-1">
+    <div dir="ltr">stuff go here<div>asdf</div>
+    <div>sdf</div>
+    <div>
+      <br/>
+    </div>
+  </div>
+  </jot:section>
+  </div>
+  </content>
+  <link rel="self" type="application/atom+xml" href="http:///sites.google.com/feeds/content/site/gdatatestsite/1712987567114738703"/>
+  <link rel="edit" type="application/atom+xml" href="http:///sites.google.com/feeds/content/site/gdatatestsite/1712987567114738703"/>
+  <author>
+    <name>Test User</name>
+    <email>test@gmail.com</email>
+  </author>
+  <gs:worksheet xmlns:gs="http://schemas.google.com/spreadsheets/2006" name="listpage"/>
+  <gs:header xmlns:gs="http://schemas.google.com/spreadsheets/2006" row="1"/>
+  <gs:data xmlns:gs="http://schemas.google.com/spreadsheets/2006" startRow="2">
+  <gs:column index="A" name="Owner"/>
+  <gs:column index="B" name="Description"/>
+  <gs:column index="C" name="Resolution"/>
+  <gs:column index="D" name="Complete"/>
+  <gs:column index="E" name="MyCo"/>
+  </gs:data>
+  <sites:revision>2</sites:revision>
+  <gd:deleted/>
+  <sites:pageName>home</sites:pageName>
+  <gd:feedLink xmlns:gd="http://schemas.google.com/g/2005" href="http://sites.google.com/feeds/content/site/gdatatestsite?parent=abc"/>
+</entry>
+<entry>
+  <id>http://sites.google.com/feeds/content/site/gdatatestsite/abc123</id>
+  <updated>2009-06-17T00:40:37.082Z</updated>
+  <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/sites/2008#filecabinet"/>
+  <title type="text">filecabinet</title>
+  <content type="xhtml">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+    <jot:section xmlns:jot="http://www.google.com/ns/jotspot/srvtmpl/" target="content-1">
+    <div dir="ltr">sdf</div>
+  </jot:section>
+</div>
+</content>
+<link rel="http://schemas.google.com/sites/2008#parent" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+<link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+<link rel="edit" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+ <author>
+    <name>Test User</name>
+    <email>test@gmail.com</email>
+  </author>
+<gd:feedLink xmlns:gd="http://schemas.google.com/g/2005" href="http://sites.google.com/feeds/content/site/gdatatestsite?parent=8472761212299270332"/>
+</entry>
+<entry>
+  <id>http://sites.google.com/feeds/content/site/gdatatestsite/abc123</id>
+  <updated>2009-06-16T00:34:55.633Z</updated>
+  <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/sites/2008#listitem"/>
+  <title type="text"/>
+  <link rel="http://schemas.google.com/sites/2008#parent" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123def"/>
+  <link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+  <link rel="edit" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+  <author>
+    <name>Test User</name>
+    <email>test@gmail.com</email>
+  </author>
+  <gs:field xmlns:gs="http://schemas.google.com/spreadsheets/2006" index="A" name="Owner">test value</gs:field>
+  <gs:field xmlns:gs="http://schemas.google.com/spreadsheets/2006" index="B" name="Description">test</gs:field>
+  <gs:field xmlns:gs="http://schemas.google.com/spreadsheets/2006" index="C" name="Resolution">90</gs:field>
+  <gs:field xmlns:gs="http://schemas.google.com/spreadsheets/2006" index="D" name="Complete"/>
+  <gs:field xmlns:gs="http://schemas.google.com/spreadsheets/2006" index="E" name="MyCo">2009-05-31</gs:field>
+</entry>
+<entry>
+  <id>http://sites.google.com/feeds/content/site/gdatatestsite/abc123</id>
+  <updated>2009-06-15T18:40:32.922Z</updated>
+  <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/sites/2008#attachment"/>
+  <title type="text">testFile.ods</title>
+  <link rel="alternate" type="application/vnd.oasis.opendocument.spreadsheet" href="http://sites.google.com/feeds/SOMELONGURL"/>
+  <link rel="http://schemas.google.com/sites/2008#parent" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+  <link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+  <link rel="edit" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+  <author>
+    <name>Test User</name>
+    <email>test@gmail.com</email>
+  </author>
+  <gd:deleted/>
+  <sites:pageName>something else</sites:pageName>
+</entry>
+<entry>
+  <id>http://sites.google.com/feeds/content/site/gdatatestsite/abc123</id>
+  <updated>2009-06-15T18:40:22.407Z</updated>
+  <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/sites/2008#comment"/>
+  <title type="text"/>
+  <content type="xhtml">
+    <div xmlns="http://www.w3.org/1999/xhtml">first comment</div>
+  </content>
+  <link rel="http://schemas.google.com/sites/2008#parent" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+  <link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+  <link rel="edit" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+  <author>
+    <name>Test User</name>
+    <email>test@gmail.com</email>
+  </author>
+  <thr:in-reply-to xmlns:thr="http://purl.org/syndication/thread/1.0" href="http://sites.google.com/site/gdatatestsite/annoucment/testpost" ref="http://sites.google.com/feeds/content/site/gdatatestsite/abc123" source="http://sites.google.com/feeds/content/site/gdatatestsite" type="text/html"/>
+</entry>
+<entry>
+  <id>http://sites.google.com/feeds/content/site/gdatatestsite/abc123</id>
+  <updated>2009-06-15T18:40:16.388Z</updated>
+  <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/sites/2008#announcement"/>
+  <title type="text">TestPost</title>
+  <content type="xhtml">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+    <jot:section xmlns:jot="http://www.google.com/ns/jotspot/srvtmpl/" target="content-1">
+    <div dir="ltr">content goes here</div>
+  </jot:section>
+</div>
+</content>
+<link rel="http://schemas.google.com/sites/2008#parent" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+<link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+<link rel="edit" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+<author>
+  <name>Test User</name>
+  <email>test@gmail.com</email>
+</author>
+</entry>
+<entry>
+  <id>http://sites.google.com/feeds/content/site/gdatatestsite/abc123</id>
+  <updated>2009-06-12T23:37:59.417Z</updated>
+  <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/sites/2008#webpage"/>
+  <title type="text">Home</title>
+  <content type="xhtml">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+    <jot:section xmlns:jot="http://www.google.com/ns/jotspot/srvtmpl/" target="content-1">
+    <div dir="ltr">Some Content goes here<div>
+    <br/>
+  </div>
+  <div>
+    <jot:embed height="300" id="4981865780428052" props="align:left;width:250;maxDepth:6" src="http://www.google.com/chart?SOMELONGURL" style="display: block; text-align: left; " type="toc" width="250"/>
+    <br/>
+  </div>
+</div>
+</jot:section>
+</div>
+</content>
+<link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+<link rel="edit" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+<author>
+  <name>Test User</name>
+  <email>test@gmail.com</email>
+</author>
+</entry>
+<entry>
+  <id>http://sites.google.com/feeds/content/site/gdatatestsite/2639323850129333500</id>
+  <updated>2009-06-12T23:32:09.191Z</updated>
+  <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/sites/2008#announcementspage"/>
+  <title type="text">annoucment</title>
+  <content type="xhtml">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+  </div>
+</content>
+<link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+<link rel="edit" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+<author>
+  <name>Test User</name>
+  <email>test@gmail.com</email>
+</author>
+<gd:feedLink xmlns:gd="http://schemas.google.com/g/2005" href="http://sites.google.com/feeds/content/site/gdatatestsite?parent=abc123"/>
+</entry>
+</feed>'''
+
+SITES_ACTIVITY_FEED = '''<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearch/1.1/">
+<id>http://sites.google.com/feeds/activity/site/siteName</id>
+<updated>2009-08-19T05:46:01.503Z</updated>
+<title>Activity</title>
+<link rel="alternate" type="text/html" href="http://sites.google.com/a/site/siteName/system/app/pages/recentChanges"/>
+<link rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml" href="http://sites.google.com/feeds/activity/site/siteName"/>
+<link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/activity/site/siteName"/>
+<generator version="1" uri="http://sites.google.com">Google Sites</generator>
+<openSearch:startIndex>1</openSearch:startIndex>
+<entry xmlns:gd="http://schemas.google.com/g/2005" gd:etag="W/&quot;DUENSH0zfyl7ImA9WxNTFEs.&quot;">
+<id>http://sites.google.com/feeds/activity/site/siteName/197441951793148343</id>
+<updated>2009-08-17T00:08:19.387Z</updated>
+<category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/sites/2008#deletion" label="deletion"/>
+<title>NewWebpage3</title>
+<summary type="xhtml">
+  <div xmlns="http://www.w3.org/1999/xhtml">User deleted <a href="http://sites.google.com/site/siteName/newwebpage">NewWebpage3</a>
+</div>
+</summary>
+<link rel="http://schemas.google.com/sites/2008#revision" type="application/atom+xml" href="http://sites.google.com/feeds/revision/site/siteName/6397361387376148502"/>
+<link rel="http://schemas.google.com/sites/2008#current" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/siteName/6397361387376148502"/>
+<link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/activity/site/siteName/197441951793148343"/>
+<author>
+  <name>User</name>
+  <email>user@gmail.com</email>
+</author>
+</entry>
+<entry xmlns:gd="http://schemas.google.com/g/2005" gd:etag="W/&quot;DUEMQnk6eSl7ImA9WxNTFEs.&quot;">
+<id>http://sites.google.com/feeds/activity/site/siteName/7299542210274956360</id>
+<updated>2009-08-17T00:08:03.711Z</updated>
+<category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/sites/2008#edit" label="edit"/>
+<title>NewWebpage3</title>
+<summary type="xhtml">
+  <div xmlns="http://www.w3.org/1999/xhtml">User edited <a href="http://sites.google.com/site/siteName/newwebpage">NewWebpage3</a>
+</div>
+</summary>
+<link rel="http://schemas.google.com/sites/2008#revision" type="application/atom+xml" href="http://sites.google.com/feeds/revision/site/siteName/6397361387376148502"/>
+<link rel="http://schemas.google.com/sites/2008#current" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/siteName/6397361387376148502"/>
+<link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/activity/site/siteName/7299542210274956360"/>
+<author>
+  <name>User</name>
+  <email>user@gmail.com</email>
+</author>
+</entry>
+</feed>'''
+
+SITES_REVISION_FEED = '''
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:sites="http://schemas.google.com/sites/2008" xmlns:gs="http://schemas.google.com/spreadsheets/2006" xmlns:dc="http://purl.org/dc/terms" xmlns:batch="http://schemas.google.com/gdata/batch" xmlns:gd="http://schemas.google.com/g/2005" xmlns:thr="http://purl.org/syndication/thread/1.0">
+<id>http://sites.google.com/feeds/revision/site/siteName/2947510322163358574</id>
+<updated>2009-08-19T06:20:18.151Z</updated>
+<title>Revisions</title>
+<link rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml" href="http://sites.google.com/feeds/revision/2947510322163358574"/>
+<link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/revision/site/siteName/2947510322163358574"/>
+<generator version="1" uri="http://sites.google.com">Google Sites</generator>
+<openSearch:startIndex>1</openSearch:startIndex>
+<entry gd:etag="W/&quot;DEQNRXY-fil7ImA9WxNTFkg.&quot;">
+<id>http://sites.google.com/feeds/revision/site/siteName/2947510322163358574/1</id>
+<updated>2009-08-19T04:33:14.856Z</updated>
+<category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/sites/2008#comment" label="comment"/>
+<title/>
+<content type="xhtml">
+  <div xmlns="http://www.w3.org/1999/xhtml">
+  <table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox">
+    <tbody>
+      <tr>
+        <td class="sites-layout-tile sites-tile-name-content-1">testcomment</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</content>
+<link rel="http://schemas.google.com/sites/2008#parent" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/siteName/54395424125706119"/>
+<link rel="alternate" type="text" href="http://sites.google.com/site/system/app/pages/admin/compare?wuid=wuid%3Agx%3A28e7a9057c581b6e&amp;rev1=1"/>
+<link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/revision/site/siteName/2947510322163358574/1"/>
+<author>
+  <name>User</name>
+  <email>user@gmail.com</email>
+</author>
+<thr:in-reply-to href="http://sites.google.com/site/siteName/code/js" ref="http://sites.google.com/feeds/content/site/siteName/54395424125706119" source="http://sites.google.com/feeds/content/google.com/siteName" type="text/html;charset=UTF-8"/>
+<sites:revision>1</sites:revision>
+</entry>
+</feed>'''

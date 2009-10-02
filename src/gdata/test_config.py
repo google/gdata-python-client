@@ -145,7 +145,11 @@ options.register(
                  ' the servers. This slows down test execution and may'
                  ' modify the users data, be sure to use a test account.'),
     default='true')
-
+options.register(
+    'ssl',
+    'Run the live tests over SSL (enter true or false)',
+    description='If set to true, all tests will be performed over HTTPS (SSL)',
+    default='false')
 
 # Other options which may be used if needed.
 BLOG_ID_OPTION = Option(
@@ -163,8 +167,16 @@ SPREADSHEET_ID_OPTION = Option(
     'Please enter the ID of a spreadsheet to use in these tests',
     description=('The spreadsheet ID for the spreadsheet which should be'
                  ' modified by theses tests.'))
-
-
+SITES_DOMAIN_OPTION = Option(
+    'sitedomain',
+    'Please enter the domain of your Google Apps hosted Site',
+    description=('The domain the Site is hosted on or leave blank if n/a'),
+    default='site')
+SITES_NAME_OPTION = Option(
+    'sitename',
+    'Please enter name of your Google Site',
+    description='The webspace name of the Site found in its URL.')
+    
 # Functions to inject a cachable HTTP client into a service client.
 def configure_client(client, case_name, service_name):
   """Sets up a mock client which will reuse a saved session.

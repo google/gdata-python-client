@@ -136,20 +136,25 @@ CLIENT_LOGIN_SCOPES = {
         'http://gdata.youtube.com/feeds/api/',
         'http://uploads.gdata.youtube.com/feeds/api',
         'http://gdata.youtube.com/action/GetUploadToken'],
-    'books': ['http://www.google.com/books/feeds/'],
-    'analytics': ['https://www.google.com/analytics/feeds/']}
+    'books': [ # Google Books
+        'http://www.google.com/books/feeds/'],
+    'analytics': [ # Google Analytics
+        'https://www.google.com/analytics/feeds/'],
+    'jotspot': [ # Google Sites
+        'http://sites.google.com/feeds/',
+        'https://sites.google.com/feeds/']}
 
 
 def lookup_scopes(service_name):
   """Finds the scope URLs for the desired service.
-  
+
   In some cases, an unknown service may be used, and in those cases this
   function will return None.
   """
   if service_name in CLIENT_LOGIN_SCOPES:
     return CLIENT_LOGIN_SCOPES[service_name]
   return None
-    
+
 
 # Module level variable specifies which module should be used by GDataService
 # objects to make HttpRequests. This setting can be overridden on each 
