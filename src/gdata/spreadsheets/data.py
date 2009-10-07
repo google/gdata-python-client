@@ -43,7 +43,11 @@ OVERWRITE_MODE = 'overwrite'
 WORKSHEETS_REL = 'http://schemas.google.com/spreadsheets/2006#worksheetsfeed'
 
 
-class Error(object):
+class Error(Exception):
+  pass
+
+
+class FieldMissing(Exception):
   pass
 
 
@@ -166,6 +170,13 @@ class Table(gdata.data.GDEntry):
   header = Header
   worksheet = Worksheet
 
+  def get_table_id(self):
+    if self.id.text:
+      return self.id.text.split('/')[-1]
+    return None
+
+  GetTableId = get_table_id
+
 
 class TablesFeed(gdata.data.GDFeed):
   """An Atom feed containing the tables defined within a worksheet."""
@@ -180,6 +191,22 @@ class Record(gdata.data.GDEntry):
   columns in the GUI.
   """
   field = [Field]
+
+  def value_for_index(self, column_index):
+    for field in self.field:
+      if field.index == column_index:
+        return field.text
+    raise FieldMissing('There is no field for %s' % column_index)
+
+  ValueForIndex = value_for_index
+
+  def value_for_name(self, name):
+    for field in self.field:
+      if field.name == name:
+        return field.text
+    raise FieldMissing('There is no field for %s' % name)
+
+  ValueForName = value_for_name
 
 
 class RecordsFeed(gdata.data.GDFeed):

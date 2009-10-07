@@ -576,6 +576,29 @@ class ListEntryTest(unittest.TestCase):
     self.assertEqual(row.content.text, 'Hours: 10, Items: 2, IPM: 0.0033')
 
 
+class RecordEntryTest(unittest.TestCase):
+
+  def setUp(self):
+    self.records = atom.core.parse(
+        RECORDS_FEED, gdata.spreadsheets.data.RecordsFeed)
+
+  def test_get_by_index(self):
+    self.assertEqual(self.records.entry[0].field[0].index, 'B')
+    self.assertEqual(self.records.entry[0].field[0].name, 'Birthday')
+    self.assertEqual(self.records.entry[0].field[0].text, '2/10/1785')
+    self.assertEqual(self.records.entry[0].value_for_index('B'), '2/10/1785')
+    self.assertRaises(gdata.spreadsheets.data.FieldMissing,
+                      self.records.entry[0].ValueForIndex, 'E')
+    self.assertEqual(self.records.entry[1].value_for_index('D'), 'Yes')
+
+  def test_get_by_name(self):
+    self.assertEqual(self.records.entry[0].ValueForName('Birthday'),
+                     '2/10/1785')
+    self.assertRaises(gdata.spreadsheets.data.FieldMissing,
+                      self.records.entry[0].value_for_name, 'Foo')
+    self.assertEqual(self.records.entry[1].value_for_name('Age'), '22')
+
+
 class DataClassSanityTest(unittest.TestCase):
 
   def test_basic_element_structure(self):
@@ -601,7 +624,7 @@ class DataClassSanityTest(unittest.TestCase):
 
 def suite():
   return conf.build_suite([SpreadsheetEntryTest, DataClassSanityTest,
-                           ListEntryTest])
+                           ListEntryTest, RecordEntryTest])
 
 
 if __name__ == '__main__':
