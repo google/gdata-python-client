@@ -1,0 +1,88 @@
+<html>
+<head>
+  <title>Blogger OAuth example</title>
+  <link type="text/css" rel="stylesheet" href="/css/index.css"/>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+</head>
+<body>
+
+{% if logged %}
+
+<div id="header">
+  <div class="right"><a href="/oauth/revoke_token">logout</a></div>
+  <div class="left">Blogger OAuth example</div>
+  <div id="status" class="hidden"><span class="text">blah blah</span></div>
+</div>
+
+<p>Your blogs:</p>
+{% for blog in blogs %}
+  <div class="blog">
+    <div class="left">
+      <span class="title">
+        <a href="{{blog.link}}">{{ blog.title }}</a>
+      </span><br/>
+      <span class="date">created: {{ blog.published }}</span><br/>
+      <span class="date">last updated: {{ blog.updated }}</span>
+    </div>
+    <div class="right post-editor-wrapper">
+      <a href="#" class="new-post-link">Write a post</a>
+      <div class="hidden post-editor">
+        <span class="hidden id">{{ blog.id }}</span>
+        <textarea>Type new post</textarea><br/>
+        <input type="button" value="Publish"/>
+      </div>
+    </div>
+  </div>
+  <div class="clear"/>
+{% endfor %}
+
+{% else %}
+
+I could do automatic redirect but we all love welcome screens :). <br/>
+
+Ok, <a href="/oauth/request_token">allow this app to access Blogger</a>.
+
+{% endif %}
+
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function() {
+
+  $('a.new-post-link').click(function() {
+    $(this).next().slideToggle();
+  });
+
+  $('input').click(function() {
+   showStatus('Creating post...');
+   var body = $(this).prevAll('textarea')[0].value;
+   var id = $(this).prevAll('span.id').text();
+   $.post('/new_post', {
+     'body': body,
+     'id': id
+   }, function(data) {
+     showStatusAndHideAfterFiveSecs('Post created.');
+   });
+  });
+
+  $(document).ajaxError(function(event, xhr) {
+    alert('Something went wrong. Code: ' + xhr.status);
+    hideStatus();
+  });
+});
+
+function showStatus(msg) {
+  $('#status span.text').text(msg);
+  $('#status').fadeIn();
+}
+
+function hideStatus() {
+  $('#status').fadeOut();
+}
+
+function showStatusAndHideAfterFiveSecs(msg) {
+  showStatus(msg);
+  setTimeout(hideStatus, 5000);
+}
+
+</script>
+</body>
+</html>

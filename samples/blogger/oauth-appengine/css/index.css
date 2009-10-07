@@ -1,0 +1,65 @@
+* {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light",
+               "Helvetica Neue", sans-serif;
+}
+
+body {
+ padding-left:15px;
+ padding-right:15px;
+}
+a {
+  color:#6699ff;
+  text-decoration:none;
+}
+a:hover {
+  color:#666666;
+  text-decoration:underline;
+}
+#header {
+  color:#666666;
+  padding-bottom:10px;
+  margin-bottom:1em;
+  border-bottom:1px solid #666666;
+  height:25px;
+  text-align: center;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+
+div#status span.text {
+  background-color: #FFEEAA;
+  text-align: center;
+  padding: 5px;
+  font-size: 0.8em;
+  font-weight: bold;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  color: black;
+}
+
+div.blog {
+  padding:10px 10px 10px 20px;
+  border-bottom:1px solid #eee;
+  float: left;
+  width: 90%;
+}
+div.blog:hover {
+  background-color:#fffccc;
+}
+
+div.blog span.date {
+  font-size: 0.7em;
+}
+
+.hidden {
+  display: none;
+}
+
+.post-editor-wrapper {
+  text-align: right;
+}
+
