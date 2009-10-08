@@ -27,11 +27,9 @@ import StringIO
 import urlparse
 import urllib
 import httplib
-ssl_imported = False
 ssl = None
 try:
   import ssl
-  ssl_imported = True
 except ImportError:
   pass
 
@@ -502,11 +500,11 @@ class ProxiedHttpClient(HttpClient):
         raise ProxyError('Error status=%s' % str(p_status))
       # Trivial setup for ssl socket.
       sslobj = None
-      if ssl_imported:
+      if ssl is not None:
         sslobj = ssl.wrap_socket(p_sock, None, None)
       else:
-        ssl = socket.ssl(p_sock, None, None)
-        sslobj = httplib.FakeSocket(p_sock, ssl)
+        sock_ssl = socket.ssl(p_sock, None, Nonesock_)
+        sslobj = httplib.FakeSocket(p_sock, sock_ssl)
       # Initalize httplib and replace with the proxy socket.
       connection = httplib.HTTPConnection(proxy_uri.host)
       connection.sock = sslobj

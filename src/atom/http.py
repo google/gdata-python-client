@@ -254,8 +254,8 @@ class ProxiedHttpClient(HttpClient):
         if ssl_imported:
           sslobj = ssl.wrap_socket(p_sock, None, None)
         else:
-          ssl = socket.ssl(p_sock, None, None)
-          sslobj = httplib.FakeSocket(p_sock, ssl)
+          sock_ssl = socket.ssl(p_sock, None, None)
+          sslobj = httplib.FakeSocket(p_sock, sock_ssl)
  
         # Initalize httplib and replace with the proxy socket.
         connection = httplib.HTTPConnection(proxy_url.host)
