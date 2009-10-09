@@ -71,7 +71,7 @@ library may also be used with any Atom Publishing Protocol service (AtomPub).
         'gdata.Crypto.Protocol', 'gdata.Crypto.PublicKey', 'gdata.Crypto.Util',
         'gdata.tlslite.utils', 'gdata.tlslite.integration', 'gdata.health',
         'gdata.analytics', 'gdata.finance', 'gdata.spreadsheets', 'gdata.maps',
-        'gdata.sites'],
+        'gdata.sites', 'gdata.apps.adminsettings'],
     package_dir = {'gdata':'src/gdata', 'atom':'src/atom'},
     install_requires=required
 )
