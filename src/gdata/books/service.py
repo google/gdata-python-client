@@ -133,13 +133,13 @@ class BookService(gdata.service.GDataService):
             elif k == 'exact_phrase':
                 q = '%s "%s"' % (q, v.strip('"'))
             elif k == 'at_least_one':
-                q = '%s %s' % (q, ' '.join('OR "%s"' % x for x in split(v)))
+                q = '%s %s' % (q, ' '.join(['OR "%s"' % x for x in split(v)]))
             elif k == 'without_words':
-                q = '%s %s' % (q, ' '.join('-"%s"' % x for x in split(v)))
+                q = '%s %s' % (q, ' '.join(['-"%s"' % x for x in split(v)]))
             elif k in ('author','title', 'publisher'):
-                q = '%s %s' % (q, ' '.join('in%s:"%s"'%(k,x) for x in split(v)))
+                q = '%s %s' % (q, ' '.join(['in%s:"%s"'%(k,x) for x in split(v)]))
             elif k == 'subject':
-                q = '%s %s' % (q, ' '.join('%s:"%s"' % (k,x) for x in split(v)))
+                q = '%s %s' % (q, ' '.join(['%s:"%s"' % (k,x) for x in split(v)]))
             elif k == 'isbn':
                 q = '%s ISBN%s' % (q, v)
             elif k == 'issn':

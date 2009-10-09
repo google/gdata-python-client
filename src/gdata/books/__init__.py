@@ -37,9 +37,11 @@ NOT_EMBEDDABLE          = "http://schemas.google.com/books/2008#not_embeddable"
 
 class _AtomFromString(atom.AtomBase):
 
-    @classmethod
+    #@classmethod
     def FromString(cls, s):
         return atom.CreateClassFromXMLString(cls, s)
+
+    FromString = classmethod(FromString)
 
 
 class Creator(_AtomFromString):
