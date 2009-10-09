@@ -335,21 +335,21 @@ class AdminSettingsService(gdata.apps.service.PropertyService):
       properties['samlSignonUri'] = ''
     if properties['samlLogoutUri'] == None:
       properties['samlLogoutUri'] = ''
-    if properties['samlPasswordUri'] == None:
-      properties['samlPasswordUri'] = ''
+    if properties['changePasswordUri'] == None:
+      properties['changePasswordUri'] = ''
     if properties['ssoWhitelist'] == None:
-      properties['ssoWhitelist'] == ''
+      properties['ssoWhitelist'] = ''
 
     #update only the values we were passed
     if enableSSO != None:
       properties['enableSSO'] = self._bool2str(enableSSO)
-    if samlSignonUri != '' or properties['samlSignonUri'] == None:
+    if samlSignonUri != None:
       properties['samlSignonUri'] = samlSignonUri
-    if samlLogoutUri != '' or properties['samlLogoutUri'] == None:
+    if samlLogoutUri != None:
       properties['samlLogoutUri'] = samlLogoutUri
-    if changePasswordUri != '' or properties['changePasswordUri'] == None:
+    if changePasswordUri != None:
       properties['changePasswordUri'] = changePasswordUri
-    if ssoWhitelist != '' or properties['ssoWhitelist'] == None:
+    if ssoWhitelist != None:
       properties['ssoWhitelist'] = ssoWhitelist
     if useDomainSpecificIssuer != None:
       properties['useDomainSpecificIssuer'] = self.bool2str(useDomainSpecificIssuer)
