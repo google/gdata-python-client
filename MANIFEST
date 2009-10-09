@@ -417,3 +417,8 @@ tests/gdata_tests/spreadsheets/live_client_test.py
 samples/apps/adminsettings_example.py
 src/gdata/apps/adminsettings/__init__.py
 src/gdata/apps/adminsettings/service.py
+pydocs/gdata.apps.adminsettings.html
+pydocs/gdata.apps.adminsettings.service.html
+pydocs/gdata.sites.client.html
+pydocs/gdata.sites.data.html
+pydocs/gdata.spreadsheets.client.html

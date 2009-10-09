@@ -1,3 +1,26 @@
+=== 2.0.3 ===
+October 9, 2009 (revision 856)
+
+- Added support for Google Sites Data API. Thanks Eric!
+- Added support for Google Contacts profiles. Thanks Julian Toledo and Pedro
+    Morais!
+- Added support for the Spreadsheets v3 API Tables feed and Records feed.
+- Added support for the Google Apps Admin Settings API. Thanks Jay Lee!
+- New sample which illustrates use of the Blogger v1 API on App Engine using
+    OAuth. Thanks Wiktor Gworek!
+- Added a new MediaSource for use with v2 data model classes. Thanks Eric!
+- The v2 client classes can now force all requests to be made over SSL.
+    Thanks Eric!
+- Revised the test config system to allow test settings to be specified as
+    command line arguments or prompt the user to enter them interactively.
+- Fixed UTF encoding issue in unittest on big endian architectures.
+- Fixed XML parsing bug in Spreadsheets data class. Thanks ppr.vitaly!
+- Fixed bug in webmaster tools service verification method arguments. Thanks
+    eyepulp!
+- Fixed download URL recognition in Document List Data API.
+- Some progress made in re-adding support for Python2.3, not sure yet if
+    full Python2.3 support is completely feasible. Python 2.4-2.6 should work.
+
 === 2.0.2 ===
 August 20, 2009 (revision 823)
 
