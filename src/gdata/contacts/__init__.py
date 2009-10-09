@@ -569,6 +569,10 @@ class ContactEntry(PersonEntry):
       'group_membership_info', [GroupMembershipInfo])
   _children['{%s}extendedProperty' % gdata.GDATA_NAMESPACE] = (
       'extended_property', [gdata.ExtendedProperty])
+  # Overwrite the organization rule in PersonEntry so that a ContactEntry
+  # may only contain one <gd:organization> element.
+  _children['{%s}organization' % gdata.GDATA_NAMESPACE] = (
+      'organization', Organization)
 
   def __init__(self, author=None, category=None, content=None,
                atom_id=None, link=None, published=None,

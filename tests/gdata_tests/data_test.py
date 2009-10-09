@@ -111,7 +111,7 @@ class GDataEntryTest(unittest.TestCase):
     entry = parse(XML_ENTRY_1, gdata.data.GDEntry)
     tree = parse(XML_ENTRY_1, atom.core.XmlElement)
     self.assert_(tree.get_elements('id', 
-        'http://www.w3.org/2005/Atom' != entry.id.text))
+        'http://www.w3.org/2005/Atom')[0].text != entry.get_id())
     self.assertEqual(entry.get_id(), 'http://www.google.com/test/id/url')
 
   def testGeneratorShouldBeCleaned(self):
