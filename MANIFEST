@@ -414,3 +414,6 @@ tests/gdata_tests/sites/__init__.py
 tests/gdata_tests/sites/data_test.py
 tests/gdata_tests/sites/live_client_test.py
 tests/gdata_tests/spreadsheets/live_client_test.py
+samples/apps/adminsettings_example.py
+src/gdata/apps/adminsettings/__init__.py
+src/gdata/apps/adminsettings/service.py
