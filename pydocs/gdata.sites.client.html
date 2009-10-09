@@ -1,18 +1,15 @@
 
 <!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head><title>Python: module gdata.maps.client</title>
+<html><head><title>Python: module gdata.sites.client</title>
 </head><body bgcolor="#f0f0f8">
 
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.maps.html"><font color="#ffffff">maps</font></a>.client</strong></big></big></font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.sites.html"><font color="#ffffff">sites</font></a>.client</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client/src/gdata/maps/client.py">/usr/local/svn/gdata-python-client/src/gdata/maps/client.py</a></font></td></tr></table>
-    <p><tt>Contains&nbsp;a&nbsp;client&nbsp;to&nbsp;communicate&nbsp;with&nbsp;the&nbsp;Maps&nbsp;Data&nbsp;servers.<br>
-&nbsp;<br>
-For&nbsp;documentation&nbsp;on&nbsp;the&nbsp;Maps&nbsp;Data&nbsp;API,&nbsp;see:<br>
-<a href="http://code.google.com/apis/maps/documentation/mapsdata/">http://code.google.com/apis/maps/documentation/mapsdata/</a></tt></p>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client/src/gdata/sites/client.py">/usr/local/svn/gdata-python-client/src/gdata/sites/client.py</a></font></td></tr></table>
+    <p><tt><a href="#SitesClient">SitesClient</a>&nbsp;extends&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>&nbsp;to&nbsp;streamline&nbsp;Sites&nbsp;API&nbsp;calls.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -33,7 +30,7 @@ For&nbsp;documentation&nbsp;on&nbsp;the&nbsp;Maps&nbsp;Data&nbsp;API,&nbsp;see:<
 <dt><font face="helvetica, arial"><a href="gdata.client.html#GDClient">gdata.client.GDClient</a>(<a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>)
 </font></dt><dd>
 <dl>
-<dt><font face="helvetica, arial"><a href="gdata.maps.client.html#MapsClient">MapsClient</a>
+<dt><font face="helvetica, arial"><a href="gdata.sites.client.html#SitesClient">SitesClient</a>
 </font></dt></dl>
 </dd>
 </dl>
@@ -41,97 +38,178 @@ For&nbsp;documentation&nbsp;on&nbsp;the&nbsp;Maps&nbsp;Data&nbsp;API,&nbsp;see:<
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="MapsClient">class <strong>MapsClient</strong></a>(<a href="gdata.client.html#GDClient">gdata.client.GDClient</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="SitesClient">class <strong>SitesClient</strong></a>(<a href="gdata.client.html#GDClient">gdata.client.GDClient</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Maps&nbsp;Data&nbsp;API&nbsp;GData&nbsp;client.<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt>Client&nbsp;extension&nbsp;for&nbsp;the&nbsp;Google&nbsp;Sites&nbsp;API&nbsp;service.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="gdata.maps.client.html#MapsClient">MapsClient</a></dd>
+<dd><a href="gdata.sites.client.html#SitesClient">SitesClient</a></dd>
 <dd><a href="gdata.client.html#GDClient">gdata.client.GDClient</a></dd>
 <dd><a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a></dd>
 <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="MapsClient-AddFeature"><strong>AddFeature</strong></a> = <a href="#MapsClient-add_feature">add_feature</a>(self, map_id, title, content, auth_token<font color="#909090">=None</font>, title_type<font color="#909090">='text'</font>, content_type<font color="#909090">='application/vnd.google-earth.kml+xml'</font>, **kwargs)</dt></dl>
+<dl><dt><a name="SitesClient-CreatePage"><strong>CreatePage</strong></a> = <a href="#SitesClient-create_page">create_page</a>(self, kind, title, html<font color="#909090">=''</font>, page_name<font color="#909090">=None</font>, parent<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="MapsClient-CreateMap"><strong>CreateMap</strong></a> = <a href="#MapsClient-create_map">create_map</a>(self, title, summary<font color="#909090">=None</font>, unlisted<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, title_type<font color="#909090">='text'</font>, summary_type<font color="#909090">='text'</font>, **kwargs)</dt></dl>
+<dl><dt><a name="SitesClient-CreateWebAttachment"><strong>CreateWebAttachment</strong></a> = <a href="#SitesClient-create_webattachment">create_webattachment</a>(self, src, content_type, title, parent, description<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="MapsClient-Delete"><strong>Delete</strong></a> = <a href="#MapsClient-delete">delete</a>(self, entry_or_uri, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="SitesClient-DownloadAttachment"><strong>DownloadAttachment</strong></a> = <a href="#SitesClient-download_attachment">download_attachment</a>(self, uri_or_entry, file_path)</dt></dl>
 
-<dl><dt><a name="MapsClient-GetFeatures"><strong>GetFeatures</strong></a> = <a href="#MapsClient-get_features">get_features</a>(self, map_id, user_id<font color="#909090">='default'</font>, auth_token<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.maps.data.FeatureFeed'&gt;</font>, query<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="SitesClient-GetActivityFeed"><strong>GetActivityFeed</strong></a> = <a href="#SitesClient-get_activity_feed">get_activity_feed</a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="MapsClient-GetMaps"><strong>GetMaps</strong></a> = <a href="#MapsClient-get_maps">get_maps</a>(self, user_id<font color="#909090">='default'</font>, auth_token<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.maps.data.MapFeed'&gt;</font>, **kwargs)</dt></dl>
+<dl><dt><a name="SitesClient-GetContentFeed"><strong>GetContentFeed</strong></a> = <a href="#SitesClient-get_content_feed">get_content_feed</a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="MapsClient-Update"><strong>Update</strong></a> = <a href="#MapsClient-update">update</a>(self, entry, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="SitesClient-GetRevisionFeed"><strong>GetRevisionFeed</strong></a> = <a href="#SitesClient-get_revision_feed">get_revision_feed</a>(self, entry_or_uri_or_id, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="MapsClient-add_feature"><strong>add_feature</strong></a>(self, map_id, title, content, auth_token<font color="#909090">=None</font>, title_type<font color="#909090">='text'</font>, content_type<font color="#909090">='application/vnd.google-earth.kml+xml'</font>, **kwargs)</dt><dd><tt>Adds&nbsp;a&nbsp;new&nbsp;feature&nbsp;to&nbsp;the&nbsp;given&nbsp;map.<br>
+<dl><dt><a name="SitesClient-MakeActivityFeedUri"><strong>MakeActivityFeedUri</strong></a> = <a href="#SitesClient-make_activity_feed_uri">make_activity_feed_uri</a>(self)</dt></dl>
+
+<dl><dt><a name="SitesClient-MakeContentFeedUri"><strong>MakeContentFeedUri</strong></a> = <a href="#SitesClient-make_content_feed_uri">make_content_feed_uri</a>(self)</dt></dl>
+
+<dl><dt><a name="SitesClient-MakeRevisionFeedUri"><strong>MakeRevisionFeedUri</strong></a> = <a href="#SitesClient-make_revision_feed_uri">make_revision_feed_uri</a>(self)</dt></dl>
+
+<dl><dt><a name="SitesClient-UploadAttachment"><strong>UploadAttachment</strong></a> = <a href="#SitesClient-upload_attachment">upload_attachment</a>(self, file_handle, parent, content_type<font color="#909090">=None</font>, title<font color="#909090">=None</font>, description<font color="#909090">=None</font>, folder_name<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="SitesClient-__init__"><strong>__init__</strong></a>(self, site<font color="#909090">=None</font>, domain<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Constructs&nbsp;a&nbsp;new&nbsp;client&nbsp;for&nbsp;the&nbsp;Sites&nbsp;API.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;map_id:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;ID&nbsp;of&nbsp;the&nbsp;map&nbsp;to&nbsp;which&nbsp;the&nbsp;new&nbsp;feature<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should&nbsp;be&nbsp;added.<br>
-&nbsp;&nbsp;title:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;name/title&nbsp;of&nbsp;the&nbsp;new&nbsp;feature.<br>
-&nbsp;&nbsp;content:&nbsp;A&nbsp;KML&nbsp;string&nbsp;or&nbsp;gdata.maps.data.KmlContent&nbsp;object&nbsp;representing<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;new&nbsp;feature's&nbsp;KML&nbsp;contents,&nbsp;including&nbsp;its&nbsp;description.<br>
+&nbsp;&nbsp;site:&nbsp;string&nbsp;(optional)&nbsp;Name&nbsp;(webspace)&nbsp;of&nbsp;the&nbsp;Google&nbsp;Site<br>
+&nbsp;&nbsp;domain:&nbsp;string&nbsp;(optional)&nbsp;Domain&nbsp;of&nbsp;the&nbsp;(Google&nbsp;Apps&nbsp;hosted)&nbsp;Site.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;no&nbsp;domain&nbsp;is&nbsp;given,&nbsp;the&nbsp;Site&nbsp;is&nbsp;assumed&nbsp;to&nbsp;be&nbsp;a&nbsp;consumer&nbsp;Google<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Site,&nbsp;in&nbsp;which&nbsp;case&nbsp;the&nbsp;value&nbsp;'site'&nbsp;is&nbsp;used.<br>
+&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
+&nbsp;&nbsp;kwargs:&nbsp;The&nbsp;other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;constructor.</tt></dd></dl>
+
+<dl><dt><a name="SitesClient-create_page"><strong>create_page</strong></a>(self, kind, title, html<font color="#909090">=''</font>, page_name<font color="#909090">=None</font>, parent<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;page&nbsp;(specified&nbsp;by&nbsp;kind)&nbsp;on&nbsp;a&nbsp;Google&nbsp;Site.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;kind:&nbsp;string&nbsp;The&nbsp;type&nbsp;of&nbsp;page/item&nbsp;to&nbsp;create.&nbsp;For&nbsp;example,&nbsp;webpage,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;listpage,&nbsp;comment,&nbsp;announcementspage,&nbsp;filecabinet,&nbsp;etc.&nbsp;The&nbsp;full&nbsp;list<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;supported&nbsp;kinds&nbsp;can&nbsp;be&nbsp;found&nbsp;in&nbsp;gdata.sites.gdata.SUPPORT_KINDS.<br>
+&nbsp;&nbsp;title:&nbsp;string&nbsp;Title&nbsp;for&nbsp;the&nbsp;page.<br>
+&nbsp;&nbsp;html:&nbsp;string&nbsp;(optional)&nbsp;XHTML&nbsp;for&nbsp;the&nbsp;page's&nbsp;content&nbsp;body.<br>
+&nbsp;&nbsp;page_name:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;page&nbsp;name&nbsp;to&nbsp;set.&nbsp;If&nbsp;not&nbsp;set,&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title&nbsp;will&nbsp;be&nbsp;normalized&nbsp;and&nbsp;used&nbsp;as&nbsp;the&nbsp;page's&nbsp;URL&nbsp;path.<br>
+&nbsp;&nbsp;parent:&nbsp;string&nbsp;or&nbsp;gdata.sites.data.ContentEntry&nbsp;(optional)&nbsp;The&nbsp;parent<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;or&nbsp;parent&nbsp;link&nbsp;url&nbsp;to&nbsp;create&nbsp;the&nbsp;page&nbsp;under.<br>
+&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="#SitesClient-post">post</a>().<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;gdata.maps.data.Feature.</tt></dd></dl>
+&nbsp;&nbsp;gdata.sites.data.ContentEntry&nbsp;of&nbsp;the&nbsp;created&nbsp;page.</tt></dd></dl>
 
-<dl><dt><a name="MapsClient-create_map"><strong>create_map</strong></a>(self, title, summary<font color="#909090">=None</font>, unlisted<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, title_type<font color="#909090">='text'</font>, summary_type<font color="#909090">='text'</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;map&nbsp;and&nbsp;posts&nbsp;it&nbsp;to&nbsp;the&nbsp;Maps&nbsp;Data&nbsp;servers.<br>
+<dl><dt><a name="SitesClient-create_webattachment"><strong>create_webattachment</strong></a>(self, src, content_type, title, parent, description<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;webattachment&nbsp;within&nbsp;a&nbsp;filecabinet.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;title:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;title&nbsp;of&nbsp;the&nbsp;new&nbsp;map.<br>
-&nbsp;&nbsp;summary:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;new&nbsp;map's&nbsp;description.<br>
-&nbsp;&nbsp;unlisted:&nbsp;An&nbsp;optional&nbsp;boolean&nbsp;identifying&nbsp;whether&nbsp;the&nbsp;map&nbsp;should&nbsp;be<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unlisted&nbsp;(True)&nbsp;or&nbsp;public&nbsp;(False).&nbsp;Default&nbsp;False.<br>
+&nbsp;&nbsp;src:&nbsp;string&nbsp;The&nbsp;url&nbsp;of&nbsp;the&nbsp;web&nbsp;attachment.<br>
+&nbsp;&nbsp;content_type:&nbsp;string&nbsp;The&nbsp;MIME&nbsp;type&nbsp;of&nbsp;the&nbsp;web&nbsp;attachment.<br>
+&nbsp;&nbsp;title:&nbsp;string&nbsp;The&nbsp;title&nbsp;to&nbsp;name&nbsp;the&nbsp;web&nbsp;attachment.<br>
+&nbsp;&nbsp;parent:&nbsp;string&nbsp;or&nbsp;gdata.sites.data.ContentEntry&nbsp;(optional)&nbsp;The<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent&nbsp;entry&nbsp;or&nbsp;url&nbsp;of&nbsp;the&nbsp;filecabinet&nbsp;to&nbsp;create&nbsp;the&nbsp;attachment&nbsp;under.<br>
+&nbsp;&nbsp;description:&nbsp;string&nbsp;(optional)&nbsp;A&nbsp;summary/description&nbsp;for&nbsp;the&nbsp;attachment.<br>
+&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="#SitesClient-post">post</a>().<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;gdata.maps.data.Map.</tt></dd></dl>
+&nbsp;&nbsp;gdata.sites.data.ContentEntry&nbsp;of&nbsp;the&nbsp;created&nbsp;page.</tt></dd></dl>
 
-<dl><dt><a name="MapsClient-delete"><strong>delete</strong></a>(self, entry_or_uri, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Deletes&nbsp;the&nbsp;given&nbsp;entry&nbsp;or&nbsp;entry&nbsp;URI&nbsp;server-side.<br>
+<dl><dt><a name="SitesClient-download_attachment"><strong>download_attachment</strong></a>(self, uri_or_entry, file_path)</dt><dd><tt>Downloads&nbsp;an&nbsp;attachment&nbsp;file&nbsp;to&nbsp;disk.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;entry_or_uri:&nbsp;A&nbsp;gdata.maps.data.Map,&nbsp;gdata.maps.data.Feature,&nbsp;or&nbsp;URI<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;representing&nbsp;the&nbsp;entry&nbsp;to&nbsp;delete.</tt></dd></dl>
+&nbsp;&nbsp;uri_or_entry:&nbsp;string&nbsp;The&nbsp;full&nbsp;URL&nbsp;to&nbsp;download&nbsp;the&nbsp;file&nbsp;from.<br>
+&nbsp;&nbsp;file_path:&nbsp;string&nbsp;The&nbsp;full&nbsp;path&nbsp;to&nbsp;save&nbsp;the&nbsp;file&nbsp;to.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;gdata.client.RequestError:&nbsp;on&nbsp;error&nbsp;response&nbsp;from&nbsp;server.</tt></dd></dl>
 
-<dl><dt><a name="MapsClient-get_features"><strong>get_features</strong></a>(self, map_id, user_id<font color="#909090">='default'</font>, auth_token<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.maps.data.FeatureFeed'&gt;</font>, query<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;a&nbsp;Feature&nbsp;feed&nbsp;for&nbsp;the&nbsp;given&nbsp;map&nbsp;ID/user&nbsp;ID&nbsp;combination.<br>
+<dl><dt><a name="SitesClient-get_activity_feed"><strong>get_activity_feed</strong></a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;the&nbsp;activity&nbsp;feed&nbsp;containing&nbsp;recent&nbsp;Site&nbsp;activity.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;map_id:&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;ID&nbsp;of&nbsp;the&nbsp;map&nbsp;whose&nbsp;features&nbsp;should&nbsp;be<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;retrieved.<br>
-&nbsp;&nbsp;user_id:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;user&nbsp;ID;&nbsp;should&nbsp;be&nbsp;'default'.<br>
+&nbsp;&nbsp;uri:&nbsp;string&nbsp;(optional)&nbsp;A&nbsp;full&nbsp;URI&nbsp;to&nbsp;query&nbsp;the&nbsp;Activity&nbsp;feed.<br>
+&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#SitesClient-get_feed">get_feed</a>().<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;gdata.maps.data.FeatureFeed.</tt></dd></dl>
+&nbsp;&nbsp;gdata.sites.data.ActivityFeed</tt></dd></dl>
 
-<dl><dt><a name="MapsClient-get_maps"><strong>get_maps</strong></a>(self, user_id<font color="#909090">='default'</font>, auth_token<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.maps.data.MapFeed'&gt;</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;a&nbsp;Map&nbsp;feed&nbsp;for&nbsp;the&nbsp;given&nbsp;user&nbsp;ID.<br>
+<dl><dt><a name="SitesClient-get_content_feed"><strong>get_content_feed</strong></a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;the&nbsp;content&nbsp;feed&nbsp;containing&nbsp;the&nbsp;current&nbsp;state&nbsp;of&nbsp;site.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;user_id:&nbsp;An&nbsp;optional&nbsp;string&nbsp;representing&nbsp;the&nbsp;user&nbsp;ID;&nbsp;should&nbsp;be&nbsp;'default'.<br>
+&nbsp;&nbsp;uri:&nbsp;string&nbsp;(optional)&nbsp;A&nbsp;full&nbsp;URI&nbsp;to&nbsp;query&nbsp;the&nbsp;Content&nbsp;feed&nbsp;with.<br>
+&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#SitesClient-get_feed">get_feed</a>().<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;gdata.maps.data.MapFeed.</tt></dd></dl>
+&nbsp;&nbsp;gdata.sites.data.ContentFeed</tt></dd></dl>
 
-<dl><dt><a name="MapsClient-update"><strong>update</strong></a>(self, entry, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;changes&nbsp;to&nbsp;a&nbsp;given&nbsp;map&nbsp;or&nbsp;feature&nbsp;entry&nbsp;to&nbsp;the&nbsp;Maps&nbsp;Data&nbsp;servers.<br>
+<dl><dt><a name="SitesClient-get_revision_feed"><strong>get_revision_feed</strong></a>(self, entry_or_uri_or_id, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;the&nbsp;revision&nbsp;feed&nbsp;containing&nbsp;the&nbsp;revision&nbsp;history&nbsp;for&nbsp;a&nbsp;node.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;entry:&nbsp;A&nbsp;gdata.maps.data.Map&nbsp;or&nbsp;gdata.maps.data.Feature&nbsp;to&nbsp;be&nbsp;updated<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server-side.</tt></dd></dl>
+&nbsp;&nbsp;entry_or_uri_or_id:&nbsp;string&nbsp;or&nbsp;gdata.sites.data.SiteEntry&nbsp;A&nbsp;full&nbsp;URI,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;node&nbsp;ID,&nbsp;or&nbsp;entry&nbsp;object&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;retrieve&nbsp;revision<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;information&nbsp;for.<br>
+&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#SitesClient-get_feed">get_feed</a>().<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.sites.data.RevisionFeed</tt></dd></dl>
+
+<dl><dt><a name="SitesClient-make_activity_feed_uri"><strong>make_activity_feed_uri</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SitesClient-make_content_feed_uri"><strong>make_content_feed_uri</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SitesClient-make_revision_feed_uri"><strong>make_revision_feed_uri</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SitesClient-upload_attachment"><strong>upload_attachment</strong></a>(self, file_handle, parent, content_type<font color="#909090">=None</font>, title<font color="#909090">=None</font>, description<font color="#909090">=None</font>, folder_name<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Uploads&nbsp;an&nbsp;attachment&nbsp;to&nbsp;a&nbsp;parent&nbsp;page.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;file_handle:&nbsp;MediaSource&nbsp;or&nbsp;string&nbsp;A&nbsp;gdata.data.MediaSource&nbsp;object<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;containing&nbsp;the&nbsp;file&nbsp;to&nbsp;be&nbsp;uploaded&nbsp;or&nbsp;the&nbsp;full&nbsp;path&nbsp;name&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file&nbsp;on&nbsp;disk.<br>
+&nbsp;&nbsp;parent:&nbsp;gdata.sites.data.ContentEntry&nbsp;or&nbsp;string&nbsp;The&nbsp;parent&nbsp;page&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upload&nbsp;the&nbsp;file&nbsp;to&nbsp;or&nbsp;the&nbsp;full&nbsp;URI&nbsp;of&nbsp;the&nbsp;entry's&nbsp;self&nbsp;link.<br>
+&nbsp;&nbsp;content_type:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;MIME&nbsp;type&nbsp;of&nbsp;the&nbsp;file<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(e.g&nbsp;'application/pdf').&nbsp;This&nbsp;should&nbsp;be&nbsp;provided&nbsp;if&nbsp;file&nbsp;is&nbsp;not&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MediaSource&nbsp;object.<br>
+&nbsp;&nbsp;title:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;title&nbsp;to&nbsp;name&nbsp;the&nbsp;attachment.&nbsp;If&nbsp;not<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;included,&nbsp;the&nbsp;filepath&nbsp;or&nbsp;media&nbsp;source's&nbsp;filename&nbsp;is&nbsp;used.<br>
+&nbsp;&nbsp;description:&nbsp;string&nbsp;(optional)&nbsp;A&nbsp;summary/description&nbsp;for&nbsp;the&nbsp;attachment.<br>
+&nbsp;&nbsp;folder_name:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;name&nbsp;of&nbsp;an&nbsp;existing&nbsp;folder&nbsp;to&nbsp;upload<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;attachment&nbsp;to.&nbsp;This&nbsp;only&nbsp;applies&nbsp;when&nbsp;the&nbsp;parent&nbsp;parameter&nbsp;points<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;a&nbsp;filecabinet&nbsp;entry.<br>
+&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;__upload().<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;gdata.sites.data.ContentEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;the&nbsp;created<br>
+&nbsp;&nbsp;attachment.</tt></dd></dl>
 
 <hr>
 Data and other attributes defined here:<br>
-<dl><dt><strong>api_version</strong> = '2'</dl>
+<dl><dt><strong>api_version</strong> = '1'</dl>
 
-<dl><dt><strong>auth_scopes</strong> = ['http://maps.google.com/maps/feeds/']</dl>
+<dl><dt><strong>auth_service</strong> = 'jotspot'</dl>
 
-<dl><dt><strong>auth_serice</strong> = 'local'</dl>
+<dl><dt><strong>domain</strong> = 'site'</dl>
+
+<dl><dt><strong>host</strong> = 'sites.google.com'</dl>
 
 <hr>
 Methods inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
-<dl><dt><a name="MapsClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">='https://www.google.com/accounts/ClientLogin'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="SitesClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">='https://www.google.com/accounts/ClientLogin'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="MapsClient-GetAccessToken"><strong>GetAccessToken</strong></a> = get_access_token(self, request_token, url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>)</dt><dd><tt>Exchanges&nbsp;an&nbsp;authorized&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;for&nbsp;an&nbsp;access&nbsp;token.<br>
+<dl><dt><a name="SitesClient-Delete"><strong>Delete</strong></a> = delete(self, entry_or_uri, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="SitesClient-GetAccessToken"><strong>GetAccessToken</strong></a> = get_access_token(self, request_token, url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>)</dt><dd><tt>Exchanges&nbsp;an&nbsp;authorized&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;for&nbsp;an&nbsp;access&nbsp;token.<br>
 &nbsp;<br>
 Contacts&nbsp;the&nbsp;Google&nbsp;OAuth&nbsp;server&nbsp;to&nbsp;upgrade&nbsp;a&nbsp;previously&nbsp;authorized<br>
 request&nbsp;token.&nbsp;Once&nbsp;the&nbsp;request&nbsp;token&nbsp;is&nbsp;upgraded&nbsp;to&nbsp;an&nbsp;access&nbsp;token,<br>
@@ -145,11 +223,11 @@ Args:<br>
 &nbsp;&nbsp;url:&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;the&nbsp;upgrade&nbsp;request&nbsp;should&nbsp;be&nbsp;sent.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defaults&nbsp;to:&nbsp;https://www.google.com/accounts/OAuthAuthorizeToken</tt></dd></dl>
 
-<dl><dt><a name="MapsClient-GetEntry"><strong>GetEntry</strong></a> = get_entry(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDEntry'&gt;</font>, **kwargs)</dt></dl>
+<dl><dt><a name="SitesClient-GetEntry"><strong>GetEntry</strong></a> = get_entry(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDEntry'&gt;</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="MapsClient-GetFeed"><strong>GetFeed</strong></a> = get_feed(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDFeed'&gt;</font>, **kwargs)</dt></dl>
+<dl><dt><a name="SitesClient-GetFeed"><strong>GetFeed</strong></a> = get_feed(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDFeed'&gt;</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="MapsClient-GetNext"><strong>GetNext</strong></a> = get_next(self, feed, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Fetches&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;results&nbsp;from&nbsp;the&nbsp;feed.&nbsp;<br>
+<dl><dt><a name="SitesClient-GetNext"><strong>GetNext</strong></a> = get_next(self, feed, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Fetches&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;results&nbsp;from&nbsp;the&nbsp;feed.&nbsp;<br>
 &nbsp;<br>
 When&nbsp;requesting&nbsp;a&nbsp;feed,&nbsp;the&nbsp;number&nbsp;of&nbsp;entries&nbsp;returned&nbsp;is&nbsp;capped&nbsp;at&nbsp;a<br>
 service&nbsp;specific&nbsp;default&nbsp;limit&nbsp;(often&nbsp;25&nbsp;entries).&nbsp;You&nbsp;can&nbsp;specify&nbsp;your<br>
@@ -160,7 +238,7 @@ a&nbsp;next&nbsp;link.&nbsp;This&nbsp;method&nbsp;performs&nbsp;a&nbsp;GET&nbsp;
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;feed&nbsp;object&nbsp;containing&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;entries&nbsp;in&nbsp;this&nbsp;feed.</tt></dd></dl>
 
-<dl><dt><a name="MapsClient-GetOAuthToken"><strong>GetOAuthToken</strong></a> = get_oauth_token(self, scopes, next, consumer_key, consumer_secret<font color="#909090">=None</font>, rsa_private_key<font color="#909090">=None</font>, url<font color="#909090">='https://www.google.com/accounts/OAuthGetRequestToken'</font>)</dt><dd><tt>Obtains&nbsp;an&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;to&nbsp;allow&nbsp;the&nbsp;user&nbsp;to&nbsp;authorize&nbsp;this&nbsp;app.<br>
+<dl><dt><a name="SitesClient-GetOAuthToken"><strong>GetOAuthToken</strong></a> = get_oauth_token(self, scopes, next, consumer_key, consumer_secret<font color="#909090">=None</font>, rsa_private_key<font color="#909090">=None</font>, url<font color="#909090">='https://www.google.com/accounts/OAuthGetRequestToken'</font>)</dt><dd><tt>Obtains&nbsp;an&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;to&nbsp;allow&nbsp;the&nbsp;user&nbsp;to&nbsp;authorize&nbsp;this&nbsp;app.<br>
 &nbsp;<br>
 Once&nbsp;this&nbsp;client&nbsp;has&nbsp;a&nbsp;request&nbsp;token,&nbsp;the&nbsp;user&nbsp;can&nbsp;authorize&nbsp;the&nbsp;request<br>
 token&nbsp;by&nbsp;visiting&nbsp;the&nbsp;authorization&nbsp;URL&nbsp;in&nbsp;their&nbsp;browser.&nbsp;After&nbsp;being<br>
@@ -196,15 +274,15 @@ Args:<br>
 &nbsp;&nbsp;url:&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;a&nbsp;request&nbsp;for&nbsp;a&nbsp;token&nbsp;should&nbsp;be&nbsp;made.&nbsp;The&nbsp;default<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;Google's&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;provider.</tt></dd></dl>
 
-<dl><dt><a name="MapsClient-ModifyRequest"><strong>ModifyRequest</strong></a> = modify_request(self, http_request)</dt><dd><tt>Adds&nbsp;or&nbsp;changes&nbsp;request&nbsp;before&nbsp;making&nbsp;the&nbsp;HTTP&nbsp;request.<br>
+<dl><dt><a name="SitesClient-ModifyRequest"><strong>ModifyRequest</strong></a> = modify_request(self, http_request)</dt><dd><tt>Adds&nbsp;or&nbsp;changes&nbsp;request&nbsp;before&nbsp;making&nbsp;the&nbsp;HTTP&nbsp;request.<br>
 &nbsp;<br>
 This&nbsp;client&nbsp;will&nbsp;add&nbsp;the&nbsp;API&nbsp;version&nbsp;if&nbsp;it&nbsp;is&nbsp;specified.&nbsp;<br>
 Subclasses&nbsp;may&nbsp;override&nbsp;this&nbsp;method&nbsp;to&nbsp;add&nbsp;their&nbsp;own&nbsp;request&nbsp;<br>
 modifications&nbsp;before&nbsp;the&nbsp;request&nbsp;is&nbsp;made.</tt></dd></dl>
 
-<dl><dt><a name="MapsClient-Post"><strong>Post</strong></a> = post(self, entry, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="SitesClient-Post"><strong>Post</strong></a> = post(self, entry, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="MapsClient-Request"><strong>Request</strong></a> = request(self, method<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, **kwargs)</dt><dd><tt>Make&nbsp;an&nbsp;HTTP&nbsp;request&nbsp;to&nbsp;the&nbsp;server.<br>
+<dl><dt><a name="SitesClient-Request"><strong>Request</strong></a> = request(self, method<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, **kwargs)</dt><dd><tt>Make&nbsp;an&nbsp;HTTP&nbsp;request&nbsp;to&nbsp;the&nbsp;server.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;atom.client.AtomPubClient.request.<br>
 &nbsp;<br>
@@ -257,9 +335,27 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using&nbsp;<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="MapsClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc32190&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="SitesClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc43b90&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="MapsClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc321d0&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="SitesClient-Update"><strong>Update</strong></a> = update(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
+&nbsp;<br>
+Performs&nbsp;a&nbsp;PUT&nbsp;and&nbsp;converts&nbsp;the&nbsp;response&nbsp;to&nbsp;a&nbsp;new&nbsp;entry&nbsp;object&nbsp;with&nbsp;a<br>
+matching&nbsp;class&nbsp;to&nbsp;the&nbsp;entry&nbsp;passed&nbsp;in.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:<br>
+&nbsp;&nbsp;auth_token:<br>
+&nbsp;&nbsp;force:&nbsp;boolean&nbsp;stating&nbsp;whether&nbsp;an&nbsp;update&nbsp;should&nbsp;be&nbsp;forced.&nbsp;Defaults&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;False.&nbsp;Normally,&nbsp;if&nbsp;a&nbsp;change&nbsp;has&nbsp;been&nbsp;made&nbsp;since&nbsp;the&nbsp;passed&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;was&nbsp;obtained,&nbsp;the&nbsp;server&nbsp;will&nbsp;not&nbsp;overwrite&nbsp;the&nbsp;entry&nbsp;since<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;changes&nbsp;were&nbsp;based&nbsp;on&nbsp;an&nbsp;obsolete&nbsp;version&nbsp;of&nbsp;the&nbsp;entry.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Setting&nbsp;force&nbsp;to&nbsp;True&nbsp;will&nbsp;cause&nbsp;the&nbsp;update&nbsp;to&nbsp;silently<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;overwrite&nbsp;whatever&nbsp;version&nbsp;is&nbsp;present.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
+
+<dl><dt><a name="SitesClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc43bd0&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -276,9 +372,11 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
 
-<dl><dt><a name="MapsClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">='https://www.google.com/accounts/ClientLogin'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="SitesClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">='https://www.google.com/accounts/ClientLogin'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="MapsClient-get_access_token"><strong>get_access_token</strong></a>(self, request_token, url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>)</dt><dd><tt>Exchanges&nbsp;an&nbsp;authorized&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;for&nbsp;an&nbsp;access&nbsp;token.<br>
+<dl><dt><a name="SitesClient-delete"><strong>delete</strong></a>(self, entry_or_uri, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="SitesClient-get_access_token"><strong>get_access_token</strong></a>(self, request_token, url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>)</dt><dd><tt>Exchanges&nbsp;an&nbsp;authorized&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;for&nbsp;an&nbsp;access&nbsp;token.<br>
 &nbsp;<br>
 Contacts&nbsp;the&nbsp;Google&nbsp;OAuth&nbsp;server&nbsp;to&nbsp;upgrade&nbsp;a&nbsp;previously&nbsp;authorized<br>
 request&nbsp;token.&nbsp;Once&nbsp;the&nbsp;request&nbsp;token&nbsp;is&nbsp;upgraded&nbsp;to&nbsp;an&nbsp;access&nbsp;token,<br>
@@ -292,11 +390,11 @@ Args:<br>
 &nbsp;&nbsp;url:&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;the&nbsp;upgrade&nbsp;request&nbsp;should&nbsp;be&nbsp;sent.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defaults&nbsp;to:&nbsp;https://www.google.com/accounts/OAuthAuthorizeToken</tt></dd></dl>
 
-<dl><dt><a name="MapsClient-get_entry"><strong>get_entry</strong></a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDEntry'&gt;</font>, **kwargs)</dt></dl>
+<dl><dt><a name="SitesClient-get_entry"><strong>get_entry</strong></a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDEntry'&gt;</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="MapsClient-get_feed"><strong>get_feed</strong></a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDFeed'&gt;</font>, **kwargs)</dt></dl>
+<dl><dt><a name="SitesClient-get_feed"><strong>get_feed</strong></a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDFeed'&gt;</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="MapsClient-get_next"><strong>get_next</strong></a>(self, feed, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Fetches&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;results&nbsp;from&nbsp;the&nbsp;feed.&nbsp;<br>
+<dl><dt><a name="SitesClient-get_next"><strong>get_next</strong></a>(self, feed, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Fetches&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;results&nbsp;from&nbsp;the&nbsp;feed.&nbsp;<br>
 &nbsp;<br>
 When&nbsp;requesting&nbsp;a&nbsp;feed,&nbsp;the&nbsp;number&nbsp;of&nbsp;entries&nbsp;returned&nbsp;is&nbsp;capped&nbsp;at&nbsp;a<br>
 service&nbsp;specific&nbsp;default&nbsp;limit&nbsp;(often&nbsp;25&nbsp;entries).&nbsp;You&nbsp;can&nbsp;specify&nbsp;your<br>
@@ -307,7 +405,7 @@ a&nbsp;next&nbsp;link.&nbsp;This&nbsp;method&nbsp;performs&nbsp;a&nbsp;GET&nbsp;
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;feed&nbsp;object&nbsp;containing&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;entries&nbsp;in&nbsp;this&nbsp;feed.</tt></dd></dl>
 
-<dl><dt><a name="MapsClient-get_oauth_token"><strong>get_oauth_token</strong></a>(self, scopes, next, consumer_key, consumer_secret<font color="#909090">=None</font>, rsa_private_key<font color="#909090">=None</font>, url<font color="#909090">='https://www.google.com/accounts/OAuthGetRequestToken'</font>)</dt><dd><tt>Obtains&nbsp;an&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;to&nbsp;allow&nbsp;the&nbsp;user&nbsp;to&nbsp;authorize&nbsp;this&nbsp;app.<br>
+<dl><dt><a name="SitesClient-get_oauth_token"><strong>get_oauth_token</strong></a>(self, scopes, next, consumer_key, consumer_secret<font color="#909090">=None</font>, rsa_private_key<font color="#909090">=None</font>, url<font color="#909090">='https://www.google.com/accounts/OAuthGetRequestToken'</font>)</dt><dd><tt>Obtains&nbsp;an&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;to&nbsp;allow&nbsp;the&nbsp;user&nbsp;to&nbsp;authorize&nbsp;this&nbsp;app.<br>
 &nbsp;<br>
 Once&nbsp;this&nbsp;client&nbsp;has&nbsp;a&nbsp;request&nbsp;token,&nbsp;the&nbsp;user&nbsp;can&nbsp;authorize&nbsp;the&nbsp;request<br>
 token&nbsp;by&nbsp;visiting&nbsp;the&nbsp;authorization&nbsp;URL&nbsp;in&nbsp;their&nbsp;browser.&nbsp;After&nbsp;being<br>
@@ -343,15 +441,15 @@ Args:<br>
 &nbsp;&nbsp;url:&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;a&nbsp;request&nbsp;for&nbsp;a&nbsp;token&nbsp;should&nbsp;be&nbsp;made.&nbsp;The&nbsp;default<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;Google's&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;provider.</tt></dd></dl>
 
-<dl><dt><a name="MapsClient-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt><dd><tt>Adds&nbsp;or&nbsp;changes&nbsp;request&nbsp;before&nbsp;making&nbsp;the&nbsp;HTTP&nbsp;request.<br>
+<dl><dt><a name="SitesClient-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt><dd><tt>Adds&nbsp;or&nbsp;changes&nbsp;request&nbsp;before&nbsp;making&nbsp;the&nbsp;HTTP&nbsp;request.<br>
 &nbsp;<br>
 This&nbsp;client&nbsp;will&nbsp;add&nbsp;the&nbsp;API&nbsp;version&nbsp;if&nbsp;it&nbsp;is&nbsp;specified.&nbsp;<br>
 Subclasses&nbsp;may&nbsp;override&nbsp;this&nbsp;method&nbsp;to&nbsp;add&nbsp;their&nbsp;own&nbsp;request&nbsp;<br>
 modifications&nbsp;before&nbsp;the&nbsp;request&nbsp;is&nbsp;made.</tt></dd></dl>
 
-<dl><dt><a name="MapsClient-post"><strong>post</strong></a>(self, entry, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="SitesClient-post"><strong>post</strong></a>(self, entry, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="MapsClient-request"><strong>request</strong></a>(self, method<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, **kwargs)</dt><dd><tt>Make&nbsp;an&nbsp;HTTP&nbsp;request&nbsp;to&nbsp;the&nbsp;server.<br>
+<dl><dt><a name="SitesClient-request"><strong>request</strong></a>(self, method<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, **kwargs)</dt><dd><tt>Make&nbsp;an&nbsp;HTTP&nbsp;request&nbsp;to&nbsp;the&nbsp;server.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;atom.client.AtomPubClient.request.<br>
 &nbsp;<br>
@@ -404,9 +502,27 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using&nbsp;<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="MapsClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc32190&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="SitesClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc43b90&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="MapsClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc321d0&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="SitesClient-update"><strong>update</strong></a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
+&nbsp;<br>
+Performs&nbsp;a&nbsp;PUT&nbsp;and&nbsp;converts&nbsp;the&nbsp;response&nbsp;to&nbsp;a&nbsp;new&nbsp;entry&nbsp;object&nbsp;with&nbsp;a<br>
+matching&nbsp;class&nbsp;to&nbsp;the&nbsp;entry&nbsp;passed&nbsp;in.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:<br>
+&nbsp;&nbsp;auth_token:<br>
+&nbsp;&nbsp;force:&nbsp;boolean&nbsp;stating&nbsp;whether&nbsp;an&nbsp;update&nbsp;should&nbsp;be&nbsp;forced.&nbsp;Defaults&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;False.&nbsp;Normally,&nbsp;if&nbsp;a&nbsp;change&nbsp;has&nbsp;been&nbsp;made&nbsp;since&nbsp;the&nbsp;passed&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;was&nbsp;obtained,&nbsp;the&nbsp;server&nbsp;will&nbsp;not&nbsp;overwrite&nbsp;the&nbsp;entry&nbsp;since<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;changes&nbsp;were&nbsp;based&nbsp;on&nbsp;an&nbsp;obsolete&nbsp;version&nbsp;of&nbsp;the&nbsp;entry.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Setting&nbsp;force&nbsp;to&nbsp;True&nbsp;will&nbsp;cause&nbsp;the&nbsp;update&nbsp;to&nbsp;silently<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;overwrite&nbsp;whatever&nbsp;version&nbsp;is&nbsp;present.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
+
+<dl><dt><a name="SitesClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc43bd0&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -425,32 +541,17 @@ Returns:<br>
 
 <hr>
 Data and other attributes inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
-<dl><dt><strong>auth_service</strong> = None</dl>
+<dl><dt><strong>auth_scopes</strong> = None</dl>
 
 <hr>
 Methods inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
-<dl><dt><a name="MapsClient-Get"><strong>Get</strong></a> = get(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="SitesClient-Get"><strong>Get</strong></a> = get(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="MapsClient-Put"><strong>Put</strong></a> = put(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="SitesClient-Put"><strong>Put</strong></a> = put(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="MapsClient-__init__"><strong>__init__</strong></a>(self, http_client<font color="#909090">=None</font>, host<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, source<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;AtomPubClient&nbsp;instance.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;source:&nbsp;The&nbsp;name&nbsp;of&nbsp;your&nbsp;application.<br>
-&nbsp;&nbsp;http_client:&nbsp;An&nbsp;object&nbsp;capable&nbsp;of&nbsp;performing&nbsp;HTTP&nbsp;requests&nbsp;through&nbsp;a<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request&nbsp;method.&nbsp;This&nbsp;object&nbsp;is&nbsp;used&nbsp;to&nbsp;perform&nbsp;the&nbsp;request<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;when&nbsp;the&nbsp;AtomPubClient's&nbsp;request&nbsp;method&nbsp;is&nbsp;called.&nbsp;Used&nbsp;to<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow&nbsp;HTTP&nbsp;requests&nbsp;to&nbsp;be&nbsp;directed&nbsp;to&nbsp;a&nbsp;mock&nbsp;server,&nbsp;or&nbsp;use<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;an&nbsp;alternate&nbsp;library&nbsp;instead&nbsp;of&nbsp;the&nbsp;default&nbsp;of&nbsp;httplib&nbsp;to<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make&nbsp;HTTP&nbsp;requests.<br>
-&nbsp;&nbsp;host:&nbsp;str&nbsp;The&nbsp;default&nbsp;host&nbsp;name&nbsp;to&nbsp;use&nbsp;if&nbsp;a&nbsp;host&nbsp;is&nbsp;not&nbsp;specified&nbsp;in&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested&nbsp;URI.<br>
-&nbsp;&nbsp;auth_token:&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;HTTP&nbsp;Authorization&nbsp;header&nbsp;when&nbsp;its<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modify_request&nbsp;method&nbsp;is&nbsp;called.</tt></dd></dl>
+<dl><dt><a name="SitesClient-get"><strong>get</strong></a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="MapsClient-get"><strong>get</strong></a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
-
-<dl><dt><a name="MapsClient-put"><strong>put</strong></a>(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="SitesClient-put"><strong>put</strong></a>(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <hr>
 Data descriptors inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
@@ -464,8 +565,6 @@ Data descriptors inherited from <a href="atom.client.html#AtomPubClient">atom.cl
 Data and other attributes inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
 <dl><dt><strong>auth_token</strong> = None</dl>
 
-<dl><dt><strong>host</strong> = None</dl>
-
 <dl><dt><strong>ssl</strong> = False</dl>
 
 </td></tr></table></td></tr></table><p>
@@ -475,15 +574,15 @@ Data and other attributes inherited from <a href="atom.client.html#AtomPubClient
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>KML_CONTENT_TYPE</strong> = 'application/vnd.google-earth.kml+xml'<br>
-<strong>MAP_FEATURE_URL_TEMPLATE</strong> = 'http://maps.google.com/maps/feeds/features/%s/%s/full'<br>
-<strong>MAP_URL_TEMPLATE</strong> = 'http://maps.google.com/maps/feeds/maps/%s/full'<br>
-<strong>__author__</strong> = 'api.roman.public@google.com (Roman Nurik)'</td></tr></table><p>
+<td width="100%"><strong>ACTIVITY_FEED_TEMPLATE</strong> = '/feeds/activity/%s/%s/'<br>
+<strong>CONTENT_FEED_TEMPLATE</strong> = '/feeds/content/%s/%s/'<br>
+<strong>REVISION_FEED_TEMPLATE</strong> = '/feeds/revision/%s/%s/'<br>
+<strong>__author__</strong> = 'e.bidelman (Eric Bidelman)'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#7799ee">
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
     
 <tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%">api.roman.public@google.com&nbsp;(Roman&nbsp;Nurik)</td></tr></table>
+<td width="100%">e.bidelman&nbsp;(Eric&nbsp;Bidelman)</td></tr></table>
 </body></html>

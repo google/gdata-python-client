@@ -9,13 +9,13 @@
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.contacts.html"><font color="#ffffff">contacts</font></a>.service</strong></big></big></font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client/src/gdata/contacts/service.py">/usr/local/svn/gdata-python-client/src/gdata/contacts/service.py</a></font></td></tr></table>
-    <p><tt><a href="#ContactsService">ContactsService</a>&nbsp;extends&nbsp;the&nbsp;<a href="gdata.service.html#GDataService">GDataService</a>&nbsp;to&nbsp;streamline&nbsp;Google&nbsp;Contacts&nbsp;operations.<br>
+    <p><tt><a href="#ContactsService">ContactsService</a>&nbsp;extends&nbsp;the&nbsp;<a href="gdata.service.html#GDataService">GDataService</a>&nbsp;for&nbsp;Google&nbsp;Contacts&nbsp;operations.<br>
 &nbsp;<br>
-<a href="#ContactsService">ContactsService</a>:&nbsp;Provides&nbsp;methods&nbsp;to&nbsp;query&nbsp;feeds&nbsp;and&nbsp;manipulate&nbsp;items.&nbsp;Extends&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="gdata.service.html#GDataService">GDataService</a>.<br>
+<a href="#ContactsService">ContactsService</a>:&nbsp;Provides&nbsp;methods&nbsp;to&nbsp;query&nbsp;feeds&nbsp;and&nbsp;manipulate&nbsp;items.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extends&nbsp;<a href="gdata.service.html#GDataService">GDataService</a>.<br>
 &nbsp;<br>
-DictionaryToParamList:&nbsp;Function&nbsp;which&nbsp;converts&nbsp;a&nbsp;dictionary&nbsp;into&nbsp;a&nbsp;list&nbsp;of&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;URL&nbsp;arguments&nbsp;(represented&nbsp;as&nbsp;strings).&nbsp;This&nbsp;is&nbsp;a&nbsp;<br>
+DictionaryToParamList:&nbsp;Function&nbsp;which&nbsp;converts&nbsp;a&nbsp;dictionary&nbsp;into&nbsp;a&nbsp;list&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;URL&nbsp;arguments&nbsp;(represented&nbsp;as&nbsp;strings).&nbsp;This&nbsp;is&nbsp;a<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;utility&nbsp;function&nbsp;used&nbsp;in&nbsp;CRUD&nbsp;operations.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -24,9 +24,8 @@ DictionaryToParamList:&nbsp;Function&nbsp;which&nbsp;converts&nbsp;a&nbsp;dictio
 <font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="atom.html">atom</a><br>
-</td><td width="25%" valign=top><a href="gdata.html">gdata</a><br>
-</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="gdata.html">gdata</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -56,6 +55,7 @@ DictionaryToParamList:&nbsp;Function&nbsp;which&nbsp;converts&nbsp;a&nbsp;dictio
 <dl>
 <dt><font face="helvetica, arial"><a href="gdata.contacts.service.html#ContactsQuery">ContactsQuery</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.contacts.service.html#GroupsQuery">GroupsQuery</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.contacts.service.html#ProfilesQuery">ProfilesQuery</a>
 </font></dt></dl>
 </dd>
 </dl>
@@ -196,7 +196,7 @@ Data and other attributes inherited from <a href="__builtin__.html#dict">__built
 
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x7569a0&gt;<dd><tt>T.<a href="#ContactsQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xdfc460&gt;<dd><tt>dict.<a href="#ContactsQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xe04060&gt;<dd><tt>dict.<a href="#ContactsQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -233,26 +233,26 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mime&nbsp;type&nbsp;in&nbsp;the&nbsp;media&nbsp;object.<br>
 &nbsp;&nbsp;content_length:&nbsp;int&nbsp;or&nbsp;str&nbsp;(optional)&nbsp;Specifying&nbsp;the&nbsp;content&nbsp;length&nbsp;is<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;only&nbsp;required&nbsp;if&nbsp;media&nbsp;is&nbsp;a&nbsp;file-like&nbsp;object.&nbsp;If&nbsp;media<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;a&nbsp;filename,&nbsp;the&nbsp;length&nbsp;is&nbsp;determined&nbsp;using&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;a&nbsp;filename,&nbsp;the&nbsp;length&nbsp;is&nbsp;determined&nbsp;using<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;os.path.getsize.&nbsp;If&nbsp;media&nbsp;is&nbsp;a&nbsp;MediaSource&nbsp;object,&nbsp;it&nbsp;is<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assumed&nbsp;that&nbsp;it&nbsp;already&nbsp;contains&nbsp;the&nbsp;content&nbsp;length.</tt></dd></dl>
 
 <dl><dt><a name="ContactsService-CreateContact"><strong>CreateContact</strong></a>(self, new_contact, insert_uri<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>)</dt><dd><tt>Adds&nbsp;an&nbsp;new&nbsp;contact&nbsp;to&nbsp;Google&nbsp;Contacts.<br>
 &nbsp;<br>
-Args:&nbsp;<br>
+Args:<br>
 &nbsp;&nbsp;new_contact:&nbsp;atom.Entry&nbsp;or&nbsp;subclass&nbsp;A&nbsp;new&nbsp;contact&nbsp;which&nbsp;is&nbsp;to&nbsp;be&nbsp;added&nbsp;to<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Google&nbsp;Contacts.<br>
 &nbsp;&nbsp;insert_uri:&nbsp;the&nbsp;URL&nbsp;to&nbsp;post&nbsp;new&nbsp;contacts&nbsp;to&nbsp;the&nbsp;feed<br>
 &nbsp;&nbsp;url_params:&nbsp;dict&nbsp;(optional)&nbsp;Additional&nbsp;URL&nbsp;parameters&nbsp;to&nbsp;be&nbsp;included<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;insertion&nbsp;request.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;insertion&nbsp;request.<br>
 &nbsp;&nbsp;escape_params:&nbsp;boolean&nbsp;(optional)&nbsp;If&nbsp;true,&nbsp;the&nbsp;url_parameters&nbsp;will&nbsp;be<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;escaped&nbsp;before&nbsp;they&nbsp;are&nbsp;included&nbsp;in&nbsp;the&nbsp;request.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;On&nbsp;successful&nbsp;insert,&nbsp;&nbsp;an&nbsp;entry&nbsp;containing&nbsp;the&nbsp;contact&nbsp;created<br>
 &nbsp;&nbsp;On&nbsp;failure,&nbsp;a&nbsp;<a href="#RequestError">RequestError</a>&nbsp;is&nbsp;raised&nbsp;of&nbsp;the&nbsp;form:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{'status':&nbsp;HTTP&nbsp;status&nbsp;code&nbsp;from&nbsp;server,&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'reason':&nbsp;HTTP&nbsp;reason&nbsp;from&nbsp;the&nbsp;server,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{'status':&nbsp;HTTP&nbsp;status&nbsp;code&nbsp;from&nbsp;server,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'reason':&nbsp;HTTP&nbsp;reason&nbsp;from&nbsp;the&nbsp;server,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'body':&nbsp;HTTP&nbsp;body&nbsp;of&nbsp;the&nbsp;server's&nbsp;response}</tt></dd></dl>
 
 <dl><dt><a name="ContactsService-CreateGroup"><strong>CreateGroup</strong></a>(self, new_group, insert_uri<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>)</dt></dl>
@@ -271,15 +271,15 @@ Returns:<br>
 &nbsp;&nbsp;On&nbsp;successful&nbsp;delete,&nbsp;&nbsp;a&nbsp;httplib.HTTPResponse&nbsp;containing&nbsp;the&nbsp;server's<br>
 &nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;to&nbsp;the&nbsp;DELETE&nbsp;request.<br>
 &nbsp;&nbsp;On&nbsp;failure,&nbsp;a&nbsp;<a href="#RequestError">RequestError</a>&nbsp;is&nbsp;raised&nbsp;of&nbsp;the&nbsp;form:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{'status':&nbsp;HTTP&nbsp;status&nbsp;code&nbsp;from&nbsp;server,&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'reason':&nbsp;HTTP&nbsp;reason&nbsp;from&nbsp;the&nbsp;server,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{'status':&nbsp;HTTP&nbsp;status&nbsp;code&nbsp;from&nbsp;server,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'reason':&nbsp;HTTP&nbsp;reason&nbsp;from&nbsp;the&nbsp;server,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'body':&nbsp;HTTP&nbsp;body&nbsp;of&nbsp;the&nbsp;server's&nbsp;response}</tt></dd></dl>
 
 <dl><dt><a name="ContactsService-DeleteGroup"><strong>DeleteGroup</strong></a>(self, edit_uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>)</dt></dl>
 
 <dl><dt><a name="ContactsService-DeletePhoto"><strong>DeletePhoto</strong></a>(self, contact_entry_or_url)</dt></dl>
 
-<dl><dt><a name="ContactsService-ExecuteBatch"><strong>ExecuteBatch</strong></a>(self, batch_feed, url, converter<font color="#909090">=&lt;function ContactsFeedFromString at 0x954398&gt;</font>)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;feed&nbsp;to&nbsp;the&nbsp;server.<br>
+<dl><dt><a name="ContactsService-ExecuteBatch"><strong>ExecuteBatch</strong></a>(self, batch_feed, url, converter<font color="#909090">=&lt;function ContactsFeedFromString at 0xb1bc08&gt;</font>)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;feed&nbsp;to&nbsp;the&nbsp;server.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;batch_feed:&nbsp;gdata.contacts.ContactFeed&nbsp;A&nbsp;feed&nbsp;containing&nbsp;batch<br>
@@ -294,6 +294,23 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;results&nbsp;of&nbsp;the&nbsp;batch&nbsp;request's&nbsp;execution&nbsp;on&nbsp;the&nbsp;server.&nbsp;If&nbsp;the<br>
 &nbsp;&nbsp;default&nbsp;converter&nbsp;is&nbsp;used,&nbsp;this&nbsp;is&nbsp;stored&nbsp;in&nbsp;a&nbsp;ContactsFeed.</tt></dd></dl>
+
+<dl><dt><a name="ContactsService-ExecuteBatchProfiles"><strong>ExecuteBatchProfiles</strong></a>(self, batch_feed, url, converter<font color="#909090">=&lt;function ProfilesFeedFromString at 0xb1bed8&gt;</font>)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;feed&nbsp;to&nbsp;the&nbsp;server.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;batch_feed:&nbsp;gdata.profiles.ProfilesFeed&nbsp;A&nbsp;feed&nbsp;containing&nbsp;batch<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request&nbsp;entries.&nbsp;Each&nbsp;entry&nbsp;contains&nbsp;the&nbsp;operation&nbsp;to&nbsp;be&nbsp;performed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;on&nbsp;the&nbsp;data&nbsp;contained&nbsp;in&nbsp;the&nbsp;entry.&nbsp;For&nbsp;example&nbsp;an&nbsp;entry&nbsp;with&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;operation&nbsp;type&nbsp;of&nbsp;insert&nbsp;will&nbsp;be&nbsp;used&nbsp;as&nbsp;if&nbsp;the&nbsp;individual&nbsp;entry<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;had&nbsp;been&nbsp;inserted.<br>
+&nbsp;&nbsp;url:&nbsp;string&nbsp;The&nbsp;batch&nbsp;URL&nbsp;to&nbsp;which&nbsp;these&nbsp;operations&nbsp;should&nbsp;be&nbsp;applied.<br>
+&nbsp;&nbsp;converter:&nbsp;Function&nbsp;(optional)&nbsp;The&nbsp;function&nbsp;used&nbsp;to&nbsp;convert&nbsp;the&nbsp;server's<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;to&nbsp;an&nbsp;object.&nbsp;The&nbsp;default&nbsp;value&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.profiles.ProfilesFeedFromString.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;results&nbsp;of&nbsp;the&nbsp;batch&nbsp;request's&nbsp;execution&nbsp;on&nbsp;the&nbsp;server.&nbsp;If&nbsp;the<br>
+&nbsp;&nbsp;default&nbsp;converter&nbsp;is&nbsp;used,&nbsp;this&nbsp;is&nbsp;stored&nbsp;in&nbsp;a&nbsp;ProfilesFeed.</tt></dd></dl>
 
 <dl><dt><a name="ContactsService-GetContact"><strong>GetContact</strong></a>(self, uri)</dt></dl>
 
@@ -325,13 +342,33 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contain&nbsp;a&nbsp;photo&nbsp;link,&nbsp;the&nbsp;image&nbsp;will&nbsp;not&nbsp;be&nbsp;fetched&nbsp;and&nbsp;this&nbsp;method<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;return&nbsp;None.</tt></dd></dl>
 
+<dl><dt><a name="ContactsService-GetProfile"><strong>GetProfile</strong></a>(self, uri)</dt><dd><tt>Retrieves&nbsp;a&nbsp;domain's&nbsp;profile&nbsp;for&nbsp;the&nbsp;user.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;string&nbsp;the&nbsp;URL&nbsp;to&nbsp;retrieve&nbsp;the&nbsp;profiles&nbsp;feed,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;example&nbsp;/m8/feeds/profiles/default/full/username<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;On&nbsp;success,&nbsp;a&nbsp;ProfileEntry&nbsp;containing&nbsp;the&nbsp;profile&nbsp;for&nbsp;the&nbsp;user.<br>
+&nbsp;&nbsp;On&nbsp;failure,&nbsp;raises&nbsp;a&nbsp;<a href="#RequestError">RequestError</a></tt></dd></dl>
+
+<dl><dt><a name="ContactsService-GetProfilesFeed"><strong>GetProfilesFeed</strong></a>(self, uri<font color="#909090">=None</font>)</dt><dd><tt>Retrieves&nbsp;a&nbsp;feed&nbsp;containing&nbsp;all&nbsp;domain's&nbsp;profiles.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;string&nbsp;(optional)&nbsp;the&nbsp;URL&nbsp;to&nbsp;retrieve&nbsp;the&nbsp;profiles&nbsp;feed,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;example&nbsp;/m8/feeds/profiles/default/full<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;On&nbsp;success,&nbsp;a&nbsp;ProfilesFeed&nbsp;containing&nbsp;the&nbsp;profiles.<br>
+&nbsp;&nbsp;On&nbsp;failure,&nbsp;raises&nbsp;a&nbsp;<a href="#RequestError">RequestError</a>.</tt></dd></dl>
+
 <dl><dt><a name="ContactsService-UpdateContact"><strong>UpdateContact</strong></a>(self, edit_uri, updated_contact, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>)</dt><dd><tt>Updates&nbsp;an&nbsp;existing&nbsp;contact.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;edit_uri:&nbsp;string&nbsp;The&nbsp;edit&nbsp;link&nbsp;URI&nbsp;for&nbsp;the&nbsp;element&nbsp;being&nbsp;updated<br>
 &nbsp;&nbsp;updated_contact:&nbsp;string,&nbsp;atom.Entry&nbsp;or&nbsp;subclass&nbsp;containing<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Atom&nbsp;Entry&nbsp;which&nbsp;will&nbsp;replace&nbsp;the&nbsp;contact&nbsp;which&nbsp;is&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stored&nbsp;at&nbsp;the&nbsp;edit_url&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Atom&nbsp;Entry&nbsp;which&nbsp;will&nbsp;replace&nbsp;the&nbsp;contact&nbsp;which&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stored&nbsp;at&nbsp;the&nbsp;edit_url<br>
 &nbsp;&nbsp;url_params:&nbsp;dict&nbsp;(optional)&nbsp;Additional&nbsp;URL&nbsp;parameters&nbsp;to&nbsp;be&nbsp;included<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;update&nbsp;request.<br>
 &nbsp;&nbsp;escape_params:&nbsp;boolean&nbsp;(optional)&nbsp;If&nbsp;true,&nbsp;the&nbsp;url_parameters&nbsp;will&nbsp;be<br>
@@ -341,11 +378,28 @@ Returns:<br>
 &nbsp;&nbsp;On&nbsp;successful&nbsp;update,&nbsp;&nbsp;a&nbsp;httplib.HTTPResponse&nbsp;containing&nbsp;the&nbsp;server's<br>
 &nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;to&nbsp;the&nbsp;PUT&nbsp;request.<br>
 &nbsp;&nbsp;On&nbsp;failure,&nbsp;a&nbsp;<a href="#RequestError">RequestError</a>&nbsp;is&nbsp;raised&nbsp;of&nbsp;the&nbsp;form:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{'status':&nbsp;HTTP&nbsp;status&nbsp;code&nbsp;from&nbsp;server,&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'reason':&nbsp;HTTP&nbsp;reason&nbsp;from&nbsp;the&nbsp;server,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{'status':&nbsp;HTTP&nbsp;status&nbsp;code&nbsp;from&nbsp;server,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'reason':&nbsp;HTTP&nbsp;reason&nbsp;from&nbsp;the&nbsp;server,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'body':&nbsp;HTTP&nbsp;body&nbsp;of&nbsp;the&nbsp;server's&nbsp;response}</tt></dd></dl>
 
 <dl><dt><a name="ContactsService-UpdateGroup"><strong>UpdateGroup</strong></a>(self, edit_uri, updated_group, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>)</dt></dl>
+
+<dl><dt><a name="ContactsService-UpdateProfile"><strong>UpdateProfile</strong></a>(self, edit_uri, updated_profile, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>)</dt><dd><tt>Updates&nbsp;an&nbsp;existing&nbsp;profile.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;edit_uri:&nbsp;string&nbsp;The&nbsp;edit&nbsp;link&nbsp;URI&nbsp;for&nbsp;the&nbsp;element&nbsp;being&nbsp;updated<br>
+&nbsp;&nbsp;updated_profile:&nbsp;string&nbsp;atom.Entry&nbsp;or&nbsp;subclass&nbsp;containing<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Atom&nbsp;Entry&nbsp;which&nbsp;will&nbsp;replace&nbsp;the&nbsp;profile&nbsp;which&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stored&nbsp;at&nbsp;the&nbsp;edit_url.<br>
+&nbsp;&nbsp;url_params:&nbsp;dict&nbsp;(optional)&nbsp;Additional&nbsp;URL&nbsp;parameters&nbsp;to&nbsp;be&nbsp;included<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;update&nbsp;request.<br>
+&nbsp;&nbsp;escape_params:&nbsp;boolean&nbsp;(optional)&nbsp;If&nbsp;true,&nbsp;the&nbsp;url_params&nbsp;will&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;escaped&nbsp;before&nbsp;they&nbsp;are&nbsp;included&nbsp;in&nbsp;the&nbsp;request.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;On&nbsp;successful&nbsp;update,&nbsp;&nbsp;a&nbsp;httplib.HTTPResponse&nbsp;containing&nbsp;the&nbsp;server's<br>
+&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;to&nbsp;the&nbsp;PUT&nbsp;request.<br>
+&nbsp;&nbsp;On&nbsp;failure,&nbsp;raises&nbsp;a&nbsp;<a href="#RequestError">RequestError</a>.</tt></dd></dl>
 
 <dl><dt><a name="ContactsService-__init__"><strong>__init__</strong></a>(self, email<font color="#909090">=None</font>, password<font color="#909090">=None</font>, source<font color="#909090">=None</font>, server<font color="#909090">='www.google.com'</font>, additional_headers<font color="#909090">=None</font>, contact_list<font color="#909090">='default'</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;client&nbsp;for&nbsp;the&nbsp;Contacts&nbsp;service.<br>
 &nbsp;<br>
@@ -1093,7 +1147,144 @@ Data and other attributes inherited from <a href="__builtin__.html#dict">__built
 
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x7569a0&gt;<dd><tt>T.<a href="#GroupsQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xdfc820&gt;<dd><tt>dict.<a href="#GroupsQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xe04790&gt;<dd><tt>dict.<a href="#GroupsQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ProfilesQuery">class <strong>ProfilesQuery</strong></a>(<a href="gdata.service.html#Query">gdata.service.Query</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Constructs&nbsp;a&nbsp;query&nbsp;object&nbsp;for&nbsp;the&nbsp;profiles&nbsp;feed.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.contacts.service.html#ProfilesQuery">ProfilesQuery</a></dd>
+<dd><a href="gdata.service.html#Query">gdata.service.Query</a></dd>
+<dd><a href="__builtin__.html#dict">__builtin__.dict</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ProfilesQuery-__init__"><strong>__init__</strong></a>(self, feed<font color="#909090">=None</font>, text_query<font color="#909090">=None</font>, params<font color="#909090">=None</font>, categories<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.service.html#Query">gdata.service.Query</a>:<br>
+<dl><dt><a name="ProfilesQuery-ToUri"><strong>ToUri</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ProfilesQuery-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="gdata.service.html#Query">gdata.service.Query</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>alt</strong></dt>
+<dd><tt>The&nbsp;feed&nbsp;query's&nbsp;alt&nbsp;parameter</tt></dd>
+</dl>
+<dl><dt><strong>author</strong></dt>
+<dd><tt>The&nbsp;feed&nbsp;query's&nbsp;author&nbsp;parameter</tt></dd>
+</dl>
+<dl><dt><strong>max_results</strong></dt>
+<dd><tt>The&nbsp;feed&nbsp;query's&nbsp;max-results&nbsp;parameter</tt></dd>
+</dl>
+<dl><dt><strong>orderby</strong></dt>
+<dd><tt>The&nbsp;feed&nbsp;query's&nbsp;orderby&nbsp;parameter</tt></dd>
+</dl>
+<dl><dt><strong>published_max</strong></dt>
+<dd><tt>The&nbsp;feed&nbsp;query's&nbsp;published-max&nbsp;parameter</tt></dd>
+</dl>
+<dl><dt><strong>published_min</strong></dt>
+<dd><tt>The&nbsp;feed&nbsp;query's&nbsp;published-min&nbsp;parameter</tt></dd>
+</dl>
+<dl><dt><strong>start_index</strong></dt>
+<dd><tt>The&nbsp;feed&nbsp;query's&nbsp;start-index&nbsp;parameter</tt></dd>
+</dl>
+<dl><dt><strong>text_query</strong></dt>
+<dd><tt>The&nbsp;feed&nbsp;query's&nbsp;q&nbsp;parameter</tt></dd>
+</dl>
+<dl><dt><strong>updated_max</strong></dt>
+<dd><tt>The&nbsp;feed&nbsp;query's&nbsp;updated-max&nbsp;parameter</tt></dd>
+</dl>
+<dl><dt><strong>updated_min</strong></dt>
+<dd><tt>The&nbsp;feed&nbsp;query's&nbsp;updated-min&nbsp;parameter</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
+<dl><dt><a name="ProfilesQuery-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#ProfilesQuery-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-__contains__"><strong>__contains__</strong></a>(...)</dt><dd><tt>D.<a href="#ProfilesQuery-__contains__">__contains__</a>(k)&nbsp;-&gt;&nbsp;True&nbsp;if&nbsp;D&nbsp;has&nbsp;a&nbsp;key&nbsp;k,&nbsp;else&nbsp;False</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-__delitem__"><strong>__delitem__</strong></a>(...)</dt><dd><tt>x.<a href="#ProfilesQuery-__delitem__">__delitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;del&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-__eq__"><strong>__eq__</strong></a>(...)</dt><dd><tt>x.<a href="#ProfilesQuery-__eq__">__eq__</a>(y)&nbsp;&lt;==&gt;&nbsp;x==y</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-__ge__"><strong>__ge__</strong></a>(...)</dt><dd><tt>x.<a href="#ProfilesQuery-__ge__">__ge__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&gt;=y</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#ProfilesQuery-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#ProfilesQuery-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-__gt__"><strong>__gt__</strong></a>(...)</dt><dd><tt>x.<a href="#ProfilesQuery-__gt__">__gt__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&gt;y</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-__iter__"><strong>__iter__</strong></a>(...)</dt><dd><tt>x.<a href="#ProfilesQuery-__iter__">__iter__</a>()&nbsp;&lt;==&gt;&nbsp;iter(x)</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-__le__"><strong>__le__</strong></a>(...)</dt><dd><tt>x.<a href="#ProfilesQuery-__le__">__le__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&lt;=y</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-__len__"><strong>__len__</strong></a>(...)</dt><dd><tt>x.<a href="#ProfilesQuery-__len__">__len__</a>()&nbsp;&lt;==&gt;&nbsp;len(x)</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-__lt__"><strong>__lt__</strong></a>(...)</dt><dd><tt>x.<a href="#ProfilesQuery-__lt__">__lt__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&lt;y</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-__ne__"><strong>__ne__</strong></a>(...)</dt><dd><tt>x.<a href="#ProfilesQuery-__ne__">__ne__</a>(y)&nbsp;&lt;==&gt;&nbsp;x!=y</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#ProfilesQuery-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-__setitem__"><strong>__setitem__</strong></a>(...)</dt><dd><tt>x.<a href="#ProfilesQuery-__setitem__">__setitem__</a>(i,&nbsp;y)&nbsp;&lt;==&gt;&nbsp;x[i]=y</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-__sizeof__"><strong>__sizeof__</strong></a>(...)</dt><dd><tt>D.<a href="#ProfilesQuery-__sizeof__">__sizeof__</a>()&nbsp;-&gt;&nbsp;size&nbsp;of&nbsp;D&nbsp;in&nbsp;memory,&nbsp;in&nbsp;bytes</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-clear"><strong>clear</strong></a>(...)</dt><dd><tt>D.<a href="#ProfilesQuery-clear">clear</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Remove&nbsp;all&nbsp;items&nbsp;from&nbsp;D.</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-copy"><strong>copy</strong></a>(...)</dt><dd><tt>D.<a href="#ProfilesQuery-copy">copy</a>()&nbsp;-&gt;&nbsp;a&nbsp;shallow&nbsp;copy&nbsp;of&nbsp;D</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-get"><strong>get</strong></a>(...)</dt><dd><tt>D.<a href="#ProfilesQuery-get">get</a>(k[,d])&nbsp;-&gt;&nbsp;D[k]&nbsp;if&nbsp;k&nbsp;in&nbsp;D,&nbsp;else&nbsp;d.&nbsp;&nbsp;d&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-has_key"><strong>has_key</strong></a>(...)</dt><dd><tt>D.<a href="#ProfilesQuery-has_key">has_key</a>(k)&nbsp;-&gt;&nbsp;True&nbsp;if&nbsp;D&nbsp;has&nbsp;a&nbsp;key&nbsp;k,&nbsp;else&nbsp;False</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-items"><strong>items</strong></a>(...)</dt><dd><tt>D.<a href="#ProfilesQuery-items">items</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;(key,&nbsp;value)&nbsp;pairs,&nbsp;as&nbsp;2-tuples</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-iteritems"><strong>iteritems</strong></a>(...)</dt><dd><tt>D.<a href="#ProfilesQuery-iteritems">iteritems</a>()&nbsp;-&gt;&nbsp;an&nbsp;iterator&nbsp;over&nbsp;the&nbsp;(key,&nbsp;value)&nbsp;items&nbsp;of&nbsp;D</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-iterkeys"><strong>iterkeys</strong></a>(...)</dt><dd><tt>D.<a href="#ProfilesQuery-iterkeys">iterkeys</a>()&nbsp;-&gt;&nbsp;an&nbsp;iterator&nbsp;over&nbsp;the&nbsp;keys&nbsp;of&nbsp;D</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-itervalues"><strong>itervalues</strong></a>(...)</dt><dd><tt>D.<a href="#ProfilesQuery-itervalues">itervalues</a>()&nbsp;-&gt;&nbsp;an&nbsp;iterator&nbsp;over&nbsp;the&nbsp;values&nbsp;of&nbsp;D</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-keys"><strong>keys</strong></a>(...)</dt><dd><tt>D.<a href="#ProfilesQuery-keys">keys</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;keys</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-pop"><strong>pop</strong></a>(...)</dt><dd><tt>D.<a href="#ProfilesQuery-pop">pop</a>(k[,d])&nbsp;-&gt;&nbsp;v,&nbsp;remove&nbsp;specified&nbsp;key&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;value<br>
+If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nbsp;given,&nbsp;otherwise&nbsp;KeyError&nbsp;is&nbsp;raised</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-popitem"><strong>popitem</strong></a>(...)</dt><dd><tt>D.<a href="#ProfilesQuery-popitem">popitem</a>()&nbsp;-&gt;&nbsp;(k,&nbsp;v),&nbsp;remove&nbsp;and&nbsp;return&nbsp;some&nbsp;(key,&nbsp;value)&nbsp;pair&nbsp;as&nbsp;a<br>
+2-tuple;&nbsp;but&nbsp;raise&nbsp;KeyError&nbsp;if&nbsp;D&nbsp;is&nbsp;empty</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-setdefault"><strong>setdefault</strong></a>(...)</dt><dd><tt>D.<a href="#ProfilesQuery-setdefault">setdefault</a>(k[,d])&nbsp;-&gt;&nbsp;D.<a href="#ProfilesQuery-get">get</a>(k,d),&nbsp;also&nbsp;set&nbsp;D[k]=d&nbsp;if&nbsp;k&nbsp;not&nbsp;in&nbsp;D</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#ProfilesQuery-update">update</a>(E,&nbsp;**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;E&nbsp;and&nbsp;F:&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
+(if&nbsp;E&nbsp;has&nbsp;keys&nbsp;else:&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v)&nbsp;then:&nbsp;for&nbsp;k&nbsp;in&nbsp;F:&nbsp;D[k]&nbsp;=&nbsp;F[k]</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-values"><strong>values</strong></a>(...)</dt><dd><tt>D.<a href="#ProfilesQuery-values">values</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
+<dl><dt><strong>__hash__</strong> = None</dl>
+
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x7569a0&gt;<dd><tt>T.<a href="#ProfilesQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xe05e90&gt;<dd><tt>dict.<a href="#ProfilesQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -1163,6 +1354,8 @@ Data descriptors inherited from <a href="exceptions.html#BaseException">exceptio
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><strong>DEFAULT_BATCH_URL</strong> = 'http://www.google.com/m8/feeds/contacts/default/full/batch'<br>
+<strong>DEFAULT_PROFILES_BATCH_URL</strong> = 'http://www.google.com/m8/feeds/profiles/default/full/batch'<br>
+<strong>GDATA_VER_HEADER</strong> = 'GData-Version'<br>
 <strong>__author__</strong> = 'dbrattli (Dag Brattli)'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#7799ee">
