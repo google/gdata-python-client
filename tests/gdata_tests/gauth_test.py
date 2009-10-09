@@ -51,7 +51,7 @@ class AuthSubTest(unittest.TestCase):
   def test_generate_request_url(self):
     url = gdata.gauth.generate_auth_sub_url('http://example.com', 
         ['http://example.net/scope1'])
-    self.assertTrue(isinstance(url, atom.http_core.Uri))
+    self.assert_(isinstance(url, atom.http_core.Uri))
     self.assertEqual(url.query['secure'], '0')
     self.assertEqual(url.query['session'], '1')
     self.assertEqual(url.query['scope'], 'http://example.net/scope1')
@@ -83,7 +83,7 @@ class AuthSubTest(unittest.TestCase):
   def test_create_and_upgrade_tokens(self):
     token = gdata.gauth.AuthSubToken.from_url(
         'http://example.com?token=123abc')
-    self.assertTrue(isinstance(token, gdata.gauth.AuthSubToken))
+    self.assert_(isinstance(token, gdata.gauth.AuthSubToken))
     self.assertEqual(token.token_string, '123abc')
     self.assertEqual(token.scopes, [])
     token._upgrade_token('Token=456def')
@@ -120,19 +120,19 @@ class TokensToAndFromBlobsTest(unittest.TestCase):
     token = gdata.gauth.ClientLoginToken('test|key')
     copy = gdata.gauth.token_from_blob(gdata.gauth.token_to_blob(token))
     self.assertEqual(token.token_string, copy.token_string)
-    self.assertTrue(isinstance(copy, gdata.gauth.ClientLoginToken))
+    self.assert_(isinstance(copy, gdata.gauth.ClientLoginToken))
 
   def test_authsub_conversion(self):
     token = gdata.gauth.AuthSubToken('test|key')
     copy = gdata.gauth.token_from_blob(gdata.gauth.token_to_blob(token))
     self.assertEqual(token.token_string, copy.token_string)
-    self.assertTrue(isinstance(copy, gdata.gauth.AuthSubToken))
+    self.assert_(isinstance(copy, gdata.gauth.AuthSubToken))
     
     scopes = ['http://example.com', 'http://other||test', 'thir|d']
     token = gdata.gauth.AuthSubToken('key-=', scopes)
     copy = gdata.gauth.token_from_blob(gdata.gauth.token_to_blob(token))
     self.assertEqual(token.token_string, copy.token_string)
-    self.assertTrue(isinstance(copy, gdata.gauth.AuthSubToken))
+    self.assert_(isinstance(copy, gdata.gauth.AuthSubToken))
     self.assertEqual(token.scopes, scopes)
 
   def test_join_and_split(self):
@@ -143,8 +143,8 @@ class TokensToAndFromBlobsTest(unittest.TestCase):
     self.assertEqual(token_type, '1x')
     self.assertEqual(a, 'test|string')
     self.assertEqual(b, '%x%')
-    self.assertTrue(c is None)
-    self.assertTrue(d is None)
+    self.assert_(c is None)
+    self.assert_(d is None)
 
   def test_secure_authsub_conversion(self):
     token = gdata.gauth.SecureAuthSubToken(
@@ -186,8 +186,8 @@ class TokensToAndFromBlobsTest(unittest.TestCase):
     self.assertEqual(
         blob, '1s|||http%3A%2F%2Fexample.net|http%3A%2F%2Fgoogle.com')
     copy = gdata.gauth.token_from_blob(blob)
-    self.assertTrue(copy.token_string is None)
-    self.assertTrue(copy.rsa_private_key is None)
+    self.assert_(copy.token_string is None)
+    self.assert_(copy.rsa_private_key is None)
     self.assertEqual(copy.scopes, ['http://example.net', 'http://google.com'])
 
   def test_oauth_rsa_conversion(self):
@@ -200,7 +200,7 @@ class TokensToAndFromBlobsTest(unittest.TestCase):
         blob, '1r|consumerKey|myRsa|t|secret|2|http%3A%2F%2Fexample.com'
             '%2Fnext|verifier')
     copy = gdata.gauth.token_from_blob(blob)
-    self.assertTrue(isinstance(copy, gdata.gauth.OAuthRsaToken))
+    self.assert_(isinstance(copy, gdata.gauth.OAuthRsaToken))
     self.assertEqual(copy.consumer_key, token.consumer_key)
     self.assertEqual(copy.rsa_private_key, token.rsa_private_key)
     self.assertEqual(copy.token, token.token)
@@ -214,17 +214,17 @@ class TokensToAndFromBlobsTest(unittest.TestCase):
     blob = gdata.gauth.token_to_blob(token)
     self.assertEqual(blob, '1r||myRsa|t|secret|0||')
     copy = gdata.gauth.token_from_blob(blob)
-    self.assertTrue(isinstance(copy, gdata.gauth.OAuthRsaToken))
-    self.assertFalse(copy.consumer_key == token.consumer_key)
-    self.assertTrue(copy.consumer_key is None)
+    self.assert_(isinstance(copy, gdata.gauth.OAuthRsaToken))
+    self.assert_(copy.consumer_key != token.consumer_key)
+    self.assert_(copy.consumer_key is None)
     self.assertEqual(copy.rsa_private_key, token.rsa_private_key)
     self.assertEqual(copy.token, token.token)
     self.assertEqual(copy.token_secret, token.token_secret)
     self.assertEqual(copy.auth_state, token.auth_state)
     self.assertEqual(copy.next, token.next)
-    self.assertTrue(copy.next is None)
+    self.assert_(copy.next is None)
     self.assertEqual(copy.verifier, token.verifier)
-    self.assertTrue(copy.verifier is None)
+    self.assert_(copy.verifier is None)
 
     token = gdata.gauth.OAuthRsaToken(
         rsa_private_key='myRsa', token='t', token_secret='secret',
@@ -233,13 +233,13 @@ class TokensToAndFromBlobsTest(unittest.TestCase):
     self.assertEqual(blob, '1r||myRsa|t|secret|3||v')
     copy = gdata.gauth.token_from_blob(blob)
     self.assertEqual(copy.consumer_key, token.consumer_key)
-    self.assertTrue(copy.consumer_key is None)
+    self.assert_(copy.consumer_key is None)
     self.assertEqual(copy.rsa_private_key, token.rsa_private_key)
     self.assertEqual(copy.token, token.token)
     self.assertEqual(copy.token_secret, token.token_secret)
     self.assertEqual(copy.auth_state, token.auth_state)
     self.assertEqual(copy.next, token.next)
-    self.assertTrue(copy.next is None)
+    self.assert_(copy.next is None)
     self.assertEqual(copy.verifier, token.verifier)
 
   def test_oauth_hmac_conversion(self):
@@ -251,7 +251,7 @@ class TokensToAndFromBlobsTest(unittest.TestCase):
         blob, '1h|consumerKey|consumerSecret|t|secret|1|http%3A%2F%2F'
             'example.com%2Fnext|verifier')
     copy = gdata.gauth.token_from_blob(blob)
-    self.assertTrue(isinstance(copy, gdata.gauth.OAuthHmacToken))
+    self.assert_(isinstance(copy, gdata.gauth.OAuthHmacToken))
     self.assertEqual(copy.consumer_key, token.consumer_key)
     self.assertEqual(copy.consumer_secret, token.consumer_secret)
     self.assertEqual(copy.token, token.token)
@@ -266,15 +266,15 @@ class TokensToAndFromBlobsTest(unittest.TestCase):
     blob = gdata.gauth.token_to_blob(token)
     self.assertEqual(blob, '1h||c%2Cs|t|secret|7||v')
     copy = gdata.gauth.token_from_blob(blob)
-    self.assertTrue(isinstance(copy, gdata.gauth.OAuthHmacToken))
+    self.assert_(isinstance(copy, gdata.gauth.OAuthHmacToken))
     self.assertEqual(copy.consumer_key, token.consumer_key)
-    self.assertTrue(copy.consumer_key is None)
+    self.assert_(copy.consumer_key is None)
     self.assertEqual(copy.consumer_secret, token.consumer_secret)
     self.assertEqual(copy.token, token.token)
     self.assertEqual(copy.token_secret, token.token_secret)
     self.assertEqual(copy.auth_state, token.auth_state)
     self.assertEqual(copy.next, token.next)
-    self.assertTrue(copy.next is None)
+    self.assert_(copy.next is None)
     self.assertEqual(copy.verifier, token.verifier)
 
   def test_illegal_token_types(self):
@@ -438,21 +438,21 @@ class OAuthHeaderTest(unittest.TestCase):
   def test_generate_auth_header(self):
     header = gdata.gauth.generate_auth_header(
         'consumerkey', 1234567890, 'mynonce', 'unknown_sig_type', 'sig')
-    self.assertTrue(header.startswith('OAuth'))
-    self.assertTrue(header.find('oauth_nonce="mynonce"') > -1)
-    self.assertTrue(header.find('oauth_timestamp="1234567890"') > -1)
-    self.assertTrue(header.find('oauth_consumer_key="consumerkey"') > -1)
-    self.assertTrue(
+    self.assert_(header.startswith('OAuth'))
+    self.assert_(header.find('oauth_nonce="mynonce"') > -1)
+    self.assert_(header.find('oauth_timestamp="1234567890"') > -1)
+    self.assert_(header.find('oauth_consumer_key="consumerkey"') > -1)
+    self.assert_(
         header.find('oauth_signature_method="unknown_sig_type"') > -1)
-    self.assertTrue(header.find('oauth_version="1.0"') > -1)
-    self.assertTrue(header.find('oauth_signature="sig"') > -1)
+    self.assert_(header.find('oauth_version="1.0"') > -1)
+    self.assert_(header.find('oauth_signature="sig"') > -1)
 
     header = gdata.gauth.generate_auth_header(
         'consumer/key', 1234567890, 'ab%&33', '', 'ab/+-_=')
-    self.assertTrue(header.find('oauth_nonce="ab%25%2633"') > -1)
-    self.assertTrue(header.find('oauth_consumer_key="consumer%2Fkey"') > -1)
-    self.assertTrue(header.find('oauth_signature_method=""') > -1)
-    self.assertTrue(header.find('oauth_signature="ab%2F%2B-_%3D"') > -1)
+    self.assert_(header.find('oauth_nonce="ab%25%2633"') > -1)
+    self.assert_(header.find('oauth_consumer_key="consumer%2Fkey"') > -1)
+    self.assert_(header.find('oauth_signature_method=""') > -1)
+    self.assert_(header.find('oauth_signature="ab%2F%2B-_%3D"') > -1)
 
 
 class OAuthGetRequestToken(unittest.TestCase):
@@ -464,16 +464,16 @@ class OAuthGetRequestToken(unittest.TestCase):
          'http://www.google.com/calendar/feeds/'], 
         consumer_secret='anonymous')
     request_uri = str(request.uri)
-    self.assertTrue('http%3A%2F%2Fwww.blogger.com%2Ffeeds%2F' in request_uri)
-    self.assertTrue(
+    self.assert_('http%3A%2F%2Fwww.blogger.com%2Ffeeds%2F' in request_uri)
+    self.assert_(
         'http%3A%2F%2Fwww.google.com%2Fcalendar%2Ffeeds%2F' in request_uri)
     auth_header = request.headers['Authorization']
-    self.assertTrue('oauth_consumer_key="anonymous"' in auth_header)
-    self.assertTrue('oauth_signature_method="HMAC-SHA1"' in auth_header)
-    self.assertTrue('oauth_version="1.0"' in auth_header)
-    self.assertTrue('oauth_signature="' in auth_header)
-    self.assertTrue('oauth_nonce="' in auth_header)
-    self.assertTrue('oauth_timestamp="' in auth_header)
+    self.assert_('oauth_consumer_key="anonymous"' in auth_header)
+    self.assert_('oauth_signature_method="HMAC-SHA1"' in auth_header)
+    self.assert_('oauth_version="1.0"' in auth_header)
+    self.assert_('oauth_signature="' in auth_header)
+    self.assert_('oauth_nonce="' in auth_header)
+    self.assert_('oauth_timestamp="' in auth_header)
 
   def test_request_rsa_request_token(self):
     request = gdata.gauth.generate_request_for_request_token(
@@ -482,16 +482,16 @@ class OAuthGetRequestToken(unittest.TestCase):
          'http://www.google.com/calendar/feeds/'], 
         rsa_key=PRIVATE_TEST_KEY)
     request_uri = str(request.uri)
-    self.assertTrue('http%3A%2F%2Fwww.blogger.com%2Ffeeds%2F' in request_uri)
-    self.assertTrue(
+    self.assert_('http%3A%2F%2Fwww.blogger.com%2Ffeeds%2F' in request_uri)
+    self.assert_(
         'http%3A%2F%2Fwww.google.com%2Fcalendar%2Ffeeds%2F' in request_uri)
     auth_header = request.headers['Authorization']
-    self.assertTrue('oauth_consumer_key="anonymous"' in auth_header)
-    self.assertTrue('oauth_signature_method="RSA-SHA1"' in auth_header)
-    self.assertTrue('oauth_version="1.0"' in auth_header)
-    self.assertTrue('oauth_signature="' in auth_header)
-    self.assertTrue('oauth_nonce="' in auth_header)
-    self.assertTrue('oauth_timestamp="' in auth_header)
+    self.assert_('oauth_consumer_key="anonymous"' in auth_header)
+    self.assert_('oauth_signature_method="RSA-SHA1"' in auth_header)
+    self.assert_('oauth_version="1.0"' in auth_header)
+    self.assert_('oauth_signature="' in auth_header)
+    self.assert_('oauth_nonce="' in auth_header)
+    self.assert_('oauth_timestamp="' in auth_header)
 
   def test_extract_token_from_body(self):
     body = ('oauth_token=4%2F5bNFM_efIu3yN-E9RrF1KfZzOAZG&oauth_token_secret='
@@ -527,9 +527,9 @@ class OAuthAuthorizeToken(unittest.TestCase):
 
   def test_generate_authorization_url(self):
     url = gdata.gauth.generate_oauth_authorization_url('/+=aosdpikk')
-    self.assertTrue(str(url).startswith(
+    self.assert_(str(url).startswith(
         'https://www.google.com/accounts/OAuthAuthorizeToken'))
-    self.assertTrue('oauth_token=%2F%2B%3Daosdpikk' in str(url))
+    self.assert_('oauth_token=%2F%2B%3Daosdpikk' in str(url))
 
   def test_extract_auth_token(self):
     url = ('http://www.example.com/test?oauth_token='

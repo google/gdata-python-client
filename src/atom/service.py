@@ -78,7 +78,7 @@ class AtomService(object):
 
   override_token = property(_get_override_token, _set_override_token)
 
-  @atom.v1_deprecated('Please use atom.client.AtomPubClient instead.')
+  #@atom.v1_deprecated('Please use atom.client.AtomPubClient instead.')
   def __init__(self, server=None, additional_headers=None, 
       application_name='', http_client=None, token_store=None):
     """Creates a new AtomService client.
@@ -105,6 +105,10 @@ class AtomService(object):
         application_name,)
     # If debug is True, the HTTPConnection will display debug information
     self._set_debug(False)
+
+  __init__ = atom.v1_deprecated(
+      'Please use atom.client.AtomPubClient instead.')(
+          __init__)
 
   def _get_debug(self):
     return self.http_client.debug
@@ -144,7 +148,7 @@ class AtomService(object):
     """
     self.use_basic_auth(username, password)
 
-  @atom.v1_deprecated('Please use atom.client.AtomPubClient for requests.')
+  #@atom.v1_deprecated('Please use atom.client.AtomPubClient for requests.')
   def request(self, operation, url, data=None, headers=None, 
       url_params=None):
     if isinstance(url, (str, unicode)):
@@ -180,6 +184,10 @@ class AtomService(object):
       auth_token = self.token_store.find_token(url)
     return auth_token.perform_request(self.http_client, operation, url, 
         data=data, headers=all_headers)
+
+  request = atom.v1_deprecated(
+      'Please use atom.client.AtomPubClient for requests.')(
+          request)
 
   # CRUD operations
   def Get(self, uri, extra_headers=None, url_params=None, escape_params=True):

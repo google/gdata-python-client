@@ -399,7 +399,7 @@ class DeleteWithUrlParamsTest(unittest.TestCase):
         atom.mock_http_core.SettableHttpClient(200, 'OK', '', {}))
     
   def testDeleteWithUrlParams(self):
-    self.assertTrue(self.gd_client.Delete('http://example.com/test', 
+    self.assert_(self.gd_client.Delete('http://example.com/test', 
         {'TestHeader': '123'}, {'urlParam1': 'a', 'urlParam2': 'test'}))
     request = self.gd_client.http_client.v2_http_client.last_request
     self.assertEqual(request.uri.host, 'example.com')
@@ -409,7 +409,7 @@ class DeleteWithUrlParamsTest(unittest.TestCase):
 
   def testDeleteWithSessionId(self):
     self.gd_client._SetSessionId('test_session_id')
-    self.assertTrue(self.gd_client.Delete('http://example.com/test', 
+    self.assert_(self.gd_client.Delete('http://example.com/test', 
         {'TestHeader': '123'}, {'urlParam1': 'a', 'urlParam2': 'test'}))
     request = self.gd_client.http_client.v2_http_client.last_request
     self.assertEqual(request.uri.host, 'example.com')

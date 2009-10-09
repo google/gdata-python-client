@@ -93,12 +93,15 @@ def v1_deprecated(warning=None):
       return f(*args, **kwargs)
     # Preserve the original name to avoid masking all decorated functions as
     # 'deprecated_function'
-    optional_warn_function.func_name = f.func_name
+    try:
+      optional_warn_function.func_name = f.func_name
+    except TypeError:
+      pass # In Python2.3 we can't set the func_name
     return optional_warn_function
   return mark_deprecated
 
 
-@v1_deprecated('Please use atom.core.parse with atom.data classes instead.')
+#@v1_deprecated('Please use atom.core.parse with atom.data classes instead.')
 def CreateClassFromXMLString(target_class, xml_string, string_encoding=None):
   """Creates an instance of the target class from the string contents.
   
@@ -124,6 +127,11 @@ def CreateClassFromXMLString(target_class, xml_string, string_encoding=None):
     xml_string = xml_string.encode(encoding)
   tree = ElementTree.fromstring(xml_string)
   return _CreateClassFromElementTree(target_class, tree)
+
+
+CreateClassFromXMLString = v1_deprecated(
+    'Please use atom.core.parse with atom.data classes instead.')(
+        CreateClassFromXMLString)
 
 
 def _CreateClassFromElementTree(target_class, tree, namespace=None, tag=None):
@@ -162,12 +170,16 @@ def _CreateClassFromElementTree(target_class, tree, namespace=None, tag=None):
 
 class ExtensionContainer(object):
  
-  @v1_deprecated('Please use data model classes in atom.data instead.')
+  #@v1_deprecated('Please use data model classes in atom.data instead.')
   def __init__(self, extension_elements=None, extension_attributes=None,
       text=None):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
     self.text = text
+
+  __init__ = v1_deprecated(
+      'Please use data model classes in atom.data instead.')(
+          __init__)
  
   # Three methods to create an object from an ElementTree
   def _HarvestElementTree(self, tree):
@@ -257,12 +269,16 @@ class AtomBase(ExtensionContainer):
   _children = {}
   _attributes = {}
 
-  @v1_deprecated('Please use data model classes in atom.data instead.')
+  #@v1_deprecated('Please use data model classes in atom.data instead.')
   def __init__(self, extension_elements=None, extension_attributes=None,
       text=None):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
     self.text = text
+
+  __init__ = v1_deprecated(
+      'Please use data model classes in atom.data instead.')(
+          __init__)
       
   def _ConvertElementTreeToMember(self, child_tree):
     # Find the element's tag in this class's list of child members
@@ -1208,7 +1224,7 @@ class Entry(FeedEntryParent):
   _children['{%s}summary' % ATOM_NAMESPACE] = ('summary', Summary)
   _children['{%s}control' % APP_NAMESPACE] = ('control', Control)
 
-  @v1_deprecated('Please use atom.data.Entry instead.')
+  #@v1_deprecated('Please use atom.data.Entry instead.')
   def __init__(self, author=None, category=None, content=None, 
       contributor=None, atom_id=None, link=None, published=None, rights=None,
       source=None, summary=None, control=None, title=None, updated=None,
@@ -1255,6 +1271,8 @@ class Entry(FeedEntryParent):
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
+  __init__ = v1_deprecated('Please use atom.data.Entry instead.')(__init__)
+
 
 def EntryFromString(xml_string):
   return CreateClassFromXMLString(Entry, xml_string)
@@ -1269,7 +1287,7 @@ class Feed(Source):
   _attributes = Source._attributes.copy()
   _children['{%s}entry' % ATOM_NAMESPACE] = ('entry', [Entry])
 
-  @v1_deprecated('Please use atom.data.Feed instead.')
+  #@v1_deprecated('Please use atom.data.Feed instead.')
   def __init__(self, author=None, category=None, contributor=None,
       generator=None, icon=None, atom_id=None, link=None, logo=None, 
       rights=None, subtitle=None, title=None, updated=None, entry=None, 
@@ -1317,6 +1335,8 @@ class Feed(Source):
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
+
+  __init__ = v1_deprecated('Please use atom.data.Feed instead.')(__init__)
 
 
 def FeedFromString(xml_string):
@@ -1460,6 +1480,9 @@ def deprecated(warning=None):
       return f(*args, **kwargs)
     # Preserve the original name to avoid masking all decorated functions as
     # 'deprecated_function'
-    deprecated_function.func_name = f.func_name
+    try:
+      deprecated_function.func_name = f.func_name
+    except TypeError:
+      pass # Setting the func_name is not allowed in Python2.3.
     return deprecated_function
   return mark_deprecated

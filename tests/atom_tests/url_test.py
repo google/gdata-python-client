@@ -28,7 +28,7 @@ class UrlTest(unittest.TestCase):
   def testParseUrl(self):
     url = atom.url.parse_url('http://www.google.com/calendar/feeds')
     self.assert_(url.protocol == 'http')
-    self.assertTrue(url.port is None)
+    self.assert_(url.port is None)
     self.assert_(url.host == 'www.google.com')
     self.assert_(url.path == '/calendar/feeds')
     self.assert_(url.params == {})

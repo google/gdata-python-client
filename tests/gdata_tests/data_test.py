@@ -110,15 +110,15 @@ class GDataEntryTest(unittest.TestCase):
   def testIdShouldBeCleaned(self):
     entry = parse(XML_ENTRY_1, gdata.data.GDEntry)
     tree = parse(XML_ENTRY_1, atom.core.XmlElement)
-    self.assertFalse(tree.get_elements('id', 
-        'http://www.w3.org/2005/Atom' == entry.id.text))
+    self.assert_(tree.get_elements('id', 
+        'http://www.w3.org/2005/Atom' != entry.id.text))
     self.assertEqual(entry.get_id(), 'http://www.google.com/test/id/url')
 
   def testGeneratorShouldBeCleaned(self):
     feed = parse(test_data.GBASE_FEED, gdata.data.GDFeed)
     tree = parse(test_data.GBASE_FEED, atom.core.XmlElement)
-    self.assertFalse(tree.get_elements('generator', 
-        'http://www.w3.org/2005/Atom')[0].text == feed.get_generator())
+    self.assert_(tree.get_elements('generator', 
+        'http://www.w3.org/2005/Atom')[0].text != feed.get_generator())
     self.assertEqual(feed.get_generator(), 'GoogleBase')
 
   def testAllowsEmptyId(self):
@@ -140,7 +140,7 @@ class LinkFinderTest(unittest.TestCase):
         'http://creativecommons.org/licenses/by-nc/2.5/rdf')
 
   def testLinkFinderGetsAlternateLink(self):
-    self.assertTrue(isinstance(self.entry.FindAlternateLink(), str))
+    self.assert_(isinstance(self.entry.FindAlternateLink(), str))
     self.assertEquals(self.entry.FindAlternateLink(),
         'http://www.provider-host.com/123456789')
 
@@ -150,9 +150,9 @@ class GDataFeedTest(unittest.TestCase):
   def testCorrectConversionToElementTree(self):
     test_feed = parse(test_data.GBASE_FEED, gdata.data.GDFeed)
     self.assert_(test_feed.total_results is not None)
-    self.assertTrue(test_feed.get_elements('totalResults', 
+    self.assert_(test_feed.get_elements('totalResults', 
         'http://a9.com/-/spec/opensearchrss/1.0/') is not None)
-    self.assertTrue(len(test_feed.get_elements('totalResults',
+    self.assert_(len(test_feed.get_elements('totalResults',
         'http://a9.com/-/spec/opensearchrss/1.0/')) > 0)
 
   def testAllowsEmptyId(self):
@@ -395,7 +395,7 @@ class FeedLinkTest(unittest.TestCase):
     link = parse(
         '<feedLink xmlns="http://schemas.google.com/g/2005" countHint="5"/>',
         gdata.data.FeedLink)
-    self.assertTrue(isinstance(link, gdata.data.FeedLink))
+    self.assert_(isinstance(link, gdata.data.FeedLink))
     self.assertEqual(link.count_hint, '5')
 
 
@@ -409,7 +409,7 @@ class SimpleV2FeedTest(unittest.TestCase):
                      'Elizabeth Bennet\'s Contacts')
     self.assertEqual(len(feed.entry), 2)
     for entry in feed.entry:
-      self.assertTrue(isinstance(entry, gdata.data.GDEntry))
+      self.assert_(isinstance(entry, gdata.data.GDEntry))
     self.assertEqual(feed.entry[0].GetElements('title')[0].text,
                      'Fitzwilliam')
     self.assertEqual(feed.entry[0].get_elements('id')[0].text,
@@ -431,15 +431,15 @@ class SimpleV2FeedTest(unittest.TestCase):
 
   def test_constructor_defauls(self):
     feed = gdata.data.GDFeed()
-    self.assertTrue(feed.etag is None)
+    self.assert_(feed.etag is None)
     self.assertEqual(feed.link, [])
     self.assertEqual(feed.entry, [])
     entry = gdata.data.GDEntry()
-    self.assertTrue(entry.etag is None)
+    self.assert_(entry.etag is None)
     self.assertEqual(entry.link, [])
     link = atom.data.Link()
-    self.assertTrue(link.href is None)
-    self.assertTrue(link.rel is None)
+    self.assert_(link.href is None)
+    self.assert_(link.rel is None)
     link1 = atom.data.Link(href='http://example.com', rel='test')
     self.assertEqual(link1.href, 'http://example.com')
     self.assertEqual(link1.rel, 'test')

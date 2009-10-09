@@ -55,14 +55,14 @@ class SpreadsheetsClientTest(unittest.TestCase):
 
     spreadsheet_id = conf.options.get_value('spreadsheetid')
     original_worksheets = self.client.get_worksheets(spreadsheet_id)
-    self.assertTrue(isinstance(original_worksheets,
+    self.assert_(isinstance(original_worksheets,
                                gdata.spreadsheets.data.WorksheetsFeed))
     worksheet_count = int(original_worksheets.total_results.text)
 
     # Add a new worksheet to the spreadsheet.
     created = self.client.add_worksheet(
         spreadsheet_id, 'a test worksheet', 4, 8)
-    self.assertTrue(isinstance(created,
+    self.assert_(isinstance(created,
                                gdata.spreadsheets.data.WorksheetEntry))
     self.assertEqual(created.title.text, 'a test worksheet')
     self.assertEqual(created.row_count.text, '4')
@@ -93,7 +93,7 @@ class SpreadsheetsClientTest(unittest.TestCase):
     test_worksheet = self.client.add_worksheet(
         spreadsheet_id, 'worksheet x', rows=30, cols=3)
 
-    self.assertTrue(isinstance(tables, gdata.spreadsheets.data.TablesFeed))
+    self.assert_(isinstance(tables, gdata.spreadsheets.data.TablesFeed))
     initial_count = tables.total_results.text
 
     created_table = self.client.add_table(
@@ -112,10 +112,10 @@ class SpreadsheetsClientTest(unittest.TestCase):
     table_num = int(created_table.get_table_id())
     starting_records = self.client.get_records(spreadsheet_id, table_num)
     self.assertEqual(starting_records.total_results.text, '10')
-    self.assertTrue(starting_records.entry[0].field[0].text is None)
-    self.assertTrue(starting_records.entry[0].field[1].text is None)
-    self.assertTrue(starting_records.entry[1].field[0].text is None)
-    self.assertTrue(starting_records.entry[1].field[1].text is None)
+    self.assert_(starting_records.entry[0].field[0].text is None)
+    self.assert_(starting_records.entry[0].field[1].text is None)
+    self.assert_(starting_records.entry[1].field[0].text is None)
+    self.assert_(starting_records.entry[1].field[1].text is None)
 
     record1 = self.client.add_record(
         spreadsheet_id, table_num,
@@ -130,14 +130,14 @@ class SpreadsheetsClientTest(unittest.TestCase):
     self.assertEqual(updated_records.entry[10].value_for_index('A'), '2.99')
     self.assertEqual(updated_records.entry[10].value_for_name('Drink'),
                      'Soda')
-    self.assertTrue(updated_records.entry[11].value_for_name('Price') is None)
+    self.assert_(updated_records.entry[11].value_for_name('Price') is None)
     self.assertEqual(updated_records.entry[11].value_for_name('Drink'),
                      'Milk')
     self.assertEqual(updated_records.entry[12].value_for_name('Drink'),
                      'Water')
-    self.assertTrue(updated_records.entry[1].value_for_index('A') is None)
-    self.assertTrue(updated_records.entry[2].value_for_index('B') is None)
-    self.assertTrue(updated_records.entry[3].value_for_index('C') is None)
+    self.assert_(updated_records.entry[1].value_for_index('A') is None)
+    self.assert_(updated_records.entry[2].value_for_index('B') is None)
+    self.assert_(updated_records.entry[3].value_for_index('C') is None)
 
     # Cleanup the table.
     self.client.delete(created_table)

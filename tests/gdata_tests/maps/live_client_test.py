@@ -58,14 +58,14 @@ class MapsClientTest(unittest.TestCase):
 
     self.assertEqual(created.title.text, 'A test map')
     self.assertEqual(created.summary.text, 'This map is just a little test.')
-    self.assertTrue(created.control is None)
+    self.assert_(created.control is None)
 
     # Change the title of the map we just added.
     created.title.text = 'Edited'
     updated = self.client.update(created)
 
     self.assertEqual(updated.title.text, 'Edited')
-    self.assertTrue(isinstance(updated, gdata.maps.data.Map))
+    self.assert_(isinstance(updated, gdata.maps.data.Map))
     self.assertEqual(updated.content.text, created.content.text)
 
     # Delete the test map.
@@ -83,8 +83,8 @@ class MapsClientTest(unittest.TestCase):
 
     self.assertEqual(created.title.text, 'An unlisted test map')
     self.assertEqual(created.summary.text, 'This should be unlisted.')
-    self.assertTrue(created.control is not None)
-    self.assertTrue(created.control.draft is not None)
+    self.assert_(created.control is not None)
+    self.assert_(created.control.draft is not None)
     self.assertEqual(created.control.draft.text, 'yes')
     
     # Make the map public. 

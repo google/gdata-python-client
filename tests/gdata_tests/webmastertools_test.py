@@ -158,7 +158,7 @@ class VerificationMethodTest(unittest.TestCase):
     method = webmastertools.VerificationMethod(type='xyz')
     self.assertEqual(method.type, 'xyz')
     method = webmastertools.VerificationMethod()
-    self.assertTrue(method.type is None)
+    self.assert_(method.type is None)
 
   def testHtmlPageToAndFromString(self):
     self.method = webmastertools.VerificationMethod()

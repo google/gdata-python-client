@@ -56,9 +56,9 @@ class AuthorTest(unittest.TestCase):
     self.author = atom.data.Author()
     
   def testEmptyAuthorShouldHaveEmptyExtensionLists(self):
-    self.assertTrue(isinstance(self.author._other_elements, list))
+    self.assert_(isinstance(self.author._other_elements, list))
     self.assertEqual(len(self.author._other_elements), 0)
-    self.assertTrue(isinstance(self.author._other_attributes, dict))
+    self.assert_(isinstance(self.author._other_attributes, dict))
     self.assertEqual(len(self.author._other_attributes), 0)
     
   def testNormalAuthorShouldHaveNoExtensionElements(self):
@@ -143,7 +143,7 @@ class NameTest(unittest.TestCase):
     self.assertEqual(string_from_name, string_from_new_name)
     
   def testText(self):
-    self.assertTrue(self.name.text is None)
+    self.assert_(self.name.text is None)
     self.name.text = 'Jeff Scudder'
     self.assertEqual(self.name.text, 'Jeff Scudder')
     new_name = atom.core.parse(self.name.to_string(), atom.data.Name)
@@ -502,11 +502,11 @@ class ControlTest(unittest.TestCase):
         <draft>no</draft></control>"""
     control_v1 = atom.core.parse(xml_v1, atom.data.Control, 1)
     control_v2 = atom.core.parse(xml_v2, atom.data.Control, 2)
-    self.assertFalse(control_v1 is None)
-    self.assertFalse(control_v2 is None)
+    self.assert_(control_v1 is not None)
+    self.assert_(control_v2 is not None)
     # Parsing with mismatched version numbers should return None.
-    self.assertTrue(atom.core.parse(xml_v1, atom.data.Control, 2) is None)
-    self.assertTrue(atom.core.parse(xml_v2, atom.data.Control, 1) is None)
+    self.assert_(atom.core.parse(xml_v1, atom.data.Control, 2) is None)
+    self.assert_(atom.core.parse(xml_v2, atom.data.Control, 1) is None)
 
   def testConvertToAndFromString(self):
     control = atom.data.Control()
@@ -514,11 +514,11 @@ class ControlTest(unittest.TestCase):
     control.draft = atom.data.Draft(text='yes')
     self.assertEquals(control.draft.text, 'yes')
     self.assertEquals(control.text, 'some text')
-    self.assertTrue(isinstance(control.draft, atom.data.Draft))
+    self.assert_(isinstance(control.draft, atom.data.Draft))
     new_control = atom.core.parse(str(control), atom.data.Control)
     self.assertEquals(control.draft.text, new_control.draft.text)
     self.assertEquals(control.text, new_control.text)
-    self.assertTrue(isinstance(new_control.draft, atom.data.Draft))
+    self.assert_(isinstance(new_control.draft, atom.data.Draft))
 
 
 class DraftTest(unittest.TestCase):
@@ -633,7 +633,7 @@ class ContentEntryParentTest(unittest.TestCase):
   def testContentFromString(self):
     content_xml = '<content xmlns="http://www.w3.org/2005/Atom" type="test"/>'
     content = atom.core.parse(content_xml, atom.data.Content)
-    self.assertTrue(isinstance(content, atom.data.Content))
+    self.assert_(isinstance(content, atom.data.Content))
     self.assertEqual(content.type, 'test')
 
 
@@ -719,8 +719,8 @@ class LinkFinderTest(unittest.TestCase):
     self.entry = atom.core.parse(XML_ENTRY_1, atom.data.Entry)
 
   def testLinkFinderGetsLicenseLink(self):
-    self.assertTrue(isinstance(self.entry.GetLink('license'), atom.data.Link))
-    self.assertTrue(isinstance(self.entry.GetLicenseLink(), atom.data.Link))
+    self.assert_(isinstance(self.entry.GetLink('license'), atom.data.Link))
+    self.assert_(isinstance(self.entry.GetLicenseLink(), atom.data.Link))
     self.assertEquals(self.entry.GetLink('license').href,
                       'http://creativecommons.org/licenses/by-nc/2.5/rdf')
     self.assertEquals(self.entry.get_license_link().href,
@@ -730,7 +730,7 @@ class LinkFinderTest(unittest.TestCase):
                       'http://creativecommons.org/licenses/by-nc/2.5/rdf')
 
   def testLinkFinderGetsAlternateLink(self):
-    self.assertTrue(isinstance(self.entry.GetLink('alternate'),
+    self.assert_(isinstance(self.entry.GetLink('alternate'),
                     atom.data.Link))
     self.assertEquals(self.entry.GetLink('alternate').href,
                       'http://www.provider-host.com/123456789')
@@ -772,7 +772,7 @@ class UtfParsingTest(unittest.TestCase):
 
   def testMemberStringEncoding(self):
     atom_entry = atom.core.parse(self.test_xml, atom.data.Entry)
-    self.assertTrue(isinstance(atom_entry.title.type, unicode))
+    self.assert_(isinstance(atom_entry.title.type, unicode))
     self.assertEqual(atom_entry.title.type, u'\u03B1\u03BB\u03C6\u03B1')
     self.assertEqual(atom_entry.title.text, u'\u03B1\u03BB\u03C6\u03B1')
 
@@ -780,7 +780,7 @@ class UtfParsingTest(unittest.TestCase):
     atom_entry.title.type = u'\u03B1\u03BB\u03C6\u03B1'
     xml = atom_entry.ToString()
     # The unicode code points should be converted to XML escaped sequences.
-    self.assertTrue('&#945;&#955;&#966;&#945;' in xml)
+    self.assert_('&#945;&#955;&#966;&#945;' in xml)
 
     # Make sure that we can use plain text when MEMBER_STRING_ENCODING is utf8
     atom_entry.title.type = "plain text"
@@ -857,7 +857,7 @@ class VersionedXmlTest(unittest.TestCase):
 
   def test_monoversioned_parent_with_multiversioned_child(self):
     v2_rules = atom.data.Entry._get_rules(2)
-    self.assertTrue('{http://www.w3.org/2007/app}control' in v2_rules[1])
+    self.assert_('{http://www.w3.org/2007/app}control' in v2_rules[1])
 
     entry_xml = """<entry xmlns='http://www.w3.org/2005/Atom'>
                      <app:control xmlns:app='http://www.w3.org/2007/app'>
@@ -866,20 +866,20 @@ class VersionedXmlTest(unittest.TestCase):
                    </entry>"""
 
     entry = e = atom.core.parse(entry_xml, atom.data.Entry, version=2)
-    self.assertTrue(entry is not None)
-    self.assertTrue(entry.control is not None)
-    self.assertTrue(entry.control.draft is not None)
+    self.assert_(entry is not None)
+    self.assert_(entry.control is not None)
+    self.assert_(entry.control.draft is not None)
     self.assertEqual(entry.control.draft.text, 'yes')
 
     # v1 rules should not parse v2 XML.
     entry = e = atom.core.parse(entry_xml, atom.data.Entry, version=1)
-    self.assertTrue(entry is not None)
-    self.assertTrue(entry.control is None)
+    self.assert_(entry is not None)
+    self.assert_(entry.control is None)
     
     # The default version should be v1.
     entry = e = atom.core.parse(entry_xml, atom.data.Entry)
-    self.assertTrue(entry is not None)
-    self.assertTrue(entry.control is None)
+    self.assert_(entry is not None)
+    self.assert_(entry.control is None)
 
 
 class DataModelSanityTest(unittest.TestCase):

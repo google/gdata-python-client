@@ -350,7 +350,7 @@ class FeedLinkTest(unittest.TestCase):
   def testCorrectFromStringType(self):
     link = gdata.FeedLinkFromString(
         '<feedLink xmlns="http://schemas.google.com/g/2005" countHint="5"/>')
-    self.assertTrue(isinstance(link, gdata.FeedLink))
+    self.assert_(isinstance(link, gdata.FeedLink))
     self.assertEqual(link.count_hint, '5')
 
 

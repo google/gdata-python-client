@@ -686,9 +686,10 @@ class DeprecationDecoratorTest(unittest.TestCase):
     # After decorating a function as deprecated, the function name should
     # still be the name of the original function.
     self.assertEqual(deprecated.func_name, 'to_deprecate')
-    @atom.deprecated()
+    #@atom.deprecated()
     def also_deprecated():
       return 6
+    also_deprecated = atom.deprecated()(also_deprecated)
     self.assertEqual(also_deprecated.func_name, 'also_deprecated')
 
 

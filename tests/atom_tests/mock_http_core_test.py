@@ -137,22 +137,22 @@ class MockHttpClientTest(unittest.TestCase):
   def test_match_request(self):
     x = atom.http_core.HttpRequest('http://example.com/', 'GET')
     y = atom.http_core.HttpRequest('http://example.com/', 'GET')
-    self.assertTrue(atom.mock_http_core._match_request(x, y))
+    self.assert_(atom.mock_http_core._match_request(x, y))
     y = atom.http_core.HttpRequest('http://example.com/', 'POST')
-    self.assertFalse(atom.mock_http_core._match_request(x, y))
+    self.assert_(not atom.mock_http_core._match_request(x, y))
     y = atom.http_core.HttpRequest('http://example.com/1', 'GET')
-    self.assertFalse(atom.mock_http_core._match_request(x, y))
+    self.assert_(not atom.mock_http_core._match_request(x, y))
     y = atom.http_core.HttpRequest('http://example.com/?gsessionid=1', 'GET')
-    self.assertFalse(atom.mock_http_core._match_request(x, y))
+    self.assert_(not atom.mock_http_core._match_request(x, y))
     y = atom.http_core.HttpRequest('http://example.com/?start_index=1', 'GET')
-    self.assertTrue(atom.mock_http_core._match_request(x, y))
+    self.assert_(atom.mock_http_core._match_request(x, y))
     x = atom.http_core.HttpRequest('http://example.com/?gsessionid=1', 'GET')
     y = atom.http_core.HttpRequest('http://example.com/?gsessionid=1', 'GET')
-    self.assertTrue(atom.mock_http_core._match_request(x, y))
+    self.assert_(atom.mock_http_core._match_request(x, y))
     y = atom.http_core.HttpRequest('http://example.com/?gsessionid=2', 'GET')
-    self.assertFalse(atom.mock_http_core._match_request(x, y))
+    self.assert_(not atom.mock_http_core._match_request(x, y))
     y = atom.http_core.HttpRequest('http://example.com/', 'GET')
-    self.assertFalse(atom.mock_http_core._match_request(x, y))
+    self.assert_(not atom.mock_http_core._match_request(x, y))
 
   def test_use_named_sessions(self):
     self.client._delete_recordings('mock_http_test.test_use_named_sessions')
@@ -168,9 +168,9 @@ class MockHttpClientTest(unittest.TestCase):
     # Modify the recorded response to allow us to identify a cached result
     # from an echoed result. We need to be able to check to see if this
     # came from a recording.
-    self.assertFalse('Cache-Marker' in self.client._recordings[0][1]._headers)
+    self.assert_('Cache-Marker' not in self.client._recordings[0][1]._headers)
     self.client._recordings[0][1]._headers['Cache-Marker'] = '1'
-    self.assertTrue('Cache-Marker' in self.client._recordings[0][1]._headers)
+    self.assert_('Cache-Marker' in self.client._recordings[0][1]._headers)
     # Save the recorded responses.
     self.client.close_session()
 

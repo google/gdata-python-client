@@ -63,14 +63,14 @@ class BloggerClientTest(unittest.TestCase):
     self.assertEqual(created.title.text, 'test post from BloggerClientTest')
     self.assertEqual(created.content.text, 'Hey look, another test!')
     self.assertEqual(len(created.category), 2)
-    self.assertTrue(created.control is None)
+    self.assert_(created.control is None)
 
     # Change the title of the blog post we just added.
     created.title.text = 'Edited'
     updated = self.client.update(created)
 
     self.assertEqual(updated.title.text, 'Edited')
-    self.assertTrue(isinstance(updated, gdata.blogger.data.BlogPost))
+    self.assert_(isinstance(updated, gdata.blogger.data.BlogPost))
     self.assertEqual(updated.content.text, created.content.text)
 
     # Delete the test entry from the blog.
@@ -91,8 +91,8 @@ class BloggerClientTest(unittest.TestCase):
                      'draft test post from BloggerClientTest')
     self.assertEqual(created.content.text, 'This should only be a draft.')
     self.assertEqual(len(created.category), 2)
-    self.assertTrue(created.control is not None)
-    self.assertTrue(created.control.draft is not None)
+    self.assert_(created.control is not None)
+    self.assert_(created.control.draft is not None)
     self.assertEqual(created.control.draft.text, 'yes')
     
     # Publish the blog post. 

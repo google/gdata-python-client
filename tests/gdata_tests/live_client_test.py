@@ -135,8 +135,8 @@ class BloggerTest(unittest.TestCase):
         found_tags[0] = True
       elif category.get_attributes('term')[0].value == 'Mr. Darcy':
         found_tags[1] = True
-    self.assertTrue(found_tags[0])
-    self.assertTrue(found_tags[1])
+    self.assert_(found_tags[0])
+    self.assert_(found_tags[1])
 
     # TODO: test queries using ETags.
 
@@ -148,8 +148,8 @@ class BloggerTest(unittest.TestCase):
         self_link = link.get_attributes('href')[0].value
       elif link.get_attributes('rel')[0].value == 'edit':
         edit_link = link.get_attributes('href')[0].value
-    self.assertTrue(self_link is not None)
-    self.assertTrue(edit_link is not None)
+    self.assert_(self_link is not None)
+    self.assert_(edit_link is not None)
 
     queried = self.client.request('GET', self_link, 
         converter=element_from_string)
@@ -198,12 +198,12 @@ class ContactsTest(unittest.TestCase):
         self_link = link.get_attributes('href')[0].value
       elif link.get_attributes('rel')[0].value == 'edit':
         edit_link = link.get_attributes('href')[0].value
-    self.assertTrue(self_link is not None)
-    self.assertTrue(edit_link is not None)
+    self.assert_(self_link is not None)
+    self.assert_(edit_link is not None)
 
     etag = posted.get_attributes('etag')[0].value
-    self.assertTrue(etag is not None)
-    self.assertTrue(len(etag) > 0)
+    self.assert_(etag is not None)
+    self.assert_(len(etag) > 0)
 
     # Delete the test contact.
     http_request = atom.http_core.HttpRequest()
@@ -243,14 +243,14 @@ class VersionTwoClientContactsTest(unittest.TestCase):
     # Create the test contact.
     posted = self.client.post(entry,
         'https://www.google.com/m8/feeds/contacts/default/full')
-    self.assertTrue(isinstance(posted, gdata.data.GDEntry))
+    self.assert_(isinstance(posted, gdata.data.GDEntry))
     self.assertEqual(posted.get_elements('title')[0].text, 'Test')
     self.assertEqual(posted.get_elements('email')[0].get_attributes(
         'address')[0].value, 'test@example.com')
 
     posted.get_elements('title')[0].text = 'Doug'
     edited = self.client.update(posted)
-    self.assertTrue(isinstance(edited, gdata.data.GDEntry))
+    self.assert_(isinstance(edited, gdata.data.GDEntry))
     self.assertEqual(edited.get_elements('title')[0].text, 'Doug')
     self.assertEqual(edited.get_elements('email')[0].get_attributes(
         'address')[0].value, 'test@example.com')

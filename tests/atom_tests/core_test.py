@@ -341,7 +341,7 @@ class CharacterEncodingTest(unittest.TestCase):
     e = create(u'x', u'\u03b4')
     self.assertEqual(e.to_string(), '<x>&#948;</x>')
     self.assertEqual(e.text, u'\u03b4')
-    self.assertTrue(isinstance(e.text, unicode))
+    self.assert_(isinstance(e.text, unicode))
     self.assertEqual(create(u'x', '\xce\xb4'.decode('utf-8')).to_string(),
                      '<x>&#948;</x>')
 
@@ -358,7 +358,7 @@ class CharacterEncodingTest(unittest.TestCase):
         u'\u03b4a')[0].value, u'\u03b4b')
     x = create('x', None)
     x._other_attributes[u'a'] = u'\u03b4elta'
-    self.assertTrue(x.to_string().startswith('<x a="&#948;elta"'))
+    self.assert_(x.to_string().startswith('<x a="&#948;elta"'))
 
   def testUtf8InputString(self):
     # Test parsing inner text.
@@ -377,8 +377,8 @@ class CharacterEncodingTest(unittest.TestCase):
     self.assertEqual(e.to_string(), '<x>&#948;</x>')
     # Don't change the encoding until the we convert to an XML string.
     self.assertEqual(e.text, '\xce\xb4')
-    self.assertTrue(isinstance(e.text, str))
-    self.assertTrue(isinstance(e.to_string(), str))
+    self.assert_(isinstance(e.text, str))
+    self.assert_(isinstance(e.to_string(), str))
     self.assertEqual(create('x', u'\u03b4'.encode('utf-8')).to_string(),
                      '<x>&#948;</x>')
     # Test attributes and values with UTF-8 inputs.
@@ -394,8 +394,8 @@ class CharacterEncodingTest(unittest.TestCase):
     # Test an element with UTF-8 in the attribute value.
     x = create('x', None)
     x._other_attributes[u'a'] = '\xce\xb4'
-    self.assertTrue(x.to_string(encoding='UTF-8').startswith('<x a="&#948;"'))
-    self.assertTrue(x.to_string().startswith('<x a="&#948;"'))
+    self.assert_(x.to_string(encoding='UTF-8').startswith('<x a="&#948;"'))
+    self.assert_(x.to_string().startswith('<x a="&#948;"'))
 
   def testOtherEncodingOnInputString(self):
     BIG_ENDIAN = 0
@@ -412,12 +412,12 @@ class CharacterEncodingTest(unittest.TestCase):
     self.assertEqual(e.to_string(encoding='utf-16'), '<x>&#948;</x>')
     # Don't change the encoding until the we convert to an XML string.
     # Allow either little-endian or big-endian byte orderings.
-    self.assertTrue(e.text in ['\xff\xfe\xb4\x03', '\xfe\xff\x03\xb4'])
+    self.assert_(e.text in ['\xff\xfe\xb4\x03', '\xfe\xff\x03\xb4'])
     endianness = LITTLE_ENDIAN
     if e.text == '\xfe\xff\x03\xb4':
       endianness = BIG_ENDIAN
-    self.assertTrue(isinstance(e.text, str))
-    self.assertTrue(isinstance(e.to_string(encoding='utf-16'), str))
+    self.assert_(isinstance(e.text, str))
+    self.assert_(isinstance(e.to_string(encoding='utf-16'), str))
     if endianness == LITTLE_ENDIAN:
       self.assertEqual(
           create('x', '\xff\xfe\xb4\x03').to_string(encoding='utf-16'),
@@ -434,7 +434,7 @@ class CharacterEncodingTest(unittest.TestCase):
     # Test an element with UTF-16 in the attribute value.
     x = create('x', None)
     x._other_attributes[u'a'] = u'\u03b4'.encode('utf-16')
-    self.assertTrue(x.to_string(encoding='UTF-16').startswith('<x a="&#948;"'))
+    self.assert_(x.to_string(encoding='UTF-16').startswith('<x a="&#948;"'))
 
 
 def suite():

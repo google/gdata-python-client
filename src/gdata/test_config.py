@@ -326,8 +326,8 @@ def build_suite(classes):
 def check_data_classes(test, classes):
   import inspect
   for data_class in classes:
-    test.assertTrue(data_class.__doc__ is not None,
-                    'The class %s should have a docstring' % data_class)
+    test.assert_(data_class.__doc__ is not None,
+                 'The class %s should have a docstring' % data_class)
     if hasattr(data_class, '_qname'):
       qname_versions = None
       if isinstance(data_class._qname, tuple):
@@ -335,11 +335,11 @@ def check_data_classes(test, classes):
       else:
         qname_versions = (data_class._qname,)
       for versioned_qname in qname_versions:
-        test.assertTrue(isinstance(versioned_qname, str),
-                        'The class %s has a non-string _qname' % data_class)
-        test.assertFalse(versioned_qname.endswith('}'), 
-                         'The _qname for class %s is only a namespace' % (
-                             data_class))
+        test.assert_(isinstance(versioned_qname, str),
+                     'The class %s has a non-string _qname' % data_class)
+        test.assert_(not versioned_qname.endswith('}'), 
+                     'The _qname for class %s is only a namespace' % (
+                         data_class))
 
     for attribute_name, value in data_class.__dict__.iteritems():
       # Ignore all elements that start with _ (private members)

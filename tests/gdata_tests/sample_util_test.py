@@ -32,18 +32,18 @@ class SettingsUtilTest(unittest.TestCase):
     self.settings = gdata.sample_util.SettingsUtil()
 
   def test_get_param(self):
-    self.assertTrue(self.settings.get_param('missing', ask=False) is None)
+    self.assert_(self.settings.get_param('missing', ask=False) is None)
     self.settings.prefs['x'] = 'something'
     self.assertEqual(self.settings.get_param('x'), 'something')
   
   def test_get_param_from_command_line_arg(self):
-    self.assertFalse('x' in self.settings.prefs)
-    self.assertTrue(self.settings.get_param('x', ask=False) is None)
+    self.assert_('x' not in self.settings.prefs)
+    self.assert_(self.settings.get_param('x', ask=False) is None)
     sys.argv.append('--x=something')
     self.assertEqual(self.settings.get_param('x'), 'something')
-    self.assertFalse('x' in self.settings.prefs)
-    self.assertFalse('y' in self.settings.prefs)
-    self.assertTrue(self.settings.get_param('y', ask=False) is None)
+    self.assert_('x' not in self.settings.prefs)
+    self.assert_('y' not in self.settings.prefs)
+    self.assert_(self.settings.get_param('y', ask=False) is None)
     sys.argv.append('--y')
     sys.argv.append('other')
     self.assertEqual(self.settings.get_param('y', reuse=True), 'other')

@@ -49,7 +49,7 @@ class AtomPubClientEchoTest(unittest.TestCase):
       self.assert_(response.getheader('Echo-Uri') == '/')
       self.assert_(response.getheader('Echo-Scheme') == 'http')
       self.assert_(response.getheader('Echo-Method') == 'GET')
-      self.assertTrue(response.getheader('User-Agent').startswith('gdata-py/'))
+      self.assert_(response.getheader('User-Agent').startswith('gdata-py/'))
 
   def test_auth_request_with_no_client_defaults(self):
     client = atom.client.AtomPubClient(atom.mock_http_core.EchoHttpClient())
@@ -154,7 +154,7 @@ class AtomPubClientEchoTest(unittest.TestCase):
     response = client.delete(uri='http://example.com/d')
     self.assertEqual(response.getheader('Echo-Uri'), '/d')
     self.assertEqual(response.getheader('Echo-Method'), 'DELETE')
-    self.assertTrue(
+    self.assert_(
         response.getheader('User-Agent').startswith('my new app gdata-py/'))
 
 def suite():

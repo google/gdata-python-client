@@ -38,7 +38,7 @@ class ClientLoginTest(unittest.TestCase):
         'LSID=DQAAAGsA...lk8BBbG\n'
         'Auth=DQAAAGgA...dk3fA5N', {'Content-Type': 'text/plain'})
     token = client.request_client_login_token('email', 'pw', 'cp', 'test')
-    self.assertTrue(isinstance(token, gdata.gauth.ClientLoginToken))
+    self.assert_(isinstance(token, gdata.gauth.ClientLoginToken))
     self.assertEqual(token.token_string, 'DQAAAGgA...dk3fA5N')
 
     # Test a server response without a ClientLogin token.`
@@ -82,7 +82,7 @@ class ClientLoginTest(unittest.TestCase):
         'LSID=DQAAAGsA...lk8BBbG\n'
         'Auth=DQAAAGgA...dk3fA5N', {'Content-Type': 'text/plain'})
     client.client_login('me@example.com', 'password', 'wise', 'unit test')
-    self.assertTrue(isinstance(client.auth_token, gdata.gauth.ClientLoginToken))
+    self.assert_(isinstance(client.auth_token, gdata.gauth.ClientLoginToken))
     self.assertEqual(client.auth_token.token_string, 'DQAAAGgA...dk3fA5N')
 
 
@@ -98,12 +98,12 @@ class AuthSubTest(unittest.TestCase):
 
     client.auth_token = gdata.gauth.AuthSubToken.from_url(page_url)
 
-    self.assertTrue(isinstance(client.auth_token, gdata.gauth.AuthSubToken))
+    self.assert_(isinstance(client.auth_token, gdata.gauth.AuthSubToken))
     self.assertEqual(client.auth_token.token_string, 'CKF50YzIHxCTKMAg')
 
     upgraded = client.upgrade_token()
 
-    self.assertTrue(isinstance(client.auth_token, gdata.gauth.AuthSubToken))
+    self.assert_(isinstance(client.auth_token, gdata.gauth.AuthSubToken))
     self.assertEqual(client.auth_token.token_string, 'UpgradedTokenVal')
     self.assertEqual(client.auth_token, upgraded)
 
@@ -139,18 +139,18 @@ class OAuthTest(unittest.TestCase):
 
     # Also check the Authorization header which was sent in the request.
     auth_header = client.http_client.last_request.headers['Authorization']
-    self.assertTrue('OAuth' in auth_header)
-    self.assertTrue(
+    self.assert_('OAuth' in auth_header)
+    self.assert_(
         'oauth_callback="http%3A%2F%2Fexample.net%2Fmyapp"' in auth_header)
-    self.assertTrue('oauth_version="1.0"' in auth_header)
-    self.assertTrue('oauth_signature_method="HMAC-SHA1"' in auth_header)
-    self.assertTrue('oauth_consumer_key="consumer"' in auth_header)
+    self.assert_('oauth_version="1.0"' in auth_header)
+    self.assert_('oauth_signature_method="HMAC-SHA1"' in auth_header)
+    self.assert_('oauth_consumer_key="consumer"' in auth_header)
 
     # Check generation of the authorization URL.
     authorize_url = request_token.generate_authorization_url()
-    self.assertTrue(str(authorize_url).startswith(
+    self.assert_(str(authorize_url).startswith(
         'https://www.google.com/accounts/OAuthAuthorizeToken'))
-    self.assertTrue('oauth_token=ab3cd9j4ks7' in str(authorize_url))
+    self.assert_('oauth_token=ab3cd9j4ks7' in str(authorize_url))
 
     # Check that the token information from the browser's URL is parsed.
     redirected_url = (
@@ -167,21 +167,21 @@ class OAuthTest(unittest.TestCase):
     access_token = client.get_access_token(request_token)
     self.assertEqual(request_token.token, '3cd9Fj417')
     self.assertEqual(request_token.token_secret, 'Xhrh6bXBs')
-    self.assertTrue(request_token.verifier is None)
+    self.assert_(request_token.verifier is None)
     self.assertEqual(request_token.auth_state, gdata.gauth.ACCESS_TOKEN)
     self.assertEqual(request_token.token, access_token.token)
     self.assertEqual(request_token.token_secret, access_token.token_secret)
-    self.assertTrue(access_token.verifier is None)
+    self.assert_(access_token.verifier is None)
     self.assertEqual(request_token.auth_state, access_token.auth_state)
 
     # Also check the Authorization header which was sent in the request.
     auth_header = client.http_client.last_request.headers['Authorization']
-    self.assertTrue('OAuth' in auth_header)
-    self.assertTrue('oauth_callback="' not in auth_header)
-    self.assertTrue('oauth_version="1.0"' in auth_header)
-    self.assertTrue('oauth_verifier="Xhhbas"' in auth_header)
-    self.assertTrue('oauth_signature_method="HMAC-SHA1"' in auth_header)
-    self.assertTrue('oauth_consumer_key="consumer"' in auth_header)
+    self.assert_('OAuth' in auth_header)
+    self.assert_('oauth_callback="' not in auth_header)
+    self.assert_('oauth_version="1.0"' in auth_header)
+    self.assert_('oauth_verifier="Xhhbas"' in auth_header)
+    self.assert_('oauth_signature_method="HMAC-SHA1"' in auth_header)
+    self.assert_('oauth_consumer_key="consumer"' in auth_header)
 
 
 class RequestTest(unittest.TestCase):
@@ -271,11 +271,11 @@ class RequestTest(unittest.TestCase):
     client.http_client = atom.mock_http_core.EchoHttpClient()
     test_entry = gdata.data.GDEntry()
     result = client.post(test_entry, 'http://example.com')
-    self.assertTrue(isinstance(result, gdata.data.GDEntry))
+    self.assert_(isinstance(result, gdata.data.GDEntry))
     result = client.post(test_entry, 'http://example.com', converter=bad_converter)
     self.assertEquals(result, 1)
     result = client.post(test_entry, 'http://example.com', desired_class=TestClass)
-    self.assertTrue(isinstance(result, TestClass))
+    self.assert_(isinstance(result, TestClass))
 
 
 class QueryTest(unittest.TestCase):
