@@ -9,7 +9,6 @@ import getpass
 # Modules whose tests we will run.
 import atom_tests.service_test
 import gdata_tests.service_test
-import gdata_tests.client_online_test
 import gdata_tests.apps.service_test
 import gdata_tests.base.service_test
 import gdata_tests.books.service_test
@@ -31,7 +30,6 @@ def RunAllTests(username, password, spreadsheet_key, worksheet_key,
   test_runner = module_test_runner.ModuleTestRunner()
   test_runner.modules = [atom_tests.service_test, 
                          gdata_tests.service_test, 
-                         gdata_tests.client_online_test, 
                          gdata_tests.apps.service_test,
                          gdata_tests.base.service_test, 
                          gdata_tests.books.service_test, 
