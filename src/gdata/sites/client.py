@@ -206,7 +206,7 @@ class SitesClient(gdata.client.GDClient):
     """
     new_entry = gdata.sites.data.ContentEntry(
         title=atom.data.Title(text=title), kind=kind,
-        content=gdata.sites.data.Content(html=html))
+        content=gdata.sites.data.Content(text=html))
 
     if page_name is not None:
       new_entry.page_name = gdata.sites.data.PageName(text=page_name)
