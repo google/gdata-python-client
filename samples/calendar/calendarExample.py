@@ -189,7 +189,7 @@ class CalendarExample:
             print '\tUnexpected Error: %s' % msg[0]['body']
 
   def _InsertSubscription(self, 
-      id='c4o4i7m2lbamc4k26sc2vokh5g%40group.calendar.google.com'):
+      id='python.gcal.test%40gmail.com'):
     """Subscribes to the calendar with the specified ID."""
     print 'Subscribing to the calendar with ID: %s' % id
     calendar = gdata.calendar.CalendarListEntry()
@@ -198,7 +198,7 @@ class CalendarExample:
     return returned_calendar
 
   def _UpdateCalendarSubscription(self, 
-      id='c4o4i7m2lbamc4k26sc2vokh5g%40group.calendar.google.com', 
+      id='python.gcal.test%40gmail.com', 
       color=None, hidden=None, selected=None):
     """Updates the subscription to the calendar with the specified ID."""
     print 'Updating the calendar subscription with ID: %s' % id
@@ -224,7 +224,7 @@ class CalendarExample:
     return updated_calendar
 
   def _DeleteCalendarSubscription(self, 
-      id='c4o4i7m2lbamc4k26sc2vokh5g%40group.calendar.google.com'):
+      id='python.gcal.test%40gmail.com'):
     """Deletes the subscription to the calendar with the specified ID."""
     print 'Deleting the calendar subscription with ID: %s' % id
     calendar_url = (
