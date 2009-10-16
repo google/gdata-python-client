@@ -432,3 +432,5 @@ tests/gdata_tests/apps/AppsServiceTestForGetGeneratorForAllUsers.pickle
 tests/gdata_tests/projecthosting/__init__.py
 tests/gdata_tests/projecthosting/data_test.py
 tests/gdata_tests/projecthosting/live_client_test.py
+pydocs/gdata.projecthosting.client.html
+pydocs/gdata.projecthosting.data.html

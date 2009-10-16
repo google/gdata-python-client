@@ -1,3 +1,12 @@
+=== 2.0.4 ===
+October 15, 2009 (revision 864)
+
+- Added support for the project hosting issue tracker API. Thanks Joe LaPenna!
+- Added a get-with-retries method to the v1 service for use with the Google Apps
+    API to automatically retry. Thanks Takashi Matsuo!
+- Revised Google Sites client to use text input when creating a page. Thanks Eric!
+- Changed demo calendar in the Google Calendar API example. Thanks Trevor!
+
 === 2.0.3 ===
 October 9, 2009 (revision 856)
 
