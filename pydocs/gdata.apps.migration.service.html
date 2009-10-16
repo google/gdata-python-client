@@ -112,9 +112,17 @@ Methods inherited from <a href="gdata.apps.service.html#AppsService">gdata.apps.
 
 <dl><dt><a name="MigrationService-DeleteUser"><strong>DeleteUser</strong></a>(self, user_name)</dt><dd><tt>Delete&nbsp;a&nbsp;user&nbsp;account</tt></dd></dl>
 
-<dl><dt><a name="MigrationService-GetGeneratorForAllUsers"><strong>GetGeneratorForAllUsers</strong></a>(self)</dt><dd><tt>Retrieve&nbsp;a&nbsp;generator&nbsp;for&nbsp;all&nbsp;users&nbsp;in&nbsp;this&nbsp;domain.</tt></dd></dl>
+<dl><dt><a name="MigrationService-GetGeneratorForAllEmailLists"><strong>GetGeneratorForAllEmailLists</strong></a>(self, num_retries<font color="#909090">=3</font>, delay<font color="#909090">=1</font>, backoff<font color="#909090">=2</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;generator&nbsp;for&nbsp;all&nbsp;emaillists&nbsp;in&nbsp;this&nbsp;domain.</tt></dd></dl>
 
-<dl><dt><a name="MigrationService-GetGeneratorFromLinkFinder"><strong>GetGeneratorFromLinkFinder</strong></a>(self, link_finder, func)</dt><dd><tt>returns&nbsp;a&nbsp;generator&nbsp;for&nbsp;pagination</tt></dd></dl>
+<dl><dt><a name="MigrationService-GetGeneratorForAllNicknames"><strong>GetGeneratorForAllNicknames</strong></a>(self, num_retries<font color="#909090">=3</font>, delay<font color="#909090">=1</font>, backoff<font color="#909090">=2</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;generator&nbsp;for&nbsp;all&nbsp;nicknames&nbsp;in&nbsp;this&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="MigrationService-GetGeneratorForAllNicknamesOfAUser"><strong>GetGeneratorForAllNicknamesOfAUser</strong></a>(self, user_name, num_retries<font color="#909090">=3</font>, delay<font color="#909090">=1</font>, backoff<font color="#909090">=2</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;generator&nbsp;for&nbsp;all&nbsp;nicknames&nbsp;of&nbsp;a&nbsp;particular&nbsp;user.</tt></dd></dl>
+
+<dl><dt><a name="MigrationService-GetGeneratorForAllRecipients"><strong>GetGeneratorForAllRecipients</strong></a>(self, list_name, num_retries<font color="#909090">=3</font>, delay<font color="#909090">=1</font>, backoff<font color="#909090">=2</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;generator&nbsp;for&nbsp;all&nbsp;recipients&nbsp;of&nbsp;a&nbsp;particular&nbsp;emaillist.</tt></dd></dl>
+
+<dl><dt><a name="MigrationService-GetGeneratorForAllUsers"><strong>GetGeneratorForAllUsers</strong></a>(self, num_retries<font color="#909090">=3</font>, delay<font color="#909090">=1</font>, backoff<font color="#909090">=2</font>)</dt><dd><tt>Retrieve&nbsp;a&nbsp;generator&nbsp;for&nbsp;all&nbsp;users&nbsp;in&nbsp;this&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="MigrationService-GetGeneratorFromLinkFinder"><strong>GetGeneratorFromLinkFinder</strong></a>(self, link_finder, func, num_retries<font color="#909090">=3</font>, delay<font color="#909090">=1</font>, backoff<font color="#909090">=2</font>)</dt><dd><tt>returns&nbsp;a&nbsp;generator&nbsp;for&nbsp;pagination</tt></dd></dl>
 
 <dl><dt><a name="MigrationService-RemoveRecipientFromEmailList"><strong>RemoveRecipientFromEmailList</strong></a>(self, recipient, list_name)</dt><dd><tt>Remove&nbsp;recipient&nbsp;from&nbsp;email&nbsp;list.</tt></dd></dl>
 
@@ -142,13 +150,13 @@ Returns:<br>
 
 <dl><dt><a name="MigrationService-RetrieveNicknames"><strong>RetrieveNicknames</strong></a>(self, user_name)</dt><dd><tt>Retrieve&nbsp;nicknames&nbsp;of&nbsp;the&nbsp;user</tt></dd></dl>
 
-<dl><dt><a name="MigrationService-RetrievePageOfEmailLists"><strong>RetrievePageOfEmailLists</strong></a>(self, start_email_list_name<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;one&nbsp;page&nbsp;of&nbsp;email&nbsp;list</tt></dd></dl>
+<dl><dt><a name="MigrationService-RetrievePageOfEmailLists"><strong>RetrievePageOfEmailLists</strong></a>(self, start_email_list_name<font color="#909090">=None</font>, num_retries<font color="#909090">=3</font>, delay<font color="#909090">=1</font>, backoff<font color="#909090">=2</font>)</dt><dd><tt>Retrieve&nbsp;one&nbsp;page&nbsp;of&nbsp;email&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="MigrationService-RetrievePageOfNicknames"><strong>RetrievePageOfNicknames</strong></a>(self, start_nickname<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;one&nbsp;page&nbsp;of&nbsp;nicknames&nbsp;in&nbsp;the&nbsp;domain</tt></dd></dl>
+<dl><dt><a name="MigrationService-RetrievePageOfNicknames"><strong>RetrievePageOfNicknames</strong></a>(self, start_nickname<font color="#909090">=None</font>, num_retries<font color="#909090">=3</font>, delay<font color="#909090">=1</font>, backoff<font color="#909090">=2</font>)</dt><dd><tt>Retrieve&nbsp;one&nbsp;page&nbsp;of&nbsp;nicknames&nbsp;in&nbsp;the&nbsp;domain</tt></dd></dl>
 
-<dl><dt><a name="MigrationService-RetrievePageOfRecipients"><strong>RetrievePageOfRecipients</strong></a>(self, list_name, start_recipient<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;one&nbsp;page&nbsp;of&nbsp;recipient&nbsp;of&nbsp;an&nbsp;email&nbsp;list.</tt></dd></dl>
+<dl><dt><a name="MigrationService-RetrievePageOfRecipients"><strong>RetrievePageOfRecipients</strong></a>(self, list_name, start_recipient<font color="#909090">=None</font>, num_retries<font color="#909090">=3</font>, delay<font color="#909090">=1</font>, backoff<font color="#909090">=2</font>)</dt><dd><tt>Retrieve&nbsp;one&nbsp;page&nbsp;of&nbsp;recipient&nbsp;of&nbsp;an&nbsp;email&nbsp;list.</tt></dd></dl>
 
-<dl><dt><a name="MigrationService-RetrievePageOfUsers"><strong>RetrievePageOfUsers</strong></a>(self, start_username<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;one&nbsp;page&nbsp;of&nbsp;users&nbsp;in&nbsp;this&nbsp;domain.</tt></dd></dl>
+<dl><dt><a name="MigrationService-RetrievePageOfUsers"><strong>RetrievePageOfUsers</strong></a>(self, start_username<font color="#909090">=None</font>, num_retries<font color="#909090">=3</font>, delay<font color="#909090">=1</font>, backoff<font color="#909090">=2</font>)</dt><dd><tt>Retrieve&nbsp;one&nbsp;page&nbsp;of&nbsp;users&nbsp;in&nbsp;this&nbsp;domain.</tt></dd></dl>
 
 <dl><dt><a name="MigrationService-RetrieveUser"><strong>RetrieveUser</strong></a>(self, user_name)</dt><dd><tt>Retrieve&nbsp;an&nbsp;user&nbsp;account.<br>
 &nbsp;<br>
@@ -392,6 +400,19 @@ Returns:<br>
 &nbsp;&nbsp;The&nbsp;type&nbsp;of&nbsp;this&nbsp;feed&nbsp;will&nbsp;match&nbsp;that&nbsp;of&nbsp;the&nbsp;feed&nbsp;argument.</tt></dd></dl>
 
 <dl><dt><a name="MigrationService-GetOAuthInputParameters"><strong>GetOAuthInputParameters</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="MigrationService-GetWithRetries"><strong>GetWithRetries</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, encoding<font color="#909090">='UTF-8'</font>, converter<font color="#909090">=None</font>, num_retries<font color="#909090">=3</font>, delay<font color="#909090">=1</font>, backoff<font color="#909090">=2</font>)</dt><dd><tt>This&nbsp;is&nbsp;a&nbsp;wrapper&nbsp;method&nbsp;for&nbsp;Get&nbsp;with&nbsp;retring&nbsp;capability.<br>
+&nbsp;<br>
+To&nbsp;avoid&nbsp;various&nbsp;errors&nbsp;while&nbsp;retrieving&nbsp;bulk&nbsp;entities&nbsp;by&nbsp;retring<br>
+specified&nbsp;times.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;num_retries:&nbsp;integer&nbsp;The&nbsp;retry&nbsp;count.<br>
+&nbsp;&nbsp;delay:&nbsp;integer&nbsp;The&nbsp;initial&nbsp;delay&nbsp;for&nbsp;retring.<br>
+&nbsp;&nbsp;backoff:&nbsp;integer&nbsp;how&nbsp;much&nbsp;the&nbsp;delay&nbsp;should&nbsp;lengthen&nbsp;after&nbsp;each&nbsp;failure.<br>
+Raises:<br>
+&nbsp;&nbsp;ValueError&nbsp;if&nbsp;any&nbsp;of&nbsp;the&nbsp;parameters&nbsp;has&nbsp;an&nbsp;invalid&nbsp;value.<br>
+&nbsp;&nbsp;RanOutOfTries&nbsp;on&nbsp;failure&nbsp;after&nbsp;number&nbsp;of&nbsp;retries.</tt></dd></dl>
 
 <dl><dt><a name="MigrationService-Post"><strong>Post</strong></a>(self, data, uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, redirects_remaining<font color="#909090">=4</font>, media_source<font color="#909090">=None</font>, converter<font color="#909090">=None</font>)</dt><dd><tt>Insert&nbsp;or&nbsp;update&nbsp;&nbsp;data&nbsp;into&nbsp;a&nbsp;GData&nbsp;service&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.<br>
 &nbsp;<br>

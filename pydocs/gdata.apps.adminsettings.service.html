@@ -530,6 +530,19 @@ Returns:<br>
 
 <dl><dt><a name="AdminSettingsService-GetOAuthInputParameters"><strong>GetOAuthInputParameters</strong></a>(self)</dt></dl>
 
+<dl><dt><a name="AdminSettingsService-GetWithRetries"><strong>GetWithRetries</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, encoding<font color="#909090">='UTF-8'</font>, converter<font color="#909090">=None</font>, num_retries<font color="#909090">=3</font>, delay<font color="#909090">=1</font>, backoff<font color="#909090">=2</font>)</dt><dd><tt>This&nbsp;is&nbsp;a&nbsp;wrapper&nbsp;method&nbsp;for&nbsp;Get&nbsp;with&nbsp;retring&nbsp;capability.<br>
+&nbsp;<br>
+To&nbsp;avoid&nbsp;various&nbsp;errors&nbsp;while&nbsp;retrieving&nbsp;bulk&nbsp;entities&nbsp;by&nbsp;retring<br>
+specified&nbsp;times.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;num_retries:&nbsp;integer&nbsp;The&nbsp;retry&nbsp;count.<br>
+&nbsp;&nbsp;delay:&nbsp;integer&nbsp;The&nbsp;initial&nbsp;delay&nbsp;for&nbsp;retring.<br>
+&nbsp;&nbsp;backoff:&nbsp;integer&nbsp;how&nbsp;much&nbsp;the&nbsp;delay&nbsp;should&nbsp;lengthen&nbsp;after&nbsp;each&nbsp;failure.<br>
+Raises:<br>
+&nbsp;&nbsp;ValueError&nbsp;if&nbsp;any&nbsp;of&nbsp;the&nbsp;parameters&nbsp;has&nbsp;an&nbsp;invalid&nbsp;value.<br>
+&nbsp;&nbsp;RanOutOfTries&nbsp;on&nbsp;failure&nbsp;after&nbsp;number&nbsp;of&nbsp;retries.</tt></dd></dl>
+
 <dl><dt><a name="AdminSettingsService-Post"><strong>Post</strong></a>(self, data, uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, redirects_remaining<font color="#909090">=4</font>, media_source<font color="#909090">=None</font>, converter<font color="#909090">=None</font>)</dt><dd><tt>Insert&nbsp;or&nbsp;update&nbsp;&nbsp;data&nbsp;into&nbsp;a&nbsp;GData&nbsp;service&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.<br>
 &nbsp;<br>
 Args:<br>

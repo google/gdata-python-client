@@ -62,6 +62,8 @@ pydoc -w gdata.maps.data
 pydoc -w gdata.maps.client
 pydoc -w gdata.photos
 pydoc -w gdata.photos.service
+pydoc -w gdata.projecthosting.data
+pydoc -w gdata.projecthosting.client
 pydoc -w gdata.sites.client
 pydoc -w gdata.sites.data
 pydoc -w gdata.spreadsheet
