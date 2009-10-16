@@ -60,7 +60,9 @@
 
 __author__ = 'api.jscudder (Jeffrey Scudder)'
 
-
+import logging
+import math
+import time
 import re
 import urllib
 import urlparse
@@ -143,6 +145,10 @@ CLIENT_LOGIN_SCOPES = {
     'jotspot': [ # Google Sites
         'http://sites.google.com/feeds/',
         'https://sites.google.com/feeds/']}
+# Default parameters for GDataService.GetWithRetries method
+DEFAULT_NUM_RETRIES = 3
+DEFAULT_DELAY = 1
+DEFAULT_BACKOFF = 2
 
 
 def lookup_scopes(service_name):
@@ -217,6 +223,10 @@ class AuthorizationRequired(Error):
 
 
 class TokenHadNoScope(Error):
+  pass
+
+
+class RanOutOfTries(Error):
   pass
 
 
@@ -962,6 +972,55 @@ class GDataService(atom.service.AtomService):
     else:
       raise RequestError, {'status': response.status,
           'body': result_body}
+
+  def GetWithRetries(self, uri, extra_headers=None, redirects_remaining=4, 
+      encoding='UTF-8', converter=None, num_retries=DEFAULT_NUM_RETRIES,
+      delay=DEFAULT_DELAY, backoff=DEFAULT_BACKOFF):
+    """This is a wrapper method for Get with retring capability.
+
+    To avoid various errors while retrieving bulk entities by retring
+    specified times.
+
+    Args:
+      num_retries: integer The retry count.
+      delay: integer The initial delay for retring.
+      backoff: integer how much the delay should lengthen after each failure.
+    Raises:
+      ValueError if any of the parameters has an invalid value.
+      RanOutOfTries on failure after number of retries.
+    """
+    if backoff <= 1:
+      raise ValueError("backoff must be greater than 1")
+    num_retries = math.floor(num_retries)
+
+    if num_retries < 0:
+      raise ValueError("num_retries must be 0 or greater")
+
+    if delay <= 0:
+      raise ValueError("delay must be greater than 0")
+
+    # Let's start
+    mtries, mdelay = num_retries, delay
+    while mtries > 0:
+      if mtries != num_retries:
+        logging.debug("Retrying...")
+      try:
+        rv = self.Get(uri, extra_headers=extra_headers,
+                      redirects_remaining=redirects_remaining,
+                      encoding=encoding, converter=converter)
+      except (SystemExit, RequestError):
+        # Allow these errors
+        raise
+      except Exception, e:
+        logging.debug(e)
+        mtries -= 1
+        time.sleep(mdelay)
+        mdelay *= backoff
+      else:
+        # This is the right path.
+        logging.debug("Succeeeded...")
+        return rv
+    raise RanOutOfTries('Ran out of tries.')
 
   # CRUD operations
   def Get(self, uri, extra_headers=None, redirects_remaining=4, 

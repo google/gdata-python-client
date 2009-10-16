@@ -104,12 +104,16 @@ class AppsService(gdata.service.GDataService):
   def _baseURL(self):
     return "/a/feeds/%s" % self.domain 
 
-  def GetGeneratorFromLinkFinder(self, link_finder, func):
+  def GetGeneratorFromLinkFinder(self, link_finder, func, 
+                                 num_retries=gdata.service.DEFAULT_NUM_RETRIES,
+                                 delay=gdata.service.DEFAULT_DELAY,
+                                 backoff=gdata.service.DEFAULT_BACKOFF):
     """returns a generator for pagination"""
     yield link_finder
     next = link_finder.GetNextLink()
     while next is not None:
-      next_feed = func(str(self.Get(next.href)))
+      next_feed = func(str(self.GetWithRetries(
+            next.href, num_retries=num_retries, delay=delay, backoff=backoff)))
       yield next_feed
       next = next_feed.GetNextLink()
 
@@ -123,17 +127,31 @@ class AppsService(gdata.service.GDataService):
       next = next_feed.GetNextLink()
     return link_finder
 
-  def RetrievePageOfEmailLists(self, start_email_list_name=None):
+  def RetrievePageOfEmailLists(self, start_email_list_name=None,
+                               num_retries=gdata.service.DEFAULT_NUM_RETRIES,
+                               delay=gdata.service.DEFAULT_DELAY,
+                               backoff=gdata.service.DEFAULT_BACKOFF):
     """Retrieve one page of email list"""
-
     uri = "%s/emailList/%s" % (self._baseURL(), API_VER)
     if start_email_list_name is not None:
       uri += "?startEmailListName=%s" % start_email_list_name
     try:
-      return gdata.apps.EmailListFeedFromString(str(self.Get(uri)))
+      return gdata.apps.EmailListFeedFromString(str(self.GetWithRetries(
+            uri, num_retries=num_retries, delay=delay, backoff=backoff)))
     except gdata.service.RequestError, e:
       raise AppsForYourDomainException(e.args[0])
     
+  def GetGeneratorForAllEmailLists(
+    self, num_retries=gdata.service.DEFAULT_NUM_RETRIES,
+    delay=gdata.service.DEFAULT_DELAY, backoff=gdata.service.DEFAULT_BACKOFF):
+    """Retrieve a generator for all emaillists in this domain."""
+    first_page = self.RetrievePageOfEmailLists(num_retries=num_retries,
+                                               delay=delay,
+                                               backoff=backoff)
+    return self.GetGeneratorFromLinkFinder(
+      first_page, gdata.apps.EmailListRecipientFeedFromString,
+      num_retries=num_retries, delay=delay, backoff=backoff)
+
   def RetrieveAllEmailLists(self):
     """Retrieve all email list of a domain."""
 
@@ -176,7 +194,10 @@ class AppsService(gdata.service.GDataService):
     except gdata.service.RequestError, e:
       raise AppsForYourDomainException(e.args[0])
 
-  def RetrievePageOfRecipients(self, list_name, start_recipient=None):
+  def RetrievePageOfRecipients(self, list_name, start_recipient=None,
+                               num_retries=gdata.service.DEFAULT_NUM_RETRIES,
+                               delay=gdata.service.DEFAULT_DELAY,
+                               backoff=gdata.service.DEFAULT_BACKOFF):
     """Retrieve one page of recipient of an email list. """
 
     uri = "%s/emailList/%s/%s/recipient" % (
@@ -185,9 +206,23 @@ class AppsService(gdata.service.GDataService):
     if start_recipient is not None:
       uri += "?startRecipient=%s" % start_recipient
     try:
-      return gdata.apps.EmailListRecipientFeedFromString(str(self.Get(uri)))
+      return gdata.apps.EmailListRecipientFeedFromString(str(
+          self.GetWithRetries(
+            uri, num_retries=num_retries, delay=delay, backoff=backoff)))
     except gdata.service.RequestError, e:
       raise AppsForYourDomainException(e.args[0])
+
+  def GetGeneratorForAllRecipients(
+    self, list_name, num_retries=gdata.service.DEFAULT_NUM_RETRIES,
+    delay=gdata.service.DEFAULT_DELAY, backoff=gdata.service.DEFAULT_BACKOFF):
+    """Retrieve a generator for all recipients of a particular emaillist."""
+    first_page = self.RetrievePageOfRecipients(list_name,
+                                               num_retries=num_retries,
+                                               delay=delay,
+                                               backoff=backoff)
+    return self.GetGeneratorFromLinkFinder(
+      first_page, gdata.apps.EmailListRecipientFeedFromString,
+      num_retries=num_retries, delay=delay, backoff=backoff)
 
   def RetrieveAllRecipients(self, list_name):
     """Retrieve all recipient of an email list."""
@@ -241,16 +276,31 @@ class AppsService(gdata.service.GDataService):
     except gdata.service.RequestError, e:
       raise AppsForYourDomainException(e.args[0])
 
-  def RetrievePageOfNicknames(self, start_nickname=None):
+  def RetrievePageOfNicknames(self, start_nickname=None,
+                              num_retries=gdata.service.DEFAULT_NUM_RETRIES,
+                              delay=gdata.service.DEFAULT_DELAY,
+                              backoff=gdata.service.DEFAULT_BACKOFF):
     """Retrieve one page of nicknames in the domain"""
 
     uri = "%s/nickname/%s" % (self._baseURL(), API_VER)
     if start_nickname is not None:
       uri += "?startNickname=%s" % start_nickname
     try:
-      return gdata.apps.NicknameFeedFromString(str(self.Get(uri)))
+      return gdata.apps.NicknameFeedFromString(str(self.GetWithRetries(
+            uri, num_retries=num_retries, delay=delay, backoff=backoff)))
     except gdata.service.RequestError, e:
       raise AppsForYourDomainException(e.args[0])
+
+  def GetGeneratorForAllNicknames(
+    self, num_retries=gdata.service.DEFAULT_NUM_RETRIES,
+    delay=gdata.service.DEFAULT_DELAY, backoff=gdata.service.DEFAULT_BACKOFF):
+    """Retrieve a generator for all nicknames in this domain."""
+    first_page = self.RetrievePageOfNicknames(num_retries=num_retries,
+                                              delay=delay,
+                                              backoff=backoff)
+    return self.GetGeneratorFromLinkFinder(
+      first_page, gdata.apps.NicknameFeedFromString, num_retries=num_retries,
+      delay=delay, backoff=backoff)
 
   def RetrieveAllNicknames(self):
     """Retrieve all nicknames in the domain"""
@@ -259,6 +309,20 @@ class AppsService(gdata.service.GDataService):
     # pagination
     return self.AddAllElementsFromAllPages(
       ret, gdata.apps.NicknameFeedFromString)
+
+  def GetGeneratorForAllNicknamesOfAUser(
+    self, user_name, num_retries=gdata.service.DEFAULT_NUM_RETRIES,
+    delay=gdata.service.DEFAULT_DELAY, backoff=gdata.service.DEFAULT_BACKOFF):
+    """Retrieve a generator for all nicknames of a particular user."""
+    uri = "%s/nickname/%s?username=%s" % (self._baseURL(), API_VER, user_name)
+    try:
+      first_page = gdata.apps.NicknameFeedFromString(str(self.GetWithRetries(
+            uri, num_retries=num_retries, delay=delay, backoff=backoff)))
+    except gdata.service.RequestError, e:
+      raise AppsForYourDomainException(e.args[0])
+    return self.GetGeneratorFromLinkFinder(
+      first_page, gdata.apps.NicknameFeedFromString, num_retries=num_retries,
+      delay=delay, backoff=backoff)
 
   def RetrieveNicknames(self, user_name):
     """Retrieve nicknames of the user"""
@@ -371,22 +435,31 @@ class AppsService(gdata.service.GDataService):
     except gdata.service.RequestError, e:
       raise AppsForYourDomainException(e.args[0])
 
-  def RetrievePageOfUsers(self, start_username=None):
+  def RetrievePageOfUsers(self, start_username=None,
+                          num_retries=gdata.service.DEFAULT_NUM_RETRIES,
+                          delay=gdata.service.DEFAULT_DELAY,
+                          backoff=gdata.service.DEFAULT_BACKOFF):
     """Retrieve one page of users in this domain."""
 
     uri = "%s/user/%s" % (self._baseURL(), API_VER)
     if start_username is not None:
       uri += "?startUsername=%s" % start_username
     try:
-      return gdata.apps.UserFeedFromString(str(self.Get(uri)))
+      return gdata.apps.UserFeedFromString(str(self.GetWithRetries(
+          uri, num_retries=num_retries, delay=delay, backoff=backoff)))
     except gdata.service.RequestError, e:
       raise AppsForYourDomainException(e.args[0])
 
-  def GetGeneratorForAllUsers(self):
+  def GetGeneratorForAllUsers(self,
+                              num_retries=gdata.service.DEFAULT_NUM_RETRIES,
+                              delay=gdata.service.DEFAULT_DELAY,
+                              backoff=gdata.service.DEFAULT_BACKOFF):
     """Retrieve a generator for all users in this domain."""
-    first_page = self.RetrievePageOfUsers()
-    return self.GetGeneratorFromLinkFinder(first_page,
-                                           gdata.apps.UserFeedFromString)
+    first_page = self.RetrievePageOfUsers(num_retries=num_retries, delay=delay,
+                                          backoff=backoff)
+    return self.GetGeneratorFromLinkFinder(
+      first_page, gdata.apps.UserFeedFromString, num_retries=num_retries,
+      delay=delay, backoff=backoff)
 
   def RetrieveAllUsers(self):
     """Retrieve all users in this domain. OBSOLETE"""
