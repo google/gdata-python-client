@@ -176,6 +176,16 @@ SITES_NAME_OPTION = Option(
     'sitename',
     'Please enter name of your Google Site',
     description='The webspace name of the Site found in its URL.')
+PROJECT_NAME_OPTION = Option(
+    'project_name',
+    'Please enter the name of your project hosting project',
+    description=('The name of the project which should have test issues added'
+                 ' to it. Example gdata-python-client'))
+ISSUE_ASSIGNEE_OPTION = Option(
+    'issue_assignee',
+    'Enter the email address of the target owner of the updated issue.',
+    description=('The email address of the user a created issue\'s owner will '
+                 ' become. Example testuser2@gmail.com'))
     
 # Functions to inject a cachable HTTP client into a service client.
 def configure_client(client, case_name, service_name):

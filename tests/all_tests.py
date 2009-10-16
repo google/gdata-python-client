@@ -39,6 +39,8 @@ import gdata_tests.maps.data_test
 import gdata_tests.maps.live_client_test
 import gdata_tests.spreadsheets.data_test
 import gdata_tests.spreadsheets.live_client_test
+import gdata_tests.projecthosting.data_test
+import gdata_tests.projecthosting.live_client_test
 # Compatibility tests for requests to v1 feeds.
 import gdata_tests.contacts.service_test
 # Tests for v1 classes.
@@ -54,31 +56,34 @@ import atom_tests.url_test
 
 
 def suite():
-  return unittest.TestSuite((atom_tests.core_test.suite(),
-                             atom_tests.data_test.suite(),
-                             atom_tests.http_core_test.suite(),
-                             atom_tests.auth_test.suite(),
-                             atom_tests.mock_http_core_test.suite(),
-                             atom_tests.client_test.suite(),
-                             gdata_tests.client_test.suite(),
-                             gdata_tests.data_test.suite(),
-                             gdata_tests.live_client_test.suite(),
-                             gdata_tests.gauth_test.suite(),
-                             gdata_tests.blogger.data_test.suite(),
-                             gdata_tests.blogger.live_client_test.suite(),
-                             gdata_tests.contacts.service_test.suite(),
-                             gdata_tests.maps.data_test.suite(),
-                             gdata_tests.maps.live_client_test.suite(),
-                             gdata_tests.spreadsheets.data_test.suite(),
-                             gdata_tests.spreadsheets.live_client_test.suite(),
-                             atom_test.suite(), gdata_test.suite(),
-                             atom_tests.service_test.suite(),
-                             atom_tests.auth_test.suite(),
-                             atom_tests.http_interface_test.suite(),
-                             atom_tests.mock_client_test.suite(),
-                             atom_tests.mock_http_test.suite(),
-                             atom_tests.token_store_test.suite(),
-                             atom_tests.url_test.suite()))
+  return unittest.TestSuite((
+      atom_tests.core_test.suite(),
+      atom_tests.data_test.suite(),
+      atom_tests.http_core_test.suite(),
+      atom_tests.auth_test.suite(),
+      atom_tests.mock_http_core_test.suite(),
+      atom_tests.client_test.suite(),
+      gdata_tests.client_test.suite(),
+      gdata_tests.data_test.suite(),
+      gdata_tests.live_client_test.suite(),
+      gdata_tests.gauth_test.suite(),
+      gdata_tests.blogger.data_test.suite(),
+      gdata_tests.blogger.live_client_test.suite(),
+      gdata_tests.contacts.service_test.suite(),
+      gdata_tests.maps.data_test.suite(),
+      gdata_tests.maps.live_client_test.suite(),
+      gdata_tests.spreadsheets.data_test.suite(),
+      gdata_tests.spreadsheets.live_client_test.suite(),
+      gdata_tests.projecthosting.data_test.suite(),
+      gdata_tests.projecthosting.live_client_test.suite(),
+      atom_test.suite(), gdata_test.suite(),
+      atom_tests.service_test.suite(),
+      atom_tests.auth_test.suite(),
+      atom_tests.http_interface_test.suite(),
+      atom_tests.mock_client_test.suite(),
+      atom_tests.mock_http_test.suite(),
+      atom_tests.token_store_test.suite(),
+      atom_tests.url_test.suite()))
 
 
 if __name__ == '__main__':

@@ -25,7 +25,7 @@ if sys.version_info[:3] < (2, 5, 0):
 
 setup(
     name='gdata',
-    version='2.0.3',
+    version='2.0.4',
     description='Python client library for Google data APIs',
     long_description = """\
 The Google data Python client library makes it easy to interact with
@@ -71,7 +71,7 @@ library may also be used with any Atom Publishing Protocol service (AtomPub).
         'gdata.Crypto.Protocol', 'gdata.Crypto.PublicKey', 'gdata.Crypto.Util',
         'gdata.tlslite.utils', 'gdata.tlslite.integration', 'gdata.health',
         'gdata.analytics', 'gdata.finance', 'gdata.spreadsheets', 'gdata.maps',
-        'gdata.sites', 'gdata.apps.adminsettings'],
+        'gdata.sites', 'gdata.apps.adminsettings', 'gdata.projecthosting'],
     package_dir = {'gdata':'src/gdata', 'atom':'src/atom'},
     install_requires=required
 )
