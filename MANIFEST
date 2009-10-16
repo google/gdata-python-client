@@ -422,3 +422,13 @@ pydocs/gdata.apps.adminsettings.service.html
 pydocs/gdata.sites.client.html
 pydocs/gdata.sites.data.html
 pydocs/gdata.spreadsheets.client.html
+src/gdata/projecthosting/__init__.py
+src/gdata/projecthosting/client.py
+src/gdata/projecthosting/data.py
+tests/gdata_tests/apps/AppsServiceTestForGetGeneratorForAllEmailLists.pickle
+tests/gdata_tests/apps/AppsServiceTestForGetGeneratorForAllNicknames.pickle
+tests/gdata_tests/apps/AppsServiceTestForGetGeneratorForAllRecipients.pickle
+tests/gdata_tests/apps/AppsServiceTestForGetGeneratorForAllUsers.pickle
+tests/gdata_tests/projecthosting/__init__.py
+tests/gdata_tests/projecthosting/data_test.py
+tests/gdata_tests/projecthosting/live_client_test.py
