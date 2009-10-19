@@ -320,7 +320,10 @@ class PositionEntry(gdata.GDataEntry):
   ticker_id = property(ticker_id, doc='The position TICKER ID.')
 
   def transactions(self):
-    return self.feed_link.feed.entry if self.feed_link.feed else None
+    if self.feed_link.feed:
+      return self.feed_link.feed.entry
+    else:
+      return None
 
   transactions = property(transactions, doc="""
       Inlined TransactionEntries are returned if PositionFeed is queried
