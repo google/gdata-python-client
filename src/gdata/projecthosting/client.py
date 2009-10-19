@@ -192,8 +192,7 @@ class Query(gdata.client.Query):
     if self.owner:
       gdata.client._add_query_param('owner', self.owner, http_request)
     if self.status:
-      gdata.client._add_statusuery_param('status', self.status,
-                                         http_request)
+      gdata.client._add_query_param('status', self.status, http_request)
     super(Query, self).modify_request(http_request)
 
   ModifyRequest = modify_request
