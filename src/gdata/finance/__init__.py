@@ -453,7 +453,10 @@ class PortfolioEntry(gdata.GDataEntry):
       doc='The portfolio ID. Do not confuse with portfolio.id.')
 
   def positions(self):
-    return self.feed_link.feed.entry if self.feed_link.feed else None
+    if self.feed_link.feed:
+      return self.feed_link.feed.entry
+    else:
+      return None
 
   positions = property(positions, doc="""
       Inlined PositionEntries are returned if PortfolioFeed was queried
