@@ -556,7 +556,7 @@ class GDClient(atom.client.AtomPubClient):
     """
     if converter is None and desired_class is None:
       desired_class = feed.__class__
-    return self.get_feed(feed.get_next_url(), auth_token=auth_token,
+    return self.get_feed(feed.get_next_link(), auth_token=auth_token,
                          converter=converter, desired_class=desired_class,
                          **kwargs)
 
