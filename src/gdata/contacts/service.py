@@ -70,11 +70,6 @@ class ContactsService(gdata.service.GDataService):
           constructor.
     """
 
-    if not additional_headers:
-      additional_headers = {GDATA_VER_HEADER: 3}
-    elif GDATA_VER_HEADER not in additional_headers:
-      additional_headers[GDATA_VER_HEADER] = 3
-
     self.contact_list = contact_list
     gdata.service.GDataService.__init__(
         self, email=email, password=password, service='cp', source=source,

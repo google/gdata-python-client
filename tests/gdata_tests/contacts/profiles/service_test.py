@@ -38,12 +38,14 @@ password = ''
 domain = ''
 server = 'www.google.com'
 
+GDATA_VER_HEADER = 'GData-Version'
 
 class ProfilesServiceTest(unittest.TestCase):
 
-  def setUp(self):
+  def setUp(self):    
+    additional_headers = {GDATA_VER_HEADER: 3}
     self.gd_client = gdata.contacts.service.ContactsService(
-        contact_list=domain)
+        contact_list=domain, additional_headers=additional_headers )
     self.gd_client.email = email
     self.gd_client.password = password
     self.gd_client.source = 'GoogleInc-ProfilesPythonTest-1'
