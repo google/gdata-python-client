@@ -69,6 +69,8 @@ class Label(atom.core.XmlElement):
 class Owner(atom.core.XmlElement):
   """The issues:owner element."""
   _qname = ISSUES_TEMPLATE % 'owner'
+  uri = Uri
+  username = Username
 
 
 class Stars(atom.core.XmlElement):
@@ -114,6 +116,7 @@ class Updates(atom.core.XmlElement):
 class IssueEntry(gdata.data.GDEntry):
   """Represents the information of one issue."""
   _qname = atom.data.ATOM_TEMPLATE % 'entry'
+  owner = Owner
   cc = [Cc]
   label = [Label]
   stars = Stars

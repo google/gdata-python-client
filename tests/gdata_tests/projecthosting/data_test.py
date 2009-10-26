@@ -132,6 +132,9 @@ class IssueEntryTest(unittest.TestCase):
   def testParsing(self):
     entry = atom.core.parse(ISSUE_ENTRY, gdata.projecthosting.data.IssueEntry)
 
+    self.assertEquals(entry.owner.uri.text, '/u/charlotte.lucas/')
+    self.assertEqual(entry.owner.username.text, 'charlotte.lucas')
+
     self.assertEquals(len(entry.cc), 2)
     cc_0 = entry.cc[0]
     self.assertEquals(cc_0.uri.text, '/u/@UBhTQl1UARRAVga7/')
