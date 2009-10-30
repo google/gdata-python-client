@@ -87,7 +87,8 @@ class BadAuthentication(RequestError):
   pass
 
 
-def error_from_response(message, http_response, error_class, response_body=None):
+def error_from_response(message, http_response, error_class,
+                        response_body=None):
   """Creates a new exception and sets the HTTP information in the error.
 
   Args:
