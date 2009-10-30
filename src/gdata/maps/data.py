@@ -43,7 +43,7 @@ KML_NAMESPACE = 'http://www.opengis.net/kml/2.2'
 
 class MapsDataEntry(gdata.data.GDEntry):
   """Adds convenience methods inherited by all Maps Data entries."""
-  
+
   def get_user_id(self):
     """Extracts the user ID of this entry."""
     if self.id.text:
@@ -51,7 +51,7 @@ class MapsDataEntry(gdata.data.GDEntry):
       if match:
         return match.group('user_id')
     return None
-  
+
   GetUserId = get_user_id
 
   def get_map_id(self):
@@ -61,7 +61,7 @@ class MapsDataEntry(gdata.data.GDEntry):
       if match:
         return match.group('map_id')
     return None
-  
+
   GetMapId = get_map_id
 
 
@@ -77,7 +77,7 @@ class MapFeed(gdata.data.GDFeed):
 
 class KmlContent(atom.data.Content):
   """Represents an atom content element that encapsulates KML content."""
-  
+
   def __init__(self, **kwargs):
     super(KmlContent, self).__init__(type=KML_CONTENT_TYPE, **kwargs)
     if 'kml' in kwargs:
@@ -88,19 +88,19 @@ class KmlContent(atom.data.Content):
       return self.children[0]
     else:
       return ''
-  
+
   def _set_kml(self, kml):
     if not kml:
       self.children = []
       return
-    
+
     if type(kml) == str:
       kml = atom.core.parse(kml)
       if not kml.namespace:
         kml.namespace = KML_NAMESPACE
-    
+
     self.children = [kml]
-  
+
   kml = property(_get_kml, _set_kml)
 
 
@@ -116,7 +116,7 @@ class Feature(MapsDataEntry):
       if match:
         return match.group('feature_id')
     return None
-  
+
   GetFeatureId = get_feature_id
 
 

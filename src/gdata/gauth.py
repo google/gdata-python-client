@@ -67,8 +67,8 @@ class UnsupportedTokenType(Error):
 
 
 # ClientLogin functions and classes.
-def generate_client_login_request_body(email, password, service, source, 
-    account_type='HOSTED_OR_GOOGLE', captcha_token=None, 
+def generate_client_login_request_body(email, password, service, source,
+    account_type='HOSTED_OR_GOOGLE', captcha_token=None,
     captcha_response=None):
   """Creates the body of the autentication request
 
@@ -114,7 +114,7 @@ def get_client_login_token_string(http_body):
   Args:
     http_body: str The body of the server's HTTP response to a Client Login
         request
- 
+
   Returns:
     The token value string for a ClientLoginToken.
   """
@@ -128,14 +128,14 @@ def get_client_login_token_string(http_body):
 GetClientLoginTokenString = get_client_login_token_string
 
 
-def get_captcha_challenge(http_body, 
+def get_captcha_challenge(http_body,
     captcha_base_url='http://www.google.com/accounts/'):
   """Returns the URL and token for a CAPTCHA challenge issued by the server.
 
   Args:
-    http_body: str The body of the HTTP response from the server which 
+    http_body: str The body of the HTTP response from the server which
         contains the CAPTCHA challenge.
-    captcha_base_url: str This function returns a full URL for viewing the 
+    captcha_base_url: str This function returns a full URL for viewing the
         challenge image which is built from the server's response. This
         base_url is used as the beginning of the URL because the server
         only provides the end of the URL. For example the server provides
@@ -144,7 +144,7 @@ def get_captcha_challenge(http_body,
 
   Returns:
     A dictionary containing the information needed to repond to the CAPTCHA
-    challenge, the image URL and the ID token of the challenge. The 
+    challenge, the image URL and the ID token of the challenge. The
     dictionary is in the form:
     {'token': string identifying the CAPTCHA image,
      'url': string containing the URL of the image}
@@ -215,7 +215,7 @@ def generate_auth_sub_url(next, scopes, secure=False, session=True,
     session: boolean (optional) Determines whether or not the issued token
              can be upgraded to a session token.
     request_url: atom.http_core.Uri or str The beginning of the request URL.
-                 This is normally 
+                 This is normally
                  'http://www.google.com/accounts/AuthSubRequest' or
                  '/accounts/AuthSubRequest'
     domain: The domain which the account is part of. This is used for Google
@@ -270,12 +270,12 @@ def auth_sub_string_from_url(url, scopes_param_prefix='auth_sub_scopes'):
                          the list of valid scopes for the token.
 
   Returns:
-    A tuple containing the token value as a string, and a tuple of scopes 
+    A tuple containing the token value as a string, and a tuple of scopes
     (as atom.http_core.Uri objects) which are URL prefixes under which this
     token grants permission to read and write user data.
     (token_string, (scope_uri, scope_uri, scope_uri, ...))
     If no scopes were included in the URL, the second value in the tuple is
-    None. If there was no token param in the url, the tuple returned is 
+    None. If there was no token param in the url, the tuple returned is
     (None, None)
   """
   if isinstance(url, (str, unicode)):
@@ -329,7 +329,7 @@ class AuthSubToken(object):
 
   def from_url(str_or_uri):
     """Creates a new AuthSubToken using information in the URL.
-    
+
     Uses auth_sub_string_from_url.
 
     Args:
@@ -346,7 +346,7 @@ class AuthSubToken(object):
 
   def _upgrade_token(self, http_body):
     """Replaces the token value with a session token from the auth server.
-    
+
     Uses the response of a token upgrade request to modify this token. Uses
     auth_sub_string_from_body.
     """
@@ -356,7 +356,7 @@ class AuthSubToken(object):
 # Functions and classes for Secure-mode AuthSub
 def build_auth_sub_data(http_request, timestamp, nonce):
   """Creates the data string which must be RSA-signed in secure requests.
-  
+
   For more details see the documenation on secure AuthSub requests:
   http://code.google.com/apis/accounts/docs/AuthSub.html#signingrequests
 
@@ -396,7 +396,7 @@ class SecureAuthSubToken(AuthSubToken):
 
   def from_url(str_or_uri, rsa_private_key):
     """Creates a new SecureAuthSubToken using information in the URL.
-    
+
     Uses auth_sub_string_from_url.
 
     Args:
@@ -415,13 +415,13 @@ class SecureAuthSubToken(AuthSubToken):
 
   def modify_request(self, http_request):
     """Sets the Authorization header and includes a digital signature.
-    
+
     Calculates a digital signature using the private RSA key, a timestamp
-    (uses now at the time this method is called) and a random nonce. 
+    (uses now at the time this method is called) and a random nonce.
 
     Args:
       http_request: The atom.http_core.HttpRequest which contains all of the
-          information needed to send a request to the remote server. The 
+          information needed to send a request to the remote server. The
           URL and the method of the request must be already set and cannot be
           changed after this token signs the request, or the signature will
           not be valid.
@@ -446,7 +446,7 @@ def build_oauth_base_string(http_request, consumer_key, nonce, signaure_type,
                             timestamp, version, next='oob', token=None,
                             verifier=None):
   """Generates the base string to be signed in the OAuth request.
-  
+
   Args:
     http_request: The request being made to the server. The Request's URL
         must be complete before this signature is calculated as any changes
@@ -468,7 +468,7 @@ def build_oauth_base_string(http_request, consumer_key, nonce, signaure_type,
         to a Google service(s). It can include url-encoded query parameters.
         The default value is 'oob'. (This is the oauth_callback.)
     token: The string for the OAuth request token or OAuth access token.
-    verifier: str Sent as the oauth_verifier and required when upgrading a 
+    verifier: str Sent as the oauth_verifier and required when upgrading a
         request token to an access token.
   """
   # First we must build the canonical base string for the request.
@@ -496,8 +496,8 @@ def build_oauth_base_string(http_request, consumer_key, nonce, signaure_type,
   normailzed_host = http_request.uri.host.lower()
   normalized_scheme = (http_request.uri.scheme or 'http').lower()
   non_default_port = None
-  if (http_request.uri.port is not None 
-      and ((normalized_scheme == 'https' and http_request.uri.port != 443) 
+  if (http_request.uri.port is not None
+      and ((normalized_scheme == 'https' and http_request.uri.port != 443)
            or (normalized_scheme == 'http' and http_request.uri.port != 80))):
     non_default_port = http_request.uri.port
   path = http_request.uri.path or '/'
@@ -505,17 +505,17 @@ def build_oauth_base_string(http_request, consumer_key, nonce, signaure_type,
   if not path.startswith('/'):
     path = '/%s' % path
   if non_default_port is not None:
-    # Set the only safe char in url encoding to ~ since we want to escape / 
+    # Set the only safe char in url encoding to ~ since we want to escape /
     # as well.
     request_path = urllib.quote('%s://%s:%s%s' % (
         normalized_scheme, normailzed_host, non_default_port, path), safe='~')
   else:
-    # Set the only safe char in url encoding to ~ since we want to escape / 
+    # Set the only safe char in url encoding to ~ since we want to escape /
     # as well.
     request_path = urllib.quote('%s://%s%s' % (
         normalized_scheme, normailzed_host, path), safe='~')
   # TODO: ensure that token escaping logic is correct, not sure if the token
-  # value should be double escaped instead of single. 
+  # value should be double escaped instead of single.
   base_string = '&'.join((http_request.method.upper(), request_path,
                           all_parameters))
   # Now we have the base string, we can calculate the oauth_signature.
@@ -567,10 +567,10 @@ def generate_auth_header(consumer_key, timestamp, nonce, signature_type,
                          signature, version='1.0', next=None, token=None,
                          verifier=None):
   """Builds the Authorization header to be sent in the request.
-  
+
   Args:
     consumer_key: Identifies the application making the request (str).
-    timestamp: 
+    timestamp:
     nonce:
     signature_type: One of either HMAC_SHA1 or RSA_SHA1
     signature: The HMAC or RSA signature for the request as a base64
@@ -611,17 +611,17 @@ def generate_request_for_request_token(
     consumer_key, signature_type, scopes, rsa_key=None, consumer_secret=None,
     auth_server_url=REQUEST_TOKEN_URL, next='oob', version='1.0'):
   """Creates request to be sent to auth server to get an OAuth request token.
-  
+
   Args:
-    consumer_key: 
+    consumer_key:
     signature_type: either RSA_SHA1 or HMAC_SHA1. The rsa_key must be
         provided if the signature type is RSA but if the signature method
         is HMAC, the consumer_secret must be used.
     scopes: List of URL prefixes for the data which we want to access. For
         example, to request access to the user's Blogger and Google Calendar
-        data, we would request 
-        ['http://www.blogger.com/feeds/', 
-         'https://www.google.com/calendar/feeds/', 
+        data, we would request
+        ['http://www.blogger.com/feeds/',
+         'https://www.google.com/calendar/feeds/',
          'http://www.google.com/calendar/feeds/']
     rsa_key: Only used if the signature method is RSA_SHA1.
     consumer_secret: Only used if the signature method is HMAC_SHA1.
@@ -664,7 +664,7 @@ def generate_request_for_request_token(
 def generate_request_for_access_token(
     request_token, auth_server_url=ACCESS_TOKEN_URL):
   """Creates a request to ask the OAuth server for an access token.
-  
+
   Requires a request token which the user has authorized. See the
   documentation on OAuth with Google Data for more details:
   http://code.google.com/apis/accounts/docs/OAuth.html#AccessToken
@@ -673,7 +673,7 @@ def generate_request_for_access_token(
     request_token: An OAuthHmacToken or OAuthRsaToken which the user has
         approved using their browser.
     auth_server_url: (optional) The URL at which the OAuth access token is
-        requested. Defaults to 
+        requested. Defaults to
         https://www.google.com/accounts/OAuthGetAccessToken
 
   Returns:
@@ -687,7 +687,7 @@ def generate_request_for_access_token(
 
 def oauth_token_info_from_body(http_body):
   """Exracts an OAuth request token from the server's response.
- 
+
   Returns:
     A tuple of strings containing the OAuth token and token secret. If
     neither of these are present in the body, returns (None, None)
@@ -698,7 +698,7 @@ def oauth_token_info_from_body(http_body):
     if pair.startswith('oauth_token='):
       token = urllib.unquote(pair[len('oauth_token='):])
     if pair.startswith('oauth_token_secret='):
-      token_secret = urllib.unquote(pair[len('oauth_token_secret='):]) 
+      token_secret = urllib.unquote(pair[len('oauth_token_secret='):])
   return (token, token_secret)
 
 
@@ -726,7 +726,7 @@ def generate_oauth_authorization_url(
     token, next=None, hd=DEFAULT_DOMAIN, hl=None, btmpl=None,
     auth_server=OAUTH_AUTHORIZE_URL):
   """Creates a URL for the page where the request token can be authorized.
-  
+
   Args:
     token: str The request token from the OAuth server.
     next: str (optional) URL the user should be redirected to after granting
@@ -741,10 +741,10 @@ def generate_oauth_authorization_url(
     btmpl: str (optional) Forces a mobile version of the approval page. The
         only accepted value is 'mobile'.
     auth_server: str (optional) The start of the token authorization web
-        page. Defaults to 
+        page. Defaults to
         'https://www.google.com/accounts/OAuthAuthorizeToken'
 
-  Returns: 
+  Returns:
     An atom.http_core.Uri pointing to the token authorization page where the
     user may allow or deny this app to access their Google data.
   """
@@ -758,7 +758,7 @@ def generate_oauth_authorization_url(
   if btmpl is not None:
     uri.query['btmpl'] = btmpl
   return uri
-  
+
 
 def oauth_token_info_from_url(url):
   """Exracts an OAuth access token from the redirected page's URL.
@@ -783,7 +783,7 @@ def authorize_request_token(request_token, url):
 
   Modifies the request_token object passed in by setting and unsetting the
   necessary fields to allow this token to form a valid upgrade request.
-  
+
   Args:
     request_token: The OAuth request token which has been authorized by the
         user. In order for this token to be upgraded to an access token,
@@ -809,7 +809,7 @@ AuthorizeRequestToken = authorize_request_token
 
 def upgrade_to_access_token(request_token, server_response_body):
   """Extracts access token information from response to an upgrade request.
-  
+
   Once the server has responded with the new token info for the OAuth
   access token, this method modifies the request_token to set and unset
   necessary fields to create valid OAuth authorization headers for requests.
@@ -859,7 +859,7 @@ class OAuthHmacToken(object):
       self, google_apps_domain=DEFAULT_DOMAIN, language=None, btmpl=None,
       auth_server=OAUTH_AUTHORIZE_URL):
     """Creates the URL at which the user can authorize this app to access.
-    
+
     Args:
       google_apps_domain: str (optional) If the user should be signing in
           using an account under a known Google Apps domain, provide the
@@ -867,7 +867,7 @@ class OAuthHmacToken(object):
           will be used, and the user will be prompted to select an account
           if they are signed in with a Google Account and Google Apps
           accounts.
-      language: str (optional) An ISO 639 country code identifying what 
+      language: str (optional) An ISO 639 country code identifying what
           language the approval page should be translated in (for example,
           'en' for English). The default is the user's selected language.
       btmpl: str (optional) Forces a mobile version of the approval page. The
@@ -947,7 +947,7 @@ class OAuthRsaToken(OAuthHmacToken):
 
 def _join_token_parts(*args):
   """"Escapes and combines all strings passed in.
-  
+
   Used to convert a token object's members into a string instead of
   using pickle.
 
@@ -979,7 +979,7 @@ def _split_token_parts(blob):
 
 def token_to_blob(token):
   """Serializes the token data as a string for storage in a datastore.
-  
+
   Supported token classes: ClientLoginToken, AuthSubToken, SecureAuthSubToken,
   OAuthRsaToken, and OAuthHmacToken.
 
@@ -989,7 +989,7 @@ def token_to_blob(token):
   Raises:
     UnsupportedTokenType if the token is not one of the supported token
     classes listed above.
-  
+
   Returns:
     A string represenging this token. The string can be converted back into
     an equivalent token object using token_from_blob. Note that any members
@@ -1037,7 +1037,7 @@ def token_from_blob(blob):
   Raises:
     UnsupportedTokenType if the token is not one of the supported token
     classes listed above.
- 
+
   Returns:
     A new token object with members set to the values serialized in the
     blob string. Note that any members which were set to '' in the original

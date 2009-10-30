@@ -51,7 +51,7 @@ class SpreadsheetsClient(gdata.client.GDClient):
                        desired_class=gdata.spreadsheets.data.SpreadsheetsFeed,
                        **kwargs):
     """Obtains a feed with the spreadsheets belonging to the current user.
-    
+
     Args:
       auth_token: An object which sets the Authorization HTTP header in its
                   modify_request method. Recommended classes include
@@ -77,7 +77,7 @@ class SpreadsheetsClient(gdata.client.GDClient):
                      desired_class=gdata.spreadsheets.data.WorksheetsFeed,
                      **kwargs):
     """Finds the worksheets within a given spreadsheet.
-   
+
     Args:
       spreadsheet_key: str, The unique ID of this containing spreadsheet. This
                        can be the ID from the URL or as provided in a
@@ -106,7 +106,7 @@ class SpreadsheetsClient(gdata.client.GDClient):
   def add_worksheet(self, spreadsheet_key, title, rows, cols,
                     auth_token=None, **kwargs):
     """Creates a new worksheet entry in the spreadsheet.
-    
+
     Args:
       spreadsheet_key: str, The unique ID of this containing spreadsheet. This
                        can be the ID from the URL or as provided in a
@@ -239,7 +239,7 @@ class SpreadsheetsClient(gdata.client.GDClient):
   def add_record(self, spreadsheet_key, table_id, fields,
                  title=None, auth_token=None, **kwargs):
     """Adds a new row to the table.
-    
+
     Args:
       spreadsheet_key: str, The unique ID of this containing spreadsheet. This
                        can be the ID from the URL or as provided in a
@@ -323,7 +323,7 @@ class SpreadsheetQuery(gdata.client.Query):
     gdata.client._add_query_param('title-exact', self.title_exact,
                                   http_request)
     gdata.client.Query.modify_request(self, http_request)
-  
+
   ModifyRequest = modify_request
 
 
@@ -340,14 +340,14 @@ class ListQuery(gdata.client.Query):
       order_by: str Specifies what column to use in ordering the entries in
                 the feed. By position (the default): 'position' returns
                 rows in the order in which they appear in the GUI. Row 1, then
-                row 2, then row 3, and so on. By column: 
+                row 2, then row 3, and so on. By column:
                 'column:columnName' sorts rows in ascending order based on the
                 values in the column with the given columnName, where
                 columnName is the value in the header row for that column.
       reverse: str Specifies whether to sort in descending or ascending order.
                Reverses default sort order: 'true' results in a descending
-               sort; 'false' (the default) results in an ascending sort. 
-      sq: str Structured query on the full text in the worksheet. 
+               sort; 'false' (the default) results in an ascending sort.
+      sq: str Structured query on the full text in the worksheet.
           [columnName][binaryOperator][value]
           Supported binaryOperators are:
           - (), for overriding order of operations
@@ -366,7 +366,7 @@ class ListQuery(gdata.client.Query):
     gdata.client._add_query_param('reverse', self.reverse, http_request)
     gdata.client._add_query_param('sq', self.sq, http_request)
     gdata.client.Query.modify_request(self, http_request)
-  
+
   ModifyRequest = modify_request
 
 
@@ -411,5 +411,5 @@ class CellQuery(gdata.client.Query):
     gdata.client._add_query_param('return-empty', self.return_empty,
                                   http_request)
     gdata.client.Query.modify_request(self, http_request)
-  
+
   ModifyRequest = modify_request

@@ -74,7 +74,7 @@ class BloggerEntry(gdata.data.GDEntry):
       if link.rel == 'alternate':
         return BLOG_NAME_PATTERN.match(link.href).group(2)
     return None
-   
+
   GetBlogName = get_blog_name
 
 
@@ -138,9 +138,9 @@ class Comment(BloggerEntry):
     if self.id.text:
       return COMMENT_ID_PATTERN.match(self.id.text).group(1)
     return None
-     
+
   GetCommentId = get_comment_id
 
 
 class CommentFeed(gdata.data.GDFeed):
-  entry = [Comment] 
+  entry = [Comment]

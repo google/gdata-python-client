@@ -105,7 +105,7 @@ class SettingsUtil(object):
         service = self.get_param(
             'service', 'What is the name of the service you wish to access?'
             '\n(See list:'
-            ' http://code.google.com/apis/gdata/faq.html#clientlogin)', 
+            ' http://code.google.com/apis/gdata/faq.html#clientlogin)',
             reuse=True)
       if source is None:
         source = self.get_param('source', ask=False, reuse=True)
@@ -117,7 +117,7 @@ class SettingsUtil(object):
       auth_url = None
       single_use_token = None
       rsa_private_key = self.get_param(
-          'rsa_private_key', 
+          'rsa_private_key',
           'If you want to use secure mode AuthSub, please provide the\n'
           ' location of your RSA private key which corresponds to the\n'
           ' certificate you have uploaded for your domain. If you do not\n'
@@ -130,7 +130,7 @@ class SettingsUtil(object):
           private_key_file.close()
         except IOError:
           print 'Unable to read private key from file'
-  
+
       if private_key is not None:
         if client.auth_token is None:
           if session_token:
@@ -146,11 +146,11 @@ class SettingsUtil(object):
             self.prefs['client_auth_token'] = gdata.gauth.token_to_blob(
                 client.auth_token)
             return
-   
+
         auth_url = gdata.gauth.generate_auth_sub_url(
             'http://gauthmachine.appspot.com/authsub', scopes, True)
         print 'with a private key, get ready for this URL', auth_url
-  
+
       else:
         if client.auth_token is None:
           if session_token:
@@ -166,7 +166,7 @@ class SettingsUtil(object):
             self.prefs['client_auth_token'] = gdata.gauth.token_to_blob(
                 client.auth_token)
             return
-  
+
           auth_url = gdata.gauth.generate_auth_sub_url(
               'http://gauthmachine.appspot.com/authsub', scopes)
 
@@ -183,7 +183,7 @@ class SettingsUtil(object):
         single_use_token = gdata.gauth.AuthSubToken(token_value, scopes)
       client.auth_token = single_use_token
       client.upgrade_token()
-  
+
     elif auth_type == OAUTH:
       if oauth_type is None:
         oauth_type = int(self.get_param(
@@ -192,11 +192,11 @@ class SettingsUtil(object):
             '1. use an HMAC signature using your consumer key and secret\n'
             '2. use RSA with your private key to sign requests\n',
             reuse=True))
-  
+
       consumer_key = self.get_param(
           'consumer_key', 'Please enter your OAuth conumer key '
           'which identifies your app', reuse=True)
-  
+
       if oauth_type == HMAC:
         consumer_secret = self.get_param(
             'consumer_secret', 'Please enter your OAuth conumer secret '
@@ -209,7 +209,7 @@ class SettingsUtil(object):
             consumer_secret=consumer_secret)
       elif oauth_type == RSA:
         rsa_private_key = self.get_param(
-            'rsa_private_key', 
+            'rsa_private_key',
             'Please provide the location of your RSA private key which\n'
             ' corresponds to the certificate you have uploaded for your'
             ' domain.',
@@ -220,7 +220,7 @@ class SettingsUtil(object):
           private_key_file.close()
         except IOError:
           print 'Unable to read private key from file'
-          
+
         request_token = client.get_oauth_token(
             scopes, 'http://gauthmachine.appspot.com/oauth', consumer_key,
             rsa_private_key=private_key)
@@ -260,10 +260,10 @@ def authorize_client(client, auth_type=None, service=None, source=None,
                                    scopes=scopes, oauth_type=oauth_type,
                                    consumer_key=consumer_key,
                                    consumer_secret=consumer_secret)
- 
+
 
 def print_options():
   """Displays usage information, available command line params."""
   # TODO: fill in the usage description for authorizing the client.
   print ''
-  
+

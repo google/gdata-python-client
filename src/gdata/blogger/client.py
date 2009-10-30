@@ -48,22 +48,22 @@ class BloggerClient(gdata.client.GDClient):
   auth_serice = 'blogger'
   auth_scopes = ['http://www.blogger.com/feeds/']
 
-  def get_blogs(self, user_id='default', auth_token=None, 
+  def get_blogs(self, user_id='default', auth_token=None,
                 desired_class=gdata.blogger.data.BlogFeed, **kwargs):
     return self.get_feed(BLOGS_URL % user_id, auth_token=auth_token,
                          desired_class=desired_class, **kwargs)
 
   GetBlogs = get_blogs
 
-  def get_posts(self, blog_id, auth_token=None, 
+  def get_posts(self, blog_id, auth_token=None,
                 desired_class=gdata.blogger.data.BlogPostFeed, query=None,
                 **kwargs):
     return self.get_feed(BLOG_POST_URL % blog_id, auth_token=auth_token,
                          desired_class=desired_class, query=query, **kwargs)
 
   GetPosts = get_posts
- 
-  def get_post_comments(self, blog_id, post_id,  auth_token=None, 
+
+  def get_post_comments(self, blog_id, post_id,  auth_token=None,
                         desired_class=gdata.blogger.data.CommentFeed,
                         query=None, **kwargs):
     return self.get_feed(BLOG_POST_COMMENTS_URL % (blog_id, post_id),
@@ -133,7 +133,7 @@ class BloggerClient(gdata.client.GDClient):
     response = gdata.client.GDClient.delete(self, entry_or_uri,
                                             auth_token=auth_token, **kwargs)
     # TODO: if GDClient.delete raises and exception, the entry's etag may be
-    # left as None. Should revisit this logic.  
+    # left as None. Should revisit this logic.
     entry_or_uri.etag = old_etag
     return response
 

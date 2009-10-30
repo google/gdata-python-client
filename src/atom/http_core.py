@@ -52,14 +52,14 @@ MIME_BOUNDARY = 'END_OF_PART'
 
 class HttpRequest(object):
   """Contains all of the parameters for an HTTP 1.1 request.
- 
+
   The HTTP headers are represented by a dictionary, and it is the
   responsibility of the user to ensure that duplicate field names are combined
   into one header value according to the rules in section 4.2 of RFC 2616.
   """
   method = None
   uri = None
- 
+
   def __init__(self, uri=None, method=None, headers=None):
     """Construct an HTTP request.
 
@@ -80,7 +80,7 @@ class HttpRequest(object):
 
   def add_body_part(self, data, mime_type, size=None):
     """Adds data to the HTTP request body.
-   
+
     If more than one part is added, this is assumed to be a mime-multipart
     request. This method is designed to create MIME 1.0 requests as specified
     in RFC 1341.
@@ -153,7 +153,7 @@ class HttpRequest(object):
   def add_form_inputs(self, form_data,
                       mime_type='application/x-www-form-urlencoded'):
     """Form-encodes and adds data to the request body.
-    
+
     Args:
       form_data: dict or sequnce or two member tuples which contains the
                  form keys and values.
@@ -189,7 +189,7 @@ class Uri(object):
   host = None
   port = None
   path = None
- 
+
   def __init__(self, scheme=None, host=None, port=None, path=None, query=None):
     """Constructor for a URI.
 
@@ -213,7 +213,7 @@ class Uri(object):
       self.port = port
     if path:
       self.path = path
-     
+
   def _get_query_string(self):
     param_pairs = []
     for key, value in self.query.iteritems():
@@ -232,7 +232,7 @@ class Uri(object):
       return '?'.join([path, param_string])
     else:
       return path
-     
+
   def _to_string(self):
     if self.scheme is None and self.port == 443:
       scheme = 'https'
@@ -252,7 +252,7 @@ class Uri(object):
 
   def __str__(self):
     return self._to_string()
-     
+
   def modify_request(self, http_request=None):
     """Sets HTTP request components based on the URI."""
     if http_request is None:
@@ -277,7 +277,7 @@ class Uri(object):
 
   def parse_uri(uri_string):
     """Creates a Uri object which corresponds to the URI string.
- 
+
     This method can accept partial URIs, but it will leave missing
     members of the Uri unset.
     """
@@ -319,7 +319,7 @@ class HttpResponse(object):
   status = None
   reason = None
   _body = None
- 
+
   def __init__(self, status=None, reason=None, headers=None, body=None):
     self._headers = headers or {}
     if status is not None:
@@ -331,7 +331,7 @@ class HttpResponse(object):
         self._body = body
       else:
         self._body = StringIO.StringIO(body)
-         
+
   def getheader(self, name, default=None):
     if name in self._headers:
       return self._headers[name]
@@ -340,7 +340,7 @@ class HttpResponse(object):
 
   def getheaders(self):
     return self._headers
-   
+
   def read(self, amt=None):
     if self._body is None:
       return None
@@ -353,16 +353,16 @@ class HttpResponse(object):
 class HttpClient(object):
   """Performs HTTP requests using httplib."""
   debug = None
- 
+
   def request(self, http_request):
-    return self._http_request(http_request.method, http_request.uri, 
+    return self._http_request(http_request.method, http_request.uri,
                               http_request.headers, http_request._body_parts)
 
   Request = request
 
   def _get_connection(self, uri, headers=None):
     """Opens a socket connection to the server to set up an HTTP request.
-    
+
     Args:
       uri: The full URL for the request as a Uri object.
       headers: A dict of string pairs containing the HTTP headers for the
@@ -383,11 +383,11 @@ class HttpClient(object):
 
   def _http_request(self, method, uri, headers=None, body_parts=None):
     """Makes an HTTP request using httplib.
-   
+
     Args:
       method: str example: 'GET', 'POST', 'PUT', 'DELETE', etc.
       uri: str or atom.http_core.Uri
-      headers: dict of strings mapping to strings which will be sent as HTTP 
+      headers: dict of strings mapping to strings which will be sent as HTTP
                headers in the request.
       body_parts: list of strings, objects with a read method, or objects
                   which can be converted to strings using str. Each of these
@@ -396,7 +396,7 @@ class HttpClient(object):
     if isinstance(uri, (str, unicode)):
       uri = Uri.parse_uri(uri)
     connection = self._get_connection(uri, headers=headers)
- 
+
     if self.debug:
       connection.debuglevel = 1
 
@@ -430,7 +430,7 @@ class HttpClient(object):
     if body_parts:
       for part in body_parts:
         _send_data_part(part, connection)
-   
+
     # Return the HTTP Response from the server.
     return connection.getresponse()
 

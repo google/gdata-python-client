@@ -32,11 +32,11 @@ THR_NAMESPACE = 'http://purl.org/syndication/thread/1.0'
 
 class BloggerEntry(gdata.GDataEntry):
   """Adds convenience methods inherited by all Blogger entries."""
-  
+
   blog_name_pattern = re.compile('(http://)(\w*)')
   blog_id_pattern = re.compile('(tag:blogger.com,1999:blog-)(\w*)')
   blog_id2_pattern = re.compile('tag:blogger.com,1999:user-(\d+)\.blog-(\d+)')
-  
+
   def GetBlogId(self):
     """Extracts the Blogger id of this blog.
     This method is useful when contructing URLs by hand. The blog id is
@@ -82,7 +82,7 @@ class BlogFeed(gdata.GDataFeed):
 
   _children = gdata.GDataFeed._children.copy()
   _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', [BlogEntry])
-  
+
 
 def BlogFeedFromString(xml_string):
   return atom.CreateClassFromXMLString(BlogFeed, xml_string)
@@ -92,9 +92,9 @@ class BlogPostEntry(BloggerEntry):
   """Describes a blog post entry in the feed of a blog's posts."""
 
   post_id_pattern = re.compile('(tag:blogger.com,1999:blog-)(\w*)(.post-)(\w*)')
-  
+
   def AddLabel(self, label):
-    """Adds a label to the blog post. 
+    """Adds a label to the blog post.
 
     The label is represented by an Atom category element, so this method
     is shorthand for appending a new atom.Category object.
@@ -106,7 +106,7 @@ class BlogPostEntry(BloggerEntry):
 
   def GetPostId(self):
     """Extracts the postID string from the entry's Atom id.
-    
+
     Returns: A string of digits which identify this post within the blog.
     """
     if self.id.text:
@@ -120,7 +120,7 @@ def BlogPostEntryFromString(xml_string):
 
 class BlogPostFeed(gdata.GDataFeed):
   """Describes a feed of a blog's posts."""
-  
+
   _children = gdata.GDataFeed._children.copy()
   _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', [BlogPostEntry])
 
@@ -138,7 +138,7 @@ class InReplyTo(atom.AtomBase):
   _attributes['source'] = 'source'
   _attributes['type'] = 'type'
 
-  def __init__(self, href=None, ref=None, source=None, type=None, 
+  def __init__(self, href=None, ref=None, source=None, type=None,
       extension_elements=None, extension_attributes=None, text=None):
     self.href = href
     self.ref = ref
@@ -154,7 +154,7 @@ def InReplyToFromString(xml_string):
 
 
 class CommentEntry(BloggerEntry):
-  """Describes a blog post comment entry in the feed of a blog post's 
+  """Describes a blog post comment entry in the feed of a blog post's
   comments."""
 
   _children = BloggerEntry._children.copy()
@@ -162,28 +162,28 @@ class CommentEntry(BloggerEntry):
 
   comment_id_pattern = re.compile('.*-(\w*)$')
 
-  def __init__(self, author=None, category=None, content=None, 
+  def __init__(self, author=None, category=None, content=None,
       contributor=None, atom_id=None, link=None, published=None, rights=None,
       source=None, summary=None, control=None, title=None, updated=None,
-      in_reply_to=None, extension_elements=None, extension_attributes=None, 
+      in_reply_to=None, extension_elements=None, extension_attributes=None,
       text=None):
-    BloggerEntry.__init__(self, author=author, category=category, 
+    BloggerEntry.__init__(self, author=author, category=category,
         content=content, contributor=contributor, atom_id=atom_id, link=link,
-        published=published, rights=rights, source=source, summary=summary, 
-        control=control, title=title, updated=updated, 
-        extension_elements=extension_elements, 
+        published=published, rights=rights, source=source, summary=summary,
+        control=control, title=title, updated=updated,
+        extension_elements=extension_elements,
         extension_attributes=extension_attributes, text=text)
     self.in_reply_to = in_reply_to
 
   def GetCommentId(self):
     """Extracts the commentID string from the entry's Atom id.
-    
+
     Returns: A string of digits which identify this post within the blog.
     """
     if self.id.text:
       return self.comment_id_pattern.match(self.id.text).group(1)
     return None
-    
+
 
 def CommentEntryFromString(xml_string):
   return atom.CreateClassFromXMLString(CommentEntry, xml_string)

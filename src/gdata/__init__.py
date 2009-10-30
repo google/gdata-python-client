@@ -65,7 +65,7 @@ class MediaSource(object):
   """GData Entries can refer to media sources, so this class provides a
   place to store references to these objects along with some metadata.
   """
-  
+
   def __init__(self, file_handle=None, content_type=None, content_length=None,
       file_path=None, file_name=None):
     """Creates an object of type MediaSource.
@@ -104,7 +104,7 @@ class MediaSource(object):
     self.content_type = content_type
     self.content_length = os.path.getsize(file_name)
     self.file_name = os.path.basename(file_name)
-  
+
 
 class LinkFinder(atom.LinkFinder):
   """An "interface" providing methods to find link elements
@@ -134,7 +134,7 @@ class LinkFinder(atom.LinkFinder):
       if a_link.rel == 'edit':
         return a_link
     return None
-    
+
   def GetEditMediaLink(self):
     """The Picasa API mistakenly returns media-edit rather than edit-media, but
     this may change soon.
@@ -159,7 +159,7 @@ class LinkFinder(atom.LinkFinder):
 
   def GetPostLink(self):
     """Get a link containing the POST target URL.
-    
+
     The POST target URL is used to insert new entries.
 
     Returns:
@@ -197,7 +197,7 @@ class LinkFinder(atom.LinkFinder):
 
 class TotalResults(atom.AtomBase):
   """opensearch:TotalResults for a GData feed"""
-  
+
   _tag = 'totalResults'
   _namespace = OPENSEARCH_NAMESPACE
   _children = atom.AtomBase._children.copy()
@@ -213,7 +213,7 @@ class TotalResults(atom.AtomBase):
 def TotalResultsFromString(xml_string):
   return atom.CreateClassFromXMLString(TotalResults, xml_string)
 
-  
+
 class StartIndex(atom.AtomBase):
   """The opensearch:startIndex element in GData feed"""
 
@@ -222,7 +222,7 @@ class StartIndex(atom.AtomBase):
   _children = atom.AtomBase._children.copy()
   _attributes = atom.AtomBase._attributes.copy()
 
-  def __init__(self, extension_elements=None, 
+  def __init__(self, extension_elements=None,
       extension_attributes=None, text=None):
     self.text = text
     self.extension_elements = extension_elements or []
@@ -254,9 +254,9 @@ def ItemsPerPageFromString(xml_string):
 
 class ExtendedProperty(atom.AtomBase):
   """The Google Data extendedProperty element.
-  
+
   Used to store arbitrary key-value information specific to your
-  application. The value can either be a text string stored as an XML 
+  application. The value can either be a text string stored as an XML
   attribute (.value), or an XML node (XmlBlob) as a child element.
 
   This element is used in the Google Calendar data API and the Google
@@ -280,7 +280,7 @@ class ExtendedProperty(atom.AtomBase):
 
   def GetXmlBlobExtensionElement(self):
     """Returns the XML blob as an atom.ExtensionElement.
-    
+
     Returns:
       An atom.ExtensionElement representing the blob's XML, or None if no
       blob was set.
@@ -339,7 +339,7 @@ class GDataEntry(atom.Entry, LinkFinder):
   def __GetId(self):
     return self.__id
 
-  # This method was created to strip the unwanted whitespace from the id's 
+  # This method was created to strip the unwanted whitespace from the id's
   # text node.
   def __SetId(self, id):
     self.__id = id
@@ -347,7 +347,7 @@ class GDataEntry(atom.Entry, LinkFinder):
       self.__id.text = id.text.strip()
 
   id = property(__GetId, __SetId)
-  
+
   def IsMedia(self):
     """Determines whether or not an entry is a GData Media entry.
     """
@@ -355,7 +355,7 @@ class GDataEntry(atom.Entry, LinkFinder):
       return True
     else:
       return False
-  
+
   def GetMediaURL(self):
     """Returns the URL to the media content, if the entry is a media entry.
     Otherwise returns None.
@@ -378,9 +378,9 @@ class GDataFeed(atom.Feed, LinkFinder):
   _namespace = atom.ATOM_NAMESPACE
   _children = atom.Feed._children.copy()
   _attributes = atom.Feed._attributes.copy()
-  _children['{%s}totalResults' % OPENSEARCH_NAMESPACE] = ('total_results', 
+  _children['{%s}totalResults' % OPENSEARCH_NAMESPACE] = ('total_results',
                                                           TotalResults)
-  _children['{%s}startIndex' % OPENSEARCH_NAMESPACE] = ('start_index', 
+  _children['{%s}startIndex' % OPENSEARCH_NAMESPACE] = ('start_index',
                                                         StartIndex)
   _children['{%s}itemsPerPage' % OPENSEARCH_NAMESPACE] = ('items_per_page',
                                                           ItemsPerPage)
@@ -409,34 +409,34 @@ class GDataFeed(atom.Feed, LinkFinder):
   generator = property(__GetGenerator, __SetGenerator)
 
   def __init__(self, author=None, category=None, contributor=None,
-      generator=None, icon=None, atom_id=None, link=None, logo=None, 
-      rights=None, subtitle=None, title=None, updated=None, entry=None, 
+      generator=None, icon=None, atom_id=None, link=None, logo=None,
+      rights=None, subtitle=None, title=None, updated=None, entry=None,
       total_results=None, start_index=None, items_per_page=None,
       extension_elements=None, extension_attributes=None, text=None):
     """Constructor for Source
-    
+
     Args:
       author: list (optional) A list of Author instances which belong to this
           class.
       category: list (optional) A list of Category instances
       contributor: list (optional) A list on Contributor instances
-      generator: Generator (optional) 
-      icon: Icon (optional) 
+      generator: Generator (optional)
+      icon: Icon (optional)
       id: Id (optional) The entry's Id element
       link: list (optional) A list of Link instances
-      logo: Logo (optional) 
+      logo: Logo (optional)
       rights: Rights (optional) The entry's Rights element
       subtitle: Subtitle (optional) The entry's subtitle element
       title: Title (optional) the entry's title element
       updated: Updated (optional) the entry's updated element
-      entry: list (optional) A list of the Entry instances contained in the 
+      entry: list (optional) A list of the Entry instances contained in the
           feed.
-      text: String (optional) The text contents of the element. This is the 
-          contents of the Entry's XML text node. 
+      text: String (optional) The text contents of the element. This is the
+          contents of the Entry's XML text node.
           (Example: <foo>This is the text</foo>)
       extension_elements: list (optional) A list of ExtensionElement instances
           which are children of this element.
-      extension_attributes: dict (optional) A dictionary of strings which are 
+      extension_attributes: dict (optional) A dictionary of strings which are
           the values for additional XML attributes of this element.
     """
 
@@ -483,13 +483,13 @@ class BatchOperation(atom.AtomBase):
   _attributes = atom.AtomBase._attributes.copy()
   _attributes['type'] = 'type'
 
-  def __init__(self, op_type=None, extension_elements=None, 
+  def __init__(self, op_type=None, extension_elements=None,
                extension_attributes=None,
                text=None):
     self.type = op_type
-    atom.AtomBase.__init__(self, 
-                           extension_elements=extension_elements, 
-                           extension_attributes=extension_attributes, 
+    atom.AtomBase.__init__(self,
+                           extension_elements=extension_elements,
+                           extension_attributes=extension_attributes,
                            text=text)
 
 
@@ -499,8 +499,8 @@ def BatchOperationFromString(xml_string):
 
 class BatchStatus(atom.AtomBase):
   """The batch:status element present in a batch response entry.
-  
-  A status element contains the code (HTTP response code) and 
+
+  A status element contains the code (HTTP response code) and
   reason as elements. In a single request these fields would
   be part of the HTTP response, but in a batch request each
   Entry operation has a corresponding Entry in the response
@@ -517,13 +517,13 @@ class BatchStatus(atom.AtomBase):
   _attributes['reason'] = 'reason'
   _attributes['content-type'] = 'content_type'
 
-  def __init__(self, code=None, reason=None, content_type=None, 
+  def __init__(self, code=None, reason=None, content_type=None,
                extension_elements=None, extension_attributes=None, text=None):
     self.code = code
     self.reason = reason
     self.content_type = content_type
     atom.AtomBase.__init__(self, extension_elements=extension_elements,
-                           extension_attributes=extension_attributes, 
+                           extension_attributes=extension_attributes,
                            text=text)
 
 
@@ -543,7 +543,7 @@ class BatchEntry(GDataEntry):
   _tag = GDataEntry._tag
   _namespace = GDataEntry._namespace
   _children = GDataEntry._children.copy()
-  _children['{%s}operation' % BATCH_NAMESPACE] = ('batch_operation', BatchOperation) 
+  _children['{%s}operation' % BATCH_NAMESPACE] = ('batch_operation', BatchOperation)
   _children['{%s}id' % BATCH_NAMESPACE] = ('batch_id', BatchId)
   _children['{%s}status' % BATCH_NAMESPACE] = ('batch_status', BatchStatus)
   _attributes = GDataEntry._attributes.copy()
@@ -556,11 +556,11 @@ class BatchEntry(GDataEntry):
     self.batch_operation = batch_operation
     self.batch_id = batch_id
     self.batch_status = batch_status
-    GDataEntry.__init__(self, author=author, category=category, 
-        content=content, contributor=contributor, atom_id=atom_id, link=link, 
-        published=published, rights=rights, source=source, summary=summary, 
-        control=control, title=title, updated=updated, 
-        extension_elements=extension_elements, 
+    GDataEntry.__init__(self, author=author, category=category,
+        content=content, contributor=contributor, atom_id=atom_id, link=link,
+        published=published, rights=rights, source=source, summary=summary,
+        control=control, title=title, updated=updated,
+        extension_elements=extension_elements,
         extension_attributes=extension_attributes, text=text)
 
 
@@ -570,7 +570,7 @@ def BatchEntryFromString(xml_string):
 
 class BatchInterrupted(atom.AtomBase):
   """The batch:interrupted element sent if batch request was interrupted.
-  
+
   Only appears in a feed if some of the batch entries could not be processed.
   See: http://code.google.com/apis/gdata/batch.html#Handling_Errors
   """
@@ -584,14 +584,14 @@ class BatchInterrupted(atom.AtomBase):
   _attributes['failures'] = 'failures'
   _attributes['parsed'] = 'parsed'
 
-  def __init__(self, reason=None, success=None, failures=None, parsed=None, 
+  def __init__(self, reason=None, success=None, failures=None, parsed=None,
                extension_elements=None, extension_attributes=None, text=None):
     self.reason = reason
     self.success = success
     self.failures = failures
     self.parsed = parsed
     atom.AtomBase.__init__(self, extension_elements=extension_elements,
-                           extension_attributes=extension_attributes, 
+                           extension_attributes=extension_attributes,
                            text=text)
 
 
@@ -616,24 +616,24 @@ class BatchFeed(GDataFeed):
       interrupted=None,
       extension_elements=None, extension_attributes=None, text=None):
     self.interrupted = interrupted
-    GDataFeed.__init__(self, author=author, category=category, 
-                       contributor=contributor, generator=generator, 
-                       icon=icon, atom_id=atom_id, link=link, 
+    GDataFeed.__init__(self, author=author, category=category,
+                       contributor=contributor, generator=generator,
+                       icon=icon, atom_id=atom_id, link=link,
                        logo=logo, rights=rights, subtitle=subtitle,
                        title=title, updated=updated, entry=entry,
                        total_results=total_results, start_index=start_index,
                        items_per_page=items_per_page,
-                       extension_elements=extension_elements, 
+                       extension_elements=extension_elements,
                        extension_attributes=extension_attributes,
                        text=text)
 
-  def AddBatchEntry(self, entry=None, id_url_string=None, 
+  def AddBatchEntry(self, entry=None, id_url_string=None,
                      batch_id_string=None, operation_string=None):
     """Logic for populating members of a BatchEntry and adding to the feed.
 
-    
+
     If the entry is not a BatchEntry, it is converted to a BatchEntry so
-    that the batch specific members will be present. 
+    that the batch specific members will be present.
 
     The id_url_string can be used in place of an entry if the batch operation
     applies to a URL. For example query and delete operations require just
@@ -641,15 +641,15 @@ class BatchFeed(GDataFeed):
     id_url_string is sent instead of an entry, a BatchEntry is created and
     added to the feed.
 
-    This method also assigns the desired batch id to the entry so that it 
+    This method also assigns the desired batch id to the entry so that it
     can be referenced in the server's response. If the batch_id_string is
     None, this method will assign a batch_id to be the index at which this
     entry will be in the feed's entry list.
-    
+
     Args:
       entry: BatchEntry, atom.Entry, or another Entry flavor (optional) The
           entry which will be sent to the server as part of the batch request.
-          The item must have a valid atom id so that the server knows which 
+          The item must have a valid atom id so that the server knows which
           entry this request references.
       id_url_string: str (optional) The URL of the entry to be acted on. You
           can find this URL in the text member of the atom id for an entry.
@@ -663,7 +663,7 @@ class BatchFeed(GDataFeed):
       operation_string: str (optional) The desired batch operation which will
           set the batch_operation.type member of the entry. Options are
           'insert', 'update', 'delete', and 'query'
-    
+
     Raises:
       MissingRequiredParameters: Raised if neither an id_ url_string nor an
           entry are provided in the request.
@@ -704,12 +704,12 @@ class BatchFeed(GDataFeed):
     """
     entry = self.AddBatchEntry(entry=entry, batch_id_string=batch_id_string,
                                operation_string=BATCH_INSERT)
-  
+
   def AddUpdate(self, entry, batch_id_string=None):
     """Add an update request to the list of batch operations in this feed.
 
     Sets the operation type of the entry to insert if it is not already set
-    and assigns the desired batch id to the entry so that it can be 
+    and assigns the desired batch id to the entry so that it can be
     referenced in the server's response.
 
     Args:
@@ -728,27 +728,27 @@ class BatchFeed(GDataFeed):
     """Adds a delete request to the batch request feed.
 
     This method takes either the url_string which is the atom id of the item
-    to be deleted, or the entry itself. The atom id of the entry must be 
+    to be deleted, or the entry itself. The atom id of the entry must be
     present so that the server knows which entry should be deleted.
 
     Args:
       url_string: str (optional) The URL of the entry to be deleted. You can
-         find this URL in the text member of the atom id for an entry. 
+         find this URL in the text member of the atom id for an entry.
       entry: BatchEntry (optional) The entry to be deleted.
       batch_id_string: str (optional)
 
     Raises:
-      MissingRequiredParameters: Raised if neither a url_string nor an entry 
-          are provided in the request. 
+      MissingRequiredParameters: Raised if neither a url_string nor an entry
+          are provided in the request.
     """
-    entry = self.AddBatchEntry(entry=entry, id_url_string=url_string, 
-                               batch_id_string=batch_id_string, 
+    entry = self.AddBatchEntry(entry=entry, id_url_string=url_string,
+                               batch_id_string=batch_id_string,
                                operation_string=BATCH_DELETE)
 
   def AddQuery(self, url_string=None, entry=None, batch_id_string=None):
     """Adds a query request to the batch request feed.
 
-    This method takes either the url_string which is the query URL 
+    This method takes either the url_string which is the query URL
     whose results will be added to the result feed. The query URL will
     be encapsulated in a BatchEntry, and you may pass in the BatchEntry
     with a query URL instead of sending a url_string.
@@ -770,11 +770,11 @@ class BatchFeed(GDataFeed):
       if link.rel == 'http://schemas.google.com/g/2005#batch':
         return link
     return None
- 
+
 
 def BatchFeedFromString(xml_string):
   return atom.CreateClassFromXMLString(BatchFeed, xml_string)
-  
+
 
 class EntryLink(atom.AtomBase):
   """The gd:entryLink element"""
@@ -788,9 +788,9 @@ class EntryLink(atom.AtomBase):
   _attributes['rel'] = 'rel'
   _attributes['readOnly'] = 'read_only'
   _attributes['href'] = 'href'
-  
+
   def __init__(self, href=None, read_only=None, rel=None,
-      entry=None, extension_elements=None, 
+      entry=None, extension_elements=None,
       extension_attributes=None, text=None):
     self.href = href
     self.read_only = read_only
@@ -799,7 +799,7 @@ class EntryLink(atom.AtomBase):
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
-    
+
 
 def EntryLinkFromString(xml_string):
   return atom.CreateClassFromXMLString(EntryLink, xml_string)
@@ -821,7 +821,7 @@ class FeedLink(atom.AtomBase):
   def __init__(self, count_hint=None, href=None, read_only=None, rel=None,
       feed=None, extension_elements=None, extension_attributes=None,
       text=None):
-    self.count_hint = count_hint 
+    self.count_hint = count_hint
     self.href = href
     self.read_only = read_only
     self.rel = rel

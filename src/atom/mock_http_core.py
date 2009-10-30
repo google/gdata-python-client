@@ -34,7 +34,7 @@ class MockHttpClient(object):
 
   # The following members are used to construct the session cache temp file
   # name.
-  # These are combined to form the file name 
+  # These are combined to form the file name
   # /tmp/cache_prefix.cache_case_name.cache_test_name
   cache_name_prefix = 'gdata_live_test'
   cache_case_name = ''
@@ -45,21 +45,21 @@ class MockHttpClient(object):
     if real_client is not None:
       self.real_client = real_client
 
-  def add_response(self, http_request, status, reason, headers=None, 
+  def add_response(self, http_request, status, reason, headers=None,
       body=None):
     response = MockHttpResponse(status, reason, headers, body)
     # TODO Scrub the request and the response.
     self._recordings.append((http_request._copy(), response))
 
   AddResponse = add_response
-  
+
   def request(self, http_request):
     """Provide a recorded response, or record a response for replay.
 
     If the real_client is set, the request will be made using the
     real_client, and the response from the server will be recorded.
     If the real_client is None (the default), this method will examine
-    the recordings and find the first which matches. 
+    the recordings and find the first which matches.
     """
     request = http_request._copy()
     _scrub_request(request)
@@ -73,22 +73,22 @@ class MockHttpClient(object):
       # Make an actual request since we can use the real HTTP client.
       response = self.real_client.request(http_request)
       _scrub_response(response)
-      self.add_response(request, response.status, response.reason, 
+      self.add_response(request, response.status, response.reason,
           dict(response.getheaders()), response.read())
       # Return the recording which we just added.
       return self._recordings[-1][1]
     return None
 
   Request = request
-    
+
   def _save_recordings(self, filename):
-    recording_file = open(os.path.join(tempfile.gettempdir(), filename), 
+    recording_file = open(os.path.join(tempfile.gettempdir(), filename),
                           'wb')
     pickle.dump(self._recordings, recording_file)
     recording_file.close()
 
   def _load_recordings(self, filename):
-    recording_file = open(os.path.join(tempfile.gettempdir(), filename), 
+    recording_file = open(os.path.join(tempfile.gettempdir(), filename),
                           'rb')
     self._recordings = pickle.load(recording_file)
     recording_file.close()
@@ -106,9 +106,9 @@ class MockHttpClient(object):
 
   def use_cached_session(self, name=None, real_http_client=None):
     """Attempts to load recordings from a previous live request.
-    
+
     If a temp file with the recordings exists, then it is used to fulfill
-    requests. If the file does not exist, then a real client is used to 
+    requests. If the file does not exist, then a real client is used to
     actually make the desired HTTP requests. Requests and responses are
     recorded and will be written to the desired temprary cache file when
     close_session is called.
@@ -116,12 +116,12 @@ class MockHttpClient(object):
     Args:
       name: str (optional) The file name of session file to be used. The file
             is loaded from the temporary directory of this machine. If no name
-            is passed in, a default name will be constructed using the 
+            is passed in, a default name will be constructed using the
             cache_name_prefix, cache_case_name, and cache_test_name of this
             object.
       real_http_client: atom.http_core.HttpClient the real client to be used
                         if the cached recordings are not found. If the default
-                        value is used, this will be an 
+                        value is used, this will be an
                         atom.http_core.HttpClient.
     """
     if real_http_client is None:
@@ -150,10 +150,10 @@ class MockHttpClient(object):
 
 
 def _match_request(http_request, stored_request):
-  """Determines whether a request is similar enough to a stored request 
+  """Determines whether a request is similar enough to a stored request
      to cause the stored response to be returned."""
   # Check to see if the host names match.
-  if (http_request.uri.host is not None 
+  if (http_request.uri.host is not None
       and http_request.uri.host != stored_request.uri.host):
     return False
   # Check the request path in the URL (/feeds/private/full/x)
@@ -164,30 +164,30 @@ def _match_request(http_request, stored_request):
     return False
   # If there is a gsession ID in either request, make sure that it is matched
   # exactly.
-  elif ('gsessionid' in http_request.uri.query 
+  elif ('gsessionid' in http_request.uri.query
         or 'gsessionid' in stored_request.uri.query):
     if 'gsessionid' not in stored_request.uri.query:
       return False
     elif 'gsessionid' not in http_request.uri.query:
       return False
-    elif (http_request.uri.query['gsessionid'] 
+    elif (http_request.uri.query['gsessionid']
           != stored_request.uri.query['gsessionid']):
       return False
   # Ignores differences in the query params (?start-index=5&max-results=20),
-  # the body of the request, the port number, HTTP headers, just to name a 
+  # the body of the request, the port number, HTTP headers, just to name a
   # few.
   return True
 
 
 def _scrub_request(http_request):
   """ Removes email address and password from a client login request.
-  
+
   Since the mock server saves the request and response in plantext, sensitive
-  information like the password should be removed before saving the 
+  information like the password should be removed before saving the
   recordings. At the moment only requests sent to a ClientLogin url are
   scrubbed.
   """
-  if (http_request and http_request.uri and http_request.uri.path and 
+  if (http_request and http_request.uri and http_request.uri.path and
       http_request.uri.path.endswith('ClientLogin')):
     # Remove the email and password from a ClientLogin request.
     http_request._body_parts = []
@@ -203,7 +203,7 @@ def _scrub_request(http_request):
 def _scrub_response(http_response):
   return http_response
 
-    
+
 class EchoHttpClient(object):
   """Sends the request data back in the response.
 
@@ -218,9 +218,9 @@ class EchoHttpClient(object):
   'Echo-Scheme': The beginning of the URL, usually 'http' or 'https'
   'Echo-Method': The HTTP method being used, 'GET', 'POST', 'PUT', etc.
   """
-  
+
   def request(self, http_request):
-    return self._http_request(http_request.uri, http_request.method, 
+    return self._http_request(http_request.uri, http_request.method,
                               http_request.headers, http_request._body_parts)
 
   def _http_request(self, uri, method, headers=None, body_parts=None):
@@ -252,7 +252,7 @@ class SettableHttpClient(object):
 
   def __init__(self, status, reason, body, headers):
     """Configures the response for the server.
-    
+
     See set_response for details on the arguments to the constructor.
     """
     self.set_response(status, reason, body, headers)
@@ -264,8 +264,8 @@ class SettableHttpClient(object):
     Args:
       status: An int for the HTTP status code, example: 200, 404, etc.
       reason: String for the HTTP reason, example: OK, NOT FOUND, etc.
-      body: The body of the HTTP response as a string or a file-like 
-            object (something with a read method). 
+      body: The body of the HTTP response as a string or a file-like
+            object (something with a read method).
       headers: dict of strings containing the HTTP headers in the response.
     """
     self.response = atom.http_core.HttpResponse(status=status, reason=reason,

@@ -37,7 +37,7 @@ class Token(db.Model):
 
 def get_token(unique_key):
   """Searches for a stored token with the desired key.
-  
+
   Checks memcache and then the datastore if required.
 
   Args:
@@ -60,7 +60,7 @@ def get_token(unique_key):
 
 def set_token(unique_key, token_str):
   """Saves the serialized auth token in the datastore.
-  
+
   The token is also stored in memcache to speed up retrieval on a cache hit.
 
   Args:
@@ -75,7 +75,7 @@ def set_token(unique_key, token_str):
     safely cached (if an old value could not be cleared). If the token was
     set in memcache, but not in the datastore, this function will return None.
     However, in that situation an exception will likely be raised.
-    
+
   Raises:
     Datastore exceptions may be raised from the App Engine SDK in the event of
     failure.
@@ -92,7 +92,7 @@ def set_token(unique_key, token_str):
   if Token(key_name=unique_key, t=token_str).put():
     return True
   return None
-  
+
 
 def delete_token(unique_key):
   # Clear from memcache.

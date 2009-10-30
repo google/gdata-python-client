@@ -39,7 +39,7 @@ STRING_ENCODING = 'utf-8'
 
 class XmlElement(object):
   """Represents an element node in an XML document.
-  
+
   The text member is a UTF-8 encoded str or unicode.
   """
   _qname = None
@@ -50,9 +50,9 @@ class XmlElement(object):
   _rule_set = None
   _members = None
   text = None
-  
+
   def __init__(self, text=None, *args, **kwargs):
-    if ('_members' not in self.__class__.__dict__ 
+    if ('_members' not in self.__class__.__dict__
         or self.__class__._members is None):
       self.__class__._members = tuple(self.__class__._list_xml_members())
     for member_name, member_type in self.__class__._members:
@@ -67,17 +67,17 @@ class XmlElement(object):
     self._other_attributes = {}
     if text is not None:
       self.text = text
-    
+
   def _list_xml_members(cls):
     """Generator listing all members which are XML elements or attributes.
-    
+
     The following members would be considered XML members:
     foo = 'abc' - indicates an XML attribute with the qname abc
     foo = SomeElement - indicates an XML child element
     foo = [AnElement] - indicates a repeating XML child element, each instance
         will be stored in a list in this member
     foo = ('att1', '{http://example.com/namespace}att2') - indicates an XML
-        attribute which has different parsing rules in different versions of 
+        attribute which has different parsing rules in different versions of
         the protocol. Version 1 of the XML parsing rules will look for an
         attribute with the qname 'att1' but verion 2 of the parsing rules will
         look for a namespaced attribute with the local name of 'att2' and an
@@ -87,9 +87,9 @@ class XmlElement(object):
     for pair in inspect.getmembers(cls):
       if not pair[0].startswith('_') and pair[0] != 'text':
         member_type = pair[1]
-        if (isinstance(member_type, tuple) or isinstance(member_type, list) 
-            or isinstance(member_type, (str, unicode)) 
-            or (inspect.isclass(member_type) 
+        if (isinstance(member_type, tuple) or isinstance(member_type, list)
+            or isinstance(member_type, (str, unicode))
+            or (inspect.isclass(member_type)
                 and issubclass(member_type, XmlElement))):
           members.append(pair)
     return members
@@ -101,11 +101,11 @@ class XmlElement(object):
 
     This method is used internally for parsing and generating XML for an
     XmlElement. It is not recommended that you call this method directly.
-    
+
     Returns:
       A tuple containing the XML parsing rules for the appropriate version.
 
-      The tuple looks like: 
+      The tuple looks like:
       (qname, {sub_element_qname: (member_name, member_class, repeating), ..},
        {attribute_qname: member_name})
 
@@ -114,7 +114,7 @@ class XmlElement(object):
       ('{http://www.w3.org/2007/app}control',
        {'{http://www.w3.org/2007/app}draft': ('draft',
                                               <class 'atom.data.Draft'>,
-                                              False)}, 
+                                              False)},
        {})
       Calling _get_rules with version 1 on gdata.data.FeedLink will produce:
       ('{http://schemas.google.com/g/2005}feedLink',
@@ -126,7 +126,7 @@ class XmlElement(object):
     """
     # Initialize the _rule_set to make sure there is a slot available to store
     # the parsing rules for this version of the XML schema.
-    # Look for rule set in the class __dict__ proxy so that only the 
+    # Look for rule set in the class __dict__ proxy so that only the
     # _rule_set for this class will be found. By using the dict proxy
     # we avoid finding rule_sets defined in superclasses.
     # The four lines below provide support for any number of versions, but it
@@ -145,12 +145,12 @@ class XmlElement(object):
     # 2 is currently the highest supported version.
     if version > 2:
       return cls._get_rules(2)
-    # Check the dict proxy for the rule set to avoid finding any rule sets 
+    # Check the dict proxy for the rule set to avoid finding any rule sets
     # which belong to the superclass. We only want rule sets for this class.
     if cls._rule_set[version-1] is None:
-      # The rule set for each version consists of the qname for this element 
-      # ('{namespace}tag'), a dictionary (elements) for looking up the 
-      # corresponding class member when given a child element's qname, and a 
+      # The rule set for each version consists of the qname for this element
+      # ('{namespace}tag'), a dictionary (elements) for looking up the
+      # corresponding class member when given a child element's qname, and a
       # dictionary (attributes) for looking up the corresponding class member
       # when given an XML attribute's qname.
       elements = {}
@@ -160,7 +160,7 @@ class XmlElement(object):
       for member_name, target in cls._members:
         if isinstance(target, list):
           # This member points to a repeating element.
-          elements[_get_qname(target[0], version)] = (member_name, target[0], 
+          elements[_get_qname(target[0], version)] = (member_name, target[0],
               True)
         elif isinstance(target, tuple):
           # This member points to a versioned XML attribute.
@@ -181,7 +181,7 @@ class XmlElement(object):
       return cls._rule_set[version-1]
 
   _get_rules = classmethod(_get_rules)
-  
+
   def get_elements(self, tag=None, namespace=None, version=1):
     """Find all sub elements which match the tag and namespace.
 
@@ -193,7 +193,7 @@ class XmlElement(object):
     Args:
       tag: str
       namespace: str
-      version: int Specifies the version of the XML rules to be used when 
+      version: int Specifies the version of the XML rules to be used when
                searching for matching elements.
 
     Returns:
@@ -207,7 +207,7 @@ class XmlElement(object):
         if member:
           if _qname_matches(tag, namespace, qname):
             if element_def[2]:
-              # If this is a repeating element, copy all instances into the 
+              # If this is a repeating element, copy all instances into the
               # result list.
               matches.extend(member)
             else:
@@ -226,20 +226,20 @@ class XmlElement(object):
   # method searched only "other elements" AKA extension_elements.
   FindExtensions = get_elements
   FindChildren = get_elements
-    
+
   def get_attributes(self, tag=None, namespace=None, version=1):
     """Find all attributes which match the tag and namespace.
 
     To find all attributes in this object, call get_attributes with the tag
-    and namespace both set to None (the default). This method searches 
-    through the object's members and the attributes stored in 
+    and namespace both set to None (the default). This method searches
+    through the object's members and the attributes stored in
     _other_attributes which did not fit any of the XML parsing rules for this
     class.
 
     Args:
       tag: str
       namespace: str
-      version: int Specifies the version of the XML rules to be used when 
+      version: int Specifies the version of the XML rules to be used when
                searching for matching attributes.
 
     Returns:
@@ -259,14 +259,14 @@ class XmlElement(object):
     return matches
 
   GetAttributes = get_attributes
-  
+
   def _harvest_tree(self, tree, version=1):
     """Populates object members from the data in the tree Element."""
     qname, elements, attributes = self.__class__._get_rules(version)
     for element in tree:
       if elements and element.tag in elements:
         definition = elements[element.tag]
-        # If this is a repeating element, make sure the member is set to a 
+        # If this is a repeating element, make sure the member is set to a
         # list.
         if definition[2]:
           if getattr(self, definition[0]) is None:
@@ -274,7 +274,7 @@ class XmlElement(object):
           getattr(self, definition[0]).append(_xml_element_from_tree(element,
               definition[1], version))
         else:
-          setattr(self, definition[0], _xml_element_from_tree(element, 
+          setattr(self, definition[0], _xml_element_from_tree(element,
               definition[1], version))
       else:
         self._other_elements.append(_xml_element_from_tree(element, XmlElement,
@@ -294,11 +294,11 @@ class XmlElement(object):
 
   def _attach_members(self, tree, version=1, encoding=None):
     """Convert members to XML elements/attributes and add them to the tree.
-    
+
     Args:
       tree: An ElementTree.Element which will be modified. The members of
-            this object will be added as child elements or attributes 
-            according to the rules described in _expected_elements and 
+            this object will be added as child elements or attributes
+            according to the rules described in _expected_elements and
             _expected_attributes. The elements and attributes stored in
             other_attributes and other_elements are also added a children
             of this tree.
@@ -359,8 +359,8 @@ class XmlElement(object):
   def __set_extension_elements(self, elements):
     self._other_elements = elements
 
-  extension_elements = property(__get_extension_elements, 
-      __set_extension_elements, 
+  extension_elements = property(__get_extension_elements,
+      __set_extension_elements,
       """Provides backwards compatibility for v1 atom.AtomBase classes.""")
 
   def __get_extension_attributes(self):
@@ -369,8 +369,8 @@ class XmlElement(object):
   def __set_extension_attributes(self, attributes):
     self._other_attributes = attributes
 
-  extension_attributes = property(__get_extension_attributes, 
-      __set_extension_attributes, 
+  extension_attributes = property(__get_extension_attributes,
+      __set_extension_attributes,
       """Provides backwards compatibility for v1 atom.AtomBase classes.""")
 
   def _get_tag(self, version=1):
@@ -410,10 +410,10 @@ class XmlElement(object):
       else:
          self._qname = self._get_tag(1)
 
-  tag = property(_get_tag, _set_tag, 
+  tag = property(_get_tag, _set_tag,
       """Provides backwards compatibility for v1 atom.AtomBase classes.""")
 
-  namespace = property(_get_namespace, _set_namespace, 
+  namespace = property(_get_namespace, _set_namespace,
       """Provides backwards compatibility for v1 atom.AtomBase classes.""")
 
   # Provided for backwards compatibility to atom.ExtensionElement
@@ -433,17 +433,17 @@ def _get_qname(element, version):
 
 def _qname_matches(tag, namespace, qname):
   """Logic determines if a QName matches the desired local tag and namespace.
-  
+
   This is used in XmlElement.get_elements and XmlElement.get_attributes to
   find matches in the element's members (among all expected-and-unexpected
   elements-and-attributes).
-  
+
   Args:
     expected_tag: string
     expected_namespace: string
     qname: string in the form '{xml_namespace}localtag' or 'tag' if there is
            no namespace.
-  
+
   Returns:
     boolean True if the member's tag and namespace fit the expected tag and
     namespace.
@@ -488,7 +488,7 @@ def parse(xml_string, target_class=None, version=1, encoding=None):
     version: int (optional) The version of the schema which should be used when
         converting the XML into an object. The default is 1.
     encoding: str (optional) The character encoding of the bytes in the
-        xml_string. Default is 'UTF-8'. 
+        xml_string. Default is 'UTF-8'.
   """
   if target_class is None:
     target_class = XmlElement
@@ -513,7 +513,7 @@ def _xml_element_from_tree(tree, target_class, version=1):
     instance._harvest_tree(tree, version)
     return instance
   # TODO handle the namespace-only case
-  # Namespace only will be used with Google Spreadsheets rows and 
+  # Namespace only will be used with Google Spreadsheets rows and
   # Google Base item attributes.
   elif tree.tag == _get_qname(target_class, version):
     instance = target_class()

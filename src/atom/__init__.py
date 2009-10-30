@@ -18,23 +18,23 @@
 """Contains classes representing Atom elements.
 
   Module objective: provide data classes for Atom constructs. These classes hide
-  the XML-ness of Atom and provide a set of native Python classes to interact 
+  the XML-ness of Atom and provide a set of native Python classes to interact
   with.
 
   Conversions to and from XML should only be necessary when the Atom classes
-  "touch the wire" and are sent over HTTP. For this reason this module 
+  "touch the wire" and are sent over HTTP. For this reason this module
   provides  methods and functions to convert Atom classes to and from strings.
 
-  For more information on the Atom data model, see RFC 4287 
+  For more information on the Atom data model, see RFC 4287
   (http://www.ietf.org/rfc/rfc4287.txt)
 
-  AtomBase: A foundation class on which Atom classes are built. It 
+  AtomBase: A foundation class on which Atom classes are built. It
       handles the parsing of attributes and children which are common to all
-      Atom classes. By default, the AtomBase class translates all XML child 
+      Atom classes. By default, the AtomBase class translates all XML child
       nodes into ExtensionElements.
 
-  ExtensionElement: Atom allows Atom objects to contain XML which is not part 
-      of the Atom specification, these are called extension elements. If a 
+  ExtensionElement: Atom allows Atom objects to contain XML which is not part
+      of the Atom specification, these are called extension elements. If a
       classes parser encounters an unexpected XML construct, it is translated
       into an ExtensionElement instance. ExtensionElement is designed to fully
       capture the information in the XML. Child nodes in an XML extension are
@@ -66,7 +66,7 @@ APP_TEMPLATE = '{http://purl.org/atom/app#}%s'
 # This encoding is used for converting strings before translating the XML
 # into an object.
 XML_STRING_ENCODING = 'utf-8'
-# The desired string encoding for object members. set or monkey-patch to 
+# The desired string encoding for object members. set or monkey-patch to
 # unicode if you want object members to be Python unicode strings, instead of
 # encoded strings
 MEMBER_STRING_ENCODING = 'utf-8'
@@ -79,7 +79,7 @@ ENABLE_V1_WARNINGS = False
 
 def v1_deprecated(warning=None):
   """Shows a warning if ENABLE_V1_WARNINGS is True.
-  
+
   Function decorator used to mark methods used in v1 classes which
   may be removed in future versions of the library.
   """
@@ -104,7 +104,7 @@ def v1_deprecated(warning=None):
 #@v1_deprecated('Please use atom.core.parse with atom.data classes instead.')
 def CreateClassFromXMLString(target_class, xml_string, string_encoding=None):
   """Creates an instance of the target class from the string contents.
-  
+
   Args:
     target_class: class The class which will be instantiated and populated
         with the contents of the XML. This class must have a _tag and a
@@ -113,7 +113,7 @@ def CreateClassFromXMLString(target_class, xml_string, string_encoding=None):
         of the XML string should match the tag and namespace of the desired
         class.
     string_encoding: str The character encoding which the xml_string should
-        be converted to before it is interpreted and translated into 
+        be converted to before it is interpreted and translated into
         objects. The default is None in which case the string encoding
         is not changed.
 
@@ -146,14 +146,14 @@ def _CreateClassFromElementTree(target_class, tree, namespace=None, tag=None):
     tree: ElementTree An element tree whose contents will be converted into
         members of the new target_class instance.
     namespace: str (optional) The namespace which the XML tree's root node must
-        match. If omitted, the namespace defaults to the _namespace of the 
+        match. If omitted, the namespace defaults to the _namespace of the
         target class.
     tag: str (optional) The tag which the XML tree's root node must match. If
-        omitted, the tag defaults to the _tag class member of the target 
+        omitted, the tag defaults to the _tag class member of the target
         class.
 
     Returns:
-      An instance of the target class - or None if the tag and namespace of 
+      An instance of the target class - or None if the tag and namespace of
       the XML tree's root node did not match the desired namespace and tag.
   """
   if namespace is None:
@@ -169,7 +169,7 @@ def _CreateClassFromElementTree(target_class, tree, namespace=None, tag=None):
 
 
 class ExtensionContainer(object):
- 
+
   #@v1_deprecated('Please use data model classes in atom.data instead.')
   def __init__(self, extension_elements=None, extension_attributes=None,
       text=None):
@@ -180,7 +180,7 @@ class ExtensionContainer(object):
   __init__ = v1_deprecated(
       'Please use data model classes in atom.data instead.')(
           __init__)
- 
+
   # Three methods to create an object from an ElementTree
   def _HarvestElementTree(self, tree):
     # Fill in the instance members from the contents of the XML tree.
@@ -194,7 +194,7 @@ class ExtensionContainer(object):
         self.text = tree.text
       else:
         self.text = tree.text.encode(MEMBER_STRING_ENCODING)
-    
+
   def _ConvertElementTreeToMember(self, child_tree, current_class=None):
     self.extension_elements.append(_ExtensionElementFromElementTree(
         child_tree))
@@ -221,7 +221,7 @@ class ExtensionContainer(object):
           tree.attrib[attribute] = value.decode(MEMBER_STRING_ENCODING)
     if self.text:
       if isinstance(self.text, unicode) or MEMBER_STRING_ENCODING is unicode:
-        tree.text = self.text 
+        tree.text = self.text
       else:
         tree.text = self.text.decode(MEMBER_STRING_ENCODING)
 
@@ -262,7 +262,7 @@ class ExtensionContainer(object):
         results.append(element)
 
     return results
-  
+
 
 class AtomBase(ExtensionContainer):
 
@@ -279,7 +279,7 @@ class AtomBase(ExtensionContainer):
   __init__ = v1_deprecated(
       'Please use data model classes in atom.data instead.')(
           __init__)
-      
+
   def _ConvertElementTreeToMember(self, child_tree):
     # Find the element's tag in this class's list of child members
     if self.__class__._children.has_key(child_tree.tag):
@@ -294,13 +294,13 @@ class AtomBase(ExtensionContainer):
         getattr(self, member_name).append(_CreateClassFromElementTree(
             member_class[0], child_tree))
       else:
-        setattr(self, member_name, 
+        setattr(self, member_name,
                 _CreateClassFromElementTree(member_class, child_tree))
     else:
-      ExtensionContainer._ConvertElementTreeToMember(self, child_tree)      
+      ExtensionContainer._ConvertElementTreeToMember(self, child_tree)
 
   def _ConvertElementAttributeToMember(self, attribute, value):
-    # Find the attribute in this class's list of attributes. 
+    # Find the attribute in this class's list of attributes.
     if self.__class__._attributes.has_key(attribute):
       # Find the member of this class which corresponds to the XML attribute
       # (lookup in current_class._attributes) and set this member to the
@@ -310,18 +310,18 @@ class AtomBase(ExtensionContainer):
         if MEMBER_STRING_ENCODING is unicode:
           setattr(self, self.__class__._attributes[attribute], value)
         else:
-          setattr(self, self.__class__._attributes[attribute], 
+          setattr(self, self.__class__._attributes[attribute],
                 value.encode(MEMBER_STRING_ENCODING))
     else:
-      ExtensionContainer._ConvertElementAttributeToMember(self, attribute, 
+      ExtensionContainer._ConvertElementAttributeToMember(self, attribute,
           value)
 
   # Three methods to create an ElementTree from an object
   def _AddMembersToElementTree(self, tree):
-    # Convert the members of this class which are XML child nodes. 
+    # Convert the members of this class which are XML child nodes.
     # This uses the class's _children dictionary to find the members which
     # should become XML child nodes.
-    member_node_names = [values[0] for tag, values in 
+    member_node_names = [values[0] for tag, values in
                                        self.__class__._children.iteritems()]
     for member_name in member_node_names:
       member = getattr(self, member_name)
@@ -340,29 +340,29 @@ class AtomBase(ExtensionContainer):
           tree.attrib[xml_attribute] = member
         else:
           tree.attrib[xml_attribute] = member.decode(MEMBER_STRING_ENCODING)
-    # Lastly, call the ExtensionContainers's _AddMembersToElementTree to 
+    # Lastly, call the ExtensionContainers's _AddMembersToElementTree to
     # convert any extension attributes.
     ExtensionContainer._AddMembersToElementTree(self, tree)
-    
-  
+
+
   def _BecomeChildElement(self, tree):
     """
 
-    Note: Only for use with classes that have a _tag and _namespace class 
+    Note: Only for use with classes that have a _tag and _namespace class
     member. It is in AtomBase so that it can be inherited but it should
     not be called on instances of AtomBase.
-    
+
     """
     new_child = ElementTree.Element('')
     tree.append(new_child)
-    new_child.tag = '{%s}%s' % (self.__class__._namespace, 
+    new_child.tag = '{%s}%s' % (self.__class__._namespace,
                                 self.__class__._tag)
     self._AddMembersToElementTree(new_child)
 
   def _ToElementTree(self):
     """
 
-    Note, this method is designed to be used only with classes that have a 
+    Note, this method is designed to be used only with classes that have a
     _tag and _namespace. It is placed in AtomBase for inheritance but should
     not be called on this class.
 
@@ -379,7 +379,7 @@ class AtomBase(ExtensionContainer):
   def __str__(self):
     return self.ToString()
 
-    
+
 class Name(AtomBase):
   """The atom:name element"""
 
@@ -414,7 +414,7 @@ class Email(AtomBase):
   _namespace = ATOM_NAMESPACE
   _children = AtomBase._children.copy()
   _attributes = AtomBase._attributes.copy()
-  
+
   def __init__(self, text=None, extension_elements=None,
       extension_attributes=None):
     """Constructor for Email
@@ -460,12 +460,12 @@ class Uri(AtomBase):
 def UriFromString(xml_string):
   return CreateClassFromXMLString(Uri, xml_string)
 
-  
+
 class Person(AtomBase):
   """A foundation class from which atom:author and atom:contributor extend.
-  
+
   A person contains information like name, email address, and web page URI for
-  an author or contributor to an Atom feed. 
+  an author or contributor to an Atom feed.
   """
 
   _children = AtomBase._children.copy()
@@ -503,8 +503,8 @@ class Person(AtomBase):
 
 class Author(Person):
   """The atom:author element
-  
-  An author is a required element in Feed. 
+
+  An author is a required element in Feed.
   """
 
   _tag = 'author'
@@ -514,10 +514,10 @@ class Author(Person):
   #_children = {}
   #_attributes = {}
 
-  def __init__(self, name=None, email=None, uri=None, 
+  def __init__(self, name=None, email=None, uri=None,
       extension_elements=None, extension_attributes=None, text=None):
     """Constructor for Author
-    
+
     Args:
       name: Name
       email: Email
@@ -526,7 +526,7 @@ class Author(Person):
       extension_attributes: dict A dictionary of attribute value string pairs
       text: str The text data in the this element
     """
-    
+
     self.name = name
     self.email = email
     self.uri = uri
@@ -534,10 +534,10 @@ class Author(Person):
     self.extension_attributes = extension_attributes or {}
     self.text = text
 
-    
+
 def AuthorFromString(xml_string):
   return CreateClassFromXMLString(Author, xml_string)
-  
+
 
 class Contributor(Person):
   """The atom:contributor element"""
@@ -550,7 +550,7 @@ class Contributor(Person):
   def __init__(self, name=None, email=None, uri=None,
       extension_elements=None, extension_attributes=None, text=None):
     """Constructor for Contributor
-    
+
     Args:
       name: Name
       email: Email
@@ -570,8 +570,8 @@ class Contributor(Person):
 
 def ContributorFromString(xml_string):
   return CreateClassFromXMLString(Contributor, xml_string)
-  
-  
+
+
 class Link(AtomBase):
   """The atom:link element"""
 
@@ -585,12 +585,12 @@ class Link(AtomBase):
   _attributes['title'] = 'title'
   _attributes['length'] = 'length'
   _attributes['hreflang'] = 'hreflang'
-  
-  def __init__(self, href=None, rel=None, link_type=None, hreflang=None, 
-      title=None, length=None, text=None, extension_elements=None, 
+
+  def __init__(self, href=None, rel=None, link_type=None, hreflang=None,
+      title=None, length=None, text=None, extension_elements=None,
       extension_attributes=None):
     """Constructor for Link
-    
+
     Args:
       href: string The href attribute of the link
       rel: string
@@ -616,7 +616,7 @@ class Link(AtomBase):
 
 def LinkFromString(xml_string):
   return CreateClassFromXMLString(Link, xml_string)
-  
+
 
 class Generator(AtomBase):
   """The atom:generator element"""
@@ -628,10 +628,10 @@ class Generator(AtomBase):
   _attributes['uri'] = 'uri'
   _attributes['version'] = 'version'
 
-  def __init__(self, uri=None, version=None, text=None, 
+  def __init__(self, uri=None, version=None, text=None,
       extension_elements=None, extension_attributes=None):
     """Constructor for Generator
-    
+
     Args:
       uri: string
       version: string
@@ -652,7 +652,7 @@ def GeneratorFromString(xml_string):
 
 class Text(AtomBase):
   """A foundation class from which atom:title, summary, etc. extend.
-  
+
   This class should never be instantiated.
   """
 
@@ -663,14 +663,14 @@ class Text(AtomBase):
   def __init__(self, text_type=None, text=None, extension_elements=None,
       extension_attributes=None):
     """Constructor for Text
-    
+
     Args:
       text_type: string
       text: str The text data in the this element
       extension_elements: list A  list of ExtensionElement instances
       extension_attributes: dict A dictionary of attribute value string pairs
     """
-    
+
     self.type = text_type
     self.text = text
     self.extension_elements = extension_elements or []
@@ -688,7 +688,7 @@ class Title(Text):
   def __init__(self, title_type=None, text=None, extension_elements=None,
       extension_attributes=None):
     """Constructor for Title
-    
+
     Args:
       title_type: string
       text: str The text data in the this element
@@ -717,7 +717,7 @@ class Subtitle(Text):
   def __init__(self, subtitle_type=None, text=None, extension_elements=None,
       extension_attributes=None):
     """Constructor for Subtitle
-    
+
     Args:
       subtitle_type: string
       text: str The text data in the this element
@@ -746,7 +746,7 @@ class Rights(Text):
   def __init__(self, rights_type=None, text=None, extension_elements=None,
       extension_attributes=None):
     """Constructor for Rights
-    
+
     Args:
       rights_type: string
       text: str The text data in the this element
@@ -775,7 +775,7 @@ class Summary(Text):
   def __init__(self, summary_type=None, text=None, extension_elements=None,
       extension_attributes=None):
     """Constructor for Summary
-    
+
     Args:
       summary_type: string
       text: str The text data in the this element
@@ -802,10 +802,10 @@ class Content(Text):
   _attributes = Text._attributes.copy()
   _attributes['src'] = 'src'
 
-  def __init__(self, content_type=None, src=None, text=None, 
+  def __init__(self, content_type=None, src=None, text=None,
       extension_elements=None, extension_attributes=None):
     """Constructor for Content
-    
+
     Args:
       content_type: string
       src: string
@@ -813,7 +813,7 @@ class Content(Text):
       extension_elements: list A  list of ExtensionElement instances
       extension_attributes: dict A dictionary of attribute value string pairs
     """
-    
+
     self.type = content_type
     self.src = src
     self.text = text
@@ -835,10 +835,10 @@ class Category(AtomBase):
   _attributes['scheme'] = 'scheme'
   _attributes['label'] = 'label'
 
-  def __init__(self, term=None, scheme=None, label=None, text=None, 
+  def __init__(self, term=None, scheme=None, label=None, text=None,
       extension_elements=None, extension_attributes=None):
     """Constructor for Category
-    
+
     Args:
       term: str
       scheme: str
@@ -847,7 +847,7 @@ class Category(AtomBase):
       extension_elements: list A  list of ExtensionElement instances
       extension_attributes: dict A dictionary of attribute value string pairs
     """
-    
+
     self.term = term
     self.scheme = scheme
     self.label = label
@@ -871,7 +871,7 @@ class Id(AtomBase):
   def __init__(self, text=None, extension_elements=None,
       extension_attributes=None):
     """Constructor for Id
-    
+
     Args:
       text: str The text data in the this element
       extension_elements: list A  list of ExtensionElement instances
@@ -889,7 +889,7 @@ def IdFromString(xml_string):
 
 class Icon(AtomBase):
   """The atom:icon element."""
-  
+
   _tag = 'icon'
   _namespace = ATOM_NAMESPACE
   _children = AtomBase._children.copy()
@@ -898,7 +898,7 @@ class Icon(AtomBase):
   def __init__(self, text=None, extension_elements=None,
       extension_attributes=None):
     """Constructor for Icon
-    
+
     Args:
       text: str The text data in the this element
       extension_elements: list A  list of ExtensionElement instances
@@ -925,13 +925,13 @@ class Logo(AtomBase):
   def __init__(self, text=None, extension_elements=None,
       extension_attributes=None):
     """Constructor for Logo
-    
+
     Args:
       text: str The text data in the this element
       extension_elements: list A  list of ExtensionElement instances
       extension_attributes: dict A dictionary of attribute value string pairs
     """
-    
+
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
@@ -970,7 +970,7 @@ def DraftFromString(xml_string):
 
 class Control(AtomBase):
   """The app:control element indicating restrictions on publication.
-  
+
   The APP control element may contain a draft element indicating whether or
   not this entry should be publicly available.
   """
@@ -984,7 +984,7 @@ class Control(AtomBase):
   def __init__(self, draft=None, text=None, extension_elements=None,
         extension_attributes=None):
     """Constructor for app:control"""
-    
+
     self.draft = draft
     self.text = text
     self.extension_elements = extension_elements or []
@@ -1022,7 +1022,7 @@ class Updated(Date):
   def __init__(self, text=None, extension_elements=None,
       extension_attributes=None):
     """Constructor for Updated
-    
+
     Args:
       text: str The text data in the this element
       extension_elements: list A  list of ExtensionElement instances
@@ -1049,7 +1049,7 @@ class Published(Date):
   def __init__(self, text=None, extension_elements=None,
       extension_attributes=None):
     """Constructor for Published
-    
+
     Args:
       text: str The text data in the this element
       extension_elements: list A  list of ExtensionElement instances
@@ -1117,8 +1117,8 @@ class LinkFinder(object):
       if a_link.rel == 'alternate':
         return a_link
     return None
-    
- 
+
+
 class FeedEntryParent(AtomBase, LinkFinder):
   """A super class for atom:feed and entry, contains shared attributes"""
 
@@ -1133,8 +1133,8 @@ class FeedEntryParent(AtomBase, LinkFinder):
   _children['{%s}title' % ATOM_NAMESPACE] = ('title', Title)
   _children['{%s}updated' % ATOM_NAMESPACE] = ('updated', Updated)
 
-  def __init__(self, author=None, category=None, contributor=None, 
-      atom_id=None, link=None, rights=None, title=None, updated=None, 
+  def __init__(self, author=None, category=None, contributor=None,
+      atom_id=None, link=None, rights=None, title=None, updated=None,
       text=None, extension_elements=None, extension_attributes=None):
     self.author = author or []
     self.category = category or []
@@ -1162,7 +1162,7 @@ class Source(FeedEntryParent):
   _children['{%s}subtitle' % ATOM_NAMESPACE] = ('subtitle', Subtitle)
 
   def __init__(self, author=None, category=None, contributor=None,
-      generator=None, icon=None, atom_id=None, link=None, logo=None, 
+      generator=None, icon=None, atom_id=None, link=None, logo=None,
       rights=None, subtitle=None, title=None, updated=None, text=None,
       extension_elements=None, extension_attributes=None):
     """Constructor for Source
@@ -1225,7 +1225,7 @@ class Entry(FeedEntryParent):
   _children['{%s}control' % APP_NAMESPACE] = ('control', Control)
 
   #@v1_deprecated('Please use atom.data.Entry instead.')
-  def __init__(self, author=None, category=None, content=None, 
+  def __init__(self, author=None, category=None, content=None,
       contributor=None, atom_id=None, link=None, published=None, rights=None,
       source=None, summary=None, control=None, title=None, updated=None,
       extension_elements=None, extension_attributes=None, text=None):
@@ -1244,7 +1244,7 @@ class Entry(FeedEntryParent):
       summary: Summary the entry's summary element
       title: Title the entry's title element
       updated: Updated the entry's updated element
-      control: The entry's app:control element which can be used to mark an 
+      control: The entry's app:control element which can be used to mark an
           entry as a draft which should not be publicly viewable.
       text: String The text contents of the element. This is the contents
           of the Entry's XML text node. (Example: <foo>This is the text</foo>)
@@ -1289,33 +1289,33 @@ class Feed(Source):
 
   #@v1_deprecated('Please use atom.data.Feed instead.')
   def __init__(self, author=None, category=None, contributor=None,
-      generator=None, icon=None, atom_id=None, link=None, logo=None, 
-      rights=None, subtitle=None, title=None, updated=None, entry=None, 
+      generator=None, icon=None, atom_id=None, link=None, logo=None,
+      rights=None, subtitle=None, title=None, updated=None, entry=None,
       text=None, extension_elements=None, extension_attributes=None):
     """Constructor for Source
-    
+
     Args:
       author: list (optional) A list of Author instances which belong to this
           class.
       category: list (optional) A list of Category instances
       contributor: list (optional) A list on Contributor instances
-      generator: Generator (optional) 
-      icon: Icon (optional) 
+      generator: Generator (optional)
+      icon: Icon (optional)
       id: Id (optional) The entry's Id element
       link: list (optional) A list of Link instances
-      logo: Logo (optional) 
+      logo: Logo (optional)
       rights: Rights (optional) The entry's Rights element
       subtitle: Subtitle (optional) The entry's subtitle element
       title: Title (optional) the entry's title element
       updated: Updated (optional) the entry's updated element
-      entry: list (optional) A list of the Entry instances contained in the 
+      entry: list (optional) A list of the Entry instances contained in the
           feed.
-      text: String (optional) The text contents of the element. This is the 
-          contents of the Entry's XML text node. 
+      text: String (optional) The text contents of the element. This is the
+          contents of the Entry's XML text node.
           (Example: <foo>This is the text</foo>)
       extension_elements: list (optional) A list of ExtensionElement instances
           which are children of this element.
-      extension_attributes: dict (optional) A dictionary of strings which are 
+      extension_attributes: dict (optional) A dictionary of strings which are
           the values for additional XML attributes of this element.
     """
 
@@ -1341,12 +1341,12 @@ class Feed(Source):
 
 def FeedFromString(xml_string):
   return CreateClassFromXMLString(Feed, xml_string)
-  
-  
+
+
 class ExtensionElement(object):
   """Represents extra XML elements contained in Atom classes."""
-  
-  def __init__(self, tag, namespace=None, attributes=None, 
+
+  def __init__(self, tag, namespace=None, attributes=None,
       children=None, text=None):
     """Constructor for EtensionElement
 
@@ -1355,9 +1355,9 @@ class ExtensionElement(object):
       tag: string (optional) The tag (without the namespace qualifier) for
           this element. To reconstruct the full qualified name of the element,
           combine this tag with the namespace.
-      attributes: dict (optinal) The attribute value string pairs for the XML 
+      attributes: dict (optinal) The attribute value string pairs for the XML
           attributes of this element.
-      children: list (optional) A list of ExtensionElements which represent 
+      children: list (optional) A list of ExtensionElements which represent
           the XML child nodes of this element.
     """
 
@@ -1366,28 +1366,28 @@ class ExtensionElement(object):
     self.attributes = attributes or {}
     self.children = children or []
     self.text = text
-    
+
   def ToString(self):
     element_tree = self._TransferToElementTree(ElementTree.Element(''))
     return ElementTree.tostring(element_tree, encoding="UTF-8")
-    
+
   def _TransferToElementTree(self, element_tree):
     if self.tag is None:
       return None
-      
+
     if self.namespace is not None:
       element_tree.tag = '{%s}%s' % (self.namespace, self.tag)
     else:
       element_tree.tag = self.tag
-      
+
     for key, value in self.attributes.iteritems():
       element_tree.attrib[key] = value
-      
+
     for child in self.children:
       child._BecomeChildElement(element_tree)
-      
+
     element_tree.text = self.text
-      
+
     return element_tree
 
   def _BecomeChildElement(self, element_tree):
@@ -1441,8 +1441,8 @@ class ExtensionElement(object):
         results.append(element)
 
     return results
- 
-    
+
+
 def ExtensionElementFromString(xml_string):
   element_tree = ElementTree.fromstring(xml_string)
   return _ExtensionElementFromElementTree(element_tree)
@@ -1453,7 +1453,7 @@ def _ExtensionElementFromElementTree(element_tree):
   if '}' in element_tag:
     namespace = element_tag[1:element_tag.index('}')]
     tag = element_tag[element_tag.index('}')+1:]
-  else: 
+  else:
     namespace = None
     tag = element_tag
   extension = ExtensionElement(namespace=namespace, tag=tag)
@@ -1467,7 +1467,7 @@ def _ExtensionElementFromElementTree(element_tree):
 
 def deprecated(warning=None):
   """Decorator to raise warning each time the function is called.
-  
+
   Args:
     warning: The warning message to be displayed as a string (optinoal).
   """

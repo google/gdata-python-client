@@ -46,9 +46,9 @@ class Uri(atom.core.XmlElement):
 
 class Person(atom.core.XmlElement):
   """A foundation class which atom:author and atom:contributor extend.
-  
+
   A person contains information like name, email address, and web page URI for
-  an author or contributor to an Atom feed. 
+  an author or contributor to an Atom feed.
   """
   name = Name
   email = Email
@@ -57,7 +57,7 @@ class Person(atom.core.XmlElement):
 
 class Author(Person):
   """The atom:author element.
-  
+
   An author is a required element in Feed unless each Entry contains an Author.
   """
   _qname = ATOM_TEMPLATE % 'author'
@@ -88,7 +88,7 @@ class Generator(atom.core.XmlElement):
 
 class Text(atom.core.XmlElement):
   """A foundation class from which atom:title, summary, etc. extend.
-  
+
   This class should never be instantiated.
   """
   type = 'type'
@@ -98,7 +98,7 @@ class Title(Text):
   """The atom:title element."""
   _qname = ATOM_TEMPLATE % 'title'
 
-  
+
 class Subtitle(Text):
   """The atom:subtitle element."""
   _qname = ATOM_TEMPLATE % 'subtitle'
@@ -129,28 +129,28 @@ class Category(atom.core.XmlElement):
 
 
 class Id(atom.core.XmlElement):
-  """The atom:id element."""  
+  """The atom:id element."""
   _qname = ATOM_TEMPLATE % 'id'
-  
+
 
 class Icon(atom.core.XmlElement):
-  """The atom:icon element."""  
+  """The atom:icon element."""
   _qname = ATOM_TEMPLATE % 'icon'
 
 
 class Logo(atom.core.XmlElement):
-  """The atom:logo element."""  
+  """The atom:logo element."""
   _qname = ATOM_TEMPLATE % 'logo'
-  
+
 
 class Draft(atom.core.XmlElement):
   """The app:draft element which indicates if this entry should be public."""
   _qname = (APP_TEMPLATE_V1 % 'draft', APP_TEMPLATE_V2 % 'draft')
 
- 
+
 class Control(atom.core.XmlElement):
   """The app:control element indicating restrictions on publication.
-  
+
   The APP control element may contain a draft element indicating whether or
   not this entry should be publicly available.
   """
@@ -194,7 +194,7 @@ class LinkFinder(object):
 
   def get_link(self, rel):
     """Returns a link object which has the desired rel value.
-    
+
     If you are interested in the URL instead of the link object,
     consider using find_url instead.
     """
@@ -223,23 +223,23 @@ class LinkFinder(object):
 
   def find_edit_link(self):
     return self.find_url('edit')
-  
+
   FindEditLink = find_edit_link
-  
+
   def get_edit_link(self):
     return self.get_link('edit')
 
   GetEditLink = get_edit_link
-  
+
   def find_edit_media_link(self):
     link = self.find_url('edit-media')
     # Search for media-edit as well since Picasa API used media-edit instead.
     if link is None:
       return self.find_url('media-edit')
     return link
-  
+
   FindEditMediaLink = find_edit_media_link
-  
+
   def get_edit_media_link(self):
     link = self.get_link('edit-media')
     if link is None:
@@ -250,34 +250,34 @@ class LinkFinder(object):
 
   def find_next_link(self):
     return self.find_url('next')
-  
+
   FindNextLink = find_next_link
 
   def get_next_link(self):
     return self.get_link('next')
 
   GetNextLink = get_next_link
-  
+
   def find_license_link(self):
     return self.find_url('license')
-  
+
   FindLicenseLink = find_license_link
-  
+
   def get_license_link(self):
     return self.get_link('license')
 
   GetLicenseLink = get_license_link
-  
+
   def find_alternate_link(self):
     return self.find_url('alternate')
-  
+
   FindAlternateLink = find_alternate_link
 
   def get_alternate_link(self):
     return self.get_link('alternate')
 
   GetAlternateLink = get_alternate_link
-  
+
 
 class FeedEntryParent(atom.core.XmlElement, LinkFinder):
   """A super class for atom:feed and entry, contains shared attributes"""

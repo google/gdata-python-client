@@ -140,7 +140,7 @@ class Spreadsheet(gdata.data.GDEntry):
     return self.find_url(WORKSHEETS_REL)
 
   FindWorksheetsFeed = find_worksheets_feed
-  
+
 
 class SpreadsheetsFeed(gdata.data.GDFeed):
   """An Atom feed listing a user's Google Spreadsheets."""
@@ -180,7 +180,7 @@ class Table(gdata.data.GDEntry):
 
 class TablesFeed(gdata.data.GDFeed):
   """An Atom feed containing the tables defined within a worksheet."""
-  entry = [Table]  
+  entry = [Table]
 
 
 class Record(gdata.data.GDEntry):
@@ -223,12 +223,12 @@ class ListRow(atom.core.XmlElement):
   col_value._qname = col_value._qname % 'mycolumnname'
   """
   _qname = '{http://schemas.google.com/spreadsheets/2006/extended}%s'
-  
+
 
 class ListEntry(gdata.data.GDEntry):
   """An Atom entry representing a worksheet row in the list feed.
 
-  The values for a particular column can be get and set using 
+  The values for a particular column can be get and set using
   x.get_value('columnheader') and x.set_value('columnheader', 'value').
   See also the explanation of column names in the ListFeed class.
   """
@@ -237,7 +237,7 @@ class ListEntry(gdata.data.GDEntry):
     """Returns the displayed text for the desired column in this row.
 
     The formula or input which generated the displayed value is not accessible
-    through the list feed, to see the user's input, use the cells feed. 
+    through the list feed, to see the user's input, use the cells feed.
 
     If a column is not present in this spreadsheet, or there is no value
     for a column in this row, this method will return None.
@@ -257,7 +257,7 @@ class ListEntry(gdata.data.GDEntry):
     No client side checking is performed on the column_name, you need to
     ensure that the column_name is the local tag name in the gsx tag for the
     column. For example, the column_name will not contain special characters,
-    spaces, uppercase letters, etc. 
+    spaces, uppercase letters, etc.
     """
     # Try to find the column in this row to change an existing value.
     values = self.get_elements(column_name, GSX_NAMESPACE)
@@ -301,7 +301,7 @@ class CellEntry(gdata.data.BatchEntry):
 
 class CellsFeed(gdata.data.BatchFeed):
   """An Atom feed contains one entry per cell in a worksheet.
-  
+
   The cell feed supports batch operations, you can send multiple cell
   operations in one HTTP request.
   """
@@ -309,4 +309,4 @@ class CellsFeed(gdata.data.BatchFeed):
 
   def batch_set_cell(row, col, input):
     pass
-    
+
