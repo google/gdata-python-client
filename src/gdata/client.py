@@ -87,8 +87,16 @@ class BadAuthentication(RequestError):
   pass
 
 
+<<<<<<< .mine
+class NotModified(RequestError):
+  pass
+
+
+def error_from_response(message, http_response, error_class, response_body=None):
+=======
 def error_from_response(message, http_response, error_class,
                         response_body=None):
+>>>>>>> .r874
   """Creates a new exception and sets the HTTP information in the error.
 
   Args:
@@ -297,7 +305,14 @@ class GDClient(atom.client.AtomPubClient):
     elif response.status == 401:
       raise error_from_response('Unauthorized - Server responded with',
                                 response, Unauthorized)
+<<<<<<< .mine
+    elif response.status == 304:
+      raise error_from_response('Entry Not Modified - Server responded with',
+                                response, NotModified)
     # If the server's response was not a 200, 201, 302, or 401, raise an
+=======
+    # If the server's response was not a 200, 201, 302, or 401, raise an
+>>>>>>> .r874
     # exception.
     else:
       raise error_from_response('Server responded with', response,
@@ -535,10 +550,14 @@ class GDClient(atom.client.AtomPubClient):
   GetFeed = get_feed
 
   def get_entry(self, uri, auth_token=None, converter=None,
-                desired_class=gdata.data.GDEntry, **kwargs):
+                desired_class=gdata.data.GDEntry, etag=None, **kwargs):
+    http_request = atom.http_core.HttpRequest()
+    # Conditional retrieval
+    if etag is not None:
+      http_request.headers['If-None-Match'] = etag
     return self.request(method='GET', uri=uri, auth_token=auth_token,
-                        converter=converter, desired_class=desired_class,
-                        **kwargs)
+                        http_request=http_request, converter=converter,
+                        desired_class=desired_class, **kwargs)
 
   GetEntry = get_entry
 
@@ -603,12 +622,12 @@ class GDClient(atom.client.AtomPubClient):
     http_request.add_body_part(
         entry.to_string(get_xml_version(self.api_version)),
         'application/atom+xml')
-    # Include the ETag in the request if this is version 2 of the API.
-    if self.api_version and self.api_version.startswith('2'):
-      if force:
-        http_request.headers['If-Match'] = '*'
-      elif hasattr(entry, 'etag') and entry.etag:
-        http_request.headers['If-Match'] = entry.etag
+    # Include the ETag in the request if present.
+    if force:
+      http_request.headers['If-Match'] = '*'
+    elif hasattr(entry, 'etag') and entry.etag:
+      http_request.headers['If-Match'] = entry.etag
+
     return self.request(method='PUT', uri=entry.find_edit_link(),
                         auth_token=auth_token, http_request=http_request,
                         desired_class=entry.__class__, **kwargs)
@@ -616,19 +635,21 @@ class GDClient(atom.client.AtomPubClient):
   Update = update
 
   def delete(self, entry_or_uri, auth_token=None, force=False, **kwargs):
+    http_request = atom.http_core.HttpRequest()
+      
+    # Include the ETag in the request if present.
+    if force:
+      http_request.headers['If-Match'] = '*'
+    elif hasattr(entry_or_uri, 'etag') and entry_or_uri.etag:
+      http_request.headers['If-Match'] = entry_or_uri.etag
+
     # If the user passes in a URL, just delete directly, may not work as
     # the service might require an ETag.
     if isinstance(entry_or_uri, (str, unicode, atom.http_core.Uri)):
       return self.request(method='DELETE', uri=entry_or_uri,
-                          auth_token=auth_token, **kwargs)
-    http_request = atom.http_core.HttpRequest()
-    # Include the ETag in the request if this is version 2 of the API.
-    if self.api_version and (self.api_version.startswith('2')
-                             or self.api_version.startswith('3')):
-      if force:
-        http_request.headers['If-Match'] = '*'
-      elif hasattr(entry_or_uri, 'etag') and entry_or_uri.etag:
-        http_request.headers['If-Match'] = entry_or_uri.etag
+                          http_request=http_request, auth_token=auth_token,
+                          **kwargs)
+
     return self.request(method='DELETE', uri=entry_or_uri.find_edit_link(),
                         http_request=http_request, auth_token=auth_token,
                         **kwargs)

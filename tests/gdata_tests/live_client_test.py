@@ -138,8 +138,6 @@ class BloggerTest(unittest.TestCase):
     self.assert_(found_tags[0])
     self.assert_(found_tags[1])
 
-    # TODO: test queries using ETags.
-
     # Find the blog post on the blog.
     self_link = None
     edit_link = None
@@ -154,6 +152,12 @@ class BloggerTest(unittest.TestCase):
     queried = self.client.request('GET', self_link, 
         converter=element_from_string)
     # TODO: add additional asserts to check content and etags.
+
+    # Test queries using ETags.
+    entry = self.client.get_entry(self_link)
+    self.assert_(entry.etag is not None)
+    self.assertRaises(gdata.client.NotModified, self.client.get_entry,
+                      self_link, etag=entry.etag)
 
     # Delete the test blog post.
     self.client.request('DELETE', edit_link)
