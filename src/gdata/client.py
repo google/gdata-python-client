@@ -87,16 +87,13 @@ class BadAuthentication(RequestError):
   pass
 
 
-<<<<<<< .mine
 class NotModified(RequestError):
   pass
 
 
-def error_from_response(message, http_response, error_class, response_body=None):
-=======
 def error_from_response(message, http_response, error_class,
                         response_body=None):
->>>>>>> .r874
+
   """Creates a new exception and sets the HTTP information in the error.
 
   Args:
@@ -305,14 +302,10 @@ class GDClient(atom.client.AtomPubClient):
     elif response.status == 401:
       raise error_from_response('Unauthorized - Server responded with',
                                 response, Unauthorized)
-<<<<<<< .mine
     elif response.status == 304:
       raise error_from_response('Entry Not Modified - Server responded with',
                                 response, NotModified)
     # If the server's response was not a 200, 201, 302, or 401, raise an
-=======
-    # If the server's response was not a 200, 201, 302, or 401, raise an
->>>>>>> .r874
     # exception.
     else:
       raise error_from_response('Server responded with', response,
