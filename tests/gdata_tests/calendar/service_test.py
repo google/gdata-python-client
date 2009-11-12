@@ -28,9 +28,6 @@ import gdata.calendar.service
 import random
 import getpass
 
-# Commented out as dateutil is not in this repository
-#from dateutil.parser import parse
-
 
 username = ''
 password = ''
@@ -188,7 +185,7 @@ class CalendarServiceUnitTest(unittest.TestCase):
     comments_entry.content = atom.Content(text='Comments content')
     comments_entry.author.append(
         atom.Author(name=atom.Name(text='GData Test user'),
-            email=atom.Email(text='gdata.ops.demo@gmail.com')))
+            email=atom.Email(text=username)))
     new_comments_entry = self.cal_client.InsertEventComment(comments_entry,
         comments_feed.GetPostLink().href)
   
@@ -279,6 +276,81 @@ class CalendarServiceUnitTest(unittest.TestCase):
     # Ensure status of returned event is canceled
     self.assertEquals(after_delete_query_result.entry[0].event_status.value,
         'CANCELED')
+
+  def testEventWithSyncEventAndUID(self):
+    """Test posting a new entry (with syncEvent and a UID) and deleting it."""
+
+    # Get random data for creating event
+    r = random.Random()
+    r.seed()
+    random_event_number = str(r.randint(100000,1000000))
+    random_event_title = 'My Random Test Event %s' % random_event_number
+
+    random_start_hour = (r.randint(1,1000000) % 23)
+    random_end_hour = random_start_hour + 1
+    non_random_start_minute = 0
+    non_random_end_minute = 0
+    random_month = (r.randint(1,1000000) % 12 + 1)
+    random_day_of_month = (r.randint(1,1000000) % 28 + 1)
+    non_random_year = 2008
+    start_time = '%04d-%02d-%02dT%02d:%02d:00.000-05:00' % (
+        non_random_year, random_month, random_day_of_month,
+        random_start_hour, non_random_start_minute,)
+    end_time = '%04d-%02d-%02dT%02d:%02d:00.000-05:00' % (
+        non_random_year, random_month, random_day_of_month,
+        random_end_hour, non_random_end_minute,)
+
+    # create a random event ID. I'm mimicing an example from outlook here,
+    # the format doesn't seem to be important per the RFC except for being
+    # globally unique.
+    uid_string = ''
+    for i in xrange(121):
+      uid_string += "%X" % r.randint(0, 0xf)
+
+    # Set event data
+    event = gdata.calendar.CalendarEventEntry()
+    event.author.append(atom.Author(name=atom.Name(text='GData Test user')))
+    event.title = atom.Title(text=random_event_title)
+    event.content = atom.Content(text='Picnic with some lunch')
+    event.where.append(gdata.calendar.Where(value_string='Down by the river'))
+    event.when.append(gdata.calendar.When(
+        start_time=start_time,end_time=end_time))
+    event.sync_event = gdata.calendar.SyncEvent('true')
+    event.uid = gdata.calendar.UID(value=uid_string)
+
+    # Insert event
+    self.cal_client.ProgrammaticLogin()
+    new_event = self.cal_client.InsertEvent(event,
+        '/calendar/feeds/default/private/full')
+
+    # Inserting it a second time should fail, as it'll have the same UID
+    try:
+      bad_event = self.cal_client.InsertEvent(event,
+          '/calendar/feeds/default/private/full')
+      self.fail('Was able to insert an event with a duplicate UID')
+    except gdata.service.RequestError, error:
+      # for the current problem with redirects, just re-raise so the
+      # failure doesn't seem to be because of the duplicate UIDs.
+      status = error[0]['status']
+      if status == 302:
+        raise
+
+      # otherwise, make sure it was the right error
+      self.assertEquals(error[0]['status'], 409)
+      self.assertEquals(error[0]['reason'], 'Conflict')
+
+    # Ensure that atom data returned from calendar server equals atom data
+    # sent
+    self.assertEquals(event.title.text, new_event.title.text)
+    self.assertEquals(event.content.text, new_event.content.text)
+
+    # Ensure that gd:where data returned from calendar equals value sent
+    self.assertEquals(event.where[0].value_string,
+        new_event.where[0].value_string)
+
+    # Delete the event
+    self.cal_client.DeleteEvent(new_event.GetEditLink().href)
+ 
 
   def testCreateAndDeleteEventUsingBatch(self):
     # Get random data for creating event

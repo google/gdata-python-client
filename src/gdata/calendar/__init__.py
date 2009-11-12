@@ -513,7 +513,8 @@ class EventStatus(UriEnumElement):
         extension_elements=extension_elements,
         extension_attributes=extension_attributes, 
         text=text)
-    
+
+
 class Who(UriEnumElement):
   """The Google Calendar Who element"""
 
@@ -576,7 +577,8 @@ class OriginalEvent(atom.AtomBase):
 
 def GetCalendarEventEntryClass():
   return CalendarEventEntry
-  
+
+
 # This class is not completely defined here, because of a circular reference
 # in which CalendarEventEntryLink and CalendarEventEntry refer to one another.
 class CalendarEventEntryLink(gdata.EntryLink):
@@ -635,7 +637,8 @@ class SendEventNotifications(atom.AtomBase):
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
-    
+
+
 class QuickAdd(atom.AtomBase):
   """The Google Calendar quickadd element"""
   
@@ -666,6 +669,36 @@ class QuickAdd(atom.AtomBase):
     else:
       atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
           element_tree)
+
+
+class SyncEvent(atom.AtomBase):
+  _tag = 'syncEvent'
+  _namespace = GCAL_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['value'] = 'value'
+
+  def __init__(self, value='false', extension_elements=None,
+               extension_attributes=None, text=None):
+    self.value = value
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+
+
+class UID(atom.AtomBase):
+  _tag = 'uid'
+  _namespace = GCAL_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['value'] = 'value'
+
+  def __init__(self, value=None, extension_elements=None,
+               extension_attributes=None, text=None):
+    self.value = value
+    self.text = text
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {} 
 
 
 class Sequence(atom.AtomBase):
@@ -741,6 +774,73 @@ class WebContentLink(atom.Link):
     self.web_content = web_content
 
 
+class GuestsCanInviteOthers(atom.AtomBase):
+  """Indicates whether event attendees may invite others to the event.
+  
+  This element may only be changed by the organizer of the event. If not
+  included as part of the event entry, this element will default to true
+  during a POST request, and will inherit its previous value during a PUT
+  request.
+  """
+  _tag = 'guestsCanInviteOthers'
+  _namespace = GCAL_NAMESPACE
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['value'] = 'value'
+
+  def __init__(self, value='true', *args, **kwargs):
+    atom.AtomBase.__init__(self, *args, **kwargs)
+    self.value = value
+
+
+class GuestsCanSeeGuests(atom.AtomBase):
+  """Indicates whether attendees can see other people invited to the event.
+
+  The organizer always sees all attendees. Guests always see themselves. This
+  property affects what attendees see in the event's guest list via both the
+  Calendar UI and API feeds.
+
+  This element may only be changed by the organizer of the event.
+
+  If not included as part of the event entry, this element will default to
+  true during a POST request, and will inherit its previous value during a
+  PUT request.
+  """
+  _tag = 'guestsCanSeeGuests'
+  _namespace = GCAL_NAMESPACE
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['value'] = 'value'
+
+  def __init__(self, value='true', *args, **kwargs):
+    atom.AtomBase.__init__(self, *args, **kwargs)
+    self.value = value
+
+
+class GuestsCanModify(atom.AtomBase):
+  """Indicates whether event attendees may modify the original event. 
+  
+  If yes, changes are visible to organizer and other attendees. Otherwise,
+  any changes made by attendees will be restricted to that attendee's
+  calendar.
+
+  This element may only be changed by the organizer of the event, and may
+  be set to 'true' only if both gCal:guestsCanInviteOthers and
+  gCal:guestsCanSeeGuests are set to true in the same PUT/POST request.
+  Otherwise, request fails with HTTP error code 400 (Bad Request).
+
+  If not included as part of the event entry, this element will default to
+  false during a POST request, and will inherit its previous value during a
+  PUT request."""
+  _tag = 'guestsCanModify'
+  _namespace = GCAL_NAMESPACE
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['value'] = 'value'
+
+  def __init__(self, value='false', *args, **kwargs):
+    atom.AtomBase.__init__(self, *args, **kwargs)
+    self.value = value
+
+
+
 class CalendarEventEntry(gdata.BatchEntry):
   """A Google Calendar flavor of an Atom Entry """
 
@@ -773,6 +873,14 @@ class CalendarEventEntry(gdata.BatchEntry):
                                                             OriginalEvent)
   _children['{%s}sequence' % GCAL_NAMESPACE] = ('sequence', Sequence)
   _children['{%s}reminder' % gdata.GDATA_NAMESPACE] = ('reminder', [Reminder])
+  _children['{%s}syncEvent' % GCAL_NAMESPACE] = ('sync_event', SyncEvent)
+  _children['{%s}uid' % GCAL_NAMESPACE] = ('uid', UID)
+  _children['{%s}guestsCanInviteOthers' % GCAL_NAMESPACE] = (
+      'guests_can_invite_others', GuestsCanInviteOthers)
+  _children['{%s}guestsCanModify' % GCAL_NAMESPACE] = (
+      'guests_can_modify', GuestsCanModify)
+  _children['{%s}guestsCanSeeGuests' % GCAL_NAMESPACE] = (
+      'guests_can_see_guests', GuestsCanSeeGuests)
   
   def __init__(self, author=None, category=None, content=None,
       atom_id=None, link=None, published=None, 
@@ -783,7 +891,9 @@ class CalendarEventEntry(gdata.BatchEntry):
       where=None, when=None, who=None, quick_add=None,
       extended_property=None, original_event=None,
       batch_operation=None, batch_id=None, batch_status=None,
-      sequence=None, reminder=None,
+      sequence=None, reminder=None, sync_event=None, uid=None,
+      guests_can_invite_others=None, guests_can_modify=None,
+      guests_can_see_guests=None,
       extension_elements=None, extension_attributes=None, text=None):
 
     gdata.BatchEntry.__init__(self, author=author, category=category, 
@@ -808,7 +918,12 @@ class CalendarEventEntry(gdata.BatchEntry):
     self.original_event = original_event
     self.sequence = sequence
     self.reminder = reminder or []
+    self.sync_event = sync_event
+    self.uid = uid
     self.text = text
+    self.guests_can_invite_others = guests_can_invite_others
+    self.guests_can_modify = guests_can_modify
+    self.guests_can_see_guests = guests_can_see_guests
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
 
