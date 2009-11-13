@@ -68,7 +68,7 @@ class Color(ValueAttributeContainer):
   _namespace = GCAL_NAMESPACE
   _children = ValueAttributeContainer._children.copy()
   _attributes = ValueAttributeContainer._attributes.copy()
-  
+
 
 
 class AccessLevel(ValueAttributeContainer):
@@ -78,7 +78,7 @@ class AccessLevel(ValueAttributeContainer):
   _namespace = GCAL_NAMESPACE
   _children = ValueAttributeContainer._children.copy()
   _attributes = ValueAttributeContainer._attributes.copy()
-  
+
 
 class Hidden(ValueAttributeContainer):
   """The Google Calendar hidden element"""
@@ -87,7 +87,7 @@ class Hidden(ValueAttributeContainer):
   _namespace = GCAL_NAMESPACE
   _children = ValueAttributeContainer._children.copy()
   _attributes = ValueAttributeContainer._attributes.copy()
-  
+
 
 class Selected(ValueAttributeContainer):
   """The Google Calendar selected element"""
@@ -118,7 +118,7 @@ class Where(atom.AtomBase):
 
   def __init__(self, value_string=None, extension_elements=None,
       extension_attributes=None, text=None):
-    self.value_string = value_string 
+    self.value_string = value_string
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
@@ -132,31 +132,31 @@ class CalendarListEntry(gdata.GDataEntry, gdata.LinkFinder):
   _children = gdata.GDataEntry._children.copy()
   _attributes = gdata.GDataEntry._attributes.copy()
   _children['{%s}color' % GCAL_NAMESPACE] = ('color', Color)
-  _children['{%s}accesslevel' % GCAL_NAMESPACE] = ('access_level', 
+  _children['{%s}accesslevel' % GCAL_NAMESPACE] = ('access_level',
                                                    AccessLevel)
   _children['{%s}hidden' % GCAL_NAMESPACE] = ('hidden', Hidden)
   _children['{%s}selected' % GCAL_NAMESPACE] = ('selected', Selected)
   _children['{%s}timezone' % GCAL_NAMESPACE] = ('timezone', Timezone)
   _children['{%s}where' % gdata.GDATA_NAMESPACE] = ('where', Where)
-  
+
   def __init__(self, author=None, category=None, content=None,
-      atom_id=None, link=None, published=None, 
-      title=None, updated=None, 
+      atom_id=None, link=None, published=None,
+      title=None, updated=None,
       color=None, access_level=None, hidden=None, timezone=None,
       selected=None,
       where=None,
       extension_elements=None, extension_attributes=None, text=None):
-    gdata.GDataEntry.__init__(self, author=author, category=category, 
-                        content=content, atom_id=atom_id, link=link, 
-                        published=published, title=title, 
+    gdata.GDataEntry.__init__(self, author=author, category=category,
+                        content=content, atom_id=atom_id, link=link,
+                        published=published, title=title,
                         updated=updated, text=None)
 
     self.color = color
     self.access_level = access_level
-    self.hidden = hidden 
+    self.hidden = hidden
     self.selected = selected
     self.timezone = timezone
-    self.where = where 
+    self.where = where
 
 
 class CalendarListFeed(gdata.GDataFeed, gdata.LinkFinder):
@@ -178,7 +178,7 @@ class Scope(atom.AtomBase):
   _attributes = atom.AtomBase._attributes.copy()
   _attributes['value'] = 'value'
   _attributes['type'] = 'type'
-  
+
   def __init__(self, extension_elements=None, value=None, scope_type=None,
       extension_attributes=None, text=None):
     self.value = value
@@ -206,15 +206,15 @@ class CalendarAclEntry(gdata.GDataEntry, gdata.LinkFinder):
   _attributes = gdata.GDataEntry._attributes.copy()
   _children['{%s}scope' % GACL_NAMESPACE] = ('scope', Scope)
   _children['{%s}role' % GACL_NAMESPACE] = ('role', Role)
-  
+
   def __init__(self, author=None, category=None, content=None,
-      atom_id=None, link=None, published=None, 
+      atom_id=None, link=None, published=None,
       title=None, updated=None,
       scope=None, role=None,
       extension_elements=None, extension_attributes=None, text=None):
-    gdata.GDataEntry.__init__(self, author=author, category=category, 
-                        content=content, atom_id=atom_id, link=link, 
-                        published=published, title=title, 
+    gdata.GDataEntry.__init__(self, author=author, category=category,
+                        content=content, atom_id=atom_id, link=link,
+                        published=published, title=title,
                         updated=updated, text=None)
     self.scope = scope
     self.role = role
@@ -246,7 +246,7 @@ class CalendarEventCommentFeed(gdata.GDataFeed, gdata.LinkFinder):
   _namespace = gdata.GDataFeed._namespace
   _children = gdata.GDataFeed._children.copy()
   _attributes = gdata.GDataFeed._attributes.copy()
-  _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', 
+  _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry',
       [CalendarEventCommentEntry])
 
 
@@ -254,10 +254,10 @@ class ExtendedProperty(gdata.ExtendedProperty):
   """A transparent subclass of gdata.ExtendedProperty added to this module
   for backwards compatibility."""
 
-    
+
 class Reminder(atom.AtomBase):
   """The Google Calendar reminder element"""
-  
+
   _tag = 'reminder'
   _namespace = gdata.GDATA_NAMESPACE
   _children = atom.AtomBase._children.copy()
@@ -273,7 +273,7 @@ class Reminder(atom.AtomBase):
       extension_elements=None,
       extension_attributes=None, text=None):
     self.absolute_time = absolute_time
-    if days is not None: 
+    if days is not None:
       self.days = str(days)
     else:
       self.days = None
@@ -289,7 +289,7 @@ class Reminder(atom.AtomBase):
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
-    
+
 
 class When(atom.AtomBase):
   """The Google Calendar When element"""
@@ -302,10 +302,10 @@ class When(atom.AtomBase):
   _attributes['startTime'] = 'start_time'
   _attributes['endTime'] = 'end_time'
 
-  def __init__(self, start_time=None, end_time=None, reminder=None, 
+  def __init__(self, start_time=None, end_time=None, reminder=None,
       extension_elements=None, extension_attributes=None, text=None):
-    self.start_time = start_time 
-    self.end_time = end_time 
+    self.start_time = start_time
+    self.end_time = end_time
     self.reminder = reminder or []
     self.text = text
     self.extension_elements = extension_elements or []
@@ -320,13 +320,13 @@ class Recurrence(atom.AtomBase):
   _children = atom.AtomBase._children.copy()
   _attributes = atom.AtomBase._attributes.copy()
 
-  
+
 class UriEnumElement(atom.AtomBase):
 
   _children = atom.AtomBase._children.copy()
   _attributes = atom.AtomBase._attributes.copy()
 
-  def __init__(self, tag, enum_map, attrib_name='value', 
+  def __init__(self, tag, enum_map, attrib_name='value',
       extension_elements=None, extension_attributes=None, text=None):
     self.tag=tag
     self.enum_map=enum_map
@@ -335,7 +335,7 @@ class UriEnumElement(atom.AtomBase):
     self.text=text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
-     
+
   def findKey(self, value):
      res=[item[0] for item in self.enum_map.items() if item[1] == value]
      if res is None or len(res) == 0:
@@ -355,10 +355,10 @@ class UriEnumElement(atom.AtomBase):
       setattr(self, self.__class__._attributes[attribute], value)
     else:
       # The current class doesn't map this attribute, so try to parent class.
-      atom.ExtensionContainer._ConvertElementAttributeToMember(self, 
+      atom.ExtensionContainer._ConvertElementAttributeToMember(self,
                                                                attribute,
                                                                value)
- 
+
   def _AddMembersToElementTree(self, tree):
     # Convert the members of this class which are XML child nodes.
     # This uses the class's _children dictionary to find the members which
@@ -386,46 +386,46 @@ class UriEnumElement(atom.AtomBase):
     # Lastly, call the parent's _AddMembersToElementTree to get any
     # extension elements.
     atom.ExtensionContainer._AddMembersToElementTree(self, tree)
-    
-    
+
+
 
 class AttendeeStatus(UriEnumElement):
   """The Google Calendar attendeeStatus element"""
-  
+
   _tag = 'attendeeStatus'
   _namespace = gdata.GDATA_NAMESPACE
   _children = UriEnumElement._children.copy()
   _attributes = UriEnumElement._attributes.copy()
-  
-  attendee_enum = { 
+
+  attendee_enum = {
       'http://schemas.google.com/g/2005#event.accepted' : 'ACCEPTED',
       'http://schemas.google.com/g/2005#event.declined' : 'DECLINED',
       'http://schemas.google.com/g/2005#event.invited' : 'INVITED',
       'http://schemas.google.com/g/2005#event.tentative' : 'TENTATIVE'}
-  
-  def __init__(self, extension_elements=None, 
+
+  def __init__(self, extension_elements=None,
       extension_attributes=None, text=None):
     UriEnumElement.__init__(self, 'attendeeStatus', AttendeeStatus.attendee_enum,
                             extension_elements=extension_elements,
-                            extension_attributes=extension_attributes, 
+                            extension_attributes=extension_attributes,
                             text=text)
 
 
 class AttendeeType(UriEnumElement):
   """The Google Calendar attendeeType element"""
-  
+
   _tag = 'attendeeType'
   _namespace = gdata.GDATA_NAMESPACE
   _children = UriEnumElement._children.copy()
   _attributes = UriEnumElement._attributes.copy()
-  
-  attendee_type_enum = { 
+
+  attendee_type_enum = {
       'http://schemas.google.com/g/2005#event.optional' : 'OPTIONAL',
       'http://schemas.google.com/g/2005#event.required' : 'REQUIRED' }
-  
+
   def __init__(self, extension_elements=None,
       extension_attributes=None, text=None):
-    UriEnumElement.__init__(self, 'attendeeType', 
+    UriEnumElement.__init__(self, 'attendeeType',
         AttendeeType.attendee_type_enum,
         extension_elements=extension_elements,
         extension_attributes=extension_attributes,text=text)
@@ -433,13 +433,13 @@ class AttendeeType(UriEnumElement):
 
 class Visibility(UriEnumElement):
   """The Google Calendar Visibility element"""
-  
+
   _tag = 'visibility'
   _namespace = gdata.GDATA_NAMESPACE
   _children = UriEnumElement._children.copy()
   _attributes = UriEnumElement._attributes.copy()
-  
-  visibility_enum = { 
+
+  visibility_enum = {
       'http://schemas.google.com/g/2005#event.confidential' : 'CONFIDENTIAL',
       'http://schemas.google.com/g/2005#event.default' : 'DEFAULT',
       'http://schemas.google.com/g/2005#event.private' : 'PRIVATE',
@@ -449,45 +449,45 @@ class Visibility(UriEnumElement):
       extension_attributes=None, text=None):
     UriEnumElement.__init__(self, 'visibility', Visibility.visibility_enum,
                             extension_elements=extension_elements,
-                            extension_attributes=extension_attributes, 
+                            extension_attributes=extension_attributes,
                             text=text)
 
 
 class Transparency(UriEnumElement):
   """The Google Calendar Transparency element"""
-  
+
   _tag = 'transparency'
   _namespace = gdata.GDATA_NAMESPACE
   _children = UriEnumElement._children.copy()
   _attributes = UriEnumElement._attributes.copy()
-  
-  transparency_enum = { 
+
+  transparency_enum = {
       'http://schemas.google.com/g/2005#event.opaque' : 'OPAQUE',
       'http://schemas.google.com/g/2005#event.transparent' : 'TRANSPARENT' }
-  
+
   def __init__(self, extension_elements=None,
       extension_attributes=None, text=None):
-    UriEnumElement.__init__(self, tag='transparency', 
+    UriEnumElement.__init__(self, tag='transparency',
                             enum_map=Transparency.transparency_enum,
                             extension_elements=extension_elements,
-                            extension_attributes=extension_attributes, 
+                            extension_attributes=extension_attributes,
                             text=text)
 
 
 class Comments(atom.AtomBase):
   """The Google Calendar comments element"""
-  
+
   _tag = 'comments'
   _namespace = gdata.GDATA_NAMESPACE
   _children = atom.AtomBase._children.copy()
   _attributes = atom.AtomBase._attributes.copy()
-  _children['{%s}feedLink' % gdata.GDATA_NAMESPACE] = ('feed_link', 
+  _children['{%s}feedLink' % gdata.GDATA_NAMESPACE] = ('feed_link',
                                                        gdata.FeedLink)
   _attributes['rel'] = 'rel'
 
   def __init__(self, rel=None, feed_link=None, extension_elements=None,
       extension_attributes=None, text=None):
-    self.rel = rel 
+    self.rel = rel
     self.feed_link = feed_link
     self.text = text
     self.extension_elements = extension_elements or []
@@ -496,22 +496,22 @@ class Comments(atom.AtomBase):
 
 class EventStatus(UriEnumElement):
   """The Google Calendar eventStatus element"""
-  
+
   _tag = 'eventStatus'
   _namespace = gdata.GDATA_NAMESPACE
   _children = UriEnumElement._children.copy()
   _attributes = UriEnumElement._attributes.copy()
-  
+
   status_enum = { 'http://schemas.google.com/g/2005#event.canceled' : 'CANCELED',
                  'http://schemas.google.com/g/2005#event.confirmed' : 'CONFIRMED',
                  'http://schemas.google.com/g/2005#event.tentative' : 'TENTATIVE'}
-  
+
   def __init__(self, extension_elements=None,
       extension_attributes=None, text=None):
-    UriEnumElement.__init__(self, tag='eventStatus', 
+    UriEnumElement.__init__(self, tag='eventStatus',
         enum_map=EventStatus.status_enum,
         extension_elements=extension_elements,
-        extension_attributes=extension_attributes, 
+        extension_attributes=extension_attributes,
         text=text)
 
 
@@ -538,13 +538,13 @@ class Who(UriEnumElement):
               'http://schemas.google.com/g/2005#message.from' : 'FROM',
               'http://schemas.google.com/g/2005#message.reply-to' : 'REPLY_TO',
               'http://schemas.google.com/g/2005#message.to' : 'TO' }
-  
-  def __init__(self, name=None, email=None, attendee_status=None, 
-      attendee_type=None, rel=None, extension_elements=None, 
+
+  def __init__(self, name=None, email=None, attendee_status=None,
+      attendee_type=None, rel=None, extension_elements=None,
       extension_attributes=None, text=None):
     UriEnumElement.__init__(self, 'who', Who.relEnum, attrib_name='rel',
                             extension_elements=extension_elements,
-                            extension_attributes=extension_attributes, 
+                            extension_attributes=extension_attributes,
                             text=text)
     self.name = name
     self.email = email
@@ -555,7 +555,7 @@ class Who(UriEnumElement):
 
 class OriginalEvent(atom.AtomBase):
   """The Google Calendar OriginalEvent element"""
-  
+
   _tag = 'originalEvent'
   _namespace = gdata.GDATA_NAMESPACE
   _children = atom.AtomBase._children.copy()
@@ -565,15 +565,15 @@ class OriginalEvent(atom.AtomBase):
   _attributes['id'] = 'id'
   _attributes['href'] = 'href'
 
-  def __init__(self, id=None, href=None, when=None, 
+  def __init__(self, id=None, href=None, when=None,
       extension_elements=None, extension_attributes=None, text=None):
     self.id = id
-    self.href = href 
+    self.href = href
     self.when = when
     self.text = text
     self.extension_elements = extension_elements or []
-    self.extension_attributes = extension_attributes or {}    
-  
+    self.extension_attributes = extension_attributes or {}
+
 
 def GetCalendarEventEntryClass():
   return CalendarEventEntry
@@ -583,7 +583,7 @@ def GetCalendarEventEntryClass():
 # in which CalendarEventEntryLink and CalendarEventEntry refer to one another.
 class CalendarEventEntryLink(gdata.EntryLink):
   """An entryLink which contains a calendar event entry
-  
+
   Within an event's recurranceExceptions, an entry link
   points to a calendar event entry. This class exists
   to capture the calendar specific extensions in the entry.
@@ -597,7 +597,7 @@ class CalendarEventEntryLink(gdata.EntryLink):
   # that class hasn't been defined yet, so we will wait until after defining
   # CalendarEventEntry to list it in _children.
 
-  
+
 class RecurrenceException(atom.AtomBase):
   """The Google Calendar RecurrenceException element"""
 
@@ -605,14 +605,14 @@ class RecurrenceException(atom.AtomBase):
   _namespace = gdata.GDATA_NAMESPACE
   _children = atom.AtomBase._children.copy()
   _attributes = atom.AtomBase._attributes.copy()
-  _children['{%s}entryLink' % gdata.GDATA_NAMESPACE] = ('entry_link', 
+  _children['{%s}entryLink' % gdata.GDATA_NAMESPACE] = ('entry_link',
       CalendarEventEntryLink)
   _children['{%s}originalEvent' % gdata.GDATA_NAMESPACE] = ('original_event',
                                                             OriginalEvent)
   _attributes['specialized'] = 'specialized'
-  
-  def __init__(self, specialized=None, entry_link=None, 
-      original_event=None, extension_elements=None, 
+
+  def __init__(self, specialized=None, entry_link=None,
+      original_event=None, extension_elements=None,
       extension_attributes=None, text=None):
     self.specialized = specialized
     self.entry_link = entry_link
@@ -620,11 +620,11 @@ class RecurrenceException(atom.AtomBase):
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
-    
- 
+
+
 class SendEventNotifications(atom.AtomBase):
   """The Google Calendar sendEventNotifications element"""
-  
+
   _tag = 'sendEventNotifications'
   _namespace = GCAL_NAMESPACE
   _children = atom.AtomBase._children.copy()
@@ -641,7 +641,7 @@ class SendEventNotifications(atom.AtomBase):
 
 class QuickAdd(atom.AtomBase):
   """The Google Calendar quickadd element"""
-  
+
   _tag = 'quickadd'
   _namespace = GCAL_NAMESPACE
   _children = atom.AtomBase._children.copy()
@@ -667,7 +667,7 @@ class QuickAdd(atom.AtomBase):
       self.value = element_tree.attrib[attribute]
       del element_tree.attrib[attribute]
     else:
-      atom.AtomBase._TakeAttributeFromElementTree(self, attribute, 
+      atom.AtomBase._TakeAttributeFromElementTree(self, attribute,
           element_tree)
 
 
@@ -698,7 +698,7 @@ class UID(atom.AtomBase):
     self.value = value
     self.text = text
     self.extension_elements = extension_elements or []
-    self.extension_attributes = extension_attributes or {} 
+    self.extension_attributes = extension_attributes or {}
 
 
 class Sequence(atom.AtomBase):
@@ -707,9 +707,9 @@ class Sequence(atom.AtomBase):
   _children = atom.AtomBase._children.copy()
   _attributes = atom.AtomBase._attributes.copy()
   _attributes['value'] = 'value'
-          
+
   def __init__(self, value=None, extension_elements=None,
-      extension_attributes=None, text=None):
+               extension_attributes=None, text=None):
     self.value = value
     self.text = text
     self.extension_elements = extension_elements or []
@@ -733,16 +733,16 @@ class WebContentGadgetPref(atom.AtomBase):
     self.value = value
     self.text = text
     self.extension_elements = extension_elements or []
-    self.extension_attributes = extension_attributes or {}          
-          
-      
+    self.extension_attributes = extension_attributes or {}
+
+
 class WebContent(atom.AtomBase):
 
   _tag = 'webContent'
   _namespace = GCAL_NAMESPACE
   _children = atom.AtomBase._children.copy()
   _attributes = atom.AtomBase._attributes.copy()
-  _children['{%s}webContentGadgetPref' % GCAL_NAMESPACE] = ('gadget_pref', 
+  _children['{%s}webContentGadgetPref' % GCAL_NAMESPACE] = ('gadget_pref',
       [WebContentGadgetPref])
   _attributes['url'] = 'url'
   _attributes['width'] = 'width'
@@ -756,9 +756,9 @@ class WebContent(atom.AtomBase):
     self.text = text
     self.gadget_pref = gadget_pref or []
     self.extension_elements = extension_elements or []
-    self.extension_attributes = extension_attributes or {}  
+    self.extension_attributes = extension_attributes or {}
 
-      
+
 class WebContentLink(atom.Link):
 
   _tag = 'link'
@@ -766,17 +766,17 @@ class WebContentLink(atom.Link):
   _children = atom.Link._children.copy()
   _attributes = atom.Link._attributes.copy()
   _children['{%s}webContent' % GCAL_NAMESPACE] = ('web_content', WebContent)
-    
-  def __init__(self, title=None, href=None, link_type=None, 
+
+  def __init__(self, title=None, href=None, link_type=None,
         web_content=None):
-    atom.Link.__init__(self, rel=WEB_CONTENT_LINK_REL, title=title, href=href, 
+    atom.Link.__init__(self, rel=WEB_CONTENT_LINK_REL, title=title, href=href,
         link_type=link_type)
     self.web_content = web_content
 
 
 class GuestsCanInviteOthers(atom.AtomBase):
   """Indicates whether event attendees may invite others to the event.
-  
+
   This element may only be changed by the organizer of the event. If not
   included as part of the event entry, this element will default to true
   during a POST request, and will inherit its previous value during a PUT
@@ -816,8 +816,8 @@ class GuestsCanSeeGuests(atom.AtomBase):
 
 
 class GuestsCanModify(atom.AtomBase):
-  """Indicates whether event attendees may modify the original event. 
-  
+  """Indicates whether event attendees may modify the original event.
+
   If yes, changes are visible to organizer and other attendees. Otherwise,
   any changes made by attendees will be restricted to that attendee's
   calendar.
@@ -854,14 +854,14 @@ class CalendarEventEntry(gdata.BatchEntry):
   _children['{%s}when' % gdata.GDATA_NAMESPACE] = ('when', [When])
   _children['{%s}who' % gdata.GDATA_NAMESPACE] = ('who', [Who])
   _children['{%s}extendedProperty' % gdata.GDATA_NAMESPACE] = (
-      'extended_property', [ExtendedProperty]) 
-  _children['{%s}visibility' % gdata.GDATA_NAMESPACE] = ('visibility', 
+      'extended_property', [ExtendedProperty])
+  _children['{%s}visibility' % gdata.GDATA_NAMESPACE] = ('visibility',
                                                          Visibility)
-  _children['{%s}transparency' % gdata.GDATA_NAMESPACE] = ('transparency', 
+  _children['{%s}transparency' % gdata.GDATA_NAMESPACE] = ('transparency',
                                                            Transparency)
-  _children['{%s}eventStatus' % gdata.GDATA_NAMESPACE] = ('event_status', 
+  _children['{%s}eventStatus' % gdata.GDATA_NAMESPACE] = ('event_status',
                                                           EventStatus)
-  _children['{%s}recurrence' % gdata.GDATA_NAMESPACE] = ('recurrence', 
+  _children['{%s}recurrence' % gdata.GDATA_NAMESPACE] = ('recurrence',
                                                          Recurrence)
   _children['{%s}recurrenceException' % gdata.GDATA_NAMESPACE] = (
       'recurrence_exception', [RecurrenceException])
@@ -881,10 +881,10 @@ class CalendarEventEntry(gdata.BatchEntry):
       'guests_can_modify', GuestsCanModify)
   _children['{%s}guestsCanSeeGuests' % GCAL_NAMESPACE] = (
       'guests_can_see_guests', GuestsCanSeeGuests)
-  
+
   def __init__(self, author=None, category=None, content=None,
-      atom_id=None, link=None, published=None, 
-      title=None, updated=None, 
+      atom_id=None, link=None, published=None,
+      title=None, updated=None,
       transparency=None, comments=None, event_status=None,
       send_event_notifications=None, visibility=None,
       recurrence=None, recurrence_exception=None,
@@ -896,19 +896,19 @@ class CalendarEventEntry(gdata.BatchEntry):
       guests_can_see_guests=None,
       extension_elements=None, extension_attributes=None, text=None):
 
-    gdata.BatchEntry.__init__(self, author=author, category=category, 
+    gdata.BatchEntry.__init__(self, author=author, category=category,
                         content=content,
                         atom_id=atom_id, link=link, published=published,
-                        batch_operation=batch_operation, batch_id=batch_id, 
+                        batch_operation=batch_operation, batch_id=batch_id,
                         batch_status=batch_status,
                         title=title, updated=updated)
-    
-    self.transparency = transparency 
+
+    self.transparency = transparency
     self.comments = comments
-    self.event_status = event_status 
+    self.event_status = event_status
     self.send_event_notifications = send_event_notifications
     self.visibility = visibility
-    self.recurrence = recurrence 
+    self.recurrence = recurrence
     self.recurrence_exception = recurrence_exception or []
     self.where = where or []
     self.when = when or []
@@ -928,15 +928,15 @@ class CalendarEventEntry(gdata.BatchEntry):
     self.extension_attributes = extension_attributes or {}
 
   # We needed to add special logic to _ConvertElementTreeToMember because we
-  # want to make links with a rel of WEB_CONTENT_LINK_REL into a 
+  # want to make links with a rel of WEB_CONTENT_LINK_REL into a
   # WebContentLink
   def _ConvertElementTreeToMember(self, child_tree):
     # Special logic to handle Web Content links
-    if (child_tree.tag == '{%s}link' % atom.ATOM_NAMESPACE and 
+    if (child_tree.tag == '{%s}link' % atom.ATOM_NAMESPACE and
         child_tree.attrib['rel'] == WEB_CONTENT_LINK_REL):
       if self.link is None:
         self.link = []
-      self.link.append(atom._CreateClassFromElementTree(WebContentLink, 
+      self.link.append(atom._CreateClassFromElementTree(WebContentLink,
                                                         child_tree))
       return
     # Find the element's tag in this class's list of child members
@@ -956,13 +956,13 @@ class CalendarEventEntry(gdata.BatchEntry):
                 atom._CreateClassFromElementTree(member_class, child_tree))
     else:
       atom.ExtensionContainer._ConvertElementTreeToMember(self, child_tree)
-      
+
 
   def GetWebContentLink(self):
     """Finds the first link with rel set to WEB_CONTENT_REL
 
     Returns:
-      A gdata.calendar.WebContentLink or none if none of the links had rel 
+      A gdata.calendar.WebContentLink or none if none of the links had rel
       equal to WEB_CONTENT_REL
     """
 
@@ -970,7 +970,7 @@ class CalendarEventEntry(gdata.BatchEntry):
       if a_link.rel == WEB_CONTENT_LINK_REL:
         return a_link
     return None
-    
+
 
 def CalendarEventEntryFromString(xml_string):
   return atom.CreateClassFromXMLString(CalendarEventEntry, xml_string)
@@ -978,11 +978,11 @@ def CalendarEventEntryFromString(xml_string):
 
 def CalendarEventCommentEntryFromString(xml_string):
   return atom.CreateClassFromXMLString(CalendarEventCommentEntry, xml_string)
-  
 
-CalendarEventEntryLink._children = {'{%s}entry' % atom.ATOM_NAMESPACE: 
+
+CalendarEventEntryLink._children = {'{%s}entry' % atom.ATOM_NAMESPACE:
     ('entry', CalendarEventEntry)}
-  
+
 
 def CalendarEventEntryLinkFromString(xml_string):
   return atom.CreateClassFromXMLString(CalendarEventEntryLink, xml_string)
@@ -995,13 +995,13 @@ class CalendarEventFeed(gdata.BatchFeed, gdata.LinkFinder):
   _namespace = gdata.BatchFeed._namespace
   _children = gdata.BatchFeed._children.copy()
   _attributes = gdata.BatchFeed._attributes.copy()
-  _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry', 
+  _children['{%s}entry' % atom.ATOM_NAMESPACE] = ('entry',
                                                   [CalendarEventEntry])
   _children['{%s}timezone' % GCAL_NAMESPACE] = ('timezone', Timezone)
 
   def __init__(self, author=None, category=None, contributor=None,
-      generator=None, icon=None, atom_id=None, link=None, logo=None, 
-      rights=None, subtitle=None, title=None, updated=None, entry=None, 
+      generator=None, icon=None, atom_id=None, link=None, logo=None,
+      rights=None, subtitle=None, title=None, updated=None, entry=None,
       total_results=None, start_index=None, items_per_page=None,
       interrupted=None, timezone=None,
       extension_elements=None, extension_attributes=None, text=None):
@@ -1030,8 +1030,8 @@ def CalendarAclEntryFromString(xml_string):
 
 def CalendarListFeedFromString(xml_string):
   return atom.CreateClassFromXMLString(CalendarListFeed, xml_string)
-  
-  
+
+
 def CalendarAclFeedFromString(xml_string):
   return atom.CreateClassFromXMLString(CalendarAclFeed, xml_string)
 
@@ -1039,6 +1039,6 @@ def CalendarAclFeedFromString(xml_string):
 def CalendarEventFeedFromString(xml_string):
   return atom.CreateClassFromXMLString(CalendarEventFeed, xml_string)
 
-  
+
 def CalendarEventCommentFeedFromString(xml_string):
   return atom.CreateClassFromXMLString(CalendarEventCommentFeed, xml_string)
