@@ -405,7 +405,7 @@ class DocsService(gdata.service.GDataService):
 
   # Deprecated methods
 
-  @atom.deprecated('Please use Upload instead')
+  #@atom.deprecated('Please use Upload instead')
   def UploadPresentation(self, media_source, title, folder_or_uri=None):
     """Uploads a presentation inside of a MediaSource object to the Document
        List feed with the given title.
@@ -430,7 +430,10 @@ class DocsService(gdata.service.GDataService):
         media_source, title, self._MakeKindCategory(PRESENTATION_LABEL),
         folder_or_uri=folder_or_uri)
 
-  @atom.deprecated('Please use Upload instead')
+  UploadPresentation = atom.deprecated('Please use Upload instead')(
+      UploadPresentation)
+
+  #@atom.deprecated('Please use Upload instead')
   def UploadSpreadsheet(self, media_source, title, folder_or_uri=None):
     """Uploads a spreadsheet inside of a MediaSource object to the Document
        List feed with the given title.
@@ -455,7 +458,10 @@ class DocsService(gdata.service.GDataService):
         media_source, title, self._MakeKindCategory(SPREADSHEET_LABEL),
         folder_or_uri=folder_or_uri)
 
-  @atom.deprecated('Please use Upload instead')
+  UploadSpreadsheet = atom.deprecated('Please use Upload instead')(
+      UploadSpreadsheet)
+
+  #@atom.deprecated('Please use Upload instead')
   def UploadDocument(self, media_source, title, folder_or_uri=None):
     """Uploads a document inside of a MediaSource object to the Document List
        feed with the given title.
@@ -479,6 +485,9 @@ class DocsService(gdata.service.GDataService):
     return self._UploadFile(
         media_source, title, self._MakeKindCategory(DOCUMENT_LABEL),
         folder_or_uri=folder_or_uri)
+
+  UploadDocument = atom.deprecated('Please use Upload instead')(
+      UploadDocument)
 
   """Calling any of these functions is the same as calling Export"""
   DownloadDocument = atom.deprecated('Please use Export instead')(Export)

@@ -61,7 +61,7 @@ class _Monies(atom.AtomBase):
     atom.AtomBase.__init__(self, **kwargs)
 
   def __str__(self):
-    return " / ".join("%s" % i for i in self.money)
+    return " / ".join(["%s" % i for i in self.money])
 
 
 class CostBasis(_Monies):

@@ -47,5 +47,12 @@ class BookEntryTest(unittest.TestCase):
         self.assertEquals( len(feed.entry), 1)
         self.assert_(isinstance(feed.entry[0], gdata.books.Book))
 
+    def testBookEntryToDict(self):
+        book = gdata.books.Book()
+        book.dc_title.append(gdata.books.Title(text='a'))
+        book.dc_title.append(gdata.books.Title(text='b'))
+        book.dc_title.append(gdata.books.Title(text='c'))
+        self.assertEqual(book.to_dict()['title'], 'a b c')
+
 if __name__ == "__main__":
     unittest.main()

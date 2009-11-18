@@ -353,7 +353,7 @@ class Book(_AtomFromString, gdata.GDataEntry):
         if self.GetThumbnailLink():
             d['thumbnail'] = self.GetThumbnailLink().href
         if self.dc_title:
-            d['title'] = ' '.join(x.text for x in self.dc_title)
+            d['title'] = ' '.join([x.text for x in self.dc_title])
         if self.viewability:
             d['viewability'] = self.viewability.value.split('#')[-1]
         return d
@@ -373,7 +373,7 @@ class Book(_AtomFromString, gdata.GDataEntry):
         self.identifier = identifier
         self.publisher = publisher
         self.subject = subject
-        self.dc_title = dc_title
+        self.dc_title = dc_title or []
         self.viewability = viewability
         self.embeddability = embeddability
         self.review = review
