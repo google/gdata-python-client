@@ -5100,3 +5100,70 @@ SITES_REVISION_FEED = '''
 <sites:revision>1</sites:revision>
 </entry>
 </feed>'''
+
+ANALYTICS_ACCOUNT_FEED = '''
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:dxp='http://schemas.google.com/analytics/2009'>
+<id>http://www.google.com/analytics/feeds/accounts/abc@test.com</id>
+<updated>2009-06-25T03:55:22.000-07:00</updated>
+<title type='text'>Profile list for abc@test.com</title>
+<link rel='self' type='application/atom+xml' href='http://www.google.com/analytics/feeds/accounts/default'/>
+<author>
+<name>Google Analytics</name>
+</author>
+<generator version='1.0'>Google Analytics</generator>
+<openSearch:totalResults>12</openSearch:totalResults>
+<openSearch:startIndex>1</openSearch:startIndex>
+<openSearch:itemsPerPage>12</openSearch:itemsPerPage>
+<entry>
+<id>http://www.google.com/analytics/feeds/accounts/ga:1174</id>
+<updated>2009-06-25T03:55:22.000-07:00</updated>
+<title type='text'>www.googlestore.com</title>
+<link rel='alternate' type='text/html' href='http://www.google.com/analytics'/>
+<dxp:tableId>ga:1174</dxp:tableId>
+<dxp:property name='ga:accountId' value='30481'/>
+<dxp:property name='ga:accountName' value='Google Store'/>
+<dxp:property name='ga:profileId' value='1174'/>
+<dxp:property name='ga:webPropertyId' value='UA-30481-1'/>
+<dxp:property name='ga:currency' value='USD'/>
+<dxp:property name='ga:timezone' value='America/Los_Angeles'/>
+</entry>
+</feed>'''
+
+ANALYTICS_DATA_FEED = '''
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:dxp='http://schemas.google.com/analytics/2009'>
+<id>http://www.google.com/analytics/feeds/data?ids=ga:1174&amp;dimensions=ga:medium,ga:source&amp;metrics=ga:bounces,ga:visits&amp;filters=ga:medium%3D%3Dreferral&amp;start-date=2008-10-01&amp;end-date=2008-10-31</id>
+<updated>2008-10-31T16:59:59.999-07:00</updated>
+<title type='text'>Google Analytics Data for Profile 1174</title>
+<link rel='self' type='application/atom+xml' href='http://www.google.com/analytics/feeds/data?max-results=5&amp;sort=-ga%3Avisits&amp;end-date=2008-10-31&amp;start-date=2008-10-01&amp;metrics=ga%3Avisits%2Cga%3Abounces&amp;ids=ga%3A1174&amp;dimensions=ga%3Asource%2Cga%3Amedium&amp;filters=ga%3Amedium%3D%3Dreferral'/>
+<link rel='next' type='application/atom+xml' href='http://www.google.com/analytics/feeds/data?start-index=6&amp;max-results=5&amp;sort=-ga%3Avisits&amp;end-date=2008-10-31&amp;start-date=2008-10-01&amp;metrics=ga%3Avisits%2Cga%3Abounces&amp;ids=ga%3A1174&amp;dimensions=ga%3Asource%2Cga%3Amedium&amp;filters=ga%3Amedium%3D%3Dreferral'/>
+<author>
+<name>Google Analytics</name>
+</author>
+<generator version='1.0'>Google Analytics</generator>
+<openSearch:totalResults>6451</openSearch:totalResults>
+<openSearch:startIndex>1</openSearch:startIndex>
+<openSearch:itemsPerPage>2</openSearch:itemsPerPage>
+<dxp:startDate>2008-10-01</dxp:startDate>
+<dxp:endDate>2008-10-31</dxp:endDate>
+<dxp:aggregates>
+<dxp:metric confidenceInterval='0.0' name='ga:visits' type='integer' value='136540'/>
+<dxp:metric confidenceInterval='0.0' name='ga:bounces' type='integer' value='101535'/>
+</dxp:aggregates>
+<dxp:dataSource>
+<dxp:tableId>ga:1174</dxp:tableId>
+<dxp:tableName>www.googlestore.com</dxp:tableName>
+<dxp:property name='ga:profileId' value='1174'/>
+<dxp:property name='ga:webPropertyId' value='UA-30481-1'/>
+<dxp:property name='ga:accountName' value='Google Store'/>
+</dxp:dataSource>
+<entry>
+<id>http://www.google.com/analytics/feeds/data?ids=ga:1174&amp;ga:medium=referral&amp;ga:source=blogger.com&amp;filters=ga:medium%3D%3Dreferral&amp;start-date=2008-10-01&amp;end-date=2008-10-31</id>
+<updated>2008-10-30T17:00:00.001-07:00</updated>
+<title type='text'>ga:source=blogger.com | ga:medium=referral</title>
+<link rel='alternate' type='text/html' href='http://www.google.com/analytics'/>
+<dxp:dimension name='ga:source' value='blogger.com'/>
+<dxp:dimension name='ga:medium' value='referral'/>
+<dxp:metric confidenceInterval='0.0' name='ga:visits' type='integer' value='68140'/>
+<dxp:metric confidenceInterval='0.0' name='ga:bounces' type='integer' value='61095'/>
+</entry>
+</feed>'''
