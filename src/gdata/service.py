@@ -1094,7 +1094,8 @@ class GDataService(atom.service.AtomService):
       return feed
     elif server_response.status == 302:
       if redirects_remaining > 0:
-        location = server_response.getheader('Location')
+        location = (server_response.getheader('Location')
+                    or server_response.getheader('location'))
         if location is not None:
           m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
           if m is not None:
@@ -1341,7 +1342,8 @@ class GDataService(atom.service.AtomService):
       return feed
     elif server_response.status == 302:
       if redirects_remaining > 0:
-        location = server_response.getheader('Location')
+        location = (server_response.getheader('Location')
+                    or server_response.getheader('location'))
         if location is not None:
           m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
           if m is not None:
@@ -1438,7 +1440,8 @@ class GDataService(atom.service.AtomService):
       return True
     elif server_response.status == 302:
       if redirects_remaining > 0:
-        location = server_response.getheader('Location')
+        location = (server_response.getheader('Location')
+                    or server_response.getheader('location'))
         if location is not None:
           m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
           if m is not None:

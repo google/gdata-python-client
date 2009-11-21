@@ -255,6 +255,25 @@ class RequestTest(unittest.TestCase):
     except gdata.client.RedirectError, err:
       self.assert_(str(err).startswith('Too many redirects from server'))
 
+  def test_lowercase_location(self):
+    client = gdata.client.GDClient()
+    client.http_client = atom.mock_http_core.MockHttpClient()
+    # Add the redirect response for the initial request.
+    first_request = atom.http_core.HttpRequest('http://example.com/1', 
+                                               'POST')
+    # In some environments, notably App Engine, the HTTP headers which come
+    # back from a server will be normalized to all lowercase.
+    client.http_client.add_response(first_request, 302, None, 
+        {'location': 'http://example.com/1?gsessionid=12'})
+    second_request = atom.http_core.HttpRequest(
+        'http://example.com/1?gsessionid=12', 'POST')
+    client.http_client.AddResponse(second_request, 200, 'OK', body='Done')
+
+    response = client.Request('POST', 'http://example.com/1')
+    self.assertEqual(response.status, 200)
+    self.assertEqual(response.reason, 'OK')
+    self.assertEqual(response.read(), 'Done')
+
   def test_exercise_exceptions(self):
     # TODO
     pass

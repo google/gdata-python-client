@@ -281,7 +281,8 @@ class GDClient(atom.client.AtomPubClient):
     # exists since the redirects are only used in the calendar API.
     elif response.status == 302:
       if redirects_remaining > 0:
-        location = response.getheader('Location')
+        location = (response.getheader('Location')
+                    or response.getheader('location'))
         if location is not None:
           m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
           if m is not None:
