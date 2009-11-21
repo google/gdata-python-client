@@ -434,3 +434,14 @@ tests/gdata_tests/projecthosting/data_test.py
 tests/gdata_tests/projecthosting/live_client_test.py
 pydocs/gdata.projecthosting.client.html
 pydocs/gdata.projecthosting.data.html
+tests/gdata_tests/analytics/data_test.py
+tests/gdata_tests/analytics/live_client_test.py
+tests/gdata_tests/docs/data_test.py
+tests/gdata_tests/docs/live_client_test.py
+tests/gdata_tests/docs/test.pdf
+samples/analytics/account_feed_demo.py
+samples/analytics/data_feed_demo.py
+src/gdata/analytics/client.py
+src/gdata/analytics/data.py
+src/gdata/docs/client.py
+src/gdata/docs/data.py
