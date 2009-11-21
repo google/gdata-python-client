@@ -445,3 +445,9 @@ src/gdata/analytics/client.py
 src/gdata/analytics/data.py
 src/gdata/docs/client.py
 src/gdata/docs/data.py
+src/gdata/acl/__init__.py
+src/gdata/acl/data.py
+src/gdata/books/data.py
+src/gdata/dublincore/__init__.py
+src/gdata/dublincore/data.py
+tests/gdata_tests/data_smoke_test.py
