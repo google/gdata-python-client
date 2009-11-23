@@ -30,7 +30,6 @@ import gdata.dublincore.data
 import gdata.books.data
 import gdata.calendar.data
 import gdata.geo.data
-import gdata.contacts.data
 import gdata.finance.data
 import gdata.notebook.data
 import gdata.media.data
@@ -139,37 +138,6 @@ class DataSmokeTest(unittest.TestCase):
         gdata.calendar.data.CalendarFeed,
         gdata.calendar.data.WebContentGadgetPref,
         gdata.calendar.data.WebContent,
-        gdata.contacts.data.GroupMembershipInfo,
-        gdata.contacts.data.SystemGroup,
-        gdata.contacts.data.ContactGroupEntry,
-        gdata.contacts.data.ContactGroupFeed,
-        gdata.contacts.data.BillingInformation,
-        gdata.contacts.data.Birthday,
-        gdata.contacts.data.CalendarLink,
-        gdata.contacts.data.DirectoryServer,
-        gdata.contacts.data.Event,
-        gdata.contacts.data.ExternalId,
-        gdata.contacts.data.Gender,
-        gdata.contacts.data.Hobby,
-        gdata.contacts.data.Initials,
-        gdata.contacts.data.Jot,
-        gdata.contacts.data.Language,
-        gdata.contacts.data.MaidenName,
-        gdata.contacts.data.Mileage,
-        gdata.contacts.data.Nickname,
-        gdata.contacts.data.Occupation,
-        gdata.contacts.data.Priority,
-        gdata.contacts.data.Relation,
-        gdata.contacts.data.Sensitivity,
-        gdata.contacts.data.ShortName,
-        gdata.contacts.data.Subject,
-        gdata.contacts.data.UserDefinedField,
-        gdata.contacts.data.Website,
-        gdata.contacts.data.PersonEntry,
-        gdata.contacts.data.ProfileEntry,
-        gdata.contacts.data.ProfileFeed,
-        gdata.contacts.data.ContactEntry,
-        gdata.contacts.data.ContactFeed,
         gdata.finance.data.Commission,
         gdata.finance.data.CostBasis,
         gdata.finance.data.DaysGain,
