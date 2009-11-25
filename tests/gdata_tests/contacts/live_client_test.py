@@ -75,8 +75,6 @@ class ContactsTest(unittest.TestCase):
     # Upload the changes to the language and group membership.
     edited = self.client.update(created)
 
-    raw_input('pause')
-
     # Delete the group and the test contact.
     self.client.delete(created_group)
     self.client.delete(edited)

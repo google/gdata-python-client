@@ -283,8 +283,6 @@ class DataSmokeTest(unittest.TestCase):
         gdata.webmastertools.data.Verified,
         gdata.webmastertools.data.SiteEntry,
         gdata.webmastertools.data.SitesFeed,
-        gdata.contacts.data.Where,
-        gdata.contacts.data.When,
         gdata.contacts.data.BillingInformation,
         gdata.contacts.data.Birthday,
         gdata.contacts.data.CalendarLink,
