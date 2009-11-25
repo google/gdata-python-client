@@ -471,3 +471,6 @@ pydocs/gdata.docs.data.html
 pydocs/gdata.dublincore.data.html
 pydocs/gdata.geo.data.html
 pydocs/gdata.media.data.html
+src/gdata/opensearch/__init__.py
+src/gdata/opensearch/data.py
+
