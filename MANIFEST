@@ -462,3 +462,12 @@ src/gdata/notebook/data.py
 src/gdata/webmastertools/data.py
 src/gdata/youtube/data.py
 tests/gdata_tests/contacts/live_client_test.py
+pydocs/gdata.analytics.client.html
+pydocs/gdata.analytics.data.html
+pydocs/gdata.contacts.client.html
+pydocs/gdata.contacts.data.html
+pydocs/gdata.docs.client.html
+pydocs/gdata.docs.data.html
+pydocs/gdata.dublincore.data.html
+pydocs/gdata.geo.data.html
+pydocs/gdata.media.data.html
