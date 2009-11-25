@@ -1,3 +1,24 @@
+=== 2.0.5 ===
+November 24, 2009 (revision 900)
+
+- added new gdata.contacts.client (and data) which uses version 3.0 of the
+    contacts API. Thanks Vince!
+- added new gdata.docs.client which uses version 3.0 of the Documents List
+    API. Thanks Eric!
+- added new v2 modules for the Analytics API (gdata.analytics.client).
+    Thanks Nick!
+- added conditional get using etags on get_entry. Thanks Eric!
+- fixed bug in how Calendar redirect headers are handled when using this
+    library in an App Engine app.
+- added new Calendar XML elements to the gdata.calendar module. Thanks
+    Michael Ballbach!
+- added v2 data model classes for finance, notebook, webmastertools, ACLs,
+    opensearch and youtube.
+- fixed issues with contacts.service when editing profiles. Thanks Julian!
+- fixed bug in GDClient's get_next method.
+- improved usability in Python2.3, though tests do not run the src modules
+    should be Python2.3 compatible.
+
 === 2.0.4 ===
 October 15, 2009 (revision 864)
 
