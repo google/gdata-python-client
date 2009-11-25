@@ -451,3 +451,14 @@ src/gdata/books/data.py
 src/gdata/dublincore/__init__.py
 src/gdata/dublincore/data.py
 tests/gdata_tests/data_smoke_test.py
+src/gdata/calendar/data.py
+src/gdata/contacts/client.py
+src/gdata/contacts/data.py
+src/gdata/finance/data.py
+src/gdata/geo/data.py
+src/gdata/media/data.py
+src/gdata/notebook/__init__.py
+src/gdata/notebook/data.py
+src/gdata/webmastertools/data.py
+src/gdata/youtube/data.py
+tests/gdata_tests/contacts/live_client_test.py
