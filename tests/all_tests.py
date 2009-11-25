@@ -69,7 +69,7 @@ def suite():
       gdata_tests.projecthosting.data_test.suite(),
       gdata_tests.projecthosting.live_client_test.suite(),
       gdata_tests.sites.data_test.suite(),
-      gdata_tests.sites.live_client_test..suite(),
+      gdata_tests.sites.live_client_test.suite(),
       gdata_tests.contacts.live_client_test.suite(),))
 
 
