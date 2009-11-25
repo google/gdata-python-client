@@ -12,23 +12,23 @@
     <p><tt>Contains&nbsp;classes&nbsp;representing&nbsp;Atom&nbsp;elements.<br>
 &nbsp;<br>
 Module&nbsp;objective:&nbsp;provide&nbsp;data&nbsp;classes&nbsp;for&nbsp;Atom&nbsp;constructs.&nbsp;These&nbsp;classes&nbsp;hide<br>
-the&nbsp;XML-ness&nbsp;of&nbsp;Atom&nbsp;and&nbsp;provide&nbsp;a&nbsp;set&nbsp;of&nbsp;native&nbsp;Python&nbsp;classes&nbsp;to&nbsp;interact&nbsp;<br>
+the&nbsp;XML-ness&nbsp;of&nbsp;Atom&nbsp;and&nbsp;provide&nbsp;a&nbsp;set&nbsp;of&nbsp;native&nbsp;Python&nbsp;classes&nbsp;to&nbsp;interact<br>
 with.<br>
 &nbsp;<br>
 Conversions&nbsp;to&nbsp;and&nbsp;from&nbsp;XML&nbsp;should&nbsp;only&nbsp;be&nbsp;necessary&nbsp;when&nbsp;the&nbsp;Atom&nbsp;classes<br>
-"touch&nbsp;the&nbsp;wire"&nbsp;and&nbsp;are&nbsp;sent&nbsp;over&nbsp;HTTP.&nbsp;For&nbsp;this&nbsp;reason&nbsp;this&nbsp;module&nbsp;<br>
+"touch&nbsp;the&nbsp;wire"&nbsp;and&nbsp;are&nbsp;sent&nbsp;over&nbsp;HTTP.&nbsp;For&nbsp;this&nbsp;reason&nbsp;this&nbsp;module<br>
 provides&nbsp;&nbsp;methods&nbsp;and&nbsp;functions&nbsp;to&nbsp;convert&nbsp;Atom&nbsp;classes&nbsp;to&nbsp;and&nbsp;from&nbsp;strings.<br>
 &nbsp;<br>
-For&nbsp;more&nbsp;information&nbsp;on&nbsp;the&nbsp;Atom&nbsp;data&nbsp;model,&nbsp;see&nbsp;<a href="http://www.rfc-editor.org/rfc/rfc4287.txt">RFC&nbsp;4287</a>&nbsp;<br>
+For&nbsp;more&nbsp;information&nbsp;on&nbsp;the&nbsp;Atom&nbsp;data&nbsp;model,&nbsp;see&nbsp;<a href="http://www.rfc-editor.org/rfc/rfc4287.txt">RFC&nbsp;4287</a><br>
 (<a href="http://www.ietf.org/rfc/rfc4287.txt">http://www.ietf.org/rfc/rfc4287.txt</a>)<br>
 &nbsp;<br>
-<a href="#AtomBase">AtomBase</a>:&nbsp;A&nbsp;foundation&nbsp;class&nbsp;on&nbsp;which&nbsp;Atom&nbsp;classes&nbsp;are&nbsp;built.&nbsp;It&nbsp;<br>
+<a href="#AtomBase">AtomBase</a>:&nbsp;A&nbsp;foundation&nbsp;class&nbsp;on&nbsp;which&nbsp;Atom&nbsp;classes&nbsp;are&nbsp;built.&nbsp;It<br>
 &nbsp;&nbsp;&nbsp;&nbsp;handles&nbsp;the&nbsp;parsing&nbsp;of&nbsp;attributes&nbsp;and&nbsp;children&nbsp;which&nbsp;are&nbsp;common&nbsp;to&nbsp;all<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Atom&nbsp;classes.&nbsp;By&nbsp;default,&nbsp;the&nbsp;<a href="#AtomBase">AtomBase</a>&nbsp;class&nbsp;translates&nbsp;all&nbsp;XML&nbsp;child&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Atom&nbsp;classes.&nbsp;By&nbsp;default,&nbsp;the&nbsp;<a href="#AtomBase">AtomBase</a>&nbsp;class&nbsp;translates&nbsp;all&nbsp;XML&nbsp;child<br>
 &nbsp;&nbsp;&nbsp;&nbsp;nodes&nbsp;into&nbsp;ExtensionElements.<br>
 &nbsp;<br>
-<a href="#ExtensionElement">ExtensionElement</a>:&nbsp;Atom&nbsp;allows&nbsp;Atom&nbsp;objects&nbsp;to&nbsp;contain&nbsp;XML&nbsp;which&nbsp;is&nbsp;not&nbsp;part&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;Atom&nbsp;specification,&nbsp;these&nbsp;are&nbsp;called&nbsp;extension&nbsp;elements.&nbsp;If&nbsp;a&nbsp;<br>
+<a href="#ExtensionElement">ExtensionElement</a>:&nbsp;Atom&nbsp;allows&nbsp;Atom&nbsp;objects&nbsp;to&nbsp;contain&nbsp;XML&nbsp;which&nbsp;is&nbsp;not&nbsp;part<br>
+&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;Atom&nbsp;specification,&nbsp;these&nbsp;are&nbsp;called&nbsp;extension&nbsp;elements.&nbsp;If&nbsp;a<br>
 &nbsp;&nbsp;&nbsp;&nbsp;classes&nbsp;parser&nbsp;encounters&nbsp;an&nbsp;unexpected&nbsp;XML&nbsp;construct,&nbsp;it&nbsp;is&nbsp;translated<br>
 &nbsp;&nbsp;&nbsp;&nbsp;into&nbsp;an&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instance.&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;is&nbsp;designed&nbsp;to&nbsp;fully<br>
 &nbsp;&nbsp;&nbsp;&nbsp;capture&nbsp;the&nbsp;information&nbsp;in&nbsp;the&nbsp;XML.&nbsp;Child&nbsp;nodes&nbsp;in&nbsp;an&nbsp;XML&nbsp;extension&nbsp;are<br>
@@ -768,9 +768,9 @@ Args:<br>
 &nbsp;&nbsp;tag:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;tag&nbsp;(without&nbsp;the&nbsp;namespace&nbsp;qualifier)&nbsp;for<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;element.&nbsp;To&nbsp;reconstruct&nbsp;the&nbsp;full&nbsp;qualified&nbsp;name&nbsp;of&nbsp;the&nbsp;element,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;combine&nbsp;this&nbsp;tag&nbsp;with&nbsp;the&nbsp;namespace.<br>
-&nbsp;&nbsp;attributes:&nbsp;dict&nbsp;(optinal)&nbsp;The&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs&nbsp;for&nbsp;the&nbsp;XML&nbsp;<br>
+&nbsp;&nbsp;attributes:&nbsp;dict&nbsp;(optinal)&nbsp;The&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs&nbsp;for&nbsp;the&nbsp;XML<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attributes&nbsp;of&nbsp;this&nbsp;element.<br>
-&nbsp;&nbsp;children:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;ExtensionElements&nbsp;which&nbsp;represent&nbsp;<br>
+&nbsp;&nbsp;children:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;ExtensionElements&nbsp;which&nbsp;represent<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;XML&nbsp;child&nbsp;nodes&nbsp;of&nbsp;this&nbsp;element.</tt></dd></dl>
 
 <hr>

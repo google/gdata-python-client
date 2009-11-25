@@ -228,7 +228,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;be&nbsp;used,&nbsp;and&nbsp;the&nbsp;user&nbsp;will&nbsp;be&nbsp;prompted&nbsp;to&nbsp;select&nbsp;an&nbsp;account<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;they&nbsp;are&nbsp;signed&nbsp;in&nbsp;with&nbsp;a&nbsp;Google&nbsp;Account&nbsp;and&nbsp;Google&nbsp;Apps<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;accounts.<br>
-&nbsp;&nbsp;language:&nbsp;str&nbsp;(optional)&nbsp;An&nbsp;ISO&nbsp;639&nbsp;country&nbsp;code&nbsp;identifying&nbsp;what&nbsp;<br>
+&nbsp;&nbsp;language:&nbsp;str&nbsp;(optional)&nbsp;An&nbsp;ISO&nbsp;639&nbsp;country&nbsp;code&nbsp;identifying&nbsp;what<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;language&nbsp;the&nbsp;approval&nbsp;page&nbsp;should&nbsp;be&nbsp;translated&nbsp;in&nbsp;(for&nbsp;example,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'en'&nbsp;for&nbsp;English).&nbsp;The&nbsp;default&nbsp;is&nbsp;the&nbsp;user's&nbsp;selected&nbsp;language.<br>
 &nbsp;&nbsp;btmpl:&nbsp;str&nbsp;(optional)&nbsp;Forces&nbsp;a&nbsp;mobile&nbsp;version&nbsp;of&nbsp;the&nbsp;approval&nbsp;page.&nbsp;The<br>
@@ -300,7 +300,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;be&nbsp;used,&nbsp;and&nbsp;the&nbsp;user&nbsp;will&nbsp;be&nbsp;prompted&nbsp;to&nbsp;select&nbsp;an&nbsp;account<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;they&nbsp;are&nbsp;signed&nbsp;in&nbsp;with&nbsp;a&nbsp;Google&nbsp;Account&nbsp;and&nbsp;Google&nbsp;Apps<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;accounts.<br>
-&nbsp;&nbsp;language:&nbsp;str&nbsp;(optional)&nbsp;An&nbsp;ISO&nbsp;639&nbsp;country&nbsp;code&nbsp;identifying&nbsp;what&nbsp;<br>
+&nbsp;&nbsp;language:&nbsp;str&nbsp;(optional)&nbsp;An&nbsp;ISO&nbsp;639&nbsp;country&nbsp;code&nbsp;identifying&nbsp;what<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;language&nbsp;the&nbsp;approval&nbsp;page&nbsp;should&nbsp;be&nbsp;translated&nbsp;in&nbsp;(for&nbsp;example,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'en'&nbsp;for&nbsp;English).&nbsp;The&nbsp;default&nbsp;is&nbsp;the&nbsp;user's&nbsp;selected&nbsp;language.<br>
 &nbsp;&nbsp;btmpl:&nbsp;str&nbsp;(optional)&nbsp;Forces&nbsp;a&nbsp;mobile&nbsp;version&nbsp;of&nbsp;the&nbsp;approval&nbsp;page.&nbsp;The<br>
@@ -318,7 +318,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;be&nbsp;used,&nbsp;and&nbsp;the&nbsp;user&nbsp;will&nbsp;be&nbsp;prompted&nbsp;to&nbsp;select&nbsp;an&nbsp;account<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;they&nbsp;are&nbsp;signed&nbsp;in&nbsp;with&nbsp;a&nbsp;Google&nbsp;Account&nbsp;and&nbsp;Google&nbsp;Apps<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;accounts.<br>
-&nbsp;&nbsp;language:&nbsp;str&nbsp;(optional)&nbsp;An&nbsp;ISO&nbsp;639&nbsp;country&nbsp;code&nbsp;identifying&nbsp;what&nbsp;<br>
+&nbsp;&nbsp;language:&nbsp;str&nbsp;(optional)&nbsp;An&nbsp;ISO&nbsp;639&nbsp;country&nbsp;code&nbsp;identifying&nbsp;what<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;language&nbsp;the&nbsp;approval&nbsp;page&nbsp;should&nbsp;be&nbsp;translated&nbsp;in&nbsp;(for&nbsp;example,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'en'&nbsp;for&nbsp;English).&nbsp;The&nbsp;default&nbsp;is&nbsp;the&nbsp;user's&nbsp;selected&nbsp;language.<br>
 &nbsp;&nbsp;btmpl:&nbsp;str&nbsp;(optional)&nbsp;Forces&nbsp;a&nbsp;mobile&nbsp;version&nbsp;of&nbsp;the&nbsp;approval&nbsp;page.&nbsp;The<br>
@@ -356,11 +356,11 @@ Methods defined here:<br>
 <dl><dt><a name="SecureAuthSubToken-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt><dd><tt>Sets&nbsp;the&nbsp;Authorization&nbsp;header&nbsp;and&nbsp;includes&nbsp;a&nbsp;digital&nbsp;signature.<br>
 &nbsp;<br>
 Calculates&nbsp;a&nbsp;digital&nbsp;signature&nbsp;using&nbsp;the&nbsp;private&nbsp;RSA&nbsp;key,&nbsp;a&nbsp;timestamp<br>
-(uses&nbsp;now&nbsp;at&nbsp;the&nbsp;time&nbsp;this&nbsp;method&nbsp;is&nbsp;called)&nbsp;and&nbsp;a&nbsp;random&nbsp;nonce.&nbsp;<br>
+(uses&nbsp;now&nbsp;at&nbsp;the&nbsp;time&nbsp;this&nbsp;method&nbsp;is&nbsp;called)&nbsp;and&nbsp;a&nbsp;random&nbsp;nonce.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;http_request:&nbsp;The&nbsp;atom.http_core.HttpRequest&nbsp;which&nbsp;contains&nbsp;all&nbsp;of&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;information&nbsp;needed&nbsp;to&nbsp;send&nbsp;a&nbsp;request&nbsp;to&nbsp;the&nbsp;remote&nbsp;server.&nbsp;The&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;information&nbsp;needed&nbsp;to&nbsp;send&nbsp;a&nbsp;request&nbsp;to&nbsp;the&nbsp;remote&nbsp;server.&nbsp;The<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;URL&nbsp;and&nbsp;the&nbsp;method&nbsp;of&nbsp;the&nbsp;request&nbsp;must&nbsp;be&nbsp;already&nbsp;set&nbsp;and&nbsp;cannot&nbsp;be<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;changed&nbsp;after&nbsp;this&nbsp;token&nbsp;signs&nbsp;the&nbsp;request,&nbsp;or&nbsp;the&nbsp;signature&nbsp;will<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not&nbsp;be&nbsp;valid.</tt></dd></dl>
@@ -484,12 +484,12 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;list&nbsp;of&nbsp;valid&nbsp;scopes&nbsp;for&nbsp;the&nbsp;token.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;tuple&nbsp;containing&nbsp;the&nbsp;token&nbsp;value&nbsp;as&nbsp;a&nbsp;string,&nbsp;and&nbsp;a&nbsp;tuple&nbsp;of&nbsp;scopes&nbsp;<br>
+&nbsp;&nbsp;A&nbsp;tuple&nbsp;containing&nbsp;the&nbsp;token&nbsp;value&nbsp;as&nbsp;a&nbsp;string,&nbsp;and&nbsp;a&nbsp;tuple&nbsp;of&nbsp;scopes<br>
 &nbsp;&nbsp;(as&nbsp;atom.http_core.Uri&nbsp;objects)&nbsp;which&nbsp;are&nbsp;URL&nbsp;prefixes&nbsp;under&nbsp;which&nbsp;this<br>
 &nbsp;&nbsp;token&nbsp;grants&nbsp;permission&nbsp;to&nbsp;read&nbsp;and&nbsp;write&nbsp;user&nbsp;data.<br>
 &nbsp;&nbsp;(token_string,&nbsp;(scope_uri,&nbsp;scope_uri,&nbsp;scope_uri,&nbsp;...))<br>
 &nbsp;&nbsp;If&nbsp;no&nbsp;scopes&nbsp;were&nbsp;included&nbsp;in&nbsp;the&nbsp;URL,&nbsp;the&nbsp;second&nbsp;value&nbsp;in&nbsp;the&nbsp;tuple&nbsp;is<br>
-&nbsp;&nbsp;None.&nbsp;If&nbsp;there&nbsp;was&nbsp;no&nbsp;token&nbsp;param&nbsp;in&nbsp;the&nbsp;url,&nbsp;the&nbsp;tuple&nbsp;returned&nbsp;is&nbsp;<br>
+&nbsp;&nbsp;None.&nbsp;If&nbsp;there&nbsp;was&nbsp;no&nbsp;token&nbsp;param&nbsp;in&nbsp;the&nbsp;url,&nbsp;the&nbsp;tuple&nbsp;returned&nbsp;is<br>
 &nbsp;&nbsp;(None,&nbsp;None)</tt></dd></dl>
  <dl><dt><a name="-AuthorizeRequestToken"><strong>AuthorizeRequestToken</strong></a> = authorize_request_token(request_token, url)</dt><dd><tt>Adds&nbsp;information&nbsp;to&nbsp;request&nbsp;token&nbsp;to&nbsp;allow&nbsp;it&nbsp;to&nbsp;become&nbsp;an&nbsp;access&nbsp;token.<br>
 &nbsp;<br>
@@ -528,9 +528,9 @@ Returns:<br>
  <dl><dt><a name="-GetCaptchaChallenge"><strong>GetCaptchaChallenge</strong></a> = get_captcha_challenge(http_body, captcha_base_url<font color="#909090">='http://www.google.com/accounts/'</font>)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;and&nbsp;token&nbsp;for&nbsp;a&nbsp;CAPTCHA&nbsp;challenge&nbsp;issued&nbsp;by&nbsp;the&nbsp;server.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;http_body:&nbsp;str&nbsp;The&nbsp;body&nbsp;of&nbsp;the&nbsp;HTTP&nbsp;response&nbsp;from&nbsp;the&nbsp;server&nbsp;which&nbsp;<br>
+&nbsp;&nbsp;http_body:&nbsp;str&nbsp;The&nbsp;body&nbsp;of&nbsp;the&nbsp;HTTP&nbsp;response&nbsp;from&nbsp;the&nbsp;server&nbsp;which<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contains&nbsp;the&nbsp;CAPTCHA&nbsp;challenge.<br>
-&nbsp;&nbsp;captcha_base_url:&nbsp;str&nbsp;This&nbsp;function&nbsp;returns&nbsp;a&nbsp;full&nbsp;URL&nbsp;for&nbsp;viewing&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;captcha_base_url:&nbsp;str&nbsp;This&nbsp;function&nbsp;returns&nbsp;a&nbsp;full&nbsp;URL&nbsp;for&nbsp;viewing&nbsp;the<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;challenge&nbsp;image&nbsp;which&nbsp;is&nbsp;built&nbsp;from&nbsp;the&nbsp;server's&nbsp;response.&nbsp;This<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base_url&nbsp;is&nbsp;used&nbsp;as&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;URL&nbsp;because&nbsp;the&nbsp;server<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;only&nbsp;provides&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;URL.&nbsp;For&nbsp;example&nbsp;the&nbsp;server&nbsp;provides<br>
@@ -539,7 +539,7 @@ Args:<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;dictionary&nbsp;containing&nbsp;the&nbsp;information&nbsp;needed&nbsp;to&nbsp;repond&nbsp;to&nbsp;the&nbsp;CAPTCHA<br>
-&nbsp;&nbsp;challenge,&nbsp;the&nbsp;image&nbsp;URL&nbsp;and&nbsp;the&nbsp;ID&nbsp;token&nbsp;of&nbsp;the&nbsp;challenge.&nbsp;The&nbsp;<br>
+&nbsp;&nbsp;challenge,&nbsp;the&nbsp;image&nbsp;URL&nbsp;and&nbsp;the&nbsp;ID&nbsp;token&nbsp;of&nbsp;the&nbsp;challenge.&nbsp;The<br>
 &nbsp;&nbsp;dictionary&nbsp;is&nbsp;in&nbsp;the&nbsp;form:<br>
 &nbsp;&nbsp;{'token':&nbsp;string&nbsp;identifying&nbsp;the&nbsp;CAPTCHA&nbsp;image,<br>
 &nbsp;&nbsp;&nbsp;'url':&nbsp;string&nbsp;containing&nbsp;the&nbsp;URL&nbsp;of&nbsp;the&nbsp;image}<br>
@@ -635,12 +635,12 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;list&nbsp;of&nbsp;valid&nbsp;scopes&nbsp;for&nbsp;the&nbsp;token.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;tuple&nbsp;containing&nbsp;the&nbsp;token&nbsp;value&nbsp;as&nbsp;a&nbsp;string,&nbsp;and&nbsp;a&nbsp;tuple&nbsp;of&nbsp;scopes&nbsp;<br>
+&nbsp;&nbsp;A&nbsp;tuple&nbsp;containing&nbsp;the&nbsp;token&nbsp;value&nbsp;as&nbsp;a&nbsp;string,&nbsp;and&nbsp;a&nbsp;tuple&nbsp;of&nbsp;scopes<br>
 &nbsp;&nbsp;(as&nbsp;atom.http_core.Uri&nbsp;objects)&nbsp;which&nbsp;are&nbsp;URL&nbsp;prefixes&nbsp;under&nbsp;which&nbsp;this<br>
 &nbsp;&nbsp;token&nbsp;grants&nbsp;permission&nbsp;to&nbsp;read&nbsp;and&nbsp;write&nbsp;user&nbsp;data.<br>
 &nbsp;&nbsp;(token_string,&nbsp;(scope_uri,&nbsp;scope_uri,&nbsp;scope_uri,&nbsp;...))<br>
 &nbsp;&nbsp;If&nbsp;no&nbsp;scopes&nbsp;were&nbsp;included&nbsp;in&nbsp;the&nbsp;URL,&nbsp;the&nbsp;second&nbsp;value&nbsp;in&nbsp;the&nbsp;tuple&nbsp;is<br>
-&nbsp;&nbsp;None.&nbsp;If&nbsp;there&nbsp;was&nbsp;no&nbsp;token&nbsp;param&nbsp;in&nbsp;the&nbsp;url,&nbsp;the&nbsp;tuple&nbsp;returned&nbsp;is&nbsp;<br>
+&nbsp;&nbsp;None.&nbsp;If&nbsp;there&nbsp;was&nbsp;no&nbsp;token&nbsp;param&nbsp;in&nbsp;the&nbsp;url,&nbsp;the&nbsp;tuple&nbsp;returned&nbsp;is<br>
 &nbsp;&nbsp;(None,&nbsp;None)</tt></dd></dl>
  <dl><dt><a name="-authorize_request_token"><strong>authorize_request_token</strong></a>(request_token, url)</dt><dd><tt>Adds&nbsp;information&nbsp;to&nbsp;request&nbsp;token&nbsp;to&nbsp;allow&nbsp;it&nbsp;to&nbsp;become&nbsp;an&nbsp;access&nbsp;token.<br>
 &nbsp;<br>
@@ -697,14 +697,14 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;a&nbsp;Google&nbsp;service(s).&nbsp;It&nbsp;can&nbsp;include&nbsp;url-encoded&nbsp;query&nbsp;parameters.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;is&nbsp;'oob'.&nbsp;(This&nbsp;is&nbsp;the&nbsp;oauth_callback.)<br>
 &nbsp;&nbsp;token:&nbsp;The&nbsp;string&nbsp;for&nbsp;the&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;or&nbsp;OAuth&nbsp;access&nbsp;token.<br>
-&nbsp;&nbsp;verifier:&nbsp;str&nbsp;Sent&nbsp;as&nbsp;the&nbsp;oauth_verifier&nbsp;and&nbsp;required&nbsp;when&nbsp;upgrading&nbsp;a&nbsp;<br>
+&nbsp;&nbsp;verifier:&nbsp;str&nbsp;Sent&nbsp;as&nbsp;the&nbsp;oauth_verifier&nbsp;and&nbsp;required&nbsp;when&nbsp;upgrading&nbsp;a<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request&nbsp;token&nbsp;to&nbsp;an&nbsp;access&nbsp;token.</tt></dd></dl>
  <dl><dt><a name="-dump_tokens"><strong>dump_tokens</strong></a>(tokens)</dt></dl>
  <dl><dt><a name="-generate_auth_header"><strong>generate_auth_header</strong></a>(consumer_key, timestamp, nonce, signature_type, signature, version<font color="#909090">='1.0'</font>, next<font color="#909090">=None</font>, token<font color="#909090">=None</font>, verifier<font color="#909090">=None</font>)</dt><dd><tt>Builds&nbsp;the&nbsp;Authorization&nbsp;header&nbsp;to&nbsp;be&nbsp;sent&nbsp;in&nbsp;the&nbsp;request.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;consumer_key:&nbsp;Identifies&nbsp;the&nbsp;application&nbsp;making&nbsp;the&nbsp;request&nbsp;(str).<br>
-&nbsp;&nbsp;timestamp:&nbsp;<br>
+&nbsp;&nbsp;timestamp:<br>
 &nbsp;&nbsp;nonce:<br>
 &nbsp;&nbsp;signature_type:&nbsp;One&nbsp;of&nbsp;either&nbsp;HMAC_SHA1&nbsp;or&nbsp;RSA_SHA1<br>
 &nbsp;&nbsp;signature:&nbsp;The&nbsp;HMAC&nbsp;or&nbsp;RSA&nbsp;signature&nbsp;for&nbsp;the&nbsp;request&nbsp;as&nbsp;a&nbsp;base64<br>
@@ -717,7 +717,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;header.<br>
 &nbsp;&nbsp;verifier:&nbsp;str&nbsp;The&nbsp;OAuth&nbsp;verifier&nbsp;which&nbsp;must&nbsp;be&nbsp;included&nbsp;when&nbsp;you&nbsp;are<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upgrading&nbsp;a&nbsp;request&nbsp;token&nbsp;to&nbsp;an&nbsp;access&nbsp;token.</tt></dd></dl>
- <dl><dt><a name="-generate_auth_sub_url"><strong>generate_auth_sub_url</strong></a>(next, scopes, secure<font color="#909090">=False</font>, session<font color="#909090">=True</font>, request_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc16e90&gt;</font>, domain<font color="#909090">='default'</font>, scopes_param_prefix<font color="#909090">='auth_sub_scopes'</font>)</dt><dd><tt>Constructs&nbsp;a&nbsp;URI&nbsp;for&nbsp;requesting&nbsp;a&nbsp;multiscope&nbsp;AuthSub&nbsp;token.<br>
+ <dl><dt><a name="-generate_auth_sub_url"><strong>generate_auth_sub_url</strong></a>(next, scopes, secure<font color="#909090">=False</font>, session<font color="#909090">=True</font>, request_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc17e90&gt;</font>, domain<font color="#909090">='default'</font>, scopes_param_prefix<font color="#909090">='auth_sub_scopes'</font>)</dt><dd><tt>Constructs&nbsp;a&nbsp;URI&nbsp;for&nbsp;requesting&nbsp;a&nbsp;multiscope&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 The&nbsp;generated&nbsp;token&nbsp;will&nbsp;contain&nbsp;a&nbsp;URL&nbsp;parameter&nbsp;to&nbsp;pass&nbsp;along&nbsp;the<br>
 requested&nbsp;scopes&nbsp;to&nbsp;the&nbsp;next&nbsp;URL.&nbsp;When&nbsp;the&nbsp;Google&nbsp;Accounts&nbsp;page<br>
@@ -739,7 +739,7 @@ Args:<br>
 &nbsp;&nbsp;session:&nbsp;boolean&nbsp;(optional)&nbsp;Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;issued&nbsp;token<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;be&nbsp;upgraded&nbsp;to&nbsp;a&nbsp;session&nbsp;token.<br>
 &nbsp;&nbsp;request_url:&nbsp;atom.http_core.Uri&nbsp;or&nbsp;str&nbsp;The&nbsp;beginning&nbsp;of&nbsp;the&nbsp;request&nbsp;URL.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;is&nbsp;normally&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;is&nbsp;normally<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<a href="http://www.google.com/accounts/AuthSubRequest">http://www.google.com/accounts/AuthSubRequest</a>'&nbsp;or<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/accounts/AuthSubRequest'<br>
 &nbsp;&nbsp;domain:&nbsp;The&nbsp;domain&nbsp;which&nbsp;the&nbsp;account&nbsp;is&nbsp;part&nbsp;of.&nbsp;This&nbsp;is&nbsp;used&nbsp;for&nbsp;Google<br>
@@ -789,10 +789,10 @@ Args:<br>
 &nbsp;&nbsp;btmpl:&nbsp;str&nbsp;(optional)&nbsp;Forces&nbsp;a&nbsp;mobile&nbsp;version&nbsp;of&nbsp;the&nbsp;approval&nbsp;page.&nbsp;The<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;only&nbsp;accepted&nbsp;value&nbsp;is&nbsp;'mobile'.<br>
 &nbsp;&nbsp;auth_server:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;start&nbsp;of&nbsp;the&nbsp;token&nbsp;authorization&nbsp;web<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;page.&nbsp;Defaults&nbsp;to&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;page.&nbsp;Defaults&nbsp;to<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'https://www.google.com/accounts/OAuthAuthorizeToken'<br>
 &nbsp;<br>
-Returns:&nbsp;<br>
+Returns:<br>
 &nbsp;&nbsp;An&nbsp;atom.http_core.Uri&nbsp;pointing&nbsp;to&nbsp;the&nbsp;token&nbsp;authorization&nbsp;page&nbsp;where&nbsp;the<br>
 &nbsp;&nbsp;user&nbsp;may&nbsp;allow&nbsp;or&nbsp;deny&nbsp;this&nbsp;app&nbsp;to&nbsp;access&nbsp;their&nbsp;Google&nbsp;data.</tt></dd></dl>
  <dl><dt><a name="-generate_request_for_access_token"><strong>generate_request_for_access_token</strong></a>(request_token, auth_server_url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>)</dt><dd><tt>Creates&nbsp;a&nbsp;request&nbsp;to&nbsp;ask&nbsp;the&nbsp;OAuth&nbsp;server&nbsp;for&nbsp;an&nbsp;access&nbsp;token.<br>
@@ -805,7 +805,7 @@ Args:<br>
 &nbsp;&nbsp;request_token:&nbsp;An&nbsp;<a href="#OAuthHmacToken">OAuthHmacToken</a>&nbsp;or&nbsp;<a href="#OAuthRsaToken">OAuthRsaToken</a>&nbsp;which&nbsp;the&nbsp;user&nbsp;has<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;approved&nbsp;using&nbsp;their&nbsp;browser.<br>
 &nbsp;&nbsp;auth_server_url:&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;at&nbsp;which&nbsp;the&nbsp;OAuth&nbsp;access&nbsp;token&nbsp;is<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested.&nbsp;Defaults&nbsp;to&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested.&nbsp;Defaults&nbsp;to<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.google.com/accounts/OAuthGetAccessToken<br>
 &nbsp;<br>
 Returns:<br>
@@ -814,15 +814,15 @@ Returns:<br>
  <dl><dt><a name="-generate_request_for_request_token"><strong>generate_request_for_request_token</strong></a>(consumer_key, signature_type, scopes, rsa_key<font color="#909090">=None</font>, consumer_secret<font color="#909090">=None</font>, auth_server_url<font color="#909090">='https://www.google.com/accounts/OAuthGetRequestToken'</font>, next<font color="#909090">='oob'</font>, version<font color="#909090">='1.0'</font>)</dt><dd><tt>Creates&nbsp;request&nbsp;to&nbsp;be&nbsp;sent&nbsp;to&nbsp;auth&nbsp;server&nbsp;to&nbsp;get&nbsp;an&nbsp;OAuth&nbsp;request&nbsp;token.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;consumer_key:&nbsp;<br>
+&nbsp;&nbsp;consumer_key:<br>
 &nbsp;&nbsp;signature_type:&nbsp;either&nbsp;RSA_SHA1&nbsp;or&nbsp;HMAC_SHA1.&nbsp;The&nbsp;rsa_key&nbsp;must&nbsp;be<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;provided&nbsp;if&nbsp;the&nbsp;signature&nbsp;type&nbsp;is&nbsp;RSA&nbsp;but&nbsp;if&nbsp;the&nbsp;signature&nbsp;method<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;HMAC,&nbsp;the&nbsp;consumer_secret&nbsp;must&nbsp;be&nbsp;used.<br>
 &nbsp;&nbsp;scopes:&nbsp;List&nbsp;of&nbsp;URL&nbsp;prefixes&nbsp;for&nbsp;the&nbsp;data&nbsp;which&nbsp;we&nbsp;want&nbsp;to&nbsp;access.&nbsp;For<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;example,&nbsp;to&nbsp;request&nbsp;access&nbsp;to&nbsp;the&nbsp;user's&nbsp;Blogger&nbsp;and&nbsp;Google&nbsp;Calendar<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data,&nbsp;we&nbsp;would&nbsp;request&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['<a href="http://www.blogger.com/feeds/">http://www.blogger.com/feeds/</a>',&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'https://www.google.com/calendar/feeds/',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data,&nbsp;we&nbsp;would&nbsp;request<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['<a href="http://www.blogger.com/feeds/">http://www.blogger.com/feeds/</a>',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'https://www.google.com/calendar/feeds/',<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<a href="http://www.google.com/calendar/feeds/">http://www.google.com/calendar/feeds/</a>']<br>
 &nbsp;&nbsp;rsa_key:&nbsp;Only&nbsp;used&nbsp;if&nbsp;the&nbsp;signature&nbsp;method&nbsp;is&nbsp;RSA_SHA1.<br>
 &nbsp;&nbsp;consumer_secret:&nbsp;Only&nbsp;used&nbsp;if&nbsp;the&nbsp;signature&nbsp;method&nbsp;is&nbsp;HMAC_SHA1.<br>
@@ -841,9 +841,9 @@ Returns:<br>
  <dl><dt><a name="-get_captcha_challenge"><strong>get_captcha_challenge</strong></a>(http_body, captcha_base_url<font color="#909090">='http://www.google.com/accounts/'</font>)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;and&nbsp;token&nbsp;for&nbsp;a&nbsp;CAPTCHA&nbsp;challenge&nbsp;issued&nbsp;by&nbsp;the&nbsp;server.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;http_body:&nbsp;str&nbsp;The&nbsp;body&nbsp;of&nbsp;the&nbsp;HTTP&nbsp;response&nbsp;from&nbsp;the&nbsp;server&nbsp;which&nbsp;<br>
+&nbsp;&nbsp;http_body:&nbsp;str&nbsp;The&nbsp;body&nbsp;of&nbsp;the&nbsp;HTTP&nbsp;response&nbsp;from&nbsp;the&nbsp;server&nbsp;which<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contains&nbsp;the&nbsp;CAPTCHA&nbsp;challenge.<br>
-&nbsp;&nbsp;captcha_base_url:&nbsp;str&nbsp;This&nbsp;function&nbsp;returns&nbsp;a&nbsp;full&nbsp;URL&nbsp;for&nbsp;viewing&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;captcha_base_url:&nbsp;str&nbsp;This&nbsp;function&nbsp;returns&nbsp;a&nbsp;full&nbsp;URL&nbsp;for&nbsp;viewing&nbsp;the<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;challenge&nbsp;image&nbsp;which&nbsp;is&nbsp;built&nbsp;from&nbsp;the&nbsp;server's&nbsp;response.&nbsp;This<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base_url&nbsp;is&nbsp;used&nbsp;as&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;URL&nbsp;because&nbsp;the&nbsp;server<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;only&nbsp;provides&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;URL.&nbsp;For&nbsp;example&nbsp;the&nbsp;server&nbsp;provides<br>
@@ -852,7 +852,7 @@ Args:<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;dictionary&nbsp;containing&nbsp;the&nbsp;information&nbsp;needed&nbsp;to&nbsp;repond&nbsp;to&nbsp;the&nbsp;CAPTCHA<br>
-&nbsp;&nbsp;challenge,&nbsp;the&nbsp;image&nbsp;URL&nbsp;and&nbsp;the&nbsp;ID&nbsp;token&nbsp;of&nbsp;the&nbsp;challenge.&nbsp;The&nbsp;<br>
+&nbsp;&nbsp;challenge,&nbsp;the&nbsp;image&nbsp;URL&nbsp;and&nbsp;the&nbsp;ID&nbsp;token&nbsp;of&nbsp;the&nbsp;challenge.&nbsp;The<br>
 &nbsp;&nbsp;dictionary&nbsp;is&nbsp;in&nbsp;the&nbsp;form:<br>
 &nbsp;&nbsp;{'token':&nbsp;string&nbsp;identifying&nbsp;the&nbsp;CAPTCHA&nbsp;image,<br>
 &nbsp;&nbsp;&nbsp;'url':&nbsp;string&nbsp;containing&nbsp;the&nbsp;URL&nbsp;of&nbsp;the&nbsp;image}<br>

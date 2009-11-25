@@ -1,0 +1,2913 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.docs.data</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.docs.html"><font color="#ffffff">docs</font></a>.data</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client/src/gdata/docs/data.py">/usr/local/svn/gdata-python-client/src/gdata/docs/data.py</a></font></td></tr></table>
+    <p><tt>Data&nbsp;model&nbsp;classes&nbsp;for&nbsp;parsing&nbsp;and&nbsp;generating&nbsp;XML&nbsp;for&nbsp;the&nbsp;Sites&nbsp;Data&nbsp;API.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="atom.html">atom</a><br>
+</td><td width="25%" valign=top><a href="gdata.html">gdata</a><br>
+</td><td width="25%" valign=top><a href="re.html">re</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="atom.core.html#XmlElement">atom.core.XmlElement</a>(<a href="__builtin__.html#object">__builtin__.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.docs.data.html#QuotaBytesUsed">QuotaBytesUsed</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.docs.data.html#ResourceId">ResourceId</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.docs.data.html#WritersCanInvite">WritersCanInvite</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="atom.data.html#Person">atom.data.Person</a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.docs.data.html#LastModifiedBy">LastModifiedBy</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.docs.data.html#LastViewed">LastViewed</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>(<a href="atom.data.html#Entry">atom.data.Entry</a>, <a href="gdata.data.html#LinkFinder">gdata.data.LinkFinder</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.docs.data.html#Acl">Acl</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.docs.data.html#DocsEntry">DocsEntry</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.docs.data.html#Revision">Revision</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gdata.data.html#GDFeed">gdata.data.GDFeed</a>(<a href="atom.data.html#Feed">atom.data.Feed</a>, <a href="gdata.data.html#LinkFinder">gdata.data.LinkFinder</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.docs.data.html#AclFeed">AclFeed</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.docs.data.html#DocList">DocList</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.docs.data.html#RevisionFeed">RevisionFeed</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Acl">class <strong>Acl</strong></a>(<a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;document&nbsp;ACL&nbsp;entry.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.docs.data.html#Acl">Acl</a></dd>
+<dd><a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a></dd>
+<dd><a href="atom.data.html#Entry">atom.data.Entry</a></dd>
+<dd><a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="gdata.data.html#LinkFinder">gdata.data.LinkFinder</a></dd>
+<dd><a href="atom.data.html#LinkFinder">atom.data.LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>role</strong> = &lt;class 'gdata.data.Role'&gt;<dd><tt>The&nbsp;gAcl:role&nbsp;element.</tt></dl>
+
+<dl><dt><strong>scope</strong> = &lt;class 'gdata.data.Scope'&gt;<dd><tt>"The&nbsp;gAcl:scope&nbsp;element.</tt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>:<br>
+<dl><dt><a name="Acl-FindMediaLink"><strong>FindMediaLink</strong></a> = find_media_link(self)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;to&nbsp;the&nbsp;media&nbsp;content,&nbsp;if&nbsp;the&nbsp;entry&nbsp;is&nbsp;a&nbsp;media&nbsp;entry.<br>
+Otherwise&nbsp;returns&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="Acl-GetId"><strong>GetId</strong></a> = get_id(self)</dt></dl>
+
+<dl><dt><a name="Acl-IsMedia"><strong>IsMedia</strong></a> = is_media(self)</dt></dl>
+
+<dl><dt><a name="Acl-find_media_link"><strong>find_media_link</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;to&nbsp;the&nbsp;media&nbsp;content,&nbsp;if&nbsp;the&nbsp;entry&nbsp;is&nbsp;a&nbsp;media&nbsp;entry.<br>
+Otherwise&nbsp;returns&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="Acl-get_id"><strong>get_id</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Acl-is_media"><strong>is_media</strong></a>(self)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>:<br>
+<dl><dt><strong>etag</strong> = '{http://schemas.google.com/g/2005}etag'</dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.data.html#Entry">atom.data.Entry</a>:<br>
+<dl><dt><strong>content</strong> = &lt;class 'atom.data.Content'&gt;<dd><tt>The&nbsp;atom:content&nbsp;element.</tt></dl>
+
+<dl><dt><strong>control</strong> = &lt;class 'atom.data.Control'&gt;<dd><tt>The&nbsp;app:control&nbsp;element&nbsp;indicating&nbsp;restrictions&nbsp;on&nbsp;publication.<br>
+&nbsp;<br>
+The&nbsp;APP&nbsp;control&nbsp;element&nbsp;may&nbsp;contain&nbsp;a&nbsp;draft&nbsp;element&nbsp;indicating&nbsp;whether&nbsp;or<br>
+not&nbsp;this&nbsp;entry&nbsp;should&nbsp;be&nbsp;publicly&nbsp;available.</tt></dl>
+
+<dl><dt><strong>published</strong> = &lt;class 'atom.data.Published'&gt;<dd><tt>The&nbsp;atom:published&nbsp;element.</tt></dl>
+
+<dl><dt><strong>source</strong> = &lt;class 'atom.data.Source'&gt;<dd><tt>The&nbsp;atom:source&nbsp;element.</tt></dl>
+
+<dl><dt><strong>summary</strong> = &lt;class 'atom.data.Summary'&gt;<dd><tt>The&nbsp;atom:summary&nbsp;element.</tt></dl>
+
+<hr>
+Methods inherited from <a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a>:<br>
+<dl><dt><a name="Acl-__init__"><strong>__init__</strong></a>(self, atom_id<font color="#909090">=None</font>, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a>:<br>
+<dl><dt><strong>author</strong> = [&lt;class 'atom.data.Author'&gt;]</dl>
+
+<dl><dt><strong>category</strong> = [&lt;class 'atom.data.Category'&gt;]</dl>
+
+<dl><dt><strong>contributor</strong> = [&lt;class 'atom.data.Contributor'&gt;]</dl>
+
+<dl><dt><strong>id</strong> = &lt;class 'atom.data.Id'&gt;<dd><tt>The&nbsp;atom:id&nbsp;element.</tt></dl>
+
+<dl><dt><strong>link</strong> = [&lt;class 'atom.data.Link'&gt;]</dl>
+
+<dl><dt><strong>rights</strong> = &lt;class 'atom.data.Rights'&gt;<dd><tt>The&nbsp;atom:rights&nbsp;element.</tt></dl>
+
+<dl><dt><strong>title</strong> = &lt;class 'atom.data.Title'&gt;<dd><tt>The&nbsp;atom:title&nbsp;element.</tt></dl>
+
+<dl><dt><strong>updated</strong> = &lt;class 'atom.data.Updated'&gt;<dd><tt>The&nbsp;atom:updated&nbsp;element.</tt></dl>
+
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="Acl-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Acl-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Acl-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="Acl-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Acl-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Acl-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Acl-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="Acl-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Acl-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
+<hr>
+Methods inherited from <a href="gdata.data.html#LinkFinder">gdata.data.LinkFinder</a>:<br>
+<dl><dt><a name="Acl-FindAclLink"><strong>FindAclLink</strong></a> = find_acl_link(self)</dt></dl>
+
+<dl><dt><a name="Acl-FindFeedLink"><strong>FindFeedLink</strong></a> = find_feed_link(self)</dt></dl>
+
+<dl><dt><a name="Acl-FindHtmlLink"><strong>FindHtmlLink</strong></a> = find_html_link(self)</dt><dd><tt>Finds&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html.</tt></dd></dl>
+
+<dl><dt><a name="Acl-FindPostLink"><strong>FindPostLink</strong></a> = find_post_link(self)</dt><dd><tt>Get&nbsp;the&nbsp;URL&nbsp;to&nbsp;which&nbsp;new&nbsp;entries&nbsp;should&nbsp;be&nbsp;POSTed.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;for&nbsp;the&nbsp;URL&nbsp;in&nbsp;the&nbsp;link&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="Acl-FindPreviousLink"><strong>FindPreviousLink</strong></a> = find_previous_link(self)</dt></dl>
+
+<dl><dt><a name="Acl-GetAclLink"><strong>GetAclLink</strong></a> = get_acl_link(self)</dt></dl>
+
+<dl><dt><a name="Acl-GetFeedLink"><strong>GetFeedLink</strong></a> = get_feed_link(self)</dt></dl>
+
+<dl><dt><a name="Acl-GetHtmlLink"><strong>GetHtmlLink</strong></a> = get_html_link(self)</dt></dl>
+
+<dl><dt><a name="Acl-GetPostLink"><strong>GetPostLink</strong></a> = get_post_link(self)</dt></dl>
+
+<dl><dt><a name="Acl-GetPreviousLink"><strong>GetPreviousLink</strong></a> = get_previous_link(self)</dt></dl>
+
+<dl><dt><a name="Acl-find_acl_link"><strong>find_acl_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Acl-find_feed_link"><strong>find_feed_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Acl-find_html_link"><strong>find_html_link</strong></a>(self)</dt><dd><tt>Finds&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html.</tt></dd></dl>
+
+<dl><dt><a name="Acl-find_post_link"><strong>find_post_link</strong></a>(self)</dt><dd><tt>Get&nbsp;the&nbsp;URL&nbsp;to&nbsp;which&nbsp;new&nbsp;entries&nbsp;should&nbsp;be&nbsp;POSTed.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;for&nbsp;the&nbsp;URL&nbsp;in&nbsp;the&nbsp;link&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="Acl-find_previous_link"><strong>find_previous_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Acl-get_acl_link"><strong>get_acl_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Acl-get_feed_link"><strong>get_feed_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Acl-get_html_link"><strong>get_html_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Acl-get_post_link"><strong>get_post_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Acl-get_previous_link"><strong>get_previous_link</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.data.html#LinkFinder">atom.data.LinkFinder</a>:<br>
+<dl><dt><a name="Acl-FindAlternateLink"><strong>FindAlternateLink</strong></a> = find_alternate_link(self)</dt></dl>
+
+<dl><dt><a name="Acl-FindEditLink"><strong>FindEditLink</strong></a> = find_edit_link(self)</dt></dl>
+
+<dl><dt><a name="Acl-FindEditMediaLink"><strong>FindEditMediaLink</strong></a> = find_edit_media_link(self)</dt></dl>
+
+<dl><dt><a name="Acl-FindLicenseLink"><strong>FindLicenseLink</strong></a> = find_license_link(self)</dt></dl>
+
+<dl><dt><a name="Acl-FindNextLink"><strong>FindNextLink</strong></a> = find_next_link(self)</dt></dl>
+
+<dl><dt><a name="Acl-FindSelfLink"><strong>FindSelfLink</strong></a> = find_self_link(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
+&nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<dl><dt><a name="Acl-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="Acl-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
+
+<dl><dt><a name="Acl-GetEditLink"><strong>GetEditLink</strong></a> = get_edit_link(self)</dt></dl>
+
+<dl><dt><a name="Acl-GetEditMediaLink"><strong>GetEditMediaLink</strong></a> = get_edit_media_link(self)</dt></dl>
+
+<dl><dt><a name="Acl-GetLicenseLink"><strong>GetLicenseLink</strong></a> = get_license_link(self)</dt></dl>
+
+<dl><dt><a name="Acl-GetLink"><strong>GetLink</strong></a> = get_link(self, rel)</dt><dd><tt>Returns&nbsp;a&nbsp;link&nbsp;object&nbsp;which&nbsp;has&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.<br>
+&nbsp;<br>
+If&nbsp;you&nbsp;are&nbsp;interested&nbsp;in&nbsp;the&nbsp;URL&nbsp;instead&nbsp;of&nbsp;the&nbsp;link&nbsp;object,<br>
+consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
+
+<dl><dt><a name="Acl-GetNextLink"><strong>GetNextLink</strong></a> = get_next_link(self)</dt></dl>
+
+<dl><dt><a name="Acl-GetSelfLink"><strong>GetSelfLink</strong></a> = get_self_link(self)</dt></dl>
+
+<dl><dt><a name="Acl-find_alternate_link"><strong>find_alternate_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Acl-find_edit_link"><strong>find_edit_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Acl-find_edit_media_link"><strong>find_edit_media_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Acl-find_license_link"><strong>find_license_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Acl-find_next_link"><strong>find_next_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Acl-find_self_link"><strong>find_self_link</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
+&nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<dl><dt><a name="Acl-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="Acl-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Acl-get_edit_link"><strong>get_edit_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Acl-get_edit_media_link"><strong>get_edit_media_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Acl-get_license_link"><strong>get_license_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Acl-get_link"><strong>get_link</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;a&nbsp;link&nbsp;object&nbsp;which&nbsp;has&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.<br>
+&nbsp;<br>
+If&nbsp;you&nbsp;are&nbsp;interested&nbsp;in&nbsp;the&nbsp;URL&nbsp;instead&nbsp;of&nbsp;the&nbsp;link&nbsp;object,<br>
+consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
+
+<dl><dt><a name="Acl-get_next_link"><strong>get_next_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Acl-get_self_link"><strong>get_self_link</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="AclFeed">class <strong>AclFeed</strong></a>(<a href="gdata.data.html#GDFeed">gdata.data.GDFeed</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;<a href="#DocList">DocList</a>&nbsp;ACL&nbsp;feed.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.docs.data.html#AclFeed">AclFeed</a></dd>
+<dd><a href="gdata.data.html#GDFeed">gdata.data.GDFeed</a></dd>
+<dd><a href="atom.data.html#Feed">atom.data.Feed</a></dd>
+<dd><a href="atom.data.html#Source">atom.data.Source</a></dd>
+<dd><a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="gdata.data.html#LinkFinder">gdata.data.LinkFinder</a></dd>
+<dd><a href="atom.data.html#LinkFinder">atom.data.LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>entry</strong> = [&lt;class 'gdata.docs.data.Acl'&gt;]</dl>
+
+<hr>
+Methods inherited from <a href="gdata.data.html#GDFeed">gdata.data.GDFeed</a>:<br>
+<dl><dt><a name="AclFeed-GetId"><strong>GetId</strong></a> = get_id(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-get_generator"><strong>get_generator</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-get_id"><strong>get_id</strong></a>(self)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="gdata.data.html#GDFeed">gdata.data.GDFeed</a>:<br>
+<dl><dt><strong>etag</strong> = '{http://schemas.google.com/g/2005}etag'</dl>
+
+<dl><dt><strong>items_per_page</strong> = &lt;class 'gdata.data.ItemsPerPage'&gt;<dd><tt>The&nbsp;opensearch:itemsPerPage&nbsp;element&nbsp;in&nbsp;GData&nbsp;feed.</tt></dl>
+
+<dl><dt><strong>start_index</strong> = &lt;class 'gdata.data.StartIndex'&gt;<dd><tt>The&nbsp;opensearch:startIndex&nbsp;element&nbsp;in&nbsp;GData&nbsp;feed.</tt></dl>
+
+<dl><dt><strong>total_results</strong> = &lt;class 'gdata.data.TotalResults'&gt;<dd><tt>opensearch:TotalResults&nbsp;for&nbsp;a&nbsp;GData&nbsp;feed.</tt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.data.html#Source">atom.data.Source</a>:<br>
+<dl><dt><strong>generator</strong> = &lt;class 'atom.data.Generator'&gt;<dd><tt>The&nbsp;atom:generator&nbsp;element.</tt></dl>
+
+<dl><dt><strong>icon</strong> = &lt;class 'atom.data.Icon'&gt;<dd><tt>The&nbsp;atom:icon&nbsp;element.</tt></dl>
+
+<dl><dt><strong>logo</strong> = &lt;class 'atom.data.Logo'&gt;<dd><tt>The&nbsp;atom:logo&nbsp;element.</tt></dl>
+
+<dl><dt><strong>subtitle</strong> = &lt;class 'atom.data.Subtitle'&gt;<dd><tt>The&nbsp;atom:subtitle&nbsp;element.</tt></dl>
+
+<hr>
+Methods inherited from <a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a>:<br>
+<dl><dt><a name="AclFeed-__init__"><strong>__init__</strong></a>(self, atom_id<font color="#909090">=None</font>, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a>:<br>
+<dl><dt><strong>author</strong> = [&lt;class 'atom.data.Author'&gt;]</dl>
+
+<dl><dt><strong>category</strong> = [&lt;class 'atom.data.Category'&gt;]</dl>
+
+<dl><dt><strong>contributor</strong> = [&lt;class 'atom.data.Contributor'&gt;]</dl>
+
+<dl><dt><strong>id</strong> = &lt;class 'atom.data.Id'&gt;<dd><tt>The&nbsp;atom:id&nbsp;element.</tt></dl>
+
+<dl><dt><strong>link</strong> = [&lt;class 'atom.data.Link'&gt;]</dl>
+
+<dl><dt><strong>rights</strong> = &lt;class 'atom.data.Rights'&gt;<dd><tt>The&nbsp;atom:rights&nbsp;element.</tt></dl>
+
+<dl><dt><strong>title</strong> = &lt;class 'atom.data.Title'&gt;<dd><tt>The&nbsp;atom:title&nbsp;element.</tt></dl>
+
+<dl><dt><strong>updated</strong> = &lt;class 'atom.data.Updated'&gt;<dd><tt>The&nbsp;atom:updated&nbsp;element.</tt></dl>
+
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="AclFeed-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="AclFeed-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="AclFeed-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="AclFeed-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="AclFeed-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="AclFeed-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="AclFeed-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="AclFeed-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
+<hr>
+Methods inherited from <a href="gdata.data.html#LinkFinder">gdata.data.LinkFinder</a>:<br>
+<dl><dt><a name="AclFeed-FindAclLink"><strong>FindAclLink</strong></a> = find_acl_link(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-FindFeedLink"><strong>FindFeedLink</strong></a> = find_feed_link(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-FindHtmlLink"><strong>FindHtmlLink</strong></a> = find_html_link(self)</dt><dd><tt>Finds&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html.</tt></dd></dl>
+
+<dl><dt><a name="AclFeed-FindPostLink"><strong>FindPostLink</strong></a> = find_post_link(self)</dt><dd><tt>Get&nbsp;the&nbsp;URL&nbsp;to&nbsp;which&nbsp;new&nbsp;entries&nbsp;should&nbsp;be&nbsp;POSTed.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;for&nbsp;the&nbsp;URL&nbsp;in&nbsp;the&nbsp;link&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="AclFeed-FindPreviousLink"><strong>FindPreviousLink</strong></a> = find_previous_link(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-GetAclLink"><strong>GetAclLink</strong></a> = get_acl_link(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-GetFeedLink"><strong>GetFeedLink</strong></a> = get_feed_link(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-GetHtmlLink"><strong>GetHtmlLink</strong></a> = get_html_link(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-GetPostLink"><strong>GetPostLink</strong></a> = get_post_link(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-GetPreviousLink"><strong>GetPreviousLink</strong></a> = get_previous_link(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-find_acl_link"><strong>find_acl_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-find_feed_link"><strong>find_feed_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-find_html_link"><strong>find_html_link</strong></a>(self)</dt><dd><tt>Finds&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html.</tt></dd></dl>
+
+<dl><dt><a name="AclFeed-find_post_link"><strong>find_post_link</strong></a>(self)</dt><dd><tt>Get&nbsp;the&nbsp;URL&nbsp;to&nbsp;which&nbsp;new&nbsp;entries&nbsp;should&nbsp;be&nbsp;POSTed.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;for&nbsp;the&nbsp;URL&nbsp;in&nbsp;the&nbsp;link&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="AclFeed-find_previous_link"><strong>find_previous_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-get_acl_link"><strong>get_acl_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-get_feed_link"><strong>get_feed_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-get_html_link"><strong>get_html_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-get_post_link"><strong>get_post_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-get_previous_link"><strong>get_previous_link</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.data.html#LinkFinder">atom.data.LinkFinder</a>:<br>
+<dl><dt><a name="AclFeed-FindAlternateLink"><strong>FindAlternateLink</strong></a> = find_alternate_link(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-FindEditLink"><strong>FindEditLink</strong></a> = find_edit_link(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-FindEditMediaLink"><strong>FindEditMediaLink</strong></a> = find_edit_media_link(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-FindLicenseLink"><strong>FindLicenseLink</strong></a> = find_license_link(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-FindNextLink"><strong>FindNextLink</strong></a> = find_next_link(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-FindSelfLink"><strong>FindSelfLink</strong></a> = find_self_link(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
+&nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<dl><dt><a name="AclFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="AclFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-GetEditLink"><strong>GetEditLink</strong></a> = get_edit_link(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-GetEditMediaLink"><strong>GetEditMediaLink</strong></a> = get_edit_media_link(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-GetLicenseLink"><strong>GetLicenseLink</strong></a> = get_license_link(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-GetLink"><strong>GetLink</strong></a> = get_link(self, rel)</dt><dd><tt>Returns&nbsp;a&nbsp;link&nbsp;object&nbsp;which&nbsp;has&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.<br>
+&nbsp;<br>
+If&nbsp;you&nbsp;are&nbsp;interested&nbsp;in&nbsp;the&nbsp;URL&nbsp;instead&nbsp;of&nbsp;the&nbsp;link&nbsp;object,<br>
+consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
+
+<dl><dt><a name="AclFeed-GetNextLink"><strong>GetNextLink</strong></a> = get_next_link(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-GetSelfLink"><strong>GetSelfLink</strong></a> = get_self_link(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-find_alternate_link"><strong>find_alternate_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-find_edit_link"><strong>find_edit_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-find_edit_media_link"><strong>find_edit_media_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-find_license_link"><strong>find_license_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-find_next_link"><strong>find_next_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-find_self_link"><strong>find_self_link</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
+&nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<dl><dt><a name="AclFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="AclFeed-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-get_edit_link"><strong>get_edit_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-get_edit_media_link"><strong>get_edit_media_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-get_license_link"><strong>get_license_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-get_link"><strong>get_link</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;a&nbsp;link&nbsp;object&nbsp;which&nbsp;has&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.<br>
+&nbsp;<br>
+If&nbsp;you&nbsp;are&nbsp;interested&nbsp;in&nbsp;the&nbsp;URL&nbsp;instead&nbsp;of&nbsp;the&nbsp;link&nbsp;object,<br>
+consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
+
+<dl><dt><a name="AclFeed-get_next_link"><strong>get_next_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AclFeed-get_self_link"><strong>get_self_link</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="DocList">class <strong>DocList</strong></a>(<a href="gdata.data.html#GDFeed">gdata.data.GDFeed</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;main&nbsp;<a href="#DocList">DocList</a>&nbsp;feed&nbsp;containing&nbsp;a&nbsp;list&nbsp;of&nbsp;Google&nbsp;Documents.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.docs.data.html#DocList">DocList</a></dd>
+<dd><a href="gdata.data.html#GDFeed">gdata.data.GDFeed</a></dd>
+<dd><a href="atom.data.html#Feed">atom.data.Feed</a></dd>
+<dd><a href="atom.data.html#Source">atom.data.Source</a></dd>
+<dd><a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="gdata.data.html#LinkFinder">gdata.data.LinkFinder</a></dd>
+<dd><a href="atom.data.html#LinkFinder">atom.data.LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>entry</strong> = [&lt;class 'gdata.docs.data.DocsEntry'&gt;]</dl>
+
+<hr>
+Methods inherited from <a href="gdata.data.html#GDFeed">gdata.data.GDFeed</a>:<br>
+<dl><dt><a name="DocList-GetId"><strong>GetId</strong></a> = get_id(self)</dt></dl>
+
+<dl><dt><a name="DocList-get_generator"><strong>get_generator</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocList-get_id"><strong>get_id</strong></a>(self)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="gdata.data.html#GDFeed">gdata.data.GDFeed</a>:<br>
+<dl><dt><strong>etag</strong> = '{http://schemas.google.com/g/2005}etag'</dl>
+
+<dl><dt><strong>items_per_page</strong> = &lt;class 'gdata.data.ItemsPerPage'&gt;<dd><tt>The&nbsp;opensearch:itemsPerPage&nbsp;element&nbsp;in&nbsp;GData&nbsp;feed.</tt></dl>
+
+<dl><dt><strong>start_index</strong> = &lt;class 'gdata.data.StartIndex'&gt;<dd><tt>The&nbsp;opensearch:startIndex&nbsp;element&nbsp;in&nbsp;GData&nbsp;feed.</tt></dl>
+
+<dl><dt><strong>total_results</strong> = &lt;class 'gdata.data.TotalResults'&gt;<dd><tt>opensearch:TotalResults&nbsp;for&nbsp;a&nbsp;GData&nbsp;feed.</tt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.data.html#Source">atom.data.Source</a>:<br>
+<dl><dt><strong>generator</strong> = &lt;class 'atom.data.Generator'&gt;<dd><tt>The&nbsp;atom:generator&nbsp;element.</tt></dl>
+
+<dl><dt><strong>icon</strong> = &lt;class 'atom.data.Icon'&gt;<dd><tt>The&nbsp;atom:icon&nbsp;element.</tt></dl>
+
+<dl><dt><strong>logo</strong> = &lt;class 'atom.data.Logo'&gt;<dd><tt>The&nbsp;atom:logo&nbsp;element.</tt></dl>
+
+<dl><dt><strong>subtitle</strong> = &lt;class 'atom.data.Subtitle'&gt;<dd><tt>The&nbsp;atom:subtitle&nbsp;element.</tt></dl>
+
+<hr>
+Methods inherited from <a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a>:<br>
+<dl><dt><a name="DocList-__init__"><strong>__init__</strong></a>(self, atom_id<font color="#909090">=None</font>, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a>:<br>
+<dl><dt><strong>author</strong> = [&lt;class 'atom.data.Author'&gt;]</dl>
+
+<dl><dt><strong>category</strong> = [&lt;class 'atom.data.Category'&gt;]</dl>
+
+<dl><dt><strong>contributor</strong> = [&lt;class 'atom.data.Contributor'&gt;]</dl>
+
+<dl><dt><strong>id</strong> = &lt;class 'atom.data.Id'&gt;<dd><tt>The&nbsp;atom:id&nbsp;element.</tt></dl>
+
+<dl><dt><strong>link</strong> = [&lt;class 'atom.data.Link'&gt;]</dl>
+
+<dl><dt><strong>rights</strong> = &lt;class 'atom.data.Rights'&gt;<dd><tt>The&nbsp;atom:rights&nbsp;element.</tt></dl>
+
+<dl><dt><strong>title</strong> = &lt;class 'atom.data.Title'&gt;<dd><tt>The&nbsp;atom:title&nbsp;element.</tt></dl>
+
+<dl><dt><strong>updated</strong> = &lt;class 'atom.data.Updated'&gt;<dd><tt>The&nbsp;atom:updated&nbsp;element.</tt></dl>
+
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="DocList-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="DocList-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="DocList-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="DocList-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="DocList-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="DocList-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocList-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="DocList-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="DocList-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
+<hr>
+Methods inherited from <a href="gdata.data.html#LinkFinder">gdata.data.LinkFinder</a>:<br>
+<dl><dt><a name="DocList-FindAclLink"><strong>FindAclLink</strong></a> = find_acl_link(self)</dt></dl>
+
+<dl><dt><a name="DocList-FindFeedLink"><strong>FindFeedLink</strong></a> = find_feed_link(self)</dt></dl>
+
+<dl><dt><a name="DocList-FindHtmlLink"><strong>FindHtmlLink</strong></a> = find_html_link(self)</dt><dd><tt>Finds&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html.</tt></dd></dl>
+
+<dl><dt><a name="DocList-FindPostLink"><strong>FindPostLink</strong></a> = find_post_link(self)</dt><dd><tt>Get&nbsp;the&nbsp;URL&nbsp;to&nbsp;which&nbsp;new&nbsp;entries&nbsp;should&nbsp;be&nbsp;POSTed.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;for&nbsp;the&nbsp;URL&nbsp;in&nbsp;the&nbsp;link&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="DocList-FindPreviousLink"><strong>FindPreviousLink</strong></a> = find_previous_link(self)</dt></dl>
+
+<dl><dt><a name="DocList-GetAclLink"><strong>GetAclLink</strong></a> = get_acl_link(self)</dt></dl>
+
+<dl><dt><a name="DocList-GetFeedLink"><strong>GetFeedLink</strong></a> = get_feed_link(self)</dt></dl>
+
+<dl><dt><a name="DocList-GetHtmlLink"><strong>GetHtmlLink</strong></a> = get_html_link(self)</dt></dl>
+
+<dl><dt><a name="DocList-GetPostLink"><strong>GetPostLink</strong></a> = get_post_link(self)</dt></dl>
+
+<dl><dt><a name="DocList-GetPreviousLink"><strong>GetPreviousLink</strong></a> = get_previous_link(self)</dt></dl>
+
+<dl><dt><a name="DocList-find_acl_link"><strong>find_acl_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocList-find_feed_link"><strong>find_feed_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocList-find_html_link"><strong>find_html_link</strong></a>(self)</dt><dd><tt>Finds&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html.</tt></dd></dl>
+
+<dl><dt><a name="DocList-find_post_link"><strong>find_post_link</strong></a>(self)</dt><dd><tt>Get&nbsp;the&nbsp;URL&nbsp;to&nbsp;which&nbsp;new&nbsp;entries&nbsp;should&nbsp;be&nbsp;POSTed.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;for&nbsp;the&nbsp;URL&nbsp;in&nbsp;the&nbsp;link&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="DocList-find_previous_link"><strong>find_previous_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocList-get_acl_link"><strong>get_acl_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocList-get_feed_link"><strong>get_feed_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocList-get_html_link"><strong>get_html_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocList-get_post_link"><strong>get_post_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocList-get_previous_link"><strong>get_previous_link</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.data.html#LinkFinder">atom.data.LinkFinder</a>:<br>
+<dl><dt><a name="DocList-FindAlternateLink"><strong>FindAlternateLink</strong></a> = find_alternate_link(self)</dt></dl>
+
+<dl><dt><a name="DocList-FindEditLink"><strong>FindEditLink</strong></a> = find_edit_link(self)</dt></dl>
+
+<dl><dt><a name="DocList-FindEditMediaLink"><strong>FindEditMediaLink</strong></a> = find_edit_media_link(self)</dt></dl>
+
+<dl><dt><a name="DocList-FindLicenseLink"><strong>FindLicenseLink</strong></a> = find_license_link(self)</dt></dl>
+
+<dl><dt><a name="DocList-FindNextLink"><strong>FindNextLink</strong></a> = find_next_link(self)</dt></dl>
+
+<dl><dt><a name="DocList-FindSelfLink"><strong>FindSelfLink</strong></a> = find_self_link(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
+&nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<dl><dt><a name="DocList-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="DocList-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
+
+<dl><dt><a name="DocList-GetEditLink"><strong>GetEditLink</strong></a> = get_edit_link(self)</dt></dl>
+
+<dl><dt><a name="DocList-GetEditMediaLink"><strong>GetEditMediaLink</strong></a> = get_edit_media_link(self)</dt></dl>
+
+<dl><dt><a name="DocList-GetLicenseLink"><strong>GetLicenseLink</strong></a> = get_license_link(self)</dt></dl>
+
+<dl><dt><a name="DocList-GetLink"><strong>GetLink</strong></a> = get_link(self, rel)</dt><dd><tt>Returns&nbsp;a&nbsp;link&nbsp;object&nbsp;which&nbsp;has&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.<br>
+&nbsp;<br>
+If&nbsp;you&nbsp;are&nbsp;interested&nbsp;in&nbsp;the&nbsp;URL&nbsp;instead&nbsp;of&nbsp;the&nbsp;link&nbsp;object,<br>
+consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
+
+<dl><dt><a name="DocList-GetNextLink"><strong>GetNextLink</strong></a> = get_next_link(self)</dt></dl>
+
+<dl><dt><a name="DocList-GetSelfLink"><strong>GetSelfLink</strong></a> = get_self_link(self)</dt></dl>
+
+<dl><dt><a name="DocList-find_alternate_link"><strong>find_alternate_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocList-find_edit_link"><strong>find_edit_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocList-find_edit_media_link"><strong>find_edit_media_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocList-find_license_link"><strong>find_license_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocList-find_next_link"><strong>find_next_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocList-find_self_link"><strong>find_self_link</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
+&nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<dl><dt><a name="DocList-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="DocList-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocList-get_edit_link"><strong>get_edit_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocList-get_edit_media_link"><strong>get_edit_media_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocList-get_license_link"><strong>get_license_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocList-get_link"><strong>get_link</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;a&nbsp;link&nbsp;object&nbsp;which&nbsp;has&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.<br>
+&nbsp;<br>
+If&nbsp;you&nbsp;are&nbsp;interested&nbsp;in&nbsp;the&nbsp;URL&nbsp;instead&nbsp;of&nbsp;the&nbsp;link&nbsp;object,<br>
+consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
+
+<dl><dt><a name="DocList-get_next_link"><strong>get_next_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocList-get_self_link"><strong>get_self_link</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="DocsEntry">class <strong>DocsEntry</strong></a>(<a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;<a href="#DocList">DocList</a>&nbsp;version&nbsp;of&nbsp;an&nbsp;Atom&nbsp;Entry.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.docs.data.html#DocsEntry">DocsEntry</a></dd>
+<dd><a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a></dd>
+<dd><a href="atom.data.html#Entry">atom.data.Entry</a></dd>
+<dd><a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="gdata.data.html#LinkFinder">gdata.data.LinkFinder</a></dd>
+<dd><a href="atom.data.html#LinkFinder">atom.data.LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="DocsEntry-GetAclFeedLink"><strong>GetAclFeedLink</strong></a> = <a href="#DocsEntry-get_acl_feed_link">get_acl_feed_link</a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-GetDocumentType"><strong>GetDocumentType</strong></a> = <a href="#DocsEntry-get_document_type">get_document_type</a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-GetRevisionsFeedLink"><strong>GetRevisionsFeedLink</strong></a> = <a href="#DocsEntry-get_revisions_feed_link">get_revisions_feed_link</a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-InFolders"><strong>InFolders</strong></a> = <a href="#DocsEntry-in_folders">in_folders</a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-get_acl_feed_link"><strong>get_acl_feed_link</strong></a>(self)</dt><dd><tt>Extracts&nbsp;the&nbsp;<a href="#DocsEntry">DocsEntry</a>'s&nbsp;ACL&nbsp;feed&nbsp;&lt;gd:feedLink&gt;.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;gdata.data.FeedLink&nbsp;object.</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-get_document_type"><strong>get_document_type</strong></a>(self)</dt><dd><tt>Extracts&nbsp;the&nbsp;type&nbsp;of&nbsp;document&nbsp;this&nbsp;<a href="#DocsEntry">DocsEntry</a>&nbsp;is.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;returns&nbsp;the&nbsp;type&nbsp;of&nbsp;document&nbsp;the&nbsp;<a href="#DocsEntry">DocsEntry</a>&nbsp;represents.&nbsp;Possible<br>
+values&nbsp;are&nbsp;document,&nbsp;presentation,&nbsp;spreadsheet,&nbsp;folder,&nbsp;or&nbsp;pdf.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;type&nbsp;of&nbsp;document.</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-get_revisions_feed_link"><strong>get_revisions_feed_link</strong></a>(self)</dt><dd><tt>Extracts&nbsp;the&nbsp;<a href="#DocsEntry">DocsEntry</a>'s&nbsp;revisions&nbsp;feed&nbsp;&lt;gd:feedLink&gt;.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;gdata.data.FeedLink&nbsp;object.</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-in_folders"><strong>in_folders</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;parents&nbsp;<a href="#DocsEntry-link">link</a>(s)&nbsp;(folders)&nbsp;of&nbsp;this&nbsp;entry.</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>feed_link</strong> = [&lt;class 'gdata.data.FeedLink'&gt;]</dl>
+
+<dl><dt><strong>last_modified_by</strong> = &lt;class 'gdata.docs.data.LastModifiedBy'&gt;<dd><tt>The&nbsp;<a href="#DocList">DocList</a>&nbsp;gd:lastModifiedBy&nbsp;element.</tt></dl>
+
+<dl><dt><strong>last_viewed</strong> = &lt;class 'gdata.docs.data.LastViewed'&gt;<dd><tt>The&nbsp;<a href="#DocList">DocList</a>&nbsp;gd:lastViewed&nbsp;element.</tt></dl>
+
+<dl><dt><strong>quota_bytes_used</strong> = &lt;class 'gdata.docs.data.QuotaBytesUsed'&gt;<dd><tt>The&nbsp;<a href="#DocList">DocList</a>&nbsp;gd:quotaBytesUsed&nbsp;element.</tt></dl>
+
+<dl><dt><strong>resource_id</strong> = &lt;class 'gdata.docs.data.ResourceId'&gt;<dd><tt>The&nbsp;<a href="#DocList">DocList</a>&nbsp;gd:resourceId&nbsp;element.</tt></dl>
+
+<dl><dt><strong>writers_can_invite</strong> = &lt;class 'gdata.docs.data.WritersCanInvite'&gt;<dd><tt>The&nbsp;<a href="#DocList">DocList</a>&nbsp;docs:writersCanInvite&nbsp;element.</tt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>:<br>
+<dl><dt><a name="DocsEntry-FindMediaLink"><strong>FindMediaLink</strong></a> = find_media_link(self)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;to&nbsp;the&nbsp;media&nbsp;content,&nbsp;if&nbsp;the&nbsp;entry&nbsp;is&nbsp;a&nbsp;media&nbsp;entry.<br>
+Otherwise&nbsp;returns&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-GetId"><strong>GetId</strong></a> = get_id(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-IsMedia"><strong>IsMedia</strong></a> = is_media(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-find_media_link"><strong>find_media_link</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;to&nbsp;the&nbsp;media&nbsp;content,&nbsp;if&nbsp;the&nbsp;entry&nbsp;is&nbsp;a&nbsp;media&nbsp;entry.<br>
+Otherwise&nbsp;returns&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-get_id"><strong>get_id</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-is_media"><strong>is_media</strong></a>(self)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>:<br>
+<dl><dt><strong>etag</strong> = '{http://schemas.google.com/g/2005}etag'</dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.data.html#Entry">atom.data.Entry</a>:<br>
+<dl><dt><strong>content</strong> = &lt;class 'atom.data.Content'&gt;<dd><tt>The&nbsp;atom:content&nbsp;element.</tt></dl>
+
+<dl><dt><strong>control</strong> = &lt;class 'atom.data.Control'&gt;<dd><tt>The&nbsp;app:control&nbsp;element&nbsp;indicating&nbsp;restrictions&nbsp;on&nbsp;publication.<br>
+&nbsp;<br>
+The&nbsp;APP&nbsp;control&nbsp;element&nbsp;may&nbsp;contain&nbsp;a&nbsp;draft&nbsp;element&nbsp;indicating&nbsp;whether&nbsp;or<br>
+not&nbsp;this&nbsp;entry&nbsp;should&nbsp;be&nbsp;publicly&nbsp;available.</tt></dl>
+
+<dl><dt><strong>published</strong> = &lt;class 'atom.data.Published'&gt;<dd><tt>The&nbsp;atom:published&nbsp;element.</tt></dl>
+
+<dl><dt><strong>source</strong> = &lt;class 'atom.data.Source'&gt;<dd><tt>The&nbsp;atom:source&nbsp;element.</tt></dl>
+
+<dl><dt><strong>summary</strong> = &lt;class 'atom.data.Summary'&gt;<dd><tt>The&nbsp;atom:summary&nbsp;element.</tt></dl>
+
+<hr>
+Methods inherited from <a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a>:<br>
+<dl><dt><a name="DocsEntry-__init__"><strong>__init__</strong></a>(self, atom_id<font color="#909090">=None</font>, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a>:<br>
+<dl><dt><strong>author</strong> = [&lt;class 'atom.data.Author'&gt;]</dl>
+
+<dl><dt><strong>category</strong> = [&lt;class 'atom.data.Category'&gt;]</dl>
+
+<dl><dt><strong>contributor</strong> = [&lt;class 'atom.data.Contributor'&gt;]</dl>
+
+<dl><dt><strong>id</strong> = &lt;class 'atom.data.Id'&gt;<dd><tt>The&nbsp;atom:id&nbsp;element.</tt></dl>
+
+<dl><dt><strong>link</strong> = [&lt;class 'atom.data.Link'&gt;]</dl>
+
+<dl><dt><strong>rights</strong> = &lt;class 'atom.data.Rights'&gt;<dd><tt>The&nbsp;atom:rights&nbsp;element.</tt></dl>
+
+<dl><dt><strong>title</strong> = &lt;class 'atom.data.Title'&gt;<dd><tt>The&nbsp;atom:title&nbsp;element.</tt></dl>
+
+<dl><dt><strong>updated</strong> = &lt;class 'atom.data.Updated'&gt;<dd><tt>The&nbsp;atom:updated&nbsp;element.</tt></dl>
+
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="DocsEntry-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
+<hr>
+Methods inherited from <a href="gdata.data.html#LinkFinder">gdata.data.LinkFinder</a>:<br>
+<dl><dt><a name="DocsEntry-FindAclLink"><strong>FindAclLink</strong></a> = find_acl_link(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-FindFeedLink"><strong>FindFeedLink</strong></a> = find_feed_link(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-FindHtmlLink"><strong>FindHtmlLink</strong></a> = find_html_link(self)</dt><dd><tt>Finds&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html.</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-FindPostLink"><strong>FindPostLink</strong></a> = find_post_link(self)</dt><dd><tt>Get&nbsp;the&nbsp;URL&nbsp;to&nbsp;which&nbsp;new&nbsp;entries&nbsp;should&nbsp;be&nbsp;POSTed.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;for&nbsp;the&nbsp;URL&nbsp;in&nbsp;the&nbsp;link&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-FindPreviousLink"><strong>FindPreviousLink</strong></a> = find_previous_link(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-GetAclLink"><strong>GetAclLink</strong></a> = get_acl_link(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-GetFeedLink"><strong>GetFeedLink</strong></a> = get_feed_link(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-GetHtmlLink"><strong>GetHtmlLink</strong></a> = get_html_link(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-GetPostLink"><strong>GetPostLink</strong></a> = get_post_link(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-GetPreviousLink"><strong>GetPreviousLink</strong></a> = get_previous_link(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-find_acl_link"><strong>find_acl_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-find_feed_link"><strong>find_feed_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-find_html_link"><strong>find_html_link</strong></a>(self)</dt><dd><tt>Finds&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html.</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-find_post_link"><strong>find_post_link</strong></a>(self)</dt><dd><tt>Get&nbsp;the&nbsp;URL&nbsp;to&nbsp;which&nbsp;new&nbsp;entries&nbsp;should&nbsp;be&nbsp;POSTed.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;for&nbsp;the&nbsp;URL&nbsp;in&nbsp;the&nbsp;link&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-find_previous_link"><strong>find_previous_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-get_acl_link"><strong>get_acl_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-get_feed_link"><strong>get_feed_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-get_html_link"><strong>get_html_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-get_post_link"><strong>get_post_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-get_previous_link"><strong>get_previous_link</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.data.html#LinkFinder">atom.data.LinkFinder</a>:<br>
+<dl><dt><a name="DocsEntry-FindAlternateLink"><strong>FindAlternateLink</strong></a> = find_alternate_link(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-FindEditLink"><strong>FindEditLink</strong></a> = find_edit_link(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-FindEditMediaLink"><strong>FindEditMediaLink</strong></a> = find_edit_media_link(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-FindLicenseLink"><strong>FindLicenseLink</strong></a> = find_license_link(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-FindNextLink"><strong>FindNextLink</strong></a> = find_next_link(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-FindSelfLink"><strong>FindSelfLink</strong></a> = find_self_link(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
+&nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-GetEditLink"><strong>GetEditLink</strong></a> = get_edit_link(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-GetEditMediaLink"><strong>GetEditMediaLink</strong></a> = get_edit_media_link(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-GetLicenseLink"><strong>GetLicenseLink</strong></a> = get_license_link(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-GetLink"><strong>GetLink</strong></a> = get_link(self, rel)</dt><dd><tt>Returns&nbsp;a&nbsp;link&nbsp;object&nbsp;which&nbsp;has&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.<br>
+&nbsp;<br>
+If&nbsp;you&nbsp;are&nbsp;interested&nbsp;in&nbsp;the&nbsp;URL&nbsp;instead&nbsp;of&nbsp;the&nbsp;link&nbsp;object,<br>
+consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-GetNextLink"><strong>GetNextLink</strong></a> = get_next_link(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-GetSelfLink"><strong>GetSelfLink</strong></a> = get_self_link(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-find_alternate_link"><strong>find_alternate_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-find_edit_link"><strong>find_edit_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-find_edit_media_link"><strong>find_edit_media_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-find_license_link"><strong>find_license_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-find_next_link"><strong>find_next_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-find_self_link"><strong>find_self_link</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
+&nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-get_edit_link"><strong>get_edit_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-get_edit_media_link"><strong>get_edit_media_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-get_license_link"><strong>get_license_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-get_link"><strong>get_link</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;a&nbsp;link&nbsp;object&nbsp;which&nbsp;has&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.<br>
+&nbsp;<br>
+If&nbsp;you&nbsp;are&nbsp;interested&nbsp;in&nbsp;the&nbsp;URL&nbsp;instead&nbsp;of&nbsp;the&nbsp;link&nbsp;object,<br>
+consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
+
+<dl><dt><a name="DocsEntry-get_next_link"><strong>get_next_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DocsEntry-get_self_link"><strong>get_self_link</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="LastModifiedBy">class <strong>LastModifiedBy</strong></a>(<a href="atom.data.html#Person">atom.data.Person</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;<a href="#DocList">DocList</a>&nbsp;gd:lastModifiedBy&nbsp;element.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.docs.data.html#LastModifiedBy">LastModifiedBy</a></dd>
+<dd><a href="atom.data.html#Person">atom.data.Person</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.data.html#Person">atom.data.Person</a>:<br>
+<dl><dt><strong>email</strong> = &lt;class 'atom.data.Email'&gt;<dd><tt>The&nbsp;atom:email&nbsp;element.</tt></dl>
+
+<dl><dt><strong>name</strong> = &lt;class 'atom.data.Name'&gt;<dd><tt>The&nbsp;atom:name&nbsp;element.</tt></dl>
+
+<dl><dt><strong>uri</strong> = &lt;class 'atom.data.Uri'&gt;<dd><tt>The&nbsp;atom:uri&nbsp;element.</tt></dl>
+
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="LastModifiedBy-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="LastModifiedBy-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="LastModifiedBy-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="LastModifiedBy-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="LastModifiedBy-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="LastModifiedBy-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="LastModifiedBy-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="LastModifiedBy-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="LastModifiedBy-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="LastModifiedBy-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="LastViewed">class <strong>LastViewed</strong></a>(<a href="atom.data.html#Person">atom.data.Person</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;<a href="#DocList">DocList</a>&nbsp;gd:lastViewed&nbsp;element.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.docs.data.html#LastViewed">LastViewed</a></dd>
+<dd><a href="atom.data.html#Person">atom.data.Person</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.data.html#Person">atom.data.Person</a>:<br>
+<dl><dt><strong>email</strong> = &lt;class 'atom.data.Email'&gt;<dd><tt>The&nbsp;atom:email&nbsp;element.</tt></dl>
+
+<dl><dt><strong>name</strong> = &lt;class 'atom.data.Name'&gt;<dd><tt>The&nbsp;atom:name&nbsp;element.</tt></dl>
+
+<dl><dt><strong>uri</strong> = &lt;class 'atom.data.Uri'&gt;<dd><tt>The&nbsp;atom:uri&nbsp;element.</tt></dl>
+
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="LastViewed-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="LastViewed-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="LastViewed-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="LastViewed-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="LastViewed-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="LastViewed-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="LastViewed-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="LastViewed-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="LastViewed-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="LastViewed-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="QuotaBytesUsed">class <strong>QuotaBytesUsed</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;<a href="#DocList">DocList</a>&nbsp;gd:quotaBytesUsed&nbsp;element.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.docs.data.html#QuotaBytesUsed">QuotaBytesUsed</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="QuotaBytesUsed-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="QuotaBytesUsed-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="QuotaBytesUsed-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="QuotaBytesUsed-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="QuotaBytesUsed-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="QuotaBytesUsed-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="QuotaBytesUsed-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="QuotaBytesUsed-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="QuotaBytesUsed-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="QuotaBytesUsed-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ResourceId">class <strong>ResourceId</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;<a href="#DocList">DocList</a>&nbsp;gd:resourceId&nbsp;element.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.docs.data.html#ResourceId">ResourceId</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="ResourceId-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="ResourceId-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="ResourceId-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="ResourceId-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="ResourceId-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="ResourceId-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="ResourceId-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ResourceId-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="ResourceId-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="ResourceId-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Revision">class <strong>Revision</strong></a>(<a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;document&nbsp;<a href="#Revision">Revision</a>&nbsp;entry.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.docs.data.html#Revision">Revision</a></dd>
+<dd><a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a></dd>
+<dd><a href="atom.data.html#Entry">atom.data.Entry</a></dd>
+<dd><a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="gdata.data.html#LinkFinder">gdata.data.LinkFinder</a></dd>
+<dd><a href="atom.data.html#LinkFinder">atom.data.LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>:<br>
+<dl><dt><a name="Revision-FindMediaLink"><strong>FindMediaLink</strong></a> = find_media_link(self)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;to&nbsp;the&nbsp;media&nbsp;content,&nbsp;if&nbsp;the&nbsp;entry&nbsp;is&nbsp;a&nbsp;media&nbsp;entry.<br>
+Otherwise&nbsp;returns&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="Revision-GetId"><strong>GetId</strong></a> = get_id(self)</dt></dl>
+
+<dl><dt><a name="Revision-IsMedia"><strong>IsMedia</strong></a> = is_media(self)</dt></dl>
+
+<dl><dt><a name="Revision-find_media_link"><strong>find_media_link</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;to&nbsp;the&nbsp;media&nbsp;content,&nbsp;if&nbsp;the&nbsp;entry&nbsp;is&nbsp;a&nbsp;media&nbsp;entry.<br>
+Otherwise&nbsp;returns&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="Revision-get_id"><strong>get_id</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Revision-is_media"><strong>is_media</strong></a>(self)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>:<br>
+<dl><dt><strong>etag</strong> = '{http://schemas.google.com/g/2005}etag'</dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.data.html#Entry">atom.data.Entry</a>:<br>
+<dl><dt><strong>content</strong> = &lt;class 'atom.data.Content'&gt;<dd><tt>The&nbsp;atom:content&nbsp;element.</tt></dl>
+
+<dl><dt><strong>control</strong> = &lt;class 'atom.data.Control'&gt;<dd><tt>The&nbsp;app:control&nbsp;element&nbsp;indicating&nbsp;restrictions&nbsp;on&nbsp;publication.<br>
+&nbsp;<br>
+The&nbsp;APP&nbsp;control&nbsp;element&nbsp;may&nbsp;contain&nbsp;a&nbsp;draft&nbsp;element&nbsp;indicating&nbsp;whether&nbsp;or<br>
+not&nbsp;this&nbsp;entry&nbsp;should&nbsp;be&nbsp;publicly&nbsp;available.</tt></dl>
+
+<dl><dt><strong>published</strong> = &lt;class 'atom.data.Published'&gt;<dd><tt>The&nbsp;atom:published&nbsp;element.</tt></dl>
+
+<dl><dt><strong>source</strong> = &lt;class 'atom.data.Source'&gt;<dd><tt>The&nbsp;atom:source&nbsp;element.</tt></dl>
+
+<dl><dt><strong>summary</strong> = &lt;class 'atom.data.Summary'&gt;<dd><tt>The&nbsp;atom:summary&nbsp;element.</tt></dl>
+
+<hr>
+Methods inherited from <a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a>:<br>
+<dl><dt><a name="Revision-__init__"><strong>__init__</strong></a>(self, atom_id<font color="#909090">=None</font>, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a>:<br>
+<dl><dt><strong>author</strong> = [&lt;class 'atom.data.Author'&gt;]</dl>
+
+<dl><dt><strong>category</strong> = [&lt;class 'atom.data.Category'&gt;]</dl>
+
+<dl><dt><strong>contributor</strong> = [&lt;class 'atom.data.Contributor'&gt;]</dl>
+
+<dl><dt><strong>id</strong> = &lt;class 'atom.data.Id'&gt;<dd><tt>The&nbsp;atom:id&nbsp;element.</tt></dl>
+
+<dl><dt><strong>link</strong> = [&lt;class 'atom.data.Link'&gt;]</dl>
+
+<dl><dt><strong>rights</strong> = &lt;class 'atom.data.Rights'&gt;<dd><tt>The&nbsp;atom:rights&nbsp;element.</tt></dl>
+
+<dl><dt><strong>title</strong> = &lt;class 'atom.data.Title'&gt;<dd><tt>The&nbsp;atom:title&nbsp;element.</tt></dl>
+
+<dl><dt><strong>updated</strong> = &lt;class 'atom.data.Updated'&gt;<dd><tt>The&nbsp;atom:updated&nbsp;element.</tt></dl>
+
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="Revision-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Revision-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Revision-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="Revision-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Revision-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Revision-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Revision-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="Revision-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Revision-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
+<hr>
+Methods inherited from <a href="gdata.data.html#LinkFinder">gdata.data.LinkFinder</a>:<br>
+<dl><dt><a name="Revision-FindAclLink"><strong>FindAclLink</strong></a> = find_acl_link(self)</dt></dl>
+
+<dl><dt><a name="Revision-FindFeedLink"><strong>FindFeedLink</strong></a> = find_feed_link(self)</dt></dl>
+
+<dl><dt><a name="Revision-FindHtmlLink"><strong>FindHtmlLink</strong></a> = find_html_link(self)</dt><dd><tt>Finds&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html.</tt></dd></dl>
+
+<dl><dt><a name="Revision-FindPostLink"><strong>FindPostLink</strong></a> = find_post_link(self)</dt><dd><tt>Get&nbsp;the&nbsp;URL&nbsp;to&nbsp;which&nbsp;new&nbsp;entries&nbsp;should&nbsp;be&nbsp;POSTed.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;for&nbsp;the&nbsp;URL&nbsp;in&nbsp;the&nbsp;link&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="Revision-FindPreviousLink"><strong>FindPreviousLink</strong></a> = find_previous_link(self)</dt></dl>
+
+<dl><dt><a name="Revision-GetAclLink"><strong>GetAclLink</strong></a> = get_acl_link(self)</dt></dl>
+
+<dl><dt><a name="Revision-GetFeedLink"><strong>GetFeedLink</strong></a> = get_feed_link(self)</dt></dl>
+
+<dl><dt><a name="Revision-GetHtmlLink"><strong>GetHtmlLink</strong></a> = get_html_link(self)</dt></dl>
+
+<dl><dt><a name="Revision-GetPostLink"><strong>GetPostLink</strong></a> = get_post_link(self)</dt></dl>
+
+<dl><dt><a name="Revision-GetPreviousLink"><strong>GetPreviousLink</strong></a> = get_previous_link(self)</dt></dl>
+
+<dl><dt><a name="Revision-find_acl_link"><strong>find_acl_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Revision-find_feed_link"><strong>find_feed_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Revision-find_html_link"><strong>find_html_link</strong></a>(self)</dt><dd><tt>Finds&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html.</tt></dd></dl>
+
+<dl><dt><a name="Revision-find_post_link"><strong>find_post_link</strong></a>(self)</dt><dd><tt>Get&nbsp;the&nbsp;URL&nbsp;to&nbsp;which&nbsp;new&nbsp;entries&nbsp;should&nbsp;be&nbsp;POSTed.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;for&nbsp;the&nbsp;URL&nbsp;in&nbsp;the&nbsp;link&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="Revision-find_previous_link"><strong>find_previous_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Revision-get_acl_link"><strong>get_acl_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Revision-get_feed_link"><strong>get_feed_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Revision-get_html_link"><strong>get_html_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Revision-get_post_link"><strong>get_post_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Revision-get_previous_link"><strong>get_previous_link</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.data.html#LinkFinder">atom.data.LinkFinder</a>:<br>
+<dl><dt><a name="Revision-FindAlternateLink"><strong>FindAlternateLink</strong></a> = find_alternate_link(self)</dt></dl>
+
+<dl><dt><a name="Revision-FindEditLink"><strong>FindEditLink</strong></a> = find_edit_link(self)</dt></dl>
+
+<dl><dt><a name="Revision-FindEditMediaLink"><strong>FindEditMediaLink</strong></a> = find_edit_media_link(self)</dt></dl>
+
+<dl><dt><a name="Revision-FindLicenseLink"><strong>FindLicenseLink</strong></a> = find_license_link(self)</dt></dl>
+
+<dl><dt><a name="Revision-FindNextLink"><strong>FindNextLink</strong></a> = find_next_link(self)</dt></dl>
+
+<dl><dt><a name="Revision-FindSelfLink"><strong>FindSelfLink</strong></a> = find_self_link(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
+&nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<dl><dt><a name="Revision-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="Revision-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
+
+<dl><dt><a name="Revision-GetEditLink"><strong>GetEditLink</strong></a> = get_edit_link(self)</dt></dl>
+
+<dl><dt><a name="Revision-GetEditMediaLink"><strong>GetEditMediaLink</strong></a> = get_edit_media_link(self)</dt></dl>
+
+<dl><dt><a name="Revision-GetLicenseLink"><strong>GetLicenseLink</strong></a> = get_license_link(self)</dt></dl>
+
+<dl><dt><a name="Revision-GetLink"><strong>GetLink</strong></a> = get_link(self, rel)</dt><dd><tt>Returns&nbsp;a&nbsp;link&nbsp;object&nbsp;which&nbsp;has&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.<br>
+&nbsp;<br>
+If&nbsp;you&nbsp;are&nbsp;interested&nbsp;in&nbsp;the&nbsp;URL&nbsp;instead&nbsp;of&nbsp;the&nbsp;link&nbsp;object,<br>
+consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
+
+<dl><dt><a name="Revision-GetNextLink"><strong>GetNextLink</strong></a> = get_next_link(self)</dt></dl>
+
+<dl><dt><a name="Revision-GetSelfLink"><strong>GetSelfLink</strong></a> = get_self_link(self)</dt></dl>
+
+<dl><dt><a name="Revision-find_alternate_link"><strong>find_alternate_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Revision-find_edit_link"><strong>find_edit_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Revision-find_edit_media_link"><strong>find_edit_media_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Revision-find_license_link"><strong>find_license_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Revision-find_next_link"><strong>find_next_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Revision-find_self_link"><strong>find_self_link</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
+&nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<dl><dt><a name="Revision-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="Revision-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Revision-get_edit_link"><strong>get_edit_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Revision-get_edit_media_link"><strong>get_edit_media_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Revision-get_license_link"><strong>get_license_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Revision-get_link"><strong>get_link</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;a&nbsp;link&nbsp;object&nbsp;which&nbsp;has&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.<br>
+&nbsp;<br>
+If&nbsp;you&nbsp;are&nbsp;interested&nbsp;in&nbsp;the&nbsp;URL&nbsp;instead&nbsp;of&nbsp;the&nbsp;link&nbsp;object,<br>
+consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
+
+<dl><dt><a name="Revision-get_next_link"><strong>get_next_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Revision-get_self_link"><strong>get_self_link</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RevisionFeed">class <strong>RevisionFeed</strong></a>(<a href="gdata.data.html#GDFeed">gdata.data.GDFeed</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;<a href="#DocList">DocList</a>&nbsp;<a href="#Revision">Revision</a>&nbsp;feed.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.docs.data.html#RevisionFeed">RevisionFeed</a></dd>
+<dd><a href="gdata.data.html#GDFeed">gdata.data.GDFeed</a></dd>
+<dd><a href="atom.data.html#Feed">atom.data.Feed</a></dd>
+<dd><a href="atom.data.html#Source">atom.data.Source</a></dd>
+<dd><a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="gdata.data.html#LinkFinder">gdata.data.LinkFinder</a></dd>
+<dd><a href="atom.data.html#LinkFinder">atom.data.LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>entry</strong> = [&lt;class 'gdata.docs.data.Revision'&gt;]</dl>
+
+<hr>
+Methods inherited from <a href="gdata.data.html#GDFeed">gdata.data.GDFeed</a>:<br>
+<dl><dt><a name="RevisionFeed-GetId"><strong>GetId</strong></a> = get_id(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-get_generator"><strong>get_generator</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-get_id"><strong>get_id</strong></a>(self)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="gdata.data.html#GDFeed">gdata.data.GDFeed</a>:<br>
+<dl><dt><strong>etag</strong> = '{http://schemas.google.com/g/2005}etag'</dl>
+
+<dl><dt><strong>items_per_page</strong> = &lt;class 'gdata.data.ItemsPerPage'&gt;<dd><tt>The&nbsp;opensearch:itemsPerPage&nbsp;element&nbsp;in&nbsp;GData&nbsp;feed.</tt></dl>
+
+<dl><dt><strong>start_index</strong> = &lt;class 'gdata.data.StartIndex'&gt;<dd><tt>The&nbsp;opensearch:startIndex&nbsp;element&nbsp;in&nbsp;GData&nbsp;feed.</tt></dl>
+
+<dl><dt><strong>total_results</strong> = &lt;class 'gdata.data.TotalResults'&gt;<dd><tt>opensearch:TotalResults&nbsp;for&nbsp;a&nbsp;GData&nbsp;feed.</tt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.data.html#Source">atom.data.Source</a>:<br>
+<dl><dt><strong>generator</strong> = &lt;class 'atom.data.Generator'&gt;<dd><tt>The&nbsp;atom:generator&nbsp;element.</tt></dl>
+
+<dl><dt><strong>icon</strong> = &lt;class 'atom.data.Icon'&gt;<dd><tt>The&nbsp;atom:icon&nbsp;element.</tt></dl>
+
+<dl><dt><strong>logo</strong> = &lt;class 'atom.data.Logo'&gt;<dd><tt>The&nbsp;atom:logo&nbsp;element.</tt></dl>
+
+<dl><dt><strong>subtitle</strong> = &lt;class 'atom.data.Subtitle'&gt;<dd><tt>The&nbsp;atom:subtitle&nbsp;element.</tt></dl>
+
+<hr>
+Methods inherited from <a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a>:<br>
+<dl><dt><a name="RevisionFeed-__init__"><strong>__init__</strong></a>(self, atom_id<font color="#909090">=None</font>, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a>:<br>
+<dl><dt><strong>author</strong> = [&lt;class 'atom.data.Author'&gt;]</dl>
+
+<dl><dt><strong>category</strong> = [&lt;class 'atom.data.Category'&gt;]</dl>
+
+<dl><dt><strong>contributor</strong> = [&lt;class 'atom.data.Contributor'&gt;]</dl>
+
+<dl><dt><strong>id</strong> = &lt;class 'atom.data.Id'&gt;<dd><tt>The&nbsp;atom:id&nbsp;element.</tt></dl>
+
+<dl><dt><strong>link</strong> = [&lt;class 'atom.data.Link'&gt;]</dl>
+
+<dl><dt><strong>rights</strong> = &lt;class 'atom.data.Rights'&gt;<dd><tt>The&nbsp;atom:rights&nbsp;element.</tt></dl>
+
+<dl><dt><strong>title</strong> = &lt;class 'atom.data.Title'&gt;<dd><tt>The&nbsp;atom:title&nbsp;element.</tt></dl>
+
+<dl><dt><strong>updated</strong> = &lt;class 'atom.data.Updated'&gt;<dd><tt>The&nbsp;atom:updated&nbsp;element.</tt></dl>
+
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="RevisionFeed-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="RevisionFeed-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="RevisionFeed-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="RevisionFeed-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="RevisionFeed-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="RevisionFeed-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="RevisionFeed-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="RevisionFeed-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
+<hr>
+Methods inherited from <a href="gdata.data.html#LinkFinder">gdata.data.LinkFinder</a>:<br>
+<dl><dt><a name="RevisionFeed-FindAclLink"><strong>FindAclLink</strong></a> = find_acl_link(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-FindFeedLink"><strong>FindFeedLink</strong></a> = find_feed_link(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-FindHtmlLink"><strong>FindHtmlLink</strong></a> = find_html_link(self)</dt><dd><tt>Finds&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html.</tt></dd></dl>
+
+<dl><dt><a name="RevisionFeed-FindPostLink"><strong>FindPostLink</strong></a> = find_post_link(self)</dt><dd><tt>Get&nbsp;the&nbsp;URL&nbsp;to&nbsp;which&nbsp;new&nbsp;entries&nbsp;should&nbsp;be&nbsp;POSTed.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;for&nbsp;the&nbsp;URL&nbsp;in&nbsp;the&nbsp;link&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="RevisionFeed-FindPreviousLink"><strong>FindPreviousLink</strong></a> = find_previous_link(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-GetAclLink"><strong>GetAclLink</strong></a> = get_acl_link(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-GetFeedLink"><strong>GetFeedLink</strong></a> = get_feed_link(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-GetHtmlLink"><strong>GetHtmlLink</strong></a> = get_html_link(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-GetPostLink"><strong>GetPostLink</strong></a> = get_post_link(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-GetPreviousLink"><strong>GetPreviousLink</strong></a> = get_previous_link(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-find_acl_link"><strong>find_acl_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-find_feed_link"><strong>find_feed_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-find_html_link"><strong>find_html_link</strong></a>(self)</dt><dd><tt>Finds&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html.</tt></dd></dl>
+
+<dl><dt><a name="RevisionFeed-find_post_link"><strong>find_post_link</strong></a>(self)</dt><dd><tt>Get&nbsp;the&nbsp;URL&nbsp;to&nbsp;which&nbsp;new&nbsp;entries&nbsp;should&nbsp;be&nbsp;POSTed.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;for&nbsp;the&nbsp;URL&nbsp;in&nbsp;the&nbsp;link&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="RevisionFeed-find_previous_link"><strong>find_previous_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-get_acl_link"><strong>get_acl_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-get_feed_link"><strong>get_feed_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-get_html_link"><strong>get_html_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-get_post_link"><strong>get_post_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-get_previous_link"><strong>get_previous_link</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.data.html#LinkFinder">atom.data.LinkFinder</a>:<br>
+<dl><dt><a name="RevisionFeed-FindAlternateLink"><strong>FindAlternateLink</strong></a> = find_alternate_link(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-FindEditLink"><strong>FindEditLink</strong></a> = find_edit_link(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-FindEditMediaLink"><strong>FindEditMediaLink</strong></a> = find_edit_media_link(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-FindLicenseLink"><strong>FindLicenseLink</strong></a> = find_license_link(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-FindNextLink"><strong>FindNextLink</strong></a> = find_next_link(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-FindSelfLink"><strong>FindSelfLink</strong></a> = find_self_link(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
+&nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<dl><dt><a name="RevisionFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="RevisionFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-GetEditLink"><strong>GetEditLink</strong></a> = get_edit_link(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-GetEditMediaLink"><strong>GetEditMediaLink</strong></a> = get_edit_media_link(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-GetLicenseLink"><strong>GetLicenseLink</strong></a> = get_license_link(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-GetLink"><strong>GetLink</strong></a> = get_link(self, rel)</dt><dd><tt>Returns&nbsp;a&nbsp;link&nbsp;object&nbsp;which&nbsp;has&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.<br>
+&nbsp;<br>
+If&nbsp;you&nbsp;are&nbsp;interested&nbsp;in&nbsp;the&nbsp;URL&nbsp;instead&nbsp;of&nbsp;the&nbsp;link&nbsp;object,<br>
+consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
+
+<dl><dt><a name="RevisionFeed-GetNextLink"><strong>GetNextLink</strong></a> = get_next_link(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-GetSelfLink"><strong>GetSelfLink</strong></a> = get_self_link(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-find_alternate_link"><strong>find_alternate_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-find_edit_link"><strong>find_edit_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-find_edit_media_link"><strong>find_edit_media_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-find_license_link"><strong>find_license_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-find_next_link"><strong>find_next_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-find_self_link"><strong>find_self_link</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
+&nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<dl><dt><a name="RevisionFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="RevisionFeed-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-get_edit_link"><strong>get_edit_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-get_edit_media_link"><strong>get_edit_media_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-get_license_link"><strong>get_license_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-get_link"><strong>get_link</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;a&nbsp;link&nbsp;object&nbsp;which&nbsp;has&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.<br>
+&nbsp;<br>
+If&nbsp;you&nbsp;are&nbsp;interested&nbsp;in&nbsp;the&nbsp;URL&nbsp;instead&nbsp;of&nbsp;the&nbsp;link&nbsp;object,<br>
+consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
+
+<dl><dt><a name="RevisionFeed-get_next_link"><strong>get_next_link</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RevisionFeed-get_self_link"><strong>get_self_link</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="WritersCanInvite">class <strong>WritersCanInvite</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;<a href="#DocList">DocList</a>&nbsp;docs:writersCanInvite&nbsp;element.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.docs.data.html#WritersCanInvite">WritersCanInvite</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>value</strong> = 'value'</dl>
+
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="WritersCanInvite-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="WritersCanInvite-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="WritersCanInvite-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="WritersCanInvite-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="WritersCanInvite-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="WritersCanInvite-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="WritersCanInvite-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="WritersCanInvite-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="WritersCanInvite-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="WritersCanInvite-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-MakeContentLinkFromResourceId"><strong>MakeContentLinkFromResourceId</strong></a> = make_content_link_from_resource_id(resource_id)</dt><dd><tt>Constructs&nbsp;export&nbsp;URL&nbsp;for&nbsp;a&nbsp;given&nbsp;resource.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;resource_id:&nbsp;str&nbsp;The&nbsp;document/item's&nbsp;resource&nbsp;id.&nbsp;Example&nbsp;presentation:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'presentation%3A0A1234567890'.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;gdata.client.ValueError&nbsp;if&nbsp;the&nbsp;resource_id&nbsp;is&nbsp;not&nbsp;a&nbsp;valid&nbsp;format.</tt></dd></dl>
+ <dl><dt><a name="-MakeKindCategory"><strong>MakeKindCategory</strong></a> = make_kind_category(label)</dt><dd><tt>Builds&nbsp;the&nbsp;appropriate&nbsp;atom.data.Category&nbsp;for&nbsp;the&nbsp;label&nbsp;passed&nbsp;in.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;label:&nbsp;str&nbsp;The&nbsp;value&nbsp;for&nbsp;the&nbsp;category&nbsp;entry.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.data.Category&nbsp;or&nbsp;None&nbsp;if&nbsp;label&nbsp;is&nbsp;None.</tt></dd></dl>
+ <dl><dt><a name="-make_content_link_from_resource_id"><strong>make_content_link_from_resource_id</strong></a>(resource_id)</dt><dd><tt>Constructs&nbsp;export&nbsp;URL&nbsp;for&nbsp;a&nbsp;given&nbsp;resource.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;resource_id:&nbsp;str&nbsp;The&nbsp;document/item's&nbsp;resource&nbsp;id.&nbsp;Example&nbsp;presentation:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'presentation%3A0A1234567890'.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;gdata.client.ValueError&nbsp;if&nbsp;the&nbsp;resource_id&nbsp;is&nbsp;not&nbsp;a&nbsp;valid&nbsp;format.</tt></dd></dl>
+ <dl><dt><a name="-make_kind_category"><strong>make_kind_category</strong></a>(label)</dt><dd><tt>Builds&nbsp;the&nbsp;appropriate&nbsp;atom.data.Category&nbsp;for&nbsp;the&nbsp;label&nbsp;passed&nbsp;in.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;label:&nbsp;str&nbsp;The&nbsp;value&nbsp;for&nbsp;the&nbsp;category&nbsp;entry.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.data.Category&nbsp;or&nbsp;None&nbsp;if&nbsp;label&nbsp;is&nbsp;None.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>ACL_FEEDLINK_REL</strong> = 'http://schemas.google.com/acl/2007#accessControlList'<br>
+<strong>DATA_KIND_SCHEME</strong> = 'http://schemas.google.com/g/2005#kind'<br>
+<strong>DOCS_PARENT_LINK_REL</strong> = 'http://schemas.google.com/docs/2007#parent'<br>
+<strong>DOCUMENTS_NS</strong> = 'http://schemas.google.com/docs/2007'<br>
+<strong>DOCUMENTS_TEMPLATE</strong> = '{http://schemas.google.com/docs/2007}%s'<br>
+<strong>DOCUMENT_LABEL</strong> = 'document'<br>
+<strong>FILE_EXT_PATTERN</strong> = &lt;_sre.SRE_Pattern object at 0x8e0a30&gt;<br>
+<strong>FOLDER_LABEL</strong> = 'folder'<br>
+<strong>HIDDEN_LABEL_TERM</strong> = 'http://schemas.google.com/g/2005/labels#hidden'<br>
+<strong>LABEL_SCHEME</strong> = 'http://schemas.google.com/g/2005/labels'<br>
+<strong>MIMETYPES</strong> = {'CSV': 'text/csv', 'DOC': 'application/msword', 'DOCX': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'HTM': 'text/html', 'HTML': 'text/html', 'ODS': 'application/x-vnd.oasis.opendocument.spreadsheet', 'ODT': 'application/vnd.oasis.opendocument.text', 'PDF': 'application/pdf', 'PNG': 'image/png', 'PPS': 'application/vnd.ms-powerpoint', ...}<br>
+<strong>MINE_LABEL_TERM</strong> = 'http://schemas.google.com/g/2005/labels#mine'<br>
+<strong>PDF_LABEL</strong> = 'pdf'<br>
+<strong>PRESENTATION_LABEL</strong> = 'presentation'<br>
+<strong>PRIVATE_LABEL_TERM</strong> = 'http://schemas.google.com/g/2005/labels#private'<br>
+<strong>RESOURCE_ID_PATTERN</strong> = &lt;_sre.SRE_Pattern object at 0x8bccd8&gt;<br>
+<strong>REVISION_FEEDLINK_REL</strong> = 'http://schemas.google.com/docs/2007/revisions'<br>
+<strong>SHARED_WITH_DOMAIN_LABEL_TERM</strong> = 'http://schemas.google.com/g/2005/labels#shared-with-domain'<br>
+<strong>SPREADSHEET_LABEL</strong> = 'spreadsheet'<br>
+<strong>STARRED_LABEL_TERM</strong> = 'http://schemas.google.com/g/2005/labels#starred'<br>
+<strong>TRASHED_LABEL_TERM</strong> = 'http://schemas.google.com/g/2005/labels#trashed'<br>
+<strong>VIEWED_LABEL_TERM</strong> = 'http://schemas.google.com/g/2005/labels#viewed'<br>
+<strong>__author__</strong> = 'e.bidelman (Eric Bidelman)'</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">e.bidelman&nbsp;(Eric&nbsp;Bidelman)</td></tr></table>
+</body></html>

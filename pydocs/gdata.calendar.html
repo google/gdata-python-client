@@ -17,8 +17,9 @@
 <font color="#ffffff" face="helvetica, arial"><big><strong>Package Contents</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="gdata.calendar.service.html">service</a><br>
-</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="gdata.calendar.data.html">data</a><br>
+</td><td width="25%" valign=top><a href="gdata.calendar.service.html">service</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -30,6 +31,9 @@
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="gdata.calendar.html#Comments">Comments</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.calendar.html#GuestsCanInviteOthers">GuestsCanInviteOthers</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.calendar.html#GuestsCanModify">GuestsCanModify</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.calendar.html#GuestsCanSeeGuests">GuestsCanSeeGuests</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.calendar.html#OriginalEvent">OriginalEvent</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.calendar.html#QuickAdd">QuickAdd</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.calendar.html#Recurrence">Recurrence</a>
@@ -38,6 +42,8 @@
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.calendar.html#Scope">Scope</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.calendar.html#SendEventNotifications">SendEventNotifications</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.calendar.html#Sequence">Sequence</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.calendar.html#SyncEvent">SyncEvent</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.calendar.html#UID">UID</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.calendar.html#UriEnumElement">UriEnumElement</a>
 </font></dt><dd>
 <dl>
@@ -432,23 +438,23 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class.<br>
 &nbsp;&nbsp;category:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;Category&nbsp;instances<br>
 &nbsp;&nbsp;contributor:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;on&nbsp;Contributor&nbsp;instances<br>
-&nbsp;&nbsp;generator:&nbsp;Generator&nbsp;(optional)&nbsp;<br>
-&nbsp;&nbsp;icon:&nbsp;Icon&nbsp;(optional)&nbsp;<br>
+&nbsp;&nbsp;generator:&nbsp;Generator&nbsp;(optional)<br>
+&nbsp;&nbsp;icon:&nbsp;Icon&nbsp;(optional)<br>
 &nbsp;&nbsp;id:&nbsp;Id&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;Id&nbsp;element<br>
 &nbsp;&nbsp;link:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="atom.html#Link">Link</a>&nbsp;instances<br>
-&nbsp;&nbsp;logo:&nbsp;Logo&nbsp;(optional)&nbsp;<br>
+&nbsp;&nbsp;logo:&nbsp;Logo&nbsp;(optional)<br>
 &nbsp;&nbsp;rights:&nbsp;Rights&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;Rights&nbsp;element<br>
 &nbsp;&nbsp;subtitle:&nbsp;Subtitle&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;subtitle&nbsp;element<br>
 &nbsp;&nbsp;title:&nbsp;Title&nbsp;(optional)&nbsp;the&nbsp;entry's&nbsp;title&nbsp;element<br>
 &nbsp;&nbsp;updated:&nbsp;Updated&nbsp;(optional)&nbsp;the&nbsp;entry's&nbsp;updated&nbsp;element<br>
-&nbsp;&nbsp;entry:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;Entry&nbsp;instances&nbsp;contained&nbsp;in&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;entry:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;Entry&nbsp;instances&nbsp;contained&nbsp;in&nbsp;the<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed.<br>
-&nbsp;&nbsp;text:&nbsp;String&nbsp;(optional)&nbsp;The&nbsp;text&nbsp;contents&nbsp;of&nbsp;the&nbsp;element.&nbsp;This&nbsp;is&nbsp;the&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contents&nbsp;of&nbsp;the&nbsp;Entry's&nbsp;XML&nbsp;text&nbsp;node.&nbsp;<br>
+&nbsp;&nbsp;text:&nbsp;String&nbsp;(optional)&nbsp;The&nbsp;text&nbsp;contents&nbsp;of&nbsp;the&nbsp;element.&nbsp;This&nbsp;is&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contents&nbsp;of&nbsp;the&nbsp;Entry's&nbsp;XML&nbsp;text&nbsp;node.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Example:&nbsp;&lt;foo&gt;This&nbsp;is&nbsp;the&nbsp;text&lt;/foo&gt;)<br>
 &nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;ExtensionElement&nbsp;instances<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;are&nbsp;children&nbsp;of&nbsp;this&nbsp;element.<br>
-&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;strings&nbsp;which&nbsp;are&nbsp;<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;strings&nbsp;which&nbsp;are<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;values&nbsp;for&nbsp;additional&nbsp;XML&nbsp;attributes&nbsp;of&nbsp;this&nbsp;element.</tt></dd></dl>
 
 <hr>
@@ -662,23 +668,23 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class.<br>
 &nbsp;&nbsp;category:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;Category&nbsp;instances<br>
 &nbsp;&nbsp;contributor:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;on&nbsp;Contributor&nbsp;instances<br>
-&nbsp;&nbsp;generator:&nbsp;Generator&nbsp;(optional)&nbsp;<br>
-&nbsp;&nbsp;icon:&nbsp;Icon&nbsp;(optional)&nbsp;<br>
+&nbsp;&nbsp;generator:&nbsp;Generator&nbsp;(optional)<br>
+&nbsp;&nbsp;icon:&nbsp;Icon&nbsp;(optional)<br>
 &nbsp;&nbsp;id:&nbsp;Id&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;Id&nbsp;element<br>
 &nbsp;&nbsp;link:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="atom.html#Link">Link</a>&nbsp;instances<br>
-&nbsp;&nbsp;logo:&nbsp;Logo&nbsp;(optional)&nbsp;<br>
+&nbsp;&nbsp;logo:&nbsp;Logo&nbsp;(optional)<br>
 &nbsp;&nbsp;rights:&nbsp;Rights&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;Rights&nbsp;element<br>
 &nbsp;&nbsp;subtitle:&nbsp;Subtitle&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;subtitle&nbsp;element<br>
 &nbsp;&nbsp;title:&nbsp;Title&nbsp;(optional)&nbsp;the&nbsp;entry's&nbsp;title&nbsp;element<br>
 &nbsp;&nbsp;updated:&nbsp;Updated&nbsp;(optional)&nbsp;the&nbsp;entry's&nbsp;updated&nbsp;element<br>
-&nbsp;&nbsp;entry:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;Entry&nbsp;instances&nbsp;contained&nbsp;in&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;entry:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;Entry&nbsp;instances&nbsp;contained&nbsp;in&nbsp;the<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed.<br>
-&nbsp;&nbsp;text:&nbsp;String&nbsp;(optional)&nbsp;The&nbsp;text&nbsp;contents&nbsp;of&nbsp;the&nbsp;element.&nbsp;This&nbsp;is&nbsp;the&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contents&nbsp;of&nbsp;the&nbsp;Entry's&nbsp;XML&nbsp;text&nbsp;node.&nbsp;<br>
+&nbsp;&nbsp;text:&nbsp;String&nbsp;(optional)&nbsp;The&nbsp;text&nbsp;contents&nbsp;of&nbsp;the&nbsp;element.&nbsp;This&nbsp;is&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contents&nbsp;of&nbsp;the&nbsp;Entry's&nbsp;XML&nbsp;text&nbsp;node.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Example:&nbsp;&lt;foo&gt;This&nbsp;is&nbsp;the&nbsp;text&lt;/foo&gt;)<br>
 &nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;ExtensionElement&nbsp;instances<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;are&nbsp;children&nbsp;of&nbsp;this&nbsp;element.<br>
-&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;strings&nbsp;which&nbsp;are&nbsp;<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;strings&nbsp;which&nbsp;are<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;values&nbsp;for&nbsp;additional&nbsp;XML&nbsp;attributes&nbsp;of&nbsp;this&nbsp;element.</tt></dd></dl>
 
 <hr>
@@ -783,10 +789,10 @@ Methods defined here:<br>
 <dl><dt><a name="CalendarEventEntry-GetWebContentLink"><strong>GetWebContentLink</strong></a>(self)</dt><dd><tt>Finds&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;WEB_CONTENT_REL<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;gdata.calendar.<a href="#WebContentLink">WebContentLink</a>&nbsp;or&nbsp;none&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel&nbsp;<br>
+&nbsp;&nbsp;A&nbsp;gdata.calendar.<a href="#WebContentLink">WebContentLink</a>&nbsp;or&nbsp;none&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;WEB_CONTENT_REL</tt></dd></dl>
 
-<dl><dt><a name="CalendarEventEntry-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, content<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, published<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, transparency<font color="#909090">=None</font>, comments<font color="#909090">=None</font>, event_status<font color="#909090">=None</font>, send_event_notifications<font color="#909090">=None</font>, visibility<font color="#909090">=None</font>, recurrence<font color="#909090">=None</font>, recurrence_exception<font color="#909090">=None</font>, where<font color="#909090">=None</font>, when<font color="#909090">=None</font>, who<font color="#909090">=None</font>, quick_add<font color="#909090">=None</font>, extended_property<font color="#909090">=None</font>, original_event<font color="#909090">=None</font>, batch_operation<font color="#909090">=None</font>, batch_id<font color="#909090">=None</font>, batch_status<font color="#909090">=None</font>, sequence<font color="#909090">=None</font>, reminder<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="CalendarEventEntry-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, content<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, published<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, transparency<font color="#909090">=None</font>, comments<font color="#909090">=None</font>, event_status<font color="#909090">=None</font>, send_event_notifications<font color="#909090">=None</font>, visibility<font color="#909090">=None</font>, recurrence<font color="#909090">=None</font>, recurrence_exception<font color="#909090">=None</font>, where<font color="#909090">=None</font>, when<font color="#909090">=None</font>, who<font color="#909090">=None</font>, quick_add<font color="#909090">=None</font>, extended_property<font color="#909090">=None</font>, original_event<font color="#909090">=None</font>, batch_operation<font color="#909090">=None</font>, batch_id<font color="#909090">=None</font>, batch_status<font color="#909090">=None</font>, sequence<font color="#909090">=None</font>, reminder<font color="#909090">=None</font>, sync_event<font color="#909090">=None</font>, uid<font color="#909090">=None</font>, guests_can_invite_others<font color="#909090">=None</font>, guests_can_modify<font color="#909090">=None</font>, guests_can_see_guests<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
 
 <hr>
 Methods inherited from <a href="gdata.html#GDataEntry">gdata.GDataEntry</a>:<br>
@@ -957,7 +963,7 @@ Methods inherited from <a href="gdata.html#BatchFeed">gdata.BatchFeed</a>:<br>
 &nbsp;<br>
 &nbsp;<br>
 If&nbsp;the&nbsp;entry&nbsp;is&nbsp;not&nbsp;a&nbsp;<a href="gdata.html#BatchEntry">BatchEntry</a>,&nbsp;it&nbsp;is&nbsp;converted&nbsp;to&nbsp;a&nbsp;<a href="gdata.html#BatchEntry">BatchEntry</a>&nbsp;so<br>
-that&nbsp;the&nbsp;batch&nbsp;specific&nbsp;members&nbsp;will&nbsp;be&nbsp;present.&nbsp;<br>
+that&nbsp;the&nbsp;batch&nbsp;specific&nbsp;members&nbsp;will&nbsp;be&nbsp;present.<br>
 &nbsp;<br>
 The&nbsp;id_url_string&nbsp;can&nbsp;be&nbsp;used&nbsp;in&nbsp;place&nbsp;of&nbsp;an&nbsp;entry&nbsp;if&nbsp;the&nbsp;batch&nbsp;operation<br>
 applies&nbsp;to&nbsp;a&nbsp;URL.&nbsp;For&nbsp;example&nbsp;query&nbsp;and&nbsp;delete&nbsp;operations&nbsp;require&nbsp;just<br>
@@ -965,7 +971,7 @@ the&nbsp;URL&nbsp;of&nbsp;an&nbsp;entry,&nbsp;no&nbsp;body&nbsp;is&nbsp;sent&nbs
 id_url_string&nbsp;is&nbsp;sent&nbsp;instead&nbsp;of&nbsp;an&nbsp;entry,&nbsp;a&nbsp;<a href="gdata.html#BatchEntry">BatchEntry</a>&nbsp;is&nbsp;created&nbsp;and<br>
 added&nbsp;to&nbsp;the&nbsp;feed.<br>
 &nbsp;<br>
-This&nbsp;method&nbsp;also&nbsp;assigns&nbsp;the&nbsp;desired&nbsp;batch&nbsp;id&nbsp;to&nbsp;the&nbsp;entry&nbsp;so&nbsp;that&nbsp;it&nbsp;<br>
+This&nbsp;method&nbsp;also&nbsp;assigns&nbsp;the&nbsp;desired&nbsp;batch&nbsp;id&nbsp;to&nbsp;the&nbsp;entry&nbsp;so&nbsp;that&nbsp;it<br>
 can&nbsp;be&nbsp;referenced&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.&nbsp;If&nbsp;the&nbsp;batch_id_string&nbsp;is<br>
 None,&nbsp;this&nbsp;method&nbsp;will&nbsp;assign&nbsp;a&nbsp;batch_id&nbsp;to&nbsp;be&nbsp;the&nbsp;index&nbsp;at&nbsp;which&nbsp;this<br>
 entry&nbsp;will&nbsp;be&nbsp;in&nbsp;the&nbsp;feed's&nbsp;entry&nbsp;list.<br>
@@ -973,7 +979,7 @@ entry&nbsp;will&nbsp;be&nbsp;in&nbsp;the&nbsp;feed's&nbsp;entry&nbsp;list.<br>
 Args:<br>
 &nbsp;&nbsp;entry:&nbsp;<a href="gdata.html#BatchEntry">BatchEntry</a>,&nbsp;atom.Entry,&nbsp;or&nbsp;another&nbsp;Entry&nbsp;flavor&nbsp;(optional)&nbsp;The<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;server&nbsp;as&nbsp;part&nbsp;of&nbsp;the&nbsp;batch&nbsp;request.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;item&nbsp;must&nbsp;have&nbsp;a&nbsp;valid&nbsp;atom&nbsp;id&nbsp;so&nbsp;that&nbsp;the&nbsp;server&nbsp;knows&nbsp;which&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;item&nbsp;must&nbsp;have&nbsp;a&nbsp;valid&nbsp;atom&nbsp;id&nbsp;so&nbsp;that&nbsp;the&nbsp;server&nbsp;knows&nbsp;which<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;this&nbsp;request&nbsp;references.<br>
 &nbsp;&nbsp;id_url_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;be&nbsp;acted&nbsp;on.&nbsp;You<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;find&nbsp;this&nbsp;URL&nbsp;in&nbsp;the&nbsp;text&nbsp;member&nbsp;of&nbsp;the&nbsp;atom&nbsp;id&nbsp;for&nbsp;an&nbsp;entry.<br>
@@ -998,17 +1004,17 @@ Returns:<br>
 <dl><dt><a name="CalendarEventFeed-AddDelete"><strong>AddDelete</strong></a>(self, url_string<font color="#909090">=None</font>, entry<font color="#909090">=None</font>, batch_id_string<font color="#909090">=None</font>)</dt><dd><tt>Adds&nbsp;a&nbsp;delete&nbsp;request&nbsp;to&nbsp;the&nbsp;batch&nbsp;request&nbsp;feed.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;takes&nbsp;either&nbsp;the&nbsp;url_string&nbsp;which&nbsp;is&nbsp;the&nbsp;atom&nbsp;id&nbsp;of&nbsp;the&nbsp;item<br>
-to&nbsp;be&nbsp;deleted,&nbsp;or&nbsp;the&nbsp;entry&nbsp;itself.&nbsp;The&nbsp;atom&nbsp;id&nbsp;of&nbsp;the&nbsp;entry&nbsp;must&nbsp;be&nbsp;<br>
+to&nbsp;be&nbsp;deleted,&nbsp;or&nbsp;the&nbsp;entry&nbsp;itself.&nbsp;The&nbsp;atom&nbsp;id&nbsp;of&nbsp;the&nbsp;entry&nbsp;must&nbsp;be<br>
 present&nbsp;so&nbsp;that&nbsp;the&nbsp;server&nbsp;knows&nbsp;which&nbsp;entry&nbsp;should&nbsp;be&nbsp;deleted.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;url_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;be&nbsp;deleted.&nbsp;You&nbsp;can<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;find&nbsp;this&nbsp;URL&nbsp;in&nbsp;the&nbsp;text&nbsp;member&nbsp;of&nbsp;the&nbsp;atom&nbsp;id&nbsp;for&nbsp;an&nbsp;entry.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;find&nbsp;this&nbsp;URL&nbsp;in&nbsp;the&nbsp;text&nbsp;member&nbsp;of&nbsp;the&nbsp;atom&nbsp;id&nbsp;for&nbsp;an&nbsp;entry.<br>
 &nbsp;&nbsp;entry:&nbsp;<a href="gdata.html#BatchEntry">BatchEntry</a>&nbsp;(optional)&nbsp;The&nbsp;entry&nbsp;to&nbsp;be&nbsp;deleted.<br>
 &nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)<br>
 &nbsp;<br>
 Raises:<br>
-&nbsp;&nbsp;MissingRequiredParameters:&nbsp;Raised&nbsp;if&nbsp;neither&nbsp;a&nbsp;url_string&nbsp;nor&nbsp;an&nbsp;entry&nbsp;<br>
+&nbsp;&nbsp;MissingRequiredParameters:&nbsp;Raised&nbsp;if&nbsp;neither&nbsp;a&nbsp;url_string&nbsp;nor&nbsp;an&nbsp;entry<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;provided&nbsp;in&nbsp;the&nbsp;request.</tt></dd></dl>
 
 <dl><dt><a name="CalendarEventFeed-AddInsert"><strong>AddInsert</strong></a>(self, entry, batch_id_string<font color="#909090">=None</font>)</dt><dd><tt>Add&nbsp;an&nbsp;insert&nbsp;request&nbsp;to&nbsp;the&nbsp;operations&nbsp;in&nbsp;this&nbsp;batch&nbsp;request&nbsp;feed.<br>
@@ -1027,7 +1033,7 @@ Args:<br>
 
 <dl><dt><a name="CalendarEventFeed-AddQuery"><strong>AddQuery</strong></a>(self, url_string<font color="#909090">=None</font>, entry<font color="#909090">=None</font>, batch_id_string<font color="#909090">=None</font>)</dt><dd><tt>Adds&nbsp;a&nbsp;query&nbsp;request&nbsp;to&nbsp;the&nbsp;batch&nbsp;request&nbsp;feed.<br>
 &nbsp;<br>
-This&nbsp;method&nbsp;takes&nbsp;either&nbsp;the&nbsp;url_string&nbsp;which&nbsp;is&nbsp;the&nbsp;query&nbsp;URL&nbsp;<br>
+This&nbsp;method&nbsp;takes&nbsp;either&nbsp;the&nbsp;url_string&nbsp;which&nbsp;is&nbsp;the&nbsp;query&nbsp;URL<br>
 whose&nbsp;results&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;result&nbsp;feed.&nbsp;The&nbsp;query&nbsp;URL&nbsp;will<br>
 be&nbsp;encapsulated&nbsp;in&nbsp;a&nbsp;<a href="gdata.html#BatchEntry">BatchEntry</a>,&nbsp;and&nbsp;you&nbsp;may&nbsp;pass&nbsp;in&nbsp;the&nbsp;<a href="gdata.html#BatchEntry">BatchEntry</a><br>
 with&nbsp;a&nbsp;query&nbsp;URL&nbsp;instead&nbsp;of&nbsp;sending&nbsp;a&nbsp;url_string.<br>
@@ -1043,7 +1049,7 @@ Raises:<br>
 <dl><dt><a name="CalendarEventFeed-AddUpdate"><strong>AddUpdate</strong></a>(self, entry, batch_id_string<font color="#909090">=None</font>)</dt><dd><tt>Add&nbsp;an&nbsp;update&nbsp;request&nbsp;to&nbsp;the&nbsp;list&nbsp;of&nbsp;batch&nbsp;operations&nbsp;in&nbsp;this&nbsp;feed.<br>
 &nbsp;<br>
 Sets&nbsp;the&nbsp;operation&nbsp;type&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;insert&nbsp;if&nbsp;it&nbsp;is&nbsp;not&nbsp;already&nbsp;set<br>
-and&nbsp;assigns&nbsp;the&nbsp;desired&nbsp;batch&nbsp;id&nbsp;to&nbsp;the&nbsp;entry&nbsp;so&nbsp;that&nbsp;it&nbsp;can&nbsp;be&nbsp;<br>
+and&nbsp;assigns&nbsp;the&nbsp;desired&nbsp;batch&nbsp;id&nbsp;to&nbsp;the&nbsp;entry&nbsp;so&nbsp;that&nbsp;it&nbsp;can&nbsp;be<br>
 referenced&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.<br>
 &nbsp;<br>
 Args:<br>
@@ -1268,23 +1274,23 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class.<br>
 &nbsp;&nbsp;category:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;Category&nbsp;instances<br>
 &nbsp;&nbsp;contributor:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;on&nbsp;Contributor&nbsp;instances<br>
-&nbsp;&nbsp;generator:&nbsp;Generator&nbsp;(optional)&nbsp;<br>
-&nbsp;&nbsp;icon:&nbsp;Icon&nbsp;(optional)&nbsp;<br>
+&nbsp;&nbsp;generator:&nbsp;Generator&nbsp;(optional)<br>
+&nbsp;&nbsp;icon:&nbsp;Icon&nbsp;(optional)<br>
 &nbsp;&nbsp;id:&nbsp;Id&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;Id&nbsp;element<br>
 &nbsp;&nbsp;link:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="atom.html#Link">Link</a>&nbsp;instances<br>
-&nbsp;&nbsp;logo:&nbsp;Logo&nbsp;(optional)&nbsp;<br>
+&nbsp;&nbsp;logo:&nbsp;Logo&nbsp;(optional)<br>
 &nbsp;&nbsp;rights:&nbsp;Rights&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;Rights&nbsp;element<br>
 &nbsp;&nbsp;subtitle:&nbsp;Subtitle&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;subtitle&nbsp;element<br>
 &nbsp;&nbsp;title:&nbsp;Title&nbsp;(optional)&nbsp;the&nbsp;entry's&nbsp;title&nbsp;element<br>
 &nbsp;&nbsp;updated:&nbsp;Updated&nbsp;(optional)&nbsp;the&nbsp;entry's&nbsp;updated&nbsp;element<br>
-&nbsp;&nbsp;entry:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;Entry&nbsp;instances&nbsp;contained&nbsp;in&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;entry:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;Entry&nbsp;instances&nbsp;contained&nbsp;in&nbsp;the<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed.<br>
-&nbsp;&nbsp;text:&nbsp;String&nbsp;(optional)&nbsp;The&nbsp;text&nbsp;contents&nbsp;of&nbsp;the&nbsp;element.&nbsp;This&nbsp;is&nbsp;the&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contents&nbsp;of&nbsp;the&nbsp;Entry's&nbsp;XML&nbsp;text&nbsp;node.&nbsp;<br>
+&nbsp;&nbsp;text:&nbsp;String&nbsp;(optional)&nbsp;The&nbsp;text&nbsp;contents&nbsp;of&nbsp;the&nbsp;element.&nbsp;This&nbsp;is&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contents&nbsp;of&nbsp;the&nbsp;Entry's&nbsp;XML&nbsp;text&nbsp;node.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Example:&nbsp;&lt;foo&gt;This&nbsp;is&nbsp;the&nbsp;text&lt;/foo&gt;)<br>
 &nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;ExtensionElement&nbsp;instances<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;are&nbsp;children&nbsp;of&nbsp;this&nbsp;element.<br>
-&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;strings&nbsp;which&nbsp;are&nbsp;<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;strings&nbsp;which&nbsp;are<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;values&nbsp;for&nbsp;additional&nbsp;XML&nbsp;attributes&nbsp;of&nbsp;this&nbsp;element.</tt></dd></dl>
 
 <hr>
@@ -1577,6 +1583,187 @@ Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
 <hr>
 Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
 <dl><dt><a name="ExtendedProperty-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="GuestsCanInviteOthers">class <strong>GuestsCanInviteOthers</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Indicates&nbsp;whether&nbsp;event&nbsp;attendees&nbsp;may&nbsp;invite&nbsp;others&nbsp;to&nbsp;the&nbsp;event.<br>
+&nbsp;<br>
+This&nbsp;element&nbsp;may&nbsp;only&nbsp;be&nbsp;changed&nbsp;by&nbsp;the&nbsp;organizer&nbsp;of&nbsp;the&nbsp;event.&nbsp;If&nbsp;not<br>
+included&nbsp;as&nbsp;part&nbsp;of&nbsp;the&nbsp;event&nbsp;entry,&nbsp;this&nbsp;element&nbsp;will&nbsp;default&nbsp;to&nbsp;true<br>
+during&nbsp;a&nbsp;POST&nbsp;request,&nbsp;and&nbsp;will&nbsp;inherit&nbsp;its&nbsp;previous&nbsp;value&nbsp;during&nbsp;a&nbsp;PUT<br>
+request.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.calendar.html#GuestsCanInviteOthers">GuestsCanInviteOthers</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="GuestsCanInviteOthers-__init__"><strong>__init__</strong></a>(self, value<font color="#909090">='true'</font>, *args, **kwargs)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="GuestsCanInviteOthers-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="GuestsCanInviteOthers-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="GuestsCanInviteOthers-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="GuestsCanModify">class <strong>GuestsCanModify</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Indicates&nbsp;whether&nbsp;event&nbsp;attendees&nbsp;may&nbsp;modify&nbsp;the&nbsp;original&nbsp;event.<br>
+&nbsp;<br>
+If&nbsp;yes,&nbsp;changes&nbsp;are&nbsp;visible&nbsp;to&nbsp;organizer&nbsp;and&nbsp;other&nbsp;attendees.&nbsp;Otherwise,<br>
+any&nbsp;changes&nbsp;made&nbsp;by&nbsp;attendees&nbsp;will&nbsp;be&nbsp;restricted&nbsp;to&nbsp;that&nbsp;attendee's<br>
+calendar.<br>
+&nbsp;<br>
+This&nbsp;element&nbsp;may&nbsp;only&nbsp;be&nbsp;changed&nbsp;by&nbsp;the&nbsp;organizer&nbsp;of&nbsp;the&nbsp;event,&nbsp;and&nbsp;may<br>
+be&nbsp;set&nbsp;to&nbsp;'true'&nbsp;only&nbsp;if&nbsp;both&nbsp;gCal:guestsCanInviteOthers&nbsp;and<br>
+gCal:guestsCanSeeGuests&nbsp;are&nbsp;set&nbsp;to&nbsp;true&nbsp;in&nbsp;the&nbsp;same&nbsp;PUT/POST&nbsp;request.<br>
+Otherwise,&nbsp;request&nbsp;fails&nbsp;with&nbsp;HTTP&nbsp;error&nbsp;code&nbsp;400&nbsp;(Bad&nbsp;Request).<br>
+&nbsp;<br>
+If&nbsp;not&nbsp;included&nbsp;as&nbsp;part&nbsp;of&nbsp;the&nbsp;event&nbsp;entry,&nbsp;this&nbsp;element&nbsp;will&nbsp;default&nbsp;to<br>
+false&nbsp;during&nbsp;a&nbsp;POST&nbsp;request,&nbsp;and&nbsp;will&nbsp;inherit&nbsp;its&nbsp;previous&nbsp;value&nbsp;during&nbsp;a<br>
+PUT&nbsp;request.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.calendar.html#GuestsCanModify">GuestsCanModify</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="GuestsCanModify-__init__"><strong>__init__</strong></a>(self, value<font color="#909090">='false'</font>, *args, **kwargs)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="GuestsCanModify-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="GuestsCanModify-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="GuestsCanModify-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="GuestsCanSeeGuests">class <strong>GuestsCanSeeGuests</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Indicates&nbsp;whether&nbsp;attendees&nbsp;can&nbsp;see&nbsp;other&nbsp;people&nbsp;invited&nbsp;to&nbsp;the&nbsp;event.<br>
+&nbsp;<br>
+The&nbsp;organizer&nbsp;always&nbsp;sees&nbsp;all&nbsp;attendees.&nbsp;Guests&nbsp;always&nbsp;see&nbsp;themselves.&nbsp;This<br>
+property&nbsp;affects&nbsp;what&nbsp;attendees&nbsp;see&nbsp;in&nbsp;the&nbsp;event's&nbsp;guest&nbsp;list&nbsp;via&nbsp;both&nbsp;the<br>
+Calendar&nbsp;UI&nbsp;and&nbsp;API&nbsp;feeds.<br>
+&nbsp;<br>
+This&nbsp;element&nbsp;may&nbsp;only&nbsp;be&nbsp;changed&nbsp;by&nbsp;the&nbsp;organizer&nbsp;of&nbsp;the&nbsp;event.<br>
+&nbsp;<br>
+If&nbsp;not&nbsp;included&nbsp;as&nbsp;part&nbsp;of&nbsp;the&nbsp;event&nbsp;entry,&nbsp;this&nbsp;element&nbsp;will&nbsp;default&nbsp;to<br>
+true&nbsp;during&nbsp;a&nbsp;POST&nbsp;request,&nbsp;and&nbsp;will&nbsp;inherit&nbsp;its&nbsp;previous&nbsp;value&nbsp;during&nbsp;a<br>
+PUT&nbsp;request.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.calendar.html#GuestsCanSeeGuests">GuestsCanSeeGuests</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="GuestsCanSeeGuests-__init__"><strong>__init__</strong></a>(self, value<font color="#909090">='true'</font>, *args, **kwargs)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="GuestsCanSeeGuests-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="GuestsCanSeeGuests-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="GuestsCanSeeGuests-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
 &nbsp;<br>
 Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
 and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
@@ -2164,6 +2351,55 @@ Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.Exte
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SyncEvent">class <strong>SyncEvent</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.calendar.html#SyncEvent">SyncEvent</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SyncEvent-__init__"><strong>__init__</strong></a>(self, value<font color="#909090">='false'</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="SyncEvent-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="SyncEvent-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="SyncEvent-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="Timezone">class <strong>Timezone</strong></a>(<a href="gdata.calendar.html#ValueAttributeContainer">ValueAttributeContainer</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
@@ -2249,6 +2485,55 @@ Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
 <hr>
 Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
 <dl><dt><a name="Transparency-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="UID">class <strong>UID</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.calendar.html#UID">UID</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="UID-__init__"><strong>__init__</strong></a>(self, value<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="UID-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="UID-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="UID-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
 &nbsp;<br>
 Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
 and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>

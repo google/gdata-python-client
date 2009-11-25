@@ -120,7 +120,7 @@ the&nbsp;recordings&nbsp;and&nbsp;find&nbsp;the&nbsp;first&nbsp;which&nbsp;match
 <dl><dt><a name="MockHttpClient-use_cached_session"><strong>use_cached_session</strong></a>(self, name<font color="#909090">=None</font>, real_http_client<font color="#909090">=None</font>)</dt><dd><tt>Attempts&nbsp;to&nbsp;load&nbsp;recordings&nbsp;from&nbsp;a&nbsp;previous&nbsp;live&nbsp;request.<br>
 &nbsp;<br>
 If&nbsp;a&nbsp;temp&nbsp;file&nbsp;with&nbsp;the&nbsp;recordings&nbsp;exists,&nbsp;then&nbsp;it&nbsp;is&nbsp;used&nbsp;to&nbsp;fulfill<br>
-requests.&nbsp;If&nbsp;the&nbsp;file&nbsp;does&nbsp;not&nbsp;exist,&nbsp;then&nbsp;a&nbsp;real&nbsp;client&nbsp;is&nbsp;used&nbsp;to&nbsp;<br>
+requests.&nbsp;If&nbsp;the&nbsp;file&nbsp;does&nbsp;not&nbsp;exist,&nbsp;then&nbsp;a&nbsp;real&nbsp;client&nbsp;is&nbsp;used&nbsp;to<br>
 actually&nbsp;make&nbsp;the&nbsp;desired&nbsp;HTTP&nbsp;requests.&nbsp;Requests&nbsp;and&nbsp;responses&nbsp;are<br>
 recorded&nbsp;and&nbsp;will&nbsp;be&nbsp;written&nbsp;to&nbsp;the&nbsp;desired&nbsp;temprary&nbsp;cache&nbsp;file&nbsp;when<br>
 close_session&nbsp;is&nbsp;called.<br>
@@ -128,12 +128,12 @@ close_session&nbsp;is&nbsp;called.<br>
 Args:<br>
 &nbsp;&nbsp;name:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;file&nbsp;name&nbsp;of&nbsp;session&nbsp;file&nbsp;to&nbsp;be&nbsp;used.&nbsp;The&nbsp;file<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;loaded&nbsp;from&nbsp;the&nbsp;temporary&nbsp;directory&nbsp;of&nbsp;this&nbsp;machine.&nbsp;If&nbsp;no&nbsp;name<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;passed&nbsp;in,&nbsp;a&nbsp;default&nbsp;name&nbsp;will&nbsp;be&nbsp;constructed&nbsp;using&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;passed&nbsp;in,&nbsp;a&nbsp;default&nbsp;name&nbsp;will&nbsp;be&nbsp;constructed&nbsp;using&nbsp;the<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache_name_prefix,&nbsp;cache_case_name,&nbsp;and&nbsp;cache_test_name&nbsp;of&nbsp;this<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="__builtin__.html#object">object</a>.<br>
 &nbsp;&nbsp;real_http_client:&nbsp;atom.http_core.HttpClient&nbsp;the&nbsp;real&nbsp;client&nbsp;to&nbsp;be&nbsp;used<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;the&nbsp;cached&nbsp;recordings&nbsp;are&nbsp;not&nbsp;found.&nbsp;If&nbsp;the&nbsp;default<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value&nbsp;is&nbsp;used,&nbsp;this&nbsp;will&nbsp;be&nbsp;an&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value&nbsp;is&nbsp;used,&nbsp;this&nbsp;will&nbsp;be&nbsp;an<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;atom.http_core.HttpClient.</tt></dd></dl>
 
 <hr>
@@ -215,8 +215,8 @@ See&nbsp;set_response&nbsp;for&nbsp;details&nbsp;on&nbsp;the&nbsp;arguments&nbsp
 Args:<br>
 &nbsp;&nbsp;status:&nbsp;An&nbsp;int&nbsp;for&nbsp;the&nbsp;HTTP&nbsp;status&nbsp;code,&nbsp;example:&nbsp;200,&nbsp;404,&nbsp;etc.<br>
 &nbsp;&nbsp;reason:&nbsp;String&nbsp;for&nbsp;the&nbsp;HTTP&nbsp;reason,&nbsp;example:&nbsp;OK,&nbsp;NOT&nbsp;FOUND,&nbsp;etc.<br>
-&nbsp;&nbsp;body:&nbsp;The&nbsp;body&nbsp;of&nbsp;the&nbsp;HTTP&nbsp;response&nbsp;as&nbsp;a&nbsp;string&nbsp;or&nbsp;a&nbsp;file-like&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(something&nbsp;with&nbsp;a&nbsp;read&nbsp;method).&nbsp;<br>
+&nbsp;&nbsp;body:&nbsp;The&nbsp;body&nbsp;of&nbsp;the&nbsp;HTTP&nbsp;response&nbsp;as&nbsp;a&nbsp;string&nbsp;or&nbsp;a&nbsp;file-like<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(something&nbsp;with&nbsp;a&nbsp;read&nbsp;method).<br>
 &nbsp;&nbsp;headers:&nbsp;dict&nbsp;of&nbsp;strings&nbsp;containing&nbsp;the&nbsp;HTTP&nbsp;headers&nbsp;in&nbsp;the&nbsp;response.</tt></dd></dl>
 
 <hr>

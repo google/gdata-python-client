@@ -1,27 +1,16 @@
 
 <!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head><title>Python: module gdata.projecthosting.client</title>
+<html><head><title>Python: module gdata.analytics.client</title>
 </head><body bgcolor="#f0f0f8">
 
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.projecthosting.html"><font color="#ffffff">projecthosting</font></a>.client</strong></big></big></font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.analytics.html"><font color="#ffffff">analytics</font></a>.client</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client/src/gdata/projecthosting/client.py">/usr/local/svn/gdata-python-client/src/gdata/projecthosting/client.py</a></font></td></tr></table>
-    <p><tt>#&nbsp;Copyright&nbsp;2009&nbsp;Google&nbsp;Inc.<br>
-#<br>
-#&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;"License");<br>
-#&nbsp;you&nbsp;may&nbsp;not&nbsp;use&nbsp;this&nbsp;file&nbsp;except&nbsp;in&nbsp;compliance&nbsp;with&nbsp;the&nbsp;License.<br>
-#&nbsp;You&nbsp;may&nbsp;obtain&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;License&nbsp;at<br>
-#<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a><br>
-#<br>
-#&nbsp;Unless&nbsp;required&nbsp;by&nbsp;applicable&nbsp;law&nbsp;or&nbsp;agreed&nbsp;to&nbsp;in&nbsp;writing,&nbsp;software<br>
-#&nbsp;distributed&nbsp;under&nbsp;the&nbsp;License&nbsp;is&nbsp;distributed&nbsp;on&nbsp;an&nbsp;"AS&nbsp;IS"&nbsp;BASIS,<br>
-#&nbsp;WITHOUT&nbsp;WARRANTIES&nbsp;OR&nbsp;CONDITIONS&nbsp;OF&nbsp;ANY&nbsp;KIND,&nbsp;either&nbsp;express&nbsp;or&nbsp;implied.<br>
-#&nbsp;See&nbsp;the&nbsp;License&nbsp;for&nbsp;the&nbsp;specific&nbsp;language&nbsp;governing&nbsp;permissions&nbsp;and<br>
-#&nbsp;limitations&nbsp;under&nbsp;the&nbsp;License.</tt></p>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client/src/gdata/analytics/client.py">/usr/local/svn/gdata-python-client/src/gdata/analytics/client.py</a></font></td></tr></table>
+    <p><tt><a href="#AnalyticsClient">AnalyticsClient</a>&nbsp;extends&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>&nbsp;to&nbsp;streamline<br>
+Google&nbsp;Analytics&nbsp;Data&nbsp;Export&nbsp;API&nbsp;calls.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -42,13 +31,14 @@
 <dt><font face="helvetica, arial"><a href="gdata.client.html#GDClient">gdata.client.GDClient</a>(<a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>)
 </font></dt><dd>
 <dl>
-<dt><font face="helvetica, arial"><a href="gdata.projecthosting.client.html#ProjectHostingClient">ProjectHostingClient</a>
+<dt><font face="helvetica, arial"><a href="gdata.analytics.client.html#AnalyticsClient">AnalyticsClient</a>
 </font></dt></dl>
 </dd>
-<dt><font face="helvetica, arial"><a href="gdata.client.html#Query">gdata.client.Query</a>(<a href="__builtin__.html#object">__builtin__.object</a>)
+<dt><font face="helvetica, arial"><a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a>(<a href="atom.http_core.html#Uri">atom.http_core.Uri</a>)
 </font></dt><dd>
 <dl>
-<dt><font face="helvetica, arial"><a href="gdata.projecthosting.client.html#Query">Query</a>
+<dt><font face="helvetica, arial"><a href="gdata.analytics.client.html#AccountFeedQuery">AccountFeedQuery</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.client.html#DataFeedQuery">DataFeedQuery</a>
 </font></dt></dl>
 </dd>
 </dl>
@@ -56,91 +46,138 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="ProjectHostingClient">class <strong>ProjectHostingClient</strong></a>(<a href="gdata.client.html#GDClient">gdata.client.GDClient</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="AccountFeedQuery">class <strong>AccountFeedQuery</strong></a>(<a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Client&nbsp;to&nbsp;interact&nbsp;with&nbsp;the&nbsp;Project&nbsp;Hosting&nbsp;GData&nbsp;API.<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt>Account&nbsp;Feed&nbsp;query&nbsp;class&nbsp;to&nbsp;simplify&nbsp;constructing&nbsp;Account&nbsp;Feed&nbsp;Urls.<br>
+&nbsp;<br>
+To&nbsp;use&nbsp;this&nbsp;class,&nbsp;you&nbsp;can&nbsp;either&nbsp;pass&nbsp;a&nbsp;dict&nbsp;in&nbsp;the&nbsp;constructor&nbsp;that&nbsp;has<br>
+all&nbsp;the&nbsp;data&nbsp;feed&nbsp;query&nbsp;parameters&nbsp;as&nbsp;keys.<br>
+&nbsp;&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#DataFeedQuery">DataFeedQuery</a>({'max-results':&nbsp;'10000'})<br>
+&nbsp;<br>
+Alternatively&nbsp;you&nbsp;can&nbsp;add&nbsp;new&nbsp;parameters&nbsp;directly&nbsp;to&nbsp;the&nbsp;query&nbsp;object.<br>
+&nbsp;&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#DataFeedQuery">DataFeedQuery</a>()<br>
+&nbsp;&nbsp;&nbsp;queryUrl.query['max-results']&nbsp;=&nbsp;'10000'<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;query:&nbsp;dict&nbsp;(optional)&nbsp;Contains&nbsp;all&nbsp;the&nbsp;GA&nbsp;Data&nbsp;Feed&nbsp;query&nbsp;parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;as&nbsp;keys.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="gdata.projecthosting.client.html#ProjectHostingClient">ProjectHostingClient</a></dd>
+<dd><a href="gdata.analytics.client.html#AccountFeedQuery">AccountFeedQuery</a></dd>
+<dd><a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a></dd>
+<dd><a href="atom.http_core.html#Uri">atom.http_core.Uri</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="AccountFeedQuery-__init__"><strong>__init__</strong></a>(self, query<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>host</strong> = 'www.google.com'</dl>
+
+<dl><dt><strong>path</strong> = '/analytics/feeds/accounts/default'</dl>
+
+<dl><dt><strong>scheme</strong> = 'https'</dl>
+
+<hr>
+Data descriptors inherited from <a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a>:<br>
+<dl><dt><strong>text_query</strong></dt>
+<dd><tt>The&nbsp;q&nbsp;parameter&nbsp;for&nbsp;searching&nbsp;for&nbsp;an&nbsp;exact&nbsp;text&nbsp;match&nbsp;on&nbsp;content</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><a name="AccountFeedQuery-ModifyRequest"><strong>ModifyRequest</strong></a> = modify_request(self, http_request<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;HTTP&nbsp;request&nbsp;components&nbsp;based&nbsp;on&nbsp;the&nbsp;URI.</tt></dd></dl>
+
+<dl><dt><a name="AccountFeedQuery-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AccountFeedQuery-modify_request"><strong>modify_request</strong></a>(self, http_request<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;HTTP&nbsp;request&nbsp;components&nbsp;based&nbsp;on&nbsp;the&nbsp;URI.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><a name="AccountFeedQuery-ParseUri"><strong>ParseUri</strong></a> = parse_uri(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;Uri&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
+members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>
+
+<dl><dt><a name="AccountFeedQuery-parse_uri"><strong>parse_uri</strong></a>(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;Uri&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
+members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><strong>port</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="AnalyticsClient">class <strong>AnalyticsClient</strong></a>(<a href="gdata.client.html#GDClient">gdata.client.GDClient</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Client&nbsp;extension&nbsp;for&nbsp;the&nbsp;Google&nbsp;Analytics&nbsp;API&nbsp;service.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.analytics.client.html#AnalyticsClient">AnalyticsClient</a></dd>
 <dd><a href="gdata.client.html#GDClient">gdata.client.GDClient</a></dd>
 <dd><a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a></dd>
 <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="ProjectHostingClient-add_issue"><strong>add_issue</strong></a>(self, project_name, title, content, author, status<font color="#909090">=None</font>, owner<font color="#909090">=None</font>, labels<font color="#909090">=None</font>, ccs<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Create&nbsp;a&nbsp;new&nbsp;issue&nbsp;for&nbsp;the&nbsp;project.<br>
+<dl><dt><a name="AnalyticsClient-GetAccountFeed"><strong>GetAccountFeed</strong></a> = <a href="#AnalyticsClient-get_account_feed">get_account_feed</a>(self, feed_uri, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="AnalyticsClient-GetDataFeed"><strong>GetDataFeed</strong></a> = <a href="#AnalyticsClient-get_data_feed">get_data_feed</a>(self, feed_uri, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="AnalyticsClient-__init__"><strong>__init__</strong></a>(self, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Constructs&nbsp;a&nbsp;new&nbsp;client&nbsp;for&nbsp;the&nbsp;Sites&nbsp;API.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;project_name&nbsp;str&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;project.<br>
-&nbsp;&nbsp;title&nbsp;str&nbsp;The&nbsp;title&nbsp;of&nbsp;the&nbsp;new&nbsp;issue.<br>
-&nbsp;&nbsp;content&nbsp;str&nbsp;The&nbsp;summary&nbsp;of&nbsp;the&nbsp;new&nbsp;issue.<br>
-&nbsp;&nbsp;author&nbsp;str&nbsp;The&nbsp;authenticated&nbsp;user's&nbsp;username.<br>
-&nbsp;&nbsp;status&nbsp;str&nbsp;The&nbsp;status&nbsp;of&nbsp;the&nbsp;new&nbsp;issue,&nbsp;Accepted,&nbsp;etc.<br>
-&nbsp;&nbsp;owner&nbsp;str&nbsp;The&nbsp;username&nbsp;of&nbsp;new&nbsp;issue's&nbsp;owner.<br>
-&nbsp;&nbsp;labels&nbsp;[str]&nbsp;Labels&nbsp;to&nbsp;associate&nbsp;with&nbsp;the&nbsp;new&nbsp;issue.<br>
-&nbsp;&nbsp;ccs&nbsp;[str]&nbsp;usernames&nbsp;to&nbsp;Cc&nbsp;on&nbsp;the&nbsp;new&nbsp;issue.<br>
-Returns:<br>
-&nbsp;&nbsp;data.IssueEntry</tt></dd></dl>
+&nbsp;&nbsp;auth_token:&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;(optional)&nbsp;Authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
+&nbsp;&nbsp;kwargs:&nbsp;The&nbsp;other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;constructor.</tt></dd></dl>
 
-<dl><dt><a name="ProjectHostingClient-delete"><strong>delete</strong></a>(self, entry_or_uri, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Unsupported&nbsp;GData&nbsp;delete&nbsp;method.<br>
-&nbsp;<br>
-Use&nbsp;<a href="#ProjectHostingClient-update_issue">update_issue</a>(status='Closed')&nbsp;instead.</tt></dd></dl>
-
-<dl><dt><a name="ProjectHostingClient-get_comments"><strong>get_comments</strong></a>(self, project_name, issue_id, desired_class<font color="#909090">=&lt;class 'gdata.projecthosting.data.CommentsFeed'&gt;</font>, **kwargs)</dt><dd><tt>Get&nbsp;a&nbsp;feed&nbsp;of&nbsp;all&nbsp;updates&nbsp;to&nbsp;an&nbsp;issue.<br>
+<dl><dt><a name="AnalyticsClient-get_account_feed"><strong>get_account_feed</strong></a>(self, feed_uri, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Makes&nbsp;a&nbsp;request&nbsp;to&nbsp;the&nbsp;Analytics&nbsp;API&nbsp;Account&nbsp;Feed.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;project_name&nbsp;str&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;issue's&nbsp;project.<br>
-&nbsp;&nbsp;issue_id&nbsp;str&nbsp;The&nbsp;issue&nbsp;number&nbsp;needing&nbsp;updated.<br>
-&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;data.CommentsFeed</tt></dd></dl>
+&nbsp;&nbsp;feed_uri:&nbsp;str&nbsp;or&nbsp;gdata.analytics.<a href="#AccountFeedQuery">AccountFeedQuery</a>&nbsp;The&nbsp;Analytics&nbsp;Account<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Feed&nbsp;uri&nbsp;to&nbsp;define&nbsp;what&nbsp;data&nbsp;to&nbsp;retrieve&nbsp;from&nbsp;the&nbsp;API.&nbsp;Can&nbsp;also&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;used&nbsp;with&nbsp;a&nbsp;gdata.analytics.<a href="#AccountFeedQuery">AccountFeedQuery</a>&nbsp;object.</tt></dd></dl>
 
-<dl><dt><a name="ProjectHostingClient-get_issues"><strong>get_issues</strong></a>(self, project_name, desired_class<font color="#909090">=&lt;class 'gdata.projecthosting.data.IssuesFeed'&gt;</font>, **kwargs)</dt><dd><tt>Get&nbsp;a&nbsp;feed&nbsp;of&nbsp;issues&nbsp;for&nbsp;a&nbsp;particular&nbsp;project.<br>
+<dl><dt><a name="AnalyticsClient-get_data_feed"><strong>get_data_feed</strong></a>(self, feed_uri, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Makes&nbsp;a&nbsp;request&nbsp;to&nbsp;the&nbsp;Analytics&nbsp;API&nbsp;Data&nbsp;Feed.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;project_name&nbsp;str&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;project.<br>
-&nbsp;&nbsp;query&nbsp;<a href="#Query">Query</a>&nbsp;Set&nbsp;returned&nbsp;issues&nbsp;parameters.<br>
-&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;data.IssuesFeed</tt></dd></dl>
-
-<dl><dt><a name="ProjectHostingClient-update"><strong>update</strong></a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Unsupported&nbsp;GData&nbsp;update&nbsp;method.<br>
-&nbsp;<br>
-Use&nbsp;update_*()&nbsp;instead.</tt></dd></dl>
-
-<dl><dt><a name="ProjectHostingClient-update_issue"><strong>update_issue</strong></a>(self, project_name, issue_id, author, comment<font color="#909090">=None</font>, summary<font color="#909090">=None</font>, status<font color="#909090">=None</font>, owner<font color="#909090">=None</font>, labels<font color="#909090">=None</font>, ccs<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Update&nbsp;or&nbsp;comment&nbsp;on&nbsp;one&nbsp;issue&nbsp;for&nbsp;the&nbsp;project.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;project_name&nbsp;str&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;issue's&nbsp;project.<br>
-&nbsp;&nbsp;issue_id&nbsp;str&nbsp;The&nbsp;issue&nbsp;number&nbsp;needing&nbsp;updated.<br>
-&nbsp;&nbsp;author&nbsp;str&nbsp;The&nbsp;authenticated&nbsp;user's&nbsp;username.<br>
-&nbsp;&nbsp;comment&nbsp;str&nbsp;A&nbsp;comment&nbsp;to&nbsp;append&nbsp;to&nbsp;the&nbsp;issue<br>
-&nbsp;&nbsp;summary&nbsp;str&nbsp;Rewrite&nbsp;the&nbsp;summary&nbsp;of&nbsp;the&nbsp;issue.<br>
-&nbsp;&nbsp;status&nbsp;str&nbsp;A&nbsp;new&nbsp;status&nbsp;for&nbsp;the&nbsp;issue.<br>
-&nbsp;&nbsp;owner&nbsp;str&nbsp;The&nbsp;username&nbsp;of&nbsp;the&nbsp;new&nbsp;owner.<br>
-&nbsp;&nbsp;labels&nbsp;[str]&nbsp;Labels&nbsp;to&nbsp;set&nbsp;on&nbsp;the&nbsp;issue&nbsp;(prepend&nbsp;issue&nbsp;with&nbsp;-&nbsp;to&nbsp;remove&nbsp;a<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label).<br>
-&nbsp;&nbsp;ccs&nbsp;[str]&nbsp;Ccs&nbsp;to&nbsp;set&nbsp;on&nbsp;th&nbsp;enew&nbsp;issue&nbsp;(prepend&nbsp;cc&nbsp;with&nbsp;-&nbsp;to&nbsp;remove&nbsp;a&nbsp;cc).<br>
-&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;data.CommentEntry</tt></dd></dl>
+&nbsp;&nbsp;feed_uri:&nbsp;str&nbsp;or&nbsp;gdata.analytics.<a href="#AccountFeedQuery">AccountFeedQuery</a>&nbsp;The&nbsp;Analytics&nbsp;Data<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Feed&nbsp;uri&nbsp;to&nbsp;define&nbsp;what&nbsp;data&nbsp;to&nbsp;retrieve&nbsp;from&nbsp;the&nbsp;API.&nbsp;Can&nbsp;also&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;used&nbsp;with&nbsp;a&nbsp;gdata.analytics.<a href="#AccountFeedQuery">AccountFeedQuery</a>&nbsp;object.</tt></dd></dl>
 
 <hr>
 Data and other attributes defined here:<br>
-<dl><dt><strong>api_version</strong> = '1.0'</dl>
+<dl><dt><strong>account_type</strong> = 'GOOGLE'</dl>
 
-<dl><dt><strong>auth_scopes</strong> = ['http://code.google.com/feeds/issues']</dl>
+<dl><dt><strong>api_version</strong> = '1'</dl>
 
-<dl><dt><strong>auth_service</strong> = 'code'</dl>
+<dl><dt><strong>auth_scopes</strong> = ['https://www.google.com/analytics/feeds']</dl>
+
+<dl><dt><strong>auth_service</strong> = 'analytics'</dl>
 
 <hr>
 Methods inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
-<dl><dt><a name="ProjectHostingClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">='https://www.google.com/accounts/ClientLogin'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="AnalyticsClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">='https://www.google.com/accounts/ClientLogin'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="ProjectHostingClient-Delete"><strong>Delete</strong></a> = delete(self, entry_or_uri, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
+<dl><dt><a name="AnalyticsClient-Delete"><strong>Delete</strong></a> = delete(self, entry_or_uri, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ProjectHostingClient-GetAccessToken"><strong>GetAccessToken</strong></a> = get_access_token(self, request_token, url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>)</dt><dd><tt>Exchanges&nbsp;an&nbsp;authorized&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;for&nbsp;an&nbsp;access&nbsp;token.<br>
+<dl><dt><a name="AnalyticsClient-GetAccessToken"><strong>GetAccessToken</strong></a> = get_access_token(self, request_token, url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>)</dt><dd><tt>Exchanges&nbsp;an&nbsp;authorized&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;for&nbsp;an&nbsp;access&nbsp;token.<br>
 &nbsp;<br>
 Contacts&nbsp;the&nbsp;Google&nbsp;OAuth&nbsp;server&nbsp;to&nbsp;upgrade&nbsp;a&nbsp;previously&nbsp;authorized<br>
 request&nbsp;token.&nbsp;Once&nbsp;the&nbsp;request&nbsp;token&nbsp;is&nbsp;upgraded&nbsp;to&nbsp;an&nbsp;access&nbsp;token,<br>
@@ -154,11 +191,11 @@ Args:<br>
 &nbsp;&nbsp;url:&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;the&nbsp;upgrade&nbsp;request&nbsp;should&nbsp;be&nbsp;sent.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defaults&nbsp;to:&nbsp;https://www.google.com/accounts/OAuthAuthorizeToken</tt></dd></dl>
 
-<dl><dt><a name="ProjectHostingClient-GetEntry"><strong>GetEntry</strong></a> = get_entry(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDEntry'&gt;</font>, etag<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="AnalyticsClient-GetEntry"><strong>GetEntry</strong></a> = get_entry(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDEntry'&gt;</font>, etag<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ProjectHostingClient-GetFeed"><strong>GetFeed</strong></a> = get_feed(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDFeed'&gt;</font>, **kwargs)</dt></dl>
+<dl><dt><a name="AnalyticsClient-GetFeed"><strong>GetFeed</strong></a> = get_feed(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDFeed'&gt;</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ProjectHostingClient-GetNext"><strong>GetNext</strong></a> = get_next(self, feed, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Fetches&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;results&nbsp;from&nbsp;the&nbsp;feed.<br>
+<dl><dt><a name="AnalyticsClient-GetNext"><strong>GetNext</strong></a> = get_next(self, feed, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Fetches&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;results&nbsp;from&nbsp;the&nbsp;feed.<br>
 &nbsp;<br>
 When&nbsp;requesting&nbsp;a&nbsp;feed,&nbsp;the&nbsp;number&nbsp;of&nbsp;entries&nbsp;returned&nbsp;is&nbsp;capped&nbsp;at&nbsp;a<br>
 service&nbsp;specific&nbsp;default&nbsp;limit&nbsp;(often&nbsp;25&nbsp;entries).&nbsp;You&nbsp;can&nbsp;specify&nbsp;your<br>
@@ -169,7 +206,7 @@ a&nbsp;next&nbsp;link.&nbsp;This&nbsp;method&nbsp;performs&nbsp;a&nbsp;GET&nbsp;
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;feed&nbsp;object&nbsp;containing&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;entries&nbsp;in&nbsp;this&nbsp;feed.</tt></dd></dl>
 
-<dl><dt><a name="ProjectHostingClient-GetOAuthToken"><strong>GetOAuthToken</strong></a> = get_oauth_token(self, scopes, next, consumer_key, consumer_secret<font color="#909090">=None</font>, rsa_private_key<font color="#909090">=None</font>, url<font color="#909090">='https://www.google.com/accounts/OAuthGetRequestToken'</font>)</dt><dd><tt>Obtains&nbsp;an&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;to&nbsp;allow&nbsp;the&nbsp;user&nbsp;to&nbsp;authorize&nbsp;this&nbsp;app.<br>
+<dl><dt><a name="AnalyticsClient-GetOAuthToken"><strong>GetOAuthToken</strong></a> = get_oauth_token(self, scopes, next, consumer_key, consumer_secret<font color="#909090">=None</font>, rsa_private_key<font color="#909090">=None</font>, url<font color="#909090">='https://www.google.com/accounts/OAuthGetRequestToken'</font>)</dt><dd><tt>Obtains&nbsp;an&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;to&nbsp;allow&nbsp;the&nbsp;user&nbsp;to&nbsp;authorize&nbsp;this&nbsp;app.<br>
 &nbsp;<br>
 Once&nbsp;this&nbsp;client&nbsp;has&nbsp;a&nbsp;request&nbsp;token,&nbsp;the&nbsp;user&nbsp;can&nbsp;authorize&nbsp;the&nbsp;request<br>
 token&nbsp;by&nbsp;visiting&nbsp;the&nbsp;authorization&nbsp;URL&nbsp;in&nbsp;their&nbsp;browser.&nbsp;After&nbsp;being<br>
@@ -205,15 +242,15 @@ Args:<br>
 &nbsp;&nbsp;url:&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;a&nbsp;request&nbsp;for&nbsp;a&nbsp;token&nbsp;should&nbsp;be&nbsp;made.&nbsp;The&nbsp;default<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;Google's&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;provider.</tt></dd></dl>
 
-<dl><dt><a name="ProjectHostingClient-ModifyRequest"><strong>ModifyRequest</strong></a> = modify_request(self, http_request)</dt><dd><tt>Adds&nbsp;or&nbsp;changes&nbsp;request&nbsp;before&nbsp;making&nbsp;the&nbsp;HTTP&nbsp;request.<br>
+<dl><dt><a name="AnalyticsClient-ModifyRequest"><strong>ModifyRequest</strong></a> = modify_request(self, http_request)</dt><dd><tt>Adds&nbsp;or&nbsp;changes&nbsp;request&nbsp;before&nbsp;making&nbsp;the&nbsp;HTTP&nbsp;request.<br>
 &nbsp;<br>
 This&nbsp;client&nbsp;will&nbsp;add&nbsp;the&nbsp;API&nbsp;version&nbsp;if&nbsp;it&nbsp;is&nbsp;specified.<br>
 Subclasses&nbsp;may&nbsp;override&nbsp;this&nbsp;method&nbsp;to&nbsp;add&nbsp;their&nbsp;own&nbsp;request<br>
 modifications&nbsp;before&nbsp;the&nbsp;request&nbsp;is&nbsp;made.</tt></dd></dl>
 
-<dl><dt><a name="ProjectHostingClient-Post"><strong>Post</strong></a> = post(self, entry, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="AnalyticsClient-Post"><strong>Post</strong></a> = post(self, entry, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ProjectHostingClient-Request"><strong>Request</strong></a> = request(self, method<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, **kwargs)</dt><dd><tt>Make&nbsp;an&nbsp;HTTP&nbsp;request&nbsp;to&nbsp;the&nbsp;server.<br>
+<dl><dt><a name="AnalyticsClient-Request"><strong>Request</strong></a> = request(self, method<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, **kwargs)</dt><dd><tt>Make&nbsp;an&nbsp;HTTP&nbsp;request&nbsp;to&nbsp;the&nbsp;server.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;atom.client.AtomPubClient.request.<br>
 &nbsp;<br>
@@ -266,9 +303,9 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="ProjectHostingClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc47310&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="AnalyticsClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc4ad90&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="ProjectHostingClient-Update"><strong>Update</strong></a> = update(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
+<dl><dt><a name="AnalyticsClient-Update"><strong>Update</strong></a> = update(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
 &nbsp;<br>
 Performs&nbsp;a&nbsp;PUT&nbsp;and&nbsp;converts&nbsp;the&nbsp;response&nbsp;to&nbsp;a&nbsp;new&nbsp;entry&nbsp;object&nbsp;with&nbsp;a<br>
 matching&nbsp;class&nbsp;to&nbsp;the&nbsp;entry&nbsp;passed&nbsp;in.<br>
@@ -286,7 +323,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="ProjectHostingClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc47350&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="AnalyticsClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc4add0&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -303,9 +340,11 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
 
-<dl><dt><a name="ProjectHostingClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">='https://www.google.com/accounts/ClientLogin'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="AnalyticsClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">='https://www.google.com/accounts/ClientLogin'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="ProjectHostingClient-get_access_token"><strong>get_access_token</strong></a>(self, request_token, url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>)</dt><dd><tt>Exchanges&nbsp;an&nbsp;authorized&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;for&nbsp;an&nbsp;access&nbsp;token.<br>
+<dl><dt><a name="AnalyticsClient-delete"><strong>delete</strong></a>(self, entry_or_uri, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="AnalyticsClient-get_access_token"><strong>get_access_token</strong></a>(self, request_token, url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>)</dt><dd><tt>Exchanges&nbsp;an&nbsp;authorized&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;for&nbsp;an&nbsp;access&nbsp;token.<br>
 &nbsp;<br>
 Contacts&nbsp;the&nbsp;Google&nbsp;OAuth&nbsp;server&nbsp;to&nbsp;upgrade&nbsp;a&nbsp;previously&nbsp;authorized<br>
 request&nbsp;token.&nbsp;Once&nbsp;the&nbsp;request&nbsp;token&nbsp;is&nbsp;upgraded&nbsp;to&nbsp;an&nbsp;access&nbsp;token,<br>
@@ -319,11 +358,11 @@ Args:<br>
 &nbsp;&nbsp;url:&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;the&nbsp;upgrade&nbsp;request&nbsp;should&nbsp;be&nbsp;sent.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defaults&nbsp;to:&nbsp;https://www.google.com/accounts/OAuthAuthorizeToken</tt></dd></dl>
 
-<dl><dt><a name="ProjectHostingClient-get_entry"><strong>get_entry</strong></a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDEntry'&gt;</font>, etag<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="AnalyticsClient-get_entry"><strong>get_entry</strong></a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDEntry'&gt;</font>, etag<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ProjectHostingClient-get_feed"><strong>get_feed</strong></a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDFeed'&gt;</font>, **kwargs)</dt></dl>
+<dl><dt><a name="AnalyticsClient-get_feed"><strong>get_feed</strong></a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDFeed'&gt;</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ProjectHostingClient-get_next"><strong>get_next</strong></a>(self, feed, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Fetches&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;results&nbsp;from&nbsp;the&nbsp;feed.<br>
+<dl><dt><a name="AnalyticsClient-get_next"><strong>get_next</strong></a>(self, feed, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Fetches&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;results&nbsp;from&nbsp;the&nbsp;feed.<br>
 &nbsp;<br>
 When&nbsp;requesting&nbsp;a&nbsp;feed,&nbsp;the&nbsp;number&nbsp;of&nbsp;entries&nbsp;returned&nbsp;is&nbsp;capped&nbsp;at&nbsp;a<br>
 service&nbsp;specific&nbsp;default&nbsp;limit&nbsp;(often&nbsp;25&nbsp;entries).&nbsp;You&nbsp;can&nbsp;specify&nbsp;your<br>
@@ -334,7 +373,7 @@ a&nbsp;next&nbsp;link.&nbsp;This&nbsp;method&nbsp;performs&nbsp;a&nbsp;GET&nbsp;
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;feed&nbsp;object&nbsp;containing&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;entries&nbsp;in&nbsp;this&nbsp;feed.</tt></dd></dl>
 
-<dl><dt><a name="ProjectHostingClient-get_oauth_token"><strong>get_oauth_token</strong></a>(self, scopes, next, consumer_key, consumer_secret<font color="#909090">=None</font>, rsa_private_key<font color="#909090">=None</font>, url<font color="#909090">='https://www.google.com/accounts/OAuthGetRequestToken'</font>)</dt><dd><tt>Obtains&nbsp;an&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;to&nbsp;allow&nbsp;the&nbsp;user&nbsp;to&nbsp;authorize&nbsp;this&nbsp;app.<br>
+<dl><dt><a name="AnalyticsClient-get_oauth_token"><strong>get_oauth_token</strong></a>(self, scopes, next, consumer_key, consumer_secret<font color="#909090">=None</font>, rsa_private_key<font color="#909090">=None</font>, url<font color="#909090">='https://www.google.com/accounts/OAuthGetRequestToken'</font>)</dt><dd><tt>Obtains&nbsp;an&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;to&nbsp;allow&nbsp;the&nbsp;user&nbsp;to&nbsp;authorize&nbsp;this&nbsp;app.<br>
 &nbsp;<br>
 Once&nbsp;this&nbsp;client&nbsp;has&nbsp;a&nbsp;request&nbsp;token,&nbsp;the&nbsp;user&nbsp;can&nbsp;authorize&nbsp;the&nbsp;request<br>
 token&nbsp;by&nbsp;visiting&nbsp;the&nbsp;authorization&nbsp;URL&nbsp;in&nbsp;their&nbsp;browser.&nbsp;After&nbsp;being<br>
@@ -370,15 +409,15 @@ Args:<br>
 &nbsp;&nbsp;url:&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;a&nbsp;request&nbsp;for&nbsp;a&nbsp;token&nbsp;should&nbsp;be&nbsp;made.&nbsp;The&nbsp;default<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;Google's&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;provider.</tt></dd></dl>
 
-<dl><dt><a name="ProjectHostingClient-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt><dd><tt>Adds&nbsp;or&nbsp;changes&nbsp;request&nbsp;before&nbsp;making&nbsp;the&nbsp;HTTP&nbsp;request.<br>
+<dl><dt><a name="AnalyticsClient-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt><dd><tt>Adds&nbsp;or&nbsp;changes&nbsp;request&nbsp;before&nbsp;making&nbsp;the&nbsp;HTTP&nbsp;request.<br>
 &nbsp;<br>
 This&nbsp;client&nbsp;will&nbsp;add&nbsp;the&nbsp;API&nbsp;version&nbsp;if&nbsp;it&nbsp;is&nbsp;specified.<br>
 Subclasses&nbsp;may&nbsp;override&nbsp;this&nbsp;method&nbsp;to&nbsp;add&nbsp;their&nbsp;own&nbsp;request<br>
 modifications&nbsp;before&nbsp;the&nbsp;request&nbsp;is&nbsp;made.</tt></dd></dl>
 
-<dl><dt><a name="ProjectHostingClient-post"><strong>post</strong></a>(self, entry, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="AnalyticsClient-post"><strong>post</strong></a>(self, entry, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ProjectHostingClient-request"><strong>request</strong></a>(self, method<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, **kwargs)</dt><dd><tt>Make&nbsp;an&nbsp;HTTP&nbsp;request&nbsp;to&nbsp;the&nbsp;server.<br>
+<dl><dt><a name="AnalyticsClient-request"><strong>request</strong></a>(self, method<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, **kwargs)</dt><dd><tt>Make&nbsp;an&nbsp;HTTP&nbsp;request&nbsp;to&nbsp;the&nbsp;server.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;atom.client.AtomPubClient.request.<br>
 &nbsp;<br>
@@ -431,9 +470,27 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="ProjectHostingClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc47310&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="AnalyticsClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc4ad90&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="ProjectHostingClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc47350&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="AnalyticsClient-update"><strong>update</strong></a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
+&nbsp;<br>
+Performs&nbsp;a&nbsp;PUT&nbsp;and&nbsp;converts&nbsp;the&nbsp;response&nbsp;to&nbsp;a&nbsp;new&nbsp;entry&nbsp;object&nbsp;with&nbsp;a<br>
+matching&nbsp;class&nbsp;to&nbsp;the&nbsp;entry&nbsp;passed&nbsp;in.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:<br>
+&nbsp;&nbsp;auth_token:<br>
+&nbsp;&nbsp;force:&nbsp;boolean&nbsp;stating&nbsp;whether&nbsp;an&nbsp;update&nbsp;should&nbsp;be&nbsp;forced.&nbsp;Defaults&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;False.&nbsp;Normally,&nbsp;if&nbsp;a&nbsp;change&nbsp;has&nbsp;been&nbsp;made&nbsp;since&nbsp;the&nbsp;passed&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;was&nbsp;obtained,&nbsp;the&nbsp;server&nbsp;will&nbsp;not&nbsp;overwrite&nbsp;the&nbsp;entry&nbsp;since<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;changes&nbsp;were&nbsp;based&nbsp;on&nbsp;an&nbsp;obsolete&nbsp;version&nbsp;of&nbsp;the&nbsp;entry.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Setting&nbsp;force&nbsp;to&nbsp;True&nbsp;will&nbsp;cause&nbsp;the&nbsp;update&nbsp;to&nbsp;silently<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;overwrite&nbsp;whatever&nbsp;version&nbsp;is&nbsp;present.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
+
+<dl><dt><a name="AnalyticsClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc4add0&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -452,28 +509,13 @@ Returns:<br>
 
 <hr>
 Methods inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
-<dl><dt><a name="ProjectHostingClient-Get"><strong>Get</strong></a> = get(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="AnalyticsClient-Get"><strong>Get</strong></a> = get(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ProjectHostingClient-Put"><strong>Put</strong></a> = put(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="AnalyticsClient-Put"><strong>Put</strong></a> = put(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ProjectHostingClient-__init__"><strong>__init__</strong></a>(self, http_client<font color="#909090">=None</font>, host<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, source<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;AtomPubClient&nbsp;instance.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;source:&nbsp;The&nbsp;name&nbsp;of&nbsp;your&nbsp;application.<br>
-&nbsp;&nbsp;http_client:&nbsp;An&nbsp;object&nbsp;capable&nbsp;of&nbsp;performing&nbsp;HTTP&nbsp;requests&nbsp;through&nbsp;a<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request&nbsp;method.&nbsp;This&nbsp;object&nbsp;is&nbsp;used&nbsp;to&nbsp;perform&nbsp;the&nbsp;request<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;when&nbsp;the&nbsp;AtomPubClient's&nbsp;request&nbsp;method&nbsp;is&nbsp;called.&nbsp;Used&nbsp;to<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow&nbsp;HTTP&nbsp;requests&nbsp;to&nbsp;be&nbsp;directed&nbsp;to&nbsp;a&nbsp;mock&nbsp;server,&nbsp;or&nbsp;use<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;an&nbsp;alternate&nbsp;library&nbsp;instead&nbsp;of&nbsp;the&nbsp;default&nbsp;of&nbsp;httplib&nbsp;to<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make&nbsp;HTTP&nbsp;requests.<br>
-&nbsp;&nbsp;host:&nbsp;str&nbsp;The&nbsp;default&nbsp;host&nbsp;name&nbsp;to&nbsp;use&nbsp;if&nbsp;a&nbsp;host&nbsp;is&nbsp;not&nbsp;specified&nbsp;in&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested&nbsp;URI.<br>
-&nbsp;&nbsp;auth_token:&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;HTTP&nbsp;Authorization&nbsp;header&nbsp;when&nbsp;its<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modify_request&nbsp;method&nbsp;is&nbsp;called.</tt></dd></dl>
+<dl><dt><a name="AnalyticsClient-get"><strong>get</strong></a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ProjectHostingClient-get"><strong>get</strong></a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
-
-<dl><dt><a name="ProjectHostingClient-put"><strong>put</strong></a>(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="AnalyticsClient-put"><strong>put</strong></a>(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <hr>
 Data descriptors inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
@@ -495,36 +537,91 @@ Data and other attributes inherited from <a href="atom.client.html#AtomPubClient
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="Query">class <strong>Query</strong></a>(<a href="gdata.client.html#Query">gdata.client.Query</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="DataFeedQuery">class <strong>DataFeedQuery</strong></a>(<a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a>)</font></td></tr>
     
-<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Data&nbsp;Feed&nbsp;query&nbsp;class&nbsp;to&nbsp;simplify&nbsp;constructing&nbsp;Data&nbsp;Feed&nbsp;Urls.<br>
+&nbsp;<br>
+To&nbsp;use&nbsp;this&nbsp;class,&nbsp;you&nbsp;can&nbsp;either&nbsp;pass&nbsp;a&nbsp;dict&nbsp;in&nbsp;the&nbsp;constructor&nbsp;that&nbsp;has<br>
+all&nbsp;the&nbsp;data&nbsp;feed&nbsp;query&nbsp;parameters&nbsp;as&nbsp;keys.<br>
+&nbsp;&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#DataFeedQuery">DataFeedQuery</a>({'start-date':&nbsp;'2008-10-01'})<br>
+&nbsp;<br>
+Alternatively&nbsp;you&nbsp;can&nbsp;add&nbsp;new&nbsp;parameters&nbsp;directly&nbsp;to&nbsp;the&nbsp;query&nbsp;object.<br>
+&nbsp;&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#DataFeedQuery">DataFeedQuery</a>()<br>
+&nbsp;&nbsp;&nbsp;queryUrl.query['start-date']&nbsp;=&nbsp;'2008-10-01'<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;query:&nbsp;dict&nbsp;(optional)&nbsp;Contains&nbsp;all&nbsp;the&nbsp;GA&nbsp;Data&nbsp;Feed&nbsp;query&nbsp;parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;as&nbsp;keys.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="gdata.projecthosting.client.html#Query">Query</a></dd>
-<dd><a href="gdata.client.html#Query">gdata.client.Query</a></dd>
+<dd><a href="gdata.analytics.client.html#DataFeedQuery">DataFeedQuery</a></dd>
+<dd><a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a></dd>
+<dd><a href="atom.http_core.html#Uri">atom.http_core.Uri</a></dd>
 <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="Query-ModifyRequest"><strong>ModifyRequest</strong></a> = <a href="#Query-modify_request">modify_request</a>(self, http_request)</dt></dl>
-
-<dl><dt><a name="Query-__init__"><strong>__init__</strong></a>(self, issue_id<font color="#909090">=None</font>, label<font color="#909090">=None</font>, canned_query<font color="#909090">=None</font>, owner<font color="#909090">=None</font>, status<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Constructs&nbsp;a&nbsp;Google&nbsp;Data&nbsp;<a href="#Query">Query</a>&nbsp;to&nbsp;filter&nbsp;feed&nbsp;contents&nbsp;serverside.<br>
-Args:<br>
-&nbsp;&nbsp;issue_id:&nbsp;int&nbsp;or&nbsp;str&nbsp;The&nbsp;issue&nbsp;to&nbsp;return&nbsp;based&nbsp;on&nbsp;the&nbsp;issue&nbsp;id.<br>
-&nbsp;&nbsp;label:&nbsp;str&nbsp;A&nbsp;label&nbsp;returned&nbsp;issues&nbsp;must&nbsp;have.<br>
-&nbsp;&nbsp;canned_query:&nbsp;str&nbsp;Return&nbsp;issues&nbsp;based&nbsp;on&nbsp;a&nbsp;canned&nbsp;query&nbsp;identifier<br>
-&nbsp;&nbsp;owner:&nbsp;str&nbsp;Return&nbsp;issues&nbsp;based&nbsp;on&nbsp;the&nbsp;owner&nbsp;of&nbsp;the&nbsp;issue.&nbsp;For&nbsp;Gmail&nbsp;users,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;will&nbsp;be&nbsp;the&nbsp;part&nbsp;of&nbsp;the&nbsp;email&nbsp;preceding&nbsp;the&nbsp;'@'&nbsp;sign.<br>
-&nbsp;&nbsp;status:&nbsp;str&nbsp;Return&nbsp;issues&nbsp;based&nbsp;on&nbsp;the&nbsp;status&nbsp;of&nbsp;the&nbsp;issue.</tt></dd></dl>
-
-<dl><dt><a name="Query-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt></dl>
+<dl><dt><a name="DataFeedQuery-__init__"><strong>__init__</strong></a>(self, query<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <hr>
-Data descriptors inherited from <a href="gdata.client.html#Query">gdata.client.Query</a>:<br>
+Data and other attributes defined here:<br>
+<dl><dt><strong>host</strong> = 'www.google.com'</dl>
+
+<dl><dt><strong>path</strong> = '/analytics/feeds/data'</dl>
+
+<dl><dt><strong>scheme</strong> = 'https'</dl>
+
+<hr>
+Data descriptors inherited from <a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a>:<br>
+<dl><dt><strong>text_query</strong></dt>
+<dd><tt>The&nbsp;q&nbsp;parameter&nbsp;for&nbsp;searching&nbsp;for&nbsp;an&nbsp;exact&nbsp;text&nbsp;match&nbsp;on&nbsp;content</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><a name="DataFeedQuery-ModifyRequest"><strong>ModifyRequest</strong></a> = modify_request(self, http_request<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;HTTP&nbsp;request&nbsp;components&nbsp;based&nbsp;on&nbsp;the&nbsp;URI.</tt></dd></dl>
+
+<dl><dt><a name="DataFeedQuery-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DataFeedQuery-modify_request"><strong>modify_request</strong></a>(self, http_request<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;HTTP&nbsp;request&nbsp;components&nbsp;based&nbsp;on&nbsp;the&nbsp;URI.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><a name="DataFeedQuery-ParseUri"><strong>ParseUri</strong></a> = parse_uri(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;Uri&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
+members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>
+
+<dl><dt><a name="DataFeedQuery-parse_uri"><strong>parse_uri</strong></a>(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;Uri&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
+members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
 <dl><dt><strong>__weakref__</strong></dt>
 <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
-</td></tr></table></td></tr></table>
+<hr>
+Data and other attributes inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><strong>port</strong> = None</dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__author__</strong> = 'api.nickm@google.com (Nick Mihailovski)'</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">api.nickm@google.com&nbsp;(Nick&nbsp;Mihailovski)</td></tr></table>
 </body></html>
