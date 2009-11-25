@@ -36,6 +36,7 @@ import gdata.media.data
 import gdata.youtube.data
 import gdata.webmastertools.data
 import gdata.contacts.data
+import gdata.opensearch.data
 
 
 class DataSmokeTest(unittest.TestCase):
@@ -324,6 +325,9 @@ class DataSmokeTest(unittest.TestCase):
         gdata.contacts.data.GroupsFeed,
         gdata.contacts.data.ProfileEntry,
         gdata.contacts.data.ProfilesFeed,
+        gdata.opensearch.data.ItemsPerPage,
+        gdata.opensearch.data.StartIndex,
+        gdata.opensearch.data.TotalResults,
     ))
 
 
