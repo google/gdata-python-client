@@ -31,6 +31,7 @@ import atom_tests.mock_http_core_test
 import atom_tests.client_test
 import gdata_tests.client_test
 import gdata_tests.data_test
+import gdata_tests.data_smoke_test
 import gdata_tests.live_client_test
 import gdata_tests.gauth_test
 import gdata_tests.blogger.data_test
@@ -55,6 +56,7 @@ def suite():
       atom_tests.client_test.suite(),
       gdata_tests.client_test.suite(),
       gdata_tests.data_test.suite(),
+      gdata_tests.data_smoke_test.suite(),
       gdata_tests.live_client_test.suite(),
       gdata_tests.gauth_test.suite(),
       gdata_tests.blogger.data_test.suite(),

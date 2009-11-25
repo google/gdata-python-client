@@ -249,7 +249,11 @@ class XmlElement(object):
     ignored1, ignored2, attributes = self.__class__._get_rules(version)
     if attributes:
       for qname, attribute_def in attributes.iteritems():
-        member = getattr(self, attribute_def[0])
+        if isinstance(attribute_def, (list, tuple)):
+          attribute_def = attribute_def[0]
+        member = getattr(self, attribute_def)
+        # TODO: ensure this hasn't broken existing behavior.
+        #member = getattr(self, attribute_def[0])
         if member:
           if _qname_matches(tag, namespace, qname):
             matches.append(XmlAttribute(qname, member))

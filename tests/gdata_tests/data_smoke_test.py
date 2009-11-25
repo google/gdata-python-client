@@ -35,6 +35,7 @@ import gdata.notebook.data
 import gdata.media.data
 import gdata.youtube.data
 import gdata.webmastertools.data
+import gdata.contacts.data
 
 
 class DataSmokeTest(unittest.TestCase):
@@ -282,6 +283,49 @@ class DataSmokeTest(unittest.TestCase):
         gdata.webmastertools.data.Verified,
         gdata.webmastertools.data.SiteEntry,
         gdata.webmastertools.data.SitesFeed,
+        gdata.contacts.data.Where,
+        gdata.contacts.data.When,
+        gdata.contacts.data.BillingInformation,
+        gdata.contacts.data.Birthday,
+        gdata.contacts.data.CalendarLink,
+        gdata.contacts.data.DirectoryServer,
+        gdata.contacts.data.Event,
+        gdata.contacts.data.ExternalId,
+        gdata.contacts.data.Gender,
+        gdata.contacts.data.Hobby,
+        gdata.contacts.data.Initials,
+        gdata.contacts.data.Jot,
+        gdata.contacts.data.Language,
+        gdata.contacts.data.MaidenName,
+        gdata.contacts.data.Mileage,
+        gdata.contacts.data.NickName,
+        gdata.contacts.data.Occupation,
+        gdata.contacts.data.Priority,
+        gdata.contacts.data.Relation,
+        gdata.contacts.data.Sensitivity,
+        gdata.contacts.data.UserDefinedField,
+        gdata.contacts.data.Website,
+        gdata.contacts.data.HouseName,
+        gdata.contacts.data.Street,
+        gdata.contacts.data.POBox,
+        gdata.contacts.data.Neighborhood,
+        gdata.contacts.data.City,
+        gdata.contacts.data.SubRegion,
+        gdata.contacts.data.Region,
+        gdata.contacts.data.PostalCode,
+        gdata.contacts.data.Country,
+        gdata.contacts.data.FormattedAddress,
+        gdata.contacts.data.StructuredPostalAddress,
+        gdata.contacts.data.PersonEntry,
+        gdata.contacts.data.Deleted,
+        gdata.contacts.data.GroupMembershipInfo,
+        gdata.contacts.data.ContactEntry,
+        gdata.contacts.data.ContactsFeed,
+        gdata.contacts.data.SystemGroup,
+        gdata.contacts.data.GroupEntry,
+        gdata.contacts.data.GroupsFeed,
+        gdata.contacts.data.ProfileEntry,
+        gdata.contacts.data.ProfilesFeed,
     ))
 
 

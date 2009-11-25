@@ -458,6 +458,25 @@ class EntryTest(unittest.TestCase):
     self.assert_(entry.content.type == 'xhtml')
     #TODO check all other values for the test entry
 
+  def testEntryWithFindElementAndFindAttribute(self):
+    entry = atom.data.Entry()
+    entry.link.append(atom.data.Link(rel='self', href='x'))
+    entry.link.append(atom.data.Link(rel='foo', href='y'))
+    entry.link.append(atom.data.Link(rel='edit',href='z'))
+
+    self_link = None
+    edit_link = None
+
+    for link in entry.get_elements('link', 'http://www.w3.org/2005/Atom'):
+      ignored1, ignored2, attributes = link.__class__._get_rules(2)
+      if link.get_attributes('rel')[0].value == 'self':
+        self_link = link.get_attributes('href')[0].value
+      elif link.get_attributes('rel')[0].value == 'edit':
+        edit_link = link.get_attributes('href')[0].value
+
+    self.assertEqual(self_link, 'x')
+    self.assertEqual(edit_link, 'z')
+
   def testAppControl(self):
     TEST_BASE_ENTRY = """<?xml version='1.0'?>
         <entry xmlns='http://www.w3.org/2005/Atom'

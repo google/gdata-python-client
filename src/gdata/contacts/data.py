@@ -25,52 +25,8 @@ import gdata
 import gdata.data
 
 
-## Constants from http://code.google.com/apis/gdata/elements.html ##
-REL_HOME = 'http://schemas.google.com/g/2005#home'                  
-REL_WORK = 'http://schemas.google.com/g/2005#work'                  
-REL_OTHER = 'http://schemas.google.com/g/2005#other'                
-
-# AOL Instant Messenger protocol
-IM_AIM = 'http://schemas.google.com/g/2005#AIM'
-IM_MSN = 'http://schemas.google.com/g/2005#MSN'  # MSN Messenger protocol
-IM_YAHOO = 'http://schemas.google.com/g/2005#YAHOO'  # Yahoo Messenger protocol
-IM_SKYPE = 'http://schemas.google.com/g/2005#SKYPE'  # Skype protocol          
-IM_QQ = 'http://schemas.google.com/g/2005#QQ'  # QQ protocol                   
-# Google Talk protocol                                                         
-IM_GOOGLE_TALK = 'http://schemas.google.com/g/2005#GOOGLE_TALK'                
-IM_ICQ = 'http://schemas.google.com/g/2005#ICQ'  # ICQ protocol                
-IM_JABBER = 'http://schemas.google.com/g/2005#JABBER'  # Jabber protocol       
-IM_NETMEETING = 'http://schemas.google.com/g/2005#netmeeting'  # NetMeeting    
-
 PHOTO_LINK_REL = 'http://schemas.google.com/contacts/2008/rel#photo'
 PHOTO_EDIT_LINK_REL = 'http://schemas.google.com/contacts/2008/rel#edit-photo'
-
-# Different phone types, for moro info see: 
-# http://code.google.com/apis/gdata/docs/2.0/elements.html#gdPhoneNumber
-PHONE_CAR = 'http://schemas.google.com/g/2005#car'
-PHONE_FAX = 'http://schemas.google.com/g/2005#fax'
-PHONE_GENERAL = 'http://schemas.google.com/g/2005#general'
-PHONE_HOME = REL_HOME
-PHONE_HOME_FAX = 'http://schemas.google.com/g/2005#home_fax'
-PHONE_INTERNAL = 'http://schemas.google.com/g/2005#internal-extension'
-PHONE_MOBILE = 'http://schemas.google.com/g/2005#mobile'
-PHONE_OTHER = REL_OTHER
-PHONE_PAGER = 'http://schemas.google.com/g/2005#pager'
-PHONE_SATELLITE = 'http://schemas.google.com/g/2005#satellite'
-PHONE_VOIP = 'http://schemas.google.com/g/2005#voip'
-PHONE_WORK = REL_WORK
-PHONE_WORK_FAX = 'http://schemas.google.com/g/2005#work_fax'
-PHONE_WORK_MOBILE = 'http://schemas.google.com/g/2005#work_mobile'
-PHONE_WORK_PAGER = 'http://schemas.google.com/g/2005#work_pager'
-PHONE_MAIN = 'http://schemas.google.com/g/2005#main'
-PHONE_ASSISTANT = 'http://schemas.google.com/g/2005#assistant'
-PHONE_CALLBACK = 'http://schemas.google.com/g/2005#callback'
-PHONE_COMPANY_MAIN = 'http://schemas.google.com/g/2005#company_main'
-PHONE_ISDN = 'http://schemas.google.com/g/2005#isdn'
-PHONE_OTHER_FAX = 'http://schemas.google.com/g/2005#other_fax'
-PHONE_RADIO = 'http://schemas.google.com/g/2005#radio'
-PHONE_TELEX = 'http://schemas.google.com/g/2005#telex'
-PHONE_TTY_TDD = 'http://schemas.google.com/g/2005#tty_tdd'
 
 EXTERNAL_ID_ORGANIZATION = 'organization'
 
@@ -78,26 +34,6 @@ RELATION_MANAGER = 'manager'
 
 CONTACTS_NAMESPACE = 'http://schemas.google.com/contact/2008'
 CONTACTS_TEMPLATE = '{%s}%%s' % CONTACTS_NAMESPACE
-
-
-class Where(atom.core.XmlElement):
-  """ The Google Contacts Where element """
-  
-  _qname = gdata.GDATA_TEMPLATE % 'when'
-  
-  rel = 'rel'
-  label = 'label'
-  value_string = 'value_string'
-
-
-class When(atom.core.XmlElement):
-  """ The Google Contacts When element """
-  
-  _qname = gdata.GDATA_TEMPLATE % 'where'
-  
-  startTime = 'start_time'
-  endTime = 'end_time'
-  label = 'label'
 
 
 class BillingInformation(atom.core.XmlElement):
@@ -148,7 +84,7 @@ class Event(atom.core.XmlElement):
   _qname = CONTACTS_TEMPLATE % 'event'
   label = 'label'
   rel = 'rel'
-  when = When
+  when = gdata.data.When
 
 
 class ExternalId(atom.core.XmlElement):
@@ -324,131 +260,6 @@ def WebsiteFromString(xml_string):
   return atom.core.parse(Website, xml_string)
 
 
-class OrgName(atom.core.XmlElement):
-  _qname = gdata.GDATA_TEMPLATE % 'orgName'
-
-
-class OrgJobDescription(atom.core.XmlElement):
-  _qname = gdata.GDATA_TEMPLATE % 'orgJobDecscription'
-
-                        
-class OrgDepartment(atom.core.XmlElement):
-  
-  _qname = gdata.GDATA_TEMPLATE % 'orgDepartment'
-
-
-class OrgTitle(atom.core.XmlElement):
-  """The Google Contacts OrgTitle element."""
-
-  _qname = gdata.GDATA_TEMPLATE % 'orgTitle'
-  
-               
-class Organization(atom.core.XmlElement):
-  """The Google Contacts Organization element."""
- 
-  _qname = gdata.GDATA_TEMPLATE % 'organization'
-  rel = 'rel'
-  label = 'label'
-  primary = 'primary'
-  org_name = OrgName
-  org_title = OrgTitle
-  org_job_description = OrgJobDescription
-  org_department = OrgDepartment
-
-
-class PostalAddress(atom.core.XmlElement):
-  _qname = gdata.GDATA_TEMPLATE % 'postalAddress'
-  rel = 'rel'
-  primary = 'primary'
-
-
-class IM(atom.core.XmlElement):
-  """The Google Contacts IM element."""
-
-  _qname = gdata.GDATA_TEMPLATE % 'im'
-  address = 'address'
-  primary = 'primary'
-  protocol = 'protocol'
-  label = 'label'
-  rel  = 'rel'
-
-                
-class Email(atom.core.XmlElement):
-  """The Google Contacts Email element."""
-
-  _qname = gdata.GDATA_TEMPLATE % 'email'
-  address = 'address'
-  primary = 'primary'
-  rel = 'rel'
-  label = 'label' 
-
-
-class PhoneNumber(atom.core.XmlElement):
-  """The Google Contacts Phone Number element."""
-
-  _qname = gdata.GDATA_TEMPLATE % 'phoneNumber'
-  label = 'label'
-  primary = 'primary'
-  rel = 'rel'
-  label = 'label'
-  uri = 'uri'
-
-
-class GivenName(atom.core.XmlElement):
-  """ Person's given name. """
-     
-  _qname = gdata.GDATA_TEMPLATE % 'givenName'
-  yomi = 'yomi'
-
-
-class AdditionalName(atom.core.XmlElement):
-  """ Additional name of the person, eg. middle name. """
-    
-  _qname = gdata.GDATA_TEMPLATE % 'additionalName'
-  yomi = 'yomi'
-
-
-class FamilyName(atom.core.XmlElement):
-  """ Person's family name. """
-    
-  _qname = gdata.GDATA_TEMPLATE % 'familyName'
-  yomi = 'yomi'
-
-    
-class FullName(atom.core.XmlElement):
-  """The Google Contacts Full Name element."""
-    
-  _qname = gdata.GDATA_TEMPLATE % 'fullName'
-  yomi = 'yomi'
-
-
-class NamePrefix(atom.core.XmlElement):
-  """ Honorific prefix, eg. 'Mr' or 'Mrs'. """
-    
-  _qname = gdata.GDATA_TEMPLATE % 'namePrefix'
-
-
-class NameSuffix(atom.core.XmlElement):
-  """ Honorific suffix, eg. 'san' or 'III'. """
-    
-  _qname = gdata.GDATA_TEMPLATE % 'nameSuffix'
-
-
-class Name(atom.core.XmlElement):
-  """ 
-  Allows storing person's name in a structured way. Consists of given
-  name, additional name, family name, prefix, suffix and full name. 
-  """
-    
-  _qname = gdata.GDATA_TEMPLATE % 'name' 
-  given_name = GivenName
-  additonal_name = AdditionalName
-  family_name = FamilyName
-  full_name = FullName
-  name_prefix = NamePrefix
-  name_suffix = NameSuffix
-
-
 class HouseName(atom.core.XmlElement):
   """
   Used in places where houses or buildings have names (and 
@@ -494,6 +305,7 @@ class City(atom.core.XmlElement):
   """
   
   _qname = CONTACTS_TEMPLATE % 'city'
+
 
 class SubRegion(atom.core.XmlElement):
   """
@@ -559,15 +371,6 @@ class StructuredPostalAddress(atom.core.XmlElement):
   country = Country
   formattedAddress = FormattedAddress
 
-class ExtendedProperty(atom.core.XmlElement):
-  """ It is possible to set any additional contact- or contact group- related
-   information as an exteded property (arbitrary name - value pair) for a
-   contact or contact group entry. 
-   """
-    
-  _qname = gdata.GDATA_TEMPLATE % 'extendedProperty'
-  name = 'name'
-  value = 'value'
 
 class PersonEntry(gdata.data.GDEntry):
   """Represents a google contact"""
@@ -593,17 +396,18 @@ class PersonEntry(gdata.data.GDEntry):
   user_defined_field = [UserDefinedField]
   website = [Website]
   
-  name = Name
-  phone_number = [PhoneNumber]
-  organization = Organization
-  postal_address = [PostalAddress]
-  email = [Email]
-  im = [IM]
+  name = gdata.data.Name
+  phone_number = [gdata.data.PhoneNumber]
+  organization = gdata.data.Organization
+  postal_address = [gdata.data.PostalAddress]
+  email = [gdata.data.Email]
+  im = [gdata.data.Im]
   structured_postal_address = [StructuredPostalAddress]
-  extended_property = [ExtendedProperty]
+  extended_property = [gdata.data.ExtendedProperty]
   
 
 class Deleted(atom.core.XmlElement):
+  """If present, indicates that this contact has been deleted."""
   _qname = gdata.GDATA_TEMPLATE % 'deleted'
 
 
@@ -624,7 +428,7 @@ class ContactEntry(PersonEntry):
 
   deleted = Deleted
   group_membership_info = [GroupMembershipInfo]
-  organization = Organization
+  organization = gdata.data.Organization
 
   def GetPhotoLink(self):
     for a_link in self.link:
@@ -638,16 +442,25 @@ class ContactEntry(PersonEntry):
         return a_link
     return None
 
+
 class ContactsFeed(gdata.data.GDFeed):
+  """A collection of Contacts."""
   entry = [ContactEntry]
 
+
 class SystemGroup(atom.core.XmlElement):
-    _qname = CONTACTS_TEMPLATE % 'systemGroup'
-    id = 'id'
+  """The contacts systemGroup element.
+  
+  When used within a contact group entry, indicates that the group in
+  question is one of the predefined system groups."""
+
+  _qname = CONTACTS_TEMPLATE % 'systemGroup'
+  id = 'id'
+
 
 class GroupEntry(gdata.data.GDEntry):
   """Represents a contact group."""
-  extended_property = [ExtendedProperty]
+  extended_property = [gdata.data.ExtendedProperty]
   system_group = SystemGroup
 
 
@@ -676,6 +489,7 @@ class ProfilesFeed(gdata.data.GDFeed):
   """A Google Profiles feed flavor of an Atom Feed."""
   _qname = atom.data.ATOM_TEMPLATE % 'feed'
   entry = [ProfileEntry]
+
 
 def ProfilesFeedFromString(xml_string):
   """Converts an XML string into a ProfilesFeed object.
