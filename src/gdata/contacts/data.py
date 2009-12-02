@@ -334,42 +334,11 @@ class PostalCode(atom.core.XmlElement):
   
   _qname = CONTACTS_TEMPLATE % 'postcode'
 
+
 class Country(atom.core.XmlElement):
   """ The name or code of the country. """
 
   _qname = CONTACTS_TEMPLATE % 'country'  
-
-class FormattedAddress(atom.core.XmlElement):
-  """ The full, unstructured postal address. """
-  
-  _qname = CONTACTS_TEMPLATE % 'formattedAddress'
-
-  
-class StructuredPostalAddress(atom.core.XmlElement):
-  """
-  Postal address split into components. It allows to store the address in
-  locale independent format. The fields can be interpreted and used to 
-  generate formatted, locale dependent address. 
-  """
-  
-  _qname = gdata.GDATA_TEMPLATE  % 'structuredPostalAddress'
-  
-  rel = 'rel'
-  mail_class = 'mailClass'
-  usage = 'usage'
-  label = 'label'
-  primary = 'primary'
-
-  housename = HouseName
-  street = Street
-  pobox = POBox
-  neighborhood = Neighborhood
-  city = City
-  subregion = SubRegion
-  region = Region
-  postal_code = PostalCode
-  country = Country
-  formattedAddress = FormattedAddress
 
 
 class PersonEntry(gdata.data.GDEntry):
@@ -402,7 +371,7 @@ class PersonEntry(gdata.data.GDEntry):
   postal_address = [gdata.data.PostalAddress]
   email = [gdata.data.Email]
   im = [gdata.data.Im]
-  structured_postal_address = [StructuredPostalAddress]
+  structured_postal_address = [gdata.data.StructuredPostalAddress]
   extended_property = [gdata.data.ExtendedProperty]
   
 

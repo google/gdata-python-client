@@ -313,8 +313,6 @@ class DataSmokeTest(unittest.TestCase):
         gdata.contacts.data.Region,
         gdata.contacts.data.PostalCode,
         gdata.contacts.data.Country,
-        gdata.contacts.data.FormattedAddress,
-        gdata.contacts.data.StructuredPostalAddress,
         gdata.contacts.data.PersonEntry,
         gdata.contacts.data.Deleted,
         gdata.contacts.data.GroupMembershipInfo,
