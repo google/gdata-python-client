@@ -14,7 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 """Contains the data classes of the Google Access Control List (ACL) Extension"""
 
 
@@ -31,26 +30,26 @@ GACL_TEMPLATE = '{http://schemas.google.com/acl/2007/}%s'
 
 
 class AclRole(atom.core.XmlElement):
-  """Describes the role of an entry in an access control list"""
+  """Describes the role of an entry in an access control list."""
   _qname = GACL_TEMPLATE % 'role'
   value = 'value'
 
 
 class AclScope(atom.core.XmlElement):
-  """Describes the scope of an entry in an access control list"""
+  """Describes the scope of an entry in an access control list."""
   _qname = GACL_TEMPLATE % 'scope'
   type = 'type'
   value = 'value'
 
 
 class AclEntry(gdata.data.GDEntry):
-  """Describes an entry in a feed of an access control list (ACL)"""
+  """Describes an entry in a feed of an access control list (ACL)."""
   scope = AclScope
   role = AclRole
 
 
 class AclFeed(gdata.data.GDFeed):
-  """Describes a feed of an access control list (ACL)"""
+  """Describes a feed of an access control list (ACL)."""
   entry = [AclEntry]
 
 

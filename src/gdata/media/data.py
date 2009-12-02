@@ -14,7 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 """Contains the data classes of the Yahoo! Media RSS Extension"""
 
 
@@ -28,44 +27,44 @@ MEDIA_TEMPLATE = '{http://search.yahoo.com/mrss//}%s'
 
 
 class MediaCategory(atom.core.XmlElement):
-  """Describes a media category"""
+  """Describes a media category."""
   _qname = MEDIA_TEMPLATE % 'category'
   scheme = 'scheme'
   label = 'label'
 
 
 class MediaCopyright(atom.core.XmlElement):
-  """Describes a media copyright"""
+  """Describes a media copyright."""
   _qname = MEDIA_TEMPLATE % 'copyright'
   url = 'url'
 
 
 class MediaCredit(atom.core.XmlElement):
-  """Describes a media credit"""
+  """Describes a media credit."""
   _qname = MEDIA_TEMPLATE % 'credit'
   role = 'role'
   scheme = 'scheme'
 
 
 class MediaDescription(atom.core.XmlElement):
-  """Describes a media description"""
+  """Describes a media description."""
   _qname = MEDIA_TEMPLATE % 'description'
   type = 'type'
 
 
 class MediaHash(atom.core.XmlElement):
-  """Describes a media hash"""
+  """Describes a media hash."""
   _qname = MEDIA_TEMPLATE % 'hash'
   algo = 'algo'
 
 
 class MediaKeywords(atom.core.XmlElement):
-  """Describes a media keywords"""
+  """Describes a media keywords."""
   _qname = MEDIA_TEMPLATE % 'keywords'
 
 
 class MediaPlayer(atom.core.XmlElement):
-  """Describes a media player"""
+  """Describes a media player."""
   _qname = MEDIA_TEMPLATE % 'player'
   height = 'height'
   width = 'width'
@@ -73,20 +72,20 @@ class MediaPlayer(atom.core.XmlElement):
 
 
 class MediaRating(atom.core.XmlElement):
-  """Describes a media rating"""
+  """Describes a media rating."""
   _qname = MEDIA_TEMPLATE % 'rating'
   scheme = 'scheme'
 
 
 class MediaRestriction(atom.core.XmlElement):
-  """Describes a media restriction"""
+  """Describes a media restriction."""
   _qname = MEDIA_TEMPLATE % 'restriction'
   relationship = 'relationship'
   type = 'type'
 
 
 class MediaText(atom.core.XmlElement):
-  """Describes a media text"""
+  """Describes a media text."""
   _qname = MEDIA_TEMPLATE % 'text'
   end = 'end'
   lang = 'lang'
@@ -95,7 +94,7 @@ class MediaText(atom.core.XmlElement):
 
 
 class MediaThumbnail(atom.core.XmlElement):
-  """Describes a media thumbnail"""
+  """Describes a media thumbnail."""
   _qname = MEDIA_TEMPLATE % 'thumbnail'
   time = 'time'
   url = 'url'
@@ -104,13 +103,13 @@ class MediaThumbnail(atom.core.XmlElement):
 
 
 class MediaTitle(atom.core.XmlElement):
-  """Describes a media title"""
+  """Describes a media title."""
   _qname = MEDIA_TEMPLATE % 'title'
   type = 'type'
 
 
 class MediaContent(atom.core.XmlElement):
-  """Describes a media content"""
+  """Describes a media content."""
   _qname = MEDIA_TEMPLATE % 'content'
   bitrate = 'bitrate'
   is_default = 'isDefault'
@@ -141,7 +140,7 @@ class MediaContent(atom.core.XmlElement):
 
 
 class MediaGroup(atom.core.XmlElement):
-  """Describes a media group"""
+  """Describes a media group."""
   _qname = MEDIA_TEMPLATE % 'group'
   credit = [MediaCredit]
   content = [MediaContent]

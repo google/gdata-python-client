@@ -14,7 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 """Contains the data classes of the Dublin Core Metadata Initiative (DCMI) Extension"""
 
 
@@ -28,52 +27,52 @@ DC_TEMPLATE = '{http://purl.org/dc/terms/}%s'
 
 
 class Creator(atom.core.XmlElement):
-  """Entity primarily responsible for making the resource"""
+  """Entity primarily responsible for making the resource."""
   _qname = DC_TEMPLATE % 'creator'
 
 
 class Date(atom.core.XmlElement):
-  """Point or period of time associated with an event in the lifecycle of the resource"""
+  """Point or period of time associated with an event in the lifecycle of the resource."""
   _qname = DC_TEMPLATE % 'date'
 
 
 class Description(atom.core.XmlElement):
-  """Account of the resource"""
+  """Account of the resource."""
   _qname = DC_TEMPLATE % 'description'
 
 
 class Format(atom.core.XmlElement):
-  """File format, physical medium, or dimensions of the resource"""
+  """File format, physical medium, or dimensions of the resource."""
   _qname = DC_TEMPLATE % 'format'
 
 
 class Identifier(atom.core.XmlElement):
-  """An unambiguous reference to the resource within a given context"""
+  """An unambiguous reference to the resource within a given context."""
   _qname = DC_TEMPLATE % 'identifier'
 
 
 class Language(atom.core.XmlElement):
-  """Language of the resource"""
+  """Language of the resource."""
   _qname = DC_TEMPLATE % 'language'
 
 
 class Publisher(atom.core.XmlElement):
-  """Entity responsible for making the resource available"""
+  """Entity responsible for making the resource available."""
   _qname = DC_TEMPLATE % 'publisher'
 
 
 class Rights(atom.core.XmlElement):
-  """Information about rights held in and over the resource"""
+  """Information about rights held in and over the resource."""
   _qname = DC_TEMPLATE % 'rights'
 
 
 class Subject(atom.core.XmlElement):
-  """Topic of the resource"""
+  """Topic of the resource."""
   _qname = DC_TEMPLATE % 'subject'
 
 
 class Title(atom.core.XmlElement):
-  """Name given to the resource"""
+  """Name given to the resource."""
   _qname = DC_TEMPLATE % 'title'
 
 
