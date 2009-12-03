@@ -1143,7 +1143,7 @@ class MediaSource(object):
 
     Args:
       file_handle: A file handle pointing to the file to be encapsulated in the
-                   MediaSource
+                   MediaSource.
       content_type: string The MIME type of the file. Required if a file_handle
                     is given.
       content_length: int The size of the file. Required if a file_handle is

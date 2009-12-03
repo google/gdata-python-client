@@ -314,7 +314,8 @@ class GDClient(atom.client.AtomPubClient):
 
   Request = request
 
-  def request_client_login_token(self, email, password, source, service=None,
+  def request_client_login_token(
+      self, email, password, source, service=None,
       account_type='HOSTED_OR_GOOGLE',
       auth_url=atom.http_core.Uri.parse_uri(
           'https://www.google.com/accounts/ClientLogin'),
@@ -369,8 +370,65 @@ class GDClient(atom.client.AtomPubClient):
 
   def client_login(self, email, password, source, service=None,
                    account_type='HOSTED_OR_GOOGLE',
-                   auth_url='https://www.google.com/accounts/ClientLogin',
+                   auth_url=atom.http_core.Uri.parse_uri(
+                       'https://www.google.com/accounts/ClientLogin'),
                    captcha_token=None, captcha_response=None):
+    """Performs an auth request using the user's email address and password.
+    
+    In order to modify user specific data and read user private data, your
+    application must be authorized by the user. One way to demonstrage
+    authorization is by including a Client Login token in the Authorization
+    HTTP header of all requests. This method requests the Client Login token
+    by sending the user's email address, password, the name of the
+    application, and the service code for the service which will be accessed
+    by the application. If the username and password are correct, the server
+    will respond with the client login code and a new ClientLoginToken
+    object will be set in the client's auth_token member. With the auth_token
+    set, future requests from this client will include the Client Login
+    token.
+    
+    For a list of service names, see 
+    http://code.google.com/apis/gdata/faq.html#clientlogin
+    For more information on Client Login, see:
+    http://code.google.com/apis/accounts/docs/AuthForInstalledApps.html
+
+    Args:
+      email: str The user's email address or username.
+      password: str The password for the user's account.
+      source: str The name of your application. This can be anything you
+              like but should should give some indication of which app is
+              making the request.
+      service: str The service code for the service you would like to access.
+               For example, 'cp' for contacts, 'cl' for calendar. For a full
+               list see
+               http://code.google.com/apis/gdata/faq.html#clientlogin
+               If you are using a subclass of the gdata.client.GDClient, the
+               service will usually be filled in for you so you do not need
+               to specify it. For example see BloggerClient,
+               SpreadsheetsClient, etc.
+      account_type: str (optional) The type of account which is being
+                    authenticated. This can be either 'GOOGLE' for a Google
+                    Account, 'HOSTED' for a Google Apps Account, or the
+                    default 'HOSTED_OR_GOOGLE' which will select the Google
+                    Apps Account if the same email address is used for both
+                    a Google Account and a Google Apps Account.
+      auth_url: str (optional) The URL to which the login request should be
+                sent.
+      captcha_token: str (optional) If a previous login attempt was reponded
+                     to with a CAPTCHA challenge, this is the token which
+                     identifies the challenge (from the CAPTCHA's URL).
+      captcha_response: str (optional) If a previous login attempt was
+                        reponded to with a CAPTCHA challenge, this is the
+                        response text which was contained in the challenge.
+
+      Returns:
+        None
+
+      Raises:
+        A RequestError or one of its suclasses: BadAuthentication,
+        BadAuthenticationServiceURL, ClientLoginFailed,
+        ClientLoginTokenMissing, or CaptchaChallenge
+    """
     service = service or self.auth_service
     self.auth_token = self.request_client_login_token(email, password,
         source, service=service, account_type=account_type, auth_url=auth_url,
