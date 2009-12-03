@@ -22,7 +22,7 @@ __author__ = 'e.bidelman (Eric Bidelman)'
 import mimetypes
 import urllib
 import atom.data
-import atom.url
+import atom.http_core
 import gdata.client
 import gdata.docs.data
 
@@ -130,13 +130,14 @@ class DocsClient(gdata.client.GDClient):
     if uri is None:
       uri = DOCLIST_FEED_URI
 
-    url = atom.url.parse_url(uri)
-
+    if isinstance(uri, (str, unicode)):
+      uri = atom.http_core.Uri.parse_uri(uri)    
+    
     # Add max-results param if it wasn't included in the uri.
-    if limit is not None and not 'max-results' in url.params:
-      url.params['max-results'] = limit
+    if limit is not None and not 'max-results' in uri.query:
+      uri.query['max-results'] = limit
 
-    return self.get_feed(str(url), desired_class=gdata.docs.data.DocList,
+    return self.get_feed(uri, desired_class=gdata.docs.data.DocList,
                          auth_token=auth_token, **kwargs)
 
   GetDocList = get_doclist
@@ -475,3 +476,103 @@ class DocsClient(gdata.client.GDClient):
                   auth_token=auth_token, **kwargs)
 
   Export = export
+
+
+class DocsQuery(gdata.client.Query):
+
+  def __init__(self, title=None, title_exact=None, opened_min=None,
+               opened_max=None, edited_min=None, edited_max=None, owner=None,
+               writer=None, reader=None, show_folders=None,
+               show_deleted=None, ocr=None, target_language=None,
+               source_language=None, **kwargs):
+    """Constructs a query URL for the Google Documents List  API.
+    
+    Args:
+      title: str (optional) Specifies the search terms for the title of a
+             document. This parameter used without title_exact will only
+             submit partial queries, not exact queries.
+      title_exact: str (optional) Meaningless without title. Possible values
+                   are 'true' and 'false'. Note: Matches are case-insensitive.
+      opened_min: str (optional) Lower bound on the last time a document was
+                  opened by the current user. Use the RFC 3339 timestamp
+                  format. For example: opened_min='2005-08-09T09:57:00-08:00'.
+      opened_max: str (optional) Upper bound on the last time a document was
+                  opened by the current user. (See also opened_min.)
+      edited_min: str (optional) Lower bound on the last time a document was
+                  edited by the current user. This value corresponds to the
+                  edited.text value in the doc's entry object, which
+                  represents changes to the document's content or metadata.
+                  Use the RFC 3339 timestamp format. For example:
+                  edited_min='2005-08-09T09:57:00-08:00'
+      edited_max: str (optional) Upper bound on the last time a document was
+                  edited by the user. (See also edited_min.)
+      owner: str (optional) Searches for documents with a specific owner. Use
+             the email address of the owner. For example:
+             owner='user@gmail.com'
+      writer: str (optional) Searches for documents which can be written to
+              by specific users. Use a single email address or a comma
+              separated list of email addresses. For example:
+              writer='user1@gmail.com,user@example.com'
+      reader: str (optional) Searches for documents which can be read by
+              specific users. (See also writer.)
+      show_folders: str (optional) Specifies whether the query should return
+                    folders as well as documents. Possible values are 'true'
+                    and 'false'. Default is false.
+      show_deleted: str (optional) Specifies whether the query should return
+                    documents which are in the trash as well as other
+                    documents. Possible values are 'true' and 'false'.
+                    Default is false.
+      ocr: str (optional) Specifies whether to attempt OCR on a .jpg, .png, or
+           .gif upload. Possible values are 'true' and 'false'. Default is
+           false. See OCR in the Protocol Guide: 
+           http://code.google.com/apis/documents/docs/3.0/developers_guide_protocol.html#OCR
+      target_language: str (optional) Specifies the language to translate a
+                       document into. See Document Translation in the Protocol
+                       Guide for a table of possible values:
+                       http://code.google.com/apis/documents/docs/3.0/developers_guide_protocol.html#DocumentTranslation
+      source_language: str (optional) Specifies the source language of the
+                       original document. Optional when using the translation
+                       service. If not provided, Google will attempt to
+                       auto-detect the source language. See Document
+                       Translation in the Protocol Guide for a table of
+                       possible values (link in target_language).
+    """
+    gdata.client.Query.__init__(self, **kwargs)
+    self.title = title
+    self.title_exact = title_exact
+    self.opened_min = opened_min
+    self.opened_max = opened_max
+    self.edited_min = edited_min
+    self.edited_max = edited_max
+    self.owner = owner
+    self.writer = writer
+    self.reader = reader
+    self.show_folders = show_folders
+    self.show_deleted = show_deleted
+    self.ocr = ocr
+    self.target_language = target_language
+    self.source_language = source_language
+
+  def modify_request(self, http_request):
+    gdata.client._add_query_param('title', self.title, http_request)
+    gdata.client._add_query_param('title-exact', self.title_exact,
+                                  http_request)
+    gdata.client._add_query_param('opened-min', self.opened_min, http_request)
+    gdata.client._add_query_param('opened-max', self.opened_max, http_request)
+    gdata.client._add_query_param('edited-min', self.edited_min, http_request)
+    gdata.client._add_query_param('edited-max', self.edited_max, http_request)
+    gdata.client._add_query_param('owner', self.owner, http_request)
+    gdata.client._add_query_param('writer', self.writer, http_request)
+    gdata.client._add_query_param('reader', self.reader, http_request)
+    gdata.client._add_query_param('showfolders', self.show_folders,
+                                  http_request)
+    gdata.client._add_query_param('showdeleted', self.show_deleted,
+                                  http_request)
+    gdata.client._add_query_param('ocr', self.ocr, http_request)
+    gdata.client._add_query_param('targetLanguage', self.target_language,
+                                  http_request)
+    gdata.client._add_query_param('sourceLanguage', self.source_language,
+                                  http_request)
+    gdata.client.Query.modify_request(self, http_request)
+
+  ModifyRequest = modify_request
