@@ -22,6 +22,7 @@ __author__ = 'e.bidelman (Eric Bidelman)'
 import re
 import atom.core
 import atom.data
+import gdata.acl.data
 import gdata.data
 
 DOCUMENTS_NS = 'http://schemas.google.com/docs/2007'
@@ -213,11 +214,8 @@ class DocsEntry(gdata.data.GDEntry):
   InFolders = in_folders
 
 
-class Acl(gdata.data.GDEntry):
+class Acl(gdata.acl.data.AclEntry):
   """A document ACL entry."""
-
-  scope = gdata.data.Scope
-  role = gdata.data.Role
 
 
 class DocList(gdata.data.GDFeed):
@@ -225,7 +223,7 @@ class DocList(gdata.data.GDFeed):
   entry = [DocsEntry]
 
 
-class AclFeed(gdata.data.GDFeed):
+class AclFeed(gdata.acl.data.AclFeed):
   """A DocList ACL feed."""
   entry = [Acl]
 

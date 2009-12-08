@@ -20,6 +20,7 @@ __author__ = 'e.bidelman (Eric Bidelman)'
 import unittest
 import atom
 from gdata import test_data
+import gdata.acl.data
 import gdata.data
 import gdata.docs.data
 import gdata.test_config as conf
@@ -128,8 +129,8 @@ class AclTest(unittest.TestCase):
 
   def testToAndFromString(self):
     self.assert_(isinstance(self.acl_entry, gdata.docs.data.Acl))
-    self.assert_(isinstance(self.acl_entry.role, gdata.data.Role))
-    self.assert_(isinstance(self.acl_entry.scope, gdata.data.Scope))
+    self.assert_(isinstance(self.acl_entry.role, gdata.acl.data.AclRole))
+    self.assert_(isinstance(self.acl_entry.scope, gdata.acl.data.AclScope))
     self.assertEqual(self.acl_entry.scope.value, 'user@gmail.com')
     self.assertEqual(self.acl_entry.scope.type, 'user')
     self.assertEqual(self.acl_entry.role.value, 'writer')
@@ -137,8 +138,8 @@ class AclTest(unittest.TestCase):
     acl_entry_str = str(self.acl_entry)
     new_acl_entry = atom.core.parse(acl_entry_str, gdata.docs.data.Acl)
     self.assert_(isinstance(new_acl_entry, gdata.docs.data.Acl))
-    self.assert_(isinstance(new_acl_entry.role, gdata.data.Role))
-    self.assert_(isinstance(new_acl_entry.scope, gdata.data.Scope))
+    self.assert_(isinstance(new_acl_entry.role, gdata.acl.data.AclRole))
+    self.assert_(isinstance(new_acl_entry.scope, gdata.acl.data.AclScope))
     self.assertEqual(new_acl_entry.scope.value, self.acl_entry.scope.value)
     self.assertEqual(new_acl_entry.scope.type, self.acl_entry.scope.type)
     self.assertEqual(new_acl_entry.role.value, self.acl_entry.role.value)

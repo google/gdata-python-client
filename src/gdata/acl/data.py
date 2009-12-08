@@ -26,7 +26,7 @@ import gdata.data
 import gdata.opensearch.data
 
 
-GACL_TEMPLATE = '{http://schemas.google.com/acl/2007/}%s'
+GACL_TEMPLATE = '{http://schemas.google.com/acl/2007}%s'
 
 
 class AclRole(atom.core.XmlElement):

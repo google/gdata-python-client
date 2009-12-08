@@ -35,7 +35,6 @@ import atom.data
 
 GDATA_TEMPLATE = '{http://schemas.google.com/g/2005}%s'
 GD_TEMPLATE = GDATA_TEMPLATE
-GACL_TEMPLATE = '{http://schemas.google.com/acl/2007}%s'
 OPENSEARCH_TEMPLATE_V1 = '{http://a9.com/-/spec/opensearchrss/1.0/}%s'
 OPENSEARCH_TEMPLATE_V2 = '{http://a9.com/-/spec/opensearch/1.1/}%s'
 BATCH_TEMPLATE = '{http://schemas.google.com/gdata/batch}%s'
@@ -1105,19 +1104,6 @@ class Who(atom.core.XmlElement):
   attendee_status = AttendeeStatus
   attendee_type = AttendeeType
   entry_link = EntryLink
-
-
-class Scope(atom.core.XmlElement):
-  """"The gAcl:scope element."""
-  _qname = GACL_TEMPLATE % 'scope'
-  value = 'value'
-  type = 'type'
-
-
-class Role(atom.core.XmlElement):
-  """The gAcl:role element."""
-  _qname = GACL_TEMPLATE % 'role'
-  value = 'value'
 
 
 class Deleted(atom.core.XmlElement):
