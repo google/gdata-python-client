@@ -341,7 +341,7 @@ class Country(atom.core.XmlElement):
   _qname = CONTACTS_TEMPLATE % 'country'  
 
 
-class PersonEntry(gdata.data.GDEntry):
+class PersonEntry(gdata.data.BatchEntry):
   """Represents a google contact"""
 
   billing_information = BillingInformation
@@ -412,7 +412,7 @@ class ContactEntry(PersonEntry):
     return None
 
 
-class ContactsFeed(gdata.data.GDFeed):
+class ContactsFeed(gdata.data.BatchFeed):
   """A collection of Contacts."""
   entry = [ContactEntry]
 
@@ -427,13 +427,13 @@ class SystemGroup(atom.core.XmlElement):
   id = 'id'
 
 
-class GroupEntry(gdata.data.GDEntry):
+class GroupEntry(gdata.data.BatchEntry):
   """Represents a contact group."""
   extended_property = [gdata.data.ExtendedProperty]
   system_group = SystemGroup
 
 
-class GroupsFeed(gdata.data.GDFeed):
+class GroupsFeed(gdata.data.BatchFeed):
   """A Google contact groups feed flavor of an Atom Feed."""
   entry = [GroupEntry]
 
@@ -454,7 +454,7 @@ def ProfileEntryFromString(xml_string):
   return atom.core.parse(ProfileEntry, xml_string)
 
 
-class ProfilesFeed(gdata.data.GDFeed):
+class ProfilesFeed(gdata.data.BatchFeed):
   """A Google Profiles feed flavor of an Atom Feed."""
   _qname = atom.data.ATOM_TEMPLATE % 'feed'
   entry = [ProfileEntry]
