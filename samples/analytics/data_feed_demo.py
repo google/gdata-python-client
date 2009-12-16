@@ -37,6 +37,7 @@ def main():
   demo.PrintFeedDetails()
   demo.PrintDataSources()
   demo.PrintFeedAggregates()
+  demo.PrintSegmentInfo()
   demo.PrintOneEntry()
   demo.PrintFeedTable()
 
@@ -114,9 +115,9 @@ class DataFeedDemo(object):
   def PrintFeedAggregates(self):
     """Prints data found in the aggregates elements.
 
-    This contains the sum of all the metrics defined in the query across. This
-    sum spans all the rows matched in the feed.total_results property and not
-    just the rows returned by the response.
+    This contains the sum of all the metrics defined in the query across.
+    This sum spans all the rows matched in the feed.total_results property
+    and not just the rows returned by the response.
     """
 
     aggregates = self.feed.aggregates
@@ -128,6 +129,17 @@ class DataFeedDemo(object):
       print 'Metric Value = ' + met.value
       print 'Metric Type  = ' + met.type
       print 'Metric CI    = ' + met.confidence_interval
+
+  def PrintSegmentInfo(self):
+    """Prints segment information if the query has advanced segments
+    defined."""
+
+    if self.feed.segment:
+      print '-------- Advanced Segments Information --------'
+      for segment in self.feed.segment:
+        print 'Segment Name       = ' + segment.name
+        print 'Segment Id         = ' + segment.id
+        print 'Segment Definition = ' + segment.definition.value
 
   def PrintOneEntry(self):
     """Prints all the important Google Analytics data found in an entry"""

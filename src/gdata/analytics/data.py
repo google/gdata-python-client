@@ -26,6 +26,7 @@ import atom.core
 
 # XML Namespace used in Google Analytics API entities.
 DXP_NS = '{http://schemas.google.com/analytics/2009}%s'
+GA_NS = '{http://schemas.google.com/ga/2009}%s'
 
 
 class GetProperty(object):
@@ -139,6 +140,64 @@ class Property(atom.core.XmlElement):
   value = 'value'
 
 
+class Definition(atom.core.XmlElement):
+  """Analytics Feed <dxp:definition>"""
+  _qname = DXP_NS % 'definition'
+
+
+class Segment(atom.core.XmlElement):
+  """Analytics Feed <dxp:segment>"""
+  _qname = DXP_NS % 'segment'
+  id = 'id'
+  name = 'name'
+  definition = Definition
+
+
+class Engagement(atom.core.XmlElement):
+  """Analytics Feed <dxp:engagement>"""
+  _qname = GA_NS % 'engagement'
+  type = 'type'
+  comparison = 'comparison'
+  threshold_value = 'thresholdValue'
+
+
+class Step(atom.core.XmlElement):
+  """Analytics Feed <dxp:step>"""
+  _qname = GA_NS % 'step'
+  number = 'number'
+  name = 'name'
+  path = 'path'
+
+
+class Destination(atom.core.XmlElement):
+  """Analytics Feed <dxp:destination>"""
+  _qname = GA_NS % 'destination'
+  step = [Step]
+  expression = 'expression'
+  case_sensitive = 'caseSensitive'
+  match_type = 'matchType'
+  step1_required = 'step1Required'
+
+
+class Goal(atom.core.XmlElement):
+  """Analytics Feed <dxp:goal>"""
+  _qname = GA_NS % 'goal'
+  destination = Destination
+  engagement = Engagement
+  number = 'number'
+  name = 'name'
+  value = 'value'
+  active = 'active'
+
+
+class CustomVariable(atom.core.XmlElement):
+  """Analytics Data Feed <dxp:customVariable>"""
+  _qname = GA_NS % 'customVariable'
+  index = 'index'
+  name = 'name'
+  scope = 'scope'
+
+
 class DataSource(atom.core.XmlElement, GetProperty):
   """Analytics Data Feed <dxp:dataSource>"""
   _qname = DXP_NS % 'dataSource'
@@ -160,11 +219,14 @@ class AccountEntry(gdata.data.GDEntry, GetProperty):
   _qname = atom.data.ATOM_TEMPLATE % 'entry'
   table_id = TableId
   property = [Property]
+  goal = [Goal]
+  custom_variable = [CustomVariable]
 
 
 class AccountFeed(gdata.data.GDFeed):
   """Analytics Account Feed <feed>"""
   _qname = atom.data.ATOM_TEMPLATE % 'feed'
+  segment = [Segment]
   entry = [AccountEntry]
 
 
@@ -207,4 +269,5 @@ class DataFeed(gdata.data.GDFeed):
   aggregates = Aggregates
   data_source = [DataSource]
   entry = [DataEntry]
+  segment = Segment
 

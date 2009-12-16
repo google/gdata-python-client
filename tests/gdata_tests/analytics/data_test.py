@@ -38,13 +38,26 @@ class AccountFeedTest(unittest.TestCase):
     self.feed = atom.core.parse(test_data.ANALYTICS_ACCOUNT_FEED,
                                 gdata.analytics.data.AccountFeed)
 
-  def testAccountEntryTableId(self):
+  def testSegment(self):
+    """Tests Segment class in Google Analytics Account Feed."""
+
+    segment = self.feed.segment[0]
+    self.assertEquals(segment.id, 'gaid::-11')
+    self.assertEquals(segment.name, 'Visits from iPhones')
+
+  def testSegmentDefinition(self):
+    """Tests Definition class in Google Analytics Account Feed."""
+
+    definition = self.feed.segment[0].definition
+    self.assertEquals(definition.text, 'ga:operatingSystem==iPhone')
+
+  def testEntryTableId(self):
     """Tests custom classes in Google Analytics Account Feed."""
 
     entry = self.feed.entry[0]
     self.assertEquals(entry.table_id.text, 'ga:1174')
 
-  def testAccountEntryProperty(self):
+  def testEntryProperty(self):
     """Tests the property classes in Google Analytics Account Feed."""
     property = self.feed.entry[0].property
 
@@ -66,7 +79,7 @@ class AccountFeedTest(unittest.TestCase):
     self.assertEquals(property[5].name, 'ga:timezone')
     self.assertEquals(property[5].value, 'America/Los_Angeles')
 
-  def testAccountEntryGetProperty(self):
+  def testEntryGetProperty(self):
     """Tests GetProperty inherited class in the AccountEntry class."""
 
     entry = self.feed.entry[0]
@@ -76,6 +89,48 @@ class AccountFeedTest(unittest.TestCase):
     self.assertEquals(entry.GetProperty('ga:webPropertyId').value, 'UA-30481-1')
     self.assertEquals(entry.GetProperty('ga:currency').value, 'USD')
     self.assertEquals(entry.GetProperty('ga:timezone').value, 'America/Los_Angeles')
+
+  def testGoal(self):
+    """Tests Goal class in Google Anlaytics Account Feed."""
+
+    goal = self.feed.entry[0].goal[0]
+    self.assertEquals(goal.number, '1')
+    self.assertEquals(goal.name, 'Completing Order')
+    self.assertEquals(goal.value, '10.0')
+    self.assertEquals(goal.active, 'true')
+
+  def testDestination(self):
+    """Tests Destination class in Google Analytics Account Feed."""
+
+    destination = self.feed.entry[0].goal[0].destination
+    self.assertEquals(destination.expression, '/purchaseComplete.html')
+    self.assertEquals(destination.case_sensitive, 'false')
+    self.assertEquals(destination.match_type, 'regex')
+    self.assertEquals(destination.step1_required, 'false')
+
+  def testStep(self):
+    """Tests Step class in Google Analytics Account Feed."""
+
+    step = self.feed.entry[0].goal[0].destination.step[0]
+    self.assertEquals(step.number, '1')
+    self.assertEquals(step.name, 'View Product Categories')
+    self.assertEquals(step.path, '/Apps|Accessories|Fun|Kid\+s|Office')
+
+  def testEngagemet(self):
+    """Tests Engagement class in Google Analytics Account Feed."""
+
+    engagement = self.feed.entry[0].goal[1].engagement
+    self.assertEquals(engagement.type, 'timeOnSite')
+    self.assertEquals(engagement.comparison, '>')
+    self.assertEquals(engagement.threshold_value, '300')
+
+  def testCustomVariable(self):
+    """Tests CustomVariable class in Google Analytics Account Feed."""
+
+    customVar = self.feed.entry[0].custom_variable[0]
+    self.assertEquals(customVar.index, '1')
+    self.assertEquals(customVar.name, 'My Custom Variable')
+    self.assertEquals(customVar.scope, '3')
 
 
 class DataFeedTest(unittest.TestCase):
@@ -150,6 +205,19 @@ class DataFeedTest(unittest.TestCase):
     self.assertEquals(ds.GetProperty('ga:profileId').value, '1174')
     self.assertEquals(ds.GetProperty('ga:webPropertyId').value, 'UA-30481-1')
     self.assertEquals(ds.GetProperty('ga:accountName').value, 'Google Store')
+
+  def testSegment(self):
+    """Tests Segment class in DataFeed class."""
+
+    segment = self.feed.segment
+    self.assertEquals(segment.id, 'gaid::-11')
+    self.assertEquals(segment.name, 'Visits from iPhones')
+
+  def testSegmentDefinition(self):
+    """Tests Definition class in Segment class."""
+
+    definition = self.feed.segment.definition
+    self.assertEquals(definition.text, 'ga:operatingSystem==iPhone')
 
   def testEntryDimension(self):
     """Tests Dimension class in Entry class."""

@@ -35,6 +35,9 @@ def main():
 
   demo = AccountFeedDemo()
   demo.PrintFeedDetails()
+  demo.PrintAdvancedSegments()
+  demo.PrintCustomVarForOneEntry()
+  demo.PrintGoalsForOneEntry()
   demo.PrintAccountEntries()
 
 
@@ -68,24 +71,117 @@ class AccountFeedDemo(object):
   def PrintFeedDetails(self):
     """Prints important Analytics related data found at the top of the feed."""
 
+    print '-------- Important Feed Data --------'
     print 'Feed Title          = ' + self.feed.title.text
     print 'Feed Id             = ' + self.feed.id.text
     print 'Total Results Found = ' + self.feed.total_results.text
     print 'Start Index         = ' + self.feed.start_index.text
     print 'Results Returned    = ' + self.feed.items_per_page.text
 
-  def PrintAccountEntries(self):
-    """Prints important Analytics data found in each entry"""
+  def PrintAdvancedSegments(self):
+    """Prints the advanced segments for this user."""
 
-    for entry in self.feed.entry:
-      print '--------------------------'
-      print 'Profile Name     = ' + entry.title.text
-      print 'Table ID         = ' + entry.table_id.text
-      print 'Account Name     = ' + entry.GetProperty('ga:accountId').value
-      print 'Profile ID       = ' + entry.GetProperty('ga:accountName').value
-      print 'Web Property ID  = ' + entry.GetProperty('ga:webPropertyId').value
-      print 'Profile Currency = ' + entry.GetProperty('ga:currency').value
-      print 'Profile TimeZone = ' + entry.GetProperty('ga:timezone').value
+    print '-------- Advances Segments --------'
+    if not self.feed.segment:
+      print 'No advanced segments found'
+    else:
+      for segment in self.feed.segment:
+        print 'Segment Name       = ' + segment.name
+        print 'Segment Id         = ' + segment.id
+        print 'Segment Definition = ' + segment.definition.text
+
+  def PrintCustomVarForOneEntry(self):
+    """Prints custom variable information for the first profile that has
+    custom variable configured."""
+
+    print '-------- Custom Variables --------'
+    if not self.feed.entry:
+      print 'No entries found'
+    else:
+      for entry in self.feed.entry:
+        if entry.custom_Variable:
+          for custom_variable in entry.custom_variable:
+            print 'Custom Variable Index = ' + custom_variable.index
+            print 'Custom Variable Name  = ' + custom_variable.name
+            print 'Custom Variable Scope = ' + custom_variable.scope
+          return
+      print 'No custom variables defined for this user'
+
+  def PrintGoalsForOneEntry(self):
+    """Prints All the goal information for one profile."""
+
+    print '-------- Goal Configuration --------'
+    if not self.feed.entry:
+      print 'No entries found'
+    else:
+      for entry in self.feed.entry:
+        if entry.goal:
+          for goal in entry.goal:
+            print 'Goal Number = ' + goal.number
+            print 'Goal Name   = ' + goal.name
+            print 'Goal Value  = ' + goal.value
+            print 'Goal Active = ' + goal.active
+
+            if goal.destination:
+              self.PrintDestinationGoal(goal.destination)
+            elif goal.engagement:
+              self.PrintEngagementGoal(goal.engagement)
+          return
+
+  def PrintDestinationGoal(self, destination):
+    """Prints the important information for destination goals including all
+    the configured steps if they exist.
+
+    Args:
+      destination: gdata.data.Destination The destination goal configuration.
+    """
+
+    print '----- Destination Goal -----'
+    print 'Expression      = ' + destination.expression
+    print 'Match Type      = ' + destination.match_type
+    print 'Step 1 Required = ' + destination.step1_required
+    print 'Case Sensitive  = ' + destination.case_sensitive
+
+    # Print goal steps.
+    if destination.step:
+      print '----- Destination Goal Steps -----'
+      for step in destination.step:
+        print 'Step Number = ' + step.number
+        print 'Step Name   = ' + step.name
+        print 'Step Path   = ' + step.path
+
+  def PrintEngagementGoal(self, engagement):
+    """Prints the important information for engagement goals.
+
+    Args:
+      engagement: gdata.data.Engagement The engagement goal configuration.
+    """
+
+    print '----- Engagement Goal -----'
+    print 'Goal Type       = ' + engagement.type
+    print 'Goal Engagement = ' + engagement.comparison
+    print 'Goal Threshold  = ' + engagement.threshold_value
+
+  def PrintAccountEntries(self):
+    """Prints important Analytics data found in each account entry"""
+
+    print '-------- First 1000 Profiles in Account Feed --------'
+    if not self.feed.entry:
+      print 'No entries found'
+    else:
+      for entry in self.feed.entry:
+        print 'Web Property ID = ' + entry.GetProperty('ga:webPropertyId').value
+        print 'Account Name    = ' + entry.GetProperty('ga:accountName').value
+        print 'Account Id      = ' + entry.GetProperty('ga:accountId').value
+        print 'Profile Name    = ' + entry.title.text
+        print 'Profile ID      = ' + entry.GetProperty('ga:profileId').value
+        print 'Table ID        = ' + entry.table_id.text
+        print 'Currency        = ' + entry.GetProperty('ga:currency').value
+        print 'TimeZone        = ' + entry.GetProperty('ga:timezone').value
+        if entry.custom_variables:
+          print 'This profile has custom variables'
+        if entry.goal:
+          print 'This profile has goals'
 
 
 if __name__ == '__main__':

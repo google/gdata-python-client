@@ -28,13 +28,13 @@ import gdata.analytics.data
 class AnalyticsClient(gdata.client.GDClient):
   """Client extension for the Google Analytics API service."""
 
-  api_version = '1'
+  api_version = '2'
   auth_service = 'analytics'
   auth_scopes = ['https://www.google.com/analytics/feeds']
   account_type = 'GOOGLE'
 
   def __init__(self, auth_token=None, **kwargs):
-    """Constructs a new client for the Sites API.
+    """Constructs a new client for the Google Analytics Data Export API.
 
     Args:
       auth_token: gdata.gauth.ClientLoginToken, AuthSubToken, or
