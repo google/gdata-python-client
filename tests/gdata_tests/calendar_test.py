@@ -872,6 +872,24 @@ class CalendarWebContentTest(unittest.TestCase):
     self.assertEquals(expected_pref_value, 
         web_content_element.gadget_pref[0].value)
 
+  def testSampleCode(self):
+    # From http://code.google.com/apis/calendar/gadgets/event/
+    wc = gdata.calendar.WebContent()
+    wc.url = 'http://www.thefreedictionary.com/_/WoD/wod-module.xml'
+    wc.width = '300'
+    wc.height = '136'
+    wc.gadget_pref.append(gdata.calendar.WebContentGadgetPref(name='Days', value='1'))
+    wc.gadget_pref.append(gdata.calendar.WebContentGadgetPref(name='Format', value='0'))
+    wcl = gdata.calendar.WebContentLink()
+    wcl.title = 'Word of the Day'
+    wcl.href = 'http://www.thefreedictionary.com/favicon.ico'
+    wcl.type = 'application/x-google-gadgets+xml'
+    wcl.web_content = wc
+    self.assertEqual(wcl.web_content.url,
+                     'http://www.thefreedictionary.com/_/WoD/wod-module.xml')
+    self.assertEqual(wcl.type, 'application/x-google-gadgets+xml')
+    self.assertEqual(wcl.web_content.height, '136')
+
 
 class ExtendedPropertyTest(unittest.TestCase):
 
