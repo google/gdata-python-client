@@ -14,14 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Allow Google Apps domain administrators to manage groups, groups memembers and groups owners.
+"""Allow Google Apps domain administrators to manage groups, group members and group owners.
 
-  EmailSettingsService: Set various email settings.
+  GroupsService: Provides methods to manage groups, members and owners.
 """
 
 __author__ = 'google-apps-apis@googlegroups.com'
 
 
+import urllib
 import gdata.apps
 import gdata.apps.service
 import gdata.service
@@ -54,22 +55,22 @@ class GroupsService(gdata.apps.service.PropertyService):
         return GROUP_ID_URL % (domain, group_id)
       if member_id != '':
         if direct_only is not None:
-          return GROUP_MEMBER_DIRECT_URL % (domain, member_id, 
-                                            self._Bool2Str(direct_only))   
+          return GROUP_MEMBER_DIRECT_URL % (domain, urllib.quote_plus(member_id),
+                                            self._Bool2Str(direct_only))
         else:
-          return GROUP_MEMBER_URL % (domain, member_id)
+          return GROUP_MEMBER_URL % (domain, urllib.quote_plus(member_id))
       if start_key != '':
         return GROUP_START_URL % (domain, start_key)
       return BASE_URL % (domain)
     if service_type == 'member':
       if member_id != '' and is_existed:
-        return MEMBER_ID_URL % (domain, group_id, member_id)
+        return MEMBER_ID_URL % (domain, group_id, urllib.quote_plus(member_id))
       if start_key != '':
         return MEMBER_START_URL % (domain, group_id, start_key)
       return MEMBER_URL % (domain, group_id)
     if service_type == 'owner':
       if owner_email != '' and is_existed:
-        return OWNER_ID_URL % (domain, group_id, owner_email)
+        return OWNER_ID_URL % (domain, group_id, urllib.quote_plus(owner_email))
       return OWNER_URL % (domain, group_id)
 
   def _Bool2Str(self, b):
@@ -146,7 +147,7 @@ class GroupsService(gdata.apps.service.PropertyService):
       None.
 
     Returns:
-      A dict containing the result of the retrieve operation.
+      A list containing the result of the retrieve operation.
     """
     uri = self._ServiceUrl('group', True, '', '', '', '', '')
     return self._GetPropertiesList(uri)
@@ -159,7 +160,7 @@ class GroupsService(gdata.apps.service.PropertyService):
       direct_only: Boolean whether only return groups that this member directly belongs to.
 
     Returns:
-      A dict containing the result of the retrieve operation.
+      A list containing the result of the retrieve operation.
     """
     uri = self._ServiceUrl('group', True, '', member_id, '', '', direct_only)
     return self._GetPropertiesList(uri)
@@ -203,7 +204,7 @@ class GroupsService(gdata.apps.service.PropertyService):
     """
     uri = self._ServiceUrl('member', True, group_id, member_id, '', '', '')
     return self._IsExisted(uri)
-  
+
   def RetrieveMember(self, member_id, group_id):
     """Retrieve the given member in the given group
 
@@ -224,7 +225,7 @@ class GroupsService(gdata.apps.service.PropertyService):
       group_id: The ID of the group (e.g. us-sales).
 
     Returns:
-      A dict containing the result of the retrieve operation.
+      A list containing the result of the retrieve operation.
     """
     uri = self._ServiceUrl('member', True, group_id, '', '', '', '')
     return self._GetPropertiesList(uri)
@@ -282,7 +283,7 @@ class GroupsService(gdata.apps.service.PropertyService):
     """
     uri = self._ServiceUrl('owner', True, group_id, '', owner_email, '', '')
     return self._GetProperties(uri)
-    
+
   def RetrieveAllOwners(self, group_id):
     """Retrieve all owners of the given group
 
@@ -290,7 +291,7 @@ class GroupsService(gdata.apps.service.PropertyService):
       group_id: The ID of the group (e.g. us-sales).
 
     Returns:
-      A dict containing the result of the retrieve operation.
+      A list containing the result of the retrieve operation.
     """
     uri = self._ServiceUrl('owner', True, group_id, '', '', '', '')
     return self._GetPropertiesList(uri)
