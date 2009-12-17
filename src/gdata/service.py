@@ -60,9 +60,6 @@
 
 __author__ = 'api.jscudder (Jeffrey Scudder)'
 
-import logging
-import math
-import time
 import re
 import urllib
 import urlparse
@@ -975,23 +972,32 @@ class GDataService(atom.service.AtomService):
 
   def GetWithRetries(self, uri, extra_headers=None, redirects_remaining=4, 
       encoding='UTF-8', converter=None, num_retries=DEFAULT_NUM_RETRIES,
-      delay=DEFAULT_DELAY, backoff=DEFAULT_BACKOFF):
+      delay=DEFAULT_DELAY, backoff=DEFAULT_BACKOFF, logger=None):
     """This is a wrapper method for Get with retring capability.
 
     To avoid various errors while retrieving bulk entities by retring
     specified times.
 
+    Note this method relies on the time module and so may not be usable
+    by default in Python2.2.
+
     Args:
       num_retries: integer The retry count.
       delay: integer The initial delay for retring.
       backoff: integer how much the delay should lengthen after each failure.
+      logger: an object which has a debug(str) method to receive logging
+              messages. Recommended that you pass in the logging module.
     Raises:
       ValueError if any of the parameters has an invalid value.
       RanOutOfTries on failure after number of retries.
     """
+    # Moved import for time module inside this method since time is not a
+    # default module in Python2.2. This method will not be usable in
+    # Python2.2.
+    import time
     if backoff <= 1:
       raise ValueError("backoff must be greater than 1")
-    num_retries = math.floor(num_retries)
+    num_retries = int(num_retries)
 
     if num_retries < 0:
       raise ValueError("num_retries must be 0 or greater")
@@ -1003,7 +1009,8 @@ class GDataService(atom.service.AtomService):
     mtries, mdelay = num_retries, delay
     while mtries > 0:
       if mtries != num_retries:
-        logging.debug("Retrying...")
+        if logger:
+          logger.debug("Retrying...")
       try:
         rv = self.Get(uri, extra_headers=extra_headers,
                       redirects_remaining=redirects_remaining,
@@ -1012,13 +1019,15 @@ class GDataService(atom.service.AtomService):
         # Allow these errors
         raise
       except Exception, e:
-        logging.debug(e)
+        if logger:
+          logger.debug(e)
         mtries -= 1
         time.sleep(mdelay)
         mdelay *= backoff
       else:
         # This is the right path.
-        logging.debug("Succeeeded...")
+        if logger:
+          logger.debug("Succeeeded...")
         return rv
     raise RanOutOfTries('Ran out of tries.')
 
