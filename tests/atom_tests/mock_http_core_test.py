@@ -112,8 +112,11 @@ class MockHttpClientTest(unittest.TestCase):
     response = self.client.request(request)
     self.client._save_recordings('test_save_and_load_recordings')
     self.client._recordings = []
-    response = self.client.request(request)
-    self.assert_(response is None)
+    try:
+      response = self.client.request(request)
+      self.fail('There should be no recording for this request.')
+    except atom.mock_http_core.NoRecordingFound:
+      pass
     self.client._load_recordings('test_save_and_load_recordings')
     response = self.client.request(request)
     self.assert_(response.status == 200)

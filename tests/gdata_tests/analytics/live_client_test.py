@@ -109,7 +109,7 @@ class AnalyticsClientTest(unittest.TestCase):
 
 
 def suite():
-  return conf.build_suite([AccountClientTest])
+  return conf.build_suite([AnalyticsClientTest])
 
 
 if __name__ == '__main__':

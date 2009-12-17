@@ -44,6 +44,8 @@ import gdata_tests.projecthosting.data_test
 import gdata_tests.projecthosting.live_client_test
 import gdata_tests.sites.data_test
 import gdata_tests.sites.live_client_test
+import gdata_tests.analytics.data_test
+import gdata_tests.analytics.live_client_test
 import gdata_tests.contacts.live_client_test
 
 
@@ -70,6 +72,8 @@ def suite():
       gdata_tests.projecthosting.live_client_test.suite(),
       gdata_tests.sites.data_test.suite(),
       gdata_tests.sites.live_client_test.suite(),
+      gdata_tests.analytics.data_test.suite(),
+      gdata_tests.analytics.live_client_test.suite(),
       gdata_tests.contacts.live_client_test.suite(),))
 
 
