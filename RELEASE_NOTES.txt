@@ -1,3 +1,16 @@
+=== 2.0.6 ===
+December 17, 2009 (revision 914)
+
+- updated the Google Analytics Data Export API to v2. Thanks Nick!
+- added support for batch operations on contacts and profiles. Thanks Julian!
+- added a DocsQuery class for the Documents List v3 API.
+- removed now obsolete ACL classes from gdata.docs.data in favor of using
+    classes in gdata.acl.data. Thanks Eric!
+- fixed bug in querying group membership by email. Thanks Will Charles!
+- removed import which are not present in Python2.2 from gdata.service to
+    maintain support for Python2.2.
+- added additional debug information to MockHttpClient.
+
 === 2.0.5 ===
 November 24, 2009 (revision 900)
 

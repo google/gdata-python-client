@@ -481,3 +481,4 @@ pydocs/gdata.notebook.data.html
 pydocs/gdata.opensearch.data.html
 pydocs/gdata.webmastertools.data.html
 pydocs/gdata.youtube.data.html
+tests/gdata_tests/analytics/__init__.py
