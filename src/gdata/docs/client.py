@@ -365,6 +365,7 @@ class DocsClient(gdata.client.GDClient):
     Returns:
       A gdata.docs.data.DocsEntry containing information about uploaded doc.
     """
+    uri = None
     if folder_or_uri is not None:
       if isinstance(folder_or_uri, gdata.docs.data.DocsEntry):
         # Verify that we're uploading the resource into to a folder.

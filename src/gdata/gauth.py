@@ -209,7 +209,8 @@ def generate_auth_sub_url(next, scopes, secure=False, session=True,
     next: atom.http_core.Uri or string The URL user will be sent to after
           authorizing this web application to access their data.
     scopes: list containint strings or atom.http_core.Uri objects. The URLs
-            of the services to be accessed.
+            of the services to be accessed. Could also be a single string
+            or single atom.http_core.Uri for requesting just one scope.
     secure: boolean (optional) Determines whether or not the issued token
             is a secure token.
     session: boolean (optional) Determines whether or not the issued token
@@ -234,6 +235,10 @@ def generate_auth_sub_url(next, scopes, secure=False, session=True,
   """
   if isinstance(next, (str, unicode)):
     next = atom.http_core.Uri.parse_uri(next)
+  # If the user passed in a string instead of a list for scopes, convert to
+  # a single item tuple.
+  if isinstance(scopes, (str, unicode, atom.http_core.Uri)):
+    scopes = (scopes,)
   scopes_string = ' '.join([str(scope) for scope in scopes])
   next.query[scopes_param_prefix] = scopes_string
 
@@ -1075,6 +1080,25 @@ def load_tokens(blob):
 
 
 def ae_save(token, token_key):
+  """Stores an auth token in the App Engine datastore.
+  
+  This is a convenience method for using the library with App Engine.
+  Recommended usage is to associate the auth token with the current_user.
+  If a user is signed in to the app using the App Engine users API, you
+  can use
+  gdata.gauth.ae_save(some_token, users.get_current_user().user_id())
+  If you are not using the Users API you are free to choose whatever
+  string you would like for a token_string.
+
+  Args:
+    token: an auth token object. Must be one of ClientLoginToken,
+           AuthSubToken, SecureAuthSubToken, OAuthRsaToken, or OAuthHmacToken
+           (see token_to_blob).
+    token_key: str A unique identified to be used when you want to retrieve
+               the token. If the user is signed in to App Engine using the
+               users API, I recommend using the user ID for the token_key:
+               users.get_current_user().user_id()
+  """
   import gdata.alt.app_engine
   key_name = ''.join(('gd_auth_token', token_key))
   return gdata.alt.app_engine.set_token(key_name, token_to_blob(token))
@@ -1084,6 +1108,19 @@ AeSave = ae_save
 
 
 def ae_load(token_key):
+  """Retrieves a token object from the App Engine datastore.
+  
+  This is a convenience method for using the library with App Engine.
+  See also ae_save.
+
+  Args:
+    token_key: str The unique key associated with the desired token when it
+               was saved using ae_save.
+
+  Returns:
+    A token object if there was a token associated with the token_key or None
+    if the key could not be found.
+  """
   import gdata.alt.app_engine
   key_name = ''.join(('gd_auth_token', token_key))
   token_string = gdata.alt.app_engine.get_token(key_name)
@@ -1097,6 +1134,7 @@ AeLoad = ae_load
 
 
 def ae_delete(token_key):
+  """Removes the token object from the App Engine datastore."""
   import gdata.alt.app_engine
   key_name = ''.join(('gd_auth_token', token_key))
   gdata.alt.app_engine.delete_token(key_name)

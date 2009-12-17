@@ -25,6 +25,14 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 import atom.http_core
 
 
+class Error(Exception):
+  pass
+
+
+class MissingHost(Error):
+  pass
+
+
 class AtomPubClient(object):
   host = None
   auth_token = None
@@ -67,6 +75,10 @@ class AtomPubClient(object):
       http_request:
       auth_token: An authorization token object whose modify_request method
                   sets the HTTP Authorization header.
+
+    Returns:
+      The results of calling self.http_client.request. With the default
+      http_client, this is an HTTP response object.
     """
     # Modify the request based on the AtomPubClient settings and parameters
     # passed in to the request.
@@ -96,6 +108,10 @@ class AtomPubClient(object):
       auth_token.modify_request(http_request)
     elif self.auth_token:
       self.auth_token.modify_request(http_request)
+    # Check to make sure there is a host in the http_request.
+    if http_request.uri.host is None:
+      raise MissingHost('No host provided in request %s %s' % (
+          http_request.method, str(http_request.uri)))
     # Perform the fully specified request using the http_client instance.
     # Sends the request to the server and returns the server's response.
     return self.http_client.request(http_request)
@@ -103,6 +119,7 @@ class AtomPubClient(object):
   Request = request
 
   def get(self, uri=None, auth_token=None, http_request=None, **kwargs):
+    """Performs a request using the GET method, returns an HTTP response."""
     return self.request(method='GET', uri=uri, auth_token=auth_token,
                         http_request=http_request, **kwargs)
 
@@ -110,6 +127,7 @@ class AtomPubClient(object):
 
   def post(self, uri=None, data=None, auth_token=None, http_request=None,
            **kwargs):
+    """Sends data using the POST method, returns an HTTP response."""
     return self.request(method='POST', uri=uri, auth_token=auth_token,
                         http_request=http_request, data=data, **kwargs)
 
@@ -117,27 +135,48 @@ class AtomPubClient(object):
 
   def put(self, uri=None, data=None, auth_token=None, http_request=None,
           **kwargs):
+    """Sends data using the PUT method, returns an HTTP response."""
     return self.request(method='PUT', uri=uri, auth_token=auth_token,
                         http_request=http_request, data=data, **kwargs)
 
   Put = put
 
   def delete(self, uri=None, auth_token=None, http_request=None, **kwargs):
+    """Performs a request using the DELETE method, returns an HTTP response."""
     return self.request(method='DELETE', uri=uri, auth_token=auth_token,
                         http_request=http_request, **kwargs)
 
   Delete = delete
 
   def modify_request(self, http_request):
+    """Changes the HTTP request before sending it to the server.
+    
+    Sets the User-Agent HTTP header and fills in the HTTP host portion
+    of the URL if one was not included in the request (for this it uses
+    the self.host member if one is set). This method is called in
+    self.request.
+
+    Args:
+      http_request: An atom.http_core.HttpRequest() (optional) If one is
+                    not provided, a new HttpRequest is instantiated.
+
+    Returns:
+      An atom.http_core.HttpRequest() with the User-Agent header set and
+      if this client has a value in its host member, the host in the request
+      URL is set.
+    """
     if http_request is None:
       http_request = atom.http_core.HttpRequest()
+
     if self.host is not None and http_request.uri.host is None:
       http_request.uri.host = self.host
+
     # Set the user agent header for logging purposes.
     if self.source:
-      http_request.headers['User-Agent'] = '%s gdata-py/2.0.5' % self.source
+      http_request.headers['User-Agent'] = '%s gdata-py/2.0.6' % self.source
     else:
-      http_request.headers['User-Agent'] = 'gdata-py/2.0.5'
+      http_request.headers['User-Agent'] = 'gdata-py/2.0.6'
+
     return http_request
 
   ModifyRequest = modify_request

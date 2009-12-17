@@ -174,6 +174,26 @@ class HttpRequest(object):
     new_request._body_parts = self._body_parts[:]
     return new_request
 
+  def _dump(self):
+    """Converts to a printable string for debugging purposes.
+    
+    In order to preserve the request, it does not read from file-like objects
+    in the body.
+    """
+    output =  'HTTP Request\n  method: %s\n  url: %s\n  headers:\n' % (
+        self.method, str(self.uri))
+    for header, value in self.headers.iteritems():
+      output += '    %s: %s\n' % (header, value)
+    output += '  body sections:\n'
+    i = 0
+    for part in self._body_parts:
+      if isinstance(part, (str, unicode)):
+        output += '    %s: %s\n' % (i, part)
+      else:
+        output += '    %s: <file like object>\n' % i
+      i += 1
+    return output
+
 
 def _apply_defaults(http_request):
   if http_request.uri.scheme is None:
@@ -350,6 +370,23 @@ class HttpResponse(object):
       return self._body.read(amt)
 
 
+def _dump_response(http_response):
+  """Converts to a string for printing debug messages.
+  
+  Does not read the body since that may consume the content.
+  """
+  output = 'HttpResponse\n  status: %s\n  reason: %s\n  headers:' % (
+      http_response.status, http_response.reason)
+  headers = http_response.getheaders()
+  if isinstance(headers, dict):
+    for header, value in headers.iteritems():
+      output += '    %s: %s\n' % (header, value)
+  else:
+    for pair in headers:
+      output += '    %s: %s\n' % (pair[0], pair[1])
+  return output
+
+
 class HttpClient(object):
   """Performs HTTP requests using httplib."""
   debug = None
@@ -395,6 +432,7 @@ class HttpClient(object):
     """
     if isinstance(uri, (str, unicode)):
       uri = Uri.parse_uri(uri)
+
     connection = self._get_connection(uri, headers=headers)
 
     if self.debug:

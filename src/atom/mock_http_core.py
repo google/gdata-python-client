@@ -28,9 +28,18 @@ import tempfile
 import atom.http_core
 
 
+class Error(Exception):
+  pass
+
+
+class NoRecordingFound(Error):
+  pass
+
+
 class MockHttpClient(object):
   debug = None
   real_client = None
+  last_request_was_live = False
 
   # The following members are used to construct the session cache temp file
   # name.
@@ -64,6 +73,7 @@ class MockHttpClient(object):
     request = http_request._copy()
     _scrub_request(request)
     if self.real_client is None:
+      self.last_request_was_live = False
       for recording in self._recordings:
         if _match_request(recording[0], request):
           return recording[1]
@@ -71,13 +81,17 @@ class MockHttpClient(object):
       # Pass along the debug settings to the real client.
       self.real_client.debug = self.debug
       # Make an actual request since we can use the real HTTP client.
+      self.last_request_was_live = True
       response = self.real_client.request(http_request)
-      _scrub_response(response)
-      self.add_response(request, response.status, response.reason,
-          dict(response.getheaders()), response.read())
+      scrubbed_response = _scrub_response(response)
+      self.add_response(request, scrubbed_response.status,
+                        scrubbed_response.reason,
+                        dict(scrubbed_response.getheaders()),
+                        scrubbed_response.read())
       # Return the recording which we just added.
       return self._recordings[-1][1]
-    return None
+    raise NoRecordingFound('No recoding was found for request: %s %s' % (
+        request.method, str(request.uri)))
 
   Request = request
 
@@ -147,6 +161,18 @@ class MockHttpClient(object):
   def get_cache_file_name(self):
     return '%s.%s.%s' % (self.cache_name_prefix, self.cache_case_name,
                          self.cache_test_name)
+
+  def _dump(self):
+    """Provides debug information in a string."""
+    output = 'MockHttpClient\n  real_client: %s\n  cache file name: %s\n' % (
+        self.real_client, self.get_cache_file_name())
+    output += '  recordings:\n'
+    i = 0
+    for recording in self._recordings:
+      output += '    recording %i is for: %s %s\n' % (
+          i, recording[0].method, str(recording[0].uri))
+      i += 1
+    return output
 
 
 def _match_request(http_request, stored_request):
