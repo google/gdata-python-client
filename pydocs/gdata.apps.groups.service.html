@@ -9,9 +9,9 @@
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.apps.html"><font color="#ffffff">apps</font></a>.<a href="gdata.apps.groups.html"><font color="#ffffff">groups</font></a>.service</strong></big></big></font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client/src/gdata/apps/groups/service.py">/usr/local/svn/gdata-python-client/src/gdata/apps/groups/service.py</a></font></td></tr></table>
-    <p><tt>Allow&nbsp;Google&nbsp;Apps&nbsp;domain&nbsp;administrators&nbsp;to&nbsp;manage&nbsp;groups,&nbsp;groups&nbsp;memembers&nbsp;and&nbsp;groups&nbsp;owners.<br>
+    <p><tt>Allow&nbsp;Google&nbsp;Apps&nbsp;domain&nbsp;administrators&nbsp;to&nbsp;manage&nbsp;groups,&nbsp;group&nbsp;members&nbsp;and&nbsp;group&nbsp;owners.<br>
 &nbsp;<br>
-EmailSettingsService:&nbsp;Set&nbsp;various&nbsp;email&nbsp;settings.</tt></p>
+<a href="#GroupsService">GroupsService</a>:&nbsp;Provides&nbsp;methods&nbsp;to&nbsp;manage&nbsp;groups,&nbsp;members&nbsp;and&nbsp;owners.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -20,7 +20,8 @@ EmailSettingsService:&nbsp;Set&nbsp;various&nbsp;email&nbsp;settings.</tt></p>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="gdata.html">gdata</a><br>
-</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+</td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -132,7 +133,7 @@ Args:<br>
 &nbsp;&nbsp;None.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;dict&nbsp;containing&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;retrieve&nbsp;operation.</tt></dd></dl>
+&nbsp;&nbsp;A&nbsp;list&nbsp;containing&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;retrieve&nbsp;operation.</tt></dd></dl>
 
 <dl><dt><a name="GroupsService-RetrieveAllMembers"><strong>RetrieveAllMembers</strong></a>(self, group_id)</dt><dd><tt>Retrieve&nbsp;all&nbsp;members&nbsp;in&nbsp;the&nbsp;given&nbsp;group.<br>
 &nbsp;<br>
@@ -140,7 +141,7 @@ Args:<br>
 &nbsp;&nbsp;group_id:&nbsp;The&nbsp;ID&nbsp;of&nbsp;the&nbsp;group&nbsp;(e.g.&nbsp;us-sales).<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;dict&nbsp;containing&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;retrieve&nbsp;operation.</tt></dd></dl>
+&nbsp;&nbsp;A&nbsp;list&nbsp;containing&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;retrieve&nbsp;operation.</tt></dd></dl>
 
 <dl><dt><a name="GroupsService-RetrieveAllOwners"><strong>RetrieveAllOwners</strong></a>(self, group_id)</dt><dd><tt>Retrieve&nbsp;all&nbsp;owners&nbsp;of&nbsp;the&nbsp;given&nbsp;group<br>
 &nbsp;<br>
@@ -148,7 +149,7 @@ Args:<br>
 &nbsp;&nbsp;group_id:&nbsp;The&nbsp;ID&nbsp;of&nbsp;the&nbsp;group&nbsp;(e.g.&nbsp;us-sales).<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;dict&nbsp;containing&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;retrieve&nbsp;operation.</tt></dd></dl>
+&nbsp;&nbsp;A&nbsp;list&nbsp;containing&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;retrieve&nbsp;operation.</tt></dd></dl>
 
 <dl><dt><a name="GroupsService-RetrieveGroup"><strong>RetrieveGroup</strong></a>(self, group_id)</dt><dd><tt>Retrieve&nbsp;a&nbsp;group&nbsp;based&nbsp;on&nbsp;its&nbsp;ID.<br>
 &nbsp;<br>
@@ -165,7 +166,7 @@ Args:<br>
 &nbsp;&nbsp;direct_only:&nbsp;Boolean&nbsp;whether&nbsp;only&nbsp;return&nbsp;groups&nbsp;that&nbsp;this&nbsp;member&nbsp;directly&nbsp;belongs&nbsp;to.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;dict&nbsp;containing&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;retrieve&nbsp;operation.</tt></dd></dl>
+&nbsp;&nbsp;A&nbsp;list&nbsp;containing&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;retrieve&nbsp;operation.</tt></dd></dl>
 
 <dl><dt><a name="GroupsService-RetrieveMember"><strong>RetrieveMember</strong></a>(self, member_id, group_id)</dt><dd><tt>Retrieve&nbsp;the&nbsp;given&nbsp;member&nbsp;in&nbsp;the&nbsp;given&nbsp;group<br>
 &nbsp;<br>
@@ -433,15 +434,20 @@ Returns:<br>
 
 <dl><dt><a name="GroupsService-GetOAuthInputParameters"><strong>GetOAuthInputParameters</strong></a>(self)</dt></dl>
 
-<dl><dt><a name="GroupsService-GetWithRetries"><strong>GetWithRetries</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, encoding<font color="#909090">='UTF-8'</font>, converter<font color="#909090">=None</font>, num_retries<font color="#909090">=3</font>, delay<font color="#909090">=1</font>, backoff<font color="#909090">=2</font>)</dt><dd><tt>This&nbsp;is&nbsp;a&nbsp;wrapper&nbsp;method&nbsp;for&nbsp;Get&nbsp;with&nbsp;retring&nbsp;capability.<br>
+<dl><dt><a name="GroupsService-GetWithRetries"><strong>GetWithRetries</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, encoding<font color="#909090">='UTF-8'</font>, converter<font color="#909090">=None</font>, num_retries<font color="#909090">=3</font>, delay<font color="#909090">=1</font>, backoff<font color="#909090">=2</font>, logger<font color="#909090">=None</font>)</dt><dd><tt>This&nbsp;is&nbsp;a&nbsp;wrapper&nbsp;method&nbsp;for&nbsp;Get&nbsp;with&nbsp;retring&nbsp;capability.<br>
 &nbsp;<br>
 To&nbsp;avoid&nbsp;various&nbsp;errors&nbsp;while&nbsp;retrieving&nbsp;bulk&nbsp;entities&nbsp;by&nbsp;retring<br>
 specified&nbsp;times.<br>
+&nbsp;<br>
+Note&nbsp;this&nbsp;method&nbsp;relies&nbsp;on&nbsp;the&nbsp;time&nbsp;module&nbsp;and&nbsp;so&nbsp;may&nbsp;not&nbsp;be&nbsp;usable<br>
+by&nbsp;default&nbsp;in&nbsp;Python2.2.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;num_retries:&nbsp;integer&nbsp;The&nbsp;retry&nbsp;count.<br>
 &nbsp;&nbsp;delay:&nbsp;integer&nbsp;The&nbsp;initial&nbsp;delay&nbsp;for&nbsp;retring.<br>
 &nbsp;&nbsp;backoff:&nbsp;integer&nbsp;how&nbsp;much&nbsp;the&nbsp;delay&nbsp;should&nbsp;lengthen&nbsp;after&nbsp;each&nbsp;failure.<br>
+&nbsp;&nbsp;logger:&nbsp;an&nbsp;object&nbsp;which&nbsp;has&nbsp;a&nbsp;<a href="#GroupsService-debug">debug</a>(str)&nbsp;method&nbsp;to&nbsp;receive&nbsp;logging<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;messages.&nbsp;Recommended&nbsp;that&nbsp;you&nbsp;pass&nbsp;in&nbsp;the&nbsp;logging&nbsp;module.<br>
 Raises:<br>
 &nbsp;&nbsp;ValueError&nbsp;if&nbsp;any&nbsp;of&nbsp;the&nbsp;parameters&nbsp;has&nbsp;an&nbsp;invalid&nbsp;value.<br>
 &nbsp;&nbsp;RanOutOfTries&nbsp;on&nbsp;failure&nbsp;after&nbsp;number&nbsp;of&nbsp;retries.</tt></dd></dl>

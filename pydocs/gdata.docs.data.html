@@ -43,19 +43,29 @@
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.docs.data.html#LastViewed">LastViewed</a>
 </font></dt></dl>
 </dd>
-<dt><font face="helvetica, arial"><a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>(<a href="atom.data.html#Entry">atom.data.Entry</a>, <a href="gdata.data.html#LinkFinder">gdata.data.LinkFinder</a>)
+<dt><font face="helvetica, arial"><a href="gdata.acl.data.html#AclEntry">gdata.acl.data.AclEntry</a>(<a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>)
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="gdata.docs.data.html#Acl">Acl</a>
-</font></dt><dt><font face="helvetica, arial"><a href="gdata.docs.data.html#DocsEntry">DocsEntry</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gdata.acl.data.html#AclFeed">gdata.acl.data.AclFeed</a>(<a href="gdata.data.html#GDFeed">gdata.data.GDFeed</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.docs.data.html#AclFeed">AclFeed</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>(<a href="atom.data.html#Entry">atom.data.Entry</a>, <a href="gdata.data.html#LinkFinder">gdata.data.LinkFinder</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.docs.data.html#DocsEntry">DocsEntry</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.docs.data.html#Revision">Revision</a>
 </font></dt></dl>
 </dd>
 <dt><font face="helvetica, arial"><a href="gdata.data.html#GDFeed">gdata.data.GDFeed</a>(<a href="atom.data.html#Feed">atom.data.Feed</a>, <a href="gdata.data.html#LinkFinder">gdata.data.LinkFinder</a>)
 </font></dt><dd>
 <dl>
-<dt><font face="helvetica, arial"><a href="gdata.docs.data.html#AclFeed">AclFeed</a>
-</font></dt><dt><font face="helvetica, arial"><a href="gdata.docs.data.html#DocList">DocList</a>
+<dt><font face="helvetica, arial"><a href="gdata.docs.data.html#DocList">DocList</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.docs.data.html#RevisionFeed">RevisionFeed</a>
 </font></dt></dl>
 </dd>
@@ -64,13 +74,14 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="Acl">class <strong>Acl</strong></a>(<a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="Acl">class <strong>Acl</strong></a>(<a href="gdata.acl.data.html#AclEntry">gdata.acl.data.AclEntry</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt>A&nbsp;document&nbsp;ACL&nbsp;entry.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.docs.data.html#Acl">Acl</a></dd>
+<dd><a href="gdata.acl.data.html#AclEntry">gdata.acl.data.AclEntry</a></dd>
 <dd><a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a></dd>
 <dd><a href="atom.data.html#Entry">atom.data.Entry</a></dd>
 <dd><a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a></dd>
@@ -80,10 +91,10 @@
 <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
 </dl>
 <hr>
-Data and other attributes defined here:<br>
-<dl><dt><strong>role</strong> = &lt;class 'gdata.data.Role'&gt;<dd><tt>The&nbsp;gAcl:role&nbsp;element.</tt></dl>
+Data and other attributes inherited from <a href="gdata.acl.data.html#AclEntry">gdata.acl.data.AclEntry</a>:<br>
+<dl><dt><strong>role</strong> = &lt;class 'gdata.acl.data.AclRole'&gt;<dd><tt>Describes&nbsp;the&nbsp;role&nbsp;of&nbsp;an&nbsp;entry&nbsp;in&nbsp;an&nbsp;access&nbsp;control&nbsp;list.</tt></dl>
 
-<dl><dt><strong>scope</strong> = &lt;class 'gdata.data.Scope'&gt;<dd><tt>"The&nbsp;gAcl:scope&nbsp;element.</tt></dl>
+<dl><dt><strong>scope</strong> = &lt;class 'gdata.acl.data.AclScope'&gt;<dd><tt>Describes&nbsp;the&nbsp;scope&nbsp;of&nbsp;an&nbsp;entry&nbsp;in&nbsp;an&nbsp;access&nbsp;control&nbsp;list.</tt></dl>
 
 <hr>
 Methods inherited from <a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>:<br>
@@ -400,13 +411,14 @@ consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="AclFeed">class <strong>AclFeed</strong></a>(<a href="gdata.data.html#GDFeed">gdata.data.GDFeed</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="AclFeed">class <strong>AclFeed</strong></a>(<a href="gdata.acl.data.html#AclFeed">gdata.acl.data.AclFeed</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt>A&nbsp;<a href="#DocList">DocList</a>&nbsp;ACL&nbsp;feed.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.docs.data.html#AclFeed">AclFeed</a></dd>
+<dd><a href="gdata.acl.data.html#AclFeed">gdata.acl.data.AclFeed</a></dd>
 <dd><a href="gdata.data.html#GDFeed">gdata.data.GDFeed</a></dd>
 <dd><a href="atom.data.html#Feed">atom.data.Feed</a></dd>
 <dd><a href="atom.data.html#Source">atom.data.Source</a></dd>

@@ -36,13 +36,6 @@
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.books.data.html#Viewability">Viewability</a>
 </font></dt></dl>
 </dd>
-<dt><font face="helvetica, arial"><a href="gdata.data.html#BatchEntry">gdata.data.BatchEntry</a>(<a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>)
-</font></dt><dd>
-<dl>
-<dt><font face="helvetica, arial"><a href="gdata.books.data.html#CollectionEntry">CollectionEntry</a>
-</font></dt><dt><font face="helvetica, arial"><a href="gdata.books.data.html#VolumeEntry">VolumeEntry</a>
-</font></dt></dl>
-</dd>
 <dt><font face="helvetica, arial"><a href="gdata.data.html#BatchFeed">gdata.data.BatchFeed</a>(<a href="gdata.data.html#GDFeed">gdata.data.GDFeed</a>)
 </font></dt><dd>
 <dl>
@@ -50,19 +43,25 @@
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.books.data.html#VolumeFeed">VolumeFeed</a>
 </font></dt></dl>
 </dd>
+<dt><font face="helvetica, arial"><a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>(<a href="atom.data.html#Entry">atom.data.Entry</a>, <a href="gdata.data.html#LinkFinder">gdata.data.LinkFinder</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.books.data.html#CollectionEntry">CollectionEntry</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.books.data.html#VolumeEntry">VolumeEntry</a>
+</font></dt></dl>
+</dd>
 </dl>
  <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="CollectionEntry">class <strong>CollectionEntry</strong></a>(<a href="gdata.data.html#BatchEntry">gdata.data.BatchEntry</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="CollectionEntry">class <strong>CollectionEntry</strong></a>(<a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Describes&nbsp;an&nbsp;entry&nbsp;in&nbsp;a&nbsp;feed&nbsp;of&nbsp;collections<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt>Describes&nbsp;an&nbsp;entry&nbsp;in&nbsp;a&nbsp;feed&nbsp;of&nbsp;collections.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.books.data.html#CollectionEntry">CollectionEntry</a></dd>
-<dd><a href="gdata.data.html#BatchEntry">gdata.data.BatchEntry</a></dd>
 <dd><a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a></dd>
 <dd><a href="atom.data.html#Entry">atom.data.Entry</a></dd>
 <dd><a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a></dd>
@@ -71,22 +70,6 @@
 <dd><a href="atom.data.html#LinkFinder">atom.data.LinkFinder</a></dd>
 <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
 </dl>
-<hr>
-Data and other attributes inherited from <a href="gdata.data.html#BatchEntry">gdata.data.BatchEntry</a>:<br>
-<dl><dt><strong>batch_id</strong> = &lt;class 'gdata.data.BatchId'&gt;<dd><tt>Identifies&nbsp;a&nbsp;single&nbsp;operation&nbsp;in&nbsp;a&nbsp;batch&nbsp;request.</tt></dl>
-
-<dl><dt><strong>batch_operation</strong> = &lt;class 'gdata.data.BatchOperation'&gt;<dd><tt>The&nbsp;CRUD&nbsp;operation&nbsp;which&nbsp;this&nbsp;batch&nbsp;entry&nbsp;represents.</tt></dl>
-
-<dl><dt><strong>batch_status</strong> = &lt;class 'gdata.data.BatchStatus'&gt;<dd><tt>The&nbsp;batch:status&nbsp;element&nbsp;present&nbsp;in&nbsp;a&nbsp;batch&nbsp;response&nbsp;entry.<br>
-&nbsp;<br>
-A&nbsp;status&nbsp;element&nbsp;contains&nbsp;the&nbsp;code&nbsp;(HTTP&nbsp;response&nbsp;code)&nbsp;and<br>
-reason&nbsp;as&nbsp;elements.&nbsp;In&nbsp;a&nbsp;single&nbsp;request&nbsp;these&nbsp;fields&nbsp;would<br>
-be&nbsp;part&nbsp;of&nbsp;the&nbsp;HTTP&nbsp;response,&nbsp;but&nbsp;in&nbsp;a&nbsp;batch&nbsp;request&nbsp;each<br>
-Entry&nbsp;operation&nbsp;has&nbsp;a&nbsp;corresponding&nbsp;Entry&nbsp;in&nbsp;the&nbsp;response<br>
-feed&nbsp;which&nbsp;includes&nbsp;status&nbsp;information.<br>
-&nbsp;<br>
-See&nbsp;<a href="http://code.google.com/apis/gdata/batch.html#Handling_Errors">http://code.google.com/apis/gdata/batch.html#Handling_Errors</a></tt></dl>
-
 <hr>
 Methods inherited from <a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>:<br>
 <dl><dt><a name="CollectionEntry-FindMediaLink"><strong>FindMediaLink</strong></a> = find_media_link(self)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;to&nbsp;the&nbsp;media&nbsp;content,&nbsp;if&nbsp;the&nbsp;entry&nbsp;is&nbsp;a&nbsp;media&nbsp;entry.<br>
@@ -405,7 +388,7 @@ consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
 <font color="#000000" face="helvetica, arial"><a name="CollectionFeed">class <strong>CollectionFeed</strong></a>(<a href="gdata.data.html#BatchFeed">gdata.data.BatchFeed</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Describes&nbsp;a&nbsp;Book&nbsp;Search&nbsp;collection&nbsp;feed<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt>Describes&nbsp;a&nbsp;Book&nbsp;Search&nbsp;collection&nbsp;feed.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.books.data.html#CollectionFeed">CollectionFeed</a></dd>
@@ -425,15 +408,15 @@ Data and other attributes defined here:<br>
 
 <hr>
 Methods inherited from <a href="gdata.data.html#BatchFeed">gdata.data.BatchFeed</a>:<br>
-<dl><dt><a name="CollectionFeed-AddBatchEntry"><strong>AddBatchEntry</strong></a> = add_batch_entry(self, entry<font color="#909090">=None</font>, id_url_string<font color="#909090">=None</font>, batch_id_string<font color="#909090">=None</font>, operation_string<font color="#909090">=None</font>)</dt><dd><tt>Logic&nbsp;for&nbsp;populating&nbsp;members&nbsp;of&nbsp;a&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;and&nbsp;adding&nbsp;to&nbsp;the&nbsp;feed.<br>
+<dl><dt><a name="CollectionFeed-AddBatchEntry"><strong>AddBatchEntry</strong></a> = add_batch_entry(self, entry<font color="#909090">=None</font>, id_url_string<font color="#909090">=None</font>, batch_id_string<font color="#909090">=None</font>, operation_string<font color="#909090">=None</font>)</dt><dd><tt>Logic&nbsp;for&nbsp;populating&nbsp;members&nbsp;of&nbsp;a&nbsp;BatchEntry&nbsp;and&nbsp;adding&nbsp;to&nbsp;the&nbsp;feed.<br>
 &nbsp;<br>
-If&nbsp;the&nbsp;entry&nbsp;is&nbsp;not&nbsp;a&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>,&nbsp;it&nbsp;is&nbsp;converted&nbsp;to&nbsp;a&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;so<br>
+If&nbsp;the&nbsp;entry&nbsp;is&nbsp;not&nbsp;a&nbsp;BatchEntry,&nbsp;it&nbsp;is&nbsp;converted&nbsp;to&nbsp;a&nbsp;BatchEntry&nbsp;so<br>
 that&nbsp;the&nbsp;batch&nbsp;specific&nbsp;members&nbsp;will&nbsp;be&nbsp;present.<br>
 &nbsp;<br>
 The&nbsp;id_url_string&nbsp;can&nbsp;be&nbsp;used&nbsp;in&nbsp;place&nbsp;of&nbsp;an&nbsp;entry&nbsp;if&nbsp;the&nbsp;batch&nbsp;operation<br>
 applies&nbsp;to&nbsp;a&nbsp;URL.&nbsp;For&nbsp;example&nbsp;query&nbsp;and&nbsp;delete&nbsp;operations&nbsp;require&nbsp;just<br>
 the&nbsp;URL&nbsp;of&nbsp;an&nbsp;entry,&nbsp;no&nbsp;body&nbsp;is&nbsp;sent&nbsp;in&nbsp;the&nbsp;HTTP&nbsp;request.&nbsp;If&nbsp;an<br>
-id_url_string&nbsp;is&nbsp;sent&nbsp;instead&nbsp;of&nbsp;an&nbsp;entry,&nbsp;a&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;is&nbsp;created&nbsp;and<br>
+id_url_string&nbsp;is&nbsp;sent&nbsp;instead&nbsp;of&nbsp;an&nbsp;entry,&nbsp;a&nbsp;BatchEntry&nbsp;is&nbsp;created&nbsp;and<br>
 added&nbsp;to&nbsp;the&nbsp;feed.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;also&nbsp;assigns&nbsp;the&nbsp;desired&nbsp;batch&nbsp;id&nbsp;to&nbsp;the&nbsp;entry&nbsp;so&nbsp;that&nbsp;it<br>
@@ -442,14 +425,14 @@ None,&nbsp;this&nbsp;method&nbsp;will&nbsp;assign&nbsp;a&nbsp;batch_id&nbsp;to&n
 entry&nbsp;will&nbsp;be&nbsp;in&nbsp;the&nbsp;feed's&nbsp;entry&nbsp;list.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;entry:&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>,&nbsp;atom.data.Entry,&nbsp;or&nbsp;another&nbsp;Entry&nbsp;flavor&nbsp;(optional)<br>
+&nbsp;&nbsp;entry:&nbsp;BatchEntry,&nbsp;atom.data.Entry,&nbsp;or&nbsp;another&nbsp;Entry&nbsp;flavor&nbsp;(optional)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;server&nbsp;as&nbsp;part&nbsp;of&nbsp;the&nbsp;batch<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request.&nbsp;The&nbsp;item&nbsp;must&nbsp;have&nbsp;a&nbsp;valid&nbsp;atom&nbsp;id&nbsp;so&nbsp;that&nbsp;the&nbsp;server<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;knows&nbsp;which&nbsp;entry&nbsp;this&nbsp;request&nbsp;references.<br>
 &nbsp;&nbsp;id_url_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;be&nbsp;acted&nbsp;on.&nbsp;You<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;find&nbsp;this&nbsp;URL&nbsp;in&nbsp;the&nbsp;text&nbsp;member&nbsp;of&nbsp;the&nbsp;atom&nbsp;id&nbsp;for&nbsp;an&nbsp;entry.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;an&nbsp;entry&nbsp;is&nbsp;not&nbsp;sent,&nbsp;this&nbsp;id&nbsp;will&nbsp;be&nbsp;used&nbsp;to&nbsp;construct&nbsp;a&nbsp;new<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;which&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;request&nbsp;feed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BatchEntry&nbsp;which&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;request&nbsp;feed.<br>
 &nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;batch&nbsp;ID&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;reference<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;batch&nbsp;operation&nbsp;in&nbsp;the&nbsp;results&nbsp;feed.&nbsp;If&nbsp;this&nbsp;parameter&nbsp;is&nbsp;None,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;current&nbsp;length&nbsp;of&nbsp;the&nbsp;feed's&nbsp;entry&nbsp;array&nbsp;will&nbsp;be&nbsp;used&nbsp;as&nbsp;a<br>
@@ -475,7 +458,7 @@ present&nbsp;so&nbsp;that&nbsp;the&nbsp;server&nbsp;knows&nbsp;which&nbsp;entry&
 Args:<br>
 &nbsp;&nbsp;url_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;be&nbsp;deleted.&nbsp;You&nbsp;can<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;find&nbsp;this&nbsp;URL&nbsp;in&nbsp;the&nbsp;text&nbsp;member&nbsp;of&nbsp;the&nbsp;atom&nbsp;id&nbsp;for&nbsp;an&nbsp;entry.<br>
-&nbsp;&nbsp;entry:&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;(optional)&nbsp;The&nbsp;entry&nbsp;to&nbsp;be&nbsp;deleted.<br>
+&nbsp;&nbsp;entry:&nbsp;BatchEntry&nbsp;(optional)&nbsp;The&nbsp;entry&nbsp;to&nbsp;be&nbsp;deleted.<br>
 &nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)<br>
 &nbsp;<br>
 Raises:<br>
@@ -488,7 +471,7 @@ If&nbsp;the&nbsp;entry&nbsp;doesn't&nbsp;yet&nbsp;have&nbsp;an&nbsp;operation&nb
 be&nbsp;set&nbsp;to&nbsp;the&nbsp;insert&nbsp;operation&nbsp;and&nbsp;a&nbsp;batch_id&nbsp;specified&nbsp;as&nbsp;a&nbsp;parameter.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;entry:&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;in&nbsp;the&nbsp;batch&nbsp;feed&nbsp;as&nbsp;an<br>
+&nbsp;&nbsp;entry:&nbsp;BatchEntry&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;in&nbsp;the&nbsp;batch&nbsp;feed&nbsp;as&nbsp;an<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;insert&nbsp;request.<br>
 &nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;batch&nbsp;ID&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;reference<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;batch&nbsp;operation&nbsp;in&nbsp;the&nbsp;results&nbsp;feed.&nbsp;If&nbsp;this&nbsp;parameter&nbsp;is&nbsp;None,<br>
@@ -500,12 +483,12 @@ Args:<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;takes&nbsp;either&nbsp;the&nbsp;url_string&nbsp;which&nbsp;is&nbsp;the&nbsp;query&nbsp;URL<br>
 whose&nbsp;results&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;result&nbsp;feed.&nbsp;The&nbsp;query&nbsp;URL&nbsp;will<br>
-be&nbsp;encapsulated&nbsp;in&nbsp;a&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>,&nbsp;and&nbsp;you&nbsp;may&nbsp;pass&nbsp;in&nbsp;the&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a><br>
+be&nbsp;encapsulated&nbsp;in&nbsp;a&nbsp;BatchEntry,&nbsp;and&nbsp;you&nbsp;may&nbsp;pass&nbsp;in&nbsp;the&nbsp;BatchEntry<br>
 with&nbsp;a&nbsp;query&nbsp;URL&nbsp;instead&nbsp;of&nbsp;sending&nbsp;a&nbsp;url_string.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;url_string:&nbsp;str&nbsp;(optional)<br>
-&nbsp;&nbsp;entry:&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;(optional)<br>
+&nbsp;&nbsp;entry:&nbsp;BatchEntry&nbsp;(optional)<br>
 &nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)<br>
 &nbsp;<br>
 Raises:<br>
@@ -518,7 +501,7 @@ and&nbsp;assigns&nbsp;the&nbsp;desired&nbsp;batch&nbsp;id&nbsp;to&nbsp;the&nbsp;
 referenced&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;entry:&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;server&nbsp;as&nbsp;an<br>
+&nbsp;&nbsp;entry:&nbsp;BatchEntry&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;server&nbsp;as&nbsp;an<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;update&nbsp;(HTTP&nbsp;PUT)&nbsp;request.&nbsp;The&nbsp;item&nbsp;must&nbsp;have&nbsp;a&nbsp;valid&nbsp;atom&nbsp;id<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;so&nbsp;that&nbsp;the&nbsp;server&nbsp;knows&nbsp;which&nbsp;entry&nbsp;to&nbsp;replace.<br>
 &nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;batch&nbsp;ID&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;reference<br>
@@ -528,15 +511,15 @@ Args:<br>
 
 <dl><dt><a name="CollectionFeed-FindBatchLink"><strong>FindBatchLink</strong></a> = find_batch_link(self)</dt></dl>
 
-<dl><dt><a name="CollectionFeed-add_batch_entry"><strong>add_batch_entry</strong></a>(self, entry<font color="#909090">=None</font>, id_url_string<font color="#909090">=None</font>, batch_id_string<font color="#909090">=None</font>, operation_string<font color="#909090">=None</font>)</dt><dd><tt>Logic&nbsp;for&nbsp;populating&nbsp;members&nbsp;of&nbsp;a&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;and&nbsp;adding&nbsp;to&nbsp;the&nbsp;feed.<br>
+<dl><dt><a name="CollectionFeed-add_batch_entry"><strong>add_batch_entry</strong></a>(self, entry<font color="#909090">=None</font>, id_url_string<font color="#909090">=None</font>, batch_id_string<font color="#909090">=None</font>, operation_string<font color="#909090">=None</font>)</dt><dd><tt>Logic&nbsp;for&nbsp;populating&nbsp;members&nbsp;of&nbsp;a&nbsp;BatchEntry&nbsp;and&nbsp;adding&nbsp;to&nbsp;the&nbsp;feed.<br>
 &nbsp;<br>
-If&nbsp;the&nbsp;entry&nbsp;is&nbsp;not&nbsp;a&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>,&nbsp;it&nbsp;is&nbsp;converted&nbsp;to&nbsp;a&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;so<br>
+If&nbsp;the&nbsp;entry&nbsp;is&nbsp;not&nbsp;a&nbsp;BatchEntry,&nbsp;it&nbsp;is&nbsp;converted&nbsp;to&nbsp;a&nbsp;BatchEntry&nbsp;so<br>
 that&nbsp;the&nbsp;batch&nbsp;specific&nbsp;members&nbsp;will&nbsp;be&nbsp;present.<br>
 &nbsp;<br>
 The&nbsp;id_url_string&nbsp;can&nbsp;be&nbsp;used&nbsp;in&nbsp;place&nbsp;of&nbsp;an&nbsp;entry&nbsp;if&nbsp;the&nbsp;batch&nbsp;operation<br>
 applies&nbsp;to&nbsp;a&nbsp;URL.&nbsp;For&nbsp;example&nbsp;query&nbsp;and&nbsp;delete&nbsp;operations&nbsp;require&nbsp;just<br>
 the&nbsp;URL&nbsp;of&nbsp;an&nbsp;entry,&nbsp;no&nbsp;body&nbsp;is&nbsp;sent&nbsp;in&nbsp;the&nbsp;HTTP&nbsp;request.&nbsp;If&nbsp;an<br>
-id_url_string&nbsp;is&nbsp;sent&nbsp;instead&nbsp;of&nbsp;an&nbsp;entry,&nbsp;a&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;is&nbsp;created&nbsp;and<br>
+id_url_string&nbsp;is&nbsp;sent&nbsp;instead&nbsp;of&nbsp;an&nbsp;entry,&nbsp;a&nbsp;BatchEntry&nbsp;is&nbsp;created&nbsp;and<br>
 added&nbsp;to&nbsp;the&nbsp;feed.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;also&nbsp;assigns&nbsp;the&nbsp;desired&nbsp;batch&nbsp;id&nbsp;to&nbsp;the&nbsp;entry&nbsp;so&nbsp;that&nbsp;it<br>
@@ -545,14 +528,14 @@ None,&nbsp;this&nbsp;method&nbsp;will&nbsp;assign&nbsp;a&nbsp;batch_id&nbsp;to&n
 entry&nbsp;will&nbsp;be&nbsp;in&nbsp;the&nbsp;feed's&nbsp;entry&nbsp;list.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;entry:&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>,&nbsp;atom.data.Entry,&nbsp;or&nbsp;another&nbsp;Entry&nbsp;flavor&nbsp;(optional)<br>
+&nbsp;&nbsp;entry:&nbsp;BatchEntry,&nbsp;atom.data.Entry,&nbsp;or&nbsp;another&nbsp;Entry&nbsp;flavor&nbsp;(optional)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;server&nbsp;as&nbsp;part&nbsp;of&nbsp;the&nbsp;batch<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request.&nbsp;The&nbsp;item&nbsp;must&nbsp;have&nbsp;a&nbsp;valid&nbsp;atom&nbsp;id&nbsp;so&nbsp;that&nbsp;the&nbsp;server<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;knows&nbsp;which&nbsp;entry&nbsp;this&nbsp;request&nbsp;references.<br>
 &nbsp;&nbsp;id_url_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;be&nbsp;acted&nbsp;on.&nbsp;You<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;find&nbsp;this&nbsp;URL&nbsp;in&nbsp;the&nbsp;text&nbsp;member&nbsp;of&nbsp;the&nbsp;atom&nbsp;id&nbsp;for&nbsp;an&nbsp;entry.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;an&nbsp;entry&nbsp;is&nbsp;not&nbsp;sent,&nbsp;this&nbsp;id&nbsp;will&nbsp;be&nbsp;used&nbsp;to&nbsp;construct&nbsp;a&nbsp;new<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;which&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;request&nbsp;feed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BatchEntry&nbsp;which&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;request&nbsp;feed.<br>
 &nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;batch&nbsp;ID&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;reference<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;batch&nbsp;operation&nbsp;in&nbsp;the&nbsp;results&nbsp;feed.&nbsp;If&nbsp;this&nbsp;parameter&nbsp;is&nbsp;None,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;current&nbsp;length&nbsp;of&nbsp;the&nbsp;feed's&nbsp;entry&nbsp;array&nbsp;will&nbsp;be&nbsp;used&nbsp;as&nbsp;a<br>
@@ -578,7 +561,7 @@ present&nbsp;so&nbsp;that&nbsp;the&nbsp;server&nbsp;knows&nbsp;which&nbsp;entry&
 Args:<br>
 &nbsp;&nbsp;url_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;be&nbsp;deleted.&nbsp;You&nbsp;can<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;find&nbsp;this&nbsp;URL&nbsp;in&nbsp;the&nbsp;text&nbsp;member&nbsp;of&nbsp;the&nbsp;atom&nbsp;id&nbsp;for&nbsp;an&nbsp;entry.<br>
-&nbsp;&nbsp;entry:&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;(optional)&nbsp;The&nbsp;entry&nbsp;to&nbsp;be&nbsp;deleted.<br>
+&nbsp;&nbsp;entry:&nbsp;BatchEntry&nbsp;(optional)&nbsp;The&nbsp;entry&nbsp;to&nbsp;be&nbsp;deleted.<br>
 &nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)<br>
 &nbsp;<br>
 Raises:<br>
@@ -591,7 +574,7 @@ If&nbsp;the&nbsp;entry&nbsp;doesn't&nbsp;yet&nbsp;have&nbsp;an&nbsp;operation&nb
 be&nbsp;set&nbsp;to&nbsp;the&nbsp;insert&nbsp;operation&nbsp;and&nbsp;a&nbsp;batch_id&nbsp;specified&nbsp;as&nbsp;a&nbsp;parameter.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;entry:&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;in&nbsp;the&nbsp;batch&nbsp;feed&nbsp;as&nbsp;an<br>
+&nbsp;&nbsp;entry:&nbsp;BatchEntry&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;in&nbsp;the&nbsp;batch&nbsp;feed&nbsp;as&nbsp;an<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;insert&nbsp;request.<br>
 &nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;batch&nbsp;ID&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;reference<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;batch&nbsp;operation&nbsp;in&nbsp;the&nbsp;results&nbsp;feed.&nbsp;If&nbsp;this&nbsp;parameter&nbsp;is&nbsp;None,<br>
@@ -603,12 +586,12 @@ Args:<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;takes&nbsp;either&nbsp;the&nbsp;url_string&nbsp;which&nbsp;is&nbsp;the&nbsp;query&nbsp;URL<br>
 whose&nbsp;results&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;result&nbsp;feed.&nbsp;The&nbsp;query&nbsp;URL&nbsp;will<br>
-be&nbsp;encapsulated&nbsp;in&nbsp;a&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>,&nbsp;and&nbsp;you&nbsp;may&nbsp;pass&nbsp;in&nbsp;the&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a><br>
+be&nbsp;encapsulated&nbsp;in&nbsp;a&nbsp;BatchEntry,&nbsp;and&nbsp;you&nbsp;may&nbsp;pass&nbsp;in&nbsp;the&nbsp;BatchEntry<br>
 with&nbsp;a&nbsp;query&nbsp;URL&nbsp;instead&nbsp;of&nbsp;sending&nbsp;a&nbsp;url_string.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;url_string:&nbsp;str&nbsp;(optional)<br>
-&nbsp;&nbsp;entry:&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;(optional)<br>
+&nbsp;&nbsp;entry:&nbsp;BatchEntry&nbsp;(optional)<br>
 &nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)<br>
 &nbsp;<br>
 Raises:<br>
@@ -621,7 +604,7 @@ and&nbsp;assigns&nbsp;the&nbsp;desired&nbsp;batch&nbsp;id&nbsp;to&nbsp;the&nbsp;
 referenced&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;entry:&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;server&nbsp;as&nbsp;an<br>
+&nbsp;&nbsp;entry:&nbsp;BatchEntry&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;server&nbsp;as&nbsp;an<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;update&nbsp;(HTTP&nbsp;PUT)&nbsp;request.&nbsp;The&nbsp;item&nbsp;must&nbsp;have&nbsp;a&nbsp;valid&nbsp;atom&nbsp;id<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;so&nbsp;that&nbsp;the&nbsp;server&nbsp;knows&nbsp;which&nbsp;entry&nbsp;to&nbsp;replace.<br>
 &nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;batch&nbsp;ID&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;reference<br>
@@ -949,7 +932,7 @@ consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
 <font color="#000000" face="helvetica, arial"><a name="Embeddability">class <strong>Embeddability</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Describes&nbsp;an&nbsp;embeddability<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt>Describes&nbsp;an&nbsp;embeddability.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.books.data.html#Embeddability">Embeddability</a></dd>
@@ -1099,7 +1082,7 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <font color="#000000" face="helvetica, arial"><a name="OpenAccess">class <strong>OpenAccess</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Describes&nbsp;an&nbsp;open&nbsp;access<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt>Describes&nbsp;an&nbsp;open&nbsp;access.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.books.data.html#OpenAccess">OpenAccess</a></dd>
@@ -1249,7 +1232,7 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <font color="#000000" face="helvetica, arial"><a name="Review">class <strong>Review</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>User-provided&nbsp;review<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt>User-provided&nbsp;review.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.books.data.html#Review">Review</a></dd>
@@ -1401,7 +1384,7 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <font color="#000000" face="helvetica, arial"><a name="Viewability">class <strong>Viewability</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Describes&nbsp;a&nbsp;viewability<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt>Describes&nbsp;a&nbsp;viewability.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.books.data.html#Viewability">Viewability</a></dd>
@@ -1548,14 +1531,13 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="VolumeEntry">class <strong>VolumeEntry</strong></a>(<a href="gdata.data.html#BatchEntry">gdata.data.BatchEntry</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="VolumeEntry">class <strong>VolumeEntry</strong></a>(<a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Describes&nbsp;an&nbsp;entry&nbsp;in&nbsp;a&nbsp;feed&nbsp;of&nbsp;Book&nbsp;Search&nbsp;volumes<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt>Describes&nbsp;an&nbsp;entry&nbsp;in&nbsp;a&nbsp;feed&nbsp;of&nbsp;Book&nbsp;Search&nbsp;volumes.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.books.data.html#VolumeEntry">VolumeEntry</a></dd>
-<dd><a href="gdata.data.html#BatchEntry">gdata.data.BatchEntry</a></dd>
 <dd><a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a></dd>
 <dd><a href="atom.data.html#Entry">atom.data.Entry</a></dd>
 <dd><a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a></dd>
@@ -1578,7 +1560,7 @@ Contains&nbsp;a&nbsp;comments&nbsp;feed&nbsp;for&nbsp;the&nbsp;enclosing&nbsp;en
 
 <dl><dt><strong>description</strong> = [&lt;class 'gdata.dublincore.data.Description'&gt;]</dl>
 
-<dl><dt><strong>embeddability</strong> = &lt;class 'gdata.books.data.Embeddability'&gt;<dd><tt>Describes&nbsp;an&nbsp;embeddability</tt></dl>
+<dl><dt><strong>embeddability</strong> = &lt;class 'gdata.books.data.Embeddability'&gt;<dd><tt>Describes&nbsp;an&nbsp;embeddability.</tt></dl>
 
 <dl><dt><strong>format</strong> = [&lt;class 'gdata.dublincore.data.Format'&gt;]</dl>
 
@@ -1586,7 +1568,7 @@ Contains&nbsp;a&nbsp;comments&nbsp;feed&nbsp;for&nbsp;the&nbsp;enclosing&nbsp;en
 
 <dl><dt><strong>language</strong> = [&lt;class 'gdata.dublincore.data.Language'&gt;]</dl>
 
-<dl><dt><strong>open_access</strong> = &lt;class 'gdata.books.data.OpenAccess'&gt;<dd><tt>Describes&nbsp;an&nbsp;open&nbsp;access</tt></dl>
+<dl><dt><strong>open_access</strong> = &lt;class 'gdata.books.data.OpenAccess'&gt;<dd><tt>Describes&nbsp;an&nbsp;open&nbsp;access.</tt></dl>
 
 <dl><dt><strong>publisher</strong> = [&lt;class 'gdata.dublincore.data.Publisher'&gt;]</dl>
 
@@ -1597,27 +1579,11 @@ comment.&nbsp;Each&nbsp;rating&nbsp;supplies&nbsp;its&nbsp;own&nbsp;scale,&nbsp;
 normalized&nbsp;by&nbsp;a&nbsp;service;&nbsp;for&nbsp;example,&nbsp;some&nbsp;services&nbsp;might&nbsp;convert&nbsp;all<br>
 ratings&nbsp;to&nbsp;a&nbsp;scale&nbsp;from&nbsp;1&nbsp;to&nbsp;5.</tt></dl>
 
-<dl><dt><strong>review</strong> = &lt;class 'gdata.books.data.Review'&gt;<dd><tt>User-provided&nbsp;review</tt></dl>
+<dl><dt><strong>review</strong> = &lt;class 'gdata.books.data.Review'&gt;<dd><tt>User-provided&nbsp;review.</tt></dl>
 
 <dl><dt><strong>subject</strong> = [&lt;class 'gdata.dublincore.data.Subject'&gt;]</dl>
 
-<dl><dt><strong>viewability</strong> = &lt;class 'gdata.books.data.Viewability'&gt;<dd><tt>Describes&nbsp;a&nbsp;viewability</tt></dl>
-
-<hr>
-Data and other attributes inherited from <a href="gdata.data.html#BatchEntry">gdata.data.BatchEntry</a>:<br>
-<dl><dt><strong>batch_id</strong> = &lt;class 'gdata.data.BatchId'&gt;<dd><tt>Identifies&nbsp;a&nbsp;single&nbsp;operation&nbsp;in&nbsp;a&nbsp;batch&nbsp;request.</tt></dl>
-
-<dl><dt><strong>batch_operation</strong> = &lt;class 'gdata.data.BatchOperation'&gt;<dd><tt>The&nbsp;CRUD&nbsp;operation&nbsp;which&nbsp;this&nbsp;batch&nbsp;entry&nbsp;represents.</tt></dl>
-
-<dl><dt><strong>batch_status</strong> = &lt;class 'gdata.data.BatchStatus'&gt;<dd><tt>The&nbsp;batch:status&nbsp;element&nbsp;present&nbsp;in&nbsp;a&nbsp;batch&nbsp;response&nbsp;entry.<br>
-&nbsp;<br>
-A&nbsp;status&nbsp;element&nbsp;contains&nbsp;the&nbsp;code&nbsp;(HTTP&nbsp;response&nbsp;code)&nbsp;and<br>
-reason&nbsp;as&nbsp;elements.&nbsp;In&nbsp;a&nbsp;single&nbsp;request&nbsp;these&nbsp;fields&nbsp;would<br>
-be&nbsp;part&nbsp;of&nbsp;the&nbsp;HTTP&nbsp;response,&nbsp;but&nbsp;in&nbsp;a&nbsp;batch&nbsp;request&nbsp;each<br>
-Entry&nbsp;operation&nbsp;has&nbsp;a&nbsp;corresponding&nbsp;Entry&nbsp;in&nbsp;the&nbsp;response<br>
-feed&nbsp;which&nbsp;includes&nbsp;status&nbsp;information.<br>
-&nbsp;<br>
-See&nbsp;<a href="http://code.google.com/apis/gdata/batch.html#Handling_Errors">http://code.google.com/apis/gdata/batch.html#Handling_Errors</a></tt></dl>
+<dl><dt><strong>viewability</strong> = &lt;class 'gdata.books.data.Viewability'&gt;<dd><tt>Describes&nbsp;a&nbsp;viewability.</tt></dl>
 
 <hr>
 Methods inherited from <a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>:<br>
@@ -1937,7 +1903,7 @@ consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
 <font color="#000000" face="helvetica, arial"><a name="VolumeFeed">class <strong>VolumeFeed</strong></a>(<a href="gdata.data.html#BatchFeed">gdata.data.BatchFeed</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Describes&nbsp;a&nbsp;Book&nbsp;Search&nbsp;volume&nbsp;feed<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt>Describes&nbsp;a&nbsp;Book&nbsp;Search&nbsp;volume&nbsp;feed.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.books.data.html#VolumeFeed">VolumeFeed</a></dd>
@@ -1957,15 +1923,15 @@ Data and other attributes defined here:<br>
 
 <hr>
 Methods inherited from <a href="gdata.data.html#BatchFeed">gdata.data.BatchFeed</a>:<br>
-<dl><dt><a name="VolumeFeed-AddBatchEntry"><strong>AddBatchEntry</strong></a> = add_batch_entry(self, entry<font color="#909090">=None</font>, id_url_string<font color="#909090">=None</font>, batch_id_string<font color="#909090">=None</font>, operation_string<font color="#909090">=None</font>)</dt><dd><tt>Logic&nbsp;for&nbsp;populating&nbsp;members&nbsp;of&nbsp;a&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;and&nbsp;adding&nbsp;to&nbsp;the&nbsp;feed.<br>
+<dl><dt><a name="VolumeFeed-AddBatchEntry"><strong>AddBatchEntry</strong></a> = add_batch_entry(self, entry<font color="#909090">=None</font>, id_url_string<font color="#909090">=None</font>, batch_id_string<font color="#909090">=None</font>, operation_string<font color="#909090">=None</font>)</dt><dd><tt>Logic&nbsp;for&nbsp;populating&nbsp;members&nbsp;of&nbsp;a&nbsp;BatchEntry&nbsp;and&nbsp;adding&nbsp;to&nbsp;the&nbsp;feed.<br>
 &nbsp;<br>
-If&nbsp;the&nbsp;entry&nbsp;is&nbsp;not&nbsp;a&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>,&nbsp;it&nbsp;is&nbsp;converted&nbsp;to&nbsp;a&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;so<br>
+If&nbsp;the&nbsp;entry&nbsp;is&nbsp;not&nbsp;a&nbsp;BatchEntry,&nbsp;it&nbsp;is&nbsp;converted&nbsp;to&nbsp;a&nbsp;BatchEntry&nbsp;so<br>
 that&nbsp;the&nbsp;batch&nbsp;specific&nbsp;members&nbsp;will&nbsp;be&nbsp;present.<br>
 &nbsp;<br>
 The&nbsp;id_url_string&nbsp;can&nbsp;be&nbsp;used&nbsp;in&nbsp;place&nbsp;of&nbsp;an&nbsp;entry&nbsp;if&nbsp;the&nbsp;batch&nbsp;operation<br>
 applies&nbsp;to&nbsp;a&nbsp;URL.&nbsp;For&nbsp;example&nbsp;query&nbsp;and&nbsp;delete&nbsp;operations&nbsp;require&nbsp;just<br>
 the&nbsp;URL&nbsp;of&nbsp;an&nbsp;entry,&nbsp;no&nbsp;body&nbsp;is&nbsp;sent&nbsp;in&nbsp;the&nbsp;HTTP&nbsp;request.&nbsp;If&nbsp;an<br>
-id_url_string&nbsp;is&nbsp;sent&nbsp;instead&nbsp;of&nbsp;an&nbsp;entry,&nbsp;a&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;is&nbsp;created&nbsp;and<br>
+id_url_string&nbsp;is&nbsp;sent&nbsp;instead&nbsp;of&nbsp;an&nbsp;entry,&nbsp;a&nbsp;BatchEntry&nbsp;is&nbsp;created&nbsp;and<br>
 added&nbsp;to&nbsp;the&nbsp;feed.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;also&nbsp;assigns&nbsp;the&nbsp;desired&nbsp;batch&nbsp;id&nbsp;to&nbsp;the&nbsp;entry&nbsp;so&nbsp;that&nbsp;it<br>
@@ -1974,14 +1940,14 @@ None,&nbsp;this&nbsp;method&nbsp;will&nbsp;assign&nbsp;a&nbsp;batch_id&nbsp;to&n
 entry&nbsp;will&nbsp;be&nbsp;in&nbsp;the&nbsp;feed's&nbsp;entry&nbsp;list.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;entry:&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>,&nbsp;atom.data.Entry,&nbsp;or&nbsp;another&nbsp;Entry&nbsp;flavor&nbsp;(optional)<br>
+&nbsp;&nbsp;entry:&nbsp;BatchEntry,&nbsp;atom.data.Entry,&nbsp;or&nbsp;another&nbsp;Entry&nbsp;flavor&nbsp;(optional)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;server&nbsp;as&nbsp;part&nbsp;of&nbsp;the&nbsp;batch<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request.&nbsp;The&nbsp;item&nbsp;must&nbsp;have&nbsp;a&nbsp;valid&nbsp;atom&nbsp;id&nbsp;so&nbsp;that&nbsp;the&nbsp;server<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;knows&nbsp;which&nbsp;entry&nbsp;this&nbsp;request&nbsp;references.<br>
 &nbsp;&nbsp;id_url_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;be&nbsp;acted&nbsp;on.&nbsp;You<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;find&nbsp;this&nbsp;URL&nbsp;in&nbsp;the&nbsp;text&nbsp;member&nbsp;of&nbsp;the&nbsp;atom&nbsp;id&nbsp;for&nbsp;an&nbsp;entry.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;an&nbsp;entry&nbsp;is&nbsp;not&nbsp;sent,&nbsp;this&nbsp;id&nbsp;will&nbsp;be&nbsp;used&nbsp;to&nbsp;construct&nbsp;a&nbsp;new<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;which&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;request&nbsp;feed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BatchEntry&nbsp;which&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;request&nbsp;feed.<br>
 &nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;batch&nbsp;ID&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;reference<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;batch&nbsp;operation&nbsp;in&nbsp;the&nbsp;results&nbsp;feed.&nbsp;If&nbsp;this&nbsp;parameter&nbsp;is&nbsp;None,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;current&nbsp;length&nbsp;of&nbsp;the&nbsp;feed's&nbsp;entry&nbsp;array&nbsp;will&nbsp;be&nbsp;used&nbsp;as&nbsp;a<br>
@@ -2007,7 +1973,7 @@ present&nbsp;so&nbsp;that&nbsp;the&nbsp;server&nbsp;knows&nbsp;which&nbsp;entry&
 Args:<br>
 &nbsp;&nbsp;url_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;be&nbsp;deleted.&nbsp;You&nbsp;can<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;find&nbsp;this&nbsp;URL&nbsp;in&nbsp;the&nbsp;text&nbsp;member&nbsp;of&nbsp;the&nbsp;atom&nbsp;id&nbsp;for&nbsp;an&nbsp;entry.<br>
-&nbsp;&nbsp;entry:&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;(optional)&nbsp;The&nbsp;entry&nbsp;to&nbsp;be&nbsp;deleted.<br>
+&nbsp;&nbsp;entry:&nbsp;BatchEntry&nbsp;(optional)&nbsp;The&nbsp;entry&nbsp;to&nbsp;be&nbsp;deleted.<br>
 &nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)<br>
 &nbsp;<br>
 Raises:<br>
@@ -2020,7 +1986,7 @@ If&nbsp;the&nbsp;entry&nbsp;doesn't&nbsp;yet&nbsp;have&nbsp;an&nbsp;operation&nb
 be&nbsp;set&nbsp;to&nbsp;the&nbsp;insert&nbsp;operation&nbsp;and&nbsp;a&nbsp;batch_id&nbsp;specified&nbsp;as&nbsp;a&nbsp;parameter.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;entry:&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;in&nbsp;the&nbsp;batch&nbsp;feed&nbsp;as&nbsp;an<br>
+&nbsp;&nbsp;entry:&nbsp;BatchEntry&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;in&nbsp;the&nbsp;batch&nbsp;feed&nbsp;as&nbsp;an<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;insert&nbsp;request.<br>
 &nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;batch&nbsp;ID&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;reference<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;batch&nbsp;operation&nbsp;in&nbsp;the&nbsp;results&nbsp;feed.&nbsp;If&nbsp;this&nbsp;parameter&nbsp;is&nbsp;None,<br>
@@ -2032,12 +1998,12 @@ Args:<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;takes&nbsp;either&nbsp;the&nbsp;url_string&nbsp;which&nbsp;is&nbsp;the&nbsp;query&nbsp;URL<br>
 whose&nbsp;results&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;result&nbsp;feed.&nbsp;The&nbsp;query&nbsp;URL&nbsp;will<br>
-be&nbsp;encapsulated&nbsp;in&nbsp;a&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>,&nbsp;and&nbsp;you&nbsp;may&nbsp;pass&nbsp;in&nbsp;the&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a><br>
+be&nbsp;encapsulated&nbsp;in&nbsp;a&nbsp;BatchEntry,&nbsp;and&nbsp;you&nbsp;may&nbsp;pass&nbsp;in&nbsp;the&nbsp;BatchEntry<br>
 with&nbsp;a&nbsp;query&nbsp;URL&nbsp;instead&nbsp;of&nbsp;sending&nbsp;a&nbsp;url_string.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;url_string:&nbsp;str&nbsp;(optional)<br>
-&nbsp;&nbsp;entry:&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;(optional)<br>
+&nbsp;&nbsp;entry:&nbsp;BatchEntry&nbsp;(optional)<br>
 &nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)<br>
 &nbsp;<br>
 Raises:<br>
@@ -2050,7 +2016,7 @@ and&nbsp;assigns&nbsp;the&nbsp;desired&nbsp;batch&nbsp;id&nbsp;to&nbsp;the&nbsp;
 referenced&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;entry:&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;server&nbsp;as&nbsp;an<br>
+&nbsp;&nbsp;entry:&nbsp;BatchEntry&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;server&nbsp;as&nbsp;an<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;update&nbsp;(HTTP&nbsp;PUT)&nbsp;request.&nbsp;The&nbsp;item&nbsp;must&nbsp;have&nbsp;a&nbsp;valid&nbsp;atom&nbsp;id<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;so&nbsp;that&nbsp;the&nbsp;server&nbsp;knows&nbsp;which&nbsp;entry&nbsp;to&nbsp;replace.<br>
 &nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;batch&nbsp;ID&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;reference<br>
@@ -2060,15 +2026,15 @@ Args:<br>
 
 <dl><dt><a name="VolumeFeed-FindBatchLink"><strong>FindBatchLink</strong></a> = find_batch_link(self)</dt></dl>
 
-<dl><dt><a name="VolumeFeed-add_batch_entry"><strong>add_batch_entry</strong></a>(self, entry<font color="#909090">=None</font>, id_url_string<font color="#909090">=None</font>, batch_id_string<font color="#909090">=None</font>, operation_string<font color="#909090">=None</font>)</dt><dd><tt>Logic&nbsp;for&nbsp;populating&nbsp;members&nbsp;of&nbsp;a&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;and&nbsp;adding&nbsp;to&nbsp;the&nbsp;feed.<br>
+<dl><dt><a name="VolumeFeed-add_batch_entry"><strong>add_batch_entry</strong></a>(self, entry<font color="#909090">=None</font>, id_url_string<font color="#909090">=None</font>, batch_id_string<font color="#909090">=None</font>, operation_string<font color="#909090">=None</font>)</dt><dd><tt>Logic&nbsp;for&nbsp;populating&nbsp;members&nbsp;of&nbsp;a&nbsp;BatchEntry&nbsp;and&nbsp;adding&nbsp;to&nbsp;the&nbsp;feed.<br>
 &nbsp;<br>
-If&nbsp;the&nbsp;entry&nbsp;is&nbsp;not&nbsp;a&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>,&nbsp;it&nbsp;is&nbsp;converted&nbsp;to&nbsp;a&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;so<br>
+If&nbsp;the&nbsp;entry&nbsp;is&nbsp;not&nbsp;a&nbsp;BatchEntry,&nbsp;it&nbsp;is&nbsp;converted&nbsp;to&nbsp;a&nbsp;BatchEntry&nbsp;so<br>
 that&nbsp;the&nbsp;batch&nbsp;specific&nbsp;members&nbsp;will&nbsp;be&nbsp;present.<br>
 &nbsp;<br>
 The&nbsp;id_url_string&nbsp;can&nbsp;be&nbsp;used&nbsp;in&nbsp;place&nbsp;of&nbsp;an&nbsp;entry&nbsp;if&nbsp;the&nbsp;batch&nbsp;operation<br>
 applies&nbsp;to&nbsp;a&nbsp;URL.&nbsp;For&nbsp;example&nbsp;query&nbsp;and&nbsp;delete&nbsp;operations&nbsp;require&nbsp;just<br>
 the&nbsp;URL&nbsp;of&nbsp;an&nbsp;entry,&nbsp;no&nbsp;body&nbsp;is&nbsp;sent&nbsp;in&nbsp;the&nbsp;HTTP&nbsp;request.&nbsp;If&nbsp;an<br>
-id_url_string&nbsp;is&nbsp;sent&nbsp;instead&nbsp;of&nbsp;an&nbsp;entry,&nbsp;a&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;is&nbsp;created&nbsp;and<br>
+id_url_string&nbsp;is&nbsp;sent&nbsp;instead&nbsp;of&nbsp;an&nbsp;entry,&nbsp;a&nbsp;BatchEntry&nbsp;is&nbsp;created&nbsp;and<br>
 added&nbsp;to&nbsp;the&nbsp;feed.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;also&nbsp;assigns&nbsp;the&nbsp;desired&nbsp;batch&nbsp;id&nbsp;to&nbsp;the&nbsp;entry&nbsp;so&nbsp;that&nbsp;it<br>
@@ -2077,14 +2043,14 @@ None,&nbsp;this&nbsp;method&nbsp;will&nbsp;assign&nbsp;a&nbsp;batch_id&nbsp;to&n
 entry&nbsp;will&nbsp;be&nbsp;in&nbsp;the&nbsp;feed's&nbsp;entry&nbsp;list.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;entry:&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>,&nbsp;atom.data.Entry,&nbsp;or&nbsp;another&nbsp;Entry&nbsp;flavor&nbsp;(optional)<br>
+&nbsp;&nbsp;entry:&nbsp;BatchEntry,&nbsp;atom.data.Entry,&nbsp;or&nbsp;another&nbsp;Entry&nbsp;flavor&nbsp;(optional)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;server&nbsp;as&nbsp;part&nbsp;of&nbsp;the&nbsp;batch<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request.&nbsp;The&nbsp;item&nbsp;must&nbsp;have&nbsp;a&nbsp;valid&nbsp;atom&nbsp;id&nbsp;so&nbsp;that&nbsp;the&nbsp;server<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;knows&nbsp;which&nbsp;entry&nbsp;this&nbsp;request&nbsp;references.<br>
 &nbsp;&nbsp;id_url_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;be&nbsp;acted&nbsp;on.&nbsp;You<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;find&nbsp;this&nbsp;URL&nbsp;in&nbsp;the&nbsp;text&nbsp;member&nbsp;of&nbsp;the&nbsp;atom&nbsp;id&nbsp;for&nbsp;an&nbsp;entry.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;an&nbsp;entry&nbsp;is&nbsp;not&nbsp;sent,&nbsp;this&nbsp;id&nbsp;will&nbsp;be&nbsp;used&nbsp;to&nbsp;construct&nbsp;a&nbsp;new<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;which&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;request&nbsp;feed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BatchEntry&nbsp;which&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;request&nbsp;feed.<br>
 &nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;batch&nbsp;ID&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;reference<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;batch&nbsp;operation&nbsp;in&nbsp;the&nbsp;results&nbsp;feed.&nbsp;If&nbsp;this&nbsp;parameter&nbsp;is&nbsp;None,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;current&nbsp;length&nbsp;of&nbsp;the&nbsp;feed's&nbsp;entry&nbsp;array&nbsp;will&nbsp;be&nbsp;used&nbsp;as&nbsp;a<br>
@@ -2110,7 +2076,7 @@ present&nbsp;so&nbsp;that&nbsp;the&nbsp;server&nbsp;knows&nbsp;which&nbsp;entry&
 Args:<br>
 &nbsp;&nbsp;url_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;be&nbsp;deleted.&nbsp;You&nbsp;can<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;find&nbsp;this&nbsp;URL&nbsp;in&nbsp;the&nbsp;text&nbsp;member&nbsp;of&nbsp;the&nbsp;atom&nbsp;id&nbsp;for&nbsp;an&nbsp;entry.<br>
-&nbsp;&nbsp;entry:&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;(optional)&nbsp;The&nbsp;entry&nbsp;to&nbsp;be&nbsp;deleted.<br>
+&nbsp;&nbsp;entry:&nbsp;BatchEntry&nbsp;(optional)&nbsp;The&nbsp;entry&nbsp;to&nbsp;be&nbsp;deleted.<br>
 &nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)<br>
 &nbsp;<br>
 Raises:<br>
@@ -2123,7 +2089,7 @@ If&nbsp;the&nbsp;entry&nbsp;doesn't&nbsp;yet&nbsp;have&nbsp;an&nbsp;operation&nb
 be&nbsp;set&nbsp;to&nbsp;the&nbsp;insert&nbsp;operation&nbsp;and&nbsp;a&nbsp;batch_id&nbsp;specified&nbsp;as&nbsp;a&nbsp;parameter.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;entry:&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;in&nbsp;the&nbsp;batch&nbsp;feed&nbsp;as&nbsp;an<br>
+&nbsp;&nbsp;entry:&nbsp;BatchEntry&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;in&nbsp;the&nbsp;batch&nbsp;feed&nbsp;as&nbsp;an<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;insert&nbsp;request.<br>
 &nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;batch&nbsp;ID&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;reference<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;batch&nbsp;operation&nbsp;in&nbsp;the&nbsp;results&nbsp;feed.&nbsp;If&nbsp;this&nbsp;parameter&nbsp;is&nbsp;None,<br>
@@ -2135,12 +2101,12 @@ Args:<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;takes&nbsp;either&nbsp;the&nbsp;url_string&nbsp;which&nbsp;is&nbsp;the&nbsp;query&nbsp;URL<br>
 whose&nbsp;results&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;result&nbsp;feed.&nbsp;The&nbsp;query&nbsp;URL&nbsp;will<br>
-be&nbsp;encapsulated&nbsp;in&nbsp;a&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>,&nbsp;and&nbsp;you&nbsp;may&nbsp;pass&nbsp;in&nbsp;the&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a><br>
+be&nbsp;encapsulated&nbsp;in&nbsp;a&nbsp;BatchEntry,&nbsp;and&nbsp;you&nbsp;may&nbsp;pass&nbsp;in&nbsp;the&nbsp;BatchEntry<br>
 with&nbsp;a&nbsp;query&nbsp;URL&nbsp;instead&nbsp;of&nbsp;sending&nbsp;a&nbsp;url_string.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;url_string:&nbsp;str&nbsp;(optional)<br>
-&nbsp;&nbsp;entry:&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;(optional)<br>
+&nbsp;&nbsp;entry:&nbsp;BatchEntry&nbsp;(optional)<br>
 &nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)<br>
 &nbsp;<br>
 Raises:<br>
@@ -2153,7 +2119,7 @@ and&nbsp;assigns&nbsp;the&nbsp;desired&nbsp;batch&nbsp;id&nbsp;to&nbsp;the&nbsp;
 referenced&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;entry:&nbsp;<a href="gdata.data.html#BatchEntry">BatchEntry</a>&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;server&nbsp;as&nbsp;an<br>
+&nbsp;&nbsp;entry:&nbsp;BatchEntry&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;server&nbsp;as&nbsp;an<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;update&nbsp;(HTTP&nbsp;PUT)&nbsp;request.&nbsp;The&nbsp;item&nbsp;must&nbsp;have&nbsp;a&nbsp;valid&nbsp;atom&nbsp;id<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;so&nbsp;that&nbsp;the&nbsp;server&nbsp;knows&nbsp;which&nbsp;entry&nbsp;to&nbsp;replace.<br>
 &nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;batch&nbsp;ID&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;reference<br>

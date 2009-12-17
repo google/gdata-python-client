@@ -52,12 +52,19 @@ Google&nbsp;Analytics&nbsp;Data&nbsp;Export&nbsp;API.</tt></p>
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="gdata.analytics.data.html#Aggregates">Aggregates</a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>, <a href="gdata.analytics.data.html#GetMetric">GetMetric</a>)
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.data.html#CustomVariable">CustomVariable</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.data.html#DataSource">DataSource</a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>, <a href="gdata.analytics.data.html#GetProperty">GetProperty</a>)
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.data.html#Definition">Definition</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.data.html#Destination">Destination</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.data.html#Dimension">Dimension</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.data.html#EndDate">EndDate</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.data.html#Engagement">Engagement</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.data.html#Goal">Goal</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.data.html#Metric">Metric</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.data.html#Property">Property</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.data.html#Segment">Segment</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.data.html#StartDate">StartDate</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.data.html#Step">Step</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.data.html#TableId">TableId</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.data.html#TableName">TableName</a>
 </font></dt></dl>
@@ -99,6 +106,10 @@ Google&nbsp;Analytics&nbsp;Data&nbsp;Export&nbsp;API.</tt></p>
 </dl>
 <hr>
 Data and other attributes defined here:<br>
+<dl><dt><strong>custom_variable</strong> = [&lt;class 'gdata.analytics.data.CustomVariable'&gt;]</dl>
+
+<dl><dt><strong>goal</strong> = [&lt;class 'gdata.analytics.data.Goal'&gt;]</dl>
+
 <dl><dt><strong>property</strong> = [&lt;class 'gdata.analytics.data.Property'&gt;]</dl>
 
 <dl><dt><strong>table_id</strong> = &lt;class 'gdata.analytics.data.TableId'&gt;<dd><tt>Analytics&nbsp;Feed&nbsp;&lt;dxp:tableId&gt;</tt></dl>
@@ -457,6 +468,8 @@ Returns:<br>
 <hr>
 Data and other attributes defined here:<br>
 <dl><dt><strong>entry</strong> = [&lt;class 'gdata.analytics.data.AccountEntry'&gt;]</dl>
+
+<dl><dt><strong>segment</strong> = [&lt;class 'gdata.analytics.data.Segment'&gt;]</dl>
 
 <hr>
 Methods inherited from <a href="gdata.data.html#GDFeed">gdata.data.GDFeed</a>:<br>
@@ -937,6 +950,160 @@ Returns:<br>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="CustomVariable">class <strong>CustomVariable</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Analytics&nbsp;Data&nbsp;Feed&nbsp;&lt;dxp:customVariable&gt;<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.analytics.data.html#CustomVariable">CustomVariable</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>index</strong> = 'index'</dl>
+
+<dl><dt><strong>name</strong> = 'name'</dl>
+
+<dl><dt><strong>scope</strong> = 'scope'</dl>
+
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="CustomVariable-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="CustomVariable-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="CustomVariable-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="CustomVariable-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="CustomVariable-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="CustomVariable-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="CustomVariable-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="CustomVariable-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="CustomVariable-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="CustomVariable-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="DataEntry">class <strong>DataEntry</strong></a>(<a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>, <a href="gdata.analytics.data.html#GetMetric">GetMetric</a>, <a href="gdata.analytics.data.html#GetDimension">GetDimension</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
@@ -1355,6 +1522,8 @@ Data and other attributes defined here:<br>
 <dl><dt><strong>end_date</strong> = &lt;class 'gdata.analytics.data.EndDate'&gt;<dd><tt>Analytics&nbsp;Feed&nbsp;&lt;dxp:endDate&gt;</tt></dl>
 
 <dl><dt><strong>entry</strong> = [&lt;class 'gdata.analytics.data.DataEntry'&gt;]</dl>
+
+<dl><dt><strong>segment</strong> = &lt;class 'gdata.analytics.data.Segment'&gt;<dd><tt>Analytics&nbsp;Feed&nbsp;&lt;dxp:segment&gt;</tt></dl>
 
 <dl><dt><strong>start_date</strong> = &lt;class 'gdata.analytics.data.StartDate'&gt;<dd><tt>Analytics&nbsp;Feed&nbsp;&lt;dxp:startDate&gt;</tt></dl>
 
@@ -1841,6 +2010,310 @@ Returns:<br>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Definition">class <strong>Definition</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Analytics&nbsp;Feed&nbsp;&lt;dxp:definition&gt;<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.analytics.data.html#Definition">Definition</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="Definition-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Definition-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Definition-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="Definition-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Definition-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Definition-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="Definition-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Definition-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="Definition-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Definition-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Destination">class <strong>Destination</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Analytics&nbsp;Feed&nbsp;&lt;dxp:destination&gt;<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.analytics.data.html#Destination">Destination</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>case_sensitive</strong> = 'caseSensitive'</dl>
+
+<dl><dt><strong>expression</strong> = 'expression'</dl>
+
+<dl><dt><strong>match_type</strong> = 'matchType'</dl>
+
+<dl><dt><strong>step</strong> = [&lt;class 'gdata.analytics.data.Step'&gt;]</dl>
+
+<dl><dt><strong>step1_required</strong> = 'step1Required'</dl>
+
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="Destination-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Destination-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Destination-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="Destination-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Destination-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Destination-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="Destination-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Destination-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="Destination-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Destination-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="Dimension">class <strong>Dimension</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
@@ -2139,6 +2612,160 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Engagement">class <strong>Engagement</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Analytics&nbsp;Feed&nbsp;&lt;dxp:engagement&gt;<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.analytics.data.html#Engagement">Engagement</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>comparison</strong> = 'comparison'</dl>
+
+<dl><dt><strong>threshold_value</strong> = 'thresholdValue'</dl>
+
+<dl><dt><strong>type</strong> = 'type'</dl>
+
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="Engagement-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Engagement-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Engagement-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="Engagement-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Engagement-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Engagement-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="Engagement-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Engagement-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="Engagement-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Engagement-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="GetDimension">class <strong>GetDimension</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
@@ -2222,6 +2849,166 @@ Data descriptors defined here:<br>
 <dl><dt><strong>__weakref__</strong></dt>
 <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Goal">class <strong>Goal</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Analytics&nbsp;Feed&nbsp;&lt;dxp:goal&gt;<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.analytics.data.html#Goal">Goal</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>active</strong> = 'active'</dl>
+
+<dl><dt><strong>destination</strong> = &lt;class 'gdata.analytics.data.Destination'&gt;<dd><tt>Analytics&nbsp;Feed&nbsp;&lt;dxp:destination&gt;</tt></dl>
+
+<dl><dt><strong>engagement</strong> = &lt;class 'gdata.analytics.data.Engagement'&gt;<dd><tt>Analytics&nbsp;Feed&nbsp;&lt;dxp:engagement&gt;</tt></dl>
+
+<dl><dt><strong>name</strong> = 'name'</dl>
+
+<dl><dt><strong>number</strong> = 'number'</dl>
+
+<dl><dt><strong>value</strong> = 'value'</dl>
+
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="Goal-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Goal-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Goal-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="Goal-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Goal-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Goal-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="Goal-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Goal-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="Goal-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Goal-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -2534,6 +3321,160 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Segment">class <strong>Segment</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Analytics&nbsp;Feed&nbsp;&lt;dxp:segment&gt;<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.analytics.data.html#Segment">Segment</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>definition</strong> = &lt;class 'gdata.analytics.data.Definition'&gt;<dd><tt>Analytics&nbsp;Feed&nbsp;&lt;dxp:definition&gt;</tt></dl>
+
+<dl><dt><strong>id</strong> = 'id'</dl>
+
+<dl><dt><strong>name</strong> = 'name'</dl>
+
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="Segment-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Segment-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Segment-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="Segment-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Segment-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Segment-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="Segment-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Segment-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="Segment-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Segment-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="StartDate">class <strong>StartDate</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
@@ -2651,6 +3592,160 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
 
 <dl><dt><a name="StartDate-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Step">class <strong>Step</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Analytics&nbsp;Feed&nbsp;&lt;dxp:step&gt;<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.analytics.data.html#Step">Step</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>name</strong> = 'name'</dl>
+
+<dl><dt><strong>number</strong> = 'number'</dl>
+
+<dl><dt><strong>path</strong> = 'path'</dl>
+
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="Step-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Step-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Step-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="Step-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Step-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Step-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="Step-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Step-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="Step-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Step-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;XML.</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
@@ -2976,6 +4071,7 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><strong>DXP_NS</strong> = '{http://schemas.google.com/analytics/2009}%s'<br>
+<strong>GA_NS</strong> = '{http://schemas.google.com/ga/2009}%s'<br>
 <strong>__author__</strong> = 'api.nickm@google.com (Nick Mihailovski)'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#7799ee">

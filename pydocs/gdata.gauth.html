@@ -465,9 +465,37 @@ Data descriptors inherited from <a href="exceptions.html#BaseException">exceptio
 <font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt><a name="-AeDelete"><strong>AeDelete</strong></a> = ae_delete(token_key)</dt></dl>
- <dl><dt><a name="-AeLoad"><strong>AeLoad</strong></a> = ae_load(token_key)</dt></dl>
- <dl><dt><a name="-AeSave"><strong>AeSave</strong></a> = ae_save(token, token_key)</dt></dl>
+<td width="100%"><dl><dt><a name="-AeDelete"><strong>AeDelete</strong></a> = ae_delete(token_key)</dt><dd><tt>Removes&nbsp;the&nbsp;token&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;from&nbsp;the&nbsp;App&nbsp;Engine&nbsp;datastore.</tt></dd></dl>
+ <dl><dt><a name="-AeLoad"><strong>AeLoad</strong></a> = ae_load(token_key)</dt><dd><tt>Retrieves&nbsp;a&nbsp;token&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;from&nbsp;the&nbsp;App&nbsp;Engine&nbsp;datastore.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;a&nbsp;convenience&nbsp;method&nbsp;for&nbsp;using&nbsp;the&nbsp;library&nbsp;with&nbsp;App&nbsp;Engine.<br>
+See&nbsp;also&nbsp;ae_save.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;token_key:&nbsp;str&nbsp;The&nbsp;unique&nbsp;key&nbsp;associated&nbsp;with&nbsp;the&nbsp;desired&nbsp;token&nbsp;when&nbsp;it<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;was&nbsp;saved&nbsp;using&nbsp;ae_save.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;token&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;if&nbsp;there&nbsp;was&nbsp;a&nbsp;token&nbsp;associated&nbsp;with&nbsp;the&nbsp;token_key&nbsp;or&nbsp;None<br>
+&nbsp;&nbsp;if&nbsp;the&nbsp;key&nbsp;could&nbsp;not&nbsp;be&nbsp;found.</tt></dd></dl>
+ <dl><dt><a name="-AeSave"><strong>AeSave</strong></a> = ae_save(token, token_key)</dt><dd><tt>Stores&nbsp;an&nbsp;auth&nbsp;token&nbsp;in&nbsp;the&nbsp;App&nbsp;Engine&nbsp;datastore.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;a&nbsp;convenience&nbsp;method&nbsp;for&nbsp;using&nbsp;the&nbsp;library&nbsp;with&nbsp;App&nbsp;Engine.<br>
+Recommended&nbsp;usage&nbsp;is&nbsp;to&nbsp;associate&nbsp;the&nbsp;auth&nbsp;token&nbsp;with&nbsp;the&nbsp;current_user.<br>
+If&nbsp;a&nbsp;user&nbsp;is&nbsp;signed&nbsp;in&nbsp;to&nbsp;the&nbsp;app&nbsp;using&nbsp;the&nbsp;App&nbsp;Engine&nbsp;users&nbsp;API,&nbsp;you<br>
+can&nbsp;use<br>
+gdata.gauth.<a href="#-ae_save">ae_save</a>(some_token,&nbsp;users.get_current_user().user_id())<br>
+If&nbsp;you&nbsp;are&nbsp;not&nbsp;using&nbsp;the&nbsp;Users&nbsp;API&nbsp;you&nbsp;are&nbsp;free&nbsp;to&nbsp;choose&nbsp;whatever<br>
+string&nbsp;you&nbsp;would&nbsp;like&nbsp;for&nbsp;a&nbsp;token_string.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;token:&nbsp;an&nbsp;auth&nbsp;token&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;Must&nbsp;be&nbsp;one&nbsp;of&nbsp;<a href="#ClientLoginToken">ClientLoginToken</a>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#AuthSubToken">AuthSubToken</a>,&nbsp;<a href="#SecureAuthSubToken">SecureAuthSubToken</a>,&nbsp;<a href="#OAuthRsaToken">OAuthRsaToken</a>,&nbsp;or&nbsp;<a href="#OAuthHmacToken">OAuthHmacToken</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;token_to_blob).<br>
+&nbsp;&nbsp;token_key:&nbsp;str&nbsp;A&nbsp;unique&nbsp;identified&nbsp;to&nbsp;be&nbsp;used&nbsp;when&nbsp;you&nbsp;want&nbsp;to&nbsp;retrieve<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;token.&nbsp;If&nbsp;the&nbsp;user&nbsp;is&nbsp;signed&nbsp;in&nbsp;to&nbsp;App&nbsp;Engine&nbsp;using&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;users&nbsp;API,&nbsp;I&nbsp;recommend&nbsp;using&nbsp;the&nbsp;user&nbsp;ID&nbsp;for&nbsp;the&nbsp;token_key:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;users.get_current_user().user_id()</tt></dd></dl>
  <dl><dt><a name="-AuthSubStringFromUrl"><strong>AuthSubStringFromUrl</strong></a> = auth_sub_string_from_url(url, scopes_param_prefix<font color="#909090">='auth_sub_scopes'</font>)</dt><dd><tt>Finds&nbsp;the&nbsp;token&nbsp;string&nbsp;(and&nbsp;scopes)&nbsp;after&nbsp;the&nbsp;browser&nbsp;is&nbsp;redirected.<br>
 &nbsp;<br>
 After&nbsp;the&nbsp;Google&nbsp;Accounts&nbsp;AuthSub&nbsp;pages&nbsp;redirect&nbsp;the&nbsp;user's&nbsp;broswer&nbsp;back&nbsp;to<br>
@@ -604,9 +632,37 @@ Args:<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;same&nbsp;token&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
- <dl><dt><a name="-ae_delete"><strong>ae_delete</strong></a>(token_key)</dt></dl>
- <dl><dt><a name="-ae_load"><strong>ae_load</strong></a>(token_key)</dt></dl>
- <dl><dt><a name="-ae_save"><strong>ae_save</strong></a>(token, token_key)</dt></dl>
+ <dl><dt><a name="-ae_delete"><strong>ae_delete</strong></a>(token_key)</dt><dd><tt>Removes&nbsp;the&nbsp;token&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;from&nbsp;the&nbsp;App&nbsp;Engine&nbsp;datastore.</tt></dd></dl>
+ <dl><dt><a name="-ae_load"><strong>ae_load</strong></a>(token_key)</dt><dd><tt>Retrieves&nbsp;a&nbsp;token&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;from&nbsp;the&nbsp;App&nbsp;Engine&nbsp;datastore.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;a&nbsp;convenience&nbsp;method&nbsp;for&nbsp;using&nbsp;the&nbsp;library&nbsp;with&nbsp;App&nbsp;Engine.<br>
+See&nbsp;also&nbsp;ae_save.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;token_key:&nbsp;str&nbsp;The&nbsp;unique&nbsp;key&nbsp;associated&nbsp;with&nbsp;the&nbsp;desired&nbsp;token&nbsp;when&nbsp;it<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;was&nbsp;saved&nbsp;using&nbsp;ae_save.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;token&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;if&nbsp;there&nbsp;was&nbsp;a&nbsp;token&nbsp;associated&nbsp;with&nbsp;the&nbsp;token_key&nbsp;or&nbsp;None<br>
+&nbsp;&nbsp;if&nbsp;the&nbsp;key&nbsp;could&nbsp;not&nbsp;be&nbsp;found.</tt></dd></dl>
+ <dl><dt><a name="-ae_save"><strong>ae_save</strong></a>(token, token_key)</dt><dd><tt>Stores&nbsp;an&nbsp;auth&nbsp;token&nbsp;in&nbsp;the&nbsp;App&nbsp;Engine&nbsp;datastore.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;a&nbsp;convenience&nbsp;method&nbsp;for&nbsp;using&nbsp;the&nbsp;library&nbsp;with&nbsp;App&nbsp;Engine.<br>
+Recommended&nbsp;usage&nbsp;is&nbsp;to&nbsp;associate&nbsp;the&nbsp;auth&nbsp;token&nbsp;with&nbsp;the&nbsp;current_user.<br>
+If&nbsp;a&nbsp;user&nbsp;is&nbsp;signed&nbsp;in&nbsp;to&nbsp;the&nbsp;app&nbsp;using&nbsp;the&nbsp;App&nbsp;Engine&nbsp;users&nbsp;API,&nbsp;you<br>
+can&nbsp;use<br>
+gdata.gauth.<a href="#-ae_save">ae_save</a>(some_token,&nbsp;users.get_current_user().user_id())<br>
+If&nbsp;you&nbsp;are&nbsp;not&nbsp;using&nbsp;the&nbsp;Users&nbsp;API&nbsp;you&nbsp;are&nbsp;free&nbsp;to&nbsp;choose&nbsp;whatever<br>
+string&nbsp;you&nbsp;would&nbsp;like&nbsp;for&nbsp;a&nbsp;token_string.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;token:&nbsp;an&nbsp;auth&nbsp;token&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;Must&nbsp;be&nbsp;one&nbsp;of&nbsp;<a href="#ClientLoginToken">ClientLoginToken</a>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#AuthSubToken">AuthSubToken</a>,&nbsp;<a href="#SecureAuthSubToken">SecureAuthSubToken</a>,&nbsp;<a href="#OAuthRsaToken">OAuthRsaToken</a>,&nbsp;or&nbsp;<a href="#OAuthHmacToken">OAuthHmacToken</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;token_to_blob).<br>
+&nbsp;&nbsp;token_key:&nbsp;str&nbsp;A&nbsp;unique&nbsp;identified&nbsp;to&nbsp;be&nbsp;used&nbsp;when&nbsp;you&nbsp;want&nbsp;to&nbsp;retrieve<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;token.&nbsp;If&nbsp;the&nbsp;user&nbsp;is&nbsp;signed&nbsp;in&nbsp;to&nbsp;App&nbsp;Engine&nbsp;using&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;users&nbsp;API,&nbsp;I&nbsp;recommend&nbsp;using&nbsp;the&nbsp;user&nbsp;ID&nbsp;for&nbsp;the&nbsp;token_key:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;users.get_current_user().user_id()</tt></dd></dl>
  <dl><dt><a name="-auth_sub_string_from_body"><strong>auth_sub_string_from_body</strong></a>(http_body)</dt><dd><tt>Extracts&nbsp;the&nbsp;AuthSub&nbsp;token&nbsp;from&nbsp;an&nbsp;HTTP&nbsp;body&nbsp;string.<br>
 &nbsp;<br>
 Used&nbsp;to&nbsp;find&nbsp;the&nbsp;new&nbsp;session&nbsp;token&nbsp;after&nbsp;making&nbsp;a&nbsp;request&nbsp;to&nbsp;upgrade&nbsp;a<br>
@@ -717,7 +773,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;header.<br>
 &nbsp;&nbsp;verifier:&nbsp;str&nbsp;The&nbsp;OAuth&nbsp;verifier&nbsp;which&nbsp;must&nbsp;be&nbsp;included&nbsp;when&nbsp;you&nbsp;are<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upgrading&nbsp;a&nbsp;request&nbsp;token&nbsp;to&nbsp;an&nbsp;access&nbsp;token.</tt></dd></dl>
- <dl><dt><a name="-generate_auth_sub_url"><strong>generate_auth_sub_url</strong></a>(next, scopes, secure<font color="#909090">=False</font>, session<font color="#909090">=True</font>, request_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc17e90&gt;</font>, domain<font color="#909090">='default'</font>, scopes_param_prefix<font color="#909090">='auth_sub_scopes'</font>)</dt><dd><tt>Constructs&nbsp;a&nbsp;URI&nbsp;for&nbsp;requesting&nbsp;a&nbsp;multiscope&nbsp;AuthSub&nbsp;token.<br>
+ <dl><dt><a name="-generate_auth_sub_url"><strong>generate_auth_sub_url</strong></a>(next, scopes, secure<font color="#909090">=False</font>, session<font color="#909090">=True</font>, request_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc16f10&gt;</font>, domain<font color="#909090">='default'</font>, scopes_param_prefix<font color="#909090">='auth_sub_scopes'</font>)</dt><dd><tt>Constructs&nbsp;a&nbsp;URI&nbsp;for&nbsp;requesting&nbsp;a&nbsp;multiscope&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 The&nbsp;generated&nbsp;token&nbsp;will&nbsp;contain&nbsp;a&nbsp;URL&nbsp;parameter&nbsp;to&nbsp;pass&nbsp;along&nbsp;the<br>
 requested&nbsp;scopes&nbsp;to&nbsp;the&nbsp;next&nbsp;URL.&nbsp;When&nbsp;the&nbsp;Google&nbsp;Accounts&nbsp;page<br>
@@ -733,7 +789,8 @@ Args:<br>
 &nbsp;&nbsp;next:&nbsp;atom.http_core.Uri&nbsp;or&nbsp;string&nbsp;The&nbsp;URL&nbsp;user&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;after<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authorizing&nbsp;this&nbsp;web&nbsp;application&nbsp;to&nbsp;access&nbsp;their&nbsp;data.<br>
 &nbsp;&nbsp;scopes:&nbsp;list&nbsp;containint&nbsp;strings&nbsp;or&nbsp;atom.http_core.Uri&nbsp;objects.&nbsp;The&nbsp;URLs<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;services&nbsp;to&nbsp;be&nbsp;accessed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;services&nbsp;to&nbsp;be&nbsp;accessed.&nbsp;Could&nbsp;also&nbsp;be&nbsp;a&nbsp;single&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;single&nbsp;atom.http_core.Uri&nbsp;for&nbsp;requesting&nbsp;just&nbsp;one&nbsp;scope.<br>
 &nbsp;&nbsp;secure:&nbsp;boolean&nbsp;(optional)&nbsp;Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;issued&nbsp;token<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;a&nbsp;secure&nbsp;token.<br>
 &nbsp;&nbsp;session:&nbsp;boolean&nbsp;(optional)&nbsp;Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;issued&nbsp;token<br>

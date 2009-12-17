@@ -35,6 +35,12 @@
 <dt><font face="helvetica, arial"><a href="gdata.docs.client.html#DocsClient">DocsClient</a>
 </font></dt></dl>
 </dd>
+<dt><font face="helvetica, arial"><a href="gdata.client.html#Query">gdata.client.Query</a>(<a href="__builtin__.html#object">__builtin__.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.docs.client.html#DocsQuery">DocsQuery</a>
+</font></dt></dl>
+</dd>
 </dl>
  <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -293,7 +299,61 @@ Data and other attributes defined here:<br>
 
 <hr>
 Methods inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
-<dl><dt><a name="DocsClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">='https://www.google.com/accounts/ClientLogin'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="DocsClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc52f90&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+&nbsp;<br>
+In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
+application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
+authorization&nbsp;is&nbsp;by&nbsp;including&nbsp;a&nbsp;Client&nbsp;Login&nbsp;token&nbsp;in&nbsp;the&nbsp;Authorization<br>
+HTTP&nbsp;header&nbsp;of&nbsp;all&nbsp;requests.&nbsp;This&nbsp;method&nbsp;requests&nbsp;the&nbsp;Client&nbsp;Login&nbsp;token<br>
+by&nbsp;sending&nbsp;the&nbsp;user's&nbsp;email&nbsp;address,&nbsp;password,&nbsp;the&nbsp;name&nbsp;of&nbsp;the<br>
+application,&nbsp;and&nbsp;the&nbsp;service&nbsp;code&nbsp;for&nbsp;the&nbsp;service&nbsp;which&nbsp;will&nbsp;be&nbsp;accessed<br>
+by&nbsp;the&nbsp;application.&nbsp;If&nbsp;the&nbsp;username&nbsp;and&nbsp;password&nbsp;are&nbsp;correct,&nbsp;the&nbsp;server<br>
+will&nbsp;respond&nbsp;with&nbsp;the&nbsp;client&nbsp;login&nbsp;code&nbsp;and&nbsp;a&nbsp;new&nbsp;ClientLoginToken<br>
+object&nbsp;will&nbsp;be&nbsp;set&nbsp;in&nbsp;the&nbsp;client's&nbsp;auth_token&nbsp;member.&nbsp;With&nbsp;the&nbsp;auth_token<br>
+set,&nbsp;future&nbsp;requests&nbsp;from&nbsp;this&nbsp;client&nbsp;will&nbsp;include&nbsp;the&nbsp;Client&nbsp;Login<br>
+token.<br>
+&nbsp;<br>
+For&nbsp;a&nbsp;list&nbsp;of&nbsp;service&nbsp;names,&nbsp;see&nbsp;<br>
+<a href="http://code.google.com/apis/gdata/faq.html#clientlogin">http://code.google.com/apis/gdata/faq.html#clientlogin</a><br>
+For&nbsp;more&nbsp;information&nbsp;on&nbsp;Client&nbsp;Login,&nbsp;see:<br>
+<a href="http://code.google.com/apis/accounts/docs/AuthForInstalledApps.html">http://code.google.com/apis/accounts/docs/AuthForInstalledApps.html</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;email:&nbsp;str&nbsp;The&nbsp;user's&nbsp;email&nbsp;address&nbsp;or&nbsp;username.<br>
+&nbsp;&nbsp;password:&nbsp;str&nbsp;The&nbsp;password&nbsp;for&nbsp;the&nbsp;user's&nbsp;account.<br>
+&nbsp;&nbsp;source:&nbsp;str&nbsp;The&nbsp;name&nbsp;of&nbsp;your&nbsp;application.&nbsp;This&nbsp;can&nbsp;be&nbsp;anything&nbsp;you<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;like&nbsp;but&nbsp;should&nbsp;should&nbsp;give&nbsp;some&nbsp;indication&nbsp;of&nbsp;which&nbsp;app&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;making&nbsp;the&nbsp;request.<br>
+&nbsp;&nbsp;service:&nbsp;str&nbsp;The&nbsp;service&nbsp;code&nbsp;for&nbsp;the&nbsp;service&nbsp;you&nbsp;would&nbsp;like&nbsp;to&nbsp;access.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;example,&nbsp;'cp'&nbsp;for&nbsp;contacts,&nbsp;'cl'&nbsp;for&nbsp;calendar.&nbsp;For&nbsp;a&nbsp;full<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list&nbsp;see<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://code.google.com/apis/gdata/faq.html#clientlogin">http://code.google.com/apis/gdata/faq.html#clientlogin</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;you&nbsp;are&nbsp;using&nbsp;a&nbsp;subclass&nbsp;of&nbsp;the&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>,&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;service&nbsp;will&nbsp;usually&nbsp;be&nbsp;filled&nbsp;in&nbsp;for&nbsp;you&nbsp;so&nbsp;you&nbsp;do&nbsp;not&nbsp;need<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;specify&nbsp;it.&nbsp;For&nbsp;example&nbsp;see&nbsp;BloggerClient,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SpreadsheetsClient,&nbsp;etc.<br>
+&nbsp;&nbsp;account_type:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;type&nbsp;of&nbsp;account&nbsp;which&nbsp;is&nbsp;being<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authenticated.&nbsp;This&nbsp;can&nbsp;be&nbsp;either&nbsp;'GOOGLE'&nbsp;for&nbsp;a&nbsp;Google<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account,&nbsp;'HOSTED'&nbsp;for&nbsp;a&nbsp;Google&nbsp;Apps&nbsp;Account,&nbsp;or&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;'HOSTED_OR_GOOGLE'&nbsp;which&nbsp;will&nbsp;select&nbsp;the&nbsp;Google<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apps&nbsp;Account&nbsp;if&nbsp;the&nbsp;same&nbsp;email&nbsp;address&nbsp;is&nbsp;used&nbsp;for&nbsp;both<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;Google&nbsp;Account&nbsp;and&nbsp;a&nbsp;Google&nbsp;Apps&nbsp;Account.<br>
+&nbsp;&nbsp;auth_url:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;the&nbsp;login&nbsp;request&nbsp;should&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sent.<br>
+&nbsp;&nbsp;captcha_token:&nbsp;str&nbsp;(optional)&nbsp;If&nbsp;a&nbsp;previous&nbsp;login&nbsp;attempt&nbsp;was&nbsp;reponded<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;with&nbsp;a&nbsp;CAPTCHA&nbsp;challenge,&nbsp;this&nbsp;is&nbsp;the&nbsp;token&nbsp;which<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;identifies&nbsp;the&nbsp;challenge&nbsp;(from&nbsp;the&nbsp;CAPTCHA's&nbsp;URL).<br>
+&nbsp;&nbsp;captcha_response:&nbsp;str&nbsp;(optional)&nbsp;If&nbsp;a&nbsp;previous&nbsp;login&nbsp;attempt&nbsp;was<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reponded&nbsp;to&nbsp;with&nbsp;a&nbsp;CAPTCHA&nbsp;challenge,&nbsp;this&nbsp;is&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;text&nbsp;which&nbsp;was&nbsp;contained&nbsp;in&nbsp;the&nbsp;challenge.<br>
+&nbsp;<br>
+&nbsp;&nbsp;Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;None<br>
+&nbsp;<br>
+&nbsp;&nbsp;Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;RequestError&nbsp;or&nbsp;one&nbsp;of&nbsp;its&nbsp;suclasses:&nbsp;BadAuthentication,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;BadAuthenticationServiceURL,&nbsp;ClientLoginFailed,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ClientLoginTokenMissing,&nbsp;or&nbsp;CaptchaChallenge</tt></dd></dl>
 
 <dl><dt><a name="DocsClient-Delete"><strong>Delete</strong></a> = delete(self, entry_or_uri, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
 
@@ -423,7 +483,7 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xca5090&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="DocsClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc52f50&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="DocsClient-Update"><strong>Update</strong></a> = update(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
 &nbsp;<br>
@@ -443,7 +503,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xca50d0&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="DocsClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc52fd0&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -460,7 +520,61 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">='https://www.google.com/accounts/ClientLogin'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="DocsClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc52f90&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+&nbsp;<br>
+In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
+application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
+authorization&nbsp;is&nbsp;by&nbsp;including&nbsp;a&nbsp;Client&nbsp;Login&nbsp;token&nbsp;in&nbsp;the&nbsp;Authorization<br>
+HTTP&nbsp;header&nbsp;of&nbsp;all&nbsp;requests.&nbsp;This&nbsp;method&nbsp;requests&nbsp;the&nbsp;Client&nbsp;Login&nbsp;token<br>
+by&nbsp;sending&nbsp;the&nbsp;user's&nbsp;email&nbsp;address,&nbsp;password,&nbsp;the&nbsp;name&nbsp;of&nbsp;the<br>
+application,&nbsp;and&nbsp;the&nbsp;service&nbsp;code&nbsp;for&nbsp;the&nbsp;service&nbsp;which&nbsp;will&nbsp;be&nbsp;accessed<br>
+by&nbsp;the&nbsp;application.&nbsp;If&nbsp;the&nbsp;username&nbsp;and&nbsp;password&nbsp;are&nbsp;correct,&nbsp;the&nbsp;server<br>
+will&nbsp;respond&nbsp;with&nbsp;the&nbsp;client&nbsp;login&nbsp;code&nbsp;and&nbsp;a&nbsp;new&nbsp;ClientLoginToken<br>
+object&nbsp;will&nbsp;be&nbsp;set&nbsp;in&nbsp;the&nbsp;client's&nbsp;auth_token&nbsp;member.&nbsp;With&nbsp;the&nbsp;auth_token<br>
+set,&nbsp;future&nbsp;requests&nbsp;from&nbsp;this&nbsp;client&nbsp;will&nbsp;include&nbsp;the&nbsp;Client&nbsp;Login<br>
+token.<br>
+&nbsp;<br>
+For&nbsp;a&nbsp;list&nbsp;of&nbsp;service&nbsp;names,&nbsp;see&nbsp;<br>
+<a href="http://code.google.com/apis/gdata/faq.html#clientlogin">http://code.google.com/apis/gdata/faq.html#clientlogin</a><br>
+For&nbsp;more&nbsp;information&nbsp;on&nbsp;Client&nbsp;Login,&nbsp;see:<br>
+<a href="http://code.google.com/apis/accounts/docs/AuthForInstalledApps.html">http://code.google.com/apis/accounts/docs/AuthForInstalledApps.html</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;email:&nbsp;str&nbsp;The&nbsp;user's&nbsp;email&nbsp;address&nbsp;or&nbsp;username.<br>
+&nbsp;&nbsp;password:&nbsp;str&nbsp;The&nbsp;password&nbsp;for&nbsp;the&nbsp;user's&nbsp;account.<br>
+&nbsp;&nbsp;source:&nbsp;str&nbsp;The&nbsp;name&nbsp;of&nbsp;your&nbsp;application.&nbsp;This&nbsp;can&nbsp;be&nbsp;anything&nbsp;you<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;like&nbsp;but&nbsp;should&nbsp;should&nbsp;give&nbsp;some&nbsp;indication&nbsp;of&nbsp;which&nbsp;app&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;making&nbsp;the&nbsp;request.<br>
+&nbsp;&nbsp;service:&nbsp;str&nbsp;The&nbsp;service&nbsp;code&nbsp;for&nbsp;the&nbsp;service&nbsp;you&nbsp;would&nbsp;like&nbsp;to&nbsp;access.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;example,&nbsp;'cp'&nbsp;for&nbsp;contacts,&nbsp;'cl'&nbsp;for&nbsp;calendar.&nbsp;For&nbsp;a&nbsp;full<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list&nbsp;see<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://code.google.com/apis/gdata/faq.html#clientlogin">http://code.google.com/apis/gdata/faq.html#clientlogin</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;you&nbsp;are&nbsp;using&nbsp;a&nbsp;subclass&nbsp;of&nbsp;the&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>,&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;service&nbsp;will&nbsp;usually&nbsp;be&nbsp;filled&nbsp;in&nbsp;for&nbsp;you&nbsp;so&nbsp;you&nbsp;do&nbsp;not&nbsp;need<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;specify&nbsp;it.&nbsp;For&nbsp;example&nbsp;see&nbsp;BloggerClient,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SpreadsheetsClient,&nbsp;etc.<br>
+&nbsp;&nbsp;account_type:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;type&nbsp;of&nbsp;account&nbsp;which&nbsp;is&nbsp;being<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authenticated.&nbsp;This&nbsp;can&nbsp;be&nbsp;either&nbsp;'GOOGLE'&nbsp;for&nbsp;a&nbsp;Google<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account,&nbsp;'HOSTED'&nbsp;for&nbsp;a&nbsp;Google&nbsp;Apps&nbsp;Account,&nbsp;or&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;'HOSTED_OR_GOOGLE'&nbsp;which&nbsp;will&nbsp;select&nbsp;the&nbsp;Google<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apps&nbsp;Account&nbsp;if&nbsp;the&nbsp;same&nbsp;email&nbsp;address&nbsp;is&nbsp;used&nbsp;for&nbsp;both<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;Google&nbsp;Account&nbsp;and&nbsp;a&nbsp;Google&nbsp;Apps&nbsp;Account.<br>
+&nbsp;&nbsp;auth_url:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;the&nbsp;login&nbsp;request&nbsp;should&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sent.<br>
+&nbsp;&nbsp;captcha_token:&nbsp;str&nbsp;(optional)&nbsp;If&nbsp;a&nbsp;previous&nbsp;login&nbsp;attempt&nbsp;was&nbsp;reponded<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;with&nbsp;a&nbsp;CAPTCHA&nbsp;challenge,&nbsp;this&nbsp;is&nbsp;the&nbsp;token&nbsp;which<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;identifies&nbsp;the&nbsp;challenge&nbsp;(from&nbsp;the&nbsp;CAPTCHA's&nbsp;URL).<br>
+&nbsp;&nbsp;captcha_response:&nbsp;str&nbsp;(optional)&nbsp;If&nbsp;a&nbsp;previous&nbsp;login&nbsp;attempt&nbsp;was<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reponded&nbsp;to&nbsp;with&nbsp;a&nbsp;CAPTCHA&nbsp;challenge,&nbsp;this&nbsp;is&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;text&nbsp;which&nbsp;was&nbsp;contained&nbsp;in&nbsp;the&nbsp;challenge.<br>
+&nbsp;<br>
+&nbsp;&nbsp;Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;None<br>
+&nbsp;<br>
+&nbsp;&nbsp;Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;RequestError&nbsp;or&nbsp;one&nbsp;of&nbsp;its&nbsp;suclasses:&nbsp;BadAuthentication,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;BadAuthenticationServiceURL,&nbsp;ClientLoginFailed,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ClientLoginTokenMissing,&nbsp;or&nbsp;CaptchaChallenge</tt></dd></dl>
 
 <dl><dt><a name="DocsClient-delete"><strong>delete</strong></a>(self, entry_or_uri, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
 
@@ -590,7 +704,7 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xca5090&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="DocsClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc52f50&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="DocsClient-update"><strong>update</strong></a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
 &nbsp;<br>
@@ -610,7 +724,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xca50d0&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="DocsClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc52fd0&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -629,13 +743,13 @@ Returns:<br>
 
 <hr>
 Methods inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
-<dl><dt><a name="DocsClient-Get"><strong>Get</strong></a> = get(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-Get"><strong>Get</strong></a> = get(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Performs&nbsp;a&nbsp;request&nbsp;using&nbsp;the&nbsp;GET&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-Put"><strong>Put</strong></a> = put(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-Put"><strong>Put</strong></a> = put(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;data&nbsp;using&nbsp;the&nbsp;PUT&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-get"><strong>get</strong></a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-get"><strong>get</strong></a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Performs&nbsp;a&nbsp;request&nbsp;using&nbsp;the&nbsp;GET&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-put"><strong>put</strong></a>(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-put"><strong>put</strong></a>(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;data&nbsp;using&nbsp;the&nbsp;PUT&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
@@ -651,6 +765,84 @@ Data and other attributes inherited from <a href="atom.client.html#AtomPubClient
 
 <dl><dt><strong>ssl</strong> = False</dl>
 
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="DocsQuery">class <strong>DocsQuery</strong></a>(<a href="gdata.client.html#Query">gdata.client.Query</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.docs.client.html#DocsQuery">DocsQuery</a></dd>
+<dd><a href="gdata.client.html#Query">gdata.client.Query</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="DocsQuery-ModifyRequest"><strong>ModifyRequest</strong></a> = <a href="#DocsQuery-modify_request">modify_request</a>(self, http_request)</dt></dl>
+
+<dl><dt><a name="DocsQuery-__init__"><strong>__init__</strong></a>(self, title<font color="#909090">=None</font>, title_exact<font color="#909090">=None</font>, opened_min<font color="#909090">=None</font>, opened_max<font color="#909090">=None</font>, edited_min<font color="#909090">=None</font>, edited_max<font color="#909090">=None</font>, owner<font color="#909090">=None</font>, writer<font color="#909090">=None</font>, reader<font color="#909090">=None</font>, show_folders<font color="#909090">=None</font>, show_deleted<font color="#909090">=None</font>, ocr<font color="#909090">=None</font>, target_language<font color="#909090">=None</font>, source_language<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Constructs&nbsp;a&nbsp;query&nbsp;URL&nbsp;for&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;List&nbsp;&nbsp;API.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;title:&nbsp;str&nbsp;(optional)&nbsp;Specifies&nbsp;the&nbsp;search&nbsp;terms&nbsp;for&nbsp;the&nbsp;title&nbsp;of&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.&nbsp;This&nbsp;parameter&nbsp;used&nbsp;without&nbsp;title_exact&nbsp;will&nbsp;only<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;submit&nbsp;partial&nbsp;queries,&nbsp;not&nbsp;exact&nbsp;queries.<br>
+&nbsp;&nbsp;title_exact:&nbsp;str&nbsp;(optional)&nbsp;Meaningless&nbsp;without&nbsp;title.&nbsp;Possible&nbsp;values<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;'true'&nbsp;and&nbsp;'false'.&nbsp;Note:&nbsp;Matches&nbsp;are&nbsp;case-insensitive.<br>
+&nbsp;&nbsp;opened_min:&nbsp;str&nbsp;(optional)&nbsp;Lower&nbsp;bound&nbsp;on&nbsp;the&nbsp;last&nbsp;time&nbsp;a&nbsp;document&nbsp;was<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;opened&nbsp;by&nbsp;the&nbsp;current&nbsp;user.&nbsp;Use&nbsp;the&nbsp;<a href="http://www.rfc-editor.org/rfc/rfc3339.txt">RFC&nbsp;3339</a>&nbsp;timestamp<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format.&nbsp;For&nbsp;example:&nbsp;opened_min='2005-08-09T09:57:00-08:00'.<br>
+&nbsp;&nbsp;opened_max:&nbsp;str&nbsp;(optional)&nbsp;Upper&nbsp;bound&nbsp;on&nbsp;the&nbsp;last&nbsp;time&nbsp;a&nbsp;document&nbsp;was<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;opened&nbsp;by&nbsp;the&nbsp;current&nbsp;user.&nbsp;(See&nbsp;also&nbsp;opened_min.)<br>
+&nbsp;&nbsp;edited_min:&nbsp;str&nbsp;(optional)&nbsp;Lower&nbsp;bound&nbsp;on&nbsp;the&nbsp;last&nbsp;time&nbsp;a&nbsp;document&nbsp;was<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edited&nbsp;by&nbsp;the&nbsp;current&nbsp;user.&nbsp;This&nbsp;value&nbsp;corresponds&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edited.text&nbsp;value&nbsp;in&nbsp;the&nbsp;doc's&nbsp;entry&nbsp;object,&nbsp;which<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;represents&nbsp;changes&nbsp;to&nbsp;the&nbsp;document's&nbsp;content&nbsp;or&nbsp;metadata.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use&nbsp;the&nbsp;<a href="http://www.rfc-editor.org/rfc/rfc3339.txt">RFC&nbsp;3339</a>&nbsp;timestamp&nbsp;format.&nbsp;For&nbsp;example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edited_min='2005-08-09T09:57:00-08:00'<br>
+&nbsp;&nbsp;edited_max:&nbsp;str&nbsp;(optional)&nbsp;Upper&nbsp;bound&nbsp;on&nbsp;the&nbsp;last&nbsp;time&nbsp;a&nbsp;document&nbsp;was<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edited&nbsp;by&nbsp;the&nbsp;user.&nbsp;(See&nbsp;also&nbsp;edited_min.)<br>
+&nbsp;&nbsp;owner:&nbsp;str&nbsp;(optional)&nbsp;Searches&nbsp;for&nbsp;documents&nbsp;with&nbsp;a&nbsp;specific&nbsp;owner.&nbsp;Use<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;email&nbsp;address&nbsp;of&nbsp;the&nbsp;owner.&nbsp;For&nbsp;example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;owner='user@gmail.com'<br>
+&nbsp;&nbsp;writer:&nbsp;str&nbsp;(optional)&nbsp;Searches&nbsp;for&nbsp;documents&nbsp;which&nbsp;can&nbsp;be&nbsp;written&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by&nbsp;specific&nbsp;users.&nbsp;Use&nbsp;a&nbsp;single&nbsp;email&nbsp;address&nbsp;or&nbsp;a&nbsp;comma<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;separated&nbsp;list&nbsp;of&nbsp;email&nbsp;addresses.&nbsp;For&nbsp;example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;writer='user1@gmail.com,user@example.com'<br>
+&nbsp;&nbsp;reader:&nbsp;str&nbsp;(optional)&nbsp;Searches&nbsp;for&nbsp;documents&nbsp;which&nbsp;can&nbsp;be&nbsp;read&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specific&nbsp;users.&nbsp;(See&nbsp;also&nbsp;writer.)<br>
+&nbsp;&nbsp;show_folders:&nbsp;str&nbsp;(optional)&nbsp;Specifies&nbsp;whether&nbsp;the&nbsp;query&nbsp;should&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;folders&nbsp;as&nbsp;well&nbsp;as&nbsp;documents.&nbsp;Possible&nbsp;values&nbsp;are&nbsp;'true'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;'false'.&nbsp;Default&nbsp;is&nbsp;false.<br>
+&nbsp;&nbsp;show_deleted:&nbsp;str&nbsp;(optional)&nbsp;Specifies&nbsp;whether&nbsp;the&nbsp;query&nbsp;should&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;documents&nbsp;which&nbsp;are&nbsp;in&nbsp;the&nbsp;trash&nbsp;as&nbsp;well&nbsp;as&nbsp;other<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;documents.&nbsp;Possible&nbsp;values&nbsp;are&nbsp;'true'&nbsp;and&nbsp;'false'.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;is&nbsp;false.<br>
+&nbsp;&nbsp;ocr:&nbsp;str&nbsp;(optional)&nbsp;Specifies&nbsp;whether&nbsp;to&nbsp;attempt&nbsp;OCR&nbsp;on&nbsp;a&nbsp;.jpg,&nbsp;.png,&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.gif&nbsp;upload.&nbsp;Possible&nbsp;values&nbsp;are&nbsp;'true'&nbsp;and&nbsp;'false'.&nbsp;Default&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;false.&nbsp;See&nbsp;OCR&nbsp;in&nbsp;the&nbsp;Protocol&nbsp;Guide:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://code.google.com/apis/documents/docs/3.0/developers_guide_protocol.html#OCR">http://code.google.com/apis/documents/docs/3.0/developers_guide_protocol.html#OCR</a><br>
+&nbsp;&nbsp;target_language:&nbsp;str&nbsp;(optional)&nbsp;Specifies&nbsp;the&nbsp;language&nbsp;to&nbsp;translate&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document&nbsp;into.&nbsp;See&nbsp;Document&nbsp;Translation&nbsp;in&nbsp;the&nbsp;Protocol<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Guide&nbsp;for&nbsp;a&nbsp;table&nbsp;of&nbsp;possible&nbsp;values:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://code.google.com/apis/documents/docs/3.0/developers_guide_protocol.html#DocumentTranslation">http://code.google.com/apis/documents/docs/3.0/developers_guide_protocol.html#DocumentTranslation</a><br>
+&nbsp;&nbsp;source_language:&nbsp;str&nbsp;(optional)&nbsp;Specifies&nbsp;the&nbsp;source&nbsp;language&nbsp;of&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;original&nbsp;document.&nbsp;Optional&nbsp;when&nbsp;using&nbsp;the&nbsp;translation<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;service.&nbsp;If&nbsp;not&nbsp;provided,&nbsp;Google&nbsp;will&nbsp;attempt&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;auto-detect&nbsp;the&nbsp;source&nbsp;language.&nbsp;See&nbsp;Document<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Translation&nbsp;in&nbsp;the&nbsp;Protocol&nbsp;Guide&nbsp;for&nbsp;a&nbsp;table&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;possible&nbsp;values&nbsp;(link&nbsp;in&nbsp;target_language).</tt></dd></dl>
+
+<dl><dt><a name="DocsQuery-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="gdata.client.html#Query">gdata.client.Query</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">

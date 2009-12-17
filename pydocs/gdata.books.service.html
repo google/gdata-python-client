@@ -386,15 +386,20 @@ Returns:<br>
 
 <dl><dt><a name="BookService-GetOAuthInputParameters"><strong>GetOAuthInputParameters</strong></a>(self)</dt></dl>
 
-<dl><dt><a name="BookService-GetWithRetries"><strong>GetWithRetries</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, encoding<font color="#909090">='UTF-8'</font>, converter<font color="#909090">=None</font>, num_retries<font color="#909090">=3</font>, delay<font color="#909090">=1</font>, backoff<font color="#909090">=2</font>)</dt><dd><tt>This&nbsp;is&nbsp;a&nbsp;wrapper&nbsp;method&nbsp;for&nbsp;Get&nbsp;with&nbsp;retring&nbsp;capability.<br>
+<dl><dt><a name="BookService-GetWithRetries"><strong>GetWithRetries</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, encoding<font color="#909090">='UTF-8'</font>, converter<font color="#909090">=None</font>, num_retries<font color="#909090">=3</font>, delay<font color="#909090">=1</font>, backoff<font color="#909090">=2</font>, logger<font color="#909090">=None</font>)</dt><dd><tt>This&nbsp;is&nbsp;a&nbsp;wrapper&nbsp;method&nbsp;for&nbsp;Get&nbsp;with&nbsp;retring&nbsp;capability.<br>
 &nbsp;<br>
 To&nbsp;avoid&nbsp;various&nbsp;errors&nbsp;while&nbsp;retrieving&nbsp;bulk&nbsp;entities&nbsp;by&nbsp;retring<br>
 specified&nbsp;times.<br>
+&nbsp;<br>
+Note&nbsp;this&nbsp;method&nbsp;relies&nbsp;on&nbsp;the&nbsp;time&nbsp;module&nbsp;and&nbsp;so&nbsp;may&nbsp;not&nbsp;be&nbsp;usable<br>
+by&nbsp;default&nbsp;in&nbsp;Python2.2.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;num_retries:&nbsp;integer&nbsp;The&nbsp;retry&nbsp;count.<br>
 &nbsp;&nbsp;delay:&nbsp;integer&nbsp;The&nbsp;initial&nbsp;delay&nbsp;for&nbsp;retring.<br>
 &nbsp;&nbsp;backoff:&nbsp;integer&nbsp;how&nbsp;much&nbsp;the&nbsp;delay&nbsp;should&nbsp;lengthen&nbsp;after&nbsp;each&nbsp;failure.<br>
+&nbsp;&nbsp;logger:&nbsp;an&nbsp;object&nbsp;which&nbsp;has&nbsp;a&nbsp;<a href="#BookService-debug">debug</a>(str)&nbsp;method&nbsp;to&nbsp;receive&nbsp;logging<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;messages.&nbsp;Recommended&nbsp;that&nbsp;you&nbsp;pass&nbsp;in&nbsp;the&nbsp;logging&nbsp;module.<br>
 Raises:<br>
 &nbsp;&nbsp;ValueError&nbsp;if&nbsp;any&nbsp;of&nbsp;the&nbsp;parameters&nbsp;has&nbsp;an&nbsp;invalid&nbsp;value.<br>
 &nbsp;&nbsp;RanOutOfTries&nbsp;on&nbsp;failure&nbsp;after&nbsp;number&nbsp;of&nbsp;retries.</tt></dd></dl>

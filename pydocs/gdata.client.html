@@ -539,7 +539,7 @@ api_version&nbsp;member&nbsp;to&nbsp;a&nbsp;string,&nbsp;either&nbsp;'1'&nbsp;or
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="GDClient-ClientLogin"><strong>ClientLogin</strong></a> = <a href="#GDClient-client_login">client_login</a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">='https://www.google.com/accounts/ClientLogin'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="GDClient-ClientLogin"><strong>ClientLogin</strong></a> = <a href="#GDClient-client_login">client_login</a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc3a410&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="GDClient-Delete"><strong>Delete</strong></a> = <a href="#GDClient-delete">delete</a>(self, entry_or_uri, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
 
@@ -559,13 +559,67 @@ Methods defined here:<br>
 
 <dl><dt><a name="GDClient-Request"><strong>Request</strong></a> = <a href="#GDClient-request">request</a>(self, method<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="GDClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = <a href="#GDClient-request_client_login_token">request_client_login_token</a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc37090&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="GDClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = <a href="#GDClient-request_client_login_token">request_client_login_token</a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc3a3d0&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="GDClient-Update"><strong>Update</strong></a> = <a href="#GDClient-update">update</a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="GDClient-UpgradeToken"><strong>UpgradeToken</strong></a> = <a href="#GDClient-upgrade_token">upgrade_token</a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc370d0&gt;</font>)</dt></dl>
+<dl><dt><a name="GDClient-UpgradeToken"><strong>UpgradeToken</strong></a> = <a href="#GDClient-upgrade_token">upgrade_token</a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc3a450&gt;</font>)</dt></dl>
 
-<dl><dt><a name="GDClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">='https://www.google.com/accounts/ClientLogin'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="GDClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc3a410&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+&nbsp;<br>
+In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
+application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
+authorization&nbsp;is&nbsp;by&nbsp;including&nbsp;a&nbsp;Client&nbsp;Login&nbsp;token&nbsp;in&nbsp;the&nbsp;Authorization<br>
+HTTP&nbsp;header&nbsp;of&nbsp;all&nbsp;requests.&nbsp;This&nbsp;method&nbsp;requests&nbsp;the&nbsp;Client&nbsp;Login&nbsp;token<br>
+by&nbsp;sending&nbsp;the&nbsp;user's&nbsp;email&nbsp;address,&nbsp;password,&nbsp;the&nbsp;name&nbsp;of&nbsp;the<br>
+application,&nbsp;and&nbsp;the&nbsp;service&nbsp;code&nbsp;for&nbsp;the&nbsp;service&nbsp;which&nbsp;will&nbsp;be&nbsp;accessed<br>
+by&nbsp;the&nbsp;application.&nbsp;If&nbsp;the&nbsp;username&nbsp;and&nbsp;password&nbsp;are&nbsp;correct,&nbsp;the&nbsp;server<br>
+will&nbsp;respond&nbsp;with&nbsp;the&nbsp;client&nbsp;login&nbsp;code&nbsp;and&nbsp;a&nbsp;new&nbsp;ClientLoginToken<br>
+<a href="__builtin__.html#object">object</a>&nbsp;will&nbsp;be&nbsp;set&nbsp;in&nbsp;the&nbsp;client's&nbsp;auth_token&nbsp;member.&nbsp;With&nbsp;the&nbsp;auth_token<br>
+set,&nbsp;future&nbsp;requests&nbsp;from&nbsp;this&nbsp;client&nbsp;will&nbsp;include&nbsp;the&nbsp;Client&nbsp;Login<br>
+token.<br>
+&nbsp;<br>
+For&nbsp;a&nbsp;list&nbsp;of&nbsp;service&nbsp;names,&nbsp;see&nbsp;<br>
+<a href="http://code.google.com/apis/gdata/faq.html#clientlogin">http://code.google.com/apis/gdata/faq.html#clientlogin</a><br>
+For&nbsp;more&nbsp;information&nbsp;on&nbsp;Client&nbsp;Login,&nbsp;see:<br>
+<a href="http://code.google.com/apis/accounts/docs/AuthForInstalledApps.html">http://code.google.com/apis/accounts/docs/AuthForInstalledApps.html</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;email:&nbsp;str&nbsp;The&nbsp;user's&nbsp;email&nbsp;address&nbsp;or&nbsp;username.<br>
+&nbsp;&nbsp;password:&nbsp;str&nbsp;The&nbsp;password&nbsp;for&nbsp;the&nbsp;user's&nbsp;account.<br>
+&nbsp;&nbsp;source:&nbsp;str&nbsp;The&nbsp;name&nbsp;of&nbsp;your&nbsp;application.&nbsp;This&nbsp;can&nbsp;be&nbsp;anything&nbsp;you<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;like&nbsp;but&nbsp;should&nbsp;should&nbsp;give&nbsp;some&nbsp;indication&nbsp;of&nbsp;which&nbsp;app&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;making&nbsp;the&nbsp;request.<br>
+&nbsp;&nbsp;service:&nbsp;str&nbsp;The&nbsp;service&nbsp;code&nbsp;for&nbsp;the&nbsp;service&nbsp;you&nbsp;would&nbsp;like&nbsp;to&nbsp;access.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;example,&nbsp;'cp'&nbsp;for&nbsp;contacts,&nbsp;'cl'&nbsp;for&nbsp;calendar.&nbsp;For&nbsp;a&nbsp;full<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list&nbsp;see<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://code.google.com/apis/gdata/faq.html#clientlogin">http://code.google.com/apis/gdata/faq.html#clientlogin</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;you&nbsp;are&nbsp;using&nbsp;a&nbsp;subclass&nbsp;of&nbsp;the&nbsp;gdata.client.<a href="#GDClient">GDClient</a>,&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;service&nbsp;will&nbsp;usually&nbsp;be&nbsp;filled&nbsp;in&nbsp;for&nbsp;you&nbsp;so&nbsp;you&nbsp;do&nbsp;not&nbsp;need<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;specify&nbsp;it.&nbsp;For&nbsp;example&nbsp;see&nbsp;BloggerClient,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SpreadsheetsClient,&nbsp;etc.<br>
+&nbsp;&nbsp;account_type:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;type&nbsp;of&nbsp;account&nbsp;which&nbsp;is&nbsp;being<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authenticated.&nbsp;This&nbsp;can&nbsp;be&nbsp;either&nbsp;'GOOGLE'&nbsp;for&nbsp;a&nbsp;Google<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account,&nbsp;'HOSTED'&nbsp;for&nbsp;a&nbsp;Google&nbsp;Apps&nbsp;Account,&nbsp;or&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;'HOSTED_OR_GOOGLE'&nbsp;which&nbsp;will&nbsp;select&nbsp;the&nbsp;Google<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apps&nbsp;Account&nbsp;if&nbsp;the&nbsp;same&nbsp;email&nbsp;address&nbsp;is&nbsp;used&nbsp;for&nbsp;both<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;Google&nbsp;Account&nbsp;and&nbsp;a&nbsp;Google&nbsp;Apps&nbsp;Account.<br>
+&nbsp;&nbsp;auth_url:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;the&nbsp;login&nbsp;request&nbsp;should&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sent.<br>
+&nbsp;&nbsp;captcha_token:&nbsp;str&nbsp;(optional)&nbsp;If&nbsp;a&nbsp;previous&nbsp;login&nbsp;attempt&nbsp;was&nbsp;reponded<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;with&nbsp;a&nbsp;CAPTCHA&nbsp;challenge,&nbsp;this&nbsp;is&nbsp;the&nbsp;token&nbsp;which<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;identifies&nbsp;the&nbsp;challenge&nbsp;(from&nbsp;the&nbsp;CAPTCHA's&nbsp;URL).<br>
+&nbsp;&nbsp;captcha_response:&nbsp;str&nbsp;(optional)&nbsp;If&nbsp;a&nbsp;previous&nbsp;login&nbsp;attempt&nbsp;was<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reponded&nbsp;to&nbsp;with&nbsp;a&nbsp;CAPTCHA&nbsp;challenge,&nbsp;this&nbsp;is&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;text&nbsp;which&nbsp;was&nbsp;contained&nbsp;in&nbsp;the&nbsp;challenge.<br>
+&nbsp;<br>
+&nbsp;&nbsp;Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;None<br>
+&nbsp;<br>
+&nbsp;&nbsp;Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;<a href="#RequestError">RequestError</a>&nbsp;or&nbsp;one&nbsp;of&nbsp;its&nbsp;suclasses:&nbsp;<a href="#BadAuthentication">BadAuthentication</a>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#BadAuthenticationServiceURL">BadAuthenticationServiceURL</a>,&nbsp;<a href="#ClientLoginFailed">ClientLoginFailed</a>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ClientLoginTokenMissing">ClientLoginTokenMissing</a>,&nbsp;or&nbsp;<a href="#CaptchaChallenge">CaptchaChallenge</a></tt></dd></dl>
 
 <dl><dt><a name="GDClient-delete"><strong>delete</strong></a>(self, entry_or_uri, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
 
@@ -695,7 +749,7 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="GDClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc37090&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="GDClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc3a3d0&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="GDClient-update"><strong>update</strong></a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
 &nbsp;<br>
@@ -715,7 +769,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="GDClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc370d0&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="GDClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc3a450&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -742,9 +796,9 @@ Data and other attributes defined here:<br>
 
 <hr>
 Methods inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
-<dl><dt><a name="GDClient-Get"><strong>Get</strong></a> = get(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="GDClient-Get"><strong>Get</strong></a> = get(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Performs&nbsp;a&nbsp;request&nbsp;using&nbsp;the&nbsp;GET&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="GDClient-Put"><strong>Put</strong></a> = put(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="GDClient-Put"><strong>Put</strong></a> = put(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;data&nbsp;using&nbsp;the&nbsp;PUT&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
 <dl><dt><a name="GDClient-__init__"><strong>__init__</strong></a>(self, http_client<font color="#909090">=None</font>, host<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, source<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;<a href="atom.client.html#AtomPubClient">AtomPubClient</a>&nbsp;instance.<br>
 &nbsp;<br>
@@ -761,9 +815,9 @@ Args:<br>
 &nbsp;&nbsp;auth_token:&nbsp;An&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;which&nbsp;sets&nbsp;the&nbsp;HTTP&nbsp;Authorization&nbsp;header&nbsp;when&nbsp;its<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modify_request&nbsp;method&nbsp;is&nbsp;called.</tt></dd></dl>
 
-<dl><dt><a name="GDClient-get"><strong>get</strong></a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="GDClient-get"><strong>get</strong></a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Performs&nbsp;a&nbsp;request&nbsp;using&nbsp;the&nbsp;GET&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="GDClient-put"><strong>put</strong></a>(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="GDClient-put"><strong>put</strong></a>(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;data&nbsp;using&nbsp;the&nbsp;PUT&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
