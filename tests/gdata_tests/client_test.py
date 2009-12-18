@@ -121,6 +121,18 @@ class AuthSubTest(unittest.TestCase):
                       None)
     self.assertRaises(gdata.client.UnableToUpgradeToken, client.upgrade_token)
 
+  def test_revoke_token(self):
+    client = gdata.client.GDClient()
+    client.http_client = atom.mock_http_core.SettableHttpClient(
+        200, 'OK', '', {})
+    page_url = 'http://example.com/showcalendar.html?token=CKF50YzIHxCTKMAg'
+    client.auth_token = gdata.gauth.AuthSubToken.from_url(page_url)
+    deleted = client.revoke_token()
+    self.assert_(deleted)
+    self.assertEqual(
+        client.http_client.last_request.headers['Authorization'],
+        'AuthSub token=CKF50YzIHxCTKMAg')
+
 
 class OAuthTest(unittest.TestCase):
 

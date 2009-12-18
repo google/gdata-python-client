@@ -478,6 +478,34 @@ class GDClient(atom.client.AtomPubClient):
 
   UpgradeToken = upgrade_token
 
+  def revoke_token(self, token=None, url=atom.http_core.Uri.parse_uri(
+      'https://www.google.com/accounts/AuthSubRevokeToken')):
+    """Requests that the token be invalidated.
+    
+    This method can be used for both AuthSub and OAuth tokens (to invalidate
+    a ClientLogin token, the user must change their password).
+
+    Returns:
+      True if the server responded with a 200.
+
+    Raises:
+      A RequestError if the server responds with a non-200 status.
+    """
+    # Default to using the auth_token member if no token is provided.
+    if token is None:
+      token = self.auth_token
+
+    http_request = atom.http_core.HttpRequest(uri=url, method='GET')
+    token.modify_request(http_request)
+    response = self.http_client.request(http_request)
+    if response.status != 200:
+      raise error_from_response('Server sent non-200 to revoke token',
+                                response, RequestError, response_body)
+
+    return True
+
+  RevokeToken = revoke_token
+
   def get_oauth_token(self, scopes, next, consumer_key, consumer_secret=None,
                       rsa_private_key=None,
                       url=gdata.gauth.REQUEST_TOKEN_URL):
