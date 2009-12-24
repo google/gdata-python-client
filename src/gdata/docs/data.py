@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Data model classes for parsing and generating XML for the Sites Data API."""
+"""Data model classes for parsing and generating XML for the DocList Data API"""
 
 __author__ = 'e.bidelman (Eric Bidelman)'
 
