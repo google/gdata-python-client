@@ -28,14 +28,16 @@ import gdata.apps.service
 import gdata.service
 
 
-API_VER='2.0'
+API_VER = '2.0'
 BASE_URL = '/a/feeds/group/' + API_VER + '/%s'
 GROUP_MEMBER_URL = BASE_URL + '?member=%s'
 GROUP_MEMBER_DIRECT_URL = GROUP_MEMBER_URL + '&directOnly=%s'
 GROUP_ID_URL = BASE_URL + '/%s'
 MEMBER_URL = BASE_URL + '/%s/member'
+MEMBER_WITH_SUSPENDED_URL = MEMBER_URL + '?includeSuspendedUsers=%s'
 MEMBER_ID_URL = MEMBER_URL + '/%s'
-OWNER_URL  = BASE_URL + '/%s/owner'
+OWNER_URL = BASE_URL + '/%s/owner'
+OWNER_WITH_SUSPENDED_URL = OWNER_URL + '?includeSuspendedUsers=%s'
 OWNER_ID_URL = OWNER_URL + '/%s'
 
 PERMISSION_OWNER = 'Owner'
@@ -43,35 +45,44 @@ PERMISSION_MEMBER = 'Member'
 PERMISSION_DOMAIN = 'Domain'
 PERMISSION_ANYONE = 'Anyone'
 
+
 class GroupsService(gdata.apps.service.PropertyService):
   """Client for the Google Apps Groups service."""
 
   def _ServiceUrl(self, service_type, is_existed, group_id, member_id, owner_email,
-                  start_key, direct_only=None, domain=None):
+                  direct_only=False, domain=None, suspended_users=False):
     if domain is None:
       domain = self.domain
+
     if service_type == 'group':
       if group_id != '' and is_existed:
         return GROUP_ID_URL % (domain, group_id)
-      if member_id != '':
-        if direct_only is not None:
+      elif member_id != '':
+        if direct_only:
           return GROUP_MEMBER_DIRECT_URL % (domain, urllib.quote_plus(member_id),
                                             self._Bool2Str(direct_only))
         else:
           return GROUP_MEMBER_URL % (domain, urllib.quote_plus(member_id))
-      if start_key != '':
-        return GROUP_START_URL % (domain, start_key)
-      return BASE_URL % (domain)
+      else:
+        return BASE_URL % (domain)
+
     if service_type == 'member':
       if member_id != '' and is_existed:
         return MEMBER_ID_URL % (domain, group_id, urllib.quote_plus(member_id))
-      if start_key != '':
-        return MEMBER_START_URL % (domain, group_id, start_key)
-      return MEMBER_URL % (domain, group_id)
+      elif suspended_users:
+        return MEMBER_WITH_SUSPENDED_URL % (domain, group_id,
+                                            self._Bool2Str(suspended_users))
+      else:
+        return MEMBER_URL % (domain, group_id)
+
     if service_type == 'owner':
       if owner_email != '' and is_existed:
         return OWNER_ID_URL % (domain, group_id, urllib.quote_plus(owner_email))
-      return OWNER_URL % (domain, group_id)
+      elif suspended_users:
+        return OWNER_WITH_SUSPENDED_URL % (domain, group_id,
+                                           self._Bool2Str(suspended_users))
+      else:
+        return OWNER_URL % (domain, group_id)
 
   def _Bool2Str(self, b):
     if b is None:
@@ -80,7 +91,7 @@ class GroupsService(gdata.apps.service.PropertyService):
 
   def _IsExisted(self, uri):
     try:
-      properties = self._GetProperties(uri)
+      self._GetProperties(uri)
       return True
     except gdata.apps.service.AppsForYourDomainException, e:
       if e.error_code == gdata.apps.service.ENTITY_DOES_NOT_EXIST:
@@ -100,7 +111,7 @@ class GroupsService(gdata.apps.service.PropertyService):
     Returns:
       A dict containing the result of the create operation.
     """
-    uri = self._ServiceUrl('group', False, group_id, '', '', '', '')
+    uri = self._ServiceUrl('group', False, group_id, '', '')
     properties = {}
     properties['groupId'] = group_id
     properties['groupName'] = group_name
@@ -120,7 +131,7 @@ class GroupsService(gdata.apps.service.PropertyService):
     Returns:
       A dict containing the result of the update operation.
     """
-    uri = self._ServiceUrl('group', True, group_id, '', '', '', '')
+    uri = self._ServiceUrl('group', True, group_id, '', '')
     properties = {}
     properties['groupId'] = group_id
     properties['groupName'] = group_name
@@ -137,19 +148,19 @@ class GroupsService(gdata.apps.service.PropertyService):
     Returns:
       A dict containing the result of the retrieve operation.
     """
-    uri = self._ServiceUrl('group', True, group_id, '', '', '', '')
+    uri = self._ServiceUrl('group', True, group_id, '', '')
     return self._GetProperties(uri)
 
   def RetrieveAllGroups(self):
     """Retrieve all groups in the domain.
 
     Args:
-      None.
+      None
 
     Returns:
       A list containing the result of the retrieve operation.
     """
-    uri = self._ServiceUrl('group', True, '', '', '', '', '')
+    uri = self._ServiceUrl('group', True, '', '', '')
     return self._GetPropertiesList(uri)
 
   def RetrieveGroups(self, member_id, direct_only=False):
@@ -162,7 +173,7 @@ class GroupsService(gdata.apps.service.PropertyService):
     Returns:
       A list containing the result of the retrieve operation.
     """
-    uri = self._ServiceUrl('group', True, '', member_id, '', '', direct_only)
+    uri = self._ServiceUrl('group', True, '', member_id, '', direct_only=direct_only)
     return self._GetPropertiesList(uri)
 
   def DeleteGroup(self, group_id):
@@ -174,7 +185,7 @@ class GroupsService(gdata.apps.service.PropertyService):
     Returns:
       A dict containing the result of the delete operation.
     """
-    uri = self._ServiceUrl('group', True, group_id, '', '', '', '')
+    uri = self._ServiceUrl('group', True, group_id, '', '')
     return self._DeleteProperties(uri)
 
   def AddMemberToGroup(self, member_id, group_id):
@@ -187,13 +198,13 @@ class GroupsService(gdata.apps.service.PropertyService):
     Returns:
       A dict containing the result of the add operation.
     """
-    uri = self._ServiceUrl('member', False, group_id, member_id, '', '', '')
+    uri = self._ServiceUrl('member', False, group_id, member_id, '')
     properties = {}
     properties['memberId'] = member_id
     return self._PostProperties(uri, properties)
 
   def IsMember(self, member_id, group_id):
-    """Check whether the given member already exists in the given group
+    """Check whether the given member already exists in the given group.
 
     Args:
       member_id: The member's email address (e.g. member@example.com).
@@ -202,11 +213,11 @@ class GroupsService(gdata.apps.service.PropertyService):
     Returns:
       True if the member exists in the group.  False otherwise.
     """
-    uri = self._ServiceUrl('member', True, group_id, member_id, '', '', '')
+    uri = self._ServiceUrl('member', True, group_id, member_id, '')
     return self._IsExisted(uri)
 
   def RetrieveMember(self, member_id, group_id):
-    """Retrieve the given member in the given group
+    """Retrieve the given member in the given group.
 
     Args:
       member_id: The member's email address (e.g. member@example.com).
@@ -215,32 +226,35 @@ class GroupsService(gdata.apps.service.PropertyService):
     Returns:
       A dict containing the result of the retrieve operation.
     """
-    uri = self._ServiceUrl('member', True, group_id, member_id, '', '', '')
+    uri = self._ServiceUrl('member', True, group_id, member_id, '')
     return self._GetProperties(uri)
 
-  def RetrieveAllMembers(self, group_id):
+  def RetrieveAllMembers(self, group_id, suspended_users=False):
     """Retrieve all members in the given group.
 
     Args:
       group_id: The ID of the group (e.g. us-sales).
+      suspended_users: A boolean; should we include any suspended users in
+        the membership list returned?
 
     Returns:
       A list containing the result of the retrieve operation.
     """
-    uri = self._ServiceUrl('member', True, group_id, '', '', '', '')
+    uri = self._ServiceUrl('member', True, group_id, '', '',
+                           suspended_users=suspended_users)
     return self._GetPropertiesList(uri)
 
   def RemoveMemberFromGroup(self, member_id, group_id):
-    """Remove the given member from the given group
+    """Remove the given member from the given group.
 
     Args:
-      group_id: The ID of the group (e.g. us-sales).
       member_id: The member's email address (e.g. member@example.com).
+      group_id: The ID of the group (e.g. us-sales).
 
     Returns:
       A dict containing the result of the remove operation.
     """
-    uri = self._ServiceUrl('member', True, group_id, member_id, '', '', '')
+    uri = self._ServiceUrl('member', True, group_id, member_id, '')
     return self._DeleteProperties(uri)
 
   def AddOwnerToGroup(self, owner_email, group_id):
@@ -253,7 +267,7 @@ class GroupsService(gdata.apps.service.PropertyService):
     Returns:
       A dict containing the result of the add operation.
     """
-    uri = self._ServiceUrl('owner', False, group_id, '', owner_email, '', '')
+    uri = self._ServiceUrl('owner', False, group_id, '', owner_email)
     properties = {}
     properties['email'] = owner_email
     return self._PostProperties(uri, properties)
@@ -268,11 +282,11 @@ class GroupsService(gdata.apps.service.PropertyService):
     Returns:
       True if the member is an owner of the given group.  False otherwise.
     """
-    uri = self._ServiceUrl('owner', True, group_id, '', owner_email, '', '')
+    uri = self._ServiceUrl('owner', True, group_id, '', owner_email)
     return self._IsExisted(uri)
 
   def RetrieveOwner(self, owner_email, group_id):
-    """Retrieve the given owner in the given group
+    """Retrieve the given owner in the given group.
 
     Args:
       owner_email: The email address of a group owner.
@@ -281,23 +295,26 @@ class GroupsService(gdata.apps.service.PropertyService):
     Returns:
       A dict containing the result of the retrieve operation.
     """
-    uri = self._ServiceUrl('owner', True, group_id, '', owner_email, '', '')
+    uri = self._ServiceUrl('owner', True, group_id, '', owner_email)
     return self._GetProperties(uri)
 
-  def RetrieveAllOwners(self, group_id):
-    """Retrieve all owners of the given group
+  def RetrieveAllOwners(self, group_id, suspended_users=False):
+    """Retrieve all owners of the given group.
 
     Args:
       group_id: The ID of the group (e.g. us-sales).
+      suspended_users: A boolean; should we include any suspended users in
+        the ownership list returned?
 
     Returns:
       A list containing the result of the retrieve operation.
     """
-    uri = self._ServiceUrl('owner', True, group_id, '', '', '', '')
+    uri = self._ServiceUrl('owner', True, group_id, '', '',
+                           suspended_users=suspended_users)
     return self._GetPropertiesList(uri)
 
   def RemoveOwnerFromGroup(self, owner_email, group_id):
-    """Remove the given owner from the given group
+    """Remove the given owner from the given group.
 
     Args:
       owner_email: The email address of a group owner.
@@ -306,5 +323,5 @@ class GroupsService(gdata.apps.service.PropertyService):
     Returns:
       A dict containing the result of the remove operation.
     """
-    uri = self._ServiceUrl('owner', True, group_id, '', owner_email, '', '')
+    uri = self._ServiceUrl('owner', True, group_id, '', owner_email)
     return self._DeleteProperties(uri)
