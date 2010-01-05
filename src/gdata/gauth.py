@@ -28,6 +28,8 @@ AuthSubToken
 SecureAuthSubToken
 OAuthHmacToken
 OAuthRsaToken
+TwoLeggedOAuthHmacToken
+TwoLeggedOAuthRsaToken
 
 Functions which are often used in application code (as opposed to just within
 the gdata-python-client library) are the following:
@@ -950,6 +952,54 @@ class OAuthRsaToken(OAuthHmacToken):
   ModifyRequest = modify_request
 
 
+class TwoLeggedOAuthHmacToken(OAuthHmacToken):
+
+  def __init__(self, consumer_key, consumer_secret, requestor_id):
+    self.requestor_id = requestor_id
+    OAuthHmacToken.__init__(
+        self, consumer_key, consumer_secret, None, None, ACCESS_TOKEN,
+        next=None, verifier=None)
+
+  def modify_request(self, http_request):
+    """Sets the Authorization header in the HTTP request using the token.
+
+    Calculates an HMAC signature using the information in the token to
+    indicate that the request came from this application and that this
+    application has permission to access a particular user's data using 2LO.
+
+    Returns:
+      The same HTTP request object which was passed in.
+    """
+    http_request.uri.query['xoauth_requestor_id'] = self.requestor_id
+    return OAuthHmacToken.modify_request(self, http_request)
+
+  ModifyRequest = modify_request
+
+
+class TwoLeggedOAuthRsaToken(OAuthRsaToken):
+
+  def __init__(self, consumer_key, rsa_private_key, requestor_id):
+    self.requestor_id = requestor_id
+    OAuthRsaToken.__init__(
+        self, consumer_key, rsa_private_key, None, None, ACCESS_TOKEN,
+        next=None, verifier=None)
+
+  def modify_request(self, http_request):
+    """Sets the Authorization header in the HTTP request using the token.
+
+    Calculates an RSA signature using the information in the token to
+    indicate that the request came from this application and that this
+    application has permission to access a particular user's data using 2LO.
+
+    Returns:
+      The same HTTP request object which was passed in.
+    """
+    http_request.uri.query['xoauth_requestor_id'] = self.requestor_id
+    return OAuthRsaToken.modify_request(self, http_request)
+
+  ModifyRequest = modify_request
+
+
 def _join_token_parts(*args):
   """"Escapes and combines all strings passed in.
 
@@ -986,7 +1036,8 @@ def token_to_blob(token):
   """Serializes the token data as a string for storage in a datastore.
 
   Supported token classes: ClientLoginToken, AuthSubToken, SecureAuthSubToken,
-  OAuthRsaToken, and OAuthHmacToken.
+  OAuthRsaToken, and OAuthHmacToken, TwoLeggedOAuthRsaToken,
+  TwoLeggedOAuthHmacToken.
 
   Args:
     token: A token object which must be of one of the supported token classes.
@@ -1010,6 +1061,12 @@ def token_to_blob(token):
                              *token.scopes)
   elif isinstance(token, AuthSubToken):
     return _join_token_parts('1a', token.token_string, *token.scopes)
+  elif isinstance(token, TwoLeggedOAuthRsaToken):
+    return _join_token_parts(
+        '1rtl', token.consumer_key, token.rsa_private_key, token.requestor_id)
+  elif isinstance(token, TwoLeggedOAuthHmacToken):
+    return _join_token_parts(
+        '1htl', token.consumer_key, token.consumer_secret, token.requestor_id)
   # Check RSA OAuth token first since the OAuthRsaToken is a subclass of
   # OAuthHmacToken.
   elif isinstance(token, OAuthRsaToken):
@@ -1034,7 +1091,8 @@ def token_from_blob(blob):
   """Deserializes a token string from the datastore back into a token object.
 
   Supported token classes: ClientLoginToken, AuthSubToken, SecureAuthSubToken,
-  OAuthRsaToken, and OAuthHmacToken.
+  OAuthRsaToken, and OAuthHmacToken, TwoLeggedOAuthRsaToken,
+  TwoLeggedOAuthHmacToken.
 
   Args:
     blob: string created by token_to_blob.
@@ -1055,6 +1113,10 @@ def token_from_blob(blob):
     return AuthSubToken(parts[1], parts[2:])
   elif parts[0] == '1s':
     return SecureAuthSubToken(parts[1], parts[2], parts[3:])
+  elif parts[0] == '1rtl':
+    return TwoLeggedOAuthRsaToken(parts[1], parts[2], parts[3])
+  elif parts[0] == '1htl':
+    return TwoLeggedOAuthHmacToken(parts[1], parts[2], parts[3])
   elif parts[0] == '1r':
     auth_state = int(parts[5])
     return OAuthRsaToken(parts[1], parts[2], parts[3], parts[4], auth_state,
@@ -1081,7 +1143,7 @@ def load_tokens(blob):
 
 def ae_save(token, token_key):
   """Stores an auth token in the App Engine datastore.
-  
+
   This is a convenience method for using the library with App Engine.
   Recommended usage is to associate the auth token with the current_user.
   If a user is signed in to the app using the App Engine users API, you
@@ -1109,7 +1171,7 @@ AeSave = ae_save
 
 def ae_load(token_key):
   """Retrieves a token object from the App Engine datastore.
-  
+
   This is a convenience method for using the library with App Engine.
   See also ae_save.
 
