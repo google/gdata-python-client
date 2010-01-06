@@ -263,9 +263,9 @@ class DocsClient(gdata.client.GDClient):
       doc_type: str The type of object to create. For example: 'document',
           'spreadsheet', 'folder', 'presentation'.
       title: str A title for the document.
-      folder_or_id: DocsEntry or str (optional) Folder entry or the resouce id
-          of a folder to create the object under. Note: A valid resouce id for a
-          folder is of the form: folder%3Afolder_id.
+      folder_or_id: gdata.docs.data.DocsEntry or str (optional) Folder entry or
+          the resouce id of a folder to create the object under. Note: A valid
+          resource id for a folder is of the form: folder%3Afolder_id.
       writers_can_invite: bool (optional) False prevents collaborators from
           being able to invite others to edit or view the document.
       auth_token: (optional) gdata.gauth.ClientLoginToken, AuthSubToken, or
@@ -350,7 +350,7 @@ class DocsClient(gdata.client.GDClient):
           uploaded or a string of the filepath.
       title: str The title of the document on the server after being
           uploaded.
-      folder_or_uri: gdata.docs.data.DocList or str (optional) An object with
+      folder_or_uri: gdata.docs.data.DocsEntry or str (optional) An object with
           a link to the folder or the uri to upload the file to.
           Note: A valid uri for a folder is of the form:
                 /feeds/default/private/full/folder%3Afolder_id/contents
