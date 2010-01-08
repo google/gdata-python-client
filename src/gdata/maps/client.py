@@ -46,7 +46,7 @@ class MapsClient(gdata.client.GDClient):
   """Maps Data API GData client."""
 
   api_version = '2'
-  auth_serice = 'local'
+  auth_service = 'local'
   auth_scopes = ['http://maps.google.com/maps/feeds/']
 
   def get_maps(self, user_id='default', auth_token=None,
