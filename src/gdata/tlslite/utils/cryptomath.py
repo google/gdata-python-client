@@ -3,10 +3,14 @@
 This module has basic math/crypto code."""
 
 import os
+import sys
 import math
 import base64
 import binascii
-import sha
+if sys.version[:3] <= 2.4:
+  from sha import sha as sha1
+else:
+  from hashlib import sha1
 
 from compat import *
 
@@ -195,7 +199,7 @@ def numBytes(n):
     return int(math.ceil(bits / 8.0))
 
 def hashAndBase64(s):
-    return stringToBase64(sha.sha(s).digest())
+    return stringToBase64(sha1(s).digest())
 
 def getBase64Nonce(numChars=22): #defaults to an 132 bit nonce
     bytes = getRandomBytes(numChars)
