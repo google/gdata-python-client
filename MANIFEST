@@ -482,3 +482,10 @@ pydocs/gdata.opensearch.data.html
 pydocs/gdata.webmastertools.data.html
 pydocs/gdata.youtube.data.html
 tests/gdata_tests/analytics/__init__.py
+samples/oauth/TwoLeggedOAuthExample.py
+src/gdata/calendar_resource/__init__.py
+src/gdata/calendar_resource/client.py
+src/gdata/calendar_resource/data.py
+tests/gdata_tests/calendar_resource/__init__.py
+tests/gdata_tests/calendar_resource/data_test.py
+tests/gdata_tests/calendar_resource/live_client_test.py
