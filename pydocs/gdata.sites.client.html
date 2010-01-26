@@ -53,9 +53,13 @@
 Methods defined here:<br>
 <dl><dt><a name="SitesClient-CreatePage"><strong>CreatePage</strong></a> = <a href="#SitesClient-create_page">create_page</a>(self, kind, title, html<font color="#909090">=''</font>, page_name<font color="#909090">=None</font>, parent<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
+<dl><dt><a name="SitesClient-CreateSite"><strong>CreateSite</strong></a> = <a href="#SitesClient-create_site">create_site</a>(self, title, description<font color="#909090">=None</font>, source_site<font color="#909090">=None</font>, theme<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
 <dl><dt><a name="SitesClient-CreateWebAttachment"><strong>CreateWebAttachment</strong></a> = <a href="#SitesClient-create_webattachment">create_webattachment</a>(self, src, content_type, title, parent, description<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="SitesClient-DownloadAttachment"><strong>DownloadAttachment</strong></a> = <a href="#SitesClient-download_attachment">download_attachment</a>(self, uri_or_entry, file_path)</dt></dl>
+
+<dl><dt><a name="SitesClient-GetAclFeed"><strong>GetAclFeed</strong></a> = <a href="#SitesClient-get_acl_feed">get_acl_feed</a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="SitesClient-GetActivityFeed"><strong>GetActivityFeed</strong></a> = <a href="#SitesClient-get_activity_feed">get_activity_feed</a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
@@ -63,11 +67,17 @@ Methods defined here:<br>
 
 <dl><dt><a name="SitesClient-GetRevisionFeed"><strong>GetRevisionFeed</strong></a> = <a href="#SitesClient-get_revision_feed">get_revision_feed</a>(self, entry_or_uri_or_id, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
+<dl><dt><a name="SitesClient-GetSiteFeed"><strong>GetSiteFeed</strong></a> = <a href="#SitesClient-get_site_feed">get_site_feed</a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="SitesClient-MakeAclFeedUri"><strong>MakeAclFeedUri</strong></a> = <a href="#SitesClient-make_acl_feed_uri">make_acl_feed_uri</a>(self)</dt></dl>
+
 <dl><dt><a name="SitesClient-MakeActivityFeedUri"><strong>MakeActivityFeedUri</strong></a> = <a href="#SitesClient-make_activity_feed_uri">make_activity_feed_uri</a>(self)</dt></dl>
 
 <dl><dt><a name="SitesClient-MakeContentFeedUri"><strong>MakeContentFeedUri</strong></a> = <a href="#SitesClient-make_content_feed_uri">make_content_feed_uri</a>(self)</dt></dl>
 
 <dl><dt><a name="SitesClient-MakeRevisionFeedUri"><strong>MakeRevisionFeedUri</strong></a> = <a href="#SitesClient-make_revision_feed_uri">make_revision_feed_uri</a>(self)</dt></dl>
+
+<dl><dt><a name="SitesClient-MakeSiteFeedUri"><strong>MakeSiteFeedUri</strong></a> = <a href="#SitesClient-make_site_feed_uri">make_site_feed_uri</a>(self, site_name<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="SitesClient-UploadAttachment"><strong>UploadAttachment</strong></a> = <a href="#SitesClient-upload_attachment">upload_attachment</a>(self, file_handle, parent, content_type<font color="#909090">=None</font>, title<font color="#909090">=None</font>, description<font color="#909090">=None</font>, folder_name<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
@@ -102,6 +112,26 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;gdata.sites.data.ContentEntry&nbsp;of&nbsp;the&nbsp;created&nbsp;page.</tt></dd></dl>
 
+<dl><dt><a name="SitesClient-create_site"><strong>create_site</strong></a>(self, title, description<font color="#909090">=None</font>, source_site<font color="#909090">=None</font>, theme<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;Google&nbsp;Site.<br>
+&nbsp;<br>
+Note:&nbsp;This&nbsp;feature&nbsp;is&nbsp;only&nbsp;available&nbsp;to&nbsp;Google&nbsp;Apps&nbsp;domains.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;title:&nbsp;string&nbsp;Title&nbsp;for&nbsp;the&nbsp;site.<br>
+&nbsp;&nbsp;description:&nbsp;string&nbsp;(optional)&nbsp;A&nbsp;description/summary&nbsp;for&nbsp;the&nbsp;site.<br>
+&nbsp;&nbsp;source_site:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;site&nbsp;feed&nbsp;URI&nbsp;of&nbsp;the&nbsp;site&nbsp;to&nbsp;copy.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;parameter&nbsp;should&nbsp;only&nbsp;be&nbsp;specified&nbsp;when&nbsp;copying&nbsp;a&nbsp;site.<br>
+&nbsp;&nbsp;theme:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;theme&nbsp;to&nbsp;create&nbsp;the&nbsp;site&nbsp;with.<br>
+&nbsp;&nbsp;uri:&nbsp;string&nbsp;(optional)&nbsp;A&nbsp;full&nbsp;site&nbsp;feed&nbsp;URI&nbsp;to&nbsp;override&nbsp;where&nbsp;the&nbsp;site<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;created/copied.&nbsp;By&nbsp;default,&nbsp;the&nbsp;site&nbsp;will&nbsp;be&nbsp;created&nbsp;under<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;currently&nbsp;set&nbsp;domain&nbsp;(e.g.&nbsp;self.<strong>domain</strong>).<br>
+&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="#SitesClient-post">post</a>().<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.sites.data.SiteEntry&nbsp;of&nbsp;the&nbsp;created&nbsp;site.</tt></dd></dl>
+
 <dl><dt><a name="SitesClient-create_webattachment"><strong>create_webattachment</strong></a>(self, src, content_type, title, parent, description<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;webattachment&nbsp;within&nbsp;a&nbsp;filecabinet.<br>
 &nbsp;<br>
 Args:<br>
@@ -126,6 +156,17 @@ Args:<br>
 &nbsp;<br>
 Raises:<br>
 &nbsp;&nbsp;gdata.client.RequestError:&nbsp;on&nbsp;error&nbsp;response&nbsp;from&nbsp;server.</tt></dd></dl>
+
+<dl><dt><a name="SitesClient-get_acl_feed"><strong>get_acl_feed</strong></a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;the&nbsp;acl&nbsp;feed&nbsp;containing&nbsp;a&nbsp;site's&nbsp;sharing&nbsp;permissions.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;string&nbsp;(optional)&nbsp;A&nbsp;full&nbsp;URI&nbsp;to&nbsp;query&nbsp;the&nbsp;acl&nbsp;feed.<br>
+&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#SitesClient-get_feed">get_feed</a>().<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.sites.data.AclFeed</tt></dd></dl>
 
 <dl><dt><a name="SitesClient-get_activity_feed"><strong>get_activity_feed</strong></a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;the&nbsp;activity&nbsp;feed&nbsp;containing&nbsp;recent&nbsp;Site&nbsp;activity.<br>
 &nbsp;<br>
@@ -152,9 +193,9 @@ Returns:<br>
 <dl><dt><a name="SitesClient-get_revision_feed"><strong>get_revision_feed</strong></a>(self, entry_or_uri_or_id, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;the&nbsp;revision&nbsp;feed&nbsp;containing&nbsp;the&nbsp;revision&nbsp;history&nbsp;for&nbsp;a&nbsp;node.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;entry_or_uri_or_id:&nbsp;string&nbsp;or&nbsp;gdata.sites.data.SiteEntry&nbsp;A&nbsp;full&nbsp;URI,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;node&nbsp;ID,&nbsp;or&nbsp;entry&nbsp;object&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;retrieve&nbsp;revision<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;information&nbsp;for.<br>
+&nbsp;&nbsp;entry_or_uri_or_id:&nbsp;string&nbsp;or&nbsp;gdata.sites.data.ContentEntry&nbsp;A&nbsp;full&nbsp;URI,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content&nbsp;entry&nbsp;node&nbsp;ID,&nbsp;or&nbsp;a&nbsp;content&nbsp;entry&nbsp;object&nbsp;of&nbsp;the&nbsp;entry&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;retrieve&nbsp;revision&nbsp;information&nbsp;for.<br>
 &nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
 &nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#SitesClient-get_feed">get_feed</a>().<br>
@@ -162,11 +203,26 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;gdata.sites.data.RevisionFeed</tt></dd></dl>
 
+<dl><dt><a name="SitesClient-get_site_feed"><strong>get_site_feed</strong></a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;the&nbsp;site&nbsp;feed&nbsp;containing&nbsp;a&nbsp;list&nbsp;of&nbsp;sites&nbsp;a&nbsp;user&nbsp;has&nbsp;access&nbsp;to.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;string&nbsp;(optional)&nbsp;A&nbsp;full&nbsp;URI&nbsp;to&nbsp;query&nbsp;the&nbsp;site&nbsp;feed.<br>
+&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#SitesClient-get_feed">get_feed</a>().<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.sites.data.SiteFeed</tt></dd></dl>
+
+<dl><dt><a name="SitesClient-make_acl_feed_uri"><strong>make_acl_feed_uri</strong></a>(self)</dt></dl>
+
 <dl><dt><a name="SitesClient-make_activity_feed_uri"><strong>make_activity_feed_uri</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="SitesClient-make_content_feed_uri"><strong>make_content_feed_uri</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="SitesClient-make_revision_feed_uri"><strong>make_revision_feed_uri</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SitesClient-make_site_feed_uri"><strong>make_site_feed_uri</strong></a>(self, site_name<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="SitesClient-upload_attachment"><strong>upload_attachment</strong></a>(self, file_handle, parent, content_type<font color="#909090">=None</font>, title<font color="#909090">=None</font>, description<font color="#909090">=None</font>, folder_name<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Uploads&nbsp;an&nbsp;attachment&nbsp;to&nbsp;a&nbsp;parent&nbsp;page.<br>
 &nbsp;<br>
@@ -195,7 +251,9 @@ Returns:<br>
 
 <hr>
 Data and other attributes defined here:<br>
-<dl><dt><strong>api_version</strong> = '1'</dl>
+<dl><dt><strong>api_version</strong> = '1.1'</dl>
+
+<dl><dt><strong>auth_scopes</strong> = ('http://sites.google.com/feeds/', 'https://sites.google.com/feeds/')</dl>
 
 <dl><dt><strong>auth_service</strong> = 'jotspot'</dl>
 
@@ -205,7 +263,7 @@ Data and other attributes defined here:<br>
 
 <hr>
 Methods inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
-<dl><dt><a name="SitesClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc40d50&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+<dl><dt><a name="SitesClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb8b650&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
 application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
@@ -389,7 +447,18 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="SitesClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc40d10&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="SitesClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb8b610&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="SitesClient-RevokeToken"><strong>RevokeToken</strong></a> = revoke_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb8b6d0&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;both&nbsp;AuthSub&nbsp;and&nbsp;OAuth&nbsp;tokens&nbsp;(to&nbsp;invalidate<br>
+a&nbsp;ClientLogin&nbsp;token,&nbsp;the&nbsp;user&nbsp;must&nbsp;change&nbsp;their&nbsp;password).<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;server&nbsp;responded&nbsp;with&nbsp;a&nbsp;200.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;A&nbsp;RequestError&nbsp;if&nbsp;the&nbsp;server&nbsp;responds&nbsp;with&nbsp;a&nbsp;non-200&nbsp;status.</tt></dd></dl>
 
 <dl><dt><a name="SitesClient-Update"><strong>Update</strong></a> = update(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
 &nbsp;<br>
@@ -409,7 +478,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="SitesClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc40d90&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="SitesClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb8b690&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -426,7 +495,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
 
-<dl><dt><a name="SitesClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc40d50&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+<dl><dt><a name="SitesClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb8b650&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
 application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
@@ -610,7 +679,18 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="SitesClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc40d10&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="SitesClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb8b610&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="SitesClient-revoke_token"><strong>revoke_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb8b6d0&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;both&nbsp;AuthSub&nbsp;and&nbsp;OAuth&nbsp;tokens&nbsp;(to&nbsp;invalidate<br>
+a&nbsp;ClientLogin&nbsp;token,&nbsp;the&nbsp;user&nbsp;must&nbsp;change&nbsp;their&nbsp;password).<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;server&nbsp;responded&nbsp;with&nbsp;a&nbsp;200.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;A&nbsp;RequestError&nbsp;if&nbsp;the&nbsp;server&nbsp;responds&nbsp;with&nbsp;a&nbsp;non-200&nbsp;status.</tt></dd></dl>
 
 <dl><dt><a name="SitesClient-update"><strong>update</strong></a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
 &nbsp;<br>
@@ -630,7 +710,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="SitesClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc40d90&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="SitesClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb8b690&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -646,10 +726,6 @@ Args:<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
-
-<hr>
-Data and other attributes inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
-<dl><dt><strong>auth_scopes</strong> = None</dl>
 
 <hr>
 Methods inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
@@ -682,9 +758,11 @@ Data and other attributes inherited from <a href="atom.client.html#AtomPubClient
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>ACTIVITY_FEED_TEMPLATE</strong> = '/feeds/activity/%s/%s/'<br>
+<td width="100%"><strong>ACL_FEED_TEMPLATE</strong> = '/feeds/acl/site/%s/%s/'<br>
+<strong>ACTIVITY_FEED_TEMPLATE</strong> = '/feeds/activity/%s/%s/'<br>
 <strong>CONTENT_FEED_TEMPLATE</strong> = '/feeds/content/%s/%s/'<br>
 <strong>REVISION_FEED_TEMPLATE</strong> = '/feeds/revision/%s/%s/'<br>
+<strong>SITE_FEED_TEMPLATE</strong> = '/feeds/site/%s/'<br>
 <strong>__author__</strong> = 'e.bidelman (Eric Bidelman)'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#7799ee">

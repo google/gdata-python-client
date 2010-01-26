@@ -407,7 +407,7 @@ Data and other attributes inherited from <a href="__builtin__.html#dict">__built
 
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x7569a0&gt;<dd><tt>T.<a href="#YouTubePlaylistQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xdff2e0&gt;<dd><tt>dict.<a href="#YouTubePlaylistQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xd40220&gt;<dd><tt>dict.<a href="#YouTubePlaylistQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -1329,7 +1329,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="YouTubeService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x9219b0&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
+<dl><dt><a name="YouTubeService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x7f2de671cd70&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;gdata.service.Get<br>
 &nbsp;<br>
@@ -1344,6 +1344,8 @@ Args:<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataFeed&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
+
+<dl><dt><a name="YouTubeService-GetGeneratorFromLinkFinder"><strong>GetGeneratorFromLinkFinder</strong></a>(self, link_finder, func, num_retries<font color="#909090">=3</font>, delay<font color="#909090">=1</font>, backoff<font color="#909090">=2</font>)</dt><dd><tt>returns&nbsp;a&nbsp;generator&nbsp;for&nbsp;pagination</tt></dd></dl>
 
 <dl><dt><a name="YouTubeService-GetMedia"><strong>GetMedia</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>)</dt><dd><tt>Returns&nbsp;a&nbsp;MediaSource&nbsp;containing&nbsp;media&nbsp;and&nbsp;its&nbsp;metadata&nbsp;from&nbsp;the&nbsp;given<br>
 URI&nbsp;string.</tt></dd></dl>
@@ -1855,7 +1857,7 @@ Data and other attributes inherited from <a href="__builtin__.html#dict">__built
 
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x7569a0&gt;<dd><tt>T.<a href="#YouTubeUserQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xdfee00&gt;<dd><tt>dict.<a href="#YouTubeUserQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xd3fce0&gt;<dd><tt>dict.<a href="#YouTubeUserQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -1897,7 +1899,9 @@ Attributes:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;countries.<br>
 &nbsp;&nbsp;location:&nbsp;A&nbsp;string&nbsp;of&nbsp;geo&nbsp;coordinates.&nbsp;Note&nbsp;that&nbsp;this&nbsp;is&nbsp;not&nbsp;used&nbsp;when&nbsp;the<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;search&nbsp;is&nbsp;performed&nbsp;but&nbsp;rather&nbsp;to&nbsp;filter&nbsp;the&nbsp;returned&nbsp;videos&nbsp;for&nbsp;ones<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;match&nbsp;to&nbsp;the&nbsp;location&nbsp;entered.<br>&nbsp;</tt></td></tr>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;match&nbsp;to&nbsp;the&nbsp;location&nbsp;entered.<br>
+&nbsp;&nbsp;feed:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;base&nbsp;URL&nbsp;which&nbsp;is&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;query&nbsp;URL.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defaults&nbsp;to&nbsp;'<a href="http://%s/feeds/videos">http://%s/feeds/videos</a>'&nbsp;%&nbsp;(YOUTUBE_SERVER)<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.youtube.service.html#YouTubeVideoQuery">YouTubeVideoQuery</a></dd>
@@ -1907,7 +1911,7 @@ Attributes:<br>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="YouTubeVideoQuery-__init__"><strong>__init__</strong></a>(self, video_id<font color="#909090">=None</font>, feed_type<font color="#909090">=None</font>, text_query<font color="#909090">=None</font>, params<font color="#909090">=None</font>, categories<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="YouTubeVideoQuery-__init__"><strong>__init__</strong></a>(self, video_id<font color="#909090">=None</font>, feed_type<font color="#909090">=None</font>, text_query<font color="#909090">=None</font>, params<font color="#909090">=None</font>, categories<font color="#909090">=None</font>, feed<font color="#909090">=None</font>)</dt></dl>
 
 <hr>
 Data descriptors defined here:<br>
@@ -2047,7 +2051,7 @@ Data and other attributes inherited from <a href="__builtin__.html#dict">__built
 
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x7569a0&gt;<dd><tt>T.<a href="#YouTubeVideoQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xe00620&gt;<dd><tt>dict.<a href="#YouTubeVideoQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0xd41d10&gt;<dd><tt>dict.<a href="#YouTubeVideoQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table></td></tr></table><p>

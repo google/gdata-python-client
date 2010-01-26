@@ -82,7 +82,7 @@ Methods defined here:<br>
 
 <dl><dt><a name="ContactsClient-ExecuteBatch"><strong>ExecuteBatch</strong></a> = <a href="#ContactsClient-execute_batch">execute_batch</a>(self, batch_feed, url, desired_class<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="ContactsClient-ExecuteBatchProfiles"><strong>ExecuteBatchProfiles</strong></a> = <a href="#ContactsClient-execute_batch_profiles">execute_batch_profiles</a>(self, batch_feed, url, desired_class<font color="#909090">=&lt;function ProfilesFeedFromString at 0xc9f500&gt;</font>)</dt></dl>
+<dl><dt><a name="ContactsClient-ExecuteBatchProfiles"><strong>ExecuteBatchProfiles</strong></a> = <a href="#ContactsClient-execute_batch_profiles">execute_batch_profiles</a>(self, batch_feed, url, desired_class<font color="#909090">=&lt;function ProfilesFeedFromString at 0xbe6f50&gt;</font>)</dt></dl>
 
 <dl><dt><a name="ContactsClient-GetContact"><strong>GetContact</strong></a> = <a href="#ContactsClient-get_contact">get_contact</a>(self, uri)</dt></dl>
 
@@ -183,7 +183,7 @@ Returns:<br>
 &nbsp;&nbsp;The&nbsp;results&nbsp;of&nbsp;the&nbsp;batch&nbsp;request's&nbsp;execution&nbsp;on&nbsp;the&nbsp;server.&nbsp;If&nbsp;the<br>
 &nbsp;&nbsp;default&nbsp;converter&nbsp;is&nbsp;used,&nbsp;this&nbsp;is&nbsp;stored&nbsp;in&nbsp;a&nbsp;ContactsFeed.</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-execute_batch_profiles"><strong>execute_batch_profiles</strong></a>(self, batch_feed, url, desired_class<font color="#909090">=&lt;function ProfilesFeedFromString at 0xc9f500&gt;</font>)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;feed&nbsp;to&nbsp;the&nbsp;server.<br>
+<dl><dt><a name="ContactsClient-execute_batch_profiles"><strong>execute_batch_profiles</strong></a>(self, batch_feed, url, desired_class<font color="#909090">=&lt;function ProfilesFeedFromString at 0xbe6f50&gt;</font>)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;feed&nbsp;to&nbsp;the&nbsp;server.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;batch_feed:&nbsp;gdata.profiles.ProfilesFeed&nbsp;A&nbsp;feed&nbsp;containing&nbsp;batch<br>
@@ -293,6 +293,8 @@ Returns:<br>
 Data and other attributes defined here:<br>
 <dl><dt><strong>api_version</strong> = '3'</dl>
 
+<dl><dt><strong>auth_scopes</strong> = ('https://www.google.com/m8/feeds/', 'http://www.google.com/m8/feeds/')</dl>
+
 <dl><dt><strong>auth_service</strong> = 'cp'</dl>
 
 <dl><dt><strong>contact_list</strong> = 'default'</dl>
@@ -301,7 +303,7 @@ Data and other attributes defined here:<br>
 
 <hr>
 Methods inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
-<dl><dt><a name="ContactsClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc4df50&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+<dl><dt><a name="ContactsClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xbe04d0&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
 application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
@@ -485,7 +487,18 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc4df10&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="ContactsClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xbe0490&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="ContactsClient-RevokeToken"><strong>RevokeToken</strong></a> = revoke_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xbe0550&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;both&nbsp;AuthSub&nbsp;and&nbsp;OAuth&nbsp;tokens&nbsp;(to&nbsp;invalidate<br>
+a&nbsp;ClientLogin&nbsp;token,&nbsp;the&nbsp;user&nbsp;must&nbsp;change&nbsp;their&nbsp;password).<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;server&nbsp;responded&nbsp;with&nbsp;a&nbsp;200.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;A&nbsp;RequestError&nbsp;if&nbsp;the&nbsp;server&nbsp;responds&nbsp;with&nbsp;a&nbsp;non-200&nbsp;status.</tt></dd></dl>
 
 <dl><dt><a name="ContactsClient-Update"><strong>Update</strong></a> = update(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
 &nbsp;<br>
@@ -505,7 +518,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc4df90&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="ContactsClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xbe0510&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -522,7 +535,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc4df50&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+<dl><dt><a name="ContactsClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xbe04d0&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
 application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
@@ -706,7 +719,18 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc4df10&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="ContactsClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xbe0490&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="ContactsClient-revoke_token"><strong>revoke_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xbe0550&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;both&nbsp;AuthSub&nbsp;and&nbsp;OAuth&nbsp;tokens&nbsp;(to&nbsp;invalidate<br>
+a&nbsp;ClientLogin&nbsp;token,&nbsp;the&nbsp;user&nbsp;must&nbsp;change&nbsp;their&nbsp;password).<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;server&nbsp;responded&nbsp;with&nbsp;a&nbsp;200.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;A&nbsp;RequestError&nbsp;if&nbsp;the&nbsp;server&nbsp;responds&nbsp;with&nbsp;a&nbsp;non-200&nbsp;status.</tt></dd></dl>
 
 <dl><dt><a name="ContactsClient-update"><strong>update</strong></a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
 &nbsp;<br>
@@ -726,7 +750,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc4df90&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="ContactsClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xbe0510&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -742,10 +766,6 @@ Args:<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
-
-<hr>
-Data and other attributes inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
-<dl><dt><strong>auth_scopes</strong> = None</dl>
 
 <hr>
 Methods inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>

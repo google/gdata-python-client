@@ -91,7 +91,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;dict&nbsp;containing&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;delete&nbsp;operation.</tt></dd></dl>
 
-<dl><dt><a name="GroupsService-IsMember"><strong>IsMember</strong></a>(self, member_id, group_id)</dt><dd><tt>Check&nbsp;whether&nbsp;the&nbsp;given&nbsp;member&nbsp;already&nbsp;exists&nbsp;in&nbsp;the&nbsp;given&nbsp;group<br>
+<dl><dt><a name="GroupsService-IsMember"><strong>IsMember</strong></a>(self, member_id, group_id)</dt><dd><tt>Check&nbsp;whether&nbsp;the&nbsp;given&nbsp;member&nbsp;already&nbsp;exists&nbsp;in&nbsp;the&nbsp;given&nbsp;group.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;member_id:&nbsp;The&nbsp;member's&nbsp;email&nbsp;address&nbsp;(e.g.&nbsp;member@example.com).<br>
@@ -109,16 +109,16 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;member&nbsp;is&nbsp;an&nbsp;owner&nbsp;of&nbsp;the&nbsp;given&nbsp;group.&nbsp;&nbsp;False&nbsp;otherwise.</tt></dd></dl>
 
-<dl><dt><a name="GroupsService-RemoveMemberFromGroup"><strong>RemoveMemberFromGroup</strong></a>(self, member_id, group_id)</dt><dd><tt>Remove&nbsp;the&nbsp;given&nbsp;member&nbsp;from&nbsp;the&nbsp;given&nbsp;group<br>
+<dl><dt><a name="GroupsService-RemoveMemberFromGroup"><strong>RemoveMemberFromGroup</strong></a>(self, member_id, group_id)</dt><dd><tt>Remove&nbsp;the&nbsp;given&nbsp;member&nbsp;from&nbsp;the&nbsp;given&nbsp;group.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;group_id:&nbsp;The&nbsp;ID&nbsp;of&nbsp;the&nbsp;group&nbsp;(e.g.&nbsp;us-sales).<br>
 &nbsp;&nbsp;member_id:&nbsp;The&nbsp;member's&nbsp;email&nbsp;address&nbsp;(e.g.&nbsp;member@example.com).<br>
+&nbsp;&nbsp;group_id:&nbsp;The&nbsp;ID&nbsp;of&nbsp;the&nbsp;group&nbsp;(e.g.&nbsp;us-sales).<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;dict&nbsp;containing&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;remove&nbsp;operation.</tt></dd></dl>
 
-<dl><dt><a name="GroupsService-RemoveOwnerFromGroup"><strong>RemoveOwnerFromGroup</strong></a>(self, owner_email, group_id)</dt><dd><tt>Remove&nbsp;the&nbsp;given&nbsp;owner&nbsp;from&nbsp;the&nbsp;given&nbsp;group<br>
+<dl><dt><a name="GroupsService-RemoveOwnerFromGroup"><strong>RemoveOwnerFromGroup</strong></a>(self, owner_email, group_id)</dt><dd><tt>Remove&nbsp;the&nbsp;given&nbsp;owner&nbsp;from&nbsp;the&nbsp;given&nbsp;group.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;owner_email:&nbsp;The&nbsp;email&nbsp;address&nbsp;of&nbsp;a&nbsp;group&nbsp;owner.<br>
@@ -130,23 +130,27 @@ Returns:<br>
 <dl><dt><a name="GroupsService-RetrieveAllGroups"><strong>RetrieveAllGroups</strong></a>(self)</dt><dd><tt>Retrieve&nbsp;all&nbsp;groups&nbsp;in&nbsp;the&nbsp;domain.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;None.<br>
+&nbsp;&nbsp;None<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;list&nbsp;containing&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;retrieve&nbsp;operation.</tt></dd></dl>
 
-<dl><dt><a name="GroupsService-RetrieveAllMembers"><strong>RetrieveAllMembers</strong></a>(self, group_id)</dt><dd><tt>Retrieve&nbsp;all&nbsp;members&nbsp;in&nbsp;the&nbsp;given&nbsp;group.<br>
+<dl><dt><a name="GroupsService-RetrieveAllMembers"><strong>RetrieveAllMembers</strong></a>(self, group_id, suspended_users<font color="#909090">=False</font>)</dt><dd><tt>Retrieve&nbsp;all&nbsp;members&nbsp;in&nbsp;the&nbsp;given&nbsp;group.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;group_id:&nbsp;The&nbsp;ID&nbsp;of&nbsp;the&nbsp;group&nbsp;(e.g.&nbsp;us-sales).<br>
+&nbsp;&nbsp;suspended_users:&nbsp;A&nbsp;boolean;&nbsp;should&nbsp;we&nbsp;include&nbsp;any&nbsp;suspended&nbsp;users&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;membership&nbsp;list&nbsp;returned?<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;list&nbsp;containing&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;retrieve&nbsp;operation.</tt></dd></dl>
 
-<dl><dt><a name="GroupsService-RetrieveAllOwners"><strong>RetrieveAllOwners</strong></a>(self, group_id)</dt><dd><tt>Retrieve&nbsp;all&nbsp;owners&nbsp;of&nbsp;the&nbsp;given&nbsp;group<br>
+<dl><dt><a name="GroupsService-RetrieveAllOwners"><strong>RetrieveAllOwners</strong></a>(self, group_id, suspended_users<font color="#909090">=False</font>)</dt><dd><tt>Retrieve&nbsp;all&nbsp;owners&nbsp;of&nbsp;the&nbsp;given&nbsp;group.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;group_id:&nbsp;The&nbsp;ID&nbsp;of&nbsp;the&nbsp;group&nbsp;(e.g.&nbsp;us-sales).<br>
+&nbsp;&nbsp;suspended_users:&nbsp;A&nbsp;boolean;&nbsp;should&nbsp;we&nbsp;include&nbsp;any&nbsp;suspended&nbsp;users&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;ownership&nbsp;list&nbsp;returned?<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;list&nbsp;containing&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;retrieve&nbsp;operation.</tt></dd></dl>
@@ -168,7 +172,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;list&nbsp;containing&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;retrieve&nbsp;operation.</tt></dd></dl>
 
-<dl><dt><a name="GroupsService-RetrieveMember"><strong>RetrieveMember</strong></a>(self, member_id, group_id)</dt><dd><tt>Retrieve&nbsp;the&nbsp;given&nbsp;member&nbsp;in&nbsp;the&nbsp;given&nbsp;group<br>
+<dl><dt><a name="GroupsService-RetrieveMember"><strong>RetrieveMember</strong></a>(self, member_id, group_id)</dt><dd><tt>Retrieve&nbsp;the&nbsp;given&nbsp;member&nbsp;in&nbsp;the&nbsp;given&nbsp;group.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;member_id:&nbsp;The&nbsp;member's&nbsp;email&nbsp;address&nbsp;(e.g.&nbsp;member@example.com).<br>
@@ -177,7 +181,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;dict&nbsp;containing&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;retrieve&nbsp;operation.</tt></dd></dl>
 
-<dl><dt><a name="GroupsService-RetrieveOwner"><strong>RetrieveOwner</strong></a>(self, owner_email, group_id)</dt><dd><tt>Retrieve&nbsp;the&nbsp;given&nbsp;owner&nbsp;in&nbsp;the&nbsp;given&nbsp;group<br>
+<dl><dt><a name="GroupsService-RetrieveOwner"><strong>RetrieveOwner</strong></a>(self, owner_email, group_id)</dt><dd><tt>Retrieve&nbsp;the&nbsp;given&nbsp;owner&nbsp;in&nbsp;the&nbsp;given&nbsp;group.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;owner_email:&nbsp;The&nbsp;email&nbsp;address&nbsp;of&nbsp;a&nbsp;group&nbsp;owner.<br>
@@ -398,7 +402,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="GroupsService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x9219b0&gt;</font>)</dt><dd><tt>Query&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
+<dl><dt><a name="GroupsService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0x7f7cc103bd70&gt;</font>)</dt><dd><tt>Query&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;gdata.service.Get<br>
 &nbsp;<br>
@@ -413,6 +417,8 @@ Args:<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataFeed&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
+
+<dl><dt><a name="GroupsService-GetGeneratorFromLinkFinder"><strong>GetGeneratorFromLinkFinder</strong></a>(self, link_finder, func, num_retries<font color="#909090">=3</font>, delay<font color="#909090">=1</font>, backoff<font color="#909090">=2</font>)</dt><dd><tt>returns&nbsp;a&nbsp;generator&nbsp;for&nbsp;pagination</tt></dd></dl>
 
 <dl><dt><a name="GroupsService-GetMedia"><strong>GetMedia</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>)</dt><dd><tt>Returns&nbsp;a&nbsp;MediaSource&nbsp;containing&nbsp;media&nbsp;and&nbsp;its&nbsp;metadata&nbsp;from&nbsp;the&nbsp;given<br>
 URI&nbsp;string.</tt></dd></dl>
@@ -776,8 +782,10 @@ Data and other attributes inherited from <a href="atom.service.html#AtomService"
 <strong>GROUP_MEMBER_URL</strong> = '/a/feeds/group/2.0/%s?member=%s'<br>
 <strong>MEMBER_ID_URL</strong> = '/a/feeds/group/2.0/%s/%s/member/%s'<br>
 <strong>MEMBER_URL</strong> = '/a/feeds/group/2.0/%s/%s/member'<br>
+<strong>MEMBER_WITH_SUSPENDED_URL</strong> = '/a/feeds/group/2.0/%s/%s/member?includeSuspendedUsers=%s'<br>
 <strong>OWNER_ID_URL</strong> = '/a/feeds/group/2.0/%s/%s/owner/%s'<br>
 <strong>OWNER_URL</strong> = '/a/feeds/group/2.0/%s/%s/owner'<br>
+<strong>OWNER_WITH_SUSPENDED_URL</strong> = '/a/feeds/group/2.0/%s/%s/owner?includeSuspendedUsers=%s'<br>
 <strong>PERMISSION_ANYONE</strong> = 'Anyone'<br>
 <strong>PERMISSION_DOMAIN</strong> = 'Domain'<br>
 <strong>PERMISSION_MEMBER</strong> = 'Member'<br>

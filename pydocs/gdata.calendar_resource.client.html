@@ -1,16 +1,20 @@
 
 <!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head><title>Python: module gdata.analytics.client</title>
+<html><head><title>Python: module gdata.calendar_resource.client</title>
 </head><body bgcolor="#f0f0f8">
 
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.analytics.html"><font color="#ffffff">analytics</font></a>.client</strong></big></big></font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.calendar_resource.html"><font color="#ffffff">calendar_resource</font></a>.client</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client/src/gdata/analytics/client.py">/usr/local/svn/gdata-python-client/src/gdata/analytics/client.py</a></font></td></tr></table>
-    <p><tt><a href="#AnalyticsClient">AnalyticsClient</a>&nbsp;extends&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>&nbsp;to&nbsp;streamline<br>
-Google&nbsp;Analytics&nbsp;Data&nbsp;Export&nbsp;API&nbsp;calls.</tt></p>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client/src/gdata/calendar_resource/client.py">/usr/local/svn/gdata-python-client/src/gdata/calendar_resource/client.py</a></font></td></tr></table>
+    <p><tt><a href="#CalendarResourceClient">CalendarResourceClient</a>&nbsp;simplifies&nbsp;Calendar&nbsp;Resources&nbsp;API&nbsp;calls.<br>
+&nbsp;<br>
+<a href="#CalendarResourceClient">CalendarResourceClient</a>&nbsp;extends&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>&nbsp;to&nbsp;ease&nbsp;interaction&nbsp;with<br>
+the&nbsp;Google&nbsp;Apps&nbsp;Calendar&nbsp;Resources&nbsp;API.&nbsp;&nbsp;These&nbsp;interactions&nbsp;include&nbsp;the&nbsp;ability<br>
+to&nbsp;create,&nbsp;retrieve,&nbsp;update,&nbsp;and&nbsp;delete&nbsp;calendar&nbsp;resources&nbsp;in&nbsp;a&nbsp;Google&nbsp;Apps<br>
+domain.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -20,7 +24,8 @@ Google&nbsp;Analytics&nbsp;Data&nbsp;Export&nbsp;API&nbsp;calls.</tt></p>
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="atom.html">atom</a><br>
 </td><td width="25%" valign=top><a href="gdata.html">gdata</a><br>
-</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+</td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -31,14 +36,7 @@ Google&nbsp;Analytics&nbsp;Data&nbsp;Export&nbsp;API&nbsp;calls.</tt></p>
 <dt><font face="helvetica, arial"><a href="gdata.client.html#GDClient">gdata.client.GDClient</a>(<a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>)
 </font></dt><dd>
 <dl>
-<dt><font face="helvetica, arial"><a href="gdata.analytics.client.html#AnalyticsClient">AnalyticsClient</a>
-</font></dt></dl>
-</dd>
-<dt><font face="helvetica, arial"><a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a>(<a href="atom.http_core.html#Uri">atom.http_core.Uri</a>)
-</font></dt><dd>
-<dl>
-<dt><font face="helvetica, arial"><a href="gdata.analytics.client.html#AccountFeedQuery">AccountFeedQuery</a>
-</font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.client.html#DataFeedQuery">DataFeedQuery</a>
+<dt><font face="helvetica, arial"><a href="gdata.calendar_resource.client.html#CalendarResourceClient">CalendarResourceClient</a>
 </font></dt></dl>
 </dd>
 </dl>
@@ -46,134 +44,122 @@ Google&nbsp;Analytics&nbsp;Data&nbsp;Export&nbsp;API&nbsp;calls.</tt></p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="AccountFeedQuery">class <strong>AccountFeedQuery</strong></a>(<a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="CalendarResourceClient">class <strong>CalendarResourceClient</strong></a>(<a href="gdata.client.html#GDClient">gdata.client.GDClient</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Account&nbsp;Feed&nbsp;query&nbsp;class&nbsp;to&nbsp;simplify&nbsp;constructing&nbsp;Account&nbsp;Feed&nbsp;Urls.<br>
+<td colspan=2><tt>Client&nbsp;extension&nbsp;for&nbsp;the&nbsp;Google&nbsp;Calendar&nbsp;Resource&nbsp;API&nbsp;service.<br>
 &nbsp;<br>
-To&nbsp;use&nbsp;this&nbsp;class,&nbsp;you&nbsp;can&nbsp;either&nbsp;pass&nbsp;a&nbsp;dict&nbsp;in&nbsp;the&nbsp;constructor&nbsp;that&nbsp;has<br>
-all&nbsp;the&nbsp;data&nbsp;feed&nbsp;query&nbsp;parameters&nbsp;as&nbsp;keys.<br>
-&nbsp;&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#DataFeedQuery">DataFeedQuery</a>({'max-results':&nbsp;'10000'})<br>
-&nbsp;<br>
-Alternatively&nbsp;you&nbsp;can&nbsp;add&nbsp;new&nbsp;parameters&nbsp;directly&nbsp;to&nbsp;the&nbsp;query&nbsp;object.<br>
-&nbsp;&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#DataFeedQuery">DataFeedQuery</a>()<br>
-&nbsp;&nbsp;&nbsp;queryUrl.query['max-results']&nbsp;=&nbsp;'10000'<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;query:&nbsp;dict&nbsp;(optional)&nbsp;Contains&nbsp;all&nbsp;the&nbsp;GA&nbsp;Data&nbsp;Feed&nbsp;query&nbsp;parameters<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;as&nbsp;keys.<br>&nbsp;</tt></td></tr>
+Attributes:<br>
+&nbsp;&nbsp;host:&nbsp;string&nbsp;The&nbsp;hostname&nbsp;for&nbsp;the&nbsp;Calendar&nbsp;Resouce&nbsp;API&nbsp;service.<br>
+&nbsp;&nbsp;api_version:&nbsp;string&nbsp;The&nbsp;version&nbsp;of&nbsp;the&nbsp;Calendar&nbsp;Resource&nbsp;API.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="gdata.analytics.client.html#AccountFeedQuery">AccountFeedQuery</a></dd>
-<dd><a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a></dd>
-<dd><a href="atom.http_core.html#Uri">atom.http_core.Uri</a></dd>
-<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
-</dl>
-<hr>
-Methods defined here:<br>
-<dl><dt><a name="AccountFeedQuery-__init__"><strong>__init__</strong></a>(self, query<font color="#909090">=None</font>, **kwargs)</dt></dl>
-
-<hr>
-Data and other attributes defined here:<br>
-<dl><dt><strong>host</strong> = 'www.google.com'</dl>
-
-<dl><dt><strong>path</strong> = '/analytics/feeds/accounts/default'</dl>
-
-<dl><dt><strong>scheme</strong> = 'https'</dl>
-
-<hr>
-Data descriptors inherited from <a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a>:<br>
-<dl><dt><strong>text_query</strong></dt>
-<dd><tt>The&nbsp;q&nbsp;parameter&nbsp;for&nbsp;searching&nbsp;for&nbsp;an&nbsp;exact&nbsp;text&nbsp;match&nbsp;on&nbsp;content</tt></dd>
-</dl>
-<hr>
-Methods inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
-<dl><dt><a name="AccountFeedQuery-ModifyRequest"><strong>ModifyRequest</strong></a> = modify_request(self, http_request<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;HTTP&nbsp;request&nbsp;components&nbsp;based&nbsp;on&nbsp;the&nbsp;URI.</tt></dd></dl>
-
-<dl><dt><a name="AccountFeedQuery-__str__"><strong>__str__</strong></a>(self)</dt></dl>
-
-<dl><dt><a name="AccountFeedQuery-modify_request"><strong>modify_request</strong></a>(self, http_request<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;HTTP&nbsp;request&nbsp;components&nbsp;based&nbsp;on&nbsp;the&nbsp;URI.</tt></dd></dl>
-
-<hr>
-Static methods inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
-<dl><dt><a name="AccountFeedQuery-ParseUri"><strong>ParseUri</strong></a> = parse_uri(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;Uri&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
-&nbsp;<br>
-This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
-members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>
-
-<dl><dt><a name="AccountFeedQuery-parse_uri"><strong>parse_uri</strong></a>(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;Uri&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
-&nbsp;<br>
-This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
-members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>
-
-<hr>
-Data descriptors inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
-<dl><dt><strong>__dict__</strong></dt>
-<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-<dl><dt><strong>__weakref__</strong></dt>
-<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-<hr>
-Data and other attributes inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
-<dl><dt><strong>port</strong> = None</dl>
-
-</td></tr></table> <p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#ffc8d8">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="AnalyticsClient">class <strong>AnalyticsClient</strong></a>(<a href="gdata.client.html#GDClient">gdata.client.GDClient</a>)</font></td></tr>
-    
-<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Client&nbsp;extension&nbsp;for&nbsp;the&nbsp;Google&nbsp;Analytics&nbsp;API&nbsp;service.<br>&nbsp;</tt></td></tr>
-<tr><td>&nbsp;</td>
-<td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="gdata.analytics.client.html#AnalyticsClient">AnalyticsClient</a></dd>
+<dd><a href="gdata.calendar_resource.client.html#CalendarResourceClient">CalendarResourceClient</a></dd>
 <dd><a href="gdata.client.html#GDClient">gdata.client.GDClient</a></dd>
 <dd><a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a></dd>
 <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="AnalyticsClient-GetAccountFeed"><strong>GetAccountFeed</strong></a> = <a href="#AnalyticsClient-get_account_feed">get_account_feed</a>(self, feed_uri, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="CalendarResourceClient-CreateResource"><strong>CreateResource</strong></a> = <a href="#CalendarResourceClient-create_resource">create_resource</a>(self, resource_id, resource_common_name<font color="#909090">=None</font>, resource_description<font color="#909090">=None</font>, resource_type<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="AnalyticsClient-GetDataFeed"><strong>GetDataFeed</strong></a> = <a href="#AnalyticsClient-get_data_feed">get_data_feed</a>(self, feed_uri, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="CalendarResourceClient-DeleteResource"><strong>DeleteResource</strong></a> = <a href="#CalendarResourceClient-delete_resource">delete_resource</a>(self, resource_id, **kwargs)</dt></dl>
 
-<dl><dt><a name="AnalyticsClient-__init__"><strong>__init__</strong></a>(self, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Constructs&nbsp;a&nbsp;new&nbsp;client&nbsp;for&nbsp;the&nbsp;Google&nbsp;Analytics&nbsp;Data&nbsp;Export&nbsp;API.<br>
+<dl><dt><a name="CalendarResourceClient-GetResource"><strong>GetResource</strong></a> = <a href="#CalendarResourceClient-get_resource">get_resource</a>(self, uri<font color="#909090">=None</font>, resource_id<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="CalendarResourceClient-GetResourceFeed"><strong>GetResourceFeed</strong></a> = <a href="#CalendarResourceClient-get_resource_feed">get_resource_feed</a>(self, uri<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="CalendarResourceClient-MakeResourceFeedUri"><strong>MakeResourceFeedUri</strong></a> = <a href="#CalendarResourceClient-make_resource_feed_uri">make_resource_feed_uri</a>(self, resource_id<font color="#909090">=None</font>, params<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="CalendarResourceClient-UpdateResource"><strong>UpdateResource</strong></a> = <a href="#CalendarResourceClient-update_resource">update_resource</a>(self, resource_id, resource_common_name<font color="#909090">=None</font>, resource_description<font color="#909090">=None</font>, resource_type<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="CalendarResourceClient-__init__"><strong>__init__</strong></a>(self, domain, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Constructs&nbsp;a&nbsp;new&nbsp;client&nbsp;for&nbsp;the&nbsp;Calendar&nbsp;Resource&nbsp;API.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;auth_token:&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;(optional)&nbsp;Authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
-&nbsp;&nbsp;kwargs:&nbsp;The&nbsp;other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;constructor.</tt></dd></dl>
+&nbsp;&nbsp;domain:&nbsp;string&nbsp;The&nbsp;Google&nbsp;Apps&nbsp;domain&nbsp;with&nbsp;Calendar&nbsp;Resources.<br>
+&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;calendar&nbsp;resource&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data.<br>
+&nbsp;&nbsp;kwargs:&nbsp;The&nbsp;other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>&nbsp;constructor.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-get_account_feed"><strong>get_account_feed</strong></a>(self, feed_uri, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Makes&nbsp;a&nbsp;request&nbsp;to&nbsp;the&nbsp;Analytics&nbsp;API&nbsp;Account&nbsp;Feed.<br>
+<dl><dt><a name="CalendarResourceClient-create_resource"><strong>create_resource</strong></a>(self, resource_id, resource_common_name<font color="#909090">=None</font>, resource_description<font color="#909090">=None</font>, resource_type<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;calendar&nbsp;resource&nbsp;with&nbsp;the&nbsp;given&nbsp;properties.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;feed_uri:&nbsp;str&nbsp;or&nbsp;gdata.analytics.<a href="#AccountFeedQuery">AccountFeedQuery</a>&nbsp;The&nbsp;Analytics&nbsp;Account<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Feed&nbsp;uri&nbsp;to&nbsp;define&nbsp;what&nbsp;data&nbsp;to&nbsp;retrieve&nbsp;from&nbsp;the&nbsp;API.&nbsp;Can&nbsp;also&nbsp;be<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;used&nbsp;with&nbsp;a&nbsp;gdata.analytics.<a href="#AccountFeedQuery">AccountFeedQuery</a>&nbsp;object.</tt></dd></dl>
+&nbsp;&nbsp;resource_id:&nbsp;string&nbsp;The&nbsp;resource&nbsp;ID&nbsp;of&nbsp;the&nbsp;calendar&nbsp;resource.<br>
+&nbsp;&nbsp;resource_common_name:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;common&nbsp;name&nbsp;of&nbsp;the&nbsp;resource.<br>
+&nbsp;&nbsp;resource_description:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;description&nbsp;of&nbsp;the&nbsp;resource.<br>
+&nbsp;&nbsp;resource_type:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;type&nbsp;of&nbsp;the&nbsp;resource.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.calendar_resource.data.CalendarResourceEntry&nbsp;of&nbsp;the&nbsp;new&nbsp;resource.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-get_data_feed"><strong>get_data_feed</strong></a>(self, feed_uri, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Makes&nbsp;a&nbsp;request&nbsp;to&nbsp;the&nbsp;Analytics&nbsp;API&nbsp;Data&nbsp;Feed.<br>
+<dl><dt><a name="CalendarResourceClient-delete_resource"><strong>delete_resource</strong></a>(self, resource_id, **kwargs)</dt><dd><tt>Deletes&nbsp;the&nbsp;calendar&nbsp;resource&nbsp;with&nbsp;the&nbsp;given&nbsp;resource&nbsp;ID.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;feed_uri:&nbsp;str&nbsp;or&nbsp;gdata.analytics.<a href="#AccountFeedQuery">AccountFeedQuery</a>&nbsp;The&nbsp;Analytics&nbsp;Data<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Feed&nbsp;uri&nbsp;to&nbsp;define&nbsp;what&nbsp;data&nbsp;to&nbsp;retrieve&nbsp;from&nbsp;the&nbsp;API.&nbsp;Can&nbsp;also&nbsp;be<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;used&nbsp;with&nbsp;a&nbsp;gdata.analytics.<a href="#AccountFeedQuery">AccountFeedQuery</a>&nbsp;object.</tt></dd></dl>
+&nbsp;&nbsp;resource_id:&nbsp;string&nbsp;The&nbsp;resource&nbsp;ID&nbsp;of&nbsp;the&nbsp;calendar&nbsp;resource&nbsp;to&nbsp;delete.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="#CalendarResourceClient-delete">delete</a>()<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;HTTP&nbsp;response&nbsp;object.&nbsp;&nbsp;See&nbsp;gdata.client.<a href="#CalendarResourceClient-request">request</a>().</tt></dd></dl>
+
+<dl><dt><a name="CalendarResourceClient-get_resource"><strong>get_resource</strong></a>(self, uri<font color="#909090">=None</font>, resource_id<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Fetches&nbsp;a&nbsp;single&nbsp;calendar&nbsp;resource&nbsp;by&nbsp;resource&nbsp;ID.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;string&nbsp;The&nbsp;base&nbsp;URI&nbsp;of&nbsp;the&nbsp;feed&nbsp;from&nbsp;which&nbsp;to&nbsp;fetch&nbsp;the&nbsp;resource.<br>
+&nbsp;&nbsp;resource_id:&nbsp;string&nbsp;The&nbsp;string&nbsp;ID&nbsp;of&nbsp;the&nbsp;Resource&nbsp;to&nbsp;fetch.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;Resource&nbsp;object&nbsp;representing&nbsp;the&nbsp;calendar&nbsp;resource&nbsp;with&nbsp;the&nbsp;given&nbsp;<br>
+&nbsp;&nbsp;base&nbsp;URI&nbsp;and&nbsp;resource&nbsp;ID.</tt></dd></dl>
+
+<dl><dt><a name="CalendarResourceClient-get_resource_feed"><strong>get_resource_feed</strong></a>(self, uri<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Fetches&nbsp;a&nbsp;ResourceFeed&nbsp;of&nbsp;calendar&nbsp;resources&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;string&nbsp;The&nbsp;URI&nbsp;of&nbsp;the&nbsp;feed&nbsp;to&nbsp;pull.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;ResourceFeed&nbsp;object&nbsp;representing&nbsp;the&nbsp;feed&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.</tt></dd></dl>
+
+<dl><dt><a name="CalendarResourceClient-make_resource_feed_uri"><strong>make_resource_feed_uri</strong></a>(self, resource_id<font color="#909090">=None</font>, params<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;a&nbsp;resource&nbsp;feed&nbsp;URI&nbsp;for&nbsp;the&nbsp;Calendar&nbsp;Resource&nbsp;API.<br>
+&nbsp;<br>
+Using&nbsp;this&nbsp;client's&nbsp;Google&nbsp;Apps&nbsp;domain,&nbsp;create&nbsp;a&nbsp;feed&nbsp;URI&nbsp;for&nbsp;calendar<br>
+resources&nbsp;in&nbsp;that&nbsp;domain.&nbsp;If&nbsp;a&nbsp;resource_id&nbsp;is&nbsp;provided,&nbsp;return&nbsp;a&nbsp;URI<br>
+for&nbsp;that&nbsp;specific&nbsp;resource.&nbsp;&nbsp;If&nbsp;params&nbsp;are&nbsp;provided,&nbsp;append&nbsp;them&nbsp;as&nbsp;GET<br>
+params.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;resource_id:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;ID&nbsp;of&nbsp;the&nbsp;calendar&nbsp;resource&nbsp;for&nbsp;which<br>
+&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;make&nbsp;a&nbsp;feed&nbsp;URI.<br>
+&nbsp;&nbsp;params:&nbsp;dict&nbsp;(optional)&nbsp;key&nbsp;-&gt;&nbsp;value&nbsp;params&nbsp;to&nbsp;append&nbsp;as&nbsp;GET&nbsp;vars&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;URI.&nbsp;Example:&nbsp;params={'start':&nbsp;'my-resource-id'}<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;string&nbsp;giving&nbsp;the&nbsp;URI&nbsp;for&nbsp;calendar&nbsp;resources&nbsp;for&nbsp;this&nbsp;client's&nbsp;Google<br>
+&nbsp;&nbsp;Apps&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="CalendarResourceClient-update_resource"><strong>update_resource</strong></a>(self, resource_id, resource_common_name<font color="#909090">=None</font>, resource_description<font color="#909090">=None</font>, resource_type<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Updates&nbsp;the&nbsp;calendar&nbsp;resource&nbsp;with&nbsp;the&nbsp;given&nbsp;resource&nbsp;ID.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;resource_id:&nbsp;string&nbsp;The&nbsp;resource&nbsp;ID&nbsp;of&nbsp;the&nbsp;calendar&nbsp;resource&nbsp;to&nbsp;update.<br>
+&nbsp;&nbsp;resource_common_name:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;common&nbsp;name&nbsp;to&nbsp;give&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource.<br>
+&nbsp;&nbsp;resource_description:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;description&nbsp;to&nbsp;give&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource.<br>
+&nbsp;&nbsp;resource_type:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;type&nbsp;to&nbsp;give&nbsp;the&nbsp;resource.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.calendar_resource.data.CalendarResourceEntry&nbsp;of&nbsp;the&nbsp;updated&nbsp;resource.</tt></dd></dl>
 
 <hr>
 Data and other attributes defined here:<br>
-<dl><dt><strong>account_type</strong> = 'GOOGLE'</dl>
+<dl><dt><strong>api_version</strong> = '2.0'</dl>
 
-<dl><dt><strong>api_version</strong> = '2'</dl>
+<dl><dt><strong>auth_service</strong> = 'apps'</dl>
 
-<dl><dt><strong>auth_scopes</strong> = ('https://www.google.com/analytics/feeds/',)</dl>
-
-<dl><dt><strong>auth_service</strong> = 'analytics'</dl>
+<dl><dt><strong>host</strong> = 'apps-apis.google.com'</dl>
 
 <hr>
 Methods inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
-<dl><dt><a name="AnalyticsClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb92550&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+<dl><dt><a name="CalendarResourceClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb85cd0&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
 application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
@@ -229,9 +215,9 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;BadAuthenticationServiceURL,&nbsp;ClientLoginFailed,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;ClientLoginTokenMissing,&nbsp;or&nbsp;CaptchaChallenge</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-Delete"><strong>Delete</strong></a> = delete(self, entry_or_uri, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
+<dl><dt><a name="CalendarResourceClient-Delete"><strong>Delete</strong></a> = delete(self, entry_or_uri, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="AnalyticsClient-GetAccessToken"><strong>GetAccessToken</strong></a> = get_access_token(self, request_token, url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>)</dt><dd><tt>Exchanges&nbsp;an&nbsp;authorized&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;for&nbsp;an&nbsp;access&nbsp;token.<br>
+<dl><dt><a name="CalendarResourceClient-GetAccessToken"><strong>GetAccessToken</strong></a> = get_access_token(self, request_token, url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>)</dt><dd><tt>Exchanges&nbsp;an&nbsp;authorized&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;for&nbsp;an&nbsp;access&nbsp;token.<br>
 &nbsp;<br>
 Contacts&nbsp;the&nbsp;Google&nbsp;OAuth&nbsp;server&nbsp;to&nbsp;upgrade&nbsp;a&nbsp;previously&nbsp;authorized<br>
 request&nbsp;token.&nbsp;Once&nbsp;the&nbsp;request&nbsp;token&nbsp;is&nbsp;upgraded&nbsp;to&nbsp;an&nbsp;access&nbsp;token,<br>
@@ -245,11 +231,11 @@ Args:<br>
 &nbsp;&nbsp;url:&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;the&nbsp;upgrade&nbsp;request&nbsp;should&nbsp;be&nbsp;sent.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defaults&nbsp;to:&nbsp;https://www.google.com/accounts/OAuthAuthorizeToken</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-GetEntry"><strong>GetEntry</strong></a> = get_entry(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDEntry'&gt;</font>, etag<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="CalendarResourceClient-GetEntry"><strong>GetEntry</strong></a> = get_entry(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDEntry'&gt;</font>, etag<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="AnalyticsClient-GetFeed"><strong>GetFeed</strong></a> = get_feed(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDFeed'&gt;</font>, **kwargs)</dt></dl>
+<dl><dt><a name="CalendarResourceClient-GetFeed"><strong>GetFeed</strong></a> = get_feed(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDFeed'&gt;</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="AnalyticsClient-GetNext"><strong>GetNext</strong></a> = get_next(self, feed, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Fetches&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;results&nbsp;from&nbsp;the&nbsp;feed.<br>
+<dl><dt><a name="CalendarResourceClient-GetNext"><strong>GetNext</strong></a> = get_next(self, feed, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Fetches&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;results&nbsp;from&nbsp;the&nbsp;feed.<br>
 &nbsp;<br>
 When&nbsp;requesting&nbsp;a&nbsp;feed,&nbsp;the&nbsp;number&nbsp;of&nbsp;entries&nbsp;returned&nbsp;is&nbsp;capped&nbsp;at&nbsp;a<br>
 service&nbsp;specific&nbsp;default&nbsp;limit&nbsp;(often&nbsp;25&nbsp;entries).&nbsp;You&nbsp;can&nbsp;specify&nbsp;your<br>
@@ -260,7 +246,7 @@ a&nbsp;next&nbsp;link.&nbsp;This&nbsp;method&nbsp;performs&nbsp;a&nbsp;GET&nbsp;
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;feed&nbsp;object&nbsp;containing&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;entries&nbsp;in&nbsp;this&nbsp;feed.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-GetOAuthToken"><strong>GetOAuthToken</strong></a> = get_oauth_token(self, scopes, next, consumer_key, consumer_secret<font color="#909090">=None</font>, rsa_private_key<font color="#909090">=None</font>, url<font color="#909090">='https://www.google.com/accounts/OAuthGetRequestToken'</font>)</dt><dd><tt>Obtains&nbsp;an&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;to&nbsp;allow&nbsp;the&nbsp;user&nbsp;to&nbsp;authorize&nbsp;this&nbsp;app.<br>
+<dl><dt><a name="CalendarResourceClient-GetOAuthToken"><strong>GetOAuthToken</strong></a> = get_oauth_token(self, scopes, next, consumer_key, consumer_secret<font color="#909090">=None</font>, rsa_private_key<font color="#909090">=None</font>, url<font color="#909090">='https://www.google.com/accounts/OAuthGetRequestToken'</font>)</dt><dd><tt>Obtains&nbsp;an&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;to&nbsp;allow&nbsp;the&nbsp;user&nbsp;to&nbsp;authorize&nbsp;this&nbsp;app.<br>
 &nbsp;<br>
 Once&nbsp;this&nbsp;client&nbsp;has&nbsp;a&nbsp;request&nbsp;token,&nbsp;the&nbsp;user&nbsp;can&nbsp;authorize&nbsp;the&nbsp;request<br>
 token&nbsp;by&nbsp;visiting&nbsp;the&nbsp;authorization&nbsp;URL&nbsp;in&nbsp;their&nbsp;browser.&nbsp;After&nbsp;being<br>
@@ -296,15 +282,15 @@ Args:<br>
 &nbsp;&nbsp;url:&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;a&nbsp;request&nbsp;for&nbsp;a&nbsp;token&nbsp;should&nbsp;be&nbsp;made.&nbsp;The&nbsp;default<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;Google's&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;provider.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-ModifyRequest"><strong>ModifyRequest</strong></a> = modify_request(self, http_request)</dt><dd><tt>Adds&nbsp;or&nbsp;changes&nbsp;request&nbsp;before&nbsp;making&nbsp;the&nbsp;HTTP&nbsp;request.<br>
+<dl><dt><a name="CalendarResourceClient-ModifyRequest"><strong>ModifyRequest</strong></a> = modify_request(self, http_request)</dt><dd><tt>Adds&nbsp;or&nbsp;changes&nbsp;request&nbsp;before&nbsp;making&nbsp;the&nbsp;HTTP&nbsp;request.<br>
 &nbsp;<br>
 This&nbsp;client&nbsp;will&nbsp;add&nbsp;the&nbsp;API&nbsp;version&nbsp;if&nbsp;it&nbsp;is&nbsp;specified.<br>
 Subclasses&nbsp;may&nbsp;override&nbsp;this&nbsp;method&nbsp;to&nbsp;add&nbsp;their&nbsp;own&nbsp;request<br>
 modifications&nbsp;before&nbsp;the&nbsp;request&nbsp;is&nbsp;made.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-Post"><strong>Post</strong></a> = post(self, entry, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="CalendarResourceClient-Post"><strong>Post</strong></a> = post(self, entry, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="AnalyticsClient-Request"><strong>Request</strong></a> = request(self, method<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, **kwargs)</dt><dd><tt>Make&nbsp;an&nbsp;HTTP&nbsp;request&nbsp;to&nbsp;the&nbsp;server.<br>
+<dl><dt><a name="CalendarResourceClient-Request"><strong>Request</strong></a> = request(self, method<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, **kwargs)</dt><dd><tt>Make&nbsp;an&nbsp;HTTP&nbsp;request&nbsp;to&nbsp;the&nbsp;server.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;atom.client.AtomPubClient.request.<br>
 &nbsp;<br>
@@ -357,9 +343,9 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb92510&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="CalendarResourceClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb85c90&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="AnalyticsClient-RevokeToken"><strong>RevokeToken</strong></a> = revoke_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb925d0&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
+<dl><dt><a name="CalendarResourceClient-RevokeToken"><strong>RevokeToken</strong></a> = revoke_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb85d50&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;both&nbsp;AuthSub&nbsp;and&nbsp;OAuth&nbsp;tokens&nbsp;(to&nbsp;invalidate<br>
 a&nbsp;ClientLogin&nbsp;token,&nbsp;the&nbsp;user&nbsp;must&nbsp;change&nbsp;their&nbsp;password).<br>
@@ -370,7 +356,7 @@ Returns:<br>
 Raises:<br>
 &nbsp;&nbsp;A&nbsp;RequestError&nbsp;if&nbsp;the&nbsp;server&nbsp;responds&nbsp;with&nbsp;a&nbsp;non-200&nbsp;status.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-Update"><strong>Update</strong></a> = update(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
+<dl><dt><a name="CalendarResourceClient-Update"><strong>Update</strong></a> = update(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
 &nbsp;<br>
 Performs&nbsp;a&nbsp;PUT&nbsp;and&nbsp;converts&nbsp;the&nbsp;response&nbsp;to&nbsp;a&nbsp;new&nbsp;entry&nbsp;object&nbsp;with&nbsp;a<br>
 matching&nbsp;class&nbsp;to&nbsp;the&nbsp;entry&nbsp;passed&nbsp;in.<br>
@@ -388,7 +374,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb92590&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="CalendarResourceClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb85d10&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -405,7 +391,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb92550&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+<dl><dt><a name="CalendarResourceClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb85cd0&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
 application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
@@ -461,9 +447,9 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;BadAuthenticationServiceURL,&nbsp;ClientLoginFailed,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;ClientLoginTokenMissing,&nbsp;or&nbsp;CaptchaChallenge</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-delete"><strong>delete</strong></a>(self, entry_or_uri, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
+<dl><dt><a name="CalendarResourceClient-delete"><strong>delete</strong></a>(self, entry_or_uri, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="AnalyticsClient-get_access_token"><strong>get_access_token</strong></a>(self, request_token, url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>)</dt><dd><tt>Exchanges&nbsp;an&nbsp;authorized&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;for&nbsp;an&nbsp;access&nbsp;token.<br>
+<dl><dt><a name="CalendarResourceClient-get_access_token"><strong>get_access_token</strong></a>(self, request_token, url<font color="#909090">='https://www.google.com/accounts/OAuthGetAccessToken'</font>)</dt><dd><tt>Exchanges&nbsp;an&nbsp;authorized&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;for&nbsp;an&nbsp;access&nbsp;token.<br>
 &nbsp;<br>
 Contacts&nbsp;the&nbsp;Google&nbsp;OAuth&nbsp;server&nbsp;to&nbsp;upgrade&nbsp;a&nbsp;previously&nbsp;authorized<br>
 request&nbsp;token.&nbsp;Once&nbsp;the&nbsp;request&nbsp;token&nbsp;is&nbsp;upgraded&nbsp;to&nbsp;an&nbsp;access&nbsp;token,<br>
@@ -477,11 +463,11 @@ Args:<br>
 &nbsp;&nbsp;url:&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;the&nbsp;upgrade&nbsp;request&nbsp;should&nbsp;be&nbsp;sent.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defaults&nbsp;to:&nbsp;https://www.google.com/accounts/OAuthAuthorizeToken</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-get_entry"><strong>get_entry</strong></a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDEntry'&gt;</font>, etag<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="CalendarResourceClient-get_entry"><strong>get_entry</strong></a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDEntry'&gt;</font>, etag<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="AnalyticsClient-get_feed"><strong>get_feed</strong></a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDFeed'&gt;</font>, **kwargs)</dt></dl>
+<dl><dt><a name="CalendarResourceClient-get_feed"><strong>get_feed</strong></a>(self, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.data.GDFeed'&gt;</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="AnalyticsClient-get_next"><strong>get_next</strong></a>(self, feed, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Fetches&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;results&nbsp;from&nbsp;the&nbsp;feed.<br>
+<dl><dt><a name="CalendarResourceClient-get_next"><strong>get_next</strong></a>(self, feed, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Fetches&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;results&nbsp;from&nbsp;the&nbsp;feed.<br>
 &nbsp;<br>
 When&nbsp;requesting&nbsp;a&nbsp;feed,&nbsp;the&nbsp;number&nbsp;of&nbsp;entries&nbsp;returned&nbsp;is&nbsp;capped&nbsp;at&nbsp;a<br>
 service&nbsp;specific&nbsp;default&nbsp;limit&nbsp;(often&nbsp;25&nbsp;entries).&nbsp;You&nbsp;can&nbsp;specify&nbsp;your<br>
@@ -492,7 +478,7 @@ a&nbsp;next&nbsp;link.&nbsp;This&nbsp;method&nbsp;performs&nbsp;a&nbsp;GET&nbsp;
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;feed&nbsp;object&nbsp;containing&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;entries&nbsp;in&nbsp;this&nbsp;feed.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-get_oauth_token"><strong>get_oauth_token</strong></a>(self, scopes, next, consumer_key, consumer_secret<font color="#909090">=None</font>, rsa_private_key<font color="#909090">=None</font>, url<font color="#909090">='https://www.google.com/accounts/OAuthGetRequestToken'</font>)</dt><dd><tt>Obtains&nbsp;an&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;to&nbsp;allow&nbsp;the&nbsp;user&nbsp;to&nbsp;authorize&nbsp;this&nbsp;app.<br>
+<dl><dt><a name="CalendarResourceClient-get_oauth_token"><strong>get_oauth_token</strong></a>(self, scopes, next, consumer_key, consumer_secret<font color="#909090">=None</font>, rsa_private_key<font color="#909090">=None</font>, url<font color="#909090">='https://www.google.com/accounts/OAuthGetRequestToken'</font>)</dt><dd><tt>Obtains&nbsp;an&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;to&nbsp;allow&nbsp;the&nbsp;user&nbsp;to&nbsp;authorize&nbsp;this&nbsp;app.<br>
 &nbsp;<br>
 Once&nbsp;this&nbsp;client&nbsp;has&nbsp;a&nbsp;request&nbsp;token,&nbsp;the&nbsp;user&nbsp;can&nbsp;authorize&nbsp;the&nbsp;request<br>
 token&nbsp;by&nbsp;visiting&nbsp;the&nbsp;authorization&nbsp;URL&nbsp;in&nbsp;their&nbsp;browser.&nbsp;After&nbsp;being<br>
@@ -528,15 +514,15 @@ Args:<br>
 &nbsp;&nbsp;url:&nbsp;The&nbsp;URL&nbsp;to&nbsp;which&nbsp;a&nbsp;request&nbsp;for&nbsp;a&nbsp;token&nbsp;should&nbsp;be&nbsp;made.&nbsp;The&nbsp;default<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;Google's&nbsp;OAuth&nbsp;request&nbsp;token&nbsp;provider.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt><dd><tt>Adds&nbsp;or&nbsp;changes&nbsp;request&nbsp;before&nbsp;making&nbsp;the&nbsp;HTTP&nbsp;request.<br>
+<dl><dt><a name="CalendarResourceClient-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt><dd><tt>Adds&nbsp;or&nbsp;changes&nbsp;request&nbsp;before&nbsp;making&nbsp;the&nbsp;HTTP&nbsp;request.<br>
 &nbsp;<br>
 This&nbsp;client&nbsp;will&nbsp;add&nbsp;the&nbsp;API&nbsp;version&nbsp;if&nbsp;it&nbsp;is&nbsp;specified.<br>
 Subclasses&nbsp;may&nbsp;override&nbsp;this&nbsp;method&nbsp;to&nbsp;add&nbsp;their&nbsp;own&nbsp;request<br>
 modifications&nbsp;before&nbsp;the&nbsp;request&nbsp;is&nbsp;made.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-post"><strong>post</strong></a>(self, entry, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="CalendarResourceClient-post"><strong>post</strong></a>(self, entry, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="AnalyticsClient-request"><strong>request</strong></a>(self, method<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, **kwargs)</dt><dd><tt>Make&nbsp;an&nbsp;HTTP&nbsp;request&nbsp;to&nbsp;the&nbsp;server.<br>
+<dl><dt><a name="CalendarResourceClient-request"><strong>request</strong></a>(self, method<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, **kwargs)</dt><dd><tt>Make&nbsp;an&nbsp;HTTP&nbsp;request&nbsp;to&nbsp;the&nbsp;server.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;atom.client.AtomPubClient.request.<br>
 &nbsp;<br>
@@ -589,9 +575,9 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb92510&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="CalendarResourceClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb85c90&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="AnalyticsClient-revoke_token"><strong>revoke_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb925d0&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
+<dl><dt><a name="CalendarResourceClient-revoke_token"><strong>revoke_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb85d50&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;both&nbsp;AuthSub&nbsp;and&nbsp;OAuth&nbsp;tokens&nbsp;(to&nbsp;invalidate<br>
 a&nbsp;ClientLogin&nbsp;token,&nbsp;the&nbsp;user&nbsp;must&nbsp;change&nbsp;their&nbsp;password).<br>
@@ -602,7 +588,7 @@ Returns:<br>
 Raises:<br>
 &nbsp;&nbsp;A&nbsp;RequestError&nbsp;if&nbsp;the&nbsp;server&nbsp;responds&nbsp;with&nbsp;a&nbsp;non-200&nbsp;status.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-update"><strong>update</strong></a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
+<dl><dt><a name="CalendarResourceClient-update"><strong>update</strong></a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
 &nbsp;<br>
 Performs&nbsp;a&nbsp;PUT&nbsp;and&nbsp;converts&nbsp;the&nbsp;response&nbsp;to&nbsp;a&nbsp;new&nbsp;entry&nbsp;object&nbsp;with&nbsp;a<br>
 matching&nbsp;class&nbsp;to&nbsp;the&nbsp;entry&nbsp;passed&nbsp;in.<br>
@@ -620,7 +606,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb92590&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="CalendarResourceClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb85d10&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -638,14 +624,18 @@ Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
 
 <hr>
+Data and other attributes inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
+<dl><dt><strong>auth_scopes</strong> = None</dl>
+
+<hr>
 Methods inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
-<dl><dt><a name="AnalyticsClient-Get"><strong>Get</strong></a> = get(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Performs&nbsp;a&nbsp;request&nbsp;using&nbsp;the&nbsp;GET&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
+<dl><dt><a name="CalendarResourceClient-Get"><strong>Get</strong></a> = get(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Performs&nbsp;a&nbsp;request&nbsp;using&nbsp;the&nbsp;GET&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-Put"><strong>Put</strong></a> = put(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;data&nbsp;using&nbsp;the&nbsp;PUT&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
+<dl><dt><a name="CalendarResourceClient-Put"><strong>Put</strong></a> = put(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;data&nbsp;using&nbsp;the&nbsp;PUT&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-get"><strong>get</strong></a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Performs&nbsp;a&nbsp;request&nbsp;using&nbsp;the&nbsp;GET&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
+<dl><dt><a name="CalendarResourceClient-get"><strong>get</strong></a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Performs&nbsp;a&nbsp;request&nbsp;using&nbsp;the&nbsp;GET&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-put"><strong>put</strong></a>(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;data&nbsp;using&nbsp;the&nbsp;PUT&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
+<dl><dt><a name="CalendarResourceClient-put"><strong>put</strong></a>(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;data&nbsp;using&nbsp;the&nbsp;PUT&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
@@ -659,85 +649,7 @@ Data descriptors inherited from <a href="atom.client.html#AtomPubClient">atom.cl
 Data and other attributes inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
 <dl><dt><strong>auth_token</strong> = None</dl>
 
-<dl><dt><strong>host</strong> = None</dl>
-
 <dl><dt><strong>ssl</strong> = False</dl>
-
-</td></tr></table> <p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#ffc8d8">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="DataFeedQuery">class <strong>DataFeedQuery</strong></a>(<a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a>)</font></td></tr>
-    
-<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Data&nbsp;Feed&nbsp;query&nbsp;class&nbsp;to&nbsp;simplify&nbsp;constructing&nbsp;Data&nbsp;Feed&nbsp;Urls.<br>
-&nbsp;<br>
-To&nbsp;use&nbsp;this&nbsp;class,&nbsp;you&nbsp;can&nbsp;either&nbsp;pass&nbsp;a&nbsp;dict&nbsp;in&nbsp;the&nbsp;constructor&nbsp;that&nbsp;has<br>
-all&nbsp;the&nbsp;data&nbsp;feed&nbsp;query&nbsp;parameters&nbsp;as&nbsp;keys.<br>
-&nbsp;&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#DataFeedQuery">DataFeedQuery</a>({'start-date':&nbsp;'2008-10-01'})<br>
-&nbsp;<br>
-Alternatively&nbsp;you&nbsp;can&nbsp;add&nbsp;new&nbsp;parameters&nbsp;directly&nbsp;to&nbsp;the&nbsp;query&nbsp;object.<br>
-&nbsp;&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#DataFeedQuery">DataFeedQuery</a>()<br>
-&nbsp;&nbsp;&nbsp;queryUrl.query['start-date']&nbsp;=&nbsp;'2008-10-01'<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;query:&nbsp;dict&nbsp;(optional)&nbsp;Contains&nbsp;all&nbsp;the&nbsp;GA&nbsp;Data&nbsp;Feed&nbsp;query&nbsp;parameters<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;as&nbsp;keys.<br>&nbsp;</tt></td></tr>
-<tr><td>&nbsp;</td>
-<td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="gdata.analytics.client.html#DataFeedQuery">DataFeedQuery</a></dd>
-<dd><a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a></dd>
-<dd><a href="atom.http_core.html#Uri">atom.http_core.Uri</a></dd>
-<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
-</dl>
-<hr>
-Methods defined here:<br>
-<dl><dt><a name="DataFeedQuery-__init__"><strong>__init__</strong></a>(self, query<font color="#909090">=None</font>, **kwargs)</dt></dl>
-
-<hr>
-Data and other attributes defined here:<br>
-<dl><dt><strong>host</strong> = 'www.google.com'</dl>
-
-<dl><dt><strong>path</strong> = '/analytics/feeds/data'</dl>
-
-<dl><dt><strong>scheme</strong> = 'https'</dl>
-
-<hr>
-Data descriptors inherited from <a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a>:<br>
-<dl><dt><strong>text_query</strong></dt>
-<dd><tt>The&nbsp;q&nbsp;parameter&nbsp;for&nbsp;searching&nbsp;for&nbsp;an&nbsp;exact&nbsp;text&nbsp;match&nbsp;on&nbsp;content</tt></dd>
-</dl>
-<hr>
-Methods inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
-<dl><dt><a name="DataFeedQuery-ModifyRequest"><strong>ModifyRequest</strong></a> = modify_request(self, http_request<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;HTTP&nbsp;request&nbsp;components&nbsp;based&nbsp;on&nbsp;the&nbsp;URI.</tt></dd></dl>
-
-<dl><dt><a name="DataFeedQuery-__str__"><strong>__str__</strong></a>(self)</dt></dl>
-
-<dl><dt><a name="DataFeedQuery-modify_request"><strong>modify_request</strong></a>(self, http_request<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;HTTP&nbsp;request&nbsp;components&nbsp;based&nbsp;on&nbsp;the&nbsp;URI.</tt></dd></dl>
-
-<hr>
-Static methods inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
-<dl><dt><a name="DataFeedQuery-ParseUri"><strong>ParseUri</strong></a> = parse_uri(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;Uri&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
-&nbsp;<br>
-This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
-members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>
-
-<dl><dt><a name="DataFeedQuery-parse_uri"><strong>parse_uri</strong></a>(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;Uri&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
-&nbsp;<br>
-This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
-members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>
-
-<hr>
-Data descriptors inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
-<dl><dt><strong>__dict__</strong></dt>
-<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-<dl><dt><strong>__weakref__</strong></dt>
-<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-<hr>
-Data and other attributes inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
-<dl><dt><strong>port</strong> = None</dl>
 
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -746,12 +658,13 @@ Data and other attributes inherited from <a href="atom.http_core.html#Uri">atom.
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>__author__</strong> = 'api.nickm@google.com (Nick Mihailovski)'</td></tr></table><p>
+<td width="100%"><strong>RESOURCE_FEED_TEMPLATE</strong> = '/a/feeds/calendar/resource/%s/%s/'<br>
+<strong>__author__</strong> = 'Vic Fryzel &lt;vf@google.com&gt;'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#7799ee">
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
     
 <tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%">api.nickm@google.com&nbsp;(Nick&nbsp;Mihailovski)</td></tr></table>
+<td width="100%">Vic&nbsp;Fryzel&nbsp;&lt;vf@google.com&gt;</td></tr></table>
 </body></html>

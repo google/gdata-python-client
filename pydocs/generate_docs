@@ -92,3 +92,5 @@ pydoc -w gdata.youtube
 pydoc -w gdata.youtube.service
 pydoc -w gdata.youtube.data
 pydoc -w gdata.opensearch.data
+pydoc -w gdata.calendar_resource.data
+pydoc -w gdata.calendar_resource.client

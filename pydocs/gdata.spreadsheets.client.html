@@ -202,6 +202,8 @@ Methods defined here:<br>
 
 <dl><dt><a name="SpreadsheetsClient-AddWorksheet"><strong>AddWorksheet</strong></a> = <a href="#SpreadsheetsClient-add_worksheet">add_worksheet</a>(self, spreadsheet_key, title, rows, cols, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
+<dl><dt><a name="SpreadsheetsClient-GetRecord"><strong>GetRecord</strong></a> = <a href="#SpreadsheetsClient-get_record">get_record</a>(self, spreadsheet_key, table_id, record_id, desired_class<font color="#909090">=&lt;class 'gdata.spreadsheets.data.Record'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
 <dl><dt><a name="SpreadsheetsClient-GetRecords"><strong>GetRecords</strong></a> = <a href="#SpreadsheetsClient-get_records">get_records</a>(self, spreadsheet_key, table_id, desired_class<font color="#909090">=&lt;class 'gdata.spreadsheets.data.RecordsFeed'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="SpreadsheetsClient-GetSpreadsheets"><strong>GetSpreadsheets</strong></a> = <a href="#SpreadsheetsClient-get_spreadsheets">get_spreadsheets</a>(self, auth_token<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.spreadsheets.data.SpreadsheetsFeed'&gt;</font>, **kwargs)</dt></dl>
@@ -264,6 +266,33 @@ Args:<br>
 &nbsp;&nbsp;title:&nbsp;str,&nbsp;The&nbsp;title&nbsp;to&nbsp;be&nbsp;used&nbsp;in&nbsp;for&nbsp;the&nbsp;worksheet.<br>
 &nbsp;&nbsp;rows:&nbsp;str&nbsp;or&nbsp;int,&nbsp;The&nbsp;number&nbsp;of&nbsp;rows&nbsp;this&nbsp;worksheet&nbsp;should&nbsp;start&nbsp;with.<br>
 &nbsp;&nbsp;cols:&nbsp;str&nbsp;or&nbsp;int,&nbsp;The&nbsp;number&nbsp;of&nbsp;columns&nbsp;this&nbsp;worksheet&nbsp;should&nbsp;start&nbsp;with.<br>
+&nbsp;&nbsp;auth_token:&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header&nbsp;in&nbsp;its<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modify_request&nbsp;method.&nbsp;Recommended&nbsp;classes&nbsp;include<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.&nbsp;Represents&nbsp;the&nbsp;current&nbsp;user.&nbsp;Defaults&nbsp;to&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;if&nbsp;None,&nbsp;this&nbsp;method&nbsp;will&nbsp;look&nbsp;for&nbsp;a&nbsp;value&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;auth_token&nbsp;member&nbsp;of&nbsp;<a href="#SpreadsheetsClient">SpreadsheetsClient</a>.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsClient-get_record"><strong>get_record</strong></a>(self, spreadsheet_key, table_id, record_id, desired_class<font color="#909090">=&lt;class 'gdata.spreadsheets.data.Record'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;a&nbsp;single&nbsp;record&nbsp;from&nbsp;the&nbsp;table.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;spreadsheet_key:&nbsp;str,&nbsp;The&nbsp;unique&nbsp;ID&nbsp;of&nbsp;this&nbsp;containing&nbsp;spreadsheet.&nbsp;This<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;be&nbsp;the&nbsp;ID&nbsp;from&nbsp;the&nbsp;URL&nbsp;or&nbsp;as&nbsp;provided&nbsp;in&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spreadsheet&nbsp;entry.<br>
+&nbsp;&nbsp;table_id:&nbsp;str,&nbsp;The&nbsp;ID&nbsp;of&nbsp;the&nbsp;table&nbsp;within&nbsp;the&nbsp;worksheet&nbsp;whose&nbsp;records<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;we&nbsp;would&nbsp;like&nbsp;to&nbsp;fetch.&nbsp;The&nbsp;table&nbsp;ID&nbsp;can&nbsp;be&nbsp;found&nbsp;using&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get_table_id&nbsp;method&nbsp;of&nbsp;a&nbsp;gdata.spreadsheets.data.Table.<br>
+&nbsp;&nbsp;record_id:&nbsp;str,&nbsp;The&nbsp;ID&nbsp;of&nbsp;the&nbsp;record&nbsp;within&nbsp;this&nbsp;table&nbsp;which&nbsp;we&nbsp;want&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fetch.&nbsp;You&nbsp;can&nbsp;find&nbsp;the&nbsp;record&nbsp;ID&nbsp;using&nbsp;get_record_id()&nbsp;on<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;an&nbsp;instance&nbsp;of&nbsp;the&nbsp;gdata.spreadsheets.data.Record&nbsp;class.<br>
+&nbsp;&nbsp;desired_class:&nbsp;class&nbsp;descended&nbsp;from&nbsp;atom.core.XmlElement&nbsp;to&nbsp;which&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;successful&nbsp;response&nbsp;should&nbsp;be&nbsp;converted.&nbsp;If&nbsp;there&nbsp;is&nbsp;no<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;converter&nbsp;function&nbsp;specified&nbsp;(converter=None)&nbsp;then&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;desired_class&nbsp;will&nbsp;be&nbsp;used&nbsp;in&nbsp;calling&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;atom.core.parse&nbsp;function.&nbsp;If&nbsp;neither<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;desired_class&nbsp;nor&nbsp;the&nbsp;converter&nbsp;is&nbsp;specified,&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTTP&nbsp;reponse&nbsp;object&nbsp;will&nbsp;be&nbsp;returned.&nbsp;Defaults&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.spreadsheets.data.RecordsFeed.<br>
 &nbsp;&nbsp;auth_token:&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header&nbsp;in&nbsp;its<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modify_request&nbsp;method.&nbsp;Recommended&nbsp;classes&nbsp;include<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
@@ -382,13 +411,13 @@ Args:<br>
 Data and other attributes defined here:<br>
 <dl><dt><strong>api_version</strong> = '3'</dl>
 
-<dl><dt><strong>auth_scopes</strong> = ['https://spreadsheets.google.com/feeds/', 'http://spreadsheets.google.com/feeds/']</dl>
+<dl><dt><strong>auth_scopes</strong> = ('https://spreadsheets.google.com/feeds/', 'http://spreadsheets.google.com/feeds/')</dl>
 
 <dl><dt><strong>auth_serice</strong> = 'wise'</dl>
 
 <hr>
 Methods inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
-<dl><dt><a name="SpreadsheetsClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc33390&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+<dl><dt><a name="SpreadsheetsClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb36990&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
 application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
@@ -572,7 +601,18 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="SpreadsheetsClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc33350&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="SpreadsheetsClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb36950&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsClient-RevokeToken"><strong>RevokeToken</strong></a> = revoke_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb36a10&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;both&nbsp;AuthSub&nbsp;and&nbsp;OAuth&nbsp;tokens&nbsp;(to&nbsp;invalidate<br>
+a&nbsp;ClientLogin&nbsp;token,&nbsp;the&nbsp;user&nbsp;must&nbsp;change&nbsp;their&nbsp;password).<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;server&nbsp;responded&nbsp;with&nbsp;a&nbsp;200.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;A&nbsp;RequestError&nbsp;if&nbsp;the&nbsp;server&nbsp;responds&nbsp;with&nbsp;a&nbsp;non-200&nbsp;status.</tt></dd></dl>
 
 <dl><dt><a name="SpreadsheetsClient-Update"><strong>Update</strong></a> = update(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
 &nbsp;<br>
@@ -592,7 +632,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="SpreadsheetsClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc333d0&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="SpreadsheetsClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb369d0&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -609,7 +649,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
 
-<dl><dt><a name="SpreadsheetsClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc33390&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+<dl><dt><a name="SpreadsheetsClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb36990&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
 application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
@@ -793,7 +833,18 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="SpreadsheetsClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc33350&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="SpreadsheetsClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb36950&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsClient-revoke_token"><strong>revoke_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb36a10&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;both&nbsp;AuthSub&nbsp;and&nbsp;OAuth&nbsp;tokens&nbsp;(to&nbsp;invalidate<br>
+a&nbsp;ClientLogin&nbsp;token,&nbsp;the&nbsp;user&nbsp;must&nbsp;change&nbsp;their&nbsp;password).<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;server&nbsp;responded&nbsp;with&nbsp;a&nbsp;200.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;A&nbsp;RequestError&nbsp;if&nbsp;the&nbsp;server&nbsp;responds&nbsp;with&nbsp;a&nbsp;non-200&nbsp;status.</tt></dd></dl>
 
 <dl><dt><a name="SpreadsheetsClient-update"><strong>update</strong></a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
 &nbsp;<br>
@@ -813,7 +864,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="SpreadsheetsClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc333d0&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="SpreadsheetsClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb369d0&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -969,6 +1020,7 @@ Data descriptors inherited from <a href="gdata.client.html#Query">gdata.client.Q
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><strong>RECORDS_URL</strong> = 'http://spreadsheets.google.com/feeds/%s/records/%s'<br>
+<strong>RECORD_URL</strong> = 'http://spreadsheets.google.com/feeds/%s/records/%s/%s'<br>
 <strong>SPREADSHEETS_URL</strong> = 'http://spreadsheets.google.com/feeds/spreadsheets/private/full'<br>
 <strong>TABLES_URL</strong> = 'http://spreadsheets.google.com/feeds/%s/tables'<br>
 <strong>WORKSHEETS_URL</strong> = 'http://spreadsheets.google.com/feeds/worksheets/%s/private/full'<br>
