@@ -19,6 +19,7 @@ import gdata_tests.base_test
 import gdata_tests.books_test
 import gdata_tests.blogger_test
 import gdata_tests.calendar_test
+import gdata_tests.calendar_resource.data_test
 import gdata_tests.client_test
 import gdata_tests.codesearch_test
 import gdata_tests.contacts_test
@@ -45,7 +46,8 @@ def RunAllTests():
                          gdata_tests.photos_test, gdata_tests.codesearch_test,
                          gdata_tests.contacts_test,
                          gdata_tests.youtube_test, gdata_tests.blogger_test, 
-                         gdata_tests.webmastertools_test]
+                         gdata_tests.webmastertools_test,
+                         gdata_tests.calendar_resource.data_test]
   test_runner.RunAllTests()
   
 if __name__ == '__main__':

@@ -2728,6 +2728,47 @@ CONTACT_GROUP_ENTRY = """<?xml version="1.0" encoding="UTF-8"?>
     </gd:extendedProperty>
 </entry>"""
 
+CALENDAR_RESOURCE_ENTRY = """<?xml version="1.0"?>
+<atom:entry xmlns:atom="http://www.w3.org/2005/Atom" xmlns:apps="http://schemas.google.com/apps/2006">
+  <apps:property name="resourceId" value="CR-NYC-14-12-BR"/>
+  <apps:property name="resourceCommonName" value="Boardroom"/>
+  <apps:property name="resourceDescription" value="This conference room is in New York City, building 14, floor 12, Boardroom"/>
+  <apps:property name="resourceType" value="CR"/>
+</atom:entry>"""
+
+CALENDAR_RESOURCES_FEED = """<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/" xmlns:apps="http://schemas.google.com/apps/2006">
+  <id>https://apps-apis.google.com/a/feeds/calendar/resource/2.0/yourdomain.com</id>
+  <updated>2008-10-17T15:29:21.064Z</updated>
+  <link rel="next" type="application/atom+xml" href="https://apps-apis.google.com/a/feeds/calendar/resource/2.0/yourdomain.com/?start=the next resourceId"/>
+  <link rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml" href="https://apps-apis.google.com/a/feeds/calendar/resource/2.0/yourdomain.com"/>
+  <link rel="http://schemas.google.com/g/2005#post" type="application/atom+xml" href="https://apps-apis.google.com/a/feeds/calendar/resource/2.0/yourdomain.com"/>
+  <link rel="self" type="application/atom+xml" href="https://apps-apis.google.com/a/feeds/calendar/resource/2.0/yourdomain.com?start=CR-NYC-14-12-BR"/>
+  <openSearch:startIndex>1</openSearch:startIndex>
+  <entry>
+    <id>https://apps-apis.google.com/a/feeds/calendar/resource/2.0/yourdomain.com/CR-NYC-14-12-BR</id>
+    <updated>2008-10-17T15:29:21.064Z</updated>
+    <link rel="self" type="application/atom+xml" href="https://apps-apis.google.com/a/feeds/calendar/resource/2.0/yourdomain.com/CR-NYC-14-12-BR"/>
+    <link rel="edit" type="application/atom+xml" href="https://apps-apis.google.com/feeds/calendar/resource/2.0/yourdomain.com/CR-NYC-14-12-BR"/>
+    <apps:property name="resourceId" value="CR-NYC-14-12-BR"/>
+    <apps:property name="resourceCommonName" value="Boardroom"/>
+    <apps:property name="resourceEmail" value="domain_123456@resource.calendar.google.com"/>
+    <apps:property name="resourceDescription" value="This conference room is in New York City, building 14, floor 12, Boardroom"/>
+    <apps:property name="resourceType" value="CR"/>
+  </entry>
+  <entry>
+    <id>https://apps-apis.google.com/a/feeds/calendar/resource/2.0/yourdomain.com/?start=(Bike)-London-43-Lobby-Bike-1</id>
+    <updated>2008-10-17T15:29:21.064Z</updated>
+    <link rel="self" type="application/atom+xml" href="https://apps-apis.google.com/a/feeds/calendar/resource/2.0/yourdomain.com/(Bike)-London-43-Lobby-Bike-1"/>
+    <link rel="edit" type="application/atom+xml" href="https://apps-apis.google.com/a/feeds/calendar/resource/2.0/yourdomain.com/(Bike)-London-43-Lobby-Bike-1"/>
+    <apps:property name="resourceId" value="(Bike)-London-43-Lobby-Bike-1"/>
+    <apps:property name="resourceCommonName" value="London bike-1"/>
+    <apps:property name="resourceEmail" value="domain_123457@resource.calendar.google.com"/>
+    <apps:property name="resourceDescription" value="Bike is in London at building 43's lobby."/>
+    <apps:property name="resourceType" value="(Bike)"/>
+  </entry>
+</feed>"""
+
 BLOG_ENTRY = """<entry xmlns='http://www.w3.org/2005/Atom'>
   <id>tag:blogger.com,1999:blog-blogID.post-postID</id>
   <published>2006-08-02T18:44:43.089-07:00</published>

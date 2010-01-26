@@ -47,6 +47,8 @@ import gdata_tests.sites.live_client_test
 import gdata_tests.analytics.data_test
 import gdata_tests.analytics.live_client_test
 import gdata_tests.contacts.live_client_test
+import gdata_tests.calendar_resource.live_client_test
+import gdata_tests.calendar_resource.data_test
 
 
 def suite():
@@ -74,7 +76,9 @@ def suite():
       gdata_tests.sites.live_client_test.suite(),
       gdata_tests.analytics.data_test.suite(),
       gdata_tests.analytics.live_client_test.suite(),
-      gdata_tests.contacts.live_client_test.suite(),))
+      gdata_tests.contacts.live_client_test.suite(),
+      gdata_tests.calendar_resource.live_client_test.suite(),
+      gdata_tests.calendar_resource.data_test.suite(),))
 
 
 if __name__ == '__main__':

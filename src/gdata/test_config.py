@@ -167,11 +167,11 @@ SPREADSHEET_ID_OPTION = Option(
     'Please enter the ID of a spreadsheet to use in these tests',
     description=('The spreadsheet ID for the spreadsheet which should be'
                  ' modified by theses tests.'))
-SITES_DOMAIN_OPTION = Option(
-    'sitedomain',
-    'Please enter the domain of your Google Apps hosted Site',
-    description=('The domain the Site is hosted on or leave blank if n/a'),
-    default='site')
+DOMAIN_OPTION = Option(
+    'domain',
+    'Please enter your Google Apps domain',
+    description=('The domain the Google Apps is hosted on or leave blank if n/a'),
+    default='')
 SITES_NAME_OPTION = Option(
     'sitename',
     'Please enter name of your Google Site',
