@@ -301,6 +301,41 @@ class SpreadsheetsClient(gdata.client.GDClient):
 
   GetRecords = get_records
 
+  def get_record(self, spreadsheet_key, table_id, record_id,
+                 desired_class=gdata.spreadsheets.data.Record,
+                 auth_token=None, **kwargs):
+    """Retrieves a single record from the table.
+
+    Args:
+      spreadsheet_key: str, The unique ID of this containing spreadsheet. This
+                       can be the ID from the URL or as provided in a
+                       Spreadsheet entry.
+      table_id: str, The ID of the table within the worksheet whose records
+                we would like to fetch. The table ID can be found using the
+                get_table_id method of a gdata.spreadsheets.data.Table.
+      record_id: str, The ID of the record within this table which we want to
+                 fetch. You can find the record ID using get_record_id() on
+                 an instance of the gdata.spreadsheets.data.Record class.
+      desired_class: class descended from atom.core.XmlElement to which a
+                     successful response should be converted. If there is no
+                     converter function specified (converter=None) then the
+                     desired_class will be used in calling the
+                     atom.core.parse function. If neither
+                     the desired_class nor the converter is specified, an
+                     HTTP reponse object will be returned. Defaults to
+                     gdata.spreadsheets.data.RecordsFeed.
+      auth_token: An object which sets the Authorization HTTP header in its
+                  modify_request method. Recommended classes include
+                  gdata.gauth.ClientLoginToken and gdata.gauth.AuthSubToken
+                  among others. Represents the current user. Defaults to None
+                  and if None, this method will look for a value in the
+                  auth_token member of SpreadsheetsClient."""
+    return self.get_entry(RECORD_URL % (spreadsheet_key, table_id, record_id),
+                          desired_class=desired_class, auth_token=auth_token,
+                          **kwargs)
+
+  GetRecord = get_record
+
 
 class SpreadsheetQuery(gdata.client.Query):
 
