@@ -311,6 +311,29 @@ class GDataService(atom.service.AtomService):
   captcha_url = property(__GetCaptchaURL,
       doc="""Get the captcha URL for a login request.""")
 
+  def GetGeneratorFromLinkFinder(self, link_finder, func, 
+                                 num_retries=gdata.service.DEFAULT_NUM_RETRIES,
+                                 delay=gdata.service.DEFAULT_DELAY,
+                                 backoff=gdata.service.DEFAULT_BACKOFF):
+    """returns a generator for pagination"""
+    yield link_finder
+    next = link_finder.GetNextLink()
+    while next is not None:
+      next_feed = func(str(self.GetWithRetries(
+            next.href, num_retries=num_retries, delay=delay, backoff=backoff)))
+      yield next_feed
+      next = next_feed.GetNextLink()
+
+  def _GetElementGeneratorFromLinkFinder(self, link_finder, func,
+                                        num_retries=gdata.service.DEFAULT_NUM_RETRIES,
+                                        delay=gdata.service.DEFAULT_DELAY,
+                                        backoff=gdata.service.DEFAULT_BACKOFF):
+    for element in self.GetGeneratorFromLinkFinder(link_finder, func,
+                                                   num_retries=num_retries,
+                                                   delay=delay,
+                                                   backoff=backoff):
+      yield element
+
   def GetOAuthInputParameters(self):
     return self._oauth_input_params
 

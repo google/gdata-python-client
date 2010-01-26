@@ -104,19 +104,6 @@ class AppsService(gdata.service.GDataService):
   def _baseURL(self):
     return "/a/feeds/%s" % self.domain 
 
-  def GetGeneratorFromLinkFinder(self, link_finder, func, 
-                                 num_retries=gdata.service.DEFAULT_NUM_RETRIES,
-                                 delay=gdata.service.DEFAULT_DELAY,
-                                 backoff=gdata.service.DEFAULT_BACKOFF):
-    """returns a generator for pagination"""
-    yield link_finder
-    next = link_finder.GetNextLink()
-    while next is not None:
-      next_feed = func(str(self.GetWithRetries(
-            next.href, num_retries=num_retries, delay=delay, backoff=backoff)))
-      yield next_feed
-      next = next_feed.GetNextLink()
-
   def AddAllElementsFromAllPages(self, link_finder, func):
     """retrieve all pages and add all elements"""
     next = link_finder.GetNextLink()
@@ -157,8 +144,8 @@ class AppsService(gdata.service.GDataService):
 
     ret = self.RetrievePageOfEmailLists()
     # pagination
-    return self.AddAllElementsFromAllPages(
-      ret, gdata.apps.EmailListFeedFromString)
+    return list(self._GetElementGeneratorFromLinkFinder(
+      ret, gdata.apps.EmailListFeedFromString))
 
   def RetrieveEmailList(self, list_name):
     """Retreive a single email list by the list's name."""
@@ -181,8 +168,8 @@ class AppsService(gdata.service.GDataService):
       raise AppsForYourDomainException(e.args[0])
     
     # pagination
-    return self.AddAllElementsFromAllPages(
-      ret, gdata.apps.EmailListFeedFromString)
+    return list(self._GetElementGeneratorFromLinkFinder(
+      ret, gdata.apps.EmailListFeedFromString))
 
   def RemoveRecipientFromEmailList(self, recipient, list_name):
     """Remove recipient from email list."""
@@ -229,8 +216,8 @@ class AppsService(gdata.service.GDataService):
 
     ret = self.RetrievePageOfRecipients(list_name)
     # pagination
-    return self.AddAllElementsFromAllPages(
-      ret, gdata.apps.EmailListRecipientFeedFromString)
+    return list(self._GetElementGeneratorFromLinkFinder(
+      ret, gdata.apps.EmailListRecipientFeedFromString))
 
   def AddRecipientToEmailList(self, recipient, list_name):
     """Add a recipient to a email list."""
@@ -307,8 +294,8 @@ class AppsService(gdata.service.GDataService):
 
     ret = self.RetrievePageOfNicknames()
     # pagination
-    return self.AddAllElementsFromAllPages(
-      ret, gdata.apps.NicknameFeedFromString)
+    return list(self._GetElementGeneratorFromLinkFinder(
+      ret, gdata.apps.NicknameFeedFromString))
 
   def GetGeneratorForAllNicknamesOfAUser(
     self, user_name, num_retries=gdata.service.DEFAULT_NUM_RETRIES,
@@ -334,8 +321,8 @@ class AppsService(gdata.service.GDataService):
       raise AppsForYourDomainException(e.args[0])
 
     # pagination
-    return self.AddAllElementsFromAllPages(
-      ret, gdata.apps.NicknameFeedFromString)
+    return list(self._GetElementGeneratorFromLinkFinder(
+      ret, gdata.apps.NicknameFeedFromString))
 
   def RetrieveNickname(self, nickname):
     """Retrieve a nickname.
@@ -466,8 +453,8 @@ class AppsService(gdata.service.GDataService):
 
     ret = self.RetrievePageOfUsers()
     # pagination
-    return self.AddAllElementsFromAllPages(
-      ret, gdata.apps.UserFeedFromString)
+    return list(self._GetElementGeneratorFromLinkFinder(
+      ret, gdata.apps.UserFeedFromString))
 
 class PropertyService(gdata.service.GDataService):
   """Client for the Google Apps Property service."""
