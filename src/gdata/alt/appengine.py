@@ -43,7 +43,7 @@ from google.appengine.api import memcache
 
 
 def run_on_appengine(gdata_service, store_tokens=True, 
-    single_user_mode=False):
+    single_user_mode=False, deadline=None):
   """Modifies a GDataService object to allow it to run on App Engine.
 
   Args:
@@ -68,8 +68,13 @@ def run_on_appengine(gdata_service, store_tokens=True,
                       be stored in the datastore and they should not be stored
                       in the gdata_service object. This will make it 
                       impossible to make requests which require authorization.
+    deadline: int (optional) The number of seconds to wait for a response
+              before timing out on the HTTP request. If no deadline is
+              specified, the deafault deadline for HTTP requests from App
+              Engine is used. The maximum is currently 10 (for 10 seconds).
+              The default deadline for App Engine is 5 seconds.
   """
-  gdata_service.http_client = AppEngineHttpClient()
+  gdata_service.http_client = AppEngineHttpClient(deadline=deadline)
   gdata_service.token_store = AppEngineTokenStore()
   gdata_service.auto_store_tokens = store_tokens
   gdata_service.auto_set_current_token = single_user_mode
@@ -77,9 +82,10 @@ def run_on_appengine(gdata_service, store_tokens=True,
 
 
 class AppEngineHttpClient(atom.http_interface.GenericHttpClient):
-  def __init__(self, headers=None):
+  def __init__(self, headers=None, deadline=None):
     self.debug = False
     self.headers = headers or {}
+    self.deadline = deadline
 
   def request(self, operation, url, data=None, headers=None):
     """Performs an HTTP call to the server, supports GET, POST, PUT, and
@@ -140,8 +146,12 @@ class AppEngineHttpClient(atom.http_interface.GenericHttpClient):
       method = urlfetch.DELETE
     else:
       method = None
+    if self.deadline is None:
+      return HttpResponse(urlfetch.Fetch(url=str(url), payload=data_str,
+          method=method, headers=all_headers, follow_redirects=False))
     return HttpResponse(urlfetch.Fetch(url=str(url), payload=data_str,
-        method=method, headers=all_headers, follow_redirects=False))
+        method=method, headers=all_headers, follow_redirects=False,
+        deadline=self.deadline))
 
 
 def _convert_data_part(data):
