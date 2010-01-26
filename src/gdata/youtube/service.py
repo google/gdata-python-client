@@ -1383,17 +1383,20 @@ class YouTubeVideoQuery(gdata.service.Query):
     location: A string of geo coordinates. Note that this is not used when the
         search is performed but rather to filter the returned videos for ones
         that match to the location entered.
+    feed: str (optional) The base URL which is the beginning of the query URL.
+          defaults to 'http://%s/feeds/videos' % (YOUTUBE_SERVER)
   """
 
   def __init__(self, video_id=None, feed_type=None, text_query=None,
-               params=None, categories=None):
+               params=None, categories=None, feed=None):
 
-    if feed_type in YOUTUBE_STANDARDFEEDS:
+    if feed_type in YOUTUBE_STANDARDFEEDS and feed is None:
       feed = 'http://%s/feeds/standardfeeds/%s' % (YOUTUBE_SERVER, feed_type)
-    elif feed_type is 'responses' or feed_type is 'comments' and video_id:
+    elif (feed_type is 'responses' or feed_type is 'comments' and video_id
+          and feed is None):
       feed = 'http://%s/feeds/videos/%s/%s' % (YOUTUBE_SERVER, video_id,
                                                feed_type)
-    else:
+    elif feed is None:
       feed = 'http://%s/feeds/videos' % (YOUTUBE_SERVER)
 
     gdata.service.Query.__init__(self, feed, text_query=text_query,
