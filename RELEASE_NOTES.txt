@@ -1,5 +1,5 @@
 === 2.0.7 ===
-January 26, 2010 (revision 936)
+January 26, 2010 (revision 937)
 
 - Added gdata.calendar_resource.client to support the management of calendar
     resources (like conference rooms) for Google Apps domains. Thanks Vic!

@@ -72,7 +72,8 @@ library may also be used with any Atom Publishing Protocol service (AtomPub).
         'gdata.tlslite.utils', 'gdata.tlslite.integration', 'gdata.health',
         'gdata.analytics', 'gdata.finance', 'gdata.spreadsheets', 'gdata.maps',
         'gdata.sites', 'gdata.apps.adminsettings', 'gdata.projecthosting',
-        'gdata.dublincore', 'gdata.acl', 'gdata.notebook', 'gdata.opensearch'],
+        'gdata.dublincore', 'gdata.acl', 'gdata.notebook', 'gdata.opensearch',
+        'gdata.calendar_resource'],
     package_dir = {'gdata':'src/gdata', 'atom':'src/atom'},
     install_requires=required
 )
