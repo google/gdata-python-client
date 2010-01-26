@@ -489,3 +489,5 @@ src/gdata/calendar_resource/data.py
 tests/gdata_tests/calendar_resource/__init__.py
 tests/gdata_tests/calendar_resource/data_test.py
 tests/gdata_tests/calendar_resource/live_client_test.py
+pydocs/gdata.calendar_resource.client.html
+pydocs/gdata.calendar_resource.data.html
