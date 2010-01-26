@@ -170,8 +170,8 @@ SPREADSHEET_ID_OPTION = Option(
 DOMAIN_OPTION = Option(
     'domain',
     'Please enter your Google Apps domain',
-    description=('The domain the Google Apps is hosted on or leave blank if n/a'),
-    default='')
+    description=('The domain the Google Apps is hosted on or leave blank'
+                 ' if n/a'))
 SITES_NAME_OPTION = Option(
     'sitename',
     'Please enter name of your Google Site',
