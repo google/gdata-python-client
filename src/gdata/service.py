@@ -312,9 +312,9 @@ class GDataService(atom.service.AtomService):
       doc="""Get the captcha URL for a login request.""")
 
   def GetGeneratorFromLinkFinder(self, link_finder, func, 
-                                 num_retries=gdata.service.DEFAULT_NUM_RETRIES,
-                                 delay=gdata.service.DEFAULT_DELAY,
-                                 backoff=gdata.service.DEFAULT_BACKOFF):
+                                 num_retries=DEFAULT_NUM_RETRIES,
+                                 delay=DEFAULT_DELAY,
+                                 backoff=DEFAULT_BACKOFF):
     """returns a generator for pagination"""
     yield link_finder
     next = link_finder.GetNextLink()
@@ -325,9 +325,9 @@ class GDataService(atom.service.AtomService):
       next = next_feed.GetNextLink()
 
   def _GetElementGeneratorFromLinkFinder(self, link_finder, func,
-                                        num_retries=gdata.service.DEFAULT_NUM_RETRIES,
-                                        delay=gdata.service.DEFAULT_DELAY,
-                                        backoff=gdata.service.DEFAULT_BACKOFF):
+                                        num_retries=DEFAULT_NUM_RETRIES,
+                                        delay=DEFAULT_DELAY,
+                                        backoff=DEFAULT_BACKOFF):
     for element in self.GetGeneratorFromLinkFinder(link_finder, func,
                                                    num_retries=num_retries,
                                                    delay=delay,
