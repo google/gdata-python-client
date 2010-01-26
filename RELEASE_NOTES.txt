@@ -1,3 +1,30 @@
+=== 2.0.7 ===
+January 26, 2010 (revision 936)
+
+- Added gdata.calendar_resource.client to support the management of calendar
+    resources (like conference rooms) for Google Apps domains. Thanks Vic!
+- Updated the sites API client to use version 1.1 of the sites API.
+- Added support for 2 Legged OAuth to the GDClient and included a sample
+    app. Thanks Eric!
+- Added a revoke_token method to GDClient to invalidate AuthSub or OAuth
+    tokens.
+- Added a get_record method to the Spreadsheets client to fetch a single
+    record entry.
+- Added includeSuspendedUsers parameter to the apps groups API. Thanks Will
+    Charles!
+- Fixed a client login bug present in the Maps API client. Thanks Roman!
+- The client_id property in the YouTube service object is now optional.
+- Added optional 'feed' parameter to YouTube service's Query classes.
+    Resolves issue 323.
+- Updated tlslite's use of sha1 to use hashlib if using python2.5 or higher.
+    Resolves  issue 290 . Thanks Jay Lee!
+- Added a deadline parameter to gdata.alt.appengine to allow the urlfetch
+    timeout to be modified to as high as 10 seconds.
+- Added GetGeneratorFromLinkFinder to GDataService which simplifies pagination
+    across the entries in a feed. Resolves  issue 325 . Thanks Aprotim!
+- Removed the default value for the test domain option.
+- Moved auth scopes to gdata.gauth from gdata.service.
+
 === 2.0.6 ===
 December 17, 2009 (revision 914)
 
