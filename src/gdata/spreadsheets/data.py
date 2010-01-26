@@ -208,6 +208,11 @@ class Record(gdata.data.GDEntry):
 
   ValueForName = value_for_name
 
+  def get_record_id(self):
+    if self.id.text:
+      return self.id.text.split('/')[-1]
+    return None
+
 
 class RecordsFeed(gdata.data.GDFeed):
   """An Atom feed containing the individuals records in a table."""

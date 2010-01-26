@@ -539,11 +539,32 @@ class OAuthAuthorizeToken(unittest.TestCase):
     self.assertEqual(token[1], '123zzz')
 
 
+class FindScopesForService(unittest.TestCase):
+
+  def test_find_all_scopes(self):
+    count = 0
+    for key, scopes in gdata.gauth.AUTH_SCOPES.iteritems():
+      count += len(scopes)
+    self.assertEqual(count, len(gdata.gauth.find_scopes_for_services()))
+
+  def test_single_service(self):
+    self.assertEqual(
+        gdata.gauth.FindScopesForServices(('codesearch',)),
+        ['http://www.google.com/codesearch/feeds/'])
+
+  def test_multiple_services(self):
+    self.assertEqual(
+        gdata.gauth.find_scopes_for_services(('jotspot', 'wise')),
+        ['http://sites.google.com/feeds/', 'https://sites.google.com/feeds/',
+         'https://spreadsheets.google.com/feeds/',
+         'http://spreadsheets.google.com/feeds/'])
+
+
 def suite():
   return conf.build_suite([AuthSubTest, TokensToAndFromBlobsTest,
                            OAuthHmacTokenTests, OAuthRsaTokenTests,
                            OAuthHeaderTest, OAuthGetRequestToken,
-                           OAuthAuthorizeToken])
+                           OAuthAuthorizeToken, FindScopesForService])
 
 
 if __name__ == '__main__':

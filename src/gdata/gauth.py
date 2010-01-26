@@ -59,6 +59,61 @@ PROGRAMMATIC_AUTH_LABEL = 'GoogleLogin auth='
 AUTHSUB_AUTH_LABEL = 'AuthSub token='
 
 
+# This dict provides the AuthSub and OAuth scopes for all services by service
+# name. The service name (key) is used in ClientLogin requests.
+AUTH_SCOPES = {
+    'cl': ( # Google Calendar API
+        'https://www.google.com/calendar/feeds/',
+        'http://www.google.com/calendar/feeds/'),
+    'gbase': ( # Google Base API
+        'http://base.google.com/base/feeds/',
+        'http://www.google.com/base/feeds/'),
+    'blogger': ( # Blogger API
+        'http://www.blogger.com/feeds/',),
+    'codesearch': ( # Google Code Search API
+        'http://www.google.com/codesearch/feeds/',),
+    'cp': ( # Contacts API
+        'https://www.google.com/m8/feeds/',
+        'http://www.google.com/m8/feeds/'),
+    'finance': ( # Google Finance API
+        'http://finance.google.com/finance/feeds/',),
+    'health': ( # Google Health API
+        'https://www.google.com/health/feeds/',),
+    'writely': ( # Documents List API
+        'https://docs.google.com/feeds/',
+        'http://docs.google.com/feeds/'),
+    'lh2': ( # Picasa Web Albums API
+        'http://picasaweb.google.com/data/',),
+    'apps': ( # Google Apps Provisioning API
+        'http://www.google.com/a/feeds/',
+        'https://www.google.com/a/feeds/',
+        'http://apps-apis.google.com/a/feeds/',
+        'https://apps-apis.google.com/a/feeds/'),
+    'weaver': ( # Health H9 Sandbox
+        'https://www.google.com/h9/feeds/',),
+    'wise': ( # Spreadsheets Data API
+        'https://spreadsheets.google.com/feeds/',
+        'http://spreadsheets.google.com/feeds/'),
+    'sitemaps': ( # Google Webmaster Tools API
+        'https://www.google.com/webmasters/tools/feeds/',),
+    'youtube': ( # YouTube API
+        'http://gdata.youtube.com/feeds/api/',
+        'http://uploads.gdata.youtube.com/feeds/api',
+        'http://gdata.youtube.com/action/GetUploadToken'),
+    'books': ( # Google Books API
+        'http://www.google.com/books/feeds/',),
+    'analytics': ( # Google Analytics API
+        'https://www.google.com/analytics/feeds/',),
+    'jotspot': ( # Google Sites API
+        'http://sites.google.com/feeds/',
+        'https://sites.google.com/feeds/'),
+    'local': ( # Google Maps Data API
+        'http://maps.google.com/maps/feeds/',),
+    'code': ( # Project Hosting Data API
+        'http://code.google.com/feeds/issues',)}
+
+
+
 class Error(Exception):
   pass
 
@@ -1139,6 +1194,34 @@ def dump_tokens(tokens):
 
 def load_tokens(blob):
   return [token_from_blob(s) for s in blob.split(',')]
+
+
+def find_scopes_for_services(service_names=None):
+  """Creates a combined list of scope URLs for the desired services.
+
+  This method searches the AUTH_SCOPES dictionary.
+  
+  Args:
+    service_names: list of strings (optional) Each name must be a key in the
+                   AUTH_SCOPES dictionary. If no list is provided (None) then
+                   the resulting list will contain all scope URLs in the
+                   AUTH_SCOPES dict.
+
+  Returns:
+    A list of URL strings which are the scopes needed to access these services
+    when requesting a token using AuthSub or OAuth.
+  """
+  result_scopes = []
+  if service_names is None:
+    for service_name, scopes in AUTH_SCOPES.iteritems():
+      result_scopes.extend(scopes)
+  else:
+    for service_name in service_names:
+      result_scopes.extend(AUTH_SCOPES[service_name])
+  return result_scopes
+
+
+FindScopesForServices = find_scopes_for_services
 
 
 def ae_save(token, token_key):

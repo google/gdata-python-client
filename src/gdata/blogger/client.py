@@ -26,6 +26,7 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 
 
 import gdata.client
+import gdata.gauth
 import gdata.blogger.data
 import atom.data
 import atom.http_core
@@ -46,7 +47,7 @@ BLOG_ARCHIVE_URL = 'http://www.blogger.com/feeds/%s/archive/full'
 class BloggerClient(gdata.client.GDClient):
   api_version = '2'
   auth_serice = 'blogger'
-  auth_scopes = ['http://www.blogger.com/feeds/']
+  auth_scopes = gdata.gauth.AUTH_SCOPES['blogger']
 
   def get_blogs(self, user_id='default', auth_token=None,
                 desired_class=gdata.blogger.data.BlogFeed, **kwargs):

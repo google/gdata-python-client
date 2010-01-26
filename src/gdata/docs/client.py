@@ -25,6 +25,7 @@ import atom.data
 import atom.http_core
 import gdata.client
 import gdata.docs.data
+import gdata.gauth
 
 
 # Feed URI templates
@@ -40,8 +41,7 @@ class DocsClient(gdata.client.GDClient):
   host = 'docs.google.com'  # default server for the API
   api_version = '3.0'  # default major version for the service.
   auth_service = 'writely'
-  auth_scopes = ['http://docs.google.com/feeds/',
-                 'https://docs.google.com/feeds/']
+  auth_scopes = gdata.gauth.AUTH_SCOPES['writely']
 
   def __init__(self, auth_token=None, **kwargs):
     """Constructs a new client for the DocList API.

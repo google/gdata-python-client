@@ -16,6 +16,7 @@
 
 import atom.data
 import gdata.client
+import gdata.gauth
 import gdata.projecthosting.data
 
 
@@ -23,7 +24,7 @@ class ProjectHostingClient(gdata.client.GDClient):
   """Client to interact with the Project Hosting GData API."""
   api_version = '1.0'
   auth_service = 'code'
-  auth_scopes = ['http://code.google.com/feeds/issues']
+  auth_scopes = gdata.gauth.AUTH_SCOPES['code']
 
   def get_issues(self, project_name,
                  desired_class=gdata.projecthosting.data.IssuesFeed, **kwargs):

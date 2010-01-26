@@ -26,6 +26,7 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 
 
 import gdata.client
+import gdata.gauth
 import gdata.spreadsheets.data
 import atom.data
 import atom.http_core
@@ -39,13 +40,13 @@ WORKSHEET_URL = ('http://spreadsheets.google.com/feeds/worksheets/'
                  '%s/private/full/%s')
 TABLES_URL = 'http://spreadsheets.google.com/feeds/%s/tables'
 RECORDS_URL = 'http://spreadsheets.google.com/feeds/%s/records/%s'
+RECORD_URL = 'http://spreadsheets.google.com/feeds/%s/records/%s/%s'
 
 
 class SpreadsheetsClient(gdata.client.GDClient):
   api_version = '3'
   auth_serice = 'wise'
-  auth_scopes = ['https://spreadsheets.google.com/feeds/',
-                 'http://spreadsheets.google.com/feeds/']
+  auth_scopes = gdata.gauth.AUTH_SCOPES['wise']
 
   def get_spreadsheets(self, auth_token=None,
                        desired_class=gdata.spreadsheets.data.SpreadsheetsFeed,

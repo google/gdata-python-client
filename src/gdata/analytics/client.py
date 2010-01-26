@@ -23,6 +23,7 @@ __author__ = 'api.nickm@google.com (Nick Mihailovski)'
 import atom.data
 import gdata.client
 import gdata.analytics.data
+import gdata.gauth
 
 
 class AnalyticsClient(gdata.client.GDClient):
@@ -30,7 +31,7 @@ class AnalyticsClient(gdata.client.GDClient):
 
   api_version = '2'
   auth_service = 'analytics'
-  auth_scopes = ['https://www.google.com/analytics/feeds']
+  auth_scopes = gdata.gauth.AUTH_SCOPES['analytics']
   account_type = 'GOOGLE'
 
   def __init__(self, auth_token=None, **kwargs):

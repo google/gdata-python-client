@@ -24,16 +24,20 @@ http://code.google.com/apis/contatcs/
 
 __author__ = 'vinces1979@gmail.com (Vince Spicer)'
 
+
 import gdata.client
 import gdata.contacts.data
 import atom.data
 import atom.http_core
+import gdata.gauth
+
 
 class ContactsClient(gdata.client.GDClient):
   api_version = '3'
   auth_service = 'cp'
   server = "www.google.com"
   contact_list = "default"
+  auth_scopes = gdata.gauth.AUTH_SCOPES['cp']
 
   def get_feed_uri(self, kind='contacts', contact_list=None, projection='full',
                   scheme="http"):

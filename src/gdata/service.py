@@ -79,6 +79,7 @@ import atom
 import atom.http_interface
 import atom.token_store
 import gdata.auth
+import gdata.gauth
 
 
 AUTH_SERVER_HOST = 'https://www.google.com'
@@ -96,52 +97,7 @@ SCOPE_URL_PARAM_NAME = 'authsub_token_scope'
 # default name (AKA key) for the URL parameter.
 OAUTH_SCOPE_URL_PARAM_NAME = 'oauth_token_scope'
 # Maps the service names used in ClientLogin to scope URLs.
-CLIENT_LOGIN_SCOPES = {
-    'cl': [ # Google Calendar
-        'https://www.google.com/calendar/feeds/',
-        'http://www.google.com/calendar/feeds/'],
-    'gbase': [ # Google Base
-        'http://base.google.com/base/feeds/',
-        'http://www.google.com/base/feeds/'], 
-    'blogger': [ # Blogger
-        'http://www.blogger.com/feeds/'], 
-    'codesearch': [ # Google Code Search
-        'http://www.google.com/codesearch/feeds/'],
-    'cp': [ # Contacts API
-        'https://www.google.com/m8/feeds/',
-        'http://www.google.com/m8/feeds/'],
-    'finance': [ # Google Finance
-        'http://finance.google.com/finance/feeds/'],
-    'health': [ # Google Health
-        'https://www.google.com/health/feeds/'],
-    'writely': [ # Documents List API
-        'https://docs.google.com/feeds/',
-        'http://docs.google.com/feeds/'],
-    'lh2': [ # Picasa Web Albums
-        'http://picasaweb.google.com/data/'],
-    'apps': [ # Google Apps Provisioning API
-        'http://www.google.com/a/feeds/',
-        'https://www.google.com/a/feeds/',
-        'http://apps-apis.google.com/a/feeds/',
-        'https://apps-apis.google.com/a/feeds/'],
-    'weaver': [ # Health H9 Sandbox
-        'https://www.google.com/h9/feeds/'],
-    'wise': [ # Spreadsheets Data API
-        'https://spreadsheets.google.com/feeds/',
-        'http://spreadsheets.google.com/feeds/'],
-    'sitemaps': [ # Google Webmaster Tools
-        'https://www.google.com/webmasters/tools/feeds/'],
-    'youtube': [ # YouTube
-        'http://gdata.youtube.com/feeds/api/',
-        'http://uploads.gdata.youtube.com/feeds/api',
-        'http://gdata.youtube.com/action/GetUploadToken'],
-    'books': [ # Google Books
-        'http://www.google.com/books/feeds/'],
-    'analytics': [ # Google Analytics
-        'https://www.google.com/analytics/feeds/'],
-    'jotspot': [ # Google Sites
-        'http://sites.google.com/feeds/',
-        'https://sites.google.com/feeds/']}
+CLIENT_LOGIN_SCOPES = gdata.gauth.AUTH_SCOPES
 # Default parameters for GDataService.GetWithRetries method
 DEFAULT_NUM_RETRIES = 3
 DEFAULT_DELAY = 1

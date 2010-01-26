@@ -29,6 +29,7 @@ import gdata.client
 import gdata.maps.data
 import atom.data
 import atom.http_core
+import gdata.gauth
 
 
 # List user's maps, takes a user ID, or 'default'.
@@ -47,7 +48,7 @@ class MapsClient(gdata.client.GDClient):
 
   api_version = '2'
   auth_service = 'local'
-  auth_scopes = ['http://maps.google.com/maps/feeds/']
+  auth_scopes = gdata.gauth.AUTH_SCOPES['local']
 
   def get_maps(self, user_id='default', auth_token=None,
                desired_class=gdata.maps.data.MapFeed, **kwargs):
