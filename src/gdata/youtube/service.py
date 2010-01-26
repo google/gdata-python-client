@@ -155,16 +155,16 @@ class YouTubeService(gdata.service.GDataService):
       **kwargs: The other parameters to pass to gdata.service.GDataService
           constructor.
     """
-    if developer_key and not client_id:
-      raise YouTubeError('You must also specify the clientId')
 
     gdata.service.GDataService.__init__(
         self, email=email, password=password, service=YOUTUBE_SERVICE,
         source=source, server=server, additional_headers=additional_headers,
         **kwargs)
 
-    if client_id is not None and developer_key is not None:
+    if client_id is not None:
       self.additional_headers['X-Gdata-Client'] = client_id
+
+    if developer_key is not None:
       self.additional_headers['X-GData-Key'] = 'key=%s' % developer_key
 
     self.auth_service_url = YOUTUBE_CLIENTLOGIN_AUTHENTICATION_URL
@@ -1301,7 +1301,7 @@ class YouTubeService(gdata.service.GDataService):
     self.additional_headers['X-Gdata-Client'] = client_id
 
   client_id = property(_GetClientId, _SetClientId,
-                         doc="""The ClientId property""")
+                       doc="""The ClientId property""")
 
   def Query(self, uri):
     """Performs a query and returns a resulting feed or entry.
