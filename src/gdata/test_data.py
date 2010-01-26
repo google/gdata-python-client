@@ -4932,8 +4932,10 @@ xmlns:gd="http://schemas.google.com/g/2005" xmlns:thr="http://purl.org/syndicati
   </jot:section>
   </div>
   </content>
+  <link rel="alternate" type="text/html" href="http:///sites.google.com/site/gdatatestsite/asdfsdfsdf"/>
   <link rel="self" type="application/atom+xml" href="http:///sites.google.com/feeds/content/site/gdatatestsite/1712987567114738703"/>
   <link rel="edit" type="application/atom+xml" href="http:///sites.google.com/feeds/content/site/gdatatestsite/1712987567114738703"/>
+  <link rel="http://schemas.google.com/sites/2008#revision" type="application/atom+xml" href="http:///sites.google.com/feeds/content/site/gdatatestsite/12345"/>
   <author>
     <name>Test User</name>
     <email>test@gmail.com</email>
@@ -4967,6 +4969,7 @@ xmlns:gd="http://schemas.google.com/g/2005" xmlns:thr="http://purl.org/syndicati
 <link rel="http://schemas.google.com/sites/2008#parent" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
 <link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
 <link rel="edit" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+<link rel="http://schemas.google.com/sites/2008#revision" type="application/atom+xml" href="http:///sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
  <author>
     <name>Test User</name>
     <email>test@gmail.com</email>
@@ -4981,6 +4984,7 @@ xmlns:gd="http://schemas.google.com/g/2005" xmlns:thr="http://purl.org/syndicati
   <link rel="http://schemas.google.com/sites/2008#parent" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123def"/>
   <link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
   <link rel="edit" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+  <link rel="http://schemas.google.com/sites/2008#revision" type="application/atom+xml" href="http:///sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
   <author>
     <name>Test User</name>
     <email>test@gmail.com</email>
@@ -5000,6 +5004,7 @@ xmlns:gd="http://schemas.google.com/g/2005" xmlns:thr="http://purl.org/syndicati
   <link rel="http://schemas.google.com/sites/2008#parent" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
   <link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
   <link rel="edit" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+  <link rel="http://schemas.google.com/sites/2008#revision" type="application/atom+xml" href="http:///sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
   <author>
     <name>Test User</name>
     <email>test@gmail.com</email>
@@ -5018,6 +5023,7 @@ xmlns:gd="http://schemas.google.com/g/2005" xmlns:thr="http://purl.org/syndicati
   <link rel="http://schemas.google.com/sites/2008#parent" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
   <link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
   <link rel="edit" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+  <link rel="http://schemas.google.com/sites/2008#revision" type="application/atom+xml" href="http:///sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
   <author>
     <name>Test User</name>
     <email>test@gmail.com</email>
@@ -5039,6 +5045,7 @@ xmlns:gd="http://schemas.google.com/g/2005" xmlns:thr="http://purl.org/syndicati
 <link rel="http://schemas.google.com/sites/2008#parent" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
 <link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
 <link rel="edit" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+<link rel="http://schemas.google.com/sites/2008#revision" type="application/atom+xml" href="http:///sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
 <author>
   <name>Test User</name>
   <email>test@gmail.com</email>
@@ -5065,6 +5072,7 @@ xmlns:gd="http://schemas.google.com/g/2005" xmlns:thr="http://purl.org/syndicati
 </content>
 <link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
 <link rel="edit" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+<link rel="http://schemas.google.com/sites/2008#revision" type="application/atom+xml" href="http:///sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
 <author>
   <name>Test User</name>
   <email>test@gmail.com</email>
@@ -5081,6 +5089,7 @@ xmlns:gd="http://schemas.google.com/g/2005" xmlns:thr="http://purl.org/syndicati
 </content>
 <link rel="self" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
 <link rel="edit" type="application/atom+xml" href="http://sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
+<link rel="http://schemas.google.com/sites/2008#revision" type="application/atom+xml" href="http:///sites.google.com/feeds/content/site/gdatatestsite/abc123"/>
 <author>
   <name>Test User</name>
   <email>test@gmail.com</email>
@@ -5169,6 +5178,68 @@ SITES_REVISION_FEED = '''
 </author>
 <thr:in-reply-to href="http://sites.google.com/site/siteName/code/js" ref="http://sites.google.com/feeds/content/site/siteName/54395424125706119" source="http://sites.google.com/feeds/content/google.com/siteName" type="text/html;charset=UTF-8"/>
 <sites:revision>1</sites:revision>
+</entry>
+</feed>'''
+
+SITES_SITE_FEED = '''
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:gAcl="http://schemas.google.com/acl/2007" xmlns:sites="http://schemas.google.com/sites/2008" xmlns:gs="http://schemas.google.com/spreadsheets/2006" xmlns:dc="http://purl.org/dc/terms" xmlns:batch="http://schemas.google.com/gdata/batch" xmlns:gd="http://schemas.google.com/g/2005" xmlns:thr="http://purl.org/syndication/thread/1.0">
+<id>https://sites.google.com/feeds/site/example.com</id>
+<updated>2009-12-09T01:05:54.631Z</updated>
+<title>Site</title>
+<link rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml" href="https://sites.google.com/feeds/site/example.com"/>
+<link rel="http://schemas.google.com/g/2005#post" type="application/atom+xml" href="https://sites.google.com/feeds/site/example.com"/>
+<link rel="self" type="application/atom+xml" href="https://sites.google.com/feeds/site/example.com"/>
+<generator version="1" uri="http://sites.google.com">Google Sites</generator>
+<openSearch:startIndex>1</openSearch:startIndex>
+<entry gd:etag="W/&quot;DkIHQH4_eCl7I2A9WxNaF0Q.&quot;">
+<id>https://sites.google.com/feeds/site/example.com/new-test-site</id>
+<updated>2009-12-02T22:55:31.040Z</updated>
+<app:edited xmlns:app="http://www.w3.org/2007/app">2009-12-02T22:55:31.040Z</app:edited>
+<title>New Test Site</title>
+<summary>A new site to hold memories</summary>
+<link rel="alternate" type="text/html" href="http://sites.google.com/a/example.com/new-test-site/"/>
+<link rel="http://schemas.google.com/sites/2008#source" type="application/atom+xml" href="http://sites.google.com/feeds/site/example.com/source-site"/>
+<link rel="http://schemas.google.com/acl/2007#accessControlList" type="application/atom+xml" href="http://sites.google.com/feeds/acl/site/example.com/new-test-site"/>
+<link rel="self" type="application/atom+xml" href="https://sites.google.com/feeds/site/example.com/new-test-site"/>
+<link rel="edit" type="application/atom+xml" href="https://sites.google.com/feeds/site/example.com/new-test-site"/>
+<sites:siteName>new-test-site</sites:siteName>
+<sites:theme>iceberg</sites:theme>
+</entry>
+<entry gd:etag="W/&quot;CE8MQH48fyl7I2A9WxNaGUo.&quot;">
+<id>https://sites.google.com/feeds/site/example.com/newautosite2</id>
+<updated>2009-12-05T00:28:01.077Z</updated>
+<app:edited xmlns:app="http://www.w3.org/2007/app">2009-12-05T00:28:01.077Z</app:edited>
+<title>newAutoSite3</title>
+<summary>A new site to hold memories2</summary>
+<link rel="alternate" type="text/html" href="http://sites.google.com/a/example.com/newautosite2/"/>
+<link rel="http://schemas.google.com/acl/2007#accessControlList" type="application/atom+xml" href="http://sites.google.com/feeds/acl/site/examp.e.com/newautosite2"/>
+<link rel="self" type="application/atom+xml" href="https://sites.google.com/feeds/site/example.com/newautosite2"/>
+<link rel="edit" type="application/atom+xml" href="https://sites.google.com/feeds/site/example.com/newautosite2"/>
+<sites:siteName>newautosite2</sites:siteName>
+<sites:theme>default</sites:theme>
+</entry>
+</feed>'''
+
+SITES_ACL_FEED = '''
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:gAcl="http://schemas.google.com/acl/2007" xmlns:sites="http://schemas.google.com/sites/2008" xmlns:gs="http://schemas.google.com/spreadsheets/2006" xmlns:dc="http://purl.org/dc/terms" xmlns:batch="http://schemas.google.com/gdata/batch" xmlns:gd="http://schemas.google.com/g/2005" xmlns:thr="http://purl.org/syndication/thread/1.0">
+<id>https://sites.google.comsites.google.com/feeds/acl/site/example.com/new-test-site</id>
+<updated>2009-12-09T01:24:59.080Z</updated>
+<category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/acl/2007#accessRule"/>
+<title>Acl</title>
+<link rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml" href="https://sites.google.com/feeds/acl/site/example.com/new-test-site"/>
+<link rel="http://schemas.google.com/g/2005#post" type="application/atom+xml" href="https://sites.google.com/feeds/acl/site/example.com/new-test-site"/>
+<link rel="self" type="application/atom+xml" href="https://sites.google.com/feeds/acl/site/example.com/new-test-site"/>
+<generator version="1" uri="http://sites.google.com">Google Sites</generator>
+<openSearch:startIndex>1</openSearch:startIndex>
+<entry>
+  <id>https://sites.google.com/feeds/acl/site/google.com/new-test-site/user%3Auser%40example.com</id>
+  <updated>2009-12-09T01:24:59.080Z</updated>
+  <app:edited xmlns:app="http://www.w3.org/2007/app">2009-12-09T01:24:59.080Z</app:edited>
+  <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/acl/2007#accessRule"/>
+  <link rel="self" type="application/atom+xml" href="https://sites.google.com/feeds/acl/site/example.com/new-test-site/user%3Auser%40example.com"/>
+  <link rel="edit" type="application/atom+xml" href="https://sites.google.com/feeds/acl/site/example.com/new-test-site/user%3Auser%40example.com"/>
+  <gAcl:scope type="user" value="user@example.com"/>
+  <gAcl:role value="owner"/>
 </entry>
 </feed>'''
 

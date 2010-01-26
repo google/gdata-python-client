@@ -27,17 +27,20 @@ import gdata.sites.client
 import gdata.sites.data
 
 
-SOURCE_APP_NAME = 'googleInc-GoogleSitesAPIPythonLibSample-v1.0'
-MAIN_MENU = ['1) List site content',
-             '2) List recent activity',
-             '3) List revision history',
-             '4) Create webpage',
-             '5) Create web attachment',
-             '6) Upload attachment',
-             '7) Download attachment',
-             '8) Delete item',
-             '9) Change settings',
-             '10) Exit']
+SOURCE_APP_NAME = 'googleInc-GoogleSitesAPIPythonLibSample-v1.1'
+MAIN_MENU = ['1)  List site content',
+             '2)  List recent activity',
+             '3)  List revision history',
+             '4)  Create webpage',
+             '5)  Create web attachment',
+             '6)  Upload attachment',
+             '7)  Download attachment',
+             '8)  Delete item',
+             '9)  List sites',
+             '10)  Create a new site',
+             "11) List site's sharing permissions",
+             '12) Change settings',
+             '13) Exit']
 SETTINGS_MENU = ['1) Change current site.',
                  '2) Change domain.']
 
@@ -216,14 +219,14 @@ class SitesExample(object):
 
             print
 
-        if choice == 2:
+        elif choice == 2:
           print "\nFetching activity feed of '%s'..." % self.client.site
           feed = self.client.GetActivityFeed()
           for entry in feed.entry:
             print '  %s [%s on %s]' % (entry.title.text, entry.Kind(),
                                        entry.updated.text)
 
-        if choice == 3:
+        elif choice == 3:
           print "\nFetching content feed of '%s'...\n" % self.client.site
 
           feed = self.client.GetContentFeed()
@@ -244,7 +247,7 @@ class SitesExample(object):
             print '  current version:\t%s...' % str(entry.content.html)[0:100]
             print
 
-        if choice == 4:
+        elif choice == 4:
           print "\nFetching content feed of '%s'...\n" % self.client.site
 
           feed = self.client.GetContentFeed()
@@ -266,8 +269,8 @@ class SitesExample(object):
           if new_entry.GetAlternateLink():
             print 'Created. View it at: %s' % new_entry.GetAlternateLink().href
 
-        if choice == 5:
-          print "\nFetching filecainets on '%s'...\n" % self.client.site
+        elif choice == 5:
+          print "\nFetching filecabinets on '%s'...\n" % self.client.site
 
           uri = '%s?kind=%s' % (self.client.make_content_feed_uri(),
                                 'filecabinet')
@@ -289,7 +292,7 @@ class SitesExample(object):
                                           parent_entry, description=description)
           print 'Created!'
 
-        if choice == 6:
+        elif choice == 6:
           print "\nFetching filecainets on '%s'...\n" % self.client.site
 
           uri = '%s?kind=%s' % (self.client.make_content_feed_uri(),
@@ -320,7 +323,7 @@ class SitesExample(object):
               description=description)
           print 'Uploaded. View it at: %s' % new_entry.GetAlternateLink().href
 
-        if choice == 7:
+        elif choice == 7:
           print "\nFetching all attachments on '%s'...\n" % self.client.site
 
           uri = '%s?kind=%s' % (self.client.make_content_feed_uri(),
@@ -339,7 +342,7 @@ class SitesExample(object):
           self.client.DownloadAttachment(entry, filepath)
           print 'Downloaded.'
 
-        if choice == 8:
+        elif choice == 8:
           print "\nFetching content feed of '%s'...\n" % self.client.site
 
           feed = self.client.GetContentFeed()
@@ -352,7 +355,38 @@ class SitesExample(object):
           self.client.Delete(entry)
           print 'Removed!'
 
-        if choice == 9:
+        elif choice == 9:
+          print ('\nFetching your list of sites for domain: %s...\n'
+                 % self.client.domain)
+
+          feed = self.client.GetSiteFeed()
+          for entry in feed.entry:
+            print entry.title.text
+            print '  site name: ' + entry.site_name.text
+            if entry.summary.text:
+              print '  summary: ' + entry.summary.text
+            if entry.FindSourceLink():
+              print '  copied from site: ' + entry.FindSourceLink()
+            print '  acl feed: %s\n' % entry.FindAclLink()
+
+        elif choice == 10:
+          title = raw_input('Enter a title: ')
+          summary = raw_input('Enter a description: ')
+          theme = raw_input('Theme name (ex. "default"): ')
+
+          new_entry = self.client.CreateSite(
+              title, description=summary, theme=theme)
+          print 'Site created! View it at: ' + new_entry.GetAlternateLink().href
+
+        elif choice == 11:
+          print "\nFetching acl permissions of '%s'...\n" % self.client.site
+
+          feed = self.client.GetAclFeed()
+          for entry in feed.entry:
+            print '%s (%s) - %s' % (entry.scope.value, entry.scope.type,
+                                    entry.role.value)
+
+        elif choice == 12:
           self.PrintSettingsMenu()
           settings_choice = self.GetMenuChoice(SETTINGS_MENU)
 
@@ -361,8 +395,8 @@ class SitesExample(object):
           elif settings_choice == 2:
             self.client.domain = self.PromptDomain()
 
-        elif choice == 10:
-          print 'Later dude!\n'
+        elif choice == 13:
+          print 'Later!\n'
           return
 
     except gdata.client.RequestError, error:

@@ -20,6 +20,7 @@ __author__ = 'e.bidelman (Eric Bidelman)'
 import unittest
 import atom
 from gdata import test_data
+import gdata.acl.data
 import gdata.data
 import gdata.sites.data
 import gdata.test_config as conf
@@ -100,10 +101,10 @@ class ListItemEntryTest(unittest.TestCase):
         'http://sites.google.com/feeds/content/site/gdatatestsite/abc123def')
 
 
-class SiteEntryTest(unittest.TestCase):
+class BaseSiteEntryTest(unittest.TestCase):
 
-  def testCreateSiteEntry(self):
-    entry = gdata.sites.data.SiteEntry()
+  def testCreateBaseSiteEntry(self):
+    entry = gdata.sites.data.BaseSiteEntry()
     parent_link = atom.data.Link(
         rel=gdata.sites.data.SITES_PARENT_LINK_REL, href='abc')
     entry.link.append(parent_link)
@@ -121,7 +122,7 @@ class SiteEntryTest(unittest.TestCase):
     self.assertEqual(entry.link[0].rel,
                      'http://schemas.google.com/sites/2008#parent')
 
-    entry2 = gdata.sites.data.SiteEntry(kind='webpage')
+    entry2 = gdata.sites.data.BaseSiteEntry(kind='webpage')
     self.assertEqual(
         entry2.category[0].term,
         '%s#%s' % ('http://schemas.google.com/sites/2008', 'webpage'))
@@ -143,6 +144,8 @@ class ContentFeedTest(unittest.TestCase):
     self.assert_(isinstance(self.feed.entry[0].page_name,
                             gdata.sites.data.PageName))
     self.assertEqual(self.feed.entry[0].page_name.text, 'home')
+    self.assertEqual(self.feed.entry[0].FindRevisionLink(),
+        'http:///sites.google.com/feeds/content/site/gdatatestsite/12345')
     for entry in self.feed.entry:
       self.assert_(isinstance(entry, gdata.sites.data.ContentEntry))
       if entry.deleted is not None:
@@ -219,6 +222,50 @@ class RevisionFeedTest(unittest.TestCase):
         'http://sites.google.com/feeds/content/site/siteName/54395424125706119')
 
 
+class SiteFeedTest(unittest.TestCase):
+
+  def setUp(self):
+    self.feed = parse(test_data.SITES_SITE_FEED,
+                      gdata.sites.data.SiteFeed)
+
+  def testToAndFromStringSiteFeed(self):
+    self.assert_(isinstance(self.feed, gdata.sites.data.SiteFeed))
+    self.assertEqual(len(self.feed.entry), 2)
+    entry = self.feed.entry[0]
+    self.assert_(isinstance(entry.site_name, gdata.sites.data.SiteName))
+    self.assertEqual(entry.title.text, 'New Test Site')
+    self.assertEqual(entry.site_name.text, 'new-test-site')
+    self.assertEqual(
+        entry.FindAclLink(),
+        'http://sites.google.com/feeds/acl/site/example.com/new-test-site')
+    self.assertEqual(
+        entry.FindSourceLink(),
+        'http://sites.google.com/feeds/site/example.com/source-site')
+    self.assertEqual(entry.theme.text, 'iceberg')
+
+
+class AclFeedTest(unittest.TestCase):
+
+  def setUp(self):
+    self.feed = parse(test_data.SITES_ACL_FEED,
+                      gdata.sites.data.AclFeed)
+
+  def testToAndFromStringAclFeed(self):
+    self.assert_(isinstance(self.feed, gdata.sites.data.AclFeed))
+    self.assertEqual(len(self.feed.entry), 1)
+    entry = self.feed.entry[0]
+    self.assert_(isinstance(entry, gdata.sites.data.AclEntry))
+    self.assert_(isinstance(entry.scope, gdata.acl.data.AclScope))
+    self.assertEqual(entry.scope.type, 'user')
+    self.assertEqual(entry.scope.value, 'user@example.com')
+    self.assert_(isinstance(entry.role, gdata.acl.data.AclRole))
+    self.assertEqual(entry.role.value, 'owner')
+    self.assertEqual(
+        entry.GetSelfLink().href,
+        ('https://sites.google.com/feeds/acl/site/example.com/'
+         'new-test-site/user%3Auser%40example.com'))
+
+
 class DataClassSanityTest(unittest.TestCase):
 
   def test_basic_element_structure(self):
@@ -228,17 +275,21 @@ class DataClassSanityTest(unittest.TestCase):
         gdata.sites.data.Worksheet, gdata.sites.data.Header,
         gdata.sites.data.Column, gdata.sites.data.Data,
         gdata.sites.data.Field, gdata.sites.data.InReplyTo,
-        gdata.sites.data.SiteEntry, gdata.sites.data.ContentEntry,
+        gdata.sites.data.BaseSiteEntry, gdata.sites.data.ContentEntry,
         gdata.sites.data.ContentFeed, gdata.sites.data.ActivityEntry,
         gdata.sites.data.ActivityFeed, gdata.sites.data.RevisionEntry,
         gdata.sites.data.RevisionFeed, gdata.sites.data.Content,
-        gdata.sites.data.Summary])
+        gdata.sites.data.Summary, gdata.sites.data.SiteName,
+        gdata.sites.data.SiteEntry, gdata.sites.data.SiteFeed,
+        gdata.sites.data.AclEntry, gdata.sites.data.AclFeed,
+        gdata.sites.data.Theme])
 
 
 def suite():
   return conf.build_suite([
-      CommentEntryTest, ListPageEntryTest, ListItemEntryTest, SiteEntryTest,
-      ContentFeedTest, ActivityFeedTest, RevisionFeedTest, DataClassSanityTest])
+      CommentEntryTest, ListPageEntryTest, ListItemEntryTest, BaseSiteEntryTest,
+      ContentFeedTest, ActivityFeedTest, RevisionFeedTest, SiteFeedTest,
+      AclFeedTest, DataClassSanityTest])
 
 
 if __name__ == '__main__':

@@ -20,7 +20,6 @@
 
 __author__ = 'e.bidelman (Eric Bidelman)'
 
-
 import unittest
 import gdata.client
 import gdata.data
@@ -28,7 +27,6 @@ import gdata.gauth
 import gdata.sites.client
 import gdata.sites.data
 import gdata.test_config as conf
-
 
 conf.options.register_option(conf.TEST_IMAGE_LOCATION_OPTION)
 conf.options.register_option(conf.DOMAIN_OPTION)

@@ -21,6 +21,7 @@ __author__ = 'e.bidelman (Eric Bidelman)'
 
 import atom.core
 import atom.data
+import gdata.acl.data
 import gdata.data
 
 # XML Namespaces used in Google Sites entities.
@@ -34,6 +35,8 @@ XHTML_NAMESPACE = 'http://www.w3.org/1999/xhtml'
 XHTML_TEMPLATE = '{http://www.w3.org/1999/xhtml}%s'
 
 SITES_PARENT_LINK_REL = SITES_NAMESPACE + '#parent'
+SITES_REVISION_LINK_REL = SITES_NAMESPACE + '#revision'
+SITES_SOURCE_LINK_REL = SITES_NAMESPACE + '#source'
 
 SITES_KIND_SCHEME = 'http://schemas.google.com/g/2005#kind'
 ANNOUNCEMENT_KIND_TERM = SITES_NAMESPACE + '#announcement'
@@ -61,6 +64,16 @@ class Revision(atom.core.XmlElement):
 class PageName(atom.core.XmlElement):
   """Google Sites <sites:pageName>."""
   _qname = SITES_TEMPLATE % 'pageName'
+
+
+class SiteName(atom.core.XmlElement):
+  """Google Sites <sites:siteName>."""
+  _qname = SITES_TEMPLATE % 'siteName'
+
+
+class Theme(atom.core.XmlElement):
+  """Google Sites <sites:theme>."""
+  _qname = SITES_TEMPLATE % 'theme'
 
 
 class Deleted(atom.core.XmlElement):
@@ -184,11 +197,11 @@ class Summary(atom.data.Summary):
   html = property(_get_html, _set_html)
 
 
-class SiteEntry(gdata.data.GDEntry):
+class BaseSiteEntry(gdata.data.GDEntry):
   """Google Sites Entry."""
 
   def __init__(self, kind=None, **kwargs):
-    super(SiteEntry, self).__init__(**kwargs)
+    super(BaseSiteEntry, self).__init__(**kwargs)
     if kind is not None:
       self.category.append(
           atom.data.Category(scheme=SITES_KIND_SCHEME,
@@ -226,7 +239,7 @@ class SiteEntry(gdata.data.GDEntry):
   IsDeleted = is_deleted
 
 
-class ContentEntry(SiteEntry):
+class ContentEntry(BaseSiteEntry):
   """Google Sites Content Entry."""
   content = Content
   deleted = Deleted
@@ -239,6 +252,11 @@ class ContentEntry(SiteEntry):
   revision = Revision
   page_name = PageName
   feed_link = gdata.data.FeedLink
+
+  def find_revison_link(self):
+    return self.find_url(SITES_REVISION_LINK_REL)
+
+  FindRevisionLink = find_revison_link
 
 
 class ContentFeed(gdata.data.GDFeed):
@@ -301,7 +319,7 @@ class ContentFeed(gdata.data.GDFeed):
   GetWebattachments = get_webattachments
 
 
-class ActivityEntry(SiteEntry):
+class ActivityEntry(BaseSiteEntry):
   """Google Sites Activity Entry."""
   summary = Summary
 
@@ -314,7 +332,7 @@ class ActivityFeed(gdata.data.GDFeed):
   entry = [ActivityEntry]
 
 
-class RevisionEntry(SiteEntry):
+class RevisionEntry(BaseSiteEntry):
   """Google Sites Revision Entry."""
   content = Content
 
@@ -325,3 +343,34 @@ class RevisionFeed(gdata.data.GDFeed):
   The Activity feed is a feed containing recent Site activity.
   """
   entry = [RevisionEntry]
+
+
+class SiteEntry(gdata.data.GDEntry):
+  """Google Sites Site Feed Entry."""
+  site_name = SiteName
+  theme = Theme
+
+  def find_source_link(self):
+    return self.find_url(SITES_SOURCE_LINK_REL)
+
+  FindSourceLink = find_source_link
+
+
+class SiteFeed(gdata.data.GDFeed):
+  """Google Sites Site Feed.
+
+  The Site feed can be used to list a user's sites and create new sites.
+  """
+  entry = [SiteEntry]
+
+
+class AclEntry(gdata.acl.data.AclEntry):
+  """Google Sites ACL Entry."""
+
+
+class AclFeed(gdata.acl.data.AclFeed):
+  """Google Sites ACL Feed.
+
+  The ACL feed can be used to modify the sharing permissions of a Site.
+  """
+  entry = [AclEntry]

@@ -29,6 +29,8 @@ import gdata.gauth
 CONTENT_FEED_TEMPLATE = '/feeds/content/%s/%s/'
 REVISION_FEED_TEMPLATE = '/feeds/revision/%s/%s/'
 ACTIVITY_FEED_TEMPLATE = '/feeds/activity/%s/%s/'
+SITE_FEED_TEMPLATE = '/feeds/site/%s/'
+ACL_FEED_TEMPLATE = '/feeds/acl/site/%s/%s/'
 
 
 class SitesClient(gdata.client.GDClient):
@@ -37,7 +39,7 @@ class SitesClient(gdata.client.GDClient):
 
   host = 'sites.google.com'  # default server for the API
   domain = 'site'  # default site domain name
-  api_version = '1'  # default major version for the service.
+  api_version = '1.1'  # default major version for the service.
   auth_service = 'jotspot'
   auth_scopes = gdata.gauth.AUTH_SCOPES['jotspot']
 
@@ -86,7 +88,7 @@ class SitesClient(gdata.client.GDClient):
                      auth_token=auth_token, **kwargs)
 
   def _get_file_content(self, uri):
-    """Fetches the file conten from the specified uri.
+    """Fetches the file content from the specified URI.
 
     Args:
       uri: string The full URL to fetch the file contents from.
@@ -121,6 +123,19 @@ class SitesClient(gdata.client.GDClient):
 
   MakeActivityFeedUri = make_activity_feed_uri
 
+  def make_site_feed_uri(self, site_name=None):
+    if site_name is not None:
+      return (SITE_FEED_TEMPLATE % self.domain) + site_name
+    else:
+      return SITE_FEED_TEMPLATE % self.domain
+
+  MakeSiteFeedUri = make_site_feed_uri
+
+  def make_acl_feed_uri(self):
+    return ACL_FEED_TEMPLATE % (self.domain, self.site)
+
+  MakeAclFeedUri = make_acl_feed_uri
+
   def get_content_feed(self, uri=None, auth_token=None, **kwargs):
     """Retrieves the content feed containing the current state of site.
 
@@ -144,9 +159,9 @@ class SitesClient(gdata.client.GDClient):
     """Retrieves the revision feed containing the revision history for a node.
 
     Args:
-      entry_or_uri_or_id: string or gdata.sites.data.SiteEntry A full URI,
-          entry node ID, or entry object of the entry to retrieve revision
-          information for.
+      entry_or_uri_or_id: string or gdata.sites.data.ContentEntry A full URI,
+          content entry node ID, or a content entry object of the entry to
+          retrieve revision information for.
       auth_token: (optional) gdata.gauth.ClientLoginToken, AuthSubToken, or
           OAuthToken which authorizes this client to edit the user's data.
       kwargs: Other parameters to pass to self.get_feed().
@@ -155,8 +170,8 @@ class SitesClient(gdata.client.GDClient):
       gdata.sites.data.RevisionFeed
     """
     uri = self.make_revision_feed_uri()
-    if isinstance(entry_or_uri_or_id, gdata.sites.data.SiteEntry):
-      uri = entry_or_uri_or_id.GetSelfLink().href
+    if isinstance(entry_or_uri_or_id, gdata.sites.data.ContentEntry):
+      uri = entry_or_uri_or_id.FindRevisionLink()
     elif entry_or_uri_or_id.find('/') == -1:
       uri += entry_or_uri_or_id
     else:
@@ -184,6 +199,88 @@ class SitesClient(gdata.client.GDClient):
                          auth_token=auth_token, **kwargs)
 
   GetActivityFeed = get_activity_feed
+
+  def get_site_feed(self, uri=None, auth_token=None, **kwargs):
+    """Retrieves the site feed containing a list of sites a user has access to.
+
+    Args:
+      uri: string (optional) A full URI to query the site feed.
+      auth_token: (optional) gdata.gauth.ClientLoginToken, AuthSubToken, or
+          OAuthToken which authorizes this client to edit the user's data.
+      kwargs: Other parameters to pass to self.get_feed().
+
+    Returns:
+      gdata.sites.data.SiteFeed
+    """
+    if uri is None:
+      uri = self.make_site_feed_uri()
+    return self.get_feed(uri, desired_class=gdata.sites.data.SiteFeed,
+                         auth_token=auth_token, **kwargs)
+
+  GetSiteFeed = get_site_feed
+
+  def get_acl_feed(self, uri=None, auth_token=None, **kwargs):
+    """Retrieves the acl feed containing a site's sharing permissions.
+
+    Args:
+      uri: string (optional) A full URI to query the acl feed.
+      auth_token: (optional) gdata.gauth.ClientLoginToken, AuthSubToken, or
+          OAuthToken which authorizes this client to edit the user's data.
+      kwargs: Other parameters to pass to self.get_feed().
+
+    Returns:
+      gdata.sites.data.AclFeed
+    """
+    if uri is None:
+      uri = self.make_acl_feed_uri()
+    return self.get_feed(uri, desired_class=gdata.sites.data.AclFeed,
+                         auth_token=auth_token, **kwargs)
+
+  GetAclFeed = get_acl_feed
+
+  def create_site(self, title, description=None, source_site=None,
+                  theme=None, uri=None, auth_token=None, **kwargs):
+    """Creates a new Google Site.
+
+    Note: This feature is only available to Google Apps domains.
+
+    Args:
+      title: string Title for the site.
+      description: string (optional) A description/summary for the site.
+      source_site: string (optional) The site feed URI of the site to copy.
+          This parameter should only be specified when copying a site.
+      theme: string (optional) The name of the theme to create the site with.
+      uri: string (optional) A full site feed URI to override where the site
+          is created/copied. By default, the site will be created under
+          the currently set domain (e.g. self.domain).
+      auth_token: (optional) gdata.gauth.ClientLoginToken, AuthSubToken, or
+          OAuthToken which authorizes this client to edit the user's data.
+      kwargs: Other parameters to pass to gdata.client.post().
+
+    Returns:
+      gdata.sites.data.SiteEntry of the created site.
+    """
+    new_entry = gdata.sites.data.SiteEntry(title=atom.data.Title(text=title))
+
+    if description is not None:
+      new_entry.summary = gdata.sites.data.Summary(text=description)
+
+    # Add the source link if we're making a copy of a site.
+    if source_site is not None:
+      source_link = atom.data.Link(rel=gdata.sites.data.SITES_SOURCE_LINK_REL,
+                                   type='application/atom+xml',
+                                   href=source_site)
+      new_entry.link.append(source_link)
+
+    if theme is not None:
+      new_entry.theme = gdata.sites.data.Theme(text=theme)
+
+    if uri is None:
+      uri = self.make_site_feed_uri()
+
+    return self.post(new_entry, uri, auth_token=auth_token, **kwargs)
+
+  CreateSite = create_site
 
   def create_page(self, kind, title, html='', page_name=None, parent=None,
                   auth_token=None, **kwargs):
