@@ -337,6 +337,12 @@ class SpreadsheetsService(gdata.service.GDataService):
     
   def UpdateRow(self, entry, new_row_data):
     """Updates a row with the provided data
+
+    If you want to add additional information to a row, it is often
+    easier to change the values in entry.custom, then use the Put
+    method instead of UpdateRow. This UpdateRow method will replace
+    the contents of the row with new_row_data - it will change all columns
+    not just the columns specified in the new_row_data dict.
     
     Args:
       entry: gdata.spreadsheet.SpreadsheetsList The entry to be updated
