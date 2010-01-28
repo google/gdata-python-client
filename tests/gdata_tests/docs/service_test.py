@@ -28,10 +28,23 @@ import gdata.spreadsheet.service
 username = ''
 password = ''
 
+client = gdata.docs.service.DocsService()
+spreadsheets = gdata.spreadsheet.service.SpreadsheetsService()
+
+
+def client_login():
+  if client.GetClientLoginToken() is None:
+    client.ClientLogin(username, password,
+                       source='Document List Client Unit Tests')
+  if spreadsheets.GetClientLoginToken() is None:
+    spreadsheets.ClientLogin(username, password,
+                             source='Document List Client Unit Tests')
+
 
 class DocumentListQueryTest(unittest.TestCase):
 
   def setUp(self):
+    client_login()
     self.doclist = client
     self.feed = self.doclist.GetDocumentListFeed()
 
@@ -78,6 +91,7 @@ class DocumentListQueryTest(unittest.TestCase):
 class DocumentListAclTest(unittest.TestCase):
 
   def setUp(self):
+    client_login()
     self.doclist = client
     uri = ('http://docs.google.com/feeds/documents/private/full'
            '/-/mine?max-results=1')
@@ -125,6 +139,7 @@ class DocumentListAclTest(unittest.TestCase):
 
 class DocumentListCreateAndDeleteTest(unittest.TestCase):
   def setUp(self):
+    client_login()
     self.doclist = client
     self.TITLE = 'Test title'
     self.new_entry = gdata.docs.DocumentListEntry()
@@ -198,6 +213,7 @@ class DocumentListCreateAndDeleteTest(unittest.TestCase):
 
 class DocumentListMoveInAndOutOfFolderTest(unittest.TestCase):
   def setUp(self):
+    client_login()
     self.doclist = client
     self.folder_name = 'TestFolder'
     self.folder = self.doclist.CreateFolder(self.folder_name)
@@ -266,6 +282,7 @@ class DocumentListMoveInAndOutOfFolderTest(unittest.TestCase):
 class DocumentListUploadTest(unittest.TestCase):
 
   def setUp(self):
+    client_login()
     self.doclist = client
 
   def testUploadAndDeleteDocument(self):
@@ -298,6 +315,7 @@ class DocumentListUploadTest(unittest.TestCase):
 
 class DocumentListUpdateTest(unittest.TestCase):
   def setUp(self):
+    client_login()
     self.doclist = client
     self.TITLE = 'CreatedTestDoc'
     new_entry = gdata.docs.DocumentListEntry()
@@ -342,6 +360,7 @@ class DocumentListUpdateTest(unittest.TestCase):
 class DocumentListExportTest(unittest.TestCase):
 
   def setUp(self):
+    client_login()
     self.doclist = client
     self.spreadsheets = spreadsheets
 
@@ -402,10 +421,4 @@ if __name__ == '__main__':
          'account. The tests may delete or update your data.')
   username = raw_input('Please enter your username: ')
   password = getpass.getpass()
-  client = gdata.docs.service.DocsService()
-  spreadsheets = gdata.spreadsheet.service.SpreadsheetsService()
-  client.ClientLogin(username, password,
-                     source='Document List Client Unit Tests')
-  spreadsheets.ClientLogin(username, password,
-                           source='Document List Client Unit Tests')
   unittest.main()
