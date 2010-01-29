@@ -7,7 +7,7 @@ import sys
 import math
 import base64
 import binascii
-if sys.version[:3] <= 2.4:
+if float(sys.version[:3]) <= 2.4:
   from sha import sha as sha1
 else:
   from hashlib import sha1
