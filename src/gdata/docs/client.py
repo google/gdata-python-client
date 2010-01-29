@@ -132,7 +132,7 @@ class DocsClient(gdata.client.GDClient):
 
     if isinstance(uri, (str, unicode)):
       uri = atom.http_core.Uri.parse_uri(uri)    
-    
+
     # Add max-results param if it wasn't included in the uri.
     if limit is not None and not 'max-results' in uri.query:
       uri.query['max-results'] = limit
@@ -299,6 +299,29 @@ class DocsClient(gdata.client.GDClient):
     return self.post(entry, uri, auth_token=auth_token, **kwargs)
 
   Create = create
+
+  def copy(self, source_entry, title, auth_token=None, **kwargs):
+    """Copies a native Google document, spreadsheet, or presentation.
+
+    Note: arbitrary file types and PDFs do not support this feature.
+
+    Args:
+      source_entry: gdata.docs.data.DocsEntry An object representing the source
+          document/folder.
+      title: str A title for the new document.
+      auth_token: (optional) gdata.gauth.ClientLoginToken, AuthSubToken, or
+          OAuthToken which authorizes this client to edit the user's data.
+      kwargs: Other parameters to pass to self.post().
+
+    Returns:
+      A gdata.docs.data.DocsEntry of the duplicated document.
+    """
+    entry = gdata.docs.data.DocsEntry(
+        title=atom.data.Title(text=title),
+        id=atom.data.Id(text=source_entry.GetSelfLink().href))
+    return self.post(entry, DOCLIST_FEED_URI, auth_token=auth_token, **kwargs)
+
+  Copy = copy
 
   def move(self, source_entry, folder_entry=None,
            keep_in_folders=False, auth_token=None, **kwargs):
@@ -485,9 +508,9 @@ class DocsQuery(gdata.client.Query):
                opened_max=None, edited_min=None, edited_max=None, owner=None,
                writer=None, reader=None, show_folders=None,
                show_deleted=None, ocr=None, target_language=None,
-               source_language=None, **kwargs):
+               source_language=None, convert=None, **kwargs):
     """Constructs a query URL for the Google Documents List  API.
-    
+
     Args:
       title: str (optional) Specifies the search terms for the title of a
              document. This parameter used without title_exact will only
@@ -537,8 +560,13 @@ class DocsQuery(gdata.client.Query):
                        auto-detect the source language. See Document
                        Translation in the Protocol Guide for a table of
                        possible values (link in target_language).
+      convert: str (optional) Used when uploading arbitrary file types to
+               specity if document-type uploads should convert to a native
+               Google Docs format. Possible values are 'true' and 'false'.
+               The default is 'true'.
     """
     gdata.client.Query.__init__(self, **kwargs)
+    self.convert = convert
     self.title = title
     self.title_exact = title_exact
     self.opened_min = opened_min
@@ -555,6 +583,7 @@ class DocsQuery(gdata.client.Query):
     self.source_language = source_language
 
   def modify_request(self, http_request):
+    gdata.client._add_query_param('convert', self.convert, http_request)
     gdata.client._add_query_param('title', self.title, http_request)
     gdata.client._add_query_param('title-exact', self.title_exact,
                                   http_request)

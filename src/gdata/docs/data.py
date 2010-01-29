@@ -48,6 +48,7 @@ SHARED_WITH_DOMAIN_LABEL_TERM = LABEL_SCHEME + '#shared-with-domain'
 VIEWED_LABEL_TERM = LABEL_SCHEME + '#viewed'
 
 DOCS_PARENT_LINK_REL = DOCUMENTS_NS + '#parent'
+DOCS_PUBLISH_LINK_REL = DOCUMENTS_NS + '#publish'
 
 FILE_EXT_PATTERN = re.compile('.*\.([a-zA-Z]{3,}$)')
 RESOURCE_ID_PATTERN = re.compile('^([a-z]*)(:|%3A)([\w-]*)$')
@@ -144,9 +145,28 @@ class WritersCanInvite(atom.core.XmlElement):
   _qname = DOCUMENTS_TEMPLATE  % 'writersCanInvite'
   value = 'value'
 
+
 class QuotaBytesUsed(atom.core.XmlElement):
   """The DocList gd:quotaBytesUsed element."""
   _qname = gdata.data.GDATA_TEMPLATE  % 'quotaBytesUsed'
+
+
+class Publish(atom.core.XmlElement):
+  """The DocList docs:publish element."""
+  _qname = DOCUMENTS_TEMPLATE  % 'publish'
+  value = 'value'
+
+
+class PublishAuto(atom.core.XmlElement):
+  """The DocList docs:publishAuto element."""
+  _qname = DOCUMENTS_TEMPLATE  % 'publishAuto'
+  value = 'value'
+
+
+class PublishOutsideDomain(atom.core.XmlElement):
+  """The DocList docs:publishOutsideDomain element."""
+  _qname = DOCUMENTS_TEMPLATE  % 'publishOutsideDomain'
+  value = 'value'
 
 
 class DocsEntry(gdata.data.GDEntry):
@@ -230,6 +250,29 @@ class AclFeed(gdata.acl.data.AclFeed):
 
 class Revision(gdata.data.GDEntry):
   """A document Revision entry."""
+  publish = Publish
+  publish_auto = PublishAuto
+  publish_outside_domain = PublishOutsideDomain
+
+  def find_publish_link(self):
+    """Get the link that points to the published document on the web.
+
+    Returns:
+      A str for the URL in the link with a rel ending in #publish.
+    """
+    return self.find_url(DOCS_PUBLISH_LINK_REL)
+
+  FindPublishLink = find_publish_link
+
+  def get_publish_link(self):
+    """Get the link that points to the published document on the web.
+
+    Returns:
+      A gdata.data.Link for the link with a rel ending in #publish.
+    """
+    return self.get_link(DOCS_PUBLISH_LINK_REL)
+
+  GetPublishLink = get_publish_link
 
 
 class RevisionFeed(gdata.data.GDFeed):

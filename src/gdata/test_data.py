@@ -1768,6 +1768,43 @@ DOCUMENT_LIST_ACL_FEED = """<?xml version='1.0' encoding='UTF-8'?>
 </entry>
 </feed>"""
 
+DOCUMENT_LIST_REVISION_FEED = """<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearch/1.1/"
+    xmlns:batch="http://schemas.google.com/gdata/batch" xmlns:gd="http://schemas.google.com/g/2005"
+    xmlns:docs="http://schemas.google.com/docs/2007"
+    gd:etag="W/&quot;CE4HQX08cCt7ImA9WxNTFEU.&quot;">
+<id>https://docs.google.com/feeds/default/private/full/resource_id/revisions</id>
+<updated>2009-08-17T04:22:10.378Z</updated>
+<title>Document Revisions</title>
+<link rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml"
+    href="https://docs.google.com/feeds/default/private/full/resource_id/revisions"/>
+<link rel="http://schemas.google.com/g/2005#batch" type="application/atom+xml"
+    href="https://docs.google.com/feeds/default/private/full/resource_id/revisions/batch"/>
+<link rel="self" type="application/atom+xml"
+    href="https://docs.google.com/feeds/default/private/full/resource_id/revisions"/>
+<openSearch:totalResults>6</openSearch:totalResults>
+<openSearch:startIndex>1</openSearch:startIndex>
+<entry>
+  <id>https://docs.google.com/feeds/id/resource_id/revisions/2</id>
+  <updated>2009-08-17T04:22:10.440Z</updated>
+  <app:edited xmlns:app="http://www.w3.org/2007/app">2009-08-14T07:11:34.197Z</app:edited>
+  <title>Revision 2</title>
+  <content type="text/html" src="https://docs.google.com/feeds/download/documents/Export?docId=doc_id&amp;revision=2"/>
+  <link rel="alternate" type="text/html"
+      href="https://docs.google.com/Doc?id=doc_id&amp;revision=2"/>
+  <link rel="self" type="application/atom+xml"
+      href="https://docs.google.com/feeds/default/private/full/resource_id/revisions/2"/>
+  <link rel='http://schemas.google.com/docs/2007#publish' type='text/html' href='http://docs.google.com/View?docid=dfr4&amp;pageview=1&amp;hgd=1'/>   
+  <author>
+    <name>another_user</name>
+    <email>another_user@gmail.com</email>
+  </author>
+  <docs:publish value="true"/>
+  <docs:publishAuto value="true"/>
+  <docs:publishOutsideDomain value="false"/>
+</entry>
+</feed>
+"""
 
 BATCH_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
 <entry xmlns="http://www.w3.org/2005/Atom"

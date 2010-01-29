@@ -192,15 +192,46 @@ class AclFeedTest(unittest.TestCase):
     self.assert_(entries[1].GetEditLink() is not None)
 
 
+class RevisionFeedTest(unittest.TestCase):
+
+  def setUp(self):
+    self.feed = atom.core.parse(test_data.DOCUMENT_LIST_REVISION_FEED,
+                                gdata.docs.data.RevisionFeed)
+
+  def testToAndFromString(self):
+    for entry in self.feed.entry:
+      self.assert_(isinstance(entry, gdata.docs.data.Revision))
+
+    feed = atom.core.parse(str(self.feed), gdata.docs.data.RevisionFeed)
+    for entry in feed.entry:
+      self.assert_(isinstance(entry, gdata.docs.data.Revision))
+
+  def testConvertActualData(self):
+    entries = self.feed.entry
+    self.assert_(len(entries) == 1)
+    self.assertEqual(entries[0].title.text, 'Revision 2')
+    self.assertEqual(entries[0].publish.value, 'true')
+    self.assertEqual(entries[0].publish_auto.value, 'true')
+    self.assertEqual(entries[0].publish_outside_domain.value, 'false')
+    self.assertEqual(
+         entries[0].GetPublishLink().href,
+         'http://docs.google.com/View?docid=dfr4&pageview=1&hgd=1')
+    self.assertEqual(
+         entries[0].FindPublishLink(),
+         'http://docs.google.com/View?docid=dfr4&pageview=1&hgd=1')
+
+
 class DataClassSanityTest(unittest.TestCase):
 
   def test_basic_element_structure(self):
     conf.check_data_classes(self, [
         gdata.docs.data.ResourceId, gdata.docs.data.LastModifiedBy,
         gdata.docs.data.LastViewed, gdata.docs.data.WritersCanInvite,
-        gdata.docs.data.QuotaBytesUsed, gdata.docs.data.DocsEntry,
-        gdata.docs.data.Acl, gdata.docs.data.AclFeed, gdata.docs.data.DocList,
-        gdata.docs.data.Revision, gdata.docs.data.RevisionFeed])
+        gdata.docs.data.QuotaBytesUsed, gdata.docs.data.Publish,
+        gdata.docs.data.PublishAuto, gdata.docs.data.PublishOutsideDomain,
+        gdata.docs.data.DocsEntry, gdata.docs.data.Acl, gdata.docs.data.AclFeed,
+        gdata.docs.data.DocList, gdata.docs.data.Revision,
+        gdata.docs.data.RevisionFeed])
 
 
 def suite():
