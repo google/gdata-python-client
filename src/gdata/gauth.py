@@ -446,7 +446,11 @@ def generate_signature(data, rsa_key):
     from gdata.tlslite.utils import keyfactory
   private_key = keyfactory.parsePrivateKey(rsa_key)
   signed = private_key.hashAndSign(data)
-  return base64.b64encode(signed)
+  # Python2.3 and lower does not have the base64.b64encode function.
+  if hasattr(base64, 'b64encode'):
+    return base64.b64encode(signed)
+  else:
+    return base64.encodestring(signed).replace('\n', '')
 
 
 class SecureAuthSubToken(AuthSubToken):
@@ -548,7 +552,13 @@ def build_oauth_base_string(http_request, consumer_key, nonce, signaure_type,
   if verifier is not None:
     params['oauth_verifier'] = verifier
   # We need to get the key value pairs in lexigraphically sorted order.
-  sorted_keys = sorted(params.keys())
+  sorted_keys = None
+  try:
+    sorted_keys = sorted(params.keys())
+  # The sorted function is not available in Python2.3 and lower
+  except NameError:
+    sorted_keys = params.keys()
+    sorted_keys.sort()
   pairs = []
   for key in sorted_keys:
     pairs.append('%s=%s' % (urllib.quote(key, safe='~'),
@@ -605,7 +615,11 @@ def generate_hmac_signature(http_request, consumer_key, consumer_secret,
   except ImportError:
     import sha
     hashed = hmac.new(hash_key, base_string, sha)
-  return base64.b64encode(hashed.digest())
+  # Python2.3 does not have base64.b64encode.
+  if hasattr(base64, 'b64encode'):
+    return base64.b64encode(hashed.digest())
+  else:
+    return base64.encodestring(hashed.digest()).replace('\n', '')
 
 
 def generate_rsa_signature(http_request, consumer_key, rsa_key,
@@ -622,7 +636,11 @@ def generate_rsa_signature(http_request, consumer_key, rsa_key,
   private_key = keyfactory.parsePrivateKey(rsa_key)
   # Sign using the key
   signed = private_key.hashAndSign(base_string)
-  return base64.b64encode(signed)
+  # Python2.3 does not have base64.b64encode.
+  if hasattr(base64, 'b64encode'):
+    return base64.b64encode(signed)
+  else:
+    return base64.encodestring(signed).replace('\n', '')
 
 
 def generate_auth_header(consumer_key, timestamp, nonce, signature_type,

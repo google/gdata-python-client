@@ -35,6 +35,13 @@ class UriTest(unittest.TestCase):
     self.assert_(uri.port is None)
     self.assert_(uri.path == '/test')
     self.assert_(uri.query == {'z':'bar', 'q':'foo'})
+
+  def test_static_parse_uri(self):
+    uri = atom.http_core.Uri.parse_uri('http://test.com/?token=foo&x=1')
+    self.assertEqual(uri.scheme, 'http')
+    self.assertEqual(uri.host, 'test.com')
+    self.assert_(uri.port is None)
+    self.assertEqual(uri.query, {'token':'foo', 'x':'1'})
     
   def test_modify_request_no_request(self):
     uri = atom.http_core.parse_uri('http://www.google.com/test?q=foo&z=bar')

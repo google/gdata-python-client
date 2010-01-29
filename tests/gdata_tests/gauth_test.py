@@ -65,7 +65,7 @@ class AuthSubTest(unittest.TestCase):
 
   def test_from_url(self):
     token_str = gdata.gauth.auth_sub_string_from_url(
-        'http://example.com?token=123abc')[0]
+        'http://example.com/?token=123abc')[0]
     self.assertEqual(token_str, '123abc')
 
   def test_from_http_body(self):
@@ -82,7 +82,7 @@ class AuthSubTest(unittest.TestCase):
 
   def test_create_and_upgrade_tokens(self):
     token = gdata.gauth.AuthSubToken.from_url(
-        'http://example.com?token=123abc')
+        'http://example.com/?token=123abc')
     self.assert_(isinstance(token, gdata.gauth.AuthSubToken))
     self.assertEqual(token.token_string, '123abc')
     self.assertEqual(token.scopes, [])
