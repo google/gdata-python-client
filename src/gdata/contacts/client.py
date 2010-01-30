@@ -65,9 +65,11 @@ class ContactsClient(gdata.client.GDClient):
 
   GetFeedUri = get_feed_uri
 
+  def get_contact(self, uri, desired_class=gdata.contacts.data.ContactEntry,
+                  auth_token=None, **kwargs):
+    return self.get_feed(uri, auth_token=auth_token, 
+                         desired_class=desired_class, **kwargs)
 
-  def get_contact(self, uri):
-    return self.Get(uri)
 
   GetContact = get_contact
 
@@ -93,11 +95,11 @@ class ContactsClient(gdata.client.GDClient):
     """
     insert_uri = insert_uri or self.GetFeedUri()
     return self.Post(new_contact, insert_uri, 
-                      auth_token=None,  **kwargs)
+                     auth_token=auth_token,  **kwargs)
 
   CreateContact = create_contact
 
-  def add_contact(self, new_contact, insert_uri=None,  auth_token=None,  
+  def add_contact(self, new_contact, insert_uri=None, auth_token=None,  
                   billing_information=None, birthday=None, calendar_link=None, **kwargs):
     """Adds an new contact to Google Contacts.
 
@@ -152,7 +154,7 @@ class ContactsClient(gdata.client.GDClient):
     
     insert_uri = insert_uri or self.GetFeedUri()
     return self.Post(contact, insert_uri, 
-                      auth_token=None,  **kwargs)
+                     auth_token=auth_token,  **kwargs)
 
   AddContact = add_contact
 
@@ -176,7 +178,7 @@ class ContactsClient(gdata.client.GDClient):
                      HTTP reponse object will be returned. Defaults to
                      gdata.spreadsheets.data.SpreadsheetsFeed.
     """
-    return self.get_feed(self.GetFeedUri(), auth_token=None,
+    return self.get_feed(self.GetFeedUri(), auth_token=auth_token,
                          desired_class=desired_class, **kwargs)
 
   GetContacts = get_contacts
