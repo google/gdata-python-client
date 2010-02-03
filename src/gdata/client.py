@@ -90,6 +90,9 @@ class BadAuthentication(RequestError):
 class NotModified(RequestError):
   pass
 
+class NotImplemented(RequestError):
+  pass
+
 
 def error_from_response(message, http_response, error_class,
                         response_body=None):
@@ -306,8 +309,12 @@ class GDClient(atom.client.AtomPubClient):
     elif response.status == 304:
       raise error_from_response('Entry Not Modified - Server responded with',
                                 response, NotModified)
-    # If the server's response was not a 200, 201, 302, or 401, raise an
-    # exception.
+    elif response.status == 501:
+      raise error_from_response(
+          'This API operation is not implemented. - Server responded with',
+          response, NotImplemented)
+    # If the server's response was not a 200, 201, 302, 304, 401, or 501, raise
+    # an exception.
     else:
       raise error_from_response('Server responded with', response,
                                 RequestError)
@@ -847,3 +854,273 @@ class GDQuery(atom.http_core.Uri):
 
   text_query = property(_get_text_query, _set_text_query,
       doc='The q parameter for searching for an exact text match on content')
+
+
+class ResumableUploader(object):
+  """Resumable upload helper for the Google Data protocol."""
+
+  DEFAULT_CHUNK_SIZE = 5242880  # 5MB
+
+  def __init__(self, client, file_handle, content_type, total_file_size,
+               chunk_size=None, desired_class=None):
+    """Starts a resumable upload to a service that supports the protocol.
+
+    Args:
+      client: gdata.client.GDClient A Google Data API service.
+      file_handle: object A file-like object containing the file to upload.
+      content_type: str The mimetype of the file to upload.
+      total_file_size: int The file's total size in bytes.
+      chunk_size: int The size of each upload chunk. If None, the
+          DEFAULT_CHUNK_SIZE will be used.
+      desired_class: object (optional) The type of gdata.data.GDEntry to parse
+          the completed entry as. This should be specific to the API.
+    """
+    self.client = client
+    self.file_handle = file_handle
+    self.content_type = content_type
+    self.total_file_size = total_file_size
+    self.chunk_size = chunk_size or self.DEFAULT_CHUNK_SIZE
+    self.desired_class = desired_class or gdata.data.GDEntry
+    self.upload_uri = None
+
+    # Send the entire file if the chunk size is less than fize's total size.
+    if self.total_file_size <= self.chunk_size:
+      self.chunk_size = total_file_size
+
+  def _init_session(self, resumable_media_link, entry=None, headers=None,
+                    auth_token=None):
+    """Starts a new resumable upload to a service that supports the protocol.
+
+    The method makes a request to initiate a new upload session. The unique
+    upload uri returned by the server (and set in this method) should be used
+    to send upload chunks to the server.
+
+    Args:
+      resumable_media_link: str The full URL for the #resumable-create-media or
+          #resumable-edit-media link for starting a resumable upload request or
+          updating media using a resumable PUT.
+      entry: A (optional) gdata.data.GDEntry containging metadata to create the 
+          upload from.
+      headers: dict (optional) Additional headers to send in the initial request
+          to create the resumable upload request. These headers will override
+          any default headers sent in the request. For example:
+          headers={'Slug': 'MyTitle'}.
+      auth_token: (optional) An object which sets the Authorization HTTP header
+          in its modify_request method. Recommended classes include
+          gdata.gauth.ClientLoginToken and gdata.gauth.AuthSubToken
+          among others.
+
+    Returns:
+      The final Atom entry as created on the server. The entry will be
+      parsed accoring to the class specified in self.desired_class.
+
+    Raises:
+      RequestError if the unique upload uri is not set or the
+      server returns something other than an HTTP 308 when the upload is
+      incomplete.
+    """
+    http_request = atom.http_core.HttpRequest()
+    
+    # Send empty POST if Atom XML wasn't specified.
+    if entry is None:
+      http_request.add_body_part('', self.content_type, size=0)
+    else:
+      http_request.add_body_part(str(entry), 'application/atom+xml',
+                                 size=len(str(entry)))
+    http_request.headers['X-Upload-Content-Type'] = self.content_type
+    http_request.headers['X-Upload-Content-Length'] = self.total_file_size
+
+    if headers is not None:
+      http_request.headers.update(headers)
+
+    response = self.client.request(method='POST',
+                                   uri=resumable_media_link,
+                                   auth_token=auth_token,
+                                   http_request=http_request)
+
+    self.upload_uri = (response.getheader('location') or
+                       response.getheader('Location'))
+
+  _InitSession = _init_session
+
+  def upload_chunk(self, start_byte, content_bytes):
+    """Uploads a byte range (chunk) to the resumable upload server.
+
+    Args:
+      start_byte: int The byte offset of the total file where the byte range
+          passed in lives.
+      content_bytes: str The file contents of this chunk.
+
+    Returns:
+      The final Atom entry created on the server. The entry object's type will
+      be the class specified in self.desired_class.
+
+    Raises:
+      RequestError if the unique upload uri is not set or the
+      server returns something other than an HTTP 308 when the upload is
+      incomplete.
+    """
+    if self.upload_uri is None:
+      raise RequestError('Resumable upload request not initialized.')
+
+    # Adjustment if last byte range is less than defined chunk size.
+    chunk_size = self.chunk_size
+    if len(content_bytes) <= chunk_size:
+      chunk_size = len(content_bytes)
+
+    http_request = atom.http_core.HttpRequest()
+    http_request.add_body_part(content_bytes, self.content_type,
+                               size=len(content_bytes))
+    http_request.headers['Content-Range'] = ('bytes %s-%s/%s'
+                                             % (start_byte,
+                                                start_byte + chunk_size - 1,
+                                                self.total_file_size))
+
+    try:
+      response = self.client.request(method='POST', uri=self.upload_uri,
+                                     http_request=http_request,
+                                     desired_class=self.desired_class)
+      return response
+    except RequestError, error:
+      if error.status == 308:
+        return None
+      else:
+        raise error
+
+  UploadChunk = upload_chunk
+
+  def upload_file(self, resumable_media_link, entry=None, headers=None,
+                  auth_token=None):
+    """Uploads an entire file in chunks using the resumable upload protocol.
+
+    If you are interested in pausing an upload or controlling the chunking
+    yourself, use the upload_chunk() method instead.
+
+    Args:
+      resumable_media_link: str The full URL for the #resumable-create-media for
+          starting a resumable upload request.
+      entry: A (optional) gdata.data.GDEntry containging metadata to create the 
+          upload from.
+      headers: dict Additional headers to send in the initial request to create
+          the resumable upload request. These headers will override any default
+          headers sent in the request. For example: headers={'Slug': 'MyTitle'}.
+      auth_token: (optional) An object which sets the Authorization HTTP header
+          in its modify_request method. Recommended classes include
+          gdata.gauth.ClientLoginToken and gdata.gauth.AuthSubToken
+          among others.
+
+    Returns:
+      The final Atom entry created on the server. The entry object's type will
+      be the class specified in self.desired_class.
+
+    Raises:
+      RequestError if anything other than a HTTP 308 is returned
+      when the request raises an exception.
+    """
+    self._init_session(resumable_media_link, headers=headers,
+                       auth_token=auth_token, entry=entry)
+
+    start_byte = 0
+    entry = None
+
+    while not entry:
+      entry = self.upload_chunk(
+          start_byte, self.file_handle.read(self.chunk_size))
+      start_byte += self.chunk_size
+
+    return entry
+
+  UploadFile = upload_file
+
+  def update_file(self, entry_or_resumable_edit_link, headers=None, force=False,
+                  auth_token=None):
+    """Updates the contents of an existing file using the resumable protocol.
+
+    If you are interested in pausing an upload or controlling the chunking
+    yourself, use the upload_chunk() method instead.
+
+    Args:
+      entry_or_resumable_edit_link: object or string A gdata.data.GDEntry for
+          the entry/file to update or the full uri of the link with rel
+          #resumable-edit-media.
+      headers: dict Additional headers to send in the initial request to create
+          the resumable upload request. These headers will override any default
+          headers sent in the request. For example: headers={'Slug': 'MyTitle'}.
+      force boolean (optional) True to force an update and set the If-Match
+          header to '*'. If False and entry_or_resumable_edit_link is a
+          gdata.data.GDEntry object, its etag value is used. Otherwise this
+          parameter should be set to True to force the update.
+      auth_token: (optional) An object which sets the Authorization HTTP header
+          in its modify_request method. Recommended classes include
+          gdata.gauth.ClientLoginToken and gdata.gauth.AuthSubToken
+          among others.
+
+    Returns:
+      The final Atom entry created on the server. The entry object's type will
+      be the class specified in self.desired_class.
+
+    Raises:
+      RequestError if anything other than a HTTP 308 is returned
+      when the request raises an exception.
+    """
+    # Need to override the POST request for a resumable update (required).
+    customer_headers = {'X-HTTP-Method-Override': 'PUT'}
+
+    if headers is not None:
+      customer_headers.update(headers)
+
+    if isinstance(entry_or_resumable_edit_link, gdata.data.GDEntry):
+      resumable_edit_link = entry_or_resumable_edit_link.find_url(
+          'http://schemas.google.com/g/2005#resumable-edit-media')
+      customer_headers['If-Match'] = entry_or_resumable_edit_link.etag
+    else:
+      resumable_edit_link = entry_or_resumable_edit_link
+
+    if force:
+      customer_headers['If-Match'] = '*'
+
+    return self.upload_file(resumable_edit_link, headers=customer_headers,
+                            auth_token=auth_token)
+
+  UpdateFile = update_file
+
+  def query_upload_status(self, uri=None):
+    """Queries the current status of a resumable upload request.
+
+    Args:
+      uri: str (optional) A resumable upload uri to query and override the one
+          that is set in this object.
+
+    Returns:
+      An integer representing the file position (byte) to resume the upload from
+      or True if the upload is complete.
+
+    Raises:
+      RequestError if anything other than a HTTP 308 is returned
+      when the request raises an exception.
+    """
+    # Override object's unique upload uri.
+    if uri is None:
+      uri = self.upload_uri
+
+    http_request = atom.http_core.HttpRequest()
+    http_request.headers['Content-Length'] = '0'
+    http_request.headers['Content-Range'] = 'bytes */%s' % self.total_file_size
+
+    try:
+      response = self.client.request(
+          method='POST', uri=uri, http_request=http_request)
+      if response.status == 201:
+        return True
+      else:
+        raise error_from_response(
+            '%s returned by server' % response.status, response, RequestError)
+    except RequestError, error:
+      if error.status == 308:
+        for pair in error.headers:
+          if pair[0].capitalize() == 'Range':
+            return int(pair[1].split('-')[1]) + 1
+      else:
+        raise error
+
+  QueryUploadStatus = query_upload_status
