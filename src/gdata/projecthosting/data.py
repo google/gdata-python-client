@@ -34,14 +34,8 @@ import gdata.data
 ISSUES_TEMPLATE = '{http://schemas.google.com/projecthosting/issues/2009}%s'
 
 
-AUTHORITY = 'http://code.google.com'
-
-
 ISSUES_FULL_FEED = '/feeds/issues/p/%s/issues/full'
-ISSUES_FULL_URL = AUTHORITY + ISSUES_FULL_FEED
-
 COMMENTS_FULL_FEED = '/feeds/issues/p/%s/issues/%s/comments/full'
-COMMENTS_FULL_URL = AUTHORITY + COMMENTS_FULL_FEED
 
 
 class Uri(atom.core.XmlElement):
