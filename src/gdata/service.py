@@ -331,7 +331,7 @@ class GDataService(atom.service.AtomService):
     for element in self.GetGeneratorFromLinkFinder(link_finder, func,
                                                    num_retries=num_retries,
                                                    delay=delay,
-                                                   backoff=backoff):
+                                                   backoff=backoff).entry:
       yield element
 
   def GetOAuthInputParameters(self):

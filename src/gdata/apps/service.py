@@ -144,8 +144,8 @@ class AppsService(gdata.service.GDataService):
 
     ret = self.RetrievePageOfEmailLists()
     # pagination
-    return list(self._GetElementGeneratorFromLinkFinder(
-      ret, gdata.apps.EmailListFeedFromString))
+    return self.AddAllElementsFromAllPages(
+      ret, gdata.apps.EmailListFeedFromString)
 
   def RetrieveEmailList(self, list_name):
     """Retreive a single email list by the list's name."""
@@ -168,8 +168,8 @@ class AppsService(gdata.service.GDataService):
       raise AppsForYourDomainException(e.args[0])
     
     # pagination
-    return list(self._GetElementGeneratorFromLinkFinder(
-      ret, gdata.apps.EmailListFeedFromString))
+    return self.AddAllElementsFromAllPages(
+      ret, gdata.apps.EmailListFeedFromString)
 
   def RemoveRecipientFromEmailList(self, recipient, list_name):
     """Remove recipient from email list."""
@@ -216,8 +216,8 @@ class AppsService(gdata.service.GDataService):
 
     ret = self.RetrievePageOfRecipients(list_name)
     # pagination
-    return list(self._GetElementGeneratorFromLinkFinder(
-      ret, gdata.apps.EmailListRecipientFeedFromString))
+    return self.AddAllElementsFromAllPages(
+      ret, gdata.apps.EmailListRecipientFeedFromString)
 
   def AddRecipientToEmailList(self, recipient, list_name):
     """Add a recipient to a email list."""
@@ -294,8 +294,8 @@ class AppsService(gdata.service.GDataService):
 
     ret = self.RetrievePageOfNicknames()
     # pagination
-    return list(self._GetElementGeneratorFromLinkFinder(
-      ret, gdata.apps.NicknameFeedFromString))
+    return self.AddAllElementsFromAllPages(
+      ret, gdata.apps.NicknameFeedFromString)
 
   def GetGeneratorForAllNicknamesOfAUser(
     self, user_name, num_retries=gdata.service.DEFAULT_NUM_RETRIES,
@@ -321,8 +321,8 @@ class AppsService(gdata.service.GDataService):
       raise AppsForYourDomainException(e.args[0])
 
     # pagination
-    return list(self._GetElementGeneratorFromLinkFinder(
-      ret, gdata.apps.NicknameFeedFromString))
+    return self.AddAllElementsFromAllPages(
+      ret, gdata.apps.NicknameFeedFromString)
 
   def RetrieveNickname(self, nickname):
     """Retrieve a nickname.
@@ -453,8 +453,8 @@ class AppsService(gdata.service.GDataService):
 
     ret = self.RetrievePageOfUsers()
     # pagination
-    return list(self._GetElementGeneratorFromLinkFinder(
-      ret, gdata.apps.UserFeedFromString))
+    return self.AddAllElementsFromAllPages(
+      ret, gdata.apps.UserFeedFromString)
 
 class PropertyService(gdata.service.GDataService):
   """Client for the Google Apps Property service."""
