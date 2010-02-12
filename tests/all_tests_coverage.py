@@ -56,5 +56,5 @@ if __name__ == '__main__':
   coverage.stop()
   coverage.report([atom.core, atom.http_core, atom.auth, atom.data,
       atom.mock_http_core, atom.client, gdata.gauth, gdata.client,
-      gdata.data, gdata.blogger.data, gdata.blogger.client,
+      gdata.core, gdata.data, gdata.blogger.data, gdata.blogger.client,
       gdata.maps.data, gdata.maps.client, gdata.spreadsheets.data])

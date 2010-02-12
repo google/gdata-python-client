@@ -20,6 +20,7 @@ src/atom/url.py
 src/gdata/__init__.py
 src/gdata/auth.py
 src/gdata/client.py
+src/gdata/core.py
 src/gdata/data.py
 src/gdata/gauth.py
 src/gdata/sample_util.py
@@ -271,6 +272,7 @@ tests/gdata_tests/books_test.py
 tests/gdata_tests/calendar_test.py
 tests/gdata_tests/client_online_test.py
 tests/gdata_tests/client_test.py
+tests/gdata_tests/core_test.py
 tests/gdata_tests/codesearch_test.py
 tests/gdata_tests/contacts_test.py
 tests/gdata_tests/data_test.py
