@@ -50,6 +50,30 @@ class ProxyError(Error):
 MIME_BOUNDARY = 'END_OF_PART'
 
 
+def get_headers(http_response):
+  """Retrieves all HTTP headers from an HTTP response from the server.
+  
+  This method is provided for backwards compatibility for Python2.2 and 2.3.
+  The httplib.HTTPResponse object in 2.2 and 2.3 does not have a getheaders
+  method so this function will use getheaders if available, but if not it
+  will retrieve a few using getheader.
+  """
+  if hasattr(http_response, 'getheaders'):
+    return http_response.getheaders()
+  else:
+    headers = []
+    for header in (
+        'location', 'content-type', 'content-length', 'age', 'allow',
+        'cache-control', 'content-location', 'content-encoding', 'date',
+        'etag', 'expires', 'last-modified', 'pragma', 'server',
+        'set-cookie', 'transfer-encoding', 'vary', 'via', 'warning',
+        'www-authenticate', 'gdata-version'):
+      value = http_response.getheader(header, None)
+      if value is not None:
+        headers.append((header, value))
+    return headers
+
+
 class HttpRequest(object):
   """Contains all of the parameters for an HTTP 1.1 request.
 
@@ -377,7 +401,7 @@ def _dump_response(http_response):
   """
   output = 'HttpResponse\n  status: %s\n  reason: %s\n  headers:' % (
       http_response.status, http_response.reason)
-  headers = http_response.getheaders()
+  headers = get_headers(http_response)
   if isinstance(headers, dict):
     for header, value in headers.iteritems():
       output += '    %s: %s\n' % (header, value)

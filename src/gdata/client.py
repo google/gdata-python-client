@@ -116,7 +116,7 @@ def error_from_response(message, http_response, error_class,
   error.status = http_response.status
   error.reason = http_response.reason
   error.body = body
-  error.headers = http_response.getheaders()
+  error.headers = atom.http_core.get_headers(http_response)
   return error
 
 

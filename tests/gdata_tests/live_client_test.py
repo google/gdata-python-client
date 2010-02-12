@@ -62,6 +62,8 @@ class BloggerTest(unittest.TestCase):
     http_request.add_body_part(str(blog_post), 'application/atom+xml')
 
     def entry_from_string_wrapper(response):
+      self.assert_(response.getheader('content-type') is not None)
+      self.assert_(response.getheader('gdata-version') is not None)
       return atom.EntryFromString(response.read())
 
     entry = self.client.request('POST', 

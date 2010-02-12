@@ -86,7 +86,7 @@ class MockHttpClient(object):
       scrubbed_response = _scrub_response(response)
       self.add_response(request, scrubbed_response.status,
                         scrubbed_response.reason,
-                        dict(scrubbed_response.getheaders()),
+                        dict(atom.http_core.get_headers(scrubbed_response)),
                         scrubbed_response.read())
       # Return the recording which we just added.
       return self._recordings[-1][1]
