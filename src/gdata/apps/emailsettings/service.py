@@ -45,11 +45,6 @@ class EmailSettingsService(gdata.apps.service.PropertyService):
     return '/a/feeds/emailsettings/%s/%s/%s/%s' % (API_VER, domain, username,
                                                    setting_id)
 
-  def _bool2str(self, b):
-    if b is None:
-      return None
-    return str(b is True).lower()
-
   def CreateLabel(self, username, label):
     """Create a label.
 
@@ -92,10 +87,10 @@ class EmailSettingsService(gdata.apps.service.PropertyService):
     properties['subject'] = subject
     properties['hasTheWord'] = has_the_word
     properties['doesNotHaveTheWord'] = does_not_have_the_word
-    properties['hasAttachment'] = self._bool2str(has_attachment)
+    properties['hasAttachment'] = gdata.apps.service._bool2str(has_attachment)
     properties['label'] = label
-    properties['shouldMarkAsRead'] = self._bool2str(should_mark_as_read)
-    properties['shouldArchive'] = self._bool2str(should_archive)
+    properties['shouldMarkAsRead'] = gdata.apps.service._bool2str(should_mark_as_read)
+    properties['shouldArchive'] = gdata.apps.service._bool2str(should_archive)
     return self._PostProperties(uri, properties)
 
   def CreateSendAsAlias(self, username, name, address, reply_to=None,
@@ -117,7 +112,7 @@ class EmailSettingsService(gdata.apps.service.PropertyService):
     properties['name'] = name
     properties['address'] = address
     properties['replyTo'] = reply_to
-    properties['makeDefault'] = self._bool2str(make_default)
+    properties['makeDefault'] = gdata.apps.service._bool2str(make_default)
     return self._PostProperties(uri, properties)
 
   def UpdateWebClipSettings(self, username, enable):
@@ -131,7 +126,7 @@ class EmailSettingsService(gdata.apps.service.PropertyService):
     """
     uri = self._serviceUrl('webclip', username)
     properties = {}
-    properties['enable'] = self._bool2str(enable)
+    properties['enable'] = gdata.apps.service._bool2str(enable)
     return self._PutProperties(uri, properties)
 
   def UpdateForwarding(self, username, enable, forward_to=None, action=None):
@@ -148,7 +143,7 @@ class EmailSettingsService(gdata.apps.service.PropertyService):
     """
     uri = self._serviceUrl('forwarding', username)
     properties = {}
-    properties['enable'] = self._bool2str(enable)
+    properties['enable'] = gdata.apps.service._bool2str(enable)
     if enable is True:
       properties['forwardTo'] = forward_to
       properties['action'] = action
@@ -168,7 +163,7 @@ class EmailSettingsService(gdata.apps.service.PropertyService):
     """
     uri = self._serviceUrl('pop', username)
     properties = {}
-    properties['enable'] = self._bool2str(enable)
+    properties['enable'] = gdata.apps.service._bool2str(enable)
     if enable is True:
       properties['enableFor'] = enable_for
       properties['action'] = action
@@ -185,7 +180,7 @@ class EmailSettingsService(gdata.apps.service.PropertyService):
       A dict containing the result of the update operation.
     """
     uri = self._serviceUrl('imap', username)
-    properties = {'enable': self._bool2str(enable)}
+    properties = {'enable': gdata.apps.service._bool2str(enable)}
     return self._PutProperties(uri, properties)
 
   def UpdateVacation(self, username, enable, subject=None, message=None,
@@ -204,11 +199,11 @@ class EmailSettingsService(gdata.apps.service.PropertyService):
     """
     uri = self._serviceUrl('vacation', username)
     properties = {}
-    properties['enable'] = self._bool2str(enable)
+    properties['enable'] = gdata.apps.service._bool2str(enable)
     if enable is True:
       properties['subject'] = subject
       properties['message'] = message
-      properties['contactsOnly'] = self._bool2str(contacts_only)
+      properties['contactsOnly'] = gdata.apps.service._bool2str(contacts_only)
     return self._PutProperties(uri, properties)
 
   def UpdateSignature(self, username, signature):
@@ -259,11 +254,11 @@ class EmailSettingsService(gdata.apps.service.PropertyService):
     if page_size != None:
       properties['pageSize'] = str(page_size)
     if shortcuts != None:
-      properties['shortcuts'] = self._bool2str(shortcuts)
+      properties['shortcuts'] = gdata.apps.service._bool2str(shortcuts)
     if arrows != None:
-      properties['arrows'] = self._bool2str(arrows)
+      properties['arrows'] = gdata.apps.service._bool2str(arrows)
     if snippets != None:
-      properties['snippets'] = self._bool2str(snippets)
+      properties['snippets'] = gdata.apps.service._bool2str(snippets)
     if unicode != None:
-      properties['unicode'] = self._bool2str(unicode)
+      properties['unicode'] = gdata.apps.service._bool2str(unicode)
     return self._PutProperties(uri, properties)

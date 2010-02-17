@@ -59,8 +59,10 @@ TOO_MANY_RECIPIENTS_ON_EMAIL_LIST=1500
 
 DEFAULT_QUOTA_LIMIT='2048'
 
+
 class Error(Exception):
   pass
+
 
 class AppsForYourDomainException(Error):
 
@@ -74,6 +76,7 @@ class AppsForYourDomainException(Error):
       self.invalidInput = self.element_tree[0].attrib['invalidInput']
     except:
       self.error_code = UNKOWN_ERROR
+
 
 class AppsService(gdata.service.GDataService):
   """Client for the Google Apps Provisioning service."""
@@ -456,6 +459,7 @@ class AppsService(gdata.service.GDataService):
     return self.AddAllElementsFromAllPages(
       ret, gdata.apps.UserFeedFromString)
 
+
 class PropertyService(gdata.service.GDataService):
   """Client for the Google Apps Property service."""
 
@@ -538,3 +542,9 @@ class PropertyService(gdata.service.GDataService):
       self.Delete(uri)
     except gdata.service.RequestError, e:
       raise gdata.apps.service.AppsForYourDomainException(e.args[0])
+
+
+def _bool2str(b):
+  if b is None:
+    return None
+  return str(b is True).lower()

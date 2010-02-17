@@ -36,11 +36,6 @@ class AdminSettingsService(gdata.apps.service.PropertyService):
       domain = self.domain
     return '/a/feeds/domain/%s/%s/%s' % (API_VER, domain, setting_id)
 
-  def _bool2str(self, b):
-    if b is None:
-      return None
-    return str(b is True).lower()
-
   def genericGet(self, location):
     """Generic HTTP Get Wrapper
 
@@ -342,7 +337,7 @@ class AdminSettingsService(gdata.apps.service.PropertyService):
 
     #update only the values we were passed
     if enableSSO != None:
-      properties['enableSSO'] = self._bool2str(enableSSO)
+      properties['enableSSO'] = gdata.apps.service._bool2str(enableSSO)
     if samlSignonUri != None:
       properties['samlSignonUri'] = samlSignonUri
     if samlLogoutUri != None:
@@ -352,7 +347,7 @@ class AdminSettingsService(gdata.apps.service.PropertyService):
     if ssoWhitelist != None:
       properties['ssoWhitelist'] = ssoWhitelist
     if useDomainSpecificIssuer != None:
-      properties['useDomainSpecificIssuer'] = self.bool2str(useDomainSpecificIssuer)
+      properties['useDomainSpecificIssuer'] = gdata.apps.service._bool2str(useDomainSpecificIssuer)
 
     return self._PutProperties(uri, properties)
 
@@ -469,8 +464,8 @@ class AdminSettingsService(gdata.apps.service.PropertyService):
     uri = self._serviceUrl('emailrouting')
     properties = {}
     properties['routeDestination'] = routeDestination
-    properties['routeRewriteTo'] = self._bool2str(routeRewriteTo)
-    properties['routeEnabled'] = self._bool2str(routeEnabled)
-    properties['bounceNotifications'] = self._bool2str(bounceNotifications)
+    properties['routeRewriteTo'] = gdata.apps.service._bool2str(routeRewriteTo)
+    properties['routeEnabled'] = gdata.apps.service._bool2str(routeEnabled)
+    properties['bounceNotifications'] = gdata.apps.service._bool2str(bounceNotifications)
     properties['accountHandling'] = accountHandling
     return self._PostProperties(uri, properties)
