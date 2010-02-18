@@ -45,7 +45,7 @@ RECORD_URL = 'http://spreadsheets.google.com/feeds/%s/records/%s/%s'
 
 class SpreadsheetsClient(gdata.client.GDClient):
   api_version = '3'
-  auth_serice = 'wise'
+  auth_service = 'wise'
   auth_scopes = gdata.gauth.AUTH_SCOPES['wise']
 
   def get_spreadsheets(self, auth_token=None,
