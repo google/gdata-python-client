@@ -155,7 +155,7 @@ class WorksheetEntry(gdata.data.GDEntry):
 
 class WorksheetsFeed(gdata.data.GDFeed):
   """A feed containing the worksheets in a single spreadsheet."""
-  entry = [Worksheet]
+  entry = [WorksheetEntry]
 
 
 class Table(gdata.data.GDEntry):
