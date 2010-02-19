@@ -46,7 +46,7 @@ BLOG_ARCHIVE_URL = 'http://www.blogger.com/feeds/%s/archive/full'
 
 class BloggerClient(gdata.client.GDClient):
   api_version = '2'
-  auth_serice = 'blogger'
+  auth_service = 'blogger'
   auth_scopes = gdata.gauth.AUTH_SCOPES['blogger']
 
   def get_blogs(self, user_id='default', auth_token=None,

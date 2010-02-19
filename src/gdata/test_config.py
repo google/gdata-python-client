@@ -373,3 +373,13 @@ def check_data_classes(test, classes):
         except TypeError:
           test.fail('Element %s in %s was of type %s' % (
               attribute_name, data_class._qname, type(value)))
+
+
+def check_clients_with_auth(test, classes):
+  for client_class in classes:
+    test.assert_(hasattr(client_class, 'api_version'))
+    test.assert_(isinstance(client_class.auth_service, (str, unicode, int)))
+    test.assert_(hasattr(client_class, 'auth_service'))
+    test.assert_(isinstance(client_class.auth_service, (str, unicode)))
+    test.assert_(hasattr(client_class, 'auth_scopes'))
+    test.assert_(isinstance(client_class.auth_scopes, (list, tuple)))

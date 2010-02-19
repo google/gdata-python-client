@@ -453,6 +453,7 @@ src/gdata/books/data.py
 src/gdata/dublincore/__init__.py
 src/gdata/dublincore/data.py
 tests/gdata_tests/data_smoke_test.py
+tests/gdata_tests/client_smoke_test.py
 src/gdata/calendar/data.py
 src/gdata/contacts/client.py
 src/gdata/contacts/data.py
