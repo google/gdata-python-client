@@ -43,7 +43,7 @@ YOUTUBE_SERVER = 'gdata.youtube.com'
 YOUTUBE_SERVICE = 'youtube'
 YOUTUBE_CLIENTLOGIN_AUTHENTICATION_URL = 'https://www.google.com/youtube/accounts/ClientLogin'
 YOUTUBE_SUPPORTED_UPLOAD_TYPES = ('mov', 'avi', 'wmv', 'mpg', 'quicktime',
-                                  'flv')
+                                  'flv', 'mp4', 'x-flv')
 YOUTUBE_QUERY_VALID_TIME_PARAMETERS = ('today', 'this_week', 'this_month',
                                        'all_time')
 YOUTUBE_QUERY_VALID_ORDERBY_PARAMETERS = ('published', 'viewCount', 'rating',
@@ -614,15 +614,15 @@ class YouTubeService(gdata.service.GDataService):
           'body':'`video_entry` must be a gdata.youtube.VideoEntry instance',
           'reason':'Found %s, not VideoEntry' % type(video_entry)
           })
-    majtype, mintype = content_type.split('/')
-
-    try:
-      assert(mintype in YOUTUBE_SUPPORTED_UPLOAD_TYPES)
-    except (ValueError, AssertionError):
-      raise YouTubeError({'status':YOUTUBE_INVALID_CONTENT_TYPE,
-          'body':'This is not a valid content type: %s' % content_type,
-          'reason':'Accepted content types: %s' %
-              ['video/%s' % (t) for t in YOUTUBE_SUPPORTED_UPLOAD_TYPES]})
+    #majtype, mintype = content_type.split('/')
+    #
+    #try:
+    #  assert(mintype in YOUTUBE_SUPPORTED_UPLOAD_TYPES)
+    #except (ValueError, AssertionError):
+    #  raise YouTubeError({'status':YOUTUBE_INVALID_CONTENT_TYPE,
+    #      'body':'This is not a valid content type: %s' % content_type,
+    #      'reason':'Accepted content types: %s' %
+    #          ['video/%s' % (t) for t in YOUTUBE_SUPPORTED_UPLOAD_TYPES]})
 
     if (isinstance(filename_or_handle, (str, unicode)) 
         and os.path.exists(filename_or_handle)):
