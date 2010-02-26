@@ -29,7 +29,7 @@ import gdata.sites.data
 import gdata.test_config as conf
 
 conf.options.register_option(conf.TEST_IMAGE_LOCATION_OPTION)
-conf.options.register_option(conf.DOMAIN_OPTION)
+conf.options.register_option(conf.APPS_DOMAIN_OPTION)
 conf.options.register_option(conf.SITES_NAME_OPTION)
 
 
@@ -40,10 +40,11 @@ class SitesClientTest(unittest.TestCase):
     if conf.options.get_value('runlive') == 'true':
       self.client = gdata.sites.client.SitesClient(
           site=conf.options.get_value('sitename'),
-          domain=conf.options.get_value('domain'))
+          domain=conf.options.get_value('appsdomain'))
       if conf.options.get_value('ssl') == 'true':
         self.client.ssl = True
-      conf.configure_client(self.client, 'SitesTest', self.client.auth_service)
+      conf.configure_client(self.client, 'SitesTest', self.client.auth_service,
+          True)
 
   def tearDown(self):
     conf.close_client(self.client)

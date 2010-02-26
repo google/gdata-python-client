@@ -125,7 +125,7 @@ options.register(
 options.register(
     'password',
     'Please enter the password for your test account',
-    secret=True, description='The test accounts password.')
+    secret=True, description='The test account password.')
 options.register(
     'clearcache',
     'Delete cached data? (enter true or false)',
@@ -150,6 +150,16 @@ options.register(
     'Run the live tests over SSL (enter true or false)',
     description='If set to true, all tests will be performed over HTTPS (SSL)',
     default='false')
+options.register(
+    'appsusername',
+    'Please enter the email address of your test Apps domain account', 
+    description=('The email address you want to sign in with. '
+                 'Make sure this is a test account on your Apps domain as '
+                 'these tests may edit or delete data.'))
+options.register(
+    'appspassword',
+    'Please enter the password for your test Apps domain account',
+    secret=True, description='The test Apps account password.')
 
 # Other options which may be used if needed.
 BLOG_ID_OPTION = Option(
@@ -167,8 +177,8 @@ SPREADSHEET_ID_OPTION = Option(
     'Please enter the ID of a spreadsheet to use in these tests',
     description=('The spreadsheet ID for the spreadsheet which should be'
                  ' modified by theses tests.'))
-DOMAIN_OPTION = Option(
-    'domain',
+APPS_DOMAIN_OPTION = Option(
+    'appsdomain',
     'Please enter your Google Apps domain',
     description=('The domain the Google Apps is hosted on or leave blank'
                  ' if n/a'))
@@ -193,7 +203,7 @@ GA_TABLE_ID = Option(
                  ' Example ga:1174'))
 
 # Functions to inject a cachable HTTP client into a service client.
-def configure_client(client, case_name, service_name):
+def configure_client(client, case_name, service_name, use_apps_auth=False):
   """Sets up a mock client which will reuse a saved session.
 
   Should be called during setUp of each unit test.
@@ -212,8 +222,11 @@ def configure_client(client, case_name, service_name):
                should be reused if and only if the same username, password,
                and service are being used.
     service_name: str The service name as used for ClientLogin to identify
-               the Google Data API being accessed. Example: 'blogger',
-               'wise', etc.
+                  the Google Data API being accessed. Example: 'blogger',
+                  'wise', etc.
+    use_apps_auth: bool (optional) If set to True, use appsusername and
+                   appspassword command-line args instead of username and
+                   password respectively.
   """
   # Use a mock HTTP client which will record and replay the HTTP traffic
   # from these tests.
@@ -229,8 +242,13 @@ def configure_client(client, case_name, service_name):
     if options.get_value('clearcache') == 'true':
       client.http_client.delete_session(cache_name)
     client.http_client.use_cached_session(cache_name)
-    auth_token = client.request_client_login_token(
-        options.get_value('username'), options.get_value('password'),
+    if not use_apps_auth:
+      username = options.get_value('username')
+      password = options.get_value('password')
+    else:
+      username = options.get_value('appsusername')
+      password = options.get_value('appspassword')
+    auth_token = client.request_client_login_token(username, password,
         case_name, service=service_name)
     options.values[auth_token_key] = gdata.gauth.token_to_blob(auth_token)
     client.http_client.close_session()

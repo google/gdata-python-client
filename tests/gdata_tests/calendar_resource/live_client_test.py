@@ -30,7 +30,7 @@ import gdata.calendar_resource.data
 import gdata.test_config as conf
 
 
-conf.options.register_option(conf.DOMAIN_OPTION)
+conf.options.register_option(conf.APPS_DOMAIN_OPTION)
 
 
 class CalendarResourceClientTest(unittest.TestCase):
@@ -39,11 +39,11 @@ class CalendarResourceClientTest(unittest.TestCase):
     self.client = None
     if conf.options.get_value('runlive') == 'true':
       self.client = gdata.calendar_resource.client.CalendarResourceClient(
-          domain=conf.options.get_value('domain'))
+          domain=conf.options.get_value('appsdomain'))
       if conf.options.get_value('ssl') == 'true':
         self.client.ssl = True
       conf.configure_client(self.client, 'CalendarResourceClientTest',
-          self.client.auth_service)
+          self.client.auth_service, True)
 
   def tearDown(self):
     conf.close_client(self.client)
