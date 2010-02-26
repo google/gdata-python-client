@@ -1,3 +1,40 @@
+=== 2.0.8 ===
+February 26, 2010 (revision 958)
+
+- Added support for resumable uploads with a sample that shows it's use
+    with Google Docs. Thanks Eric!
+- Added the publish element and copy() method to the DocsClient. Thanks Eric!
+- Added support for the JSON-C data format recently released for the YouTube
+    API.
+- Fixed import bug when using cryptomath with Python2.4 and lower.
+- Modified gdata.gauth to be usable under Python2.3.
+- Fixed errors which affect RetrieveAllEmailLists RetrieveEmailLists
+    RetrieveAllRecipients RetrieveAllNicknames RetrieveNicknames
+    RetrieveAllUsers in gdata.apps.service. Resolves  issue 340 . Thanks
+    Aprotim!
+- Fixed issues with contacts client returning a raw get and not a ContactEntry
+    and a few auth_tokens are not being passed into the HTTP request. Resolves
+    issue 332 . Thanks vinces!
+- Fixed issue parsing worksheet feed, entry was the wrong type, corrected to
+    WorksheetEntry. Resolves  issue 343. Thanks Igor!
+- Fixed typo in gdata.spreadsheets.client (auth_service). Resolves  issue 342.
+    Thanks to Igor once again!
+- Fixed bug in Google Apps APIs UpdateSSOSettings.
+- The gdata.data.LinkFinder now looks in both the link and feed_link members
+    for an ACL link. Resolves issue 339.
+- Removed client side check on video type in YouTube service. Rely on the
+    server to provide an error if the format is not supported. Resolves 
+    issue 338.
+- Improved documentation for SpreadsheetsService's UpdateRow method to explain
+    the use case it addresses and recomment alternatives.
+- Changed projecthosting to use the host member with relative URLs.
+- Added a get_headers function to be used in Python2.2 and 2.3 since
+    httplib.HTTPResponse does not have getheaders in those versions of Python.
+    Resolves  issue 335.
+- Added a client smoke test to check version and auth related class members
+    which all gdata.x.client's should have.
+- Updated the docs service_test.py to run as part of run_all_tests.py.
+
 === 2.0.7 ===
 January 26, 2010 (revision 937)
 
