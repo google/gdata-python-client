@@ -494,3 +494,5 @@ tests/gdata_tests/calendar_resource/data_test.py
 tests/gdata_tests/calendar_resource/live_client_test.py
 pydocs/gdata.calendar_resource.client.html
 pydocs/gdata.calendar_resource.data.html
+samples/docs/resumable_upload_sample.py
+tests/gdata_tests/resumable_upload_test.py

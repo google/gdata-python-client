@@ -1,5 +1,5 @@
 === 2.0.8 ===
-February 26, 2010 (revision 958)
+February 26, 2010 (revision 959)
 
 - Added support for resumable uploads with a sample that shows it's use
     with Google Docs. Thanks Eric!
