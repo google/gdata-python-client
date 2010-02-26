@@ -138,6 +138,8 @@ BASIC_PROJECTION = 'basic'
 PRIVATE_VISIBILITY = 'private'
 PUBLIC_VISIBILITY = 'public'
 
+ACL_REL = 'http://schemas.google.com/acl/2007#accessControlList'
+
 
 class Error(Exception):
   pass
@@ -189,14 +191,26 @@ class LinkFinder(atom.data.LinkFinder):
   GetPostLink = get_post_link
 
   def find_acl_link(self):
-    return self.find_url(
-        'http://schemas.google.com/acl/2007#accessControlList')
+    acl_link = self.get_acl_link()
+    if acl_link:
+      return acl_link.href
+
+    return None
 
   FindAclLink = find_acl_link
 
   def get_acl_link(self):
-    return self.get_link(
-        'http://schemas.google.com/acl/2007#accessControlList')
+    """Searches for a link or feed_link (if present) with the rel for ACL."""
+
+    acl_link = self.get_link(ACL_REL)
+    if acl_link:
+      return acl_link
+    elif hasattr(self, 'feed_link'):
+      for a_feed_link in self.feed_link:
+        if a_feed_link.rel == ACL_REL:
+          return a_feed_link
+
+    return None
 
   GetAclLink = get_acl_link
 

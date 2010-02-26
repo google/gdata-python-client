@@ -144,6 +144,26 @@ class LinkFinderTest(unittest.TestCase):
     self.assertEquals(self.entry.FindAlternateLink(),
         'http://www.provider-host.com/123456789')
 
+  def testFindAclLink(self):
+    entry = gdata.data.GDEntry()
+    self.assert_(entry.get_acl_link() is None)
+    self.assert_(entry.find_acl_link() is None)
+
+    entry.link.append(atom.data.Link(
+        rel=gdata.data.ACL_REL, href='http://example.com/acl'))
+    self.assertEqual(entry.get_acl_link().href, 'http://example.com/acl')
+    self.assertEqual(entry.find_acl_link(), 'http://example.com/acl')
+
+    del entry.link[0]
+    self.assert_(entry.get_acl_link() is None)
+    self.assert_(entry.find_acl_link() is None)
+
+    # We should also find an ACL link which is a feed_link.
+    entry.feed_link = [gdata.data.FeedLink(
+        rel=gdata.data.ACL_REL, href='http://example.com/acl2')]
+    self.assertEqual(entry.get_acl_link().href, 'http://example.com/acl2')
+    self.assertEqual(entry.find_acl_link(), 'http://example.com/acl2')
+
 
 class GDataFeedTest(unittest.TestCase):
 
