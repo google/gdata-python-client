@@ -23,10 +23,10 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 
 import unittest
 import all_tests
-from gdata.test_config import settings
+import gdata.test_config as conf
 
 
-settings.RUN_LIVE_TESTS = False
+conf.options.set_value('runlive', 'false')
 
 
 def suite():
