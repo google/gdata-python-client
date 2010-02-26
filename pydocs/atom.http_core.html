@@ -462,6 +462,12 @@ Data and other attributes defined here:<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
 members&nbsp;of&nbsp;the&nbsp;<a href="#Uri">Uri</a>&nbsp;unset.</tt></dd></dl>
+ <dl><dt><a name="-get_headers"><strong>get_headers</strong></a>(http_response)</dt><dd><tt>Retrieves&nbsp;all&nbsp;HTTP&nbsp;headers&nbsp;from&nbsp;an&nbsp;HTTP&nbsp;response&nbsp;from&nbsp;the&nbsp;server.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;is&nbsp;provided&nbsp;for&nbsp;backwards&nbsp;compatibility&nbsp;for&nbsp;Python2.2&nbsp;and&nbsp;2.3.<br>
+The&nbsp;httplib.HTTPResponse&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;in&nbsp;2.2&nbsp;and&nbsp;2.3&nbsp;does&nbsp;not&nbsp;have&nbsp;a&nbsp;getheaders<br>
+method&nbsp;so&nbsp;this&nbsp;function&nbsp;will&nbsp;use&nbsp;getheaders&nbsp;if&nbsp;available,&nbsp;but&nbsp;if&nbsp;not&nbsp;it<br>
+will&nbsp;retrieve&nbsp;a&nbsp;few&nbsp;using&nbsp;getheader.</tt></dd></dl>
  <dl><dt><a name="-parse_uri"><strong>parse_uri</strong></a>(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;<a href="#Uri">Uri</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>

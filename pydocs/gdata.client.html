@@ -38,6 +38,7 @@ in&nbsp;this&nbsp;module&nbsp;is&nbsp;<a href="#GDClient">GDClient</a>.<br>
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="gdata.client.html#Query">Query</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.client.html#ResumableUploader">ResumableUploader</a>
 </font></dt></dl>
 </dd>
 <dt><font face="helvetica, arial"><a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>(<a href="__builtin__.html#object">__builtin__.object</a>)
@@ -66,6 +67,7 @@ in&nbsp;this&nbsp;module&nbsp;is&nbsp;<a href="#GDClient">GDClient</a>.<br>
 <dt><font face="helvetica, arial"><a href="gdata.client.html#BadAuthentication">BadAuthentication</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.client.html#CaptchaChallenge">CaptchaChallenge</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.client.html#ClientLoginFailed">ClientLoginFailed</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.client.html#NotImplemented">NotImplemented</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.client.html#NotModified">NotModified</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.client.html#RedirectError">RedirectError</a>
 </font></dt><dd>
@@ -539,7 +541,7 @@ api_version&nbsp;member&nbsp;to&nbsp;a&nbsp;string,&nbsp;either&nbsp;'1'&nbsp;or
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="GDClient-ClientLogin"><strong>ClientLogin</strong></a> = <a href="#GDClient-client_login">client_login</a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb33650&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="GDClient-ClientLogin"><strong>ClientLogin</strong></a> = <a href="#GDClient-client_login">client_login</a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc57d10&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="GDClient-Delete"><strong>Delete</strong></a> = <a href="#GDClient-delete">delete</a>(self, entry_or_uri, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
 
@@ -559,15 +561,15 @@ Methods defined here:<br>
 
 <dl><dt><a name="GDClient-Request"><strong>Request</strong></a> = <a href="#GDClient-request">request</a>(self, method<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="GDClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = <a href="#GDClient-request_client_login_token">request_client_login_token</a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb33610&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="GDClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = <a href="#GDClient-request_client_login_token">request_client_login_token</a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc57cd0&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="GDClient-RevokeToken"><strong>RevokeToken</strong></a> = <a href="#GDClient-revoke_token">revoke_token</a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb336d0&gt;</font>)</dt></dl>
+<dl><dt><a name="GDClient-RevokeToken"><strong>RevokeToken</strong></a> = <a href="#GDClient-revoke_token">revoke_token</a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc57d90&gt;</font>)</dt></dl>
 
 <dl><dt><a name="GDClient-Update"><strong>Update</strong></a> = <a href="#GDClient-update">update</a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="GDClient-UpgradeToken"><strong>UpgradeToken</strong></a> = <a href="#GDClient-upgrade_token">upgrade_token</a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb33690&gt;</font>)</dt></dl>
+<dl><dt><a name="GDClient-UpgradeToken"><strong>UpgradeToken</strong></a> = <a href="#GDClient-upgrade_token">upgrade_token</a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc57d50&gt;</font>)</dt></dl>
 
-<dl><dt><a name="GDClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb33650&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+<dl><dt><a name="GDClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc57d10&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
 application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
@@ -751,9 +753,9 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="GDClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb33610&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="GDClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc57cd0&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="GDClient-revoke_token"><strong>revoke_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb336d0&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
+<dl><dt><a name="GDClient-revoke_token"><strong>revoke_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc57d90&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;both&nbsp;AuthSub&nbsp;and&nbsp;OAuth&nbsp;tokens&nbsp;(to&nbsp;invalidate<br>
 a&nbsp;ClientLogin&nbsp;token,&nbsp;the&nbsp;user&nbsp;must&nbsp;change&nbsp;their&nbsp;password).<br>
@@ -782,7 +784,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="GDClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb33690&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="GDClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xc57d50&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -966,6 +968,76 @@ Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd
 <dl><dt><a name="MissingOAuthParameters-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#MissingOAuthParameters-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
 
 <dl><dt><a name="MissingOAuthParameters-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NotImplemented">class <strong>NotImplemented</strong></a>(<a href="gdata.client.html#RequestError">RequestError</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.client.html#NotImplemented">NotImplemented</a></dd>
+<dd><a href="gdata.client.html#RequestError">RequestError</a></dd>
+<dd><a href="gdata.client.html#Error">Error</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="gdata.client.html#RequestError">RequestError</a>:<br>
+<dl><dt><strong>body</strong> = None</dl>
+
+<dl><dt><strong>headers</strong> = None</dl>
+
+<dl><dt><strong>reason</strong> = None</dl>
+
+<dl><dt><strong>status</strong> = None</dl>
+
+<hr>
+Data descriptors inherited from <a href="gdata.client.html#Error">Error</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="NotImplemented-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#NotImplemented-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x74d100&gt;<dd><tt>T.<a href="#NotImplemented-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="NotImplemented-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NotImplemented-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NotImplemented-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#NotImplemented-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NotImplemented-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#NotImplemented-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="NotImplemented-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#NotImplemented-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="NotImplemented-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NotImplemented-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#NotImplemented-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="NotImplemented-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NotImplemented-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="NotImplemented-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NotImplemented-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#NotImplemented-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="NotImplemented-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
 
 <hr>
 Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
@@ -1250,6 +1322,133 @@ Data descriptors inherited from <a href="exceptions.html#BaseException">exceptio
 </dl>
 <dl><dt><strong>message</strong></dt>
 </dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ResumableUploader">class <strong>ResumableUploader</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Resumable&nbsp;upload&nbsp;helper&nbsp;for&nbsp;the&nbsp;Google&nbsp;Data&nbsp;protocol.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ResumableUploader-QueryUploadStatus"><strong>QueryUploadStatus</strong></a> = <a href="#ResumableUploader-query_upload_status">query_upload_status</a>(self, uri<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="ResumableUploader-UpdateFile"><strong>UpdateFile</strong></a> = <a href="#ResumableUploader-update_file">update_file</a>(self, entry_or_resumable_edit_link, headers<font color="#909090">=None</font>, force<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="ResumableUploader-UploadChunk"><strong>UploadChunk</strong></a> = <a href="#ResumableUploader-upload_chunk">upload_chunk</a>(self, start_byte, content_bytes)</dt></dl>
+
+<dl><dt><a name="ResumableUploader-UploadFile"><strong>UploadFile</strong></a> = <a href="#ResumableUploader-upload_file">upload_file</a>(self, resumable_media_link, entry<font color="#909090">=None</font>, headers<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="ResumableUploader-__init__"><strong>__init__</strong></a>(self, client, file_handle, content_type, total_file_size, chunk_size<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>)</dt><dd><tt>Starts&nbsp;a&nbsp;resumable&nbsp;upload&nbsp;to&nbsp;a&nbsp;service&nbsp;that&nbsp;supports&nbsp;the&nbsp;protocol.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;client:&nbsp;gdata.client.<a href="#GDClient">GDClient</a>&nbsp;A&nbsp;Google&nbsp;Data&nbsp;API&nbsp;service.<br>
+&nbsp;&nbsp;file_handle:&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;A&nbsp;file-like&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;containing&nbsp;the&nbsp;file&nbsp;to&nbsp;upload.<br>
+&nbsp;&nbsp;content_type:&nbsp;str&nbsp;The&nbsp;mimetype&nbsp;of&nbsp;the&nbsp;file&nbsp;to&nbsp;upload.<br>
+&nbsp;&nbsp;total_file_size:&nbsp;int&nbsp;The&nbsp;file's&nbsp;total&nbsp;size&nbsp;in&nbsp;bytes.<br>
+&nbsp;&nbsp;chunk_size:&nbsp;int&nbsp;The&nbsp;size&nbsp;of&nbsp;each&nbsp;upload&nbsp;chunk.&nbsp;If&nbsp;None,&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DEFAULT_CHUNK_SIZE&nbsp;will&nbsp;be&nbsp;used.<br>
+&nbsp;&nbsp;desired_class:&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(optional)&nbsp;The&nbsp;type&nbsp;of&nbsp;gdata.data.GDEntry&nbsp;to&nbsp;parse<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;completed&nbsp;entry&nbsp;as.&nbsp;This&nbsp;should&nbsp;be&nbsp;specific&nbsp;to&nbsp;the&nbsp;API.</tt></dd></dl>
+
+<dl><dt><a name="ResumableUploader-query_upload_status"><strong>query_upload_status</strong></a>(self, uri<font color="#909090">=None</font>)</dt><dd><tt>Queries&nbsp;the&nbsp;current&nbsp;status&nbsp;of&nbsp;a&nbsp;resumable&nbsp;upload&nbsp;request.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;str&nbsp;(optional)&nbsp;A&nbsp;resumable&nbsp;upload&nbsp;uri&nbsp;to&nbsp;query&nbsp;and&nbsp;override&nbsp;the&nbsp;one<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;is&nbsp;set&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;integer&nbsp;representing&nbsp;the&nbsp;file&nbsp;position&nbsp;(byte)&nbsp;to&nbsp;resume&nbsp;the&nbsp;upload&nbsp;from<br>
+&nbsp;&nbsp;or&nbsp;True&nbsp;if&nbsp;the&nbsp;upload&nbsp;is&nbsp;complete.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;<a href="#RequestError">RequestError</a>&nbsp;if&nbsp;anything&nbsp;other&nbsp;than&nbsp;a&nbsp;HTTP&nbsp;308&nbsp;is&nbsp;returned<br>
+&nbsp;&nbsp;when&nbsp;the&nbsp;request&nbsp;raises&nbsp;an&nbsp;exception.</tt></dd></dl>
+
+<dl><dt><a name="ResumableUploader-update_file"><strong>update_file</strong></a>(self, entry_or_resumable_edit_link, headers<font color="#909090">=None</font>, force<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>)</dt><dd><tt>Updates&nbsp;the&nbsp;contents&nbsp;of&nbsp;an&nbsp;existing&nbsp;file&nbsp;using&nbsp;the&nbsp;resumable&nbsp;protocol.<br>
+&nbsp;<br>
+If&nbsp;you&nbsp;are&nbsp;interested&nbsp;in&nbsp;pausing&nbsp;an&nbsp;upload&nbsp;or&nbsp;controlling&nbsp;the&nbsp;chunking<br>
+yourself,&nbsp;use&nbsp;the&nbsp;<a href="#ResumableUploader-upload_chunk">upload_chunk</a>()&nbsp;method&nbsp;instead.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry_or_resumable_edit_link:&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;or&nbsp;string&nbsp;A&nbsp;gdata.data.GDEntry&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;entry/file&nbsp;to&nbsp;update&nbsp;or&nbsp;the&nbsp;full&nbsp;uri&nbsp;of&nbsp;the&nbsp;link&nbsp;with&nbsp;rel<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#resumable-edit-media.<br>
+&nbsp;&nbsp;headers:&nbsp;dict&nbsp;Additional&nbsp;headers&nbsp;to&nbsp;send&nbsp;in&nbsp;the&nbsp;initial&nbsp;request&nbsp;to&nbsp;create<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;resumable&nbsp;upload&nbsp;request.&nbsp;These&nbsp;headers&nbsp;will&nbsp;override&nbsp;any&nbsp;default<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;headers&nbsp;sent&nbsp;in&nbsp;the&nbsp;request.&nbsp;For&nbsp;example:&nbsp;headers={'Slug':&nbsp;'MyTitle'}.<br>
+&nbsp;&nbsp;force&nbsp;boolean&nbsp;(optional)&nbsp;True&nbsp;to&nbsp;force&nbsp;an&nbsp;update&nbsp;and&nbsp;set&nbsp;the&nbsp;If-Match<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;header&nbsp;to&nbsp;'*'.&nbsp;If&nbsp;False&nbsp;and&nbsp;entry_or_resumable_edit_link&nbsp;is&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.data.GDEntry&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;its&nbsp;etag&nbsp;value&nbsp;is&nbsp;used.&nbsp;Otherwise&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameter&nbsp;should&nbsp;be&nbsp;set&nbsp;to&nbsp;True&nbsp;to&nbsp;force&nbsp;the&nbsp;update.<br>
+&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;An&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;its&nbsp;modify_request&nbsp;method.&nbsp;Recommended&nbsp;classes&nbsp;include<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;final&nbsp;Atom&nbsp;entry&nbsp;created&nbsp;on&nbsp;the&nbsp;server.&nbsp;The&nbsp;entry&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;type&nbsp;will<br>
+&nbsp;&nbsp;be&nbsp;the&nbsp;class&nbsp;specified&nbsp;in&nbsp;self.<strong>desired_class</strong>.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;<a href="#RequestError">RequestError</a>&nbsp;if&nbsp;anything&nbsp;other&nbsp;than&nbsp;a&nbsp;HTTP&nbsp;308&nbsp;is&nbsp;returned<br>
+&nbsp;&nbsp;when&nbsp;the&nbsp;request&nbsp;raises&nbsp;an&nbsp;exception.</tt></dd></dl>
+
+<dl><dt><a name="ResumableUploader-upload_chunk"><strong>upload_chunk</strong></a>(self, start_byte, content_bytes)</dt><dd><tt>Uploads&nbsp;a&nbsp;byte&nbsp;range&nbsp;(chunk)&nbsp;to&nbsp;the&nbsp;resumable&nbsp;upload&nbsp;server.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;start_byte:&nbsp;int&nbsp;The&nbsp;byte&nbsp;offset&nbsp;of&nbsp;the&nbsp;total&nbsp;file&nbsp;where&nbsp;the&nbsp;byte&nbsp;range<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;passed&nbsp;in&nbsp;lives.<br>
+&nbsp;&nbsp;content_bytes:&nbsp;str&nbsp;The&nbsp;file&nbsp;contents&nbsp;of&nbsp;this&nbsp;chunk.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;final&nbsp;Atom&nbsp;entry&nbsp;created&nbsp;on&nbsp;the&nbsp;server.&nbsp;The&nbsp;entry&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;type&nbsp;will<br>
+&nbsp;&nbsp;be&nbsp;the&nbsp;class&nbsp;specified&nbsp;in&nbsp;self.<strong>desired_class</strong>.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;<a href="#RequestError">RequestError</a>&nbsp;if&nbsp;the&nbsp;unique&nbsp;upload&nbsp;uri&nbsp;is&nbsp;not&nbsp;set&nbsp;or&nbsp;the<br>
+&nbsp;&nbsp;server&nbsp;returns&nbsp;something&nbsp;other&nbsp;than&nbsp;an&nbsp;HTTP&nbsp;308&nbsp;when&nbsp;the&nbsp;upload&nbsp;is<br>
+&nbsp;&nbsp;incomplete.</tt></dd></dl>
+
+<dl><dt><a name="ResumableUploader-upload_file"><strong>upload_file</strong></a>(self, resumable_media_link, entry<font color="#909090">=None</font>, headers<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>)</dt><dd><tt>Uploads&nbsp;an&nbsp;entire&nbsp;file&nbsp;in&nbsp;chunks&nbsp;using&nbsp;the&nbsp;resumable&nbsp;upload&nbsp;protocol.<br>
+&nbsp;<br>
+If&nbsp;you&nbsp;are&nbsp;interested&nbsp;in&nbsp;pausing&nbsp;an&nbsp;upload&nbsp;or&nbsp;controlling&nbsp;the&nbsp;chunking<br>
+yourself,&nbsp;use&nbsp;the&nbsp;<a href="#ResumableUploader-upload_chunk">upload_chunk</a>()&nbsp;method&nbsp;instead.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;resumable_media_link:&nbsp;str&nbsp;The&nbsp;full&nbsp;URL&nbsp;for&nbsp;the&nbsp;#resumable-create-media&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;starting&nbsp;a&nbsp;resumable&nbsp;upload&nbsp;request.<br>
+&nbsp;&nbsp;entry:&nbsp;A&nbsp;(optional)&nbsp;gdata.data.GDEntry&nbsp;containging&nbsp;metadata&nbsp;to&nbsp;create&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upload&nbsp;from.<br>
+&nbsp;&nbsp;headers:&nbsp;dict&nbsp;Additional&nbsp;headers&nbsp;to&nbsp;send&nbsp;in&nbsp;the&nbsp;initial&nbsp;request&nbsp;to&nbsp;create<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;resumable&nbsp;upload&nbsp;request.&nbsp;These&nbsp;headers&nbsp;will&nbsp;override&nbsp;any&nbsp;default<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;headers&nbsp;sent&nbsp;in&nbsp;the&nbsp;request.&nbsp;For&nbsp;example:&nbsp;headers={'Slug':&nbsp;'MyTitle'}.<br>
+&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;An&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;its&nbsp;modify_request&nbsp;method.&nbsp;Recommended&nbsp;classes&nbsp;include<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;final&nbsp;Atom&nbsp;entry&nbsp;created&nbsp;on&nbsp;the&nbsp;server.&nbsp;The&nbsp;entry&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;type&nbsp;will<br>
+&nbsp;&nbsp;be&nbsp;the&nbsp;class&nbsp;specified&nbsp;in&nbsp;self.<strong>desired_class</strong>.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;<a href="#RequestError">RequestError</a>&nbsp;if&nbsp;anything&nbsp;other&nbsp;than&nbsp;a&nbsp;HTTP&nbsp;308&nbsp;is&nbsp;returned<br>
+&nbsp;&nbsp;when&nbsp;the&nbsp;request&nbsp;raises&nbsp;an&nbsp;exception.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>DEFAULT_CHUNK_SIZE</strong> = 5242880</dl>
+
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
