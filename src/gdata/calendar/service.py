@@ -282,6 +282,12 @@ class CalendarService(gdata.service.GDataService):
         escape_params=escape_params, 
         converter=gdata.calendar.CalendarEventCommentEntryFromString)
 
+  def _RemoveStandardUrlPrefix(self, url):
+    url_prefix = 'http://%s/' % self.server
+    if url.startswith(url_prefix):
+      return url[len(url_prefix) - 1:]
+    return url
+
   def DeleteEvent(self, edit_uri, extra_headers=None, 
       url_params=None, escape_params=True):
     """Removes an event with the specified ID from Google Calendar.
@@ -303,10 +309,8 @@ class CalendarService(gdata.service.GDataService):
          'body': HTTP body of the server's response}
     """
     
-    url_prefix = 'http://%s/' % self.server
-    if edit_uri.startswith(url_prefix):
-      edit_uri = edit_uri[len(url_prefix):]
-    return self.Delete('/%s' % edit_uri,
+    edit_uri = self._RemoveStandardUrlPrefix(edit_uri)
+    return self.Delete('%s' % edit_uri,
                        url_params=url_params, escape_params=escape_params)
 
   def DeleteAclEntry(self, edit_uri, extra_headers=None, 
@@ -329,11 +333,9 @@ class CalendarService(gdata.service.GDataService):
          'reason': HTTP reason from the server, 
          'body': HTTP body of the server's response}
     """
-    
-    url_prefix = 'http://%s/' % self.server
-    if edit_uri.startswith(url_prefix):
-      edit_uri = edit_uri[len(url_prefix):]
-    return self.Delete('/%s' % edit_uri,
+   
+    edit_uri = self._RemoveStandardUrlPrefix(edit_uri)
+    return self.Delete('%s' % edit_uri,
                        url_params=url_params, escape_params=escape_params)
 
   def DeleteCalendarEntry(self, edit_uri, extra_headers=None,
@@ -381,10 +383,9 @@ class CalendarService(gdata.service.GDataService):
          'reason': HTTP reason from the server, 
          'body': HTTP body of the server's response}
     """
-    url_prefix = 'http://%s/' % self.server
-    if edit_uri.startswith(url_prefix):
-      edit_uri = edit_uri[len(url_prefix):]
-    return self.Put(updated_event, '/%s' % edit_uri,
+
+    edit_uri = self._RemoveStandardUrlPrefix(edit_uri)
+    return self.Put(updated_event, '%s' % edit_uri,
                     url_params=url_params, 
                     escape_params=escape_params, 
                     converter=gdata.calendar.CalendarEventEntryFromString)
@@ -411,10 +412,9 @@ class CalendarService(gdata.service.GDataService):
          'reason': HTTP reason from the server, 
          'body': HTTP body of the server's response}
     """
-    url_prefix = 'http://%s/' % self.server
-    if edit_uri.startswith(url_prefix):
-      edit_uri = edit_uri[len(url_prefix):]
-    return self.Put(updated_rule, '/%s' % edit_uri,
+
+    edit_uri = self._RemoveStandardUrlPrefix(edit_uri)
+    return self.Put(updated_rule, '%s' % edit_uri,
                     url_params=url_params, 
                     escape_params=escape_params,
                     converter=gdata.calendar.CalendarAclEntryFromString)

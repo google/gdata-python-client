@@ -43,7 +43,16 @@ class CalendarServiceUnitTest(unittest.TestCase):
 
   def tearDown(self):
     # No teardown needed
-    pass  
+    pass
+
+  def testUrlScrubbing(self):
+    self.assertEquals(self.cal_client._RemoveStandardUrlPrefix(
+        '/test'), '/test')
+    self.assertEquals(self.cal_client._RemoveStandardUrlPrefix(
+        'http://www.google.com/calendar/test'), '/calendar/test')
+    self.assertEquals(self.cal_client._RemoveStandardUrlPrefix(
+        'https://www.google.com/calendar/test'),
+        'https://www.google.com/calendar/test')
 
   def testPostUpdateAndDeleteSubscription(self):
     """Test posting a new subscription, updating it, deleting it"""
