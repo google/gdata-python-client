@@ -1,3 +1,10 @@
+=== 2.0.9 ===
+March 5, 2010 (revision 964)
+
+- Fixed URL related bug in gdata.calendar.service. You can now edit and delete
+    against https URLs.
+- Removed hard coded Python version from gdata.contacts. Resolves issue 347.
+
 === 2.0.8 ===
 February 26, 2010 (revision 960)
 
