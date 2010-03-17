@@ -106,6 +106,45 @@ class BloggerClientTest(unittest.TestCase):
     self.client.delete(updated.find_edit_link())
 
 
+  def test_create_draft_page(self):
+    if not conf.options.get_value('runlive') == 'true':
+      return
+    conf.configure_cache(self.client, 'test_create_draft_page')
+
+    # List all pages on the blog.
+    pages_before = self.client.get_pages(conf.options.get_value('blogid'))
+
+    # Add a draft page to blog.
+    created = self.client.add_page(conf.options.get_value('blogid'),
+                                   'draft page from BloggerClientTest',
+                                   'draft content',
+                                   draft=True)
+
+    self.assertEqual(created.title.text, 'draft page from BloggerClientTest')
+    self.assertEqual(created.content.text, 'draft content')
+    self.assert_(created.control is not None)
+    self.assert_(created.control.draft is not None)
+    self.assertEqual(created.control.draft.text, 'yes')
+    self.assertEqual(str(int(created.get_page_id())), created.get_page_id())
+
+    # List all pages after adding one.
+    pages_after = self.client.get_pages(conf.options.get_value('blogid'))
+    self.assertEqual(len(pages_before.entry) + 1, len(pages_after.entry))
+
+    # Publish page.
+    created.control.draft.text = 'no'
+    updated = self.client.update(created)
+
+    if updated.control is not None and updated.control.draft is not None:
+      self.assertNotEqual(updated.control.draft.text, 'yes')
+
+    # Delete test page.
+    self.client.delete(updated.find_edit_link())
+    pages_after = self.client.get_pages(conf.options.get_value('blogid'))
+
+    self.assertEqual(len(pages_before.entry), len(pages_after.entry))
+
+
 def suite():
   return conf.build_suite([BloggerClientTest])
 

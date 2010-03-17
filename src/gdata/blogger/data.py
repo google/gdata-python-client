@@ -34,6 +34,8 @@ BLOG_ID_PATTERN = re.compile('(tag:blogger.com,1999:blog-)(\w*)')
 BLOG_ID2_PATTERN = re.compile('tag:blogger.com,1999:user-(\d+)\.blog-(\d+)')
 POST_ID_PATTERN = re.compile(
     '(tag:blogger.com,1999:blog-)(\w*)(.post-)(\w*)')
+PAGE_ID_PATTERN = re.compile(
+    '(tag:blogger.com,1999:blog-)(\w*)(.page-)(\w*)')
 COMMENT_ID_PATTERN = re.compile('.*-(\w*)$')
 
 
@@ -116,6 +118,25 @@ class BlogPost(BloggerEntry):
 
 class BlogPostFeed(gdata.data.GDFeed):
   entry = [BlogPost]
+
+
+class BlogPage(BloggerEntry):
+  """Represents a single page on a blog."""
+
+  def get_page_id(self):
+    """Extracts the pageID string from entry's Atom id.
+
+    Returns: A string of digits which identify this post within the blog.
+    """
+    if self.id.text:
+      return PAGE_ID_PATTERN.match(self.id.text).group(4)
+    return None
+
+  GetPageId = get_page_id
+
+
+class BlogPageFeed(gdata.data.GDFeed):
+  entry = [BlogPage]
 
 
 class InReplyTo(atom.core.XmlElement):

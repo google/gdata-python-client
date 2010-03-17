@@ -36,6 +36,8 @@ import atom.http_core
 BLOGS_URL = 'http://www.blogger.com/feeds/%s/blogs'
 # Takes a blog ID.
 BLOG_POST_URL = 'http://www.blogger.com/feeds/%s/posts/default'
+# Takes a blog ID.
+BLOG_PAGE_URL = 'http://www.blogger.com/feeds/%s/pages/default'
 # Takes a blog ID and post ID.
 BLOG_POST_COMMENTS_URL = 'http://www.blogger.com/feeds/%s/%s/comments/default'
 # Takes a blog ID.
@@ -63,6 +65,14 @@ class BloggerClient(gdata.client.GDClient):
                          desired_class=desired_class, query=query, **kwargs)
 
   GetPosts = get_posts
+
+  def get_pages(self, blog_id, auth_token=None,
+                desired_class=gdata.blogger.data.BlogPageFeed, query=None,
+                **kwargs):
+    return self.get_feed(BLOG_PAGE_URL % blog_id, auth_token=auth_token,
+                         desired_class=desired_class, query=query, **kwargs)
+
+  GetPages = get_pages
 
   def get_post_comments(self, blog_id, post_id,  auth_token=None,
                         desired_class=gdata.blogger.data.CommentFeed,
@@ -101,6 +111,17 @@ class BloggerClient(gdata.client.GDClient):
     return self.post(new_entry, BLOG_POST_URL % blog_id, auth_token=auth_token, **kwargs)
 
   AddPost = add_post
+
+  def add_page(self, blog_id, title, body, draft=False, auth_token=None,
+               title_type='text', body_type='html', **kwargs):
+    new_entry = gdata.blogger.data.BlogPage(
+        title=atom.data.Title(text=title, type=title_type),
+        content=atom.data.Content(text=body, type=body_type))
+    if draft:
+      new_entry.control = atom.data.Control(draft=atom.data.Draft(text='yes'))
+    return self.post(new_entry, BLOG_PAGE_URL % blog_id, auth_token=auth_token, **kwargs)
+
+  AddPage = add_page
 
   def add_comment(self, blog_id, post_id, body, auth_token=None,
                   title_type='text', body_type='html', **kwargs):
