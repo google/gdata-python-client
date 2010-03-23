@@ -314,7 +314,7 @@ class GDEntry(atom.data.Entry, LinkFinder):
   GetId = get_id
 
   def is_media(self):
-    if self.find_media_edit_link():
+    if self.find_edit_media_link():
       return True
     return False
 
