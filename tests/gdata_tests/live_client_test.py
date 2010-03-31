@@ -30,6 +30,7 @@ import atom.http_core
 import atom.mock_http_core
 import atom.core
 import gdata.data
+import gdata.core
 # TODO: switch to using v2 atom data once it is available.
 import atom
 import gdata.test_config as conf
@@ -270,6 +271,18 @@ class VersionTwoClientContactsTest(unittest.TestCase):
     self.test_version_two_client()
 
 
+class JsoncRequestTest(unittest.TestCase):
+
+  def setUp(self):
+    self.client = gdata.client.GDClient()
+
+  def test_get_jsonc(self):
+    jsonc = self.client.get_feed(
+        'http://gdata.youtube.com/feeds/api/videos?q=surfing&v=2&alt=jsonc',
+        converter=gdata.core.parse_json_file)
+    self.assertTrue(len(jsonc.data.items) > 0)
+
+
 # Utility methods.
 # The Atom XML namespace.
 ATOM = 'http://www.w3.org/2005/Atom'
@@ -297,7 +310,8 @@ def element_from_string(response):
 
 def suite():
   return conf.build_suite([BloggerTest, ContactsTest, 
-                           VersionTwoClientContactsTest])
+                           VersionTwoClientContactsTest,
+                           JsoncRequestTest])
 
 
 if __name__ == '__main__':

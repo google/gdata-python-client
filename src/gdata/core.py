@@ -78,6 +78,10 @@ def parse_json(json_string):
   return _convert_to_jsonc(simplejson.loads(json_string))
 
 
+def parse_json_file(json_file):
+  return _convert_to_jsonc(simplejson.load(json_file))
+
+
 def jsonc_to_string(jsonc_obj):
   """Converts a Jsonc object into a string of JSON-C."""
 
