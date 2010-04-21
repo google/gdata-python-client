@@ -36,7 +36,8 @@ conf.options.register_option(conf.APPS_DOMAIN_OPTION)
 class CalendarResourceClientTest(unittest.TestCase):
 
   def setUp(self):
-    self.client = None
+    self.client = gdata.calendar_resource.client.CalendarResourceClient(
+        domain='example.com')
     if conf.options.get_value('runlive') == 'true':
       self.client = gdata.calendar_resource.client.CalendarResourceClient(
           domain=conf.options.get_value('appsdomain'))
@@ -48,7 +49,35 @@ class CalendarResourceClientTest(unittest.TestCase):
   def tearDown(self):
     conf.close_client(self.client)
 
-  def testCreateUpdateDelete(self):
+  def testClientConfiguration(self):
+    self.assertEqual('apps-apis.google.com', self.client.host)
+    self.assertEqual('2.0', self.client.api_version)
+    self.assertEqual('apps', self.client.auth_service)
+    self.assertEqual(
+        ('http://www.google.com/a/feeds/',
+         'https://www.google.com/a/feeds/',
+         'http://apps-apis.google.com/a/feeds/',
+         'https://apps-apis.google.com/a/feeds/'), self.client.auth_scopes)
+    if conf.options.get_value('runlive') == 'true':
+      self.assertEqual(self.client.domain, conf.options.get_value('appsdomain'))
+    else:
+      self.assertEqual(self.client.domain, 'example.com')
+
+  def testMakeResourceFeedUri(self):
+    self.assertEqual('/a/feeds/calendar/resource/2.0/%s/' % self.client.domain,
+        self.client.MakeResourceFeedUri())
+    self.assertEqual('/a/feeds/calendar/resource/2.0/%s/CR-NYC-14-12-BR'
+        % self.client.domain,
+        self.client.MakeResourceFeedUri(resource_id='CR-NYC-14-12-BR'))
+    self.assertEqual('/a/feeds/calendar/resource/2.0/%s/?test=1'
+        % self.client.domain,
+        self.client.MakeResourceFeedUri(params={'test': 1}))
+    self.assertEqual('/a/feeds/calendar/resource/2.0/%s/CR-NYC-14-12-BR?test=1'
+        % self.client.domain,
+        self.client.MakeResourceFeedUri(resource_id='CR-NYC-14-12-BR',
+            params={'test': 1}))
+
+  def testCreateRetrieveUpdateDelete(self):
     if not conf.options.get_value('runlive') == 'true':
       return
 
@@ -68,6 +97,16 @@ class CalendarResourceClientTest(unittest.TestCase):
         ('This conference room is in New York City, building 14, floor 12, '
          'Boardroom'))
     self.assertEqual(new_entry.resource_type, 'CR')
+
+    fetched_entry = self.client.get_resource(resource_id='CR-NYC-14-12-BR')
+    self.assert_(isinstance(fetched_entry,
+        gdata.calendar_resource.data.CalendarResourceEntry))
+    self.assertEqual(fetched_entry.resource_id, 'CR-NYC-14-12-BR')
+    self.assertEqual(fetched_entry.resource_common_name, 'Boardroom')
+    self.assertEqual(fetched_entry.resource_description,
+        ('This conference room is in New York City, building 14, floor 12, '
+         'Boardroom'))
+    self.assertEqual(fetched_entry.resource_type, 'CR')
 
     new_entry.resource_id = 'CR-MTV-14-12-BR'
     new_entry.resource_common_name = 'Executive Boardroom'
