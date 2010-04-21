@@ -119,7 +119,7 @@ class CalendarResourceClient(gdata.client.GDClient):
     """
 
     if uri is None:
-      uri = self.MakeResourceUri(resource_id)
+      uri = self.MakeResourceFeedUri(resource_id)
     return self.get_entry(uri,
       desired_class=gdata.calendar_resource.data.CalendarResourceEntry,
       **kwargs)
