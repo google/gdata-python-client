@@ -163,6 +163,21 @@ class GroupsService(gdata.apps.service.PropertyService):
     uri = self._ServiceUrl('group', True, '', '', '')
     return self._GetPropertiesList(uri)
 
+  def RetrievePageOfGroups(self, start_group=None):
+    """Retrieve one page of groups in the domain.
+    
+    Args:
+      start_group: The key to continue for pagination through all groups.
+      
+    Returns:
+      A feed object containing the result of the retrieve operation.
+    """
+    uri = self._ServiceUrl('group', True, '', '', '')
+    if start_group is not None:
+      uri += "?start="+start_group
+    property_feed = self._GetPropertyFeed(uri)
+    return property_feed
+
   def RetrieveGroups(self, member_id, direct_only=False):
     """Retrieve all groups that belong to the given member_id.
 
@@ -243,6 +258,29 @@ class GroupsService(gdata.apps.service.PropertyService):
     uri = self._ServiceUrl('member', True, group_id, '', '',
                            suspended_users=suspended_users)
     return self._GetPropertiesList(uri)
+    
+  def RetrievePageOfMembers(self, group_id, suspended_users=False, start=None):
+    """Retrieve one page of members of a given group.
+    
+    Args:
+      group_id: The ID of the group (e.g. us-sales).
+      suspended_users: A boolean; should we include any suspended users in
+        the membership list returned?
+      start: The key to continue for pagination through all members.
+
+    Returns:
+      A feed object containing the result of the retrieve operation.
+    """
+    
+    uri = self._ServiceUrl('member', True, group_id, '', '',
+                           suspended_users=suspended_users)
+    if start is not None:
+      if suspended_users:
+        uri += "&start="+start
+      else:
+        uri += "?start="+start
+    property_feed = self._GetPropertyFeed(uri)
+    return property_feed
 
   def RemoveMemberFromGroup(self, member_id, group_id):
     """Remove the given member from the given group.
@@ -312,7 +350,29 @@ class GroupsService(gdata.apps.service.PropertyService):
     uri = self._ServiceUrl('owner', True, group_id, '', '',
                            suspended_users=suspended_users)
     return self._GetPropertiesList(uri)
+    
+  def RetrievePageOfOwners(self, group_id, suspended_users=False, start=None):
+    """Retrieve one page of owners of the given group.
+    
+    Args:
+      group_id: The ID of the group (e.g. us-sales).
+      suspended_users: A boolean; should we include any suspended users in
+        the ownership list returned?
+      start: The key to continue for pagination through all owners.
 
+    Returns:
+      A feed object containing the result of the retrieve operation.
+    """
+    uri = self._ServiceUrl('owner', True, group_id, '', '',
+                           suspended_users=suspended_users)
+    if start is not None:
+      if suspended_users:
+        uri += "&start="+start
+      else:
+        uri += "?start="+start
+    property_feed = self._GetPropertyFeed(uri)
+    return property_feed
+        
   def RemoveOwnerFromGroup(self, owner_email, group_id):
     """Remove the given owner from the given group.
 
