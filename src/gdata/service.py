@@ -952,19 +952,19 @@ class GDataService(atom.service.AtomService):
   def GetWithRetries(self, uri, extra_headers=None, redirects_remaining=4, 
       encoding='UTF-8', converter=None, num_retries=DEFAULT_NUM_RETRIES,
       delay=DEFAULT_DELAY, backoff=DEFAULT_BACKOFF, logger=None):
-    """This is a wrapper method for Get with retring capability.
+    """This is a wrapper method for Get with retrying capability.
 
-    To avoid various errors while retrieving bulk entities by retring
+    To avoid various errors while retrieving bulk entities by retrying
     specified times.
 
     Note this method relies on the time module and so may not be usable
     by default in Python2.2.
 
     Args:
-      num_retries: integer The retry count.
-      delay: integer The initial delay for retring.
-      backoff: integer how much the delay should lengthen after each failure.
-      logger: an object which has a debug(str) method to receive logging
+      num_retries: Integer; the retry count.
+      delay: Integer; the initial delay for retrying.
+      backoff: Integer; how much the delay should lengthen after each failure.
+      logger: An object which has a debug(str) method to receive logging
               messages. Recommended that you pass in the logging module.
     Raises:
       ValueError if any of the parameters has an invalid value.
@@ -989,25 +989,30 @@ class GDataService(atom.service.AtomService):
     while mtries > 0:
       if mtries != num_retries:
         if logger:
-          logger.debug("Retrying...")
+          logger.debug("Retrying: %s" % uri)
       try:
         rv = self.Get(uri, extra_headers=extra_headers,
                       redirects_remaining=redirects_remaining,
                       encoding=encoding, converter=converter)
-      except (SystemExit, RequestError):
-        # Allow these errors
+      except SystemExit:
+        # Allow this error
         raise
+      except RequestError, e:
+        # Error 500 is 'internal server error' and warrants a retry
+        # Error 503 is 'service unavailable' and warrants a retry
+        if e[0]['status'] not in [500, 503]:
+          raise e
+        # Else, fall through to the retry code...
       except Exception, e:
         if logger:
           logger.debug(e)
-        mtries -= 1
-        time.sleep(mdelay)
-        mdelay *= backoff
+        # Fall through to the retry code...
       else:
         # This is the right path.
-        if logger:
-          logger.debug("Succeeeded...")
         return rv
+      mtries -= 1
+      time.sleep(mdelay)
+      mdelay *= backoff
     raise RanOutOfTries('Ran out of tries.')
 
   # CRUD operations
