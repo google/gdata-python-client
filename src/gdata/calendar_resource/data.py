@@ -40,6 +40,8 @@ RESOURCE_COMMON_NAME_NAME = 'resourceCommonName'
 RESOURCE_DESCRIPTION_NAME = 'resourceDescription'
 # The apps:property name of the resourceType property
 RESOURCE_TYPE_NAME = 'resourceType'
+# The apps:property name of the resourceEmail property
+RESOURCE_EMAIL_NAME = 'resourceEmail'
 
 
 class AppsProperty(atom.core.XmlElement):
@@ -170,6 +172,17 @@ class CalendarResourceEntry(gdata.data.GDEntry):
     self._SetProperty(RESOURCE_TYPE_NAME, value)
 
   resource_type = pyproperty(GetResourceType, SetResourceType)
+
+  def GetResourceEmail(self):
+    """Get the email of this Calendar Resource object.
+    
+    Returns:
+     The email of this Calendar Resource object as a string or None.
+    """
+    
+    return self._GetProperty(RESOURCE_EMAIL_NAME)
+    
+  resource_email = pyproperty(GetResourceEmail)
 
   def __init__(self, resource_id=None, resource_common_name=None,
     resource_description=None, resource_type=None, *args, **kwargs):
