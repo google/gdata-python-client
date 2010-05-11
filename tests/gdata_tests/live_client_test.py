@@ -266,10 +266,17 @@ class VersionTwoClientContactsTest(unittest.TestCase):
     self.client.delete(edited)
 
   def test_crud_over_https_proxy(self):
-    os.environ['https_proxy'] = '98.192.125.23'
-    # Perform the CRUD test above, this time over a proxy.
-    self.test_version_two_client()
-
+    import urllib
+    PROXY_ADDR = '98.192.125.23'
+    try:
+      response = urllib.urlopen('http://' + PROXY_ADDR)
+    except IOError:
+      return
+    # Only bother running the test if the proxy is up
+    if response.getcode() == 200:
+      os.environ['https_proxy'] = PROXY_ADDR
+      # Perform the CRUD test above, this time over a proxy.
+      self.test_version_two_client()
 
 class JsoncRequestTest(unittest.TestCase):
 

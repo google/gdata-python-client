@@ -36,7 +36,7 @@ class MissingHost(Error):
 class AtomPubClient(object):
   host = None
   auth_token = None
-  ssl = False # Whether to force all requests over https
+  ssl = True # Whether to force all requests over https
 
   def __init__(self, http_client=None, host=None,
                auth_token=None, source=None, **kwargs):
