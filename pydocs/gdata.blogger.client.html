@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.blogger.html"><font color="#ffffff">blogger</font></a>.client</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client/src/gdata/blogger/client.py">/usr/local/svn/gdata-python-client/src/gdata/blogger/client.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/jcgregorio/projects/gdata-python-client/src/gdata/blogger/client.py">/home/jcgregorio/projects/gdata-python-client/src/gdata/blogger/client.py</a></font></td></tr></table>
     <p><tt>Contains&nbsp;a&nbsp;client&nbsp;to&nbsp;communicate&nbsp;with&nbsp;the&nbsp;Blogger&nbsp;servers.<br>
 &nbsp;<br>
 For&nbsp;documentation&nbsp;on&nbsp;the&nbsp;Blogger&nbsp;API,&nbsp;see:<br>
@@ -17,7 +17,7 @@ For&nbsp;documentation&nbsp;on&nbsp;the&nbsp;Blogger&nbsp;API,&nbsp;see:<br>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="atom.html">atom</a><br>
@@ -60,6 +60,8 @@ For&nbsp;documentation&nbsp;on&nbsp;the&nbsp;Blogger&nbsp;API,&nbsp;see:<br>
 Methods defined here:<br>
 <dl><dt><a name="BloggerClient-AddComment"><strong>AddComment</strong></a> = <a href="#BloggerClient-add_comment">add_comment</a>(self, blog_id, post_id, body, auth_token<font color="#909090">=None</font>, title_type<font color="#909090">='text'</font>, body_type<font color="#909090">='html'</font>, **kwargs)</dt></dl>
 
+<dl><dt><a name="BloggerClient-AddPage"><strong>AddPage</strong></a> = <a href="#BloggerClient-add_page">add_page</a>(self, blog_id, title, body, draft<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, title_type<font color="#909090">='text'</font>, body_type<font color="#909090">='html'</font>, **kwargs)</dt></dl>
+
 <dl><dt><a name="BloggerClient-AddPost"><strong>AddPost</strong></a> = <a href="#BloggerClient-add_post">add_post</a>(self, blog_id, title, body, labels<font color="#909090">=None</font>, draft<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, title_type<font color="#909090">='text'</font>, body_type<font color="#909090">='html'</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="BloggerClient-Delete"><strong>Delete</strong></a> = <a href="#BloggerClient-delete">delete</a>(self, entry_or_uri, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
@@ -70,6 +72,8 @@ Methods defined here:<br>
 
 <dl><dt><a name="BloggerClient-GetBlogs"><strong>GetBlogs</strong></a> = <a href="#BloggerClient-get_blogs">get_blogs</a>(self, user_id<font color="#909090">='default'</font>, auth_token<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.blogger.data.BlogFeed'&gt;</font>, **kwargs)</dt></dl>
 
+<dl><dt><a name="BloggerClient-GetPages"><strong>GetPages</strong></a> = <a href="#BloggerClient-get_pages">get_pages</a>(self, blog_id, auth_token<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.blogger.data.BlogPageFeed'&gt;</font>, query<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
 <dl><dt><a name="BloggerClient-GetPostComments"><strong>GetPostComments</strong></a> = <a href="#BloggerClient-get_post_comments">get_post_comments</a>(self, blog_id, post_id, auth_token<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.blogger.data.CommentFeed'&gt;</font>, query<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="BloggerClient-GetPosts"><strong>GetPosts</strong></a> = <a href="#BloggerClient-get_posts">get_posts</a>(self, blog_id, auth_token<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.blogger.data.BlogPostFeed'&gt;</font>, query<font color="#909090">=None</font>, **kwargs)</dt></dl>
@@ -77,6 +81,8 @@ Methods defined here:<br>
 <dl><dt><a name="BloggerClient-Update"><strong>Update</strong></a> = <a href="#BloggerClient-update">update</a>(self, entry, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="BloggerClient-add_comment"><strong>add_comment</strong></a>(self, blog_id, post_id, body, auth_token<font color="#909090">=None</font>, title_type<font color="#909090">='text'</font>, body_type<font color="#909090">='html'</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="BloggerClient-add_page"><strong>add_page</strong></a>(self, blog_id, title, body, draft<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, title_type<font color="#909090">='text'</font>, body_type<font color="#909090">='html'</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="BloggerClient-add_post"><strong>add_post</strong></a>(self, blog_id, title, body, labels<font color="#909090">=None</font>, draft<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, title_type<font color="#909090">='text'</font>, body_type<font color="#909090">='html'</font>, **kwargs)</dt></dl>
 
@@ -87,6 +93,8 @@ Methods defined here:<br>
 <dl><dt><a name="BloggerClient-get_blog_comments"><strong>get_blog_comments</strong></a>(self, blog_id, auth_token<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.blogger.data.CommentFeed'&gt;</font>, query<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="BloggerClient-get_blogs"><strong>get_blogs</strong></a>(self, user_id<font color="#909090">='default'</font>, auth_token<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.blogger.data.BlogFeed'&gt;</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="BloggerClient-get_pages"><strong>get_pages</strong></a>(self, blog_id, auth_token<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.blogger.data.BlogPageFeed'&gt;</font>, query<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="BloggerClient-get_post_comments"><strong>get_post_comments</strong></a>(self, blog_id, post_id, auth_token<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.blogger.data.CommentFeed'&gt;</font>, query<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
@@ -104,7 +112,7 @@ Data and other attributes defined here:<br>
 
 <hr>
 Methods inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
-<dl><dt><a name="BloggerClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb868d0&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+<dl><dt><a name="BloggerClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x836d90c&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
 application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
@@ -286,9 +294,9 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="BloggerClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb86890&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="BloggerClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x836d88c&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="BloggerClient-RevokeToken"><strong>RevokeToken</strong></a> = revoke_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb86950&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
+<dl><dt><a name="BloggerClient-RevokeToken"><strong>RevokeToken</strong></a> = revoke_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x836da0c&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;both&nbsp;AuthSub&nbsp;and&nbsp;OAuth&nbsp;tokens&nbsp;(to&nbsp;invalidate<br>
 a&nbsp;ClientLogin&nbsp;token,&nbsp;the&nbsp;user&nbsp;must&nbsp;change&nbsp;their&nbsp;password).<br>
@@ -299,7 +307,7 @@ Returns:<br>
 Raises:<br>
 &nbsp;&nbsp;A&nbsp;RequestError&nbsp;if&nbsp;the&nbsp;server&nbsp;responds&nbsp;with&nbsp;a&nbsp;non-200&nbsp;status.</tt></dd></dl>
 
-<dl><dt><a name="BloggerClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb86910&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="BloggerClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x836d96c&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -316,7 +324,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
 
-<dl><dt><a name="BloggerClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb868d0&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+<dl><dt><a name="BloggerClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x836d90c&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
 application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
@@ -498,9 +506,9 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="BloggerClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb86890&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="BloggerClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x836d88c&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="BloggerClient-revoke_token"><strong>revoke_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb86950&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
+<dl><dt><a name="BloggerClient-revoke_token"><strong>revoke_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x836da0c&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;both&nbsp;AuthSub&nbsp;and&nbsp;OAuth&nbsp;tokens&nbsp;(to&nbsp;invalidate<br>
 a&nbsp;ClientLogin&nbsp;token,&nbsp;the&nbsp;user&nbsp;must&nbsp;change&nbsp;their&nbsp;password).<br>
@@ -511,7 +519,7 @@ Returns:<br>
 Raises:<br>
 &nbsp;&nbsp;A&nbsp;RequestError&nbsp;if&nbsp;the&nbsp;server&nbsp;responds&nbsp;with&nbsp;a&nbsp;non-200&nbsp;status.</tt></dd></dl>
 
-<dl><dt><a name="BloggerClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xb86910&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="BloggerClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x836d96c&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -567,7 +575,7 @@ Data and other attributes inherited from <a href="atom.client.html#AtomPubClient
 
 <dl><dt><strong>host</strong> = None</dl>
 
-<dl><dt><strong>ssl</strong> = False</dl>
+<dl><dt><strong>ssl</strong> = True</dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -607,6 +615,7 @@ Data descriptors inherited from <a href="gdata.client.html#Query">gdata.client.Q
 <td width="100%"><strong>BLOGS_URL</strong> = 'http://www.blogger.com/feeds/%s/blogs'<br>
 <strong>BLOG_ARCHIVE_URL</strong> = 'http://www.blogger.com/feeds/%s/archive/full'<br>
 <strong>BLOG_COMMENTS_URL</strong> = 'http://www.blogger.com/feeds/%s/comments/default'<br>
+<strong>BLOG_PAGE_URL</strong> = 'http://www.blogger.com/feeds/%s/pages/default'<br>
 <strong>BLOG_POST_COMMENTS_URL</strong> = 'http://www.blogger.com/feeds/%s/%s/comments/default'<br>
 <strong>BLOG_POST_URL</strong> = 'http://www.blogger.com/feeds/%s/posts/default'<br>
 <strong>__author__</strong> = 'j.s@google.com (Jeff Scudder)'</td></tr></table><p>

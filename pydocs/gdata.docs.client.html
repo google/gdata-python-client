@@ -8,13 +8,13 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.docs.html"><font color="#ffffff">docs</font></a>.client</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client/src/gdata/docs/client.py">/usr/local/svn/gdata-python-client/src/gdata/docs/client.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/jcgregorio/projects/gdata-python-client/src/gdata/docs/client.py">/home/jcgregorio/projects/gdata-python-client/src/gdata/docs/client.py</a></font></td></tr></table>
     <p><tt><a href="#DocsClient">DocsClient</a>&nbsp;extends&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>&nbsp;to&nbsp;streamline&nbsp;DocList&nbsp;API&nbsp;calls.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="atom.html">atom</a><br>
@@ -316,7 +316,7 @@ Data and other attributes defined here:<br>
 
 <hr>
 Methods inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
-<dl><dt><a name="DocsClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xbdfa10&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+<dl><dt><a name="DocsClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8372d4c&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
 application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
@@ -500,9 +500,9 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xbdf9d0&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="DocsClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8372ccc&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="DocsClient-RevokeToken"><strong>RevokeToken</strong></a> = revoke_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xbdfa90&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
+<dl><dt><a name="DocsClient-RevokeToken"><strong>RevokeToken</strong></a> = revoke_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8372e4c&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;both&nbsp;AuthSub&nbsp;and&nbsp;OAuth&nbsp;tokens&nbsp;(to&nbsp;invalidate<br>
 a&nbsp;ClientLogin&nbsp;token,&nbsp;the&nbsp;user&nbsp;must&nbsp;change&nbsp;their&nbsp;password).<br>
@@ -531,7 +531,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xbdfa50&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="DocsClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8372dac&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -548,7 +548,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xbdfa10&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+<dl><dt><a name="DocsClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8372d4c&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
 application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
@@ -732,9 +732,9 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0xbdf9d0&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="DocsClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8372ccc&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="DocsClient-revoke_token"><strong>revoke_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xbdfa90&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
+<dl><dt><a name="DocsClient-revoke_token"><strong>revoke_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8372e4c&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;both&nbsp;AuthSub&nbsp;and&nbsp;OAuth&nbsp;tokens&nbsp;(to&nbsp;invalidate<br>
 a&nbsp;ClientLogin&nbsp;token,&nbsp;the&nbsp;user&nbsp;must&nbsp;change&nbsp;their&nbsp;password).<br>
@@ -763,7 +763,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0xbdfa50&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="DocsClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8372dac&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -802,7 +802,7 @@ Data descriptors inherited from <a href="atom.client.html#AtomPubClient">atom.cl
 Data and other attributes inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
 <dl><dt><strong>auth_token</strong> = None</dl>
 
-<dl><dt><strong>ssl</strong> = False</dl>
+<dl><dt><strong>ssl</strong> = True</dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
