@@ -1,3 +1,14 @@
+=== 2.0.10 ===
+May 12, 2010 (revision 980)
+
+ - Add check for liveness of proxy in live tests. Also add in upload-diffs.py to make using codereview.appspot.com easier. 
+ - Patch from Alexandre Vivien adds the ResourceEmail attribute to CalendarResourceEntry
+ - Adding new single page methods to apps.groups.service. Thanks Jeremy Selier!
+ - Cleanup in service GetWithRetries. Thanks Will Charles!
+ - Adding much more test coverage for calendar_resource.client.
+ - Fixing Calendar Resource get_resource to use correct feed URI generator.  Thanks to Alexandre Vivien for reporting.
+ - Adds support for Blogger Pages. Thanks Wiktor Gworek!
+
 === 2.0.9 ===
 March 5, 2010 (revision 964)
 
