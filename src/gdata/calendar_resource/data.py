@@ -14,8 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Data model classes for parsing and generating XML for the Calendar
-Resource API."""
+"""Data model for parsing and generating XML for the Calendar Resource API."""
 
 
 __author__ = 'Vic Fryzel <vf@google.com>'
@@ -40,8 +39,6 @@ RESOURCE_COMMON_NAME_NAME = 'resourceCommonName'
 RESOURCE_DESCRIPTION_NAME = 'resourceDescription'
 # The apps:property name of the resourceType property
 RESOURCE_TYPE_NAME = 'resourceType'
-# The apps:property name of the resourceEmail property
-RESOURCE_EMAIL_NAME = 'resourceEmail'
 
 
 class AppsProperty(atom.core.XmlElement):
@@ -67,13 +64,11 @@ class CalendarResourceEntry(gdata.data.GDEntry):
       invalid.
     """
 
-    value = None
     for p in self.property:
       if p.name == name:
-        value = p.value
-        break
-    return value
-  
+        return p.value
+    return None
+
   def _SetProperty(self, name, value):
     """Set the apps:property value with the given name to the given value.
 
@@ -82,14 +77,11 @@ class CalendarResourceEntry(gdata.data.GDEntry):
       value: string Value to give the apps:property value with the given name.
     """
 
-    found = False
     for i in range(len(self.property)):
       if self.property[i].name == name:
         self.property[i].value = value
-        found = True
-        break
-    if not found:
-      self.property.append(AppsProperty(name=name, value=value))
+        return
+    self.property.append(AppsProperty(name=name, value=value))
 
   def GetResourceId(self):
     """Get the resource ID of this Calendar Resource object.
@@ -129,8 +121,9 @@ class CalendarResourceEntry(gdata.data.GDEntry):
 
     self._SetProperty(RESOURCE_COMMON_NAME_NAME, value)
 
-  resource_common_name = pyproperty(GetResourceCommonName,
-    SetResourceCommonName)
+  resource_common_name = pyproperty(
+      GetResourceCommonName,
+      SetResourceCommonName)
 
   def GetResourceDescription(self):
     """Get the description of this Calendar Resource object.
@@ -150,8 +143,9 @@ class CalendarResourceEntry(gdata.data.GDEntry):
 
     self._SetProperty(RESOURCE_DESCRIPTION_NAME, value)
 
-  resource_description = pyproperty(GetResourceDescription,
-    SetResourceDescription)
+  resource_description = pyproperty(
+      GetResourceDescription,
+      SetResourceDescription)
 
   def GetResourceType(self):
     """Get the type of this Calendar Resource object.
@@ -173,19 +167,8 @@ class CalendarResourceEntry(gdata.data.GDEntry):
 
   resource_type = pyproperty(GetResourceType, SetResourceType)
 
-  def GetResourceEmail(self):
-    """Get the email of this Calendar Resource object.
-    
-    Returns:
-     The email of this Calendar Resource object as a string or None.
-    """
-    
-    return self._GetProperty(RESOURCE_EMAIL_NAME)
-    
-  resource_email = pyproperty(GetResourceEmail)
-
   def __init__(self, resource_id=None, resource_common_name=None,
-    resource_description=None, resource_type=None, *args, **kwargs):
+               resource_description=None, resource_type=None, *args, **kwargs):
     """Constructs a new CalendarResourceEntry object with the given arguments.
 
     Args:
@@ -212,4 +195,5 @@ class CalendarResourceEntry(gdata.data.GDEntry):
 class CalendarResourceFeed(gdata.data.GDFeed):
   """Represents a feed of CalendarResourceEntry objects."""
 
+  # Override entry so that this feed knows how to type its list of entries.
   entry = [CalendarResourceEntry]
