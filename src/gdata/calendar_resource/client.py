@@ -26,9 +26,9 @@ domain.
 __author__ = 'Vic Fryzel <vf@google.com>'
 
 
-import urllib
 import gdata.calendar_resource.data
 import gdata.client
+import urllib
 
 
 # Feed URI template.  This must end with a /
@@ -124,7 +124,7 @@ class CalendarResourceClient(gdata.client.GDClient):
     """
 
     if uri is None:
-      uri = self.MakeResourceUri(resource_id)
+      uri = self.MakeResourceFeedUri(resource_id)
     return self.get_entry(
         uri,
         desired_class=gdata.calendar_resource.data.CalendarResourceEntry,
@@ -179,7 +179,6 @@ class CalendarResourceClient(gdata.client.GDClient):
         resource_type=resource_type)
     return self.update(
         new_resource,
-        self.MakeResourceFeedUri(resource_id),
         **kwargs)
 
   UpdateResource = update_resource

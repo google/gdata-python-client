@@ -51,6 +51,9 @@ class CalendarResourceEntryTest(unittest.TestCase):
         gdata.calendar_resource.data.CalendarResourceEntry))
     self.assert_(isinstance(self.feed.entry[1],
         gdata.calendar_resource.data.CalendarResourceEntry))
+    self.assertEquals(
+        self.feed.entry[0].find_edit_link(),
+        'https://apps-apis.google.com/feeds/calendar/resource/2.0/yourdomain.com/CR-NYC-14-12-BR')
     self.assertEquals(self.feed.entry[0].resource_id, 'CR-NYC-14-12-BR')
     self.assertEquals(self.feed.entry[0].resource_common_name, 'Boardroom')
     self.assertEquals(self.feed.entry[0].resource_description,
@@ -63,6 +66,9 @@ class CalendarResourceEntryTest(unittest.TestCase):
     self.assertEquals(self.feed.entry[1].resource_description,
         'Bike is in London at building 43\'s lobby.')
     self.assertEquals(self.feed.entry[1].resource_type, '(Bike)')
+    self.assertEquals(
+        self.feed.entry[1].find_edit_link(),
+        'https://apps-apis.google.com/a/feeds/calendar/resource/2.0/yourdomain.com/(Bike)-London-43-Lobby-Bike-1')
 
 
 def suite():
