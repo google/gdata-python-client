@@ -203,9 +203,9 @@ GA_TABLE_ID = Option(
                  ' Example ga:1174'))
 TARGET_USERNAME_OPTION = Option(
     'targetusername',
-    'Please enter the username (without domain) of the user which will be affected by the tests',
-    description=('The username of the users to be tested'
-                 ' if n/a'))
+    'Please enter the username (without domain) of the user which will be'
+    ' affected by the tests',
+    description=('The username of the user to be tested'))
 
 # Functions to inject a cachable HTTP client into a service client.
 def configure_client(client, case_name, service_name, use_apps_auth=False):
@@ -215,7 +215,7 @@ def configure_client(client, case_name, service_name, use_apps_auth=False):
 
   Handles authentication to allow the GDClient to make requests which
   require an auth header.
-
+where
   Args:
     client: a gdata.GDClient whose http_client member should be replaced
             with a atom.mock_http_core.MockHttpClient so that repeated
