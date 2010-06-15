@@ -24,6 +24,7 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 import unittest
 import gdata.test_config as conf
 import gdata.analytics.client
+import gdata.apps.emailsettings.client
 import gdata.blogger.client
 import gdata.spreadsheets.client
 import gdata.calendar_resource.client
@@ -39,6 +40,7 @@ class ClientSmokeTest(unittest.TestCase):
   def test_check_auth_client_classes(self):
     conf.check_clients_with_auth(self, (
         gdata.analytics.client.AnalyticsClient,
+        gdata.apps.emailsettings.client.EmailSettingsClient,
         gdata.blogger.client.BloggerClient,
         gdata.spreadsheets.client.SpreadsheetsClient,
         gdata.calendar_resource.client.CalendarResourceClient,
