@@ -23,6 +23,7 @@ __author__ = 'Vic Fryzel <vf@google.com>'
 import atom.core
 import atom.data
 import gdata.apps
+import gdata.apps_property
 import gdata.data
 
 
@@ -41,17 +42,10 @@ RESOURCE_DESCRIPTION_NAME = 'resourceDescription'
 RESOURCE_TYPE_NAME = 'resourceType'
 
 
-class AppsProperty(atom.core.XmlElement):
-  """Represents an <apps:property> element in a Calendar Resource feed."""
-  _qname = gdata.apps.APPS_TEMPLATE % 'property'
-  name = 'name'
-  value = 'value'
-
-
 class CalendarResourceEntry(gdata.data.GDEntry):
   """Represents a Calendar Resource entry in object form."""
 
-  property = [AppsProperty]
+  property = [gdata.apps_property.AppsProperty]
 
   def _GetProperty(self, name):
     """Get the apps:property value with the given name.
@@ -81,7 +75,7 @@ class CalendarResourceEntry(gdata.data.GDEntry):
       if self.property[i].name == name:
         self.property[i].value = value
         return
-    self.property.append(AppsProperty(name=name, value=value))
+    self.property.append(gdata.apps_property.AppsProperty(name=name, value=value))
 
   def GetResourceId(self):
     """Get the resource ID of this Calendar Resource object.
