@@ -377,14 +377,16 @@ class AppsService(gdata.service.GDataService):
 
   def CreateUser(self, user_name, family_name, given_name, password,
                  suspended='false', quota_limit=None, 
-                 password_hash_function=None):
+                 password_hash_function=None,
+                 change_password=None):
     """Create a user account. """
 
     uri = "%s/user/%s" % (self._baseURL(), API_VER)
     user_entry = gdata.apps.UserEntry()
     user_entry.login = gdata.apps.Login(
         user_name=user_name, password=password, suspended=suspended,
-        hash_function_name=password_hash_function)
+        hash_function_name=password_hash_function,
+        change_password=change_password)
     user_entry.name = gdata.apps.Name(family_name=family_name,
                                       given_name=given_name)
     if quota_limit is not None:
