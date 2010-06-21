@@ -172,7 +172,7 @@ class DataFeedDemo(object):
             % (dim.name, dim.value))
       for met in entry.metric:
         print ('Metric Name    = %s \t Metric Value    = %s'
-            % (dim.name, dim.value))
+            % (met.name, met.value))
       print '---'
 
 

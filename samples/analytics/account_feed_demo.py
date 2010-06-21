@@ -99,7 +99,7 @@ class AccountFeedDemo(object):
       print 'No entries found'
     else:
       for entry in self.feed.entry:
-        if entry.custom_Variable:
+        if entry.custom_variable:
           for custom_variable in entry.custom_variable:
             print 'Custom Variable Index = ' + custom_variable.index
             print 'Custom Variable Name  = ' + custom_variable.name
@@ -178,7 +178,7 @@ class AccountFeedDemo(object):
         print 'Table ID        = ' + entry.table_id.text
         print 'Currency        = ' + entry.GetProperty('ga:currency').value
         print 'TimeZone        = ' + entry.GetProperty('ga:timezone').value
-        if entry.custom_variables:
+        if entry.custom_variable:
           print 'This profile has custom variables'
         if entry.goal:
           print 'This profile has goals'
