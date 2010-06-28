@@ -41,7 +41,7 @@ GMETA_NAMESPACE = 'http://base.google.com/ns-metadata/1.0'
 GMETA_TEMPLATE = '{http://base.google.com/ns-metadata/1.0}%s'
 
 
-class ItemAttributeContainer(object):
+class ItemAttributeContainer(atom.AtomBase):
   """Provides methods for finding Google Base Item attributes.
   
   Google Base item attributes are child nodes in the gbase namespace. Google
@@ -105,6 +105,7 @@ class ItemAttributeContainer(object):
     new_attribute =  ItemAttribute(name, text=value, 
         text_type=value_type, access=access)
     self.item_attributes.append(new_attribute)
+    return new_attribute
     
   def SetItemAttribute(self, name, value):
     """Changes an existing item attribute's value."""
@@ -151,7 +152,15 @@ class ItemAttributeContainer(object):
         value_type = child_tree.attrib['type']
       else:
         value_type = None
-      self.AddItemAttribute(name, value, value_type)
+      attrib=self.AddItemAttribute(name, value, value_type)
+      for sub in child_tree.getchildren():
+        sub_name = sub.tag[sub.tag.index('}')+1:]
+        sub_value=sub.text
+        if sub.attrib.has_key('type'): 
+          sub_type = sub.attrib['type']
+        else:
+          sub_type=None
+        attrib.AddItemAttribute(sub_name, sub_value, sub_type)
     else:
       atom.ExtensionContainer._ConvertElementTreeToMember(self, child_tree)
   
@@ -185,7 +194,7 @@ class ItemAttributeContainer(object):
     atom.ExtensionContainer._AddMembersToElementTree(self, tree)
 
 
-class ItemAttribute(atom.Text):
+class ItemAttribute(ItemAttributeContainer):
   """An optional or user defined attribute for a GBase item.
   
   Google Base allows items to have custom attribute child nodes. These nodes
@@ -200,7 +209,7 @@ class ItemAttribute(atom.Text):
   _attributes['access'] = 'access'
 
   def __init__(self, name, text_type=None, access=None, text=None, 
-      extension_elements=None, extension_attributes=None):
+      extension_elements=None, extension_attributes=None, item_attributes=None):
     """Constructor for a GBase item attribute
 
     Args:
@@ -223,6 +232,7 @@ class ItemAttribute(atom.Text):
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}
+    self.item_attributes = item_attributes or []
     
   def _BecomeChildElement(self, tree):
     new_child = ElementTree.Element('')
