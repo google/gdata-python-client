@@ -2,17 +2,12 @@
 
 This module has misc. helper functions for working with XML DOM nodes."""
 
-import re
 from compat import *
-
 import os
-if os.name != "java":
-    from xml.dom import minidom
-    from xml.sax import saxutils
+import re
 
-    def parseDocument(s):
-        return minidom.parseString(s)
-else:
+if os.name == "java":
+    # Only for Jython
     from javax.xml.parsers import *
     import java
 
@@ -21,6 +16,12 @@ else:
     def parseDocument(s):
         stream = java.io.ByteArrayInputStream(java.lang.String(s).getBytes())
         return builder.parse(stream)
+else:
+    from xml.dom import minidom
+    from xml.sax import saxutils
+
+    def parseDocument(s):
+        return minidom.parseString(s)
 
 def parseAndStripWhitespace(s):
     try:
