@@ -457,10 +457,10 @@ group.add_option("-f", "--description_file", action="store",
                  help="Optional path of a file that contains "
                       "the description when creating an issue.")
 group.add_option("-r", "--reviewers", action="store", dest="reviewers",
-                 metavar="REVIEWERS", default="gdata-python-client-library-contributors@googlegroups.com,joe.gregorio@gmail.com",
+                 metavar="REVIEWERS", default=",joe.gregorio@gmail.com",
                  help="Add reviewers (comma separated email addresses).")
 group.add_option("--cc", action="store", dest="cc",
-                 metavar="CC", default=None,
+                 metavar="CC", default="gdata-python-client-library-contributors@googlegroups.com",
                  help="Add CC (comma separated email addresses).")
 group.add_option("--private", action="store_true", dest="private",
                  default=False,
