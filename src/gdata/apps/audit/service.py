@@ -85,21 +85,21 @@ class AuditService(gdata.apps.service.PropertyService):
       properties['beginDate'] = begin_date
     properties['endDate'] = end_date
     if incoming_headers_only:
-      properties['incomingEmailMonitorLevel'] = 'HEADERS_ONLY'
+      properties['incomingEmailMonitorLevel'] = 'HEADER_ONLY'
     else:
       properties['incomingEmailMonitorLevel'] = 'FULL_MESSAGE'
     if outgoing_headers_only:
-      properties['outgoingEmailMonitorLevel'] = 'HEADERS_ONLY'
+      properties['outgoingEmailMonitorLevel'] = 'HEADER_ONLY'
     else:
       properties['outgoingEmailMonitorLevel'] = 'FULL_MESSAGE'
     if drafts:
       if drafts_headers_only:
-        properties['draftMonitorLevel'] = 'HEADERS_ONLY'
+        properties['draftMonitorLevel'] = 'HEADER_ONLY'
       else:
         properties['draftMonitorLevel'] = 'FULL_MESSAGE'
     if chats:
       if chats_headers_only:
-        properties['chatMonitorLevel'] = 'HEADERS_ONLY'
+        properties['chatMonitorLevel'] = 'HEADER_ONLY'
       else:
         properties['chatMonitorLevel'] = 'FULL_MESSAGE'
     return self._PostProperties(uri, properties)
