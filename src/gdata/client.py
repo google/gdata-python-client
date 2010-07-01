@@ -507,7 +507,7 @@ class GDClient(atom.client.AtomPubClient):
     response = self.http_client.request(http_request)
     if response.status != 200:
       raise error_from_response('Server sent non-200 to revoke token',
-                                response, RequestError, response_body)
+                                response, RequestError, response.read())
 
     return True
 
