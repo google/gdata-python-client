@@ -63,7 +63,7 @@ class AtomService(object):
 
   # Default values for members
   port = 80
-  ssl = True 
+  ssl = False 
   # Set the current_token to force the AtomService to use this token
   # instead of searching for an appropriate token in the token_store.
   current_token = None
