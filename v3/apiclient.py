@@ -27,6 +27,7 @@ import simplejson
 import urlparse
 import uritemplate
 
+class HttpError(Exception): pass
 
 DISCOVERY_URI = 'http://www.googleapis.com/discovery/0.1/describe{?api,apiVersion}'
 
@@ -79,12 +80,18 @@ class JsonModel(object):
     if model == None:
       return (headers, params, query, None)
     else:
+      model = {'data': model }
       headers['Content-Type'] = 'application/json'
       del params['body']
       return (headers, params, query, simplejson.dumps(model))
 
   def response(self, resp, content):
-    return simplejson.loads(content)['data']
+    # Error handling is TBD
+    if resp.status < 300:
+      return simplejson.loads(content)['data']
+    else:
+      # TODO 5xx errors may not return JSON, handle that case
+      raise HttpError(simplejson.loads(content)['error'])
 
 
 def build(service, version, http=httplib2.Http(),
@@ -151,7 +158,8 @@ def createResource(http, baseUrl, model, resourceName, resourceDesc):
 
       url = urlparse.urljoin(self._baseUrl,
           uritemplate.expand(pathUrl, params) + query)
-      return self._model.response(*self._http.request(url, method=httpMethod))
+      return self._model.response(*self._http.request(
+        url, method=httpMethod, headers=headers, body=body))
 
     docs = ['A description of how to use this function\n\n']
     for arg in argmap.iterkeys():

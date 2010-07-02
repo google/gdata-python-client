@@ -15,12 +15,20 @@
 import apiclient
 import oauth_wrap
 
-
 def main():
   http = oauth_wrap.get_wrapped_http()
   p = apiclient.build('buzz', '1.0', http = http)
   activitylist = p.activities().list(scope='@self', userId='@me')
   print activitylist['items'][0]['title']
+  newitem = {
+    u'kind': u'buzz#activity', 
+    u'object': {
+      u'content': u'Just a test note to show that insert is working.', 
+      u'type': u'note', 
+    }
+  }
+  activity = p.activities().insert(userId='@me', body=newitem)
+  print activity['published']
 
 
 if __name__ == '__main__':
