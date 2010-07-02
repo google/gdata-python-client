@@ -265,7 +265,7 @@ class VersionTwoClientContactsTest(unittest.TestCase):
     # Delete the test contact.
     self.client.delete(edited)
 
-  def test_crud_over_https_proxy(self):
+  def notest_crud_over_https_proxy(self):
     import urllib
     PROXY_ADDR = '98.192.125.23'
     try:
