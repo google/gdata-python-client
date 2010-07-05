@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2.4
 #
 # Copyright 2010 Google Inc. All Rights Reserved.
 #
@@ -28,7 +28,6 @@ __author__ = 'Claudio Cherubino <ccherubino@google.com>'
 
 import gdata.apps.emailsettings.data
 import gdata.client
-import urllib
 
 
 # Email Settings URI template
@@ -59,6 +58,18 @@ SETTING_ID_SIGNATURE = 'signature'
 SETTING_ID_LANGUAGE = 'language'
 # The settingID value for the general requests
 SETTING_ID_GENERAL = 'general'
+
+# The KEEP action for the email settings
+ACTION_KEEP = 'KEEP'
+# The ARCHIVE action for the email settings
+ACTION_ARCHIVE = 'ARCHIVE'
+# The DELETE action for the email settings
+ACTION_DELETE = 'DELETE'
+
+# The ALL_MAIL setting for POP enable_for property
+POP_ENABLE_FOR_ALL_MAIL = 'ALL_MAIL'
+# The MAIL_FROM_NOW_ON setting for POP enable_for property
+POP_ENABLE_FOR_MAIL_FROM_NOW_ON = 'MAIL_FROM_NOW_ON'
 
 
 class EmailSettingsClient(gdata.client.GDClient):
@@ -104,7 +115,7 @@ class EmailSettingsClient(gdata.client.GDClient):
       Google Apps domain.
     """
     uri = EMAIL_SETTINGS_URI_TEMPLATE % (self.api_version, self.domain,
-      username, setting_id)
+                                         username, setting_id)
     return uri
 
   MakeEmailSettingsUri = make_email_settings_uri
@@ -121,7 +132,7 @@ class EmailSettingsClient(gdata.client.GDClient):
       gdata.apps.emailsettings.data.EmailSettingsLabel of the new resource.
     """
     uri = self.MakeEmailSettingsUri(username=username,
-      setting_id=SETTING_ID_LABEL)
+                                    setting_id=SETTING_ID_LABEL)
     new_label = gdata.apps.emailsettings.data.EmailSettingsLabel(
         uri=uri, name=name)
     return self.post(new_label, uri, **kwargs)
@@ -129,9 +140,9 @@ class EmailSettingsClient(gdata.client.GDClient):
   CreateLabel = create_label
 
   def create_filter(self, username, from_address=None,
-    to_address=None, subject=None, has_the_word=None,
-    does_not_have_the_word=None, has_attachments=None,
-    label=None, mark_as_read=None, archive=None, **kwargs):
+                    to_address=None, subject=None, has_the_word=None,
+                    does_not_have_the_word=None, has_attachments=None,
+                    label=None, mark_as_read=None, archive=None, **kwargs):
     """Creates a filter with the given properties.
 
     Args:
@@ -159,7 +170,7 @@ class EmailSettingsClient(gdata.client.GDClient):
       gdata.apps.emailsettings.data.EmailSettingsFilter of the new resource.
     """
     uri = self.MakeEmailSettingsUri(username=username,
-      setting_id=SETTING_ID_FILTER)
+                                    setting_id=SETTING_ID_FILTER)
     new_filter = gdata.apps.emailsettings.data.EmailSettingsFilter(
         uri=uri, from_address=from_address,
         to_address=to_address, subject=subject,
@@ -171,8 +182,8 @@ class EmailSettingsClient(gdata.client.GDClient):
 
   CreateFilter = create_filter
 
-  def create_sendas(self, username, name, address, reply_to=None,
-    make_default=None, **kwargs):
+  def create_send_as(self, username, name, address, reply_to=None,
+                    make_default=None, **kwargs):
     """Creates a send-as alias with the given properties.
 
     Args:
@@ -185,19 +196,19 @@ class EmailSettingsClient(gdata.client.GDClient):
       make_default: Boolean (optional) Whether or not this alias should
           become the default alias for this user.
       kwargs: The other parameters to pass to gdata.client.GDClient.post().
-
+ 
     Returns:
       gdata.apps.emailsettings.data.EmailSettingsSendAsAlias of the
       new resource.
     """
     uri = self.MakeEmailSettingsUri(username=username,
-      setting_id=SETTING_ID_SENDAS)
+                                    setting_id=SETTING_ID_SENDAS)
     new_alias = gdata.apps.emailsettings.data.EmailSettingsSendAsAlias(
         uri=uri, name=name, address=address,
         reply_to=reply_to, make_default=make_default)
     return self.post(new_alias, uri, **kwargs)
 
-  CreateSendAs = create_sendas
+  CreateSendAs = create_send_as
 
   def update_webclip(self, username, enable, **kwargs):
     """Enable/Disable Google Mail web clip.
@@ -212,23 +223,23 @@ class EmailSettingsClient(gdata.client.GDClient):
       updated resource.
     """
     uri = self.MakeEmailSettingsUri(username=username,
-      setting_id=SETTING_ID_WEBCLIP)
+                                    setting_id=SETTING_ID_WEBCLIP)
     new_webclip = gdata.apps.emailsettings.data.EmailSettingsWebClip(
-        uri=uri, enable=enable)
+        uri=uri, enable=enable) 
     return self.update(new_webclip, **kwargs)
 
   UpdateWebclip = update_webclip
 
   def update_forwarding(self, username, enable, forward_to=None,
-    action=None, **kwargs):
+                        action=None, **kwargs):
     """Update Google Mail Forwarding settings.
 
     Args:
       username: string The name of the user.
       enable: Boolean Whether to enable incoming email forwarding.
       forward_to: (optional) string The address email will be forwarded to.
-      action: string (optional) The action to perform after forwarding 
-          an email ("KEEP", "ARCHIVE", "DELETE").
+      action: string (optional) The action to perform after forwarding
+          an email (ACTION_KEEP, ACTION_ARCHIVE, ACTION_DELETE).
       kwargs: The other parameters to pass to the update method.
 
     Returns:
@@ -236,32 +247,33 @@ class EmailSettingsClient(gdata.client.GDClient):
       updated resource
     """
     uri = self.MakeEmailSettingsUri(username=username,
-      setting_id=SETTING_ID_FORWARDING)
+                                    setting_id=SETTING_ID_FORWARDING)
     new_forwarding = gdata.apps.emailsettings.data.EmailSettingsForwarding(
         uri=uri, enable=enable, forward_to=forward_to, action=action)
     return self.update(new_forwarding, **kwargs)
 
   UpdateForwarding = update_forwarding
-
+ 
   def update_pop(self, username, enable, enable_for=None, action=None,
-    **kwargs):
+                 **kwargs):
     """Update Google Mail POP settings.
 
     Args:
       username: string The name of the user.
       enable: Boolean Whether to enable incoming POP3 access.
       enable_for: string (optional) Whether to enable POP3 for all mail
-          ("ALL_MAIL"), or mail from now on ("MAIL_FROM_NOW_ON").
-      action: string (optional) What Google Mail should do with its copy 
-          of the email after it is retrieved using POP ("KEEP",
-          "ARCHIVE", or "DELETE").
+          (POP_ENABLE_FOR_ALL_MAIL), or mail from now on
+          (POP_ENABLE_FOR_MAIL_FROM_NOW_ON).
+      action: string (optional) What Google Mail should do with its copy
+          of the email after it is retrieved using POP (ACTION_KEEP,
+          ACTION_ARCHIVE, ACTION_DELETE).
       kwargs: The other parameters to pass to the update method.
 
     Returns:
       gdata.apps.emailsettings.data.EmailSettingsPop of the updated resource.
     """
     uri = self.MakeEmailSettingsUri(username=username,
-      setting_id=SETTING_ID_POP)
+                                    setting_id=SETTING_ID_POP)
     new_pop = gdata.apps.emailsettings.data.EmailSettingsPop(
         uri=uri, enable=enable,
         enable_for=enable_for, action=action)
@@ -271,8 +283,8 @@ class EmailSettingsClient(gdata.client.GDClient):
 
   def update_imap(self, username, enable, **kwargs):
     """Update Google Mail IMAP settings.
-
-    Args:import gdata.apps_property
+ 
+    Args:
       username: string The name of the user.
       enable: Boolean Whether to enable IMAP access.language
       kwargs: The other parameters to pass to the update method.
@@ -281,7 +293,7 @@ class EmailSettingsClient(gdata.client.GDClient):
       gdata.apps.emailsettings.data.EmailSettingsImap of the updated resource.
     """
     uri = self.MakeEmailSettingsUri(username=username,
-      setting_id=SETTING_ID_IMAP)
+                                    setting_id=SETTING_ID_IMAP)
     new_imap = gdata.apps.emailsettings.data.EmailSettingsImap(
         uri=uri, enable=enable)
     return self.update(new_imap, **kwargs)
@@ -289,7 +301,7 @@ class EmailSettingsClient(gdata.client.GDClient):
   UpdateImap = update_imap
 
   def update_vacation(self, username, enable, subject=None, message=None,
-    contacts_only=None, **kwargs):
+                      contacts_only=None, **kwargs):
     """Update Google Mail vacation-responder settings.
 
     Args:
@@ -306,9 +318,9 @@ class EmailSettingsClient(gdata.client.GDClient):
     Returns:
       gdata.apps.emailsettings.data.EmailSettingsVacationResponder of the
       updated resource.
-    """
+    """ 
     uri = self.MakeEmailSettingsUri(username=username,
-      setting_id=SETTING_ID_VACATION_RESPONDER)
+                                    setting_id=SETTING_ID_VACATION_RESPONDER)
     new_vacation = gdata.apps.emailsettings.data.EmailSettingsVacationResponder(
         uri=uri, enable=enable, subject=subject,
         message=message, contacts_only=contacts_only)
@@ -329,7 +341,7 @@ class EmailSettingsClient(gdata.client.GDClient):
       updated resource.
     """
     uri = self.MakeEmailSettingsUri(username=username,
-      setting_id=SETTING_ID_SIGNATURE)
+                                    setting_id=SETTING_ID_SIGNATURE)
     new_signature = gdata.apps.emailsettings.data.EmailSettingsSignature(
         uri=uri, signature=signature)
     return self.update(new_signature, **kwargs)
@@ -341,28 +353,30 @@ class EmailSettingsClient(gdata.client.GDClient):
 
     Args:
       username: string The name of the user.
-      signature: string The language tag for Google Mail's display language.
+      language: string The language tag for Google Mail's display language.
       kwargs: The other parameters to pass to the update method.
 
     Returns:
       gdata.apps.emailsettings.data.EmailSettingsLanguage of the
       updated resource.
     """
-    uri = self.MakeEmailSettingsUri(username=username,
-      setting_id=SETTING_ID_LANGUAGE)
+    uri = self.MakeEmailSettingsUri(username=username, 
+                                    setting_id=SETTING_ID_LANGUAGE)
     new_language = gdata.apps.emailsettings.data.EmailSettingsLanguage(
         uri=uri, language=language)
     return self.update(new_language, **kwargs)
 
   UpdateLanguage = update_language
 
-  def update_general(self, username, page_size=None, shortcuts=None, arrows=None,
-    snippets=None, use_unicode=None, **kwargs):
+  def update_general_settings(self, username, page_size=None, shortcuts=None,
+                              arrows=None, snippets=None, use_unicode=None,
+                              **kwargs):
     """Update Google Mail general settings.
 
     Args:
       username: string The name of the user.
-      page_size: int (optional) The number of conversations to be shown per page.
+      page_size: int (optional) The number of conversations to be shown per
+          page.
       shortcuts: Boolean (optional) Whether to enable keyboard shortcuts.
       arrows: Boolean (optional) Whether to display arrow-shaped personal
           indicators next to email sent specifically to the user.
@@ -377,10 +391,10 @@ class EmailSettingsClient(gdata.client.GDClient):
       updated resource.
     """
     uri = self.MakeEmailSettingsUri(username=username,
-      setting_id=SETTING_ID_GENERAL)
+                                    setting_id=SETTING_ID_GENERAL)
     new_general = gdata.apps.emailsettings.data.EmailSettingsGeneral(
         uri=uri, page_size=page_size, shortcuts=shortcuts,
         arrows=arrows, snippets=snippets, use_unicode=use_unicode)
     return self.update(new_general, **kwargs)
 
-  UpdateGeneral = update_general
+  UpdateGeneralSettings = update_general_settings
