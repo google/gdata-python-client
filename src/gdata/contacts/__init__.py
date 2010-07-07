@@ -43,7 +43,7 @@ IM_NETMEETING = 'http://schemas.google.com/g/2005#netmeeting'  # NetMeeting
 PHOTO_LINK_REL = 'http://schemas.google.com/contacts/2008/rel#photo'
 PHOTO_EDIT_LINK_REL = 'http://schemas.google.com/contacts/2008/rel#edit-photo'
 
-# Different phone types, for moro info see: 
+# Different phone types, for more info see:
 # http://code.google.com/apis/gdata/docs/2.0/elements.html#gdPhoneNumber
 PHONE_CAR = 'http://schemas.google.com/g/2005#car'
 PHONE_FAX = 'http://schemas.google.com/g/2005#fax'
@@ -506,7 +506,7 @@ class PersonEntry(gdata.BatchEntry):
   _children['{%s}postalAddress' % gdata.GDATA_NAMESPACE] = ('postal_address',
                                                             [PostalAddress])
   _children['{%s}structuredPostalAddress' % gdata.GDATA_NAMESPACE] = (
-      'structured_pstal_address', [StructuredPostalAddress])
+      'structured_postal_address', [StructuredPostalAddress])
   _children['{%s}email' % gdata.GDATA_NAMESPACE] = ('email', [Email])
   _children['{%s}im' % gdata.GDATA_NAMESPACE] = ('im', [IM])
   _children['{%s}relation' % CONTACTS_NAMESPACE] = ('relation', [Relation])
@@ -525,7 +525,7 @@ class PersonEntry(gdata.BatchEntry):
                atom_id=None, link=None, published=None,
                title=None, updated=None, organization=None, phone_number=None,
                nickname=None, occupation=None, gender=None, birthday=None,
-               postal_address=None, structured_pstal_address=None, email=None,
+               postal_address=None, structured_postal_address=None, email=None,
                im=None, relation=None, user_defined_field=None, website=None,
                external_id=None, event=None, batch_operation=None,
                batch_id=None, batch_status=None, text=None,
@@ -543,7 +543,7 @@ class PersonEntry(gdata.BatchEntry):
     self.gender = gender
     self.birthday = birthday
     self.postal_address = postal_address or []
-    self.structured_pstal_address = structured_pstal_address or []
+    self.structured_postal_address = structured_postal_address or []
     self.email = email or []
     self.im = im or []
     self.relation = relation or []
@@ -578,7 +578,7 @@ class ContactEntry(PersonEntry):
                atom_id=None, link=None, published=None,
                title=None, updated=None, organization=None, phone_number=None,
                nickname=None, occupation=None, gender=None, birthday=None,
-               postal_address=None, structured_pstal_address=None, email=None,
+               postal_address=None, structured_postal_address=None, email=None,
                im=None, relation=None, user_defined_field=None, website=None,
                external_id=None, event=None, batch_operation=None,
                batch_id=None, batch_status=None, text=None,
@@ -592,7 +592,7 @@ class ContactEntry(PersonEntry):
                          nickname=nickname, occupation=occupation,
                          gender=gender, birthday=birthday,
                          postal_address=postal_address,
-                         structured_pstal_address=structured_pstal_address,
+                         structured_postal_address=structured_postal_address,
                          email=email, im=im, relation=relation,
                          user_defined_field=user_defined_field,
                          website=website, external_id=external_id, event=event,
@@ -738,4 +738,3 @@ def ProfilesFeedFromString(xml_string):
     A ProfilesFeed object corresponding to the given XML.
   """
   return atom.CreateClassFromXMLString(ProfilesFeed, xml_string)
-
