@@ -157,7 +157,10 @@ class OAuthRequest(object):
     # parses the url and rebuilds it to be scheme://host/path
     def get_normalized_http_url(self):
         parts = urlparse.urlparse(self.http_url)
-        url_string = '%s://%s%s' % (parts[0], parts[1], parts[2]) # scheme, netloc, path
+        host = parts[1].lower()
+        if host.endswith(':80') or host.endswith(':443'):
+            host = host.split(':')[0] 
+        url_string = '%s://%s%s' % (parts[0], host, parts[2]) # scheme, netloc, path
         return url_string
         
     # set the signature parameter to the result of build_signature
@@ -239,10 +242,10 @@ class OAuthRequest(object):
     # util function: turn Authorization: header into parameters, has to do some unescaping
     def _split_header(header):
         params = {}
-        parts = header.split(',')
+        parts = header[6:].split(',')
         for param in parts:
             # ignore realm parameter
-            if param.find('OAuth realm') > -1:
+            if param.find('realm') > -1:
                 continue
             # remove whitespace
             param = param.strip()
@@ -254,8 +257,9 @@ class OAuthRequest(object):
     _split_header = staticmethod(_split_header)
     
     # util function: turn url string into parameters, has to do some unescaping
+    # even empty values should be included
     def _split_url_string(param_str):
-        parameters = cgi.parse_qs(param_str, keep_blank_values=False)
+        parameters = cgi.parse_qs(param_str, keep_blank_values=True)
         for k, v in parameters.iteritems():
             parameters[k] = urllib.unquote(v[0])
         return parameters
@@ -273,7 +277,7 @@ class OAuthServer(object):
         self.signature_methods = signature_methods or {}
 
     def set_data_store(self, oauth_data_store):
-        self.data_store = data_store
+        self.data_store = oauth_data_store
 
     def get_data_store(self):
         return self.data_store
@@ -368,7 +372,8 @@ class OAuthServer(object):
     # try to find the token for the provided request token key
     def _get_token(self, oauth_request, token_type='access'):
         token_field = oauth_request.get_parameter('oauth_token')
-        token = self.data_store.lookup_token(token_type, token_field)
+        consumer = self._get_consumer(oauth_request)
+        token = self.data_store.lookup_token(consumer, token_type, token_field)
         if not token:
             raise OAuthError('Invalid %s token: %s' % (token_type, token_field))
         return token
