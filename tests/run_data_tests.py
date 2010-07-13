@@ -30,6 +30,7 @@ import gdata_tests.photos_test
 import gdata_tests.spreadsheet_test
 import gdata_tests.youtube_test
 import gdata_tests.webmastertools_test
+import gdata_tests.oauth.data_test
 
 
 def RunAllTests():
@@ -50,7 +51,8 @@ def RunAllTests():
                          gdata_tests.contacts_test,
                          gdata_tests.youtube_test, gdata_tests.blogger_test, 
                          gdata_tests.webmastertools_test,
-                         gdata_tests.calendar_resource.data_test]
+                         gdata_tests.calendar_resource.data_test,
+                         gdata_tests.oauth.data_test]
   test_runner.RunAllTests()
   
 if __name__ == '__main__':
