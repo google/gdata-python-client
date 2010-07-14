@@ -349,7 +349,9 @@ class DocsClient(gdata.client.GDClient):
     if not keep_in_folders:
       for folder in source_entry.InFolders():
         self.delete(
-            '%s/contents/%s' % (folder.href, source_entry.resource_id.text),
+            '%s/contents/%s' % (
+                folder.href,
+                urllib.quote(source_entry.resource_id.text)),
             force=True)
 
     # If we're moving the resource into a folder, verify it is a folder entry.
