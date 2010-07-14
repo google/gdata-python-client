@@ -47,6 +47,7 @@ class SpreadsheetsClient(gdata.client.GDClient):
   api_version = '3'
   auth_service = 'wise'
   auth_scopes = gdata.gauth.AUTH_SCOPES['wise']
+  ssl = True
 
   def get_spreadsheets(self, auth_token=None,
                        desired_class=gdata.spreadsheets.data.SpreadsheetsFeed,

@@ -78,7 +78,7 @@ class SpreadsheetsService(gdata.service.GDataService):
       If there is a key, then a SpreadsheetsSpreadsheet.
     """
     
-    uri = ('http://%s/feeds/spreadsheets/%s/%s' 
+    uri = ('https://%s/feeds/spreadsheets/%s/%s' 
            % (self.server, visibility, projection))
     
     if key is not None:
@@ -108,7 +108,7 @@ class SpreadsheetsService(gdata.service.GDataService):
       If there is a wksht_id, then a SpreadsheetsWorksheet.
     """
     
-    uri = ('http://%s/feeds/worksheets/%s/%s/%s' 
+    uri = ('https://%s/feeds/worksheets/%s/%s/%s' 
            % (self.server, key, visibility, projection))
     
     if wksht_id != None:
@@ -147,7 +147,7 @@ class SpreadsheetsService(gdata.service.GDataService):
         row_count=gdata.spreadsheet.RowCount(text=str(row_count)), 
         col_count=gdata.spreadsheet.ColCount(text=str(col_count)))
     return self.Post(new_worksheet, 
-        'http://%s/feeds/worksheets/%s/private/full' % (self.server, key),
+        'https://%s/feeds/worksheets/%s/private/full' % (self.server, key),
         converter=gdata.spreadsheet.SpreadsheetsWorksheetFromString)
 
   def UpdateWorksheet(self, worksheet_entry, url=None):
@@ -200,7 +200,7 @@ class SpreadsheetsService(gdata.service.GDataService):
       If there is a cell, then a SpreadsheetsCell.
     """
     
-    uri = ('http://%s/feeds/cells/%s/%s/%s/%s' 
+    uri = ('https://%s/feeds/cells/%s/%s/%s/%s' 
            % (self.server, key, wksht_id, visibility, projection))
     
     if cell != None:
@@ -231,7 +231,7 @@ class SpreadsheetsService(gdata.service.GDataService):
       If there is a row_id, then a SpreadsheetsList.
     """
     
-    uri = ('http://%s/feeds/list/%s/%s/%s/%s' 
+    uri = ('https://%s/feeds/list/%s/%s/%s/%s' 
            % (self.server, key, wksht_id, visibility, projection))
 
     if row_id is not None:
@@ -275,7 +275,7 @@ class SpreadsheetsService(gdata.service.GDataService):
             converter=gdata.spreadsheet.SpreadsheetsCellFromString)
 
   def _GenerateCellsBatchUrl(self, spreadsheet_key, worksheet_id):
-    return ('http://spreadsheets.google.com/feeds/cells/%s/%s/'
+    return ('https://spreadsheets.google.com/feeds/cells/%s/%s/'
             'private/full/batch' % (spreadsheet_key, worksheet_id))
 
   def ExecuteBatch(self, batch_feed, url=None, spreadsheet_key=None, 
@@ -330,7 +330,7 @@ class SpreadsheetsService(gdata.service.GDataService):
       new_custom.text = v
       new_entry.custom[new_custom.column] = new_custom
     # Generate the post URL for the worksheet which will receive the new entry.
-    post_url = 'http://spreadsheets.google.com/feeds/list/%s/%s/private/full'%(
+    post_url = 'https://spreadsheets.google.com/feeds/list/%s/%s/private/full'%(
         key, wksht_id) 
     return self.Post(new_entry, post_url, 
         converter=gdata.spreadsheet.SpreadsheetsListFromString)
