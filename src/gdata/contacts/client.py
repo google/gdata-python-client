@@ -286,7 +286,7 @@ class ContactsClient(gdata.client.GDClient):
     else:
       url = contact_entry_or_url
     if url:
-      return self.Get(url, desired_class=str)
+      return self.Get(url).read()
     else:
       return None
 
