@@ -81,8 +81,8 @@ class AnalyticsClientTest(unittest.TestCase):
   def testDataFeed(self):
     """Tests if the Data Feed exists."""
 
-    start_date = '2008-10-01'
-    end_date = '2008-10-02'
+    start_date = '2010-07-01'
+    end_date = '2010-07-26'
     metrics = 'ga:visits'
 
     if not conf.options.get_value('runlive') == 'true':
@@ -113,4 +113,4 @@ def suite():
 
 
 if __name__ == '__main__':
-  unittest.main()
+  unittest.TextTestRunner().run(suite())

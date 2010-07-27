@@ -84,10 +84,20 @@ class CalendarResourceClientTest(unittest.TestCase):
     # Either load the recording or prepare to make a live request.
     conf.configure_cache(self.client, 'testCreateUpdateDelete')
 
-    new_entry = self.client.CreateResource(
-        'CR-NYC-14-12-BR', 'Boardroom',
-        ('This conference room is in New York City, building 14, floor 12, '
-         'Boardroom'), 'CR')
+    try:
+      new_entry = self.client.CreateResource(
+          'CR-NYC-14-12-BR', 'Boardroom',
+          ('This conference room is in New York City, building 14, floor 12, '
+           'Boardroom'), 'CR')
+    except Exception, e:
+      print e
+      self.client.delete_resource('CR-NYC-14-12-BR')
+      # If the test failed to run to completion
+      # the resource may already exist
+      new_entry = self.client.CreateResource(
+          'CR-NYC-14-12-BR', 'Boardroom',
+          ('This conference room is in New York City, building 14, floor 12, '
+           'Boardroom'), 'CR')
 
     self.assert_(isinstance(new_entry,
         gdata.calendar_resource.data.CalendarResourceEntry))
@@ -121,7 +131,7 @@ class CalendarResourceClientTest(unittest.TestCase):
         'This conference room is in Mountain View')
     self.assertEqual(updated_entry.resource_type, 'BR')
 
-    self.client.delete(updated_entry)
+    self.client.delete_resource('CR-NYC-14-12-BR')
 
 
 def suite():
