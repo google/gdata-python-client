@@ -143,7 +143,7 @@ class EmailSettingsClientTest(unittest.TestCase):
     self.assert_(isinstance(new_sendas,
         gdata.apps.emailsettings.data.EmailSettingsSendAsAlias))
     self.assertEqual(new_sendas.name, 'Sales')
-    self.assertEqual(new_sendas.address, 
+    self.assertEqual(new_sendas.address,
         conf.options.get_value('appsusername'))
     self.assertEqual(new_sendas.reply_to, 'abc@gmail.com')
     self.assertEqual(new_sendas.make_default, 'True')
@@ -320,7 +320,7 @@ class EmailSettingsClientTest(unittest.TestCase):
     # Either load the recording or prepare to make a live request.
     conf.configure_cache(self.client, 'testUpdateGeneral')
 
-    new_general = self.client.UpdateGeneral(
+    new_general = self.client.UpdateGeneralSettings(
         username=conf.options.get_value('targetusername'),
         page_size=25, arrows=True)
 
@@ -329,7 +329,7 @@ class EmailSettingsClientTest(unittest.TestCase):
     self.assertEqual(new_general.page_size, '25')
     self.assertEqual(new_general.arrows, 'True')
 
-    new_general = self.client.UpdateGeneral(
+    new_general = self.client.UpdateGeneralSettings(
         username=conf.options.get_value('targetusername'),
         shortcuts=False, snippets=True, use_unicode=False)
 

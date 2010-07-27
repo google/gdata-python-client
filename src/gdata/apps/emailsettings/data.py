@@ -866,7 +866,7 @@ class EmailSettingsVacationResponder(EmailSettingsEntry):
       string or None.
     """
 
-    return self._GetProperty(VACATION_RESPONDER_ENABLE)
+    return self._GetProperty(VACATION_RESPONDER_CONTACTS_ONLY)
 
   def SetContactsOnly(self, value):
     """Set the ContactsOnly value of this Vacation Responder object.
@@ -952,7 +952,7 @@ class EmailSettingsSignature(EmailSettingsEntry):
     if uri:
       self.uri = uri
     if signature is not None:
-      self.signature_value = signature  
+      self.signature_value = signature
 
 
 class EmailSettingsLanguage(EmailSettingsEntry):

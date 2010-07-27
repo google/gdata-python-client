@@ -20,13 +20,13 @@ __author__ = 'Claudio Cherubino <ccherubino@google.com>'
 
 import unittest
 import gdata.apps.emailsettings.data
-import gdata.test_config as conf                                                                                   
+import gdata.test_config as conf
 
 
 class EmailSettingsLabelTest(unittest.TestCase):
 
   def setUp(self):
-    self.entry = gdata.apps.emailsettings.data.EmailSettingsLabel
+    self.entry = gdata.apps.emailsettings.data.EmailSettingsLabel()
 
   def testName(self):
     self.entry.name = 'test label'
@@ -36,7 +36,7 @@ class EmailSettingsLabelTest(unittest.TestCase):
 class EmailSettingsFilterTest(unittest.TestCase):
 
   def setUp(self):
-    self.entry = gdata.apps.emailsettings.data.EmailSettingsFilter
+    self.entry = gdata.apps.emailsettings.data.EmailSettingsFilter()
 
   def testFrom(self):
     self.entry.from_address = 'abc@example.com'
@@ -82,7 +82,7 @@ class EmailSettingsFilterTest(unittest.TestCase):
 class EmailSettingsSendAsAliasTest(unittest.TestCase):
 
   def setUp(self):
-    self.entry = gdata.apps.emailsettings.data.EmailSettingsSendAsAlias
+    self.entry = gdata.apps.emailsettings.data.EmailSettingsSendAsAlias()
 
   def testName(self):
     self.entry.name = 'Sales'
@@ -104,7 +104,7 @@ class EmailSettingsSendAsAliasTest(unittest.TestCase):
 class EmailSettingsWebClipTest(unittest.TestCase):
 
   def setUp(self):
-    self.entry = gdata.apps.emailsettings.data.EmailSettingsWebClip
+    self.entry = gdata.apps.emailsettings.data.EmailSettingsWebClip()
 
   def testEnable(self):
     self.entry.enable = True
@@ -114,7 +114,7 @@ class EmailSettingsWebClipTest(unittest.TestCase):
 class EmailSettingsForwardingTest(unittest.TestCase):
 
   def setUp(self):
-    self.entry = gdata.apps.emailsettings.data.EmailSettingsForwarding
+    self.entry = gdata.apps.emailsettings.data.EmailSettingsForwarding()
 
   def testEnable(self):
     self.entry.enable = True
@@ -132,7 +132,7 @@ class EmailSettingsForwardingTest(unittest.TestCase):
 class EmailSettingsPopTest(unittest.TestCase):
 
   def setUp(self):
-    self.entry = gdata.apps.emailsettings.data.EmailSettingsPop
+    self.entry = gdata.apps.emailsettings.data.EmailSettingsPop()
 
   def testEnable(self):
     self.entry.enable = True
@@ -150,7 +150,7 @@ class EmailSettingsPopTest(unittest.TestCase):
 class EmailSettingsImapTest(unittest.TestCase):
 
   def setUp(self):
-    self.entry = gdata.apps.emailsettings.data.EmailSettingsImap
+    self.entry = gdata.apps.emailsettings.data.EmailSettingsImap()
 
   def testEnable(self):
     self.entry.enable = True
@@ -160,7 +160,7 @@ class EmailSettingsImapTest(unittest.TestCase):
 class EmailSettingsVacationResponderTest(unittest.TestCase):
 
   def setUp(self):
-    self.entry = gdata.apps.emailsettings.data.EmailSettingsVacationResponder
+    self.entry = gdata.apps.emailsettings.data.EmailSettingsVacationResponder()
 
   def testEnable(self):
     self.entry.enable = True
@@ -182,7 +182,7 @@ class EmailSettingsVacationResponderTest(unittest.TestCase):
 class EmailSettingsSignatureTest(unittest.TestCase):
 
   def setUp(self):
-    self.entry = gdata.apps.emailsettings.data.EmailSettingsSignature
+    self.entry = gdata.apps.emailsettings.data.EmailSettingsSignature()
 
   def testValue(self):
     self.entry.signature_value = 'Regards, Joe'
@@ -192,7 +192,7 @@ class EmailSettingsSignatureTest(unittest.TestCase):
 class EmailSettingsLanguageTest(unittest.TestCase):
 
   def setUp(self):
-    self.entry = gdata.apps.emailsettings.data.EmailSettingsLanguage
+    self.entry = gdata.apps.emailsettings.data.EmailSettingsLanguage()
 
   def testLanguage(self):
     self.entry.language_tag = 'es'
@@ -202,7 +202,7 @@ class EmailSettingsLanguageTest(unittest.TestCase):
 class EmailSettingsGeneralTest(unittest.TestCase):
 
   def setUp(self):
-    self.entry = gdata.apps.emailsettings.data.EmailSettingsGeneral
+    self.entry = gdata.apps.emailsettings.data.EmailSettingsGeneral()
 
   def testPageSize(self):
     self.entry.page_size = 25
