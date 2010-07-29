@@ -49,6 +49,7 @@ class CalendarResourceClient(gdata.client.GDClient):
   api_version = '2.0'
   auth_service = 'apps'
   auth_scopes = gdata.gauth.AUTH_SCOPES['apps']
+  ssl = True
 
   def __init__(self, domain, auth_token=None, **kwargs):
     """Constructs a new client for the Calendar Resource API.
