@@ -42,6 +42,7 @@ class SitesClient(gdata.client.GDClient):
   api_version = '1.1'  # default major version for the service.
   auth_service = 'jotspot'
   auth_scopes = gdata.gauth.AUTH_SCOPES['jotspot']
+  ssl = True
 
   def __init__(self, site=None, domain=None, auth_token=None, **kwargs):
     """Constructs a new client for the Sites API.
