@@ -34,6 +34,11 @@ except ImportError:
       from elementtree import ElementTree
 
 
+try:
+    from xml.dom.minidom import parseString as xmlString
+except ImportError:
+    xmlString = None
+
 STRING_ENCODING = 'utf-8'
 
 
@@ -341,10 +346,16 @@ class XmlElement(object):
       else:
         tree.text = self.text.decode(encoding)
 
-  def to_string(self, version=1, encoding=None):
+  def to_string(self, version=1, encoding=None, pretty_print=None):
     """Converts this object to XML."""
-    return ElementTree.tostring(self._to_tree(version, encoding))
 
+    tree_string = ElementTree.tostring(self._to_tree(version, encoding))
+
+    if pretty_print and xmlString is not None:
+        return xmlString(tree_string).toprettyxml()
+ 
+    return tree_string
+ 
   ToString = to_string
 
   def __str__(self):

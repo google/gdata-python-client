@@ -217,10 +217,8 @@ class ContactsClient(gdata.client.GDClient):
 
   UpdateGroup = update_group
 
-  def delete_group(self, edit_uri, extra_headers=None,
-                   url_params=None, escape_params=True):
-    return self.Delete(self._CleanUri(edit_uri),
-                       url_params=url_params, escape_params=escape_params)
+  def delete_group(self, group_object, auth_token=None, force=False, **kws):
+    return self.Delete(group_object, auth_token=auth_token, force=force, **kws )
 
   DeleteGroup = delete_group
 
@@ -404,6 +402,20 @@ class ContactsClient(gdata.client.GDClient):
 
   ExecuteBatchProfiles = execute_batch_profiles
 
+  def _CleanUri(self, uri):
+    """Sanitizes a feed URI.
+
+    Args:
+      uri: The URI to sanitize, can be relative or absolute.
+
+    Returns:
+      The given URI without its http://server prefix, if any.
+      Keeps the leading slash of the URI.
+    """
+    url_prefix = 'http://%s' % self.server
+    if uri.startswith(url_prefix):
+      uri = uri[len(url_prefix):]
+    return uri                 
 
 class ContactsQuery(gdata.client.Query):
   """ 
@@ -458,17 +470,4 @@ class ProfilesQuery(gdata.client.Query):
     self.feed = feed or 'http://www.google.com/m8/feeds/profiles/default/full'
     
 
-  def _CleanUri(self, uri):
-    """Sanitizes a feed URI.
 
-    Args:
-      uri: The URI to sanitize, can be relative or absolute.
-
-    Returns:
-      The given URI without its http://server prefix, if any.
-      Keeps the leading slash of the URI.
-    """
-    url_prefix = 'http://%s' % self.server
-    if uri.startswith(url_prefix):
-      uri = uri[len(url_prefix):]
-    return uri                 
