@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.codesearch.html"><font color="#ffffff">codesearch</font></a>.service</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/jcgregorio/projects/gdata-python-client/src/gdata/codesearch/service.py">/home/jcgregorio/projects/gdata-python-client/src/gdata/codesearch/service.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/jcgregorio/projects/gdata/src/gdata/codesearch/service.py">/home/jcgregorio/projects/gdata/src/gdata/codesearch/service.py</a></font></td></tr></table>
     <p><tt><a href="#CodesearchService">CodesearchService</a>&nbsp;extends&nbsp;<a href="gdata.service.html#GDataService">GDataService</a>&nbsp;to&nbsp;streamline&nbsp;Google&nbsp;Codesearch&nbsp;<br>
 operations</tt></p>
 <p>
@@ -187,7 +187,7 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8146ce0&gt;<dd><tt>T.<a href="#CodesearchQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0x82dbe2c&gt;<dd><tt>dict.<a href="#CodesearchQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0x82dda14&gt;<dd><tt>dict.<a href="#CodesearchQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -215,7 +215,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;CodesearchFeed&nbsp;objects&nbsp;representing&nbsp;the&nbsp;feed&nbsp;returned&nbsp;by&nbsp;the&nbsp;server</tt></dd></dl>
 
-<dl><dt><a name="CodesearchService-Query"><strong>Query</strong></a>(self, uri, converter<font color="#909090">=&lt;function CodesearchFeedFromString at 0xb747a614&gt;</font>)</dt><dd><tt>Queries&nbsp;the&nbsp;Codesearch&nbsp;feed&nbsp;and&nbsp;returns&nbsp;the&nbsp;resulting&nbsp;feed&nbsp;of<br>
+<dl><dt><a name="CodesearchService-Query"><strong>Query</strong></a>(self, uri, converter<font color="#909090">=&lt;function CodesearchFeedFromString at 0xb74df304&gt;</font>)</dt><dd><tt>Queries&nbsp;the&nbsp;Codesearch&nbsp;feed&nbsp;and&nbsp;returns&nbsp;the&nbsp;resulting&nbsp;feed&nbsp;of<br>
 &nbsp;&nbsp;&nbsp;entries.<br>
 &nbsp;<br>
 Args:<br>
@@ -439,7 +439,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="CodesearchService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0xb7477e2c&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
+<dl><dt><a name="CodesearchService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0xb74dab1c&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;gdata.service.Get<br>
 &nbsp;<br>
@@ -803,7 +803,7 @@ Data and other attributes inherited from <a href="atom.service.html#AtomService"
 
 <dl><dt><strong>port</strong> = 80</dl>
 
-<dl><dt><strong>ssl</strong> = True</dl>
+<dl><dt><strong>ssl</strong> = False</dl>
 
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">

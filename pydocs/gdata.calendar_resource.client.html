@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.calendar_resource.html"><font color="#ffffff">calendar_resource</font></a>.client</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/jcgregorio/projects/gdata-python-client/src/gdata/calendar_resource/client.py">/home/jcgregorio/projects/gdata-python-client/src/gdata/calendar_resource/client.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/jcgregorio/projects/gdata/src/gdata/calendar_resource/client.py">/home/jcgregorio/projects/gdata/src/gdata/calendar_resource/client.py</a></font></td></tr></table>
     <p><tt><a href="#CalendarResourceClient">CalendarResourceClient</a>&nbsp;simplifies&nbsp;Calendar&nbsp;Resources&nbsp;API&nbsp;calls.<br>
 &nbsp;<br>
 <a href="#CalendarResourceClient">CalendarResourceClient</a>&nbsp;extends&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>&nbsp;to&nbsp;ease&nbsp;interaction&nbsp;with<br>
@@ -22,10 +22,9 @@ domain.</tt></p>
 <font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="atom.html">atom</a><br>
-</td><td width="25%" valign=top><a href="gdata.html">gdata</a><br>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="gdata.html">gdata</a><br>
 </td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
-</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -78,9 +77,10 @@ Methods defined here:<br>
 Args:<br>
 &nbsp;&nbsp;domain:&nbsp;string&nbsp;The&nbsp;Google&nbsp;Apps&nbsp;domain&nbsp;with&nbsp;Calendar&nbsp;Resources.<br>
 &nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;calendar&nbsp;resource&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;data.<br>
-&nbsp;&nbsp;kwargs:&nbsp;The&nbsp;other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>&nbsp;constructor.</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;calendar&nbsp;resource<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data.<br>
+&nbsp;&nbsp;kwargs:&nbsp;The&nbsp;other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;the&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;constructor.</tt></dd></dl>
 
 <dl><dt><a name="CalendarResourceClient-create_resource"><strong>create_resource</strong></a>(self, resource_id, resource_common_name<font color="#909090">=None</font>, resource_description<font color="#909090">=None</font>, resource_type<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;calendar&nbsp;resource&nbsp;with&nbsp;the&nbsp;given&nbsp;properties.<br>
 &nbsp;<br>
@@ -89,6 +89,7 @@ Args:<br>
 &nbsp;&nbsp;resource_common_name:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;common&nbsp;name&nbsp;of&nbsp;the&nbsp;resource.<br>
 &nbsp;&nbsp;resource_description:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;description&nbsp;of&nbsp;the&nbsp;resource.<br>
 &nbsp;&nbsp;resource_type:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;type&nbsp;of&nbsp;the&nbsp;resource.<br>
+&nbsp;&nbsp;kwargs:&nbsp;The&nbsp;other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>.<a href="#CalendarResourceClient-post">post</a>().<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;gdata.calendar_resource.data.CalendarResourceEntry&nbsp;of&nbsp;the&nbsp;new&nbsp;resource.</tt></dd></dl>
@@ -97,7 +98,7 @@ Returns:<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;resource_id:&nbsp;string&nbsp;The&nbsp;resource&nbsp;ID&nbsp;of&nbsp;the&nbsp;calendar&nbsp;resource&nbsp;to&nbsp;delete.<br>
-&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="#CalendarResourceClient-delete">delete</a>()<br>
+&nbsp;&nbsp;kwargs:&nbsp;The&nbsp;other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>.<a href="#CalendarResourceClient-delete">delete</a>()<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;An&nbsp;HTTP&nbsp;response&nbsp;object.&nbsp;&nbsp;See&nbsp;gdata.client.<a href="#CalendarResourceClient-request">request</a>().</tt></dd></dl>
@@ -107,6 +108,7 @@ Returns:<br>
 Args:<br>
 &nbsp;&nbsp;uri:&nbsp;string&nbsp;The&nbsp;base&nbsp;URI&nbsp;of&nbsp;the&nbsp;feed&nbsp;from&nbsp;which&nbsp;to&nbsp;fetch&nbsp;the&nbsp;resource.<br>
 &nbsp;&nbsp;resource_id:&nbsp;string&nbsp;The&nbsp;string&nbsp;ID&nbsp;of&nbsp;the&nbsp;Resource&nbsp;to&nbsp;fetch.<br>
+&nbsp;&nbsp;kwargs:&nbsp;The&nbsp;other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>.<a href="#CalendarResourceClient-get_entry">get_entry</a>().<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;Resource&nbsp;object&nbsp;representing&nbsp;the&nbsp;calendar&nbsp;resource&nbsp;with&nbsp;the&nbsp;given&nbsp;<br>
@@ -116,6 +118,7 @@ Returns:<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;uri:&nbsp;string&nbsp;The&nbsp;URI&nbsp;of&nbsp;the&nbsp;feed&nbsp;to&nbsp;pull.<br>
+&nbsp;&nbsp;kwargs:&nbsp;The&nbsp;other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>.<a href="#CalendarResourceClient-get_feed">get_feed</a>().<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;ResourceFeed&nbsp;object&nbsp;representing&nbsp;the&nbsp;feed&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.</tt></dd></dl>
@@ -129,9 +132,9 @@ params.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;resource_id:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;ID&nbsp;of&nbsp;the&nbsp;calendar&nbsp;resource&nbsp;for&nbsp;which<br>
-&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;make&nbsp;a&nbsp;feed&nbsp;URI.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;make&nbsp;a&nbsp;feed&nbsp;URI.<br>
 &nbsp;&nbsp;params:&nbsp;dict&nbsp;(optional)&nbsp;key&nbsp;-&gt;&nbsp;value&nbsp;params&nbsp;to&nbsp;append&nbsp;as&nbsp;GET&nbsp;vars&nbsp;to&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;URI.&nbsp;Example:&nbsp;params={'start':&nbsp;'my-resource-id'}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;URI.&nbsp;Example:&nbsp;params={'start':&nbsp;'my-resource-id'}<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;string&nbsp;giving&nbsp;the&nbsp;URI&nbsp;for&nbsp;calendar&nbsp;resources&nbsp;for&nbsp;this&nbsp;client's&nbsp;Google<br>
 &nbsp;&nbsp;Apps&nbsp;domain.</tt></dd></dl>
@@ -141,13 +144,15 @@ Returns:<br>
 Args:<br>
 &nbsp;&nbsp;resource_id:&nbsp;string&nbsp;The&nbsp;resource&nbsp;ID&nbsp;of&nbsp;the&nbsp;calendar&nbsp;resource&nbsp;to&nbsp;update.<br>
 &nbsp;&nbsp;resource_common_name:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;common&nbsp;name&nbsp;to&nbsp;give&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource.<br>
 &nbsp;&nbsp;resource_description:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;description&nbsp;to&nbsp;give&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource.<br>
 &nbsp;&nbsp;resource_type:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;type&nbsp;to&nbsp;give&nbsp;the&nbsp;resource.<br>
+&nbsp;&nbsp;kwargs:&nbsp;The&nbsp;other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>.<a href="#CalendarResourceClient-update">update</a>().<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;gdata.calendar_resource.data.CalendarResourceEntry&nbsp;of&nbsp;the&nbsp;updated&nbsp;resource.</tt></dd></dl>
+&nbsp;&nbsp;gdata.calendar_resource.data.CalendarResourceEntry&nbsp;of&nbsp;the&nbsp;updated<br>
+&nbsp;&nbsp;resource.</tt></dd></dl>
 
 <hr>
 Data and other attributes defined here:<br>
@@ -159,9 +164,11 @@ Data and other attributes defined here:<br>
 
 <dl><dt><strong>host</strong> = 'apps-apis.google.com'</dl>
 
+<dl><dt><strong>ssl</strong> = True</dl>
+
 <hr>
 Methods inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
-<dl><dt><a name="CalendarResourceClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8367c4c&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+<dl><dt><a name="CalendarResourceClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x839538c&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
 application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
@@ -345,9 +352,9 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="CalendarResourceClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8367bcc&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="CalendarResourceClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x839536c&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="CalendarResourceClient-RevokeToken"><strong>RevokeToken</strong></a> = revoke_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8367d4c&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
+<dl><dt><a name="CalendarResourceClient-RevokeToken"><strong>RevokeToken</strong></a> = revoke_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x839540c&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;both&nbsp;AuthSub&nbsp;and&nbsp;OAuth&nbsp;tokens&nbsp;(to&nbsp;invalidate<br>
 a&nbsp;ClientLogin&nbsp;token,&nbsp;the&nbsp;user&nbsp;must&nbsp;change&nbsp;their&nbsp;password).<br>
@@ -376,7 +383,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="CalendarResourceClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8367cac&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="CalendarResourceClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x83953cc&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -393,7 +400,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
 
-<dl><dt><a name="CalendarResourceClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8367c4c&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+<dl><dt><a name="CalendarResourceClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x839538c&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
 application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
@@ -577,9 +584,9 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="CalendarResourceClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8367bcc&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="CalendarResourceClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x839536c&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="CalendarResourceClient-revoke_token"><strong>revoke_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8367d4c&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
+<dl><dt><a name="CalendarResourceClient-revoke_token"><strong>revoke_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x839540c&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;both&nbsp;AuthSub&nbsp;and&nbsp;OAuth&nbsp;tokens&nbsp;(to&nbsp;invalidate<br>
 a&nbsp;ClientLogin&nbsp;token,&nbsp;the&nbsp;user&nbsp;must&nbsp;change&nbsp;their&nbsp;password).<br>
@@ -608,7 +615,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="CalendarResourceClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8367cac&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="CalendarResourceClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x83953cc&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -646,8 +653,6 @@ Data descriptors inherited from <a href="atom.client.html#AtomPubClient">atom.cl
 <hr>
 Data and other attributes inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
 <dl><dt><strong>auth_token</strong> = None</dl>
-
-<dl><dt><strong>ssl</strong> = True</dl>
 
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">

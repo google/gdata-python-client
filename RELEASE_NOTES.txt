@@ -1,3 +1,23 @@
+=== 2.0.11 ===
+Jul 29, 2010 (revision fa49231cc8)
+
+ - Added the following new APIs:
+   * Apps Audit APIs from Jay Lee
+   * Apps Organization from Alexandre Vivien
+   * Added Email Settings API client library v2.0 from Claudio Cherubino
+ - Fixes to file permissions for samples.
+ - Fixing a broken calendar resource client from r983, removing a superfluous call to MakeResourceFeedUri(), adding regression tests for edit links.
+ - Abstracting out AppsProperty so that it's usable by other libs.  Thanks to Claudio Cherubino <ccherubino@google.com> for this change.
+ - Added optional change_password parameter to AppsService.CreateUser
+ - Fixing minor bugs in analytics samples
+ - http://codereview.appspot.com/1677050 Switch default connection type back to non-SSL connections.
+ - Switch the repository from subversion to mercurial
+ - Added OAuth test cases thanks Samuel Cyprian
+ - Many APIs now use SSL, and some require it, so the following APIs now default to using HTTPS:
+   * Spreadsheets
+   * Sites
+   * Calendar Resource 
+
 === 2.0.10 ===
 May 12, 2010 (revision 980)
 

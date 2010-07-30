@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.test_config</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/jcgregorio/projects/gdata-python-client/src/gdata/test_config.py">/home/jcgregorio/projects/gdata-python-client/src/gdata/test_config.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/jcgregorio/projects/gdata/src/gdata/test_config.py">/home/jcgregorio/projects/gdata/src/gdata/test_config.py</a></font></td></tr></table>
     <p><tt>#&nbsp;Copyright&nbsp;(C)&nbsp;2009&nbsp;Google&nbsp;Inc.<br>
 #<br>
 #&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;"License");<br>
@@ -138,27 +138,27 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;test&nbsp;case.</tt></dd></dl>
  <dl><dt><a name="-configure_client"><strong>configure_client</strong></a>(client, case_name, service_name, use_apps_auth<font color="#909090">=False</font>)</dt><dd><tt>Sets&nbsp;up&nbsp;a&nbsp;mock&nbsp;client&nbsp;which&nbsp;will&nbsp;reuse&nbsp;a&nbsp;saved&nbsp;session.<br>
 &nbsp;<br>
-Should&nbsp;be&nbsp;called&nbsp;during&nbsp;setUp&nbsp;of&nbsp;each&nbsp;unit&nbsp;test.<br>
+&nbsp;&nbsp;Should&nbsp;be&nbsp;called&nbsp;during&nbsp;setUp&nbsp;of&nbsp;each&nbsp;unit&nbsp;test.<br>
 &nbsp;<br>
-Handles&nbsp;authentication&nbsp;to&nbsp;allow&nbsp;the&nbsp;GDClient&nbsp;to&nbsp;make&nbsp;requests&nbsp;which<br>
-require&nbsp;an&nbsp;auth&nbsp;header.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;client:&nbsp;a&nbsp;gdata.GDClient&nbsp;whose&nbsp;http_client&nbsp;member&nbsp;should&nbsp;be&nbsp;replaced<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;a&nbsp;atom.mock_http_core.MockHttpClient&nbsp;so&nbsp;that&nbsp;repeated<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;executions&nbsp;can&nbsp;used&nbsp;cached&nbsp;responses&nbsp;instead&nbsp;of&nbsp;contacting<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;server.<br>
-&nbsp;&nbsp;case_name:&nbsp;str&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;test&nbsp;case&nbsp;class.&nbsp;Examples:&nbsp;'BloggerTest',<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'ContactsTest'.&nbsp;Used&nbsp;to&nbsp;save&nbsp;a&nbsp;session<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;the&nbsp;ClientLogin&nbsp;auth&nbsp;token&nbsp;request,&nbsp;so&nbsp;the&nbsp;case_name<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should&nbsp;be&nbsp;reused&nbsp;if&nbsp;and&nbsp;only&nbsp;if&nbsp;the&nbsp;same&nbsp;username,&nbsp;password,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;service&nbsp;are&nbsp;being&nbsp;used.<br>
-&nbsp;&nbsp;service_name:&nbsp;str&nbsp;The&nbsp;service&nbsp;name&nbsp;as&nbsp;used&nbsp;for&nbsp;ClientLogin&nbsp;to&nbsp;identify<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Google&nbsp;Data&nbsp;API&nbsp;being&nbsp;accessed.&nbsp;Example:&nbsp;'blogger',<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'wise',&nbsp;etc.<br>
-&nbsp;&nbsp;use_apps_auth:&nbsp;bool&nbsp;(optional)&nbsp;If&nbsp;set&nbsp;to&nbsp;True,&nbsp;use&nbsp;appsusername&nbsp;and<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;appspassword&nbsp;command-line&nbsp;args&nbsp;instead&nbsp;of&nbsp;username&nbsp;and<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password&nbsp;respectively.</tt></dd></dl>
+&nbsp;&nbsp;Handles&nbsp;authentication&nbsp;to&nbsp;allow&nbsp;the&nbsp;GDClient&nbsp;to&nbsp;make&nbsp;requests&nbsp;which<br>
+&nbsp;&nbsp;require&nbsp;an&nbsp;auth&nbsp;header.<br>
+where<br>
+&nbsp;&nbsp;Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;client:&nbsp;a&nbsp;gdata.GDClient&nbsp;whose&nbsp;http_client&nbsp;member&nbsp;should&nbsp;be&nbsp;replaced<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;a&nbsp;atom.mock_http_core.MockHttpClient&nbsp;so&nbsp;that&nbsp;repeated<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;executions&nbsp;can&nbsp;used&nbsp;cached&nbsp;responses&nbsp;instead&nbsp;of&nbsp;contacting<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;server.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;case_name:&nbsp;str&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;test&nbsp;case&nbsp;class.&nbsp;Examples:&nbsp;'BloggerTest',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'ContactsTest'.&nbsp;Used&nbsp;to&nbsp;save&nbsp;a&nbsp;session<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;the&nbsp;ClientLogin&nbsp;auth&nbsp;token&nbsp;request,&nbsp;so&nbsp;the&nbsp;case_name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should&nbsp;be&nbsp;reused&nbsp;if&nbsp;and&nbsp;only&nbsp;if&nbsp;the&nbsp;same&nbsp;username,&nbsp;password,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;service&nbsp;are&nbsp;being&nbsp;used.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;service_name:&nbsp;str&nbsp;The&nbsp;service&nbsp;name&nbsp;as&nbsp;used&nbsp;for&nbsp;ClientLogin&nbsp;to&nbsp;identify<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Google&nbsp;Data&nbsp;API&nbsp;being&nbsp;accessed.&nbsp;Example:&nbsp;'blogger',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'wise',&nbsp;etc.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;use_apps_auth:&nbsp;bool&nbsp;(optional)&nbsp;If&nbsp;set&nbsp;to&nbsp;True,&nbsp;use&nbsp;appsusername&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;appspassword&nbsp;command-line&nbsp;args&nbsp;instead&nbsp;of&nbsp;username&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password&nbsp;respectively.</tt></dd></dl>
  <dl><dt><a name="-configure_service"><strong>configure_service</strong></a>(service, case_name, service_name)</dt><dd><tt>Sets&nbsp;up&nbsp;a&nbsp;mock&nbsp;GDataService&nbsp;v1&nbsp;client&nbsp;to&nbsp;reuse&nbsp;recorded&nbsp;sessions.<br>
 &nbsp;<br>
 Should&nbsp;be&nbsp;called&nbsp;during&nbsp;setUp&nbsp;of&nbsp;each&nbsp;unit&nbsp;test.&nbsp;This&nbsp;is&nbsp;a&nbsp;duplicate&nbsp;of<br>
@@ -174,13 +174,14 @@ function&nbsp;is&nbsp;a&nbsp;v1&nbsp;Service&nbsp;<a href="__builtin__.html#obje
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>APPS_DOMAIN_OPTION</strong> = &lt;gdata.test_config.Option object at 0x837456c&gt;<br>
-<strong>BLOG_ID_OPTION</strong> = &lt;gdata.test_config.Option object at 0x837450c&gt;<br>
-<strong>GA_TABLE_ID</strong> = &lt;gdata.test_config.Option object at 0x83745ec&gt;<br>
-<strong>ISSUE_ASSIGNEE_OPTION</strong> = &lt;gdata.test_config.Option object at 0x83745cc&gt;<br>
-<strong>PROJECT_NAME_OPTION</strong> = &lt;gdata.test_config.Option object at 0x83745ac&gt;<br>
-<strong>SITES_NAME_OPTION</strong> = &lt;gdata.test_config.Option object at 0x837458c&gt;<br>
-<strong>SPREADSHEET_ID_OPTION</strong> = &lt;gdata.test_config.Option object at 0x837454c&gt;<br>
-<strong>TEST_IMAGE_LOCATION_OPTION</strong> = &lt;gdata.test_config.Option object at 0x837452c&gt;<br>
-<strong>options</strong> = &lt;gdata.test_config.ConfigCollection object at 0x836fa0c&gt;</td></tr></table>
+<td width="100%"><strong>APPS_DOMAIN_OPTION</strong> = &lt;gdata.test_config.Option object at 0x836f96c&gt;<br>
+<strong>BLOG_ID_OPTION</strong> = &lt;gdata.test_config.Option object at 0x836f90c&gt;<br>
+<strong>GA_TABLE_ID</strong> = &lt;gdata.test_config.Option object at 0x836f9ec&gt;<br>
+<strong>ISSUE_ASSIGNEE_OPTION</strong> = &lt;gdata.test_config.Option object at 0x836f9cc&gt;<br>
+<strong>PROJECT_NAME_OPTION</strong> = &lt;gdata.test_config.Option object at 0x836f9ac&gt;<br>
+<strong>SITES_NAME_OPTION</strong> = &lt;gdata.test_config.Option object at 0x836f98c&gt;<br>
+<strong>SPREADSHEET_ID_OPTION</strong> = &lt;gdata.test_config.Option object at 0x836f94c&gt;<br>
+<strong>TARGET_USERNAME_OPTION</strong> = &lt;gdata.test_config.Option object at 0x836fa0c&gt;<br>
+<strong>TEST_IMAGE_LOCATION_OPTION</strong> = &lt;gdata.test_config.Option object at 0x836f92c&gt;<br>
+<strong>options</strong> = &lt;gdata.test_config.ConfigCollection object at 0x836f3ac&gt;</td></tr></table>
 </body></html>
