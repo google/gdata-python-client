@@ -26,7 +26,6 @@ src/gdata/gauth.py
 src/gdata/sample_util.py
 src/gdata/service.py
 src/gdata/test_config.py
-src/gdata/test_config_template.py
 src/gdata/test_data.py
 src/gdata/urlfetch.py
 src/gdata/alt/__init__.py
@@ -42,6 +41,8 @@ src/gdata/apps/groups/__init__.py
 src/gdata/apps/groups/service.py
 src/gdata/apps/migration/__init__.py
 src/gdata/apps/migration/service.py
+src/gdata/apps/organization/__init__.py
+src/gdata/apps/organization/service.py
 src/gdata/base/__init__.py
 src/gdata/base/service.py
 src/gdata/blogger/__init__.py
@@ -93,7 +94,6 @@ src/gdata/Crypto/Hash/__init__.py
 src/gdata/Crypto/Hash/RIPEMD.pyd
 src/gdata/Crypto/Hash/MD5.py
 src/gdata/Crypto/Hash/MD2.pyd
-src/gdata/Crypto/PublicKey
 src/gdata/Crypto/PublicKey/qNEW.py
 src/gdata/Crypto/PublicKey/__init__.py
 src/gdata/Crypto/PublicKey/pubkey.py
@@ -206,9 +206,7 @@ samples/webmastertools/SitesFeedSummary.py
 samples/oauth/2_legged_oauth.py
 samples/oauth/oauth_example.py
 samples/authsub/secure_authsub.py
-samples/oauth/oauth_on_appengine
 samples/oauth/oauth_on_appengine/main_rsa.py
-samples/oauth/oauth_on_appengine/appengine_utilities
 samples/oauth/oauth_on_appengine/appengine_utilities/flash.py
 samples/oauth/oauth_on_appengine/appengine_utilities/__init__.py
 samples/oauth/oauth_on_appengine/appengine_utilities/cron.py
@@ -219,7 +217,6 @@ samples/oauth/oauth_on_appengine/appengine_utilities/rotmodel.py
 samples/oauth/oauth_on_appengine/appengine_utilities/sessions.py
 samples/oauth/oauth_on_appengine/app.yaml
 samples/oauth/oauth_on_appengine/main_hmac.py
-samples/oauth/oauth_on_appengine/images
 samples/oauth/oauth_on_appengine/images/icon_starred.png
 samples/oauth/oauth_on_appengine/images/icon_spreadsheet.gif
 samples/oauth/oauth_on_appengine/images/icon_pdf.gif
@@ -227,11 +224,9 @@ samples/oauth/oauth_on_appengine/images/icon_trashed.png
 samples/oauth/oauth_on_appengine/images/icon_presentation.gif
 samples/oauth/oauth_on_appengine/images/icon_folder.gif
 samples/oauth/oauth_on_appengine/images/icon_document.gif
-samples/oauth/oauth_on_appengine/css
 samples/oauth/oauth_on_appengine/css/index.css
 samples/oauth/oauth_on_appengine/index.yaml
 samples/oauth/oauth_on_appengine/index.html
-samples/oauth/oauth_on_appengine/js
 samples/oauth/oauth_on_appengine/js/jquery.corners.min.js
 samples/oauth/oauth_on_appengine/README.txt
 tests/__init__.py
@@ -270,7 +265,6 @@ tests/gdata_tests/base_test.py
 tests/gdata_tests/blogger_test.py
 tests/gdata_tests/books_test.py
 tests/gdata_tests/calendar_test.py
-tests/gdata_tests/client_online_test.py
 tests/gdata_tests/client_test.py
 tests/gdata_tests/core_test.py
 tests/gdata_tests/codesearch_test.py
@@ -293,6 +287,8 @@ tests/gdata_tests/apps/groups/__init__.py
 tests/gdata_tests/apps/groups/service_test.py
 tests/gdata_tests/apps/migration/__init__.py
 tests/gdata_tests/apps/migration/service_test.py
+tests/gdata_tests/apps/organization/__init__.py
+tests/gdata_tests/apps/organization/service_test.py
 tests/gdata_tests/base/__init__.py
 tests/gdata_tests/base/service_test.py
 tests/gdata_tests/blogger/__init__.py
@@ -496,3 +492,14 @@ pydocs/gdata.calendar_resource.client.html
 pydocs/gdata.calendar_resource.data.html
 samples/docs/resumable_upload_sample.py
 tests/gdata_tests/resumable_upload_test.py
+src/gdata/apps/audit/__init__.py
+src/gdata/apps/audit/service.py
+src/gdata/apps/emailsettings/client.py
+src/gdata/apps/emailsettings/data.py
+src/gdata/apps_property.py
+tests/gdata_tests/apps/emailsettings/data_test.py
+tests/gdata_tests/apps/emailsettings/live_client_test.py
+tests/gdata_tests/base/data_test.py
+tests/gdata_tests/oauth/__init__.py
+tests/gdata_tests/oauth/data_test.py
+upload-diffs.py
