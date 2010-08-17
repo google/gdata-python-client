@@ -79,6 +79,8 @@ src/gdata/spreadsheets/data.py
 src/gdata/webmastertools/__init__.py
 src/gdata/webmastertools/service.py
 src/gdata/youtube/__init__.py
+src/gdata/youtube/client.py
+src/gdata/youtube/data.py
 src/gdata/youtube/service.py
 src/gdata/oauth/__init__.py
 src/gdata/oauth/CHANGES.txt
@@ -322,6 +324,7 @@ tests/gdata_tests/spreadsheets/__init__.py
 tests/gdata_tests/spreadsheets/data_test.py
 tests/gdata_tests/youtube/__init__.py
 tests/gdata_tests/youtube/service_test.py
+tests/gdata_tests/youtube/live_client_test.py
 pydocs/atom.auth.html
 pydocs/atom.client.html
 pydocs/atom.core.html

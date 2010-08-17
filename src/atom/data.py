@@ -24,6 +24,7 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 import atom.core
 
 
+XML_TEMPLATE = '{http://www.w3.org/XML/1998/namespace}%s'
 ATOM_TEMPLATE = '{http://www.w3.org/2005/Atom}%s'
 APP_TEMPLATE_V1 = '{http://purl.org/atom/app#}%s'
 APP_TEMPLATE_V2 = '{http://www.w3.org/2007/app}%s'
