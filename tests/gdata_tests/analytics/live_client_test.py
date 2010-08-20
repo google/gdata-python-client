@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Copyright (C) 2009 Google Inc.
+# Copyright (C) 2010 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -81,8 +81,8 @@ class AnalyticsClientTest(unittest.TestCase):
   def testDataFeed(self):
     """Tests if the Data Feed exists."""
 
-    start_date = '2010-07-01'
-    end_date = '2010-07-26'
+    start_date = '2008-10-01'
+    end_date = '2008-10-02'
     metrics = 'ga:visits'
 
     if not conf.options.get_value('runlive') == 'true':
@@ -103,6 +103,18 @@ class AnalyticsClientTest(unittest.TestCase):
     self.assertEquals(feed.end_date.text, end_date)
     self.assertEquals(feed.entry[0].GetMetric(metrics).name, metrics)
 
+  def testManagementFeed(self):
+    """Tests of the Management Feed exists."""
+
+    if not conf.options.get_value('runlive') == 'true':
+      return
+    conf.configure_cache(self.client, 'testManagementFeed')
+
+    account_query = gdata.analytics.client.AccountQuery()
+    feed = self.client.GetManagementFeed(account_query)
+
+    self.assert_(feed.entry is not None)
+
   def tearDown(self):
     """Closes client connection."""
     conf.close_client(self.client)
@@ -114,3 +126,4 @@ def suite():
 
 if __name__ == '__main__':
   unittest.TextTestRunner().run(suite())
+

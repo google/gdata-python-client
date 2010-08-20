@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Copyright (C) 2009 Google Inc.
+# Copyright (C) 2010 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Unit Tests for Google Analytics Account Feed and Data Feed.
+"""Unit Tests for Google Analytics Data Export API and Management APIs.
+
+Although the Data Export API and Management API conceptually operate on
+different parts of Google Analytics, the APIs share some code so they
+are released in the same module.
 
 AccountFeedTest: All unit tests for AccountFeed class.
 DataFeedTest: All unit tests for DataFeed class.
+ManagementFeedAccountTest: Unit tests for ManagementFeed class.
+ManagementFeedGoalTest: Unit tests for ManagementFeed class.
+ManagementFeedAdvSegTest: Unit tests for ManagementFeed class.
 """
 
 __author__ = 'api.nickm@google.com (Nick Mihailovski)'
@@ -276,9 +283,168 @@ class DataFeedTest(unittest.TestCase):
     self.assertEquals(error, None)
 
 
+class ManagementFeedProfileTest(unittest.TestCase):
+  """Unit test for all property elements in Google Analytics Management Feed.
+
+  Since the Account, Web Property and Profile feed all have the same
+  structure and XML elements, this single test case covers all three feeds.
+  """
+
+  def setUp(self):
+    """Retrieves the test XML feed into a DataFeed object."""
+
+    self.feed = atom.core.parse(test_data.ANALYTICS_MGMT_PROFILE_FEED,
+                                gdata.analytics.data.ManagementFeed)
+
+  def testFeedKindAttribute(self):
+    """Tests the kind attribute in the feed."""
+
+    self.assertEqual(self.feed.kind, 'analytics#profiles')
+
+  def testEntryKindAttribute(self):
+    """tests the kind attribute in the entry."""
+
+    entry_kind = self.feed.entry[0].kind
+    self.assertEqual(entry_kind, 'analytics#profile')
+
+  def testEntryProperty(self):
+    """Tests property classes in Managment Entry class."""
+
+    property = self.feed.entry[0].property
+    self.assertEquals(property[0].name, 'ga:accountId')
+    self.assertEquals(property[0].value, '30481')
+
+  def testEntryGetProperty(self):
+    """Tests GetProperty helper method in Management Entry class."""
+
+    entry = self.feed.entry[0]
+    self.assertEquals(entry.GetProperty('ga:accountId').value, '30481')
+
+  def testGetParentLinks(self):
+    """Tests GetParentLinks utility method."""
+
+    parent_links = self.feed.entry[0].GetParentLinks()
+    self.assertEquals(len(parent_links), 1)
+
+    parent_link = parent_links[0]
+    self.assertEquals(parent_link.rel,
+        'http://schemas.google.com/ga/2009#parent')
+    self.assertEquals(parent_link.type,
+        'application/atom+xml')
+    self.assertEquals(parent_link.href,
+        'https://www.google.com/analytics/feeds/datasources'
+        '/ga/accounts/30481/webproperties/UA-30481-1')
+    self.assertEquals(parent_link.target_kind,
+        'analytics#webproperty')
+
+  def testGetChildLinks(self):
+    """Tests GetChildLinks utility method."""
+
+    print self.feed.kind
+
+    child_links = self.feed.entry[0].GetChildLinks()
+    self.assertEquals(len(child_links), 1)
+
+    self.ChildLinkTestHelper(child_links[0])
+
+  def testGetChildLink(self):
+    """Tests getChildLink utility method."""
+
+    child_link = self.feed.entry[0].GetChildLink('analytics#goals')
+    self.ChildLinkTestHelper(child_link)
+
+    child_link = self.feed.entry[0].GetChildLink('foo_bar')
+    self.assertEquals(child_link, None)
+
+  def ChildLinkTestHelper(self, child_link):
+    """Common method to test a child link."""
+
+    self.assertEquals(child_link.rel,
+        'http://schemas.google.com/ga/2009#child')
+    self.assertEquals(child_link.type,
+        'application/atom+xml')
+    self.assertEquals(child_link.href,
+        'https://www.google.com/analytics/feeds/datasources'
+        '/ga/accounts/30481/webproperties/UA-30481-1/profiles/1174/goals')
+    self.assertEquals(child_link.target_kind,
+        'analytics#goals')
+
+
+class ManagementFeedGoalTest(unittest.TestCase):
+  """Unit test for all Goal elements in Management Feed."""
+
+  def setUp(self):
+    """Retrieves the test XML feed into a DataFeed object."""
+
+    self.feed = atom.core.parse(test_data.ANALYTICS_MGMT_GOAL_FEED,
+                                gdata.analytics.data.ManagementFeed)
+
+  def testEntryGoal(self):
+    """Tests Goal class in Google Anlaytics Account Feed."""
+
+    goal = self.feed.entry[0].goal
+    self.assertEquals(goal.number, '1')
+    self.assertEquals(goal.name, 'Completing Order')
+    self.assertEquals(goal.value, '10.0')
+    self.assertEquals(goal.active, 'true')
+
+  def testGoalDestination(self):
+    """Tests Destination class in Google Analytics Account Feed."""
+
+    destination = self.feed.entry[0].goal.destination
+    self.assertEquals(destination.expression, '/purchaseComplete.html')
+    self.assertEquals(destination.case_sensitive, 'false')
+    self.assertEquals(destination.match_type, 'regex')
+    self.assertEquals(destination.step1_required, 'false')
+
+  def testGoalDestinationStep(self):
+    """Tests Step class in Google Analytics Account Feed."""
+
+    step = self.feed.entry[0].goal.destination.step[0]
+    self.assertEquals(step.number, '1')
+    self.assertEquals(step.name, 'View Product Categories')
+    self.assertEquals(step.path, '/Apps|Accessories')
+
+  def testGoalEngagemet(self):
+    """Tests Engagement class in Google Analytics Account Feed."""
+
+    engagement = self.feed.entry[1].goal.engagement
+    self.assertEquals(engagement.type, 'timeOnSite')
+    self.assertEquals(engagement.comparison, '>')
+    self.assertEquals(engagement.threshold_value, '300')
+
+
+class ManagementFeedAdvSegTest(unittest.TestCase):
+  """Unit test for all Advanced Segment elements in Management Feed."""
+
+  def setUp(self):
+    """Retrieves the test XML feed into a DataFeed object."""
+
+    self.feed = atom.core.parse(test_data.ANALYTICS_MGMT_ADV_SEGMENT_FEED,
+                                gdata.analytics.data.ManagementFeed)
+
+  def testEntrySegment(self):
+    """Tests Segment class in ManagementEntry class."""
+
+    segment = self.feed.entry[0].segment
+    self.assertEquals(segment.id, 'gaid::0')
+    self.assertEquals(segment.name, 'Sources Form Google')
+
+  def testSegmentDefinition(self):
+    """Tests Definition class in Segment class."""
+
+    definition = self.feed.entry[0].segment.definition
+    self.assertEquals(definition.text, 'ga:source=~^\Qgoogle\E')
+
+
 def suite():
-  """Test Account Feed and Data Feed."""
-  return conf.build_suite([AccountFeedTest, DataFeedTest])
+  """Test Account Feed, Data Feed and Management API Feeds."""
+  return conf.build_suite([
+      AccountFeedTest,
+      DataFeedTest,
+      ManagementFeedProfileTest,
+      ManagementFeedGoalTest,
+      ManagementFeedAdvSegTest])
 
 
 if __name__ == '__main__':

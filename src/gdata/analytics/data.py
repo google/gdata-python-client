@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# Copyright 2009 Google Inc. All Rights Reserved.
+# Copyright 2010 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,19 +14,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Data model classes for parsing and generating XML for the
-Google Analytics Data Export API."""
+"""Data model classes for parsing and generating XML for both the
+Google Analytics Data Export and Management APIs. Although both APIs
+operate on different parts of Google Analytics, they share common XML
+elements and are released in the same module.
+
+The Management API supports 5 feeds all using the same ManagementFeed
+data class.
+"""
 
 __author__ = 'api.nickm@google.com (Nick Mihailovski)'
 
 
 import gdata.data
 import atom.core
+import atom.data
 
 
 # XML Namespace used in Google Analytics API entities.
 DXP_NS = '{http://schemas.google.com/analytics/2009}%s'
 GA_NS = '{http://schemas.google.com/ga/2009}%s'
+GD_NS = '{http://schemas.google.com/g/2005}%s'
 
 
 class GetProperty(object):
@@ -96,6 +104,50 @@ class GetDimension(object):
     return None
 
   GetDimension = get_dimension
+
+
+class GaLinkFinder(object):
+  """Utility class to return specific links in Google Analytics feeds."""
+
+  def get_parent_links(self):
+    """Returns a list of all the parent links in an entry."""
+
+    links = []
+    for link in self.link:
+      if link.rel == link.parent():
+        links.append(link)
+
+    return links
+
+  GetParentLinks = get_parent_links
+
+  def get_child_links(self):
+    """Returns a list of all the child links in an entry."""
+
+    links = []
+    for link in self.link:
+      if link.rel == link.child():
+        links.append(link)
+
+    return links
+
+  GetChildLinks = get_child_links
+
+  def get_child_link(self, target_kind):
+    """Utility method to return one child link.
+
+    Returns:
+      A child link with the given target_kind. None if the target_kind was
+      not found.
+    """
+
+    for link in self.link:
+      if link.rel == link.child() and link.target_kind == target_kind:
+        return link
+
+    return None
+
+  GetChildLink = get_child_link
 
 
 class StartDate(atom.core.XmlElement):
@@ -213,6 +265,21 @@ class Dimension(atom.core.XmlElement):
   value = 'value'
 
 
+class AnalyticsLink(atom.data.Link):
+  """Subclass of link <link>"""
+  target_kind = GD_NS % 'targetKind'
+
+  @classmethod
+  def parent(cls):
+    """Parent target_kind"""
+    return '%s#parent' % GA_NS[1:-3]
+
+  @classmethod
+  def child(cls):
+    """Child target_kind"""
+    return '%s#child' % GA_NS[1:-3]
+
+
 # Account Feed.
 class AccountEntry(gdata.data.GDEntry, GetProperty):
   """Analytics Account Feed <entry>"""
@@ -258,9 +325,11 @@ class DataEntry(gdata.data.GDEntry, GetMetric, GetDimension):
 
 
 class DataFeed(gdata.data.GDFeed):
-  """Analytics Data Feed <feed>. Althrough there is only one datasource, it is
-  stored in an array to replicate the design of the Java client library and
-  ensure backwards compatibility if new data sources are added in the future.
+  """Analytics Data Feed <feed>.
+
+  Although there is only one datasource, it is stored in an array to replicate
+  the design of the Java client library and ensure backwards compatibility if
+  new data sources are added in the future.
   """
 
   _qname = atom.data.ATOM_TEMPLATE % 'feed'
@@ -271,3 +340,26 @@ class DataFeed(gdata.data.GDFeed):
   entry = [DataEntry]
   segment = Segment
 
+
+# Management Feed.
+class ManagementEntry(gdata.data.GDEntry, GetProperty, GaLinkFinder):
+  """Analytics Managememt Entry <entry>."""
+
+  _qname = atom.data.ATOM_TEMPLATE % 'entry'
+  kind = GD_NS % 'kind'
+  property  = [Property]
+  goal = Goal
+  segment = Segment
+  link = [AnalyticsLink]
+
+
+class ManagementFeed(gdata.data.GDFeed):
+  """Analytics Management Feed <feed>.
+
+  This class holds the data for all 5 Management API feeds: Account,
+  Web Property, Profile, Goal, and Advanced Segment Feeds.
+  """
+
+  _qname = atom.data.ATOM_TEMPLATE % 'feed'
+  entry = [ManagementEntry]
+  kind = GD_NS % 'kind'

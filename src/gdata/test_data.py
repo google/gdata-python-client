@@ -5395,3 +5395,101 @@ ANALYTICS_DATA_FEED = '''
     <dxp:metric confidenceInterval='0.0' name='ga:bounces' type='integer' value='61095'/>
   </entry>
 </feed>'''
+
+
+ANALYTICS_MGMT_PROFILE_FEED = '''
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:dxp='http://schemas.google.com/analytics/2009' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:gd='http://schemas.google.com/g/2005' gd:kind='analytics#profiles'>
+  <id>https://www.google.com/analytics/feeds/datasources/ga/accounts/~all/webproperties/~all/profiles</id>
+  <updated>2010-06-14T22:18:48.676Z</updated>
+  <title type='text'>Google Analytics Profiles for superman@gmail.com</title>
+  <link rel='self' type='application/atom+xml' href='https://www.google.com/analytics/feeds/datasources/ga/accounts/~all/webproperties/~all/profiles'/>
+  <author>
+    <name>Google Analytics</name>
+  </author>
+  <generator version='1.0'>Google Analytics</generator>
+  <openSearch:totalResults>1</openSearch:totalResults>
+  <openSearch:startIndex>1</openSearch:startIndex>
+  <openSearch:itemsPerPage>1000</openSearch:itemsPerPage>
+  <entry gd:etag='W/&quot;CkQAQ3Y-fSp7I2A9WxFXGEU.&quot;' gd:kind='analytics#profile'>
+    <id>https://www.google.com/analytics/feeds/datasources/ga/accounts/30481/webproperties/UA-30481-1/profiles/1174</id>
+    <updated>2010-06-09T05:58:15.436-07:00</updated>
+    <title type='text'>Google Analytics Profile www.googlestore.com</title>
+    <link rel='self' type='application/atom+xml' href='https://www.google.com/analytics/feeds/datasources/ga/accounts/30481/webproperties/UA-30481-1/profiles/1174'/>
+    <link rel='http://schemas.google.com/ga/2009#parent' type='application/atom+xml' href='https://www.google.com/analytics/feeds/datasources/ga/accounts/30481/webproperties/UA-30481-1' gd:targetKind='analytics#webproperty'/>
+    <link rel='http://schemas.google.com/ga/2009#child' type='application/atom+xml' href='https://www.google.com/analytics/feeds/datasources/ga/accounts/30481/webproperties/UA-30481-1/profiles/1174/goals' gd:targetKind='analytics#goals'/>
+    <dxp:property name='ga:accountId' value='30481'/>
+    <dxp:property name='ga:webPropertyId' value='UA-30481-1'/>
+    <dxp:property name='ga:profileName' value='www.googlestore.com'/>
+    <dxp:property name='ga:profileId' value='1174'/>
+    <dxp:property name='dxp:tableId' value='ga:1174'/>
+    <dxp:property name='ga:currency' value='USD'/>
+    <dxp:property name='ga:timezone' value='America/Los_Angeles'/>
+  </entry>
+</feed>
+'''
+
+ANALYTICS_MGMT_GOAL_FEED = '''
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:dxp='http://schemas.google.com/analytics/2009' xmlns:ga='http://schemas.google.com/ga/2009' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:gd='http://schemas.google.com/g/2005' gd:kind='analytics#goals'>
+  <id>https://www.google.com/analytics/feeds/datasources/ga/accounts/~all/webproperties/~all/profiles/~all/goals</id>
+  <updated>2010-06-14T22:21:18.485Z</updated>
+  <title type='text'>Google Analytics Goals for superman@gmail.com</title>
+  <link rel='self' type='application/atom+xml' href='https://www.google.com/analytics/feeds/datasources/ga/accounts/~all/webproperties/~all/profiles/~all/goals'/>
+  <author>
+    <name>Google Analytics</name>
+  </author>
+  <generator version='1.0'>Google Analytics</generator>
+  <openSearch:totalResults>3</openSearch:totalResults>
+  <openSearch:startIndex>1</openSearch:startIndex>
+  <openSearch:itemsPerPage>1000</openSearch:itemsPerPage>
+  <entry gd:etag='W/&quot;DUYCQn08fip7I2A9WxBWFUo.&quot;' gd:kind='analytics#goal'>
+    <id>https://www.google.com/analytics/feeds/datasources/ga/accounts/30481/webproperties/UA-30481-1/profiles/1174/goals/1</id>
+    <updated>2010-02-07T13:12:43.377-08:00</updated>
+    <title type='text'>Google Analytics Goal 1</title>
+    <link rel='self' type='application/atom+xml' href='https://www.google.com/analytics/feeds/datasources/ga/accounts/30481/webproperties/UA-30481-1/profiles/1174/goals/1'/>
+    <link rel='http://schemas.google.com/ga/2009#parent' type='application/atom+xml' href='https://www.google.com/analytics/feeds/datasources/ga/accounts/30481/webproperties/UA-30481-1/profiles/1174' gd:targetKind='analytics#profile'/>
+    <ga:goal active='true' name='Completing Order' number='1' value='10.0'>
+      <ga:destination caseSensitive='false' expression='/purchaseComplete.html' matchType='regex' step1Required='false'>
+        <ga:step name='View Product Categories' number='1' path='/Apps|Accessories'/>
+      </ga:destination>
+    </ga:goal>
+    <dxp:property name='ga:profileId' value='1174'/>
+  </entry>
+  <entry gd:etag='W/&quot;DUYCQn08fip7I2A9WxBWFUo.&quot;' gd:kind='analytics#goal'>
+    <id>https://www.google.com/analytics/feeds/datasources/ga/accounts/30481/webproperties/UA-30481-1/profiles/1174/goals/2</id>
+    <updated>2010-02-07T13:12:43.376-08:00</updated>
+    <title type='text'>Google Analytics Goal 2</title>
+    <link rel='self' type='application/atom+xml' href='https://www.google.com/analytics/feeds/datasources/ga/accounts/30481/webproperties/UA-30481-1/profiles/1174/goals/2'/>
+    <link rel='http://schemas.google.com/ga/2009#parent' type='application/atom+xml' href='https://www.google.com/analytics/feeds/datasources/ga/accounts/30481/webproperties/UA-30481-1/profiles/1174' gd:targetKind='analytics#profile'/>
+    <ga:goal active='true' name='Browsed my site over 5 minutes' number='2' value='0.0'>
+      <ga:engagement comparison='&gt;' thresholdValue='300' type='timeOnSite'/>
+    </ga:goal>
+    <dxp:property name='ga:profileId' value='1174'/>
+  </entry>
+</feed>
+'''
+
+ANALYTICS_MGMT_ADV_SEGMENT_FEED = '''
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:dxp='http://schemas.google.com/analytics/2009' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:gd='http://schemas.google.com/g/2005' gd:kind='analytics#segments'>
+  <id>https://www.google.com/analytics/feeds/datasources/ga/segments</id>
+  <updated>2010-06-14T22:22:02.728Z</updated>
+  <title type='text'>Google Analytics Advanced Segments for superman@gmail.com</title>
+  <link rel='self' type='application/atom+xml' href='https://www.google.com/analytics/feeds/datasources/ga/segments'/>
+  <author>
+    <name>Google Analytics</name>
+  </author>
+  <generator version='1.0'>Google Analytics</generator>
+  <openSearch:totalResults>2</openSearch:totalResults>
+  <openSearch:startIndex>1</openSearch:startIndex>
+  <openSearch:itemsPerPage>1000</openSearch:itemsPerPage>
+  <entry gd:etag='W/&quot;YDwqeyM.&quot;' gd:kind='analytics#segment'>
+    <id>https://www.google.com/analytics/feeds/datasources/ga/segments/gaid::0</id>
+    <updated>2009-10-26T13:00:44.915-07:00</updated>
+    <title type='text'>Google Analytics Advanced Segment Sources Form Google</title>
+    <link rel='self' type='application/atom+xml' href='https://www.google.com/analytics/feeds/datasources/ga/segments/gaid::0'/>
+    <dxp:segment id='gaid::0' name='Sources Form Google'>
+      <dxp:definition>ga:source=~^\Qgoogle\E</dxp:definition>
+    </dxp:segment>
+  </entry>
+</feed>
+'''
+
