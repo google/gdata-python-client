@@ -42,6 +42,7 @@ class DocsClient(gdata.client.GDClient):
   api_version = '3.0'  # default major version for the service.
   auth_service = 'writely'
   auth_scopes = gdata.gauth.AUTH_SCOPES['writely']
+  ssl = True
 
   def __init__(self, auth_token=None, **kwargs):
     """Constructs a new client for the DocList API.

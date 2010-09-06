@@ -116,7 +116,7 @@ def make_content_link_from_resource_id(resource_id):
     if label == PRESENTATION_LABEL:
       return '/feeds/download/presentations/Export?docId=%s' % doc_id
     if label == SPREADSHEET_LABEL:
-      return ('http://spreadsheets.google.com/feeds/download/spreadsheets/'
+      return ('https://spreadsheets.google.com/feeds/download/spreadsheets/'
               'Export?key=%s' % doc_id)
   raise ValueError, ('Invalid resource id: %s, or manually creating the '
                      'download url for this type of doc is not possible'

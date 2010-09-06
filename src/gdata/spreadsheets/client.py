@@ -32,15 +32,15 @@ import atom.data
 import atom.http_core
 
 
-SPREADSHEETS_URL = ('http://spreadsheets.google.com/feeds/spreadsheets'
+SPREADSHEETS_URL = ('https://spreadsheets.google.com/feeds/spreadsheets'
                     '/private/full')
-WORKSHEETS_URL = ('http://spreadsheets.google.com/feeds/worksheets/'
+WORKSHEETS_URL = ('https://spreadsheets.google.com/feeds/worksheets/'
                   '%s/private/full')
-WORKSHEET_URL = ('http://spreadsheets.google.com/feeds/worksheets/'
+WORKSHEET_URL = ('https://spreadsheets.google.com/feeds/worksheets/'
                  '%s/private/full/%s')
-TABLES_URL = 'http://spreadsheets.google.com/feeds/%s/tables'
-RECORDS_URL = 'http://spreadsheets.google.com/feeds/%s/records/%s'
-RECORD_URL = 'http://spreadsheets.google.com/feeds/%s/records/%s/%s'
+TABLES_URL = 'https://spreadsheets.google.com/feeds/%s/tables'
+RECORDS_URL = 'https://spreadsheets.google.com/feeds/%s/records/%s'
+RECORD_URL = 'https://spreadsheets.google.com/feeds/%s/records/%s/%s'
 
 
 class SpreadsheetsClient(gdata.client.GDClient):
