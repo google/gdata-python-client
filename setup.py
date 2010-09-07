@@ -74,6 +74,7 @@ library may also be used with any Atom Publishing Protocol service (AtomPub).
       'gdata.analytics', 
       'gdata.apps', 
       'gdata.apps.adminsettings', 
+      'gdata.apps.audit', 
       'gdata.apps.emailsettings', 
       'gdata.apps.groups',
       'gdata.apps.migration', 
