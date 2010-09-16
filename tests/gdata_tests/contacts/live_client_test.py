@@ -114,7 +114,6 @@ class ContactsTest(unittest.TestCase):
     http_request.headers['If-Match'] = etag
     self.client.request('DELETE', edit_link, http_request=http_request)
 
-
 def suite():
   return conf.build_suite([ContactsTest])
 

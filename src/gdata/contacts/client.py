@@ -39,6 +39,18 @@ class ContactsClient(gdata.client.GDClient):
   contact_list = "default"
   auth_scopes = gdata.gauth.AUTH_SCOPES['cp']
 
+
+  def __init__(self, domain=None, auth_token=None, **kwargs):
+    """Constructs a new client for the Email Settings API.
+
+    Args:
+      domain: string The Google Apps domain (if any).
+      kwargs: The other parameters to pass to the gdata.client.GDClient
+          constructor.
+    """
+    gdata.client.GDClient.__init__(self, auth_token=auth_token, **kwargs)
+    self.domain = domain
+
   def get_feed_uri(self, kind='contacts', contact_list=None, projection='full',
                   scheme="http"):
     """Builds a feed URI.
@@ -59,7 +71,7 @@ class ContactsClient(gdata.client.GDClient):
     """
     contact_list = contact_list or self.contact_list
     if kind == 'profiles':
-      contact_list = 'domain/%s' % contact_list
+      contact_list = 'domain/%s' % self.domain
     prefix = scheme and '%s://%s' % (scheme, self.server) or ''
     return '%s/m8/feeds/%s/%s/%s' % (prefix, kind, contact_list, projection)
 
@@ -315,7 +327,7 @@ class ContactsClient(gdata.client.GDClient):
     
     uri = uri or self.GetFeedUri('profiles')    
     return self.Get(uri,
-                    desired_class=gdata.contacts.data.ProfilesFeedFromString)
+                    desired_class=gdata.contacts.data.ProfilesFeed)
 
   GetProfilesFeed = get_profiles_feed
 
@@ -331,21 +343,32 @@ class ContactsClient(gdata.client.GDClient):
       On failure, raises a RequestError
     """
     return self.Get(uri,
-                    desired_class=gdata.contacts.data.ProfileEntryFromString)
+                    desired_class=gdata.contacts.data.ProfileEntry)
 
   GetProfile = get_profile
 
-  def update_profile(self, edit_uri, updated_profile,  auth_token=None,  **kwargs):
+  def update_profile(self, updated_profile, auth_token=None, force=False, **kwargs):
     """Updates an existing profile.
 
     Args:
-      edit_uri: string The edit link URI for the element being updated
-      updated_profile: string atom.Entry or subclass containing
-                    the Atom Entry which will replace the profile which is
-                    stored at the edit_url.
+      updated_profile: atom.Entry or subclass containing
+                       the Atom Entry which will replace the profile which is
+                       stored at the edit_url.
+      auth_token: An object which sets the Authorization HTTP header in its
+                  modify_request method. Recommended classes include
+                  gdata.gauth.ClientLoginToken and gdata.gauth.AuthSubToken
+                  among others. Represents the current user. Defaults to None
+                  and if None, this method will look for a value in the
+                  auth_token member of ContactsClient.
+      force: boolean stating whether an update should be forced. Defaults to
+             False. Normally, if a change has been made since the passed in
+             entry was obtained, the server will not overwrite the entry since
+             the changes were based on an obsolete version of the entry.
+             Setting force to True will cause the update to silently
+             overwrite whatever version is present.
       url_params: dict (optional) Additional URL parameters to be included
-                  in the update request.
-      escape_params: boolean (optional) If true, the url_params will be
+                  in the insertion request.
+      escape_params: boolean (optional) If true, the url_parameters will be
                      escaped before they are included in the request.
 
     Returns:
@@ -353,8 +376,7 @@ class ContactsClient(gdata.client.GDClient):
         response to the PUT request.
       On failure, raises a RequestError.
     """
-    return self.Put(updated_profile, self._CleanUri(edit_uri),
-                    desired_class=gdata.contacts.data.ProfileEntryFromString)
+    return self.Update(updated_profile, auth_token=auth_token, force=force, **kwargs)
 
   UpdateProfile = update_profile
 
@@ -380,7 +402,7 @@ class ContactsClient(gdata.client.GDClient):
   ExecuteBatch = execute_batch
 
   def execute_batch_profiles(self, batch_feed, url,
-                   desired_class=gdata.contacts.data.ProfilesFeedFromString):
+                   desired_class=gdata.contacts.data.ProfilesFeed):
     """Sends a batch request feed to the server.
 
     Args:
