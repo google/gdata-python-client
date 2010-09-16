@@ -2911,7 +2911,7 @@ BLOG_COMMENTS_FEED = """<feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSear
     <updated>2007-04-04T21:56:29.803-07:00</updated>
     <title type="text">This is my first comment</title>
     <content type="html">This is my first comment</content>
-    <link rel="alternate" type="text/html" href="http://blogName.blogspot.com/2007/04/first-post.html#commentID"/>
+    <link rel="alternate" type="text/html" href="http://a-blogName.blogspot.com/2007/04/first-post.html#commentID"/>
     <link rel="self" type="application/atom+xml" href="http://blogName.blogspot.com/feeds/postID/comments/default/commentID"/>
     <link rel="edit" type="application/atom+xml" href="http://www.blogger.com/feeds/blogID/postID/comments/default/commentID"/>
     <author>

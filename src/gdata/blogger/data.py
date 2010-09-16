@@ -22,6 +22,7 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 
 
 import re
+import urlparse
 import atom.core
 import gdata.data
 
@@ -74,7 +75,7 @@ class BloggerEntry(gdata.data.GDEntry):
     """
     for link in self.link:
       if link.rel == 'alternate':
-        return BLOG_NAME_PATTERN.match(link.href).group(2)
+        return urlparse.urlparse(link.href)[1].split(".", 1)[0]
     return None
 
   GetBlogName = get_blog_name

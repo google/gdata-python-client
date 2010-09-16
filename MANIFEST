@@ -465,6 +465,7 @@ src/gdata/notebook/__init__.py
 src/gdata/notebook/data.py
 src/gdata/webmastertools/data.py
 src/gdata/youtube/data.py
+tests/gdata_tests/contacts/profiles/live_client_test.py
 tests/gdata_tests/contacts/live_client_test.py
 pydocs/gdata.analytics.client.html
 pydocs/gdata.analytics.data.html
