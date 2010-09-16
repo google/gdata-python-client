@@ -632,7 +632,7 @@ class YouTubeService(gdata.service.GDataService):
       import StringIO
       if hasattr(filename_or_handle, 'seek'):
         filename_or_handle.seek(0)
-      file_handle = StringIO.StringIO(filename_or_handle.read())
+      file_handle = filename_or_handle
       name = 'video'
       if hasattr(filename_or_handle, 'name'):
         name = filename_or_handle.name
