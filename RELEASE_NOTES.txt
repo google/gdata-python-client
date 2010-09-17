@@ -1,3 +1,18 @@
+=== 2.0.12 ===
+17 Sep 2010 (revision )
+
+ - Bug Fixes:
+   * Issue 437: PATCH request generates incorrect Content-Type
+   * Issue 428: get_blog_name() does not correctly handle blog URLs containing hyphens
+   * Issue 443: Packages should contain gdata.apps.audit in setup.py
+   * Issue 430: Lots of memory usage when uploading big video files
+   * Issue 423: gdata.contacts.client.ContactsClient.get_profiles_feed() broken
+  - Turn on SSL be default for the spreadsheet API
+  - Added support for new Analytics feeds
+  - All V3 code and development has been out of this project and into http://code.google.com/p/google-api-python-client/
+  - Added partial support for the YouTube API in v2
+
+
 === 2.0.11 ===
 Jul 29, 2010 (revision fa49231cc8)
 
@@ -16,7 +31,7 @@ Jul 29, 2010 (revision fa49231cc8)
  - Many APIs now use SSL, and some require it, so the following APIs now default to using HTTPS:
    * Spreadsheets
    * Sites
-   * Calendar Resource 
+   * Calendar Resource
 
 === 2.0.10 ===
 May 12, 2010 (revision 980)

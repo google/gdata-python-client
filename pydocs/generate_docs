@@ -90,6 +90,7 @@ pydoc -w gdata.webmastertools.service
 pydoc -w gdata.webmastertools.data
 pydoc -w gdata.youtube
 pydoc -w gdata.youtube.service
+pydoc -w gdata.youtube.client
 pydoc -w gdata.youtube.data
 pydoc -w gdata.opensearch.data
 pydoc -w gdata.calendar_resource.data

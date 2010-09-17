@@ -1,5 +1,5 @@
 
-<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head><title>Python: module gdata.contacts.client</title>
 </head><body bgcolor="#f0f0f8">
 
@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.contacts.html"><font color="#ffffff">contacts</font></a>.client</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/jcgregorio/projects/gdata/src/gdata/contacts/client.py">/home/jcgregorio/projects/gdata/src/gdata/contacts/client.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/google/home/jcgregorio/projects/gdata/src/gdata/contacts/client.py">/usr/local/google/home/jcgregorio/projects/gdata/src/gdata/contacts/client.py</a></font></td></tr></table>
     <p><tt>#&nbsp;Copyright&nbsp;(C)&nbsp;2009&nbsp;Google&nbsp;Inc.<br>
 #<br>
 #&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;"License");<br>
@@ -26,7 +26,7 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="atom.html">atom</a><br>
@@ -76,13 +76,13 @@ Methods defined here:<br>
 
 <dl><dt><a name="ContactsClient-CreateGroup"><strong>CreateGroup</strong></a> = <a href="#ContactsClient-create_group">create_group</a>(self, new_group, insert_uri<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="ContactsClient-DeleteGroup"><strong>DeleteGroup</strong></a> = <a href="#ContactsClient-delete_group">delete_group</a>(self, edit_uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>)</dt></dl>
+<dl><dt><a name="ContactsClient-DeleteGroup"><strong>DeleteGroup</strong></a> = <a href="#ContactsClient-delete_group">delete_group</a>(self, group_object, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kws)</dt></dl>
 
 <dl><dt><a name="ContactsClient-DeletePhoto"><strong>DeletePhoto</strong></a> = <a href="#ContactsClient-delete_photo">delete_photo</a>(self, contact_entry_or_url)</dt></dl>
 
 <dl><dt><a name="ContactsClient-ExecuteBatch"><strong>ExecuteBatch</strong></a> = <a href="#ContactsClient-execute_batch">execute_batch</a>(self, batch_feed, url, desired_class<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="ContactsClient-ExecuteBatchProfiles"><strong>ExecuteBatchProfiles</strong></a> = <a href="#ContactsClient-execute_batch_profiles">execute_batch_profiles</a>(self, batch_feed, url, desired_class<font color="#909090">=&lt;function ProfilesFeedFromString at 0x8391224&gt;</font>)</dt></dl>
+<dl><dt><a name="ContactsClient-ExecuteBatchProfiles"><strong>ExecuteBatchProfiles</strong></a> = <a href="#ContactsClient-execute_batch_profiles">execute_batch_profiles</a>(self, batch_feed, url, desired_class<font color="#909090">=&lt;class 'gdata.contacts.data.ProfilesFeed'&gt;</font>)</dt></dl>
 
 <dl><dt><a name="ContactsClient-GetContact"><strong>GetContact</strong></a> = <a href="#ContactsClient-get_contact">get_contact</a>(self, uri, desired_class<font color="#909090">=&lt;class 'gdata.contacts.data.ContactEntry'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
@@ -102,7 +102,14 @@ Methods defined here:<br>
 
 <dl><dt><a name="ContactsClient-UpdateGroup"><strong>UpdateGroup</strong></a> = <a href="#ContactsClient-update_group">update_group</a>(self, edit_uri, updated_group, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, desired_class<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="ContactsClient-UpdateProfile"><strong>UpdateProfile</strong></a> = <a href="#ContactsClient-update_profile">update_profile</a>(self, edit_uri, updated_profile, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="ContactsClient-UpdateProfile"><strong>UpdateProfile</strong></a> = <a href="#ContactsClient-update_profile">update_profile</a>(self, updated_profile, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="ContactsClient-__init__"><strong>__init__</strong></a>(self, domain<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Constructs&nbsp;a&nbsp;new&nbsp;client&nbsp;for&nbsp;the&nbsp;Email&nbsp;Settings&nbsp;API.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;domain:&nbsp;string&nbsp;The&nbsp;Google&nbsp;Apps&nbsp;domain&nbsp;(if&nbsp;any).<br>
+&nbsp;&nbsp;kwargs:&nbsp;The&nbsp;other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;the&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;constructor.</tt></dd></dl>
 
 <dl><dt><a name="ContactsClient-add_contact"><strong>add_contact</strong></a>(self, new_contact, insert_uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, billing_information<font color="#909090">=None</font>, birthday<font color="#909090">=None</font>, calendar_link<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Adds&nbsp;an&nbsp;new&nbsp;contact&nbsp;to&nbsp;Google&nbsp;Contacts.<br>
 &nbsp;<br>
@@ -163,7 +170,7 @@ Returns:<br>
 
 <dl><dt><a name="ContactsClient-create_group"><strong>create_group</strong></a>(self, new_group, insert_uri<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="ContactsClient-delete_group"><strong>delete_group</strong></a>(self, edit_uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>)</dt></dl>
+<dl><dt><a name="ContactsClient-delete_group"><strong>delete_group</strong></a>(self, group_object, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kws)</dt></dl>
 
 <dl><dt><a name="ContactsClient-delete_photo"><strong>delete_photo</strong></a>(self, contact_entry_or_url)</dt></dl>
 
@@ -183,7 +190,7 @@ Returns:<br>
 &nbsp;&nbsp;The&nbsp;results&nbsp;of&nbsp;the&nbsp;batch&nbsp;request's&nbsp;execution&nbsp;on&nbsp;the&nbsp;server.&nbsp;If&nbsp;the<br>
 &nbsp;&nbsp;default&nbsp;converter&nbsp;is&nbsp;used,&nbsp;this&nbsp;is&nbsp;stored&nbsp;in&nbsp;a&nbsp;ContactsFeed.</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-execute_batch_profiles"><strong>execute_batch_profiles</strong></a>(self, batch_feed, url, desired_class<font color="#909090">=&lt;function ProfilesFeedFromString at 0x8391224&gt;</font>)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;feed&nbsp;to&nbsp;the&nbsp;server.<br>
+<dl><dt><a name="ContactsClient-execute_batch_profiles"><strong>execute_batch_profiles</strong></a>(self, batch_feed, url, desired_class<font color="#909090">=&lt;class 'gdata.contacts.data.ProfilesFeed'&gt;</font>)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;feed&nbsp;to&nbsp;the&nbsp;server.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;batch_feed:&nbsp;gdata.profiles.ProfilesFeed&nbsp;A&nbsp;feed&nbsp;containing&nbsp;batch<br>
@@ -272,16 +279,27 @@ Returns:<br>
 
 <dl><dt><a name="ContactsClient-update_group"><strong>update_group</strong></a>(self, edit_uri, updated_group, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, desired_class<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="ContactsClient-update_profile"><strong>update_profile</strong></a>(self, edit_uri, updated_profile, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Updates&nbsp;an&nbsp;existing&nbsp;profile.<br>
+<dl><dt><a name="ContactsClient-update_profile"><strong>update_profile</strong></a>(self, updated_profile, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Updates&nbsp;an&nbsp;existing&nbsp;profile.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;edit_uri:&nbsp;string&nbsp;The&nbsp;edit&nbsp;link&nbsp;URI&nbsp;for&nbsp;the&nbsp;element&nbsp;being&nbsp;updated<br>
-&nbsp;&nbsp;updated_profile:&nbsp;string&nbsp;atom.Entry&nbsp;or&nbsp;subclass&nbsp;containing<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Atom&nbsp;Entry&nbsp;which&nbsp;will&nbsp;replace&nbsp;the&nbsp;profile&nbsp;which&nbsp;is<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stored&nbsp;at&nbsp;the&nbsp;edit_url.<br>
+&nbsp;&nbsp;updated_profile:&nbsp;atom.Entry&nbsp;or&nbsp;subclass&nbsp;containing<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Atom&nbsp;Entry&nbsp;which&nbsp;will&nbsp;replace&nbsp;the&nbsp;profile&nbsp;which&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stored&nbsp;at&nbsp;the&nbsp;edit_url.<br>
+&nbsp;&nbsp;auth_token:&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header&nbsp;in&nbsp;its<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modify_request&nbsp;method.&nbsp;Recommended&nbsp;classes&nbsp;include<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.&nbsp;Represents&nbsp;the&nbsp;current&nbsp;user.&nbsp;Defaults&nbsp;to&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;if&nbsp;None,&nbsp;this&nbsp;method&nbsp;will&nbsp;look&nbsp;for&nbsp;a&nbsp;value&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;auth_token&nbsp;member&nbsp;of&nbsp;<a href="#ContactsClient">ContactsClient</a>.<br>
+&nbsp;&nbsp;force:&nbsp;boolean&nbsp;stating&nbsp;whether&nbsp;an&nbsp;update&nbsp;should&nbsp;be&nbsp;forced.&nbsp;Defaults&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;False.&nbsp;Normally,&nbsp;if&nbsp;a&nbsp;change&nbsp;has&nbsp;been&nbsp;made&nbsp;since&nbsp;the&nbsp;passed&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;was&nbsp;obtained,&nbsp;the&nbsp;server&nbsp;will&nbsp;not&nbsp;overwrite&nbsp;the&nbsp;entry&nbsp;since<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;changes&nbsp;were&nbsp;based&nbsp;on&nbsp;an&nbsp;obsolete&nbsp;version&nbsp;of&nbsp;the&nbsp;entry.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Setting&nbsp;force&nbsp;to&nbsp;True&nbsp;will&nbsp;cause&nbsp;the&nbsp;update&nbsp;to&nbsp;silently<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;overwrite&nbsp;whatever&nbsp;version&nbsp;is&nbsp;present.<br>
 &nbsp;&nbsp;url_params:&nbsp;dict&nbsp;(optional)&nbsp;Additional&nbsp;URL&nbsp;parameters&nbsp;to&nbsp;be&nbsp;included<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;update&nbsp;request.<br>
-&nbsp;&nbsp;escape_params:&nbsp;boolean&nbsp;(optional)&nbsp;If&nbsp;true,&nbsp;the&nbsp;url_params&nbsp;will&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;insertion&nbsp;request.<br>
+&nbsp;&nbsp;escape_params:&nbsp;boolean&nbsp;(optional)&nbsp;If&nbsp;true,&nbsp;the&nbsp;url_parameters&nbsp;will&nbsp;be<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;escaped&nbsp;before&nbsp;they&nbsp;are&nbsp;included&nbsp;in&nbsp;the&nbsp;request.<br>
 &nbsp;<br>
 Returns:<br>
@@ -303,7 +321,7 @@ Data and other attributes defined here:<br>
 
 <hr>
 Methods inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
-<dl><dt><a name="ContactsClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8376eec&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+<dl><dt><a name="ContactsClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
 application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
@@ -487,9 +505,9 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8376f0c&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="ContactsClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="ContactsClient-RevokeToken"><strong>RevokeToken</strong></a> = revoke_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8376fcc&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
+<dl><dt><a name="ContactsClient-RevokeToken"><strong>RevokeToken</strong></a> = revoke_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;both&nbsp;AuthSub&nbsp;and&nbsp;OAuth&nbsp;tokens&nbsp;(to&nbsp;invalidate<br>
 a&nbsp;ClientLogin&nbsp;token,&nbsp;the&nbsp;user&nbsp;must&nbsp;change&nbsp;their&nbsp;password).<br>
@@ -518,7 +536,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8376fac&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="ContactsClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -535,7 +553,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8376eec&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+<dl><dt><a name="ContactsClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
 application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
@@ -719,9 +737,9 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8376f0c&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="ContactsClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="ContactsClient-revoke_token"><strong>revoke_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8376fcc&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
+<dl><dt><a name="ContactsClient-revoke_token"><strong>revoke_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;both&nbsp;AuthSub&nbsp;and&nbsp;OAuth&nbsp;tokens&nbsp;(to&nbsp;invalidate<br>
 a&nbsp;ClientLogin&nbsp;token,&nbsp;the&nbsp;user&nbsp;must&nbsp;change&nbsp;their&nbsp;password).<br>
@@ -750,7 +768,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x8376fac&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="ContactsClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -772,21 +790,6 @@ Methods inherited from <a href="atom.client.html#AtomPubClient">atom.client.Atom
 <dl><dt><a name="ContactsClient-Get"><strong>Get</strong></a> = get(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Performs&nbsp;a&nbsp;request&nbsp;using&nbsp;the&nbsp;GET&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
 <dl><dt><a name="ContactsClient-Put"><strong>Put</strong></a> = put(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;data&nbsp;using&nbsp;the&nbsp;PUT&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
-
-<dl><dt><a name="ContactsClient-__init__"><strong>__init__</strong></a>(self, http_client<font color="#909090">=None</font>, host<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, source<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;AtomPubClient&nbsp;instance.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;source:&nbsp;The&nbsp;name&nbsp;of&nbsp;your&nbsp;application.<br>
-&nbsp;&nbsp;http_client:&nbsp;An&nbsp;object&nbsp;capable&nbsp;of&nbsp;performing&nbsp;HTTP&nbsp;requests&nbsp;through&nbsp;a<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request&nbsp;method.&nbsp;This&nbsp;object&nbsp;is&nbsp;used&nbsp;to&nbsp;perform&nbsp;the&nbsp;request<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;when&nbsp;the&nbsp;AtomPubClient's&nbsp;request&nbsp;method&nbsp;is&nbsp;called.&nbsp;Used&nbsp;to<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow&nbsp;HTTP&nbsp;requests&nbsp;to&nbsp;be&nbsp;directed&nbsp;to&nbsp;a&nbsp;mock&nbsp;server,&nbsp;or&nbsp;use<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;an&nbsp;alternate&nbsp;library&nbsp;instead&nbsp;of&nbsp;the&nbsp;default&nbsp;of&nbsp;httplib&nbsp;to<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make&nbsp;HTTP&nbsp;requests.<br>
-&nbsp;&nbsp;host:&nbsp;str&nbsp;The&nbsp;default&nbsp;host&nbsp;name&nbsp;to&nbsp;use&nbsp;if&nbsp;a&nbsp;host&nbsp;is&nbsp;not&nbsp;specified&nbsp;in&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested&nbsp;URI.<br>
-&nbsp;&nbsp;auth_token:&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;HTTP&nbsp;Authorization&nbsp;header&nbsp;when&nbsp;its<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modify_request&nbsp;method&nbsp;is&nbsp;called.</tt></dd></dl>
 
 <dl><dt><a name="ContactsClient-get"><strong>get</strong></a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Performs&nbsp;a&nbsp;request&nbsp;using&nbsp;the&nbsp;GET&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
