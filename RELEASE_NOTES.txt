@@ -1,5 +1,5 @@
 === 2.0.12 ===
-17 Sep 2010 (revision )
+17 Sep 2010 (revision 892:e949a7cf9a31)
 
  - Bug Fixes:
    * Issue 437: PATCH request generates incorrect Content-Type
