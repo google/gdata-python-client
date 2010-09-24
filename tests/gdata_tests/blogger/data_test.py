@@ -50,6 +50,7 @@ class BlogEntryTest(unittest.TestCase):
     self.assert_(isinstance(feed, gdata.blogger.data.CommentFeed))
     self.assert_(isinstance(feed.entry[0], gdata.blogger.data.Comment))
     self.assertEquals(feed.entry[0].get_blog_id(), 'blogID')
+    self.assertEquals(feed.entry[0].get_blog_name(), 'a-blogName')
     self.assertEquals(feed.entry[0].get_comment_id(), 'commentID')
     self.assertEquals(feed.entry[0].title.text, 'This is my first comment')
     self.assertEquals(feed.entry[0].in_reply_to.source, 

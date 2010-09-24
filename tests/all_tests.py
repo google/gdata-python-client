@@ -20,7 +20,6 @@
 
 __author__ = 'j.s@google.com (Jeff Scudder)'
 
-
 import unittest
 # Tests for v2 features.
 import atom_tests.core_test
@@ -49,14 +48,17 @@ import gdata_tests.sites.live_client_test
 import gdata_tests.analytics.data_test
 import gdata_tests.analytics.live_client_test
 import gdata_tests.contacts.live_client_test
+import gdata_tests.contacts.profiles.live_client_test
 import gdata_tests.calendar_resource.live_client_test
 import gdata_tests.calendar_resource.data_test
 import gdata_tests.apps.emailsettings.data_test
 import gdata_tests.apps.emailsettings.live_client_test
+import gdata_tests.youtube.live_client_test
 
 
 def suite():
   return unittest.TestSuite((
+      gdata_tests.contacts.profiles.live_client_test.suite(),
       atom_tests.core_test.suite(),
       atom_tests.data_test.suite(),
       atom_tests.http_core_test.suite(),
@@ -87,6 +89,7 @@ def suite():
       gdata_tests.calendar_resource.data_test.suite(),
       gdata_tests.apps.emailsettings.live_client_test.suite(),
       gdata_tests.apps.emailsettings.data_test.suite(),
+      gdata_tests.youtube.live_client_test.suite(),
       ))
 
 

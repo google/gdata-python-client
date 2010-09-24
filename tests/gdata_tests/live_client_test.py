@@ -24,7 +24,6 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 
 import os
 import unittest
-import gdata.gauth
 import gdata.client
 import atom.http_core
 import atom.mock_http_core
@@ -176,7 +175,8 @@ class ContactsTest(unittest.TestCase):
 
   def tearDown(self):
     conf.close_client(self.client)
-
+  
+  # Run this test and profiles fails
   def test_crud_version_two(self):
     if not conf.options.get_value('runlive') == 'true':
       return

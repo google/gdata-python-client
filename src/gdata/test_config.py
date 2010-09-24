@@ -206,6 +206,19 @@ TARGET_USERNAME_OPTION = Option(
     'Please enter the username (without domain) of the user which will be'
     ' affected by the tests',
     description=('The username of the user to be tested'))
+YT_DEVELOPER_KEY_OPTION = Option(
+    'developerkey',
+    'Please enter your YouTube developer key',
+    description=('The YouTube developer key for your account'))
+YT_CLIENT_ID_OPTION = Option(
+    'clientid',
+    'Please enter your YouTube client ID',
+    description=('The YouTube client ID for your account'))
+YT_VIDEO_ID_OPTION= Option(
+    'videoid',
+    'Please enter the ID of a YouTube video you uploaded',
+    description=('The video ID of a YouTube video uploaded to your account'))
+
 
 # Functions to inject a cachable HTTP client into a service client.
 def configure_client(client, case_name, service_name, use_apps_auth=False):
@@ -215,7 +228,7 @@ def configure_client(client, case_name, service_name, use_apps_auth=False):
 
   Handles authentication to allow the GDClient to make requests which
   require an auth header.
-where
+
   Args:
     client: a gdata.GDClient whose http_client member should be replaced
             with a atom.mock_http_core.MockHttpClient so that repeated

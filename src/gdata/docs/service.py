@@ -120,7 +120,7 @@ class DocsService(gdata.service.GDataService):
     if label == PRESENTATION_LABEL:
       return '/feeds/download/presentations/Export?docId=%s' % doc_id
     if label == SPREADSHEET_LABEL:
-      return ('http://spreadsheets.google.com/feeds/download/spreadsheets/'
+      return ('https://spreadsheets.google.com/feeds/download/spreadsheets/'
               'Export?key=%s' % doc_id)
     raise ValueError, 'Invalid resource id: %s' % resource_id
 

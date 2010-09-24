@@ -1,5 +1,5 @@
 
-<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head><title>Python: module gdata.analytics.client</title>
 </head><body bgcolor="#f0f0f8">
 
@@ -8,14 +8,13 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.analytics.html"><font color="#ffffff">analytics</font></a>.client</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/jcgregorio/projects/gdata/src/gdata/analytics/client.py">/home/jcgregorio/projects/gdata/src/gdata/analytics/client.py</a></font></td></tr></table>
-    <p><tt><a href="#AnalyticsClient">AnalyticsClient</a>&nbsp;extends&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>&nbsp;to&nbsp;streamline<br>
-Google&nbsp;Analytics&nbsp;Data&nbsp;Export&nbsp;API&nbsp;calls.</tt></p>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/google/home/jcgregorio/projects/gdata/src/gdata/analytics/client.py">/usr/local/google/home/jcgregorio/projects/gdata/src/gdata/analytics/client.py</a></font></td></tr></table>
+    <p><tt>Streamlines&nbsp;requests&nbsp;to&nbsp;the&nbsp;Google&nbsp;Analytics&nbsp;APIs.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="atom.html">atom</a><br>
@@ -37,26 +36,36 @@ Google&nbsp;Analytics&nbsp;Data&nbsp;Export&nbsp;API&nbsp;calls.</tt></p>
 <dt><font face="helvetica, arial"><a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a>(<a href="atom.http_core.html#Uri">atom.http_core.Uri</a>)
 </font></dt><dd>
 <dl>
+<dt><font face="helvetica, arial"><a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a>
+</font></dt><dd>
+<dl>
 <dt><font face="helvetica, arial"><a href="gdata.analytics.client.html#AccountFeedQuery">AccountFeedQuery</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.client.html#AccountQuery">AccountQuery</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.client.html#AdvSegQuery">AdvSegQuery</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.client.html#DataFeedQuery">DataFeedQuery</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.client.html#GoalQuery">GoalQuery</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.client.html#ProfileQuery">ProfileQuery</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.analytics.client.html#WebPropertyQuery">WebPropertyQuery</a>
 </font></dt></dl>
+</dd>
+</dl>
 </dd>
 </dl>
  <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="AccountFeedQuery">class <strong>AccountFeedQuery</strong></a>(<a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="AccountFeedQuery">class <strong>AccountFeedQuery</strong></a>(<a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt>Account&nbsp;Feed&nbsp;query&nbsp;class&nbsp;to&nbsp;simplify&nbsp;constructing&nbsp;Account&nbsp;Feed&nbsp;Urls.<br>
 &nbsp;<br>
 To&nbsp;use&nbsp;this&nbsp;class,&nbsp;you&nbsp;can&nbsp;either&nbsp;pass&nbsp;a&nbsp;dict&nbsp;in&nbsp;the&nbsp;constructor&nbsp;that&nbsp;has<br>
-all&nbsp;the&nbsp;data&nbsp;feed&nbsp;query&nbsp;parameters&nbsp;as&nbsp;keys.<br>
-&nbsp;&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#DataFeedQuery">DataFeedQuery</a>({'max-results':&nbsp;'10000'})<br>
+all&nbsp;the&nbsp;data&nbsp;feed&nbsp;query&nbsp;parameters&nbsp;as&nbsp;keys:<br>
+&nbsp;&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#AccountFeedQuery">AccountFeedQuery</a>({'max-results':&nbsp;'10000'})<br>
 &nbsp;<br>
-Alternatively&nbsp;you&nbsp;can&nbsp;add&nbsp;new&nbsp;parameters&nbsp;directly&nbsp;to&nbsp;the&nbsp;query&nbsp;object.<br>
-&nbsp;&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#DataFeedQuery">DataFeedQuery</a>()<br>
+Alternatively&nbsp;you&nbsp;can&nbsp;add&nbsp;new&nbsp;parameters&nbsp;directly&nbsp;to&nbsp;the&nbsp;query&nbsp;object:<br>
+&nbsp;&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#AccountFeedQuery">AccountFeedQuery</a>()<br>
 &nbsp;&nbsp;&nbsp;queryUrl.query['max-results']&nbsp;=&nbsp;'10000'<br>
 &nbsp;<br>
 Args:<br>
@@ -65,19 +74,22 @@ Args:<br>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.analytics.client.html#AccountFeedQuery">AccountFeedQuery</a></dd>
+<dd><a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a></dd>
 <dd><a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a></dd>
 <dd><a href="atom.http_core.html#Uri">atom.http_core.Uri</a></dd>
 <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="AccountFeedQuery-__init__"><strong>__init__</strong></a>(self, query<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="AccountFeedQuery-__init__"><strong>__init__</strong></a>(self, query<font color="#909090">={}</font>, **kwargs)</dt></dl>
 
 <hr>
 Data and other attributes defined here:<br>
-<dl><dt><strong>host</strong> = 'www.google.com'</dl>
-
 <dl><dt><strong>path</strong> = '/analytics/feeds/accounts/default'</dl>
+
+<hr>
+Data and other attributes inherited from <a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a>:<br>
+<dl><dt><strong>host</strong> = 'www.google.com'</dl>
 
 <dl><dt><strong>scheme</strong> = 'https'</dl>
 
@@ -122,6 +134,237 @@ Data and other attributes inherited from <a href="atom.http_core.html#Uri">atom.
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="AccountQuery">class <strong>AccountQuery</strong></a>(<a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Management&nbsp;API&nbsp;Account&nbsp;Feed&nbsp;query&nbsp;class.<br>
+&nbsp;<br>
+Example&nbsp;Usage:<br>
+&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#AccountQuery">AccountQuery</a>()<br>
+&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#AccountQuery">AccountQuery</a>({'max-results':&nbsp;100})<br>
+&nbsp;<br>
+&nbsp;&nbsp;queryUrl2&nbsp;=&nbsp;<a href="#AccountQuery">AccountQuery</a>()<br>
+&nbsp;&nbsp;queryUrl2.query['max-results']&nbsp;=&nbsp;100<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;query:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;query&nbsp;parameters.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.analytics.client.html#AccountQuery">AccountQuery</a></dd>
+<dd><a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a></dd>
+<dd><a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a></dd>
+<dd><a href="atom.http_core.html#Uri">atom.http_core.Uri</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="AccountQuery-__init__"><strong>__init__</strong></a>(self, query<font color="#909090">={}</font>, **kwargs)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>path</strong> = '/analytics/feeds/datasources/ga/accounts'</dl>
+
+<hr>
+Data and other attributes inherited from <a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a>:<br>
+<dl><dt><strong>host</strong> = 'www.google.com'</dl>
+
+<dl><dt><strong>scheme</strong> = 'https'</dl>
+
+<hr>
+Data descriptors inherited from <a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a>:<br>
+<dl><dt><strong>text_query</strong></dt>
+<dd><tt>The&nbsp;q&nbsp;parameter&nbsp;for&nbsp;searching&nbsp;for&nbsp;an&nbsp;exact&nbsp;text&nbsp;match&nbsp;on&nbsp;content</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><a name="AccountQuery-ModifyRequest"><strong>ModifyRequest</strong></a> = modify_request(self, http_request<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;HTTP&nbsp;request&nbsp;components&nbsp;based&nbsp;on&nbsp;the&nbsp;URI.</tt></dd></dl>
+
+<dl><dt><a name="AccountQuery-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AccountQuery-modify_request"><strong>modify_request</strong></a>(self, http_request<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;HTTP&nbsp;request&nbsp;components&nbsp;based&nbsp;on&nbsp;the&nbsp;URI.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><a name="AccountQuery-ParseUri"><strong>ParseUri</strong></a> = parse_uri(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;Uri&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
+members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>
+
+<dl><dt><a name="AccountQuery-parse_uri"><strong>parse_uri</strong></a>(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;Uri&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
+members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><strong>port</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="AdvSegQuery">class <strong>AdvSegQuery</strong></a>(<a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Management&nbsp;API&nbsp;Goal&nbsp;Feed&nbsp;query&nbsp;class.<br>
+&nbsp;<br>
+Example&nbsp;Usage:<br>
+&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#AdvSegQuery">AdvSegQuery</a>()<br>
+&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#AdvSegQuery">AdvSegQuery</a>({'max-results':&nbsp;100})<br>
+&nbsp;<br>
+&nbsp;&nbsp;queryUrl1&nbsp;=&nbsp;<a href="#AdvSegQuery">AdvSegQuery</a>()<br>
+&nbsp;&nbsp;queryUrl1.query['max-results']&nbsp;=&nbsp;100<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;query:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;query&nbsp;parameters.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.analytics.client.html#AdvSegQuery">AdvSegQuery</a></dd>
+<dd><a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a></dd>
+<dd><a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a></dd>
+<dd><a href="atom.http_core.html#Uri">atom.http_core.Uri</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="AdvSegQuery-__init__"><strong>__init__</strong></a>(self, query<font color="#909090">={}</font>, **kwargs)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>path</strong> = '/analytics/feeds/datasources/ga/segments'</dl>
+
+<hr>
+Data and other attributes inherited from <a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a>:<br>
+<dl><dt><strong>host</strong> = 'www.google.com'</dl>
+
+<dl><dt><strong>scheme</strong> = 'https'</dl>
+
+<hr>
+Data descriptors inherited from <a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a>:<br>
+<dl><dt><strong>text_query</strong></dt>
+<dd><tt>The&nbsp;q&nbsp;parameter&nbsp;for&nbsp;searching&nbsp;for&nbsp;an&nbsp;exact&nbsp;text&nbsp;match&nbsp;on&nbsp;content</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><a name="AdvSegQuery-ModifyRequest"><strong>ModifyRequest</strong></a> = modify_request(self, http_request<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;HTTP&nbsp;request&nbsp;components&nbsp;based&nbsp;on&nbsp;the&nbsp;URI.</tt></dd></dl>
+
+<dl><dt><a name="AdvSegQuery-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AdvSegQuery-modify_request"><strong>modify_request</strong></a>(self, http_request<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;HTTP&nbsp;request&nbsp;components&nbsp;based&nbsp;on&nbsp;the&nbsp;URI.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><a name="AdvSegQuery-ParseUri"><strong>ParseUri</strong></a> = parse_uri(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;Uri&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
+members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>
+
+<dl><dt><a name="AdvSegQuery-parse_uri"><strong>parse_uri</strong></a>(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;Uri&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
+members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><strong>port</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="AnalyticsBaseQuery">class <strong>AnalyticsBaseQuery</strong></a>(<a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Abstracts&nbsp;common&nbsp;configuration&nbsp;across&nbsp;all&nbsp;query&nbsp;objects.<br>
+&nbsp;<br>
+Attributes:<br>
+&nbsp;&nbsp;scheme:&nbsp;string&nbsp;The&nbsp;default&nbsp;scheme.&nbsp;Should&nbsp;always&nbsp;be&nbsp;https.<br>
+&nbsp;&nbsp;host:&nbsp;string&nbsp;The&nbsp;default&nbsp;host.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a></dd>
+<dd><a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a></dd>
+<dd><a href="atom.http_core.html#Uri">atom.http_core.Uri</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>host</strong> = 'www.google.com'</dl>
+
+<dl><dt><strong>scheme</strong> = 'https'</dl>
+
+<hr>
+Data descriptors inherited from <a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a>:<br>
+<dl><dt><strong>text_query</strong></dt>
+<dd><tt>The&nbsp;q&nbsp;parameter&nbsp;for&nbsp;searching&nbsp;for&nbsp;an&nbsp;exact&nbsp;text&nbsp;match&nbsp;on&nbsp;content</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><a name="AnalyticsBaseQuery-ModifyRequest"><strong>ModifyRequest</strong></a> = modify_request(self, http_request<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;HTTP&nbsp;request&nbsp;components&nbsp;based&nbsp;on&nbsp;the&nbsp;URI.</tt></dd></dl>
+
+<dl><dt><a name="AnalyticsBaseQuery-__init__"><strong>__init__</strong></a>(self, scheme<font color="#909090">=None</font>, host<font color="#909090">=None</font>, port<font color="#909090">=None</font>, path<font color="#909090">=None</font>, query<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;a&nbsp;URI.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;scheme:&nbsp;str&nbsp;This&nbsp;is&nbsp;usually&nbsp;'http'&nbsp;or&nbsp;'https'.<br>
+&nbsp;&nbsp;host:&nbsp;str&nbsp;The&nbsp;host&nbsp;name&nbsp;or&nbsp;IP&nbsp;address&nbsp;of&nbsp;the&nbsp;desired&nbsp;server.<br>
+&nbsp;&nbsp;post:&nbsp;int&nbsp;The&nbsp;server's&nbsp;port&nbsp;number.<br>
+&nbsp;&nbsp;path:&nbsp;str&nbsp;The&nbsp;path&nbsp;of&nbsp;the&nbsp;resource&nbsp;following&nbsp;the&nbsp;host.&nbsp;This&nbsp;begins&nbsp;with<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;/,&nbsp;example:&nbsp;'/calendar/feeds/default/allcalendars/full'<br>
+&nbsp;&nbsp;query:&nbsp;dict&nbsp;of&nbsp;strings&nbsp;The&nbsp;URL&nbsp;query&nbsp;parameters.&nbsp;The&nbsp;keys&nbsp;and&nbsp;values&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;both&nbsp;escaped&nbsp;so&nbsp;this&nbsp;dict&nbsp;should&nbsp;contain&nbsp;the&nbsp;unescaped&nbsp;values.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;example&nbsp;{'my&nbsp;key':&nbsp;'val',&nbsp;'second':&nbsp;'!!!'}&nbsp;will&nbsp;become<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'?my+key=val&amp;second=%21%21%21'&nbsp;which&nbsp;is&nbsp;appended&nbsp;to&nbsp;the&nbsp;path.</tt></dd></dl>
+
+<dl><dt><a name="AnalyticsBaseQuery-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AnalyticsBaseQuery-modify_request"><strong>modify_request</strong></a>(self, http_request<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;HTTP&nbsp;request&nbsp;components&nbsp;based&nbsp;on&nbsp;the&nbsp;URI.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><a name="AnalyticsBaseQuery-ParseUri"><strong>ParseUri</strong></a> = parse_uri(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;Uri&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
+members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>
+
+<dl><dt><a name="AnalyticsBaseQuery-parse_uri"><strong>parse_uri</strong></a>(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;Uri&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
+members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><strong>path</strong> = None</dl>
+
+<dl><dt><strong>port</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="AnalyticsClient">class <strong>AnalyticsClient</strong></a>(<a href="gdata.client.html#GDClient">gdata.client.GDClient</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
@@ -139,7 +382,11 @@ Methods defined here:<br>
 
 <dl><dt><a name="AnalyticsClient-GetDataFeed"><strong>GetDataFeed</strong></a> = <a href="#AnalyticsClient-get_data_feed">get_data_feed</a>(self, feed_uri, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="AnalyticsClient-__init__"><strong>__init__</strong></a>(self, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Constructs&nbsp;a&nbsp;new&nbsp;client&nbsp;for&nbsp;the&nbsp;Google&nbsp;Analytics&nbsp;Data&nbsp;Export&nbsp;API.<br>
+<dl><dt><a name="AnalyticsClient-GetManagementFeed"><strong>GetManagementFeed</strong></a> = <a href="#AnalyticsClient-get_management_feed">get_management_feed</a>(self, feed_uri, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="AnalyticsClient-GetMgmtFeed"><strong>GetMgmtFeed</strong></a> = <a href="#AnalyticsClient-get_management_feed">get_management_feed</a>(self, feed_uri, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="AnalyticsClient-__init__"><strong>__init__</strong></a>(self, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Initializes&nbsp;a&nbsp;new&nbsp;client&nbsp;for&nbsp;the&nbsp;Google&nbsp;Analytics&nbsp;Data&nbsp;Export&nbsp;API.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;auth_token:&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
@@ -161,6 +408,22 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Feed&nbsp;uri&nbsp;to&nbsp;define&nbsp;what&nbsp;data&nbsp;to&nbsp;retrieve&nbsp;from&nbsp;the&nbsp;API.&nbsp;Can&nbsp;also&nbsp;be<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;used&nbsp;with&nbsp;a&nbsp;gdata.analytics.<a href="#AccountFeedQuery">AccountFeedQuery</a>&nbsp;object.</tt></dd></dl>
 
+<dl><dt><a name="AnalyticsClient-get_management_feed"><strong>get_management_feed</strong></a>(self, feed_uri, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Makes&nbsp;a&nbsp;request&nbsp;to&nbsp;the&nbsp;Google&nbsp;Analytics&nbsp;Management&nbsp;API.<br>
+&nbsp;<br>
+The&nbsp;Management&nbsp;API&nbsp;provides&nbsp;read-only&nbsp;access&nbsp;to&nbsp;configuration&nbsp;data&nbsp;for<br>
+Google&nbsp;Analytics&nbsp;and&nbsp;supercedes&nbsp;the&nbsp;Data&nbsp;Export&nbsp;API&nbsp;Account&nbsp;Feed.<br>
+The&nbsp;Management&nbsp;API&nbsp;supports&nbsp;5&nbsp;feeds:&nbsp;account,&nbsp;web&nbsp;property,&nbsp;profile,<br>
+goal,&nbsp;advanced&nbsp;segment.<br>
+&nbsp;<br>
+You&nbsp;can&nbsp;access&nbsp;each&nbsp;feed&nbsp;through&nbsp;the&nbsp;respective&nbsp;management&nbsp;query&nbsp;class<br>
+below.&nbsp;All&nbsp;requests&nbsp;return&nbsp;the&nbsp;same&nbsp;data&nbsp;object.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;feed_uri:&nbsp;str&nbsp;or&nbsp;<a href="#AccountQuery">AccountQuery</a>,&nbsp;<a href="#WebPropertyQuery">WebPropertyQuery</a>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ProfileQuery">ProfileQuery</a>,&nbsp;<a href="#GoalQuery">GoalQuery</a>,&nbsp;MgmtAdvSegFeedQuery<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;Management&nbsp;API&nbsp;Feed&nbsp;uri&nbsp;to&nbsp;define&nbsp;which&nbsp;feed&nbsp;to&nbsp;retrieve.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Either&nbsp;use&nbsp;a&nbsp;string&nbsp;or&nbsp;one&nbsp;of&nbsp;the&nbsp;wrapper&nbsp;classes.</tt></dd></dl>
+
 <hr>
 Data and other attributes defined here:<br>
 <dl><dt><strong>account_type</strong> = 'GOOGLE'</dl>
@@ -173,7 +436,7 @@ Data and other attributes defined here:<br>
 
 <hr>
 Methods inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
-<dl><dt><a name="AnalyticsClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x837aa2c&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+<dl><dt><a name="AnalyticsClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
 application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
@@ -357,9 +620,9 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x837a9ac&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="AnalyticsClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="AnalyticsClient-RevokeToken"><strong>RevokeToken</strong></a> = revoke_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x837ab2c&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
+<dl><dt><a name="AnalyticsClient-RevokeToken"><strong>RevokeToken</strong></a> = revoke_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;both&nbsp;AuthSub&nbsp;and&nbsp;OAuth&nbsp;tokens&nbsp;(to&nbsp;invalidate<br>
 a&nbsp;ClientLogin&nbsp;token,&nbsp;the&nbsp;user&nbsp;must&nbsp;change&nbsp;their&nbsp;password).<br>
@@ -388,7 +651,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x837aa8c&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="AnalyticsClient-UpgradeToken"><strong>UpgradeToken</strong></a> = upgrade_token(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -405,7 +668,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x837aa2c&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
+<dl><dt><a name="AnalyticsClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
 application&nbsp;must&nbsp;be&nbsp;authorized&nbsp;by&nbsp;the&nbsp;user.&nbsp;One&nbsp;way&nbsp;to&nbsp;demonstrage<br>
@@ -589,9 +852,9 @@ Returns:<br>
 &nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
 &nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object at 0x837a9ac&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="AnalyticsClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="AnalyticsClient-revoke_token"><strong>revoke_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x837ab2c&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
+<dl><dt><a name="AnalyticsClient-revoke_token"><strong>revoke_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;both&nbsp;AuthSub&nbsp;and&nbsp;OAuth&nbsp;tokens&nbsp;(to&nbsp;invalidate<br>
 a&nbsp;ClientLogin&nbsp;token,&nbsp;the&nbsp;user&nbsp;must&nbsp;change&nbsp;their&nbsp;password).<br>
@@ -620,7 +883,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
 
-<dl><dt><a name="AnalyticsClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object at 0x837aa8c&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
+<dl><dt><a name="AnalyticsClient-upgrade_token"><strong>upgrade_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>)</dt><dd><tt>Asks&nbsp;the&nbsp;Google&nbsp;auth&nbsp;server&nbsp;for&nbsp;a&nbsp;multi-use&nbsp;AuthSub&nbsp;token.<br>
 &nbsp;<br>
 For&nbsp;details&nbsp;on&nbsp;AuthSub,&nbsp;see:<br>
 <a href="http://code.google.com/apis/accounts/docs/AuthSub.html">http://code.google.com/apis/accounts/docs/AuthSub.html</a><br>
@@ -667,16 +930,16 @@ Data and other attributes inherited from <a href="atom.client.html#AtomPubClient
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="DataFeedQuery">class <strong>DataFeedQuery</strong></a>(<a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="DataFeedQuery">class <strong>DataFeedQuery</strong></a>(<a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt>Data&nbsp;Feed&nbsp;query&nbsp;class&nbsp;to&nbsp;simplify&nbsp;constructing&nbsp;Data&nbsp;Feed&nbsp;Urls.<br>
 &nbsp;<br>
 To&nbsp;use&nbsp;this&nbsp;class,&nbsp;you&nbsp;can&nbsp;either&nbsp;pass&nbsp;a&nbsp;dict&nbsp;in&nbsp;the&nbsp;constructor&nbsp;that&nbsp;has<br>
-all&nbsp;the&nbsp;data&nbsp;feed&nbsp;query&nbsp;parameters&nbsp;as&nbsp;keys.<br>
+all&nbsp;the&nbsp;data&nbsp;feed&nbsp;query&nbsp;parameters&nbsp;as&nbsp;keys:<br>
 &nbsp;&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#DataFeedQuery">DataFeedQuery</a>({'start-date':&nbsp;'2008-10-01'})<br>
 &nbsp;<br>
-Alternatively&nbsp;you&nbsp;can&nbsp;add&nbsp;new&nbsp;parameters&nbsp;directly&nbsp;to&nbsp;the&nbsp;query&nbsp;object.<br>
+Alternatively&nbsp;you&nbsp;can&nbsp;add&nbsp;new&nbsp;parameters&nbsp;directly&nbsp;to&nbsp;the&nbsp;query&nbsp;object:<br>
 &nbsp;&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#DataFeedQuery">DataFeedQuery</a>()<br>
 &nbsp;&nbsp;&nbsp;queryUrl.query['start-date']&nbsp;=&nbsp;'2008-10-01'<br>
 &nbsp;<br>
@@ -686,19 +949,22 @@ Args:<br>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.analytics.client.html#DataFeedQuery">DataFeedQuery</a></dd>
+<dd><a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a></dd>
 <dd><a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a></dd>
 <dd><a href="atom.http_core.html#Uri">atom.http_core.Uri</a></dd>
 <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="DataFeedQuery-__init__"><strong>__init__</strong></a>(self, query<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DataFeedQuery-__init__"><strong>__init__</strong></a>(self, query<font color="#909090">={}</font>, **kwargs)</dt></dl>
 
 <hr>
 Data and other attributes defined here:<br>
-<dl><dt><strong>host</strong> = 'www.google.com'</dl>
-
 <dl><dt><strong>path</strong> = '/analytics/feeds/data'</dl>
+
+<hr>
+Data and other attributes inherited from <a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a>:<br>
+<dl><dt><strong>host</strong> = 'www.google.com'</dl>
 
 <dl><dt><strong>scheme</strong> = 'https'</dl>
 
@@ -723,6 +989,267 @@ This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&n
 members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>
 
 <dl><dt><a name="DataFeedQuery-parse_uri"><strong>parse_uri</strong></a>(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;Uri&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
+members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><strong>port</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="GoalQuery">class <strong>GoalQuery</strong></a>(<a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Management&nbsp;API&nbsp;Goal&nbsp;Feed&nbsp;query&nbsp;class.<br>
+&nbsp;<br>
+Example&nbsp;Usage:<br>
+&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#GoalQuery">GoalQuery</a>()<br>
+&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#GoalQuery">GoalQuery</a>('123',&nbsp;'UA-123-1',&nbsp;'555',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'max-results':&nbsp;100})<br>
+&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#GoalQuery">GoalQuery</a>(acct_id='123',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;web_prop_id='UA-123-1',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;profile_id='555',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query={'max-results':&nbsp;100})<br>
+&nbsp;<br>
+&nbsp;&nbsp;queryUrl2&nbsp;=&nbsp;<a href="#GoalQuery">GoalQuery</a>()<br>
+&nbsp;&nbsp;queryUrl2.acct_id&nbsp;=&nbsp;'123'<br>
+&nbsp;&nbsp;queryUrl2.web_prop_id&nbsp;=&nbsp;'UA-123-1'<br>
+&nbsp;&nbsp;queryUrl2.query['max-results']&nbsp;=&nbsp;100<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;acct_id:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;account&nbsp;ID&nbsp;to&nbsp;filter&nbsp;results.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;is&nbsp;~all.<br>
+&nbsp;&nbsp;web_prop_id:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;web&nbsp;property&nbsp;ID&nbsp;to&nbsp;filter&nbsp;results.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;is&nbsp;~all.<br>
+&nbsp;&nbsp;profile_id:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;profile&nbsp;ID&nbsp;to&nbsp;filter&nbsp;results.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;is&nbsp;~all.<br>
+&nbsp;&nbsp;query:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;query&nbsp;parameters.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.analytics.client.html#GoalQuery">GoalQuery</a></dd>
+<dd><a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a></dd>
+<dd><a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a></dd>
+<dd><a href="atom.http_core.html#Uri">atom.http_core.Uri</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="GoalQuery-__init__"><strong>__init__</strong></a>(self, acct_id<font color="#909090">='~all'</font>, web_prop_id<font color="#909090">='~all'</font>, profile_id<font color="#909090">='~all'</font>, query<font color="#909090">={}</font>, **kwargs)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>path</strong></dt>
+<dd><tt>Wrapper&nbsp;for&nbsp;path&nbsp;attribute.</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a>:<br>
+<dl><dt><strong>host</strong> = 'www.google.com'</dl>
+
+<dl><dt><strong>scheme</strong> = 'https'</dl>
+
+<hr>
+Data descriptors inherited from <a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a>:<br>
+<dl><dt><strong>text_query</strong></dt>
+<dd><tt>The&nbsp;q&nbsp;parameter&nbsp;for&nbsp;searching&nbsp;for&nbsp;an&nbsp;exact&nbsp;text&nbsp;match&nbsp;on&nbsp;content</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><a name="GoalQuery-ModifyRequest"><strong>ModifyRequest</strong></a> = modify_request(self, http_request<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;HTTP&nbsp;request&nbsp;components&nbsp;based&nbsp;on&nbsp;the&nbsp;URI.</tt></dd></dl>
+
+<dl><dt><a name="GoalQuery-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="GoalQuery-modify_request"><strong>modify_request</strong></a>(self, http_request<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;HTTP&nbsp;request&nbsp;components&nbsp;based&nbsp;on&nbsp;the&nbsp;URI.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><a name="GoalQuery-ParseUri"><strong>ParseUri</strong></a> = parse_uri(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;Uri&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
+members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>
+
+<dl><dt><a name="GoalQuery-parse_uri"><strong>parse_uri</strong></a>(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;Uri&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
+members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><strong>port</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ProfileQuery">class <strong>ProfileQuery</strong></a>(<a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Management&nbsp;API&nbsp;Profile&nbsp;Feed&nbsp;query&nbsp;class.<br>
+&nbsp;<br>
+Example&nbsp;Usage:<br>
+&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#ProfileQuery">ProfileQuery</a>()<br>
+&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#ProfileQuery">ProfileQuery</a>('123',&nbsp;'UA-123-1',&nbsp;{'max-results':&nbsp;100})<br>
+&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#ProfileQuery">ProfileQuery</a>(acct_id='123',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;web_prop_id='UA-123-1',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query={'max-results':&nbsp;100})<br>
+&nbsp;<br>
+&nbsp;&nbsp;queryUrl2&nbsp;=&nbsp;<a href="#ProfileQuery">ProfileQuery</a>()<br>
+&nbsp;&nbsp;queryUrl2.acct_id&nbsp;=&nbsp;'123'<br>
+&nbsp;&nbsp;queryUrl2.web_prop_id&nbsp;=&nbsp;'UA-123-1'<br>
+&nbsp;&nbsp;queryUrl2.query['max-results']&nbsp;=&nbsp;100<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;acct_id:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;account&nbsp;ID&nbsp;to&nbsp;filter&nbsp;results.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;is&nbsp;~all.<br>
+&nbsp;&nbsp;web_prop_id:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;web&nbsp;property&nbsp;ID&nbsp;to&nbsp;filter&nbsp;results.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;is&nbsp;~all.<br>
+&nbsp;&nbsp;query:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;query&nbsp;parameters.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.analytics.client.html#ProfileQuery">ProfileQuery</a></dd>
+<dd><a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a></dd>
+<dd><a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a></dd>
+<dd><a href="atom.http_core.html#Uri">atom.http_core.Uri</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ProfileQuery-__init__"><strong>__init__</strong></a>(self, acct_id<font color="#909090">='~all'</font>, web_prop_id<font color="#909090">='~all'</font>, query<font color="#909090">={}</font>, **kwargs)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>path</strong></dt>
+<dd><tt>Wrapper&nbsp;for&nbsp;path&nbsp;attribute.</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a>:<br>
+<dl><dt><strong>host</strong> = 'www.google.com'</dl>
+
+<dl><dt><strong>scheme</strong> = 'https'</dl>
+
+<hr>
+Data descriptors inherited from <a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a>:<br>
+<dl><dt><strong>text_query</strong></dt>
+<dd><tt>The&nbsp;q&nbsp;parameter&nbsp;for&nbsp;searching&nbsp;for&nbsp;an&nbsp;exact&nbsp;text&nbsp;match&nbsp;on&nbsp;content</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><a name="ProfileQuery-ModifyRequest"><strong>ModifyRequest</strong></a> = modify_request(self, http_request<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;HTTP&nbsp;request&nbsp;components&nbsp;based&nbsp;on&nbsp;the&nbsp;URI.</tt></dd></dl>
+
+<dl><dt><a name="ProfileQuery-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ProfileQuery-modify_request"><strong>modify_request</strong></a>(self, http_request<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;HTTP&nbsp;request&nbsp;components&nbsp;based&nbsp;on&nbsp;the&nbsp;URI.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><a name="ProfileQuery-ParseUri"><strong>ParseUri</strong></a> = parse_uri(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;Uri&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
+members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>
+
+<dl><dt><a name="ProfileQuery-parse_uri"><strong>parse_uri</strong></a>(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;Uri&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
+members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><strong>port</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="WebPropertyQuery">class <strong>WebPropertyQuery</strong></a>(<a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Management&nbsp;API&nbsp;Web&nbsp;Property&nbsp;Feed&nbsp;query&nbsp;class.<br>
+&nbsp;<br>
+Example&nbsp;Usage:<br>
+&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#WebPropertyQuery">WebPropertyQuery</a>()<br>
+&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#WebPropertyQuery">WebPropertyQuery</a>('123',&nbsp;{'max-results':&nbsp;100})<br>
+&nbsp;&nbsp;queryUrl&nbsp;=&nbsp;<a href="#WebPropertyQuery">WebPropertyQuery</a>(acct_id='123',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query={'max-results':&nbsp;100})<br>
+&nbsp;<br>
+&nbsp;&nbsp;queryUrl2&nbsp;=&nbsp;<a href="#WebPropertyQuery">WebPropertyQuery</a>()<br>
+&nbsp;&nbsp;queryUrl2.acct_id&nbsp;=&nbsp;'1234'<br>
+&nbsp;&nbsp;queryUrl2.query['max-results']&nbsp;=&nbsp;100<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;acct_id:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;account&nbsp;ID&nbsp;to&nbsp;filter&nbsp;results.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;is&nbsp;~all.<br>
+&nbsp;&nbsp;query:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;query&nbsp;parameters.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.analytics.client.html#WebPropertyQuery">WebPropertyQuery</a></dd>
+<dd><a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a></dd>
+<dd><a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a></dd>
+<dd><a href="atom.http_core.html#Uri">atom.http_core.Uri</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="WebPropertyQuery-__init__"><strong>__init__</strong></a>(self, acct_id<font color="#909090">='~all'</font>, query<font color="#909090">={}</font>, **kwargs)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>path</strong></dt>
+<dd><tt>Wrapper&nbsp;for&nbsp;path&nbsp;attribute.</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="gdata.analytics.client.html#AnalyticsBaseQuery">AnalyticsBaseQuery</a>:<br>
+<dl><dt><strong>host</strong> = 'www.google.com'</dl>
+
+<dl><dt><strong>scheme</strong> = 'https'</dl>
+
+<hr>
+Data descriptors inherited from <a href="gdata.client.html#GDQuery">gdata.client.GDQuery</a>:<br>
+<dl><dt><strong>text_query</strong></dt>
+<dd><tt>The&nbsp;q&nbsp;parameter&nbsp;for&nbsp;searching&nbsp;for&nbsp;an&nbsp;exact&nbsp;text&nbsp;match&nbsp;on&nbsp;content</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><a name="WebPropertyQuery-ModifyRequest"><strong>ModifyRequest</strong></a> = modify_request(self, http_request<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;HTTP&nbsp;request&nbsp;components&nbsp;based&nbsp;on&nbsp;the&nbsp;URI.</tt></dd></dl>
+
+<dl><dt><a name="WebPropertyQuery-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="WebPropertyQuery-modify_request"><strong>modify_request</strong></a>(self, http_request<font color="#909090">=None</font>)</dt><dd><tt>Sets&nbsp;HTTP&nbsp;request&nbsp;components&nbsp;based&nbsp;on&nbsp;the&nbsp;URI.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="atom.http_core.html#Uri">atom.http_core.Uri</a>:<br>
+<dl><dt><a name="WebPropertyQuery-ParseUri"><strong>ParseUri</strong></a> = parse_uri(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;Uri&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
+members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>
+
+<dl><dt><a name="WebPropertyQuery-parse_uri"><strong>parse_uri</strong></a>(uri_string)</dt><dd><tt>Creates&nbsp;a&nbsp;Uri&nbsp;object&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;URI&nbsp;string.<br>
 &nbsp;<br>
 This&nbsp;method&nbsp;can&nbsp;accept&nbsp;partial&nbsp;URIs,&nbsp;but&nbsp;it&nbsp;will&nbsp;leave&nbsp;missing<br>
 members&nbsp;of&nbsp;the&nbsp;Uri&nbsp;unset.</tt></dd></dl>

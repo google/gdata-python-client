@@ -1315,8 +1315,9 @@ class GDataService(atom.service.AtomService):
 
     else:
       http_data = data
-      content_type = 'application/atom+xml'
-      extra_headers['Content-Type'] = content_type
+      if 'Content-Type' not in extra_headers:
+        content_type = 'application/atom+xml'
+        extra_headers['Content-Type'] = content_type
       server_response = self.request(verb, uri, data=http_data,
           headers=extra_headers, url_params=url_params)
       result_body = server_response.read()

@@ -36,7 +36,7 @@ __author__ = 'api.jscudder (Jeff Scudder)'
 import StringIO
 
 
-USER_AGENT = '%s GData-Python/2.0.11'
+USER_AGENT = '%s GData-Python/2.0.12'
 
 
 class Error(Exception):
@@ -154,5 +154,3 @@ class GenericToken(object):
     any scope.
     """
     return False
-
-

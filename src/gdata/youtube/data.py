@@ -475,3 +475,28 @@ class VideoModerationFeed(gdata.data.GDFeed):
   entry = [VideoModerationEntry]
 
 
+class TrackContent(atom.data.Content):
+  lang = atom.data.XML_TEMPLATE % 'lang'
+
+
+class TrackEntry(gdata.data.GDEntry):
+  """Represents the URL for a caption track"""
+  content = TrackContent
+
+  def get_caption_track_id(self):
+    """Extracts the ID of this caption track.
+    Returns:
+      The caption track's id as a string.
+    """
+    if self.id.text:
+      match = CAPTION_TRACK_ID_PATTERN.match(self.id.text)
+      if match:
+        return match.group(2)
+    return None
+
+  GetCaptionTrackId = get_caption_track_id
+
+
+class CaptionFeed(gdata.data.GDFeed):
+  """Represents a caption feed for a video on YouTube."""
+  entry = [TrackEntry]

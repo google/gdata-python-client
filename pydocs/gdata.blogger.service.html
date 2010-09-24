@@ -1,5 +1,5 @@
 
-<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head><title>Python: module gdata.blogger.service</title>
 </head><body bgcolor="#f0f0f8">
 
@@ -8,13 +8,13 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.blogger.html"><font color="#ffffff">blogger</font></a>.service</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/jcgregorio/projects/gdata/src/gdata/blogger/service.py">/home/jcgregorio/projects/gdata/src/gdata/blogger/service.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/google/home/jcgregorio/projects/gdata/src/gdata/blogger/service.py">/usr/local/google/home/jcgregorio/projects/gdata/src/gdata/blogger/service.py</a></font></td></tr></table>
     <p><tt>Classes&nbsp;to&nbsp;interact&nbsp;with&nbsp;the&nbsp;Blogger&nbsp;server.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="gdata.html">gdata</a><br>
@@ -120,8 +120,6 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 
 <dl><dt><a name="BlogCommentQuery-__gt__"><strong>__gt__</strong></a>(...)</dt><dd><tt>x.<a href="#BlogCommentQuery-__gt__">__gt__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&gt;y</tt></dd></dl>
 
-<dl><dt><a name="BlogCommentQuery-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#BlogCommentQuery-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
-
 <dl><dt><a name="BlogCommentQuery-__iter__"><strong>__iter__</strong></a>(...)</dt><dd><tt>x.<a href="#BlogCommentQuery-__iter__">__iter__</a>()&nbsp;&lt;==&gt;&nbsp;iter(x)</tt></dd></dl>
 
 <dl><dt><a name="BlogCommentQuery-__le__"><strong>__le__</strong></a>(...)</dt><dd><tt>x.<a href="#BlogCommentQuery-__le__">__le__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&lt;=y</tt></dd></dl>
@@ -135,6 +133,8 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><a name="BlogCommentQuery-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#BlogCommentQuery-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
 
 <dl><dt><a name="BlogCommentQuery-__setitem__"><strong>__setitem__</strong></a>(...)</dt><dd><tt>x.<a href="#BlogCommentQuery-__setitem__">__setitem__</a>(i,&nbsp;y)&nbsp;&lt;==&gt;&nbsp;x[i]=y</tt></dd></dl>
+
+<dl><dt><a name="BlogCommentQuery-__sizeof__"><strong>__sizeof__</strong></a>(...)</dt><dd><tt>D.<a href="#BlogCommentQuery-__sizeof__">__sizeof__</a>()&nbsp;-&gt;&nbsp;size&nbsp;of&nbsp;D&nbsp;in&nbsp;memory,&nbsp;in&nbsp;bytes</tt></dd></dl>
 
 <dl><dt><a name="BlogCommentQuery-clear"><strong>clear</strong></a>(...)</dt><dd><tt>D.<a href="#BlogCommentQuery-clear">clear</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Remove&nbsp;all&nbsp;items&nbsp;from&nbsp;D.</tt></dd></dl>
 
@@ -154,24 +154,28 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 
 <dl><dt><a name="BlogCommentQuery-keys"><strong>keys</strong></a>(...)</dt><dd><tt>D.<a href="#BlogCommentQuery-keys">keys</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;keys</tt></dd></dl>
 
-<dl><dt><a name="BlogCommentQuery-pop"><strong>pop</strong></a>(...)</dt><dd><tt>D.<a href="#BlogCommentQuery-pop">pop</a>(k[,d])&nbsp;-&gt;&nbsp;v,&nbsp;remove&nbsp;specified&nbsp;key&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;value<br>
+<dl><dt><a name="BlogCommentQuery-pop"><strong>pop</strong></a>(...)</dt><dd><tt>D.<a href="#BlogCommentQuery-pop">pop</a>(k[,d])&nbsp;-&gt;&nbsp;v,&nbsp;remove&nbsp;specified&nbsp;key&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;value.<br>
 If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nbsp;given,&nbsp;otherwise&nbsp;KeyError&nbsp;is&nbsp;raised</tt></dd></dl>
 
 <dl><dt><a name="BlogCommentQuery-popitem"><strong>popitem</strong></a>(...)</dt><dd><tt>D.<a href="#BlogCommentQuery-popitem">popitem</a>()&nbsp;-&gt;&nbsp;(k,&nbsp;v),&nbsp;remove&nbsp;and&nbsp;return&nbsp;some&nbsp;(key,&nbsp;value)&nbsp;pair&nbsp;as&nbsp;a<br>
-2-tuple;&nbsp;but&nbsp;raise&nbsp;KeyError&nbsp;if&nbsp;D&nbsp;is&nbsp;empty</tt></dd></dl>
+2-tuple;&nbsp;but&nbsp;raise&nbsp;KeyError&nbsp;if&nbsp;D&nbsp;is&nbsp;empty.</tt></dd></dl>
 
 <dl><dt><a name="BlogCommentQuery-setdefault"><strong>setdefault</strong></a>(...)</dt><dd><tt>D.<a href="#BlogCommentQuery-setdefault">setdefault</a>(k[,d])&nbsp;-&gt;&nbsp;D.<a href="#BlogCommentQuery-get">get</a>(k,d),&nbsp;also&nbsp;set&nbsp;D[k]=d&nbsp;if&nbsp;k&nbsp;not&nbsp;in&nbsp;D</tt></dd></dl>
 
-<dl><dt><a name="BlogCommentQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#BlogCommentQuery-update">update</a>(E,&nbsp;**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;E&nbsp;and&nbsp;F:&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
-(if&nbsp;E&nbsp;has&nbsp;keys&nbsp;else:&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v)&nbsp;then:&nbsp;for&nbsp;k&nbsp;in&nbsp;F:&nbsp;D[k]&nbsp;=&nbsp;F[k]</tt></dd></dl>
+<dl><dt><a name="BlogCommentQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#BlogCommentQuery-update">update</a>(E,&nbsp;**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;dict/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
+If&nbsp;E&nbsp;has&nbsp;a&nbsp;.<a href="#BlogCommentQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
+If&nbsp;E&nbsp;lacks&nbsp;.<a href="#BlogCommentQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
+In&nbsp;either&nbsp;case,&nbsp;this&nbsp;is&nbsp;followed&nbsp;by:&nbsp;for&nbsp;k&nbsp;in&nbsp;F:&nbsp;D[k]&nbsp;=&nbsp;F[k]</tt></dd></dl>
 
 <dl><dt><a name="BlogCommentQuery-values"><strong>values</strong></a>(...)</dt><dd><tt>D.<a href="#BlogCommentQuery-values">values</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;values</tt></dd></dl>
 
 <hr>
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8146ce0&gt;<dd><tt>T.<a href="#BlogCommentQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__hash__</strong> = None</dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0x840d144&gt;<dd><tt>dict.<a href="#BlogCommentQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#BlogCommentQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object&gt;<dd><tt>dict.<a href="#BlogCommentQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -253,8 +257,6 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 
 <dl><dt><a name="BlogPostQuery-__gt__"><strong>__gt__</strong></a>(...)</dt><dd><tt>x.<a href="#BlogPostQuery-__gt__">__gt__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&gt;y</tt></dd></dl>
 
-<dl><dt><a name="BlogPostQuery-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#BlogPostQuery-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
-
 <dl><dt><a name="BlogPostQuery-__iter__"><strong>__iter__</strong></a>(...)</dt><dd><tt>x.<a href="#BlogPostQuery-__iter__">__iter__</a>()&nbsp;&lt;==&gt;&nbsp;iter(x)</tt></dd></dl>
 
 <dl><dt><a name="BlogPostQuery-__le__"><strong>__le__</strong></a>(...)</dt><dd><tt>x.<a href="#BlogPostQuery-__le__">__le__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&lt;=y</tt></dd></dl>
@@ -268,6 +270,8 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><a name="BlogPostQuery-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#BlogPostQuery-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
 
 <dl><dt><a name="BlogPostQuery-__setitem__"><strong>__setitem__</strong></a>(...)</dt><dd><tt>x.<a href="#BlogPostQuery-__setitem__">__setitem__</a>(i,&nbsp;y)&nbsp;&lt;==&gt;&nbsp;x[i]=y</tt></dd></dl>
+
+<dl><dt><a name="BlogPostQuery-__sizeof__"><strong>__sizeof__</strong></a>(...)</dt><dd><tt>D.<a href="#BlogPostQuery-__sizeof__">__sizeof__</a>()&nbsp;-&gt;&nbsp;size&nbsp;of&nbsp;D&nbsp;in&nbsp;memory,&nbsp;in&nbsp;bytes</tt></dd></dl>
 
 <dl><dt><a name="BlogPostQuery-clear"><strong>clear</strong></a>(...)</dt><dd><tt>D.<a href="#BlogPostQuery-clear">clear</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Remove&nbsp;all&nbsp;items&nbsp;from&nbsp;D.</tt></dd></dl>
 
@@ -287,24 +291,28 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 
 <dl><dt><a name="BlogPostQuery-keys"><strong>keys</strong></a>(...)</dt><dd><tt>D.<a href="#BlogPostQuery-keys">keys</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;keys</tt></dd></dl>
 
-<dl><dt><a name="BlogPostQuery-pop"><strong>pop</strong></a>(...)</dt><dd><tt>D.<a href="#BlogPostQuery-pop">pop</a>(k[,d])&nbsp;-&gt;&nbsp;v,&nbsp;remove&nbsp;specified&nbsp;key&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;value<br>
+<dl><dt><a name="BlogPostQuery-pop"><strong>pop</strong></a>(...)</dt><dd><tt>D.<a href="#BlogPostQuery-pop">pop</a>(k[,d])&nbsp;-&gt;&nbsp;v,&nbsp;remove&nbsp;specified&nbsp;key&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;value.<br>
 If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nbsp;given,&nbsp;otherwise&nbsp;KeyError&nbsp;is&nbsp;raised</tt></dd></dl>
 
 <dl><dt><a name="BlogPostQuery-popitem"><strong>popitem</strong></a>(...)</dt><dd><tt>D.<a href="#BlogPostQuery-popitem">popitem</a>()&nbsp;-&gt;&nbsp;(k,&nbsp;v),&nbsp;remove&nbsp;and&nbsp;return&nbsp;some&nbsp;(key,&nbsp;value)&nbsp;pair&nbsp;as&nbsp;a<br>
-2-tuple;&nbsp;but&nbsp;raise&nbsp;KeyError&nbsp;if&nbsp;D&nbsp;is&nbsp;empty</tt></dd></dl>
+2-tuple;&nbsp;but&nbsp;raise&nbsp;KeyError&nbsp;if&nbsp;D&nbsp;is&nbsp;empty.</tt></dd></dl>
 
 <dl><dt><a name="BlogPostQuery-setdefault"><strong>setdefault</strong></a>(...)</dt><dd><tt>D.<a href="#BlogPostQuery-setdefault">setdefault</a>(k[,d])&nbsp;-&gt;&nbsp;D.<a href="#BlogPostQuery-get">get</a>(k,d),&nbsp;also&nbsp;set&nbsp;D[k]=d&nbsp;if&nbsp;k&nbsp;not&nbsp;in&nbsp;D</tt></dd></dl>
 
-<dl><dt><a name="BlogPostQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#BlogPostQuery-update">update</a>(E,&nbsp;**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;E&nbsp;and&nbsp;F:&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
-(if&nbsp;E&nbsp;has&nbsp;keys&nbsp;else:&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v)&nbsp;then:&nbsp;for&nbsp;k&nbsp;in&nbsp;F:&nbsp;D[k]&nbsp;=&nbsp;F[k]</tt></dd></dl>
+<dl><dt><a name="BlogPostQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#BlogPostQuery-update">update</a>(E,&nbsp;**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;dict/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
+If&nbsp;E&nbsp;has&nbsp;a&nbsp;.<a href="#BlogPostQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
+If&nbsp;E&nbsp;lacks&nbsp;.<a href="#BlogPostQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
+In&nbsp;either&nbsp;case,&nbsp;this&nbsp;is&nbsp;followed&nbsp;by:&nbsp;for&nbsp;k&nbsp;in&nbsp;F:&nbsp;D[k]&nbsp;=&nbsp;F[k]</tt></dd></dl>
 
 <dl><dt><a name="BlogPostQuery-values"><strong>values</strong></a>(...)</dt><dd><tt>D.<a href="#BlogPostQuery-values">values</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;values</tt></dd></dl>
 
 <hr>
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8146ce0&gt;<dd><tt>T.<a href="#BlogPostQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__hash__</strong> = None</dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0x821049c&gt;<dd><tt>dict.<a href="#BlogPostQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#BlogPostQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object&gt;<dd><tt>dict.<a href="#BlogPostQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -394,8 +402,6 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 
 <dl><dt><a name="BlogQuery-__gt__"><strong>__gt__</strong></a>(...)</dt><dd><tt>x.<a href="#BlogQuery-__gt__">__gt__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&gt;y</tt></dd></dl>
 
-<dl><dt><a name="BlogQuery-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#BlogQuery-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
-
 <dl><dt><a name="BlogQuery-__iter__"><strong>__iter__</strong></a>(...)</dt><dd><tt>x.<a href="#BlogQuery-__iter__">__iter__</a>()&nbsp;&lt;==&gt;&nbsp;iter(x)</tt></dd></dl>
 
 <dl><dt><a name="BlogQuery-__le__"><strong>__le__</strong></a>(...)</dt><dd><tt>x.<a href="#BlogQuery-__le__">__le__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&lt;=y</tt></dd></dl>
@@ -409,6 +415,8 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><a name="BlogQuery-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#BlogQuery-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
 
 <dl><dt><a name="BlogQuery-__setitem__"><strong>__setitem__</strong></a>(...)</dt><dd><tt>x.<a href="#BlogQuery-__setitem__">__setitem__</a>(i,&nbsp;y)&nbsp;&lt;==&gt;&nbsp;x[i]=y</tt></dd></dl>
+
+<dl><dt><a name="BlogQuery-__sizeof__"><strong>__sizeof__</strong></a>(...)</dt><dd><tt>D.<a href="#BlogQuery-__sizeof__">__sizeof__</a>()&nbsp;-&gt;&nbsp;size&nbsp;of&nbsp;D&nbsp;in&nbsp;memory,&nbsp;in&nbsp;bytes</tt></dd></dl>
 
 <dl><dt><a name="BlogQuery-clear"><strong>clear</strong></a>(...)</dt><dd><tt>D.<a href="#BlogQuery-clear">clear</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Remove&nbsp;all&nbsp;items&nbsp;from&nbsp;D.</tt></dd></dl>
 
@@ -428,24 +436,28 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 
 <dl><dt><a name="BlogQuery-keys"><strong>keys</strong></a>(...)</dt><dd><tt>D.<a href="#BlogQuery-keys">keys</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;keys</tt></dd></dl>
 
-<dl><dt><a name="BlogQuery-pop"><strong>pop</strong></a>(...)</dt><dd><tt>D.<a href="#BlogQuery-pop">pop</a>(k[,d])&nbsp;-&gt;&nbsp;v,&nbsp;remove&nbsp;specified&nbsp;key&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;value<br>
+<dl><dt><a name="BlogQuery-pop"><strong>pop</strong></a>(...)</dt><dd><tt>D.<a href="#BlogQuery-pop">pop</a>(k[,d])&nbsp;-&gt;&nbsp;v,&nbsp;remove&nbsp;specified&nbsp;key&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;value.<br>
 If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nbsp;given,&nbsp;otherwise&nbsp;KeyError&nbsp;is&nbsp;raised</tt></dd></dl>
 
 <dl><dt><a name="BlogQuery-popitem"><strong>popitem</strong></a>(...)</dt><dd><tt>D.<a href="#BlogQuery-popitem">popitem</a>()&nbsp;-&gt;&nbsp;(k,&nbsp;v),&nbsp;remove&nbsp;and&nbsp;return&nbsp;some&nbsp;(key,&nbsp;value)&nbsp;pair&nbsp;as&nbsp;a<br>
-2-tuple;&nbsp;but&nbsp;raise&nbsp;KeyError&nbsp;if&nbsp;D&nbsp;is&nbsp;empty</tt></dd></dl>
+2-tuple;&nbsp;but&nbsp;raise&nbsp;KeyError&nbsp;if&nbsp;D&nbsp;is&nbsp;empty.</tt></dd></dl>
 
 <dl><dt><a name="BlogQuery-setdefault"><strong>setdefault</strong></a>(...)</dt><dd><tt>D.<a href="#BlogQuery-setdefault">setdefault</a>(k[,d])&nbsp;-&gt;&nbsp;D.<a href="#BlogQuery-get">get</a>(k,d),&nbsp;also&nbsp;set&nbsp;D[k]=d&nbsp;if&nbsp;k&nbsp;not&nbsp;in&nbsp;D</tt></dd></dl>
 
-<dl><dt><a name="BlogQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#BlogQuery-update">update</a>(E,&nbsp;**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;E&nbsp;and&nbsp;F:&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
-(if&nbsp;E&nbsp;has&nbsp;keys&nbsp;else:&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v)&nbsp;then:&nbsp;for&nbsp;k&nbsp;in&nbsp;F:&nbsp;D[k]&nbsp;=&nbsp;F[k]</tt></dd></dl>
+<dl><dt><a name="BlogQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#BlogQuery-update">update</a>(E,&nbsp;**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;dict/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
+If&nbsp;E&nbsp;has&nbsp;a&nbsp;.<a href="#BlogQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
+If&nbsp;E&nbsp;lacks&nbsp;.<a href="#BlogQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
+In&nbsp;either&nbsp;case,&nbsp;this&nbsp;is&nbsp;followed&nbsp;by:&nbsp;for&nbsp;k&nbsp;in&nbsp;F:&nbsp;D[k]&nbsp;=&nbsp;F[k]</tt></dd></dl>
 
 <dl><dt><a name="BlogQuery-values"><strong>values</strong></a>(...)</dt><dd><tt>D.<a href="#BlogQuery-values">values</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;values</tt></dd></dl>
 
 <hr>
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8146ce0&gt;<dd><tt>T.<a href="#BlogQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__hash__</strong> = None</dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0x820ec6c&gt;<dd><tt>dict.<a href="#BlogQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#BlogQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object&gt;<dd><tt>dict.<a href="#BlogQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
@@ -688,7 +700,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="BloggerService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString at 0xb749fb1c&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
+<dl><dt><a name="BloggerService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString&gt;</font>)</dt><dd><tt><a href="gdata.service.html#Query">Query</a>&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
 &nbsp;<br>
 See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;gdata.service.Get<br>
 &nbsp;<br>
