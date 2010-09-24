@@ -399,6 +399,51 @@ def ValueFromString(xml_string):
   return atom.CreateClassFromXMLString(Value, xml_string)
 
 
+class Bucket(atom.AtomBase):
+  """Metadata about common values for a given attribute
+  
+  A bucket is a child of an attribute which comes from the attributes feed.
+  The bucket's text is a commonly used value paired with an attribute name
+  and the bucket's count tells how often this attribute's value falls within
+  the bucket's range in the search results.
+  """
+  
+  _tag = 'bucket'
+  _namespace = GMETA_NAMESPACE
+  _children = atom.AtomBase._children.copy()
+  _attributes = atom.AtomBase._attributes.copy()
+  _attributes['count'] = 'count'
+  _attributes['low'] = 'low'
+  _attributes['high'] = 'high'
+  
+  def __init__(self, count=None, text=None, low=None, high=None,
+               extension_elements=None, extension_attributes=None):
+    """Constructor for Bucket metadata element
+
+    Args:
+      count: str (optional) The number of times the value in text is given
+          for the parent attribute.
+      text: str (optional) The bucket's string representation.
+      low: str (optional) The low end of the bucket.
+      high: str (optional) The high end of the bucket.
+      extension_elements: list (optional) A  list of ExtensionElement
+          instances
+      extension_attributes: dict (optional) A dictionary of attribute value
+          string pairs
+    """
+
+    self.count = count
+    self.text = text
+    self.low = low
+    self.high = high
+    self.extension_elements = extension_elements or []
+    self.extension_attributes = extension_attributes or {}
+ 
+ 
+def BucketFromString(xml_string):
+  return atom.CreateClassFromXMLString(Bucket, xml_string)
+ 
+
 class Attribute(atom.Text):
   """Metadata about an attribute from the attributes feed
   
@@ -412,11 +457,13 @@ class Attribute(atom.Text):
   _children = atom.Text._children.copy()
   _attributes = atom.Text._attributes.copy()
   _children['{%s}value' % GMETA_NAMESPACE] = ('value', [Value])
+  _children['{%s}bucket' % GMETA_NAMESPACE] = ('bucket', [Bucket])
   _attributes['count'] = 'count'
   _attributes['name'] = 'name'
 
   def __init__(self, name=None, attribute_type=None, count=None, value=None, 
-      text=None, extension_elements=None, extension_attributes=None):
+               bucket=None, text=None, extension_elements=None,
+               extension_attributes=None):
     """Constructor for Attribute metadata element
 
     Args:
@@ -427,6 +474,7 @@ class Attribute(atom.Text):
           the query results.
       value: list (optional) The values which are often used for this 
           attirbute.
+      bucket: list (optional) The buckets for this attribute.
       text: str (optional) The text contents of the XML for this attribute.
       extension_elements: list (optional) A  list of ExtensionElement 
           instances
@@ -438,6 +486,7 @@ class Attribute(atom.Text):
     self.type = attribute_type
     self.count = count
     self.value = value or []
+    self.bucket = bucket or []
     self.text = text
     self.extension_elements = extension_elements or []
     self.extension_attributes = extension_attributes or {}

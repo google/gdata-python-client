@@ -188,17 +188,27 @@ class AttributeTest(unittest.TestCase):
     attrib.type = 'float'
     attrib.count = '44000'
     attrib.name = 'test attribute'
+    attrib.bucket.append(gdata.base.Bucket('30', text='test', low='5'))
+    attrib.bucket[0].high = '11'
     attrib.value.append(gdata.base.Value(count='500', text='a value'))
     self.assert_(attrib.type == 'float')
     self.assert_(attrib.count == '44000')
     self.assert_(attrib.name == 'test attribute')
     self.assert_(attrib.value[0].count == '500')
     self.assert_(attrib.value[0].text == 'a value')
+    self.assert_(attrib.bucket[0].text == 'test')
+    self.assert_(attrib.bucket[0].count == '30')
+    self.assert_(attrib.bucket[0].high == '11')
+    self.assert_(attrib.bucket[0].low == '5')
     new_attrib = gdata.base.AttributeFromString(str(attrib))
     self.assert_(attrib.type == new_attrib.type)
     self.assert_(attrib.count == new_attrib.count)
     self.assert_(attrib.value[0].count == new_attrib.value[0].count)
     self.assert_(attrib.value[0].text == new_attrib.value[0].text)
+    self.assert_(attrib.bucket[0].text == new_attrib.bucket[0].text)
+    self.assert_(attrib.bucket[0].count == new_attrib.bucket[0].count)
+    self.assert_(attrib.bucket[0].high == new_attrib.bucket[0].high)
+    self.assert_(attrib.bucket[0].low == new_attrib.bucket[0].low)
     self.assert_(attrib.name == new_attrib.name)
 
 
