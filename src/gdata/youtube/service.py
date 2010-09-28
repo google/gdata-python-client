@@ -1339,12 +1339,12 @@ class YouTubeService(gdata.service.GDataService):
                                      'body': HTTP body of the server response})
     """
     result = self.Query(query.ToUri())
-    if isinstance(query, YouTubeVideoQuery):
-      return gdata.youtube.YouTubeVideoFeedFromString(result.ToString())
-    elif isinstance(query, YouTubeUserQuery):
+    if isinstance(query, YouTubeUserQuery):
       return gdata.youtube.YouTubeUserFeedFromString(result.ToString())
     elif isinstance(query, YouTubePlaylistQuery):
       return gdata.youtube.YouTubePlaylistFeedFromString(result.ToString())
+    elif isinstance(query, YouTubeVideoQuery):
+      return gdata.youtube.YouTubeVideoFeedFromString(result.ToString())
     else:
       return result
 
@@ -1539,7 +1539,7 @@ class YouTubeUserQuery(YouTubeVideoQuery):
     else:
       feed = "http://%s/feeds/users" % (YOUTUBE_SERVER)
 
-    YouTubeVideoQuery.__init__(self, feed, text_query=text_query,
+    YouTubeVideoQuery.__init__(self, feed=feed, text_query=text_query,
                                params=params, categories=categories)
 
 
@@ -1559,5 +1559,5 @@ class YouTubePlaylistQuery(YouTubeVideoQuery):
     else:
       feed = "http://%s/feeds/playlists" % (YOUTUBE_SERVER)
 
-    YouTubeVideoQuery.__init__(self, feed, text_query=text_query,
+    YouTubeVideoQuery.__init__(self, feed=feed, text_query=text_query,
                                params=params, categories=categories)
