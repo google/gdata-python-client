@@ -824,7 +824,7 @@ class Query(object):
   def modify_request(self, http_request):
     _add_query_param('q', self.text_query, http_request)
     if self.categories:
-      http_request.uri.query['categories'] = ','.join(self.categories)
+      http_request.uri.query['category'] = ','.join(self.categories)
     _add_query_param('author', self.author, http_request)
     _add_query_param('alt', self.alt, http_request)
     _add_query_param('updated-min', self.updated_min, http_request)

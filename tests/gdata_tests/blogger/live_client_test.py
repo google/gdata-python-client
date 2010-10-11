@@ -145,6 +145,13 @@ class BloggerClientTest(unittest.TestCase):
     self.assertEqual(len(pages_before.entry), len(pages_after.entry))
 
 
+  def test_retrieve_post_with_categories(self):
+    if not conf.options.get_value('runlive') == 'true':
+      return
+    conf.configure_cache(self.client, 'test_retrieve_post_with_categories')
+    query = gdata.blogger.client.Query(categories=["news"], strict=True)
+    posts = self.client.get_posts(conf.options.get_value('blogid'), query=query)
+
 def suite():
   return conf.build_suite([BloggerClientTest])
 
