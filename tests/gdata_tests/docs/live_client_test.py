@@ -22,6 +22,7 @@ __author__ = 'e.bidelman (Eric Bidelman)'
 
 
 import os
+import time
 import unittest
 import gdata.client
 import gdata.data
@@ -106,9 +107,96 @@ class DocsFetchingDataTest(DocsTestCase):
     uri = 'http://docs.google.com/feeds/default/private/full/-/document'
     feed = self.client.GetDocList(uri=uri, limit=1)
     self.assertEqual(len(feed.entry), 1)
-    acl_feed = self.client.GetRevisions(feed.entry[0].resource_id.text)
-    self.assert_(isinstance(acl_feed, gdata.docs.data.RevisionFeed))
-    self.assert_(isinstance(acl_feed.entry[0], gdata.docs.data.Revision))
+    revision_feed = self.client.GetRevisions(feed.entry[0].resource_id.text)
+    self.assert_(isinstance(revision_feed, gdata.docs.data.RevisionFeed))
+    self.assert_(isinstance(revision_feed.entry[0], gdata.docs.data.Revision))
+
+
+class DocsRevisionsTest(DocsTestCase):
+
+  def setUp(self):
+    self.client = None
+    if conf.options.get_value('runlive') == 'true':
+      self.client = gdata.docs.client.DocsClient()
+      self.client.ssl = conf.options.get_value('ssl') == 'true'
+      conf.configure_client(self.client, 'DocsTest', self.client.auth_service)
+      conf.configure_cache(self.client, 'testDocsRevisions')
+      try:
+        self.testdoc = self.client.Create(
+            gdata.docs.data.DOCUMENT_LABEL, 'My Doc')
+        # Because of an etag change issue, we must sleep for a few seconds
+        time.sleep(10)
+      except:
+        self.tearDown()
+        raise
+      try:
+        self.testdoc = self.client.GetDoc(self.testdoc.resource_id.text)
+        self.testfile = self.client.Upload(
+            'test.bin', 'My Binary File', content_type='application/octet-stream')
+        # Because of an etag change issue, we must sleep for a few seconds
+        time.sleep(10)
+        self.testfile = self.client.GetDoc(self.testfile.resource_id.text)
+      except:
+        self.tearDown()
+        raise
+    
+  def tearDown(self):
+    if conf.options.get_value('runlive') == 'true':
+      # Do a best effort tearDown, so pass on any exception
+      try:
+        self.client.Delete(self.testdoc)
+      except:
+        pass
+      try:
+        self.client.Delete(self.testfile)
+      except:
+        pass
+    conf.close_client(self.client)
+
+  def testArbFileRevisions(self):
+    if not conf.options.get_value('runlive') == 'true':
+      return
+    revisions = self.client.GetRevisions(self.testfile.resource_id.text)
+    self.assert_(isinstance(revisions, gdata.docs.data.RevisionFeed))
+    self.assert_(isinstance(revisions.entry[0], gdata.docs.data.Revision))
+    self.assertEqual(len(revisions.entry), 1)
+
+    ms = gdata.data.MediaSource(
+        file_path='test.bin', content_type='application/octet-stream')
+    self.testfile.title.text = 'My Binary File Updated'
+    self.testfile = self.client.Update(self.testfile, media_source=ms)
+    self.assertEqual(self.testfile.title.text, 'My Binary File Updated')
+
+    revisions = self.client.GetRevisions(self.testfile.resource_id.text)
+    self.assert_(isinstance(revisions, gdata.docs.data.RevisionFeed))
+    self.assert_(isinstance(revisions.entry[0], gdata.docs.data.Revision))
+    self.assert_(isinstance(revisions.entry[1], gdata.docs.data.Revision))
+    self.assertEqual(len(revisions.entry), 2)
+
+    self.client.Delete(revisions.entry[1], force=True)
+    revisions = self.client.GetRevisions(self.testfile.resource_id.text)
+    self.assert_(isinstance(revisions, gdata.docs.data.RevisionFeed))
+    self.assert_(isinstance(revisions.entry[0], gdata.docs.data.Revision))
+    self.assertEqual(len(revisions.entry), 1)
+
+  def testDocRevisions(self):
+    if not conf.options.get_value('runlive') == 'true':
+      return
+    revisions = self.client.GetRevisions(self.testdoc.resource_id.text)
+    self.assert_(isinstance(revisions, gdata.docs.data.RevisionFeed))
+    self.assert_(isinstance(revisions.entry[0], gdata.docs.data.Revision))
+    self.assertEqual(len(revisions.entry), 1)
+
+    ms = gdata.data.MediaSource(
+        file_path='test.doc', content_type='application/msword')
+    self.testdoc.title.text = 'My Doc Updated'
+    self.testdoc = self.client.Update(self.testdoc, media_source=ms)
+
+    revisions = self.client.GetRevisions(self.testdoc.resource_id.text)
+    self.assert_(isinstance(revisions, gdata.docs.data.RevisionFeed))
+    self.assert_(isinstance(revisions.entry[0], gdata.docs.data.Revision))
+    self.assert_(isinstance(revisions.entry[1], gdata.docs.data.Revision))
+    self.assertEqual(len(revisions.entry), 2)
 
 
 class CreatingAndDeletionTest(DocsTestCase):
@@ -255,7 +343,8 @@ class DocumentListExportTest(DocsTestCase):
 
 def suite():
   return conf.build_suite([DocsFetchingDataTest, CreatingAndDeletionTest,
-                           DocumentListUploadTest, DocumentListExportTest])
+                           DocumentListUploadTest, DocumentListExportTest,
+                           DocsRevisionsTest])
 
 
 if __name__ == '__main__':
