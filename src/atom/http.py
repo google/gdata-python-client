@@ -207,7 +207,7 @@ class ProxiedHttpClient(HttpClient):
   HttpClient.request.
   """
   def _prepare_connection(self, url, headers):
-    proxy_auth = _get_proxy_auth()
+    proxy_auth = _get_proxy_auth(url.protocol)
     if url.protocol == 'https':
       # destination is https
       proxy = os.environ.get('https_proxy')
@@ -284,13 +284,42 @@ class ProxiedHttpClient(HttpClient):
     return url.to_string()
 
 
-def _get_proxy_auth():
+def _get_proxy_auth(protocol=None):
+  """Returns proxy authentication string for header.
+
+  Will check environment variables for proxy authentiation info, starting with
+  proxy(_/-)username and proxy(_/-)password before checking PROTOCOL_proxy for
+  a [protocol://]username:password@host[:port] string.
+
+  Args:
+    protocol: String representation of protocol.
+
+  Returns:
+    Authentication string for proxy, or empty string if no proxy username was
+    found.
+  """
+  proxy_username = None
+  proxy_password = None
+
   proxy_username = os.environ.get('proxy-username')
   if not proxy_username:
     proxy_username = os.environ.get('proxy_username')
   proxy_password = os.environ.get('proxy-password')
   if not proxy_password:
     proxy_password = os.environ.get('proxy_password')
+
+  if protocol and not proxy_username:
+    proxy_info = os.environ.get('%s_proxy' % protocol)
+    if proxy_info and '@' in proxy_info:
+      protocol_and_proxy_auth = proxy_info.split('@')[0].split(':')
+      if len(protocol_and_proxy_auth) == 3:
+        # 3 elements means we have [<protocol>, //<user>, <password>]
+        proxy_username = protocol_and_proxy_auth[1].lstrip('/')
+        proxy_password = protocol_and_proxy_auth[2]
+      elif len(protocol_and_proxy_auth) == 2:
+        # 2 elements means we have [<user>, <password>]
+        proxy_username = protocol_and_proxy_auth[0]
+        proxy_password = protocol_and_proxy_auth[1]
   if proxy_username:
     user_auth = base64.encodestring('%s:%s' % (proxy_username,
                                                proxy_password))
