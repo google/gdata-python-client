@@ -143,7 +143,8 @@ class DocsClient(gdata.client.GDClient):
 
   GetDocList = get_doclist
 
-  def get_doc(self, resource_id, etag=None, auth_token=None, **kwargs):
+  def get_doc(self, resource_id, etag=None, auth_token=None, uri=None,
+              **kwargs):
     """Retrieves a particular document given by its resource id.
 
     Args:
@@ -154,6 +155,8 @@ class DocsClient(gdata.client.GDClient):
           developers_guide_protocol.html#RetrievingCached.
       auth_token: (optional) gdata.gauth.ClientLoginToken, AuthSubToken, or
           OAuthToken which authorizes this client to edit the user's data.
+      uri: (optional) URI to use for this request.  Translates to uri +
+          resource_id.
       kwargs: Other parameters to pass to self.get_entry().
 
     Returns:
@@ -165,8 +168,10 @@ class DocsClient(gdata.client.GDClient):
     match = gdata.docs.data.RESOURCE_ID_PATTERN.match(resource_id)
     if match is None:
       raise ValueError, 'Invalid resource id: %s' % resource_id
+    if uri is None:
+      uri = DOCLIST_FEED_URI
     return self.get_entry(
-        DOCLIST_FEED_URI + resource_id, etag=etag,
+        uri + resource_id, etag=etag,
         desired_class=gdata.docs.data.DocsEntry,
         auth_token=auth_token, **kwargs)
 
@@ -203,7 +208,8 @@ class DocsClient(gdata.client.GDClient):
 
   GetEverything = get_everything
 
-  def get_acl_permissions(self, resource_id, auth_token=None, **kwargs):
+  def get_acl_permissions(self, resource_id, auth_token=None, uri=None,
+                          **kwargs):
     """Retrieves a the ACL sharing permissions for a document.
 
     Args:
@@ -211,6 +217,8 @@ class DocsClient(gdata.client.GDClient):
           'pdf%3A0A1234567890'.
       auth_token: (optional) gdata.gauth.ClientLoginToken, AuthSubToken, or
           OAuthToken which authorizes this client to edit the user's data.
+      uri: (optional) URI to use when making this request.  Must be a template,
+          with a %s for where to put the resource_id.
       kwargs: Other parameters to pass to self.get_feed().
 
     Returns:
@@ -222,14 +230,16 @@ class DocsClient(gdata.client.GDClient):
     match = gdata.docs.data.RESOURCE_ID_PATTERN.match(resource_id)
     if match is None:
       raise ValueError, 'Invalid resource id: %s' % resource_id
+    if uri is None:
+      uri = ACL_FEED_TEMPLATE
 
     return self.get_feed(
-        ACL_FEED_TEMPLATE % resource_id, desired_class=gdata.docs.data.AclFeed,
+        uri % resource_id, desired_class=gdata.docs.data.AclFeed,
         auth_token=auth_token, **kwargs)
 
   GetAclPermissions = get_acl_permissions
 
-  def get_revisions(self, resource_id, auth_token=None, **kwargs):
+  def get_revisions(self, resource_id, auth_token=None, uri=None, **kwargs):
     """Retrieves the revision history for a document.
 
     Args:
@@ -237,6 +247,8 @@ class DocsClient(gdata.client.GDClient):
           'pdf%3A0A1234567890'.
       auth_token: (optional) gdata.gauth.ClientLoginToken, AuthSubToken, or
           OAuthToken which authorizes this client to edit the user's data.
+      uri: (optional) URI to use when making this request.  Must be a template,
+          with a %s for where to put the resource_id.
       kwargs: Other parameters to pass to self.get_feed().
 
     Returns:
@@ -248,16 +260,18 @@ class DocsClient(gdata.client.GDClient):
     match = gdata.docs.data.RESOURCE_ID_PATTERN.match(resource_id)
     if match is None:
       raise ValueError, 'Invalid resource id: %s' % resource_id
+    if uri is None:
+      uri = REVISIONS_FEED_TEMPLATE
 
     return self.get_feed(
-        REVISIONS_FEED_TEMPLATE % resource_id,
+        uri % resource_id,
         desired_class=gdata.docs.data.RevisionFeed, auth_token=auth_token,
         **kwargs)
 
   GetRevisions = get_revisions
 
   def create(self, doc_type, title, folder_or_id=None, writers_can_invite=None,
-             auth_token=None, **kwargs):
+             auth_token=None, uri=None, **kwargs):
     """Creates a new item in the user's doclist.
 
     Args:
@@ -271,6 +285,8 @@ class DocsClient(gdata.client.GDClient):
           being able to invite others to edit or view the document.
       auth_token: (optional) gdata.gauth.ClientLoginToken, AuthSubToken, or
           OAuthToken which authorizes this client to edit the user's data.
+      uri: (optional) URI to use when making this request.  Must be a template,
+          with a %s for where to put the resource_id.
       kwargs: Other parameters to pass to self.post().
 
     Returns:
@@ -285,7 +301,8 @@ class DocsClient(gdata.client.GDClient):
       entry.writers_can_invite = gdata.docs.data.WritersCanInvite(
           value=str(writers_can_invite).lower())
 
-    uri = DOCLIST_FEED_URI
+    if uri is None:
+      uri = DOCLIST_FEED_URI
 
     if folder_or_id is not None:
       if isinstance(folder_or_id, gdata.docs.data.DocsEntry):
@@ -301,7 +318,7 @@ class DocsClient(gdata.client.GDClient):
 
   Create = create
 
-  def copy(self, source_entry, title, auth_token=None, **kwargs):
+  def copy(self, source_entry, title, auth_token=None, uri=None, **kwargs):
     """Copies a native Google document, spreadsheet, or presentation.
 
     Note: arbitrary file types and PDFs do not support this feature.
@@ -312,6 +329,8 @@ class DocsClient(gdata.client.GDClient):
       title: str A title for the new document.
       auth_token: (optional) gdata.gauth.ClientLoginToken, AuthSubToken, or
           OAuthToken which authorizes this client to edit the user's data.
+      uri: (optional) URI to use when making this request.  Must be a template,
+          with a %s for where to put the resource_id.
       kwargs: Other parameters to pass to self.post().
 
     Returns:
@@ -320,12 +339,15 @@ class DocsClient(gdata.client.GDClient):
     entry = gdata.docs.data.DocsEntry(
         title=atom.data.Title(text=title),
         id=atom.data.Id(text=source_entry.GetSelfLink().href))
-    return self.post(entry, DOCLIST_FEED_URI, auth_token=auth_token, **kwargs)
+    if uri is None:
+      uri = DOCLIST_FEED_URI
+    return self.post(entry, uri, auth_token=auth_token, **kwargs)
 
   Copy = copy
 
   def move(self, source_entry, folder_entry=None,
-           keep_in_folders=False, auth_token=None, **kwargs):
+           keep_in_folders=False, auth_token=None, delete_folder_uri=None,
+           folder_uri=None, **kwargs):
     """Moves an item into a different folder (or to the root document list).
 
     Args:
@@ -338,6 +360,10 @@ class DocsClient(gdata.client.GDClient):
           is not removed from any existing parent folders it is in.
       auth_token: (optional) gdata.gauth.ClientLoginToken, AuthSubToken, or
           OAuthToken which authorizes this client to edit the user's data.
+      delete_folder_uri: (optional) URI to use when making this request.  Must
+          be a template, with a %s for where to put the resource_id.
+      folder_uri: (optional) URI to use when making this request.  Must be a
+          template, with a %s for where to put the resource_id.
       kwargs: Other parameters to pass to self.post().
 
     Returns:
@@ -348,18 +374,25 @@ class DocsClient(gdata.client.GDClient):
 
     # Remove the item from any folders it is already in.
     if not keep_in_folders:
+      construct_uri = False
+      if delete_folder_uri is None:
+        construct_uri = True
       for folder in source_entry.InFolders():
-        self.delete(
-            '%s/contents/%s' % (
-                folder.href,
-                urllib.quote(source_entry.resource_id.text)),
-            force=True)
+        if construct_uri:
+          uri = '%s/contents/%s' % (
+              folder.href,
+              urllib.quote(source_entry.resource_id.text))
+        else:
+          uri = delete_folder_uri % urllib.quote(source_entry.resource_id.text)
+
+        self.delete(uri, force=True)
 
     # If we're moving the resource into a folder, verify it is a folder entry.
     if folder_entry is not None:
       if folder_entry.get_document_type() == gdata.docs.data.FOLDER_LABEL:
-        return self.post(entry, folder_entry.content.src,
-                         auth_token=auth_token, **kwargs)
+        if folder_uri is None:
+          folder_uri = folder_entry.content.src
+        return self.post(entry, folder_uri, auth_token=auth_token, **kwargs)
       else:
         raise gdata.client.Error, 'Trying to move item into a non-folder.'
 

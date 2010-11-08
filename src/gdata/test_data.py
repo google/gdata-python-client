@@ -1616,18 +1616,18 @@ DOCUMENT_LIST_FEED = """<?xml version='1.0' encoding='UTF-8'?>
 <ns0:feed xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns2="http://schemas.google.com/g/2005" xmlns:ns3="http://schemas.google.com/docs/2007"><ns1:totalResults
 xmlns:ns1="http://a9.com/-/spec/opensearchrss/1.0/">2</ns1:totalResults><ns1:startIndex
 xmlns:ns1="http://a9.com/-/spec/opensearchrss/1.0/">1</ns1:startIndex><ns0:entry><ns0:content
-src="http://foo.com/fm?fmcmd=102&amp;key=supercalifragilisticexpeadocious"
+src="https://foo.com/fm?fmcmd=102&amp;key=supercalifragilisticexpeadocious"
 type="text/html"
 /><ns0:author><ns0:name>test.user</ns0:name><ns0:email>test.user@gmail.com</ns0:email></ns0:author><ns0:category
 label="spreadsheet" scheme="http://schemas.google.com/g/2005#kind"
 term="http://schemas.google.com/docs/2007#spreadsheet"
-/><ns0:id>http://docs.google.com/feeds/documents/private/full/spreadsheet%3Asupercalifragilisticexpeadocious</ns0:id><ns0:link
-href="http://foo.com/ccc?key=supercalifragilisticexpeadocious" rel="alternate"
+/><ns0:id>https://docs.google.com/feeds/documents/private/full/spreadsheet%3Asupercalifragilisticexpeadocious</ns0:id><ns0:link
+href="https://foo.com/ccc?key=supercalifragilisticexpeadocious" rel="alternate"
 type="text/html" /><ns0:link
-href="http://foo.com/feeds/worksheets/supercalifragilisticexpeadocious/private/full"
+href="https://foo.com/feeds/worksheets/supercalifragilisticexpeadocious/private/full"
 rel="http://schemas.google.com/spreadsheets/2006#worksheetsfeed"
 type="application/atom+xml" /><ns0:link
-href="http://docs.google.com/feeds/documents/private/full/spreadsheet%3Asupercalifragilisticexpeadocious"
+href="https://docs.google.com/feeds/documents/private/full/spreadsheet%3Asupercalifragilisticexpeadocious"
 rel="self" type="application/atom+xml" /><ns0:title type="text">Test Spreadsheet</ns0:title><ns0:updated>2007-07-03T18:03:32.045Z</ns0:updated>
 <ns2:feedLink href="http://docs.google.com/feeds/acl/private/full/spreadsheet%3Afoofoofoo" rel="http://schemas.google.com/acl/2007#accessControlList"/>
 <ns2:resourceId>document:dfrkj84g_3348jbxpxcd</ns2:resourceId>
@@ -1670,17 +1670,17 @@ test.user@gmail.com</ns0:title><ns0:updated>2007-07-09T23:07:21.898Z</ns0:update
 
 DOCUMENT_LIST_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
 <ns0:entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://schemas.google.com/g/2005" xmlns:ns2="http://schemas.google.com/docs/2007"><ns0:content
-src="http://foo.com/fm?fmcmd=102&amp;key=supercalifragilisticexpealidocious" type="text/html"/>
+src="https://foo.com/fm?fmcmd=102&amp;key=supercalifragilisticexpealidocious" type="text/html"/>
 <ns0:author><ns0:name>test.user</ns0:name><ns0:email>test.user@gmail.com</ns0:email></ns0:author>
 <ns0:category label="spreadsheet" scheme="http://schemas.google.com/g/2005#kind"
 term="http://schemas.google.com/docs/2007#spreadsheet"
-/><ns0:id>http://docs.google.com/feeds/documents/private/full/spreadsheet%3Asupercalifragilisticexpealidocious</ns0:id>
-<ns0:link href="http://foo.com/ccc?key=supercalifragilisticexpealidocious"
+/><ns0:id>https://docs.google.com/feeds/documents/private/full/spreadsheet%3Asupercalifragilisticexpealidocious</ns0:id>
+<ns0:link href="https://foo.com/ccc?key=supercalifragilisticexpealidocious"
 rel="alternate" type="text/html" /><ns0:link
-href="http://foo.com/feeds/worksheets/supercalifragilisticexpealidocious/private/full"
+href="https://foo.com/feeds/worksheets/supercalifragilisticexpealidocious/private/full"
 rel="http://schemas.google.com/spreadsheets/2006#worksheetsfeed"
 type="application/atom+xml" /><ns0:link
-href="http://docs.google.com/feeds/documents/private/full/spreadsheet%3Asupercalifragilisticexpealidocious"
+href="https://docs.google.com/feeds/documents/private/full/spreadsheet%3Asupercalifragilisticexpealidocious"
 rel="self" type="application/atom+xml" />
 <ns0:title type="text">Test Spreadsheet</ns0:title><ns0:updated>2007-07-03T18:03:32.045Z</ns0:updated>
 <ns1:resourceId>spreadsheet:supercalifragilisticexpealidocious</ns1:resourceId>
@@ -1695,17 +1695,17 @@ rel="self" type="application/atom+xml" />
 
 DOCUMENT_LIST_ENTRY_V3 = """<?xml version='1.0' encoding='UTF-8'?>
 <ns0:entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://schemas.google.com/g/2005" xmlns:ns2="http://schemas.google.com/docs/2007"><ns0:content
-src="http://foo.com/fm?fmcmd=102&amp;key=supercalifragilisticexpealidocious" type="text/html"/>
+src="https://foo.com/fm?fmcmd=102&amp;key=supercalifragilisticexpealidocious" type="text/html"/>
 <ns0:author><ns0:name>test.user</ns0:name><ns0:email>test.user@gmail.com</ns0:email></ns0:author>
 <ns0:category label="spreadsheet" scheme="http://schemas.google.com/g/2005#kind"
 term="http://schemas.google.com/docs/2007#spreadsheet"
-/><ns0:id>http://docs.google.com/feeds/documents/private/full/spreadsheet%3Asupercalifragilisticexpealidocious</ns0:id>
-<ns0:link href="http://foo.com/ccc?key=supercalifragilisticexpealidocious"
+/><ns0:id>https://docs.google.com/feeds/documents/private/full/spreadsheet%3Asupercalifragilisticexpealidocious</ns0:id>
+<ns0:link href="https://foo.com/ccc?key=supercalifragilisticexpealidocious"
 rel="alternate" type="text/html" /><ns0:link
-href="http://foo.com/feeds/worksheets/supercalifragilisticexpealidocious/private/full"
+href="https://foo.com/feeds/worksheets/supercalifragilisticexpealidocious/private/full"
 rel="http://schemas.google.com/spreadsheets/2006#worksheetsfeed"
 type="application/atom+xml" /><ns0:link
-href="http://docs.google.com/feeds/documents/private/full/spreadsheet%3Asupercalifragilisticexpealidocious"
+href="https://docs.google.com/feeds/documents/private/full/spreadsheet%3Asupercalifragilisticexpealidocious"
 rel="self" type="application/atom+xml" />
 <ns0:link rel="http://schemas.google.com/docs/2007#parent" type="application/atom+xml"
 href="http://docs.google.com/feeds/default/private/full/folder%3A12345" title="AFolderName" />
@@ -1718,8 +1718,8 @@ href="http://docs.google.com/feeds/default/private/full/folder%3A12345" title="A
 <ns1:lastViewed>2009-03-05T07:48:21.493Z</ns1:lastViewed>
 <ns2:writersCanInvite value='true'/>
 <ns1:quotaBytesUsed>1000</ns1:quotaBytesUsed>
-<ns1:feedLink rel="http://schemas.google.com/acl/2007#accessControlList" href="http://docs.google.com/feeds/default/private/full/spreadsheet%3Asupercalifragilisticexpealidocious/acl" />
-<ns1:feedLink rel="http://schemas.google.com/docs/2007/revisions" href="http://docs.google.com/feeds/default/private/full/spreadsheet%3Asupercalifragilisticexpealidocious/revisions" />
+<ns1:feedLink rel="http://schemas.google.com/acl/2007#accessControlList" href="https://docs.google.com/feeds/default/private/full/spreadsheet%3Asupercalifragilisticexpealidocious/acl" />
+<ns1:feedLink rel="http://schemas.google.com/docs/2007/revisions" href="https://docs.google.com/feeds/default/private/full/spreadsheet%3Asupercalifragilisticexpealidocious/revisions" />
 </ns0:entry>
 """
 
@@ -1794,7 +1794,7 @@ DOCUMENT_LIST_REVISION_FEED = """<?xml version='1.0' encoding='UTF-8'?>
       href="https://docs.google.com/Doc?id=doc_id&amp;revision=2"/>
   <link rel="self" type="application/atom+xml"
       href="https://docs.google.com/feeds/default/private/full/resource_id/revisions/2"/>
-  <link rel='http://schemas.google.com/docs/2007#publish' type='text/html' href='http://docs.google.com/View?docid=dfr4&amp;pageview=1&amp;hgd=1'/>   
+  <link rel='http://schemas.google.com/docs/2007#publish' type='text/html' href='https://docs.google.com/View?docid=dfr4&amp;pageview=1&amp;hgd=1'/>   
   <author>
     <name>another_user</name>
     <email>another_user@gmail.com</email>
@@ -5492,4 +5492,3 @@ ANALYTICS_MGMT_ADV_SEGMENT_FEED = '''
   </entry>
 </feed>
 '''
-

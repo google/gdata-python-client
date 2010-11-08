@@ -57,7 +57,7 @@ class DocsHelperTest(unittest.TestCase):
     link3 = gdata.docs.data.make_content_link_from_resource_id(
         'spreadsheet%3A1234567890')
     self.assertEqual(
-        link3, ('http://spreadsheets.google.com/feeds/download/spreadsheets/'
+        link3, ('https://spreadsheets.google.com/feeds/download/spreadsheets/'
                 'Export?key=1234567890'))
 
     # Try an invalid resource id.
@@ -110,11 +110,11 @@ class DocsEntryTest(unittest.TestCase):
 
     self.assertEqual(
         self.entry.get_acl_feed_link().href,
-        ('http://docs.google.com/feeds/default/private/full/'
+        ('https://docs.google.com/feeds/default/private/full/'
          'spreadsheet%3Asupercalifragilisticexpealidocious/acl'))
     self.assertEqual(
         self.entry.get_revisions_feed_link().href,
-        ('http://docs.google.com/feeds/default/private/full/'
+        ('https://docs.google.com/feeds/default/private/full/'
          'spreadsheet%3Asupercalifragilisticexpealidocious/revisions'))
 
     self.assertEqual(len(self.entry.in_folders()), 1)
@@ -215,10 +215,10 @@ class RevisionFeedTest(unittest.TestCase):
     self.assertEqual(entries[0].publish_outside_domain.value, 'false')
     self.assertEqual(
          entries[0].GetPublishLink().href,
-         'http://docs.google.com/View?docid=dfr4&pageview=1&hgd=1')
+         'https://docs.google.com/View?docid=dfr4&pageview=1&hgd=1')
     self.assertEqual(
          entries[0].FindPublishLink(),
-         'http://docs.google.com/View?docid=dfr4&pageview=1&hgd=1')
+         'https://docs.google.com/View?docid=dfr4&pageview=1&hgd=1')
 
 
 class DataClassSanityTest(unittest.TestCase):
