@@ -315,7 +315,8 @@ class QueryTest(unittest.TestCase):
     request = atom.http_core.HttpRequest()
     gdata.client.Query(
         text_query='foo', categories=['a', 'b']).modify_request(request)
-    self.assertEqual(request.uri.query, {'q': 'foo', 'categories': 'a,b'})
+    # categories param from above is named category in URL
+    self.assertEqual(request.uri.query, {'q': 'foo', 'category': 'a,b'})
 
   def test_client_uses_query_modification(self):
     """If the Query is passed as an unexpected param it should apply"""

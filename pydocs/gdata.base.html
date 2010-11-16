@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.base</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/google/home/jcgregorio/projects/gdata/src/gdata/base/__init__.py">/usr/local/google/home/jcgregorio/projects/gdata/src/gdata/base/__init__.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/vicfryzel/workspace/gdata-python-client/src/gdata/base/__init__.py">/home/vicfryzel/workspace/gdata-python-client/src/gdata/base/__init__.py</a></font></td></tr></table>
     <p><tt>Contains&nbsp;extensions&nbsp;to&nbsp;Atom&nbsp;objects&nbsp;used&nbsp;with&nbsp;Google&nbsp;Base.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -30,6 +30,7 @@
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="gdata.base.html#Attributes">Attributes</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.base.html#Bucket">Bucket</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.base.html#ItemAttributeContainer">ItemAttributeContainer</a>
 </font></dt><dd>
 <dl>
@@ -105,7 +106,7 @@ use&nbsp;the&nbsp;attribute.<br>&nbsp;</tt></td></tr>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="Attribute-__init__"><strong>__init__</strong></a>(self, name<font color="#909090">=None</font>, attribute_type<font color="#909090">=None</font>, count<font color="#909090">=None</font>, value<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Attribute">Attribute</a>&nbsp;metadata&nbsp;element<br>
+<dl><dt><a name="Attribute-__init__"><strong>__init__</strong></a>(self, name<font color="#909090">=None</font>, attribute_type<font color="#909090">=None</font>, count<font color="#909090">=None</font>, value<font color="#909090">=None</font>, bucket<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Attribute">Attribute</a>&nbsp;metadata&nbsp;element<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;name:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;attribute<br>
@@ -115,6 +116,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;query&nbsp;results.<br>
 &nbsp;&nbsp;value:&nbsp;list&nbsp;(optional)&nbsp;The&nbsp;values&nbsp;which&nbsp;are&nbsp;often&nbsp;used&nbsp;for&nbsp;this&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attirbute.<br>
+&nbsp;&nbsp;bucket:&nbsp;list&nbsp;(optional)&nbsp;The&nbsp;buckets&nbsp;for&nbsp;this&nbsp;attribute.<br>
 &nbsp;&nbsp;text:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;text&nbsp;contents&nbsp;of&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;attribute.<br>
 &nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;ExtensionElement&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;instances<br>
@@ -181,6 +183,73 @@ Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
 <hr>
 Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
 <dl><dt><a name="Attributes-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Bucket">class <strong>Bucket</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Metadata&nbsp;about&nbsp;common&nbsp;values&nbsp;for&nbsp;a&nbsp;given&nbsp;attribute<br>
+&nbsp;<br>
+A&nbsp;bucket&nbsp;is&nbsp;a&nbsp;child&nbsp;of&nbsp;an&nbsp;attribute&nbsp;which&nbsp;comes&nbsp;from&nbsp;the&nbsp;attributes&nbsp;feed.<br>
+The&nbsp;bucket's&nbsp;text&nbsp;is&nbsp;a&nbsp;commonly&nbsp;used&nbsp;value&nbsp;paired&nbsp;with&nbsp;an&nbsp;attribute&nbsp;name<br>
+and&nbsp;the&nbsp;bucket's&nbsp;count&nbsp;tells&nbsp;how&nbsp;often&nbsp;this&nbsp;attribute's&nbsp;value&nbsp;falls&nbsp;within<br>
+the&nbsp;bucket's&nbsp;range&nbsp;in&nbsp;the&nbsp;search&nbsp;results.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.base.html#Bucket">Bucket</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Bucket-__init__"><strong>__init__</strong></a>(self, count<font color="#909090">=None</font>, text<font color="#909090">=None</font>, low<font color="#909090">=None</font>, high<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Bucket">Bucket</a>&nbsp;metadata&nbsp;element<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;count:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;number&nbsp;of&nbsp;times&nbsp;the&nbsp;value&nbsp;in&nbsp;text&nbsp;is&nbsp;given<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;the&nbsp;parent&nbsp;attribute.<br>
+&nbsp;&nbsp;text:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;bucket's&nbsp;string&nbsp;representation.<br>
+&nbsp;&nbsp;low:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;low&nbsp;end&nbsp;of&nbsp;the&nbsp;bucket.<br>
+&nbsp;&nbsp;high:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;high&nbsp;end&nbsp;of&nbsp;the&nbsp;bucket.<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;ExtensionElement<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;instances<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;attribute&nbsp;value<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;pairs</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="Bucket-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Bucket-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="Bucket-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
 &nbsp;<br>
 Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
 and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
@@ -1992,6 +2061,7 @@ Data descriptors inherited from <a href="atom.html#ExtensionContainer">atom.Exte
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl><dt><a name="-AttributeFromString"><strong>AttributeFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-BucketFromString"><strong>BucketFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-GBaseAttributeEntryFromString"><strong>GBaseAttributeEntryFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-GBaseAttributesFeedFromString"><strong>GBaseAttributesFeedFromString</strong></a>(xml_string)</dt></dl>
  <dl><dt><a name="-GBaseItemFeedFromString"><strong>GBaseItemFeedFromString</strong></a>(xml_string)</dt></dl>

@@ -1,3 +1,16 @@
+=== 2.0.13 ===
+16 Nov 2010 (revision 902:73f3fbb5ea88)
+
+ - Bug Fixes:
+   * Issue 315: Correctly constructs queries based on categories for Blogger APIs.
+   * Issue 323: YouTubeUserQuery constructor passes incorrect overridden parameter to base class.
+ - Accept proxy username and password in http(s)_proxy environment variables.
+ - Adding support for specifying URI to v3 docs client.
+ - Adding tests for revisions for arbitrary file types in Documents List API.
+ - Google Base, added bucket node to attributes.
+ - Adding ContainsSampledData XML Element to Analytics Data Feed and updating samples
+
+
 === 2.0.12 ===
 17 Sep 2010 (revision 892:e949a7cf9a31)
 

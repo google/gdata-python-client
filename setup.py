@@ -25,7 +25,7 @@ if sys.version_info[:3] < (2, 5, 0):
 
 setup(
     name='gdata',
-    version='2.0.12',
+    version='2.0.13',
     description='Python client library for Google data APIs',
     long_description = """\
 The Google data Python client library makes it easy to interact with

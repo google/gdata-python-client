@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.docs.html"><font color="#ffffff">docs</font></a>.client</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/google/home/jcgregorio/projects/gdata/src/gdata/docs/client.py">/usr/local/google/home/jcgregorio/projects/gdata/src/gdata/docs/client.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/vicfryzel/workspace/gdata-python-client/src/gdata/docs/client.py">/home/vicfryzel/workspace/gdata-python-client/src/gdata/docs/client.py</a></font></td></tr></table>
     <p><tt><a href="#DocsClient">DocsClient</a>&nbsp;extends&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>&nbsp;to&nbsp;streamline&nbsp;DocList&nbsp;API&nbsp;calls.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -59,17 +59,17 @@
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="DocsClient-Copy"><strong>Copy</strong></a> = <a href="#DocsClient-copy">copy</a>(self, source_entry, title, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-Copy"><strong>Copy</strong></a> = <a href="#DocsClient-copy">copy</a>(self, source_entry, title, auth_token<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-Create"><strong>Create</strong></a> = <a href="#DocsClient-create">create</a>(self, doc_type, title, folder_or_id<font color="#909090">=None</font>, writers_can_invite<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-Create"><strong>Create</strong></a> = <a href="#DocsClient-create">create</a>(self, doc_type, title, folder_or_id<font color="#909090">=None</font>, writers_can_invite<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="DocsClient-Download"><strong>Download</strong></a> = <a href="#DocsClient-download">download</a>(self, entry_or_id_or_url, file_path, extra_params<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="DocsClient-Export"><strong>Export</strong></a> = <a href="#DocsClient-export">export</a>(self, entry_or_id_or_url, file_path, gid<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-GetAclPermissions"><strong>GetAclPermissions</strong></a> = <a href="#DocsClient-get_acl_permissions">get_acl_permissions</a>(self, resource_id, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-GetAclPermissions"><strong>GetAclPermissions</strong></a> = <a href="#DocsClient-get_acl_permissions">get_acl_permissions</a>(self, resource_id, auth_token<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-GetDoc"><strong>GetDoc</strong></a> = <a href="#DocsClient-get_doc">get_doc</a>(self, resource_id, etag<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-GetDoc"><strong>GetDoc</strong></a> = <a href="#DocsClient-get_doc">get_doc</a>(self, resource_id, etag<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="DocsClient-GetDocList"><strong>GetDocList</strong></a> = <a href="#DocsClient-get_doclist">get_doclist</a>(self, uri<font color="#909090">=None</font>, limit<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
@@ -77,9 +77,9 @@ Methods defined here:<br>
 
 <dl><dt><a name="DocsClient-GetFileContent"><strong>GetFileContent</strong></a> = <a href="#DocsClient-get_file_content">get_file_content</a>(self, uri, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-GetRevisions"><strong>GetRevisions</strong></a> = <a href="#DocsClient-get_revisions">get_revisions</a>(self, resource_id, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-GetRevisions"><strong>GetRevisions</strong></a> = <a href="#DocsClient-get_revisions">get_revisions</a>(self, resource_id, auth_token<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-Move"><strong>Move</strong></a> = <a href="#DocsClient-move">move</a>(self, source_entry, folder_entry<font color="#909090">=None</font>, keep_in_folders<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-Move"><strong>Move</strong></a> = <a href="#DocsClient-move">move</a>(self, source_entry, folder_entry<font color="#909090">=None</font>, keep_in_folders<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, delete_folder_uri<font color="#909090">=None</font>, folder_uri<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="DocsClient-Upload"><strong>Upload</strong></a> = <a href="#DocsClient-upload">upload</a>(self, media, title, folder_or_uri<font color="#909090">=None</font>, content_type<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
@@ -90,7 +90,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
 &nbsp;&nbsp;kwargs:&nbsp;The&nbsp;other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>&nbsp;constructor.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-copy"><strong>copy</strong></a>(self, source_entry, title, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Copies&nbsp;a&nbsp;native&nbsp;Google&nbsp;document,&nbsp;spreadsheet,&nbsp;or&nbsp;presentation.<br>
+<dl><dt><a name="DocsClient-copy"><strong>copy</strong></a>(self, source_entry, title, auth_token<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Copies&nbsp;a&nbsp;native&nbsp;Google&nbsp;document,&nbsp;spreadsheet,&nbsp;or&nbsp;presentation.<br>
 &nbsp;<br>
 Note:&nbsp;arbitrary&nbsp;file&nbsp;types&nbsp;and&nbsp;PDFs&nbsp;do&nbsp;not&nbsp;support&nbsp;this&nbsp;feature.<br>
 &nbsp;<br>
@@ -100,12 +100,14 @@ Args:<br>
 &nbsp;&nbsp;title:&nbsp;str&nbsp;A&nbsp;title&nbsp;for&nbsp;the&nbsp;new&nbsp;document.<br>
 &nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
+&nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;URI&nbsp;to&nbsp;use&nbsp;when&nbsp;making&nbsp;this&nbsp;request.&nbsp;&nbsp;Must&nbsp;be&nbsp;a&nbsp;template,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;a&nbsp;%s&nbsp;for&nbsp;where&nbsp;to&nbsp;put&nbsp;the&nbsp;resource_id.<br>
 &nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-post">post</a>().<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;gdata.docs.data.DocsEntry&nbsp;of&nbsp;the&nbsp;duplicated&nbsp;document.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-create"><strong>create</strong></a>(self, doc_type, title, folder_or_id<font color="#909090">=None</font>, writers_can_invite<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;item&nbsp;in&nbsp;the&nbsp;user's&nbsp;doclist.<br>
+<dl><dt><a name="DocsClient-create"><strong>create</strong></a>(self, doc_type, title, folder_or_id<font color="#909090">=None</font>, writers_can_invite<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;item&nbsp;in&nbsp;the&nbsp;user's&nbsp;doclist.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;doc_type:&nbsp;str&nbsp;The&nbsp;type&nbsp;of&nbsp;object&nbsp;to&nbsp;create.&nbsp;For&nbsp;example:&nbsp;'document',<br>
@@ -118,6 +120,8 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;being&nbsp;able&nbsp;to&nbsp;invite&nbsp;others&nbsp;to&nbsp;edit&nbsp;or&nbsp;view&nbsp;the&nbsp;document.<br>
 &nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
+&nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;URI&nbsp;to&nbsp;use&nbsp;when&nbsp;making&nbsp;this&nbsp;request.&nbsp;&nbsp;Must&nbsp;be&nbsp;a&nbsp;template,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;a&nbsp;%s&nbsp;for&nbsp;where&nbsp;to&nbsp;put&nbsp;the&nbsp;resource_id.<br>
 &nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-post">post</a>().<br>
 &nbsp;<br>
 Returns:<br>
@@ -164,13 +168,15 @@ Raises:<br>
 &nbsp;&nbsp;gdata.client.RequestError&nbsp;if&nbsp;the&nbsp;download&nbsp;URL&nbsp;is&nbsp;malformed&nbsp;or&nbsp;the&nbsp;server's<br>
 &nbsp;&nbsp;response&nbsp;was&nbsp;not&nbsp;successful.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-get_acl_permissions"><strong>get_acl_permissions</strong></a>(self, resource_id, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;a&nbsp;the&nbsp;ACL&nbsp;sharing&nbsp;permissions&nbsp;for&nbsp;a&nbsp;document.<br>
+<dl><dt><a name="DocsClient-get_acl_permissions"><strong>get_acl_permissions</strong></a>(self, resource_id, auth_token<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;a&nbsp;the&nbsp;ACL&nbsp;sharing&nbsp;permissions&nbsp;for&nbsp;a&nbsp;document.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;resource_id:&nbsp;str&nbsp;The&nbsp;document/item's&nbsp;resource&nbsp;id.&nbsp;Example&nbsp;for&nbsp;pdf:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'pdf%3A0A1234567890'.<br>
 &nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
+&nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;URI&nbsp;to&nbsp;use&nbsp;when&nbsp;making&nbsp;this&nbsp;request.&nbsp;&nbsp;Must&nbsp;be&nbsp;a&nbsp;template,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;a&nbsp;%s&nbsp;for&nbsp;where&nbsp;to&nbsp;put&nbsp;the&nbsp;resource_id.<br>
 &nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-get_feed">get_feed</a>().<br>
 &nbsp;<br>
 Returns:<br>
@@ -179,7 +185,7 @@ Returns:<br>
 Raises:<br>
 &nbsp;&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;resource_id&nbsp;is&nbsp;not&nbsp;a&nbsp;valid&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-get_doc"><strong>get_doc</strong></a>(self, resource_id, etag<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;a&nbsp;particular&nbsp;document&nbsp;given&nbsp;by&nbsp;its&nbsp;resource&nbsp;id.<br>
+<dl><dt><a name="DocsClient-get_doc"><strong>get_doc</strong></a>(self, resource_id, etag<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;a&nbsp;particular&nbsp;document&nbsp;given&nbsp;by&nbsp;its&nbsp;resource&nbsp;id.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;resource_id:&nbsp;str&nbsp;The&nbsp;document/item's&nbsp;resource&nbsp;id.&nbsp;Example&nbsp;spreadsheet:<br>
@@ -189,6 +195,8 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;developers_guide_protocol.html#RetrievingCached.<br>
 &nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
+&nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;URI&nbsp;to&nbsp;use&nbsp;for&nbsp;this&nbsp;request.&nbsp;&nbsp;Translates&nbsp;to&nbsp;uri&nbsp;+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource_id.<br>
 &nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-get_entry">get_entry</a>().<br>
 &nbsp;<br>
 Returns:<br>
@@ -249,13 +257,15 @@ Returns:<br>
 Raises:<br>
 &nbsp;&nbsp;gdata.client.RequestError:&nbsp;on&nbsp;error&nbsp;response&nbsp;from&nbsp;server.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-get_revisions"><strong>get_revisions</strong></a>(self, resource_id, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;the&nbsp;revision&nbsp;history&nbsp;for&nbsp;a&nbsp;document.<br>
+<dl><dt><a name="DocsClient-get_revisions"><strong>get_revisions</strong></a>(self, resource_id, auth_token<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;the&nbsp;revision&nbsp;history&nbsp;for&nbsp;a&nbsp;document.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;resource_id:&nbsp;str&nbsp;The&nbsp;document/item's&nbsp;resource&nbsp;id.&nbsp;Example&nbsp;for&nbsp;pdf:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'pdf%3A0A1234567890'.<br>
 &nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
+&nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;URI&nbsp;to&nbsp;use&nbsp;when&nbsp;making&nbsp;this&nbsp;request.&nbsp;&nbsp;Must&nbsp;be&nbsp;a&nbsp;template,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;a&nbsp;%s&nbsp;for&nbsp;where&nbsp;to&nbsp;put&nbsp;the&nbsp;resource_id.<br>
 &nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-get_feed">get_feed</a>().<br>
 &nbsp;<br>
 Returns:<br>
@@ -264,7 +274,7 @@ Returns:<br>
 Raises:<br>
 &nbsp;&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;resource_id&nbsp;is&nbsp;not&nbsp;a&nbsp;valid&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-move"><strong>move</strong></a>(self, source_entry, folder_entry<font color="#909090">=None</font>, keep_in_folders<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Moves&nbsp;an&nbsp;item&nbsp;into&nbsp;a&nbsp;different&nbsp;folder&nbsp;(or&nbsp;to&nbsp;the&nbsp;root&nbsp;document&nbsp;list).<br>
+<dl><dt><a name="DocsClient-move"><strong>move</strong></a>(self, source_entry, folder_entry<font color="#909090">=None</font>, keep_in_folders<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, delete_folder_uri<font color="#909090">=None</font>, folder_uri<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Moves&nbsp;an&nbsp;item&nbsp;into&nbsp;a&nbsp;different&nbsp;folder&nbsp;(or&nbsp;to&nbsp;the&nbsp;root&nbsp;document&nbsp;list).<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;source_entry:&nbsp;gdata.docs.data.DocsEntry&nbsp;An&nbsp;object&nbsp;representing&nbsp;the&nbsp;source<br>
@@ -276,6 +286,10 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;not&nbsp;removed&nbsp;from&nbsp;any&nbsp;existing&nbsp;parent&nbsp;folders&nbsp;it&nbsp;is&nbsp;in.<br>
 &nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
+&nbsp;&nbsp;delete_folder_uri:&nbsp;(optional)&nbsp;URI&nbsp;to&nbsp;use&nbsp;when&nbsp;making&nbsp;this&nbsp;request.&nbsp;&nbsp;Must<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;a&nbsp;template,&nbsp;with&nbsp;a&nbsp;%s&nbsp;for&nbsp;where&nbsp;to&nbsp;put&nbsp;the&nbsp;resource_id.<br>
+&nbsp;&nbsp;folder_uri:&nbsp;(optional)&nbsp;URI&nbsp;to&nbsp;use&nbsp;when&nbsp;making&nbsp;this&nbsp;request.&nbsp;&nbsp;Must&nbsp;be&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;template,&nbsp;with&nbsp;a&nbsp;%s&nbsp;for&nbsp;where&nbsp;to&nbsp;put&nbsp;the&nbsp;resource_id.<br>
 &nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-post">post</a>().<br>
 &nbsp;<br>
 Returns:<br>
