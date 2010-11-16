@@ -160,6 +160,13 @@ class DataFeedTest(unittest.TestCase):
 
     self.assert_(self.feed.aggregates is not None)
 
+  def testContainsSampledData(self):
+    """Tests ContainsSampledData class in Google Analytics Data Feed."""
+
+    contains_sampled_data = self.feed.contains_sampled_data.text
+    self.assertEquals(contains_sampled_data, 'true')
+    self.assertTrue(self.feed.HasSampledData())
+
   def testAggregatesElements(self):
     """Tests Metrics class in Aggregates class."""
 
@@ -193,7 +200,7 @@ class DataFeedTest(unittest.TestCase):
     self.assertEquals(table_name.text, 'www.googlestore.com')
 
   def testDataSourceProperty(self):
-    """Tests Property clas in the DataSource class."""
+    """Tests Property class in the DataSource class."""
 
     property = self.feed.data_source[0].property
     self.assertEquals(property[0].name, 'ga:profileId')
@@ -339,8 +346,6 @@ class ManagementFeedProfileTest(unittest.TestCase):
 
   def testGetChildLinks(self):
     """Tests GetChildLinks utility method."""
-
-    print self.feed.kind
 
     child_links = self.feed.entry[0].GetChildLinks()
     self.assertEquals(len(child_links), 1)

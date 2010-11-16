@@ -175,6 +175,11 @@ class Aggregates(atom.core.XmlElement, GetMetric):
   metric = [Metric]
 
 
+class ContainsSampledData(atom.core.XmlElement):
+  """Analytics Data Feed <dxp:containsSampledData>"""
+  _qname = DXP_NS % 'containsSampledData'
+
+
 class TableId(atom.core.XmlElement):
   """Analytics Feed <dxp:tableId>"""
   _qname = DXP_NS % 'tableId'
@@ -336,9 +341,18 @@ class DataFeed(gdata.data.GDFeed):
   start_date = StartDate
   end_date = EndDate
   aggregates = Aggregates
+  contains_sampled_data = ContainsSampledData
   data_source = [DataSource]
   entry = [DataEntry]
   segment = Segment
+
+  def has_sampled_data(self):
+    """Returns whether this feed has sampled data."""
+    if (self.contains_sampled_data.text == 'true'):
+      return True
+    return False
+
+  HasSampledData = has_sampled_data
 
 
 # Management Feed.
