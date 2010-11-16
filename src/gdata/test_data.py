@@ -5377,6 +5377,7 @@ ANALYTICS_DATA_FEED = '''
     <dxp:metric confidenceInterval='0.0' name='ga:visits' type='integer' value='136540'/>
     <dxp:metric confidenceInterval='0.0' name='ga:bounces' type='integer' value='101535'/>
   </dxp:aggregates>
+  <dxp:containsSampledData>true</dxp:containsSampledData>
   <dxp:dataSource>
     <dxp:tableId>ga:1174</dxp:tableId>
     <dxp:tableName>www.googlestore.com</dxp:tableName>
