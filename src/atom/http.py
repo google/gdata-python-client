@@ -201,17 +201,24 @@ class ProxiedHttpClient(HttpClient):
   'https_proxy' and 'http_proxy' respectively. If the proxy server requires
   a Basic Auth authorization header, the username and password are expected to 
   be in the 'proxy-username' or 'proxy_username' variable and the 
-  'proxy-password' or 'proxy_password' variable.
+  'proxy-password' or 'proxy_password' variable, or in 'http_proxy' or
+  'https_proxy' as "protocol://[username:password@]host:port".
   
   After connecting to the proxy server, the request is completed as in 
   HttpClient.request.
   """
   def _prepare_connection(self, url, headers):
-    proxy_auth = _get_proxy_auth(url.protocol)
-    if url.protocol == 'https':
-      # destination is https
-      proxy = os.environ.get('https_proxy')
-      if proxy:
+    proxy_settings = os.environ.get('%s_proxy' % url.protocol)
+    if not proxy_settings:
+      # The request was HTTP or HTTPS, but there was no appropriate proxy set.
+      return HttpClient._prepare_connection(self, url, headers)
+    else:
+      print '!!!!%s' % proxy_settings
+      proxy_auth = _get_proxy_auth(proxy_settings)
+      proxy_netloc = _get_proxy_net_location(proxy_settings)
+      print '!!!!%s' % proxy_auth
+      print '!!!!%s' % proxy_netloc
+      if url.protocol == 'https':
         # Set any proxy auth headers 
         if proxy_auth:
           proxy_auth = 'Proxy-authorization: %s' % proxy_auth
@@ -231,7 +238,7 @@ class ProxiedHttpClient(HttpClient):
         proxy_pieces = '%s%s%s\r\n' % (proxy_connect, proxy_auth, user_agent)
         
         # Find the proxy host and port.
-        proxy_url = atom.url.parse_url(proxy)
+        proxy_url = atom.url.parse_url(proxy_netloc)
         if not proxy_url.port:
           proxy_url.port = '80'
         
@@ -262,13 +269,9 @@ class ProxiedHttpClient(HttpClient):
         connection.sock = sslobj
         return connection
       else:
-        # The request was HTTPS, but there was no https_proxy set.
-        return HttpClient._prepare_connection(self, url, headers)
-    else:
-      proxy = os.environ.get('http_proxy')
-      if proxy:
+        # If protocol was not https.
         # Find the proxy host and port.
-        proxy_url = atom.url.parse_url(proxy)
+        proxy_url = atom.url.parse_url(proxy_netloc)
         if not proxy_url.port:
           proxy_url.port = '80'
         
@@ -276,23 +279,20 @@ class ProxiedHttpClient(HttpClient):
           headers['Proxy-Authorization'] = proxy_auth.strip()
 
         return httplib.HTTPConnection(proxy_url.host, int(proxy_url.port))
-      else:
-        # The request was HTTP, but there was no http_proxy set.
-        return HttpClient._prepare_connection(self, url, headers)
 
   def _get_access_url(self, url):
     return url.to_string()
 
 
-def _get_proxy_auth(protocol=None):
+def _get_proxy_auth(proxy_settings):
   """Returns proxy authentication string for header.
 
-  Will check environment variables for proxy authentiation info, starting with
-  proxy(_/-)username and proxy(_/-)password before checking PROTOCOL_proxy for
-  a [protocol://]username:password@host[:port] string.
+  Will check environment variables for proxy authentication info, starting with
+  proxy(_/-)username and proxy(_/-)password before checking the given
+  proxy_settings for a [protocol://]username:password@host[:port] string.
 
   Args:
-    protocol: String representation of protocol.
+    proxy_settings: String from http_proxy or https_proxy environment variable.
 
   Returns:
     Authentication string for proxy, or empty string if no proxy username was
@@ -308,10 +308,9 @@ def _get_proxy_auth(protocol=None):
   if not proxy_password:
     proxy_password = os.environ.get('proxy_password')
 
-  if protocol and not proxy_username:
-    proxy_info = os.environ.get('%s_proxy' % protocol)
-    if proxy_info and '@' in proxy_info:
-      protocol_and_proxy_auth = proxy_info.split('@')[0].split(':')
+  if not proxy_username:
+    if '@' in proxy_settings:
+      protocol_and_proxy_auth = proxy_settings.split('@')[0].split(':')
       if len(protocol_and_proxy_auth) == 3:
         # 3 elements means we have [<protocol>, //<user>, <password>]
         proxy_username = protocol_and_proxy_auth[1].lstrip('/')
@@ -326,6 +325,24 @@ def _get_proxy_auth(protocol=None):
     return 'Basic %s\r\n' % (user_auth.strip())
   else:
     return ''
+
+
+def _get_proxy_net_location(proxy_settings):
+  """Returns proxy host and port.
+
+  Args:
+    proxy_settings: String from http_proxy or https_proxy environment variable.
+        Must be in the form of protocol://[username:password@]host:port
+
+  Returns:
+    String in the form of protocol://host:port
+  """
+  if '@' in proxy_settings:
+    protocol = proxy_settings.split(':')[0]
+    netloc = proxy_settings.split('@')[1]
+    return '%s://%s' % (protocol, netloc)
+  else:
+    return proxy_settings
 
 
 def _send_data_part(data, connection):
