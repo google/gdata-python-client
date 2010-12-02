@@ -251,6 +251,21 @@ class XmlElementTest(unittest.TestCase):
         found_x_123 = True
     self.assert_(found_x_and_y)
     self.assert_(found_x_123)
+
+  def testGenericTagAndNamespace(self):
+    element = atom.core.XmlElement(text='content')
+    # Try setting tag then namespace.
+    element.tag = 'foo'
+    self.assert_(element._qname == 'foo')
+    element.namespace = 'http://example.com/ns'
+    self.assert_(element._qname == '{http://example.com/ns}foo')
+
+    element = atom.core.XmlElement()
+    # Try setting namespace then tag.
+    element.namespace = 'http://example.com/ns'
+    self.assert_(element._qname == '{http://example.com/ns}')
+    element.tag = 'foo'
+    self.assert_(element._qname == '{http://example.com/ns}foo')
     
   def assert_trees_similar(self, a, b):
     """Compares two XML trees for approximate matching."""
