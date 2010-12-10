@@ -1,0 +1,65 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.SessionCache</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.SessionCache</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/SessionCache.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/SessionCache.py</a></font></td></tr></table>
+    <p><tt>Class&nbsp;for&nbsp;caching&nbsp;TLS&nbsp;sessions.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="thread.html">thread</a><br>
+</td><td width="25%" valign=top><a href="time.html">time</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.SessionCache.html#SessionCache">SessionCache</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SessionCache">class <strong>SessionCache</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;class&nbsp;is&nbsp;used&nbsp;by&nbsp;the&nbsp;server&nbsp;to&nbsp;cache&nbsp;TLS&nbsp;sessions.<br>
+&nbsp;<br>
+Caching&nbsp;sessions&nbsp;allows&nbsp;the&nbsp;client&nbsp;to&nbsp;use&nbsp;TLS&nbsp;session&nbsp;resumption<br>
+and&nbsp;avoid&nbsp;the&nbsp;expense&nbsp;of&nbsp;a&nbsp;full&nbsp;handshake.&nbsp;&nbsp;To&nbsp;use&nbsp;this&nbsp;class,<br>
+simply&nbsp;pass&nbsp;a&nbsp;<a href="#SessionCache">SessionCache</a>&nbsp;instance&nbsp;into&nbsp;the&nbsp;server&nbsp;handshake<br>
+function.<br>
+&nbsp;<br>
+This&nbsp;class&nbsp;is&nbsp;thread-safe.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="SessionCache-__getitem__"><strong>__getitem__</strong></a>(self, sessionID)</dt></dl>
+
+<dl><dt><a name="SessionCache-__init__"><strong>__init__</strong></a>(self, maxEntries<font color="#909090">=10000</font>, maxAge<font color="#909090">=14400</font>)</dt><dd><tt>Create&nbsp;a&nbsp;new&nbsp;<a href="#SessionCache">SessionCache</a>.<br>
+&nbsp;<br>
+@type&nbsp;maxEntries:&nbsp;int<br>
+@param&nbsp;maxEntries:&nbsp;The&nbsp;maximum&nbsp;size&nbsp;of&nbsp;the&nbsp;cache.&nbsp;&nbsp;When&nbsp;this<br>
+limit&nbsp;is&nbsp;reached,&nbsp;the&nbsp;oldest&nbsp;sessions&nbsp;will&nbsp;be&nbsp;deleted&nbsp;as<br>
+necessary&nbsp;to&nbsp;make&nbsp;room&nbsp;for&nbsp;new&nbsp;ones.&nbsp;&nbsp;The&nbsp;default&nbsp;is&nbsp;10000.<br>
+&nbsp;<br>
+@type&nbsp;maxAge:&nbsp;int<br>
+@param&nbsp;maxAge:&nbsp;&nbsp;The&nbsp;number&nbsp;of&nbsp;seconds&nbsp;before&nbsp;a&nbsp;session&nbsp;expires<br>
+from&nbsp;the&nbsp;cache.&nbsp;&nbsp;The&nbsp;default&nbsp;is&nbsp;14400&nbsp;(i.e.&nbsp;4&nbsp;hours).</tt></dd></dl>
+
+<dl><dt><a name="SessionCache-__setitem__"><strong>__setitem__</strong></a>(self, sessionID, session)</dt></dl>
+
+</td></tr></table></td></tr></table>
+</body></html>

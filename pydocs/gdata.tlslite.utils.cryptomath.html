@@ -1,0 +1,79 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.utils.cryptomath</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.<a href="gdata.tlslite.utils.html"><font color="#ffffff">utils</font></a>.cryptomath</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/utils/cryptomath.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/utils/cryptomath.py</a></font></td></tr></table>
+    <p><tt>cryptomath&nbsp;module<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;has&nbsp;basic&nbsp;math/crypto&nbsp;code.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="Crypto.html">Crypto</a><br>
+<a href="array.html">array</a><br>
+</td><td width="25%" valign=top><a href="base64.html">base64</a><br>
+<a href="binascii.html">binascii</a><br>
+</td><td width="25%" valign=top><a href="math.html">math</a><br>
+<a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+<a href="traceback.html">traceback</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-base64ToBytes"><strong>base64ToBytes</strong></a>(s)</dt></dl>
+ <dl><dt><a name="-base64ToNumber"><strong>base64ToNumber</strong></a>(s)</dt></dl>
+ <dl><dt><a name="-base64ToString"><strong>base64ToString</strong></a>(s)</dt></dl>
+ <dl><dt><a name="-bytesToBase64"><strong>bytesToBase64</strong></a>(bytes)</dt></dl>
+ <dl><dt><a name="-bytesToNumber"><strong>bytesToNumber</strong></a>(bytes)</dt></dl>
+ <dl><dt><a name="-gcd"><strong>gcd</strong></a>(a, b)</dt></dl>
+ <dl><dt><a name="-getBase64Nonce"><strong>getBase64Nonce</strong></a>(numChars<font color="#909090">=22</font>)</dt></dl>
+ <dl><dt><a name="-getRandomBytes"><strong>getRandomBytes</strong></a>(howMany)</dt></dl>
+ <dl><dt><a name="-getRandomNumber"><strong>getRandomNumber</strong></a>(low, high)</dt></dl>
+ <dl><dt><a name="-getRandomPrime"><strong>getRandomPrime</strong></a>(bits, display<font color="#909090">=False</font>)</dt></dl>
+ <dl><dt><a name="-getRandomSafePrime"><strong>getRandomSafePrime</strong></a>(bits, display<font color="#909090">=False</font>)</dt><dd><tt>#Unused&nbsp;at&nbsp;the&nbsp;moment...</tt></dd></dl>
+ <dl><dt><a name="-hashAndBase64"><strong>hashAndBase64</strong></a>(s)</dt></dl>
+ <dl><dt><a name="-invMod"><strong>invMod</strong></a>(a, b)</dt><dd><tt>#Returns&nbsp;inverse&nbsp;of&nbsp;a&nbsp;mod&nbsp;b,&nbsp;zero&nbsp;if&nbsp;none<br>
+#Uses&nbsp;Extended&nbsp;Euclidean&nbsp;Algorithm</tt></dd></dl>
+ <dl><dt><a name="-isPrime"><strong>isPrime</strong></a>(n, iterations<font color="#909090">=5</font>, display<font color="#909090">=False</font>)</dt></dl>
+ <dl><dt><a name="-lcm"><strong>lcm</strong></a>(a, b)</dt></dl>
+ <dl><dt><a name="-makeSieve"><strong>makeSieve</strong></a>(n)</dt><dd><tt>#Pre-calculate&nbsp;a&nbsp;sieve&nbsp;of&nbsp;the&nbsp;~100&nbsp;primes&nbsp;&lt;&nbsp;1000:</tt></dd></dl>
+ <dl><dt><a name="-mpiToNumber"><strong>mpiToNumber</strong></a>(mpi)</dt></dl>
+ <dl><dt><a name="-numBytes"><strong>numBytes</strong></a>(n)</dt></dl>
+ <dl><dt><a name="-numberToBase64"><strong>numberToBase64</strong></a>(n)</dt></dl>
+ <dl><dt><a name="-numberToBytes"><strong>numberToBytes</strong></a>(n)</dt></dl>
+ <dl><dt><a name="-numberToMPI"><strong>numberToMPI</strong></a>(n)</dt></dl>
+ <dl><dt><a name="-numberToString"><strong>numberToString</strong></a>(s)</dt></dl>
+ <dl><dt><a name="-powMod"><strong>powMod</strong></a>(base, power, modulus)</dt><dd><tt>#Copied&nbsp;from&nbsp;Bryan&nbsp;G.&nbsp;Olson's&nbsp;post&nbsp;to&nbsp;comp.lang.python<br>
+#Does&nbsp;left-to-right&nbsp;instead&nbsp;of&nbsp;pow()'s&nbsp;right-to-left,<br>
+#thus&nbsp;about&nbsp;30%&nbsp;faster&nbsp;than&nbsp;the&nbsp;python&nbsp;built-in&nbsp;with&nbsp;small&nbsp;bases</tt></dd></dl>
+ <dl><dt><a name="-sha1"><strong>sha1</strong></a> = openssl_sha1(...)</dt><dd><tt>Returns&nbsp;a&nbsp;sha1&nbsp;hash&nbsp;object;&nbsp;optionally&nbsp;initialized&nbsp;with&nbsp;a&nbsp;string</tt></dd></dl>
+ <dl><dt><a name="-stringToBase64"><strong>stringToBase64</strong></a>(s)</dt></dl>
+ <dl><dt><a name="-stringToNumber"><strong>stringToNumber</strong></a>(s)</dt></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>cryptlibpyLoaded</strong> = False<br>
+<strong>gmpyLoaded</strong> = False<br>
+<strong>m2cryptoLoaded</strong> = False<br>
+<strong>prngName</strong> = 'os.urandom'<br>
+<strong>pycryptoLoaded</strong> = True<br>
+<strong>sieve</strong> = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, ...]</td></tr></table>
+</body></html>

@@ -1,0 +1,72 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.Crypto.Util.number</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.Crypto.html"><font color="#ffffff">Crypto</font></a>.<a href="gdata.Crypto.Util.html"><font color="#ffffff">Util</font></a>.number</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/Crypto/Util/number.py">/usr/local/lib/python2.6/dist-packages/gdata/Crypto/Util/number.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;&nbsp;&nbsp;number.py&nbsp;:&nbsp;Number-theoretic&nbsp;functions<br>
+#<br>
+#&nbsp;&nbsp;Part&nbsp;of&nbsp;the&nbsp;Python&nbsp;Cryptography&nbsp;Toolkit<br>
+#<br>
+#&nbsp;Distribute&nbsp;and&nbsp;use&nbsp;freely;&nbsp;there&nbsp;are&nbsp;no&nbsp;restrictions&nbsp;on&nbsp;further<br>
+#&nbsp;dissemination&nbsp;and&nbsp;usage&nbsp;except&nbsp;those&nbsp;imposed&nbsp;by&nbsp;the&nbsp;laws&nbsp;of&nbsp;your<br>
+#&nbsp;country&nbsp;of&nbsp;residence.&nbsp;&nbsp;This&nbsp;software&nbsp;is&nbsp;provided&nbsp;"as&nbsp;is"&nbsp;without<br>
+#&nbsp;warranty&nbsp;of&nbsp;fitness&nbsp;for&nbsp;use&nbsp;or&nbsp;suitability&nbsp;for&nbsp;any&nbsp;purpose,&nbsp;express<br>
+#&nbsp;or&nbsp;implied.&nbsp;Use&nbsp;at&nbsp;your&nbsp;own&nbsp;risk&nbsp;or&nbsp;not&nbsp;at&nbsp;all.<br>
+#</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="Crypto.PublicKey._fastmath.html">Crypto.PublicKey._fastmath</a><br>
+</td><td width="25%" valign=top><a href="struct.html">struct</a><br>
+</td><td width="25%" valign=top><a href="warnings.html">warnings</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-GCD"><strong>GCD</strong></a>(x, y)</dt><dd><tt><a href="#-GCD">GCD</a>(x:long,&nbsp;y:long):&nbsp;long<br>
+Return&nbsp;the&nbsp;GCD&nbsp;of&nbsp;x&nbsp;and&nbsp;y.</tt></dd></dl>
+ <dl><dt><a name="-bytes_to_long"><strong>bytes_to_long</strong></a>(s)</dt><dd><tt><a href="#-bytes_to_long">bytes_to_long</a>(string)&nbsp;:&nbsp;long<br>
+Convert&nbsp;a&nbsp;byte&nbsp;string&nbsp;to&nbsp;a&nbsp;long&nbsp;integer.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;(essentially)&nbsp;the&nbsp;inverse&nbsp;of&nbsp;<a href="#-long_to_bytes">long_to_bytes</a>().</tt></dd></dl>
+ <dl><dt><a name="-getPrime"><strong>getPrime</strong></a>(N, randfunc)</dt><dd><tt><a href="#-getPrime">getPrime</a>(N:int,&nbsp;randfunc:callable):long<br>
+Return&nbsp;a&nbsp;random&nbsp;N-bit&nbsp;prime&nbsp;number.</tt></dd></dl>
+ <dl><dt><a name="-getRandomNumber"><strong>getRandomNumber</strong></a>(N, randfunc)</dt><dd><tt><a href="#-getRandomNumber">getRandomNumber</a>(N:int,&nbsp;randfunc:callable):long<br>
+Return&nbsp;an&nbsp;N-bit&nbsp;random&nbsp;number.</tt></dd></dl>
+ <dl><dt><a name="-inverse"><strong>inverse</strong></a>(u, v)</dt><dd><tt><a href="#-inverse">inverse</a>(u:long,&nbsp;u:long):long<br>
+Return&nbsp;the&nbsp;inverse&nbsp;of&nbsp;u&nbsp;mod&nbsp;v.</tt></dd></dl>
+ <dl><dt><a name="-isPrime"><strong>isPrime</strong></a>(N)</dt><dd><tt><a href="#-isPrime">isPrime</a>(N:long):bool<br>
+Return&nbsp;true&nbsp;if&nbsp;N&nbsp;is&nbsp;prime.</tt></dd></dl>
+ <dl><dt><a name="-long2str"><strong>long2str</strong></a>(n, blocksize<font color="#909090">=0</font>)</dt></dl>
+ <dl><dt><a name="-long_to_bytes"><strong>long_to_bytes</strong></a>(n, blocksize<font color="#909090">=0</font>)</dt><dd><tt><a href="#-long_to_bytes">long_to_bytes</a>(n:long,&nbsp;blocksize:int)&nbsp;:&nbsp;string<br>
+Convert&nbsp;a&nbsp;long&nbsp;integer&nbsp;to&nbsp;a&nbsp;byte&nbsp;string.<br>
+&nbsp;<br>
+If&nbsp;optional&nbsp;blocksize&nbsp;is&nbsp;given&nbsp;and&nbsp;greater&nbsp;than&nbsp;zero,&nbsp;pad&nbsp;the&nbsp;front&nbsp;of&nbsp;the<br>
+byte&nbsp;string&nbsp;with&nbsp;binary&nbsp;zeros&nbsp;so&nbsp;that&nbsp;the&nbsp;length&nbsp;is&nbsp;a&nbsp;multiple&nbsp;of<br>
+blocksize.</tt></dd></dl>
+ <dl><dt><a name="-size"><strong>size</strong></a>(N)</dt><dd><tt><a href="#-size">size</a>(N:long)&nbsp;:&nbsp;int<br>
+Returns&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;number&nbsp;N&nbsp;in&nbsp;bits.</tt></dd></dl>
+ <dl><dt><a name="-str2long"><strong>str2long</strong></a>(s)</dt></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__revision__</strong> = '$Id: number.py,v 1.13 2003/04/04 18:21:07 akuchling Exp $'<br>
+<strong>sieve</strong> = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, ...]</td></tr></table>
+</body></html>

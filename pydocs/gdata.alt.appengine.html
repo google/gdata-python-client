@@ -1,5 +1,5 @@
 
-<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head><title>Python: module gdata.alt.appengine</title>
 </head><body bgcolor="#f0f0f8">
 
@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.alt.html"><font color="#ffffff">alt</font></a>.appengine</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client/src/gdata/alt/appengine.py">/usr/local/svn/gdata-python-client/src/gdata/alt/appengine.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/alt/appengine.py">/usr/local/lib/python2.6/dist-packages/gdata/alt/appengine.py</a></font></td></tr></table>
     <p><tt>Provides&nbsp;HTTP&nbsp;functions&nbsp;for&nbsp;gdata.service&nbsp;to&nbsp;use&nbsp;on&nbsp;Google&nbsp;App&nbsp;Engine<br>
 &nbsp;<br>
 <a href="#AppEngineHttpClient">AppEngineHttpClient</a>:&nbsp;Provides&nbsp;an&nbsp;HTTP&nbsp;request&nbsp;method&nbsp;which&nbsp;uses&nbsp;App&nbsp;Engine's<br>
@@ -24,7 +24,7 @@ run_on_appengine:&nbsp;Function&nbsp;which&nbsp;will&nbsp;modify&nbsp;an&nbsp;ex
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="StringIO.html">StringIO</a><br>
@@ -81,7 +81,7 @@ run_on_appengine:&nbsp;Function&nbsp;which&nbsp;will&nbsp;modify&nbsp;an&nbsp;ex
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="AppEngineHttpClient-__init__"><strong>__init__</strong></a>(self, headers<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="AppEngineHttpClient-__init__"><strong>__init__</strong></a>(self, headers<font color="#909090">=None</font>, deadline<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="AppEngineHttpClient-request"><strong>request</strong></a>(self, operation, url, data<font color="#909090">=None</font>, headers<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;HTTP&nbsp;call&nbsp;to&nbsp;the&nbsp;server,&nbsp;supports&nbsp;GET,&nbsp;POST,&nbsp;PUT,&nbsp;and<br>
 DELETE.<br>
@@ -223,24 +223,21 @@ Data descriptors defined here:<br>
 <hr>
 Data descriptors defined here:<br>
 <dl><dt><strong>pickled_tokens</strong></dt>
-<dd><tt>A&nbsp;string&nbsp;that&nbsp;can&nbsp;be&nbsp;longer&nbsp;than&nbsp;500&nbsp;bytes.<br>
-&nbsp;<br>
-This&nbsp;type&nbsp;should&nbsp;be&nbsp;used&nbsp;for&nbsp;large&nbsp;binary&nbsp;values&nbsp;to&nbsp;make&nbsp;sure&nbsp;the&nbsp;datastore<br>
-has&nbsp;good&nbsp;performance&nbsp;for&nbsp;queries.</tt></dd>
+<dd><tt>A&nbsp;byte&nbsp;string&nbsp;that&nbsp;can&nbsp;be&nbsp;longer&nbsp;than&nbsp;500&nbsp;bytes.</tt></dd>
 </dl>
 <dl><dt><strong>user</strong></dt>
 <dd><tt>A&nbsp;user&nbsp;property.</tt></dd>
 </dl>
 <hr>
 Methods inherited from <a href="google.appengine.ext.db.html#Model">google.appengine.ext.db.Model</a>:<br>
-<dl><dt><a name="TokenCollection-__init__"><strong>__init__</strong></a>(self, parent<font color="#909090">=None</font>, key_name<font color="#909090">=None</font>, _app<font color="#909090">=None</font>, **kwds)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;instance&nbsp;of&nbsp;this&nbsp;model.<br>
+<dl><dt><a name="TokenCollection-__init__"><strong>__init__</strong></a>(self, parent<font color="#909090">=None</font>, key_name<font color="#909090">=None</font>, _app<font color="#909090">=None</font>, _from_entity<font color="#909090">=False</font>, **kwds)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;instance&nbsp;of&nbsp;this&nbsp;model.<br>
 &nbsp;<br>
-To&nbsp;create&nbsp;a&nbsp;new&nbsp;entity,&nbsp;you&nbsp;instantiate&nbsp;a&nbsp;model&nbsp;and&nbsp;then&nbsp;call&nbsp;<a href="#TokenCollection-save">save</a>(),<br>
+To&nbsp;create&nbsp;a&nbsp;new&nbsp;entity,&nbsp;you&nbsp;instantiate&nbsp;a&nbsp;model&nbsp;and&nbsp;then&nbsp;call&nbsp;<a href="#TokenCollection-put">put</a>(),<br>
 which&nbsp;saves&nbsp;the&nbsp;entity&nbsp;to&nbsp;the&nbsp;datastore:<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;person&nbsp;=&nbsp;Person()<br>
 &nbsp;&nbsp;&nbsp;person.name&nbsp;=&nbsp;'Bret'<br>
-&nbsp;&nbsp;&nbsp;person.<a href="#TokenCollection-save">save</a>()<br>
+&nbsp;&nbsp;&nbsp;person.<a href="#TokenCollection-put">put</a>()<br>
 &nbsp;<br>
 You&nbsp;can&nbsp;initialize&nbsp;properties&nbsp;in&nbsp;the&nbsp;model&nbsp;in&nbsp;the&nbsp;constructor&nbsp;with&nbsp;keyword<br>
 arguments:<br>
@@ -255,15 +252,28 @@ Args:<br>
 &nbsp;&nbsp;parent:&nbsp;Parent&nbsp;instance&nbsp;for&nbsp;this&nbsp;instance&nbsp;or&nbsp;None,&nbsp;indicating&nbsp;a&nbsp;top-<br>
 &nbsp;&nbsp;&nbsp;&nbsp;level&nbsp;instance.<br>
 &nbsp;&nbsp;key_name:&nbsp;Name&nbsp;for&nbsp;new&nbsp;model&nbsp;instance.<br>
-&nbsp;&nbsp;_app:&nbsp;Intentionally&nbsp;undocumented.<br>
-&nbsp;&nbsp;args:&nbsp;Keyword&nbsp;arguments&nbsp;mapping&nbsp;to&nbsp;properties&nbsp;of&nbsp;model.</tt></dd></dl>
+&nbsp;&nbsp;_from_entity:&nbsp;Intentionally&nbsp;undocumented.<br>
+&nbsp;&nbsp;kwds:&nbsp;Keyword&nbsp;arguments&nbsp;mapping&nbsp;to&nbsp;properties&nbsp;of&nbsp;model.&nbsp;&nbsp;Also:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;key:&nbsp;Key&nbsp;instance&nbsp;for&nbsp;this&nbsp;instance,&nbsp;if&nbsp;provided&nbsp;makes&nbsp;parent&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key_name&nbsp;redundant&nbsp;(they&nbsp;do&nbsp;not&nbsp;need&nbsp;to&nbsp;be&nbsp;set&nbsp;but&nbsp;if&nbsp;they&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;they&nbsp;must&nbsp;match&nbsp;the&nbsp;key).</tt></dd></dl>
 
-<dl><dt><a name="TokenCollection-delete"><strong>delete</strong></a>(self)</dt><dd><tt>Deletes&nbsp;this&nbsp;entity&nbsp;from&nbsp;the&nbsp;datastore.<br>
+<dl><dt><a name="TokenCollection-delete"><strong>delete</strong></a>(self, **kwargs)</dt><dd><tt>Deletes&nbsp;this&nbsp;entity&nbsp;from&nbsp;the&nbsp;datastore.<br>
 &nbsp;<br>
 Raises:<br>
 &nbsp;&nbsp;TransactionFailedError&nbsp;if&nbsp;the&nbsp;data&nbsp;could&nbsp;not&nbsp;be&nbsp;committed.</tt></dd></dl>
 
 <dl><dt><a name="TokenCollection-dynamic_properties"><strong>dynamic_properties</strong></a>(self)</dt><dd><tt>Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;all&nbsp;dynamic&nbsp;properties&nbsp;defined&nbsp;for&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="TokenCollection-has_key"><strong>has_key</strong></a>(self)</dt><dd><tt>Determine&nbsp;if&nbsp;this&nbsp;model&nbsp;instance&nbsp;has&nbsp;a&nbsp;complete&nbsp;key.<br>
+&nbsp;<br>
+When&nbsp;not&nbsp;using&nbsp;a&nbsp;fully&nbsp;self-assigned&nbsp;Key,&nbsp;ids&nbsp;are&nbsp;not&nbsp;assigned&nbsp;until&nbsp;the<br>
+data&nbsp;is&nbsp;saved&nbsp;to&nbsp;the&nbsp;Datastore,&nbsp;but&nbsp;instances&nbsp;with&nbsp;a&nbsp;key&nbsp;name&nbsp;always&nbsp;have<br>
+a&nbsp;full&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;has&nbsp;been&nbsp;persisted&nbsp;to&nbsp;the&nbsp;datastore&nbsp;or&nbsp;has&nbsp;a&nbsp;key<br>
+&nbsp;&nbsp;or&nbsp;has&nbsp;a&nbsp;key_name,&nbsp;otherwise&nbsp;False.</tt></dd></dl>
 
 <dl><dt><a name="TokenCollection-instance_properties"><strong>instance_properties</strong></a>(self)</dt><dd><tt>Alias&nbsp;for&nbsp;dyanmic_properties.</tt></dd></dl>
 
@@ -278,8 +288,9 @@ Returns:<br>
 <dl><dt><a name="TokenCollection-key"><strong>key</strong></a>(self)</dt><dd><tt>Unique&nbsp;key&nbsp;for&nbsp;this&nbsp;entity.<br>
 &nbsp;<br>
 This&nbsp;property&nbsp;is&nbsp;only&nbsp;available&nbsp;if&nbsp;this&nbsp;entity&nbsp;is&nbsp;already&nbsp;stored&nbsp;in&nbsp;the<br>
-datastore,&nbsp;so&nbsp;it&nbsp;is&nbsp;available&nbsp;if&nbsp;this&nbsp;entity&nbsp;was&nbsp;fetched&nbsp;returned&nbsp;from&nbsp;a<br>
-query,&nbsp;or&nbsp;after&nbsp;<a href="#TokenCollection-save">save</a>()&nbsp;is&nbsp;called&nbsp;the&nbsp;first&nbsp;time&nbsp;for&nbsp;new&nbsp;entities.<br>
+datastore&nbsp;or&nbsp;if&nbsp;it&nbsp;has&nbsp;a&nbsp;full&nbsp;key,&nbsp;so&nbsp;it&nbsp;is&nbsp;available&nbsp;if&nbsp;this&nbsp;entity&nbsp;was<br>
+fetched&nbsp;returned&nbsp;from&nbsp;a&nbsp;query,&nbsp;or&nbsp;after&nbsp;<a href="#TokenCollection-put">put</a>()&nbsp;is&nbsp;called&nbsp;the&nbsp;first&nbsp;time<br>
+for&nbsp;new&nbsp;entities,&nbsp;or&nbsp;if&nbsp;a&nbsp;complete&nbsp;key&nbsp;was&nbsp;given&nbsp;when&nbsp;constructed.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;Datastore&nbsp;key&nbsp;of&nbsp;persisted&nbsp;entity.<br>
@@ -301,7 +312,7 @@ but&nbsp;still&nbsp;get&nbsp;information&nbsp;about&nbsp;the&nbsp;instances&nbsp
 Returns:<br>
 &nbsp;&nbsp;Parent&nbsp;key&nbsp;of&nbsp;entity,&nbsp;None&nbsp;if&nbsp;there&nbsp;is&nbsp;no&nbsp;parent.</tt></dd></dl>
 
-<dl><dt><a name="TokenCollection-put"><strong>put</strong></a>(self)</dt><dd><tt>Writes&nbsp;this&nbsp;model&nbsp;instance&nbsp;to&nbsp;the&nbsp;datastore.<br>
+<dl><dt><a name="TokenCollection-put"><strong>put</strong></a>(self, **kwargs)</dt><dd><tt>Writes&nbsp;this&nbsp;model&nbsp;instance&nbsp;to&nbsp;the&nbsp;datastore.<br>
 &nbsp;<br>
 If&nbsp;this&nbsp;instance&nbsp;is&nbsp;new,&nbsp;we&nbsp;add&nbsp;an&nbsp;entity&nbsp;to&nbsp;the&nbsp;datastore.<br>
 Otherwise,&nbsp;we&nbsp;update&nbsp;this&nbsp;instance,&nbsp;and&nbsp;the&nbsp;key&nbsp;will&nbsp;remain&nbsp;the<br>
@@ -313,7 +324,7 @@ Returns:<br>
 Raises:<br>
 &nbsp;&nbsp;TransactionFailedError&nbsp;if&nbsp;the&nbsp;data&nbsp;could&nbsp;not&nbsp;be&nbsp;committed.</tt></dd></dl>
 
-<dl><dt><a name="TokenCollection-save"><strong>save</strong></a> = put(self)</dt><dd><tt>Writes&nbsp;this&nbsp;model&nbsp;instance&nbsp;to&nbsp;the&nbsp;datastore.<br>
+<dl><dt><a name="TokenCollection-save"><strong>save</strong></a> = put(self, **kwargs)</dt><dd><tt>Writes&nbsp;this&nbsp;model&nbsp;instance&nbsp;to&nbsp;the&nbsp;datastore.<br>
 &nbsp;<br>
 If&nbsp;this&nbsp;instance&nbsp;is&nbsp;new,&nbsp;we&nbsp;add&nbsp;an&nbsp;entity&nbsp;to&nbsp;the&nbsp;datastore.<br>
 Otherwise,&nbsp;we&nbsp;update&nbsp;this&nbsp;instance,&nbsp;and&nbsp;the&nbsp;key&nbsp;will&nbsp;remain&nbsp;the<br>
@@ -335,7 +346,7 @@ respective&nbsp;schemas.&nbsp;For&nbsp;more&nbsp;information,&nbsp;see:<br>
 
 <hr>
 Class methods inherited from <a href="google.appengine.ext.db.html#Model">google.appengine.ext.db.Model</a>:<br>
-<dl><dt><a name="TokenCollection-all"><strong>all</strong></a>(cls)<font color="#909090"><font face="helvetica, arial"> from <a href="google.appengine.ext.db.html#PropertiedClass">google.appengine.ext.db.PropertiedClass</a></font></font></dt><dd><tt>Returns&nbsp;a&nbsp;query&nbsp;over&nbsp;all&nbsp;instances&nbsp;of&nbsp;this&nbsp;model&nbsp;from&nbsp;the&nbsp;datastore.<br>
+<dl><dt><a name="TokenCollection-all"><strong>all</strong></a>(cls, **kwds)<font color="#909090"><font face="helvetica, arial"> from <a href="google.appengine.ext.db.html#PropertiedClass">google.appengine.ext.db.PropertiedClass</a></font></font></dt><dd><tt>Returns&nbsp;a&nbsp;query&nbsp;over&nbsp;all&nbsp;instances&nbsp;of&nbsp;this&nbsp;model&nbsp;from&nbsp;the&nbsp;datastore.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;Query&nbsp;that&nbsp;will&nbsp;retrieve&nbsp;all&nbsp;instances&nbsp;from&nbsp;entity&nbsp;collection.</tt></dd></dl>
@@ -354,7 +365,7 @@ Args:<br>
 Raises:<br>
 &nbsp;&nbsp;KindError&nbsp;when&nbsp;cls&nbsp;is&nbsp;incorrect&nbsp;model&nbsp;for&nbsp;entity.</tt></dd></dl>
 
-<dl><dt><a name="TokenCollection-get"><strong>get</strong></a>(cls, keys)<font color="#909090"><font face="helvetica, arial"> from <a href="google.appengine.ext.db.html#PropertiedClass">google.appengine.ext.db.PropertiedClass</a></font></font></dt><dd><tt>Fetch&nbsp;instance&nbsp;from&nbsp;the&nbsp;datastore&nbsp;of&nbsp;a&nbsp;specific&nbsp;<a href="google.appengine.ext.db.html#Model">Model</a>&nbsp;type&nbsp;using&nbsp;key.<br>
+<dl><dt><a name="TokenCollection-get"><strong>get</strong></a>(cls, keys, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="google.appengine.ext.db.html#PropertiedClass">google.appengine.ext.db.PropertiedClass</a></font></font></dt><dd><tt>Fetch&nbsp;instance&nbsp;from&nbsp;the&nbsp;datastore&nbsp;of&nbsp;a&nbsp;specific&nbsp;<a href="google.appengine.ext.db.html#Model">Model</a>&nbsp;type&nbsp;using&nbsp;key.<br>
 &nbsp;<br>
 We&nbsp;support&nbsp;Key&nbsp;objects&nbsp;and&nbsp;string&nbsp;keys&nbsp;(we&nbsp;convert&nbsp;them&nbsp;to&nbsp;Key&nbsp;objects<br>
 automatically).<br>
@@ -379,13 +390,13 @@ Raises:<br>
 &nbsp;&nbsp;KindError&nbsp;if&nbsp;any&nbsp;of&nbsp;the&nbsp;retreived&nbsp;objects&nbsp;are&nbsp;not&nbsp;instances&nbsp;of&nbsp;the<br>
 &nbsp;&nbsp;type&nbsp;associated&nbsp;with&nbsp;call&nbsp;to&nbsp;'get'.</tt></dd></dl>
 
-<dl><dt><a name="TokenCollection-get_by_id"><strong>get_by_id</strong></a>(cls, ids, parent<font color="#909090">=None</font>)<font color="#909090"><font face="helvetica, arial"> from <a href="google.appengine.ext.db.html#PropertiedClass">google.appengine.ext.db.PropertiedClass</a></font></font></dt><dd><tt>Get&nbsp;instance&nbsp;of&nbsp;<a href="google.appengine.ext.db.html#Model">Model</a>&nbsp;class&nbsp;by&nbsp;id.<br>
+<dl><dt><a name="TokenCollection-get_by_id"><strong>get_by_id</strong></a>(cls, ids, parent<font color="#909090">=None</font>, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="google.appengine.ext.db.html#PropertiedClass">google.appengine.ext.db.PropertiedClass</a></font></font></dt><dd><tt>Get&nbsp;instance&nbsp;of&nbsp;<a href="google.appengine.ext.db.html#Model">Model</a>&nbsp;class&nbsp;by&nbsp;id.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;key_names:&nbsp;A&nbsp;single&nbsp;id&nbsp;or&nbsp;a&nbsp;list&nbsp;of&nbsp;ids.<br>
 &nbsp;&nbsp;parent:&nbsp;Parent&nbsp;of&nbsp;instances&nbsp;to&nbsp;get.&nbsp;&nbsp;Can&nbsp;be&nbsp;a&nbsp;model&nbsp;or&nbsp;key.</tt></dd></dl>
 
-<dl><dt><a name="TokenCollection-get_by_key_name"><strong>get_by_key_name</strong></a>(cls, key_names, parent<font color="#909090">=None</font>)<font color="#909090"><font face="helvetica, arial"> from <a href="google.appengine.ext.db.html#PropertiedClass">google.appengine.ext.db.PropertiedClass</a></font></font></dt><dd><tt>Get&nbsp;instance&nbsp;of&nbsp;<a href="google.appengine.ext.db.html#Model">Model</a>&nbsp;class&nbsp;by&nbsp;its&nbsp;key's&nbsp;name.<br>
+<dl><dt><a name="TokenCollection-get_by_key_name"><strong>get_by_key_name</strong></a>(cls, key_names, parent<font color="#909090">=None</font>, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="google.appengine.ext.db.html#PropertiedClass">google.appengine.ext.db.PropertiedClass</a></font></font></dt><dd><tt>Get&nbsp;instance&nbsp;of&nbsp;<a href="google.appengine.ext.db.html#Model">Model</a>&nbsp;class&nbsp;by&nbsp;its&nbsp;key's&nbsp;name.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;key_names:&nbsp;A&nbsp;single&nbsp;key-name&nbsp;or&nbsp;a&nbsp;list&nbsp;of&nbsp;key-names.<br>
@@ -491,11 +502,11 @@ Duplicate&nbsp;properties&nbsp;are&nbsp;not&nbsp;permitted.</tt></dl>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt><a name="-load_auth_tokens"><strong>load_auth_tokens</strong></a>()</dt><dd><tt>Reads&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;the&nbsp;current&nbsp;user's&nbsp;tokens&nbsp;from&nbsp;the&nbsp;datastore.<br>
+<td width="100%"><dl><dt><a name="-load_auth_tokens"><strong>load_auth_tokens</strong></a>(user<font color="#909090">=None</font>)</dt><dd><tt>Reads&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;the&nbsp;current&nbsp;user's&nbsp;tokens&nbsp;from&nbsp;the&nbsp;datastore.<br>
 &nbsp;<br>
 If&nbsp;there&nbsp;is&nbsp;no&nbsp;current&nbsp;user&nbsp;(a&nbsp;user&nbsp;is&nbsp;not&nbsp;signed&nbsp;in&nbsp;to&nbsp;the&nbsp;app)&nbsp;or&nbsp;the&nbsp;user<br>
 does&nbsp;not&nbsp;have&nbsp;any&nbsp;tokens,&nbsp;an&nbsp;empty&nbsp;dictionary&nbsp;is&nbsp;returned.</tt></dd></dl>
- <dl><dt><a name="-run_on_appengine"><strong>run_on_appengine</strong></a>(gdata_service, store_tokens<font color="#909090">=True</font>, single_user_mode<font color="#909090">=False</font>)</dt><dd><tt>Modifies&nbsp;a&nbsp;GDataService&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;allow&nbsp;it&nbsp;to&nbsp;run&nbsp;on&nbsp;App&nbsp;Engine.<br>
+ <dl><dt><a name="-run_on_appengine"><strong>run_on_appengine</strong></a>(gdata_service, store_tokens<font color="#909090">=True</font>, single_user_mode<font color="#909090">=False</font>, deadline<font color="#909090">=None</font>)</dt><dd><tt>Modifies&nbsp;a&nbsp;GDataService&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;allow&nbsp;it&nbsp;to&nbsp;run&nbsp;on&nbsp;App&nbsp;Engine.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;gdata_service:&nbsp;An&nbsp;instance&nbsp;of&nbsp;AtomService,&nbsp;GDataService,&nbsp;or&nbsp;any<br>
@@ -518,8 +529,13 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ignored,&nbsp;since&nbsp;the&nbsp;library&nbsp;assumes:&nbsp;the&nbsp;tokens&nbsp;should&nbsp;not<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;stored&nbsp;in&nbsp;the&nbsp;datastore&nbsp;and&nbsp;they&nbsp;should&nbsp;not&nbsp;be&nbsp;stored<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;gdata_service&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;This&nbsp;will&nbsp;make&nbsp;it&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;impossible&nbsp;to&nbsp;make&nbsp;requests&nbsp;which&nbsp;require&nbsp;authorization.</tt></dd></dl>
- <dl><dt><a name="-save_auth_tokens"><strong>save_auth_tokens</strong></a>(token_dict)</dt><dd><tt>Associates&nbsp;the&nbsp;tokens&nbsp;with&nbsp;the&nbsp;current&nbsp;user&nbsp;and&nbsp;writes&nbsp;to&nbsp;the&nbsp;datastore.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;impossible&nbsp;to&nbsp;make&nbsp;requests&nbsp;which&nbsp;require&nbsp;authorization.<br>
+&nbsp;&nbsp;deadline:&nbsp;int&nbsp;(optional)&nbsp;The&nbsp;number&nbsp;of&nbsp;seconds&nbsp;to&nbsp;wait&nbsp;for&nbsp;a&nbsp;response<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;before&nbsp;timing&nbsp;out&nbsp;on&nbsp;the&nbsp;HTTP&nbsp;request.&nbsp;If&nbsp;no&nbsp;deadline&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specified,&nbsp;the&nbsp;deafault&nbsp;deadline&nbsp;for&nbsp;HTTP&nbsp;requests&nbsp;from&nbsp;App<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Engine&nbsp;is&nbsp;used.&nbsp;The&nbsp;maximum&nbsp;is&nbsp;currently&nbsp;10&nbsp;(for&nbsp;10&nbsp;seconds).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;default&nbsp;deadline&nbsp;for&nbsp;App&nbsp;Engine&nbsp;is&nbsp;5&nbsp;seconds.</tt></dd></dl>
+ <dl><dt><a name="-save_auth_tokens"><strong>save_auth_tokens</strong></a>(token_dict, user<font color="#909090">=None</font>)</dt><dd><tt>Associates&nbsp;the&nbsp;tokens&nbsp;with&nbsp;the&nbsp;current&nbsp;user&nbsp;and&nbsp;writes&nbsp;to&nbsp;the&nbsp;datastore.<br>
 &nbsp;<br>
 If&nbsp;there&nbsp;us&nbsp;no&nbsp;current&nbsp;user,&nbsp;the&nbsp;tokens&nbsp;are&nbsp;not&nbsp;written&nbsp;and&nbsp;this&nbsp;function<br>
 returns&nbsp;None.<br>

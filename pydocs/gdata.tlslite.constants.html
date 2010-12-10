@@ -1,0 +1,288 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.constants</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.constants</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/constants.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/constants.py</a></font></td></tr></table>
+    <p><tt>Constants&nbsp;used&nbsp;in&nbsp;various&nbsp;places.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.constants.html#AlertDescription">AlertDescription</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.constants.html#AlertLevel">AlertLevel</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.constants.html#CertificateType">CertificateType</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.constants.html#CipherSuite">CipherSuite</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.constants.html#ContentType">ContentType</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.constants.html#Fault">Fault</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.constants.html#HandshakeType">HandshakeType</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="AlertDescription">class <strong>AlertDescription</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>@cvar&nbsp;bad_record_mac:&nbsp;A&nbsp;TLS&nbsp;record&nbsp;failed&nbsp;to&nbsp;decrypt&nbsp;properly.<br>
+&nbsp;<br>
+If&nbsp;this&nbsp;occurs&nbsp;during&nbsp;a&nbsp;shared-key&nbsp;or&nbsp;SRP&nbsp;handshake&nbsp;it&nbsp;most&nbsp;likely<br>
+indicates&nbsp;a&nbsp;bad&nbsp;password.&nbsp;&nbsp;It&nbsp;may&nbsp;also&nbsp;indicate&nbsp;an&nbsp;implementation<br>
+error,&nbsp;or&nbsp;some&nbsp;tampering&nbsp;with&nbsp;the&nbsp;data&nbsp;in&nbsp;transit.<br>
+&nbsp;<br>
+This&nbsp;alert&nbsp;will&nbsp;be&nbsp;signalled&nbsp;by&nbsp;the&nbsp;server&nbsp;if&nbsp;the&nbsp;SRP&nbsp;password&nbsp;is&nbsp;bad.&nbsp;&nbsp;It<br>
+may&nbsp;also&nbsp;be&nbsp;signalled&nbsp;by&nbsp;the&nbsp;server&nbsp;if&nbsp;the&nbsp;SRP&nbsp;username&nbsp;is&nbsp;unknown&nbsp;to&nbsp;the<br>
+server,&nbsp;but&nbsp;it&nbsp;doesn't&nbsp;wish&nbsp;to&nbsp;reveal&nbsp;that&nbsp;fact.<br>
+&nbsp;<br>
+This&nbsp;alert&nbsp;will&nbsp;be&nbsp;signalled&nbsp;by&nbsp;the&nbsp;client&nbsp;if&nbsp;the&nbsp;shared-key&nbsp;username&nbsp;is<br>
+bad.<br>
+&nbsp;<br>
+@cvar&nbsp;handshake_failure:&nbsp;A&nbsp;problem&nbsp;occurred&nbsp;while&nbsp;handshaking.<br>
+&nbsp;<br>
+This&nbsp;typically&nbsp;indicates&nbsp;a&nbsp;lack&nbsp;of&nbsp;common&nbsp;ciphersuites&nbsp;between&nbsp;client&nbsp;and<br>
+server,&nbsp;or&nbsp;some&nbsp;other&nbsp;disagreement&nbsp;(about&nbsp;SRP&nbsp;parameters&nbsp;or&nbsp;key&nbsp;sizes,<br>
+for&nbsp;example).<br>
+&nbsp;<br>
+@cvar&nbsp;protocol_version:&nbsp;The&nbsp;other&nbsp;party's&nbsp;SSL/TLS&nbsp;version&nbsp;was&nbsp;unacceptable.<br>
+&nbsp;<br>
+This&nbsp;indicates&nbsp;that&nbsp;the&nbsp;client&nbsp;and&nbsp;server&nbsp;couldn't&nbsp;agree&nbsp;on&nbsp;which&nbsp;version<br>
+of&nbsp;SSL&nbsp;or&nbsp;TLS&nbsp;to&nbsp;use.<br>
+&nbsp;<br>
+@cvar&nbsp;user_canceled:&nbsp;The&nbsp;handshake&nbsp;is&nbsp;being&nbsp;cancelled&nbsp;for&nbsp;some&nbsp;reason.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Data and other attributes defined here:<br>
+<dl><dt><strong>access_denied</strong> = 49</dl>
+
+<dl><dt><strong>bad_certificate</strong> = 42</dl>
+
+<dl><dt><strong>bad_record_mac</strong> = 20</dl>
+
+<dl><dt><strong>certificate_expired</strong> = 45</dl>
+
+<dl><dt><strong>certificate_revoked</strong> = 44</dl>
+
+<dl><dt><strong>certificate_unknown</strong> = 46</dl>
+
+<dl><dt><strong>close_notify</strong> = 0</dl>
+
+<dl><dt><strong>decode_error</strong> = 50</dl>
+
+<dl><dt><strong>decompression_failure</strong> = 30</dl>
+
+<dl><dt><strong>decrypt_error</strong> = 51</dl>
+
+<dl><dt><strong>decryption_failed</strong> = 21</dl>
+
+<dl><dt><strong>export_restriction</strong> = 60</dl>
+
+<dl><dt><strong>handshake_failure</strong> = 40</dl>
+
+<dl><dt><strong>illegal_parameter</strong> = 47</dl>
+
+<dl><dt><strong>insufficient_security</strong> = 71</dl>
+
+<dl><dt><strong>internal_error</strong> = 80</dl>
+
+<dl><dt><strong>missing_srp_username</strong> = 121</dl>
+
+<dl><dt><strong>no_certificate</strong> = 41</dl>
+
+<dl><dt><strong>no_renegotiation</strong> = 100</dl>
+
+<dl><dt><strong>protocol_version</strong> = 70</dl>
+
+<dl><dt><strong>record_overflow</strong> = 22</dl>
+
+<dl><dt><strong>unexpected_message</strong> = 10</dl>
+
+<dl><dt><strong>unknown_ca</strong> = 48</dl>
+
+<dl><dt><strong>unknown_srp_username</strong> = 120</dl>
+
+<dl><dt><strong>unsupported_certificate</strong> = 43</dl>
+
+<dl><dt><strong>untrusted_srp_parameters</strong> = 122</dl>
+
+<dl><dt><strong>user_canceled</strong> = 90</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="AlertLevel">class <strong>AlertLevel</strong></a></font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data and other attributes defined here:<br>
+<dl><dt><strong>fatal</strong> = 2</dl>
+
+<dl><dt><strong>warning</strong> = 1</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="CertificateType">class <strong>CertificateType</strong></a></font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data and other attributes defined here:<br>
+<dl><dt><strong>cryptoID</strong> = 2</dl>
+
+<dl><dt><strong>openpgp</strong> = 1</dl>
+
+<dl><dt><strong>x509</strong> = 0</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="CipherSuite">class <strong>CipherSuite</strong></a></font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Static methods defined here:<br>
+<dl><dt><a name="CipherSuite-getRsaSuites"><strong>getRsaSuites</strong></a>(ciphers)</dt></dl>
+
+<dl><dt><a name="CipherSuite-getSrpRsaSuites"><strong>getSrpRsaSuites</strong></a>(ciphers)</dt></dl>
+
+<dl><dt><a name="CipherSuite-getSrpSuites"><strong>getSrpSuites</strong></a>(ciphers)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TLS_RSA_WITH_3DES_EDE_CBC_SHA</strong> = 10</dl>
+
+<dl><dt><strong>TLS_RSA_WITH_AES_128_CBC_SHA</strong> = 47</dl>
+
+<dl><dt><strong>TLS_RSA_WITH_AES_256_CBC_SHA</strong> = 53</dl>
+
+<dl><dt><strong>TLS_RSA_WITH_RC4_128_SHA</strong> = 5</dl>
+
+<dl><dt><strong>TLS_SRP_SHA_RSA_WITH_3DES_EDE_CBC_SHA</strong> = 81</dl>
+
+<dl><dt><strong>TLS_SRP_SHA_RSA_WITH_AES_128_CBC_SHA</strong> = 84</dl>
+
+<dl><dt><strong>TLS_SRP_SHA_RSA_WITH_AES_256_CBC_SHA</strong> = 87</dl>
+
+<dl><dt><strong>TLS_SRP_SHA_WITH_3DES_EDE_CBC_SHA</strong> = 80</dl>
+
+<dl><dt><strong>TLS_SRP_SHA_WITH_AES_128_CBC_SHA</strong> = 83</dl>
+
+<dl><dt><strong>TLS_SRP_SHA_WITH_AES_256_CBC_SHA</strong> = 86</dl>
+
+<dl><dt><strong>aes128Suites</strong> = [83, 84, 47]</dl>
+
+<dl><dt><strong>aes256Suites</strong> = [86, 87, 53]</dl>
+
+<dl><dt><strong>rc4Suites</strong> = [5]</dl>
+
+<dl><dt><strong>rsaSuites</strong> = [10, 47, 53, 5]</dl>
+
+<dl><dt><strong>srpRsaSuites</strong> = [81, 84, 87]</dl>
+
+<dl><dt><strong>srpSuites</strong> = [80, 83, 86]</dl>
+
+<dl><dt><strong>tripleDESSuites</strong> = [80, 81, 10]</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ContentType">class <strong>ContentType</strong></a></font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data and other attributes defined here:<br>
+<dl><dt><strong>alert</strong> = 21</dl>
+
+<dl><dt><strong>all</strong> = (20, 21, 22, 23)</dl>
+
+<dl><dt><strong>application_data</strong> = 23</dl>
+
+<dl><dt><strong>change_cipher_spec</strong> = 20</dl>
+
+<dl><dt><strong>handshake</strong> = 22</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Fault">class <strong>Fault</strong></a></font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data and other attributes defined here:<br>
+<dl><dt><strong>badA</strong> = 103</dl>
+
+<dl><dt><strong>badB</strong> = 201</dl>
+
+<dl><dt><strong>badFinished</strong> = 300</dl>
+
+<dl><dt><strong>badIdentifier</strong> = 401</dl>
+
+<dl><dt><strong>badMAC</strong> = 301</dl>
+
+<dl><dt><strong>badPadding</strong> = 302</dl>
+
+<dl><dt><strong>badPassword</strong> = 102</dl>
+
+<dl><dt><strong>badPremasterPadding</strong> = 501</dl>
+
+<dl><dt><strong>badSharedKey</strong> = 402</dl>
+
+<dl><dt><strong>badUsername</strong> = 101</dl>
+
+<dl><dt><strong>badVerifyMessage</strong> = 601</dl>
+
+<dl><dt><strong>clientCertFaults</strong> = [601]</dl>
+
+<dl><dt><strong>clientNoAuthFaults</strong> = [501, 502]</dl>
+
+<dl><dt><strong>clientSharedKeyFaults</strong> = [401, 402]</dl>
+
+<dl><dt><strong>clientSrpFaults</strong> = [101, 102, 103]</dl>
+
+<dl><dt><strong>faultAlerts</strong> = {101: (120, 20), 102: (20,), 103: (47,), 300: (51,), 301: (20,), 302: (20,), 401: (40,), 402: (20,), 501: (20,), 502: (20,), ...}</dl>
+
+<dl><dt><strong>faultNames</strong> = {101: 'bad username', 102: 'bad password', 103: 'bad A', 300: 'bad finished message', 301: 'bad MAC', 302: 'bad padding', 401: 'bad identifier', 402: 'bad sharedkey', 501: 'bad premaster padding', 502: 'short premaster secret', ...}</dl>
+
+<dl><dt><strong>genericFaults</strong> = [300, 301, 302]</dl>
+
+<dl><dt><strong>serverFaults</strong> = [201]</dl>
+
+<dl><dt><strong>shortPremasterSecret</strong> = 502</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="HandshakeType">class <strong>HandshakeType</strong></a></font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data and other attributes defined here:<br>
+<dl><dt><strong>certificate</strong> = 11</dl>
+
+<dl><dt><strong>certificate_request</strong> = 13</dl>
+
+<dl><dt><strong>certificate_verify</strong> = 15</dl>
+
+<dl><dt><strong>client_hello</strong> = 1</dl>
+
+<dl><dt><strong>client_key_exchange</strong> = 16</dl>
+
+<dl><dt><strong>finished</strong> = 20</dl>
+
+<dl><dt><strong>hello_request</strong> = 0</dl>
+
+<dl><dt><strong>server_hello</strong> = 2</dl>
+
+<dl><dt><strong>server_hello_done</strong> = 14</dl>
+
+<dl><dt><strong>server_key_exchange</strong> = 12</dl>
+
+</td></tr></table></td></tr></table>
+</body></html>

@@ -1,0 +1,591 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.TLSConnection</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.TLSConnection</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/TLSConnection.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/TLSConnection.py</a></font></td></tr></table>
+    <p><tt>MAIN&nbsp;CLASS&nbsp;FOR&nbsp;TLS&nbsp;LITE&nbsp;(START&nbsp;HERE!).</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="Crypto.html">Crypto</a><br>
+<a href="array.html">array</a><br>
+<a href="base64.html">base64</a><br>
+</td><td width="25%" valign=top><a href="binascii.html">binascii</a><br>
+<a href="hmac.html">hmac</a><br>
+<a href="math.html">math</a><br>
+</td><td width="25%" valign=top><a href="md5.html">md5</a><br>
+<a href="os.html">os</a><br>
+<a href="sha.html">sha</a><br>
+</td><td width="25%" valign=top><a href="socket.html">socket</a><br>
+<a href="sys.html">sys</a><br>
+<a href="traceback.html">traceback</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.TLSRecordLayer.html#TLSRecordLayer">gdata.tlslite.TLSRecordLayer.TLSRecordLayer</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.TLSConnection.html#TLSConnection">TLSConnection</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TLSConnection">class <strong>TLSConnection</strong></a>(<a href="gdata.tlslite.TLSRecordLayer.html#TLSRecordLayer">gdata.tlslite.TLSRecordLayer.TLSRecordLayer</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;class&nbsp;wraps&nbsp;a&nbsp;socket&nbsp;and&nbsp;provides&nbsp;TLS&nbsp;handshaking&nbsp;and&nbsp;data<br>
+transfer.<br>
+&nbsp;<br>
+To&nbsp;use&nbsp;this&nbsp;class,&nbsp;create&nbsp;a&nbsp;new&nbsp;instance,&nbsp;passing&nbsp;a&nbsp;connected<br>
+socket&nbsp;into&nbsp;the&nbsp;constructor.&nbsp;&nbsp;Then&nbsp;call&nbsp;some&nbsp;handshake&nbsp;function.<br>
+If&nbsp;the&nbsp;handshake&nbsp;completes&nbsp;without&nbsp;raising&nbsp;an&nbsp;exception,&nbsp;then&nbsp;a&nbsp;TLS<br>
+connection&nbsp;has&nbsp;been&nbsp;negotiated.&nbsp;&nbsp;You&nbsp;can&nbsp;transfer&nbsp;data&nbsp;over&nbsp;this<br>
+connection&nbsp;as&nbsp;if&nbsp;it&nbsp;were&nbsp;a&nbsp;socket.<br>
+&nbsp;<br>
+This&nbsp;class&nbsp;provides&nbsp;both&nbsp;synchronous&nbsp;and&nbsp;asynchronous&nbsp;versions&nbsp;of<br>
+its&nbsp;key&nbsp;functions.&nbsp;&nbsp;The&nbsp;synchronous&nbsp;versions&nbsp;should&nbsp;be&nbsp;used&nbsp;when<br>
+writing&nbsp;single-or&nbsp;multi-threaded&nbsp;code&nbsp;using&nbsp;blocking&nbsp;sockets.&nbsp;&nbsp;The<br>
+asynchronous&nbsp;versions&nbsp;should&nbsp;be&nbsp;used&nbsp;when&nbsp;performing&nbsp;asynchronous,<br>
+event-based&nbsp;I/O&nbsp;with&nbsp;non-blocking&nbsp;sockets.<br>
+&nbsp;<br>
+Asynchronous&nbsp;I/O&nbsp;is&nbsp;a&nbsp;complicated&nbsp;subject;&nbsp;typically,&nbsp;you&nbsp;should<br>
+not&nbsp;use&nbsp;the&nbsp;asynchronous&nbsp;functions&nbsp;directly,&nbsp;but&nbsp;should&nbsp;use&nbsp;some<br>
+framework&nbsp;like&nbsp;asyncore&nbsp;or&nbsp;Twisted&nbsp;which&nbsp;TLS&nbsp;Lite&nbsp;integrates&nbsp;with<br>
+(see<br>
+L{tlslite.integration.TLSAsyncDispatcherMixIn.TLSAsyncDispatcherMixIn}&nbsp;or<br>
+L{tlslite.integration.TLSTwistedProtocolWrapper.TLSTwistedProtocolWrapper}).<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="TLSConnection-__init__"><strong>__init__</strong></a>(self, sock)</dt><dd><tt>Create&nbsp;a&nbsp;new&nbsp;<a href="#TLSConnection">TLSConnection</a>&nbsp;instance.<br>
+&nbsp;<br>
+@param&nbsp;sock:&nbsp;The&nbsp;socket&nbsp;data&nbsp;will&nbsp;be&nbsp;transmitted&nbsp;on.&nbsp;&nbsp;The<br>
+socket&nbsp;should&nbsp;already&nbsp;be&nbsp;connected.&nbsp;&nbsp;It&nbsp;may&nbsp;be&nbsp;in&nbsp;blocking&nbsp;or<br>
+non-blocking&nbsp;mode.<br>
+&nbsp;<br>
+@type&nbsp;sock:&nbsp;L{socket.socket}</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-handshakeClientCert"><strong>handshakeClientCert</strong></a>(self, certChain<font color="#909090">=None</font>, privateKey<font color="#909090">=None</font>, session<font color="#909090">=None</font>, settings<font color="#909090">=None</font>, checker<font color="#909090">=None</font>, async<font color="#909090">=False</font>)</dt><dd><tt>Perform&nbsp;a&nbsp;certificate-based&nbsp;handshake&nbsp;in&nbsp;the&nbsp;role&nbsp;of&nbsp;client.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;performs&nbsp;an&nbsp;SSL&nbsp;or&nbsp;TLS&nbsp;handshake.&nbsp;&nbsp;The&nbsp;server<br>
+will&nbsp;authenticate&nbsp;itself&nbsp;using&nbsp;an&nbsp;X.509&nbsp;or&nbsp;cryptoID&nbsp;certificate<br>
+chain.&nbsp;&nbsp;If&nbsp;the&nbsp;handshake&nbsp;succeeds,&nbsp;the&nbsp;server's&nbsp;certificate<br>
+chain&nbsp;will&nbsp;be&nbsp;stored&nbsp;in&nbsp;the&nbsp;session's&nbsp;serverCertChain&nbsp;attribute.<br>
+Unless&nbsp;a&nbsp;checker&nbsp;object&nbsp;is&nbsp;passed&nbsp;in,&nbsp;this&nbsp;function&nbsp;does&nbsp;no<br>
+validation&nbsp;or&nbsp;checking&nbsp;of&nbsp;the&nbsp;server's&nbsp;certificate&nbsp;chain.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;server&nbsp;requests&nbsp;client&nbsp;authentication,&nbsp;the<br>
+client&nbsp;will&nbsp;send&nbsp;the&nbsp;passed-in&nbsp;certificate&nbsp;chain,&nbsp;and&nbsp;use&nbsp;the<br>
+passed-in&nbsp;private&nbsp;key&nbsp;to&nbsp;authenticate&nbsp;itself.&nbsp;&nbsp;If&nbsp;no<br>
+certificate&nbsp;chain&nbsp;and&nbsp;private&nbsp;key&nbsp;were&nbsp;passed&nbsp;in,&nbsp;the&nbsp;client<br>
+will&nbsp;attempt&nbsp;to&nbsp;proceed&nbsp;without&nbsp;client&nbsp;authentication.&nbsp;&nbsp;The<br>
+server&nbsp;may&nbsp;or&nbsp;may&nbsp;not&nbsp;allow&nbsp;this.<br>
+&nbsp;<br>
+Like&nbsp;any&nbsp;handshake&nbsp;function,&nbsp;this&nbsp;can&nbsp;be&nbsp;called&nbsp;on&nbsp;a&nbsp;closed<br>
+TLS&nbsp;connection,&nbsp;or&nbsp;on&nbsp;a&nbsp;TLS&nbsp;connection&nbsp;that&nbsp;is&nbsp;already&nbsp;open.<br>
+If&nbsp;called&nbsp;on&nbsp;an&nbsp;open&nbsp;connection&nbsp;it&nbsp;performs&nbsp;a&nbsp;re-handshake.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;function&nbsp;completes&nbsp;without&nbsp;raising&nbsp;an&nbsp;exception,&nbsp;the<br>
+TLS&nbsp;connection&nbsp;will&nbsp;be&nbsp;open&nbsp;and&nbsp;available&nbsp;for&nbsp;data&nbsp;transfer.<br>
+&nbsp;<br>
+If&nbsp;an&nbsp;exception&nbsp;is&nbsp;raised,&nbsp;the&nbsp;connection&nbsp;will&nbsp;have&nbsp;been<br>
+automatically&nbsp;closed&nbsp;(if&nbsp;it&nbsp;was&nbsp;ever&nbsp;open).<br>
+&nbsp;<br>
+@type&nbsp;certChain:&nbsp;L{tlslite.X509CertChain.X509CertChain}&nbsp;or<br>
+L{cryptoIDlib.CertChain.CertChain}<br>
+@param&nbsp;certChain:&nbsp;The&nbsp;certificate&nbsp;chain&nbsp;to&nbsp;be&nbsp;used&nbsp;if&nbsp;the<br>
+server&nbsp;requests&nbsp;client&nbsp;authentication.<br>
+&nbsp;<br>
+@type&nbsp;privateKey:&nbsp;L{tlslite.utils.RSAKey.RSAKey}<br>
+@param&nbsp;privateKey:&nbsp;The&nbsp;private&nbsp;key&nbsp;to&nbsp;be&nbsp;used&nbsp;if&nbsp;the&nbsp;server<br>
+requests&nbsp;client&nbsp;authentication.<br>
+&nbsp;<br>
+@type&nbsp;session:&nbsp;L{tlslite.Session.Session}<br>
+@param&nbsp;session:&nbsp;A&nbsp;TLS&nbsp;session&nbsp;to&nbsp;attempt&nbsp;to&nbsp;resume.&nbsp;&nbsp;If&nbsp;the<br>
+resumption&nbsp;does&nbsp;not&nbsp;succeed,&nbsp;a&nbsp;full&nbsp;handshake&nbsp;will&nbsp;be<br>
+performed.<br>
+&nbsp;<br>
+@type&nbsp;settings:&nbsp;L{tlslite.HandshakeSettings.HandshakeSettings}<br>
+@param&nbsp;settings:&nbsp;Various&nbsp;settings&nbsp;which&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;control<br>
+the&nbsp;ciphersuites,&nbsp;certificate&nbsp;types,&nbsp;and&nbsp;SSL/TLS&nbsp;versions<br>
+offered&nbsp;by&nbsp;the&nbsp;client.<br>
+&nbsp;<br>
+@type&nbsp;checker:&nbsp;L{tlslite.Checker.Checker}<br>
+@param&nbsp;checker:&nbsp;A&nbsp;Checker&nbsp;instance.&nbsp;&nbsp;This&nbsp;instance&nbsp;will&nbsp;be<br>
+invoked&nbsp;to&nbsp;examine&nbsp;the&nbsp;other&nbsp;party's&nbsp;authentication<br>
+credentials,&nbsp;if&nbsp;the&nbsp;handshake&nbsp;completes&nbsp;succesfully.<br>
+&nbsp;<br>
+@type&nbsp;async:&nbsp;bool<br>
+@param&nbsp;async:&nbsp;If&nbsp;False,&nbsp;this&nbsp;function&nbsp;will&nbsp;block&nbsp;until&nbsp;the<br>
+handshake&nbsp;is&nbsp;completed.&nbsp;&nbsp;If&nbsp;True,&nbsp;this&nbsp;function&nbsp;will&nbsp;return&nbsp;a<br>
+generator.&nbsp;&nbsp;Successive&nbsp;invocations&nbsp;of&nbsp;the&nbsp;generator&nbsp;will<br>
+return&nbsp;0&nbsp;if&nbsp;it&nbsp;is&nbsp;waiting&nbsp;to&nbsp;read&nbsp;from&nbsp;the&nbsp;socket,&nbsp;1&nbsp;if&nbsp;it&nbsp;is<br>
+waiting&nbsp;to&nbsp;write&nbsp;to&nbsp;the&nbsp;socket,&nbsp;or&nbsp;will&nbsp;raise&nbsp;StopIteration&nbsp;if<br>
+the&nbsp;handshake&nbsp;operation&nbsp;is&nbsp;completed.<br>
+&nbsp;<br>
+@rtype:&nbsp;None&nbsp;or&nbsp;an&nbsp;iterable<br>
+@return:&nbsp;If&nbsp;'async'&nbsp;is&nbsp;True,&nbsp;a&nbsp;generator&nbsp;object&nbsp;will&nbsp;be<br>
+returned.<br>
+&nbsp;<br>
+@raise&nbsp;socket.error:&nbsp;If&nbsp;a&nbsp;socket&nbsp;error&nbsp;occurs.<br>
+@raise&nbsp;tlslite.errors.TLSAbruptCloseError:&nbsp;If&nbsp;the&nbsp;socket&nbsp;is&nbsp;closed<br>
+without&nbsp;a&nbsp;preceding&nbsp;alert.<br>
+@raise&nbsp;tlslite.errors.TLSAlert:&nbsp;If&nbsp;a&nbsp;TLS&nbsp;alert&nbsp;is&nbsp;signalled.<br>
+@raise&nbsp;tlslite.errors.TLSAuthenticationError:&nbsp;If&nbsp;the&nbsp;checker<br>
+doesn't&nbsp;like&nbsp;the&nbsp;other&nbsp;party's&nbsp;authentication&nbsp;credentials.</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-handshakeClientSRP"><strong>handshakeClientSRP</strong></a>(self, username, password, session<font color="#909090">=None</font>, settings<font color="#909090">=None</font>, checker<font color="#909090">=None</font>, async<font color="#909090">=False</font>)</dt><dd><tt>Perform&nbsp;an&nbsp;SRP&nbsp;handshake&nbsp;in&nbsp;the&nbsp;role&nbsp;of&nbsp;client.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;performs&nbsp;a&nbsp;TLS/SRP&nbsp;handshake.&nbsp;&nbsp;SRP&nbsp;mutually<br>
+authenticates&nbsp;both&nbsp;parties&nbsp;to&nbsp;each&nbsp;other&nbsp;using&nbsp;only&nbsp;a<br>
+username&nbsp;and&nbsp;password.&nbsp;&nbsp;This&nbsp;function&nbsp;may&nbsp;also&nbsp;perform&nbsp;a<br>
+combined&nbsp;SRP&nbsp;and&nbsp;server-certificate&nbsp;handshake,&nbsp;if&nbsp;the&nbsp;server<br>
+chooses&nbsp;to&nbsp;authenticate&nbsp;itself&nbsp;with&nbsp;a&nbsp;certificate&nbsp;chain&nbsp;in<br>
+addition&nbsp;to&nbsp;doing&nbsp;SRP.<br>
+&nbsp;<br>
+TLS/SRP&nbsp;is&nbsp;non-standard.&nbsp;&nbsp;Most&nbsp;TLS&nbsp;implementations&nbsp;don't<br>
+support&nbsp;it.&nbsp;&nbsp;See<br>
+U{<a href="http://www.ietf.org/html.charters/tls-charter.html">http://www.ietf.org/html.charters/tls-charter.html</a>}&nbsp;or<br>
+U{<a href="http://trevp.net/tlssrp/">http://trevp.net/tlssrp/</a>}&nbsp;for&nbsp;the&nbsp;latest&nbsp;information&nbsp;on<br>
+TLS/SRP.<br>
+&nbsp;<br>
+Like&nbsp;any&nbsp;handshake&nbsp;function,&nbsp;this&nbsp;can&nbsp;be&nbsp;called&nbsp;on&nbsp;a&nbsp;closed<br>
+TLS&nbsp;connection,&nbsp;or&nbsp;on&nbsp;a&nbsp;TLS&nbsp;connection&nbsp;that&nbsp;is&nbsp;already&nbsp;open.<br>
+If&nbsp;called&nbsp;on&nbsp;an&nbsp;open&nbsp;connection&nbsp;it&nbsp;performs&nbsp;a&nbsp;re-handshake.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;function&nbsp;completes&nbsp;without&nbsp;raising&nbsp;an&nbsp;exception,&nbsp;the<br>
+TLS&nbsp;connection&nbsp;will&nbsp;be&nbsp;open&nbsp;and&nbsp;available&nbsp;for&nbsp;data&nbsp;transfer.<br>
+&nbsp;<br>
+If&nbsp;an&nbsp;exception&nbsp;is&nbsp;raised,&nbsp;the&nbsp;connection&nbsp;will&nbsp;have&nbsp;been<br>
+automatically&nbsp;closed&nbsp;(if&nbsp;it&nbsp;was&nbsp;ever&nbsp;open).<br>
+&nbsp;<br>
+@type&nbsp;username:&nbsp;str<br>
+@param&nbsp;username:&nbsp;The&nbsp;SRP&nbsp;username.<br>
+&nbsp;<br>
+@type&nbsp;password:&nbsp;str<br>
+@param&nbsp;password:&nbsp;The&nbsp;SRP&nbsp;password.<br>
+&nbsp;<br>
+@type&nbsp;session:&nbsp;L{tlslite.Session.Session}<br>
+@param&nbsp;session:&nbsp;A&nbsp;TLS&nbsp;session&nbsp;to&nbsp;attempt&nbsp;to&nbsp;resume.&nbsp;&nbsp;This<br>
+session&nbsp;must&nbsp;be&nbsp;an&nbsp;SRP&nbsp;session&nbsp;performed&nbsp;with&nbsp;the&nbsp;same&nbsp;username<br>
+and&nbsp;password&nbsp;as&nbsp;were&nbsp;passed&nbsp;in.&nbsp;&nbsp;If&nbsp;the&nbsp;resumption&nbsp;does&nbsp;not<br>
+succeed,&nbsp;a&nbsp;full&nbsp;SRP&nbsp;handshake&nbsp;will&nbsp;be&nbsp;performed.<br>
+&nbsp;<br>
+@type&nbsp;settings:&nbsp;L{tlslite.HandshakeSettings.HandshakeSettings}<br>
+@param&nbsp;settings:&nbsp;Various&nbsp;settings&nbsp;which&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;control<br>
+the&nbsp;ciphersuites,&nbsp;certificate&nbsp;types,&nbsp;and&nbsp;SSL/TLS&nbsp;versions<br>
+offered&nbsp;by&nbsp;the&nbsp;client.<br>
+&nbsp;<br>
+@type&nbsp;checker:&nbsp;L{tlslite.Checker.Checker}<br>
+@param&nbsp;checker:&nbsp;A&nbsp;Checker&nbsp;instance.&nbsp;&nbsp;This&nbsp;instance&nbsp;will&nbsp;be<br>
+invoked&nbsp;to&nbsp;examine&nbsp;the&nbsp;other&nbsp;party's&nbsp;authentication<br>
+credentials,&nbsp;if&nbsp;the&nbsp;handshake&nbsp;completes&nbsp;succesfully.<br>
+&nbsp;<br>
+@type&nbsp;async:&nbsp;bool<br>
+@param&nbsp;async:&nbsp;If&nbsp;False,&nbsp;this&nbsp;function&nbsp;will&nbsp;block&nbsp;until&nbsp;the<br>
+handshake&nbsp;is&nbsp;completed.&nbsp;&nbsp;If&nbsp;True,&nbsp;this&nbsp;function&nbsp;will&nbsp;return&nbsp;a<br>
+generator.&nbsp;&nbsp;Successive&nbsp;invocations&nbsp;of&nbsp;the&nbsp;generator&nbsp;will<br>
+return&nbsp;0&nbsp;if&nbsp;it&nbsp;is&nbsp;waiting&nbsp;to&nbsp;read&nbsp;from&nbsp;the&nbsp;socket,&nbsp;1&nbsp;if&nbsp;it&nbsp;is<br>
+waiting&nbsp;to&nbsp;write&nbsp;to&nbsp;the&nbsp;socket,&nbsp;or&nbsp;will&nbsp;raise&nbsp;StopIteration&nbsp;if<br>
+the&nbsp;handshake&nbsp;operation&nbsp;is&nbsp;completed.<br>
+&nbsp;<br>
+@rtype:&nbsp;None&nbsp;or&nbsp;an&nbsp;iterable<br>
+@return:&nbsp;If&nbsp;'async'&nbsp;is&nbsp;True,&nbsp;a&nbsp;generator&nbsp;object&nbsp;will&nbsp;be<br>
+returned.<br>
+&nbsp;<br>
+@raise&nbsp;socket.error:&nbsp;If&nbsp;a&nbsp;socket&nbsp;error&nbsp;occurs.<br>
+@raise&nbsp;tlslite.errors.TLSAbruptCloseError:&nbsp;If&nbsp;the&nbsp;socket&nbsp;is&nbsp;closed<br>
+without&nbsp;a&nbsp;preceding&nbsp;alert.<br>
+@raise&nbsp;tlslite.errors.TLSAlert:&nbsp;If&nbsp;a&nbsp;TLS&nbsp;alert&nbsp;is&nbsp;signalled.<br>
+@raise&nbsp;tlslite.errors.TLSAuthenticationError:&nbsp;If&nbsp;the&nbsp;checker<br>
+doesn't&nbsp;like&nbsp;the&nbsp;other&nbsp;party's&nbsp;authentication&nbsp;credentials.</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-handshakeClientSharedKey"><strong>handshakeClientSharedKey</strong></a>(self, username, sharedKey, settings<font color="#909090">=None</font>, checker<font color="#909090">=None</font>, async<font color="#909090">=False</font>)</dt><dd><tt>Perform&nbsp;a&nbsp;shared-key&nbsp;handshake&nbsp;in&nbsp;the&nbsp;role&nbsp;of&nbsp;client.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;performs&nbsp;a&nbsp;shared-key&nbsp;handshake.&nbsp;&nbsp;Using&nbsp;shared<br>
+symmetric&nbsp;keys&nbsp;of&nbsp;high&nbsp;entropy&nbsp;(128&nbsp;bits&nbsp;or&nbsp;greater)&nbsp;mutually<br>
+authenticates&nbsp;both&nbsp;parties&nbsp;to&nbsp;each&nbsp;other.<br>
+&nbsp;<br>
+TLS&nbsp;with&nbsp;shared-keys&nbsp;is&nbsp;non-standard.&nbsp;&nbsp;Most&nbsp;TLS<br>
+implementations&nbsp;don't&nbsp;support&nbsp;it.&nbsp;&nbsp;See<br>
+U{<a href="http://www.ietf.org/html.charters/tls-charter.html">http://www.ietf.org/html.charters/tls-charter.html</a>}&nbsp;for&nbsp;the<br>
+latest&nbsp;information&nbsp;on&nbsp;TLS&nbsp;with&nbsp;shared-keys.&nbsp;&nbsp;If&nbsp;the&nbsp;shared-keys<br>
+Internet-Draft&nbsp;changes&nbsp;or&nbsp;is&nbsp;superceded,&nbsp;TLS&nbsp;Lite&nbsp;will&nbsp;track<br>
+those&nbsp;changes,&nbsp;so&nbsp;the&nbsp;shared-key&nbsp;support&nbsp;in&nbsp;later&nbsp;versions&nbsp;of<br>
+TLS&nbsp;Lite&nbsp;may&nbsp;become&nbsp;incompatible&nbsp;with&nbsp;this&nbsp;version.<br>
+&nbsp;<br>
+Like&nbsp;any&nbsp;handshake&nbsp;function,&nbsp;this&nbsp;can&nbsp;be&nbsp;called&nbsp;on&nbsp;a&nbsp;closed<br>
+TLS&nbsp;connection,&nbsp;or&nbsp;on&nbsp;a&nbsp;TLS&nbsp;connection&nbsp;that&nbsp;is&nbsp;already&nbsp;open.<br>
+If&nbsp;called&nbsp;on&nbsp;an&nbsp;open&nbsp;connection&nbsp;it&nbsp;performs&nbsp;a&nbsp;re-handshake.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;function&nbsp;completes&nbsp;without&nbsp;raising&nbsp;an&nbsp;exception,&nbsp;the<br>
+TLS&nbsp;connection&nbsp;will&nbsp;be&nbsp;open&nbsp;and&nbsp;available&nbsp;for&nbsp;data&nbsp;transfer.<br>
+&nbsp;<br>
+If&nbsp;an&nbsp;exception&nbsp;is&nbsp;raised,&nbsp;the&nbsp;connection&nbsp;will&nbsp;have&nbsp;been<br>
+automatically&nbsp;closed&nbsp;(if&nbsp;it&nbsp;was&nbsp;ever&nbsp;open).<br>
+&nbsp;<br>
+@type&nbsp;username:&nbsp;str<br>
+@param&nbsp;username:&nbsp;The&nbsp;shared-key&nbsp;username.<br>
+&nbsp;<br>
+@type&nbsp;sharedKey:&nbsp;str<br>
+@param&nbsp;sharedKey:&nbsp;The&nbsp;shared&nbsp;key.<br>
+&nbsp;<br>
+@type&nbsp;settings:&nbsp;L{tlslite.HandshakeSettings.HandshakeSettings}<br>
+@param&nbsp;settings:&nbsp;Various&nbsp;settings&nbsp;which&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;control<br>
+the&nbsp;ciphersuites,&nbsp;certificate&nbsp;types,&nbsp;and&nbsp;SSL/TLS&nbsp;versions<br>
+offered&nbsp;by&nbsp;the&nbsp;client.<br>
+&nbsp;<br>
+@type&nbsp;checker:&nbsp;L{tlslite.Checker.Checker}<br>
+@param&nbsp;checker:&nbsp;A&nbsp;Checker&nbsp;instance.&nbsp;&nbsp;This&nbsp;instance&nbsp;will&nbsp;be<br>
+invoked&nbsp;to&nbsp;examine&nbsp;the&nbsp;other&nbsp;party's&nbsp;authentication<br>
+credentials,&nbsp;if&nbsp;the&nbsp;handshake&nbsp;completes&nbsp;succesfully.<br>
+&nbsp;<br>
+@type&nbsp;async:&nbsp;bool<br>
+@param&nbsp;async:&nbsp;If&nbsp;False,&nbsp;this&nbsp;function&nbsp;will&nbsp;block&nbsp;until&nbsp;the<br>
+handshake&nbsp;is&nbsp;completed.&nbsp;&nbsp;If&nbsp;True,&nbsp;this&nbsp;function&nbsp;will&nbsp;return&nbsp;a<br>
+generator.&nbsp;&nbsp;Successive&nbsp;invocations&nbsp;of&nbsp;the&nbsp;generator&nbsp;will<br>
+return&nbsp;0&nbsp;if&nbsp;it&nbsp;is&nbsp;waiting&nbsp;to&nbsp;read&nbsp;from&nbsp;the&nbsp;socket,&nbsp;1&nbsp;if&nbsp;it&nbsp;is<br>
+waiting&nbsp;to&nbsp;write&nbsp;to&nbsp;the&nbsp;socket,&nbsp;or&nbsp;will&nbsp;raise&nbsp;StopIteration&nbsp;if<br>
+the&nbsp;handshake&nbsp;operation&nbsp;is&nbsp;completed.<br>
+&nbsp;<br>
+@rtype:&nbsp;None&nbsp;or&nbsp;an&nbsp;iterable<br>
+@return:&nbsp;If&nbsp;'async'&nbsp;is&nbsp;True,&nbsp;a&nbsp;generator&nbsp;object&nbsp;will&nbsp;be<br>
+returned.<br>
+&nbsp;<br>
+@raise&nbsp;socket.error:&nbsp;If&nbsp;a&nbsp;socket&nbsp;error&nbsp;occurs.<br>
+@raise&nbsp;tlslite.errors.TLSAbruptCloseError:&nbsp;If&nbsp;the&nbsp;socket&nbsp;is&nbsp;closed<br>
+without&nbsp;a&nbsp;preceding&nbsp;alert.<br>
+@raise&nbsp;tlslite.errors.TLSAlert:&nbsp;If&nbsp;a&nbsp;TLS&nbsp;alert&nbsp;is&nbsp;signalled.<br>
+@raise&nbsp;tlslite.errors.TLSAuthenticationError:&nbsp;If&nbsp;the&nbsp;checker<br>
+doesn't&nbsp;like&nbsp;the&nbsp;other&nbsp;party's&nbsp;authentication&nbsp;credentials.</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-handshakeClientUnknown"><strong>handshakeClientUnknown</strong></a>(self, srpCallback<font color="#909090">=None</font>, certCallback<font color="#909090">=None</font>, session<font color="#909090">=None</font>, settings<font color="#909090">=None</font>, checker<font color="#909090">=None</font>, async<font color="#909090">=False</font>)</dt><dd><tt>Perform&nbsp;a&nbsp;to-be-determined&nbsp;type&nbsp;of&nbsp;handshake&nbsp;in&nbsp;the&nbsp;role&nbsp;of&nbsp;client.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;performs&nbsp;an&nbsp;SSL&nbsp;or&nbsp;TLS&nbsp;handshake.&nbsp;&nbsp;If&nbsp;the&nbsp;server<br>
+requests&nbsp;client&nbsp;certificate&nbsp;authentication,&nbsp;the<br>
+certCallback&nbsp;will&nbsp;be&nbsp;invoked&nbsp;and&nbsp;should&nbsp;return&nbsp;a&nbsp;(certChain,<br>
+privateKey)&nbsp;pair.&nbsp;&nbsp;If&nbsp;the&nbsp;callback&nbsp;returns&nbsp;None,&nbsp;the&nbsp;library<br>
+will&nbsp;attempt&nbsp;to&nbsp;proceed&nbsp;without&nbsp;client&nbsp;authentication.&nbsp;&nbsp;The<br>
+server&nbsp;may&nbsp;or&nbsp;may&nbsp;not&nbsp;allow&nbsp;this.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;server&nbsp;requests&nbsp;SRP&nbsp;authentication,&nbsp;the&nbsp;srpCallback<br>
+will&nbsp;be&nbsp;invoked&nbsp;and&nbsp;should&nbsp;return&nbsp;a&nbsp;(username,&nbsp;password)&nbsp;pair.<br>
+If&nbsp;the&nbsp;callback&nbsp;returns&nbsp;None,&nbsp;the&nbsp;local&nbsp;implementation&nbsp;will<br>
+signal&nbsp;a&nbsp;user_canceled&nbsp;error&nbsp;alert.<br>
+&nbsp;<br>
+After&nbsp;the&nbsp;handshake&nbsp;completes,&nbsp;the&nbsp;client&nbsp;can&nbsp;inspect&nbsp;the<br>
+connection's&nbsp;session&nbsp;attribute&nbsp;to&nbsp;determine&nbsp;what&nbsp;type&nbsp;of<br>
+authentication&nbsp;was&nbsp;performed.<br>
+&nbsp;<br>
+Like&nbsp;any&nbsp;handshake&nbsp;function,&nbsp;this&nbsp;can&nbsp;be&nbsp;called&nbsp;on&nbsp;a&nbsp;closed<br>
+TLS&nbsp;connection,&nbsp;or&nbsp;on&nbsp;a&nbsp;TLS&nbsp;connection&nbsp;that&nbsp;is&nbsp;already&nbsp;open.<br>
+If&nbsp;called&nbsp;on&nbsp;an&nbsp;open&nbsp;connection&nbsp;it&nbsp;performs&nbsp;a&nbsp;re-handshake.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;function&nbsp;completes&nbsp;without&nbsp;raising&nbsp;an&nbsp;exception,&nbsp;the<br>
+TLS&nbsp;connection&nbsp;will&nbsp;be&nbsp;open&nbsp;and&nbsp;available&nbsp;for&nbsp;data&nbsp;transfer.<br>
+&nbsp;<br>
+If&nbsp;an&nbsp;exception&nbsp;is&nbsp;raised,&nbsp;the&nbsp;connection&nbsp;will&nbsp;have&nbsp;been<br>
+automatically&nbsp;closed&nbsp;(if&nbsp;it&nbsp;was&nbsp;ever&nbsp;open).<br>
+&nbsp;<br>
+@type&nbsp;srpCallback:&nbsp;callable<br>
+@param&nbsp;srpCallback:&nbsp;The&nbsp;callback&nbsp;to&nbsp;be&nbsp;used&nbsp;if&nbsp;the&nbsp;server<br>
+requests&nbsp;SRP&nbsp;authentication.&nbsp;&nbsp;If&nbsp;None,&nbsp;the&nbsp;client&nbsp;will&nbsp;not<br>
+offer&nbsp;support&nbsp;for&nbsp;SRP&nbsp;ciphersuites.<br>
+&nbsp;<br>
+@type&nbsp;certCallback:&nbsp;callable<br>
+@param&nbsp;certCallback:&nbsp;The&nbsp;callback&nbsp;to&nbsp;be&nbsp;used&nbsp;if&nbsp;the&nbsp;server<br>
+requests&nbsp;client&nbsp;certificate&nbsp;authentication.<br>
+&nbsp;<br>
+@type&nbsp;session:&nbsp;L{tlslite.Session.Session}<br>
+@param&nbsp;session:&nbsp;A&nbsp;TLS&nbsp;session&nbsp;to&nbsp;attempt&nbsp;to&nbsp;resume.&nbsp;&nbsp;If&nbsp;the<br>
+resumption&nbsp;does&nbsp;not&nbsp;succeed,&nbsp;a&nbsp;full&nbsp;handshake&nbsp;will&nbsp;be<br>
+performed.<br>
+&nbsp;<br>
+@type&nbsp;settings:&nbsp;L{tlslite.HandshakeSettings.HandshakeSettings}<br>
+@param&nbsp;settings:&nbsp;Various&nbsp;settings&nbsp;which&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;control<br>
+the&nbsp;ciphersuites,&nbsp;certificate&nbsp;types,&nbsp;and&nbsp;SSL/TLS&nbsp;versions<br>
+offered&nbsp;by&nbsp;the&nbsp;client.<br>
+&nbsp;<br>
+@type&nbsp;checker:&nbsp;L{tlslite.Checker.Checker}<br>
+@param&nbsp;checker:&nbsp;A&nbsp;Checker&nbsp;instance.&nbsp;&nbsp;This&nbsp;instance&nbsp;will&nbsp;be<br>
+invoked&nbsp;to&nbsp;examine&nbsp;the&nbsp;other&nbsp;party's&nbsp;authentication<br>
+credentials,&nbsp;if&nbsp;the&nbsp;handshake&nbsp;completes&nbsp;succesfully.<br>
+&nbsp;<br>
+@type&nbsp;async:&nbsp;bool<br>
+@param&nbsp;async:&nbsp;If&nbsp;False,&nbsp;this&nbsp;function&nbsp;will&nbsp;block&nbsp;until&nbsp;the<br>
+handshake&nbsp;is&nbsp;completed.&nbsp;&nbsp;If&nbsp;True,&nbsp;this&nbsp;function&nbsp;will&nbsp;return&nbsp;a<br>
+generator.&nbsp;&nbsp;Successive&nbsp;invocations&nbsp;of&nbsp;the&nbsp;generator&nbsp;will<br>
+return&nbsp;0&nbsp;if&nbsp;it&nbsp;is&nbsp;waiting&nbsp;to&nbsp;read&nbsp;from&nbsp;the&nbsp;socket,&nbsp;1&nbsp;if&nbsp;it&nbsp;is<br>
+waiting&nbsp;to&nbsp;write&nbsp;to&nbsp;the&nbsp;socket,&nbsp;or&nbsp;will&nbsp;raise&nbsp;StopIteration&nbsp;if<br>
+the&nbsp;handshake&nbsp;operation&nbsp;is&nbsp;completed.<br>
+&nbsp;<br>
+@rtype:&nbsp;None&nbsp;or&nbsp;an&nbsp;iterable<br>
+@return:&nbsp;If&nbsp;'async'&nbsp;is&nbsp;True,&nbsp;a&nbsp;generator&nbsp;object&nbsp;will&nbsp;be<br>
+returned.<br>
+&nbsp;<br>
+@raise&nbsp;socket.error:&nbsp;If&nbsp;a&nbsp;socket&nbsp;error&nbsp;occurs.<br>
+@raise&nbsp;tlslite.errors.TLSAbruptCloseError:&nbsp;If&nbsp;the&nbsp;socket&nbsp;is&nbsp;closed<br>
+without&nbsp;a&nbsp;preceding&nbsp;alert.<br>
+@raise&nbsp;tlslite.errors.TLSAlert:&nbsp;If&nbsp;a&nbsp;TLS&nbsp;alert&nbsp;is&nbsp;signalled.<br>
+@raise&nbsp;tlslite.errors.TLSAuthenticationError:&nbsp;If&nbsp;the&nbsp;checker<br>
+doesn't&nbsp;like&nbsp;the&nbsp;other&nbsp;party's&nbsp;authentication&nbsp;credentials.</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-handshakeServer"><strong>handshakeServer</strong></a>(self, sharedKeyDB<font color="#909090">=None</font>, verifierDB<font color="#909090">=None</font>, certChain<font color="#909090">=None</font>, privateKey<font color="#909090">=None</font>, reqCert<font color="#909090">=False</font>, sessionCache<font color="#909090">=None</font>, settings<font color="#909090">=None</font>, checker<font color="#909090">=None</font>)</dt><dd><tt>Perform&nbsp;a&nbsp;handshake&nbsp;in&nbsp;the&nbsp;role&nbsp;of&nbsp;server.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;performs&nbsp;an&nbsp;SSL&nbsp;or&nbsp;TLS&nbsp;handshake.&nbsp;&nbsp;Depending&nbsp;on<br>
+the&nbsp;arguments&nbsp;and&nbsp;the&nbsp;behavior&nbsp;of&nbsp;the&nbsp;client,&nbsp;this&nbsp;function&nbsp;can<br>
+perform&nbsp;a&nbsp;shared-key,&nbsp;SRP,&nbsp;or&nbsp;certificate-based&nbsp;handshake.&nbsp;&nbsp;It<br>
+can&nbsp;also&nbsp;perform&nbsp;a&nbsp;combined&nbsp;SRP&nbsp;and&nbsp;server-certificate<br>
+handshake.<br>
+&nbsp;<br>
+Like&nbsp;any&nbsp;handshake&nbsp;function,&nbsp;this&nbsp;can&nbsp;be&nbsp;called&nbsp;on&nbsp;a&nbsp;closed<br>
+TLS&nbsp;connection,&nbsp;or&nbsp;on&nbsp;a&nbsp;TLS&nbsp;connection&nbsp;that&nbsp;is&nbsp;already&nbsp;open.<br>
+If&nbsp;called&nbsp;on&nbsp;an&nbsp;open&nbsp;connection&nbsp;it&nbsp;performs&nbsp;a&nbsp;re-handshake.<br>
+This&nbsp;function&nbsp;does&nbsp;not&nbsp;send&nbsp;a&nbsp;Hello&nbsp;Request&nbsp;message&nbsp;before<br>
+performing&nbsp;the&nbsp;handshake,&nbsp;so&nbsp;if&nbsp;re-handshaking&nbsp;is&nbsp;required,<br>
+the&nbsp;server&nbsp;must&nbsp;signal&nbsp;the&nbsp;client&nbsp;to&nbsp;begin&nbsp;the&nbsp;re-handshake<br>
+through&nbsp;some&nbsp;other&nbsp;means.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;function&nbsp;completes&nbsp;without&nbsp;raising&nbsp;an&nbsp;exception,&nbsp;the<br>
+TLS&nbsp;connection&nbsp;will&nbsp;be&nbsp;open&nbsp;and&nbsp;available&nbsp;for&nbsp;data&nbsp;transfer.<br>
+&nbsp;<br>
+If&nbsp;an&nbsp;exception&nbsp;is&nbsp;raised,&nbsp;the&nbsp;connection&nbsp;will&nbsp;have&nbsp;been<br>
+automatically&nbsp;closed&nbsp;(if&nbsp;it&nbsp;was&nbsp;ever&nbsp;open).<br>
+&nbsp;<br>
+@type&nbsp;sharedKeyDB:&nbsp;L{tlslite.SharedKeyDB.SharedKeyDB}<br>
+@param&nbsp;sharedKeyDB:&nbsp;A&nbsp;database&nbsp;of&nbsp;shared&nbsp;symmetric&nbsp;keys<br>
+associated&nbsp;with&nbsp;usernames.&nbsp;&nbsp;If&nbsp;the&nbsp;client&nbsp;performs&nbsp;a<br>
+shared-key&nbsp;handshake,&nbsp;the&nbsp;session's&nbsp;sharedKeyUsername<br>
+attribute&nbsp;will&nbsp;be&nbsp;set.<br>
+&nbsp;<br>
+@type&nbsp;verifierDB:&nbsp;L{tlslite.VerifierDB.VerifierDB}<br>
+@param&nbsp;verifierDB:&nbsp;A&nbsp;database&nbsp;of&nbsp;SRP&nbsp;password&nbsp;verifiers<br>
+associated&nbsp;with&nbsp;usernames.&nbsp;&nbsp;If&nbsp;the&nbsp;client&nbsp;performs&nbsp;an&nbsp;SRP<br>
+handshake,&nbsp;the&nbsp;session's&nbsp;srpUsername&nbsp;attribute&nbsp;will&nbsp;be&nbsp;set.<br>
+&nbsp;<br>
+@type&nbsp;certChain:&nbsp;L{tlslite.X509CertChain.X509CertChain}&nbsp;or<br>
+L{cryptoIDlib.CertChain.CertChain}<br>
+@param&nbsp;certChain:&nbsp;The&nbsp;certificate&nbsp;chain&nbsp;to&nbsp;be&nbsp;used&nbsp;if&nbsp;the<br>
+client&nbsp;requests&nbsp;server&nbsp;certificate&nbsp;authentication.<br>
+&nbsp;<br>
+@type&nbsp;privateKey:&nbsp;L{tlslite.utils.RSAKey.RSAKey}<br>
+@param&nbsp;privateKey:&nbsp;The&nbsp;private&nbsp;key&nbsp;to&nbsp;be&nbsp;used&nbsp;if&nbsp;the&nbsp;client<br>
+requests&nbsp;server&nbsp;certificate&nbsp;authentication.<br>
+&nbsp;<br>
+@type&nbsp;reqCert:&nbsp;bool<br>
+@param&nbsp;reqCert:&nbsp;Whether&nbsp;to&nbsp;request&nbsp;client&nbsp;certificate<br>
+authentication.&nbsp;&nbsp;This&nbsp;only&nbsp;applies&nbsp;if&nbsp;the&nbsp;client&nbsp;chooses&nbsp;server<br>
+certificate&nbsp;authentication;&nbsp;if&nbsp;the&nbsp;client&nbsp;chooses&nbsp;SRP&nbsp;or<br>
+shared-key&nbsp;authentication,&nbsp;this&nbsp;will&nbsp;be&nbsp;ignored.&nbsp;&nbsp;If&nbsp;the&nbsp;client<br>
+performs&nbsp;a&nbsp;client&nbsp;certificate&nbsp;authentication,&nbsp;the&nbsp;sessions's<br>
+clientCertChain&nbsp;attribute&nbsp;will&nbsp;be&nbsp;set.<br>
+&nbsp;<br>
+@type&nbsp;sessionCache:&nbsp;L{tlslite.SessionCache.SessionCache}<br>
+@param&nbsp;sessionCache:&nbsp;An&nbsp;in-memory&nbsp;cache&nbsp;of&nbsp;resumable&nbsp;sessions.<br>
+The&nbsp;client&nbsp;can&nbsp;resume&nbsp;sessions&nbsp;from&nbsp;this&nbsp;cache.&nbsp;&nbsp;Alternatively,<br>
+if&nbsp;the&nbsp;client&nbsp;performs&nbsp;a&nbsp;full&nbsp;handshake,&nbsp;a&nbsp;new&nbsp;session&nbsp;will&nbsp;be<br>
+added&nbsp;to&nbsp;the&nbsp;cache.<br>
+&nbsp;<br>
+@type&nbsp;settings:&nbsp;L{tlslite.HandshakeSettings.HandshakeSettings}<br>
+@param&nbsp;settings:&nbsp;Various&nbsp;settings&nbsp;which&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;control<br>
+the&nbsp;ciphersuites&nbsp;and&nbsp;SSL/TLS&nbsp;version&nbsp;chosen&nbsp;by&nbsp;the&nbsp;server.<br>
+&nbsp;<br>
+@type&nbsp;checker:&nbsp;L{tlslite.Checker.Checker}<br>
+@param&nbsp;checker:&nbsp;A&nbsp;Checker&nbsp;instance.&nbsp;&nbsp;This&nbsp;instance&nbsp;will&nbsp;be<br>
+invoked&nbsp;to&nbsp;examine&nbsp;the&nbsp;other&nbsp;party's&nbsp;authentication<br>
+credentials,&nbsp;if&nbsp;the&nbsp;handshake&nbsp;completes&nbsp;succesfully.<br>
+&nbsp;<br>
+@raise&nbsp;socket.error:&nbsp;If&nbsp;a&nbsp;socket&nbsp;error&nbsp;occurs.<br>
+@raise&nbsp;tlslite.errors.TLSAbruptCloseError:&nbsp;If&nbsp;the&nbsp;socket&nbsp;is&nbsp;closed<br>
+without&nbsp;a&nbsp;preceding&nbsp;alert.<br>
+@raise&nbsp;tlslite.errors.TLSAlert:&nbsp;If&nbsp;a&nbsp;TLS&nbsp;alert&nbsp;is&nbsp;signalled.<br>
+@raise&nbsp;tlslite.errors.TLSAuthenticationError:&nbsp;If&nbsp;the&nbsp;checker<br>
+doesn't&nbsp;like&nbsp;the&nbsp;other&nbsp;party's&nbsp;authentication&nbsp;credentials.</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-handshakeServerAsync"><strong>handshakeServerAsync</strong></a>(self, sharedKeyDB<font color="#909090">=None</font>, verifierDB<font color="#909090">=None</font>, certChain<font color="#909090">=None</font>, privateKey<font color="#909090">=None</font>, reqCert<font color="#909090">=False</font>, sessionCache<font color="#909090">=None</font>, settings<font color="#909090">=None</font>, checker<font color="#909090">=None</font>)</dt><dd><tt>Start&nbsp;a&nbsp;server&nbsp;handshake&nbsp;operation&nbsp;on&nbsp;the&nbsp;TLS&nbsp;connection.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;returns&nbsp;a&nbsp;generator&nbsp;which&nbsp;behaves&nbsp;similarly&nbsp;to<br>
+<a href="#TLSConnection-handshakeServer">handshakeServer</a>().&nbsp;&nbsp;Successive&nbsp;invocations&nbsp;of&nbsp;the&nbsp;generator<br>
+will&nbsp;return&nbsp;0&nbsp;if&nbsp;it&nbsp;is&nbsp;waiting&nbsp;to&nbsp;read&nbsp;from&nbsp;the&nbsp;socket,&nbsp;1&nbsp;if&nbsp;it&nbsp;is<br>
+waiting&nbsp;to&nbsp;write&nbsp;to&nbsp;the&nbsp;socket,&nbsp;or&nbsp;it&nbsp;will&nbsp;raise&nbsp;StopIteration<br>
+if&nbsp;the&nbsp;handshake&nbsp;operation&nbsp;is&nbsp;complete.<br>
+&nbsp;<br>
+@rtype:&nbsp;iterable<br>
+@return:&nbsp;A&nbsp;generator;&nbsp;see&nbsp;above&nbsp;for&nbsp;details.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.TLSRecordLayer.html#TLSRecordLayer">gdata.tlslite.TLSRecordLayer.TLSRecordLayer</a>:<br>
+<dl><dt><a name="TLSConnection-close"><strong>close</strong></a>(self)</dt><dd><tt>Close&nbsp;the&nbsp;TLS&nbsp;connection.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;will&nbsp;block&nbsp;until&nbsp;it&nbsp;has&nbsp;exchanged&nbsp;close_notify<br>
+alerts&nbsp;with&nbsp;the&nbsp;other&nbsp;party.&nbsp;&nbsp;After&nbsp;doing&nbsp;so,&nbsp;it&nbsp;will&nbsp;shut&nbsp;down&nbsp;the<br>
+TLS&nbsp;connection.&nbsp;&nbsp;Further&nbsp;attempts&nbsp;to&nbsp;read&nbsp;through&nbsp;this&nbsp;connection<br>
+will&nbsp;return&nbsp;"".&nbsp;&nbsp;Further&nbsp;attempts&nbsp;to&nbsp;write&nbsp;through&nbsp;this&nbsp;connection<br>
+will&nbsp;raise&nbsp;ValueError.<br>
+&nbsp;<br>
+If&nbsp;<a href="#TLSConnection-makefile">makefile</a>()&nbsp;has&nbsp;been&nbsp;called&nbsp;on&nbsp;this&nbsp;connection,&nbsp;the&nbsp;connection<br>
+will&nbsp;be&nbsp;not&nbsp;be&nbsp;closed&nbsp;until&nbsp;the&nbsp;connection&nbsp;object&nbsp;and&nbsp;all&nbsp;file<br>
+objects&nbsp;have&nbsp;been&nbsp;closed.<br>
+&nbsp;<br>
+Even&nbsp;if&nbsp;an&nbsp;exception&nbsp;is&nbsp;raised,&nbsp;the&nbsp;connection&nbsp;will&nbsp;have&nbsp;been<br>
+closed.<br>
+&nbsp;<br>
+@raise&nbsp;socket.error:&nbsp;If&nbsp;a&nbsp;socket&nbsp;error&nbsp;occurs.<br>
+@raise&nbsp;tlslite.errors.TLSAbruptCloseError:&nbsp;If&nbsp;the&nbsp;socket&nbsp;is&nbsp;closed<br>
+without&nbsp;a&nbsp;preceding&nbsp;alert.<br>
+@raise&nbsp;tlslite.errors.TLSAlert:&nbsp;If&nbsp;a&nbsp;TLS&nbsp;alert&nbsp;is&nbsp;signalled.</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-closeAsync"><strong>closeAsync</strong></a>(self)</dt><dd><tt>Start&nbsp;a&nbsp;close&nbsp;operation&nbsp;on&nbsp;the&nbsp;TLS&nbsp;connection.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;returns&nbsp;a&nbsp;generator&nbsp;which&nbsp;behaves&nbsp;similarly&nbsp;to<br>
+<a href="#TLSConnection-close">close</a>().&nbsp;&nbsp;Successive&nbsp;invocations&nbsp;of&nbsp;the&nbsp;generator&nbsp;will&nbsp;return&nbsp;0<br>
+if&nbsp;it&nbsp;is&nbsp;waiting&nbsp;to&nbsp;read&nbsp;from&nbsp;the&nbsp;socket,&nbsp;1&nbsp;if&nbsp;it&nbsp;is&nbsp;waiting<br>
+to&nbsp;write&nbsp;to&nbsp;the&nbsp;socket,&nbsp;or&nbsp;will&nbsp;raise&nbsp;StopIteration&nbsp;if&nbsp;the<br>
+close&nbsp;operation&nbsp;has&nbsp;completed.<br>
+&nbsp;<br>
+@rtype:&nbsp;iterable<br>
+@return:&nbsp;A&nbsp;generator;&nbsp;see&nbsp;above&nbsp;for&nbsp;details.</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-getCipherImplementation"><strong>getCipherImplementation</strong></a>(self)</dt><dd><tt>Get&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;cipher&nbsp;implementation&nbsp;used&nbsp;with<br>
+this&nbsp;connection.<br>
+&nbsp;<br>
+@rtype:&nbsp;str<br>
+@return:&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;cipher&nbsp;implementation&nbsp;used&nbsp;with<br>
+this&nbsp;connection.&nbsp;&nbsp;Either&nbsp;'python',&nbsp;'cryptlib',&nbsp;'openssl',<br>
+or&nbsp;'pycrypto'.</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-getCipherName"><strong>getCipherName</strong></a>(self)</dt><dd><tt>Get&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;cipher&nbsp;used&nbsp;with&nbsp;this&nbsp;connection.<br>
+&nbsp;<br>
+@rtype:&nbsp;str<br>
+@return:&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;cipher&nbsp;used&nbsp;with&nbsp;this&nbsp;connection.<br>
+Either&nbsp;'aes128',&nbsp;'aes256',&nbsp;'rc4',&nbsp;or&nbsp;'3des'.</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-getpeername"><strong>getpeername</strong></a>(self)</dt><dd><tt>Return&nbsp;the&nbsp;remote&nbsp;address&nbsp;to&nbsp;which&nbsp;the&nbsp;socket&nbsp;is&nbsp;connected<br>
+(socket&nbsp;emulation).</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-getsockname"><strong>getsockname</strong></a>(self)</dt><dd><tt>Return&nbsp;the&nbsp;socket's&nbsp;own&nbsp;address&nbsp;(socket&nbsp;emulation).</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-gettimeout"><strong>gettimeout</strong></a>(self)</dt><dd><tt>Return&nbsp;the&nbsp;timeout&nbsp;associated&nbsp;with&nbsp;socket&nbsp;operations&nbsp;(socket<br>
+emulation).</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-makefile"><strong>makefile</strong></a>(self, mode<font color="#909090">='r'</font>, bufsize<font color="#909090">=-1</font>)</dt><dd><tt>Create&nbsp;a&nbsp;file&nbsp;object&nbsp;for&nbsp;the&nbsp;TLS&nbsp;connection&nbsp;(socket&nbsp;emulation).<br>
+&nbsp;<br>
+@rtype:&nbsp;L{tlslite.FileObject.FileObject}</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-read"><strong>read</strong></a>(self, max<font color="#909090">=None</font>, min<font color="#909090">=1</font>)</dt><dd><tt>Read&nbsp;some&nbsp;data&nbsp;from&nbsp;the&nbsp;TLS&nbsp;connection.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;will&nbsp;block&nbsp;until&nbsp;at&nbsp;least&nbsp;'min'&nbsp;bytes&nbsp;are<br>
+available&nbsp;(or&nbsp;the&nbsp;connection&nbsp;is&nbsp;closed).<br>
+&nbsp;<br>
+If&nbsp;an&nbsp;exception&nbsp;is&nbsp;raised,&nbsp;the&nbsp;connection&nbsp;will&nbsp;have&nbsp;been<br>
+automatically&nbsp;closed.<br>
+&nbsp;<br>
+@type&nbsp;max:&nbsp;int<br>
+@param&nbsp;max:&nbsp;The&nbsp;maximum&nbsp;number&nbsp;of&nbsp;bytes&nbsp;to&nbsp;return.<br>
+&nbsp;<br>
+@type&nbsp;min:&nbsp;int<br>
+@param&nbsp;min:&nbsp;The&nbsp;minimum&nbsp;number&nbsp;of&nbsp;bytes&nbsp;to&nbsp;return<br>
+&nbsp;<br>
+@rtype:&nbsp;str<br>
+@return:&nbsp;A&nbsp;string&nbsp;of&nbsp;no&nbsp;more&nbsp;than&nbsp;'max'&nbsp;bytes,&nbsp;and&nbsp;no&nbsp;fewer<br>
+than&nbsp;'min'&nbsp;(unless&nbsp;the&nbsp;connection&nbsp;has&nbsp;been&nbsp;closed,&nbsp;in&nbsp;which<br>
+case&nbsp;fewer&nbsp;than&nbsp;'min'&nbsp;bytes&nbsp;may&nbsp;be&nbsp;returned).<br>
+&nbsp;<br>
+@raise&nbsp;socket.error:&nbsp;If&nbsp;a&nbsp;socket&nbsp;error&nbsp;occurs.<br>
+@raise&nbsp;tlslite.errors.TLSAbruptCloseError:&nbsp;If&nbsp;the&nbsp;socket&nbsp;is&nbsp;closed<br>
+without&nbsp;a&nbsp;preceding&nbsp;alert.<br>
+@raise&nbsp;tlslite.errors.TLSAlert:&nbsp;If&nbsp;a&nbsp;TLS&nbsp;alert&nbsp;is&nbsp;signalled.</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-readAsync"><strong>readAsync</strong></a>(self, max<font color="#909090">=None</font>, min<font color="#909090">=1</font>)</dt><dd><tt>Start&nbsp;a&nbsp;read&nbsp;operation&nbsp;on&nbsp;the&nbsp;TLS&nbsp;connection.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;returns&nbsp;a&nbsp;generator&nbsp;which&nbsp;behaves&nbsp;similarly&nbsp;to<br>
+<a href="#TLSConnection-read">read</a>().&nbsp;&nbsp;Successive&nbsp;invocations&nbsp;of&nbsp;the&nbsp;generator&nbsp;will&nbsp;return&nbsp;0<br>
+if&nbsp;it&nbsp;is&nbsp;waiting&nbsp;to&nbsp;read&nbsp;from&nbsp;the&nbsp;socket,&nbsp;1&nbsp;if&nbsp;it&nbsp;is&nbsp;waiting<br>
+to&nbsp;write&nbsp;to&nbsp;the&nbsp;socket,&nbsp;or&nbsp;a&nbsp;string&nbsp;if&nbsp;the&nbsp;read&nbsp;operation&nbsp;has<br>
+completed.<br>
+&nbsp;<br>
+@rtype:&nbsp;iterable<br>
+@return:&nbsp;A&nbsp;generator;&nbsp;see&nbsp;above&nbsp;for&nbsp;details.</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-recv"><strong>recv</strong></a>(self, bufsize)</dt><dd><tt>Get&nbsp;some&nbsp;data&nbsp;from&nbsp;the&nbsp;TLS&nbsp;connection&nbsp;(socket&nbsp;emulation).<br>
+&nbsp;<br>
+@raise&nbsp;socket.error:&nbsp;If&nbsp;a&nbsp;socket&nbsp;error&nbsp;occurs.<br>
+@raise&nbsp;tlslite.errors.TLSAbruptCloseError:&nbsp;If&nbsp;the&nbsp;socket&nbsp;is&nbsp;closed<br>
+without&nbsp;a&nbsp;preceding&nbsp;alert.<br>
+@raise&nbsp;tlslite.errors.TLSAlert:&nbsp;If&nbsp;a&nbsp;TLS&nbsp;alert&nbsp;is&nbsp;signalled.</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-send"><strong>send</strong></a>(self, s)</dt><dd><tt>Send&nbsp;data&nbsp;to&nbsp;the&nbsp;TLS&nbsp;connection&nbsp;(socket&nbsp;emulation).<br>
+&nbsp;<br>
+@raise&nbsp;socket.error:&nbsp;If&nbsp;a&nbsp;socket&nbsp;error&nbsp;occurs.</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-sendall"><strong>sendall</strong></a>(self, s)</dt><dd><tt>Send&nbsp;data&nbsp;to&nbsp;the&nbsp;TLS&nbsp;connection&nbsp;(socket&nbsp;emulation).<br>
+&nbsp;<br>
+@raise&nbsp;socket.error:&nbsp;If&nbsp;a&nbsp;socket&nbsp;error&nbsp;occurs.</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-setsockopt"><strong>setsockopt</strong></a>(self, level, optname, value)</dt><dd><tt>Set&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;given&nbsp;socket&nbsp;option&nbsp;(socket&nbsp;emulation).</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-settimeout"><strong>settimeout</strong></a>(self, value)</dt><dd><tt>Set&nbsp;a&nbsp;timeout&nbsp;on&nbsp;blocking&nbsp;socket&nbsp;operations&nbsp;(socket&nbsp;emulation).</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-write"><strong>write</strong></a>(self, s)</dt><dd><tt>Write&nbsp;some&nbsp;data&nbsp;to&nbsp;the&nbsp;TLS&nbsp;connection.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;will&nbsp;block&nbsp;until&nbsp;all&nbsp;the&nbsp;data&nbsp;has&nbsp;been&nbsp;sent.<br>
+&nbsp;<br>
+If&nbsp;an&nbsp;exception&nbsp;is&nbsp;raised,&nbsp;the&nbsp;connection&nbsp;will&nbsp;have&nbsp;been<br>
+automatically&nbsp;closed.<br>
+&nbsp;<br>
+@type&nbsp;s:&nbsp;str<br>
+@param&nbsp;s:&nbsp;The&nbsp;data&nbsp;to&nbsp;transmit&nbsp;to&nbsp;the&nbsp;other&nbsp;party.<br>
+&nbsp;<br>
+@raise&nbsp;socket.error:&nbsp;If&nbsp;a&nbsp;socket&nbsp;error&nbsp;occurs.</tt></dd></dl>
+
+<dl><dt><a name="TLSConnection-writeAsync"><strong>writeAsync</strong></a>(self, s)</dt><dd><tt>Start&nbsp;a&nbsp;write&nbsp;operation&nbsp;on&nbsp;the&nbsp;TLS&nbsp;connection.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;returns&nbsp;a&nbsp;generator&nbsp;which&nbsp;behaves&nbsp;similarly&nbsp;to<br>
+<a href="#TLSConnection-write">write</a>().&nbsp;&nbsp;Successive&nbsp;invocations&nbsp;of&nbsp;the&nbsp;generator&nbsp;will&nbsp;return<br>
+1&nbsp;if&nbsp;it&nbsp;is&nbsp;waiting&nbsp;to&nbsp;write&nbsp;to&nbsp;the&nbsp;socket,&nbsp;or&nbsp;will&nbsp;raise<br>
+StopIteration&nbsp;if&nbsp;the&nbsp;write&nbsp;operation&nbsp;has&nbsp;completed.<br>
+&nbsp;<br>
+@rtype:&nbsp;iterable<br>
+@return:&nbsp;A&nbsp;generator;&nbsp;see&nbsp;above&nbsp;for&nbsp;details.</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-sha1"><strong>sha1</strong></a> = openssl_sha1(...)</dt><dd><tt>Returns&nbsp;a&nbsp;sha1&nbsp;hash&nbsp;object;&nbsp;optionally&nbsp;initialized&nbsp;with&nbsp;a&nbsp;string</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>cryptlibpyLoaded</strong> = False<br>
+<strong>generators</strong> = _Feature((2, 2, 0, 'alpha', 1), (2, 3, 0, 'final', 0), 0)<br>
+<strong>gmpyLoaded</strong> = False<br>
+<strong>goodGroupParameters</strong> = [(2, 167609434410335061...389658897350067939L), (2, 148699818592312829...022696100064262587L), (2, 217661744586174357...299250924469288819L), (2, 580960599536995806...769998514148343807L), (5, 104438888141315250...045385534758453247L), (5, 337515218214385611...109988915707117567L), (5, 109074813561941592...353154294858383359L)]<br>
+<strong>m2cryptoLoaded</strong> = False<br>
+<strong>prngName</strong> = 'os.urandom'<br>
+<strong>pycryptoLoaded</strong> = True<br>
+<strong>sieve</strong> = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, ...]</td></tr></table>
+</body></html>

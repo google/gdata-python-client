@@ -1,0 +1,251 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.integration.HTTPTLSConnection</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.<a href="gdata.tlslite.integration.html"><font color="#ffffff">integration</font></a>.HTTPTLSConnection</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/integration/HTTPTLSConnection.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/integration/HTTPTLSConnection.py</a></font></td></tr></table>
+    <p><tt>TLS&nbsp;Lite&nbsp;+&nbsp;httplib.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="httplib.html">httplib</a><br>
+</td><td width="25%" valign=top><a href="socket.html">socket</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="httplib.html#HTTPConnection">httplib.HTTPConnection</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.integration.HTTPTLSConnection.html#HTTPBaseTLSConnection">HTTPBaseTLSConnection</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.integration.HTTPTLSConnection.html#HTTPTLSConnection">HTTPTLSConnection</a>(<a href="gdata.tlslite.integration.HTTPTLSConnection.html#HTTPBaseTLSConnection">HTTPBaseTLSConnection</a>, <a href="gdata.tlslite.integration.ClientHelper.html#ClientHelper">gdata.tlslite.integration.ClientHelper.ClientHelper</a>)
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="HTTPBaseTLSConnection">class <strong>HTTPBaseTLSConnection</strong></a>(<a href="httplib.html#HTTPConnection">httplib.HTTPConnection</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;abstract&nbsp;class&nbsp;provides&nbsp;a&nbsp;framework&nbsp;for&nbsp;adding&nbsp;TLS&nbsp;support<br>
+to&nbsp;httplib.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="HTTPBaseTLSConnection-__init__"><strong>__init__</strong></a>(self, host, port<font color="#909090">=None</font>, strict<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="HTTPBaseTLSConnection-connect"><strong>connect</strong></a>(self)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>default_port</strong> = 443</dl>
+
+<hr>
+Methods inherited from <a href="httplib.html#HTTPConnection">httplib.HTTPConnection</a>:<br>
+<dl><dt><a name="HTTPBaseTLSConnection-close"><strong>close</strong></a>(self)</dt><dd><tt>Close&nbsp;the&nbsp;connection&nbsp;to&nbsp;the&nbsp;HTTP&nbsp;server.</tt></dd></dl>
+
+<dl><dt><a name="HTTPBaseTLSConnection-endheaders"><strong>endheaders</strong></a>(self)</dt><dd><tt>Indicate&nbsp;that&nbsp;the&nbsp;last&nbsp;header&nbsp;line&nbsp;has&nbsp;been&nbsp;sent&nbsp;to&nbsp;the&nbsp;server.</tt></dd></dl>
+
+<dl><dt><a name="HTTPBaseTLSConnection-getresponse"><strong>getresponse</strong></a>(self)</dt><dd><tt>Get&nbsp;the&nbsp;response&nbsp;from&nbsp;the&nbsp;server.</tt></dd></dl>
+
+<dl><dt><a name="HTTPBaseTLSConnection-putheader"><strong>putheader</strong></a>(self, header, value)</dt><dd><tt>Send&nbsp;a&nbsp;request&nbsp;header&nbsp;line&nbsp;to&nbsp;the&nbsp;server.<br>
+&nbsp;<br>
+For&nbsp;example:&nbsp;h.<a href="#HTTPBaseTLSConnection-putheader">putheader</a>('Accept',&nbsp;'text/html')</tt></dd></dl>
+
+<dl><dt><a name="HTTPBaseTLSConnection-putrequest"><strong>putrequest</strong></a>(self, method, url, skip_host<font color="#909090">=0</font>, skip_accept_encoding<font color="#909090">=0</font>)</dt><dd><tt>Send&nbsp;a&nbsp;request&nbsp;to&nbsp;the&nbsp;server.<br>
+&nbsp;<br>
+`method'&nbsp;specifies&nbsp;an&nbsp;HTTP&nbsp;request&nbsp;method,&nbsp;e.g.&nbsp;'GET'.<br>
+`url'&nbsp;specifies&nbsp;the&nbsp;object&nbsp;being&nbsp;requested,&nbsp;e.g.&nbsp;'/index.html'.<br>
+`skip_host'&nbsp;if&nbsp;True&nbsp;does&nbsp;not&nbsp;add&nbsp;automatically&nbsp;a&nbsp;'Host:'&nbsp;header<br>
+`skip_accept_encoding'&nbsp;if&nbsp;True&nbsp;does&nbsp;not&nbsp;add&nbsp;automatically&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;'Accept-Encoding:'&nbsp;header</tt></dd></dl>
+
+<dl><dt><a name="HTTPBaseTLSConnection-request"><strong>request</strong></a>(self, method, url, body<font color="#909090">=None</font>, headers<font color="#909090">={}</font>)</dt><dd><tt>Send&nbsp;a&nbsp;complete&nbsp;request&nbsp;to&nbsp;the&nbsp;server.</tt></dd></dl>
+
+<dl><dt><a name="HTTPBaseTLSConnection-send"><strong>send</strong></a>(self, str)</dt><dd><tt>Send&nbsp;`str'&nbsp;to&nbsp;the&nbsp;server.</tt></dd></dl>
+
+<dl><dt><a name="HTTPBaseTLSConnection-set_debuglevel"><strong>set_debuglevel</strong></a>(self, level)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="httplib.html#HTTPConnection">httplib.HTTPConnection</a>:<br>
+<dl><dt><strong>auto_open</strong> = 1</dl>
+
+<dl><dt><strong>debuglevel</strong> = 0</dl>
+
+<dl><dt><strong>response_class</strong> = &lt;class httplib.HTTPResponse&gt;</dl>
+
+<dl><dt><strong>strict</strong> = 0</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="HTTPTLSConnection">class <strong>HTTPTLSConnection</strong></a>(<a href="gdata.tlslite.integration.HTTPTLSConnection.html#HTTPBaseTLSConnection">HTTPBaseTLSConnection</a>, <a href="gdata.tlslite.integration.ClientHelper.html#ClientHelper">gdata.tlslite.integration.ClientHelper.ClientHelper</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;class&nbsp;extends&nbsp;L{<a href="#HTTPBaseTLSConnection">HTTPBaseTLSConnection</a>}&nbsp;to&nbsp;support&nbsp;the<br>
+common&nbsp;types&nbsp;of&nbsp;handshaking.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.integration.HTTPTLSConnection.html#HTTPTLSConnection">HTTPTLSConnection</a></dd>
+<dd><a href="gdata.tlslite.integration.HTTPTLSConnection.html#HTTPBaseTLSConnection">HTTPBaseTLSConnection</a></dd>
+<dd><a href="httplib.html#HTTPConnection">httplib.HTTPConnection</a></dd>
+<dd><a href="gdata.tlslite.integration.ClientHelper.html#ClientHelper">gdata.tlslite.integration.ClientHelper.ClientHelper</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="HTTPTLSConnection-__init__"><strong>__init__</strong></a>(self, host, port<font color="#909090">=None</font>, username<font color="#909090">=None</font>, password<font color="#909090">=None</font>, sharedKey<font color="#909090">=None</font>, certChain<font color="#909090">=None</font>, privateKey<font color="#909090">=None</font>, cryptoID<font color="#909090">=None</font>, protocol<font color="#909090">=None</font>, x509Fingerprint<font color="#909090">=None</font>, x509TrustList<font color="#909090">=None</font>, x509CommonName<font color="#909090">=None</font>, settings<font color="#909090">=None</font>)</dt><dd><tt>Create&nbsp;a&nbsp;new&nbsp;<a href="#HTTPTLSConnection">HTTPTLSConnection</a>.<br>
+&nbsp;<br>
+For&nbsp;client&nbsp;authentication,&nbsp;use&nbsp;one&nbsp;of&nbsp;these&nbsp;argument<br>
+combinations:<br>
+&nbsp;-&nbsp;username,&nbsp;password&nbsp;(SRP)<br>
+&nbsp;-&nbsp;username,&nbsp;sharedKey&nbsp;(shared-key)<br>
+&nbsp;-&nbsp;certChain,&nbsp;privateKey&nbsp;(certificate)<br>
+&nbsp;<br>
+For&nbsp;server&nbsp;authentication,&nbsp;you&nbsp;can&nbsp;either&nbsp;rely&nbsp;on&nbsp;the<br>
+implicit&nbsp;mutual&nbsp;authentication&nbsp;performed&nbsp;by&nbsp;SRP&nbsp;or<br>
+shared-keys,&nbsp;or&nbsp;you&nbsp;can&nbsp;do&nbsp;certificate-based&nbsp;server<br>
+authentication&nbsp;with&nbsp;one&nbsp;of&nbsp;these&nbsp;argument&nbsp;combinations:<br>
+&nbsp;-&nbsp;cryptoID[,&nbsp;protocol]&nbsp;(requires&nbsp;cryptoIDlib)<br>
+&nbsp;-&nbsp;x509Fingerprint<br>
+&nbsp;-&nbsp;x509TrustList[,&nbsp;x509CommonName]&nbsp;(requires&nbsp;cryptlib_py)<br>
+&nbsp;<br>
+Certificate-based&nbsp;server&nbsp;authentication&nbsp;is&nbsp;compatible&nbsp;with<br>
+SRP&nbsp;or&nbsp;certificate-based&nbsp;client&nbsp;authentication.&nbsp;&nbsp;It&nbsp;is<br>
+not&nbsp;compatible&nbsp;with&nbsp;shared-keys.<br>
+&nbsp;<br>
+The&nbsp;constructor&nbsp;does&nbsp;not&nbsp;perform&nbsp;the&nbsp;TLS&nbsp;handshake&nbsp;itself,&nbsp;but<br>
+simply&nbsp;stores&nbsp;these&nbsp;arguments&nbsp;for&nbsp;later.&nbsp;&nbsp;The&nbsp;handshake&nbsp;is<br>
+performed&nbsp;only&nbsp;when&nbsp;this&nbsp;class&nbsp;needs&nbsp;to&nbsp;connect&nbsp;with&nbsp;the<br>
+server.&nbsp;&nbsp;Thus&nbsp;you&nbsp;should&nbsp;be&nbsp;prepared&nbsp;to&nbsp;handle&nbsp;TLS-specific<br>
+exceptions&nbsp;when&nbsp;calling&nbsp;methods&nbsp;inherited&nbsp;from<br>
+L{httplib.<a href="httplib.html#HTTPConnection">HTTPConnection</a>}&nbsp;such&nbsp;as&nbsp;<a href="#HTTPTLSConnection-request">request</a>(),&nbsp;<a href="#HTTPTLSConnection-connect">connect</a>(),&nbsp;and<br>
+<a href="#HTTPTLSConnection-send">send</a>().&nbsp;&nbsp;See&nbsp;the&nbsp;client&nbsp;handshake&nbsp;functions&nbsp;in<br>
+L{tlslite.TLSConnection.TLSConnection}&nbsp;for&nbsp;details&nbsp;on&nbsp;which<br>
+exceptions&nbsp;might&nbsp;be&nbsp;raised.<br>
+&nbsp;<br>
+@type&nbsp;host:&nbsp;str<br>
+@param&nbsp;host:&nbsp;Server&nbsp;to&nbsp;connect&nbsp;to.<br>
+&nbsp;<br>
+@type&nbsp;port:&nbsp;int<br>
+@param&nbsp;port:&nbsp;Port&nbsp;to&nbsp;connect&nbsp;to.<br>
+&nbsp;<br>
+@type&nbsp;username:&nbsp;str<br>
+@param&nbsp;username:&nbsp;SRP&nbsp;or&nbsp;shared-key&nbsp;username.&nbsp;&nbsp;Requires&nbsp;the<br>
+'password'&nbsp;or&nbsp;'sharedKey'&nbsp;argument.<br>
+&nbsp;<br>
+@type&nbsp;password:&nbsp;str<br>
+@param&nbsp;password:&nbsp;SRP&nbsp;password&nbsp;for&nbsp;mutual&nbsp;authentication.<br>
+Requires&nbsp;the&nbsp;'username'&nbsp;argument.<br>
+&nbsp;<br>
+@type&nbsp;sharedKey:&nbsp;str<br>
+@param&nbsp;sharedKey:&nbsp;Shared&nbsp;key&nbsp;for&nbsp;mutual&nbsp;authentication.<br>
+Requires&nbsp;the&nbsp;'username'&nbsp;argument.<br>
+&nbsp;<br>
+@type&nbsp;certChain:&nbsp;L{tlslite.X509CertChain.X509CertChain}&nbsp;or<br>
+L{cryptoIDlib.CertChain.CertChain}<br>
+@param&nbsp;certChain:&nbsp;Certificate&nbsp;chain&nbsp;for&nbsp;client&nbsp;authentication.<br>
+Requires&nbsp;the&nbsp;'privateKey'&nbsp;argument.&nbsp;&nbsp;Excludes&nbsp;the&nbsp;SRP&nbsp;or<br>
+shared-key&nbsp;related&nbsp;arguments.<br>
+&nbsp;<br>
+@type&nbsp;privateKey:&nbsp;L{tlslite.utils.RSAKey.RSAKey}<br>
+@param&nbsp;privateKey:&nbsp;Private&nbsp;key&nbsp;for&nbsp;client&nbsp;authentication.<br>
+Requires&nbsp;the&nbsp;'certChain'&nbsp;argument.&nbsp;&nbsp;Excludes&nbsp;the&nbsp;SRP&nbsp;or<br>
+shared-key&nbsp;related&nbsp;arguments.<br>
+&nbsp;<br>
+@type&nbsp;cryptoID:&nbsp;str<br>
+@param&nbsp;cryptoID:&nbsp;cryptoID&nbsp;for&nbsp;server&nbsp;authentication.&nbsp;&nbsp;Mutually<br>
+exclusive&nbsp;with&nbsp;the&nbsp;'x509...'&nbsp;arguments.<br>
+&nbsp;<br>
+@type&nbsp;protocol:&nbsp;str<br>
+@param&nbsp;protocol:&nbsp;cryptoID&nbsp;protocol&nbsp;URI&nbsp;for&nbsp;server<br>
+authentication.&nbsp;&nbsp;Requires&nbsp;the&nbsp;'cryptoID'&nbsp;argument.<br>
+&nbsp;<br>
+@type&nbsp;x509Fingerprint:&nbsp;str<br>
+@param&nbsp;x509Fingerprint:&nbsp;Hex-encoded&nbsp;X.509&nbsp;fingerprint&nbsp;for<br>
+server&nbsp;authentication.&nbsp;&nbsp;Mutually&nbsp;exclusive&nbsp;with&nbsp;the&nbsp;'cryptoID'<br>
+and&nbsp;'x509TrustList'&nbsp;arguments.<br>
+&nbsp;<br>
+@type&nbsp;x509TrustList:&nbsp;list&nbsp;of&nbsp;L{tlslite.X509.X509}<br>
+@param&nbsp;x509TrustList:&nbsp;A&nbsp;list&nbsp;of&nbsp;trusted&nbsp;root&nbsp;certificates.&nbsp;&nbsp;The<br>
+other&nbsp;party&nbsp;must&nbsp;present&nbsp;a&nbsp;certificate&nbsp;chain&nbsp;which&nbsp;extends&nbsp;to<br>
+one&nbsp;of&nbsp;these&nbsp;root&nbsp;certificates.&nbsp;&nbsp;The&nbsp;cryptlib_py&nbsp;module&nbsp;must&nbsp;be<br>
+installed&nbsp;to&nbsp;use&nbsp;this&nbsp;parameter.&nbsp;&nbsp;Mutually&nbsp;exclusive&nbsp;with&nbsp;the<br>
+'cryptoID'&nbsp;and&nbsp;'x509Fingerprint'&nbsp;arguments.<br>
+&nbsp;<br>
+@type&nbsp;x509CommonName:&nbsp;str<br>
+@param&nbsp;x509CommonName:&nbsp;The&nbsp;end-entity&nbsp;certificate's&nbsp;'CN'&nbsp;field<br>
+must&nbsp;match&nbsp;this&nbsp;value.&nbsp;&nbsp;For&nbsp;a&nbsp;web&nbsp;server,&nbsp;this&nbsp;is&nbsp;typically&nbsp;a<br>
+server&nbsp;name&nbsp;such&nbsp;as&nbsp;'www.amazon.com'.&nbsp;&nbsp;Mutually&nbsp;exclusive&nbsp;with<br>
+the&nbsp;'cryptoID'&nbsp;and&nbsp;'x509Fingerprint'&nbsp;arguments.&nbsp;&nbsp;Requires&nbsp;the<br>
+'x509TrustList'&nbsp;argument.<br>
+&nbsp;<br>
+@type&nbsp;settings:&nbsp;L{tlslite.HandshakeSettings.HandshakeSettings}<br>
+@param&nbsp;settings:&nbsp;Various&nbsp;settings&nbsp;which&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;control<br>
+the&nbsp;ciphersuites,&nbsp;certificate&nbsp;types,&nbsp;and&nbsp;SSL/TLS&nbsp;versions<br>
+offered&nbsp;by&nbsp;the&nbsp;client.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.integration.HTTPTLSConnection.html#HTTPBaseTLSConnection">HTTPBaseTLSConnection</a>:<br>
+<dl><dt><a name="HTTPTLSConnection-connect"><strong>connect</strong></a>(self)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="gdata.tlslite.integration.HTTPTLSConnection.html#HTTPBaseTLSConnection">HTTPBaseTLSConnection</a>:<br>
+<dl><dt><strong>default_port</strong> = 443</dl>
+
+<hr>
+Methods inherited from <a href="httplib.html#HTTPConnection">httplib.HTTPConnection</a>:<br>
+<dl><dt><a name="HTTPTLSConnection-close"><strong>close</strong></a>(self)</dt><dd><tt>Close&nbsp;the&nbsp;connection&nbsp;to&nbsp;the&nbsp;HTTP&nbsp;server.</tt></dd></dl>
+
+<dl><dt><a name="HTTPTLSConnection-endheaders"><strong>endheaders</strong></a>(self)</dt><dd><tt>Indicate&nbsp;that&nbsp;the&nbsp;last&nbsp;header&nbsp;line&nbsp;has&nbsp;been&nbsp;sent&nbsp;to&nbsp;the&nbsp;server.</tt></dd></dl>
+
+<dl><dt><a name="HTTPTLSConnection-getresponse"><strong>getresponse</strong></a>(self)</dt><dd><tt>Get&nbsp;the&nbsp;response&nbsp;from&nbsp;the&nbsp;server.</tt></dd></dl>
+
+<dl><dt><a name="HTTPTLSConnection-putheader"><strong>putheader</strong></a>(self, header, value)</dt><dd><tt>Send&nbsp;a&nbsp;request&nbsp;header&nbsp;line&nbsp;to&nbsp;the&nbsp;server.<br>
+&nbsp;<br>
+For&nbsp;example:&nbsp;h.<a href="#HTTPTLSConnection-putheader">putheader</a>('Accept',&nbsp;'text/html')</tt></dd></dl>
+
+<dl><dt><a name="HTTPTLSConnection-putrequest"><strong>putrequest</strong></a>(self, method, url, skip_host<font color="#909090">=0</font>, skip_accept_encoding<font color="#909090">=0</font>)</dt><dd><tt>Send&nbsp;a&nbsp;request&nbsp;to&nbsp;the&nbsp;server.<br>
+&nbsp;<br>
+`method'&nbsp;specifies&nbsp;an&nbsp;HTTP&nbsp;request&nbsp;method,&nbsp;e.g.&nbsp;'GET'.<br>
+`url'&nbsp;specifies&nbsp;the&nbsp;object&nbsp;being&nbsp;requested,&nbsp;e.g.&nbsp;'/index.html'.<br>
+`skip_host'&nbsp;if&nbsp;True&nbsp;does&nbsp;not&nbsp;add&nbsp;automatically&nbsp;a&nbsp;'Host:'&nbsp;header<br>
+`skip_accept_encoding'&nbsp;if&nbsp;True&nbsp;does&nbsp;not&nbsp;add&nbsp;automatically&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;'Accept-Encoding:'&nbsp;header</tt></dd></dl>
+
+<dl><dt><a name="HTTPTLSConnection-request"><strong>request</strong></a>(self, method, url, body<font color="#909090">=None</font>, headers<font color="#909090">={}</font>)</dt><dd><tt>Send&nbsp;a&nbsp;complete&nbsp;request&nbsp;to&nbsp;the&nbsp;server.</tt></dd></dl>
+
+<dl><dt><a name="HTTPTLSConnection-send"><strong>send</strong></a>(self, str)</dt><dd><tt>Send&nbsp;`str'&nbsp;to&nbsp;the&nbsp;server.</tt></dd></dl>
+
+<dl><dt><a name="HTTPTLSConnection-set_debuglevel"><strong>set_debuglevel</strong></a>(self, level)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="httplib.html#HTTPConnection">httplib.HTTPConnection</a>:<br>
+<dl><dt><strong>auto_open</strong> = 1</dl>
+
+<dl><dt><strong>debuglevel</strong> = 0</dl>
+
+<dl><dt><strong>response_class</strong> = &lt;class httplib.HTTPResponse&gt;</dl>
+
+<dl><dt><strong>strict</strong> = 0</dl>
+
+</td></tr></table></td></tr></table>
+</body></html>

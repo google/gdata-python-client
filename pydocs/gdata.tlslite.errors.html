@@ -1,0 +1,834 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.errors</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.errors</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/errors.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/errors.py</a></font></td></tr></table>
+    <p><tt><a href="exceptions.html#Exception">Exception</a>&nbsp;classes.<br>
+@sort:&nbsp;<a href="#TLSError">TLSError</a>,&nbsp;<a href="#TLSAbruptCloseError">TLSAbruptCloseError</a>,&nbsp;<a href="#TLSAlert">TLSAlert</a>,&nbsp;<a href="#TLSLocalAlert">TLSLocalAlert</a>,&nbsp;<a href="#TLSRemoteAlert">TLSRemoteAlert</a>,<br>
+<a href="#TLSAuthenticationError">TLSAuthenticationError</a>,&nbsp;<a href="#TLSNoAuthenticationError">TLSNoAuthenticationError</a>,&nbsp;<a href="#TLSAuthenticationTypeError">TLSAuthenticationTypeError</a>,<br>
+<a href="#TLSFingerprintError">TLSFingerprintError</a>,&nbsp;<a href="#TLSAuthorizationError">TLSAuthorizationError</a>,&nbsp;<a href="#TLSValidationError">TLSValidationError</a>,&nbsp;<a href="#TLSFaultError">TLSFaultError</a></tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>(<a href="exceptions.html#BaseException">exceptions.BaseException</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.errors.html#TLSError">TLSError</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.errors.html#TLSAbruptCloseError">TLSAbruptCloseError</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.errors.html#TLSAlert">TLSAlert</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.errors.html#TLSLocalAlert">TLSLocalAlert</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.errors.html#TLSRemoteAlert">TLSRemoteAlert</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.errors.html#TLSAuthenticationError">TLSAuthenticationError</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.errors.html#TLSAuthenticationTypeError">TLSAuthenticationTypeError</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.errors.html#TLSAuthorizationError">TLSAuthorizationError</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.errors.html#TLSFingerprintError">TLSFingerprintError</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.errors.html#TLSNoAuthenticationError">TLSNoAuthenticationError</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.errors.html#TLSValidationError">TLSValidationError</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.errors.html#TLSFaultError">TLSFaultError</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TLSAbruptCloseError">class <strong>TLSAbruptCloseError</strong></a>(<a href="gdata.tlslite.errors.html#TLSError">TLSError</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;socket&nbsp;was&nbsp;closed&nbsp;without&nbsp;a&nbsp;proper&nbsp;TLS&nbsp;shutdown.<br>
+&nbsp;<br>
+The&nbsp;TLS&nbsp;specification&nbsp;mandates&nbsp;that&nbsp;an&nbsp;alert&nbsp;of&nbsp;some&nbsp;sort<br>
+must&nbsp;be&nbsp;sent&nbsp;before&nbsp;the&nbsp;underlying&nbsp;socket&nbsp;is&nbsp;closed.&nbsp;&nbsp;If&nbsp;the&nbsp;socket<br>
+is&nbsp;closed&nbsp;without&nbsp;this,&nbsp;it&nbsp;could&nbsp;signify&nbsp;that&nbsp;an&nbsp;attacker&nbsp;is&nbsp;trying<br>
+to&nbsp;truncate&nbsp;the&nbsp;connection.&nbsp;&nbsp;It&nbsp;could&nbsp;also&nbsp;signify&nbsp;a&nbsp;misbehaving<br>
+TLS&nbsp;implementation,&nbsp;or&nbsp;a&nbsp;random&nbsp;network&nbsp;failure.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.errors.html#TLSAbruptCloseError">TLSAbruptCloseError</a></dd>
+<dd><a href="gdata.tlslite.errors.html#TLSError">TLSError</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="gdata.tlslite.errors.html#TLSError">TLSError</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="TLSAbruptCloseError-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAbruptCloseError-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#TLSAbruptCloseError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="TLSAbruptCloseError-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAbruptCloseError-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSAbruptCloseError-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAbruptCloseError-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSAbruptCloseError-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAbruptCloseError-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="TLSAbruptCloseError-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAbruptCloseError-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="TLSAbruptCloseError-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSAbruptCloseError-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAbruptCloseError-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSAbruptCloseError-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAbruptCloseError-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="TLSAbruptCloseError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSAbruptCloseError-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAbruptCloseError-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSAbruptCloseError-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TLSAlert">class <strong>TLSAlert</strong></a>(<a href="gdata.tlslite.errors.html#TLSError">TLSError</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;TLS&nbsp;alert&nbsp;has&nbsp;been&nbsp;signalled.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.errors.html#TLSAlert">TLSAlert</a></dd>
+<dd><a href="gdata.tlslite.errors.html#TLSError">TLSError</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="gdata.tlslite.errors.html#TLSError">TLSError</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="TLSAlert-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAlert-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#TLSAlert-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="TLSAlert-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAlert-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSAlert-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAlert-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSAlert-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAlert-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="TLSAlert-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAlert-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="TLSAlert-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSAlert-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAlert-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSAlert-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAlert-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="TLSAlert-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSAlert-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAlert-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSAlert-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TLSAuthenticationError">class <strong>TLSAuthenticationError</strong></a>(<a href="gdata.tlslite.errors.html#TLSError">TLSError</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;handshake&nbsp;succeeded,&nbsp;but&nbsp;the&nbsp;other&nbsp;party's&nbsp;authentication<br>
+was&nbsp;inadequate.<br>
+&nbsp;<br>
+This&nbsp;exception&nbsp;will&nbsp;only&nbsp;be&nbsp;raised&nbsp;when&nbsp;a<br>
+L{tlslite.Checker.Checker}&nbsp;has&nbsp;been&nbsp;passed&nbsp;to&nbsp;a&nbsp;handshake&nbsp;function.<br>
+The&nbsp;Checker&nbsp;will&nbsp;be&nbsp;invoked&nbsp;once&nbsp;the&nbsp;handshake&nbsp;completes,&nbsp;and&nbsp;if<br>
+the&nbsp;Checker&nbsp;objects&nbsp;to&nbsp;how&nbsp;the&nbsp;other&nbsp;party&nbsp;authenticated,&nbsp;a<br>
+subclass&nbsp;of&nbsp;this&nbsp;exception&nbsp;will&nbsp;be&nbsp;raised.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.errors.html#TLSAuthenticationError">TLSAuthenticationError</a></dd>
+<dd><a href="gdata.tlslite.errors.html#TLSError">TLSError</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="gdata.tlslite.errors.html#TLSError">TLSError</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="TLSAuthenticationError-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthenticationError-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#TLSAuthenticationError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="TLSAuthenticationError-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthenticationError-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSAuthenticationError-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthenticationError-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSAuthenticationError-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthenticationError-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="TLSAuthenticationError-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthenticationError-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="TLSAuthenticationError-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSAuthenticationError-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthenticationError-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSAuthenticationError-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthenticationError-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="TLSAuthenticationError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSAuthenticationError-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthenticationError-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSAuthenticationError-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TLSAuthenticationTypeError">class <strong>TLSAuthenticationTypeError</strong></a>(<a href="gdata.tlslite.errors.html#TLSAuthenticationError">TLSAuthenticationError</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;Checker&nbsp;was&nbsp;expecting&nbsp;the&nbsp;other&nbsp;party&nbsp;to&nbsp;authenticate&nbsp;with&nbsp;a<br>
+different&nbsp;type&nbsp;of&nbsp;certificate&nbsp;chain.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.errors.html#TLSAuthenticationTypeError">TLSAuthenticationTypeError</a></dd>
+<dd><a href="gdata.tlslite.errors.html#TLSAuthenticationError">TLSAuthenticationError</a></dd>
+<dd><a href="gdata.tlslite.errors.html#TLSError">TLSError</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="gdata.tlslite.errors.html#TLSError">TLSError</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="TLSAuthenticationTypeError-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthenticationTypeError-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#TLSAuthenticationTypeError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="TLSAuthenticationTypeError-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthenticationTypeError-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSAuthenticationTypeError-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthenticationTypeError-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSAuthenticationTypeError-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthenticationTypeError-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="TLSAuthenticationTypeError-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthenticationTypeError-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="TLSAuthenticationTypeError-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSAuthenticationTypeError-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthenticationTypeError-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSAuthenticationTypeError-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthenticationTypeError-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="TLSAuthenticationTypeError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSAuthenticationTypeError-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthenticationTypeError-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSAuthenticationTypeError-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TLSAuthorizationError">class <strong>TLSAuthorizationError</strong></a>(<a href="gdata.tlslite.errors.html#TLSAuthenticationError">TLSAuthenticationError</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;Checker&nbsp;was&nbsp;expecting&nbsp;the&nbsp;other&nbsp;party&nbsp;to&nbsp;authenticate&nbsp;with&nbsp;a<br>
+certificate&nbsp;chain&nbsp;that&nbsp;has&nbsp;a&nbsp;different&nbsp;authorization.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.errors.html#TLSAuthorizationError">TLSAuthorizationError</a></dd>
+<dd><a href="gdata.tlslite.errors.html#TLSAuthenticationError">TLSAuthenticationError</a></dd>
+<dd><a href="gdata.tlslite.errors.html#TLSError">TLSError</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="gdata.tlslite.errors.html#TLSError">TLSError</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="TLSAuthorizationError-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthorizationError-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#TLSAuthorizationError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="TLSAuthorizationError-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthorizationError-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSAuthorizationError-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthorizationError-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSAuthorizationError-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthorizationError-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="TLSAuthorizationError-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthorizationError-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="TLSAuthorizationError-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSAuthorizationError-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthorizationError-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSAuthorizationError-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthorizationError-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="TLSAuthorizationError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSAuthorizationError-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSAuthorizationError-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSAuthorizationError-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TLSError">class <strong>TLSError</strong></a>(<a href="exceptions.html#Exception">exceptions.Exception</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;class&nbsp;for&nbsp;all&nbsp;TLS&nbsp;Lite&nbsp;exceptions.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.errors.html#TLSError">TLSError</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="TLSError-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSError-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#TLSError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="TLSError-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSError-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSError-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSError-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSError-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSError-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="TLSError-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSError-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="TLSError-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSError-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSError-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSError-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSError-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="TLSError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSError-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSError-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSError-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TLSFaultError">class <strong>TLSFaultError</strong></a>(<a href="gdata.tlslite.errors.html#TLSError">TLSError</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;other&nbsp;party&nbsp;responded&nbsp;incorrectly&nbsp;to&nbsp;an&nbsp;induced&nbsp;fault.<br>
+&nbsp;<br>
+This&nbsp;exception&nbsp;will&nbsp;only&nbsp;occur&nbsp;during&nbsp;fault&nbsp;testing,&nbsp;when&nbsp;a<br>
+TLSConnection's&nbsp;fault&nbsp;variable&nbsp;is&nbsp;set&nbsp;to&nbsp;induce&nbsp;some&nbsp;sort&nbsp;of<br>
+faulty&nbsp;behavior,&nbsp;and&nbsp;the&nbsp;other&nbsp;party&nbsp;doesn't&nbsp;respond&nbsp;appropriately.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.errors.html#TLSFaultError">TLSFaultError</a></dd>
+<dd><a href="gdata.tlslite.errors.html#TLSError">TLSError</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="gdata.tlslite.errors.html#TLSError">TLSError</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="TLSFaultError-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSFaultError-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#TLSFaultError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="TLSFaultError-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSFaultError-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSFaultError-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSFaultError-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSFaultError-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSFaultError-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="TLSFaultError-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSFaultError-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="TLSFaultError-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSFaultError-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSFaultError-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSFaultError-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSFaultError-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="TLSFaultError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSFaultError-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSFaultError-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSFaultError-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TLSFingerprintError">class <strong>TLSFingerprintError</strong></a>(<a href="gdata.tlslite.errors.html#TLSAuthenticationError">TLSAuthenticationError</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;Checker&nbsp;was&nbsp;expecting&nbsp;the&nbsp;other&nbsp;party&nbsp;to&nbsp;authenticate&nbsp;with&nbsp;a<br>
+certificate&nbsp;chain&nbsp;that&nbsp;matches&nbsp;a&nbsp;different&nbsp;fingerprint.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.errors.html#TLSFingerprintError">TLSFingerprintError</a></dd>
+<dd><a href="gdata.tlslite.errors.html#TLSAuthenticationError">TLSAuthenticationError</a></dd>
+<dd><a href="gdata.tlslite.errors.html#TLSError">TLSError</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="gdata.tlslite.errors.html#TLSError">TLSError</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="TLSFingerprintError-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSFingerprintError-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#TLSFingerprintError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="TLSFingerprintError-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSFingerprintError-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSFingerprintError-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSFingerprintError-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSFingerprintError-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSFingerprintError-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="TLSFingerprintError-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSFingerprintError-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="TLSFingerprintError-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSFingerprintError-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSFingerprintError-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSFingerprintError-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSFingerprintError-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="TLSFingerprintError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSFingerprintError-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSFingerprintError-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSFingerprintError-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TLSLocalAlert">class <strong>TLSLocalAlert</strong></a>(<a href="gdata.tlslite.errors.html#TLSAlert">TLSAlert</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;TLS&nbsp;alert&nbsp;has&nbsp;been&nbsp;signalled&nbsp;by&nbsp;the&nbsp;local&nbsp;implementation.<br>
+&nbsp;<br>
+@type&nbsp;description:&nbsp;int<br>
+@ivar&nbsp;description:&nbsp;Set&nbsp;to&nbsp;one&nbsp;of&nbsp;the&nbsp;constants&nbsp;in<br>
+L{tlslite.constants.AlertDescription}<br>
+&nbsp;<br>
+@type&nbsp;level:&nbsp;int<br>
+@ivar&nbsp;level:&nbsp;Set&nbsp;to&nbsp;one&nbsp;of&nbsp;the&nbsp;constants&nbsp;in<br>
+L{tlslite.constants.AlertLevel}<br>
+&nbsp;<br>
+@type&nbsp;message:&nbsp;str<br>
+@ivar&nbsp;message:&nbsp;Description&nbsp;of&nbsp;what&nbsp;went&nbsp;wrong.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.errors.html#TLSLocalAlert">TLSLocalAlert</a></dd>
+<dd><a href="gdata.tlslite.errors.html#TLSAlert">TLSAlert</a></dd>
+<dd><a href="gdata.tlslite.errors.html#TLSError">TLSError</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TLSLocalAlert-__init__"><strong>__init__</strong></a>(self, alert, message<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="TLSLocalAlert-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="gdata.tlslite.errors.html#TLSError">TLSError</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#TLSLocalAlert-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="TLSLocalAlert-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSLocalAlert-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSLocalAlert-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSLocalAlert-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSLocalAlert-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSLocalAlert-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="TLSLocalAlert-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSLocalAlert-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="TLSLocalAlert-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSLocalAlert-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSLocalAlert-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSLocalAlert-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSLocalAlert-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="TLSLocalAlert-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSLocalAlert-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TLSNoAuthenticationError">class <strong>TLSNoAuthenticationError</strong></a>(<a href="gdata.tlslite.errors.html#TLSAuthenticationError">TLSAuthenticationError</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;Checker&nbsp;was&nbsp;expecting&nbsp;the&nbsp;other&nbsp;party&nbsp;to&nbsp;authenticate&nbsp;with&nbsp;a<br>
+certificate&nbsp;chain,&nbsp;but&nbsp;this&nbsp;did&nbsp;not&nbsp;occur.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.errors.html#TLSNoAuthenticationError">TLSNoAuthenticationError</a></dd>
+<dd><a href="gdata.tlslite.errors.html#TLSAuthenticationError">TLSAuthenticationError</a></dd>
+<dd><a href="gdata.tlslite.errors.html#TLSError">TLSError</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="gdata.tlslite.errors.html#TLSError">TLSError</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="TLSNoAuthenticationError-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSNoAuthenticationError-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#TLSNoAuthenticationError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="TLSNoAuthenticationError-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSNoAuthenticationError-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSNoAuthenticationError-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSNoAuthenticationError-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSNoAuthenticationError-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSNoAuthenticationError-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="TLSNoAuthenticationError-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSNoAuthenticationError-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="TLSNoAuthenticationError-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSNoAuthenticationError-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSNoAuthenticationError-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSNoAuthenticationError-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSNoAuthenticationError-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="TLSNoAuthenticationError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSNoAuthenticationError-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSNoAuthenticationError-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSNoAuthenticationError-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TLSRemoteAlert">class <strong>TLSRemoteAlert</strong></a>(<a href="gdata.tlslite.errors.html#TLSAlert">TLSAlert</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;TLS&nbsp;alert&nbsp;has&nbsp;been&nbsp;signalled&nbsp;by&nbsp;the&nbsp;remote&nbsp;implementation.<br>
+&nbsp;<br>
+@type&nbsp;description:&nbsp;int<br>
+@ivar&nbsp;description:&nbsp;Set&nbsp;to&nbsp;one&nbsp;of&nbsp;the&nbsp;constants&nbsp;in<br>
+L{tlslite.constants.AlertDescription}<br>
+&nbsp;<br>
+@type&nbsp;level:&nbsp;int<br>
+@ivar&nbsp;level:&nbsp;Set&nbsp;to&nbsp;one&nbsp;of&nbsp;the&nbsp;constants&nbsp;in<br>
+L{tlslite.constants.AlertLevel}<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.errors.html#TLSRemoteAlert">TLSRemoteAlert</a></dd>
+<dd><a href="gdata.tlslite.errors.html#TLSAlert">TLSAlert</a></dd>
+<dd><a href="gdata.tlslite.errors.html#TLSError">TLSError</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TLSRemoteAlert-__init__"><strong>__init__</strong></a>(self, alert)</dt></dl>
+
+<dl><dt><a name="TLSRemoteAlert-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="gdata.tlslite.errors.html#TLSError">TLSError</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#TLSRemoteAlert-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="TLSRemoteAlert-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSRemoteAlert-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSRemoteAlert-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSRemoteAlert-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSRemoteAlert-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSRemoteAlert-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="TLSRemoteAlert-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSRemoteAlert-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="TLSRemoteAlert-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSRemoteAlert-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSRemoteAlert-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSRemoteAlert-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSRemoteAlert-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="TLSRemoteAlert-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSRemoteAlert-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TLSValidationError">class <strong>TLSValidationError</strong></a>(<a href="gdata.tlslite.errors.html#TLSAuthenticationError">TLSAuthenticationError</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;Checker&nbsp;has&nbsp;determined&nbsp;that&nbsp;the&nbsp;other&nbsp;party's&nbsp;certificate<br>
+chain&nbsp;is&nbsp;invalid.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.errors.html#TLSValidationError">TLSValidationError</a></dd>
+<dd><a href="gdata.tlslite.errors.html#TLSAuthenticationError">TLSAuthenticationError</a></dd>
+<dd><a href="gdata.tlslite.errors.html#TLSError">TLSError</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="gdata.tlslite.errors.html#TLSError">TLSError</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="TLSValidationError-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSValidationError-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#TLSValidationError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="TLSValidationError-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSValidationError-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSValidationError-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSValidationError-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="TLSValidationError-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSValidationError-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="TLSValidationError-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSValidationError-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="TLSValidationError-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSValidationError-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSValidationError-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSValidationError-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSValidationError-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="TLSValidationError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="TLSValidationError-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#TLSValidationError-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="TLSValidationError-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

@@ -1,0 +1,110 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.HandshakeSettings</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.HandshakeSettings</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/HandshakeSettings.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/HandshakeSettings.py</a></font></td></tr></table>
+    <p><tt>Class&nbsp;for&nbsp;setting&nbsp;handshake&nbsp;parameters.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="gdata.tlslite.utils.cipherfactory.html">gdata.tlslite.utils.cipherfactory</a><br>
+</td><td width="25%" valign=top><a href="gdata.tlslite.utils.cryptomath.html">gdata.tlslite.utils.cryptomath</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.HandshakeSettings.html#HandshakeSettings">HandshakeSettings</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="HandshakeSettings">class <strong>HandshakeSettings</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;class&nbsp;encapsulates&nbsp;various&nbsp;parameters&nbsp;that&nbsp;can&nbsp;be&nbsp;used&nbsp;with<br>
+a&nbsp;TLS&nbsp;handshake.<br>
+@sort:&nbsp;minKeySize,&nbsp;maxKeySize,&nbsp;cipherNames,&nbsp;certificateTypes,<br>
+minVersion,&nbsp;maxVersion<br>
+&nbsp;<br>
+@type&nbsp;minKeySize:&nbsp;int<br>
+@ivar&nbsp;minKeySize:&nbsp;The&nbsp;minimum&nbsp;bit&nbsp;length&nbsp;for&nbsp;asymmetric&nbsp;keys.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;other&nbsp;party&nbsp;tries&nbsp;to&nbsp;use&nbsp;SRP,&nbsp;RSA,&nbsp;or&nbsp;Diffie-Hellman<br>
+parameters&nbsp;smaller&nbsp;than&nbsp;this&nbsp;length,&nbsp;an&nbsp;alert&nbsp;will&nbsp;be<br>
+signalled.&nbsp;&nbsp;The&nbsp;default&nbsp;is&nbsp;1023.<br>
+&nbsp;<br>
+@type&nbsp;maxKeySize:&nbsp;int<br>
+@ivar&nbsp;maxKeySize:&nbsp;The&nbsp;maximum&nbsp;bit&nbsp;length&nbsp;for&nbsp;asymmetric&nbsp;keys.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;other&nbsp;party&nbsp;tries&nbsp;to&nbsp;use&nbsp;SRP,&nbsp;RSA,&nbsp;or&nbsp;Diffie-Hellman<br>
+parameters&nbsp;larger&nbsp;than&nbsp;this&nbsp;length,&nbsp;an&nbsp;alert&nbsp;will&nbsp;be&nbsp;signalled.<br>
+The&nbsp;default&nbsp;is&nbsp;8193.<br>
+&nbsp;<br>
+@type&nbsp;cipherNames:&nbsp;list<br>
+@ivar&nbsp;cipherNames:&nbsp;The&nbsp;allowed&nbsp;ciphers,&nbsp;in&nbsp;order&nbsp;of&nbsp;preference.<br>
+&nbsp;<br>
+The&nbsp;allowed&nbsp;values&nbsp;in&nbsp;this&nbsp;list&nbsp;are&nbsp;'aes256',&nbsp;'aes128',&nbsp;'3des',&nbsp;and<br>
+'rc4'.&nbsp;&nbsp;If&nbsp;these&nbsp;settings&nbsp;are&nbsp;used&nbsp;with&nbsp;a&nbsp;client&nbsp;handshake,&nbsp;they<br>
+determine&nbsp;the&nbsp;order&nbsp;of&nbsp;the&nbsp;ciphersuites&nbsp;offered&nbsp;in&nbsp;the&nbsp;ClientHello<br>
+message.<br>
+&nbsp;<br>
+If&nbsp;these&nbsp;settings&nbsp;are&nbsp;used&nbsp;with&nbsp;a&nbsp;server&nbsp;handshake,&nbsp;the&nbsp;server&nbsp;will<br>
+choose&nbsp;whichever&nbsp;ciphersuite&nbsp;matches&nbsp;the&nbsp;earliest&nbsp;entry&nbsp;in&nbsp;this<br>
+list.<br>
+&nbsp;<br>
+NOTE:&nbsp;&nbsp;If&nbsp;'3des'&nbsp;is&nbsp;used&nbsp;in&nbsp;this&nbsp;list,&nbsp;but&nbsp;TLS&nbsp;Lite&nbsp;can't&nbsp;find&nbsp;an<br>
+add-on&nbsp;library&nbsp;that&nbsp;supports&nbsp;3DES,&nbsp;then&nbsp;'3des'&nbsp;will&nbsp;be&nbsp;silently<br>
+removed.<br>
+&nbsp;<br>
+The&nbsp;default&nbsp;value&nbsp;is&nbsp;['aes256',&nbsp;'aes128',&nbsp;'3des',&nbsp;'rc4'].<br>
+&nbsp;<br>
+@type&nbsp;certificateTypes:&nbsp;list<br>
+@ivar&nbsp;certificateTypes:&nbsp;The&nbsp;allowed&nbsp;certificate&nbsp;types,&nbsp;in&nbsp;order&nbsp;of<br>
+preference.<br>
+&nbsp;<br>
+The&nbsp;allowed&nbsp;values&nbsp;in&nbsp;this&nbsp;list&nbsp;are&nbsp;'x509'&nbsp;and&nbsp;'cryptoID'.&nbsp;&nbsp;This<br>
+list&nbsp;is&nbsp;only&nbsp;used&nbsp;with&nbsp;a&nbsp;client&nbsp;handshake.&nbsp;&nbsp;The&nbsp;client&nbsp;will<br>
+advertise&nbsp;to&nbsp;the&nbsp;server&nbsp;which&nbsp;certificate&nbsp;types&nbsp;are&nbsp;supported,&nbsp;and<br>
+will&nbsp;check&nbsp;that&nbsp;the&nbsp;server&nbsp;uses&nbsp;one&nbsp;of&nbsp;the&nbsp;appropriate&nbsp;types.<br>
+&nbsp;<br>
+NOTE:&nbsp;&nbsp;If&nbsp;'cryptoID'&nbsp;is&nbsp;used&nbsp;in&nbsp;this&nbsp;list,&nbsp;but&nbsp;cryptoIDlib&nbsp;is&nbsp;not<br>
+installed,&nbsp;then&nbsp;'cryptoID'&nbsp;will&nbsp;be&nbsp;silently&nbsp;removed.<br>
+&nbsp;<br>
+@type&nbsp;minVersion:&nbsp;tuple<br>
+@ivar&nbsp;minVersion:&nbsp;The&nbsp;minimum&nbsp;allowed&nbsp;SSL/TLS&nbsp;version.<br>
+&nbsp;<br>
+This&nbsp;variable&nbsp;can&nbsp;be&nbsp;set&nbsp;to&nbsp;(3,0)&nbsp;for&nbsp;SSL&nbsp;3.0,&nbsp;(3,1)&nbsp;for<br>
+TLS&nbsp;1.0,&nbsp;or&nbsp;(3,2)&nbsp;for&nbsp;TLS&nbsp;1.1.&nbsp;&nbsp;If&nbsp;the&nbsp;other&nbsp;party&nbsp;wishes&nbsp;to<br>
+use&nbsp;a&nbsp;lower&nbsp;version,&nbsp;a&nbsp;protocol_version&nbsp;alert&nbsp;will&nbsp;be&nbsp;signalled.<br>
+The&nbsp;default&nbsp;is&nbsp;(3,0).<br>
+&nbsp;<br>
+@type&nbsp;maxVersion:&nbsp;tuple<br>
+@ivar&nbsp;maxVersion:&nbsp;The&nbsp;maximum&nbsp;allowed&nbsp;SSL/TLS&nbsp;version.<br>
+&nbsp;<br>
+This&nbsp;variable&nbsp;can&nbsp;be&nbsp;set&nbsp;to&nbsp;(3,0)&nbsp;for&nbsp;SSL&nbsp;3.0,&nbsp;(3,1)&nbsp;for<br>
+TLS&nbsp;1.0,&nbsp;or&nbsp;(3,2)&nbsp;for&nbsp;TLS&nbsp;1.1.&nbsp;&nbsp;If&nbsp;the&nbsp;other&nbsp;party&nbsp;wishes&nbsp;to<br>
+use&nbsp;a&nbsp;higher&nbsp;version,&nbsp;a&nbsp;protocol_version&nbsp;alert&nbsp;will&nbsp;be&nbsp;signalled.<br>
+The&nbsp;default&nbsp;is&nbsp;(3,2).&nbsp;&nbsp;(WARNING:&nbsp;Some&nbsp;servers&nbsp;may&nbsp;(improperly)<br>
+reject&nbsp;clients&nbsp;which&nbsp;offer&nbsp;support&nbsp;for&nbsp;TLS&nbsp;1.1.&nbsp;&nbsp;In&nbsp;this&nbsp;case,<br>
+try&nbsp;lowering&nbsp;maxVersion&nbsp;to&nbsp;(3,1)).<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="HandshakeSettings-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+</td></tr></table></td></tr></table>
+</body></html>

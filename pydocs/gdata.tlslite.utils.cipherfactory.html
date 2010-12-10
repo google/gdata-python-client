@@ -1,0 +1,72 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.utils.cipherfactory</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.<a href="gdata.tlslite.utils.html"><font color="#ffffff">utils</font></a>.cipherfactory</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/utils/cipherfactory.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/utils/cipherfactory.py</a></font></td></tr></table>
+    <p><tt>Factory&nbsp;functions&nbsp;for&nbsp;symmetric&nbsp;cryptography.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="gdata.tlslite.utils.PyCrypto_AES.html">gdata.tlslite.utils.PyCrypto_AES</a><br>
+<a href="gdata.tlslite.utils.PyCrypto_RC4.html">gdata.tlslite.utils.PyCrypto_RC4</a><br>
+</td><td width="25%" valign=top><a href="gdata.tlslite.utils.PyCrypto_TripleDES.html">gdata.tlslite.utils.PyCrypto_TripleDES</a><br>
+<a href="gdata.tlslite.utils.Python_AES.html">gdata.tlslite.utils.Python_AES</a><br>
+</td><td width="25%" valign=top><a href="gdata.tlslite.utils.Python_RC4.html">gdata.tlslite.utils.Python_RC4</a><br>
+<a href="gdata.tlslite.utils.cryptomath.html">gdata.tlslite.utils.cryptomath</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-createAES"><strong>createAES</strong></a>(key, IV, implList<font color="#909090">=None</font>)</dt><dd><tt>Create&nbsp;a&nbsp;new&nbsp;AES&nbsp;object.<br>
+&nbsp;<br>
+@type&nbsp;key:&nbsp;str<br>
+@param&nbsp;key:&nbsp;A&nbsp;16,&nbsp;24,&nbsp;or&nbsp;32&nbsp;byte&nbsp;string.<br>
+&nbsp;<br>
+@type&nbsp;IV:&nbsp;str<br>
+@param&nbsp;IV:&nbsp;A&nbsp;16&nbsp;byte&nbsp;string<br>
+&nbsp;<br>
+@rtype:&nbsp;L{tlslite.utils.AES}<br>
+@return:&nbsp;An&nbsp;AES&nbsp;object.</tt></dd></dl>
+ <dl><dt><a name="-createRC4"><strong>createRC4</strong></a>(key, IV, implList<font color="#909090">=None</font>)</dt><dd><tt>Create&nbsp;a&nbsp;new&nbsp;RC4&nbsp;object.<br>
+&nbsp;<br>
+@type&nbsp;key:&nbsp;str<br>
+@param&nbsp;key:&nbsp;A&nbsp;16&nbsp;to&nbsp;32&nbsp;byte&nbsp;string.<br>
+&nbsp;<br>
+@type&nbsp;IV:&nbsp;object<br>
+@param&nbsp;IV:&nbsp;Ignored,&nbsp;whatever&nbsp;it&nbsp;is.<br>
+&nbsp;<br>
+@rtype:&nbsp;L{tlslite.utils.RC4}<br>
+@return:&nbsp;An&nbsp;RC4&nbsp;object.</tt></dd></dl>
+ <dl><dt><a name="-createTripleDES"><strong>createTripleDES</strong></a>(key, IV, implList<font color="#909090">=None</font>)</dt><dd><tt>Create&nbsp;a&nbsp;new&nbsp;3DES&nbsp;object.<br>
+&nbsp;<br>
+@type&nbsp;key:&nbsp;str<br>
+@param&nbsp;key:&nbsp;A&nbsp;24&nbsp;byte&nbsp;string.<br>
+&nbsp;<br>
+@type&nbsp;IV:&nbsp;str<br>
+@param&nbsp;IV:&nbsp;An&nbsp;8&nbsp;byte&nbsp;string<br>
+&nbsp;<br>
+@rtype:&nbsp;L{tlslite.utils.TripleDES}<br>
+@return:&nbsp;A&nbsp;3DES&nbsp;object.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>tripleDESPresent</strong> = True</td></tr></table>
+</body></html>

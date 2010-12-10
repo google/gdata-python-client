@@ -1,0 +1,97 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.sample_util</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.sample_util</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/sample_util.py">/usr/local/lib/python2.6/dist-packages/gdata/sample_util.py</a></font></td></tr></table>
+    <p><tt>Provides&nbsp;utility&nbsp;functions&nbsp;used&nbsp;with&nbsp;command&nbsp;line&nbsp;samples.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="gdata.html">gdata</a><br>
+</td><td width="25%" valign=top><a href="getpass.html">getpass</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.sample_util.html#SettingsUtil">SettingsUtil</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SettingsUtil">class <strong>SettingsUtil</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Gather's&nbsp;user&nbsp;preferences&nbsp;from&nbsp;flags&nbsp;or&nbsp;command&nbsp;prompts.<br>
+&nbsp;<br>
+An&nbsp;instance&nbsp;of&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;stores&nbsp;the&nbsp;choices&nbsp;made&nbsp;by&nbsp;the&nbsp;user.&nbsp;At&nbsp;some<br>
+point&nbsp;it&nbsp;might&nbsp;be&nbsp;useful&nbsp;to&nbsp;save&nbsp;the&nbsp;user's&nbsp;preferences&nbsp;so&nbsp;that&nbsp;they&nbsp;do<br>
+not&nbsp;need&nbsp;to&nbsp;always&nbsp;set&nbsp;flags&nbsp;or&nbsp;answer&nbsp;preference&nbsp;prompts.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="SettingsUtil-__init__"><strong>__init__</strong></a>(self, prefs<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="SettingsUtil-authorize_client"><strong>authorize_client</strong></a>(self, client, auth_type<font color="#909090">=None</font>, service<font color="#909090">=None</font>, source<font color="#909090">=None</font>, scopes<font color="#909090">=None</font>, oauth_type<font color="#909090">=None</font>, consumer_key<font color="#909090">=None</font>, consumer_secret<font color="#909090">=None</font>)</dt><dd><tt>Uses&nbsp;command&nbsp;line&nbsp;arguments,&nbsp;or&nbsp;prompts&nbsp;user&nbsp;for&nbsp;token&nbsp;values.</tt></dd></dl>
+
+<dl><dt><a name="SettingsUtil-get_param"><strong>get_param</strong></a>(self, name, prompt<font color="#909090">=''</font>, secret<font color="#909090">=False</font>, ask<font color="#909090">=True</font>, reuse<font color="#909090">=False</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-authorize_client"><strong>authorize_client</strong></a>(client, auth_type<font color="#909090">=None</font>, service<font color="#909090">=None</font>, source<font color="#909090">=None</font>, scopes<font color="#909090">=None</font>, oauth_type<font color="#909090">=None</font>, consumer_key<font color="#909090">=None</font>, consumer_secret<font color="#909090">=None</font>)</dt><dd><tt>Uses&nbsp;command&nbsp;line&nbsp;arguments,&nbsp;or&nbsp;prompts&nbsp;user&nbsp;for&nbsp;token&nbsp;values.</tt></dd></dl>
+ <dl><dt><a name="-get_param"><strong>get_param</strong></a>(name, prompt<font color="#909090">=''</font>, secret<font color="#909090">=False</font>, ask<font color="#909090">=True</font>)</dt></dl>
+ <dl><dt><a name="-print_options"><strong>print_options</strong></a>()</dt><dd><tt>Displays&nbsp;usage&nbsp;information,&nbsp;available&nbsp;command&nbsp;line&nbsp;params.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>AUTHSUB</strong> = 2<br>
+<strong>CLIENT_LOGIN</strong> = 1<br>
+<strong>HMAC</strong> = 1<br>
+<strong>OAUTH</strong> = 3<br>
+<strong>RSA</strong> = 2<br>
+<strong>__author__</strong> = 'j.s@google.com (Jeff Scudder)'</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">j.s@google.com&nbsp;(Jeff&nbsp;Scudder)</td></tr></table>
+</body></html>

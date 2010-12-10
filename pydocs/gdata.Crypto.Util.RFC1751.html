@@ -1,0 +1,48 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.Crypto.Util.RFC1751</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.Crypto.html"><font color="#ffffff">Crypto</font></a>.<a href="gdata.Crypto.Util.html"><font color="#ffffff">Util</font></a>.RFC1751</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/Crypto/Util/RFC1751.py">/usr/local/lib/python2.6/dist-packages/gdata/Crypto/Util/RFC1751.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;rfc1751.py&nbsp;:&nbsp;Converts&nbsp;between&nbsp;128-bit&nbsp;strings&nbsp;and&nbsp;a&nbsp;human-readable<br>
+#&nbsp;sequence&nbsp;of&nbsp;words,&nbsp;as&nbsp;defined&nbsp;in&nbsp;<a href="http://www.rfc-editor.org/rfc/rfc1751.txt">RFC1751</a>:&nbsp;"A&nbsp;Convention&nbsp;for<br>
+#&nbsp;Human-Readable&nbsp;128-bit&nbsp;Keys",&nbsp;by&nbsp;Daniel&nbsp;L.&nbsp;McDonald.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="binascii.html">binascii</a><br>
+</td><td width="25%" valign=top><a href="string.html">string</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-english_to_key"><strong>english_to_key</strong></a>(str)</dt><dd><tt><a href="#-english_to_key">english_to_key</a>(string):string<br>
+Transform&nbsp;a&nbsp;string&nbsp;into&nbsp;a&nbsp;corresponding&nbsp;key.<br>
+The&nbsp;string&nbsp;must&nbsp;contain&nbsp;words&nbsp;separated&nbsp;by&nbsp;whitespace;&nbsp;the&nbsp;number<br>
+of&nbsp;words&nbsp;must&nbsp;be&nbsp;a&nbsp;multiple&nbsp;of&nbsp;6.</tt></dd></dl>
+ <dl><dt><a name="-key_to_english"><strong>key_to_english</strong></a>(key)</dt><dd><tt><a href="#-key_to_english">key_to_english</a>(key:string)&nbsp;:&nbsp;string<br>
+Transform&nbsp;an&nbsp;arbitrary&nbsp;key&nbsp;into&nbsp;a&nbsp;string&nbsp;containing&nbsp;English&nbsp;words.<br>
+The&nbsp;key&nbsp;length&nbsp;must&nbsp;be&nbsp;a&nbsp;multiple&nbsp;of&nbsp;8.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__revision__</strong> = '$Id: RFC1751.py,v 1.6 2003/04/04 15:15:10 akuchling Exp $'<br>
+<strong>binary</strong> = {0: '0000', 1: '0001', 2: '0010', 3: '0011', 4: '0100', 5: '0101', 6: '0110', 7: '0111', 8: '1000', 9: '1001', ...}<br>
+<strong>wordlist</strong> = ['A', 'ABE', 'ACE', 'ACT', 'AD', 'ADA', 'ADD', 'AGO', 'AID', 'AIM', 'AIR', 'ALL', 'ALP', 'AM', 'AMY', 'AN', 'ANA', 'AND', 'ANN', 'ANT', ...]</td></tr></table>
+</body></html>

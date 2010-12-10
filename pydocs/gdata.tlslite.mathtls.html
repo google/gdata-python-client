@@ -1,0 +1,103 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.mathtls</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.mathtls</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/mathtls.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/mathtls.py</a></font></td></tr></table>
+    <p><tt>Miscellaneous&nbsp;helper&nbsp;functions.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="Crypto.html">Crypto</a><br>
+<a href="array.html">array</a><br>
+<a href="base64.html">base64</a><br>
+</td><td width="25%" valign=top><a href="binascii.html">binascii</a><br>
+<a href="hmac.html">hmac</a><br>
+<a href="math.html">math</a><br>
+</td><td width="25%" valign=top><a href="md5.html">md5</a><br>
+<a href="os.html">os</a><br>
+<a href="sha.html">sha</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+<a href="traceback.html">traceback</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.mathtls.html#MAC_SSL">MAC_SSL</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="MAC_SSL">class <strong>MAC_SSL</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#MAC_SSL">MAC_SSL</a>&nbsp;class.<br>
+&nbsp;<br>
+This&nbsp;supports&nbsp;the&nbsp;API&nbsp;for&nbsp;Cryptographic&nbsp;Hash&nbsp;Functions&nbsp;(<a href="http://www.python.org/dev/peps/pep-0247/">PEP&nbsp;247</a>).<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="MAC_SSL-__init__"><strong>__init__</strong></a>(self, key, msg<font color="#909090">=None</font>, digestmod<font color="#909090">=None</font>)</dt><dd><tt>Create&nbsp;a&nbsp;new&nbsp;<a href="#MAC_SSL">MAC_SSL</a>&nbsp;object.<br>
+&nbsp;<br>
+key:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key&nbsp;for&nbsp;the&nbsp;keyed&nbsp;hash&nbsp;object.<br>
+msg:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initial&nbsp;input&nbsp;for&nbsp;the&nbsp;hash,&nbsp;if&nbsp;provided.<br>
+digestmod:&nbsp;A&nbsp;module&nbsp;supporting&nbsp;<a href="http://www.python.org/dev/peps/pep-0247/">PEP&nbsp;247</a>.&nbsp;Defaults&nbsp;to&nbsp;the&nbsp;md5&nbsp;module.</tt></dd></dl>
+
+<dl><dt><a name="MAC_SSL-copy"><strong>copy</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;separate&nbsp;copy&nbsp;of&nbsp;this&nbsp;hashing&nbsp;object.<br>
+&nbsp;<br>
+An&nbsp;update&nbsp;to&nbsp;this&nbsp;copy&nbsp;won't&nbsp;affect&nbsp;the&nbsp;original&nbsp;object.</tt></dd></dl>
+
+<dl><dt><a name="MAC_SSL-digest"><strong>digest</strong></a>(self)</dt><dd><tt>Return&nbsp;the&nbsp;hash&nbsp;value&nbsp;of&nbsp;this&nbsp;hashing&nbsp;object.<br>
+&nbsp;<br>
+This&nbsp;returns&nbsp;a&nbsp;string&nbsp;containing&nbsp;8-bit&nbsp;data.&nbsp;&nbsp;The&nbsp;object&nbsp;is<br>
+not&nbsp;altered&nbsp;in&nbsp;any&nbsp;way&nbsp;by&nbsp;this&nbsp;function;&nbsp;you&nbsp;can&nbsp;continue<br>
+updating&nbsp;the&nbsp;object&nbsp;after&nbsp;calling&nbsp;this&nbsp;function.</tt></dd></dl>
+
+<dl><dt><a name="MAC_SSL-hexdigest"><strong>hexdigest</strong></a>(self)</dt><dd><tt>Like&nbsp;<a href="#MAC_SSL-digest">digest</a>(),&nbsp;but&nbsp;returns&nbsp;a&nbsp;string&nbsp;of&nbsp;hexadecimal&nbsp;digits&nbsp;instead.</tt></dd></dl>
+
+<dl><dt><a name="MAC_SSL-update"><strong>update</strong></a>(self, msg)</dt><dd><tt>Update&nbsp;this&nbsp;hashing&nbsp;object&nbsp;with&nbsp;the&nbsp;string&nbsp;msg.</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-PAD"><strong>PAD</strong></a>(n, x)</dt></dl>
+ <dl><dt><a name="-PRF"><strong>PRF</strong></a>(secret, label, seed, length)</dt></dl>
+ <dl><dt><a name="-PRF_SSL"><strong>PRF_SSL</strong></a>(secret, seed, length)</dt></dl>
+ <dl><dt><a name="-P_hash"><strong>P_hash</strong></a>(hashModule, secret, seed, length)</dt></dl>
+ <dl><dt><a name="-makeK"><strong>makeK</strong></a>(N, g)</dt></dl>
+ <dl><dt><a name="-makeU"><strong>makeU</strong></a>(N, A, B)</dt></dl>
+ <dl><dt><a name="-makeVerifier"><strong>makeVerifier</strong></a>(username, password, bits)</dt><dd><tt>#This&nbsp;function&nbsp;is&nbsp;used&nbsp;by&nbsp;VerifierDB.makeVerifier</tt></dd></dl>
+ <dl><dt><a name="-makeX"><strong>makeX</strong></a>(salt, username, password)</dt></dl>
+ <dl><dt><a name="-sha1"><strong>sha1</strong></a> = openssl_sha1(...)</dt><dd><tt>Returns&nbsp;a&nbsp;sha1&nbsp;hash&nbsp;object;&nbsp;optionally&nbsp;initialized&nbsp;with&nbsp;a&nbsp;string</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>cryptlibpyLoaded</strong> = False<br>
+<strong>gmpyLoaded</strong> = False<br>
+<strong>goodGroupParameters</strong> = [(2, 167609434410335061...389658897350067939L), (2, 148699818592312829...022696100064262587L), (2, 217661744586174357...299250924469288819L), (2, 580960599536995806...769998514148343807L), (5, 104438888141315250...045385534758453247L), (5, 337515218214385611...109988915707117567L), (5, 109074813561941592...353154294858383359L)]<br>
+<strong>m2cryptoLoaded</strong> = False<br>
+<strong>prngName</strong> = 'os.urandom'<br>
+<strong>pycryptoLoaded</strong> = True<br>
+<strong>sieve</strong> = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, ...]</td></tr></table>
+</body></html>

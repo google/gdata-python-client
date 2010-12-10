@@ -1,0 +1,97 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.Checker</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.Checker</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/Checker.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/Checker.py</a></font></td></tr></table>
+    <p><tt>Class&nbsp;for&nbsp;post-handshake&nbsp;certificate&nbsp;checking.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.Checker.html#Checker">Checker</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Checker">class <strong>Checker</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;class&nbsp;is&nbsp;passed&nbsp;to&nbsp;a&nbsp;handshake&nbsp;function&nbsp;to&nbsp;check&nbsp;the&nbsp;other<br>
+party's&nbsp;certificate&nbsp;chain.<br>
+&nbsp;<br>
+If&nbsp;a&nbsp;handshake&nbsp;function&nbsp;completes&nbsp;successfully,&nbsp;but&nbsp;the&nbsp;<a href="#Checker">Checker</a><br>
+judges&nbsp;the&nbsp;other&nbsp;party's&nbsp;certificate&nbsp;chain&nbsp;to&nbsp;be&nbsp;missing&nbsp;or<br>
+inadequate,&nbsp;a&nbsp;subclass&nbsp;of<br>
+L{tlslite.errors.TLSAuthenticationError}&nbsp;will&nbsp;be&nbsp;raised.<br>
+&nbsp;<br>
+Currently,&nbsp;the&nbsp;<a href="#Checker">Checker</a>&nbsp;can&nbsp;check&nbsp;either&nbsp;an&nbsp;X.509&nbsp;or&nbsp;a&nbsp;cryptoID<br>
+chain&nbsp;(for&nbsp;the&nbsp;latter,&nbsp;cryptoIDlib&nbsp;must&nbsp;be&nbsp;installed).<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Checker-__call__"><strong>__call__</strong></a>(self, connection)</dt><dd><tt>Check&nbsp;a&nbsp;TLSConnection.<br>
+&nbsp;<br>
+When&nbsp;a&nbsp;<a href="#Checker">Checker</a>&nbsp;is&nbsp;passed&nbsp;to&nbsp;a&nbsp;handshake&nbsp;function,&nbsp;this&nbsp;will<br>
+be&nbsp;called&nbsp;at&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;function.<br>
+&nbsp;<br>
+@type&nbsp;connection:&nbsp;L{tlslite.TLSConnection.TLSConnection}<br>
+@param&nbsp;connection:&nbsp;The&nbsp;TLSConnection&nbsp;to&nbsp;examine.<br>
+&nbsp;<br>
+@raise&nbsp;tlslite.errors.TLSAuthenticationError:&nbsp;If&nbsp;the&nbsp;other<br>
+party's&nbsp;certificate&nbsp;chain&nbsp;is&nbsp;missing&nbsp;or&nbsp;bad.</tt></dd></dl>
+
+<dl><dt><a name="Checker-__init__"><strong>__init__</strong></a>(self, cryptoID<font color="#909090">=None</font>, protocol<font color="#909090">=None</font>, x509Fingerprint<font color="#909090">=None</font>, x509TrustList<font color="#909090">=None</font>, x509CommonName<font color="#909090">=None</font>, checkResumedSession<font color="#909090">=False</font>)</dt><dd><tt>Create&nbsp;a&nbsp;new&nbsp;<a href="#Checker">Checker</a>&nbsp;instance.<br>
+&nbsp;<br>
+You&nbsp;must&nbsp;pass&nbsp;in&nbsp;one&nbsp;of&nbsp;these&nbsp;argument&nbsp;combinations:<br>
+&nbsp;-&nbsp;cryptoID[,&nbsp;protocol]&nbsp;(requires&nbsp;cryptoIDlib)<br>
+&nbsp;-&nbsp;x509Fingerprint<br>
+&nbsp;-&nbsp;x509TrustList[,&nbsp;x509CommonName]&nbsp;(requires&nbsp;cryptlib_py)<br>
+&nbsp;<br>
+@type&nbsp;cryptoID:&nbsp;str<br>
+@param&nbsp;cryptoID:&nbsp;A&nbsp;cryptoID&nbsp;which&nbsp;the&nbsp;other&nbsp;party's&nbsp;certificate<br>
+chain&nbsp;must&nbsp;match.&nbsp;&nbsp;The&nbsp;cryptoIDlib&nbsp;module&nbsp;must&nbsp;be&nbsp;installed.<br>
+Mutually&nbsp;exclusive&nbsp;with&nbsp;all&nbsp;of&nbsp;the&nbsp;'x509...'&nbsp;arguments.<br>
+&nbsp;<br>
+@type&nbsp;protocol:&nbsp;str<br>
+@param&nbsp;protocol:&nbsp;A&nbsp;cryptoID&nbsp;protocol&nbsp;URI&nbsp;which&nbsp;the&nbsp;other<br>
+party's&nbsp;certificate&nbsp;chain&nbsp;must&nbsp;match.&nbsp;&nbsp;Requires&nbsp;the&nbsp;'cryptoID'<br>
+argument.<br>
+&nbsp;<br>
+@type&nbsp;x509Fingerprint:&nbsp;str<br>
+@param&nbsp;x509Fingerprint:&nbsp;A&nbsp;hex-encoded&nbsp;X.509&nbsp;end-entity<br>
+fingerprint&nbsp;which&nbsp;the&nbsp;other&nbsp;party's&nbsp;end-entity&nbsp;certificate&nbsp;must<br>
+match.&nbsp;&nbsp;Mutually&nbsp;exclusive&nbsp;with&nbsp;the&nbsp;'cryptoID'&nbsp;and<br>
+'x509TrustList'&nbsp;arguments.<br>
+&nbsp;<br>
+@type&nbsp;x509TrustList:&nbsp;list&nbsp;of&nbsp;L{tlslite.X509.X509}<br>
+@param&nbsp;x509TrustList:&nbsp;A&nbsp;list&nbsp;of&nbsp;trusted&nbsp;root&nbsp;certificates.&nbsp;&nbsp;The<br>
+other&nbsp;party&nbsp;must&nbsp;present&nbsp;a&nbsp;certificate&nbsp;chain&nbsp;which&nbsp;extends&nbsp;to<br>
+one&nbsp;of&nbsp;these&nbsp;root&nbsp;certificates.&nbsp;&nbsp;The&nbsp;cryptlib_py&nbsp;module&nbsp;must&nbsp;be<br>
+installed.&nbsp;&nbsp;Mutually&nbsp;exclusive&nbsp;with&nbsp;the&nbsp;'cryptoID'&nbsp;and<br>
+'x509Fingerprint'&nbsp;arguments.<br>
+&nbsp;<br>
+@type&nbsp;x509CommonName:&nbsp;str<br>
+@param&nbsp;x509CommonName:&nbsp;The&nbsp;end-entity&nbsp;certificate's&nbsp;'CN'&nbsp;field<br>
+must&nbsp;match&nbsp;this&nbsp;value.&nbsp;&nbsp;For&nbsp;a&nbsp;web&nbsp;server,&nbsp;this&nbsp;is&nbsp;typically&nbsp;a<br>
+server&nbsp;name&nbsp;such&nbsp;as&nbsp;'www.amazon.com'.&nbsp;&nbsp;Mutually&nbsp;exclusive&nbsp;with<br>
+the&nbsp;'cryptoID'&nbsp;and&nbsp;'x509Fingerprint'&nbsp;arguments.&nbsp;&nbsp;Requires&nbsp;the<br>
+'x509TrustList'&nbsp;argument.<br>
+&nbsp;<br>
+@type&nbsp;checkResumedSession:&nbsp;bool<br>
+@param&nbsp;checkResumedSession:&nbsp;If&nbsp;resumed&nbsp;sessions&nbsp;should&nbsp;be<br>
+checked.&nbsp;&nbsp;This&nbsp;defaults&nbsp;to&nbsp;False,&nbsp;on&nbsp;the&nbsp;theory&nbsp;that&nbsp;if&nbsp;the<br>
+session&nbsp;was&nbsp;checked&nbsp;once,&nbsp;we&nbsp;don't&nbsp;need&nbsp;to&nbsp;bother<br>
+re-checking&nbsp;it.</tt></dd></dl>
+
+</td></tr></table></td></tr></table>
+</body></html>

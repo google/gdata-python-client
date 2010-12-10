@@ -1,0 +1,84 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.utils.hmac</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.<a href="gdata.tlslite.utils.html"><font color="#ffffff">utils</font></a>.hmac</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/utils/hmac.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/utils/hmac.py</a></font></td></tr></table>
+    <p><tt><a href="#HMAC">HMAC</a>&nbsp;(Keyed-Hashing&nbsp;for&nbsp;Message&nbsp;Authentication)&nbsp;Python&nbsp;module.<br>
+&nbsp;<br>
+Implements&nbsp;the&nbsp;<a href="#HMAC">HMAC</a>&nbsp;algorithm&nbsp;as&nbsp;described&nbsp;by&nbsp;<a href="http://www.rfc-editor.org/rfc/rfc2104.txt">RFC&nbsp;2104</a>.<br>
+&nbsp;<br>
+(This&nbsp;file&nbsp;is&nbsp;modified&nbsp;from&nbsp;the&nbsp;standard&nbsp;library&nbsp;version&nbsp;to&nbsp;do&nbsp;faster<br>
+copying)</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.utils.hmac.html#HMAC">HMAC</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="HMAC">class <strong>HMAC</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="http://www.rfc-editor.org/rfc/rfc2104.txt">RFC2104</a>&nbsp;<a href="#HMAC">HMAC</a>&nbsp;class.<br>
+&nbsp;<br>
+This&nbsp;supports&nbsp;the&nbsp;API&nbsp;for&nbsp;Cryptographic&nbsp;Hash&nbsp;Functions&nbsp;(<a href="http://www.python.org/dev/peps/pep-0247/">PEP&nbsp;247</a>).<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="HMAC-__init__"><strong>__init__</strong></a>(self, key, msg<font color="#909090">=None</font>, digestmod<font color="#909090">=None</font>)</dt><dd><tt>Create&nbsp;a&nbsp;new&nbsp;<a href="#HMAC">HMAC</a>&nbsp;object.<br>
+&nbsp;<br>
+key:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key&nbsp;for&nbsp;the&nbsp;keyed&nbsp;hash&nbsp;object.<br>
+msg:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initial&nbsp;input&nbsp;for&nbsp;the&nbsp;hash,&nbsp;if&nbsp;provided.<br>
+digestmod:&nbsp;A&nbsp;module&nbsp;supporting&nbsp;<a href="http://www.python.org/dev/peps/pep-0247/">PEP&nbsp;247</a>.&nbsp;Defaults&nbsp;to&nbsp;the&nbsp;md5&nbsp;module.</tt></dd></dl>
+
+<dl><dt><a name="HMAC-copy"><strong>copy</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;separate&nbsp;copy&nbsp;of&nbsp;this&nbsp;hashing&nbsp;object.<br>
+&nbsp;<br>
+An&nbsp;update&nbsp;to&nbsp;this&nbsp;copy&nbsp;won't&nbsp;affect&nbsp;the&nbsp;original&nbsp;object.</tt></dd></dl>
+
+<dl><dt><a name="HMAC-digest"><strong>digest</strong></a>(self)</dt><dd><tt>Return&nbsp;the&nbsp;hash&nbsp;value&nbsp;of&nbsp;this&nbsp;hashing&nbsp;object.<br>
+&nbsp;<br>
+This&nbsp;returns&nbsp;a&nbsp;string&nbsp;containing&nbsp;8-bit&nbsp;data.&nbsp;&nbsp;The&nbsp;object&nbsp;is<br>
+not&nbsp;altered&nbsp;in&nbsp;any&nbsp;way&nbsp;by&nbsp;this&nbsp;function;&nbsp;you&nbsp;can&nbsp;continue<br>
+updating&nbsp;the&nbsp;object&nbsp;after&nbsp;calling&nbsp;this&nbsp;function.</tt></dd></dl>
+
+<dl><dt><a name="HMAC-hexdigest"><strong>hexdigest</strong></a>(self)</dt><dd><tt>Like&nbsp;<a href="#HMAC-digest">digest</a>(),&nbsp;but&nbsp;returns&nbsp;a&nbsp;string&nbsp;of&nbsp;hexadecimal&nbsp;digits&nbsp;instead.</tt></dd></dl>
+
+<dl><dt><a name="HMAC-update"><strong>update</strong></a>(self, msg)</dt><dd><tt>Update&nbsp;this&nbsp;hashing&nbsp;object&nbsp;with&nbsp;the&nbsp;string&nbsp;msg.</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-new"><strong>new</strong></a>(key, msg<font color="#909090">=None</font>, digestmod<font color="#909090">=None</font>)</dt><dd><tt>Create&nbsp;a&nbsp;new&nbsp;hashing&nbsp;object&nbsp;and&nbsp;return&nbsp;it.<br>
+&nbsp;<br>
+key:&nbsp;The&nbsp;starting&nbsp;key&nbsp;for&nbsp;the&nbsp;hash.<br>
+msg:&nbsp;if&nbsp;available,&nbsp;will&nbsp;immediately&nbsp;be&nbsp;hashed&nbsp;into&nbsp;the&nbsp;object's&nbsp;starting<br>
+state.<br>
+&nbsp;<br>
+You&nbsp;can&nbsp;now&nbsp;feed&nbsp;arbitrary&nbsp;strings&nbsp;into&nbsp;the&nbsp;object&nbsp;using&nbsp;its&nbsp;update()<br>
+method,&nbsp;and&nbsp;can&nbsp;ask&nbsp;for&nbsp;the&nbsp;hash&nbsp;value&nbsp;at&nbsp;any&nbsp;time&nbsp;by&nbsp;calling&nbsp;its&nbsp;digest()<br>
+method.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>digest_size</strong> = None</td></tr></table>
+</body></html>

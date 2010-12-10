@@ -1,0 +1,115 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.Session</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.Session</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/Session.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/Session.py</a></font></td></tr></table>
+    <p><tt>Class&nbsp;representing&nbsp;a&nbsp;TLS&nbsp;session.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="Crypto.html">Crypto</a><br>
+<a href="array.html">array</a><br>
+<a href="base64.html">base64</a><br>
+</td><td width="25%" valign=top><a href="binascii.html">binascii</a><br>
+<a href="hmac.html">hmac</a><br>
+<a href="math.html">math</a><br>
+</td><td width="25%" valign=top><a href="md5.html">md5</a><br>
+<a href="os.html">os</a><br>
+<a href="sha.html">sha</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+<a href="traceback.html">traceback</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.Session.html#Session">Session</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Session">class <strong>Session</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;class&nbsp;represents&nbsp;a&nbsp;TLS&nbsp;session.<br>
+&nbsp;<br>
+TLS&nbsp;distinguishes&nbsp;between&nbsp;connections&nbsp;and&nbsp;sessions.&nbsp;&nbsp;A&nbsp;new<br>
+handshake&nbsp;creates&nbsp;both&nbsp;a&nbsp;connection&nbsp;and&nbsp;a&nbsp;session.&nbsp;&nbsp;Data&nbsp;is<br>
+transmitted&nbsp;over&nbsp;the&nbsp;connection.<br>
+&nbsp;<br>
+The&nbsp;session&nbsp;contains&nbsp;a&nbsp;more&nbsp;permanent&nbsp;record&nbsp;of&nbsp;the&nbsp;handshake.&nbsp;&nbsp;The<br>
+session&nbsp;can&nbsp;be&nbsp;inspected&nbsp;to&nbsp;determine&nbsp;handshake&nbsp;results.&nbsp;&nbsp;The<br>
+session&nbsp;can&nbsp;also&nbsp;be&nbsp;used&nbsp;to&nbsp;create&nbsp;a&nbsp;new&nbsp;connection&nbsp;through<br>
+"session&nbsp;resumption".&nbsp;If&nbsp;the&nbsp;client&nbsp;and&nbsp;server&nbsp;both&nbsp;support&nbsp;this,<br>
+they&nbsp;can&nbsp;create&nbsp;a&nbsp;new&nbsp;connection&nbsp;based&nbsp;on&nbsp;an&nbsp;old&nbsp;session&nbsp;without<br>
+the&nbsp;overhead&nbsp;of&nbsp;a&nbsp;full&nbsp;handshake.<br>
+&nbsp;<br>
+The&nbsp;session&nbsp;for&nbsp;a&nbsp;L{tlslite.TLSConnection.TLSConnection}&nbsp;can&nbsp;be<br>
+retrieved&nbsp;from&nbsp;the&nbsp;connection's&nbsp;'session'&nbsp;attribute.<br>
+&nbsp;<br>
+@type&nbsp;srpUsername:&nbsp;str<br>
+@ivar&nbsp;srpUsername:&nbsp;The&nbsp;client's&nbsp;SRP&nbsp;username&nbsp;(or&nbsp;None).<br>
+&nbsp;<br>
+@type&nbsp;sharedKeyUsername:&nbsp;str<br>
+@ivar&nbsp;sharedKeyUsername:&nbsp;The&nbsp;client's&nbsp;shared-key&nbsp;username&nbsp;(or<br>
+None).<br>
+&nbsp;<br>
+@type&nbsp;clientCertChain:&nbsp;L{tlslite.X509CertChain.X509CertChain}&nbsp;or<br>
+L{cryptoIDlib.CertChain.CertChain}<br>
+@ivar&nbsp;clientCertChain:&nbsp;The&nbsp;client's&nbsp;certificate&nbsp;chain&nbsp;(or&nbsp;None).<br>
+&nbsp;<br>
+@type&nbsp;serverCertChain:&nbsp;L{tlslite.X509CertChain.X509CertChain}&nbsp;or<br>
+L{cryptoIDlib.CertChain.CertChain}<br>
+@ivar&nbsp;serverCertChain:&nbsp;The&nbsp;server's&nbsp;certificate&nbsp;chain&nbsp;(or&nbsp;None).<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Session-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Session-getCipherName"><strong>getCipherName</strong></a>(self)</dt><dd><tt>Get&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;cipher&nbsp;used&nbsp;with&nbsp;this&nbsp;connection.<br>
+&nbsp;<br>
+@rtype:&nbsp;str<br>
+@return:&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;cipher&nbsp;used&nbsp;with&nbsp;this&nbsp;connection.<br>
+Either&nbsp;'aes128',&nbsp;'aes256',&nbsp;'rc4',&nbsp;or&nbsp;'3des'.</tt></dd></dl>
+
+<dl><dt><a name="Session-valid"><strong>valid</strong></a>(self)</dt><dd><tt>If&nbsp;this&nbsp;session&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;session&nbsp;resumption.<br>
+&nbsp;<br>
+@rtype:&nbsp;bool<br>
+@return:&nbsp;If&nbsp;this&nbsp;session&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;session&nbsp;resumption.</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-sha1"><strong>sha1</strong></a> = openssl_sha1(...)</dt><dd><tt>Returns&nbsp;a&nbsp;sha1&nbsp;hash&nbsp;object;&nbsp;optionally&nbsp;initialized&nbsp;with&nbsp;a&nbsp;string</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>cryptlibpyLoaded</strong> = False<br>
+<strong>gmpyLoaded</strong> = False<br>
+<strong>goodGroupParameters</strong> = [(2, 167609434410335061...389658897350067939L), (2, 148699818592312829...022696100064262587L), (2, 217661744586174357...299250924469288819L), (2, 580960599536995806...769998514148343807L), (5, 104438888141315250...045385534758453247L), (5, 337515218214385611...109988915707117567L), (5, 109074813561941592...353154294858383359L)]<br>
+<strong>m2cryptoLoaded</strong> = False<br>
+<strong>prngName</strong> = 'os.urandom'<br>
+<strong>pycryptoLoaded</strong> = True<br>
+<strong>sieve</strong> = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, ...]</td></tr></table>
+</body></html>

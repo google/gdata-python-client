@@ -1,0 +1,104 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.integration.AsyncStateMachine</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.<a href="gdata.tlslite.integration.html"><font color="#ffffff">integration</font></a>.AsyncStateMachine</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/integration/AsyncStateMachine.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/integration/AsyncStateMachine.py</a></font></td></tr></table>
+    <p><tt>A&nbsp;state&nbsp;machine&nbsp;for&nbsp;using&nbsp;TLS&nbsp;Lite&nbsp;with&nbsp;asynchronous&nbsp;I/O.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.integration.AsyncStateMachine.html#AsyncStateMachine">AsyncStateMachine</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="AsyncStateMachine">class <strong>AsyncStateMachine</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;is&nbsp;an&nbsp;abstract&nbsp;class&nbsp;that's&nbsp;used&nbsp;to&nbsp;integrate&nbsp;TLS&nbsp;Lite&nbsp;with<br>
+asyncore&nbsp;and&nbsp;Twisted.<br>
+&nbsp;<br>
+This&nbsp;class&nbsp;signals&nbsp;wantsReadsEvent()&nbsp;and&nbsp;<a href="#AsyncStateMachine-wantsWriteEvent">wantsWriteEvent</a>().&nbsp;&nbsp;When<br>
+the&nbsp;underlying&nbsp;socket&nbsp;has&nbsp;become&nbsp;readable&nbsp;or&nbsp;writeable,&nbsp;the&nbsp;event<br>
+should&nbsp;be&nbsp;passed&nbsp;to&nbsp;this&nbsp;class&nbsp;by&nbsp;calling&nbsp;<a href="#AsyncStateMachine-inReadEvent">inReadEvent</a>()&nbsp;or<br>
+<a href="#AsyncStateMachine-inWriteEvent">inWriteEvent</a>().&nbsp;&nbsp;This&nbsp;class&nbsp;will&nbsp;then&nbsp;try&nbsp;to&nbsp;read&nbsp;or&nbsp;write&nbsp;through<br>
+the&nbsp;socket,&nbsp;and&nbsp;will&nbsp;update&nbsp;its&nbsp;state&nbsp;appropriately.<br>
+&nbsp;<br>
+This&nbsp;class&nbsp;will&nbsp;forward&nbsp;higher-level&nbsp;events&nbsp;to&nbsp;its&nbsp;subclass.&nbsp;&nbsp;For<br>
+example,&nbsp;when&nbsp;a&nbsp;complete&nbsp;TLS&nbsp;record&nbsp;has&nbsp;been&nbsp;received,<br>
+<a href="#AsyncStateMachine-outReadEvent">outReadEvent</a>()&nbsp;will&nbsp;be&nbsp;called&nbsp;with&nbsp;the&nbsp;decrypted&nbsp;data.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="AsyncStateMachine-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AsyncStateMachine-inReadEvent"><strong>inReadEvent</strong></a>(self)</dt><dd><tt>Tell&nbsp;the&nbsp;state&nbsp;machine&nbsp;it&nbsp;can&nbsp;read&nbsp;from&nbsp;the&nbsp;socket.</tt></dd></dl>
+
+<dl><dt><a name="AsyncStateMachine-inWriteEvent"><strong>inWriteEvent</strong></a>(self)</dt><dd><tt>Tell&nbsp;the&nbsp;state&nbsp;machine&nbsp;it&nbsp;can&nbsp;write&nbsp;to&nbsp;the&nbsp;socket.</tt></dd></dl>
+
+<dl><dt><a name="AsyncStateMachine-outCloseEvent"><strong>outCloseEvent</strong></a>(self)</dt><dd><tt>Called&nbsp;when&nbsp;a&nbsp;close&nbsp;operation&nbsp;completes.<br>
+&nbsp;<br>
+May&nbsp;be&nbsp;overridden&nbsp;in&nbsp;subclass.</tt></dd></dl>
+
+<dl><dt><a name="AsyncStateMachine-outConnectEvent"><strong>outConnectEvent</strong></a>(self)</dt><dd><tt>Called&nbsp;when&nbsp;a&nbsp;handshake&nbsp;operation&nbsp;completes.<br>
+&nbsp;<br>
+May&nbsp;be&nbsp;overridden&nbsp;in&nbsp;subclass.</tt></dd></dl>
+
+<dl><dt><a name="AsyncStateMachine-outReadEvent"><strong>outReadEvent</strong></a>(self, readBuffer)</dt><dd><tt>Called&nbsp;when&nbsp;a&nbsp;read&nbsp;operation&nbsp;completes.<br>
+&nbsp;<br>
+May&nbsp;be&nbsp;overridden&nbsp;in&nbsp;subclass.</tt></dd></dl>
+
+<dl><dt><a name="AsyncStateMachine-outWriteEvent"><strong>outWriteEvent</strong></a>(self)</dt><dd><tt>Called&nbsp;when&nbsp;a&nbsp;write&nbsp;operation&nbsp;completes.<br>
+&nbsp;<br>
+May&nbsp;be&nbsp;overridden&nbsp;in&nbsp;subclass.</tt></dd></dl>
+
+<dl><dt><a name="AsyncStateMachine-setCloseOp"><strong>setCloseOp</strong></a>(self)</dt><dd><tt>Start&nbsp;a&nbsp;close&nbsp;operation.</tt></dd></dl>
+
+<dl><dt><a name="AsyncStateMachine-setHandshakeOp"><strong>setHandshakeOp</strong></a>(self, handshaker)</dt><dd><tt>Start&nbsp;a&nbsp;handshake&nbsp;operation.<br>
+&nbsp;<br>
+@type&nbsp;handshaker:&nbsp;generator<br>
+@param&nbsp;handshaker:&nbsp;A&nbsp;generator&nbsp;created&nbsp;by&nbsp;using&nbsp;one&nbsp;of&nbsp;the<br>
+asynchronous&nbsp;handshake&nbsp;functions&nbsp;(i.e.&nbsp;handshakeServerAsync,&nbsp;or<br>
+handshakeClientxxx(...,&nbsp;async=True).</tt></dd></dl>
+
+<dl><dt><a name="AsyncStateMachine-setServerHandshakeOp"><strong>setServerHandshakeOp</strong></a>(self, **args)</dt><dd><tt>Start&nbsp;a&nbsp;handshake&nbsp;operation.<br>
+&nbsp;<br>
+The&nbsp;arguments&nbsp;passed&nbsp;to&nbsp;this&nbsp;function&nbsp;will&nbsp;be&nbsp;forwarded&nbsp;to<br>
+L{tlslite.TLSConnection.TLSConnection.handshakeServerAsync}.</tt></dd></dl>
+
+<dl><dt><a name="AsyncStateMachine-setWriteOp"><strong>setWriteOp</strong></a>(self, writeBuffer)</dt><dd><tt>Start&nbsp;a&nbsp;write&nbsp;operation.<br>
+&nbsp;<br>
+@type&nbsp;writeBuffer:&nbsp;str<br>
+@param&nbsp;writeBuffer:&nbsp;The&nbsp;string&nbsp;to&nbsp;transmit.</tt></dd></dl>
+
+<dl><dt><a name="AsyncStateMachine-wantsReadEvent"><strong>wantsReadEvent</strong></a>(self)</dt><dd><tt>If&nbsp;the&nbsp;state&nbsp;machine&nbsp;wants&nbsp;to&nbsp;read.<br>
+&nbsp;<br>
+If&nbsp;an&nbsp;operation&nbsp;is&nbsp;active,&nbsp;this&nbsp;returns&nbsp;whether&nbsp;or&nbsp;not&nbsp;the<br>
+operation&nbsp;wants&nbsp;to&nbsp;read&nbsp;from&nbsp;the&nbsp;socket.&nbsp;&nbsp;If&nbsp;an&nbsp;operation&nbsp;is<br>
+not&nbsp;active,&nbsp;this&nbsp;returns&nbsp;None.<br>
+&nbsp;<br>
+@rtype:&nbsp;bool&nbsp;or&nbsp;None<br>
+@return:&nbsp;If&nbsp;the&nbsp;state&nbsp;machine&nbsp;wants&nbsp;to&nbsp;read.</tt></dd></dl>
+
+<dl><dt><a name="AsyncStateMachine-wantsWriteEvent"><strong>wantsWriteEvent</strong></a>(self)</dt><dd><tt>If&nbsp;the&nbsp;state&nbsp;machine&nbsp;wants&nbsp;to&nbsp;write.<br>
+&nbsp;<br>
+If&nbsp;an&nbsp;operation&nbsp;is&nbsp;active,&nbsp;this&nbsp;returns&nbsp;whether&nbsp;or&nbsp;not&nbsp;the<br>
+operation&nbsp;wants&nbsp;to&nbsp;write&nbsp;to&nbsp;the&nbsp;socket.&nbsp;&nbsp;If&nbsp;an&nbsp;operation&nbsp;is<br>
+not&nbsp;active,&nbsp;this&nbsp;returns&nbsp;None.<br>
+&nbsp;<br>
+@rtype:&nbsp;bool&nbsp;or&nbsp;None<br>
+@return:&nbsp;If&nbsp;the&nbsp;state&nbsp;machine&nbsp;wants&nbsp;to&nbsp;write.</tt></dd></dl>
+
+</td></tr></table></td></tr></table>
+</body></html>

@@ -1,0 +1,125 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.Crypto.Protocol.Chaffing</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.Crypto.html"><font color="#ffffff">Crypto</font></a>.<a href="gdata.Crypto.Protocol.html"><font color="#ffffff">Protocol</font></a>.Chaffing</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/Crypto/Protocol/Chaffing.py">/usr/local/lib/python2.6/dist-packages/gdata/Crypto/Protocol/Chaffing.py</a></font></td></tr></table>
+    <p><tt>This&nbsp;file&nbsp;implements&nbsp;the&nbsp;chaffing&nbsp;algorithm.<br>
+&nbsp;<br>
+Winnowing&nbsp;and&nbsp;chaffing&nbsp;is&nbsp;a&nbsp;technique&nbsp;for&nbsp;enhancing&nbsp;privacy&nbsp;without&nbsp;requiring<br>
+strong&nbsp;encryption.&nbsp;&nbsp;In&nbsp;short,&nbsp;the&nbsp;technique&nbsp;takes&nbsp;a&nbsp;set&nbsp;of&nbsp;authenticated<br>
+message&nbsp;blocks&nbsp;(the&nbsp;wheat)&nbsp;and&nbsp;adds&nbsp;a&nbsp;number&nbsp;of&nbsp;chaff&nbsp;blocks&nbsp;which&nbsp;have<br>
+randomly&nbsp;chosen&nbsp;data&nbsp;and&nbsp;MAC&nbsp;fields.&nbsp;&nbsp;This&nbsp;means&nbsp;that&nbsp;to&nbsp;an&nbsp;adversary,&nbsp;the<br>
+chaff&nbsp;blocks&nbsp;look&nbsp;as&nbsp;valid&nbsp;as&nbsp;the&nbsp;wheat&nbsp;blocks,&nbsp;and&nbsp;so&nbsp;the&nbsp;authentication<br>
+would&nbsp;have&nbsp;to&nbsp;be&nbsp;performed&nbsp;on&nbsp;every&nbsp;block.&nbsp;&nbsp;By&nbsp;tailoring&nbsp;the&nbsp;number&nbsp;of&nbsp;chaff<br>
+blocks&nbsp;added&nbsp;to&nbsp;the&nbsp;message,&nbsp;the&nbsp;sender&nbsp;can&nbsp;make&nbsp;breaking&nbsp;the&nbsp;message<br>
+computationally&nbsp;infeasible.&nbsp;&nbsp;There&nbsp;are&nbsp;many&nbsp;other&nbsp;interesting&nbsp;properties&nbsp;of<br>
+the&nbsp;winnow/chaff&nbsp;technique.<br>
+&nbsp;<br>
+For&nbsp;example,&nbsp;say&nbsp;Alice&nbsp;is&nbsp;sending&nbsp;a&nbsp;message&nbsp;to&nbsp;Bob.&nbsp;&nbsp;She&nbsp;packetizes&nbsp;the<br>
+message&nbsp;and&nbsp;performs&nbsp;an&nbsp;all-or-nothing&nbsp;transformation&nbsp;on&nbsp;the&nbsp;packets.&nbsp;&nbsp;Then<br>
+she&nbsp;authenticates&nbsp;each&nbsp;packet&nbsp;with&nbsp;a&nbsp;message&nbsp;authentication&nbsp;code&nbsp;(MAC).&nbsp;&nbsp;The<br>
+MAC&nbsp;is&nbsp;a&nbsp;hash&nbsp;of&nbsp;the&nbsp;data&nbsp;packet,&nbsp;and&nbsp;there&nbsp;is&nbsp;a&nbsp;secret&nbsp;key&nbsp;which&nbsp;she&nbsp;must<br>
+share&nbsp;with&nbsp;Bob&nbsp;(key&nbsp;distribution&nbsp;is&nbsp;an&nbsp;exercise&nbsp;left&nbsp;to&nbsp;the&nbsp;reader).&nbsp;&nbsp;She&nbsp;then<br>
+adds&nbsp;a&nbsp;serial&nbsp;number&nbsp;to&nbsp;each&nbsp;packet,&nbsp;and&nbsp;sends&nbsp;the&nbsp;packets&nbsp;to&nbsp;Bob.<br>
+&nbsp;<br>
+Bob&nbsp;receives&nbsp;the&nbsp;packets,&nbsp;and&nbsp;using&nbsp;the&nbsp;shared&nbsp;secret&nbsp;authentication&nbsp;key,<br>
+authenticates&nbsp;the&nbsp;MACs&nbsp;for&nbsp;each&nbsp;packet.&nbsp;&nbsp;Those&nbsp;packets&nbsp;that&nbsp;have&nbsp;bad&nbsp;MACs&nbsp;are<br>
+simply&nbsp;discarded.&nbsp;&nbsp;The&nbsp;remainder&nbsp;are&nbsp;sorted&nbsp;by&nbsp;serial&nbsp;number,&nbsp;and&nbsp;passed<br>
+through&nbsp;the&nbsp;reverse&nbsp;all-or-nothing&nbsp;transform.&nbsp;&nbsp;The&nbsp;transform&nbsp;means&nbsp;that&nbsp;an<br>
+eavesdropper&nbsp;(say&nbsp;Eve)&nbsp;must&nbsp;acquire&nbsp;all&nbsp;the&nbsp;packets&nbsp;before&nbsp;any&nbsp;of&nbsp;the&nbsp;data&nbsp;can<br>
+be&nbsp;read.&nbsp;&nbsp;If&nbsp;even&nbsp;one&nbsp;packet&nbsp;is&nbsp;missing,&nbsp;the&nbsp;data&nbsp;is&nbsp;useless.<br>
+&nbsp;<br>
+There's&nbsp;one&nbsp;twist:&nbsp;by&nbsp;adding&nbsp;chaff&nbsp;packets,&nbsp;Alice&nbsp;and&nbsp;Bob&nbsp;can&nbsp;make&nbsp;Eve's&nbsp;job<br>
+much&nbsp;harder,&nbsp;since&nbsp;Eve&nbsp;now&nbsp;has&nbsp;to&nbsp;break&nbsp;the&nbsp;shared&nbsp;secret&nbsp;key,&nbsp;or&nbsp;try&nbsp;every<br>
+combination&nbsp;of&nbsp;wheat&nbsp;and&nbsp;chaff&nbsp;packet&nbsp;to&nbsp;read&nbsp;any&nbsp;of&nbsp;the&nbsp;message.&nbsp;&nbsp;The&nbsp;cool<br>
+thing&nbsp;is&nbsp;that&nbsp;Bob&nbsp;doesn't&nbsp;need&nbsp;to&nbsp;add&nbsp;any&nbsp;additional&nbsp;code;&nbsp;the&nbsp;chaff&nbsp;packets<br>
+are&nbsp;already&nbsp;filtered&nbsp;out&nbsp;because&nbsp;their&nbsp;MACs&nbsp;don't&nbsp;match&nbsp;(in&nbsp;all&nbsp;likelihood&nbsp;--<br>
+since&nbsp;the&nbsp;data&nbsp;and&nbsp;MACs&nbsp;for&nbsp;the&nbsp;chaff&nbsp;packets&nbsp;are&nbsp;randomly&nbsp;chosen&nbsp;it&nbsp;is<br>
+possible,&nbsp;but&nbsp;very&nbsp;unlikely&nbsp;that&nbsp;a&nbsp;chaff&nbsp;MAC&nbsp;will&nbsp;match&nbsp;the&nbsp;chaff&nbsp;data).&nbsp;&nbsp;And<br>
+Alice&nbsp;need&nbsp;not&nbsp;even&nbsp;be&nbsp;the&nbsp;party&nbsp;adding&nbsp;the&nbsp;chaff!&nbsp;&nbsp;She&nbsp;could&nbsp;be&nbsp;completely<br>
+unaware&nbsp;that&nbsp;a&nbsp;third&nbsp;party,&nbsp;say&nbsp;Charles,&nbsp;is&nbsp;adding&nbsp;chaff&nbsp;packets&nbsp;to&nbsp;her<br>
+messages&nbsp;as&nbsp;they&nbsp;are&nbsp;transmitted.<br>
+&nbsp;<br>
+For&nbsp;more&nbsp;information&nbsp;on&nbsp;winnowing&nbsp;and&nbsp;chaffing&nbsp;see&nbsp;this&nbsp;paper:<br>
+&nbsp;<br>
+Ronald&nbsp;L.&nbsp;Rivest,&nbsp;"Chaffing&nbsp;and&nbsp;Winnowing:&nbsp;Confidentiality&nbsp;without&nbsp;Encryption"<br>
+<a href="http://theory.lcs.mit.edu/~rivest/chaffing.txt">http://theory.lcs.mit.edu/~rivest/chaffing.txt</a></tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="gdata.Crypto.Protocol.Chaffing.html#Chaff">Chaff</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Chaff">class <strong>Chaff</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Class&nbsp;implementing&nbsp;the&nbsp;chaff&nbsp;adding&nbsp;algorithm.<br>
+&nbsp;<br>
+Methods&nbsp;for&nbsp;subclasses:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_randnum(size):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;randomly&nbsp;generated&nbsp;number&nbsp;with&nbsp;a&nbsp;byte-length&nbsp;equal<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;size.&nbsp;&nbsp;Subclasses&nbsp;can&nbsp;use&nbsp;this&nbsp;to&nbsp;implement&nbsp;better&nbsp;random<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;and&nbsp;MAC&nbsp;generating&nbsp;algorithms.&nbsp;&nbsp;The&nbsp;default&nbsp;algorithm&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;not&nbsp;very&nbsp;cryptographically&nbsp;secure.&nbsp;&nbsp;It&nbsp;is&nbsp;most<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;important&nbsp;that&nbsp;the&nbsp;chaff&nbsp;data&nbsp;does&nbsp;not&nbsp;contain&nbsp;any&nbsp;patterns<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;discern&nbsp;it&nbsp;from&nbsp;wheat&nbsp;data&nbsp;without&nbsp;running<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;MAC.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Chaff-__init__"><strong>__init__</strong></a>(self, factor<font color="#909090">=1.0</font>, blocksper<font color="#909090">=1</font>)</dt><dd><tt><a href="#Chaff">Chaff</a>(factor:float,&nbsp;blocksper:int)<br>
+&nbsp;<br>
+factor&nbsp;is&nbsp;the&nbsp;number&nbsp;of&nbsp;message&nbsp;blocks&nbsp;to&nbsp;add&nbsp;chaff&nbsp;to,<br>
+expressed&nbsp;as&nbsp;a&nbsp;percentage&nbsp;between&nbsp;0.0&nbsp;and&nbsp;1.0.&nbsp;&nbsp;blocksper&nbsp;is<br>
+the&nbsp;number&nbsp;of&nbsp;chaff&nbsp;blocks&nbsp;to&nbsp;include&nbsp;for&nbsp;each&nbsp;block&nbsp;being<br>
+chaffed.&nbsp;&nbsp;Thus&nbsp;the&nbsp;defaults&nbsp;add&nbsp;one&nbsp;chaff&nbsp;block&nbsp;to&nbsp;every<br>
+message&nbsp;block.&nbsp;&nbsp;By&nbsp;changing&nbsp;the&nbsp;defaults,&nbsp;you&nbsp;can&nbsp;adjust&nbsp;how<br>
+computationally&nbsp;difficult&nbsp;it&nbsp;could&nbsp;be&nbsp;for&nbsp;an&nbsp;adversary&nbsp;to<br>
+brute-force&nbsp;crack&nbsp;the&nbsp;message.&nbsp;&nbsp;The&nbsp;difficulty&nbsp;is&nbsp;expressed<br>
+as:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pow(blocksper,&nbsp;int(factor&nbsp;*&nbsp;number-of-blocks))<br>
+&nbsp;<br>
+For&nbsp;ease&nbsp;of&nbsp;implementation,&nbsp;when&nbsp;factor&nbsp;&lt;&nbsp;1.0,&nbsp;only&nbsp;the&nbsp;first<br>
+int(factor*number-of-blocks)&nbsp;message&nbsp;blocks&nbsp;are&nbsp;chaffed.</tt></dd></dl>
+
+<dl><dt><a name="Chaff-chaff"><strong>chaff</strong></a>(self, blocks)</dt><dd><tt><a href="#Chaff-chaff">chaff</a>(&nbsp;[(serial-number:int,&nbsp;data:string,&nbsp;MAC:string)]&nbsp;)<br>
+:&nbsp;[(int,&nbsp;string,&nbsp;string)]<br>
+&nbsp;<br>
+Add&nbsp;chaff&nbsp;to&nbsp;message&nbsp;blocks.&nbsp;&nbsp;blocks&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;3-tuples&nbsp;of&nbsp;the<br>
+form&nbsp;(serial-number,&nbsp;data,&nbsp;MAC).<br>
+&nbsp;<br>
+<a href="#Chaff">Chaff</a>&nbsp;is&nbsp;created&nbsp;by&nbsp;choosing&nbsp;a&nbsp;random&nbsp;number&nbsp;of&nbsp;the&nbsp;same<br>
+byte-length&nbsp;as&nbsp;data,&nbsp;and&nbsp;another&nbsp;random&nbsp;number&nbsp;of&nbsp;the&nbsp;same<br>
+byte-length&nbsp;as&nbsp;MAC.&nbsp;&nbsp;The&nbsp;message&nbsp;block's&nbsp;serial&nbsp;number&nbsp;is<br>
+placed&nbsp;on&nbsp;the&nbsp;chaff&nbsp;block&nbsp;and&nbsp;all&nbsp;the&nbsp;packet's&nbsp;chaff&nbsp;blocks<br>
+are&nbsp;randomly&nbsp;interspersed&nbsp;with&nbsp;the&nbsp;single&nbsp;wheat&nbsp;block.&nbsp;&nbsp;This<br>
+method&nbsp;then&nbsp;returns&nbsp;a&nbsp;list&nbsp;of&nbsp;3-tuples&nbsp;of&nbsp;the&nbsp;same&nbsp;form.<br>
+Chaffed&nbsp;blocks&nbsp;will&nbsp;contain&nbsp;multiple&nbsp;instances&nbsp;of&nbsp;3-tuples<br>
+with&nbsp;the&nbsp;same&nbsp;serial&nbsp;number,&nbsp;but&nbsp;the&nbsp;only&nbsp;way&nbsp;to&nbsp;figure&nbsp;out<br>
+which&nbsp;blocks&nbsp;are&nbsp;wheat&nbsp;and&nbsp;which&nbsp;are&nbsp;chaff&nbsp;is&nbsp;to&nbsp;perform&nbsp;the<br>
+MAC&nbsp;hash&nbsp;and&nbsp;compare&nbsp;values.</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__revision__</strong> = '$Id: Chaffing.py,v 1.7 2003/02/28 15:23:21 akuchling Exp $'</td></tr></table>
+</body></html>

@@ -1,0 +1,105 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.X509</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.X509</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/X509.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/X509.py</a></font></td></tr></table>
+    <p><tt>Class&nbsp;representing&nbsp;an&nbsp;X.509&nbsp;certificate.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="Crypto.html">Crypto</a><br>
+<a href="array.html">array</a><br>
+</td><td width="25%" valign=top><a href="base64.html">base64</a><br>
+<a href="binascii.html">binascii</a><br>
+</td><td width="25%" valign=top><a href="math.html">math</a><br>
+<a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+<a href="traceback.html">traceback</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.X509.html#X509">X509</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="X509">class <strong>X509</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;class&nbsp;represents&nbsp;an&nbsp;X.509&nbsp;certificate.<br>
+&nbsp;<br>
+@type&nbsp;bytes:&nbsp;L{array.array}&nbsp;of&nbsp;unsigned&nbsp;bytes<br>
+@ivar&nbsp;bytes:&nbsp;The&nbsp;DER-encoded&nbsp;ASN.1&nbsp;certificate<br>
+&nbsp;<br>
+@type&nbsp;publicKey:&nbsp;L{tlslite.utils.RSAKey.RSAKey}<br>
+@ivar&nbsp;publicKey:&nbsp;The&nbsp;subject&nbsp;public&nbsp;key&nbsp;from&nbsp;the&nbsp;certificate.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="X509-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="X509-getCommonName"><strong>getCommonName</strong></a>(self)</dt><dd><tt>Get&nbsp;the&nbsp;Subject's&nbsp;Common&nbsp;Name&nbsp;from&nbsp;the&nbsp;certificate.<br>
+&nbsp;<br>
+The&nbsp;cryptlib_py&nbsp;module&nbsp;must&nbsp;be&nbsp;installed&nbsp;in&nbsp;order&nbsp;to&nbsp;use&nbsp;this<br>
+function.<br>
+&nbsp;<br>
+@rtype:&nbsp;str&nbsp;or&nbsp;None<br>
+@return:&nbsp;The&nbsp;CN&nbsp;component&nbsp;of&nbsp;the&nbsp;certificate's&nbsp;subject&nbsp;DN,&nbsp;if<br>
+present.</tt></dd></dl>
+
+<dl><dt><a name="X509-getFingerprint"><strong>getFingerprint</strong></a>(self)</dt><dd><tt>Get&nbsp;the&nbsp;hex-encoded&nbsp;fingerprint&nbsp;of&nbsp;this&nbsp;certificate.<br>
+&nbsp;<br>
+@rtype:&nbsp;str<br>
+@return:&nbsp;A&nbsp;hex-encoded&nbsp;fingerprint.</tt></dd></dl>
+
+<dl><dt><a name="X509-parse"><strong>parse</strong></a>(self, s)</dt><dd><tt>Parse&nbsp;a&nbsp;PEM-encoded&nbsp;X.509&nbsp;certificate.<br>
+&nbsp;<br>
+@type&nbsp;s:&nbsp;str<br>
+@param&nbsp;s:&nbsp;A&nbsp;PEM-encoded&nbsp;X.509&nbsp;certificate&nbsp;(i.e.&nbsp;a&nbsp;base64-encoded<br>
+certificate&nbsp;wrapped&nbsp;with&nbsp;"-----BEGIN&nbsp;CERTIFICATE-----"&nbsp;and<br>
+"-----END&nbsp;CERTIFICATE-----"&nbsp;tags).</tt></dd></dl>
+
+<dl><dt><a name="X509-parseBinary"><strong>parseBinary</strong></a>(self, bytes)</dt><dd><tt>Parse&nbsp;a&nbsp;DER-encoded&nbsp;X.509&nbsp;certificate.<br>
+&nbsp;<br>
+@type&nbsp;bytes:&nbsp;str&nbsp;or&nbsp;L{array.array}&nbsp;of&nbsp;unsigned&nbsp;bytes<br>
+@param&nbsp;bytes:&nbsp;A&nbsp;DER-encoded&nbsp;X.509&nbsp;certificate.</tt></dd></dl>
+
+<dl><dt><a name="X509-writeBytes"><strong>writeBytes</strong></a>(self)</dt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-sha1"><strong>sha1</strong></a> = openssl_sha1(...)</dt><dd><tt>Returns&nbsp;a&nbsp;sha1&nbsp;hash&nbsp;object;&nbsp;optionally&nbsp;initialized&nbsp;with&nbsp;a&nbsp;string</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>cryptlibpyLoaded</strong> = False<br>
+<strong>gmpyLoaded</strong> = False<br>
+<strong>m2cryptoLoaded</strong> = False<br>
+<strong>prngName</strong> = 'os.urandom'<br>
+<strong>pycryptoLoaded</strong> = True<br>
+<strong>sieve</strong> = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, ...]</td></tr></table>
+</body></html>

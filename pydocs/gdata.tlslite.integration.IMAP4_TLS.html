@@ -1,0 +1,409 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.integration.IMAP4_TLS</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.<a href="gdata.tlslite.integration.html"><font color="#ffffff">integration</font></a>.IMAP4_TLS</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/integration/IMAP4_TLS.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/integration/IMAP4_TLS.py</a></font></td></tr></table>
+    <p><tt>TLS&nbsp;Lite&nbsp;+&nbsp;imaplib.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="socket.html">socket</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.integration.ClientHelper.html#ClientHelper">gdata.tlslite.integration.ClientHelper.ClientHelper</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.integration.IMAP4_TLS.html#IMAP4_TLS">IMAP4_TLS</a>(<a href="imaplib.html#IMAP4">imaplib.IMAP4</a>, <a href="gdata.tlslite.integration.ClientHelper.html#ClientHelper">gdata.tlslite.integration.ClientHelper.ClientHelper</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="imaplib.html#IMAP4">imaplib.IMAP4</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.integration.IMAP4_TLS.html#IMAP4_TLS">IMAP4_TLS</a>(<a href="imaplib.html#IMAP4">imaplib.IMAP4</a>, <a href="gdata.tlslite.integration.ClientHelper.html#ClientHelper">gdata.tlslite.integration.ClientHelper.ClientHelper</a>)
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="IMAP4_TLS">class <strong>IMAP4_TLS</strong></a>(<a href="imaplib.html#IMAP4">imaplib.IMAP4</a>, <a href="gdata.tlslite.integration.ClientHelper.html#ClientHelper">gdata.tlslite.integration.ClientHelper.ClientHelper</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;class&nbsp;extends&nbsp;L{imaplib.<a href="imaplib.html#IMAP4">IMAP4</a>}&nbsp;with&nbsp;TLS&nbsp;support.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.integration.IMAP4_TLS.html#IMAP4_TLS">IMAP4_TLS</a></dd>
+<dd><a href="imaplib.html#IMAP4">imaplib.IMAP4</a></dd>
+<dd><a href="gdata.tlslite.integration.ClientHelper.html#ClientHelper">gdata.tlslite.integration.ClientHelper.ClientHelper</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="IMAP4_TLS-__init__"><strong>__init__</strong></a>(self, host<font color="#909090">=''</font>, port<font color="#909090">=993</font>, username<font color="#909090">=None</font>, password<font color="#909090">=None</font>, sharedKey<font color="#909090">=None</font>, certChain<font color="#909090">=None</font>, privateKey<font color="#909090">=None</font>, cryptoID<font color="#909090">=None</font>, protocol<font color="#909090">=None</font>, x509Fingerprint<font color="#909090">=None</font>, x509TrustList<font color="#909090">=None</font>, x509CommonName<font color="#909090">=None</font>, settings<font color="#909090">=None</font>)</dt><dd><tt>Create&nbsp;a&nbsp;new&nbsp;<a href="#IMAP4_TLS">IMAP4_TLS</a>.<br>
+&nbsp;<br>
+For&nbsp;client&nbsp;authentication,&nbsp;use&nbsp;one&nbsp;of&nbsp;these&nbsp;argument<br>
+combinations:<br>
+&nbsp;-&nbsp;username,&nbsp;password&nbsp;(SRP)<br>
+&nbsp;-&nbsp;username,&nbsp;sharedKey&nbsp;(shared-key)<br>
+&nbsp;-&nbsp;certChain,&nbsp;privateKey&nbsp;(certificate)<br>
+&nbsp;<br>
+For&nbsp;server&nbsp;authentication,&nbsp;you&nbsp;can&nbsp;either&nbsp;rely&nbsp;on&nbsp;the<br>
+implicit&nbsp;mutual&nbsp;authentication&nbsp;performed&nbsp;by&nbsp;SRP&nbsp;or<br>
+shared-keys,&nbsp;or&nbsp;you&nbsp;can&nbsp;do&nbsp;certificate-based&nbsp;server<br>
+authentication&nbsp;with&nbsp;one&nbsp;of&nbsp;these&nbsp;argument&nbsp;combinations:<br>
+&nbsp;-&nbsp;cryptoID[,&nbsp;protocol]&nbsp;(requires&nbsp;cryptoIDlib)<br>
+&nbsp;-&nbsp;x509Fingerprint<br>
+&nbsp;-&nbsp;x509TrustList[,&nbsp;x509CommonName]&nbsp;(requires&nbsp;cryptlib_py)<br>
+&nbsp;<br>
+Certificate-based&nbsp;server&nbsp;authentication&nbsp;is&nbsp;compatible&nbsp;with<br>
+SRP&nbsp;or&nbsp;certificate-based&nbsp;client&nbsp;authentication.&nbsp;&nbsp;It&nbsp;is<br>
+not&nbsp;compatible&nbsp;with&nbsp;shared-keys.<br>
+&nbsp;<br>
+The&nbsp;caller&nbsp;should&nbsp;be&nbsp;prepared&nbsp;to&nbsp;handle&nbsp;TLS-specific<br>
+exceptions.&nbsp;&nbsp;See&nbsp;the&nbsp;client&nbsp;handshake&nbsp;functions&nbsp;in<br>
+L{tlslite.TLSConnection.TLSConnection}&nbsp;for&nbsp;details&nbsp;on&nbsp;which<br>
+exceptions&nbsp;might&nbsp;be&nbsp;raised.<br>
+&nbsp;<br>
+@type&nbsp;host:&nbsp;str<br>
+@param&nbsp;host:&nbsp;Server&nbsp;to&nbsp;connect&nbsp;to.<br>
+&nbsp;<br>
+@type&nbsp;port:&nbsp;int<br>
+@param&nbsp;port:&nbsp;Port&nbsp;to&nbsp;connect&nbsp;to.<br>
+&nbsp;<br>
+@type&nbsp;username:&nbsp;str<br>
+@param&nbsp;username:&nbsp;SRP&nbsp;or&nbsp;shared-key&nbsp;username.&nbsp;&nbsp;Requires&nbsp;the<br>
+'password'&nbsp;or&nbsp;'sharedKey'&nbsp;argument.<br>
+&nbsp;<br>
+@type&nbsp;password:&nbsp;str<br>
+@param&nbsp;password:&nbsp;SRP&nbsp;password&nbsp;for&nbsp;mutual&nbsp;authentication.<br>
+Requires&nbsp;the&nbsp;'username'&nbsp;argument.<br>
+&nbsp;<br>
+@type&nbsp;sharedKey:&nbsp;str<br>
+@param&nbsp;sharedKey:&nbsp;Shared&nbsp;key&nbsp;for&nbsp;mutual&nbsp;authentication.<br>
+Requires&nbsp;the&nbsp;'username'&nbsp;argument.<br>
+&nbsp;<br>
+@type&nbsp;certChain:&nbsp;L{tlslite.X509CertChain.X509CertChain}&nbsp;or<br>
+L{cryptoIDlib.CertChain.CertChain}<br>
+@param&nbsp;certChain:&nbsp;Certificate&nbsp;chain&nbsp;for&nbsp;client&nbsp;authentication.<br>
+Requires&nbsp;the&nbsp;'privateKey'&nbsp;argument.&nbsp;&nbsp;Excludes&nbsp;the&nbsp;SRP&nbsp;or<br>
+shared-key&nbsp;related&nbsp;arguments.<br>
+&nbsp;<br>
+@type&nbsp;privateKey:&nbsp;L{tlslite.utils.RSAKey.RSAKey}<br>
+@param&nbsp;privateKey:&nbsp;Private&nbsp;key&nbsp;for&nbsp;client&nbsp;authentication.<br>
+Requires&nbsp;the&nbsp;'certChain'&nbsp;argument.&nbsp;&nbsp;Excludes&nbsp;the&nbsp;SRP&nbsp;or<br>
+shared-key&nbsp;related&nbsp;arguments.<br>
+&nbsp;<br>
+@type&nbsp;cryptoID:&nbsp;str<br>
+@param&nbsp;cryptoID:&nbsp;cryptoID&nbsp;for&nbsp;server&nbsp;authentication.&nbsp;&nbsp;Mutually<br>
+exclusive&nbsp;with&nbsp;the&nbsp;'x509...'&nbsp;arguments.<br>
+&nbsp;<br>
+@type&nbsp;protocol:&nbsp;str<br>
+@param&nbsp;protocol:&nbsp;cryptoID&nbsp;protocol&nbsp;URI&nbsp;for&nbsp;server<br>
+authentication.&nbsp;&nbsp;Requires&nbsp;the&nbsp;'cryptoID'&nbsp;argument.<br>
+&nbsp;<br>
+@type&nbsp;x509Fingerprint:&nbsp;str<br>
+@param&nbsp;x509Fingerprint:&nbsp;Hex-encoded&nbsp;X.509&nbsp;fingerprint&nbsp;for<br>
+server&nbsp;authentication.&nbsp;&nbsp;Mutually&nbsp;exclusive&nbsp;with&nbsp;the&nbsp;'cryptoID'<br>
+and&nbsp;'x509TrustList'&nbsp;arguments.<br>
+&nbsp;<br>
+@type&nbsp;x509TrustList:&nbsp;list&nbsp;of&nbsp;L{tlslite.X509.X509}<br>
+@param&nbsp;x509TrustList:&nbsp;A&nbsp;list&nbsp;of&nbsp;trusted&nbsp;root&nbsp;certificates.&nbsp;&nbsp;The<br>
+other&nbsp;party&nbsp;must&nbsp;present&nbsp;a&nbsp;certificate&nbsp;chain&nbsp;which&nbsp;extends&nbsp;to<br>
+one&nbsp;of&nbsp;these&nbsp;root&nbsp;certificates.&nbsp;&nbsp;The&nbsp;cryptlib_py&nbsp;module&nbsp;must&nbsp;be<br>
+installed&nbsp;to&nbsp;use&nbsp;this&nbsp;parameter.&nbsp;&nbsp;Mutually&nbsp;exclusive&nbsp;with&nbsp;the<br>
+'cryptoID'&nbsp;and&nbsp;'x509Fingerprint'&nbsp;arguments.<br>
+&nbsp;<br>
+@type&nbsp;x509CommonName:&nbsp;str<br>
+@param&nbsp;x509CommonName:&nbsp;The&nbsp;end-entity&nbsp;certificate's&nbsp;'CN'&nbsp;field<br>
+must&nbsp;match&nbsp;this&nbsp;value.&nbsp;&nbsp;For&nbsp;a&nbsp;web&nbsp;server,&nbsp;this&nbsp;is&nbsp;typically&nbsp;a<br>
+server&nbsp;name&nbsp;such&nbsp;as&nbsp;'www.amazon.com'.&nbsp;&nbsp;Mutually&nbsp;exclusive&nbsp;with<br>
+the&nbsp;'cryptoID'&nbsp;and&nbsp;'x509Fingerprint'&nbsp;arguments.&nbsp;&nbsp;Requires&nbsp;the<br>
+'x509TrustList'&nbsp;argument.<br>
+&nbsp;<br>
+@type&nbsp;settings:&nbsp;L{tlslite.HandshakeSettings.HandshakeSettings}<br>
+@param&nbsp;settings:&nbsp;Various&nbsp;settings&nbsp;which&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;control<br>
+the&nbsp;ciphersuites,&nbsp;certificate&nbsp;types,&nbsp;and&nbsp;SSL/TLS&nbsp;versions<br>
+offered&nbsp;by&nbsp;the&nbsp;client.</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-open"><strong>open</strong></a>(self, host<font color="#909090">=''</font>, port<font color="#909090">=993</font>)</dt><dd><tt>Setup&nbsp;connection&nbsp;to&nbsp;remote&nbsp;server&nbsp;on&nbsp;"host:port".<br>
+&nbsp;<br>
+This&nbsp;connection&nbsp;will&nbsp;be&nbsp;used&nbsp;by&nbsp;the&nbsp;routines:<br>
+read,&nbsp;readline,&nbsp;send,&nbsp;shutdown.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="imaplib.html#IMAP4">imaplib.IMAP4</a>:<br>
+<dl><dt><a name="IMAP4_TLS-__getattr__"><strong>__getattr__</strong></a>(self, attr)</dt></dl>
+
+<dl><dt><a name="IMAP4_TLS-append"><strong>append</strong></a>(self, mailbox, flags, date_time, message)</dt><dd><tt>Append&nbsp;message&nbsp;to&nbsp;named&nbsp;mailbox.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-append">append</a>(mailbox,&nbsp;flags,&nbsp;date_time,&nbsp;message)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All&nbsp;args&nbsp;except&nbsp;`message'&nbsp;can&nbsp;be&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-authenticate"><strong>authenticate</strong></a>(self, mechanism, authobject)</dt><dd><tt>Authenticate&nbsp;command&nbsp;-&nbsp;requires&nbsp;response&nbsp;processing.<br>
+&nbsp;<br>
+'mechanism'&nbsp;specifies&nbsp;which&nbsp;authentication&nbsp;mechanism&nbsp;is&nbsp;to<br>
+be&nbsp;used&nbsp;-&nbsp;it&nbsp;must&nbsp;appear&nbsp;in&nbsp;&lt;instance&gt;.capabilities&nbsp;in&nbsp;the<br>
+form&nbsp;AUTH=&lt;mechanism&gt;.<br>
+&nbsp;<br>
+'authobject'&nbsp;must&nbsp;be&nbsp;a&nbsp;callable&nbsp;object:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;=&nbsp;authobject(response)<br>
+&nbsp;<br>
+It&nbsp;will&nbsp;be&nbsp;called&nbsp;to&nbsp;process&nbsp;server&nbsp;continuation&nbsp;responses.<br>
+It&nbsp;should&nbsp;return&nbsp;data&nbsp;that&nbsp;will&nbsp;be&nbsp;encoded&nbsp;and&nbsp;sent&nbsp;to&nbsp;server.<br>
+It&nbsp;should&nbsp;return&nbsp;None&nbsp;if&nbsp;the&nbsp;client&nbsp;abort&nbsp;response&nbsp;'*'&nbsp;should<br>
+be&nbsp;sent&nbsp;instead.</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-capability"><strong>capability</strong></a>(self)</dt><dd><tt>(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-capability">capability</a>()<br>
+Fetch&nbsp;capabilities&nbsp;list&nbsp;from&nbsp;server.</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-check"><strong>check</strong></a>(self)</dt><dd><tt>Checkpoint&nbsp;mailbox&nbsp;on&nbsp;server.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-check">check</a>()</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-close"><strong>close</strong></a>(self)</dt><dd><tt>Close&nbsp;currently&nbsp;selected&nbsp;mailbox.<br>
+&nbsp;<br>
+Deleted&nbsp;messages&nbsp;are&nbsp;removed&nbsp;from&nbsp;writable&nbsp;mailbox.<br>
+This&nbsp;is&nbsp;the&nbsp;recommended&nbsp;command&nbsp;before&nbsp;'LOGOUT'.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-close">close</a>()</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-copy"><strong>copy</strong></a>(self, message_set, new_mailbox)</dt><dd><tt>Copy&nbsp;'message_set'&nbsp;messages&nbsp;onto&nbsp;end&nbsp;of&nbsp;'new_mailbox'.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-copy">copy</a>(message_set,&nbsp;new_mailbox)</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-create"><strong>create</strong></a>(self, mailbox)</dt><dd><tt>Create&nbsp;new&nbsp;mailbox.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-create">create</a>(mailbox)</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-delete"><strong>delete</strong></a>(self, mailbox)</dt><dd><tt>Delete&nbsp;old&nbsp;mailbox.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-delete">delete</a>(mailbox)</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-deleteacl"><strong>deleteacl</strong></a>(self, mailbox, who)</dt><dd><tt>Delete&nbsp;the&nbsp;ACLs&nbsp;(remove&nbsp;any&nbsp;rights)&nbsp;set&nbsp;for&nbsp;who&nbsp;on&nbsp;mailbox.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-deleteacl">deleteacl</a>(mailbox,&nbsp;who)</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-expunge"><strong>expunge</strong></a>(self)</dt><dd><tt>Permanently&nbsp;remove&nbsp;deleted&nbsp;items&nbsp;from&nbsp;selected&nbsp;mailbox.<br>
+&nbsp;<br>
+Generates&nbsp;'EXPUNGE'&nbsp;response&nbsp;for&nbsp;each&nbsp;deleted&nbsp;message.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-expunge">expunge</a>()<br>
+&nbsp;<br>
+'data'&nbsp;is&nbsp;list&nbsp;of&nbsp;'EXPUNGE'd&nbsp;message&nbsp;numbers&nbsp;in&nbsp;order&nbsp;received.</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-fetch"><strong>fetch</strong></a>(self, message_set, message_parts)</dt><dd><tt>Fetch&nbsp;(parts&nbsp;of)&nbsp;messages.<br>
+&nbsp;<br>
+(typ,&nbsp;[data,&nbsp;...])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-fetch">fetch</a>(message_set,&nbsp;message_parts)<br>
+&nbsp;<br>
+'message_parts'&nbsp;should&nbsp;be&nbsp;a&nbsp;string&nbsp;of&nbsp;selected&nbsp;parts<br>
+enclosed&nbsp;in&nbsp;parentheses,&nbsp;eg:&nbsp;"(UID&nbsp;BODY[TEXT])".<br>
+&nbsp;<br>
+'data'&nbsp;are&nbsp;tuples&nbsp;of&nbsp;message&nbsp;part&nbsp;envelope&nbsp;and&nbsp;data.</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-getacl"><strong>getacl</strong></a>(self, mailbox)</dt><dd><tt>Get&nbsp;the&nbsp;ACLs&nbsp;for&nbsp;a&nbsp;mailbox.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-getacl">getacl</a>(mailbox)</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-getannotation"><strong>getannotation</strong></a>(self, mailbox, entry, attribute)</dt><dd><tt>(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-getannotation">getannotation</a>(mailbox,&nbsp;entry,&nbsp;attribute)<br>
+Retrieve&nbsp;ANNOTATIONs.</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-getquota"><strong>getquota</strong></a>(self, root)</dt><dd><tt>Get&nbsp;the&nbsp;quota&nbsp;root's&nbsp;resource&nbsp;usage&nbsp;and&nbsp;limits.<br>
+&nbsp;<br>
+Part&nbsp;of&nbsp;the&nbsp;<a href="imaplib.html#IMAP4">IMAP4</a>&nbsp;QUOTA&nbsp;extension&nbsp;defined&nbsp;in&nbsp;rfc2087.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-getquota">getquota</a>(root)</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-getquotaroot"><strong>getquotaroot</strong></a>(self, mailbox)</dt><dd><tt>Get&nbsp;the&nbsp;list&nbsp;of&nbsp;quota&nbsp;roots&nbsp;for&nbsp;the&nbsp;named&nbsp;mailbox.<br>
+&nbsp;<br>
+(typ,&nbsp;[[QUOTAROOT&nbsp;responses...],&nbsp;[QUOTA&nbsp;responses]])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-getquotaroot">getquotaroot</a>(mailbox)</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-list"><strong>list</strong></a>(self, directory<font color="#909090">='""'</font>, pattern<font color="#909090">='*'</font>)</dt><dd><tt>List&nbsp;mailbox&nbsp;names&nbsp;in&nbsp;directory&nbsp;matching&nbsp;pattern.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-list">list</a>(directory='""',&nbsp;pattern='*')<br>
+&nbsp;<br>
+'data'&nbsp;is&nbsp;list&nbsp;of&nbsp;LIST&nbsp;responses.</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-login"><strong>login</strong></a>(self, user, password)</dt><dd><tt>Identify&nbsp;client&nbsp;using&nbsp;plaintext&nbsp;password.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-login">login</a>(user,&nbsp;password)<br>
+&nbsp;<br>
+NB:&nbsp;'password'&nbsp;will&nbsp;be&nbsp;quoted.</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-login_cram_md5"><strong>login_cram_md5</strong></a>(self, user, password)</dt><dd><tt>Force&nbsp;use&nbsp;of&nbsp;CRAM-MD5&nbsp;authentication.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-login_cram_md5">login_cram_md5</a>(user,&nbsp;password)</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-logout"><strong>logout</strong></a>(self)</dt><dd><tt>Shutdown&nbsp;connection&nbsp;to&nbsp;server.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-logout">logout</a>()<br>
+&nbsp;<br>
+Returns&nbsp;server&nbsp;'BYE'&nbsp;response.</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-lsub"><strong>lsub</strong></a>(self, directory<font color="#909090">='""'</font>, pattern<font color="#909090">='*'</font>)</dt><dd><tt>List&nbsp;'subscribed'&nbsp;mailbox&nbsp;names&nbsp;in&nbsp;directory&nbsp;matching&nbsp;pattern.<br>
+&nbsp;<br>
+(typ,&nbsp;[data,&nbsp;...])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-lsub">lsub</a>(directory='""',&nbsp;pattern='*')<br>
+&nbsp;<br>
+'data'&nbsp;are&nbsp;tuples&nbsp;of&nbsp;message&nbsp;part&nbsp;envelope&nbsp;and&nbsp;data.</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-myrights"><strong>myrights</strong></a>(self, mailbox)</dt><dd><tt>Show&nbsp;my&nbsp;ACLs&nbsp;for&nbsp;a&nbsp;mailbox&nbsp;(i.e.&nbsp;the&nbsp;rights&nbsp;that&nbsp;I&nbsp;have&nbsp;on&nbsp;mailbox).<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-myrights">myrights</a>(mailbox)</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-namespace"><strong>namespace</strong></a>(self)</dt><dd><tt>Returns&nbsp;IMAP&nbsp;namespaces&nbsp;ala&nbsp;rfc2342<br>
+&nbsp;<br>
+(typ,&nbsp;[data,&nbsp;...])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-namespace">namespace</a>()</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-noop"><strong>noop</strong></a>(self)</dt><dd><tt>Send&nbsp;NOOP&nbsp;command.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-noop">noop</a>()</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-partial"><strong>partial</strong></a>(self, message_num, message_part, start, length)</dt><dd><tt>Fetch&nbsp;truncated&nbsp;part&nbsp;of&nbsp;a&nbsp;message.<br>
+&nbsp;<br>
+(typ,&nbsp;[data,&nbsp;...])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-partial">partial</a>(message_num,&nbsp;message_part,&nbsp;start,&nbsp;length)<br>
+&nbsp;<br>
+'data'&nbsp;is&nbsp;tuple&nbsp;of&nbsp;message&nbsp;part&nbsp;envelope&nbsp;and&nbsp;data.</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-print_log"><strong>print_log</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="IMAP4_TLS-proxyauth"><strong>proxyauth</strong></a>(self, user)</dt><dd><tt>Assume&nbsp;authentication&nbsp;as&nbsp;"user".<br>
+&nbsp;<br>
+Allows&nbsp;an&nbsp;authorised&nbsp;administrator&nbsp;to&nbsp;proxy&nbsp;into&nbsp;any&nbsp;user's<br>
+mailbox.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-proxyauth">proxyauth</a>(user)</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-read"><strong>read</strong></a>(self, size)</dt><dd><tt>Read&nbsp;'size'&nbsp;bytes&nbsp;from&nbsp;remote.</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-readline"><strong>readline</strong></a>(self)</dt><dd><tt>Read&nbsp;line&nbsp;from&nbsp;remote.</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-recent"><strong>recent</strong></a>(self)</dt><dd><tt>Return&nbsp;most&nbsp;recent&nbsp;'RECENT'&nbsp;responses&nbsp;if&nbsp;any&nbsp;exist,<br>
+else&nbsp;prompt&nbsp;server&nbsp;for&nbsp;an&nbsp;update&nbsp;using&nbsp;the&nbsp;'NOOP'&nbsp;command.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-recent">recent</a>()<br>
+&nbsp;<br>
+'data'&nbsp;is&nbsp;None&nbsp;if&nbsp;no&nbsp;new&nbsp;messages,<br>
+else&nbsp;list&nbsp;of&nbsp;RECENT&nbsp;responses,&nbsp;most&nbsp;recent&nbsp;last.</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-rename"><strong>rename</strong></a>(self, oldmailbox, newmailbox)</dt><dd><tt>Rename&nbsp;old&nbsp;mailbox&nbsp;name&nbsp;to&nbsp;new.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-rename">rename</a>(oldmailbox,&nbsp;newmailbox)</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-response"><strong>response</strong></a>(self, code)</dt><dd><tt>Return&nbsp;data&nbsp;for&nbsp;response&nbsp;'code'&nbsp;if&nbsp;received,&nbsp;or&nbsp;None.<br>
+&nbsp;<br>
+Old&nbsp;value&nbsp;for&nbsp;response&nbsp;'code'&nbsp;is&nbsp;cleared.<br>
+&nbsp;<br>
+(code,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-response">response</a>(code)</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-search"><strong>search</strong></a>(self, charset, *criteria)</dt><dd><tt>Search&nbsp;mailbox&nbsp;for&nbsp;matching&nbsp;messages.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-search">search</a>(charset,&nbsp;criterion,&nbsp;...)<br>
+&nbsp;<br>
+'data'&nbsp;is&nbsp;space&nbsp;separated&nbsp;list&nbsp;of&nbsp;matching&nbsp;message&nbsp;numbers.</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-select"><strong>select</strong></a>(self, mailbox<font color="#909090">='INBOX'</font>, readonly<font color="#909090">=False</font>)</dt><dd><tt>Select&nbsp;a&nbsp;mailbox.<br>
+&nbsp;<br>
+Flush&nbsp;all&nbsp;untagged&nbsp;responses.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-select">select</a>(mailbox='INBOX',&nbsp;readonly=False)<br>
+&nbsp;<br>
+'data'&nbsp;is&nbsp;count&nbsp;of&nbsp;messages&nbsp;in&nbsp;mailbox&nbsp;('EXISTS'&nbsp;response).<br>
+&nbsp;<br>
+Mandated&nbsp;responses&nbsp;are&nbsp;('FLAGS',&nbsp;'EXISTS',&nbsp;'RECENT',&nbsp;'UIDVALIDITY'),&nbsp;so<br>
+other&nbsp;responses&nbsp;should&nbsp;be&nbsp;obtained&nbsp;via&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-response">response</a>('FLAGS')&nbsp;etc.</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-send"><strong>send</strong></a>(self, data)</dt><dd><tt>Send&nbsp;data&nbsp;to&nbsp;remote.</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-setacl"><strong>setacl</strong></a>(self, mailbox, who, what)</dt><dd><tt>Set&nbsp;a&nbsp;mailbox&nbsp;acl.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-setacl">setacl</a>(mailbox,&nbsp;who,&nbsp;what)</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-setannotation"><strong>setannotation</strong></a>(self, *args)</dt><dd><tt>(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-setannotation">setannotation</a>(mailbox[,&nbsp;entry,&nbsp;attribute]+)<br>
+Set&nbsp;ANNOTATIONs.</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-setquota"><strong>setquota</strong></a>(self, root, limits)</dt><dd><tt>Set&nbsp;the&nbsp;quota&nbsp;root's&nbsp;resource&nbsp;limits.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-setquota">setquota</a>(root,&nbsp;limits)</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-shutdown"><strong>shutdown</strong></a>(self)</dt><dd><tt>Close&nbsp;I/O&nbsp;established&nbsp;in&nbsp;"open".</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-socket"><strong>socket</strong></a>(self)</dt><dd><tt>Return&nbsp;socket&nbsp;instance&nbsp;used&nbsp;to&nbsp;connect&nbsp;to&nbsp;<a href="imaplib.html#IMAP4">IMAP4</a>&nbsp;server.<br>
+&nbsp;<br>
+socket&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-socket">socket</a>()</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-sort"><strong>sort</strong></a>(self, sort_criteria, charset, *search_criteria)</dt><dd><tt>IMAP4rev1&nbsp;extension&nbsp;SORT&nbsp;command.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-sort">sort</a>(sort_criteria,&nbsp;charset,&nbsp;search_criteria,&nbsp;...)</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-status"><strong>status</strong></a>(self, mailbox, names)</dt><dd><tt>Request&nbsp;named&nbsp;status&nbsp;conditions&nbsp;for&nbsp;mailbox.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-status">status</a>(mailbox,&nbsp;names)</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-store"><strong>store</strong></a>(self, message_set, command, flags)</dt><dd><tt>Alters&nbsp;flag&nbsp;dispositions&nbsp;for&nbsp;messages&nbsp;in&nbsp;mailbox.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-store">store</a>(message_set,&nbsp;command,&nbsp;flags)</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-subscribe"><strong>subscribe</strong></a>(self, mailbox)</dt><dd><tt>Subscribe&nbsp;to&nbsp;new&nbsp;mailbox.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-subscribe">subscribe</a>(mailbox)</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-thread"><strong>thread</strong></a>(self, threading_algorithm, charset, *search_criteria)</dt><dd><tt>IMAPrev1&nbsp;extension&nbsp;THREAD&nbsp;command.<br>
+&nbsp;<br>
+(type,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-thread">thread</a>(threading_algorithm,&nbsp;charset,&nbsp;search_criteria,&nbsp;...)</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-uid"><strong>uid</strong></a>(self, command, *args)</dt><dd><tt>Execute&nbsp;"command&nbsp;arg&nbsp;..."&nbsp;with&nbsp;messages&nbsp;identified&nbsp;by&nbsp;UID,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rather&nbsp;than&nbsp;message&nbsp;number.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-uid">uid</a>(command,&nbsp;arg1,&nbsp;arg2,&nbsp;...)<br>
+&nbsp;<br>
+Returns&nbsp;response&nbsp;appropriate&nbsp;to&nbsp;'command'.</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-unsubscribe"><strong>unsubscribe</strong></a>(self, mailbox)</dt><dd><tt>Unsubscribe&nbsp;from&nbsp;old&nbsp;mailbox.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-unsubscribe">unsubscribe</a>(mailbox)</tt></dd></dl>
+
+<dl><dt><a name="IMAP4_TLS-xatom"><strong>xatom</strong></a>(self, name, *args)</dt><dd><tt>Allow&nbsp;simple&nbsp;extension&nbsp;commands<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;notified&nbsp;by&nbsp;server&nbsp;in&nbsp;CAPABILITY&nbsp;response.<br>
+&nbsp;<br>
+Assumes&nbsp;command&nbsp;is&nbsp;legal&nbsp;in&nbsp;current&nbsp;state.<br>
+&nbsp;<br>
+(typ,&nbsp;[data])&nbsp;=&nbsp;&lt;instance&gt;.<a href="#IMAP4_TLS-xatom">xatom</a>(name,&nbsp;arg,&nbsp;...)<br>
+&nbsp;<br>
+Returns&nbsp;response&nbsp;appropriate&nbsp;to&nbsp;extension&nbsp;command&nbsp;`name'.</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="imaplib.html#IMAP4">imaplib.IMAP4</a>:<br>
+<dl><dt><strong>abort</strong> = &lt;class 'imaplib.abort'&gt;</dl>
+
+<dl><dt><strong>error</strong> = &lt;class 'imaplib.error'&gt;</dl>
+
+<dl><dt><strong>mustquote</strong> = &lt;_sre.SRE_Pattern object&gt;</dl>
+
+<dl><dt><strong>readonly</strong> = &lt;class 'imaplib.readonly'&gt;</dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>IMAP4_TLS_PORT</strong> = 993</td></tr></table>
+</body></html>

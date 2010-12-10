@@ -1,0 +1,72 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.utils.xmltools</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.<a href="gdata.tlslite.utils.html"><font color="#ffffff">utils</font></a>.xmltools</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/utils/xmltools.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/utils/xmltools.py</a></font></td></tr></table>
+    <p><tt>Helper&nbsp;functions&nbsp;for&nbsp;XML.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;has&nbsp;misc.&nbsp;helper&nbsp;functions&nbsp;for&nbsp;working&nbsp;with&nbsp;XML&nbsp;DOM&nbsp;nodes.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="array.html">array</a><br>
+<a href="math.html">math</a><br>
+</td><td width="25%" valign=top><a href="xml.dom.minidom.html">xml.dom.minidom</a><br>
+<a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="re.html">re</a><br>
+<a href="xml.sax.saxutils.html">xml.sax.saxutils</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+<a href="traceback.html">traceback</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-checkName"><strong>checkName</strong></a>(element, name)</dt></dl>
+ <dl><dt><a name="-checkNoMoreAttributes"><strong>checkNoMoreAttributes</strong></a>(element)</dt></dl>
+ <dl><dt><a name="-escape"><strong>escape</strong></a>(s)</dt></dl>
+ <dl><dt><a name="-getAttribute"><strong>getAttribute</strong></a>(element, attrName, regEx<font color="#909090">=''</font>)</dt></dl>
+ <dl><dt><a name="-getChild"><strong>getChild</strong></a>(element, index, name<font color="#909090">=None</font>)</dt></dl>
+ <dl><dt><a name="-getChildIter"><strong>getChildIter</strong></a>(element, index)</dt></dl>
+ <dl><dt><a name="-getChildOrNone"><strong>getChildOrNone</strong></a>(element, index)</dt></dl>
+ <dl><dt><a name="-getLastChild"><strong>getLastChild</strong></a>(element, index, name<font color="#909090">=None</font>)</dt></dl>
+ <dl><dt><a name="-getReqAttribute"><strong>getReqAttribute</strong></a>(element, attrName, regEx<font color="#909090">=''</font>)</dt></dl>
+ <dl><dt><a name="-getText"><strong>getText</strong></a>(element, regEx<font color="#909090">=''</font>)</dt></dl>
+ <dl><dt><a name="-indent"><strong>indent</strong></a>(s, steps, ch<font color="#909090">='<font color="#c040c0">\t</font>'</font>)</dt><dd><tt>#Function&nbsp;for&nbsp;adding&nbsp;tabs&nbsp;to&nbsp;a&nbsp;string</tt></dd></dl>
+ <dl><dt><a name="-parseAndStripWhitespace"><strong>parseAndStripWhitespace</strong></a>(s)</dt></dl>
+ <dl><dt><a name="-parseDocument"><strong>parseDocument</strong></a>(s)</dt></dl>
+ <dl><dt><a name="-stripWhitespace"><strong>stripWhitespace</strong></a>(element, tab<font color="#909090">=0</font>)</dt><dd><tt>#Goes&nbsp;through&nbsp;a&nbsp;DOM&nbsp;tree&nbsp;and&nbsp;removes&nbsp;whitespace&nbsp;besides&nbsp;child&nbsp;elements,<br>
+#as&nbsp;long&nbsp;as&nbsp;this&nbsp;whitespace&nbsp;is&nbsp;correctly&nbsp;tab-ified</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>base64RegEx</strong> = r'[A-Za-z0-9+/]+={0,4}\Z'<br>
+<strong>booleanRegEx</strong> = '(true)|(false)'<br>
+<strong>certsListRegEx</strong> = r'(0)?(1)?(2)?(3)?(4)?(5)?(6)?(7)?(8)?(9)?\Z'<br>
+<strong>cryptoIDRegEx</strong> = r'([a-km-z3-9]{5}\.){3}[a-km-z3-9]{5}\Z'<br>
+<strong>dateTimeRegEx</strong> = r'\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\dZ\Z'<br>
+<strong>exprRegEx</strong> = r'[a-zA-Z0-9 ,()]{1,200}\Z'<br>
+<strong>keyRegEx</strong> = r'[A-Z]\Z'<br>
+<strong>keysListRegEx</strong> = r'(A)?(B)?(C)?(D)?(E)?(F)?(G)?(H)?(I)?(J)?(K)?(L)?...O)?(P)?(Q)?(R)?(S)?(T)?(U)?(V)?(W)?(X)?(Y)?(Z)?\Z'<br>
+<strong>notAfterDeltaRegEx</strong> = r'0|([1-9][0-9]{0,8})\Z'<br>
+<strong>nsRegEx</strong> = r'http://trevp.net/cryptoID\Z'<br>
+<strong>sha1Base64RegEx</strong> = r'[A-Za-z0-9+/]{27}=\Z'<br>
+<strong>shortStringRegEx</strong> = r'.{1,100}\Z'<br>
+<strong>urlRegEx</strong> = r'http(s)?://.{1,100}\Z'</td></tr></table>
+</body></html>

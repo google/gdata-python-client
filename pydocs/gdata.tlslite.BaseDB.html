@@ -1,0 +1,74 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.BaseDB</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.BaseDB</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/BaseDB.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/BaseDB.py</a></font></td></tr></table>
+    <p><tt>Base&nbsp;class&nbsp;for&nbsp;SharedKeyDB&nbsp;and&nbsp;VerifierDB.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="anydbm.html">anydbm</a><br>
+</td><td width="25%" valign=top><a href="thread.html">thread</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.BaseDB.html#BaseDB">BaseDB</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BaseDB">class <strong>BaseDB</strong></a></font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="BaseDB-__contains__"><strong>__contains__</strong></a>(self, username)</dt><dd><tt>Check&nbsp;if&nbsp;the&nbsp;database&nbsp;contains&nbsp;the&nbsp;specified&nbsp;username.<br>
+&nbsp;<br>
+@type&nbsp;username:&nbsp;str<br>
+@param&nbsp;username:&nbsp;The&nbsp;username&nbsp;to&nbsp;check&nbsp;for.<br>
+&nbsp;<br>
+@rtype:&nbsp;bool<br>
+@return:&nbsp;True&nbsp;if&nbsp;the&nbsp;database&nbsp;contains&nbsp;the&nbsp;username,&nbsp;False<br>
+otherwise.</tt></dd></dl>
+
+<dl><dt><a name="BaseDB-__delitem__"><strong>__delitem__</strong></a>(self, username)</dt></dl>
+
+<dl><dt><a name="BaseDB-__getitem__"><strong>__getitem__</strong></a>(self, username)</dt></dl>
+
+<dl><dt><a name="BaseDB-__init__"><strong>__init__</strong></a>(self, filename, type)</dt></dl>
+
+<dl><dt><a name="BaseDB-__setitem__"><strong>__setitem__</strong></a>(self, username, value)</dt></dl>
+
+<dl><dt><a name="BaseDB-check"><strong>check</strong></a>(self, username, param)</dt></dl>
+
+<dl><dt><a name="BaseDB-create"><strong>create</strong></a>(self)</dt><dd><tt>Create&nbsp;a&nbsp;new&nbsp;on-disk&nbsp;database.<br>
+&nbsp;<br>
+@raise&nbsp;anydbm.error:&nbsp;If&nbsp;there's&nbsp;a&nbsp;problem&nbsp;creating&nbsp;the&nbsp;database.</tt></dd></dl>
+
+<dl><dt><a name="BaseDB-keys"><strong>keys</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;list&nbsp;of&nbsp;usernames&nbsp;in&nbsp;the&nbsp;database.<br>
+&nbsp;<br>
+@rtype:&nbsp;list<br>
+@return:&nbsp;The&nbsp;usernames&nbsp;in&nbsp;the&nbsp;database.</tt></dd></dl>
+
+<dl><dt><a name="BaseDB-open"><strong>open</strong></a>(self)</dt><dd><tt>Open&nbsp;a&nbsp;pre-existing&nbsp;on-disk&nbsp;database.<br>
+&nbsp;<br>
+@raise&nbsp;anydbm.error:&nbsp;If&nbsp;there's&nbsp;a&nbsp;problem&nbsp;opening&nbsp;the&nbsp;database.<br>
+@raise&nbsp;ValueError:&nbsp;If&nbsp;the&nbsp;database&nbsp;is&nbsp;not&nbsp;of&nbsp;the&nbsp;right&nbsp;type.</tt></dd></dl>
+
+</td></tr></table></td></tr></table>
+</body></html>

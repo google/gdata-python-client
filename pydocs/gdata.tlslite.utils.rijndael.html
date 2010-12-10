@@ -1,0 +1,101 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.utils.rijndael</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.<a href="gdata.tlslite.utils.html"><font color="#ffffff">utils</font></a>.rijndael</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/utils/rijndael.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/utils/rijndael.py</a></font></td></tr></table>
+    <p><tt>A&nbsp;pure&nbsp;python&nbsp;(slow)&nbsp;implementation&nbsp;of&nbsp;<a href="#rijndael">rijndael</a>&nbsp;with&nbsp;a&nbsp;decent&nbsp;interface<br>
+&nbsp;<br>
+To&nbsp;include&nbsp;-<br>
+&nbsp;<br>
+from&nbsp;<a href="#rijndael">rijndael</a>&nbsp;import&nbsp;<a href="#rijndael">rijndael</a><br>
+&nbsp;<br>
+To&nbsp;do&nbsp;a&nbsp;key&nbsp;setup&nbsp;-<br>
+&nbsp;<br>
+r&nbsp;=&nbsp;<a href="#rijndael">rijndael</a>(key,&nbsp;block_size&nbsp;=&nbsp;16)<br>
+&nbsp;<br>
+key&nbsp;must&nbsp;be&nbsp;a&nbsp;string&nbsp;of&nbsp;length&nbsp;16,&nbsp;24,&nbsp;or&nbsp;32<br>
+blocksize&nbsp;must&nbsp;be&nbsp;16,&nbsp;24,&nbsp;or&nbsp;32.&nbsp;Default&nbsp;is&nbsp;16<br>
+&nbsp;<br>
+To&nbsp;use&nbsp;-<br>
+&nbsp;<br>
+ciphertext&nbsp;=&nbsp;r.<a href="#-encrypt">encrypt</a>(plaintext)<br>
+plaintext&nbsp;=&nbsp;r.<a href="#-decrypt">decrypt</a>(ciphertext)<br>
+&nbsp;<br>
+If&nbsp;any&nbsp;strings&nbsp;are&nbsp;of&nbsp;the&nbsp;wrong&nbsp;length&nbsp;a&nbsp;ValueError&nbsp;is&nbsp;thrown</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="copy.html">copy</a><br>
+<a href="exceptions.html">exceptions</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+<a href="string.html">string</a><br>
+</td><td width="25%" valign=top><a href="warnings.html">warnings</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.utils.rijndael.html#rijndael">rijndael</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="rijndael">class <strong>rijndael</strong></a></font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="rijndael-__init__"><strong>__init__</strong></a>(self, key, block_size<font color="#909090">=16</font>)</dt></dl>
+
+<dl><dt><a name="rijndael-decrypt"><strong>decrypt</strong></a>(self, ciphertext)</dt></dl>
+
+<dl><dt><a name="rijndael-encrypt"><strong>encrypt</strong></a>(self, plaintext)</dt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-decrypt"><strong>decrypt</strong></a>(key, block)</dt></dl>
+ <dl><dt><a name="-encrypt"><strong>encrypt</strong></a>(key, block)</dt></dl>
+ <dl><dt><a name="-test"><strong>test</strong></a>()</dt></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>S</strong> = [99, 124, 119, 123, 242, 107, 111, 197, 48, 1, 103, 43, 254, 215, 171, 118, 202, 130, 201, 125, ...]<br>
+<strong>Si</strong> = [82, 9, 106, 213, 48, 54, 165, 56, 191, 64, 163, 158, 129, 243, 215, 251, 124, 227, 57, 130, ...]<br>
+<strong>T1</strong> = [3328402341, 4168907908, 4000806809, 4135287693, 4294111757, 3597364157, 3731845041, 2445657428, 1613770832, 33620227, 3462883241, 1445669757, 3892248089, 3050821474, 1303096294, 3967186586, 2412431941, 528646813, 2311702848, 4202528135, ...]<br>
+<strong>T2</strong> = [2781242211, 2230877308, 2582542199, 2381740923, 234877682, 3184946027, 2984144751, 1418839493, 1348481072, 50462977, 2848876391, 2102799147, 434634494, 1656084439, 3863849899, 2599188086, 1167051466, 2636087938, 1082771913, 2281340285, ...]<br>
+<strong>T3</strong> = [1671808611, 2089089148, 2006576759, 2072901243, 4061003762, 1807603307, 1873927791, 3310653893, 810573872, 16974337, 1739181671, 729634347, 4263110654, 3613570519, 2883997099, 1989864566, 3393556426, 2191335298, 3376449993, 2106063485, ...]<br>
+<strong>T4</strong> = [1667474886, 2088535288, 2004326894, 2071694838, 4075949567, 1802223062, 1869591006, 3318043793, 808472672, 16843522, 1734846926, 724270422, 4278065639, 3621216949, 2880169549, 1987484396, 3402253711, 2189597983, 3385409673, 2105378810, ...]<br>
+<strong>T5</strong> = [1374988112, 2118214995, 437757123, 975658646, 1001089995, 530400753, 2902087851, 1273168787, 540080725, 2910219766, 2295101073, 4110568485, 1340463100, 3307916247, 641025152, 3043140495, 3736164937, 632953703, 1172967064, 1576976609, ...]<br>
+<strong>T6</strong> = [1347548327, 1400783205, 3273267108, 2520393566, 3409685355, 4045380933, 2880240216, 2471224067, 1428173050, 4138563181, 2441661558, 636813900, 4233094615, 3620022987, 2149987652, 2411029155, 1239331162, 1730525723, 2554718734, 3781033664, ...]<br>
+<strong>T7</strong> = [2807058932, 1699970625, 2764249623, 1586903591, 1808481195, 1173430173, 1487645946, 59984867, 4199882800, 1844882806, 1989249228, 1277555970, 3623636965, 3419915562, 1149249077, 2744104290, 1514790577, 459744698, 244860394, 3235995134, ...]<br>
+<strong>T8</strong> = [4104605777, 1097159550, 396673818, 660510266, 2875968315, 2638606623, 4200115116, 3808662347, 821712160, 1986918061, 3430322568, 38544885, 3856137295, 718002117, 893681702, 1654886325, 2975484382, 3122358053, 3926825029, 4274053469, ...]<br>
+<strong>U1</strong> = [0, 235474187, 470948374, 303765277, 941896748, 908933415, 607530554, 708780849, 1883793496, 2118214995, 1817866830, 1649639237, 1215061108, 1181045119, 1417561698, 1517767529, 3767586992, 4003061179, 4236429990, 4069246893, ...]<br>
+<strong>U2</strong> = [0, 185469197, 370938394, 487725847, 741876788, 657861945, 975451694, 824852259, 1483753576, 1400783205, 1315723890, 1164071807, 1950903388, 2135319889, 1649704518, 1767536459, 2967507152, 3152976349, 2801566410, 2918353863, ...]<br>
+<strong>U3</strong> = [0, 218828297, 437656594, 387781147, 875313188, 958871085, 775562294, 590424639, 1750626376, 1699970625, 1917742170, 2135253587, 1551124588, 1367295589, 1180849278, 1265195639, 3501252752, 3720081049, 3399941250, 3350065803, ...]<br>
+<strong>U4</strong> = [0, 151849742, 303699484, 454499602, 607398968, 758720310, 908999204, 1059270954, 1214797936, 1097159550, 1517440620, 1400849762, 1817998408, 1699839814, 2118541908, 2001430874, 2429595872, 2581445614, 2194319100, 2345119218, ...]<br>
+<strong>num_rounds</strong> = {16: {16: 10, 24: 12, 32: 14}, 24: {16: 12, 24: 12, 32: 14}, 32: {16: 14, 24: 14, 32: 14}}<br>
+<strong>rcon</strong> = [1, 2, 4, 8, 16, 32, 64, 128, 27, 54, 108, 216, 171, 77, 154, 47, 94, 188, 99, 198, ...]<br>
+<strong>shifts</strong> = [[[0, 0], [1, 3], [2, 2], [3, 1]], [[0, 0], [1, 5], [2, 4], [3, 3]], [[0, 0], [1, 7], [3, 5], [4, 4]]]</td></tr></table>
+</body></html>

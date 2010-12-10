@@ -1,0 +1,476 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: package gdata.oauth</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.oauth</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/oauth/__init__.py">/usr/local/lib/python2.6/dist-packages/gdata/oauth/__init__.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Package Contents</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="gdata.oauth.rsa.html">rsa</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.oauth.html#OAuthClient">OAuthClient</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.oauth.html#OAuthConsumer">OAuthConsumer</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.oauth.html#OAuthDataStore">OAuthDataStore</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.oauth.html#OAuthRequest">OAuthRequest</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.oauth.html#OAuthServer">OAuthServer</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.oauth.html#OAuthSignatureMethod">OAuthSignatureMethod</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.oauth.html#OAuthSignatureMethod_HMAC_SHA1">OAuthSignatureMethod_HMAC_SHA1</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.oauth.html#OAuthSignatureMethod_PLAINTEXT">OAuthSignatureMethod_PLAINTEXT</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gdata.oauth.html#OAuthToken">OAuthToken</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="exceptions.html#RuntimeError">exceptions.RuntimeError</a>(<a href="exceptions.html#StandardError">exceptions.StandardError</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.oauth.html#OAuthError">OAuthError</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="OAuthClient">class <strong>OAuthClient</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>#&nbsp;<a href="#OAuthClient">OAuthClient</a>&nbsp;is&nbsp;a&nbsp;worker&nbsp;to&nbsp;attempt&nbsp;to&nbsp;execute&nbsp;a&nbsp;request<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="OAuthClient-__init__"><strong>__init__</strong></a>(self, oauth_consumer, oauth_token)</dt></dl>
+
+<dl><dt><a name="OAuthClient-access_resource"><strong>access_resource</strong></a>(self, oauth_request)</dt></dl>
+
+<dl><dt><a name="OAuthClient-fetch_access_token"><strong>fetch_access_token</strong></a>(self, oauth_request)</dt></dl>
+
+<dl><dt><a name="OAuthClient-fetch_request_token"><strong>fetch_request_token</strong></a>(self, oauth_request)</dt></dl>
+
+<dl><dt><a name="OAuthClient-get_consumer"><strong>get_consumer</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="OAuthClient-get_token"><strong>get_token</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>consumer</strong> = None</dl>
+
+<dl><dt><strong>token</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="OAuthConsumer">class <strong>OAuthConsumer</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>#&nbsp;<a href="#OAuthConsumer">OAuthConsumer</a>&nbsp;is&nbsp;a&nbsp;data&nbsp;type&nbsp;that&nbsp;represents&nbsp;the&nbsp;identity&nbsp;of&nbsp;the&nbsp;Consumer<br>
+#&nbsp;via&nbsp;its&nbsp;shared&nbsp;secret&nbsp;with&nbsp;the&nbsp;Service&nbsp;Provider.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="OAuthConsumer-__init__"><strong>__init__</strong></a>(self, key, secret)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>key</strong> = None</dl>
+
+<dl><dt><strong>secret</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="OAuthDataStore">class <strong>OAuthDataStore</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>#&nbsp;<a href="#OAuthDataStore">OAuthDataStore</a>&nbsp;is&nbsp;a&nbsp;database&nbsp;abstraction&nbsp;used&nbsp;to&nbsp;lookup&nbsp;consumers&nbsp;and&nbsp;tokens<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="OAuthDataStore-authorize_request_token"><strong>authorize_request_token</strong></a>(self, oauth_token, user)</dt></dl>
+
+<dl><dt><a name="OAuthDataStore-fetch_access_token"><strong>fetch_access_token</strong></a>(self, oauth_consumer, oauth_token)</dt></dl>
+
+<dl><dt><a name="OAuthDataStore-fetch_request_token"><strong>fetch_request_token</strong></a>(self, oauth_consumer)</dt></dl>
+
+<dl><dt><a name="OAuthDataStore-lookup_consumer"><strong>lookup_consumer</strong></a>(self, key)</dt></dl>
+
+<dl><dt><a name="OAuthDataStore-lookup_nonce"><strong>lookup_nonce</strong></a>(self, oauth_consumer, oauth_token, nonce, timestamp)</dt></dl>
+
+<dl><dt><a name="OAuthDataStore-lookup_token"><strong>lookup_token</strong></a>(self, oauth_consumer, token_type, token_token)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="OAuthError">class <strong>OAuthError</strong></a>(<a href="exceptions.html#RuntimeError">exceptions.RuntimeError</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>#&nbsp;Generic&nbsp;exception&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.oauth.html#OAuthError">OAuthError</a></dd>
+<dd><a href="exceptions.html#RuntimeError">exceptions.RuntimeError</a></dd>
+<dd><a href="exceptions.html#StandardError">exceptions.StandardError</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="OAuthError-__init__"><strong>__init__</strong></a>(self, message<font color="#909090">='OAuth error occured.'</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#RuntimeError">exceptions.RuntimeError</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#OAuthError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="OAuthError-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#OAuthError-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="OAuthError-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#OAuthError-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="OAuthError-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#OAuthError-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="OAuthError-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#OAuthError-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="OAuthError-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="OAuthError-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#OAuthError-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="OAuthError-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#OAuthError-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="OAuthError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="OAuthError-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#OAuthError-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="OAuthError-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="OAuthRequest">class <strong>OAuthRequest</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>OAuth&nbsp;parameters:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;oauth_consumer_key&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;oauth_token<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;oauth_signature_method<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;oauth_signature&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;oauth_timestamp&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;oauth_nonce<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;oauth_version<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;any&nbsp;additional&nbsp;parameters,&nbsp;as&nbsp;defined&nbsp;by&nbsp;the&nbsp;Service&nbsp;Provider.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="OAuthRequest-__init__"><strong>__init__</strong></a>(self, http_method<font color="#909090">='GET'</font>, http_url<font color="#909090">=None</font>, parameters<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="OAuthRequest-build_signature"><strong>build_signature</strong></a>(self, signature_method, consumer, token)</dt></dl>
+
+<dl><dt><a name="OAuthRequest-get_nonoauth_parameters"><strong>get_nonoauth_parameters</strong></a>(self)</dt><dd><tt>#&nbsp;get&nbsp;any&nbsp;non-oauth&nbsp;parameters</tt></dd></dl>
+
+<dl><dt><a name="OAuthRequest-get_normalized_http_method"><strong>get_normalized_http_method</strong></a>(self)</dt><dd><tt>#&nbsp;just&nbsp;uppercases&nbsp;the&nbsp;http&nbsp;method</tt></dd></dl>
+
+<dl><dt><a name="OAuthRequest-get_normalized_http_url"><strong>get_normalized_http_url</strong></a>(self)</dt><dd><tt>#&nbsp;parses&nbsp;the&nbsp;url&nbsp;and&nbsp;rebuilds&nbsp;it&nbsp;to&nbsp;be&nbsp;scheme://host/path</tt></dd></dl>
+
+<dl><dt><a name="OAuthRequest-get_normalized_parameters"><strong>get_normalized_parameters</strong></a>(self)</dt><dd><tt>#&nbsp;return&nbsp;a&nbsp;string&nbsp;that&nbsp;consists&nbsp;of&nbsp;all&nbsp;the&nbsp;parameters&nbsp;that&nbsp;need&nbsp;to&nbsp;be&nbsp;signed</tt></dd></dl>
+
+<dl><dt><a name="OAuthRequest-get_parameter"><strong>get_parameter</strong></a>(self, parameter)</dt></dl>
+
+<dl><dt><a name="OAuthRequest-set_parameter"><strong>set_parameter</strong></a>(self, parameter, value)</dt></dl>
+
+<dl><dt><a name="OAuthRequest-sign_request"><strong>sign_request</strong></a>(self, signature_method, consumer, token)</dt><dd><tt>#&nbsp;set&nbsp;the&nbsp;signature&nbsp;parameter&nbsp;to&nbsp;the&nbsp;result&nbsp;of&nbsp;build_signature</tt></dd></dl>
+
+<dl><dt><a name="OAuthRequest-to_header"><strong>to_header</strong></a>(self, realm<font color="#909090">=''</font>)</dt><dd><tt>#&nbsp;serialize&nbsp;as&nbsp;a&nbsp;header&nbsp;for&nbsp;an&nbsp;HTTPAuth&nbsp;request</tt></dd></dl>
+
+<dl><dt><a name="OAuthRequest-to_postdata"><strong>to_postdata</strong></a>(self)</dt><dd><tt>#&nbsp;serialize&nbsp;as&nbsp;post&nbsp;data&nbsp;for&nbsp;a&nbsp;POST&nbsp;request</tt></dd></dl>
+
+<dl><dt><a name="OAuthRequest-to_url"><strong>to_url</strong></a>(self)</dt><dd><tt>#&nbsp;serialize&nbsp;as&nbsp;a&nbsp;url&nbsp;for&nbsp;a&nbsp;GET&nbsp;request</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="OAuthRequest-from_consumer_and_token"><strong>from_consumer_and_token</strong></a>(oauth_consumer, token<font color="#909090">=None</font>, http_method<font color="#909090">='GET'</font>, http_url<font color="#909090">=None</font>, parameters<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="OAuthRequest-from_request"><strong>from_request</strong></a>(http_method, http_url, headers<font color="#909090">=None</font>, parameters<font color="#909090">=None</font>, query_string<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="OAuthRequest-from_token_and_callback"><strong>from_token_and_callback</strong></a>(token, callback<font color="#909090">=None</font>, http_method<font color="#909090">='GET'</font>, http_url<font color="#909090">=None</font>, parameters<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>http_method</strong> = 'GET'</dl>
+
+<dl><dt><strong>http_url</strong> = None</dl>
+
+<dl><dt><strong>parameters</strong> = None</dl>
+
+<dl><dt><strong>version</strong> = '1.0'</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="OAuthServer">class <strong>OAuthServer</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>#&nbsp;<a href="#OAuthServer">OAuthServer</a>&nbsp;is&nbsp;a&nbsp;worker&nbsp;to&nbsp;check&nbsp;a&nbsp;requests&nbsp;validity&nbsp;against&nbsp;a&nbsp;data&nbsp;store<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="OAuthServer-__init__"><strong>__init__</strong></a>(self, data_store<font color="#909090">=None</font>, signature_methods<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="OAuthServer-add_signature_method"><strong>add_signature_method</strong></a>(self, signature_method)</dt></dl>
+
+<dl><dt><a name="OAuthServer-authorize_token"><strong>authorize_token</strong></a>(self, token, user)</dt><dd><tt>#&nbsp;authorize&nbsp;a&nbsp;request&nbsp;token</tt></dd></dl>
+
+<dl><dt><a name="OAuthServer-build_authenticate_header"><strong>build_authenticate_header</strong></a>(self, realm<font color="#909090">=''</font>)</dt><dd><tt>#&nbsp;optional&nbsp;support&nbsp;for&nbsp;the&nbsp;authenticate&nbsp;header</tt></dd></dl>
+
+<dl><dt><a name="OAuthServer-fetch_access_token"><strong>fetch_access_token</strong></a>(self, oauth_request)</dt><dd><tt>#&nbsp;process&nbsp;an&nbsp;access_token&nbsp;request<br>
+#&nbsp;returns&nbsp;the&nbsp;access&nbsp;token&nbsp;on&nbsp;success</tt></dd></dl>
+
+<dl><dt><a name="OAuthServer-fetch_request_token"><strong>fetch_request_token</strong></a>(self, oauth_request)</dt><dd><tt>#&nbsp;process&nbsp;a&nbsp;request_token&nbsp;request<br>
+#&nbsp;returns&nbsp;the&nbsp;request&nbsp;token&nbsp;on&nbsp;success</tt></dd></dl>
+
+<dl><dt><a name="OAuthServer-get_callback"><strong>get_callback</strong></a>(self, oauth_request)</dt><dd><tt>#&nbsp;get&nbsp;the&nbsp;callback&nbsp;url</tt></dd></dl>
+
+<dl><dt><a name="OAuthServer-get_data_store"><strong>get_data_store</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="OAuthServer-set_data_store"><strong>set_data_store</strong></a>(self, oauth_data_store)</dt></dl>
+
+<dl><dt><a name="OAuthServer-verify_request"><strong>verify_request</strong></a>(self, oauth_request)</dt><dd><tt>#&nbsp;verify&nbsp;an&nbsp;api&nbsp;call,&nbsp;checks&nbsp;all&nbsp;the&nbsp;parameters</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>data_store</strong> = None</dl>
+
+<dl><dt><strong>signature_methods</strong> = None</dl>
+
+<dl><dt><strong>timestamp_threshold</strong> = 300</dl>
+
+<dl><dt><strong>version</strong> = '1.0'</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="OAuthSignatureMethod">class <strong>OAuthSignatureMethod</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>#&nbsp;<a href="#OAuthSignatureMethod">OAuthSignatureMethod</a>&nbsp;is&nbsp;a&nbsp;strategy&nbsp;class&nbsp;that&nbsp;implements&nbsp;a&nbsp;signature&nbsp;method<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="OAuthSignatureMethod-build_signature"><strong>build_signature</strong></a>(self, oauth_request, oauth_consumer, oauth_token)</dt></dl>
+
+<dl><dt><a name="OAuthSignatureMethod-build_signature_base_string"><strong>build_signature_base_string</strong></a>(self, oauth_request, oauth_consumer, oauth_token)</dt></dl>
+
+<dl><dt><a name="OAuthSignatureMethod-check_signature"><strong>check_signature</strong></a>(self, oauth_request, consumer, token, signature)</dt></dl>
+
+<dl><dt><a name="OAuthSignatureMethod-get_name"><strong>get_name</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="OAuthSignatureMethod_HMAC_SHA1">class <strong>OAuthSignatureMethod_HMAC_SHA1</strong></a>(<a href="gdata.oauth.html#OAuthSignatureMethod">OAuthSignatureMethod</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.oauth.html#OAuthSignatureMethod_HMAC_SHA1">OAuthSignatureMethod_HMAC_SHA1</a></dd>
+<dd><a href="gdata.oauth.html#OAuthSignatureMethod">OAuthSignatureMethod</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="OAuthSignatureMethod_HMAC_SHA1-build_signature"><strong>build_signature</strong></a>(self, oauth_request, consumer, token)</dt></dl>
+
+<dl><dt><a name="OAuthSignatureMethod_HMAC_SHA1-build_signature_base_string"><strong>build_signature_base_string</strong></a>(self, oauth_request, consumer, token)</dt></dl>
+
+<dl><dt><a name="OAuthSignatureMethod_HMAC_SHA1-get_name"><strong>get_name</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.oauth.html#OAuthSignatureMethod">OAuthSignatureMethod</a>:<br>
+<dl><dt><a name="OAuthSignatureMethod_HMAC_SHA1-check_signature"><strong>check_signature</strong></a>(self, oauth_request, consumer, token, signature)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="gdata.oauth.html#OAuthSignatureMethod">OAuthSignatureMethod</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="OAuthSignatureMethod_PLAINTEXT">class <strong>OAuthSignatureMethod_PLAINTEXT</strong></a>(<a href="gdata.oauth.html#OAuthSignatureMethod">OAuthSignatureMethod</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.oauth.html#OAuthSignatureMethod_PLAINTEXT">OAuthSignatureMethod_PLAINTEXT</a></dd>
+<dd><a href="gdata.oauth.html#OAuthSignatureMethod">OAuthSignatureMethod</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="OAuthSignatureMethod_PLAINTEXT-build_signature"><strong>build_signature</strong></a>(self, oauth_request, consumer, token)</dt></dl>
+
+<dl><dt><a name="OAuthSignatureMethod_PLAINTEXT-build_signature_base_string"><strong>build_signature_base_string</strong></a>(self, oauth_request, consumer, token)</dt></dl>
+
+<dl><dt><a name="OAuthSignatureMethod_PLAINTEXT-get_name"><strong>get_name</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.oauth.html#OAuthSignatureMethod">OAuthSignatureMethod</a>:<br>
+<dl><dt><a name="OAuthSignatureMethod_PLAINTEXT-check_signature"><strong>check_signature</strong></a>(self, oauth_request, consumer, token, signature)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="gdata.oauth.html#OAuthSignatureMethod">OAuthSignatureMethod</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="OAuthToken">class <strong>OAuthToken</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>#&nbsp;<a href="#OAuthToken">OAuthToken</a>&nbsp;is&nbsp;a&nbsp;data&nbsp;type&nbsp;that&nbsp;represents&nbsp;an&nbsp;End&nbsp;User&nbsp;via&nbsp;either&nbsp;an&nbsp;access<br>
+#&nbsp;or&nbsp;request&nbsp;token.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="OAuthToken-__init__"><strong>__init__</strong></a>(self, key, secret)</dt></dl>
+
+<dl><dt><a name="OAuthToken-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="OAuthToken-to_string"><strong>to_string</strong></a>(self)</dt></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="OAuthToken-from_string"><strong>from_string</strong></a>(s)</dt><dd><tt>#&nbsp;return&nbsp;a&nbsp;token&nbsp;from&nbsp;something&nbsp;like:<br>
+#&nbsp;oauth_token_secret=digg&amp;oauth_token=digg</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>key</strong> = None</dl>
+
+<dl><dt><strong>secret</strong> = None</dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-build_authenticate_header"><strong>build_authenticate_header</strong></a>(realm<font color="#909090">=''</font>)</dt><dd><tt>#&nbsp;optional&nbsp;WWW-Authenticate&nbsp;header&nbsp;(401&nbsp;error)</tt></dd></dl>
+ <dl><dt><a name="-escape"><strong>escape</strong></a>(s)</dt><dd><tt>#&nbsp;url&nbsp;escape</tt></dd></dl>
+ <dl><dt><a name="-generate_nonce"><strong>generate_nonce</strong></a>(length<font color="#909090">=8</font>)</dt><dd><tt>#&nbsp;util&nbsp;function:&nbsp;nonce<br>
+#&nbsp;pseudorandom&nbsp;number</tt></dd></dl>
+ <dl><dt><a name="-generate_timestamp"><strong>generate_timestamp</strong></a>()</dt><dd><tt>#&nbsp;util&nbsp;function:&nbsp;current&nbsp;timestamp<br>
+#&nbsp;seconds&nbsp;since&nbsp;epoch&nbsp;(UTC)</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>HTTP_METHOD</strong> = 'GET'<br>
+<strong>SIGNATURE_METHOD</strong> = 'PLAINTEXT'<br>
+<strong>VERSION</strong> = '1.0'</td></tr></table>
+</body></html>

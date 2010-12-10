@@ -1,0 +1,152 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.utils.keyfactory</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.<a href="gdata.tlslite.utils.html"><font color="#ffffff">utils</font></a>.keyfactory</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/utils/keyfactory.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/utils/keyfactory.py</a></font></td></tr></table>
+    <p><tt>Factory&nbsp;functions&nbsp;for&nbsp;asymmetric&nbsp;cryptography.<br>
+@sort:&nbsp;generateRSAKey,&nbsp;parseXMLKey,&nbsp;parsePEMKey,&nbsp;parseAsPublicKey,<br>
+parseAsPrivateKey</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="array.html">array</a><br>
+<a href="gdata.tlslite.utils.cryptomath.html">gdata.tlslite.utils.cryptomath</a><br>
+</td><td width="25%" valign=top><a href="math.html">math</a><br>
+<a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+<a href="traceback.html">traceback</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-generateRSAKey"><strong>generateRSAKey</strong></a>(bits, implementations<font color="#909090">=['openssl', 'python']</font>)</dt><dd><tt>Generate&nbsp;an&nbsp;RSA&nbsp;key&nbsp;with&nbsp;the&nbsp;specified&nbsp;bit&nbsp;length.<br>
+&nbsp;<br>
+@type&nbsp;bits:&nbsp;int<br>
+@param&nbsp;bits:&nbsp;Desired&nbsp;bit&nbsp;length&nbsp;of&nbsp;the&nbsp;new&nbsp;key's&nbsp;modulus.<br>
+&nbsp;<br>
+@rtype:&nbsp;L{tlslite.utils.RSAKey.RSAKey}<br>
+@return:&nbsp;A&nbsp;new&nbsp;RSA&nbsp;private&nbsp;key.</tt></dd></dl>
+ <dl><dt><a name="-parseAsPublicKey"><strong>parseAsPublicKey</strong></a>(s)</dt><dd><tt>Parse&nbsp;an&nbsp;XML&nbsp;or&nbsp;PEM-formatted&nbsp;public&nbsp;key.<br>
+&nbsp;<br>
+@type&nbsp;s:&nbsp;str<br>
+@param&nbsp;s:&nbsp;A&nbsp;string&nbsp;containing&nbsp;an&nbsp;XML&nbsp;or&nbsp;PEM-encoded&nbsp;public&nbsp;or&nbsp;private&nbsp;key.<br>
+&nbsp;<br>
+@rtype:&nbsp;L{tlslite.utils.RSAKey.RSAKey}<br>
+@return:&nbsp;An&nbsp;RSA&nbsp;public&nbsp;key.<br>
+&nbsp;<br>
+@raise&nbsp;SyntaxError:&nbsp;If&nbsp;the&nbsp;key&nbsp;is&nbsp;not&nbsp;properly&nbsp;formatted.</tt></dd></dl>
+ <dl><dt><a name="-parsePEMKey"><strong>parsePEMKey</strong></a>(s, private<font color="#909090">=False</font>, public<font color="#909090">=False</font>, passwordCallback<font color="#909090">=None</font>, implementations<font color="#909090">=['openssl', 'python']</font>)</dt><dd><tt>Parse&nbsp;a&nbsp;PEM-format&nbsp;key.<br>
+&nbsp;<br>
+The&nbsp;PEM&nbsp;format&nbsp;is&nbsp;used&nbsp;by&nbsp;OpenSSL&nbsp;and&nbsp;other&nbsp;tools.&nbsp;&nbsp;The<br>
+format&nbsp;is&nbsp;typically&nbsp;used&nbsp;to&nbsp;store&nbsp;both&nbsp;the&nbsp;public&nbsp;and&nbsp;private<br>
+components&nbsp;of&nbsp;a&nbsp;key.&nbsp;&nbsp;For&nbsp;example::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;-----BEGIN&nbsp;RSA&nbsp;PRIVATE&nbsp;KEY-----<br>
+&nbsp;&nbsp;&nbsp;&nbsp;MIICXQIBAAKBgQDYscuoMzsGmW0pAYsmyHltxB2TdwHS0dImfjCMfaSDkfLdZY5+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dOWORVns9etWnr194mSGA1F0Pls/VJW8+cX9+3vtJV8zSdANPYUoQf0TP7VlJxkH<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dSRkUbEoz5bAAs/+970uos7n7iXQIni+3erUTdYEk2iWnMBjTljfgbK/dQIDAQAB<br>
+&nbsp;&nbsp;&nbsp;&nbsp;AoGAJHoJZk75aKr7DSQNYIHuruOMdv5ZeDuJvKERWxTrVJqE32/xBKh42/IgqRrc<br>
+&nbsp;&nbsp;&nbsp;&nbsp;esBN9ZregRCd7YtxoL+EVUNWaJNVx2mNmezEznrc9zhcYUrgeaVdFO2yBF1889zO<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gCOVwrO8uDgeyj6IKa25H6c1N13ih/o7ZzEgWbGG+ylU1yECQQDv4ZSJ4EjSh/Fl<br>
+&nbsp;&nbsp;&nbsp;&nbsp;aHdz3wbBa/HKGTjC8iRy476Cyg2Fm8MZUe9Yy3udOrb5ZnS2MTpIXt5AF3h2TfYV<br>
+&nbsp;&nbsp;&nbsp;&nbsp;VoFXIorjAkEA50FcJmzT8sNMrPaV8vn+9W2Lu4U7C+K/O2g1iXMaZms5PC5zV5aV<br>
+&nbsp;&nbsp;&nbsp;&nbsp;CKXZWUX1fq2RaOzlbQrpgiolhXpeh8FjxwJBAOFHzSQfSsTNfttp3KUpU0LbiVvv<br>
+&nbsp;&nbsp;&nbsp;&nbsp;i+spVSnA0O4rq79KpVNmK44Mq67hsW1P11QzrzTAQ6GVaUBRv0YS061td1kCQHnP<br>
+&nbsp;&nbsp;&nbsp;&nbsp;wtN2tboFR6lABkJDjxoGRvlSt4SOPr7zKGgrWjeiuTZLHXSAnCY+/hr5L9Q3ZwXG<br>
+&nbsp;&nbsp;&nbsp;&nbsp;6x6iBdgLjVIe4BZQNtcCQQDXGv/gWinCNTN3MPWfTW/RGzuMYVmyBFais0/VrgdH<br>
+&nbsp;&nbsp;&nbsp;&nbsp;h1dLpztmpQqfyH/zrBXQ9qL/zR4ojS6XYneO/U18WpEe<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-----END&nbsp;RSA&nbsp;PRIVATE&nbsp;KEY-----<br>
+&nbsp;<br>
+To&nbsp;generate&nbsp;a&nbsp;key&nbsp;like&nbsp;this&nbsp;with&nbsp;OpenSSL,&nbsp;run::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;openssl&nbsp;genrsa&nbsp;2048&nbsp;&gt;&nbsp;key.pem<br>
+&nbsp;<br>
+This&nbsp;format&nbsp;also&nbsp;supports&nbsp;password-encrypted&nbsp;private&nbsp;keys.&nbsp;&nbsp;TLS<br>
+Lite&nbsp;can&nbsp;only&nbsp;handle&nbsp;password-encrypted&nbsp;private&nbsp;keys&nbsp;when&nbsp;OpenSSL<br>
+and&nbsp;M2Crypto&nbsp;are&nbsp;installed.&nbsp;&nbsp;In&nbsp;this&nbsp;case,&nbsp;passwordCallback&nbsp;will&nbsp;be<br>
+invoked&nbsp;to&nbsp;query&nbsp;the&nbsp;user&nbsp;for&nbsp;the&nbsp;password.<br>
+&nbsp;<br>
+@type&nbsp;s:&nbsp;str<br>
+@param&nbsp;s:&nbsp;A&nbsp;string&nbsp;containing&nbsp;a&nbsp;PEM-encoded&nbsp;public&nbsp;or&nbsp;private&nbsp;key.<br>
+&nbsp;<br>
+@type&nbsp;private:&nbsp;bool<br>
+@param&nbsp;private:&nbsp;If&nbsp;True,&nbsp;a&nbsp;L{SyntaxError}&nbsp;will&nbsp;be&nbsp;raised&nbsp;if&nbsp;the<br>
+private&nbsp;key&nbsp;component&nbsp;is&nbsp;not&nbsp;present.<br>
+&nbsp;<br>
+@type&nbsp;public:&nbsp;bool<br>
+@param&nbsp;public:&nbsp;If&nbsp;True,&nbsp;the&nbsp;private&nbsp;key&nbsp;component&nbsp;(if&nbsp;present)&nbsp;will<br>
+be&nbsp;discarded,&nbsp;so&nbsp;this&nbsp;function&nbsp;will&nbsp;always&nbsp;return&nbsp;a&nbsp;public&nbsp;key.<br>
+&nbsp;<br>
+@type&nbsp;passwordCallback:&nbsp;callable<br>
+@param&nbsp;passwordCallback:&nbsp;This&nbsp;function&nbsp;will&nbsp;be&nbsp;called,&nbsp;with&nbsp;no<br>
+arguments,&nbsp;if&nbsp;the&nbsp;PEM-encoded&nbsp;private&nbsp;key&nbsp;is&nbsp;password-encrypted.<br>
+The&nbsp;callback&nbsp;should&nbsp;return&nbsp;the&nbsp;password&nbsp;string.&nbsp;&nbsp;If&nbsp;the&nbsp;password&nbsp;is<br>
+incorrect,&nbsp;SyntaxError&nbsp;will&nbsp;be&nbsp;raised.&nbsp;&nbsp;If&nbsp;no&nbsp;callback&nbsp;is&nbsp;passed<br>
+and&nbsp;the&nbsp;key&nbsp;is&nbsp;password-encrypted,&nbsp;a&nbsp;prompt&nbsp;will&nbsp;be&nbsp;displayed&nbsp;at<br>
+the&nbsp;console.<br>
+&nbsp;<br>
+@rtype:&nbsp;L{tlslite.utils.RSAKey.RSAKey}<br>
+@return:&nbsp;An&nbsp;RSA&nbsp;key.<br>
+&nbsp;<br>
+@raise&nbsp;SyntaxError:&nbsp;If&nbsp;the&nbsp;key&nbsp;is&nbsp;not&nbsp;properly&nbsp;formatted.</tt></dd></dl>
+ <dl><dt><a name="-parsePrivateKey"><strong>parsePrivateKey</strong></a>(s)</dt><dd><tt>Parse&nbsp;an&nbsp;XML&nbsp;or&nbsp;PEM-formatted&nbsp;private&nbsp;key.<br>
+&nbsp;<br>
+@type&nbsp;s:&nbsp;str<br>
+@param&nbsp;s:&nbsp;A&nbsp;string&nbsp;containing&nbsp;an&nbsp;XML&nbsp;or&nbsp;PEM-encoded&nbsp;private&nbsp;key.<br>
+&nbsp;<br>
+@rtype:&nbsp;L{tlslite.utils.RSAKey.RSAKey}<br>
+@return:&nbsp;An&nbsp;RSA&nbsp;private&nbsp;key.<br>
+&nbsp;<br>
+@raise&nbsp;SyntaxError:&nbsp;If&nbsp;the&nbsp;key&nbsp;is&nbsp;not&nbsp;properly&nbsp;formatted.</tt></dd></dl>
+ <dl><dt><a name="-parseXMLKey"><strong>parseXMLKey</strong></a>(s, private<font color="#909090">=False</font>, public<font color="#909090">=False</font>, implementations<font color="#909090">=['python']</font>)</dt><dd><tt>Parse&nbsp;an&nbsp;XML-format&nbsp;key.<br>
+&nbsp;<br>
+The&nbsp;XML&nbsp;format&nbsp;used&nbsp;here&nbsp;is&nbsp;specific&nbsp;to&nbsp;tlslite&nbsp;and&nbsp;cryptoIDlib.&nbsp;&nbsp;The<br>
+format&nbsp;can&nbsp;store&nbsp;the&nbsp;public&nbsp;component&nbsp;of&nbsp;a&nbsp;key,&nbsp;or&nbsp;the&nbsp;public&nbsp;and<br>
+private&nbsp;components.&nbsp;&nbsp;For&nbsp;example::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;publicKey&nbsp;xmlns="<a href="http://trevp.net/rsa">http://trevp.net/rsa</a>"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;n&gt;4a5yzB8oGNlHo866CAspAC47M4Fvx58zwK8pou...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;e&gt;Aw==&lt;/e&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/publicKey&gt;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;privateKey&nbsp;xmlns="<a href="http://trevp.net/rsa">http://trevp.net/rsa</a>"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;n&gt;4a5yzB8oGNlHo866CAspAC47M4Fvx58zwK8pou...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;e&gt;Aw==&lt;/e&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;d&gt;JZ0TIgUxWXmL8KJ0VqyG1V0J3ern9pqIoB0xmy...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;5PreIj6z6ldIGL1V4+1C36dQFHNCQHJvW52GXc...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;q&gt;/E/wDit8YXPCxx126zTq2ilQ3IcW54NJYyNjiZ...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dP&gt;mKc+wX8inDowEH45Qp4slRo1YveBgExKPROu6...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dQ&gt;qDVKtBz9lk0shL5PR3ickXDgkwS576zbl2ztB...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;qInv&gt;j6E8EA7dNsTImaXexAmLA1DoeArsYeFAInr...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/privateKey&gt;<br>
+&nbsp;<br>
+@type&nbsp;s:&nbsp;str<br>
+@param&nbsp;s:&nbsp;A&nbsp;string&nbsp;containing&nbsp;an&nbsp;XML&nbsp;public&nbsp;or&nbsp;private&nbsp;key.<br>
+&nbsp;<br>
+@type&nbsp;private:&nbsp;bool<br>
+@param&nbsp;private:&nbsp;If&nbsp;True,&nbsp;a&nbsp;L{SyntaxError}&nbsp;will&nbsp;be&nbsp;raised&nbsp;if&nbsp;the&nbsp;private<br>
+key&nbsp;component&nbsp;is&nbsp;not&nbsp;present.<br>
+&nbsp;<br>
+@type&nbsp;public:&nbsp;bool<br>
+@param&nbsp;public:&nbsp;If&nbsp;True,&nbsp;the&nbsp;private&nbsp;key&nbsp;component&nbsp;(if&nbsp;present)&nbsp;will&nbsp;be<br>
+discarded,&nbsp;so&nbsp;this&nbsp;function&nbsp;will&nbsp;always&nbsp;return&nbsp;a&nbsp;public&nbsp;key.<br>
+&nbsp;<br>
+@rtype:&nbsp;L{tlslite.utils.RSAKey.RSAKey}<br>
+@return:&nbsp;An&nbsp;RSA&nbsp;key.<br>
+&nbsp;<br>
+@raise&nbsp;SyntaxError:&nbsp;If&nbsp;the&nbsp;key&nbsp;is&nbsp;not&nbsp;properly&nbsp;formatted.</tt></dd></dl>
+</td></tr></table>
+</body></html>

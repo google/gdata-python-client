@@ -1,0 +1,478 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.messages</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.messages</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/messages.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/messages.py</a></font></td></tr></table>
+    <p><tt>Classes&nbsp;representing&nbsp;TLS&nbsp;messages.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="Crypto.html">Crypto</a><br>
+<a href="array.html">array</a><br>
+<a href="base64.html">base64</a><br>
+</td><td width="25%" valign=top><a href="binascii.html">binascii</a><br>
+<a href="math.html">math</a><br>
+<a href="md5.html">md5</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+<a href="sha.html">sha</a><br>
+<a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top><a href="traceback.html">traceback</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.messages.html#Msg">Msg</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.messages.html#Alert">Alert</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.messages.html#ApplicationData">ApplicationData</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.messages.html#ChangeCipherSpec">ChangeCipherSpec</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.messages.html#Certificate">Certificate</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.messages.html#CertificateRequest">CertificateRequest</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.messages.html#CertificateVerify">CertificateVerify</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.messages.html#ClientHello">ClientHello</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.messages.html#ClientKeyExchange">ClientKeyExchange</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.messages.html#Finished">Finished</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.messages.html#ServerHello">ServerHello</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.messages.html#ServerHelloDone">ServerHelloDone</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.messages.html#ServerKeyExchange">ServerKeyExchange</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.messages.html#RecordHeader2">RecordHeader2</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.tlslite.messages.html#RecordHeader3">RecordHeader3</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Alert">class <strong>Alert</strong></a>(<a href="gdata.tlslite.messages.html#Msg">Msg</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Alert-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Alert-create"><strong>create</strong></a>(self, description, level<font color="#909090">=2</font>)</dt></dl>
+
+<dl><dt><a name="Alert-parse"><strong>parse</strong></a>(self, p)</dt></dl>
+
+<dl><dt><a name="Alert-write"><strong>write</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#Msg">Msg</a>:<br>
+<dl><dt><a name="Alert-postWrite"><strong>postWrite</strong></a>(self, w, trial)</dt></dl>
+
+<dl><dt><a name="Alert-preWrite"><strong>preWrite</strong></a>(self, trial)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ApplicationData">class <strong>ApplicationData</strong></a>(<a href="gdata.tlslite.messages.html#Msg">Msg</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ApplicationData-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ApplicationData-create"><strong>create</strong></a>(self, bytes)</dt></dl>
+
+<dl><dt><a name="ApplicationData-parse"><strong>parse</strong></a>(self, p)</dt></dl>
+
+<dl><dt><a name="ApplicationData-write"><strong>write</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#Msg">Msg</a>:<br>
+<dl><dt><a name="ApplicationData-postWrite"><strong>postWrite</strong></a>(self, w, trial)</dt></dl>
+
+<dl><dt><a name="ApplicationData-preWrite"><strong>preWrite</strong></a>(self, trial)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Certificate">class <strong>Certificate</strong></a>(<a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.messages.html#Certificate">Certificate</a></dd>
+<dd><a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a></dd>
+<dd><a href="gdata.tlslite.messages.html#Msg">Msg</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Certificate-__init__"><strong>__init__</strong></a>(self, certificateType)</dt></dl>
+
+<dl><dt><a name="Certificate-create"><strong>create</strong></a>(self, certChain)</dt></dl>
+
+<dl><dt><a name="Certificate-parse"><strong>parse</strong></a>(self, p)</dt></dl>
+
+<dl><dt><a name="Certificate-write"><strong>write</strong></a>(self, trial<font color="#909090">=False</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a>:<br>
+<dl><dt><a name="Certificate-preWrite"><strong>preWrite</strong></a>(self, handshakeType, trial)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#Msg">Msg</a>:<br>
+<dl><dt><a name="Certificate-postWrite"><strong>postWrite</strong></a>(self, w, trial)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="CertificateRequest">class <strong>CertificateRequest</strong></a>(<a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.messages.html#CertificateRequest">CertificateRequest</a></dd>
+<dd><a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a></dd>
+<dd><a href="gdata.tlslite.messages.html#Msg">Msg</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="CertificateRequest-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="CertificateRequest-create"><strong>create</strong></a>(self, certificate_types, certificate_authorities)</dt></dl>
+
+<dl><dt><a name="CertificateRequest-parse"><strong>parse</strong></a>(self, p)</dt></dl>
+
+<dl><dt><a name="CertificateRequest-write"><strong>write</strong></a>(self, trial<font color="#909090">=False</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a>:<br>
+<dl><dt><a name="CertificateRequest-preWrite"><strong>preWrite</strong></a>(self, handshakeType, trial)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#Msg">Msg</a>:<br>
+<dl><dt><a name="CertificateRequest-postWrite"><strong>postWrite</strong></a>(self, w, trial)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="CertificateVerify">class <strong>CertificateVerify</strong></a>(<a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.messages.html#CertificateVerify">CertificateVerify</a></dd>
+<dd><a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a></dd>
+<dd><a href="gdata.tlslite.messages.html#Msg">Msg</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="CertificateVerify-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="CertificateVerify-create"><strong>create</strong></a>(self, signature)</dt></dl>
+
+<dl><dt><a name="CertificateVerify-parse"><strong>parse</strong></a>(self, p)</dt></dl>
+
+<dl><dt><a name="CertificateVerify-write"><strong>write</strong></a>(self, trial<font color="#909090">=False</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a>:<br>
+<dl><dt><a name="CertificateVerify-preWrite"><strong>preWrite</strong></a>(self, handshakeType, trial)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#Msg">Msg</a>:<br>
+<dl><dt><a name="CertificateVerify-postWrite"><strong>postWrite</strong></a>(self, w, trial)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ChangeCipherSpec">class <strong>ChangeCipherSpec</strong></a>(<a href="gdata.tlslite.messages.html#Msg">Msg</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ChangeCipherSpec-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ChangeCipherSpec-create"><strong>create</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ChangeCipherSpec-parse"><strong>parse</strong></a>(self, p)</dt></dl>
+
+<dl><dt><a name="ChangeCipherSpec-write"><strong>write</strong></a>(self, trial<font color="#909090">=False</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#Msg">Msg</a>:<br>
+<dl><dt><a name="ChangeCipherSpec-postWrite"><strong>postWrite</strong></a>(self, w, trial)</dt></dl>
+
+<dl><dt><a name="ChangeCipherSpec-preWrite"><strong>preWrite</strong></a>(self, trial)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ClientHello">class <strong>ClientHello</strong></a>(<a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.messages.html#ClientHello">ClientHello</a></dd>
+<dd><a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a></dd>
+<dd><a href="gdata.tlslite.messages.html#Msg">Msg</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ClientHello-__init__"><strong>__init__</strong></a>(self, ssl2<font color="#909090">=False</font>)</dt></dl>
+
+<dl><dt><a name="ClientHello-create"><strong>create</strong></a>(self, version, random, session_id, cipher_suites, certificate_types<font color="#909090">=None</font>, srp_username<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="ClientHello-parse"><strong>parse</strong></a>(self, p)</dt></dl>
+
+<dl><dt><a name="ClientHello-write"><strong>write</strong></a>(self, trial<font color="#909090">=False</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a>:<br>
+<dl><dt><a name="ClientHello-preWrite"><strong>preWrite</strong></a>(self, handshakeType, trial)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#Msg">Msg</a>:<br>
+<dl><dt><a name="ClientHello-postWrite"><strong>postWrite</strong></a>(self, w, trial)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ClientKeyExchange">class <strong>ClientKeyExchange</strong></a>(<a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.messages.html#ClientKeyExchange">ClientKeyExchange</a></dd>
+<dd><a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a></dd>
+<dd><a href="gdata.tlslite.messages.html#Msg">Msg</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ClientKeyExchange-__init__"><strong>__init__</strong></a>(self, cipherSuite, version<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="ClientKeyExchange-createRSA"><strong>createRSA</strong></a>(self, encryptedPreMasterSecret)</dt></dl>
+
+<dl><dt><a name="ClientKeyExchange-createSRP"><strong>createSRP</strong></a>(self, srp_A)</dt></dl>
+
+<dl><dt><a name="ClientKeyExchange-parse"><strong>parse</strong></a>(self, p)</dt></dl>
+
+<dl><dt><a name="ClientKeyExchange-write"><strong>write</strong></a>(self, trial<font color="#909090">=False</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a>:<br>
+<dl><dt><a name="ClientKeyExchange-preWrite"><strong>preWrite</strong></a>(self, handshakeType, trial)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#Msg">Msg</a>:<br>
+<dl><dt><a name="ClientKeyExchange-postWrite"><strong>postWrite</strong></a>(self, w, trial)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Finished">class <strong>Finished</strong></a>(<a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.messages.html#Finished">Finished</a></dd>
+<dd><a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a></dd>
+<dd><a href="gdata.tlslite.messages.html#Msg">Msg</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Finished-__init__"><strong>__init__</strong></a>(self, version)</dt></dl>
+
+<dl><dt><a name="Finished-create"><strong>create</strong></a>(self, verify_data)</dt></dl>
+
+<dl><dt><a name="Finished-parse"><strong>parse</strong></a>(self, p)</dt></dl>
+
+<dl><dt><a name="Finished-write"><strong>write</strong></a>(self, trial<font color="#909090">=False</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a>:<br>
+<dl><dt><a name="Finished-preWrite"><strong>preWrite</strong></a>(self, handshakeType, trial)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#Msg">Msg</a>:<br>
+<dl><dt><a name="Finished-postWrite"><strong>postWrite</strong></a>(self, w, trial)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="HandshakeMsg">class <strong>HandshakeMsg</strong></a>(<a href="gdata.tlslite.messages.html#Msg">Msg</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="HandshakeMsg-preWrite"><strong>preWrite</strong></a>(self, handshakeType, trial)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#Msg">Msg</a>:<br>
+<dl><dt><a name="HandshakeMsg-postWrite"><strong>postWrite</strong></a>(self, w, trial)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Msg">class <strong>Msg</strong></a></font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Msg-postWrite"><strong>postWrite</strong></a>(self, w, trial)</dt></dl>
+
+<dl><dt><a name="Msg-preWrite"><strong>preWrite</strong></a>(self, trial)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RecordHeader2">class <strong>RecordHeader2</strong></a></font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="RecordHeader2-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RecordHeader2-parse"><strong>parse</strong></a>(self, p)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RecordHeader3">class <strong>RecordHeader3</strong></a></font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="RecordHeader3-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RecordHeader3-create"><strong>create</strong></a>(self, version, type, length)</dt></dl>
+
+<dl><dt><a name="RecordHeader3-parse"><strong>parse</strong></a>(self, p)</dt></dl>
+
+<dl><dt><a name="RecordHeader3-write"><strong>write</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ServerHello">class <strong>ServerHello</strong></a>(<a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.messages.html#ServerHello">ServerHello</a></dd>
+<dd><a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a></dd>
+<dd><a href="gdata.tlslite.messages.html#Msg">Msg</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ServerHello-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ServerHello-create"><strong>create</strong></a>(self, version, random, session_id, cipher_suite, certificate_type)</dt></dl>
+
+<dl><dt><a name="ServerHello-parse"><strong>parse</strong></a>(self, p)</dt></dl>
+
+<dl><dt><a name="ServerHello-write"><strong>write</strong></a>(self, trial<font color="#909090">=False</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a>:<br>
+<dl><dt><a name="ServerHello-preWrite"><strong>preWrite</strong></a>(self, handshakeType, trial)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#Msg">Msg</a>:<br>
+<dl><dt><a name="ServerHello-postWrite"><strong>postWrite</strong></a>(self, w, trial)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ServerHelloDone">class <strong>ServerHelloDone</strong></a>(<a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.messages.html#ServerHelloDone">ServerHelloDone</a></dd>
+<dd><a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a></dd>
+<dd><a href="gdata.tlslite.messages.html#Msg">Msg</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ServerHelloDone-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ServerHelloDone-create"><strong>create</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ServerHelloDone-parse"><strong>parse</strong></a>(self, p)</dt></dl>
+
+<dl><dt><a name="ServerHelloDone-write"><strong>write</strong></a>(self, trial<font color="#909090">=False</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a>:<br>
+<dl><dt><a name="ServerHelloDone-preWrite"><strong>preWrite</strong></a>(self, handshakeType, trial)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#Msg">Msg</a>:<br>
+<dl><dt><a name="ServerHelloDone-postWrite"><strong>postWrite</strong></a>(self, w, trial)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ServerKeyExchange">class <strong>ServerKeyExchange</strong></a>(<a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.tlslite.messages.html#ServerKeyExchange">ServerKeyExchange</a></dd>
+<dd><a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a></dd>
+<dd><a href="gdata.tlslite.messages.html#Msg">Msg</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ServerKeyExchange-__init__"><strong>__init__</strong></a>(self, cipherSuite)</dt></dl>
+
+<dl><dt><a name="ServerKeyExchange-createSRP"><strong>createSRP</strong></a>(self, srp_N, srp_g, srp_s, srp_B)</dt></dl>
+
+<dl><dt><a name="ServerKeyExchange-hash"><strong>hash</strong></a>(self, clientRandom, serverRandom)</dt></dl>
+
+<dl><dt><a name="ServerKeyExchange-parse"><strong>parse</strong></a>(self, p)</dt></dl>
+
+<dl><dt><a name="ServerKeyExchange-write"><strong>write</strong></a>(self, trial<font color="#909090">=False</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#HandshakeMsg">HandshakeMsg</a>:<br>
+<dl><dt><a name="ServerKeyExchange-preWrite"><strong>preWrite</strong></a>(self, handshakeType, trial)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.messages.html#Msg">Msg</a>:<br>
+<dl><dt><a name="ServerKeyExchange-postWrite"><strong>postWrite</strong></a>(self, w, trial)</dt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-sha1"><strong>sha1</strong></a> = openssl_sha1(...)</dt><dd><tt>Returns&nbsp;a&nbsp;sha1&nbsp;hash&nbsp;object;&nbsp;optionally&nbsp;initialized&nbsp;with&nbsp;a&nbsp;string</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>cryptlibpyLoaded</strong> = False<br>
+<strong>gmpyLoaded</strong> = False<br>
+<strong>m2cryptoLoaded</strong> = False<br>
+<strong>prngName</strong> = 'os.urandom'<br>
+<strong>pycryptoLoaded</strong> = True<br>
+<strong>sieve</strong> = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, ...]</td></tr></table>
+</body></html>

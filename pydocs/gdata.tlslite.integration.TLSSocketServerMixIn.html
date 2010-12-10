@@ -1,0 +1,78 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.integration.TLSSocketServerMixIn</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.<a href="gdata.tlslite.integration.html"><font color="#ffffff">integration</font></a>.TLSSocketServerMixIn</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/integration/TLSSocketServerMixIn.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/integration/TLSSocketServerMixIn.py</a></font></td></tr></table>
+    <p><tt>TLS&nbsp;Lite&nbsp;+&nbsp;SocketServer.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.integration.TLSSocketServerMixIn.html#TLSSocketServerMixIn">TLSSocketServerMixIn</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TLSSocketServerMixIn">class <strong>TLSSocketServerMixIn</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;class&nbsp;can&nbsp;be&nbsp;mixed&nbsp;in&nbsp;with&nbsp;any&nbsp;L{SocketServer.TCPServer}&nbsp;to<br>
+add&nbsp;TLS&nbsp;support.<br>
+&nbsp;<br>
+To&nbsp;use&nbsp;this&nbsp;class,&nbsp;define&nbsp;a&nbsp;new&nbsp;class&nbsp;that&nbsp;inherits&nbsp;from&nbsp;it&nbsp;and<br>
+some&nbsp;L{SocketServer.TCPServer}&nbsp;(with&nbsp;the&nbsp;mix-in&nbsp;first).&nbsp;Then<br>
+implement&nbsp;the&nbsp;<a href="#TLSSocketServerMixIn-handshake">handshake</a>()&nbsp;method,&nbsp;doing&nbsp;some&nbsp;sort&nbsp;of&nbsp;server<br>
+handshake&nbsp;on&nbsp;the&nbsp;connection&nbsp;argument.&nbsp;&nbsp;If&nbsp;the&nbsp;handshake&nbsp;method<br>
+returns&nbsp;True,&nbsp;the&nbsp;RequestHandler&nbsp;will&nbsp;be&nbsp;triggered.&nbsp;&nbsp;Below&nbsp;is&nbsp;a<br>
+complete&nbsp;example&nbsp;of&nbsp;a&nbsp;threaded&nbsp;HTTPS&nbsp;server::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;SocketServer&nbsp;import&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;BaseHTTPServer&nbsp;import&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;SimpleHTTPServer&nbsp;import&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;tlslite.api&nbsp;import&nbsp;*<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;=&nbsp;open("./serverX509Cert.pem").read()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;x509&nbsp;=&nbsp;X509()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;x509.parse(s)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;certChain&nbsp;=&nbsp;X509CertChain([x509])<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;=&nbsp;open("./serverX509Key.pem").read()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;privateKey&nbsp;=&nbsp;parsePEMKey(s,&nbsp;private=True)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sessionCache&nbsp;=&nbsp;SessionCache()<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;class&nbsp;MyHTTPServer(ThreadingMixIn,&nbsp;<a href="#TLSSocketServerMixIn">TLSSocketServerMixIn</a>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTTPServer):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;<a href="#TLSSocketServerMixIn-handshake">handshake</a>(self,&nbsp;tlsConnection):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tlsConnection.handshakeServer(certChain=certChain,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;privateKey=privateKey,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sessionCache=sessionCache)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tlsConnection.ignoreAbruptClose&nbsp;=&nbsp;True<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;True<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;except&nbsp;TLSError,&nbsp;error:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;"Handshake&nbsp;failure:",&nbsp;str(error)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;httpd&nbsp;=&nbsp;MyHTTPServer(('localhost',&nbsp;443),&nbsp;SimpleHTTPRequestHandler)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;httpd.serve_forever()<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="TLSSocketServerMixIn-finish_request"><strong>finish_request</strong></a>(self, sock, client_address)</dt></dl>
+
+<dl><dt><a name="TLSSocketServerMixIn-handshake"><strong>handshake</strong></a>(self, tlsConnection)</dt><dd><tt>#Implement&nbsp;this&nbsp;method&nbsp;to&nbsp;do&nbsp;some&nbsp;form&nbsp;of&nbsp;handshaking.&nbsp;&nbsp;Return&nbsp;True<br>
+#if&nbsp;the&nbsp;handshake&nbsp;finishes&nbsp;properly&nbsp;and&nbsp;the&nbsp;request&nbsp;is&nbsp;authorized.</tt></dd></dl>
+
+</td></tr></table></td></tr></table>
+</body></html>

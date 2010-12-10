@@ -1,0 +1,152 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.VerifierDB</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.VerifierDB</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/VerifierDB.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/VerifierDB.py</a></font></td></tr></table>
+    <p><tt>Class&nbsp;for&nbsp;storing&nbsp;SRP&nbsp;password&nbsp;verifiers.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="Crypto.html">Crypto</a><br>
+<a href="array.html">array</a><br>
+<a href="base64.html">base64</a><br>
+</td><td width="25%" valign=top><a href="binascii.html">binascii</a><br>
+<a href="math.html">math</a><br>
+<a href="gdata.tlslite.mathtls.html">gdata.tlslite.mathtls</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+<a href="sys.html">sys</a><br>
+<a href="traceback.html">traceback</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.BaseDB.html#BaseDB">gdata.tlslite.BaseDB.BaseDB</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.tlslite.VerifierDB.html#VerifierDB">VerifierDB</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="VerifierDB">class <strong>VerifierDB</strong></a>(<a href="gdata.tlslite.BaseDB.html#BaseDB">gdata.tlslite.BaseDB.BaseDB</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;class&nbsp;represent&nbsp;an&nbsp;in-memory&nbsp;or&nbsp;on-disk&nbsp;database&nbsp;of&nbsp;SRP<br>
+password&nbsp;verifiers.<br>
+&nbsp;<br>
+A&nbsp;<a href="#VerifierDB">VerifierDB</a>&nbsp;can&nbsp;be&nbsp;passed&nbsp;to&nbsp;a&nbsp;server&nbsp;handshake&nbsp;to&nbsp;authenticate<br>
+a&nbsp;client&nbsp;based&nbsp;on&nbsp;one&nbsp;of&nbsp;the&nbsp;verifiers.<br>
+&nbsp;<br>
+This&nbsp;class&nbsp;is&nbsp;thread-safe.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="VerifierDB-__init__"><strong>__init__</strong></a>(self, filename<font color="#909090">=None</font>)</dt><dd><tt>Create&nbsp;a&nbsp;new&nbsp;<a href="#VerifierDB">VerifierDB</a>&nbsp;instance.<br>
+&nbsp;<br>
+@type&nbsp;filename:&nbsp;str<br>
+@param&nbsp;filename:&nbsp;Filename&nbsp;for&nbsp;an&nbsp;on-disk&nbsp;database,&nbsp;or&nbsp;None&nbsp;for<br>
+an&nbsp;in-memory&nbsp;database.&nbsp;&nbsp;If&nbsp;the&nbsp;filename&nbsp;already&nbsp;exists,&nbsp;follow<br>
+this&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;<a href="#VerifierDB-open">open</a>().&nbsp;&nbsp;To&nbsp;create&nbsp;a&nbsp;new&nbsp;on-disk&nbsp;database,<br>
+follow&nbsp;this&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;<a href="#VerifierDB-create">create</a>().</tt></dd></dl>
+
+<dl><dt><a name="VerifierDB-__setitem__"><strong>__setitem__</strong></a>(self, username, verifierEntry)</dt><dd><tt>Add&nbsp;a&nbsp;verifier&nbsp;entry&nbsp;to&nbsp;the&nbsp;database.<br>
+&nbsp;<br>
+@type&nbsp;username:&nbsp;str<br>
+@param&nbsp;username:&nbsp;The&nbsp;username&nbsp;to&nbsp;associate&nbsp;the&nbsp;verifier&nbsp;with.<br>
+Must&nbsp;be&nbsp;less&nbsp;than&nbsp;256&nbsp;characters&nbsp;in&nbsp;length.&nbsp;&nbsp;Must&nbsp;not&nbsp;already<br>
+be&nbsp;in&nbsp;the&nbsp;database.<br>
+&nbsp;<br>
+@type&nbsp;verifierEntry:&nbsp;tuple<br>
+@param&nbsp;verifierEntry:&nbsp;The&nbsp;verifier&nbsp;entry&nbsp;to&nbsp;add.&nbsp;&nbsp;Use<br>
+L{tlslite.<a href="#VerifierDB">VerifierDB</a>.<a href="#VerifierDB">VerifierDB</a>.makeVerifier}&nbsp;to&nbsp;create&nbsp;a<br>
+verifier&nbsp;entry.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="VerifierDB-makeVerifier"><strong>makeVerifier</strong></a>(username, password, bits)</dt><dd><tt>Create&nbsp;a&nbsp;verifier&nbsp;entry&nbsp;which&nbsp;can&nbsp;be&nbsp;stored&nbsp;in&nbsp;a&nbsp;<a href="#VerifierDB">VerifierDB</a>.<br>
+&nbsp;<br>
+@type&nbsp;username:&nbsp;str<br>
+@param&nbsp;username:&nbsp;The&nbsp;username&nbsp;for&nbsp;this&nbsp;verifier.&nbsp;&nbsp;Must&nbsp;be&nbsp;less<br>
+than&nbsp;256&nbsp;characters&nbsp;in&nbsp;length.<br>
+&nbsp;<br>
+@type&nbsp;password:&nbsp;str<br>
+@param&nbsp;password:&nbsp;The&nbsp;password&nbsp;for&nbsp;this&nbsp;verifier.<br>
+&nbsp;<br>
+@type&nbsp;bits:&nbsp;int<br>
+@param&nbsp;bits:&nbsp;This&nbsp;values&nbsp;specifies&nbsp;which&nbsp;SRP&nbsp;group&nbsp;parameters<br>
+to&nbsp;use.&nbsp;&nbsp;It&nbsp;must&nbsp;be&nbsp;one&nbsp;of&nbsp;(1024,&nbsp;1536,&nbsp;2048,&nbsp;3072,&nbsp;4096,&nbsp;6144,<br>
+8192).&nbsp;&nbsp;Larger&nbsp;values&nbsp;are&nbsp;more&nbsp;secure&nbsp;but&nbsp;slower.&nbsp;&nbsp;2048&nbsp;is&nbsp;a<br>
+good&nbsp;compromise&nbsp;between&nbsp;safety&nbsp;and&nbsp;speed.<br>
+&nbsp;<br>
+@rtype:&nbsp;tuple<br>
+@return:&nbsp;A&nbsp;tuple&nbsp;which&nbsp;may&nbsp;be&nbsp;stored&nbsp;in&nbsp;a&nbsp;<a href="#VerifierDB">VerifierDB</a>.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="gdata.tlslite.BaseDB.html#BaseDB">gdata.tlslite.BaseDB.BaseDB</a>:<br>
+<dl><dt><a name="VerifierDB-__contains__"><strong>__contains__</strong></a>(self, username)</dt><dd><tt>Check&nbsp;if&nbsp;the&nbsp;database&nbsp;contains&nbsp;the&nbsp;specified&nbsp;username.<br>
+&nbsp;<br>
+@type&nbsp;username:&nbsp;str<br>
+@param&nbsp;username:&nbsp;The&nbsp;username&nbsp;to&nbsp;check&nbsp;for.<br>
+&nbsp;<br>
+@rtype:&nbsp;bool<br>
+@return:&nbsp;True&nbsp;if&nbsp;the&nbsp;database&nbsp;contains&nbsp;the&nbsp;username,&nbsp;False<br>
+otherwise.</tt></dd></dl>
+
+<dl><dt><a name="VerifierDB-__delitem__"><strong>__delitem__</strong></a>(self, username)</dt></dl>
+
+<dl><dt><a name="VerifierDB-__getitem__"><strong>__getitem__</strong></a>(self, username)</dt></dl>
+
+<dl><dt><a name="VerifierDB-check"><strong>check</strong></a>(self, username, param)</dt></dl>
+
+<dl><dt><a name="VerifierDB-create"><strong>create</strong></a>(self)</dt><dd><tt>Create&nbsp;a&nbsp;new&nbsp;on-disk&nbsp;database.<br>
+&nbsp;<br>
+@raise&nbsp;anydbm.error:&nbsp;If&nbsp;there's&nbsp;a&nbsp;problem&nbsp;creating&nbsp;the&nbsp;database.</tt></dd></dl>
+
+<dl><dt><a name="VerifierDB-keys"><strong>keys</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;list&nbsp;of&nbsp;usernames&nbsp;in&nbsp;the&nbsp;database.<br>
+&nbsp;<br>
+@rtype:&nbsp;list<br>
+@return:&nbsp;The&nbsp;usernames&nbsp;in&nbsp;the&nbsp;database.</tt></dd></dl>
+
+<dl><dt><a name="VerifierDB-open"><strong>open</strong></a>(self)</dt><dd><tt>Open&nbsp;a&nbsp;pre-existing&nbsp;on-disk&nbsp;database.<br>
+&nbsp;<br>
+@raise&nbsp;anydbm.error:&nbsp;If&nbsp;there's&nbsp;a&nbsp;problem&nbsp;opening&nbsp;the&nbsp;database.<br>
+@raise&nbsp;ValueError:&nbsp;If&nbsp;the&nbsp;database&nbsp;is&nbsp;not&nbsp;of&nbsp;the&nbsp;right&nbsp;type.</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-sha1"><strong>sha1</strong></a> = openssl_sha1(...)</dt><dd><tt>Returns&nbsp;a&nbsp;sha1&nbsp;hash&nbsp;object;&nbsp;optionally&nbsp;initialized&nbsp;with&nbsp;a&nbsp;string</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>cryptlibpyLoaded</strong> = False<br>
+<strong>gmpyLoaded</strong> = False<br>
+<strong>m2cryptoLoaded</strong> = False<br>
+<strong>prngName</strong> = 'os.urandom'<br>
+<strong>pycryptoLoaded</strong> = True<br>
+<strong>sieve</strong> = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, ...]</td></tr></table>
+</body></html>

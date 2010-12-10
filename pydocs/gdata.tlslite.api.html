@@ -1,0 +1,67 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.tlslite.api</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.api</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/tlslite/api.py">/usr/local/lib/python2.6/dist-packages/gdata/tlslite/api.py</a></font></td></tr></table>
+    <p><tt>Import&nbsp;this&nbsp;module&nbsp;for&nbsp;easy&nbsp;access&nbsp;to&nbsp;TLS&nbsp;Lite&nbsp;objects.<br>
+&nbsp;<br>
+The&nbsp;TLS&nbsp;Lite&nbsp;API&nbsp;consists&nbsp;of&nbsp;classes,&nbsp;functions,&nbsp;and&nbsp;variables&nbsp;spread<br>
+throughout&nbsp;this&nbsp;package.&nbsp;&nbsp;Instead&nbsp;of&nbsp;importing&nbsp;them&nbsp;individually&nbsp;with::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;tlslite.TLSConnection&nbsp;import&nbsp;TLSConnection<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;tlslite.HandshakeSettings&nbsp;import&nbsp;HandshakeSettings<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;tlslite.errors&nbsp;import&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;.<br>
+&nbsp;<br>
+It's&nbsp;easier&nbsp;to&nbsp;do::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;tlslite.api&nbsp;import&nbsp;*<br>
+&nbsp;<br>
+This&nbsp;imports&nbsp;all&nbsp;the&nbsp;important&nbsp;objects&nbsp;(TLSConnection,&nbsp;Checker,<br>
+HandshakeSettings,&nbsp;etc.)&nbsp;into&nbsp;the&nbsp;global&nbsp;namespace.&nbsp;&nbsp;In&nbsp;particular,&nbsp;it<br>
+imports::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;constants&nbsp;import&nbsp;AlertLevel,&nbsp;AlertDescription,&nbsp;Fault<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;errors&nbsp;import&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;Checker&nbsp;import&nbsp;Checker<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;HandshakeSettings&nbsp;import&nbsp;HandshakeSettings<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;Session&nbsp;import&nbsp;Session<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;SessionCache&nbsp;import&nbsp;SessionCache<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;SharedKeyDB&nbsp;import&nbsp;SharedKeyDB<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;TLSConnection&nbsp;import&nbsp;TLSConnection<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;VerifierDB&nbsp;import&nbsp;VerifierDB<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;X509&nbsp;import&nbsp;X509<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;X509CertChain&nbsp;import&nbsp;X509CertChain<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;integration.HTTPTLSConnection&nbsp;import&nbsp;HTTPTLSConnection<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;integration.POP3_TLS&nbsp;import&nbsp;POP3_TLS<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;integration.IMAP4_TLS&nbsp;import&nbsp;IMAP4_TLS<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;integration.SMTP_TLS&nbsp;import&nbsp;SMTP_TLS<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;integration.XMLRPCTransport&nbsp;import&nbsp;XMLRPCTransport<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;integration.TLSSocketServerMixIn&nbsp;import&nbsp;TLSSocketServerMixIn<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;integration.TLSAsyncDispatcherMixIn&nbsp;import&nbsp;TLSAsyncDispatcherMixIn<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;integration.TLSTwistedProtocolWrapper&nbsp;import&nbsp;TLSTwistedProtocolWrapper<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;utils.cryptomath&nbsp;import&nbsp;cryptlibpyLoaded,&nbsp;m2cryptoLoaded,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gmpyLoaded,&nbsp;pycryptoLoaded,&nbsp;prngName<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;utils.keyfactory&nbsp;import&nbsp;generateRSAKey,&nbsp;parsePEMKey,&nbsp;parseXMLKey,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parseAsPublicKey,&nbsp;parsePrivateKey</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>cryptlibpyLoaded</strong> = False<br>
+<strong>gmpyLoaded</strong> = False<br>
+<strong>m2cryptoLoaded</strong> = False<br>
+<strong>prngName</strong> = 'os.urandom'<br>
+<strong>pycryptoLoaded</strong> = True</td></tr></table>
+</body></html>

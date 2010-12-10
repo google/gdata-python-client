@@ -1,0 +1,230 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.Crypto.Util.randpool</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.Crypto.html"><font color="#ffffff">Crypto</font></a>.<a href="gdata.Crypto.Util.html"><font color="#ffffff">Util</font></a>.randpool</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/Crypto/Util/randpool.py">/usr/local/lib/python2.6/dist-packages/gdata/Crypto/Util/randpool.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;&nbsp;randpool.py&nbsp;:&nbsp;Cryptographically&nbsp;strong&nbsp;random&nbsp;number&nbsp;generation<br>
+#<br>
+#&nbsp;Part&nbsp;of&nbsp;the&nbsp;Python&nbsp;Cryptography&nbsp;Toolkit<br>
+#<br>
+#&nbsp;Distribute&nbsp;and&nbsp;use&nbsp;freely;&nbsp;there&nbsp;are&nbsp;no&nbsp;restrictions&nbsp;on&nbsp;further<br>
+#&nbsp;dissemination&nbsp;and&nbsp;usage&nbsp;except&nbsp;those&nbsp;imposed&nbsp;by&nbsp;the&nbsp;laws&nbsp;of&nbsp;your<br>
+#&nbsp;country&nbsp;of&nbsp;residence.&nbsp;&nbsp;This&nbsp;software&nbsp;is&nbsp;provided&nbsp;"as&nbsp;is"&nbsp;without<br>
+#&nbsp;warranty&nbsp;of&nbsp;fitness&nbsp;for&nbsp;use&nbsp;or&nbsp;suitability&nbsp;for&nbsp;any&nbsp;purpose,&nbsp;express<br>
+#&nbsp;or&nbsp;implied.&nbsp;Use&nbsp;at&nbsp;your&nbsp;own&nbsp;risk&nbsp;or&nbsp;not&nbsp;at&nbsp;all.<br>
+#</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="array.html">array</a><br>
+<a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="termios.html">termios</a><br>
+<a href="time.html">time</a><br>
+</td><td width="25%" valign=top><a href="types.html">types</a><br>
+<a href="warnings.html">warnings</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="gdata.Crypto.Util.randpool.html#KeyboardEntry">KeyboardEntry</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.Crypto.Util.randpool.html#RandomPool">RandomPool</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.Crypto.Util.randpool.html#PersistentRandomPool">PersistentRandomPool</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.Crypto.Util.randpool.html#KeyboardRandomPool">KeyboardRandomPool</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="KeyboardEntry">class <strong>KeyboardEntry</strong></a></font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="KeyboardEntry-__init__"><strong>__init__</strong></a>(self, fd<font color="#909090">=0</font>)</dt></dl>
+
+<dl><dt><a name="KeyboardEntry-close"><strong>close</strong></a>(self, delay<font color="#909090">=0</font>)</dt></dl>
+
+<dl><dt><a name="KeyboardEntry-getch"><strong>getch</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="KeyboardRandomPool">class <strong>KeyboardRandomPool</strong></a>(<a href="gdata.Crypto.Util.randpool.html#PersistentRandomPool">PersistentRandomPool</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.Crypto.Util.randpool.html#KeyboardRandomPool">KeyboardRandomPool</a></dd>
+<dd><a href="gdata.Crypto.Util.randpool.html#PersistentRandomPool">PersistentRandomPool</a></dd>
+<dd><a href="gdata.Crypto.Util.randpool.html#RandomPool">RandomPool</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="KeyboardRandomPool-__init__"><strong>__init__</strong></a>(self, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="KeyboardRandomPool-randomize"><strong>randomize</strong></a>(self, N<font color="#909090">=0</font>)</dt><dd><tt>Adds&nbsp;N&nbsp;bits&nbsp;of&nbsp;entropy&nbsp;to&nbsp;random&nbsp;pool.&nbsp;&nbsp;If&nbsp;N&nbsp;is&nbsp;0,&nbsp;fill&nbsp;up&nbsp;pool.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="gdata.Crypto.Util.randpool.html#PersistentRandomPool">PersistentRandomPool</a>:<br>
+<dl><dt><a name="KeyboardRandomPool-save"><strong>save</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.Crypto.Util.randpool.html#RandomPool">RandomPool</a>:<br>
+<dl><dt><a name="KeyboardRandomPool-addEvent"><strong>addEvent</strong></a>(self, event, s<font color="#909090">=''</font>)</dt></dl>
+
+<dl><dt><a name="KeyboardRandomPool-add_event"><strong>add_event</strong></a>(self, s<font color="#909090">=''</font>)</dt><dd><tt><a href="#KeyboardRandomPool-add_event">add_event</a>(s:string)<br>
+Add&nbsp;an&nbsp;event&nbsp;to&nbsp;the&nbsp;random&nbsp;pool.&nbsp;&nbsp;The&nbsp;current&nbsp;time&nbsp;is&nbsp;stored<br>
+between&nbsp;calls&nbsp;and&nbsp;used&nbsp;to&nbsp;estimate&nbsp;the&nbsp;entropy.&nbsp;&nbsp;The&nbsp;optional<br>
+'s'&nbsp;parameter&nbsp;is&nbsp;a&nbsp;string&nbsp;that&nbsp;will&nbsp;also&nbsp;be&nbsp;XORed&nbsp;into&nbsp;the&nbsp;pool.<br>
+Returns&nbsp;the&nbsp;estimated&nbsp;number&nbsp;of&nbsp;additional&nbsp;bits&nbsp;of&nbsp;entropy&nbsp;gain.</tt></dd></dl>
+
+<dl><dt><a name="KeyboardRandomPool-getBytes"><strong>getBytes</strong></a>(self, N)</dt><dd><tt>#&nbsp;Deprecated&nbsp;method&nbsp;names:&nbsp;remove&nbsp;in&nbsp;PCT&nbsp;2.1&nbsp;or&nbsp;later.</tt></dd></dl>
+
+<dl><dt><a name="KeyboardRandomPool-get_bytes"><strong>get_bytes</strong></a>(self, N)</dt><dd><tt><a href="#KeyboardRandomPool-get_bytes">get_bytes</a>(N:int)&nbsp;:&nbsp;string<br>
+Return&nbsp;N&nbsp;bytes&nbsp;of&nbsp;random&nbsp;data.</tt></dd></dl>
+
+<dl><dt><a name="KeyboardRandomPool-stir"><strong>stir</strong></a>(self, s<font color="#909090">=''</font>)</dt><dd><tt><a href="#KeyboardRandomPool-stir">stir</a>(s:string)<br>
+Mix&nbsp;up&nbsp;the&nbsp;randomness&nbsp;pool.&nbsp;&nbsp;This&nbsp;will&nbsp;call&nbsp;<a href="#KeyboardRandomPool-add_event">add_event</a>()&nbsp;twice,<br>
+but&nbsp;out&nbsp;of&nbsp;paranoia&nbsp;the&nbsp;entropy&nbsp;attribute&nbsp;will&nbsp;not&nbsp;be<br>
+increased.&nbsp;&nbsp;The&nbsp;optional&nbsp;'s'&nbsp;parameter&nbsp;is&nbsp;a&nbsp;string&nbsp;that&nbsp;will<br>
+be&nbsp;hashed&nbsp;with&nbsp;the&nbsp;randomness&nbsp;pool.</tt></dd></dl>
+
+<dl><dt><a name="KeyboardRandomPool-stir_n"><strong>stir_n</strong></a>(self, N<font color="#909090">=3</font>)</dt><dd><tt><a href="#KeyboardRandomPool-stir_n">stir_n</a>(N)<br>
+stirs&nbsp;the&nbsp;random&nbsp;pool&nbsp;N&nbsp;times</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="PersistentRandomPool">class <strong>PersistentRandomPool</strong></a>(<a href="gdata.Crypto.Util.randpool.html#RandomPool">RandomPool</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="PersistentRandomPool-__init__"><strong>__init__</strong></a>(self, filename<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="PersistentRandomPool-save"><strong>save</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.Crypto.Util.randpool.html#RandomPool">RandomPool</a>:<br>
+<dl><dt><a name="PersistentRandomPool-addEvent"><strong>addEvent</strong></a>(self, event, s<font color="#909090">=''</font>)</dt></dl>
+
+<dl><dt><a name="PersistentRandomPool-add_event"><strong>add_event</strong></a>(self, s<font color="#909090">=''</font>)</dt><dd><tt><a href="#PersistentRandomPool-add_event">add_event</a>(s:string)<br>
+Add&nbsp;an&nbsp;event&nbsp;to&nbsp;the&nbsp;random&nbsp;pool.&nbsp;&nbsp;The&nbsp;current&nbsp;time&nbsp;is&nbsp;stored<br>
+between&nbsp;calls&nbsp;and&nbsp;used&nbsp;to&nbsp;estimate&nbsp;the&nbsp;entropy.&nbsp;&nbsp;The&nbsp;optional<br>
+'s'&nbsp;parameter&nbsp;is&nbsp;a&nbsp;string&nbsp;that&nbsp;will&nbsp;also&nbsp;be&nbsp;XORed&nbsp;into&nbsp;the&nbsp;pool.<br>
+Returns&nbsp;the&nbsp;estimated&nbsp;number&nbsp;of&nbsp;additional&nbsp;bits&nbsp;of&nbsp;entropy&nbsp;gain.</tt></dd></dl>
+
+<dl><dt><a name="PersistentRandomPool-getBytes"><strong>getBytes</strong></a>(self, N)</dt><dd><tt>#&nbsp;Deprecated&nbsp;method&nbsp;names:&nbsp;remove&nbsp;in&nbsp;PCT&nbsp;2.1&nbsp;or&nbsp;later.</tt></dd></dl>
+
+<dl><dt><a name="PersistentRandomPool-get_bytes"><strong>get_bytes</strong></a>(self, N)</dt><dd><tt><a href="#PersistentRandomPool-get_bytes">get_bytes</a>(N:int)&nbsp;:&nbsp;string<br>
+Return&nbsp;N&nbsp;bytes&nbsp;of&nbsp;random&nbsp;data.</tt></dd></dl>
+
+<dl><dt><a name="PersistentRandomPool-randomize"><strong>randomize</strong></a>(self, N<font color="#909090">=0</font>)</dt><dd><tt><a href="#PersistentRandomPool-randomize">randomize</a>(N:int)<br>
+use&nbsp;the&nbsp;class&nbsp;entropy&nbsp;source&nbsp;to&nbsp;get&nbsp;some&nbsp;entropy&nbsp;data.<br>
+This&nbsp;is&nbsp;overridden&nbsp;by&nbsp;KeyboardRandomize().</tt></dd></dl>
+
+<dl><dt><a name="PersistentRandomPool-stir"><strong>stir</strong></a>(self, s<font color="#909090">=''</font>)</dt><dd><tt><a href="#PersistentRandomPool-stir">stir</a>(s:string)<br>
+Mix&nbsp;up&nbsp;the&nbsp;randomness&nbsp;pool.&nbsp;&nbsp;This&nbsp;will&nbsp;call&nbsp;<a href="#PersistentRandomPool-add_event">add_event</a>()&nbsp;twice,<br>
+but&nbsp;out&nbsp;of&nbsp;paranoia&nbsp;the&nbsp;entropy&nbsp;attribute&nbsp;will&nbsp;not&nbsp;be<br>
+increased.&nbsp;&nbsp;The&nbsp;optional&nbsp;'s'&nbsp;parameter&nbsp;is&nbsp;a&nbsp;string&nbsp;that&nbsp;will<br>
+be&nbsp;hashed&nbsp;with&nbsp;the&nbsp;randomness&nbsp;pool.</tt></dd></dl>
+
+<dl><dt><a name="PersistentRandomPool-stir_n"><strong>stir_n</strong></a>(self, N<font color="#909090">=3</font>)</dt><dd><tt><a href="#PersistentRandomPool-stir_n">stir_n</a>(N)<br>
+stirs&nbsp;the&nbsp;random&nbsp;pool&nbsp;N&nbsp;times</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RandomPool">class <strong>RandomPool</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>randpool.py&nbsp;:&nbsp;Cryptographically&nbsp;strong&nbsp;random&nbsp;number&nbsp;generation.<br>
+&nbsp;<br>
+The&nbsp;implementation&nbsp;here&nbsp;is&nbsp;similar&nbsp;to&nbsp;the&nbsp;one&nbsp;in&nbsp;PGP.&nbsp;&nbsp;To&nbsp;be<br>
+cryptographically&nbsp;strong,&nbsp;it&nbsp;must&nbsp;be&nbsp;difficult&nbsp;to&nbsp;determine&nbsp;the&nbsp;RNG's<br>
+output,&nbsp;whether&nbsp;in&nbsp;the&nbsp;future&nbsp;or&nbsp;the&nbsp;past.&nbsp;&nbsp;This&nbsp;is&nbsp;done&nbsp;by&nbsp;using<br>
+a&nbsp;cryptographic&nbsp;hash&nbsp;function&nbsp;to&nbsp;"stir"&nbsp;the&nbsp;random&nbsp;data.<br>
+&nbsp;<br>
+Entropy&nbsp;is&nbsp;gathered&nbsp;in&nbsp;the&nbsp;same&nbsp;fashion&nbsp;as&nbsp;PGP;&nbsp;the&nbsp;highest-resolution<br>
+clock&nbsp;around&nbsp;is&nbsp;read&nbsp;and&nbsp;the&nbsp;data&nbsp;is&nbsp;added&nbsp;to&nbsp;the&nbsp;random&nbsp;number&nbsp;pool.<br>
+A&nbsp;conservative&nbsp;estimate&nbsp;of&nbsp;the&nbsp;entropy&nbsp;is&nbsp;then&nbsp;kept.<br>
+&nbsp;<br>
+If&nbsp;a&nbsp;cryptographically&nbsp;secure&nbsp;random&nbsp;source&nbsp;is&nbsp;available&nbsp;(/dev/urandom<br>
+on&nbsp;many&nbsp;Unixes,&nbsp;Windows&nbsp;CryptGenRandom&nbsp;on&nbsp;most&nbsp;Windows),&nbsp;then&nbsp;use<br>
+it.<br>
+&nbsp;<br>
+Instance&nbsp;Attributes:<br>
+bits&nbsp;:&nbsp;int<br>
+&nbsp;&nbsp;Maximum&nbsp;size&nbsp;of&nbsp;pool&nbsp;in&nbsp;bits<br>
+bytes&nbsp;:&nbsp;int<br>
+&nbsp;&nbsp;Maximum&nbsp;size&nbsp;of&nbsp;pool&nbsp;in&nbsp;bytes<br>
+entropy&nbsp;:&nbsp;int<br>
+&nbsp;&nbsp;Number&nbsp;of&nbsp;bits&nbsp;of&nbsp;entropy&nbsp;in&nbsp;this&nbsp;pool.<br>
+&nbsp;<br>
+Methods:<br>
+<a href="#RandomPool-add_event">add_event</a>([s])&nbsp;:&nbsp;add&nbsp;some&nbsp;entropy&nbsp;to&nbsp;the&nbsp;pool<br>
+<a href="#RandomPool-get_bytes">get_bytes</a>(int)&nbsp;:&nbsp;get&nbsp;N&nbsp;bytes&nbsp;of&nbsp;random&nbsp;data<br>
+<a href="#RandomPool-randomize">randomize</a>([N])&nbsp;:&nbsp;get&nbsp;N&nbsp;bytes&nbsp;of&nbsp;randomness&nbsp;from&nbsp;external&nbsp;source<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="RandomPool-__init__"><strong>__init__</strong></a>(self, numbytes<font color="#909090">=160</font>, cipher<font color="#909090">=None</font>, hash<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="RandomPool-addEvent"><strong>addEvent</strong></a>(self, event, s<font color="#909090">=''</font>)</dt></dl>
+
+<dl><dt><a name="RandomPool-add_event"><strong>add_event</strong></a>(self, s<font color="#909090">=''</font>)</dt><dd><tt><a href="#RandomPool-add_event">add_event</a>(s:string)<br>
+Add&nbsp;an&nbsp;event&nbsp;to&nbsp;the&nbsp;random&nbsp;pool.&nbsp;&nbsp;The&nbsp;current&nbsp;time&nbsp;is&nbsp;stored<br>
+between&nbsp;calls&nbsp;and&nbsp;used&nbsp;to&nbsp;estimate&nbsp;the&nbsp;entropy.&nbsp;&nbsp;The&nbsp;optional<br>
+'s'&nbsp;parameter&nbsp;is&nbsp;a&nbsp;string&nbsp;that&nbsp;will&nbsp;also&nbsp;be&nbsp;XORed&nbsp;into&nbsp;the&nbsp;pool.<br>
+Returns&nbsp;the&nbsp;estimated&nbsp;number&nbsp;of&nbsp;additional&nbsp;bits&nbsp;of&nbsp;entropy&nbsp;gain.</tt></dd></dl>
+
+<dl><dt><a name="RandomPool-getBytes"><strong>getBytes</strong></a>(self, N)</dt><dd><tt>#&nbsp;Deprecated&nbsp;method&nbsp;names:&nbsp;remove&nbsp;in&nbsp;PCT&nbsp;2.1&nbsp;or&nbsp;later.</tt></dd></dl>
+
+<dl><dt><a name="RandomPool-get_bytes"><strong>get_bytes</strong></a>(self, N)</dt><dd><tt><a href="#RandomPool-get_bytes">get_bytes</a>(N:int)&nbsp;:&nbsp;string<br>
+Return&nbsp;N&nbsp;bytes&nbsp;of&nbsp;random&nbsp;data.</tt></dd></dl>
+
+<dl><dt><a name="RandomPool-randomize"><strong>randomize</strong></a>(self, N<font color="#909090">=0</font>)</dt><dd><tt><a href="#RandomPool-randomize">randomize</a>(N:int)<br>
+use&nbsp;the&nbsp;class&nbsp;entropy&nbsp;source&nbsp;to&nbsp;get&nbsp;some&nbsp;entropy&nbsp;data.<br>
+This&nbsp;is&nbsp;overridden&nbsp;by&nbsp;KeyboardRandomize().</tt></dd></dl>
+
+<dl><dt><a name="RandomPool-stir"><strong>stir</strong></a>(self, s<font color="#909090">=''</font>)</dt><dd><tt><a href="#RandomPool-stir">stir</a>(s:string)<br>
+Mix&nbsp;up&nbsp;the&nbsp;randomness&nbsp;pool.&nbsp;&nbsp;This&nbsp;will&nbsp;call&nbsp;<a href="#RandomPool-add_event">add_event</a>()&nbsp;twice,<br>
+but&nbsp;out&nbsp;of&nbsp;paranoia&nbsp;the&nbsp;entropy&nbsp;attribute&nbsp;will&nbsp;not&nbsp;be<br>
+increased.&nbsp;&nbsp;The&nbsp;optional&nbsp;'s'&nbsp;parameter&nbsp;is&nbsp;a&nbsp;string&nbsp;that&nbsp;will<br>
+be&nbsp;hashed&nbsp;with&nbsp;the&nbsp;randomness&nbsp;pool.</tt></dd></dl>
+
+<dl><dt><a name="RandomPool-stir_n"><strong>stir_n</strong></a>(self, N<font color="#909090">=3</font>)</dt><dd><tt><a href="#RandomPool-stir_n">stir_n</a>(N)<br>
+stirs&nbsp;the&nbsp;random&nbsp;pool&nbsp;N&nbsp;times</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>STIRNUM</strong> = 3<br>
+<strong>__revision__</strong> = '$Id: randpool.py,v 1.14 2004/05/06 12:56:54 akuchling Exp $'<br>
+<strong>winrandom</strong> = None</td></tr></table>
+</body></html>
