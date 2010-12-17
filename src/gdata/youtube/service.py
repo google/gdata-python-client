@@ -739,8 +739,8 @@ class YouTubeService(gdata.service.GDataService):
     for link in video_entry.link:
       if link.rel == 'edit':
         edit_uri = link.href
-    return self.Put(video_entry, uri=edit_uri,
-                    converter=gdata.youtube.YouTubeVideoEntryFromString)
+        return self.Put(video_entry, uri=edit_uri, 
+        	converter=gdata.youtube.YouTubeVideoEntryFromString)
 
   def DeleteVideoEntry(self, video_entry):
     """Deletes a video entry.
@@ -756,7 +756,7 @@ class YouTubeService(gdata.service.GDataService):
     for link in video_entry.link:
       if link.rel == 'edit':
         edit_uri = link.href
-    return self.Delete(edit_uri)
+        return self.Delete(edit_uri)
 
   def AddRating(self, rating_value, video_entry):
     """Add a rating to a video entry.
