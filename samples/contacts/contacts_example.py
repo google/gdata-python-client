@@ -22,8 +22,8 @@ import sys
 import getopt
 import getpass
 import atom
-import gdata.contacts
-import gdata.contacts.service
+import gdata.contacts.data
+import gdata.contacts.client
 
 
 class ContactsSample(object):
@@ -44,11 +44,8 @@ class ContactsSample(object):
       A ContactsSample object used to run the sample demonstrating the
       functionality of the Contacts feed.
     """
-    self.gd_client = gdata.contacts.service.ContactsService()
-    self.gd_client.email = email
-    self.gd_client.password = password
-    self.gd_client.source = 'GoogleInc-ContactsPythonSample-1'
-    self.gd_client.ProgrammaticLogin()
+    self.gd_client = gdata.contacts.client.ContactsClient(source='GoogleInc-ContactsPythonSample-1')
+    self.gd_client.ClientLogin(email, password, self.gd_client.source);
 
   def PrintFeed(self, feed, ctr=0):
     """Prints out the contents of a feed to the console.
@@ -112,7 +109,7 @@ class ContactsSample(object):
         if self.PromptOperationShouldContinue():
           # Another feed is available, and the user has given us permission
           # to fetch it
-          feed = self.gd_client.GetContactsFeed(next.href)
+          feed = self.gd_client.GetContacts(next.href)
         else:
           # User has asked us to terminate
           feed = None
@@ -136,8 +133,8 @@ class ContactsSample(object):
 
   def ListAllContacts(self):
     """Retrieves a list of contacts and displays name and primary email."""
-    feed = self.gd_client.GetContactsFeed()
-    self.PrintPaginatedFeed(feed, self.PrintGroupsFeed)
+    feed = self.gd_client.GetContacts()
+    self.PrintPaginatedFeed(feed, self.PrintContactsFeed)
 
   def PrintGroupsFeed(self, feed, ctr):
     if not feed.entry:
@@ -158,8 +155,35 @@ class ContactsSample(object):
         print '    Extended Property %s: %s' % (extended_property.name, value)
     return len(feed.entry) + ctr
 
+  def PrintContactsFeed(self, feed, ctr):
+    if not feed.entry:
+      print '\nNo contacts in feed.\n'
+      return 0
+    for i, entry in enumerate(feed.entry):
+      if not entry.name is None:
+        family_name = entry.name.family_name is None and " " or entry.name.family_name.text
+        print '\n%s %s: %s - %s' % (ctr+i+1, entry.name.full_name.text, entry.name.given_name.text, family_name)
+      else:
+        print '\n%s %s (title)' % (ctr+i+1, entry.title.text)
+      if entry.content:
+        print '    %s' % (entry.content.text)
+      for p in entry.structured_postal_address:
+        print '    %s' % (p.formatted_address.text)
+      # Display the group id which can be used to query the contacts feed.
+      print '    Group ID: %s' % entry.id.text
+      # Display extended properties.
+      for extended_property in entry.extended_property:
+        if extended_property.value:
+          value = extended_property.value
+        else:
+          value = extended_property.GetXmlBlobString()
+        print '    Extended Property %s: %s' % (extended_property.name, value)
+      for user_defined_field in entry.user_defined_field:
+        print '    User Defined Field %s: %s' % (user_defined_field.key, user_defined_field.value)
+    return len(feed.entry) + ctr
+
   def ListAllGroups(self):
-    feed = self.gd_client.GetGroupsFeed()
+    feed = self.gd_client.GetGroups()
     self.PrintPaginatedFeed(feed, self.PrintGroupsFeed)
 
   def CreateMenu(self):
@@ -168,11 +192,11 @@ class ContactsSample(object):
     notes = raw_input('Enter notes for contact: ')
     primary_email = raw_input('Enter primary email address: ')
 
-    new_contact = gdata.contacts.ContactEntry(title=atom.Title(text=name))
-    new_contact.content = atom.Content(text=notes)
+    new_contact = gdata.contacts.data.ContactEntry(name=gdata.data.Name(full_name=gdata.data.FullName(text=name)))
+    new_contact.content = atom.data.Content(text=notes)
     # Create a work email address for the contact and use as primary. 
-    new_contact.email.append(gdata.contacts.Email(address=primary_email, 
-        primary='true', rel=gdata.contacts.REL_WORK))
+    new_contact.email.append(gdata.data.Email(address=primary_email, 
+        primary='true', rel=gdata.data.WORK_REL))
     entry = self.gd_client.CreateContact(new_contact)
 
     if entry:
@@ -185,22 +209,22 @@ class ContactsSample(object):
     """Prompts for updated-min query parameters and displays results."""
     updated_min = raw_input(
         'Enter updated min (example: 2007-03-16T00:00:00): ')
-    query = gdata.contacts.service.ContactsQuery()
+    query = gdata.contacts.client.ContactsQuery()
     query.updated_min = updated_min
-    feed = self.gd_client.GetContactsFeed(query.ToUri())
+    feed = self.gd_client.GetContacts(q=query)
     self.PrintFeed(feed)
 
   def QueryGroupsMenu(self):
     """Prompts for updated-min query parameters and displays results."""
     updated_min = raw_input(
         'Enter updated min (example: 2007-03-16T00:00:00): ')
-    query = gdata.service.Query(feed='/m8/feeds/groups/default/full')
+    query = gdata.contacts.client.ContactsQuery(feed='/m8/feeds/groups/default/full')
     query.updated_min = updated_min
-    feed = self.gd_client.GetGroupsFeed(query.ToUri())
-    self.PrintGroupsFeed(feed)
+    feed = self.gd_client.GetGroups(q=query)
+    self.PrintGroupsFeed(feed, 0)
    
   def _SelectContact(self):
-    feed = self.gd_client.GetContactsFeed()
+    feed = self.gd_client.GetContacts()
     self.PrintFeed(feed)
     selection = 5000
     while selection > len(feed.entry)+1 or selection < 1:
@@ -211,14 +235,14 @@ class ContactsSample(object):
   def UpdateContactMenu(self):
     selected_entry = self._SelectContact()
     new_name = raw_input('Enter a new name for the contact: ')
-    if not selected_entry.title:
-      selected_entry.title = atom.Title()
-    selected_entry.title.text = new_name
-    self.gd_client.UpdateContact(selected_entry.GetEditLink().href, selected_entry)
+    if not selected_entry.name:
+      selected_entry.name = gdata.data.Name()
+    selected_entry.name.full_name = gdata.data.FullName(text=new_name)
+    self.gd_client.Update(selected_entry)
 
   def DeleteContactMenu(self):
     selected_entry = self._SelectContact()
-    self.gd_client.DeleteContact(selected_entry.GetEditLink().href)
+    self.gd_client.Delete(selected_entry)
 
   def PrintMenu(self):
     """Displays a menu of options for the user to choose from."""
@@ -315,7 +339,7 @@ def main():
 
   try:
     sample = ContactsSample(user, pw)
-  except gdata.service.BadAuthentication:
+  except gdata.client.BadAuthentication:
     print 'Invalid user credentials given.'
     return
 
