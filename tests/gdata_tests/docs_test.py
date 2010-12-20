@@ -35,7 +35,7 @@ class DocumentListEntryTest(unittest.TestCase):
     self.assertEqual(entry.author[0].email.text, 'test.user@gmail.com')
     self.assertEqual(entry.GetDocumentType(), 'spreadsheet')
     self.assertEqual(entry.id.text,
-        'http://docs.google.com/feeds/documents/private/full/' +\
+        'https://docs.google.com/feeds/documents/private/full/' +\
         'spreadsheet%3Asupercalifragilisticexpealidocious')
     self.assertEqual(entry.title.text,'Test Spreadsheet')
     self.assertEqual(entry.resourceId.text,
