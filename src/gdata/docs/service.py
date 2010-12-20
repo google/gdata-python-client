@@ -172,6 +172,12 @@ class DocsService(gdata.service.GDataService):
     """
     server_response = self.request('GET', uri)
     response_body = server_response.read()
+    timeout = 5
+    while server_response.status == 302 and timeout > 0:
+      server_response = self.request('GET',
+                                     server_response.getheader('Location'))
+      response_body = server_response.read()
+      timeout -= 1
     if server_response.status != 200:
       raise gdata.service.RequestError, {'status': server_response.status,
                                          'reason': server_response.reason,
