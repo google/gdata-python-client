@@ -686,7 +686,7 @@ class GDClient(atom.client.AtomPubClient):
 
   Post = post
 
-  def update(self, entry, auth_token=None, force=False, **kwargs):
+  def update(self, entry, auth_token=None, force=False, uri=None, **kwargs):
     """Edits the entry on the server by sending the XML for this entry.
 
     Performs a PUT and converts the response to a new entry object with a
@@ -701,6 +701,8 @@ class GDClient(atom.client.AtomPubClient):
              the changes were based on an obsolete version of the entry.
              Setting force to True will cause the update to silently
              overwrite whatever version is present.
+      uri: The uri to put to. If provided, this uri is PUT to rather than the
+           inferred uri from the entry's edit link.
 
     Returns:
       A new Entry object of a matching type to the entry which was passed in.
@@ -714,6 +716,9 @@ class GDClient(atom.client.AtomPubClient):
       http_request.headers['If-Match'] = '*'
     elif hasattr(entry, 'etag') and entry.etag:
       http_request.headers['If-Match'] = entry.etag
+
+    if uri is None:
+      uri = entry.find_edit_link()
 
     return self.request(method='PUT', uri=entry.find_edit_link(),
                         auth_token=auth_token, http_request=http_request,
