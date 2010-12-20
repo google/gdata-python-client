@@ -720,8 +720,8 @@ class GDClient(atom.client.AtomPubClient):
     if uri is None:
       uri = entry.find_edit_link()
 
-    return self.request(method='PUT', uri=entry.find_edit_link(),
-                        auth_token=auth_token, http_request=http_request,
+    return self.request(method='PUT', uri=uri, auth_token=auth_token,
+                        http_request=http_request,
                         desired_class=entry.__class__, **kwargs)
 
   Update = update
