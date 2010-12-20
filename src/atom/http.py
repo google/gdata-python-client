@@ -233,7 +233,7 @@ class ProxiedHttpClient(HttpClient):
         if headers and 'User-Agent' in headers:
           user_agent = 'User-Agent: %s\r\n' % (headers['User-Agent'])
         else:
-          user_agent = ''
+          user_agent = 'User-Agent: python\r\n'
         
         proxy_pieces = '%s%s%s\r\n' % (proxy_connect, proxy_auth, user_agent)
         
