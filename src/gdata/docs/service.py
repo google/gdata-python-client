@@ -104,6 +104,7 @@ class DocsService(gdata.service.GDataService):
     gdata.service.GDataService.__init__(
         self, email=email, password=password, service='writely', source=source,
         server=server, additional_headers=additional_headers, **kwargs)
+    self.ssl = True
 
   def _MakeKindCategory(self, label):
     if label is None:
