@@ -138,7 +138,7 @@ class SpreadsheetsServiceTest(unittest.TestCase):
   def testGetListFeed(self):
     feed = self.gd_client.GetListFeed(self.key)
     self.assert_(isinstance(feed, gdata.spreadsheet.SpreadsheetsListFeed))
-    entry = self.gd_client.GetListFeed(self.key, row_id='cokwr')
+    entry = self.gd_client.GetListFeed(self.key, row_id='cpzh4')
     self.assert_(isinstance(entry, gdata.spreadsheet.SpreadsheetsList))
     
   def testUpdateCell(self):
@@ -204,8 +204,11 @@ class SpreadsheetsServiceTest(unittest.TestCase):
 if __name__ == '__main__':
   print ('Spreadsheet Tests\nNOTE: Please run these tests only with a test '
          'account. The tests may delete or update your data.')
+  print ('These tests must be run on a sheet with this data:\n'
+         'a1,b1,c1,d1\n'
+         '1,2,3,4')
   username = raw_input('Please enter your username: ')
   password = getpass.getpass()
   ss_key = raw_input('Please enter your spreadsheet key: ')
-  ws_key = raw_input('Please enter your worksheet key: ')
+  ws_key = raw_input('Please enter your worksheet key (usually od6): ')
   unittest.main()
