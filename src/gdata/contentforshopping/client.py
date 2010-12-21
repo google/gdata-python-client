@@ -48,7 +48,7 @@ class ContentForShoppingClient(gdata.client.GDClient):
     self.cfs_api_version = api_version
     gdata.client.GDClient.__init__(self, **kwargs)
 
-  def _create_uri(self, account_id, resource, path=()):
+  def _create_uri(self, account_id, resource, path=(), use_projection=True):
     """Create a request uri from the given arguments.
 
     If arguments are None, use the default client attributes.
@@ -57,8 +57,11 @@ class ContentForShoppingClient(gdata.client.GDClient):
     if account_id is None:
         raise ValueError('No Account ID set. '
                          'Either set for the client, or per request')
-    return '/'.join([CFS_URI, self.cfs_api_version, account_id, resource,
-                     CFS_PROJECTION] + list(path))
+    segments = [CFS_URI, self.cfs_api_version, account_id, resource]
+    if use_projection:
+      segments.append(CFS_PROJECTION)
+    segments.extend(path)
+    return '/'.join(segments)
 
   def _create_product_id(self, id, country, language):
     return 'online:%s:%s:%s' % (language, country, id)
@@ -81,6 +84,10 @@ class ContentForShoppingClient(gdata.client.GDClient):
   def get_product(self, id, country, language, account_id=None,
                   auth_token=None):
     """Get a product by id, country and language.
+
+    :param id: The product ID
+    :param country: The country (target_country)
+    :param language: The language (content_language)
     """
     pid = self._create_product_id(id, country, language)
     uri = self._create_uri(account_id, 'items/products', [pid])
@@ -111,3 +118,19 @@ class ContentForShoppingClient(gdata.client.GDClient):
                                   product.content_language.text)
     uri = self._create_uri(account_id, 'items/products', [pid])
     return self.update(product, uri=uri, auth_token=auth_token)
+
+  def get_datafeeds(self, account_id=None):
+    uri = self._create_uri(account_id, 'datafeeds/products',
+                           use_projection=False)
+    return self.get_feed(uri, desired_class=DatafeedFeed)
+
+  def insert_datafeed(self, entry, account_id=None, auth_token=None):
+    uri = self._create_uri(account_id, 'datafeeds/products',
+                           use_projection=False)
+    return self.post(entry, uri=uri, auth_token=None)
+
+  def get_managedaccounts(self, account_id=None, auth_token=None):
+    uri = self._create_uri(account_id, 'managedaccounts/1',
+                           use_projection=False)
+    print uri
+    return self.get_feed(uri)

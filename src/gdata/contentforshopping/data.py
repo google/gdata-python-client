@@ -1051,3 +1051,72 @@ def build_entry(id=None, title=None, content=None, link=None, condition=None,
   if year is not None:
     product.year = Year(year)
   return product
+
+
+class Edited(atom.core.XmlElement):
+  """sc:edited element
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'edited'
+
+
+class AttributeLanguage(atom.core.XmlElement):
+  """sc:attribute_language element
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'attribute_language'
+
+
+class Channel(atom.core.XmlElement):
+  """sc:channel element
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'channel'
+
+
+class FeedFileName(atom.core.XmlElement):
+  """sc:feed_file_name element
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'feed_file_name'
+
+
+class FeedType(atom.core.XmlElement):
+  """sc:feed_type element
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'feed_type'
+
+
+class UseQuotedFields(atom.core.XmlElement):
+  """sc:use_quoted_fields element
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'use_quoted_fields'
+
+
+class FileFormat(atom.core.XmlElement):
+  """sc:file_format element
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'file_format'
+  use_quoted_fields = UseQuotedFields
+  format = 'format'
+
+
+class ProcessingStatus(atom.core.XmlElement):
+  """sc:processing_status element
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'processing_status'
+
+
+class DatafeedEntry(gdata.data.GDEntry):
+  """An entry for a Datafeed
+  """
+  content_language = ContentLanguage
+  target_country = TargetCountry
+  feed_file_name = FeedFileName
+  file_format = FileFormat
+  attribute_language = AttributeLanguage
+  processing_status = ProcessingStatus
+  edited = Edited
+  feed_type = FeedType
+
+
+class DatafeedFeed(gdata.data.GDFeed):
+  """A datafeed feed
+  """
+  entry = [DatafeedEntry]
