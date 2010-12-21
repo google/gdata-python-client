@@ -24,11 +24,13 @@ __author__ = 'afshar (Ali Afshar)'
 
 import gdata.client
 
+from gdata.contentforshopping.data import ProductEntry, ProductFeed
+
 
 CFS_VERSION = 'v1'
 CFS_HOST = 'content.googleapis.com'
 CFS_URI = 'https://%s/content' % CFS_HOST
-CFS_PROJECTIONS = set(('generic', 'schema'))
+CFS_PROJECTION = 'generic'
 
 
 class ContentForShoppingClient(gdata.client.GDClient):
@@ -37,22 +39,16 @@ class ContentForShoppingClient(gdata.client.GDClient):
   :param account_id: Merchant account ID. This value will be used by default
                      for all requests, but may be overridden on a
                      request-by-request basis.
-  :param projection: The default projection value to be used by all requests,
-                     but may be overridden on a request-by-request basis.
-                     Possible values: 'generic', 'schema'. Default value:
-                     'generic'.
   :param api_version: The version of the API to target. Default value: 'v1'.
   :param **kwargs: Pass all addtional keywords to the GDClient constructor.
   """
 
-  def __init__(self, account_id=None, projection='generic',
-               api_version=CFS_VERSION, **kwargs):
+  def __init__(self, account_id=None, api_version=CFS_VERSION, **kwargs):
     self.cfs_account_id = account_id
     self.cfs_api_version = api_version
-    self.cfs_projection = projection
     gdata.client.GDClient.__init__(self, **kwargs)
 
-  def _create_uri(self, account_id, projection, resource, path=()):
+  def _create_uri(self, account_id, resource, path=()):
     """Create a request uri from the given arguments.
 
     If arguments are None, use the default client attributes.
@@ -61,28 +57,48 @@ class ContentForShoppingClient(gdata.client.GDClient):
     if account_id is None:
         raise ValueError('No Account ID set. '
                          'Either set for the client, or per request')
-    projection = projection or self.cfs_projection
-    if projection not in CFS_PROJECTIONS:
-        raise ValueError('Projection must be one of %s' % CFS_PROJECTIONS)
     return '/'.join([CFS_URI, self.cfs_api_version, account_id, resource,
-                     projection] + list(path))
+                     CFS_PROJECTION] + list(path))
 
-  def insert_product(self, product, account_id=None, projection=None,
-                     auth_token=None):
+  def _create_product_id(self, id, country, language):
+    return 'online:%s:%s:%s' % (language, country, id)
+
+  def get_products(self, start_index=None, max_results=None, account_id=None,
+                   auth_token=None):
+    """Get a feed of products for the account.
+
+    :param max_results: The maximum number of results to return (default 25,
+                        maximum 250).
+    :param start_index: The starting index of the feed to return (default 1,
+                        maximum 10000)
+    :param account_id: The Merchant Center Account ID. If ommitted the default
+                       Account ID will be used for this client
+    """
+    uri = self._create_uri(account_id, 'items/products')
+    return self.get_feed(uri, auth_token=auth_token,
+        desired_class=gdata.contentforshopping.data.ProductFeed)
+
+  def get_product(self, id, country, language, account_id=None,
+                  auth_token=None):
+    """Get a product by id, country and language.
+    """
+    pid = self._create_product_id(id, country, language)
+    uri = self._create_uri(account_id, 'items/products', [pid])
+    return self.get_entry(uri, desired_class=ProductEntry,
+                          auth_token=auth_token)
+
+  def insert_product(self, product, account_id=None, auth_token=None):
     """Create a new product, by posting the product entry feed.
 
     :param product: A :class:`gdata.contentforshopping.data.ProductEntry` with
                     the required product data.
     :param account_id: The Merchant Center Account ID. If ommitted the default
                        Account ID will be used for this client
-    :param projection: The projection of the request, either 'generic' or
-                       'schema'. If omitted the default projection for this
-                       client will be used.
     """
-    uri = self._create_uri(account_id, projection, 'items/products')
+    uri = self._create_uri(account_id, 'items/products')
     return self.post(product, uri=uri, auth_token=auth_token)
 
-  def update_product(self, product, account_id=None, projection=None,
+  def update_product(self, product, account_id=None,
                      auth_token=None):
     """Update a product, by putting the product entry feed.
 
@@ -90,11 +106,8 @@ class ContentForShoppingClient(gdata.client.GDClient):
                     the required product data.
     :param account_id: The Merchant Center Account ID. If ommitted the default
                        Account ID will be used for this client
-    :param projection: The projection of the request, either 'generic' or
-                       'schema'. If omitted the default projection for this
-                       client will be used.
     """
-    pid = 'online:%s:%s:%s' % (product.content_language.text,
-                               product.target_country.text, product.id.text)
-    uri = self._create_uri(account_id, projection, 'items/products', [pid])
+    pid = self._create_product_id(product.id.text, product.target_country.text,
+                                  product.content_language.text)
+    uri = self._create_uri(account_id, 'items/products', [pid])
     return self.update(product, uri=uri, auth_token=auth_token)

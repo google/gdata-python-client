@@ -700,6 +700,11 @@ class ProductEntry(gdata.data.GDEntry):
   control = ProductControl
 
 
+class ProductFeed(gdata.data.GDFeed):
+  """Represents a feed of a merchant's products."""
+  entry = [ProductEntry]
+
+
 def build_entry(id=None, title=None, content=None, link=None, condition=None,
                 target_country=None, content_language=None, price=None,
                 price_unit=None, tax_rate=None, shipping_price=None,

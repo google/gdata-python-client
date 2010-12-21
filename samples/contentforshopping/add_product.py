@@ -36,6 +36,8 @@ client.client_login(email, getpass.getpass('Google Password? '),
 # Generate a product entry
 product_entry = build_entry(
   id='ipod2',
+  target_country = 'US',
+  content_language = 'EN',
   title='iPod Nano 8GB',
   content='A nice small mp3 player',
   price='149',
@@ -43,16 +45,8 @@ product_entry = build_entry(
   shipping_price = '5',
   shipping_price_unit = 'USD',
   tax_rate='17.5',
-  target_country = 'US',
-  content_language = 'EN',
   condition = 'new',
   link = 'http://pseudoscience.co.uk/google4e823e35f032f011.html',
-  brand = u'Apple',
-  sizes = [u'Standard'],
-  features = [u'Mp3', u'Multitouch', u'Color screen', '8GB Storage'],
-  color = 'Green',
-  featured_product = 'true',
-  product_type = u'Electronics > Audio > Audio Players & Recorders > MP3 Players',
 )
 
 # Post it to the service
