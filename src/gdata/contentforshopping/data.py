@@ -32,7 +32,7 @@ SCP_NAMESPACE_TEMPLATE = ('{http://schemas.google.com/'
                          'structuredcontent/2009/products}%s')
 
 
-class Id(atom.core.XmlElement):
+class ProductId(atom.core.XmlElement):
   """sc:id element
 
   It is required that all inserted products are provided with a unique
@@ -402,7 +402,7 @@ class Year(atom.core.XmlElement):
   _qname = SCP_NAMESPACE_TEMPLATE % 'year'
 
 
-class ProductEntry(gdata.data.GDEntry):
+class ProductEntry(gdata.data.BatchEntry):
   """Product entry containing product information
 
   The elements of this entry that are used are made up of five different
@@ -674,6 +674,7 @@ class ProductEntry(gdata.data.GDEntry):
 """
 
   author = Author
+  product_id = ProductId
   availability = Availability
   brand = Brand
   color = Color
@@ -700,12 +701,12 @@ class ProductEntry(gdata.data.GDEntry):
   control = ProductControl
 
 
-class ProductFeed(gdata.data.GDFeed):
+class ProductFeed(gdata.data.BatchFeed):
   """Represents a feed of a merchant's products."""
   entry = [ProductEntry]
 
 
-def build_entry(id=None, title=None, content=None, link=None, condition=None,
+def build_entry(product_id=None, title=None, content=None, link=None, condition=None,
                 target_country=None, content_language=None, price=None,
                 price_unit=None, tax_rate=None, shipping_price=None,
                 shipping_price_unit=None, image_links=(), expiration_date=None,
@@ -725,12 +726,12 @@ def build_entry(id=None, title=None, content=None, link=None, condition=None,
   Documentation of each attribute attempts to explain the "long-hand" way of
   achieving the same goal.
 
-  :param id: The unique ID for this product.
+  :param product_id: The unique ID for this product.
 
-    This is equivalent to creating and setting an id element::
+    This is equivalent to creating and setting an product_id element::
 
       entry = ProductEntry()
-      entry.id = Id(id)
+      entry.product_id = ProductId(product_id)
 
   :param title: The title of this product.
 
@@ -971,8 +972,8 @@ def build_entry(id=None, title=None, content=None, link=None, condition=None,
   """
 
   product = product or ProductEntry()
-  if id is not None:
-    product.id = Id(id)
+  if product_id is not None:
+    product.product_id = ProductId(product_id)
   if content is not None:
     product.content = atom.data.Content(content)
   if title is not None:

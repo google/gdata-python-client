@@ -23,6 +23,7 @@ __author__ = 'afshar (Ali Afshar)'
 
 
 import gdata.client
+import atom.data
 
 from gdata.contentforshopping.data import ProductEntry, ProductFeed
 
@@ -66,6 +67,14 @@ class ContentForShoppingClient(gdata.client.GDClient):
   def _create_product_id(self, id, country, language):
     return 'online:%s:%s:%s' % (language, country, id)
 
+  def _create_batch_feed(self, entries, operation, feed=None):
+    if feed is None:
+      feed = ProductFeed()
+    for entry in entries:
+      entry.batch_operation = gdata.data.BatchOperation(type=operation)
+      feed.entry.append(entry)
+    return feed
+
   def get_products(self, start_index=None, max_results=None, account_id=None,
                    auth_token=None):
     """Get a feed of products for the account.
@@ -104,6 +113,45 @@ class ContentForShoppingClient(gdata.client.GDClient):
     """
     uri = self._create_uri(account_id, 'items/products')
     return self.post(product, uri=uri, auth_token=auth_token)
+
+  def insert_products(self, products, account_id=None, auth_token=None):
+    """Insert the products using a batch request
+
+    :param products: A list of product entries
+    """
+    feed = self._create_batch_feed(products, 'insert')
+    return self.batch(feed)
+
+  def delete_products(self, products, account_id=None, auth_token=None):
+    """Delete the products using a batch request.
+
+    :param products: A list of product entries
+
+    .. note:: Entries must have the atom:id element set.
+    """
+    feed = self._create_batch_feed(products, 'delete')
+    return self.batch(feed)
+
+  def update_products(self, products, account_id=None, auth_token=None):
+    """Update the products using a batch request
+
+    :param products: A list of product entries
+
+    .. note:: Entries must have the atom:id element set.
+    """
+    feed = self._create_batch_feed(products, 'update')
+    return self.batch(feed)
+
+  def batch(self, feed, account_id=None, auth_token=None):
+    """Send a batch request.
+
+    :param feed: The feed of batch entries to send.
+    :param account_id: The Merchant Center Account ID. If ommitted the default
+                       Account ID will be used for this client
+    """
+    uri = self._create_uri(account_id, 'items/products', ['batch'])
+    return self.post(feed, uri=uri, auth_token=auth_token,
+                     desired_class=ProductFeed)
 
   def update_product(self, product, account_id=None,
                      auth_token=None):
