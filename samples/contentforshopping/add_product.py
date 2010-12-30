@@ -35,7 +35,7 @@ client.client_login(email, getpass.getpass('Google Password? '),
 
 # Generate a product entry
 product_entry = build_entry(
-  id='ipod2',
+  product_id='ipod2',
   target_country = 'US',
   content_language = 'EN',
   title='iPod Nano 8GB',
