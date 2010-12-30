@@ -701,9 +701,29 @@ class ProductEntry(gdata.data.BatchEntry):
   control = ProductControl
 
 
+# opensearch needs overriding for wrong version
+# see http://code.google.com/p/gdata-python-client/issues/detail?id=483
+class TotalResults(gdata.data.TotalResults):
+
+    _qname = gdata.data.TotalResults._qname[1]
+
+
+class ItemsPerPage(gdata.data.ItemsPerPage):
+
+    _qname = gdata.data.ItemsPerPage._qname[1]
+
+
+class StartIndex(gdata.data.StartIndex):
+
+    _qname = gdata.data.StartIndex._qname[1]
+
+
 class ProductFeed(gdata.data.BatchFeed):
   """Represents a feed of a merchant's products."""
   entry = [ProductEntry]
+  total_results = TotalResults
+  items_per_page = ItemsPerPage
+  start_index = StartIndex
 
 
 def build_entry(product_id=None, title=None, content=None, link=None, condition=None,

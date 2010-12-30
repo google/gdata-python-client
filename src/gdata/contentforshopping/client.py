@@ -44,6 +44,8 @@ class ContentForShoppingClient(gdata.client.GDClient):
   :param **kwargs: Pass all addtional keywords to the GDClient constructor.
   """
 
+  api_version = '1.0'
+
   def __init__(self, account_id=None, api_version=CFS_VERSION, **kwargs):
     self.cfs_account_id = account_id
     self.cfs_api_version = api_version
@@ -180,5 +182,4 @@ class ContentForShoppingClient(gdata.client.GDClient):
   def get_managedaccounts(self, account_id=None, auth_token=None):
     uri = self._create_uri(account_id, 'managedaccounts/1',
                            use_projection=False)
-    print uri
     return self.get_feed(uri)
