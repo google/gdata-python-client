@@ -15,7 +15,7 @@
 # limitations under the License.
 
 
-"""Extend the gdata client for the Content PAI for Shopping.
+"""Extend the gdata client for the Content API for Shopping.
 """
 
 
@@ -25,7 +25,8 @@ __author__ = 'afshar (Ali Afshar)'
 import gdata.client
 import atom.data
 
-from gdata.contentforshopping.data import ProductEntry, ProductFeed
+from gdata.contentforshopping.data import (ProductEntry, ProductFeed,
+    DatafeedFeed)
 
 
 CFS_VERSION = 'v1'
