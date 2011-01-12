@@ -79,7 +79,7 @@ class ContactsSample(object):
         if extended_property.value:
           value = extended_property.value
         else:
-          value = extended_property.GetXmlBlobString()
+          value = extended_property.GetXmlBlob()
         print '    Extended Property %s: %s' % (extended_property.name, value)
     return len(feed.entry) + ctr
 
@@ -151,7 +151,7 @@ class ContactsSample(object):
         if extended_property.value:
           value = extended_property.value
         else:
-          value = extended_property.GetXmlBlobString()
+          value = extended_property.GetXmlBlob()
         print '    Extended Property %s: %s' % (extended_property.name, value)
     return len(feed.entry) + ctr
 
@@ -176,7 +176,7 @@ class ContactsSample(object):
         if extended_property.value:
           value = extended_property.value
         else:
-          value = extended_property.GetXmlBlobString()
+          value = extended_property.GetXmlBlob()
         print '    Extended Property %s: %s' % (extended_property.name, value)
       for user_defined_field in entry.user_defined_field:
         print '    User Defined Field %s: %s' % (user_defined_field.key, user_defined_field.value)
