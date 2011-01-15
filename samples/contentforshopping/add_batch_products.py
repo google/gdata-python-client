@@ -14,13 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import getpass
-
 
 from gdata.contentforshopping.data import build_entry
 from gdata.contentforshopping.client import ContentForShoppingClient
-
 
 # Gather merchant information
 account_id = raw_input('Merchant Account ID? ').strip()

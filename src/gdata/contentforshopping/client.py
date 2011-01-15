@@ -16,6 +16,11 @@
 
 
 """Extend the gdata client for the Content API for Shopping.
+
+TODO:
+
+1. Proper MCA Support.
+2. Better datafeed Support.
 """
 
 
@@ -171,16 +176,23 @@ class ContentForShoppingClient(gdata.client.GDClient):
     return self.update(product, uri=uri, auth_token=auth_token)
 
   def get_datafeeds(self, account_id=None):
+    """Get the feed of datafeeds.
+    """
     uri = self._create_uri(account_id, 'datafeeds/products',
                            use_projection=False)
     return self.get_feed(uri, desired_class=DatafeedFeed)
 
   def insert_datafeed(self, entry, account_id=None, auth_token=None):
+    """Insert a datafeed.
+    """
     uri = self._create_uri(account_id, 'datafeeds/products',
                            use_projection=False)
     return self.post(entry, uri=uri, auth_token=None)
 
-  def get_managedaccounts(self, account_id=None, auth_token=None):
-    uri = self._create_uri(account_id, 'managedaccounts/1',
+  def get_managedaccounts(self, mcaccount_id, account_id=None,
+                          auth_token=None):
+    """Get the feed of managed accounts
+    """
+    uri = self._create_uri(account_id, 'managedaccounts', [mcaccount_id]
                            use_projection=False)
     return self.get_feed(uri)
