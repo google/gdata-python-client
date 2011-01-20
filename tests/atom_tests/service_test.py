@@ -16,6 +16,7 @@
 
 __author__ = 'j.s@google.com (Jeff Scudder)'
 
+import os
 import unittest
 import atom.service
 import atom.mock_http_core
@@ -152,6 +153,16 @@ class AtomServiceUnitTest(unittest.TestCase):
     self.assertEqual(response.getheader('Echo-Host'), 'example.com:8080')
     response = client.Get('http://example.com:1234')
     self.assertEqual(response.getheader('Echo-Host'), 'example.com:1234')
+
+  def testBadHttpsProxyRaisesRealException(self):
+    """Test that real exceptions are raised when there is an error connecting to
+    a host with an https proxy
+    """
+    client = atom.service.AtomService(server='example.com')
+    client.server = 'example.com'
+    os.environ['https_proxy'] = 'http://example.com'
+    self.assertRaises(atom.http.ProxyError,
+        atom.service.PrepareConnection, client, 'https://example.com')
 
 
 def suite():
