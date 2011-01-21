@@ -137,8 +137,10 @@ class DataFeedDemo(object):
 
     print '-------- Advanced Segments Information --------'
     if self.feed.segment:
-      print 'Segment Name       = ' + str(segment.name)
-      print 'Segment Id         = ' + str(segment.id)
+      if segment.name:
+        print 'Segment Name       = ' + str(segment.name)
+      if segment.id:
+        print 'Segment Id         = ' + str(segment.id)
       print 'Segment Definition = ' + segment.definition.text
     else:
       print 'No segments defined'
@@ -180,4 +182,3 @@ class DataFeedDemo(object):
 
 if __name__ == '__main__':
   main()
-
