@@ -38,6 +38,7 @@ class ContactsClient(gdata.client.GDClient):
   server = "www.google.com"
   contact_list = "default"
   auth_scopes = gdata.gauth.AUTH_SCOPES['cp']
+  ssl = True
 
 
   def __init__(self, domain=None, auth_token=None, **kwargs):
@@ -490,6 +491,3 @@ class ContactsQuery(gdata.client.Query):
 class ProfilesQuery(gdata.client.Query):
   def __init__(self, feed=None):
     self.feed = feed or 'http://www.google.com/m8/feeds/profiles/default/full'
-    
-
-

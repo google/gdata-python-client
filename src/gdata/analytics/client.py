@@ -32,6 +32,7 @@ class AnalyticsClient(gdata.client.GDClient):
   auth_service = 'analytics'
   auth_scopes = gdata.gauth.AUTH_SCOPES['analytics']
   account_type = 'GOOGLE'
+  ssl = True
 
   def __init__(self, auth_token=None, **kwargs):
     """Initializes a new client for the Google Analytics Data Export API.
@@ -310,4 +311,3 @@ class AdvSegQuery(AnalyticsBaseQuery):
   def __init__(self, query={}, **kwargs):
     self.query = query
     gdata.client.GDQuery(self, **kwargs)
-
