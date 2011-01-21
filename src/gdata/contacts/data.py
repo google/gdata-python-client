@@ -94,6 +94,9 @@ class ExternalId(atom.core.XmlElement):
   """
   
   _qname = CONTACTS_TEMPLATE % 'externalId'
+  label = 'label'
+  rel = 'rel'
+  value = 'value'
 
 
 def ExternalIdFromString(xml_string):

@@ -426,7 +426,7 @@ def PrepareConnection(service, full_uri):
        
       p_status=response.split()[1]
       if p_status!=str(200):
-        raise 'Error status=',str(p_status)
+        raise atom.http.ProxyError('Error status=%s' % p_status)
 
       # Trivial setup for ssl socket.
       ssl = socket.ssl(p_sock, None, None)
