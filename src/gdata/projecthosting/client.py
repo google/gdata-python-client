@@ -26,6 +26,7 @@ class ProjectHostingClient(gdata.client.GDClient):
   auth_service = 'code'
   auth_scopes = gdata.gauth.AUTH_SCOPES['code']
   host = 'code.google.com'
+  ssl = True
 
   def get_issues(self, project_name,
                  desired_class=gdata.projecthosting.data.IssuesFeed, **kwargs):
