@@ -1732,6 +1732,15 @@ DOCUMENT_LIST_ACL_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
   <gAcl:scope type='user' value='user@gmail.com'/>
 </entry>"""
 
+DOCUMENT_LIST_ACL_WITHKEY_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
+<entry xmlns="http://www.w3.org/2005/Atom"
+       xmlns:gAcl='http://schemas.google.com/acl/2007'>
+  <category scheme='http://schemas.google.com/g/2005#kind'
+            term='http://schemas.google.com/acl/2007#accessRule'/>
+  <gAcl:withKey key='somekey'><gAcl:role value='writer' /></gAcl:withKey>
+  <gAcl:scope type='domain' value='example.com' />
+</entry>"""
+
 DOCUMENT_LIST_ACL_FEED = """<?xml version='1.0' encoding='UTF-8'?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/"
          xmlns:gAcl="http://schemas.google.com/acl/2007" 

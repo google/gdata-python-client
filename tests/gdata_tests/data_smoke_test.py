@@ -66,6 +66,7 @@ class DataSmokeTest(unittest.TestCase):
         gdata.data.AttendeeType, gdata.data.AttendeeStatus,
         gdata.data.Deleted, gdata.data.Money,
         gdata.acl.data.AclRole, gdata.acl.data.AclScope,
+        gdata.acl.data.AclWithKey,
         gdata.acl.data.AclEntry, gdata.acl.data.AclFeed,
         gdata.analytics.data.Dimension,
         gdata.analytics.data.EndDate,

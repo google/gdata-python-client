@@ -42,10 +42,18 @@ class AclScope(atom.core.XmlElement):
   value = 'value'
 
 
+class AclWithKey(atom.core.XmlElement):
+  """Describes a key that can be used to access a document."""
+  _qname = GACL_TEMPLATE % 'withKey'
+  key = 'key'
+  role = AclRole
+
+
 class AclEntry(gdata.data.GDEntry):
   """Describes an entry in a feed of an access control list (ACL)."""
   scope = AclScope
   role = AclRole
+  with_key = AclWithKey
 
 
 class AclFeed(gdata.data.GDFeed):

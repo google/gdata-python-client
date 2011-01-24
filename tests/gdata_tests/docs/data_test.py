@@ -126,6 +126,8 @@ class AclTest(unittest.TestCase):
   def setUp(self):
     self.acl_entry = atom.core.parse(test_data.DOCUMENT_LIST_ACL_ENTRY,
                                      gdata.docs.data.Acl)
+    self.acl_entry_withkey = atom.core.parse(
+      test_data.DOCUMENT_LIST_ACL_WITHKEY_ENTRY, gdata.docs.data.Acl)
 
   def testToAndFromString(self):
     self.assert_(isinstance(self.acl_entry, gdata.docs.data.Acl))
@@ -143,6 +145,40 @@ class AclTest(unittest.TestCase):
     self.assertEqual(new_acl_entry.scope.value, self.acl_entry.scope.value)
     self.assertEqual(new_acl_entry.scope.type, self.acl_entry.scope.type)
     self.assertEqual(new_acl_entry.role.value, self.acl_entry.role.value)
+
+  def testToAndFromStringWithKey(self):
+    self.assert_(isinstance(self.acl_entry_withkey, gdata.docs.data.Acl))
+    self.assert_(self.acl_entry_withkey.role is None)
+    self.assert_(isinstance(self.acl_entry_withkey.with_key,
+                            gdata.acl.data.AclWithKey))
+    self.assert_(isinstance(self.acl_entry_withkey.with_key.role,
+                            gdata.acl.data.AclRole))
+    self.assert_(isinstance(self.acl_entry_withkey.scope,
+                            gdata.acl.data.AclScope))
+    self.assertEqual(self.acl_entry_withkey.with_key.key, 'somekey')
+    self.assertEqual(self.acl_entry_withkey.with_key.role.value, 'writer')
+    self.assertEqual(self.acl_entry_withkey.scope.value, 'example.com')
+    self.assertEqual(self.acl_entry_withkey.scope.type, 'domain')
+
+    acl_entry_withkey_str = str(self.acl_entry_withkey)
+    new_acl_entry_withkey = atom.core.parse(acl_entry_withkey_str,
+                                            gdata.docs.data.Acl)
+    self.assert_(isinstance(new_acl_entry_withkey, gdata.docs.data.Acl))
+    self.assert_(new_acl_entry_withkey.role is None)
+    self.assert_(isinstance(new_acl_entry_withkey.with_key,
+                            gdata.acl.data.AclWithKey))
+    self.assert_(isinstance(new_acl_entry_withkey.with_key.role,
+                            gdata.acl.data.AclRole))
+    self.assert_(isinstance(new_acl_entry_withkey.scope,
+                            gdata.acl.data.AclScope))
+    self.assertEqual(new_acl_entry_withkey.with_key.key,
+                     self.acl_entry_withkey.with_key.key)
+    self.assertEqual(new_acl_entry_withkey.with_key.role.value,
+                     self.acl_entry_withkey.with_key.role.value)
+    self.assertEqual(new_acl_entry_withkey.scope.value,
+                     self.acl_entry_withkey.scope.value)
+    self.assertEqual(new_acl_entry_withkey.scope.type,
+                     self.acl_entry_withkey.scope.type)
 
   def testCreateNewAclEntry(self):
     cat = gdata.atom.Category(
