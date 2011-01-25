@@ -138,6 +138,18 @@ BASIC_PROJECTION = 'basic'
 PRIVATE_VISIBILITY = 'private'
 PUBLIC_VISIBILITY = 'public'
 
+OPAQUE_TRANSPARENCY = 'http://schemas.google.com/g/2005#event.opaque'
+TRANSPARENT_TRANSPARENCY = 'http://schemas.google.com/g/2005#event.transparent'
+
+CONFIDENTIAL_EVENT_VISIBILITY = 'http://schemas.google.com/g/2005#event.confidential'
+DEFAULT_EVENT_VISIBILITY = 'http://schemas.google.com/g/2005#event.default'
+PRIVATE_EVENT_VISIBILITY = 'http://schemas.google.com/g/2005#event.private'
+PUBLIC_EVENT_VISIBILITY = 'http://schemas.google.com/g/2005#event.public'
+
+CANCELED_EVENT_STATUS = 'http://schemas.google.com/g/2005#event.canceled'
+CONFIRMED_EVENT_STATUS = 'http://schemas.google.com/g/2005#event.confirmed'
+TENTATIVE_EVENT_STATUS = 'http://schemas.google.com/g/2005#event.tentative'
+
 ACL_REL = 'http://schemas.google.com/acl/2007#accessControlList'
 
 
@@ -938,6 +950,15 @@ class Reminder(atom.core.XmlElement):
   minutes = 'minutes'
 
 
+class Transparency(atom.core.XmlElement):
+  """The gd:transparency element:
+
+  Extensible enum corresponding to the TRANSP property defined in RFC 244.
+  """
+  _qname = GDATA_TEMPLATE % 'transparency'
+  value = 'value'
+
+
 class Agent(atom.core.XmlElement):
   """The gd:agent element.
 
@@ -1098,6 +1119,18 @@ class AttendeeType(atom.core.XmlElement):
 class AttendeeStatus(atom.core.XmlElement):
   """The gd:attendeeStatus element."""
   _qname = GDATA_TEMPLATE % 'attendeeStatus'
+  value = 'value'
+
+
+class EventStatus(atom.core.XmlElement):
+  """The gd:eventStatus element."""
+  _qname = GDATA_TEMPLATE % 'eventStatus'
+  value = 'value'
+
+
+class Visibility(atom.core.XmlElement):
+  """The gd:visibility element."""
+  _qname = GDATA_TEMPLATE % 'visibility'
   value = 'value'
 
 
