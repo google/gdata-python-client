@@ -80,8 +80,8 @@ class ContactsClient(gdata.client.GDClient):
 
   def get_contact(self, uri, desired_class=gdata.contacts.data.ContactEntry,
                   auth_token=None, **kwargs):
-    return self.get_feed(uri, auth_token=auth_token, 
-                         desired_class=desired_class, **kwargs)
+    return self.get_entry(uri, auth_token=auth_token, 
+                          desired_class=desired_class, **kwargs)
 
 
   GetContact = get_contact
@@ -202,7 +202,7 @@ class ContactsClient(gdata.client.GDClient):
     Args:
         uri:  the group uri or id   
     """
-    return self.get(uri, desired_class=desired_class, auth_token=auth_token, **kwargs)
+    return self.get_entry(uri, desired_class=desired_class, auth_token=auth_token, **kwargs)
 
   GetGroup = get_group
 

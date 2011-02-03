@@ -199,8 +199,8 @@ class CalendarClient(gdata.client.GDClient):
                   and if None, this method will look for a value in the
                   auth_token member of SpreadsheetsClient.
     """
-    return self.get_feed(uri, auth_token=auth_token, desired_class=desired_class,
-                         **kwargs)
+    return self.get_entry(uri, auth_token=auth_token, desired_class=desired_class,
+                          **kwargs)
 
   GetCalendarEntry = get_calendar_entry
 
@@ -254,8 +254,8 @@ class CalendarClient(gdata.client.GDClient):
                   and if None, this method will look for a value in the
                   auth_token member of SpreadsheetsClient.
     """
-    return self.get_feed(uri, auth_token=auth_token, desired_class=desired_class,
-                         **kwargs)
+    return self.get_entry(uri, auth_token=auth_token, desired_class=desired_class,
+                          **kwargs)
 
   GetEventEntry = get_event_entry
 
@@ -308,8 +308,8 @@ class CalendarClient(gdata.client.GDClient):
                   and if None, this method will look for a value in the
                   auth_token member of SpreadsheetsClient.
     """
-    return self.get_feed(uri, auth_token=auth_token, desired_class=desired_class,
-                         **kwargs)
+    return self.get_entry(uri, auth_token=auth_token, desired_class=desired_class,
+                          **kwargs)
 
   GetCalendarAclEntry = get_calendar_acl_entry
 
