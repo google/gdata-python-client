@@ -193,6 +193,6 @@ class ContentForShoppingClient(gdata.client.GDClient):
                           auth_token=None):
     """Get the feed of managed accounts
     """
-    uri = self._create_uri(account_id, 'managedaccounts', [mcaccount_id]
+    uri = self._create_uri(account_id, 'managedaccounts', [mcaccount_id],
                            use_projection=False)
     return self.get_feed(uri)
