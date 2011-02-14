@@ -45,7 +45,7 @@ class ContactsSample(object):
       functionality of the Contacts feed.
     """
     self.gd_client = gdata.contacts.client.ContactsClient(source='GoogleInc-ContactsPythonSample-1')
-    self.gd_client.ClientLogin(email, password, self.gd_client.source);
+    self.gd_client.ClientLogin(email, password, self.gd_client.source)
 
   def PrintFeed(self, feed, ctr=0):
     """Prints out the contents of a feed to the console.

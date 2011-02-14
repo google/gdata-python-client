@@ -31,6 +31,10 @@ import atom.data
 import atom.http_core
 import gdata.gauth
 
+DEFAULT_BATCH_URL = ('http://www.google.com/m8/feeds/contacts/default/full'
+                     '/batch')
+DEFAULT_PROFILES_BATCH_URL = ('http://www.google.com'
+                              '/m8/feeds/profiles/default/full/batch')
 
 class ContactsClient(gdata.client.GDClient):
   api_version = '3'
@@ -381,7 +385,7 @@ class ContactsClient(gdata.client.GDClient):
 
   UpdateProfile = update_profile
 
-  def execute_batch(self, batch_feed, url, desired_class=None):
+  def execute_batch(self, batch_feed, url=DEFAULT_BATCH_URL, desired_class=None):
     """Sends a batch request feed to the server.
     
     Args:
