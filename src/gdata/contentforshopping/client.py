@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# Copyright 2009 Google Inc. All Rights Reserved.
+# Copyright (C) 2010-2011 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ import gdata.client
 import atom.data
 
 from gdata.contentforshopping.data import (ProductEntry, ProductFeed,
-    DatafeedFeed)
+    DatafeedFeed, ClientAccountFeed, ClientAccount)
 
 
 CFS_VERSION = 'v1'
@@ -187,12 +187,51 @@ class ContentForShoppingClient(gdata.client.GDClient):
     """
     uri = self._create_uri(account_id, 'datafeeds/products',
                            use_projection=False)
-    return self.post(entry, uri=uri, auth_token=None)
+    return self.post(entry, uri=uri, auth_token=auth_token)
 
-  def get_managedaccounts(self, mcaccount_id, account_id=None,
-                          auth_token=None):
+  def get_client_accounts(self, account_id=None, auth_token=None):
     """Get the feed of managed accounts
+
+    :param account_id: The Merchant Center Account ID. If ommitted the default
+                       Account ID will be used for this client
     """
-    uri = self._create_uri(account_id, 'managedaccounts', [mcaccount_id],
+    uri = self._create_uri(account_id, 'managedaccounts/products',
                            use_projection=False)
-    return self.get_feed(uri)
+    return self.get_feed(uri, desired_class=ClientAccountFeed,
+                         auth_token=auth_token)
+
+  def insert_client_account(self, entry, account_id=None, auth_token=None):
+    """Insert a client account entry
+
+    :param entry: An entry of type ClientAccount
+    :param account_id: The Merchant Center Account ID. If ommitted the default
+                       Account ID will be used for this client
+    """
+    uri = self._create_uri(account_id, 'managedaccounts/products',
+                           use_projection=False)
+    return self.post(entry, uri=uri, auth_token=auth_token)
+
+  def update_client_account(self, entry, client_account_id, account_id=None, auth_token=None):
+    """Update a client account
+
+    :param entry: An entry of type ClientAccount to update to
+    :param client_account_id: The client account ID
+    :param account_id: The Merchant Center Account ID. If ommitted the default
+                       Account ID will be used for this client
+    """
+    uri = self._create_uri(account_id, 'managedaccounts/products',
+                           [client_account_id], use_projection=False)
+    return self.update(entry, uri=uri, auth_token=auth_token)
+
+  def delete_client_account(self, client_account_id, account_id=None,
+                            auth_token=None):
+    """Delete a client account
+
+    :param client_account_id: The client account ID
+    :param account_id: The Merchant Center Account ID. If ommitted the default
+                       Account ID will be used for this client
+    """
+
+    uri = self._create_uri(account_id, 'managedaccounts/products',
+                           [client_account_id], use_projection=False)
+    return self.delete(uri, auth_token=auth_token)

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# Copyright (C) 2010 Google Inc.
+# Copyright (C) 2010-2011 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -1141,3 +1141,35 @@ class DatafeedFeed(gdata.data.GDFeed):
   """A datafeed feed
   """
   entry = [DatafeedEntry]
+
+
+class AdultContent(atom.core.XmlElement):
+  """sc:adult_content element
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'adult_content'
+
+
+class InternalId(atom.core.XmlElement):
+  """sc:internal_id element
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'internal_id'
+
+
+class ReviewsUrl(atom.core.XmlElement):
+  """sc:reviews_url element
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'reviews_url'
+
+
+class ClientAccount(gdata.data.GDEntry):
+  """A multiclient account entry
+  """
+  adult_content = AdultContent
+  internal_id = InternalId
+  reviews_url = ReviewsUrl
+
+
+class ClientAccountFeed(gdata.data.GDFeed):
+  """A multiclient account feed
+  """
+  entry = [ClientAccount]
