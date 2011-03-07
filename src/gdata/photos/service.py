@@ -122,6 +122,7 @@ class GooglePhotosException(Exception):
     self.args = [self.error_code, self.reason, self.body]
 
 class PhotosService(gdata.service.GDataService):
+  ssl = True
   userUri = '/data/feed/api/user/%s'
   
   def __init__(self, email=None, password=None, source=None,
@@ -412,7 +413,7 @@ class PhotosService(gdata.service.GDataService):
       raise GooglePhotosException({'status':GPHOTOS_INVALID_ARGUMENT,
         'body':'`filename_or_handle` must be a path name or a file-like object',
         'reason':'Found %s, not path name or object with a .read() method' % \
-          type(filename_or_handle)
+          filename_or_handle
         })
     
     if isinstance(album_or_uri, (str, unicode)): # it's a uri

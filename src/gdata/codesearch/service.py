@@ -29,6 +29,7 @@ import gdata.codesearch
 
 class CodesearchService(gdata.service.GDataService): 
     """Client extension for Google codesearch service"""
+    ssl = True
 
     def __init__(self, email=None, password=None, source=None,
                  server='www.google.com',  additional_headers=None, **kwargs):

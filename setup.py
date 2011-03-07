@@ -48,7 +48,6 @@ models and service modules for the the following Google data services:
 - Google Book Search API
 - Google Analytics API
 - Google Finance API
-- Google Maps Data API
 - Google Sites Data API
 - core Google data API functionality 
 The core Google data code provides sufficient functionality to use this 
@@ -92,7 +91,6 @@ library may also be used with any Atom Publishing Protocol service (AtomPub).
       'gdata.finance', 
       'gdata.geo', 
       'gdata.health',
-      'gdata.maps',
       'gdata.media', 
       'gdata.notebook', 
       'gdata.oauth', 
