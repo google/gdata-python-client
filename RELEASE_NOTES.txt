@@ -1,3 +1,21 @@
+=== 2.0.14 ===
+7 Mar 2011
+
+ - Bug Fixes:
+  * 491. 302 redirect on some gsessionids
+  * 501. Remove support for deprecated Maps Data API.
+  * 462. Bug in samples/analytics/data_feed_demo.py (using segments)
+  * 482. String exception in service.py
+  * 414. http proxy url containing properly formatted user-name and password not accepted
+ - Turn on SSL for Codesearch, Photos, Project Hosting, Analytics,
+    Contacts, Marketplace Licensing, and Docs.
+ - Add batch default URL to the Contacts API and clean the sample code. (issue4000058)
+ - Added support for Content API for Shopping
+ - Added Calendar V2 API support
+ - Add Google Marketplace Licensing API to the Gdata Python Client
+ - Added patch from Alexandre Vivien that fixes calendar resource email support that somehow went missing in a previous release.
+
+
 === 2.0.13 ===
 16 Nov 2010 (revision 902:73f3fbb5ea88)
 
