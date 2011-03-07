@@ -66,9 +66,6 @@ src/gdata/geo/__init__.py
 src/gdata/health/__init__.py
 src/gdata/health/service.py
 src/gdata/media/__init__.py
-src/gdata/maps/__init__.py
-src/gdata/maps/client.py
-src/gdata/maps/data.py
 src/gdata/photos/__init__.py
 src/gdata/photos/service.py
 src/gdata/spreadsheet/__init__.py
@@ -200,7 +197,6 @@ samples/contacts/contacts_example.py
 samples/docs/docs_example.py
 samples/finance/test_finance.py
 samples/mashups/birthdaySample.py
-samples/maps/MapsExample.py
 samples/spreadsheets/spreadsheetExample.py
 samples/webmastertools/AddDeleteExampleDotCom.py
 samples/webmastertools/SitemapsFeedSummary.py
@@ -311,9 +307,6 @@ tests/gdata_tests/docs/test.doc
 tests/gdata_tests/docs/test.csv
 tests/gdata_tests/health/__init__.py
 tests/gdata_tests/health/service_test.py
-tests/gdata_tests/maps/__init__.py
-tests/gdata_tests/maps/data_test.py
-tests/gdata_tests/maps/live_client_test.py
 tests/gdata_tests/photos/__init__.py
 tests/gdata_tests/photos/service_test.py
 tests/gdata_tests/sample_util_test.py
@@ -392,8 +385,6 @@ pydocs/gdata.webmastertools.service.html
 pydocs/gdata.youtube.html
 pydocs/gdata.youtube.service.html
 pydocs/generate_docs
-pydocs/gdata.maps.client.html
-pydocs/gdata.maps.data.html
 pydocs/gdata.spreadsheets.data.html
 samples/blogger/oauth-appengine/app.yaml
 samples/blogger/oauth-appengine/css/index.css

@@ -37,8 +37,6 @@ import gdata_tests.live_client_test
 import gdata_tests.gauth_test
 import gdata_tests.blogger.data_test
 import gdata_tests.blogger.live_client_test
-import gdata_tests.maps.data_test
-import gdata_tests.maps.live_client_test
 import gdata_tests.spreadsheets.data_test
 import gdata_tests.spreadsheets.live_client_test
 import gdata_tests.projecthosting.data_test
@@ -74,8 +72,6 @@ def suite():
       gdata_tests.gauth_test.suite(),
       gdata_tests.blogger.data_test.suite(),
       gdata_tests.blogger.live_client_test.suite(),
-      gdata_tests.maps.data_test.suite(),
-      gdata_tests.maps.live_client_test.suite(),
       gdata_tests.spreadsheets.data_test.suite(),
       gdata_tests.spreadsheets.live_client_test.suite(),
       gdata_tests.projecthosting.data_test.suite(),

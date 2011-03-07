@@ -80,7 +80,7 @@ Methods defined here:<br>
 
 <dl><dt><a name="ContactsClient-DeletePhoto"><strong>DeletePhoto</strong></a> = <a href="#ContactsClient-delete_photo">delete_photo</a>(self, contact_entry_or_url)</dt></dl>
 
-<dl><dt><a name="ContactsClient-ExecuteBatch"><strong>ExecuteBatch</strong></a> = <a href="#ContactsClient-execute_batch">execute_batch</a>(self, batch_feed, url, desired_class<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="ContactsClient-ExecuteBatch"><strong>ExecuteBatch</strong></a> = <a href="#ContactsClient-execute_batch">execute_batch</a>(self, batch_feed, url<font color="#909090">='http://www.google.com/m8/feeds/contacts/default/full/batch'</font>, desired_class<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="ContactsClient-ExecuteBatchProfiles"><strong>ExecuteBatchProfiles</strong></a> = <a href="#ContactsClient-execute_batch_profiles">execute_batch_profiles</a>(self, batch_feed, url, desired_class<font color="#909090">=&lt;class 'gdata.contacts.data.ProfilesFeed'&gt;</font>)</dt></dl>
 
@@ -174,7 +174,7 @@ Returns:<br>
 
 <dl><dt><a name="ContactsClient-delete_photo"><strong>delete_photo</strong></a>(self, contact_entry_or_url)</dt></dl>
 
-<dl><dt><a name="ContactsClient-execute_batch"><strong>execute_batch</strong></a>(self, batch_feed, url, desired_class<font color="#909090">=None</font>)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;feed&nbsp;to&nbsp;the&nbsp;server.<br>
+<dl><dt><a name="ContactsClient-execute_batch"><strong>execute_batch</strong></a>(self, batch_feed, url<font color="#909090">='http://www.google.com/m8/feeds/contacts/default/full/batch'</font>, desired_class<font color="#909090">=None</font>)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;feed&nbsp;to&nbsp;the&nbsp;server.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;batch_feed:&nbsp;gdata.contacts.ContactFeed&nbsp;A&nbsp;feed&nbsp;containing&nbsp;batch<br>
@@ -318,6 +318,8 @@ Data and other attributes defined here:<br>
 <dl><dt><strong>contact_list</strong> = 'default'</dl>
 
 <dl><dt><strong>server</strong> = 'www.google.com'</dl>
+
+<dl><dt><strong>ssl</strong> = True</dl>
 
 <hr>
 Methods inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
@@ -518,7 +520,7 @@ Returns:<br>
 Raises:<br>
 &nbsp;&nbsp;A&nbsp;RequestError&nbsp;if&nbsp;the&nbsp;server&nbsp;responds&nbsp;with&nbsp;a&nbsp;non-200&nbsp;status.</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-Update"><strong>Update</strong></a> = update(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
+<dl><dt><a name="ContactsClient-Update"><strong>Update</strong></a> = update(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, uri<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
 &nbsp;<br>
 Performs&nbsp;a&nbsp;PUT&nbsp;and&nbsp;converts&nbsp;the&nbsp;response&nbsp;to&nbsp;a&nbsp;new&nbsp;entry&nbsp;object&nbsp;with&nbsp;a<br>
 matching&nbsp;class&nbsp;to&nbsp;the&nbsp;entry&nbsp;passed&nbsp;in.<br>
@@ -532,6 +534,8 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;changes&nbsp;were&nbsp;based&nbsp;on&nbsp;an&nbsp;obsolete&nbsp;version&nbsp;of&nbsp;the&nbsp;entry.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Setting&nbsp;force&nbsp;to&nbsp;True&nbsp;will&nbsp;cause&nbsp;the&nbsp;update&nbsp;to&nbsp;silently<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;overwrite&nbsp;whatever&nbsp;version&nbsp;is&nbsp;present.<br>
+&nbsp;&nbsp;uri:&nbsp;The&nbsp;uri&nbsp;to&nbsp;put&nbsp;to.&nbsp;If&nbsp;provided,&nbsp;this&nbsp;uri&nbsp;is&nbsp;PUT&nbsp;to&nbsp;rather&nbsp;than&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inferred&nbsp;uri&nbsp;from&nbsp;the&nbsp;entry's&nbsp;edit&nbsp;link.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
@@ -750,7 +754,7 @@ Returns:<br>
 Raises:<br>
 &nbsp;&nbsp;A&nbsp;RequestError&nbsp;if&nbsp;the&nbsp;server&nbsp;responds&nbsp;with&nbsp;a&nbsp;non-200&nbsp;status.</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-update"><strong>update</strong></a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
+<dl><dt><a name="ContactsClient-update"><strong>update</strong></a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, uri<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Edits&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server&nbsp;by&nbsp;sending&nbsp;the&nbsp;XML&nbsp;for&nbsp;this&nbsp;entry.<br>
 &nbsp;<br>
 Performs&nbsp;a&nbsp;PUT&nbsp;and&nbsp;converts&nbsp;the&nbsp;response&nbsp;to&nbsp;a&nbsp;new&nbsp;entry&nbsp;object&nbsp;with&nbsp;a<br>
 matching&nbsp;class&nbsp;to&nbsp;the&nbsp;entry&nbsp;passed&nbsp;in.<br>
@@ -764,6 +768,8 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;changes&nbsp;were&nbsp;based&nbsp;on&nbsp;an&nbsp;obsolete&nbsp;version&nbsp;of&nbsp;the&nbsp;entry.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Setting&nbsp;force&nbsp;to&nbsp;True&nbsp;will&nbsp;cause&nbsp;the&nbsp;update&nbsp;to&nbsp;silently<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;overwrite&nbsp;whatever&nbsp;version&nbsp;is&nbsp;present.<br>
+&nbsp;&nbsp;uri:&nbsp;The&nbsp;uri&nbsp;to&nbsp;put&nbsp;to.&nbsp;If&nbsp;provided,&nbsp;this&nbsp;uri&nbsp;is&nbsp;PUT&nbsp;to&nbsp;rather&nbsp;than&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inferred&nbsp;uri&nbsp;from&nbsp;the&nbsp;entry's&nbsp;edit&nbsp;link.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;new&nbsp;Entry&nbsp;object&nbsp;of&nbsp;a&nbsp;matching&nbsp;type&nbsp;to&nbsp;the&nbsp;entry&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
@@ -808,8 +814,6 @@ Data and other attributes inherited from <a href="atom.client.html#AtomPubClient
 <dl><dt><strong>auth_token</strong> = None</dl>
 
 <dl><dt><strong>host</strong> = None</dl>
-
-<dl><dt><strong>ssl</strong> = False</dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -896,7 +900,9 @@ Data descriptors inherited from <a href="gdata.client.html#Query">gdata.client.Q
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>__author__</strong> = 'vinces1979@gmail.com (Vince Spicer)'</td></tr></table><p>
+<td width="100%"><strong>DEFAULT_BATCH_URL</strong> = 'http://www.google.com/m8/feeds/contacts/default/full/batch'<br>
+<strong>DEFAULT_PROFILES_BATCH_URL</strong> = 'http://www.google.com/m8/feeds/profiles/default/full/batch'<br>
+<strong>__author__</strong> = 'vinces1979@gmail.com (Vince Spicer)'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#7799ee">
 <td colspan=3 valign=bottom>&nbsp;<br>

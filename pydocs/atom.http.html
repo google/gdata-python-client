@@ -147,7 +147,8 @@ proxy&nbsp;server&nbsp;is&nbsp;assumed&nbsp;to&nbsp;be&nbsp;stored&nbsp;in&nbsp;
 'https_proxy'&nbsp;and&nbsp;'http_proxy'&nbsp;respectively.&nbsp;If&nbsp;the&nbsp;proxy&nbsp;server&nbsp;requires<br>
 a&nbsp;Basic&nbsp;Auth&nbsp;authorization&nbsp;header,&nbsp;the&nbsp;username&nbsp;and&nbsp;password&nbsp;are&nbsp;expected&nbsp;to&nbsp;<br>
 be&nbsp;in&nbsp;the&nbsp;'proxy-username'&nbsp;or&nbsp;'proxy_username'&nbsp;variable&nbsp;and&nbsp;the&nbsp;<br>
-'proxy-password'&nbsp;or&nbsp;'proxy_password'&nbsp;variable.<br>
+'proxy-password'&nbsp;or&nbsp;'proxy_password'&nbsp;variable,&nbsp;or&nbsp;in&nbsp;'http_proxy'&nbsp;or<br>
+'https_proxy'&nbsp;as&nbsp;"protocol://[username:password@]host:port".<br>
 &nbsp;<br>
 After&nbsp;connecting&nbsp;to&nbsp;the&nbsp;proxy&nbsp;server,&nbsp;the&nbsp;request&nbsp;is&nbsp;completed&nbsp;as&nbsp;in&nbsp;<br>
 <a href="#HttpClient">HttpClient</a>.request.<br>&nbsp;</tt></td></tr>

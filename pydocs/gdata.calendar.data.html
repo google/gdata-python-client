@@ -57,6 +57,18 @@
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.calendar.data.html#WebContentGadgetPref">WebContentGadgetPref</a>
 </font></dt></dl>
 </dd>
+<dt><font face="helvetica, arial"><a href="atom.data.html#Link">atom.data.Link</a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.calendar.data.html#WebContentLink">WebContentLink</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gdata.acl.data.html#AclEntry">gdata.acl.data.AclEntry</a>(<a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.calendar.data.html#CalendarAclEntry">CalendarAclEntry</a>
+</font></dt></dl>
+</dd>
 <dt><font face="helvetica, arial"><a href="gdata.acl.data.html#AclRole">gdata.acl.data.AclRole</a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)
 </font></dt><dd>
 <dl>
@@ -90,8 +102,7 @@
 <dt><font face="helvetica, arial"><a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>(<a href="atom.data.html#Entry">atom.data.Entry</a>, <a href="gdata.data.html#LinkFinder">gdata.data.LinkFinder</a>)
 </font></dt><dd>
 <dl>
-<dt><font face="helvetica, arial"><a href="gdata.calendar.data.html#CalendarAclEntry">CalendarAclEntry</a>
-</font></dt><dt><font face="helvetica, arial"><a href="gdata.calendar.data.html#CalendarCommentEntry">CalendarCommentEntry</a>
+<dt><font face="helvetica, arial"><a href="gdata.calendar.data.html#CalendarCommentEntry">CalendarCommentEntry</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.calendar.data.html#CalendarEntry">CalendarEntry</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.calendar.data.html#CalendarRecurrenceExceptionEntry">CalendarRecurrenceExceptionEntry</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.calendar.data.html#SettingsEntry">SettingsEntry</a>
@@ -110,6 +121,12 @@
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="gdata.calendar.data.html#CalendarRecurrenceException">CalendarRecurrenceException</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gdata.data.html#When">gdata.data.When</a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.calendar.data.html#When">When</a>
 </font></dt></dl>
 </dd>
 <dt><font face="helvetica, arial"><a href="gdata.data.html#Where">gdata.data.Where</a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)
@@ -729,13 +746,14 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="CalendarAclEntry">class <strong>CalendarAclEntry</strong></a>(<a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="CalendarAclEntry">class <strong>CalendarAclEntry</strong></a>(<a href="gdata.acl.data.html#AclEntry">gdata.acl.data.AclEntry</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt>Describes&nbsp;an&nbsp;entry&nbsp;in&nbsp;a&nbsp;feed&nbsp;of&nbsp;a&nbsp;Calendar&nbsp;access&nbsp;control&nbsp;list&nbsp;(ACL)<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.calendar.data.html#CalendarAclEntry">CalendarAclEntry</a></dd>
+<dd><a href="gdata.acl.data.html#AclEntry">gdata.acl.data.AclEntry</a></dd>
 <dd><a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a></dd>
 <dd><a href="atom.data.html#Entry">atom.data.Entry</a></dd>
 <dd><a href="atom.data.html#FeedEntryParent">atom.data.FeedEntryParent</a></dd>
@@ -747,6 +765,14 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <hr>
 Data and other attributes defined here:<br>
 <dl><dt><strong>send_acl_notifications</strong> = &lt;class 'gdata.calendar.data.SendAclNotificationsProperty'&gt;<dd><tt>Describes&nbsp;whether&nbsp;to&nbsp;send&nbsp;ACL&nbsp;notifications&nbsp;to&nbsp;grantees</tt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="gdata.acl.data.html#AclEntry">gdata.acl.data.AclEntry</a>:<br>
+<dl><dt><strong>role</strong> = &lt;class 'gdata.acl.data.AclRole'&gt;<dd><tt>Describes&nbsp;the&nbsp;role&nbsp;of&nbsp;an&nbsp;entry&nbsp;in&nbsp;an&nbsp;access&nbsp;control&nbsp;list.</tt></dl>
+
+<dl><dt><strong>scope</strong> = &lt;class 'gdata.acl.data.AclScope'&gt;<dd><tt>Describes&nbsp;the&nbsp;scope&nbsp;of&nbsp;an&nbsp;entry&nbsp;in&nbsp;an&nbsp;access&nbsp;control&nbsp;list.</tt></dl>
+
+<dl><dt><strong>with_key</strong> = &lt;class 'gdata.acl.data.AclWithKey'&gt;<dd><tt>Describes&nbsp;a&nbsp;key&nbsp;that&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;access&nbsp;a&nbsp;document.</tt></dl>
 
 <hr>
 Methods inherited from <a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>:<br>
@@ -2724,6 +2750,12 @@ consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
 Data and other attributes defined here:<br>
 <dl><dt><strong>anyone_can_add_self</strong> = &lt;class 'gdata.calendar.data.AnyoneCanAddSelfProperty'&gt;<dd><tt>Whether&nbsp;anyone&nbsp;can&nbsp;add&nbsp;self&nbsp;as&nbsp;attendee</tt></dl>
 
+<dl><dt><strong>comments</strong> = &lt;class 'gdata.data.Comments'&gt;<dd><tt>The&nbsp;gd:comments&nbsp;element.<br>
+&nbsp;<br>
+Contains&nbsp;a&nbsp;comments&nbsp;feed&nbsp;for&nbsp;the&nbsp;enclosing&nbsp;entry&nbsp;(such&nbsp;as&nbsp;a&nbsp;calendar&nbsp;event).</tt></dl>
+
+<dl><dt><strong>event_status</strong> = &lt;class 'gdata.data.EventStatus'&gt;<dd><tt>The&nbsp;gd:eventStatus&nbsp;element.</tt></dl>
+
 <dl><dt><strong>extended_property</strong> = [&lt;class 'gdata.calendar.data.CalendarExtendedProperty'&gt;]</dl>
 
 <dl><dt><strong>georss_where</strong> = &lt;class 'gdata.geo.data.GeoRssWhere'&gt;<dd><tt>Describes&nbsp;a&nbsp;geographical&nbsp;location&nbsp;or&nbsp;region.</tt></dl>
@@ -2734,9 +2766,55 @@ Data and other attributes defined here:<br>
 
 <dl><dt><strong>guests_can_see_guests</strong> = &lt;class 'gdata.calendar.data.GuestsCanSeeGuestsProperty'&gt;<dd><tt>Whether&nbsp;guests&nbsp;can&nbsp;see&nbsp;other&nbsp;attendees</tt></dl>
 
+<dl><dt><strong>original_event</strong> = &lt;class 'gdata.data.OriginalEvent'&gt;<dd><tt>The&nbsp;gd:originalEvent&nbsp;element.<br>
+&nbsp;<br>
+Equivalent&nbsp;to&nbsp;the&nbsp;Recurrence&nbsp;ID&nbsp;property&nbsp;specified&nbsp;in&nbsp;section&nbsp;4.8.4.4<br>
+of&nbsp;<a href="http://www.rfc-editor.org/rfc/rfc2445.txt">RFC&nbsp;2445</a>.&nbsp;Appears&nbsp;in&nbsp;every&nbsp;instance&nbsp;of&nbsp;a&nbsp;recurring&nbsp;event,&nbsp;to&nbsp;identify<br>
+the&nbsp;original&nbsp;event.<br>
+&nbsp;<br>
+Contains&nbsp;a&nbsp;&lt;gd:when&gt;&nbsp;element&nbsp;specifying&nbsp;the&nbsp;original&nbsp;start&nbsp;time&nbsp;of&nbsp;the<br>
+instance&nbsp;that&nbsp;has&nbsp;become&nbsp;an&nbsp;exception.</tt></dl>
+
 <dl><dt><strong>private_copy</strong> = &lt;class 'gdata.calendar.data.PrivateCopyProperty'&gt;<dd><tt>Indicates&nbsp;whether&nbsp;this&nbsp;is&nbsp;a&nbsp;private&nbsp;copy&nbsp;of&nbsp;the&nbsp;event,&nbsp;changes&nbsp;to&nbsp;which&nbsp;should&nbsp;not&nbsp;be&nbsp;sent&nbsp;to&nbsp;other&nbsp;calendars</tt></dl>
 
-<dl><dt><strong>quickadd</strong> = &lt;class 'gdata.calendar.data.QuickAddProperty'&gt;<dd><tt>Describes&nbsp;whether&nbsp;gd:content&nbsp;is&nbsp;for&nbsp;quick-add&nbsp;processing</tt></dl>
+<dl><dt><strong>quick_add</strong> = &lt;class 'gdata.calendar.data.QuickAddProperty'&gt;<dd><tt>Describes&nbsp;whether&nbsp;gd:content&nbsp;is&nbsp;for&nbsp;quick-add&nbsp;processing</tt></dl>
+
+<dl><dt><strong>recurrence</strong> = &lt;class 'gdata.data.Recurrence'&gt;<dd><tt>The&nbsp;gd:recurrence&nbsp;element.<br>
+&nbsp;<br>
+Represents&nbsp;the&nbsp;dates&nbsp;and&nbsp;times&nbsp;when&nbsp;a&nbsp;recurring&nbsp;event&nbsp;takes&nbsp;place.<br>
+&nbsp;<br>
+The&nbsp;string&nbsp;that&nbsp;defines&nbsp;the&nbsp;recurrence&nbsp;consists&nbsp;of&nbsp;a&nbsp;set&nbsp;of&nbsp;properties,<br>
+each&nbsp;of&nbsp;which&nbsp;is&nbsp;defined&nbsp;in&nbsp;the&nbsp;iCalendar&nbsp;standard&nbsp;(<a href="http://www.rfc-editor.org/rfc/rfc2445.txt">RFC&nbsp;2445</a>).<br>
+&nbsp;<br>
+Specifically,&nbsp;the&nbsp;string&nbsp;usually&nbsp;begins&nbsp;with&nbsp;a&nbsp;DTSTART&nbsp;property&nbsp;that<br>
+indicates&nbsp;the&nbsp;starting&nbsp;time&nbsp;of&nbsp;the&nbsp;first&nbsp;instance&nbsp;of&nbsp;the&nbsp;event,&nbsp;and<br>
+often&nbsp;a&nbsp;DTEND&nbsp;property&nbsp;or&nbsp;a&nbsp;DURATION&nbsp;property&nbsp;to&nbsp;indicate&nbsp;when&nbsp;the<br>
+first&nbsp;instance&nbsp;ends.&nbsp;Next&nbsp;come&nbsp;RRULE,&nbsp;RDATE,&nbsp;EXRULE,&nbsp;and/or&nbsp;EXDATE<br>
+properties,&nbsp;which&nbsp;collectively&nbsp;define&nbsp;a&nbsp;recurring&nbsp;event&nbsp;and&nbsp;its<br>
+exceptions&nbsp;(but&nbsp;see&nbsp;below).&nbsp;(See&nbsp;section&nbsp;4.8.5&nbsp;of&nbsp;<a href="http://www.rfc-editor.org/rfc/rfc2445.txt">RFC&nbsp;2445</a>&nbsp;for&nbsp;more<br>
+information&nbsp;about&nbsp;these&nbsp;recurrence&nbsp;component&nbsp;properties.)&nbsp;Last&nbsp;comes&nbsp;a<br>
+VTIMEZONE&nbsp;component,&nbsp;providing&nbsp;detailed&nbsp;timezone&nbsp;rules&nbsp;for&nbsp;any&nbsp;timezone<br>
+ID&nbsp;mentioned&nbsp;in&nbsp;the&nbsp;preceding&nbsp;properties.<br>
+&nbsp;<br>
+Google&nbsp;services&nbsp;like&nbsp;Google&nbsp;Calendar&nbsp;don't&nbsp;generally&nbsp;generate&nbsp;EXRULE<br>
+and&nbsp;EXDATE&nbsp;properties&nbsp;to&nbsp;represent&nbsp;exceptions&nbsp;to&nbsp;recurring&nbsp;events;<br>
+instead,&nbsp;they&nbsp;generate&nbsp;&lt;gd:recurrenceException&gt;&nbsp;elements.&nbsp;However,<br>
+Google&nbsp;services&nbsp;may&nbsp;include&nbsp;EXRULE&nbsp;and/or&nbsp;EXDATE&nbsp;properties&nbsp;anyway;<br>
+for&nbsp;example,&nbsp;users&nbsp;can&nbsp;import&nbsp;events&nbsp;and&nbsp;exceptions&nbsp;into&nbsp;Calendar,&nbsp;and<br>
+if&nbsp;those&nbsp;imported&nbsp;events&nbsp;contain&nbsp;EXRULE&nbsp;or&nbsp;EXDATE&nbsp;properties,&nbsp;then<br>
+Calendar&nbsp;will&nbsp;provide&nbsp;those&nbsp;properties&nbsp;when&nbsp;it&nbsp;sends&nbsp;a&nbsp;&lt;gd:recurrence&gt;<br>
+element.<br>
+&nbsp;<br>
+Note&nbsp;the&nbsp;the&nbsp;use&nbsp;of&nbsp;&lt;gd:recurrenceException&gt;&nbsp;means&nbsp;that&nbsp;you&nbsp;can't&nbsp;be<br>
+sure&nbsp;just&nbsp;from&nbsp;examining&nbsp;a&nbsp;&lt;gd:recurrence&gt;&nbsp;element&nbsp;whether&nbsp;there&nbsp;are<br>
+any&nbsp;exceptions&nbsp;to&nbsp;the&nbsp;recurrence&nbsp;description.&nbsp;To&nbsp;ensure&nbsp;that&nbsp;you&nbsp;find<br>
+all&nbsp;exceptions,&nbsp;look&nbsp;for&nbsp;&lt;gd:recurrenceException&gt;&nbsp;elements&nbsp;in&nbsp;the&nbsp;feed,<br>
+and&nbsp;use&nbsp;their&nbsp;&lt;gd:originalEvent&gt;&nbsp;elements&nbsp;to&nbsp;match&nbsp;them&nbsp;up&nbsp;with<br>
+&lt;gd:recurrence&gt;&nbsp;elements.</tt></dl>
+
+<dl><dt><strong>recurrence_exception</strong> = [&lt;class 'gdata.data.RecurrenceException'&gt;]</dl>
+
+<dl><dt><strong>reminder</strong> = [&lt;class 'gdata.data.Reminder'&gt;]</dl>
 
 <dl><dt><strong>send_event_notifications</strong> = &lt;class 'gdata.calendar.data.SendEventNotificationsProperty'&gt;<dd><tt>Describes&nbsp;whether&nbsp;to&nbsp;send&nbsp;event&nbsp;notifications&nbsp;to&nbsp;other&nbsp;participants&nbsp;of&nbsp;the&nbsp;event</tt></dl>
 
@@ -2746,7 +2824,19 @@ Data and other attributes defined here:<br>
 
 <dl><dt><strong>sync_event</strong> = &lt;class 'gdata.calendar.data.SyncEventProperty'&gt;<dd><tt>Describes&nbsp;whether&nbsp;this&nbsp;is&nbsp;a&nbsp;sync&nbsp;scenario&nbsp;where&nbsp;the&nbsp;Ical&nbsp;UID&nbsp;and&nbsp;Sequence&nbsp;number&nbsp;are&nbsp;honored&nbsp;during&nbsp;inserts&nbsp;and&nbsp;updates</tt></dl>
 
+<dl><dt><strong>transparency</strong> = &lt;class 'gdata.data.Transparency'&gt;<dd><tt>The&nbsp;gd:transparency&nbsp;element:<br>
+&nbsp;<br>
+Extensible&nbsp;enum&nbsp;corresponding&nbsp;to&nbsp;the&nbsp;TRANSP&nbsp;property&nbsp;defined&nbsp;in&nbsp;<a href="http://www.rfc-editor.org/rfc/rfc244.txt">RFC&nbsp;244</a>.</tt></dl>
+
 <dl><dt><strong>uid</strong> = &lt;class 'gdata.calendar.data.IcalUIDProperty'&gt;<dd><tt>Describes&nbsp;the&nbsp;UID&nbsp;in&nbsp;the&nbsp;ical&nbsp;export&nbsp;of&nbsp;the&nbsp;event</tt></dl>
+
+<dl><dt><strong>visibility</strong> = &lt;class 'gdata.data.Visibility'&gt;<dd><tt>The&nbsp;gd:visibility&nbsp;element.</tt></dl>
+
+<dl><dt><strong>when</strong> = [&lt;class 'gdata.calendar.data.When'&gt;]</dl>
+
+<dl><dt><strong>where</strong> = [&lt;class 'gdata.data.Where'&gt;]</dl>
+
+<dl><dt><strong>who</strong> = [&lt;class 'gdata.data.Who'&gt;]</dl>
 
 <hr>
 Data and other attributes inherited from <a href="gdata.data.html#BatchEntry">gdata.data.BatchEntry</a>:<br>
@@ -8797,6 +8887,332 @@ Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.Xm
 Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
 <dl><dt><strong>text</strong> = None</dl>
 
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="WebContentLink">class <strong>WebContentLink</strong></a>(<a href="atom.data.html#Link">atom.data.Link</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Describes&nbsp;a&nbsp;"web&nbsp;content"&nbsp;link<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.calendar.data.html#WebContentLink">WebContentLink</a></dd>
+<dd><a href="atom.data.html#Link">atom.data.Link</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="WebContentLink-__init__"><strong>__init__</strong></a>(self, title<font color="#909090">=None</font>, href<font color="#909090">=None</font>, link_type<font color="#909090">=None</font>, web_content<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>web_content</strong> = &lt;class 'gdata.calendar.data.WebContent'&gt;<dd><tt>Describes&nbsp;a&nbsp;"web&nbsp;content"&nbsp;extension</tt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.data.html#Link">atom.data.Link</a>:<br>
+<dl><dt><strong>href</strong> = 'href'</dl>
+
+<dl><dt><strong>hreflang</strong> = 'hreflang'</dl>
+
+<dl><dt><strong>length</strong> = 'length'</dl>
+
+<dl><dt><strong>rel</strong> = 'rel'</dl>
+
+<dl><dt><strong>title</strong> = 'title'</dl>
+
+<dl><dt><strong>type</strong> = 'type'</dl>
+
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="WebContentLink-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="WebContentLink-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="WebContentLink-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="WebContentLink-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="WebContentLink-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>, pretty_print<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="WebContentLink-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="WebContentLink-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="WebContentLink-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="WebContentLink-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>, pretty_print<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="When">class <strong>When</strong></a>(<a href="gdata.data.html#When">gdata.data.When</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Extends&nbsp;the&nbsp;gd:when&nbsp;element&nbsp;to&nbsp;add&nbsp;reminders<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.calendar.data.html#When">When</a></dd>
+<dd><a href="gdata.data.html#When">gdata.data.When</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>reminder</strong> = [&lt;class 'gdata.data.Reminder'&gt;]</dl>
+
+<hr>
+Data and other attributes inherited from <a href="gdata.data.html#When">gdata.data.When</a>:<br>
+<dl><dt><strong>end</strong> = 'endTime'</dl>
+
+<dl><dt><strong>start</strong> = 'startTime'</dl>
+
+<dl><dt><strong>value</strong> = 'valueString'</dl>
+
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="When-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="When-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="When-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="When-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="When-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>, pretty_print<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="When-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="When-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="When-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="When-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="When-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>, pretty_print<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
@@ -8804,7 +9220,9 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>GCAL_TEMPLATE</strong> = '{http://schemas.google.com/gCal/2005/}%s'<br>
+<td width="100%"><strong>GCAL_NAMESPACE</strong> = 'http://schemas.google.com/gCal/2005'<br>
+<strong>GCAL_TEMPLATE</strong> = '{http://schemas.google.com/gCal/2005/}%s'<br>
+<strong>WEB_CONTENT_LINK_REL</strong> = 'http://schemas.google.com/gCal/2005/webContent'<br>
 <strong>__author__</strong> = 'j.s@google.com (Jeff Scudder)'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#7799ee">
