@@ -49,10 +49,11 @@ LISTPAGE_KIND_TERM = SITES_NAMESPACE + '#listpage'
 WEBPAGE_KIND_TERM = SITES_NAMESPACE + '#webpage'
 WEBATTACHMENT_KIND_TERM = SITES_NAMESPACE + '#webattachment'
 FOLDER_KIND_TERM = SITES_NAMESPACE + '#folder'
+TAG_KIND_TERM = SITES_NAMESPACE + '#tag'
 
 SUPPORT_KINDS = [
     'announcement', 'announcementspage', 'attachment', 'comment', 'filecabinet',
-    'listitem', 'listpage', 'webpage', 'webattachment'
+    'listitem', 'listpage', 'webpage', 'webattachment', 'tag'
     ]
 
 
