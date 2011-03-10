@@ -78,14 +78,17 @@ class SpreadsheetsService(gdata.service.GDataService):
       If there is a key, then a SpreadsheetsSpreadsheet.
     """
     
-    uri = ('https://%s/feeds/spreadsheets/%s/%s' 
-           % (self.server, visibility, projection))
+    base_uri = 'https://%s/feeds/spreadsheets' % self.server
+    uri = ('%s/%s/%s' 
+           % (base_uri, visibility, projection))
     
     if key is not None:
       uri = '%s/%s' % (uri, key)
       
     if query != None:
-      query.feed = uri
+      query.feed = base_uri
+      query.visibility = visibility
+      query.projection = projection
       uri = query.ToUri()
 
     if key:
