@@ -865,6 +865,7 @@ class ResumableUploader(object):
   """Resumable upload helper for the Google Data protocol."""
 
   DEFAULT_CHUNK_SIZE = 5242880  # 5MB
+  MIN_CHUNK_SIZE = 262144 # 256KB
 
   def __init__(self, client, file_handle, content_type, total_file_size,
                chunk_size=None, desired_class=None):
@@ -885,6 +886,8 @@ class ResumableUploader(object):
     self.content_type = content_type
     self.total_file_size = total_file_size
     self.chunk_size = chunk_size or self.DEFAULT_CHUNK_SIZE
+    if self.chunk_size < self.MIN_CHUNK_SIZE:
+      self.chunk_size = self.MIN_CHUNK_SIZE
     self.desired_class = desired_class or gdata.data.GDEntry
     self.upload_uri = None
 
