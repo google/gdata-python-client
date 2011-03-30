@@ -109,7 +109,7 @@ class ContactsSample(object):
         if self.PromptOperationShouldContinue():
           # Another feed is available, and the user has given us permission
           # to fetch it
-          feed = self.gd_client.GetContacts(next.href)
+          feed = self.gd_client.GetContacts(uri=next.href)
         else:
           # User has asked us to terminate
           feed = None
@@ -162,7 +162,9 @@ class ContactsSample(object):
     for i, entry in enumerate(feed.entry):
       if not entry.name is None:
         family_name = entry.name.family_name is None and " " or entry.name.family_name.text
-        print '\n%s %s: %s - %s' % (ctr+i+1, entry.name.full_name.text, entry.name.given_name.text, family_name)
+        full_name = entry.name.full_name is None and " " or entry.name.full_name.text
+        given_name = entry.name.given_name is None and " " or entry.name.given_name.text
+        print '\n%s %s: %s - %s' % (ctr+i+1, full_name, given_name, family_name)
       else:
         print '\n%s %s (title)' % (ctr+i+1, entry.title.text)
       if entry.content:

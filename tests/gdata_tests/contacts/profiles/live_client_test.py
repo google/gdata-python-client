@@ -24,6 +24,7 @@ __author__ = 'jcgregorio@google.com (Joe Gregorio)'
 
 import atom.core
 import atom.data
+import atom.http_core
 import gdata.contacts.client
 import gdata.data
 import gdata.test_config as conf
@@ -57,6 +58,34 @@ class ProfileTest(unittest.TestCase):
     feed = self.client.get_profiles_feed()
     self.assert_(isinstance(feed, gdata.contacts.data.ProfilesFeed))
 
+  def test_profiles_query(self):
+    if not conf.options.get_value('runlive') == 'true':
+      return
+    # Either load the recording or prepare to make a live request.
+    conf.configure_cache(self.client, 'test_profiles_feed')
+
+    query = gdata.contacts.client.ProfilesQuery(max_results=1)
+    feed = self.client.get_profiles_feed(q=query)
+    self.assert_(isinstance(feed, gdata.contacts.data.ProfilesFeed))
+    self.assert_(len(feed.entry) == 1)
+
+    # Needs at least 2 profiles in the feed to test the start-key
+    # query param.
+    next = feed.GetNextLink()
+    feed = None
+    if next:
+      # Retrieve the start-key query param from the next link.
+      uri = atom.http_core.Uri.parse_uri(next.href)
+      if 'start-key' in uri.query:
+        query.start_key = uri.query['start-key']
+        feed = self.client.get_profiles_feed(q=query)
+        self.assert_(isinstance(feed, gdata.contacts.data.ProfilesFeed))
+        self.assert_(len(feed.entry) == 1)
+        self.assert_(feed.GetSelfLink().href == next.href)
+        # Compare with a feed retrieved with the next link.
+        next_feed = self.client.get_profiles_feed(uri=next.href)
+        self.assert_(len(next_feed.entry) == 1)
+        self.assert_(next_feed.entry[0].id.text == feed.entry[0].id.text)
 
 def suite():
   return conf.build_suite([ProfileTest])
