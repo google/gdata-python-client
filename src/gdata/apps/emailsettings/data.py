@@ -108,6 +108,14 @@ GENERAL_SNIPPETS = 'snippets'
 # The apps:property uniAppsProcode of the general settings property
 GENERAL_UNICODE = 'unicode'
 
+# The apps:property delegationId of the email delegation property
+DELEGATION_ID = "delegationId"
+# The apps:property address of the email delegation property
+DELEGATION_ADDRESS = 'address'
+# The apps:property delegate of the email delegation property
+DELEGATION_DELEGATE = "delegate"
+# The apps:property status of the email delegation property
+DELEGATION_STATUS = "status"
 
 class EmailSettingsEntry(gdata.data.GDEntry):
   """Represents an Email Settings entry in object form."""
@@ -1128,3 +1136,39 @@ class EmailSettingsGeneral(EmailSettingsEntry):
       self.snippets = str(snippets)
     if use_unicode is not None:
       self.use_unicode = str(use_unicode)
+
+class EmailSettingsDelegation(EmailSettingsEntry):
+  """Represents an Email Settings delegation entry in object form."""
+  
+  def GetAddress(self):
+    """Get the email address of the delegated user.
+
+    Returns:
+      The email address of the delegated user as a string or None.
+    """
+    return self._GetProperty(DELEGATION_ADDRESS)
+  
+  def SetAddress(self, value):
+    """Set the email address of of the delegated user.
+
+    Args:
+      value: string The email address of another user on the same domain
+    """
+    self._SetProperty(DELEGATION_ADDRESS, value)
+    
+  address = pyproperty(GetAddress, SetAddress)
+    
+  def __init__(self, uri=None, address=None, *args, **kwargs):
+    """Constructs a new EmailSettingsDelegation object with the given
+       arguments.
+    
+    Args:
+      uri: string (optional) The uri of of this object for HTTP requests.
+      address: string The email address of the delegated user.
+    """
+    super(EmailSettingsDelegation, self).__init__(*args, **kwargs)
+    if uri:
+      self.uri = uri
+    if address:
+      self.address = address
+  

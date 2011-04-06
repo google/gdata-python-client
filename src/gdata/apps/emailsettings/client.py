@@ -60,6 +60,8 @@ SETTING_ID_SIGNATURE = 'signature'
 SETTING_ID_LANGUAGE = 'language'
 # The settingID value for the general requests
 SETTING_ID_GENERAL = 'general'
+# The settingID value for the delegation requests
+SETTING_ID_DELEGATION = 'delegation'
 
 # The KEEP action for the email settings
 ACTION_KEEP = 'KEEP'
@@ -200,7 +202,7 @@ class EmailSettingsClient(gdata.client.GDClient):
   CreateFilter = create_filter
   
   def create_send_as(self, username, name, address, reply_to=None,
-                    make_default=None, **kwargs):
+                     make_default=None, **kwargs):
     """Creates a send-as alias with the given properties.
 
     Args:
@@ -505,3 +507,47 @@ class EmailSettingsClient(gdata.client.GDClient):
     return self.update(new_general, **kwargs)
 
   UpdateGeneralSettings = update_general_settings
+
+  def add_email_delegate(self, username, address, **kwargs):
+    """Add an email delegate to the mail account
+    
+    Args:
+      username: string The name of the user
+      address: string The email address of the delegated account
+    """
+    uri = self.MakeEmailSettingsUri(username=username,
+                                    setting_id=SETTING_ID_DELEGATION)
+    new_delegation = gdata.apps.emailsettings.data.EmailSettingsDelegation(
+        uri=uri, address=address)
+    return self.post(new_delegation, uri, **kwargs)
+  
+  AddEmailDelegate = add_email_delegate
+  
+  def retrieve_email_delegates(self, username, **kwargs):
+    """Retrieve a feed of the email delegates for the specified username
+    
+    Args:
+      username: string The name of the user to get the email delegates for
+    
+    Returns:
+      A gdata.data.GDFeed of the user's email delegates    
+    """
+    uri = self.MakeEmailSettingsUri(username=username,
+                                    setting_id=SETTING_ID_DELEGATION)
+    return self.GetFeed(uri, auth_token=None, query=None, **kwargs)
+  
+  RetrieveEmailDelegates = retrieve_email_delegates
+  
+  def delete_email_delegate(self, username, address, **kwargs):
+    """Delete an email delegate from the specified account
+    
+    Args:
+      username: string The name of the user
+      address: string The email address of the delegated account
+    """
+    uri = self.MakeEmailSettingsUri(username=username,
+                                    setting_id=SETTING_ID_DELEGATION)
+    uri = uri + '/' + address
+    return self.delete(uri, **kwargs)
+  
+  DeleteEmailDelegate = delete_email_delegate
