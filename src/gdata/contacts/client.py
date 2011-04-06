@@ -84,7 +84,7 @@ class ContactsClient(gdata.client.GDClient):
 
   def get_contact(self, uri, desired_class=gdata.contacts.data.ContactEntry,
                   auth_token=None, **kwargs):
-    return self.get_entry(uri, auth_token=auth_token, 
+    return self.get_entry(uri, auth_token=auth_token,
                           desired_class=desired_class, **kwargs)
 
 
@@ -111,12 +111,12 @@ class ContactsClient(gdata.client.GDClient):
          'body': HTTP body of the server's response}
     """
     insert_uri = insert_uri or self.GetFeedUri()
-    return self.Post(new_contact, insert_uri, 
+    return self.Post(new_contact, insert_uri,
                      auth_token=auth_token,  **kwargs)
 
   CreateContact = create_contact
 
-  def add_contact(self, new_contact, insert_uri=None, auth_token=None,  
+  def add_contact(self, new_contact, insert_uri=None, auth_token=None,
                   billing_information=None, birthday=None, calendar_link=None, **kwargs):
     """Adds an new contact to Google Contacts.
 
@@ -136,49 +136,49 @@ class ContactsClient(gdata.client.GDClient):
          'reason': HTTP reason from the server,
          'body': HTTP body of the server's response}
     """
-    
+
     contact = gdata.contacts.data.ContactEntry()
-    
+
     if billing_information is not None:
       if not isinstance(billing_information, gdata.contacts.data.BillingInformation):
-        billing_information = gdata.contacts.data.BillingInformation(text=billing_information) 
-      
+        billing_information = gdata.contacts.data.BillingInformation(text=billing_information)
+
       contact.billing_information = billing_information
 
     if birthday is not None:
       if not isinstance(birthday, gdata.contacts.data.Birthday):
         birthday = gdata.contacts.data.Birthday(when=birthday)
-      
-      contact.birthday = birthday 
-    
+
+      contact.birthday = birthday
+
     if calendar_link is not None:
       if type(calendar_link) is not ListType:
         calendar_link = [calendar_link]
-      
+
       for link in calendar_link:
         if not isinstance(link, gdata.contacts.data.CalendarLink):
           if type(link) is not DictionaryType:
             raise TypeError, "calendar_link Requires dictionary not %s" % type(link)
-        
+
           link = gdata.contacts.data.CalendarLink(
                                                   rel=link.get("rel", None),
                                                   label=link.get("label", None),
                                                   primary=link.get("primary", None),
                                                   href=link.get("href", None),
                                                   )
-         
+
         contact.calendar_link.append(link)
-    
+
     insert_uri = insert_uri or self.GetFeedUri()
-    return self.Post(contact, insert_uri, 
+    return self.Post(contact, insert_uri,
                      auth_token=auth_token,  **kwargs)
 
   AddContact = add_contact
 
-  def get_contacts(self,  desired_class=gdata.contacts.data.ContactsFeed,
+  def get_contacts(self, uri=None, desired_class=gdata.contacts.data.ContactsFeed,
                    auth_token=None, **kwargs):
     """Obtains a feed with the contacts belonging to the current user.
-    
+
     Args:
       auth_token: An object which sets the Authorization HTTP header in its
                   modify_request method. Recommended classes include
@@ -195,16 +195,17 @@ class ContactsClient(gdata.client.GDClient):
                      HTTP reponse object will be returned. Defaults to
                      gdata.spreadsheets.data.SpreadsheetsFeed.
     """
-    return self.get_feed(self.GetFeedUri(), auth_token=auth_token,
+    uri = uri or self.GetFeedUri()
+    return self.get_feed(uri, auth_token=auth_token,
                          desired_class=desired_class, **kwargs)
 
   GetContacts = get_contacts
 
   def get_group(self, uri=None, desired_class=gdata.contacts.data.GroupEntry,
                 auth_token=None, **kwargs):
-    """ Get a single groups details 
+    """ Get a single groups details
     Args:
-        uri:  the group uri or id   
+        uri:  the group uri or id
     """
     return self.get_entry(uri, desired_class=desired_class, auth_token=auth_token, **kwargs)
 
@@ -217,30 +218,31 @@ class ContactsClient(gdata.client.GDClient):
 
   GetGroups = get_groups
 
-  def create_group(self, new_group, insert_uri=None, url_params=None, 
-                   desired_class=None):
+  def create_group(self, new_group, insert_uri=None, url_params=None,
+                   desired_class=None, **kwargs):
     insert_uri = insert_uri or self.GetFeedUri('groups')
     return self.Post(new_group, insert_uri, url_params=url_params,
-        desired_class=desired_class)
+                     desired_class=desired_class, **kwargs)
 
   CreateGroup = create_group
 
   def update_group(self, edit_uri, updated_group, url_params=None,
-                   escape_params=True, desired_class=None):
+                   escape_params=True, desired_class=None, auth_token=None, **kwargs):
     return self.Put(updated_group, self._CleanUri(edit_uri),
                     url_params=url_params,
                     escape_params=escape_params,
-                    desired_class=desired_class)
+                    desired_class=desired_class,
+                    auth_token=auth_token, **kwargs)
 
   UpdateGroup = update_group
 
   def delete_group(self, group_object, auth_token=None, force=False, **kws):
-    return self.Delete(group_object, auth_token=auth_token, force=force, **kws )
+    return self.Delete(group_object, auth_token=auth_token, force=force, **kws)
 
   DeleteGroup = delete_group
 
-  def change_photo(self, media, contact_entry_or_url, content_type=None, 
-                   content_length=None):
+  def change_photo(self, media, contact_entry_or_url, content_type=None,
+                   content_length=None, auth_token=None, *kwargs):
     """Change the photo for the contact by uploading a new photo.
 
     Performs a PUT against the photo edit URL to send the binary data for the
@@ -271,27 +273,27 @@ class ContactsClient(gdata.client.GDClient):
     # If the media object is a file-like object, then use it as the file
     # handle in the in the MediaSource.
     elif hasattr(media, 'read'):
-      payload = gdata.MediaSource(file_handle=media, 
+      payload = gdata.MediaSource(file_handle=media,
           content_type=content_type, content_length=content_length)
     # Assume that the media object is a file name.
     else:
-      payload = gdata.MediaSource(content_type=content_type, 
+      payload = gdata.MediaSource(content_type=content_type,
           content_length=content_length, file_path=media)
-    return self.Put(payload, url)
+    return self.Put(payload, url, auth_token=auth_token, **kwargs)
 
   ChangePhoto = change_photo
 
-  def get_photo(self, contact_entry_or_url):
+  def get_photo(self, contact_entry_or_url, auth_token=None, **kwargs):
     """Retrives the binary data for the contact's profile photo as a string.
-    
+
     Args:
       contact_entry_or_url: a gdata.contacts.ContactEntry objecr or a string
-         containing the photo link's URL. If the contact entry does not 
+         containing the photo link's URL. If the contact entry does not
          contain a photo link, the image will not be fetched and this method
          will return None.
     """
-    # TODO: add the ability to write out the binary image data to a file, 
-    # reading and writing a chunk at a time to avoid potentially using up 
+    # TODO: add the ability to write out the binary image data to a file,
+    # reading and writing a chunk at a time to avoid potentially using up
     # large amounts of memory.
     url = None
     if isinstance(contact_entry_or_url, gdata.contacts.data.ContactEntry):
@@ -301,24 +303,24 @@ class ContactsClient(gdata.client.GDClient):
     else:
       url = contact_entry_or_url
     if url:
-      return self.Get(url).read()
+      return self.Get(url, auth_token=auth_token, **kwargs).read()
     else:
       return None
 
   GetPhoto = get_photo
 
-  def delete_photo(self, contact_entry_or_url):
+  def delete_photo(self, contact_entry_or_url, auth_token=None, **kwargs):
     url = None
     if isinstance(contact_entry_or_url, gdata.contacts.data.ContactEntry):
       url = contact_entry_or_url.GetPhotoEditLink().href
     else:
       url = contact_entry_or_url
     if url:
-      self.Delete(url)
+      self.Delete(url, auth_token=auth_token, **kwargs)
 
   DeletePhoto = delete_photo
 
-  def get_profiles_feed(self, uri=None):
+  def get_profiles_feed(self, uri=None, auth_token=None, **kwargs):
     """Retrieves a feed containing all domain's profiles.
 
     Args:
@@ -329,14 +331,14 @@ class ContactsClient(gdata.client.GDClient):
       On success, a ProfilesFeed containing the profiles.
       On failure, raises a RequestError.
     """
-    
-    uri = uri or self.GetFeedUri('profiles')    
-    return self.Get(uri,
-                    desired_class=gdata.contacts.data.ProfilesFeed)
+
+    uri = uri or self.GetFeedUri('profiles')
+    return self.get_feed(uri, auth_token=auth_token,
+                         desired_class=gdata.contacts.data.ProfilesFeed, **kwargs)
 
   GetProfilesFeed = get_profiles_feed
 
-  def get_profile(self, uri):
+  def get_profile(self, uri, auth_token=None, **kwargs):
     """Retrieves a domain's profile for the user.
 
     Args:
@@ -347,8 +349,9 @@ class ContactsClient(gdata.client.GDClient):
       On success, a ProfileEntry containing the profile for the user.
       On failure, raises a RequestError
     """
-    return self.Get(uri,
-                    desired_class=gdata.contacts.data.ProfileEntry)
+    return self.get_entry(uri,
+                          desired_class=gdata.contacts.data.ProfileEntry,
+                          auth_token=auth_token, **kwargs)
 
   GetProfile = get_profile
 
@@ -385,9 +388,10 @@ class ContactsClient(gdata.client.GDClient):
 
   UpdateProfile = update_profile
 
-  def execute_batch(self, batch_feed, url=DEFAULT_BATCH_URL, desired_class=None):
+  def execute_batch(self, batch_feed, url=DEFAULT_BATCH_URL, desired_class=None,
+                    auth_token=None, **kwargs):
     """Sends a batch request feed to the server.
-    
+
     Args:
       batch_feed: gdata.contacts.ContactFeed A feed containing batch
           request entries. Each entry contains the operation to be performed
@@ -396,18 +400,20 @@ class ContactsClient(gdata.client.GDClient):
           had been inserted.
       url: str The batch URL to which these operations should be applied.
       converter: Function (optional) The function used to convert the server's
-          response to an object. 
-    
+          response to an object.
+
     Returns:
       The results of the batch request's execution on the server. If the
       default converter is used, this is stored in a ContactsFeed.
     """
-    return self.Post(batch_feed, url, desired_class=desired_class)
+    return self.Post(batch_feed, url, desired_class=desired_class,
+                     auth_token=None, **kwargs)
 
   ExecuteBatch = execute_batch
 
   def execute_batch_profiles(self, batch_feed, url,
-                   desired_class=gdata.contacts.data.ProfilesFeed):
+                             desired_class=gdata.contacts.data.ProfilesFeed,
+                             auth_token=None, **kwargs):
     """Sends a batch request feed to the server.
 
     Args:
@@ -425,7 +431,8 @@ class ContactsClient(gdata.client.GDClient):
       The results of the batch request's execution on the server. If the
       default converter is used, this is stored in a ProfilesFeed.
     """
-    return self.Post(batch_feed, url, desired_class=desired_class)
+    return self.Post(batch_feed, url, desired_class=desired_class,
+                     auth_token=auth_token, **kwargs)
 
   ExecuteBatchProfiles = execute_batch_profiles
 
@@ -442,33 +449,33 @@ class ContactsClient(gdata.client.GDClient):
     url_prefix = 'http://%s' % self.server
     if uri.startswith(url_prefix):
       uri = uri[len(url_prefix):]
-    return uri                 
+    return uri
 
 class ContactsQuery(gdata.client.Query):
-  """ 
-  Create a custom Contacts Query
-  
-  Full specs can be found at: U{Contacts query parameters reference
-  <http://code.google.com/apis/contacts/docs/3.0/reference.html#Parameters>} 
   """
-  
+  Create a custom Contacts Query
+
+  Full specs can be found at: U{Contacts query parameters reference
+  <http://code.google.com/apis/contacts/docs/3.0/reference.html#Parameters>}
+  """
+
   def __init__(self, feed=None, group=None, orderby=None, showdeleted=None,
                sortorder=None, requirealldeleted=None, **kwargs):
-    """ 
-    @param max_results: The maximum number of entries to return. If you want 
-        to receive all of the contacts, rather than only the default maximum, you 
+    """
+    @param max_results: The maximum number of entries to return. If you want
+        to receive all of the contacts, rather than only the default maximum, you
         can specify a very large number for max-results.
     @param start-index: The 1-based index of the first result to be retrieved.
     @param updated-min: The lower bound on entry update dates.
     @param group: Constrains the results to only the contacts belonging to the
         group specified. Value of this parameter specifies group ID
-    @param orderby:  Sorting criterion. The only supported value is 
+    @param orderby:  Sorting criterion. The only supported value is
         lastmodified.
     @param showdeleted: Include deleted contacts in the returned contacts feed
     @pram sortorder: Sorting order direction. Can be either ascending or
         descending.
-    @param requirealldeleted: Only relevant if showdeleted and updated-min 
-        are also provided. It dictates the behavior of the server in case it 
+    @param requirealldeleted: Only relevant if showdeleted and updated-min
+        are also provided. It dictates the behavior of the server in case it
         detects that placeholders of some entries deleted since the point in
         time specified as updated-min may have been lost.
     """
@@ -490,8 +497,30 @@ class ContactsQuery(gdata.client.Query):
     gdata.client.Query.modify_request(self, http_request)
 
   ModifyRequest = modify_request
-    
+
 
 class ProfilesQuery(gdata.client.Query):
-  def __init__(self, feed=None):
-    self.feed = feed or 'http://www.google.com/m8/feeds/profiles/default/full'
+  """
+  Create a custom Profiles Query
+
+  Full specs can be found at: U{Profiless query parameters reference
+  <http://code.google.com/apis/apps/profiles/reference.html#Parameters>}
+  """
+
+  def __init__(self, feed=None, start_key=None, **kwargs):
+    """
+    @param start_key: Opaque key of the first element to retrieve. Present in
+        the next link of an earlier request, if further pages of response are
+        available.
+    """
+    gdata.client.Query.__init__(self, **kwargs)
+    self.feed = feed or 'https://www.google.com/m8/feeds/profiles/default/full'
+    self.start_key = start_key
+
+  def modify_request(self, http_request):
+    if self.start_key:
+      gdata.client._add_query_param('start-key', self.start_key, http_request)
+    gdata.client.Query.modify_request(self, http_request)
+
+  ModifyRequest = modify_request
+

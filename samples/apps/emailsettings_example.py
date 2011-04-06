@@ -21,8 +21,8 @@
 
 __author__ = 'Prashant Tiwari <pti@google.com>'
 
-from gdata.apps.emailsettings.client import EmailSettingsClient
 from optparse import OptionParser
+from gdata.apps.emailsettings.client import EmailSettingsClient
 
 #defaults for sendAs alias settings
 SEND_AS_NAME = 'test-alias'
@@ -95,7 +95,7 @@ class EmailSettingsSample(object):
     self.client.ClientLogin(email=email, password=password,
                             source=app)
     
-  def run(self, username, setting, method):
+  def run(self, username, setting, method, args):
     """Method that invokes the EmailSettingsClient services
     
     Args:
@@ -107,71 +107,85 @@ class EmailSettingsSample(object):
       if method == 'get':
         print "getting labels for %s...\n" % (username)
         print self.client.RetrieveLabels(username=username)
-      else:
+      elif method == 'set':
         print "creating label for %s...\n" % (username)
         print self.client.CreateLabel(username=username, name=LABEL_NAME)
+      else:
+        print "deleting labels isn't supported"
     elif setting == 'forwarding':
       if method == 'get':
         print "getting forwarding for %s...\n" % (username)
         print self.client.RetrieveForwarding(username)
-      else:
+      elif method == 'set':
         print "updating forwarding settings for %s...\n" % (username)
         print self.client.UpdateForwarding(username=username, 
                                            enable=not(options.disable),
                                            forward_to=FORWARD_TO,
                                            action=FORWARDING_ACTION)
+      else:
+        print "deleting forwarding settings isn't supported"
     elif setting == 'sendas':
       if method == 'get':
         print "getting sendAs alias for %s...\n" % (username)
         print self.client.RetrieveSendAs(username=username)
-      else:
+      elif method == 'set':
         print "creating sendAs alias for %s...\n" % (username)
         print self.client.CreateSendAs(username=username, name=SEND_AS_NAME, 
                                        address=SEND_AS_ADDRESS,
                                        reply_to=SEND_AS_REPLY_TO, 
                                        make_default=SEND_AS_MAKE_DEFAULT)
+      else:
+        print "deleting send-as settings isn't supported"
     elif setting == 'pop':
       if method == 'get':
         print "getting pop settings for %s...\n" % (username)
         print self.client.RetrievePop(username=username)
-      else:
+      elif method == 'set':
         print "updating pop settings for %s...\n" % (username)
         print self.client.UpdatePop(username=username, 
                                     enable=not(options.disable), 
                                     enable_for=POP_ENABLE_FOR,
                                     action=POP_ACTION)
+      else:
+        print "deleting pop settings isn't supported"
     elif setting == 'signature':
       if method == 'get':
         print "getting signature for %s...\n" % (username)
         print self.client.RetrieveSignature(username=username)
-      else:
+      elif method == 'set':
         print "updating signature for %s...\n" % (username)
         print self.client.UpdateSignature(username=username, 
                                           signature=SIGNATURE)
+      else:
+        print "deleting signature settings isn't supported"
     elif setting == 'vacation':
       if method == 'get':
         print "getting vacation settings for %s...\n" % (username)
         print self.client.RetrieveVacation(username=username)
-      else:
+      elif method == 'set':
         print "updating vacation settings for %s...\n" % (username)
         print self.client.UpdateVacation(username=username, 
                                          enable=not(options.disable),
                                          subject=VACATION_SUBJECT, 
                                          message=VACATION_MESSAGE,
                                          contacts_only=VACATION_CONTACTS_ONLY)
+      else:
+        print "deleting vacation settings isn't supported"
     elif setting == 'imap':
       if method == 'get':
         print "getting imap settings for %s...\n" % (username)
         print self.client.RetrieveImap(username)
-      else:
+      elif setting == 'set':
         print "updating imap settings for %s...\n" % (username)
         print self.client.UpdateImap(username=username, 
                                      enable=not(options.disable))
+      else:
+        print "deleting imap settings isn't supported"
     elif setting == 'filter':
       if method == 'get':
         print "getting email filters is not yet possible\n"
         parser.print_help()
-      else:
+      elif method == 'set':
         print "creating an email filter for %s...\n" % (username)
         print self.client.CreateFilter(username=username, 
                                        from_address=FILTER_FROM, 
@@ -179,44 +193,66 @@ class EmailSettingsSample(object):
                                        subject=FILTER_SUBJECT, 
                                        has_the_word=FILTER_HAS_THE_WORD,
                                        does_not_have_the_word=
-                                          FILTER_DOES_NOT_HAVE_THE_WORD,
+                                       FILTER_DOES_NOT_HAVE_THE_WORD,
                                        has_attachments=FILTER_HAS_ATTACHMENT, 
                                        label=FILTER_LABEL,
                                        mark_as_read=FILTER_SHOULD_MARK_AS_READ,
                                        archive=FILTER_SHOULD_ARCHIVE)
+      else:
+        print "deleting filters isn't supported"
     elif setting == 'general':
       if method == 'get':
         print "getting general email settings is not yet possible\n"
         parser.print_help()
-      else:
+      elif method == 'set':
         print "updating general settings for %s...\n" % (username)
         print self.client.UpdateGeneralSettings(username=username, 
                                                 page_size=GENERAL_PAGE_SIZE,
                                                 shortcuts=
-                                                    GENERAL_ENABLE_SHORTCUTS,
+                                                GENERAL_ENABLE_SHORTCUTS,
                                                 arrows=
-                                                    GENERAL_ENABLE_ARROWS,
+                                                GENERAL_ENABLE_ARROWS,
                                                 snippets=
-                                                    GENERAL_ENABLE_SNIPPETS,
+                                                GENERAL_ENABLE_SNIPPETS,
                                                 use_unicode=
-                                                    GENERAL_ENABLE_UNICODE)
+                                                GENERAL_ENABLE_UNICODE)
+      else:
+        print "deleting general settings isn't supported"
     elif setting == 'language':
       if method == 'get':
         print "getting language settings is not yet possible\n"
         parser.print_help()
-      else:
+      elif method == 'set':
         print "updating language for %s...\n" % (username)
         print self.client.UpdateLanguage(username=username, language=LANGUAGE)
+      else:
+        print "deleting language settings isn't supported"
     elif setting == 'webclip':
       if method == 'get':
         print "getting webclip settings is not yet possible\n"
         parser.print_help()
-      else:
+      elif method == 'get':
         print "updating webclip settings for %s...\n" % (username)
         print self.client.UpdateWebclip(username=username, 
                                         enable=not(options.disable))
+      else:
+        print "deleting webclip settings isn't supported"
+    elif setting == 'delegation':
+      if method == 'get':
+        print "getting email delegates for %s..." % (username)
+        print self.client.RetrieveEmailDelegates(username=username)
+      elif method == 'set':
+        address = args['delegationId']
+        print "adding %s as an email delegate to %s..." % (address, username)
+        print self.client.AddEmailDelegate(username=username, address=address)
+      else:
+        address = args['delegationId']
+        print "deleting %s as an email delegate for %s..." % (address, username)
+        print self.client.DeleteEmailDelegate(username=username, 
+                                              address=address)
     else:
       parser.print_help()
+
 
 def main():
   """Demos the Email Settings API using the EmailSettingsSample object."""
@@ -238,31 +274,41 @@ def main():
   parser.add_option('--setting',
                     choices=['filter', 'label', 'forwarding', 'sendas', 'pop', 
                              'signature', 'vacation', 'imap', 'general', 
-                             'language', 'webclip'],
+                             'language', 'webclip', 'delegation'],
                     help="The email setting to use. Choose from filter, label, \
                     forwarding, sendas, pop, signature, vacation, imap, \
-                    general, language, webclip.")
+                    general, language, webclip, and delegation.")
   parser.add_option('--method',
-                     default='get',
-                     help="Specify whether to get or set/update a setting. \
-                     Choose between get (default) and set.")
+                    default='get',
+                    choices=['get', 'set', 'delete'],
+                    help="Specify whether to get, set/update or delete \
+                    setting. Choose between get (default), set, and delete.")
   parser.add_option('--disable',
                     action="store_true",
                     default=False,
                     dest="disable",
                     help="Disable a setting when using the set method with the\
                      --disable option. The default is to enable the setting.")
+  parser.add_option('--delegationId',
+                    default=None,
+                    help="The emailId of the account to which email access has\
+                    to be delegated. Required for adding or deleting an \
+                    email delegate.")
   (options, args) = parser.parse_args()
   
-  if (options.domain == None or options.email == None or options.password == 
-      None or options.username == None or options.app == None or 
-      options.setting == None):
+  if (options.domain is None or options.email is None or options.password == 
+      None or options.username is None or options.app is None or 
+      options.setting is None or (options.setting == 'delegation' and 
+                                  options.method != 'get' and 
+                                  options.delegationId is None)):
     parser.print_help()
     return
   
+  args = {'delegationId':options.delegationId}
+  
   sample = EmailSettingsSample(options.domain, options.email, options.password,
                                options.app)
-  sample.run(options.username, options.setting, options.method)
+  sample.run(options.username, options.setting, options.method, args)
 
 if __name__ == '__main__':
   main()

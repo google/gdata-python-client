@@ -766,7 +766,7 @@ class Query(object):
   def __init__(self, text_query=None, categories=None, author=None, alt=None,
                updated_min=None, updated_max=None, pretty_print=False,
                published_min=None, published_max=None, start_index=None,
-               max_results=None, strict=False):
+               max_results=None, strict=False, **custom_parameters):
     """Constructs a Google Data Query to filter feed contents serverside.
 
     Args:
@@ -812,6 +812,7 @@ class Query(object):
       strict: boolean (optional) If True, the server will return an error if
           the server does not recognize any of the parameters in the request
           URL. Defaults to False.
+      custom_parameters: other query parameters that are not explicitly defined.
     """
     self.text_query = text_query
     self.categories = categories or []
@@ -825,6 +826,12 @@ class Query(object):
     self.start_index = start_index
     self.max_results = max_results
     self.strict = strict
+    self.custom_parameters = custom_parameters
+
+  def add_custom_parameter(self, key, value):
+    self.custom_parameters[key] = value
+
+  AddCustomParameter = add_custom_parameter
 
   def modify_request(self, http_request):
     _add_query_param('q', self.text_query, http_request)
@@ -844,7 +851,7 @@ class Query(object):
       http_request.uri.query['max-results'] = str(self.max_results)
     if self.strict:
       http_request.uri.query['strict'] = 'true'
-
+    http_request.uri.query.update(self.custom_parameters)
 
   ModifyRequest = modify_request
 
