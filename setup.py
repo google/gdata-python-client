@@ -87,6 +87,7 @@ library may also be used with any Atom Publishing Protocol service (AtomPub).
       'gdata.calendar_resource',
       'gdata.codesearch', 
       'gdata.contacts', 
+      'gdata.contentforshopping', 
       'gdata.docs', 
       'gdata.dublincore', 
       'gdata.exif', 
