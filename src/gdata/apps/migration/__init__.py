@@ -1,6 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/python2.4
 #
-# Copyright (C) 2008 Google
+# Copyright 2008 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -204,6 +204,17 @@ class BatchMailEventFeed(gdata.BatchFeed):
                              extension_elements=extension_elements,
                              extension_attributes=extension_attributes,
                              text=text)
+
+
+class MailEntryProperties(object):
+  """Represents a mail message and its attributes."""
+
+  def __init__(self, mail_message=None, mail_item_properties=None,
+               mail_labels=None, identifier=None):
+    self.mail_message = mail_message
+    self.mail_item_properties = mail_item_properties or []
+    self.mail_labels = mail_labels or []
+    self.identifier = identifier
 
 
 def BatchMailEventFeedFromString(xml_string):

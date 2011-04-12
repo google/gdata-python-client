@@ -1,6 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/python2.4
 #
-# Copyright (C) 2008 Google.
+# Copyright 2008 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,17 +16,21 @@
 
 """Contains the methods to import mail via Google Apps Email Migration API.
 
-  MigrationService: Provides methids to import mail.
+  MigrationService: Provides methods to import mail.
 """
 
-__author__ = 'google-apps-apis@googlegroups.com'
+__author__ = ('google-apps-apis@googlegroups.com',
+              'pti@google.com (Prashant Tiwari)')
 
 
 import base64
-import gdata
+import threading
+import time
+from atom.service import deprecation
+from gdata.apps import migration
+from gdata.apps.migration import MailEntryProperties
 import gdata.apps.service
 import gdata.service
-from gdata.apps import migration
 
 
 API_VER = '2.0'
@@ -34,22 +38,25 @@ API_VER = '2.0'
 
 class MigrationService(gdata.apps.service.AppsService):
   """Client for the EMAPI migration service.  Use either ImportMail to import
-  one message at a time, or AddBatchEntry and SubmitBatch to import a batch of
-  messages at a time.
+  one message at a time, or AddMailEntry and ImportMultipleMails to import a
+  bunch of messages at a time.
   """
+
   def __init__(self, email=None, password=None, domain=None, source=None,
                server='apps-apis.google.com', additional_headers=None):
     gdata.apps.service.AppsService.__init__(
         self, email=email, password=password, domain=domain, source=source,
         server=server, additional_headers=additional_headers)
     self.mail_batch = migration.BatchMailEventFeed()
+    self.mail_entries = []
+    self.exceptions = 0
 
   def _BaseURL(self):
     return '/a/feeds/migration/%s/%s' % (API_VER, self.domain)
 
   def ImportMail(self, user_name, mail_message, mail_item_properties,
                  mail_labels):
-    """Import a single mail message.
+    """Imports a single mail message.
 
     Args:
       user_name: The username to import messages to.
@@ -77,11 +84,15 @@ class MigrationService(gdata.apps.service.AppsService):
     try:
       return migration.MailEntryFromString(str(self.Post(mail_entry, uri)))
     except gdata.service.RequestError, e:
+      # Store the number of failed imports when importing several at a time 
+      self.exceptions += 1
       raise gdata.apps.service.AppsForYourDomainException(e.args[0])
 
   def AddBatchEntry(self, mail_message, mail_item_properties,
                     mail_labels):
-    """Add a message to the current batch that you later will submit.
+    """Adds a message to the current batch that you later will submit.
+    
+    Deprecated, use AddMailEntry instead
 
     Args:
       mail_message: An RFC822 format email message.
@@ -91,6 +102,7 @@ class MigrationService(gdata.apps.service.AppsService):
     Returns:
       The length of the MailEntry representing the message.
     """
+    deprecation("calling deprecated method AddBatchEntry")
     mail_entry = migration.BatchMailEntry()
     mail_entry.rfc822_msg = migration.Rfc822Msg(text=(base64.b64encode(
         mail_message)))
@@ -105,7 +117,9 @@ class MigrationService(gdata.apps.service.AppsService):
     return len(str(mail_entry))
 
   def SubmitBatch(self, user_name):
-    """Send a all the mail items you have added to the batch to the server.
+    """Sends all the mail items you have added to the batch to the server.
+    
+    Deprecated, use ImportMultipleMails instead
 
     Args:
       user_name: The username to import messages to.
@@ -116,6 +130,7 @@ class MigrationService(gdata.apps.service.AppsService):
     Raises:
       AppsForYourDomainException: An error occurred importing the batch.
     """
+    deprecation("calling deprecated method SubmitBatch")
     uri = '%s/%s/mail/batch' % (self._BaseURL(), user_name)
 
     try:
@@ -127,3 +142,77 @@ class MigrationService(gdata.apps.service.AppsService):
     self.mail_batch = migration.BatchMailEventFeed()
 
     return self.result
+
+  def AddMailEntry(self, mail_message, mail_item_properties=None,
+                   mail_labels=None, identifier=None):
+    """Prepares a list of mail messages to import using ImportMultipleMails.
+    
+    Args:
+      mail_message: An RFC822 format email message as a string.
+      mail_item_properties: List of Gmail properties to apply to the
+          message.
+      mail_labels: List of Gmail labels to apply to the message.
+      identifier: The optional file identifier string
+    
+    Returns:
+      The number of email messages to be imported.
+    """
+    mail_entry_object = MailEntryProperties(
+        mail_message=mail_message,
+        mail_item_properties=mail_item_properties,
+        mail_labels=mail_labels,
+        identifier=identifier)
+
+    self.mail_entries.append(mail_entry_object)
+    return len(self.mail_entries)
+
+  def ImportMultipleMails(self, user_name, threads_per_batch=20):
+    """Launches separate threads to import every message added by AddMailEntry.
+    
+    Args:
+      user_name: The user account name to import messages to.
+      threads_per_batch: Number of messages to import at a time.
+    
+    Returns:
+      The number of email messages that were successfully migrated.
+    
+    Raises:
+      Exception: An error occurred while importing mails.
+    """
+    num_entries = len(self.mail_entries)
+
+    if num_entries is 0:
+      return 0
+
+    threads = []
+    for mail_entry_property in self.mail_entries:
+      t = threading.Thread(name=mail_entry_property.identifier,
+                           target=self.ImportMail,
+                           args=(user_name, mail_entry_property.mail_message,
+                                 mail_entry_property.mail_item_properties,
+                                 mail_entry_property.mail_labels))
+      threads.append(t)
+    try:
+      # Determine the number of batches needed with threads_per_batch in each
+      batches = num_entries / threads_per_batch + (
+          0 if num_entries % threads_per_batch is 0 else 1)
+      batch_min = 0
+      # Start the threads, one batch at a time
+      for batch in range(batches):
+        batch_max = ((batch + 1) * threads_per_batch
+                     if (batch + 1) * threads_per_batch < num_entries
+                     else num_entries)
+        for i in range(batch_min, batch_max):
+          threads[i].start()
+          time.sleep(1)
+
+        for i in range(batch_min, batch_max):
+          threads[i].join()
+
+        batch_min = batch_max
+
+      self.mail_entries = []
+    except Exception, e:
+      raise Exception(e.args[0])
+    else:
+      return num_entries - self.exceptions
