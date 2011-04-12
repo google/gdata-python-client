@@ -125,7 +125,7 @@ class MigrationService(gdata.apps.service.AppsService):
       user_name: The username to import messages to.
 
     Returns:
-      A HTTPResponse from the web service call.
+      An HTTPResponse from the web service call.
 
     Raises:
       AppsForYourDomainException: An error occurred importing the batch.
@@ -157,13 +157,13 @@ class MigrationService(gdata.apps.service.AppsService):
     Returns:
       The number of email messages to be imported.
     """
-    mail_entry_object = MailEntryProperties(
+    mail_entry_properties = MailEntryProperties(
         mail_message=mail_message,
         mail_item_properties=mail_item_properties,
         mail_labels=mail_labels,
         identifier=identifier)
 
-    self.mail_entries.append(mail_entry_object)
+    self.mail_entries.append(mail_entry_properties)
     return len(self.mail_entries)
 
   def ImportMultipleMails(self, user_name, threads_per_batch=20):
@@ -181,21 +181,21 @@ class MigrationService(gdata.apps.service.AppsService):
     """
     num_entries = len(self.mail_entries)
 
-    if num_entries is 0:
+    if not num_entries:
       return 0
 
     threads = []
-    for mail_entry_property in self.mail_entries:
-      t = threading.Thread(name=mail_entry_property.identifier,
+    for mail_entry_properties in self.mail_entries:
+      t = threading.Thread(name=mail_entry_properties.identifier,
                            target=self.ImportMail,
-                           args=(user_name, mail_entry_property.mail_message,
-                                 mail_entry_property.mail_item_properties,
-                                 mail_entry_property.mail_labels))
+                           args=(user_name, mail_entry_properties.mail_message,
+                                 mail_entry_properties.mail_item_properties,
+                                 mail_entry_properties.mail_labels))
       threads.append(t)
     try:
       # Determine the number of batches needed with threads_per_batch in each
       batches = num_entries / threads_per_batch + (
-          0 if num_entries % threads_per_batch is 0 else 1)
+          0 if num_entries % threads_per_batch == 0 else 1)
       batch_min = 0
       # Start the threads, one batch at a time
       for batch in range(batches):

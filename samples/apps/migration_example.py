@@ -32,7 +32,7 @@ from gdata.apps.migration import service
 class EmailMigrationSample(object):
   """Sample application demonstrating use of the Email Migration API."""
 
-  def __init__(self, domain, email, password, app):
+  def __init__(self, domain, email, password):
     """Constructor for the EmailMigrationSample object.
 
     Construct an EmailMigrationSample with the given args.
@@ -41,10 +41,12 @@ class EmailMigrationSample(object):
       domain: The domain name ("domain.com")
       email: The email account of the user or the admin ("john@domain.com")
       password: The domain admin's password
-      app: The app name ("companyName-applicationName-versionID")
     """
-    self.service = service.MigrationService(email=email, password=password,
-                                            domain=domain, source=app)
+    self.service = service.MigrationService(
+        email=email,
+        password=password,
+        domain=domain,
+        source='googlecode-migrationsample-v1')
     self.service.ProgrammaticLogin()
     # Sample mail properties
     self.mail_item_properties = ['IS_INBOX', 'IS_UNREAD']
@@ -95,7 +97,7 @@ class EmailMigrationSample(object):
     print "Successfully migrated 1 message."
 
   def _MigrateManyMails(self, paths):
-    """Imports several messages via the ImportMails service. 
+    """Imports several messages via the ImportMultipleMails service. 
     
     Args:
       paths: List of paths of message files
@@ -146,8 +148,6 @@ def main():
                     e.g. 'john.smith@domain.com'")
   parser.add_option('-p', '--password',
                     help="the account password")
-  parser.add_option('-a', '--app',
-                    help="the name of the app")
   parser.add_option('-u', '--username',
                     help="the user account on which to perform operations. for\
                     non-admin users this will be their own account name. \
@@ -161,7 +161,6 @@ def main():
       or options.email is None
       or options.password is None
       or options.username is None
-      or options.app is None
       or options.file is None):
     parser.print_help()
     return
@@ -174,8 +173,7 @@ def main():
 
   sample = EmailMigrationSample(domain=options.domain,
                                 email=options.email,
-                                password=options.password,
-                                app=options.app)
+                                password=options.password)
   sample.Migrate(options.file)
 
 
