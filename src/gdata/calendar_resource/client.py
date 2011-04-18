@@ -178,9 +178,8 @@ class CalendarResourceClient(gdata.client.GDClient):
         resource_common_name=resource_common_name,
         resource_description=resource_description,
         resource_type=resource_type)
-    return self.update(
-        new_resource,
-        **kwargs)
+    return self.update(new_resource, uri=self.MakeResourceFeedUri(resource_id),
+                       **kwargs)
 
   UpdateResource = update_resource
 
