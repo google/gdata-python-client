@@ -1,0 +1,106 @@
+/**
+ * Copyright 2011, Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the 'License');
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http: *www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an 'AS IS' BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ 
+ /**
+ * author pti@google.com (Prashant Tiwari)
+ */
+
+body {
+  font-family: 'Verdana', sans-serif;
+  font-size: 11px;
+}
+
+#users table {
+  width: 100%;
+  border: dotted 1px #000000;
+  font-family: 'Verdana', sans-serif;
+  font-size: 11px;
+}
+
+#navigator #prev {
+  cursor: pointer;
+}
+
+#navigator #next {
+  cursor: pointer;
+}
+
+#users table .odd {
+  background-color: #E5F2FB;
+}
+
+#users table .even {
+  background-color: #FFFFFF;
+}
+
+#users td {
+  padding: 3px;
+}
+
+#footer {
+  text-align: center;
+  padding: 10px 10px 10px 10px;
+}
+
+#header {
+  padding: 5px 5px 0px 0px;
+}
+
+#titleholder {
+  float: left;
+  padding-top: 0px;
+  margin-top: 0px;
+  margin-left: 10px;
+  color: #133BC1;
+}
+
+#titleholder h1 {
+  font-family: Arial;
+  font-weight: normal;
+  font-size: 24px;
+}
+
+#titlecrumb {
+  float: right;
+}
+
+#main {
+  width: 100%;
+  text-align: left;
+}
+
+.outer {
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+.serialno {
+  text-align: center;
+}
+
+.username {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.accountname {
+  font-weight: bold;
+}
+
+.isadmin {
+  font-weight: bold;
+  text-align: center;
+}

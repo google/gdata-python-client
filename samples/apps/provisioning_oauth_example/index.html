@@ -1,0 +1,15 @@
+{% include "header.html" %}
+<script>
+  var user_entries = {{ json }};
+</script>
+<div id="main">
+  <div id="accounts">
+    <div id="users"></div>
+    <div id="navigator" style="float: right">
+      <span id="prev">&lt;Prev</span> | 
+      <span id="next">Next &gt;</span>
+    </div>
+    <div style="clear: both;"></div>
+  </div>
+</div>
+{% include "footer.html" %}
