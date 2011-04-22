@@ -42,8 +42,7 @@ buildUserTable = function(entries, start, size) {
   html.push('<tr>', '<th width=\'10%\'>#</th>',
       '<th width=\'35%\'>Account Name</th>',
       '<th width=\'45%\'>User Name</th>',
-      '<th width=\'10%\'>Is Admin</th>');
-  html.push('</tr>');
+      '<th width=\'10%\'>Is Admin</th>', '</tr>');
   for ( var i = 0; i < size; i++) {
     if (start + i < entries.length) {
       var className = ((i % 2) == 0) ? 'odd' : 'even';
@@ -94,8 +93,7 @@ createNavigator = function(pagingElements, pagesize) {
         var user_div = document.getElementById('users')
         user_div.innerHTML = buildUserTable(user_entries, startIndex,
             page_size);
-      }
-      if (startIndex + page_size + 1 <= paging_elements.length) {
+      } else if (startIndex + page_size + 1 <= paging_elements.length) {
         startIndex = startIndex + page_size;
         var user_div = document.getElementById('users')
         user_div.innerHTML = buildUserTable(user_entries, startIndex,
