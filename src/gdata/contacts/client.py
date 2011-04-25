@@ -242,7 +242,7 @@ class ContactsClient(gdata.client.GDClient):
   DeleteGroup = delete_group
 
   def change_photo(self, media, contact_entry_or_url, content_type=None,
-                   content_length=None, auth_token=None, *kwargs):
+                   content_length=None, auth_token=None, **kwargs):
     """Change the photo for the contact by uploading a new photo.
 
     Performs a PUT against the photo edit URL to send the binary data for the
@@ -265,9 +265,9 @@ class ContactsClient(gdata.client.GDClient):
                       assumed that it already contains the content length.
     """
     if isinstance(contact_entry_or_url, gdata.contacts.data.ContactEntry):
-      url = contact_entry_or_url.GetPhotoEditLink().href
+      uri = contact_entry_or_url.GetPhotoLink().href
     else:
-      url = contact_entry_or_url
+      uri = contact_entry_or_url
     if isinstance(media, gdata.MediaSource):
       payload = media
     # If the media object is a file-like object, then use it as the file
@@ -277,9 +277,9 @@ class ContactsClient(gdata.client.GDClient):
           content_type=content_type, content_length=content_length)
     # Assume that the media object is a file name.
     else:
-      payload = gdata.MediaSource(content_type=content_type,
+      payload = gdata.data.MediaSource(content_type=content_type,
           content_length=content_length, file_path=media)
-    return self.Put(payload, url, auth_token=auth_token, **kwargs)
+    return self.Put(uri=uri, data=payload, auth_token=auth_token, **kwargs)
 
   ChangePhoto = change_photo
 
@@ -310,13 +310,13 @@ class ContactsClient(gdata.client.GDClient):
   GetPhoto = get_photo
 
   def delete_photo(self, contact_entry_or_url, auth_token=None, **kwargs):
-    url = None
+    uri = None
     if isinstance(contact_entry_or_url, gdata.contacts.data.ContactEntry):
-      url = contact_entry_or_url.GetPhotoEditLink().href
+      uri = contact_entry_or_url.GetPhotoLink().href
     else:
-      url = contact_entry_or_url
-    if url:
-      self.Delete(url, auth_token=auth_token, **kwargs)
+      uri = contact_entry_or_url
+    if uri:
+      self.Delete(uri=uri, auth_token=auth_token, **kwargs)
 
   DeletePhoto = delete_photo
 
