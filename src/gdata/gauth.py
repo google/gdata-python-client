@@ -143,7 +143,7 @@ class UnsupportedTokenType(Error):
 
 class OAuth2AccessTokenError(Error):
   """Raised when an OAuth2 error occurs."""
-  def __init__(self, error_message=None):
+  def __init__(self, error_message):
     self.error_message = error_message
 
 
