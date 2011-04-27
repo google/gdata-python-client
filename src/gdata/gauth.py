@@ -46,10 +46,27 @@ ae_save
 """
 
 
+import datetime
 import time
 import random
 import urllib
+import urlparse
 import atom.http_core
+
+try:
+  import simplejson
+except ImportError:
+  try:
+    # Try to import from django, should work on App Engine
+    from django.utils import simplejson
+  except ImportError:
+    # Should work for Python2.6 and higher.
+    import json as simplejson
+
+try:
+    from urlparse import parse_qsl
+except ImportError:
+    from cgi import parse_qsl
 
 
 __author__ = 'j.s@google.com (Jeff Scudder)'
@@ -57,6 +74,7 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 
 PROGRAMMATIC_AUTH_LABEL = 'GoogleLogin auth='
 AUTHSUB_AUTH_LABEL = 'AuthSub token='
+OAUTH2_AUTH_LABEL = 'OAuth '
 
 
 # This dict provides the AuthSub and OAuth scopes for all services by service
@@ -121,6 +139,12 @@ class Error(Exception):
 class UnsupportedTokenType(Error):
   """Raised when token to or from blob is unable to convert the token."""
   pass
+
+
+class OAuth2AccessTokenError(Error):
+  """Raised when an OAuth2 error occurs."""
+  def __init__(self, error_message=None):
+    self.error_message = error_message
 
 
 # ClientLogin functions and classes.
@@ -1073,6 +1097,220 @@ class TwoLeggedOAuthRsaToken(OAuthRsaToken):
   ModifyRequest = modify_request
 
 
+class OAuth2Token(object):
+  """Token object for OAuth 2.0 as described on
+  <http://code.google.com/apis/accounts/docs/OAuth2.html>.
+
+  Token can be applied to a gdata.client.GDClient object using the authorize()
+  method, which then signs each request from that object with the OAuth 2.0
+  access token.
+  This class supports 3 flows of OAuth 2.0:
+    Client-side web flow: call generate_authorize_url with `response_type='token''
+      and the registered `redirect_uri'.
+    Server-side web flow: call generate_authorize_url with the registered
+      `redirect_url'.
+    Native applications flow: call generate_authorize_url as it is. You will have
+      to ask the user to go to the generated url and pass in the authorization
+      code to your application.
+  """
+
+  def __init__(self, client_id, client_secret, scope, user_agent,
+      auth_uri='https://accounts.google.com/o/oauth2/auth',
+      token_uri='https://accounts.google.com/o/oauth2/token',
+      access_token=None, refresh_token=None):
+    """Create an instance of OAuth2Token
+
+    This constructor is not usually called by the user, instead
+    OAuth2Credentials objects are instantiated by the OAuth2WebServerFlow.
+
+    Args:
+      client_id: string, client identifier.
+      client_secret: string client secret.
+      scope: string, scope of the credentials being requested.
+      user_agent: string, HTTP User-Agent to provide for this application.
+      auth_uri: string, URI for authorization endpoint. For convenience
+        defaults to Google's endpoints but any OAuth 2.0 provider can be used.
+      token_uri: string, URI for token endpoint. For convenience
+        defaults to Google's endpoints but any OAuth 2.0 provider can be used.
+      access_token: string, access token.
+      refresh_token: string, refresh token.
+    """
+    self.client_id = client_id
+    self.client_secret = client_secret
+    self.scope = scope
+    self.user_agent = user_agent
+    self.auth_uri = auth_uri
+    self.token_uri = token_uri
+    self.access_token = access_token
+    self.refresh_token = refresh_token
+
+    # True if the credentials have been revoked or expired and can't be
+    # refreshed.
+    self._invalid = False
+
+  @property
+  def invalid(self):
+    """True if the credentials are invalid, such as being revoked."""
+    return getattr(self, '_invalid', False)
+
+  def _refresh(self, request):
+    """Refresh the access_token using the refresh_token.
+
+    Args:
+       http: An instance of httplib2.Http.request
+           or something that acts like it.
+    """
+    body = urllib.urlencode({
+      'grant_type': 'refresh_token',
+      'client_id': self.client_id,
+      'client_secret': self.client_secret,
+      'refresh_token' : self.refresh_token
+      })
+    headers = {
+        'user-agent': self.user_agent,
+    }
+
+    print 'REFRESHING!'
+    http_request = atom.http_core.HttpRequest(uri=self.token_uri, method='POST', headers=headers)
+    http_request.add_body_part(body, mime_type='application/x-www-form-urlencoded')
+    response = request(http_request)
+    body = response.read()
+    if response.status == 200:
+      self._extract_tokens(body)
+    else:
+      self._invalid = True
+    return response
+
+  def _extract_tokens(self, body):
+    d = simplejson.loads(body)
+    self.access_token = d['access_token']
+    self.refresh_token = d.get('refresh_token', self.refresh_token)
+    if 'expires_in' in d:
+      self.token_expiry = datetime.timedelta(
+          seconds = int(d['expires_in'])) + datetime.datetime.now()
+    else:
+      self.token_expiry = None
+
+  def generate_authorize_url(self, redirect_uri='oob', response_type='code', **kwargs):
+    """Returns a URI to redirect to the provider.
+
+    Args:
+      redirect_uri: string, Either the string 'oob' for a non-web-based
+                    application, or a URI that handles the callback from
+                    the authorization server.
+      response_type: string, Either the string 'code' for server-side or
+                     native application, or the string 'token' for client-
+                     side application.
+
+    If redirect_uri is 'oob' then pass in the
+    generated verification code to get_access_token,
+    otherwise pass in the query parameters received
+    at the callback uri to get_access_token.
+    If the response_type is 'token', no need to call
+    get_access_token as the API will return it within
+    the query parameters received at the callback:
+      oauth2_token.access_token = YOUR_ACCESS_TOKEN
+    """
+    self.redirect_uri = redirect_uri
+    query = {
+      'response_type': response_type,
+      'client_id': self.client_id,
+      'redirect_uri': redirect_uri,
+      'scope': self.scope,
+      }
+    query.update(kwargs)
+    parts = list(urlparse.urlparse(self.auth_uri))
+    query.update(dict(parse_qsl(parts[4]))) # 4 is the index of the query part
+    parts[4] = urllib.urlencode(query)
+    return urlparse.urlunparse(parts)
+
+  def get_access_token(self, code):
+    """Exhanges a code for an access token.
+
+    Args:
+      code: string or dict, either the code as a string, or a dictionary
+        of the query parameters to the redirect_uri, which contains
+        the code.
+    """
+
+    if not (isinstance(code, str) or isinstance(code, unicode)):
+      code = code['code']
+
+    body = urllib.urlencode({
+      'grant_type': 'authorization_code',
+      'client_id': self.client_id,
+      'client_secret': self.client_secret,
+      'code': code,
+      'redirect_uri': self.redirect_uri,
+      'scope': self.scope
+      })
+    headers = {
+      'user-agent': self.user_agent,
+    }
+    http_client = atom.http_core.HttpClient()
+    http_request = atom.http_core.HttpRequest(uri=self.token_uri, method='POST',
+                                              headers=headers)
+    http_request.add_body_part(data=body, mime_type='application/x-www-form-urlencoded')
+    response = http_client.request(http_request)
+    body = response.read()
+    if response.status == 200:
+      self._extract_tokens(body)
+      return self
+    else:
+      error_msg = 'Invalid response %s.' % response.status
+      try:
+        d = simplejson.loads(body)
+        if 'error' in d:
+          error_msg = d['error']
+      except:
+        pass
+      raise OAuth2AccessTokenError(error_msg)
+
+  def authorize(self, client):
+    """Authorize a gdata.client.GDClient instance with these credentials.
+
+    Args:
+       client: An instance of gdata.client.GDClient
+           or something that acts like it.
+
+    Returns:
+       A modified instance of client that was passed in.
+
+    Example:
+
+      c = gdata.client.GDClient(source='user-agent')
+      c = token.authorize(c)
+    """
+    client.auth_token = self
+    request_orig = client.http_client.request
+
+    def new_request(http_request):
+      response = request_orig(http_request)
+      if response.status == 401:
+        refresh_response = self._refresh(request_orig)
+        if self._invalid:
+          return refresh_response
+        else:
+          self.modify_request(http_request)
+          return request_orig(http_request)
+      else:
+        return response
+
+    client.http_client.request = new_request
+    return client
+
+  def modify_request(self, http_request):
+    """Sets the Authorization header in the HTTP request using the token.
+
+    Returns:
+      The same HTTP request object which was passed in.
+    """
+    http_request.headers['Authorization'] = '%s%s' % (OAUTH2_AUTH_LABEL, self.access_token)
+    return http_request
+
+  ModifyRequest = modify_request
+
+
 def _join_token_parts(*args):
   """"Escapes and combines all strings passed in.
 
@@ -1110,7 +1348,7 @@ def token_to_blob(token):
 
   Supported token classes: ClientLoginToken, AuthSubToken, SecureAuthSubToken,
   OAuthRsaToken, and OAuthHmacToken, TwoLeggedOAuthRsaToken,
-  TwoLeggedOAuthHmacToken.
+  TwoLeggedOAuthHmacToken and OAuth2Token.
 
   Args:
     token: A token object which must be of one of the supported token classes.
@@ -1152,6 +1390,11 @@ def token_to_blob(token):
         '1h', token.consumer_key, token.consumer_secret, token.token,
         token.token_secret, str(token.auth_state), token.next,
         token.verifier)
+  elif isinstance(token, OAuth2Token):
+    return _join_token_parts(
+        '2o', token.client_id, token.client_secret, token.scope,
+        token.user_agent, token.auth_uri, token.token_uri,
+        token.access_token, token.refresh_token)
   else:
     raise UnsupportedTokenType(
         'Unable to serialize token of type %s' % type(token))
@@ -1165,7 +1408,7 @@ def token_from_blob(blob):
 
   Supported token classes: ClientLoginToken, AuthSubToken, SecureAuthSubToken,
   OAuthRsaToken, and OAuthHmacToken, TwoLeggedOAuthRsaToken,
-  TwoLeggedOAuthHmacToken.
+  TwoLeggedOAuthHmacToken and OAuth2Token.
 
   Args:
     blob: string created by token_to_blob.
@@ -1198,6 +1441,9 @@ def token_from_blob(blob):
     auth_state = int(parts[5])
     return OAuthHmacToken(parts[1], parts[2], parts[3], parts[4], auth_state,
                           parts[6], parts[7])
+  elif parts[0] == '2o':
+    return OAuth2Token(parts[1], parts[2], parts[3], parts[4], parts[5],
+                       parts[6], parts[7], parts[8])
   else:
     raise UnsupportedTokenType(
         'Unable to deserialize token with type marker of %s' % parts[0])
@@ -1218,7 +1464,7 @@ def find_scopes_for_services(service_names=None):
   """Creates a combined list of scope URLs for the desired services.
 
   This method searches the AUTH_SCOPES dictionary.
-  
+
   Args:
     service_names: list of strings (optional) Each name must be a key in the
                    AUTH_SCOPES dictionary. If no list is provided (None) then
