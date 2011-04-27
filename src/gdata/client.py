@@ -287,14 +287,11 @@ class GDClient(atom.client.AtomPubClient):
         location = (response.getheader('Location')
                     or response.getheader('location'))
         if location is not None:
-          m = re.compile('[\?\&]gsessionid=(\w*)').search(location)
-          if m is not None:
-            self.__gsessionid = m.group(1)
           # Make a recursive call with the gsession ID in the URI to follow
           # the redirect.
-          return self.request(method=method, uri=uri, auth_token=auth_token,
-                              http_request=http_request, converter=converter,
-                              desired_class=desired_class,
+          return self.request(method=method, uri=location, 
+                              auth_token=auth_token, http_request=http_request,
+                              converter=converter, desired_class=desired_class,
                               redirects_remaining=redirects_remaining-1,
                               **kwargs)
         else:
