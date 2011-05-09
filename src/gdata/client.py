@@ -986,7 +986,7 @@ class ResumableUploader(object):
                                                 self.total_file_size))
 
     try:
-      response = self.client.request(method='POST', uri=self.upload_uri,
+      response = self.client.request(method='PUT', uri=self.upload_uri,
                                      http_request=http_request,
                                      desired_class=self.desired_class)
       return response
@@ -1072,8 +1072,6 @@ class ResumableUploader(object):
       RequestError if anything other than a HTTP 308 is returned
       when the request raises an exception.
     """
-    # Need to override the POST request for a resumable update (required).
-    customer_headers = {'X-HTTP-Method-Override': 'PUT'}
 
     if headers is not None:
       customer_headers.update(headers)
