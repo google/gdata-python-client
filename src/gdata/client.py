@@ -1073,6 +1073,7 @@ class ResumableUploader(object):
       when the request raises an exception.
     """
 
+    customer_headers = {}
     if headers is not None:
       customer_headers.update(headers)
 
