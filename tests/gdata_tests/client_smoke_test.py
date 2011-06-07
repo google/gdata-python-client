@@ -30,7 +30,6 @@ import gdata.spreadsheets.client
 import gdata.calendar_resource.client
 import gdata.contacts.client
 import gdata.docs.client
-import gdata.maps.client
 import gdata.projecthosting.client
 import gdata.sites.client
 
@@ -46,7 +45,6 @@ class ClientSmokeTest(unittest.TestCase):
         gdata.calendar_resource.client.CalendarResourceClient,
         gdata.contacts.client.ContactsClient,
         gdata.docs.client.DocsClient,
-        gdata.maps.client.MapsClient,
         gdata.projecthosting.client.ProjectHostingClient,
         gdata.sites.client.SitesClient
     ))
