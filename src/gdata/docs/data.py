@@ -16,7 +16,7 @@
 
 """Data model classes for parsing and generating XML for the DocList Data API"""
 
-__author__ = 'e.bidelman (Eric Bidelman)'
+__author__ = 'vicfryzel@google.com (Vic Fryzel)'
 
 import re
 import atom.core
