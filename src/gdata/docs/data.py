@@ -209,7 +209,7 @@ class ResourceFeed(gdata.data.GDFeed):
   entry = [Resource]
 
 
-class AclEntry(gdata.acl.data.AclEntry):
+class AclEntry(gdata.acl.data.AclEntry, gdata.data.BatchEntry):
   """Resource ACL entry."""
   @staticmethod
   def get_instance(role=None, scope_type=None, scope_value=None, key=False):

@@ -632,6 +632,31 @@ class DocsClient(gdata.client.GDClient):
 
   DeleteAclEntry = delete_acl_entry
 
+  def batch_process_acl_entries(self, resource, entries, **kwargs):
+    """Applies the specified operation of each entry in a single request.
+
+    To use this, simply set acl_entry.batch_operation to one of
+    ['query', 'insert', 'update', 'delete'], and optionally set
+    acl_entry.batch_id to a string of your choice.
+
+    Then, put all of your modified AclEntry objects into a list and pass
+    that list as the entries parameter.
+    
+    Args:
+      resource: gdata.docs.data.Resource to which the given entries belong.
+      entries: [gdata.docs.data.AclEntry] to modify in some way.
+      kwargs: Other args to pass to gdata.client.GDClient.post()
+    
+    Returns:
+      Resulting gdata.docs.data.AclFeed of changes.
+    """
+    feed = gdata.docs.data.AclFeed()
+    feed.entry = entries
+    return super(DocsClient, self).post(
+        feed, uri=resource.GetAclLink().href + '/acl', **kwargs)
+
+  BatchProcessAclEntries = batch_process_acl_entries
+
   def get_revisions(self, entry, **kwargs):
     """Retrieves the revision history for a resource.
 
@@ -833,7 +858,7 @@ class DocsClient(gdata.client.GDClient):
   UpdateArchive = update_archive
 
   def delete_archive(self, entry, **kwargs):
-    """Deletes the given Archive.
+    """Aborts the given Archive operation, or deletes the Archive.
     
     Args:
       entry: gdata.docs.data.Archive to delete.
