@@ -426,7 +426,7 @@ class GDClient(atom.client.AtomPubClient):
                         response text which was contained in the challenge.
 
       Returns:
-        None
+        Generated token, which is also stored in this object.
 
       Raises:
         A RequestError or one of its suclasses: BadAuthentication,
@@ -437,6 +437,12 @@ class GDClient(atom.client.AtomPubClient):
     self.auth_token = self.request_client_login_token(email, password,
         source, service=service, account_type=account_type, auth_url=auth_url,
         captcha_token=captcha_token, captcha_response=captcha_response)
+    if hasattr(self, 'alt_auth_service'):
+      self.alt_auth_token = self.request_client_login_token(
+          email, password, source, service=self.alt_auth_service,
+          account_type=account_type, auth_url=auth_url,
+          captcha_token=captcha_token, captcha_response=captcha_response)
+    return self.auth_token
 
   ClientLogin = client_login
 
@@ -897,7 +903,7 @@ class ResumableUploader(object):
       self.chunk_size = total_file_size
 
   def _init_session(self, resumable_media_link, entry=None, headers=None,
-                    auth_token=None):
+                    auth_token=None, method='POST'):
     """Starts a new resumable upload to a service that supports the protocol.
 
     The method makes a request to initiate a new upload session. The unique
@@ -918,6 +924,8 @@ class ResumableUploader(object):
           in its modify_request method. Recommended classes include
           gdata.gauth.ClientLoginToken and gdata.gauth.AuthSubToken
           among others.
+      method: (optional) Type of HTTP request to start the session with.
+          Defaults to 'POST', but may also be 'PUT'.
 
     Returns:
       The final Atom entry as created on the server. The entry will be
@@ -930,7 +938,7 @@ class ResumableUploader(object):
     """
     http_request = atom.http_core.HttpRequest()
     
-    # Send empty POST if Atom XML wasn't specified.
+    # Send empty body if Atom XML wasn't specified.
     if entry is None:
       http_request.add_body_part('', self.content_type, size=0)
     else:
@@ -942,13 +950,15 @@ class ResumableUploader(object):
     if headers is not None:
       http_request.headers.update(headers)
 
-    response = self.client.request(method='POST',
+    response = self.client.request(method=method,
                                    uri=resumable_media_link,
                                    auth_token=auth_token,
                                    http_request=http_request)
 
     self.upload_uri = (response.getheader('location') or
                        response.getheader('Location'))
+
+    return response
 
   _InitSession = _init_session
 
@@ -999,7 +1009,7 @@ class ResumableUploader(object):
   UploadChunk = upload_chunk
 
   def upload_file(self, resumable_media_link, entry=None, headers=None,
-                  auth_token=None):
+                  auth_token=None, **kwargs):
     """Uploads an entire file in chunks using the resumable upload protocol.
 
     If you are interested in pausing an upload or controlling the chunking
@@ -1017,6 +1027,7 @@ class ResumableUploader(object):
           in its modify_request method. Recommended classes include
           gdata.gauth.ClientLoginToken and gdata.gauth.AuthSubToken
           among others.
+      kwargs: (optional) Other args to pass to self._init_session.
 
     Returns:
       The final Atom entry created on the server. The entry object's type will
@@ -1027,7 +1038,7 @@ class ResumableUploader(object):
       when the request raises an exception.
     """
     self._init_session(resumable_media_link, headers=headers,
-                       auth_token=auth_token, entry=entry)
+                       auth_token=auth_token, entry=entry, **kwargs)
 
     start_byte = 0
     entry = None
@@ -1042,7 +1053,7 @@ class ResumableUploader(object):
   UploadFile = upload_file
 
   def update_file(self, entry_or_resumable_edit_link, headers=None, force=False,
-                  auth_token=None):
+                  auth_token=None, update_metadata=False):
     """Updates the contents of an existing file using the resumable protocol.
 
     If you are interested in pausing an upload or controlling the chunking
@@ -1063,32 +1074,39 @@ class ResumableUploader(object):
           in its modify_request method. Recommended classes include
           gdata.gauth.ClientLoginToken and gdata.gauth.AuthSubToken
           among others.
+      update_metadata: (optional) True to also update the entry's metadata
+          with that in the given GDEntry object in entry_or_resumable_edit_link.
 
     Returns:
       The final Atom entry created on the server. The entry object's type will
       be the class specified in self.desired_class.
 
     Raises:
-      RequestError if anything other than a HTTP 308 is returned
-      when the request raises an exception.
+      RequestError if anything other than a HTTP 308 is returned when the
+      request raises an exception.
     """
 
-    customer_headers = {}
+    custom_headers = {}
     if headers is not None:
-      customer_headers.update(headers)
+      custom_headers.update(headers)
 
+    entry = None
     if isinstance(entry_or_resumable_edit_link, gdata.data.GDEntry):
       resumable_edit_link = entry_or_resumable_edit_link.find_url(
           'http://schemas.google.com/g/2005#resumable-edit-media')
-      customer_headers['If-Match'] = entry_or_resumable_edit_link.etag
+      custom_headers['If-Match'] = entry_or_resumable_edit_link.etag
+      if update_metadata:
+        entry = entry_or_resumable_edit_link
     else:
       resumable_edit_link = entry_or_resumable_edit_link
 
     if force:
-      customer_headers['If-Match'] = '*'
+      custom_headers['If-Match'] = '*'
 
-    return self.upload_file(resumable_edit_link, headers=customer_headers,
-                            auth_token=auth_token)
+    return self.upload_file(resumable_edit_link, entry=entry,
+                            headers=custom_headers,
+                            auth_token=auth_token,
+                            method='PUT')
 
   UpdateFile = update_file
 

@@ -4,3 +4,5 @@ syntax: glob
 build/*
 dist/*
 .*.swp
+.project
+.pydevproject

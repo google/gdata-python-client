@@ -18,65 +18,28 @@
 
 __author__ = 'e.bidelman (Eric Bidelman)'
 
-
 import re
 import atom.core
 import atom.data
 import gdata.acl.data
 import gdata.data
 
+
 DOCUMENTS_NS = 'http://schemas.google.com/docs/2007'
 DOCUMENTS_TEMPLATE = '{http://schemas.google.com/docs/2007}%s'
 ACL_FEEDLINK_REL = 'http://schemas.google.com/acl/2007#accessControlList'
 REVISION_FEEDLINK_REL = DOCUMENTS_NS + '/revisions'
-
-# XML Namespaces used in Google Documents entities.
+PARENT_LINK_REL = DOCUMENTS_NS + '#parent'
+PUBLISH_LINK_REL = DOCUMENTS_NS + '#publish'
 DATA_KIND_SCHEME = 'http://schemas.google.com/g/2005#kind'
 DOCUMENT_LABEL = 'document'
 SPREADSHEET_LABEL = 'spreadsheet'
+DRAWING_LABEL = 'drawing'
 PRESENTATION_LABEL = 'presentation'
-FOLDER_LABEL = 'folder'
+FILE_LABEL = 'file'
 PDF_LABEL = 'pdf'
-
-LABEL_SCHEME = 'http://schemas.google.com/g/2005/labels'
-STARRED_LABEL_TERM = LABEL_SCHEME + '#starred'
-TRASHED_LABEL_TERM = LABEL_SCHEME + '#trashed'
-HIDDEN_LABEL_TERM = LABEL_SCHEME + '#hidden'
-MINE_LABEL_TERM = LABEL_SCHEME + '#mine'
-PRIVATE_LABEL_TERM = LABEL_SCHEME + '#private'
-SHARED_WITH_DOMAIN_LABEL_TERM = LABEL_SCHEME + '#shared-with-domain'
-VIEWED_LABEL_TERM = LABEL_SCHEME + '#viewed'
-
-DOCS_PARENT_LINK_REL = DOCUMENTS_NS + '#parent'
-DOCS_PUBLISH_LINK_REL = DOCUMENTS_NS + '#publish'
-
-FILE_EXT_PATTERN = re.compile('.*\.([a-zA-Z]{3,}$)')
-RESOURCE_ID_PATTERN = re.compile('^([a-z]*)(:|%3A)([\w-]*)$')
-
-# File extension/mimetype pairs of common format.
-MIMETYPES = {
-  'CSV': 'text/csv',
-  'TSV': 'text/tab-separated-values',
-  'TAB': 'text/tab-separated-values',
-  'DOC': 'application/msword',
-  'DOCX': ('application/vnd.openxmlformats-officedocument.'
-           'wordprocessingml.document'),
-  'ODS': 'application/x-vnd.oasis.opendocument.spreadsheet',
-  'ODT': 'application/vnd.oasis.opendocument.text',
-  'RTF': 'application/rtf',
-  'SXW': 'application/vnd.sun.xml.writer',
-  'TXT': 'text/plain',
-  'XLS': 'application/vnd.ms-excel',
-  'XLSX': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-  'PDF': 'application/pdf',
-  'PNG': 'image/png',
-  'PPT': 'application/vnd.ms-powerpoint',
-  'PPS': 'application/vnd.ms-powerpoint',
-  'HTM': 'text/html',
-  'HTML': 'text/html',
-  'ZIP': 'application/zip',
-  'SWF': 'application/x-shockwave-flash'
-  }
+FORM_LABEL = 'form'
+COLLECTION_LABEL = 'folder'
 
 
 def make_kind_category(label):
@@ -95,34 +58,6 @@ def make_kind_category(label):
     scheme=DATA_KIND_SCHEME, term='%s#%s' % (DOCUMENTS_NS, label), label=label)
 
 MakeKindCategory = make_kind_category
-
-def make_content_link_from_resource_id(resource_id):
-  """Constructs export URL for a given resource.
-
-  Args:
-    resource_id: str The document/item's resource id. Example presentation:
-        'presentation%3A0A1234567890'.
-
-  Raises:
-    gdata.client.ValueError if the resource_id is not a valid format.
-  """
-  match = RESOURCE_ID_PATTERN.match(resource_id)
-
-  if match:
-    label = match.group(1)
-    doc_id = match.group(3)
-    if label == DOCUMENT_LABEL:
-      return '/feeds/download/documents/Export?docId=%s' % doc_id
-    if label == PRESENTATION_LABEL:
-      return '/feeds/download/presentations/Export?docId=%s' % doc_id
-    if label == SPREADSHEET_LABEL:
-      return ('https://spreadsheets.google.com/feeds/download/spreadsheets/'
-              'Export?key=%s' % doc_id)
-  raise ValueError, ('Invalid resource id: %s, or manually creating the '
-                     'download url for this type of doc is not possible'
-                     % resource_id)
-
-MakeContentLinkFromResourceId = make_content_link_from_resource_id
 
 
 class ResourceId(atom.core.XmlElement):
@@ -144,6 +79,11 @@ class WritersCanInvite(atom.core.XmlElement):
   """The DocList docs:writersCanInvite element."""
   _qname = DOCUMENTS_TEMPLATE  % 'writersCanInvite'
   value = 'value'
+
+
+class Deleted(atom.core.XmlElement):
+  """The DocList gd:deleted element."""
+  _qname = gdata.data.GDATA_TEMPLATE  % 'deleted'
 
 
 class QuotaBytesUsed(atom.core.XmlElement):
@@ -169,24 +109,41 @@ class PublishOutsideDomain(atom.core.XmlElement):
   value = 'value'
 
 
-class DocsEntry(gdata.data.GDEntry):
-  """A DocList version of an Atom Entry."""
+class Resource(gdata.data.GDEntry):
+  """DocList version of an Atom Entry."""
 
   last_viewed = LastViewed
   last_modified_by = LastModifiedBy
   resource_id = ResourceId
+  deleted = Deleted
   writers_can_invite = WritersCanInvite
   quota_bytes_used = QuotaBytesUsed
   feed_link = [gdata.data.FeedLink]
 
-  def get_document_type(self):
-    """Extracts the type of document this DocsEntry is.
+  def __init__(self, type=None, title=None, **kwargs):
+    super(Resource, self).__init__(**kwargs)
+    if isinstance(type, str):
+      self.category.append(gdata.docs.data.make_kind_category(type))
 
-    This method returns the type of document the DocsEntry represents. Possible
-    values are document, presentation, spreadsheet, folder, or pdf.
+    if title is not None:
+      if isinstance(title, str):
+        self.title = atom.data.Title(text=title)
+      else:
+        self.title = title
+
+  def get_document_type(self):
+    """Extracts the type of document this Resource is.
+
+    This method returns the type of document the Resource represents. Possible
+    values are document, presentation, drawing, spreadsheet, file, folder,
+    form, or pdf.
+
+    'folder' is a possible return value of this method because, for legacy
+    support, we have not yet renamed the folder keyword to collection in
+    the API itself.
 
     Returns:
-      A string representing the type of document.
+      String representing the type of document.
     """
     if self.category:
       for category in self.category:
@@ -198,7 +155,7 @@ class DocsEntry(gdata.data.GDEntry):
   GetDocumentType = get_document_type
 
   def get_acl_feed_link(self):
-    """Extracts the DocsEntry's ACL feed <gd:feedLink>.
+    """Extracts the Resource's ACL feed <gd:feedLink>.
 
     Returns:
       A gdata.data.FeedLink object.
@@ -211,7 +168,7 @@ class DocsEntry(gdata.data.GDEntry):
   GetAclFeedLink = get_acl_feed_link
 
   def get_revisions_feed_link(self):
-    """Extracts the DocsEntry's revisions feed <gd:feedLink>.
+    """Extracts the Resource's revisions feed <gd:feedLink>.
 
     Returns:
       A gdata.data.FeedLink object.
@@ -223,54 +180,87 @@ class DocsEntry(gdata.data.GDEntry):
 
   GetRevisionsFeedLink = get_revisions_feed_link
 
-  def in_folders(self):
-    """Returns the parents link(s) (folders) of this entry."""
+  def get_resumable_edit_media_link(self):
+    """Extracts the Resource's resumable update link.
+
+    Returns:
+      A gdata.data.FeedLink object.
+    """
+    for feed_link in self.feed_link:
+      if feed_link.rel == RESUMABLE_EDIT_MEDIA_LINK_REL:
+        return feed_link
+    return None
+
+  GetRevisionsFeedLink = get_revisions_feed_link
+
+  def in_collections(self):
+    """Returns the parents link(s) (collections) of this entry."""
     links = []
     for link in self.link:
-      if link.rel == DOCS_PARENT_LINK_REL and link.href:
+      if link.rel == PARENT_LINK_REL and link.href:
         links.append(link)
     return links
 
-  InFolders = in_folders
+  InCollections = in_collections
 
 
-class Acl(gdata.acl.data.AclEntry):
-  """A document ACL entry."""
+class ResourceFeed(gdata.data.GDFeed):
+  """Main feed containing a list of resources."""
+  entry = [Resource]
 
 
-class DocList(gdata.data.GDFeed):
-  """The main DocList feed containing a list of Google Documents."""
-  entry = [DocsEntry]
+class AclEntry(gdata.acl.data.AclEntry):
+  """Resource ACL entry."""
+  @staticmethod
+  def get_instance(role=None, scope_type=None, scope_value=None, key=False):
+    entry = AclEntry()
+
+    if role is not None:
+      if key:
+        new_role = role
+        if isinstance(role, str):
+          new_role = gdata.acl.data.AclRole(value=role)
+        entry.with_key = gdata.acl.data.AclWithKey(key='1234', role=new_role)
+      else:
+        entry.role = role
+        if isinstance(role, str):
+          entry.role = gdata.acl.data.AclRole(value=role)
+
+    if scope_type is not None and scope_value is not None:
+      entry.scope = gdata.acl.data.AclScope(type=scope_type, value=scope_value)
+    return entry
+
+  GetInstance = get_instance
 
 
 class AclFeed(gdata.acl.data.AclFeed):
-  """A DocList ACL feed."""
-  entry = [Acl]
+  """Resource ACL feed."""
+  entry = [AclEntry]
 
 
 class Revision(gdata.data.GDEntry):
-  """A document Revision entry."""
+  """Resource Revision entry."""
   publish = Publish
   publish_auto = PublishAuto
   publish_outside_domain = PublishOutsideDomain
 
   def find_publish_link(self):
-    """Get the link that points to the published document on the web.
+    """Get the link that points to the published resource on the web.
 
     Returns:
       A str for the URL in the link with a rel ending in #publish.
     """
-    return self.find_url(DOCS_PUBLISH_LINK_REL)
+    return self.find_url(PUBLISH_LINK_REL)
 
   FindPublishLink = find_publish_link
 
   def get_publish_link(self):
-    """Get the link that points to the published document on the web.
+    """Get the link that points to the published resource on the web.
 
     Returns:
       A gdata.data.Link for the link with a rel ending in #publish.
     """
-    return self.get_link(DOCS_PUBLISH_LINK_REL)
+    return self.get_link(PUBLISH_LINK_REL)
 
   GetPublishLink = get_publish_link
 
@@ -278,3 +268,151 @@ class Revision(gdata.data.GDEntry):
 class RevisionFeed(gdata.data.GDFeed):
   """A DocList Revision feed."""
   entry = [Revision]
+
+
+class ArchiveResourceId(atom.core.XmlElement):
+  """The DocList docs:removed element."""
+  _qname = DOCUMENTS_TEMPLATE  % 'archiveResourceId'
+
+
+class ArchiveFailure(atom.core.XmlElement):
+  """The DocList docs:archiveFailure element."""
+  _qname = DOCUMENTS_TEMPLATE  % 'archiveFailure'
+
+
+class ArchiveComplete(atom.core.XmlElement):
+  """The DocList docs:archiveComplete element."""
+  _qname = DOCUMENTS_TEMPLATE  % 'archiveComplete'
+
+
+class ArchiveTotal(atom.core.XmlElement):
+  """The DocList docs:archiveTotal element."""
+  _qname = DOCUMENTS_TEMPLATE  % 'archiveTotal'
+
+
+class ArchiveTotalComplete(atom.core.XmlElement):
+  """The DocList docs:archiveTotalComplete element."""
+  _qname = DOCUMENTS_TEMPLATE  % 'archiveTotalComplete'
+
+
+class ArchiveTotalFailure(atom.core.XmlElement):
+  """The DocList docs:archiveTotalFailure element."""
+  _qname = DOCUMENTS_TEMPLATE  % 'archiveTotalFailure'
+
+
+class ArchiveConversion(atom.core.XmlElement):
+  """The DocList docs:removed element."""
+  _qname = DOCUMENTS_TEMPLATE  % 'archiveConversion'
+  source = 'source'
+  target = 'target'
+
+
+class ArchiveNotify(atom.core.XmlElement):
+  """The DocList docs:archiveNotify element."""
+  _qname = DOCUMENTS_TEMPLATE  % 'archiveNotify'
+
+
+class ArchiveStatus(atom.core.XmlElement):
+  """The DocList docs:archiveStatus element."""
+  _qname = DOCUMENTS_TEMPLATE  % 'archiveStatus'
+
+
+class ArchiveNotifyStatus(atom.core.XmlElement):
+  """The DocList docs:archiveNotifyStatus element."""
+  _qname = DOCUMENTS_TEMPLATE  % 'archiveNotifyStatus'
+
+
+class Archive(gdata.data.GDEntry):
+  """Archive entry."""
+  archive_resource_ids = [ArchiveResourceId]
+  status = ArchiveStatus
+  date_completed = ArchiveComplete
+  num_resources = ArchiveTotal
+  num_complete_resources = ArchiveTotalComplete
+  num_failed_resources = ArchiveTotalFailure
+  failed_resource_ids = [ArchiveFailure]
+  notify_status = ArchiveNotifyStatus
+  conversions = [ArchiveConversion]
+  notification_email = ArchiveNotify
+  size = QuotaBytesUsed
+
+
+class Removed(atom.core.XmlElement):
+  """The DocList docs:removed element."""
+  _qname = DOCUMENTS_TEMPLATE  % 'removed'
+
+
+class Changestamp(atom.core.XmlElement):
+  """The DocList docs:changestamp element."""
+  _qname = DOCUMENTS_TEMPLATE  % 'changestamp'
+  value = 'value'
+
+
+class Change(gdata.data.GDEntry):
+  """Change feed entry."""
+  resource_id = ResourceId
+  changestamp = Changestamp
+  removed = Removed
+
+  
+class ChangeFeed(gdata.data.GDFeed):
+  """DocList Changes feed."""
+  entry = [Change] 
+
+
+class QuotaBytesTotal(atom.core.XmlElement):
+  """The DocList gd:quotaBytesTotal element."""
+  _qname = gdata.data.GDATA_TEMPLATE  % 'quotaBytesTotal'
+
+
+class QuotaBytesUsedInTrash(atom.core.XmlElement):
+  """The DocList docs:quotaBytesUsedInTrash element."""
+  _qname = DOCUMENTS_TEMPLATE  % 'quotaBytesUsedInTrash'
+
+
+class ImportFormat(atom.core.XmlElement):
+  """The DocList docs:importFormat element."""
+  _qname = DOCUMENTS_TEMPLATE  % 'importFormat'
+  source = 'source'
+  target = 'target'
+
+
+class ExportFormat(atom.core.XmlElement):
+  """The DocList docs:exportFormat element."""
+  _qname = DOCUMENTS_TEMPLATE  % 'exportFormat'
+  source = 'source'
+  target = 'target'
+
+
+class FeatureName(atom.core.XmlElement):
+  """The DocList docs:featureName element."""
+  _qname = DOCUMENTS_TEMPLATE  % 'featureName'
+
+
+class FeatureRate(atom.core.XmlElement):
+  """The DocList docs:featureRate element."""
+  _qname = DOCUMENTS_TEMPLATE  % 'featureRate'
+
+
+class Feature(atom.core.XmlElement):
+  """The DocList docs:feature element."""
+  _qname = DOCUMENTS_TEMPLATE  % 'feature'
+  name = FeatureName
+  rate = FeatureRate
+
+
+class MaxUploadSize(atom.core.XmlElement):
+  """The DocList docs:maxUploadSize element."""
+  _qname = gdata.data.GDATA_TEMPLATE  % 'maxUploadSize'
+  kind = 'kind'
+
+
+class Metadata(gdata.data.GDEntry):
+  """Metadata entry for a user."""
+  quota_bytes_total = QuotaBytesTotal
+  quota_bytes_used = QuotaBytesUsed
+  quota_bytes_used_in_trash = QuotaBytesUsedInTrash
+  import_formats = [ImportFormat]
+  export_formats = [ExportFormat]
+  features = [Feature]
+  max_upload_sizes = [MaxUploadSize]

@@ -37,9 +37,10 @@ class AtomPubClient(object):
   host = None
   auth_token = None
   ssl = False # Whether to force all requests over https
+  xoauth_requestor_id = None
 
-  def __init__(self, http_client=None, host=None,
-               auth_token=None, source=None, **kwargs):
+  def __init__(self, http_client=None, host=None, auth_token=None, source=None,
+               xoauth_requestor_id=None, **kwargs):
     """Creates a new AtomPubClient instance.
 
     Args:
@@ -60,6 +61,8 @@ class AtomPubClient(object):
       self.host = host
     if auth_token is not None:
       self.auth_token = auth_token
+    if xoauth_requestor_id is not None:
+      self.xoauth_requestor_id = xoauth_requestor_id
     self.source = source
 
   def request(self, method=None, uri=None, auth_token=None,
@@ -170,6 +173,9 @@ class AtomPubClient(object):
 
     if self.host is not None and http_request.uri.host is None:
       http_request.uri.host = self.host
+
+    if self.xoauth_requestor_id is not None:
+      http_request.uri.query['xoauth_requestor_id'] = self.xoauth_requestor_id
 
     # Set the user agent header for logging purposes.
     if self.source:

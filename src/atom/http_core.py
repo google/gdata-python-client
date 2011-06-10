@@ -489,7 +489,7 @@ class HttpClient(object):
     connection.endheaders()
 
     # If there is data, send it in the request.
-    if body_parts:
+    if body_parts and filter(lambda x: x != '', body_parts):
       for part in body_parts:
         _send_data_part(part, connection)
 

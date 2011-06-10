@@ -99,7 +99,8 @@ AUTH_SCOPES = {
         'https://www.google.com/health/feeds/',),
     'writely': ( # Documents List API
         'https://docs.google.com/feeds/',
-        'http://docs.google.com/feeds/'),
+        'https://spreadsheets.google.com/feeds/',
+        'https://docs.googleusercontent.com/'),
     'lh2': ( # Picasa Web Albums API
         'http://picasaweb.google.com/data/',),
     'apps': ( # Google Apps Provisioning API
@@ -110,8 +111,7 @@ AUTH_SCOPES = {
     'weaver': ( # Health H9 Sandbox
         'https://www.google.com/h9/feeds/',),
     'wise': ( # Spreadsheets Data API
-        'https://spreadsheets.google.com/feeds/',
-        'http://spreadsheets.google.com/feeds/'),
+        'https://spreadsheets.google.com/feeds/'),
     'sitemaps': ( # Google Webmaster Tools API
         'https://www.google.com/webmasters/tools/feeds/',),
     'youtube': ( # YouTube API

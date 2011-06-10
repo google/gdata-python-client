@@ -44,41 +44,6 @@ class DocsHelperTest(unittest.TestCase):
     self.assertEqual(
         category.term, 'http://schemas.google.com/docs/2007#spreadsheet')
 
-  def testMakeContentLinkFromResourceId(self):
-    link = gdata.docs.data.make_content_link_from_resource_id(
-        'document%3A1234567890')
-    self.assertEqual(link, '/feeds/download/documents/Export?docId=1234567890')
-
-    link2 = gdata.docs.data.make_content_link_from_resource_id(
-        'presentation%3A1234567890')
-    self.assertEqual(
-        link2, '/feeds/download/presentations/Export?docId=1234567890')
-
-    link3 = gdata.docs.data.make_content_link_from_resource_id(
-        'spreadsheet%3A1234567890')
-    self.assertEqual(
-        link3, ('https://spreadsheets.google.com/feeds/download/spreadsheets/'
-                'Export?key=1234567890'))
-
-    # Try an invalid resource id.
-    exception_raised = False
-    try:
-      link4 = gdata.docs.data.make_content_link_from_resource_id('1234567890')
-    except ValueError, e:  # expected
-      exception_raised = True
-
-    self.assert_(exception_raised)
-    
-    # Try an resource id that cannot be exported.
-    exception_raised = False
-    try:
-      link4 = gdata.docs.data.make_content_link_from_resource_id(
-          'pdf%3A1234567890')
-    except ValueError, e:  # expected
-      exception_raised = True
-
-    self.assert_(exception_raised)
-
 
 class DocsEntryTest(unittest.TestCase):
 
@@ -109,16 +74,16 @@ class DocsEntryTest(unittest.TestCase):
     self.assert_(isinstance(self.entry.feed_link[0], gdata.data.FeedLink))
 
     self.assertEqual(
-        self.entry.get_acl_feed_link().href,
+        self.entry.GetAclFeedLink().href,
         ('https://docs.google.com/feeds/default/private/full/'
          'spreadsheet%3Asupercalifragilisticexpealidocious/acl'))
     self.assertEqual(
-        self.entry.get_revisions_feed_link().href,
+        self.entry.GetRevisionsFeedLink().href,
         ('https://docs.google.com/feeds/default/private/full/'
          'spreadsheet%3Asupercalifragilisticexpealidocious/revisions'))
 
-    self.assertEqual(len(self.entry.in_folders()), 1)
-    self.assertEqual(self.entry.in_folders()[0].title, 'AFolderName')
+    self.assertEqual(len(self.entry.InCollections()), 1)
+    self.assertEqual(self.entry.InCollections()[0].title, 'AFolderName')
 
 
 class AclTest(unittest.TestCase):
