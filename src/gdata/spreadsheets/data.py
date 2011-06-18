@@ -141,6 +141,12 @@ class Spreadsheet(gdata.data.GDEntry):
 
   FindWorksheetsFeed = find_worksheets_feed
 
+  def get_spreadsheet_key(self):
+    """Extracts the spreadsheet key unique to this spreadsheet."""
+    return self.get_id().split('/')[-1]
+
+  GetSpreadsheetKey = get_spreadsheet_key
+
 
 class SpreadsheetsFeed(gdata.data.GDFeed):
   """An Atom feed listing a user's Google Spreadsheets."""
@@ -151,6 +157,12 @@ class WorksheetEntry(gdata.data.GDEntry):
   """An Atom entry representing a single worksheet in a spreadsheet."""
   row_count = RowCount
   col_count = ColCount
+
+  def get_worksheet_id(self):
+    """The worksheet ID identifies this worksheet in its spreadsheet."""
+    return self.get_id().split('/')[-1]
+
+  GetWorksheetId = get_worksheet_id
 
 
 class WorksheetsFeed(gdata.data.GDFeed):
@@ -274,6 +286,23 @@ class ListEntry(gdata.data.GDEntry):
       new_value = ListRow(text=value)
       new_value._qname = new_value._qname % (column_name,)
       self._other_elements.append(new_value)
+
+  def to_dict(self):
+    """Converts this row to a mapping of column names to their values."""
+    result = {}
+    values = self.get_elements(namespace=GSX_NAMESPACE)
+    for item in values:
+      result[item._get_tag()] = item.text
+    return result
+
+  def from_dict(self, values):
+    """Sets values for this row from the dictionary.
+    
+    Old values which are already in the entry will not be removed unless
+    they are overwritten with new values from the dict.
+    """
+    for column, value in values.iteritems():
+      self.set_value(column, value)
 
 
 class ListsFeed(gdata.data.GDFeed):
