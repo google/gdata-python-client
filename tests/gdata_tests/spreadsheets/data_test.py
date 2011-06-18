@@ -527,6 +527,30 @@ class SpreadsheetEntryTest(unittest.TestCase):
                      'http://spreadsheets.google.com/feeds/spreadsheets'
                      '/private/full/key')
 
+  def test_get_spreadsheet_key(self):
+    self.assertEqual(self.spreadsheet.get_spreadsheet_key(), 'key')
+    # Change the value of the self link.
+    self.spreadsheet.id.text = '42'
+    self.assertEqual(self.spreadsheet.GetSpreadsheetKey(), '42')
+
+
+class WorksheetEntryTest(unittest.TestCase):
+
+  def setUp(self):
+    self.worksheets = atom.core.parse(
+        WORKSHEETS_FEED, gdata.spreadsheets.data.WorksheetsFeed)
+
+  def test_check_parsing(self):
+    self.assertEqual(len(self.worksheets.entry), 1)
+    self.assertEqual(self.worksheets.entry[0].get_id(),
+        'http://spreadsheets.google.com/feeds/worksheets/0/private/full/1')
+
+  def test_get_worksheet_id(self):
+    self.assertEqual(self.worksheets.entry[0].get_worksheet_id(), '1')
+    self.worksheets.entry[0].id.text = '////spam'
+    self.assertEqual(self.worksheets.entry[0].GetWorksheetId(), 'spam')
+
+
 
 class ListEntryTest(unittest.TestCase):
 

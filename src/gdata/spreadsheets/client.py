@@ -41,6 +41,10 @@ WORKSHEET_URL = ('https://spreadsheets.google.com/feeds/worksheets/'
 TABLES_URL = 'https://spreadsheets.google.com/feeds/%s/tables'
 RECORDS_URL = 'https://spreadsheets.google.com/feeds/%s/records/%s'
 RECORD_URL = 'https://spreadsheets.google.com/feeds/%s/records/%s/%s'
+CELLS_URL = 'https://spreadsheets.google.com/feeds/cells/%s/%s/private/full'
+CELL_URL = ('https://spreadsheets.google.com/feeds/cells/%s/%s/private/full/'
+            'R%sC%s')
+LISTS_URL = 'https://spreadsheets.google.com/feeds/list/%s/%s/private/full'
 
 
 class SpreadsheetsClient(gdata.client.GDClient):
@@ -330,12 +334,148 @@ class SpreadsheetsClient(gdata.client.GDClient):
                   gdata.gauth.ClientLoginToken and gdata.gauth.AuthSubToken
                   among others. Represents the current user. Defaults to None
                   and if None, this method will look for a value in the
-                  auth_token member of SpreadsheetsClient."""
+                  auth_token member of SpreadsheetsClient.
+    """
     return self.get_entry(RECORD_URL % (spreadsheet_key, table_id, record_id),
                           desired_class=desired_class, auth_token=auth_token,
                           **kwargs)
 
   GetRecord = get_record
+
+  def get_cells(self, spreadsheet_key, worksheet_id,
+                desired_class=gdata.spreadsheets.data.CellsFeed,
+                auth_token=None, **kwargs):
+    """Retrieves the cells which have values in this spreadsheet.
+
+    Blank cells are not included.
+
+    Args:
+      spreadsheet_key: str, The unique ID of this containing spreadsheet. This
+                       can be the ID from the URL or as provided in a
+                       Spreadsheet entry.
+      worksheet_id: str, The unique ID of the worksheet in this spreadsheet
+                    whose cells we want. This can be obtained using
+                    WorksheetEntry's get_worksheet_id method.
+      desired_class: class descended from atom.core.XmlElement to which a
+                     successful response should be converted. If there is no
+                     converter function specified (converter=None) then the
+                     desired_class will be used in calling the
+                     atom.core.parse function. If neither
+                     the desired_class nor the converter is specified, an
+                     HTTP reponse object will be returned. Defaults to
+                     gdata.spreadsheets.data.CellsFeed.
+      auth_token: An object which sets the Authorization HTTP header in its
+                  modify_request method. Recommended classes include
+                  gdata.gauth.ClientLoginToken and gdata.gauth.AuthSubToken
+                  among others. Represents the current user. Defaults to None
+                  and if None, this method will look for a value in the
+                  auth_token member of SpreadsheetsClient.
+    """
+    return self.get_feed(CELLS_URL % (spreadsheet_key, worksheet_id),
+                         auth_token=auth_token, desired_class=desired_class,
+                         **kwargs)
+
+  GetCells = get_cells
+
+  def get_cell(self, spreadsheet_key, worksheet_id, row_num, col_num,
+               desired_class=gdata.spreadsheets.data.CellEntry,
+               auth_token=None, **kwargs):
+    """Retrieves a single cell from the worksheet.
+    
+    Indexes are 1 based so the first cell in the worksheet is 1, 1.
+
+    Args:
+      spreadsheet_key: str, The unique ID of this containing spreadsheet. This
+                       can be the ID from the URL or as provided in a
+                       Spreadsheet entry.
+      worksheet_id: str, The unique ID of the worksheet in this spreadsheet
+                    whose cells we want. This can be obtained using
+                    WorksheetEntry's get_worksheet_id method.
+      row_num: int, The row of the cell that we want. Numbering starts with 1.
+      col_num: int, The column of the cell we want. Numbering starts with 1.
+      desired_class: class descended from atom.core.XmlElement to which a
+                     successful response should be converted. If there is no
+                     converter function specified (converter=None) then the
+                     desired_class will be used in calling the
+                     atom.core.parse function. If neither
+                     the desired_class nor the converter is specified, an
+                     HTTP reponse object will be returned. Defaults to
+                     gdata.spreadsheets.data.CellEntry.
+      auth_token: An object which sets the Authorization HTTP header in its
+                  modify_request method. Recommended classes include
+                  gdata.gauth.ClientLoginToken and gdata.gauth.AuthSubToken
+                  among others. Represents the current user. Defaults to None
+                  and if None, this method will look for a value in the
+                  auth_token member of SpreadsheetsClient.
+    """
+    return self.get_entry(
+        CELL_URL % (spreadsheet_key, worksheet_id, row_num, col_num),
+        auth_token=auth_token, desired_class=desired_class, **kwargs)
+
+  GetCell = get_cell
+
+  def get_list_feed(self, spreadsheet_key, worksheet_id,
+                    desired_class=gdata.spreadsheets.data.ListsFeed,
+                    auth_token=None, **kwargs):
+    """Retrieves the value rows from the worksheet's list feed.
+    
+    The list feed is a view of the spreadsheet in which the first row is used
+    for column names and subsequent rows up to the first blank line are
+    records.
+
+    Args:
+      spreadsheet_key: str, The unique ID of this containing spreadsheet. This
+                       can be the ID from the URL or as provided in a
+                       Spreadsheet entry.
+      worksheet_id: str, The unique ID of the worksheet in this spreadsheet
+                    whose cells we want. This can be obtained using
+                    WorksheetEntry's get_worksheet_id method.
+      desired_class: class descended from atom.core.XmlElement to which a
+                     successful response should be converted. If there is no
+                     converter function specified (converter=None) then the
+                     desired_class will be used in calling the
+                     atom.core.parse function. If neither
+                     the desired_class nor the converter is specified, an
+                     HTTP reponse object will be returned. Defaults to
+                     gdata.spreadsheets.data.ListsFeed.
+      auth_token: An object which sets the Authorization HTTP header in its
+                  modify_request method. Recommended classes include
+                  gdata.gauth.ClientLoginToken and gdata.gauth.AuthSubToken
+                  among others. Represents the current user. Defaults to None
+                  and if None, this method will look for a value in the
+                  auth_token member of SpreadsheetsClient.
+    """
+    return self.get_feed(LISTS_URL % (spreadsheet_key, worksheet_id),
+                         auth_token=auth_token, desired_class=desired_class,
+                         **kwargs)
+
+  GetListFeed = get_list_feed
+                    
+  def add_list_entry(self, list_entry, spreadsheet_key, worksheet_id,
+                     auth_token=None, **kwargs):
+    """Adds a new row to the worksheet's list feed.
+
+    Args:
+      list_entry: gdata.spreadsheets.data.ListsEntry An entry which contains
+                  the values which should be set for the columns in this
+                  record.
+      spreadsheet_key: str, The unique ID of this containing spreadsheet. This
+                       can be the ID from the URL or as provided in a
+                       Spreadsheet entry.
+      worksheet_id: str, The unique ID of the worksheet in this spreadsheet
+                    whose cells we want. This can be obtained using
+                    WorksheetEntry's get_worksheet_id method.
+      auth_token: An object which sets the Authorization HTTP header in its
+                  modify_request method. Recommended classes include
+                  gdata.gauth.ClientLoginToken and gdata.gauth.AuthSubToken
+                  among others. Represents the current user. Defaults to None
+                  and if None, this method will look for a value in the
+                  auth_token member of SpreadsheetsClient.
+    """
+    return self.post(list_entry, LISTS_URL % (spreadsheet_key, worksheet_id),
+                     auth_token=auth_token, **kwargs)
+
+  AddListEntry = add_list_entry
 
 
 class SpreadsheetQuery(gdata.client.Query):
