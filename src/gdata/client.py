@@ -1053,7 +1053,7 @@ class ResumableUploader(object):
   UploadFile = upload_file
 
   def update_file(self, entry_or_resumable_edit_link, headers=None, force=False,
-                  auth_token=None, update_metadata=False):
+                  auth_token=None, update_metadata=False, uri_params=None):
     """Updates the contents of an existing file using the resumable protocol.
 
     If you are interested in pausing an upload or controlling the chunking
@@ -1076,6 +1076,7 @@ class ResumableUploader(object):
           among others.
       update_metadata: (optional) True to also update the entry's metadata
           with that in the given GDEntry object in entry_or_resumable_edit_link.
+      uri_params: (optional) Dict of additional parameters to attach to the URI.
 
     Returns:
       The final Atom entry created on the server. The entry object's type will
@@ -1090,23 +1091,26 @@ class ResumableUploader(object):
     if headers is not None:
       custom_headers.update(headers)
 
+    uri = None
     entry = None
     if isinstance(entry_or_resumable_edit_link, gdata.data.GDEntry):
-      resumable_edit_link = entry_or_resumable_edit_link.find_url(
+      uri = entry_or_resumable_edit_link.find_url(
           'http://schemas.google.com/g/2005#resumable-edit-media')
       custom_headers['If-Match'] = entry_or_resumable_edit_link.etag
       if update_metadata:
         entry = entry_or_resumable_edit_link
     else:
-      resumable_edit_link = entry_or_resumable_edit_link
+      uri = entry_or_resumable_edit_link
+
+    uri = atom.http_core.parse_uri(uri)
+    if uri_params is not None:
+      uri.query.update(uri_params)
 
     if force:
       custom_headers['If-Match'] = '*'
 
-    return self.upload_file(resumable_edit_link, entry=entry,
-                            headers=custom_headers,
-                            auth_token=auth_token,
-                            method='PUT')
+    return self.upload_file(str(uri), entry=entry, headers=custom_headers,
+                            auth_token=auth_token, method='PUT')
 
   UpdateFile = update_file
 

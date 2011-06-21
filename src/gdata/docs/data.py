@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# Copyright 2009 Google Inc. All Rights Reserved.
+# Copyright 2011 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Data model classes for parsing and generating XML for the DocList Data API"""
+"""Data model classes for representing elements of the Documents List API."""
 
 __author__ = 'vicfryzel@google.com (Vic Fryzel)'
 
@@ -216,18 +216,21 @@ class AclEntry(gdata.acl.data.AclEntry, gdata.data.BatchEntry):
     entry = AclEntry()
 
     if role is not None:
+      if isinstance(role, (str, unicode)):
+        role = gdata.acl.data.AclRole(value=role)
+
       if key:
-        new_role = role
-        if isinstance(role, str):
-          new_role = gdata.acl.data.AclRole(value=role)
-        entry.with_key = gdata.acl.data.AclWithKey(key='1234', role=new_role)
+        entry.with_key = gdata.acl.data.AclWithKey(key='', role=role)
+#        entry.role = gdata.acl.data.AclRole(value='none')
       else:
         entry.role = role
-        if isinstance(role, str):
-          entry.role = gdata.acl.data.AclRole(value=role)
 
-    if scope_type is not None and scope_value is not None:
-      entry.scope = gdata.acl.data.AclScope(type=scope_type, value=scope_value)
+    if scope_type is not None:
+      if scope_value is not None:
+        entry.scope = gdata.acl.data.AclScope(type=scope_type,
+                                              value=scope_value)
+      else:
+        entry.scope = gdata.acl.data.AclScope(type=scope_type)
     return entry
 
   GetInstance = get_instance
@@ -348,9 +351,8 @@ class Changestamp(atom.core.XmlElement):
   value = 'value'
 
 
-class Change(gdata.data.GDEntry):
+class Change(Resource):
   """Change feed entry."""
-  resource_id = ResourceId
   changestamp = Changestamp
   removed = Removed
 
@@ -403,7 +405,7 @@ class Feature(atom.core.XmlElement):
 
 class MaxUploadSize(atom.core.XmlElement):
   """The DocList docs:maxUploadSize element."""
-  _qname = gdata.data.GDATA_TEMPLATE  % 'maxUploadSize'
+  _qname = DOCUMENTS_TEMPLATE % 'maxUploadSize'
   kind = 'kind'
 
 

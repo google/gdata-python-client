@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# Copyright 2009 Google Inc. All Rights Reserved.
+# Copyright 2011 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 
 __author__ = 'vicfryzel@google.com (Vic Fryzel)'
 
+import copy
 import mimetypes
 import re
 import urllib
@@ -50,7 +51,7 @@ class DocsClient(gdata.client.GDClient):
   auth_scopes = gdata.gauth.AUTH_SCOPES['writely']
   ssl = True
 
-  def request(self, uri=None, **kwargs):
+  def request(self, method=None, uri=None, **kwargs):
     """Add support for imitating other users via 2-Legged OAuth.
 
     Args:
@@ -64,7 +65,7 @@ class DocsClient(gdata.client.GDClient):
         uri = atom.http_core.Uri.parse_uri(uri)
       uri.path = re.sub(r'/\/default/', '/' + self.xoauth_requestor_id,
                         uri.path)
-    return super(DocsClient, self).request(uri=uri, **kwargs)
+    return super(DocsClient, self).request(method=method, uri=uri, **kwargs)
 
   Request = request
   
@@ -82,22 +83,26 @@ class DocsClient(gdata.client.GDClient):
 
   GetMetadata = get_metadata
 
-  def get_changes(self, changestamp=None, **kwargs):
+  def get_changes(self, changestamp=None, max_results=None, **kwargs):
     """Retrieves changes to a user's documents list.
 
     Args:
       changestamp: (optional) String changestamp value to query since.
           If provided, returned changes will have a changestamp larger than
           the given one.
+      max_results: (optional) Number of results to fetch.  API will limit
+          this number to 100 at most.
       kwargs: Other parameters to pass to self.get_feed().
 
     Returns:
       gdata.docs.data.ChangeFeed.
     """
-    uri = CHANGE_FEED_URI
+    uri = atom.http_core.Uri.parse_uri(CHANGE_FEED_URI)
 
     if changestamp is not None:
-      uri += '?changestamp=%s' % changestamp
+      uri.query['start-index'] = changestamp
+    if max_results is not None:
+      uri.query['max-results'] = max_results
 
     return self.get_feed(
         uri, desired_class=gdata.docs.data.ChangeFeed, **kwargs)
@@ -122,7 +127,7 @@ class DocsClient(gdata.client.GDClient):
       kwargs: Other parameters to pass to self.get_feed().
 
     Returns:
-      gdata.docs.data.DocList feed.
+      gdata.docs.data.ResourceFeed feed.
     """
     if uri is None:
       uri = RESOURCE_FEED_URI
@@ -134,7 +139,8 @@ class DocsClient(gdata.client.GDClient):
     if limit is not None and not 'max-results' in uri.query:
       uri.query['max-results'] = limit
 
-    return self.get_feed(uri, desired_class=gdata.docs.data.DocList, **kwargs)
+    return self.get_feed(uri, desired_class=gdata.docs.data.ResourceFeed,
+                         **kwargs)
 
   GetResources = get_resources
 
@@ -152,7 +158,7 @@ class DocsClient(gdata.client.GDClient):
       uri: (optional) URI to query the doclist feed with. If None, then use
           DocsClient.RESOURCE_FEED_URI, which will retrieve all
           non-collections.
-      kwargs: Other parameters to pass to self.GetDocList().
+      kwargs: Other parameters to pass to self.GetResources().
 
     Returns:
       List of gdata.docs.data.Resource objects representing the retrieved
@@ -270,7 +276,8 @@ class DocsClient(gdata.client.GDClient):
 
   CreateResource = create_resource
 
-  def update_resource(self, entry, media=None, update_metadata=True, **kwargs):
+  def update_resource(self, entry, media=None, update_metadata=True,
+                      new_revision=False, **kwargs):
     """Updates an entry in Google Docs with new metadata and/or new data.
 
     Args:
@@ -280,12 +287,21 @@ class DocsClient(gdata.client.GDClient):
       update_metadata: (optional) True to update the metadata from the entry
           itself.  You might set this to False to only update an entry's
           file content, and not its metadata.
+      new_revision: (optional) True to create a new revision with this update,
+          False otherwise.
       kwargs: Other parameters to pass to self.post().
 
     Returns:
       gdata.docs.data.Resource representing the updated entry.
     """
+
+    uri_params = {}
+    if new_revision:
+      uri_params['new-revision'] = 'true'
+
     if update_metadata and media is None:
+      uri = atom.http_core.parse_uri(entry.GetEditLink().href)
+      uri.query.update(uri_params)
       return super(DocsClient, self).update(entry, **kwargs)
     else:
       uploader = gdata.client.ResumableUploader(
@@ -293,7 +309,7 @@ class DocsClient(gdata.client.GDClient):
           desired_class=gdata.docs.data.Resource)
       return uploader.UpdateFile(entry_or_resumable_edit_link=entry,
                                  update_metadata=update_metadata,
-                                 **kwargs)
+                                 uri_params=uri_params, **kwargs)
 
   UpdateResource = update_resource
 
@@ -586,7 +602,7 @@ class DocsClient(gdata.client.GDClient):
     Raises:
       ValueError: If given resource has no ACL link.
     """
-    uri = resource.GetAclLink()
+    uri = resource.GetAclLink().href
     if uri is None:
       raise ValueError(('Given resource has no ACL link.  Did you fetch this'
                         'resource from the API?'))
@@ -611,10 +627,10 @@ class DocsClient(gdata.client.GDClient):
     Returns:
       gdata.docs.data.AclEntry representing the updated ACL entry.
     """
-    uri = entry.GetEditLink()
+    uri = entry.GetEditLink().href
     if send_notifications:
       uri += '?send-notification-emails=true'
-    return super(DocsClient, self).update(entry, uri=uri, **kwargs)
+    return super(DocsClient, self).update(entry, uri=uri, force=True, **kwargs)
 
   UpdateAclEntry = update_acl_entry
 
@@ -628,7 +644,8 @@ class DocsClient(gdata.client.GDClient):
     Returns:
       Result of delete request.
     """
-    return super(DocsClient, self).delete(entry.GetEditLink().href, **kwargs)
+    return super(DocsClient, self).delete(entry.GetEditLink().href, force=True,
+                                          **kwargs)
 
   DeleteAclEntry = delete_acl_entry
 
@@ -653,7 +670,7 @@ class DocsClient(gdata.client.GDClient):
     feed = gdata.docs.data.AclFeed()
     feed.entry = entries
     return super(DocsClient, self).post(
-        feed, uri=resource.GetAclLink().href + '/acl', **kwargs)
+        feed, uri=resource.GetAclLink().href + '/acl', force=True, **kwargs)
 
   BatchProcessAclEntries = batch_process_acl_entries
 
@@ -750,30 +767,56 @@ class DocsClient(gdata.client.GDClient):
 
   DownloadRevisionToMemory = download_revision_to_memory
 
-  def publish_revision(self, entry, auto_publish=None,
-                       publish_outside_domain=None, **kwargs):
+  def publish_revision(self, entry, publish_auto=None,
+                       publish_outside_domain=False, **kwargs):
     """Publishes the given revision.
 
     This method can only be used for document revisions.
 
     Args:
-      entry: Revision to update. Make any metadata changes to this entry.
-      auto_publish: True to automatically publish future revisions of the
+      entry: Revision to update.
+      publish_auto: True to automatically publish future revisions of the
           document.
       publish_outside_domain: True to make the published revision available
           outside of a Google Apps domain.
       kwargs: Other parameters to pass to super(DocsClient, self).update().
 
     Returns:
-      gdata.docs.data.Archive representing the updated archive.
+      gdata.docs.data.Revision representing the updated revision.
     """
-    if auto_publish is None:
-      entry.publish_auto = auto_publish
+    entry.publish = gdata.docs.data.Publish(value='true')
+    if publish_auto is not None:
+      if publish_auto:
+        entry.publish_auto = gdata.docs.data.PublishAuto(value='true')
+      else:
+        entry.publish_auto = gdata.docs.data.PublishAuto(value='false')
     if publish_outside_domain is not None:
-      entry.publish_outside_domain = publish_outside_domain
-    return super(DocsClient, self).update(entry, **kwargs)
+      if publish_outside_domain:
+        entry.publish_outside_domain = \
+            gdata.docs.data.PublishOutsideDomain(value='true')
+      else:
+        entry.publish_outside_domain = \
+            gdata.docs.data.PublishOutsideDomain(value='false')
+    return super(DocsClient, self).update(entry, force=True, **kwargs)
 
   PublishRevision = publish_revision
+
+  def unpublish_revision(self, entry, **kwargs):
+    """Unpublishes the given revision.
+
+    This method can only be used for document revisions.
+
+    Args:
+      entry: Revision to update.
+      kwargs: Other parameters to pass to super(DocsClient, self).update().
+
+    Returns:
+      gdata.docs.data.Revision representing the updated revision.
+    """
+    entry.publish = gdata.docs.data.Publish(value='false')
+    return super(DocsClient, self).update(entry, force=True, **kwargs)
+
+  UnpublishRevision = unpublish_revision
 
   def delete_revision(self, entry, **kwargs):
     """Deletes the given Revision.
@@ -785,7 +828,7 @@ class DocsClient(gdata.client.GDClient):
     Returns:
       Result of delete request.
     """
-    return super(DocsClient, self).delete(entry.GetEditLink().href, **kwargs)
+    return super(DocsClient, self).delete(entry, force=True, **kwargs)
 
   DeleteRevision = delete_revision
 
@@ -867,7 +910,7 @@ class DocsClient(gdata.client.GDClient):
     Returns:
       Result of delete request.
     """
-    return super(DocsClient, self).delete(entry.GetEditLink().href, **kwargs)
+    return super(DocsClient, self).delete(entry, force=True, **kwargs)
 
   DeleteArchive = delete_archive
 
