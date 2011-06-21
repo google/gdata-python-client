@@ -24,6 +24,7 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 
 import unittest
 import gdata.spreadsheets.client
+import gdata.spreadsheets.text_db
 import gdata.gauth
 import gdata.client
 import atom.http_core
@@ -148,6 +149,84 @@ class SpreadsheetsClientTest(unittest.TestCase):
     updated_tables = self.client.get_tables(spreadsheet_id)
     self.assertEqual(int(initial_count), 
                      int(updated_tables.total_results.text))
+
+  def test_get_and_update_cell(self):
+    if not conf.options.get_value('runlive') == 'true':
+      return
+    # Either load the recording or prepare to make a live request.
+    conf.configure_cache(self.client, 'test_get_and_update_cell')
+
+    spreadsheet_id = conf.options.get_value('spreadsheetid')
+
+    test_worksheet = self.client.add_worksheet(
+        spreadsheet_id, 'worksheet x', rows=30, cols=3)
+
+    # Get a cell and set its value.
+    cell_entry = self.client.get_cell(
+        spreadsheet_id, test_worksheet.get_worksheet_id(), 1, 1)
+    cell_entry.cell.input_value = 'a test'
+    result = self.client.update(cell_entry)
+    self.assertEquals(cell_entry.cell.input_value, result.cell.input_value)
+
+    # Verify that the value was set.
+    cells = self.client.get_cells(
+        spreadsheet_id, test_worksheet.get_worksheet_id())
+    self.assertEquals(len(cells.entry), 1)
+    self.assertEquals(cells.entry[0].cell.input_value, 'a test')
+
+    # Delete the test worksheet.
+    self.client.delete(test_worksheet, force=True)
+
+  def set_cell(self, spreadsheet_id, worksheet_id, row, column, value):
+    cell_entry = self.client.get_cell(
+        spreadsheet_id, worksheet_id, row, column)
+    self.assert_(cell_entry is not None)
+    cell_entry.cell.input_value = value
+    self.assert_(self.client.update(cell_entry) is not None)
+
+  def test_crud_on_list_feed(self):
+    if not conf.options.get_value('runlive') == 'true':
+      return
+    # Either load the recording or prepare to make a live request.
+    conf.configure_cache(self.client, 'test_crud_on_list_feed')
+
+    spreadsheet_id = conf.options.get_value('spreadsheetid')
+
+    test_worksheet = self.client.add_worksheet(
+        spreadsheet_id, 'worksheet x', rows=30, cols=3)
+    worksheet_id = test_worksheet.get_worksheet_id()
+    
+    # Create the first column to provide row headings.
+    self.set_cell(spreadsheet_id, worksheet_id, 1, 1, 'cola')
+    self.set_cell(spreadsheet_id, worksheet_id, 1, 2, 'colb')
+    self.set_cell(spreadsheet_id, worksheet_id, 1, 3, 'colc')
+
+    # Add a row to the spreadsheet.
+    entry = gdata.spreadsheets.data.ListEntry()
+    entry.from_dict({'cola': 'alpha', 'colb': 'beta', 'colc': 'gamma'})
+    added = self.client.add_list_entry(entry, spreadsheet_id, worksheet_id)
+    self.assert_(isinstance(added, gdata.spreadsheets.data.ListEntry))
+    self.assertEquals(added.get_value('cola'), 'alpha')
+
+    # Update the row.
+    added.from_dict({'cola': '1', 'colb': '2', 'colc': '3'})
+    updated = self.client.update(added)
+    self.assert_(isinstance(updated, gdata.spreadsheets.data.ListEntry))
+    self.assertEquals(updated.get_value('cola'), '1')
+
+    # Check the number of rows.
+    rows = self.client.get_list_feed(spreadsheet_id, worksheet_id)
+    self.assertEquals(len(rows.entry), 1)
+
+    # Remove the row.
+    self.client.delete(updated)
+
+    # Check that it was removed.
+    rows = self.client.get_list_feed(spreadsheet_id, worksheet_id)
+    self.assertEquals(len(rows.entry), 0)
+
+    # Delete the test worksheet.
+    self.client.delete(test_worksheet, force=True)
 
 
 def suite():

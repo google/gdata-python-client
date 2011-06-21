@@ -185,7 +185,7 @@ class LinkFinder(object):
   """
 
   def find_url(self, rel):
-    """Returns the URL in a link with the desired rel value."""
+    """Returns the URL (as a string) in a link with the desired rel value."""
     for link in self.link:
       if link.rel == rel and link.href:
         return link.href
