@@ -181,6 +181,8 @@ class GDClient(atom.client.AtomPubClient):
   auth_service = None
   # URL prefixes which should be requested for AuthSub and OAuth.
   auth_scopes = None
+  # Name of alternate auth service to use in certain cases
+  alt_auth_service = None
 
   def request(self, method=None, uri=None, auth_token=None,
               http_request=None, converter=None, desired_class=None,
@@ -437,7 +439,7 @@ class GDClient(atom.client.AtomPubClient):
     self.auth_token = self.request_client_login_token(email, password,
         source, service=service, account_type=account_type, auth_url=auth_url,
         captcha_token=captcha_token, captcha_response=captcha_response)
-    if hasattr(self, 'alt_auth_service'):
+    if self.alt_auth_service is not None:
       self.alt_auth_token = self.request_client_login_token(
           email, password, source, service=self.alt_auth_service,
           account_type=account_type, auth_url=auth_url,
@@ -933,8 +935,7 @@ class ResumableUploader(object):
           Defaults to 'POST', but may also be 'PUT'.
 
     Returns:
-      The final Atom entry as created on the server. The entry will be
-      parsed accoring to the class specified in self.desired_class.
+      Result of HTTP request to intialize the session. See atom.client.request.
 
     Raises:
       RequestError if the unique upload uri is not set or the
@@ -1082,6 +1083,7 @@ class ResumableUploader(object):
       update_metadata: (optional) True to also update the entry's metadata
           with that in the given GDEntry object in entry_or_resumable_edit_link.
       uri_params: (optional) Dict of additional parameters to attach to the URI.
+          Some non-dict types are valid here, too, like list of tuple pairs.
 
     Returns:
       The final Atom entry created on the server. The entry object's type will

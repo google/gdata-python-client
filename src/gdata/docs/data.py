@@ -122,11 +122,11 @@ class Resource(gdata.data.GDEntry):
 
   def __init__(self, type=None, title=None, **kwargs):
     super(Resource, self).__init__(**kwargs)
-    if isinstance(type, str):
+    if isinstance(type, basestring):
       self.category.append(gdata.docs.data.make_kind_category(type))
 
     if title is not None:
-      if isinstance(title, str):
+      if isinstance(title, basestring):
         self.title = atom.data.Title(text=title)
       else:
         self.title = title
@@ -216,12 +216,11 @@ class AclEntry(gdata.acl.data.AclEntry, gdata.data.BatchEntry):
     entry = AclEntry()
 
     if role is not None:
-      if isinstance(role, (str, unicode)):
+      if isinstance(role, basestring):
         role = gdata.acl.data.AclRole(value=role)
 
       if key:
         entry.with_key = gdata.acl.data.AclWithKey(key='', role=role)
-#        entry.role = gdata.acl.data.AclRole(value='none')
       else:
         entry.role = role
 

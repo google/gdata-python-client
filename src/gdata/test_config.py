@@ -274,7 +274,7 @@ def configure_client(client, case_name, service_name, use_apps_auth=False):
     auth_token = client.client_login(username, password, case_name,
                                      service=service_name)
     options.values[auth_token_key] = gdata.gauth.token_to_blob(auth_token)
-    if hasattr(client, 'alt_auth_service'):
+    if client.alt_auth_service is not None:
       options.values[client.alt_auth_service] = gdata.gauth.token_to_blob(
           client.alt_auth_token)
     client.http_client.close_session()
@@ -283,7 +283,7 @@ def configure_client(client, case_name, service_name, use_apps_auth=False):
   if auth_token_key in options.values:
     client.auth_token = gdata.gauth.token_from_blob(
         options.values[auth_token_key])
-  if hasattr(client, 'alt_auth_service'):
+  if client.alt_auth_service is not None:
     client.alt_auth_token = gdata.gauth.token_from_blob(
         options.values[client.alt_auth_service])
 

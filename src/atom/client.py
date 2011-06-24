@@ -61,8 +61,7 @@ class AtomPubClient(object):
       self.host = host
     if auth_token is not None:
       self.auth_token = auth_token
-    if xoauth_requestor_id is not None:
-      self.xoauth_requestor_id = xoauth_requestor_id
+    self.xoauth_requestor_id = xoauth_requestor_id
     self.source = source
 
   def request(self, method=None, uri=None, auth_token=None,

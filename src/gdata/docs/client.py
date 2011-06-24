@@ -41,7 +41,7 @@ CHANGE_FEED_URI = '/feeds/default/private/changes'
 
 
 class DocsClient(gdata.client.GDClient):
-  """Client interface for all features of the Google Documents List API."""
+  """Client for all features of the Google Documents List API."""
 
   host = 'docs.google.com'
   api_version = '3.0'
@@ -63,8 +63,7 @@ class DocsClient(gdata.client.GDClient):
     if self.xoauth_requestor_id is not None and uri is not None:
       if isinstance(uri, (str, unicode)):
         uri = atom.http_core.Uri.parse_uri(uri)
-      uri.path = re.sub(r'/\/default/', '/' + self.xoauth_requestor_id,
-                        uri.path)
+      uri.path.replace('/default', '/%s' % self.xoauth_requestor_id)
     return super(DocsClient, self).request(method=method, uri=uri, **kwargs)
 
   Request = request
@@ -132,7 +131,7 @@ class DocsClient(gdata.client.GDClient):
     if uri is None:
       uri = RESOURCE_FEED_URI
 
-    if isinstance(uri, (str, unicode)):
+    if isinstance(uri, basestring):
       uri = atom.http_core.Uri.parse_uri(uri)    
 
     # Add max-results param if it wasn't included in the uri.
@@ -406,13 +405,12 @@ class DocsClient(gdata.client.GDClient):
       gdata.client.RequestError: on error response from server.
     """
     server_response = None
-    if 'spreadsheets' in uri and auth_token is None \
+    token = auth_token
+    if 'spreadsheets' in uri and token is None \
         and self.alt_auth_token is not None:
-      server_response = self.request(
-          'GET', uri, auth_token=self.alt_auth_token, **kwargs)
-    else: 
-      server_response = self.request(
-          'GET', uri, auth_token=auth_token, **kwargs)
+      token = self.alt_auth_token
+    server_response = self.request(
+        'GET', uri, auth_token=token, **kwargs)
     if server_response.status != 200:
       raise gdata.client.RequestError, {'status': server_response.status,
                                         'reason': server_response.reason,
@@ -785,18 +783,16 @@ class DocsClient(gdata.client.GDClient):
       gdata.docs.data.Revision representing the updated revision.
     """
     entry.publish = gdata.docs.data.Publish(value='true')
-    if publish_auto is not None:
-      if publish_auto:
-        entry.publish_auto = gdata.docs.data.PublishAuto(value='true')
-      else:
-        entry.publish_auto = gdata.docs.data.PublishAuto(value='false')
-    if publish_outside_domain is not None:
-      if publish_outside_domain:
-        entry.publish_outside_domain = \
-            gdata.docs.data.PublishOutsideDomain(value='true')
-      else:
-        entry.publish_outside_domain = \
-            gdata.docs.data.PublishOutsideDomain(value='false')
+    if publish_auto == True:
+      entry.publish_auto = gdata.docs.data.PublishAuto(value='true')
+    elif publish_auto == False:
+      entry.publish_auto = gdata.docs.data.PublishAuto(value='false')
+    if publish_outside_domain == True:
+      entry.publish_outside_domain = \
+          gdata.docs.data.PublishOutsideDomain(value='true')
+    elif publish_outside_domain == False:
+      entry.publish_outside_domain = \
+          gdata.docs.data.PublishOutsideDomain(value='false')
     return super(DocsClient, self).update(entry, force=True, **kwargs)
 
   PublishRevision = publish_revision
