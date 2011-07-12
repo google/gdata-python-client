@@ -96,7 +96,7 @@ class MultidomainProvisioningClientTest(unittest.TestCase):
     # Either load the recording or prepare to make a live request.
     conf.configure_cache(self.client, 'testCreateUpdateDelete')
     
-    rnd_number = random.randrange(0, 101)
+    rnd_number = random.randrange(0, 100001)
     email = 'test_user%s@%s' % (rnd_number, self.client.domain)
     alias = 'test_alias%s@%s' % (rnd_number, self.client.domain)
 
@@ -122,8 +122,8 @@ class MultidomainProvisioningClientTest(unittest.TestCase):
 
     new_entry.first_name = 'Joe'
     new_entry.last_name = 'Brown'
-    updated_entry = self.client.UpdateUser(email=email,
-                                           user_entry=new_entry)
+    updated_entry = self.client.UpdateUser(
+        email=email, user_entry=new_entry)
     self.assert_(isinstance(updated_entry,
         gdata.apps.multidomain.data.UserEntry))
     self.assertEqual(updated_entry.first_name, 'Joe')

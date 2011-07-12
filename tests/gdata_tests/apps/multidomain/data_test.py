@@ -55,7 +55,8 @@ class UserEntryTest(unittest.TestCase):
         gdata.apps.multidomain.data.UserEntry))
     self.assertEquals(
         self.feed.entry[0].find_edit_link(),
-        'https://apps-apis.google.com/a/feeds/user/2.0/example.com/admin%40example.com')
+        ('https://apps-apis.google.com/a/feeds/user/2.0/example.com/'
+         'admin%40example.com'))
     self.assertEquals(self.feed.entry[0].first_name, 'Joe')
     self.assertEquals(self.feed.entry[0].last_name, 'Brown')
     self.assertEquals(self.feed.entry[0].email, 'admin@example.com')
@@ -65,7 +66,8 @@ class UserEntryTest(unittest.TestCase):
     self.assertEquals(self.feed.entry[0].ip_whitelisted, 'false')
     self.assertEquals(
         self.feed.entry[1].find_edit_link(),
-        'https://apps-apis.google.com/a/feeds/user/2.0/example.com/liz%40example.com')
+        ('https://apps-apis.google.com/a/feeds/user/2.0/example.com/'
+         'liz%40example.com'))
     self.assertEquals(self.feed.entry[1].first_name, 'Elizabeth')
     self.assertEquals(self.feed.entry[1].last_name, 'Smith')
     self.assertEquals(self.feed.entry[1].email, 'liz@example.com')
@@ -111,13 +113,15 @@ class AliasEntryTest(unittest.TestCase):
         gdata.apps.multidomain.data.AliasEntry))
     self.assertEquals(
         self.feed.entry[0].find_edit_link(),
-        'https://apps-apis.google.com/a/feeds/alias/2.0/gethelp_example.com/helpdesk%40gethelp_example.com')
+        ('https://apps-apis.google.com/a/feeds/alias/2.0/gethelp_example.com/'
+         'helpdesk%40gethelp_example.com'))
     self.assertEquals(self.feed.entry[0].user_email, 'liz@example.com')
     self.assertEquals(self.feed.entry[0].alias_email,
                       'helpdesk@gethelp_example.com')
     self.assertEquals(
         self.feed.entry[1].find_edit_link(),
-        'https://apps-apis.google.com/a/feeds/alias/2.0/gethelp_example.com/support%40gethelp_example.com')
+        ('https://apps-apis.google.com/a/feeds/alias/2.0/gethelp_example.com/'
+         'support%40gethelp_example.com'))
     self.assertEquals(self.feed.entry[1].user_email, 'joe@example.com')
     self.assertEquals(self.feed.entry[1].alias_email,
                       'support@gethelp_example.com')
