@@ -774,9 +774,11 @@ class DocsClient(gdata.client.GDClient):
     Args:
       entry: Revision to update.
       publish_auto: True to automatically publish future revisions of the
-          document.
+          document.  False to not automatically publish future revisions.
+          None to take no action and use the default value.
       publish_outside_domain: True to make the published revision available
-          outside of a Google Apps domain.
+          outside of a Google Apps domain.  False to not publish outside
+          the domain.  None to use the default value.
       kwargs: Other parameters to pass to super(DocsClient, self).update().
 
     Returns:

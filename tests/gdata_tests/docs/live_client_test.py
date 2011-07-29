@@ -17,7 +17,10 @@
 # This module is used for version 2 of the Google Data APIs.
 # These tests attempt to connect to Google servers.
 
-"""Live integration tests of the Google Documents List API."""
+"""Live integration tests of the Google Documents List API.
+
+  RESOURCES: Dict of test resource data, keyed on resource type.
+"""
 
 __author__ = 'vicfryzel@google.com (Vic Fryzel)'
 
