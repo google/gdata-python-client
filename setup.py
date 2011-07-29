@@ -81,7 +81,6 @@ library may also be used with any Atom Publishing Protocol service (AtomPub).
       'gdata.apps.migration',
       'gdata.apps.multidomain',
       'gdata.apps.organization', 
-      'gdata.base',
       'gdata.blogger', 
       'gdata.books',
       'gdata.calendar', 
