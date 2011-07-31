@@ -43,8 +43,6 @@ src/gdata/apps/migration/__init__.py
 src/gdata/apps/migration/service.py
 src/gdata/apps/organization/__init__.py
 src/gdata/apps/organization/service.py
-src/gdata/base/__init__.py
-src/gdata/base/service.py
 src/gdata/blogger/__init__.py
 src/gdata/blogger/client.py
 src/gdata/blogger/data.py
@@ -179,10 +177,6 @@ src/gdata/tlslite/TLSConnection.py
 src/gdata/tlslite/Session.py
 src/gdata/tlslite/SharedKeyDB.py
 src/gdata/tlslite/X509CertChain.py
-samples/base/baseItemTypesQueryExample.py
-samples/base/baseAttributesQueryExample.py
-samples/base/baseQueryExample.py
-samples/base/dryRunInsert.py
 samples/blogger/BloggerExample.py
 samples/blogger/BloggerExampleV1.py
 samples/blogger/app/app.yaml
@@ -259,7 +253,6 @@ tests/atom_tests/url_test.py
 tests/gdata_tests/__init__.py
 tests/gdata_tests/apps_test.py
 tests/gdata_tests/auth_test.py
-tests/gdata_tests/base_test.py
 tests/gdata_tests/blogger_test.py
 tests/gdata_tests/books_test.py
 tests/gdata_tests/calendar_test.py
@@ -287,8 +280,6 @@ tests/gdata_tests/apps/migration/__init__.py
 tests/gdata_tests/apps/migration/service_test.py
 tests/gdata_tests/apps/organization/__init__.py
 tests/gdata_tests/apps/organization/service_test.py
-tests/gdata_tests/base/__init__.py
-tests/gdata_tests/base/service_test.py
 tests/gdata_tests/blogger/__init__.py
 tests/gdata_tests/blogger/data_test.py
 tests/gdata_tests/blogger/live_client_test.py
@@ -344,8 +335,6 @@ pydocs/gdata.apps.migration.html
 pydocs/gdata.apps.migration.service.html
 pydocs/gdata.apps.service.html
 pydocs/gdata.auth.html
-pydocs/gdata.base.html
-pydocs/gdata.base.service.html
 pydocs/gdata.blogger.html
 pydocs/gdata.blogger.client.html
 pydocs/gdata.blogger.data.html
@@ -496,7 +485,6 @@ src/gdata/apps/emailsettings/data.py
 src/gdata/apps_property.py
 tests/gdata_tests/apps/emailsettings/data_test.py
 tests/gdata_tests/apps/emailsettings/live_client_test.py
-tests/gdata_tests/base/data_test.py
 tests/gdata_tests/oauth/__init__.py
 tests/gdata_tests/oauth/data_test.py
 samples/contentforshopping/add_batch_products.py

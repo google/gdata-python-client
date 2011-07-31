@@ -51,6 +51,8 @@ import gdata_tests.calendar_resource.live_client_test
 import gdata_tests.calendar_resource.data_test
 import gdata_tests.apps.emailsettings.data_test
 import gdata_tests.apps.emailsettings.live_client_test
+import gdata_tests.apps.multidomain.data_test
+import gdata_tests.apps.multidomain.live_client_test
 import gdata_tests.youtube.live_client_test
 
 
@@ -85,6 +87,8 @@ def suite():
       gdata_tests.calendar_resource.data_test.suite(),
       gdata_tests.apps.emailsettings.live_client_test.suite(),
       gdata_tests.apps.emailsettings.data_test.suite(),
+      gdata_tests.apps.multidomain.live_client_test.suite(),
+      gdata_tests.apps.multidomain.data_test.suite(),
       gdata_tests.youtube.live_client_test.suite(),
       ))
 
