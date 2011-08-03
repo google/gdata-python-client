@@ -27,6 +27,7 @@ __author__ = 'vinces1979@gmail.com (Vince Spicer)'
 
 import gdata.client
 import gdata.contacts.data
+import atom.client
 import atom.data
 import atom.http_core
 import gdata.gauth
@@ -264,8 +265,12 @@ class ContactsClient(gdata.client.GDClient):
                       os.path.getsize. If media is a MediaSource object, it is
                       assumed that it already contains the content length.
     """
+    ifmatch_header = None
     if isinstance(contact_entry_or_url, gdata.contacts.data.ContactEntry):
-      uri = contact_entry_or_url.GetPhotoLink().href
+      photo_link = contact_entry_or_url.GetPhotoLink()
+      uri = photo_link.href
+      ifmatch_header = atom.client.CustomHeaders(
+          **{'if-match': photo_link.etag})
     else:
       uri = contact_entry_or_url
     if isinstance(media, gdata.MediaSource):
@@ -279,7 +284,8 @@ class ContactsClient(gdata.client.GDClient):
     else:
       payload = gdata.data.MediaSource(content_type=content_type,
           content_length=content_length, file_path=media)
-    return self.Put(uri=uri, data=payload, auth_token=auth_token, **kwargs)
+    return self.Put(uri=uri, data=payload, auth_token=auth_token,
+                    ifmatch_header=ifmatch_header, **kwargs)
 
   ChangePhoto = change_photo
 
@@ -310,13 +316,26 @@ class ContactsClient(gdata.client.GDClient):
   GetPhoto = get_photo
 
   def delete_photo(self, contact_entry_or_url, auth_token=None, **kwargs):
+    """Delete the contact's profile photo.
+
+    Args:
+      contact_entry_or_url: a gdata.contacts.ContactEntry objecr or a string
+         containing the photo link's URL.
+    """
     uri = None
+    ifmatch_header = None
     if isinstance(contact_entry_or_url, gdata.contacts.data.ContactEntry):
-      uri = contact_entry_or_url.GetPhotoLink().href
+      photo_link = contact_entry_or_url.GetPhotoLink()
+      # No etag means no photo has been assigned to this contact.
+      if photo_link.etag:
+        uri = photo_link.href
+        ifmatch_header = atom.client.CustomHeaders(
+            **{'if-match': photo_link.etag})
     else:
       uri = contact_entry_or_url
     if uri:
-      self.Delete(uri=uri, auth_token=auth_token, **kwargs)
+      self.Delete(entry_or_uri=uri, auth_token=auth_token,
+                  ifmatch_header=ifmatch_header, **kwargs)
 
   DeletePhoto = delete_photo
 
@@ -523,4 +542,3 @@ class ProfilesQuery(gdata.client.Query):
     gdata.client.Query.modify_request(self, http_request)
 
   ModifyRequest = modify_request
-

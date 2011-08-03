@@ -152,7 +152,7 @@ class AtomPubClient(object):
 
   def modify_request(self, http_request):
     """Changes the HTTP request before sending it to the server.
-    
+
     Sets the User-Agent HTTP header and fills in the HTTP host portion
     of the URL if one was not included in the request (for this it uses
     the self.host member if one is set). This method is called in
@@ -185,3 +185,37 @@ class AtomPubClient(object):
     return http_request
 
   ModifyRequest = modify_request
+
+
+class CustomHeaders(object):
+  """Add custom headers to an http_request.
+
+  Usage:
+    >>> custom_headers = atom.client.CustomHeaders(header1='value1',
+            header2='value2')
+    >>> client.get(uri, custom_headers=custom_headers)
+  """
+
+  def __init__(self, **kwargs):
+    """Creates a CustomHeaders instance.
+
+    Initialize the headers dictionary with the arguments list.
+    """
+    self.headers = kwargs
+
+  def modify_request(self, http_request):
+    """Changes the HTTP request before sending it to the server.
+
+    Adds the custom headers to the HTTP request.
+
+    Args:
+      http_request: An atom.http_core.HttpRequest().
+
+    Returns:
+      An atom.http_core.HttpRequest() with the added custom headers.
+    """
+
+    for name, value in self.headers.iteritems():
+      if value is not None:
+        http_request.headers[name] = value
+    return http_request
