@@ -351,6 +351,13 @@ class Country(atom.core.XmlElement):
   _qname = CONTACTS_TEMPLATE % 'country'
 
 
+class Status(atom.core.XmlElement):
+  """Person's status element."""
+
+  _qname = CONTACTS_TEMPLATE % 'status'
+  indexed = 'indexed'
+
+
 class PersonEntry(gdata.data.BatchEntry):
   """Represents a google contact"""
 
@@ -364,7 +371,7 @@ class PersonEntry(gdata.data.BatchEntry):
   external_id = [ExternalId]
   gender = Gender
   hobby = [Hobby]
-  initals = Initials
+  initials = Initials
   jot = [Jot]
   language= [Language]
   maiden_name = MaidenName
@@ -385,6 +392,8 @@ class PersonEntry(gdata.data.BatchEntry):
   im = [gdata.data.Im]
   structured_postal_address = [gdata.data.StructuredPostalAddress]
   extended_property = [gdata.data.ExtendedProperty]
+
+  status = Status
 
 
 class Deleted(atom.core.XmlElement):

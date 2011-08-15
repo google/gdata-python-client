@@ -32,10 +32,10 @@ import atom.data
 import atom.http_core
 import gdata.gauth
 
-DEFAULT_BATCH_URL = ('http://www.google.com/m8/feeds/contacts/default/full'
+DEFAULT_BATCH_URL = ('https://www.google.com/m8/feeds/contacts/default/full'
                      '/batch')
-DEFAULT_PROFILES_BATCH_URL = ('http://www.google.com'
-                              '/m8/feeds/profiles/default/full/batch')
+DEFAULT_PROFILES_BATCH_URL = ('https://www.google.com/m8/feeds/profiles/domain/'
+                              '%s/full/batch')
 
 class ContactsClient(gdata.client.GDClient):
   api_version = '3'
@@ -58,7 +58,7 @@ class ContactsClient(gdata.client.GDClient):
     self.domain = domain
 
   def get_feed_uri(self, kind='contacts', contact_list=None, projection='full',
-                  scheme="http"):
+                  scheme="https"):
     """Builds a feed URI.
 
     Args:
@@ -293,7 +293,7 @@ class ContactsClient(gdata.client.GDClient):
     """Retrives the binary data for the contact's profile photo as a string.
 
     Args:
-      contact_entry_or_url: a gdata.contacts.ContactEntry objecr or a string
+      contact_entry_or_url: a gdata.contacts.ContactEntry object or a string
          containing the photo link's URL. If the contact entry does not
          contain a photo link, the image will not be fetched and this method
          will return None.
@@ -319,18 +319,20 @@ class ContactsClient(gdata.client.GDClient):
     """Delete the contact's profile photo.
 
     Args:
-      contact_entry_or_url: a gdata.contacts.ContactEntry objecr or a string
+      contact_entry_or_url: a gdata.contacts.ContactEntry object or a string
          containing the photo link's URL.
     """
     uri = None
     ifmatch_header = None
     if isinstance(contact_entry_or_url, gdata.contacts.data.ContactEntry):
       photo_link = contact_entry_or_url.GetPhotoLink()
-      # No etag means no photo has been assigned to this contact.
       if photo_link.etag:
         uri = photo_link.href
         ifmatch_header = atom.client.CustomHeaders(
             **{'if-match': photo_link.etag})
+      else:
+        # No etag means no photo has been assigned to this contact.
+        return
     else:
       uri = contact_entry_or_url
     if uri:
@@ -430,7 +432,7 @@ class ContactsClient(gdata.client.GDClient):
 
   ExecuteBatch = execute_batch
 
-  def execute_batch_profiles(self, batch_feed, url,
+  def execute_batch_profiles(self, batch_feed, url=None,
                              desired_class=gdata.contacts.data.ProfilesFeed,
                              auth_token=None, **kwargs):
     """Sends a batch request feed to the server.
@@ -450,6 +452,7 @@ class ContactsClient(gdata.client.GDClient):
       The results of the batch request's execution on the server. If the
       default converter is used, this is stored in a ProfilesFeed.
     """
+    url = url or (DEFAULT_PROFILES_BATCH_URL % self.domain)
     return self.Post(batch_feed, url, desired_class=desired_class,
                      auth_token=auth_token, **kwargs)
 
