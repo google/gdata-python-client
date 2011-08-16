@@ -109,6 +109,16 @@ class PublishOutsideDomain(atom.core.XmlElement):
   value = 'value'
 
 
+class Filename(atom.core.XmlElement):
+  """The DocList docs:filename element."""
+  _qname = DOCUMENTS_TEMPLATE % 'filename'
+
+
+class SuggestedFilename(atom.core.XmlElement):
+  """The DocList docs:suggestedFilename element."""
+  _qname = DOCUMENTS_TEMPLATE % 'suggestedFilename'
+
+
 class Resource(gdata.data.GDEntry):
   """DocList version of an Atom Entry."""
 
@@ -119,6 +129,8 @@ class Resource(gdata.data.GDEntry):
   writers_can_invite = WritersCanInvite
   quota_bytes_used = QuotaBytesUsed
   feed_link = [gdata.data.FeedLink]
+  filename = Filename
+  suggested_filename = SuggestedFilename
 
   def __init__(self, type=None, title=None, **kwargs):
     super(Resource, self).__init__(**kwargs)
