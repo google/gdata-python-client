@@ -412,6 +412,8 @@ def check_data_classes(test, classes):
                   and issubclass(value[0], atom.core.XmlElement))
               or type(value) == property # Allow properties.
               or inspect.ismethod(value) # Allow methods. 
+              or inspect.ismethoddescriptor(value) # Allow method descriptors.
+                                                   # staticmethod et al.
               or issubclass(value, atom.core.XmlElement)):
             test.fail(
                 'XmlElement member should have an attribute, XML class,'

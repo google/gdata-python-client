@@ -49,10 +49,10 @@ class DocsEntryTest(unittest.TestCase):
 
   def setUp(self):
     self.entry = atom.core.parse(test_data.DOCUMENT_LIST_ENTRY_V3,
-                                 gdata.docs.data.DocsEntry)
+                                 gdata.docs.data.Resource)
 
   def testToAndFromStringDocsEntry(self):
-    self.assert_(isinstance(self.entry, gdata.docs.data.DocsEntry))
+    self.assert_(isinstance(self.entry, gdata.docs.data.Resource))
     self.assertEqual(self.entry.GetDocumentType(), 'spreadsheet')
     self.assert_(isinstance(self.entry.last_viewed, gdata.docs.data.LastViewed))
     self.assertEqual(self.entry.last_viewed.text, '2009-03-05T07:48:21.493Z')
@@ -90,12 +90,12 @@ class AclTest(unittest.TestCase):
 
   def setUp(self):
     self.acl_entry = atom.core.parse(test_data.DOCUMENT_LIST_ACL_ENTRY,
-                                     gdata.docs.data.Acl)
+                                     gdata.docs.data.AclEntry)
     self.acl_entry_withkey = atom.core.parse(
-      test_data.DOCUMENT_LIST_ACL_WITHKEY_ENTRY, gdata.docs.data.Acl)
+      test_data.DOCUMENT_LIST_ACL_WITHKEY_ENTRY, gdata.docs.data.AclEntry)
 
   def testToAndFromString(self):
-    self.assert_(isinstance(self.acl_entry, gdata.docs.data.Acl))
+    self.assert_(isinstance(self.acl_entry, gdata.docs.data.AclEntry))
     self.assert_(isinstance(self.acl_entry.role, gdata.acl.data.AclRole))
     self.assert_(isinstance(self.acl_entry.scope, gdata.acl.data.AclScope))
     self.assertEqual(self.acl_entry.scope.value, 'user@gmail.com')
@@ -103,8 +103,8 @@ class AclTest(unittest.TestCase):
     self.assertEqual(self.acl_entry.role.value, 'writer')
 
     acl_entry_str = str(self.acl_entry)
-    new_acl_entry = atom.core.parse(acl_entry_str, gdata.docs.data.Acl)
-    self.assert_(isinstance(new_acl_entry, gdata.docs.data.Acl))
+    new_acl_entry = atom.core.parse(acl_entry_str, gdata.docs.data.AclEntry)
+    self.assert_(isinstance(new_acl_entry, gdata.docs.data.AclEntry))
     self.assert_(isinstance(new_acl_entry.role, gdata.acl.data.AclRole))
     self.assert_(isinstance(new_acl_entry.scope, gdata.acl.data.AclScope))
     self.assertEqual(new_acl_entry.scope.value, self.acl_entry.scope.value)
@@ -112,7 +112,7 @@ class AclTest(unittest.TestCase):
     self.assertEqual(new_acl_entry.role.value, self.acl_entry.role.value)
 
   def testToAndFromStringWithKey(self):
-    self.assert_(isinstance(self.acl_entry_withkey, gdata.docs.data.Acl))
+    self.assert_(isinstance(self.acl_entry_withkey, gdata.docs.data.AclEntry))
     self.assert_(self.acl_entry_withkey.role is None)
     self.assert_(isinstance(self.acl_entry_withkey.with_key,
                             gdata.acl.data.AclWithKey))
@@ -127,8 +127,8 @@ class AclTest(unittest.TestCase):
 
     acl_entry_withkey_str = str(self.acl_entry_withkey)
     new_acl_entry_withkey = atom.core.parse(acl_entry_withkey_str,
-                                            gdata.docs.data.Acl)
-    self.assert_(isinstance(new_acl_entry_withkey, gdata.docs.data.Acl))
+                                            gdata.docs.data.AclEntry)
+    self.assert_(isinstance(new_acl_entry_withkey, gdata.docs.data.AclEntry))
     self.assert_(new_acl_entry_withkey.role is None)
     self.assert_(isinstance(new_acl_entry_withkey.with_key,
                             gdata.acl.data.AclWithKey))
@@ -168,11 +168,11 @@ class AclFeedTest(unittest.TestCase):
 
   def testToAndFromString(self):
     for entry in self.feed.entry:
-      self.assert_(isinstance(entry, gdata.docs.data.Acl))
+      self.assert_(isinstance(entry, gdata.docs.data.AclEntry))
 
     feed = atom.core.parse(str(self.feed), gdata.docs.data.AclFeed)
     for entry in feed.entry:
-      self.assert_(isinstance(entry, gdata.docs.data.Acl))
+      self.assert_(isinstance(entry, gdata.docs.data.AclEntry))
 
   def testConvertActualData(self):
     entries = self.feed.entry
@@ -230,8 +230,8 @@ class DataClassSanityTest(unittest.TestCase):
         gdata.docs.data.LastViewed, gdata.docs.data.WritersCanInvite,
         gdata.docs.data.QuotaBytesUsed, gdata.docs.data.Publish,
         gdata.docs.data.PublishAuto, gdata.docs.data.PublishOutsideDomain,
-        gdata.docs.data.DocsEntry, gdata.docs.data.Acl, gdata.docs.data.AclFeed,
-        gdata.docs.data.DocList, gdata.docs.data.Revision,
+        gdata.docs.data.Resource, gdata.docs.data.AclEntry, gdata.docs.data.AclFeed,
+        gdata.docs.data.ResourceFeed, gdata.docs.data.Revision,
         gdata.docs.data.RevisionFeed])
 
 
