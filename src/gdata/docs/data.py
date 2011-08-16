@@ -370,7 +370,7 @@ class Change(Resource):
 
 class ChangeFeed(gdata.data.GDFeed):
   """DocList Changes feed."""
-  entry = [Change] 
+  entry = [Change]
 
 
 class QuotaBytesTotal(atom.core.XmlElement):
