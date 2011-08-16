@@ -355,7 +355,7 @@ class Change(Resource):
   changestamp = Changestamp
   removed = Removed
 
-  
+
 class ChangeFeed(gdata.data.GDFeed):
   """DocList Changes feed."""
   entry = [Change] 
