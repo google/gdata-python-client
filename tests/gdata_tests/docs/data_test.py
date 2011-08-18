@@ -26,25 +26,6 @@ import gdata.docs.data
 import gdata.test_config as conf
 
 
-class DocsHelperTest(unittest.TestCase):
-
-  def setUp(self):
-    pass
-
-  def testMakeKindCategory(self):
-    category = gdata.docs.data.MakeKindCategory('folder')
-    self.assertEqual(category.label, 'folder')
-    self.assertEqual(category.scheme, 'http://schemas.google.com/g/2005#kind')
-    self.assertEqual(
-        category.term, 'http://schemas.google.com/docs/2007#folder')
-
-    category = gdata.docs.data.MakeKindCategory('spreadsheet')
-    self.assertEqual(category.label, 'spreadsheet')
-    self.assertEqual(category.scheme, 'http://schemas.google.com/g/2005#kind')
-    self.assertEqual(
-        category.term, 'http://schemas.google.com/docs/2007#spreadsheet')
-
-
 class DocsEntryTest(unittest.TestCase):
 
   def setUp(self):
@@ -53,7 +34,7 @@ class DocsEntryTest(unittest.TestCase):
 
   def testToAndFromStringDocsEntry(self):
     self.assert_(isinstance(self.entry, gdata.docs.data.Resource))
-    self.assertEqual(self.entry.GetDocumentType(), 'spreadsheet')
+    self.assertEqual(self.entry.GetResourceType(), 'spreadsheet')
     self.assert_(isinstance(self.entry.last_viewed, gdata.docs.data.LastViewed))
     self.assertEqual(self.entry.last_viewed.text, '2009-03-05T07:48:21.493Z')
     self.assert_(
@@ -235,9 +216,130 @@ class DataClassSanityTest(unittest.TestCase):
         gdata.docs.data.RevisionFeed])
 
 
+class CategoryTest(unittest.TestCase):
+
+  def setUp(self):
+    self.entry = atom.core.parse(test_data.DOCUMENT_LIST_ENTRY_V3,
+                                 gdata.docs.data.Resource)
+
+  def testAddCategory(self):
+    entry = gdata.docs.data.Resource()
+    entry.AddCategory('test_scheme', 'test_term', 'test_label')
+    self.assertEqual(entry.GetFirstCategory('test_scheme').scheme,
+                     'test_scheme')
+    self.assertEqual(entry.GetFirstCategory('test_scheme').term, 'test_term')
+    self.assertEqual(entry.GetFirstCategory('test_scheme').label, 'test_label')
+
+  def testGetFirstCategory(self):
+    entry = gdata.docs.data.Resource()
+    cat1 = entry.AddCategory('test_scheme', 'test_term1', 'test_label1')
+    cat2 = entry.AddCategory('test_scheme', 'test_term2', 'test_label2')
+    self.assertEqual(entry.GetFirstCategory('test_scheme'), cat1)
+
+  def testGetCategories(self):
+    cat1 = self.entry.AddCategory('test_scheme', 'test_term1', 'test_label1')
+    cat2 = self.entry.AddCategory('test_scheme', 'test_term2', 'test_label2')
+    cats = list(self.entry.GetCategories('test_scheme'))
+    self.assertTrue(cat1 in cats)
+    self.assertTrue(cat2 in cats)
+
+  def testRemoveCategories(self):
+    self.entry.RemoveCategories(gdata.docs.data.LABELS_SCHEME)
+    self.assertEqual(self.entry.GetLabels(), set())
+
+  def testResourceType(self):
+    entry = gdata.docs.data.Resource('spreadsheet')
+    self.assertEqual(self.entry.GetResourceType(), 'spreadsheet')
+
+  def testGetResourceType(self):
+    self.assertEqual(self.entry.GetResourceType(), 'spreadsheet')
+
+  def testSetResourceType(self):
+    self.assertEqual(self.entry.GetResourceType(), 'spreadsheet')
+    self.entry.SetResourceType('drawing')
+    self.assertEqual(self.entry.GetResourceType(), 'drawing')
+
+  def testGetLabels(self):
+    self.assertEqual(self.entry.GetLabels(),
+                     set(['mine', 'private', 'restricted-download',
+                          'shared-with-domain', 'viewed', 'starred', 'hidden',
+                          'trashed']))
+
+  def testAddLabel(self):
+    entry = gdata.docs.data.Resource()
+    entry.AddLabel('banana')
+    self.assertTrue('banana' in entry.GetLabels())
+
+  def testRemoveLabel(self):
+    entry = gdata.docs.data.Resource()
+    entry.AddLabel('banana')
+    entry.AddLabel('orange')
+    self.assertTrue('banana' in entry.GetLabels())
+    self.assertTrue('orange' in entry.GetLabels())
+    entry.RemoveLabel('orange')
+    self.assertFalse('orange' in entry.GetLabels())
+
+  def testIsHidden(self):
+    self.assertTrue(self.entry.IsHidden())
+
+  def testIsNotHidden(self):
+    self.entry.remove_categories(gdata.docs.data.LABELS_SCHEME)
+    self.assertFalse(self.entry.IsHidden())
+
+  def testIsViewed(self):
+    self.assertTrue(self.entry.IsViewed())
+
+  def testIsNotViewed(self):
+    self.entry.remove_categories(gdata.docs.data.LABELS_SCHEME)
+    self.assertFalse(self.entry.IsViewed())
+
+  def testIsStarred(self):
+    self.assertTrue(self.entry.IsStarred())
+
+  def testIsNotStarred(self):
+    self.entry.remove_categories(gdata.docs.data.LABELS_SCHEME)
+    self.assertFalse(self.entry.IsStarred())
+
+  def testIsTrashed(self):
+    self.assertTrue(self.entry.IsTrashed())
+
+  def testIsNotTrashed(self):
+    self.entry.remove_categories(gdata.docs.data.LABELS_SCHEME)
+    self.assertFalse(self.entry.IsTrashed())
+
+  def testIsPrivate(self):
+    self.assertTrue(self.entry.IsPrivate())
+
+  def testIsNotPrivate(self):
+    self.entry.remove_categories(gdata.docs.data.LABELS_SCHEME)
+    self.assertFalse(self.entry.IsPrivate())
+
+  def testIsMine(self):
+    self.assertTrue(self.entry.IsMine())
+
+  def testIsNotMine(self):
+    self.entry.remove_categories(gdata.docs.data.LABELS_SCHEME)
+    self.assertFalse(self.entry.IsMine())
+
+  def testIsSharedWithDomain(self):
+    self.assertTrue(self.entry.IsSharedWithDomain())
+
+  def testIsNotSharedWithDomain(self):
+    self.entry.remove_categories(gdata.docs.data.LABELS_SCHEME)
+    self.assertFalse(self.entry.IsSharedWithDomain())
+
+  def testIsRestrictedDownload(self):
+    self.assertTrue(self.entry.IsRestrictedDownload())
+
+  def testIsNotRestrictedDownload(self):
+    self.entry.remove_categories(gdata.docs.data.LABELS_SCHEME)
+    self.assertFalse(self.entry.IsRestrictedDownload())
+
+
 def suite():
   return conf.build_suite(
-      [DataClassSanityTest, DocsHelperTest, DocsEntryTest, AclTest, AclFeed])
+      [DataClassSanityTest, CategoryTest, DocsHelperTest, DocsEntryTest,
+       AclTest, AclFeed])
 
 
 if __name__ == '__main__':

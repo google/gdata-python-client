@@ -1720,6 +1720,14 @@ href="http://docs.google.com/feeds/default/private/full/folder%3A12345" title="A
 <ns1:quotaBytesUsed>1000</ns1:quotaBytesUsed>
 <ns1:feedLink rel="http://schemas.google.com/acl/2007#accessControlList" href="https://docs.google.com/feeds/default/private/full/spreadsheet%3Asupercalifragilisticexpealidocious/acl" />
 <ns1:feedLink rel="http://schemas.google.com/docs/2007/revisions" href="https://docs.google.com/feeds/default/private/full/spreadsheet%3Asupercalifragilisticexpealidocious/revisions" />
+<ns0:category scheme="http://schemas.google.com/g/2005/labels" term="http://schemas.google.com/g/2005/labels#starred" label="starred"/>
+<ns0:category scheme="http://schemas.google.com/g/2005/labels" term="http://schemas.google.com/g/2005/labels#viewed" label="viewed"/>
+<ns0:category scheme="http://schemas.google.com/g/2005/labels" term="http://schemas.google.com/g/2005/labels#hidden" label="hidden"/>
+<ns0:category scheme="http://schemas.google.com/g/2005/labels" term="http://schemas.google.com/g/2005/labels#trashed" label="trashed"/>
+<ns0:category scheme="http://schemas.google.com/g/2005/labels" term="http://schemas.google.com/g/2005/labels#mine" label="mine"/>
+<ns0:category scheme="http://schemas.google.com/g/2005/labels" term="http://schemas.google.com/g/2005/labels#private" label="private"/>
+<ns0:category scheme="http://schemas.google.com/g/2005/labels" term="http://schemas.google.com/g/2005/labels#shared-with-domain" label="shared-with-domain"/>
+<ns0:category scheme="http://schemas.google.com/g/2005/labels" term="http://schemas.google.com/g/2005/labels#restricted-download" label="restricted-download"/>
 </ns0:entry>
 """
 

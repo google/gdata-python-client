@@ -67,7 +67,7 @@ class DocsClient(gdata.client.GDClient):
     return super(DocsClient, self).request(method=method, uri=uri, **kwargs)
 
   Request = request
-  
+
   def get_metadata(self, **kwargs):
     """Retrieves the metadata of a user account.
 
@@ -533,7 +533,7 @@ class DocsClient(gdata.client.GDClient):
       ValueError: If given entry is a collection.
     """
     self._check_entry_is_resource(entry)
-    if entry.get_document_type() != gdata.docs.data.COLLECTION_LABEL:
+    if entry.get_resource_type() != gdata.docs.data.COLLECTION_LABEL:
       raise ValueError('%s is not a collection' % str(entry))
 
   def _check_entry_is_not_collection(self, entry):
@@ -545,7 +545,7 @@ class DocsClient(gdata.client.GDClient):
       ValueError: If given entry is a collection.
     """
     self._check_entry_is_resource(entry)
-    if entry.get_document_type() == gdata.docs.data.COLLECTION_LABEL:
+    if entry.get_resource_type() == gdata.docs.data.COLLECTION_LABEL:
       raise ValueError(
           '%s is a collection, which is not valid in this method' % str(entry))
 

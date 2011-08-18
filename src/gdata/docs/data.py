@@ -26,12 +26,14 @@ import gdata.data
 
 
 DOCUMENTS_NS = 'http://schemas.google.com/docs/2007'
+LABELS_NS = 'http://schemas.google.com/g/2005/labels'
 DOCUMENTS_TEMPLATE = '{http://schemas.google.com/docs/2007}%s'
 ACL_FEEDLINK_REL = 'http://schemas.google.com/acl/2007#accessControlList'
 REVISION_FEEDLINK_REL = DOCUMENTS_NS + '/revisions'
 PARENT_LINK_REL = DOCUMENTS_NS + '#parent'
 PUBLISH_LINK_REL = DOCUMENTS_NS + '#publish'
 DATA_KIND_SCHEME = 'http://schemas.google.com/g/2005#kind'
+LABELS_SCHEME = LABELS_NS
 DOCUMENT_LABEL = 'document'
 SPREADSHEET_LABEL = 'spreadsheet'
 DRAWING_LABEL = 'drawing'
@@ -40,24 +42,14 @@ FILE_LABEL = 'file'
 PDF_LABEL = 'pdf'
 FORM_LABEL = 'form'
 COLLECTION_LABEL = 'folder'
-
-
-def make_kind_category(label):
-  """Builds the appropriate atom.data.Category for the label passed in.
-
-  Args:
-    label: str The value for the category entry.
-
-  Returns:
-    An atom.data.Category or None if label is None.
-  """
-  if label is None:
-    return None
-
-  return atom.data.Category(
-    scheme=DATA_KIND_SCHEME, term='%s#%s' % (DOCUMENTS_NS, label), label=label)
-
-MakeKindCategory = make_kind_category
+STARRED_LABEL = 'starred'
+VIEWED_LABEL = 'viewed'
+HIDDEN_LABEL = 'hidden'
+TRASHED_LABEL = 'trashed'
+MINE_LABEL = 'mine'
+PRIVATE_LABEL = 'private'
+SHAREDWITHDOMAIN_LABEL = 'shared-with-domain'
+RESTRICTEDDOWNLOAD_LABEL = 'restricted-download'
 
 
 class ResourceId(atom.core.XmlElement):
@@ -119,7 +111,249 @@ class SuggestedFilename(atom.core.XmlElement):
   _qname = DOCUMENTS_TEMPLATE % 'suggestedFilename'
 
 
-class Resource(gdata.data.GDEntry):
+class CategoryFinder(object):
+  """Mixin to provide category finding functionality.
+
+  Analogous to atom.data.LinkFinder, but a simpler API, specialized for
+  DocList categories.
+  """
+
+  def add_category(self, scheme, term, label):
+    """Add a category for a scheme, term and label.
+
+    Args:
+      scheme: The scheme for the category.
+      term: The term for the category.
+      label: The label for the category
+
+    Returns:
+      The newly created atom.data.Category.
+    """
+    category = atom.data.Category(scheme=scheme, term=term, label=label)
+    self.category.append(category)
+    return category
+
+  AddCategory = add_category
+
+  def get_categories(self, scheme):
+    """Fetch the category elements for a scheme.
+
+    Args:
+      scheme: The scheme to fetch the elements for.
+
+    Returns:
+      Generator of atom.data.Category elements.
+    """
+    for category in self.category:
+      if category.scheme == scheme:
+        yield category
+
+  GetCategories = get_categories
+
+  def remove_categories(self, scheme):
+    """Remove category elements for a scheme.
+
+    Args:
+      scheme: The scheme of category to remove.
+    """
+    for category in list(self.get_categories(scheme)):
+      self.category.remove(category)
+
+  RemoveCategories = remove_categories
+
+  def get_first_category(self, scheme):
+    """Fetch the first category element for a scheme.
+
+    Args:
+      scheme: The scheme of category to return.
+
+    Returns:
+      atom.data.Category if found or None.
+    """
+    try:
+      return self.get_categories(scheme).next()
+    except StopIteration, e:
+      # The entry doesn't have the category
+      return None
+
+  GetFirstCategory = get_first_category
+
+  def set_resource_type(self, label):
+    """Set the document type for an entry, by building the appropriate
+    atom.data.Category
+
+    Args:
+      label: str The value for the category entry. If None is passed the
+      category is removed and not set.
+
+    Returns:
+      An atom.data.Category or None if label is None.
+    """
+    self.remove_categories(DATA_KIND_SCHEME)
+    if label is not None:
+      return self.add_category(scheme=DATA_KIND_SCHEME,
+                               term='%s#%s' % (DOCUMENTS_NS, label),
+                               label=label)
+    else:
+      return None
+
+  SetResourceType = set_resource_type
+
+  def get_resource_type(self):
+    """Extracts the type of document this Resource is.
+
+    This method returns the type of document the Resource represents. Possible
+    values are document, presentation, drawing, spreadsheet, file, folder,
+    form, or pdf.
+
+    'folder' is a possible return value of this method because, for legacy
+    support, we have not yet renamed the folder keyword to collection in
+    the API itself.
+
+    Returns:
+      String representing the type of document.
+    """
+    category = self.get_first_category(DATA_KIND_SCHEME)
+    if category is not None:
+      return category.label
+    else:
+      return None
+
+  GetResourceType = get_resource_type
+
+  def get_labels(self):
+    """Extracts the labels for this Resource.
+
+    This method returns the labels as a set, for example: 'hidden', 'starred',
+    'viewed'.
+
+    Returns:
+      Set of string labels.
+    """
+    return set(category.label for category in
+               self.get_categories(LABELS_SCHEME))
+
+  GetLabels = get_labels
+
+  def has_label(self, label):
+    """Whether this Resource has a label.
+
+    Args:
+      label: The str label to test for
+
+    Returns:
+      Boolean value indicating presence of label.
+    """
+    return label in self.get_labels()
+
+  HasLabel = has_label
+
+  def add_label(self, label):
+    """Add a label, if it is not present.
+
+    Args:
+      label: The str label to set
+    """
+    if not self.has_label(self):
+      self.add_category(scheme=LABELS_SCHEME,
+                        term='%s#%s' % (LABELS_NS, label),
+                        label=label)
+  AddLabel = add_label
+
+  def remove_label(self, label):
+    """Remove a label, if it is present.
+
+    Args:
+      label: The str label to remove
+    """
+    for category in self.get_categories(LABELS_SCHEME):
+      if category.label == label:
+        self.category.remove(category)
+
+  RemoveLabel = remove_label
+
+  def is_starred(self):
+    """Whether this Resource is starred.
+
+    Returns:
+      Boolean value indicating that the resource is starred.
+    """
+    return self.has_label(STARRED_LABEL)
+
+  IsStarred = is_starred
+
+  def is_hidden(self):
+    """Whether this Resource is hidden.
+
+    Returns:
+      Boolean value indicating that the resource is hidden.
+    """
+    return self.has_label(HIDDEN_LABEL)
+
+  IsHidden = is_hidden
+
+  def is_viewed(self):
+    """Whether this Resource is viewed.
+
+    Returns:
+      Boolean value indicating that the resource is viewed.
+    """
+    return self.has_label(VIEWED_LABEL)
+
+  IsViewed = is_viewed
+
+  def is_trashed(self):
+    """Whether this resource is trashed.
+
+    Returns:
+      Boolean value indicating that the resource is trashed.
+    """
+    return self.has_label(TRASHED_LABEL)
+
+  IsTrashed = is_trashed
+
+  def is_mine(self):
+    """Whether this resource is marked as mine.
+
+    Returns:
+      Boolean value indicating that the resource is marked as mine.
+    """
+    return self.has_label(MINE_LABEL)
+
+  IsMine = is_mine
+
+  def is_private(self):
+    """Whether this resource is private.
+
+    Returns:
+      Boolean value indicating that the resource is private.
+    """
+    return self.has_label(PRIVATE_LABEL)
+
+  IsPrivate = is_private
+
+  def is_shared_with_domain(self):
+    """Whether this resource is shared with the domain.
+
+    Returns:
+      Boolean value indicating that the resource is shared with the domain.
+    """
+    return self.has_label(SHAREDWITHDOMAIN_LABEL)
+
+  IsSharedWithDomain = is_shared_with_domain
+
+  def is_restricted_download(self):
+    """Whether this resource is restricted download.
+
+    Returns:
+      Boolean value indicating whether the resource is restricted download.
+    """
+    return self.has_label(RESTRICTEDDOWNLOAD_LABEL)
+
+  IsRestrictedDownload = is_restricted_download
+
+
+class Resource(gdata.data.GDEntry, CategoryFinder):
   """DocList version of an Atom Entry."""
 
   last_viewed = LastViewed
@@ -135,36 +369,13 @@ class Resource(gdata.data.GDEntry):
   def __init__(self, type=None, title=None, **kwargs):
     super(Resource, self).__init__(**kwargs)
     if isinstance(type, basestring):
-      self.category.append(gdata.docs.data.make_kind_category(type))
+      self.set_resource_type(type)
 
     if title is not None:
       if isinstance(title, basestring):
         self.title = atom.data.Title(text=title)
       else:
         self.title = title
-
-  def get_document_type(self):
-    """Extracts the type of document this Resource is.
-
-    This method returns the type of document the Resource represents. Possible
-    values are document, presentation, drawing, spreadsheet, file, folder,
-    form, or pdf.
-
-    'folder' is a possible return value of this method because, for legacy
-    support, we have not yet renamed the folder keyword to collection in
-    the API itself.
-
-    Returns:
-      String representing the type of document.
-    """
-    if self.category:
-      for category in self.category:
-        if category.scheme == DATA_KIND_SCHEME:
-          return category.label
-    else:
-      return None
-
-  GetDocumentType = get_document_type
 
   def get_acl_feed_link(self):
     """Extracts the Resource's ACL feed <gd:feedLink>.
