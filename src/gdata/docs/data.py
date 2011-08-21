@@ -353,6 +353,37 @@ class CategoryFinder(object):
   IsRestrictedDownload = is_restricted_download
 
 
+class AclEntry(gdata.acl.data.AclEntry, gdata.data.BatchEntry):
+  """Resource ACL entry."""
+  @staticmethod
+  def get_instance(role=None, scope_type=None, scope_value=None, key=False):
+    entry = AclEntry()
+
+    if role is not None:
+      if isinstance(role, basestring):
+        role = gdata.acl.data.AclRole(value=role)
+
+      if key:
+        entry.with_key = gdata.acl.data.AclWithKey(key='', role=role)
+      else:
+        entry.role = role
+
+    if scope_type is not None:
+      if scope_value is not None:
+        entry.scope = gdata.acl.data.AclScope(type=scope_type,
+                                              value=scope_value)
+      else:
+        entry.scope = gdata.acl.data.AclScope(type=scope_type)
+    return entry
+
+  GetInstance = get_instance
+
+
+class AclFeed(gdata.acl.data.AclFeed):
+  """Resource ACL feed."""
+  entry = [AclEntry]
+
+
 class Resource(gdata.data.GDEntry, CategoryFinder):
   """DocList version of an Atom Entry."""
 
@@ -432,37 +463,6 @@ class Resource(gdata.data.GDEntry, CategoryFinder):
 class ResourceFeed(gdata.data.GDFeed):
   """Main feed containing a list of resources."""
   entry = [Resource]
-
-
-class AclEntry(gdata.acl.data.AclEntry, gdata.data.BatchEntry):
-  """Resource ACL entry."""
-  @staticmethod
-  def get_instance(role=None, scope_type=None, scope_value=None, key=False):
-    entry = AclEntry()
-
-    if role is not None:
-      if isinstance(role, basestring):
-        role = gdata.acl.data.AclRole(value=role)
-
-      if key:
-        entry.with_key = gdata.acl.data.AclWithKey(key='', role=role)
-      else:
-        entry.role = role
-
-    if scope_type is not None:
-      if scope_value is not None:
-        entry.scope = gdata.acl.data.AclScope(type=scope_type,
-                                              value=scope_value)
-      else:
-        entry.scope = gdata.acl.data.AclScope(type=scope_type)
-    return entry
-
-  GetInstance = get_instance
-
-
-class AclFeed(gdata.acl.data.AclFeed):
-  """Resource ACL feed."""
-  entry = [AclEntry]
 
 
 class Revision(gdata.data.GDEntry):
@@ -562,6 +562,16 @@ class Archive(gdata.data.GDEntry):
   conversions = [ArchiveConversion]
   notification_email = ArchiveNotify
   size = QuotaBytesUsed
+
+  @staticmethod
+  def from_resource_list(resources):
+    resource_ids = []
+    for resource in resources:
+      id = ArchiveResourceId(text=resource.resource_id.text)
+      resource_ids.append(id)
+    return Archive(archive_resource_ids=resource_ids)
+
+  FromResourceList = from_resource_list
 
 
 class Removed(atom.core.XmlElement):
