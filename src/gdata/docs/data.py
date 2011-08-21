@@ -365,6 +365,8 @@ class Resource(gdata.data.GDEntry, CategoryFinder):
   feed_link = [gdata.data.FeedLink]
   filename = Filename
   suggested_filename = SuggestedFilename
+  # Only populated if you request /feeds/default/private/expandAcl
+  acl_feed = AclFeed
 
   def __init__(self, type=None, title=None, **kwargs):
     super(Resource, self).__init__(**kwargs)
