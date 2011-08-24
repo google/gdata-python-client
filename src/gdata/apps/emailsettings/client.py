@@ -118,8 +118,12 @@ class EmailSettingsClient(gdata.client.GDClient):
       A string giving the URI for Email Settings API calls for this client's
       Google Apps domain.
     """
-    uri = EMAIL_SETTINGS_URI_TEMPLATE % (self.api_version, self.domain,
-                                         username, setting_id)
+    if '@' in username:
+      username, domain = username.split('@', 1)
+    else:
+      domain = self.domain
+    EMAIL_SETTINGS_URI_TEMPLATE % (self.api_version, domain,
+                                   username, setting_id)
     return uri
 
   MakeEmailSettingsUri = make_email_settings_uri
