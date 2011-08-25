@@ -250,7 +250,7 @@ class ContactsClient(gdata.client.GDClient):
     photo.
 
     Args:
-      media: filename, file-like-object, or a gdata.MediaSource object to send.
+      media: filename, file-like-object, or a gdata.data.MediaSource object to send.
       contact_entry_or_url: ContactEntry or str If it is a ContactEntry, this
                             method will search for an edit photo link URL and
                             perform a PUT to the URL.
@@ -273,12 +273,12 @@ class ContactsClient(gdata.client.GDClient):
           **{'if-match': photo_link.etag})
     else:
       uri = contact_entry_or_url
-    if isinstance(media, gdata.MediaSource):
+    if isinstance(media, gdata.data.MediaSource):
       payload = media
     # If the media object is a file-like object, then use it as the file
     # handle in the in the MediaSource.
     elif hasattr(media, 'read'):
-      payload = gdata.MediaSource(file_handle=media,
+      payload = gdata.data.MediaSource(file_handle=media,
           content_type=content_type, content_length=content_length)
     # Assume that the media object is a file name.
     else:
