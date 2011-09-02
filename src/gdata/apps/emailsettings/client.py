@@ -122,7 +122,7 @@ class EmailSettingsClient(gdata.client.GDClient):
       username, domain = username.split('@', 1)
     else:
       domain = self.domain
-    EMAIL_SETTINGS_URI_TEMPLATE % (self.api_version, domain,
+    uri = EMAIL_SETTINGS_URI_TEMPLATE % (self.api_version, domain,
                                    username, setting_id)
     return uri
 
