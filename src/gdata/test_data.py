@@ -1740,6 +1740,7 @@ DOCUMENT_LIST_ACL_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
   <gAcl:scope type='user' value='user@gmail.com'/>
 </entry>"""
 
+
 DOCUMENT_LIST_ACL_WITHKEY_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
 <entry xmlns="http://www.w3.org/2005/Atom"
        xmlns:gAcl='http://schemas.google.com/acl/2007'>
@@ -1748,6 +1749,21 @@ DOCUMENT_LIST_ACL_WITHKEY_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
   <gAcl:withKey key='somekey'><gAcl:role value='writer' /></gAcl:withKey>
   <gAcl:scope type='domain' value='example.com' />
 </entry>"""
+
+
+DOCUMENT_LIST_ACL_ADDITIONAL_ROLE_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>
+<entry xmlns="http://www.w3.org/2005/Atom"
+       xmlns:gAcl='http://schemas.google.com/acl/2007'>
+  <category scheme='http://schemas.google.com/g/2005#kind'
+            term='http://schemas.google.com/acl/2007#accessRule'/>
+  <gAcl:additionalRole value='commenter' />
+  <gAcl:withKey key='somekey'>
+    <gAcl:role value='writer' />
+    <gAcl:additionalRole value='commenter' />
+  </gAcl:withKey>
+  <gAcl:scope type='domain' value='example.com' />
+</entry>"""
+
 
 DOCUMENT_LIST_ACL_FEED = """<?xml version='1.0' encoding='UTF-8'?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/"
@@ -1821,6 +1837,20 @@ DOCUMENT_LIST_REVISION_FEED = """<?xml version='1.0' encoding='UTF-8'?>
   <docs:publishOutsideDomain value="false"/>
 </entry>
 </feed>
+"""
+
+DOCUMENT_LIST_METADATA = """
+<entry xmlns="http://www.w3.org/2005/Atom"
+    xmlns:docs="http://schemas.google.com/docs/2007"
+    xmlns:gd="http://schemas.google.com/g/2005"
+    xmlns:gAcl="http://schemas.google.com/acl/2007"
+    gd:etag="W/&quot;AkYNRnc_eSt7ImA9WxBUFks.&quot;">
+  <docs:additionalRoleInfo kind='document'>
+   <docs:additionalRoleSet primaryRole='reader'>
+     <gAcl:additionalRole value='commenter' />
+   </docs:additionalRoleSet>
+  </docs:additionalRoleInfo>
+</entry>
 """
 
 BATCH_ENTRY = """<?xml version='1.0' encoding='UTF-8'?>

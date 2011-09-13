@@ -74,6 +74,9 @@ class AclTest(unittest.TestCase):
                                      gdata.docs.data.AclEntry)
     self.acl_entry_withkey = atom.core.parse(
       test_data.DOCUMENT_LIST_ACL_WITHKEY_ENTRY, gdata.docs.data.AclEntry)
+    self.acl_entry_additional_role = atom.core.parse(
+      test_data.DOCUMENT_LIST_ACL_ADDITIONAL_ROLE_ENTRY,
+      gdata.docs.data.AclEntry)
 
   def testToAndFromString(self):
     self.assert_(isinstance(self.acl_entry, gdata.docs.data.AclEntry))
@@ -139,6 +142,14 @@ class AclTest(unittest.TestCase):
     self.assertEqual(acl_entry.scope.value, 'user@gmail.com')
     self.assertEqual(acl_entry.scope.type, 'user')
     self.assertEqual(acl_entry.role.value, 'writer')
+
+  def testAdditionalRole(self):
+    self.assertEqual(
+        self.acl_entry_additional_role.additional_role.value,
+        'commenter')
+    self.assertEqual(
+        self.acl_entry_additional_role.with_key.additional_role.value,
+        'commenter')
 
 
 class AclFeedTest(unittest.TestCase):
@@ -336,10 +347,30 @@ class CategoryTest(unittest.TestCase):
     self.assertFalse(self.entry.IsRestrictedDownload())
 
 
+class MetadataTest(unittest.TestCase):
+
+  def setUp(self):
+    self.entry = atom.core.parse(test_data.DOCUMENT_LIST_METADATA,
+                                 gdata.docs.data.Metadata)
+
+  def testAdditionalRoleInfo(self):
+    self.assertEqual(self.entry.additional_role_info[0].kind, 'document')
+
+  def testAdditionalRoleSet(self):
+    self.assertEqual(
+        self.entry.additional_role_info[0].additional_role_set[0].primaryRole,
+        'reader')
+
+  def testAdditionalRole(self):
+    self.assertEqual(
+        self.entry.additional_role_info[0].additional_role_set[0].\
+            additional_role[0].value, 'commenter')
+
+
 def suite():
   return conf.build_suite(
       [DataClassSanityTest, CategoryTest, DocsHelperTest, DocsEntryTest,
-       AclTest, AclFeed])
+       AclTest, AclFeed, MetadataTest])
 
 
 if __name__ == '__main__':

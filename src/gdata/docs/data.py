@@ -631,6 +631,20 @@ class MaxUploadSize(atom.core.XmlElement):
   kind = 'kind'
 
 
+class AdditionalRoleSet(atom.core.XmlElement):
+  """The DocList docs:additionalRoleSet element."""
+  _qname = DOCUMENTS_TEMPLATE % 'additionalRoleSet'
+  primaryRole = 'primaryRole'
+  additional_role = [gdata.acl.data.AclAdditionalRole]
+
+
+class AdditionalRoleInfo(atom.core.XmlElement):
+  """The DocList docs:additionalRoleInfo element."""
+  _qname = DOCUMENTS_TEMPLATE % 'additionalRoleInfo'
+  kind = 'kind'
+  additional_role_set = [AdditionalRoleSet]
+
+
 class Metadata(gdata.data.GDEntry):
   """Metadata entry for a user."""
   quota_bytes_total = QuotaBytesTotal
@@ -640,3 +654,4 @@ class Metadata(gdata.data.GDEntry):
   export_formats = [ExportFormat]
   features = [Feature]
   max_upload_sizes = [MaxUploadSize]
+  additional_role_info = [AdditionalRoleInfo]
