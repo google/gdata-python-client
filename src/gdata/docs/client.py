@@ -330,7 +330,6 @@ class DocsClient(gdata.client.GDClient):
       gdata.client.RequestError if the download URL is malformed or the server's
       response was not successful.
     """
-    self._check_entry_is_resource(entry)
     self._check_entry_is_not_collection(entry)
     uri = self._get_download_uri(entry.content.src, extra_params)
     self._download_file(uri, file_path, **kwargs)
@@ -354,7 +353,6 @@ class DocsClient(gdata.client.GDClient):
       gdata.client.RequestError if the download URL is malformed or the server's
       response was not successful.
     """
-    self._check_entry_is_resource(entry)
     self._check_entry_is_not_collection(entry)
     uri = self._get_download_uri(entry.content.src, extra_params)
     return self._get_content(uri, **kwargs)
@@ -362,7 +360,7 @@ class DocsClient(gdata.client.GDClient):
   DownloadResourceToMemory = download_resource_to_memory
 
   def _get_download_uri(self, base_uri, extra_params=None):
-    uri = base_uri
+    uri = base_uri.replace('&amp;', '&')
     if extra_params is not None:
       if 'exportFormat' in extra_params and '/Export?' not in uri:
         raise gdata.client.Error, ('This entry type cannot be exported '
@@ -544,7 +542,10 @@ class DocsClient(gdata.client.GDClient):
     Raises:
       ValueError: If given entry is a collection.
     """
-    self._check_entry_is_resource(entry)
+    try:
+      self._check_entry_is_resource(entry)
+    except ValueError:
+      return
     if entry.get_resource_type() == gdata.docs.data.COLLECTION_LABEL:
       raise ValueError(
           '%s is a collection, which is not valid in this method' % str(entry))
@@ -897,6 +898,11 @@ class DocsClient(gdata.client.GDClient):
     return super(DocsClient, self).update(entry, **kwargs)
 
   UpdateArchive = update_archive
+
+  download_archive = DownloadResource
+  DownloadArchive = download_archive
+  download_archive_to_memory = DownloadResourceToMemory
+  DownloadArchiveToMemory = download_archive_to_memory
 
   def delete_archive(self, entry, **kwargs):
     """Aborts the given Archive operation, or deletes the Archive.
