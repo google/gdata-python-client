@@ -198,7 +198,7 @@ class ResourcesTest(DocsTestCase):
 
     # Start off in 0 collections
     self.assertEqual(len(self.resource.InCollections()), 0)
-    
+
     # Move resource into collection
     entry = self.client.MoveResource(self.resource, collection)
     self.assertEqual(len(entry.InCollections()), 1)
@@ -292,7 +292,7 @@ class AclTest(DocsTestCase):
   def testAddAclEntry(self):
     acl_entry_to_add = gdata.docs.data.AclEntry.GetInstance(
         role='writer', scope_type='default', key=True)
-    
+
     new_acl_entry = self.client.AddAclEntry(self.resource, acl_entry_to_add)
     self.assertEqual(acl_entry_to_add.scope.type, new_acl_entry.scope.type)
     self.assertEqual(new_acl_entry.scope.value, None)
@@ -310,7 +310,7 @@ class AclTest(DocsTestCase):
         key=True)
     other_acl_entry = gdata.docs.data.AclEntry.GetInstance(
         role='writer', scope_type='user', scope_value='jeff@example.com')
-    
+
     new_acl_entry = self.client.AddAclEntry(self.resource, acl_entry_to_add)
     new_acl_entry.with_key = None
     new_acl_entry.scope = other_acl_entry.scope
