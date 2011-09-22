@@ -131,8 +131,8 @@ class DocsTestCase(unittest.TestCase):
       raise RuntimeError('Live tests require --runlive true')
 
     self.client = gdata.docs.client.DocsClient()
-    if conf.options.get_value('ssl') == 'true':
-      self.client.ssl = True
+    if conf.options.get_value('ssl') == 'false':
+      self.client.ssl = False
     conf.configure_client(self.client, 'DocsTest', self.client.auth_service)
     conf.configure_cache(self.client, str(self.__class__))
     if conf.options.get_value('clean') == 'true':
