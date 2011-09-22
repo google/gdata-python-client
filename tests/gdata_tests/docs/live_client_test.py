@@ -374,7 +374,7 @@ class RevisionsTest(DocsTestCase):
       new_entry = self.client.GetRevisionBySelfLink(entry.GetSelfLink().href)
       self.assertEqual(entry.GetSelfLink().href, new_entry.GetSelfLink().href)
       self.assertEqual(entry.title.text, new_entry.title.text)
-  
+
   def testMultipleRevisionsAndUpdateResource(self):
     if self.resource_type not in ['collection', 'presentation']:
       revisions = self.client.GetRevisions(self.resource)
@@ -545,7 +545,7 @@ def suite():
         suite.addTest(test)
   suite.addTests(unittest.TestLoader().loadTestsFromTestCase(MetadataTest))
   return suite
-      
+
 
 if __name__ == '__main__':
   unittest.TextTestRunner().run(suite())
