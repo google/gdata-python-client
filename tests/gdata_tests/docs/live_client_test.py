@@ -491,6 +491,15 @@ class ChangesTest(DocsTestCase):
     self.assert_(len(changes.entry) <= 5)
     self.assert_(isinstance(changes.entry[0], gdata.docs.data.Change))
 
+  def testDeleteResourceCreatesNewChange(self):
+    """Ensure that deleting a resource causes a new change entry."""
+    self._update()
+    changes = self.client.GetChanges(max_results=1)
+    latest = changes.entry[0].changestamp.value
+    self._delete(self.resource)
+    changes = self.client.GetChanges(max_results=1)
+    self.assert_(latest < changes.entry[0].changestamp.value)
+
 
 class MetadataTest(DocsTestCase):
   def setUp(self):
