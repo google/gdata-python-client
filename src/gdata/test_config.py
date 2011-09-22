@@ -146,6 +146,11 @@ options.register(
                  ' modify the users data, be sure to use a test account.'),
     default='true')
 options.register(
+    'host',
+    'Run the live tests against the given host',
+    description='Examples: docs.google.com, spreadsheets.google.com, etc.',
+    default='')
+options.register(
     'ssl',
     'Run the live tests over SSL (enter true or false)',
     description='If set to true, all tests will be performed over HTTPS (SSL)',
@@ -286,6 +291,8 @@ def configure_client(client, case_name, service_name, use_apps_auth=False):
   if client.alt_auth_service is not None:
     client.alt_auth_token = gdata.gauth.token_from_blob(
         options.values[client.alt_auth_service])
+  if options.get_value('host'):
+    client.host = options.get_value('host')
 
 
 def configure_cache(client, test_name):
