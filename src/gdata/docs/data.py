@@ -41,6 +41,7 @@ PRESENTATION_LABEL = 'presentation'
 FILE_LABEL = 'file'
 PDF_LABEL = 'pdf'
 FORM_LABEL = 'form'
+ITEM_LABEL = 'item'
 COLLECTION_LABEL = 'folder'
 STARRED_LABEL = 'starred'
 VIEWED_LABEL = 'viewed'
@@ -204,7 +205,7 @@ class CategoryFinder(object):
 
     This method returns the type of document the Resource represents. Possible
     values are document, presentation, drawing, spreadsheet, file, folder,
-    form, or pdf.
+    form, item, or pdf.
 
     'folder' is a possible return value of this method because, for legacy
     support, we have not yet renamed the folder keyword to collection in
