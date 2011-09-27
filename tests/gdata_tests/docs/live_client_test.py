@@ -91,7 +91,10 @@ RESOURCES = {
 
 class DocsTestCase(unittest.TestCase):
   def shortDescription(self):
-    return '%s for %s' % (self.__class__.__name__, self.resource_type)
+    if hasattr(self, 'resource_type'):
+      return '%s for %s' % (self.__class__.__name__, self.resource_type)
+    else:
+      return self.__class__.__name__
 
   def _delete(self, resource):
     try:
@@ -497,6 +500,7 @@ class ChangesTest(DocsTestCase):
     changes = self.client.GetChanges(max_results=1)
     latest = changes.entry[0].changestamp.value
     self._delete(self.resource)
+    time.sleep(10)
     changes = self.client.GetChanges(max_results=1)
     self.assert_(latest < changes.entry[0].changestamp.value)
 
@@ -532,7 +536,7 @@ class MetadataTest(DocsTestCase):
 def suite():
   suite = unittest.TestSuite()
   for key, value in RESOURCES.iteritems():
-    for case in [ResourcesTest, AclTest, RevisionsTest, ChangesTest]:
+    for case in [ChangesTest]: #[ResourcesTest, AclTest, RevisionsTest, ChangesTest]:
       tests = unittest.TestLoader().loadTestsFromTestCase(case)
       for test in tests:
         test.resource_type = key

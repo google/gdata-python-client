@@ -52,13 +52,13 @@ YOUTUBE_QUERY_VALID_RACY_PARAMETERS = ('include', 'exclude')
 YOUTUBE_QUERY_VALID_FORMAT_PARAMETERS = ('1', '5', '6')
 YOUTUBE_STANDARDFEEDS = ('most_recent', 'recently_featured',
                          'top_rated', 'most_viewed','watch_on_mobile')
-YOUTUBE_UPLOAD_URI = 'http://uploads.gdata.youtube.com/feeds/api/users'
-YOUTUBE_UPLOAD_TOKEN_URI = 'http://gdata.youtube.com/action/GetUploadToken'
-YOUTUBE_VIDEO_URI = 'http://gdata.youtube.com/feeds/api/videos'
-YOUTUBE_USER_FEED_URI = 'http://gdata.youtube.com/feeds/api/users'
-YOUTUBE_PLAYLIST_FEED_URI = 'http://gdata.youtube.com/feeds/api/playlists'
+YOUTUBE_UPLOAD_URI = 'https://uploads.gdata.youtube.com/feeds/api/users'
+YOUTUBE_UPLOAD_TOKEN_URI = 'https://gdata.youtube.com/action/GetUploadToken'
+YOUTUBE_VIDEO_URI = 'https://gdata.youtube.com/feeds/api/videos'
+YOUTUBE_USER_FEED_URI = 'https://gdata.youtube.com/feeds/api/users'
+YOUTUBE_PLAYLIST_FEED_URI = 'https://gdata.youtube.com/feeds/api/playlists'
 
-YOUTUBE_STANDARD_FEEDS = 'http://gdata.youtube.com/feeds/api/standardfeeds'
+YOUTUBE_STANDARD_FEEDS = 'https://gdata.youtube.com/feeds/api/standardfeeds'
 YOUTUBE_STANDARD_TOP_RATED_URI = '%s/%s' % (YOUTUBE_STANDARD_FEEDS, 'top_rated')
 YOUTUBE_STANDARD_MOST_VIEWED_URI = '%s/%s' % (YOUTUBE_STANDARD_FEEDS,
     'most_viewed')
@@ -135,6 +135,8 @@ class YouTubeService(gdata.service.GDataService):
     developer_key: An optional string value. Register your application at
         http://code.google.com/apis/youtube/dashboard to obtain a (free) key.
   """
+
+  ssl = True
 
   def __init__(self, email=None, password=None, source=None,
                server=YOUTUBE_SERVER, additional_headers=None, client_id=None,

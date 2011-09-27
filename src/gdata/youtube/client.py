@@ -86,7 +86,8 @@ class YouTubeClient(gdata.client.GDClient):
   """
   api_version = '2'
   auth_service = YOUTUBE_SERVICE
-  auth_scopes = ['http://%s' % YOUTUBE_SERVER, 'https://%s' % YOUTUBE_SERVER]
+  auth_scopes = ['https://%s' % YOUTUBE_SERVER]
+  ssl = True
 
   def get_videos(self, uri=YOUTUBE_VIDEO_FEED_URI, auth_token=None,
                          desired_class=gdata.youtube.data.VideoFeed,
