@@ -25,25 +25,21 @@ import gdata.docs.service
 
 
 class OAuthSample(object):
-  """An OAuthSample object demonstrates the three-legged OAuth process."""
+  """Sample class demonstrating the three-legged OAuth process."""
 
-  def __init__(self, consumer_key, consuer_secret):
+  def __init__(self, consumer_key, consumer_secret):
     """Constructor for the OAuthSample object.
     
-    Takes a consumer key and consumer secret, authenticates using OAuth
-    mechanism and lists the document titles using Document List Data API.
-    Uses HMAC-SHA1 signature method.
+    Takes a consumer key and consumer secret, store them in class variables,
+    creates a DocsService client to be used to make calls to
+    the Documents List Data API.
     
     Args:
       consumer_key: string Domain identifying third_party web application.
       consumer_secret: string Secret generated during registration.
-    
-    Returns:
-      An OAuthSample object used to run the sample demonstrating the
-      way to use OAuth authentication mode.
     """
     self.consumer_key = consumer_key
-    self.consumer_secret = consuer_secret
+    self.consumer_secret = consumer_secret
     self.gd_client = gdata.docs.service.DocsService()
 
   def _PrintFeed(self, feed):
@@ -54,10 +50,10 @@ class OAuthSample(object):
     """
     if not feed.entry:
       print 'No entries in feed.\n'
-    i = 1
-    for entry in feed.entry:
+    
+    docs_list = list(enumerate(feed.entry, start = 1))
+    for i, entry in docs_list:
       print '%d. %s\n' % (i, entry.title.text.encode('UTF-8'))
-      i += 1
 
   def _ListAllDocuments(self):
     """Retrieves a list of all of a user's documents and displays them."""
@@ -66,7 +62,7 @@ class OAuthSample(object):
   
   def Run(self):
     """Demonstrates usage of OAuth authentication mode and retrieves a list of
-    documents using Document List Data API."""
+    documents using the Document List Data API."""
     print '\nSTEP 1: Set OAuth input parameters.'
     self.gd_client.SetOAuthInputParameters(
         gdata.auth.OAuthSignatureMethod.HMAC_SHA1,
@@ -103,7 +99,7 @@ def main():
     opts, args = getopt.getopt(sys.argv[1:], '', ['consumer_key=',
                                                   'consumer_secret='])
   except getopt.error, msg:
-    print ('python oauth_example.py --consumer_key [oauth_consumer_key] '
+    print ('python oauth_example.py --consumer_key [consumer_key] '
            '--consumer_secret [consumer_secret] ')
     sys.exit(2)
 
