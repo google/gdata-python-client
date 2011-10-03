@@ -480,9 +480,9 @@ class DocsClient(gdata.client.GDClient):
 
     # Remove the item from any collections it is already in.
     if not keep_in_collections:
-      for collection in entry.InCollections():
+      for current_collection in entry.InCollections():
         uri = '%s/contents/%s' % (
-            collection.href,
+            current_collection.href,
             urllib.quote(entry.resource_id.text))
         self.delete(uri, force=True)
 
