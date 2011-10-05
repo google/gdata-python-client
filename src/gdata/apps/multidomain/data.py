@@ -337,7 +337,7 @@ class UserEntry(MultidomainProvisioningEntry):
     if hash_function:
       self.hash_function = hash_function
     if change_password is not None:
-      self.change_password = str(change_password)
+      self.change_password_at_next_login = str(change_password)
     if agreed_to_terms is not None:
       self.agreed_to_terms = str(agreed_to_terms)
     if suspended is not None:
