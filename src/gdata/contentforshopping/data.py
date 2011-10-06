@@ -18,7 +18,7 @@
 """GData definitions for Content API for Shopping"""
 
 
-__author__ = 'afshar (Ali Afshar)'
+__author__ = 'afshar (Ali Afshar), dhermes (Daniel Hermes)'
 
 
 import atom.core
@@ -31,6 +31,7 @@ SC_NAMESPACE_TEMPLATE = ('{http://schemas.google.com/'
 SCP_NAMESPACE_TEMPLATE = ('{http://schemas.google.com/'
                          'structuredcontent/2009/products}%s')
 
+# Content API for Shopping, general (sc) attributes
 
 class ProductId(atom.core.XmlElement):
   """sc:id element
@@ -40,6 +41,60 @@ class ProductId(atom.core.XmlElement):
   """
   _qname = SC_NAMESPACE_TEMPLATE % 'id'
 
+
+class ImageLink(atom.core.XmlElement):
+  """sc:image_link element
+
+  This is the URL of an associated image for a product. Please use full size
+  images (400x400 pixels or larger), not thumbnails.
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'image_link'
+
+
+class AdditionalImageLink(atom.core.XmlElement):
+  """sc:additional_image_link element
+
+  The URLs of any additional images for the product. This tag may be repeated.
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'additional_image_link'
+
+
+class ContentLanguage(atom.core.XmlElement):
+  """
+  sc:content_language element
+
+  Language used in the item content for the product
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'content_language'
+
+
+class TargetCountry(atom.core.XmlElement):
+  """
+  sc:target_country element
+
+  The target country of the product
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'target_country'
+
+
+class ExpirationDate(atom.core.XmlElement):
+  """sc:expiration_date
+
+  This is the date when the product listing will expire. If omitted, this will
+  default to 30 days after the product was created.
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'expiration_date'
+
+
+class Adult(atom.core.XmlElement):
+  """sc:adult element
+
+  Indicates whether the content is targeted towards adults, with possible
+  values of "true" or "false". Defaults to "false".
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'adult'
+
+# Destination Attributes (to be used with app:control element)
 
 class RequiredDestination(atom.core.XmlElement):
   """sc:required_destination element
@@ -70,6 +125,62 @@ class ExcludedDestination(atom.core.XmlElement):
   _qname = SC_NAMESPACE_TEMPLATE % 'excluded_destination'
   dest = 'dest'
 
+# Warning Attributes (to be used with app:control element)
+
+class Code(atom.core.XmlElement):
+  """sc:code element
+
+  The warning code. Currently validation/missing_recommended is the
+  only code used.
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'code'
+
+
+class Domain(atom.core.XmlElement):
+  """sc:domain element
+
+  The scope of the warning. A comma-separated list of destinations,
+  for example: ProductSearch.
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'domain'
+
+
+class Location(atom.core.XmlElement):
+  """sc:location element
+
+  The name of the product element that has raised the warning. This may be
+  any valid product element.
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'location'
+
+
+class Message(atom.core.XmlElement):
+  """sc:message element
+
+  A plain text description of the warning.
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'message'
+
+
+class WarningElement(atom.core.XmlElement):
+  """sc:warning element
+
+  Container element for an individual warning.
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'warning'
+  code = Code
+  domain = Domain
+  location = Location
+  message = Message
+
+
+class Warnings(atom.core.XmlElement):
+  """sc:warnings element
+
+  Container element for the list of warnings.
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'warnings'
+  warnings = [WarningElement]
 
 class ProductControl(atom.data.Control):
   """
@@ -79,52 +190,9 @@ class ProductControl(atom.data.Control):
   """
   required_destination = RequiredDestination
   excluded_destination = ExcludedDestination
+  warnings = Warnings
 
-
-class ContentLanguage(atom.core.XmlElement):
-  """
-  sc:content_language element
-
-  Language used in the item content for the product
-  """
-  _qname = SC_NAMESPACE_TEMPLATE % 'content_language'
-
-
-class TargetCountry(atom.core.XmlElement):
-  """
-  sc:target_country element
-
-  The target country of the product
-  """
-  _qname = SC_NAMESPACE_TEMPLATE % 'target_country'
-
-
-class ImageLink(atom.core.XmlElement):
-  """sc:image_link element
-
-  This is the URL of an associated image for a product. Please use full size
-  images (400x400 pixels or larger), not thumbnails.
-  """
-  _qname = SC_NAMESPACE_TEMPLATE % 'image_link'
-
-
-class ExpirationDate(atom.core.XmlElement):
-  """sc:expiration_date
-
-  This is the date when the product listing will expire. If omitted, this will
-  default to 30 days after the product was created.
-  """
-  _qname = SC_NAMESPACE_TEMPLATE % 'expiration_date'
-
-
-class Adult(atom.core.XmlElement):
-  """sc:adult element
-
-  Indicates whether the content is targeted towards adults, with possible
-  values of "true" or "false". Defaults to "false".
-  """
-  _qname = SC_NAMESPACE_TEMPLATE % 'adult'
-
+# Content API for Shopping, product (scp) attributes
 
 class Author(atom.core.XmlElement):
   """
@@ -140,7 +208,8 @@ class Availability(atom.core.XmlElement):
   scp:availability element
 
   The retailer's suggested label for product availability. Supported values
-  include: 'in stock', 'out of stock', 'limited availability'.
+  include: 'in stock', 'out of stock', 'limited availability',
+           'available for order', and 'preorder'.
   """
   _qname = SCP_NAMESPACE_TEMPLATE % 'availability'
 
@@ -152,6 +221,15 @@ class Brand(atom.core.XmlElement):
   The brand of the product
   """
   _qname = SCP_NAMESPACE_TEMPLATE % 'brand'
+
+
+class Channel(atom.core.XmlElement):
+  """
+  scp:channel element
+
+  The channel for the product. Supported values are: 'online', 'local'
+  """
+  _qname = SCP_NAMESPACE_TEMPLATE % 'channel'
 
 
 class Color(atom.core.XmlElement):
@@ -197,12 +275,35 @@ class FeaturedProduct(atom.core.XmlElement):
   _qname = SCP_NAMESPACE_TEMPLATE % 'featured_product'
 
 
+class Gender(atom.core.XmlElement):
+  """scp:gender element
+
+  The gender for the item. Supported values are: 'unisex', 'female', 'male'
+
+  Note: This tag is required if the google product type is part of
+        Apparel & Accessories.
+  """
+  _qname = SCP_NAMESPACE_TEMPLATE % 'gender'
+
+
 class Genre(atom.core.XmlElement):
   """scp:genre element
 
   Describes the genre of a product, eg "comedy". Strongly recommended for media.
   """
   _qname = SCP_NAMESPACE_TEMPLATE % 'genre'
+
+
+class GoogleProductCategory(atom.core.XmlElement):
+  """scp:google_product_category element
+
+  The product's google category. The value must be one of the categories listed
+  in the Product type taxonomy, which can be found at
+  http://www.google.com/support/merchants/bin/answer.py?answer=160081.
+
+  Note that & and > characters must be encoded as &amp; and &gt;
+  """
+  _qname = SCP_NAMESPACE_TEMPLATE % 'google_product_category'
 
 
 class Gtin(atom.core.XmlElement):
@@ -213,12 +314,35 @@ class Gtin(atom.core.XmlElement):
   _qname = SCP_NAMESPACE_TEMPLATE % 'gtin'
 
 
+class ItemGroupID(atom.core.XmlElement):
+  """scp:item_group_id element
+
+  The identifier for products with variants. This id is used to link items which
+  have different values for the fields:
+
+      'color', 'material', 'pattern', 'size'
+
+  but are the same item, for example a shirt with different sizes.
+
+  Note: This tag is required for all product variants.
+  """
+  _qname = SCP_NAMESPACE_TEMPLATE % 'item_group_id'
+
+
 class Manufacturer(atom.core.XmlElement):
   """scp:manufacturer element
 
   Manufacturer of the product.
   """
   _qname = SCP_NAMESPACE_TEMPLATE % 'manufacturer'
+
+
+class Material(atom.core.XmlElement):
+  """scp:material element
+
+  The material the product is made of.
+  """
+  _qname = SCP_NAMESPACE_TEMPLATE % 'material'
 
 
 class Mpn(atom.core.XmlElement):
@@ -228,6 +352,14 @@ class Mpn(atom.core.XmlElement):
   the product.
   """
   _qname = SCP_NAMESPACE_TEMPLATE % 'mpn'
+
+
+class Pattern(atom.core.XmlElement):
+  """scp:pattern element
+
+  The pattern of the product. (e.g. polka dots)
+  """
+  _qname = SCP_NAMESPACE_TEMPLATE % 'pattern'
 
 
 class Price(atom.core.XmlElement):
@@ -262,17 +394,6 @@ class Quantity(atom.core.XmlElement):
   _qname = SCP_NAMESPACE_TEMPLATE % 'quantity'
 
 
-class ShippingCountry(atom.core.XmlElement):
-  """scp:shipping_country element
-
-  The two-letter ISO 3166 country code for the country to which an item will
-  ship.
-
-  This element should be placed inside the scp:shipping element.
-  """
-  _qname = SCP_NAMESPACE_TEMPLATE % 'shipping_country'
-
-
 class ShippingPrice(atom.core.XmlElement):
   """scp:shipping_price element
 
@@ -283,6 +404,17 @@ class ShippingPrice(atom.core.XmlElement):
   """
   _qname = SCP_NAMESPACE_TEMPLATE % 'shipping_price'
   unit = 'unit'
+
+
+class ShippingCountry(atom.core.XmlElement):
+  """scp:shipping_country element
+
+  The two-letter ISO 3166 country code for the country to which an item will
+  ship.
+
+  This element should be placed inside the scp:shipping element.
+  """
+  _qname = SCP_NAMESPACE_TEMPLATE % 'shipping_country'
 
 
 class ShippingRegion(atom.core.XmlElement):
@@ -415,8 +547,12 @@ class ProductEntry(gdata.data.BatchEntry):
   scp: - Content API for Shopping, product attributes
 
   Only the sc and scp namespace elements are defined here, but additional useful
-  elements are defined in superclasses, and are documented here because they are
-  part of the required Content for Shopping API.
+  elements are defined in superclasses.
+
+  The following attributes are encoded as XML elements in the Atomn (atom:)
+  namespace: title, link, entry, id, category, content, author, created
+  updated. Among these, the title, content and link tags are part of the
+  required Content for Shopping API so we document them here.
 
   .. attribute:: title
 
@@ -426,6 +562,34 @@ class ProductEntry(gdata.data.BatchEntry):
 
       entry = ProductEntry()
       entry.title = atom.data.Title(u'32GB MP3 Player')
+
+  .. attribute:: content
+
+    The description of the item.
+
+    This should be a :class:`atom.data.Content` element, for example::
+
+      entry = ProductEntry()
+      entry.content = atom.data.Content('My item description')
+
+  .. attribute:: link
+
+    A link to a page where the item can be purchased.
+
+    This should be a :class:`atom.data.Link` element, for example::
+
+      entry = ProductEntry()
+      entry.title = atom.data.Link(rel='alternate', type='text/html',
+                                   href='http://www.somehost.com/123456jsh9')
+
+  .. attribute:: additional_image_link
+
+    A list of additional links to images of the product. Each link should be an
+    :class:`AdditionalImageLink` element, for example::
+
+      entry = ProductEntry()
+      entry.additional_image_link.append(
+          AdditionalImageLink('http://myshop/cdplayer.jpg'))
 
   .. attribute:: author
 
@@ -454,6 +618,15 @@ class ProductEntry(gdata.data.BatchEntry):
       entry = ProductEntry()
       entry.brand = Brand(u'Sony')
 
+  .. attribute:: channel
+
+    The channel for the product. Supported values are: 'online', 'local'
+
+    This should be a :class:`Channel` element, for example::
+
+      entry = ProductEntry()
+      entry.channel = Channel('online')
+
   .. attribute:: color
 
     The color of a product.
@@ -481,6 +654,13 @@ class ProductEntry(gdata.data.BatchEntry):
       entry = ProductEntry()
       entry.content_language = ContentLanguage('EN')
 
+  .. attribute:: control
+
+    Overrides :class:`atom.data.Control` to provide additional elements
+    required_destination and excluded_destination in the sc namespace
+
+    This should be a :class:`ProductControl` element.
+
   .. attribute:: edition
 
     The edition of the product.
@@ -490,7 +670,7 @@ class ProductEntry(gdata.data.BatchEntry):
       entry = ProductEntry()
       entry.edition = Edition('1')
 
-  .. attribute:: expiration
+  .. attribute:: expiration_date
 
     The expiration date of this product listing.
 
@@ -518,6 +698,15 @@ class ProductEntry(gdata.data.BatchEntry):
       entry = ProductEntry()
       entry.featured_product = FeaturedProduct('true')
 
+  .. attribute:: gender
+
+    The gender for the item. Supported values are: 'unisex', 'female', 'male'
+
+    This should be a :class:`Gender` element, for example::
+
+      entry = ProductEntry()
+      entry.gender = Gender('female')
+
   .. attribute:: genre
 
     The genre of the product.
@@ -527,13 +716,48 @@ class ProductEntry(gdata.data.BatchEntry):
       entry = ProductEntry()
       entry.genre = Genre(u'comedy')
 
+  .. attribute:: google_product_category
+
+    The product's google category. Value must come from taxonomy listed at
+
+      http://www.google.com/support/merchants/bin/answer.py?answer=160081
+
+    This should be a :class:`GoogleProductCategory` element, for example::
+
+      entry = ProductEntry()
+      entry.google_product_category = GoogleProductCategory(
+          'Animals &gt; Live Animals')
+
+  .. attribute:: gtin
+
+    The gtin for this product.
+
+    This should be a :class:`Gtin` element, for example::
+
+      entry = ProductEntry()
+      entry.gtin = Gtin('A888998877997')
+
   .. attribute:: image_link
 
-    A list of links to images of the product. Each link should be an
+    A link to the product image. This link should be an
     :class:`ImageLink` element, for example::
 
       entry = ProductEntry()
-      entry.image_link.append(ImageLink('http://myshop/cdplayer.jpg'))
+      entry.image_link = ImageLink('http://myshop/cdplayer.jpg')
+
+  .. attribute:: item_group_id
+
+    The identifier for products with variants. This id is used to link items
+    which have different values for the fields:
+
+      'color', 'material', 'pattern', 'size'
+
+    but are the same item, for example a shirt with different sizes.
+
+    This should be a :class:`ItemGroupID` element, for example::
+
+      entry = ProductEntry()
+      entry.item_group_id = ItemGroupID('R1726122')
 
   .. attribute:: manufacturer
 
@@ -544,6 +768,15 @@ class ProductEntry(gdata.data.BatchEntry):
       entry = ProductEntry()
       entry.manufacturer = Manufacturer('Sony')
 
+  .. attribute:: material
+
+    The material the product is made of.
+
+    This should be a :class:`Material` element, for example::
+
+      entry = ProductEntry()
+      entry.material = Material('cotton')
+
   .. attribute:: mpn
 
     The manufacturer's part number for this product.
@@ -552,6 +785,15 @@ class ProductEntry(gdata.data.BatchEntry):
 
       entry = ProductEntry()
       entry.mpn = Mpn('cd700199US')
+
+  .. attribute:: pattern
+
+    The pattern of the product.
+
+    This should be a :class:`Pattern` element, for example::
+
+      entry = ProductEntry()
+      entry.pattern = Pattern('polka dots')
 
   .. attribute:: price
 
@@ -563,14 +805,13 @@ class ProductEntry(gdata.data.BatchEntry):
       entry = ProductEntry()
       entry.price = Price('20.00', unit='USD')
 
-  .. attribute:: gtin
+  .. attribute:: product_id
 
-    The gtin for this product.
-
-    This should be a :class:`Gtin` element, for example::
+    A link to the product image. This link should be an
+    :class:`ProductId` element, for example::
 
       entry = ProductEntry()
-      entry.gtin = Gtin('A888998877997')
+      entry.product_id = ProductId('ABC1234')
 
   .. attribute:: product_type
 
@@ -580,15 +821,6 @@ class ProductEntry(gdata.data.BatchEntry):
 
       entry = ProductEntry()
       entry.product_type = ProductType("Electronics > Video > Projectors")
-
-  .. attribute:: publisher
-
-    The publisher of this product.
-
-    This should be a :class:`Publisher` element, for example::
-
-      entry = ProductEntry()
-      entry.publisher = Publisher(u'Oxford University Press')
 
   .. attribute:: quantity
 
@@ -659,37 +891,33 @@ class ProductEntry(gdata.data.BatchEntry):
 
       entry = ProductEntry()
       entry.year = Year('2001')
-
-
-    #TODO Document these atom elements which are part of the required API
-    <title>
-    <link>
-    <entry>
-    <id>
-    <category>
-    <content>
-    <author>
-    <created>
-    <updated>
 """
 
+  additional_image_link = [AdditionalImageLink]
   author = Author
-  product_id = ProductId
   availability = Availability
   brand = Brand
+  channel = Channel
   color = Color
   condition = Condition
   content_language = ContentLanguage
+  control = ProductControl
   edition = Edition
   expiration_date = ExpirationDate
   feature = [Feature]
   featured_product = FeaturedProduct
+  gender = Gender
   genre = Genre
-  image_link = [ImageLink]
-  manufacturer = Manufacturer
-  mpn = Mpn
-  price = Price
+  google_product_category = GoogleProductCategory
   gtin = Gtin
+  image_link = ImageLink
+  item_group_id = ItemGroupID
+  manufacturer = Manufacturer
+  material = Material
+  mpn = Mpn
+  pattern = Pattern
+  price = Price
+  product_id = ProductId
   product_type = ProductType
   quantity = Quantity
   shipping = Shipping
@@ -698,7 +926,6 @@ class ProductEntry(gdata.data.BatchEntry):
   target_country = TargetCountry
   tax = Tax
   year = Year
-  control = ProductControl
 
 
 # opensearch needs overriding for wrong version
@@ -726,354 +953,6 @@ class ProductFeed(gdata.data.BatchFeed):
   start_index = StartIndex
 
 
-def build_entry(product_id=None, title=None, content=None, link=None, condition=None,
-                target_country=None, content_language=None, price=None,
-                price_unit=None, tax_rate=None, shipping_price=None,
-                shipping_price_unit=None, image_links=(), expiration_date=None,
-                adult=None, author=None, brand=None, color=None, edition=None,
-                features=(), featured_product=None, genre=None,
-                manufacturer=None, mpn=None, gtin=None, product_type=None,
-                quantity=None, shipping_country=None, shipping_region=None,
-                shipping_service=None, shipping_weight=None,
-                shipping_weight_unit=None, sizes=(), tax_country=None,
-                tax_region=None, tax_ship=None, year=None, product=None):
-  """Create a new product with the required attributes.
-
-  This function exists as an alternative constructor to help alleviate the
-  boilerplate involved in creating product definitions. You may well want to
-  fine-tune your products after creating them.
-
-  Documentation of each attribute attempts to explain the "long-hand" way of
-  achieving the same goal.
-
-  :param product_id: The unique ID for this product.
-
-    This is equivalent to creating and setting an product_id element::
-
-      entry = ProductEntry()
-      entry.product_id = ProductId(product_id)
-
-  :param title: The title of this product.
-
-    This is equivalent to creating and setting a title element::
-
-      entry = ProductEntry
-      entry.title = atom.data.Title(title)
-
-  :param content: The description of this product.
-
-    This is equivalent to creating and setting the content element::
-
-      entry.content = atom.data.Content(content)
-
-  :param link: The uri of the link to a page describing the product.
-
-    This is equivalent to creating and setting the link element::
-
-      entry.link = atom.data.Link(href=link, rel='alternate',
-                                  type='text/html')
-
-  :param condition: The condition of the product.
-
-    This is equivalent to creating and setting the condition element::
-
-      entry.condition = Condition(condition)
-
-  :param target_country: The target country of the product
-
-    This is equivalent to creating and setting the target_country element::
-
-      entry.target_country = TargetCountry(target_country)
-
-  :param content_language: The language of the content
-
-    This is equivalent to creating and setting the content_language element::
-
-      entry.content_language = ContentLanguage(content_language)
-
-  :param price: The price of the product
-
-    This is equivalent to creating and setting the price element, using the
-    price_unit parameter as the unit::
-
-      entry.price = Price(price, unit=price_unit)
-
-  :param price_unit: The price unit of the product
-
-    See price parameter.
-
-  :param tax_rate: The tax rate for this product
-
-    This is equivalent to creating and setting the tax element and its required
-    children::
-
-      entry.tax = Tax()
-      entry.tax.tax_rate = TaxRate(tax_rate)
-
-  :param shipping_price: Thie price of shipping for this product
-
-    This is equivalent to creating and setting the shipping element and its
-    required children. The unit for the price is taken from the
-    shipping_price_unit parameter::
-
-      entry.shipping = Shipping()
-      entry.shipping.shipping_price = ShippingPrice(shipping_price,
-                                                    unit=shipping_price_unit)
-
-  :param shipping_price_unit: The unit of the shipping price
-
-    See shipping_price
-
-  :param image_links: A sequence of links for images for this product.
-
-    This is equivalent to creating a single image_link element for each image::
-
-      for image_link in image_links:
-        entry.image_link.append(ImageLink(image_link))
-
-  :param expiration_date: The date that this product listing expires
-
-    This is equivalent to creating and setting an expiration_date element::
-
-      entry.expiration_date = ExpirationDate(expiration_date)
-
-  :param adult: Whether this product listing contains adult content
-
-    This is equivalent to creating and setting the adult element::
-
-      entry.adult = Adult(adult)
-
-  :param author: The author of the product
-
-    This is equivalent to creating and setting the author element::
-
-      entry.author = Author(author)
-
-  :param brand: The brand of the product
-
-    This is equivalent to creating and setting the brand element::
-
-      entry.brand = Brand(brand)
-
-  :param color: The color of the product
-
-    This is equivalent to creating and setting the color element::
-
-      entry.color = Color(color)
-
-  :param edition: The edition of the product
-
-    This is equivalent to creating and setting the edition element::
-
-      entry.edition = Edition('1')
-
-  :param features=(): Features for this product
-
-    Each feature in the provided sequence will create a Feature element in the
-    entry, equivalent to::
-
-      for feature in features:
-        entry.feature.append(Feature(feature)))
-
-  :param featured_product: Whether this product is featured
-
-    This is equivalent to creating and setting the featured_product element::
-
-      entry.featured_product = FeaturedProduct(featured_product)
-
-  :param genre: The genre of the product
-
-    This is equivalent to creating and setting the genre element::
-
-      entry.genre = Genre(genre)
-
-  :param manufacturer: The manufacturer of the product
-
-    This is equivalent to creating and setting the manufacturer element::
-
-      entry.manufacturer = Manufacturer(manufacturer)
-
-  :param mpn: The manufacturer's part number for a product
-
-    This is equivalent to creating and setting the mpn element::
-
-      entry.mpn = Mpn(mpn)
-
-  :param gtin: The gtin for a product
-
-    This is equivalent to creating and setting the gtin element::
-
-      entry.gtin = Gtin(gtin)
-
-  :param product_type: The type of a product
-
-    This is equivalent to creating and setting the product_type element::
-
-      entry.product_type = ProductType(product_type)
-
-  :param quantity: The quantity of the product in stock
-
-    This is equivalent to creating and setting the quantity element::
-
-      entry.quantity = Quantity(quantity)
-
-  :param shipping_country: The country that this product can be shipped to
-
-    This is equivalent to creating a Shipping element, and creating and setting
-    the required element within::
-
-      entry.shipping = Shipping()
-      entry.shipping.shipping_country = ShippingCountry(shipping_country)
-
-  :param shipping_region: The region that this product can be shipped to
-
-    This is equivalent to creating a Shipping element, and creating and setting
-    the required element within::
-
-      entry.shipping = Shipping()
-      entry.shipping.shipping_region = ShippingRegion(shipping_region)
-
-  :param shipping_service: The service for shipping.
-
-    This is equivalent to creating a Shipping element, and creating and setting
-    the required element within::
-
-      entry.shipping = Shipping()
-      entry.shipping.shipping_service = ShippingRegion(shipping_service)
-
-  :param shipping_weight: The shipping weight of a product
-
-    Along with the shipping_weight_unit, this is equivalent to creating and
-    setting the shipping_weight element::
-
-      entry.shipping_weight = ShippingWeight(shipping_weight,
-                                             unit=shipping_weight_unit)
-
-  :param shipping_weight_unit: The unit of shipping weight
-
-    See shipping_weight.
-
-  :param: The sizes that are available for this product.
-
-    Each size of a list will add a size element to the entry, like so::
-
-      for size in sizes:
-        product.size.append(Size(size))
-
-  :param tax_country: The country that tax rules will apply
-
-    This is equivalent to creating a Tax element, and creating and setting the
-    required sub-element::
-
-      entry.tax = Tax()
-      entry.tax.tax_country = TaxCountry(tax_country)
-
-  :param tax_region: The region that the tax rule applies in
-
-    This is equivalent to creating a Tax element, and creating and setting the
-    required sub-element::
-
-      entry.tax = Tax()
-      entry.tax.tax_region = TaxRegion(tax_region)
-
-  :param tax_ship: Whether shipping cost is taxable
-
-    This is equivalent to creating a Tax element, and creating and setting the
-    required sub-element::
-
-      entry.tax = Tax()
-      entry.tax.tax_ship = TaxShip(tax_ship)
-
-  :param year: The year the product was created
-
-    This is equivalent to creating and setting a year element::
-
-      entry.year = Year('2001')
-  """
-
-  product = product or ProductEntry()
-  if product_id is not None:
-    product.product_id = ProductId(product_id)
-  if content is not None:
-    product.content = atom.data.Content(content)
-  if title is not None:
-    product.title = atom.data.Title(title)
-  if condition is not None:
-    product.condition = Condition(condition)
-  if price is not None:
-    product.price = Price(price, unit=price_unit)
-  if content_language is not None:
-    product.content_language = ContentLanguage(content_language)
-  if target_country is not None:
-    product.target_country = TargetCountry(target_country)
-  if tax_rate is not None:
-    product.tax = Tax()
-    product.tax.tax_rate = TaxRate(tax_rate)
-  if shipping_price is not None:
-    if shipping_price_unit is None:
-        raise ValueError('Must provide shipping_price_unit if '
-                         'shipping_price is provided')
-    product.shipping = Shipping()
-    product.shipping.shipping_price = ShippingPrice(shipping_price,
-                                                    unit=shipping_price_unit)
-  if link is not None:
-    product.link.append(atom.data.Link(href=link, type='text/html',
-                                       rel='alternate'))
-  for image_link in image_links:
-    product.image_link.append(ImageLink(image_link))
-  if expiration_date is not None:
-    product.expiration_date = ExpirationDate(expiration_date)
-  if adult is not None:
-    product.adult = Adult(adult)
-  if author is not None:
-    product.author = Author(author)
-  if brand is not None:
-    product.brand = Brand(brand)
-  if color is not None:
-    product.color = Color(color)
-  if edition is not None:
-    product.edition = Edition(edition)
-  for feature in features:
-    product.feature.append(Feature(feature))
-  if featured_product is not None:
-    product.featured_product = FeaturedProduct(featured_product)
-  if genre is not None:
-    product.genre = Genre(genre)
-  if manufacturer is not None:
-    product.manufacturer = Manufacturer(manufacturer)
-  if mpn is not None:
-    product.mpn = Mpn(mpn)
-  if gtin is not None:
-    product.gtin = Gtin(gtin)
-  if product_type is not None:
-    product.product_type = ProductType(product_type)
-  if quantity is not None:
-    product.quantity = Quantity(quantity)
-  if shipping_country is not None:
-    product.shipping.shipping_country = ShippingCountry(
-        shipping_country)
-  if shipping_region is not None:
-    product.shipping.shipping_region = ShippingRegion(shipping_region)
-  if shipping_service is not None:
-    product.shipping.shipping_service = ShippingService(
-        shipping_service)
-  if shipping_weight is not None:
-    product.shipping_weight = ShippingWeight(shipping_weight)
-  if shipping_weight_unit is not None:
-    product.shipping_weight.unit = shipping_weight_unit
-  for size in sizes:
-    product.size.append(Size(size))
-  if tax_country is not None:
-    product.tax.tax_country = TaxCountry(tax_country)
-  if tax_region is not None:
-    product.tax.tax_region = TaxRegion(tax_region)
-  if tax_ship is not None:
-    product.tax.tax_ship = TaxShip(tax_ship)
-  if year is not None:
-    product.year = Year(year)
-  return product
-
-
 class Edited(atom.core.XmlElement):
   """sc:edited element
   """
@@ -1084,12 +963,6 @@ class AttributeLanguage(atom.core.XmlElement):
   """sc:attribute_language element
   """
   _qname = SC_NAMESPACE_TEMPLATE % 'attribute_language'
-
-
-class Channel(atom.core.XmlElement):
-  """sc:channel element
-  """
-  _qname = SC_NAMESPACE_TEMPLATE % 'channel'
 
 
 class FeedFileName(atom.core.XmlElement):
