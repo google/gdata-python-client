@@ -17,7 +17,6 @@ import gdata_tests.apps.emailsettings.data_test
 import gdata_tests.apps.multidomain.data_test
 import gdata_tests.apps_test
 import gdata_tests.auth_test
-import gdata_tests.base_test
 import gdata_tests.books_test
 import gdata_tests.blogger_test
 import gdata_tests.calendar_test
@@ -46,7 +45,7 @@ def RunAllTests():
                          gdata_tests.apps.emailsettings.data_test,
                          gdata_tests.apps.multidomain.data_test,
                          gdata_tests.auth_test, 
-                         gdata_tests.base_test, gdata_tests.books_test,
+                         gdata_tests.books_test,
                          gdata_tests.calendar_test, gdata_tests.docs_test,
                          gdata_tests.health_test, gdata_tests.spreadsheet_test,
                          gdata_tests.photos_test, gdata_tests.codesearch_test,

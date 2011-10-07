@@ -28,7 +28,6 @@ import gdata.auth
 import atom
 import atom.service
 import atom.token_store
-import gdata.base
 import os.path
 from gdata import test_data
 import atom.mock_http
