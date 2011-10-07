@@ -148,9 +148,11 @@ class ContentForShoppingClient(gdata.client.GDClient):
                        modify_request method.
     :param dry_run: Flag to run all requests that modify persistent data in
                     dry-run mode. False by default.
-    :param warnings: Flag to include warnings in response. False by default.
+                    :param warnings: Flag to include warnings in response. False
+                    by default.
     """
-    pid = self._create_product_id(product.id.text, product.target_country.text,
+    pid = self._create_product_id(product.product_id.text,
+                                  product.target_country.text,
                                   product.content_language.text)
     uri = self._create_uri(account_id, 'items/products', path=[pid],
                            dry_run=dry_run, warnings=warnings)
@@ -170,7 +172,8 @@ class ContentForShoppingClient(gdata.client.GDClient):
                     dry-run mode. False by default.
     :param warnings: Flag to include warnings in response. False by default.
     """
-    pid = self._create_product_id(product.id.text, product.target_country.text,
+    pid = self._create_product_id(product.product_id.text,
+                                  product.target_country.text,
                                   product.content_language.text)
     uri = self._create_uri(account_id, 'items/products', path=[pid],
                            dry_run=dry_run, warnings=warnings)
