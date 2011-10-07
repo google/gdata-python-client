@@ -951,7 +951,7 @@ class ResumableUploader(object):
       http_request.add_body_part(str(entry), 'application/atom+xml',
                                  size=len(str(entry)))
     http_request.headers['X-Upload-Content-Type'] = self.content_type
-    http_request.headers['X-Upload-Content-Length'] = self.total_file_size
+    http_request.headers['X-Upload-Content-Length'] = str(self.total_file_size)
 
     if headers is not None:
       http_request.headers.update(headers)
