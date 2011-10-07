@@ -22,7 +22,7 @@ __author__ = 'afshar@google.com (Ali Afshar)'
 def Run(source_file):
   """Load a source file and run a sample from it."""
   source = open(source_file).read()
-  global_dict = {}
+  global_dict = {'__file__': source_file}
   exec source in global_dict
   samples = [global_dict[k] for k in global_dict if k.endswith('Sample')]
   lines = source.splitlines()
