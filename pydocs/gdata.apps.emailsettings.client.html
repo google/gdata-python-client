@@ -8,13 +8,15 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.apps.html"><font color="#ffffff">apps</font></a>.<a href="gdata.apps.emailsettings.html"><font color="#ffffff">emailsettings</font></a>.client</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/apps/emailsettings/client.py">/usr/local/lib/python2.6/dist-packages/gdata/apps/emailsettings/client.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/working/gdata-python-client/src/gdata/apps/emailsettings/client.py">/home/afshar/working/gdata-python-client/src/gdata/apps/emailsettings/client.py</a></font></td></tr></table>
     <p><tt><a href="#EmailSettingsClient">EmailSettingsClient</a>&nbsp;simplifies&nbsp;Email&nbsp;Settings&nbsp;API&nbsp;calls.<br>
 &nbsp;<br>
 <a href="#EmailSettingsClient">EmailSettingsClient</a>&nbsp;extends&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>&nbsp;to&nbsp;ease&nbsp;interaction&nbsp;with<br>
 the&nbsp;Google&nbsp;Apps&nbsp;Email&nbsp;Settings&nbsp;API.&nbsp;&nbsp;These&nbsp;interactions&nbsp;include&nbsp;the&nbsp;ability<br>
 to&nbsp;create&nbsp;labels,&nbsp;filters,&nbsp;aliases,&nbsp;and&nbsp;update&nbsp;web-clip,&nbsp;forwarding,&nbsp;POP,<br>
-IMAP,&nbsp;vacation-responder,&nbsp;signature,&nbsp;language,&nbsp;and&nbsp;general&nbsp;settings.</tt></p>
+IMAP,&nbsp;vacation-responder,&nbsp;signature,&nbsp;language,&nbsp;and&nbsp;general&nbsp;settings,&nbsp;and<br>
+retrieve&nbsp;labels,&nbsp;send-as,&nbsp;forwarding,&nbsp;pop,&nbsp;imap,&nbsp;vacation&nbsp;and&nbsp;signature<br>
+settings.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -59,13 +61,33 @@ Attributes:<br>
 </dl>
 <hr>
 Methods defined here:<br>
+<dl><dt><a name="EmailSettingsClient-AddEmailDelegate"><strong>AddEmailDelegate</strong></a> = <a href="#EmailSettingsClient-add_email_delegate">add_email_delegate</a>(self, username, address, **kwargs)</dt></dl>
+
 <dl><dt><a name="EmailSettingsClient-CreateFilter"><strong>CreateFilter</strong></a> = <a href="#EmailSettingsClient-create_filter">create_filter</a>(self, username, from_address<font color="#909090">=None</font>, to_address<font color="#909090">=None</font>, subject<font color="#909090">=None</font>, has_the_word<font color="#909090">=None</font>, does_not_have_the_word<font color="#909090">=None</font>, has_attachments<font color="#909090">=None</font>, label<font color="#909090">=None</font>, mark_as_read<font color="#909090">=None</font>, archive<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="EmailSettingsClient-CreateLabel"><strong>CreateLabel</strong></a> = <a href="#EmailSettingsClient-create_label">create_label</a>(self, username, name, **kwargs)</dt></dl>
 
 <dl><dt><a name="EmailSettingsClient-CreateSendAs"><strong>CreateSendAs</strong></a> = <a href="#EmailSettingsClient-create_send_as">create_send_as</a>(self, username, name, address, reply_to<font color="#909090">=None</font>, make_default<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
+<dl><dt><a name="EmailSettingsClient-DeleteEmailDelegate"><strong>DeleteEmailDelegate</strong></a> = <a href="#EmailSettingsClient-delete_email_delegate">delete_email_delegate</a>(self, username, address, **kwargs)</dt></dl>
+
 <dl><dt><a name="EmailSettingsClient-MakeEmailSettingsUri"><strong>MakeEmailSettingsUri</strong></a> = <a href="#EmailSettingsClient-make_email_settings_uri">make_email_settings_uri</a>(self, username, setting_id)</dt></dl>
+
+<dl><dt><a name="EmailSettingsClient-RetrieveEmailDelegates"><strong>RetrieveEmailDelegates</strong></a> = <a href="#EmailSettingsClient-retrieve_email_delegates">retrieve_email_delegates</a>(self, username, **kwargs)</dt></dl>
+
+<dl><dt><a name="EmailSettingsClient-RetrieveForwarding"><strong>RetrieveForwarding</strong></a> = <a href="#EmailSettingsClient-retrieve_forwarding">retrieve_forwarding</a>(self, username, **kwargs)</dt></dl>
+
+<dl><dt><a name="EmailSettingsClient-RetrieveImap"><strong>RetrieveImap</strong></a> = <a href="#EmailSettingsClient-retrieve_imap">retrieve_imap</a>(self, username, **kwargs)</dt></dl>
+
+<dl><dt><a name="EmailSettingsClient-RetrieveLabels"><strong>RetrieveLabels</strong></a> = <a href="#EmailSettingsClient-retrieve_labels">retrieve_labels</a>(self, username, **kwargs)</dt></dl>
+
+<dl><dt><a name="EmailSettingsClient-RetrievePop"><strong>RetrievePop</strong></a> = <a href="#EmailSettingsClient-retrieve_pop">retrieve_pop</a>(self, username, **kwargs)</dt></dl>
+
+<dl><dt><a name="EmailSettingsClient-RetrieveSendAs"><strong>RetrieveSendAs</strong></a> = <a href="#EmailSettingsClient-retrieve_send_as">retrieve_send_as</a>(self, username, **kwargs)</dt></dl>
+
+<dl><dt><a name="EmailSettingsClient-RetrieveSignature"><strong>RetrieveSignature</strong></a> = <a href="#EmailSettingsClient-retrieve_signature">retrieve_signature</a>(self, username, **kwargs)</dt></dl>
+
+<dl><dt><a name="EmailSettingsClient-RetrieveVacation"><strong>RetrieveVacation</strong></a> = <a href="#EmailSettingsClient-retrieve_vacation">retrieve_vacation</a>(self, username, **kwargs)</dt></dl>
 
 <dl><dt><a name="EmailSettingsClient-UpdateForwarding"><strong>UpdateForwarding</strong></a> = <a href="#EmailSettingsClient-update_forwarding">update_forwarding</a>(self, username, enable, forward_to<font color="#909090">=None</font>, action<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
@@ -91,6 +113,12 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;email&nbsp;settings.<br>
 &nbsp;&nbsp;kwargs:&nbsp;The&nbsp;other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;the&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;constructor.</tt></dd></dl>
+
+<dl><dt><a name="EmailSettingsClient-add_email_delegate"><strong>add_email_delegate</strong></a>(self, username, address, **kwargs)</dt><dd><tt>Add&nbsp;an&nbsp;email&nbsp;delegate&nbsp;to&nbsp;the&nbsp;mail&nbsp;account<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;username:&nbsp;string&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;user<br>
+&nbsp;&nbsp;address:&nbsp;string&nbsp;The&nbsp;email&nbsp;address&nbsp;of&nbsp;the&nbsp;delegated&nbsp;account</tt></dd></dl>
 
 <dl><dt><a name="EmailSettingsClient-create_filter"><strong>create_filter</strong></a>(self, username, from_address<font color="#909090">=None</font>, to_address<font color="#909090">=None</font>, subject<font color="#909090">=None</font>, has_the_word<font color="#909090">=None</font>, does_not_have_the_word<font color="#909090">=None</font>, has_attachments<font color="#909090">=None</font>, label<font color="#909090">=None</font>, mark_as_read<font color="#909090">=None</font>, archive<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;filter&nbsp;with&nbsp;the&nbsp;given&nbsp;properties.<br>
 &nbsp;<br>
@@ -145,6 +173,12 @@ Returns:<br>
 &nbsp;&nbsp;gdata.apps.emailsettings.data.EmailSettingsSendAsAlias&nbsp;of&nbsp;the<br>
 &nbsp;&nbsp;new&nbsp;resource.</tt></dd></dl>
 
+<dl><dt><a name="EmailSettingsClient-delete_email_delegate"><strong>delete_email_delegate</strong></a>(self, username, address, **kwargs)</dt><dd><tt>Delete&nbsp;an&nbsp;email&nbsp;delegate&nbsp;from&nbsp;the&nbsp;specified&nbsp;account<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;username:&nbsp;string&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;user<br>
+&nbsp;&nbsp;address:&nbsp;string&nbsp;The&nbsp;email&nbsp;address&nbsp;of&nbsp;the&nbsp;delegated&nbsp;account</tt></dd></dl>
+
 <dl><dt><a name="EmailSettingsClient-make_email_settings_uri"><strong>make_email_settings_uri</strong></a>(self, username, setting_id)</dt><dd><tt>Creates&nbsp;the&nbsp;URI&nbsp;for&nbsp;the&nbsp;Email&nbsp;Settings&nbsp;API&nbsp;call.<br>
 &nbsp;<br>
 Using&nbsp;this&nbsp;client's&nbsp;Google&nbsp;Apps&nbsp;domain,&nbsp;create&nbsp;the&nbsp;URI&nbsp;to&nbsp;setup<br>
@@ -158,6 +192,70 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;string&nbsp;giving&nbsp;the&nbsp;URI&nbsp;for&nbsp;Email&nbsp;Settings&nbsp;API&nbsp;calls&nbsp;for&nbsp;this&nbsp;client's<br>
 &nbsp;&nbsp;Google&nbsp;Apps&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="EmailSettingsClient-retrieve_email_delegates"><strong>retrieve_email_delegates</strong></a>(self, username, **kwargs)</dt><dd><tt>Retrieve&nbsp;a&nbsp;feed&nbsp;of&nbsp;the&nbsp;email&nbsp;delegates&nbsp;for&nbsp;the&nbsp;specified&nbsp;username<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;username:&nbsp;string&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;user&nbsp;to&nbsp;get&nbsp;the&nbsp;email&nbsp;delegates&nbsp;for<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;gdata.data.GDFeed&nbsp;of&nbsp;the&nbsp;user's&nbsp;email&nbsp;delegates</tt></dd></dl>
+
+<dl><dt><a name="EmailSettingsClient-retrieve_forwarding"><strong>retrieve_forwarding</strong></a>(self, username, **kwargs)</dt><dd><tt>Retrieves&nbsp;forwarding&nbsp;settings&nbsp;for&nbsp;the&nbsp;specified&nbsp;username<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;username:&nbsp;string&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;user&nbsp;to&nbsp;get&nbsp;the&nbsp;forwarding&nbsp;settings&nbsp;for<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;gdata.data.GDEntry&nbsp;of&nbsp;the&nbsp;user's&nbsp;email&nbsp;forwarding&nbsp;settings</tt></dd></dl>
+
+<dl><dt><a name="EmailSettingsClient-retrieve_imap"><strong>retrieve_imap</strong></a>(self, username, **kwargs)</dt><dd><tt>Retrieves&nbsp;imap&nbsp;settings&nbsp;for&nbsp;the&nbsp;specified&nbsp;username<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;username:&nbsp;string&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;user&nbsp;to&nbsp;get&nbsp;the&nbsp;imap&nbsp;settings&nbsp;for<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;gdata.data.GDEntry&nbsp;of&nbsp;the&nbsp;user's&nbsp;IMAP&nbsp;settings</tt></dd></dl>
+
+<dl><dt><a name="EmailSettingsClient-retrieve_labels"><strong>retrieve_labels</strong></a>(self, username, **kwargs)</dt><dd><tt>Retrieves&nbsp;email&nbsp;labels&nbsp;for&nbsp;the&nbsp;specified&nbsp;username<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;username:&nbsp;string&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;user&nbsp;to&nbsp;get&nbsp;the&nbsp;labels&nbsp;for<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;gdata.data.GDFeed&nbsp;of&nbsp;the&nbsp;user's&nbsp;email&nbsp;labels</tt></dd></dl>
+
+<dl><dt><a name="EmailSettingsClient-retrieve_pop"><strong>retrieve_pop</strong></a>(self, username, **kwargs)</dt><dd><tt>Retrieves&nbsp;POP&nbsp;settings&nbsp;for&nbsp;the&nbsp;specified&nbsp;username<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;username:&nbsp;string&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;user&nbsp;to&nbsp;get&nbsp;the&nbsp;POP&nbsp;settings&nbsp;for<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;gdata.data.GDEntry&nbsp;of&nbsp;the&nbsp;user's&nbsp;POP&nbsp;settings</tt></dd></dl>
+
+<dl><dt><a name="EmailSettingsClient-retrieve_send_as"><strong>retrieve_send_as</strong></a>(self, username, **kwargs)</dt><dd><tt>Retrieves&nbsp;send-as&nbsp;aliases&nbsp;for&nbsp;the&nbsp;specified&nbsp;username<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;username:&nbsp;string&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;user&nbsp;to&nbsp;get&nbsp;the&nbsp;send-as&nbsp;for<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;gdata.data.GDFeed&nbsp;of&nbsp;the&nbsp;user's&nbsp;send-as&nbsp;alias&nbsp;settings</tt></dd></dl>
+
+<dl><dt><a name="EmailSettingsClient-retrieve_signature"><strong>retrieve_signature</strong></a>(self, username, **kwargs)</dt><dd><tt>Retrieves&nbsp;signature&nbsp;settings&nbsp;for&nbsp;the&nbsp;specified&nbsp;username<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;username:&nbsp;string&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;user&nbsp;to&nbsp;get&nbsp;the&nbsp;signature&nbsp;settings&nbsp;for<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;gdata.data.GDEntry&nbsp;of&nbsp;the&nbsp;user's&nbsp;signature&nbsp;settings</tt></dd></dl>
+
+<dl><dt><a name="EmailSettingsClient-retrieve_vacation"><strong>retrieve_vacation</strong></a>(self, username, **kwargs)</dt><dd><tt>Retrieves&nbsp;vacation&nbsp;settings&nbsp;for&nbsp;the&nbsp;specified&nbsp;username<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;username:&nbsp;string&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;user&nbsp;to&nbsp;get&nbsp;the&nbsp;vacation&nbsp;settings&nbsp;for<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;gdata.data.GDEntry&nbsp;of&nbsp;the&nbsp;user's&nbsp;vacation&nbsp;auto-responder&nbsp;settings</tt></dd></dl>
 
 <dl><dt><a name="EmailSettingsClient-update_forwarding"><strong>update_forwarding</strong></a>(self, username, enable, forward_to<font color="#909090">=None</font>, action<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Update&nbsp;Google&nbsp;Mail&nbsp;Forwarding&nbsp;settings.<br>
 &nbsp;<br>
@@ -331,7 +429,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;text&nbsp;which&nbsp;was&nbsp;contained&nbsp;in&nbsp;the&nbsp;challenge.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Generated&nbsp;token,&nbsp;which&nbsp;is&nbsp;also&nbsp;stored&nbsp;in&nbsp;this&nbsp;object.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Raises:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;RequestError&nbsp;or&nbsp;one&nbsp;of&nbsp;its&nbsp;suclasses:&nbsp;BadAuthentication,<br>
@@ -565,7 +663,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;text&nbsp;which&nbsp;was&nbsp;contained&nbsp;in&nbsp;the&nbsp;challenge.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Generated&nbsp;token,&nbsp;which&nbsp;is&nbsp;also&nbsp;stored&nbsp;in&nbsp;this&nbsp;object.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Raises:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;RequestError&nbsp;or&nbsp;one&nbsp;of&nbsp;its&nbsp;suclasses:&nbsp;BadAuthentication,<br>
@@ -751,6 +849,10 @@ Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
 
 <hr>
+Data and other attributes inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
+<dl><dt><strong>alt_auth_service</strong> = None</dl>
+
+<hr>
 Methods inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
 <dl><dt><a name="EmailSettingsClient-Get"><strong>Get</strong></a> = get(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Performs&nbsp;a&nbsp;request&nbsp;using&nbsp;the&nbsp;GET&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
@@ -772,6 +874,8 @@ Data descriptors inherited from <a href="atom.client.html#AtomPubClient">atom.cl
 Data and other attributes inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
 <dl><dt><strong>auth_token</strong> = None</dl>
 
+<dl><dt><strong>xoauth_requestor_id</strong> = None</dl>
+
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
@@ -785,6 +889,7 @@ Data and other attributes inherited from <a href="atom.client.html#AtomPubClient
 <strong>EMAIL_SETTINGS_URI_TEMPLATE</strong> = '/a/feeds/emailsettings/%s/%s/%s/%s'<br>
 <strong>POP_ENABLE_FOR_ALL_MAIL</strong> = 'ALL_MAIL'<br>
 <strong>POP_ENABLE_FOR_MAIL_FROM_NOW_ON</strong> = 'MAIL_FROM_NOW_ON'<br>
+<strong>SETTING_ID_DELEGATION</strong> = 'delegation'<br>
 <strong>SETTING_ID_FILTER</strong> = 'filter'<br>
 <strong>SETTING_ID_FORWARDING</strong> = 'forwarding'<br>
 <strong>SETTING_ID_GENERAL</strong> = 'general'<br>

@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.sites.html"><font color="#ffffff">sites</font></a>.data</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/sites/data.py">/usr/local/lib/python2.6/dist-packages/gdata/sites/data.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/working/gdata-python-client/src/gdata/sites/data.py">/home/afshar/working/gdata-python-client/src/gdata/sites/data.py</a></font></td></tr></table>
     <p><tt><a href="#Data">Data</a>&nbsp;model&nbsp;classes&nbsp;for&nbsp;parsing&nbsp;and&nbsp;generating&nbsp;XML&nbsp;for&nbsp;the&nbsp;Sites&nbsp;<a href="#Data">Data</a>&nbsp;API.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -114,6 +114,8 @@
 </dl>
 <hr>
 Data and other attributes inherited from <a href="gdata.acl.data.html#AclEntry">gdata.acl.data.AclEntry</a>:<br>
+<dl><dt><strong>additional_role</strong> = &lt;class 'gdata.acl.data.AclAdditionalRole'&gt;<dd><tt>Describes&nbsp;an&nbsp;additionalRole&nbsp;element.</tt></dl>
+
 <dl><dt><strong>role</strong> = &lt;class 'gdata.acl.data.AclRole'&gt;<dd><tt>Describes&nbsp;the&nbsp;role&nbsp;of&nbsp;an&nbsp;entry&nbsp;in&nbsp;an&nbsp;access&nbsp;control&nbsp;list.</tt></dl>
 
 <dl><dt><strong>scope</strong> = &lt;class 'gdata.acl.data.AclScope'&gt;<dd><tt>Describes&nbsp;the&nbsp;scope&nbsp;of&nbsp;an&nbsp;entry&nbsp;in&nbsp;an&nbsp;access&nbsp;control&nbsp;list.</tt></dl>
@@ -377,7 +379,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="AclEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="AclEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="AclEntry-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -412,7 +414,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="AclEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="AclEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="AclEntry-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -708,7 +710,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="AclFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="AclFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="AclFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -743,7 +745,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="AclFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="AclFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="AclFeed-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -1057,7 +1059,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="ActivityEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="ActivityEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="ActivityEntry-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -1092,7 +1094,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="ActivityEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="ActivityEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="ActivityEntry-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -1387,7 +1389,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="ActivityFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="ActivityFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="ActivityFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -1422,7 +1424,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="ActivityFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="ActivityFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="ActivityFeed-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -1733,7 +1735,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="BaseSiteEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="BaseSiteEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="BaseSiteEntry-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -1768,7 +1770,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="BaseSiteEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="BaseSiteEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="BaseSiteEntry-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -2425,7 +2427,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="ContentEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="ContentEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="ContentEntry-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -2460,7 +2462,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="ContentEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="ContentEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="ContentEntry-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -2793,7 +2795,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="ContentFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="ContentFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="ContentFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -2828,7 +2830,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="ContentFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="ContentFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="ContentFeed-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -4336,7 +4338,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="RevisionEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="RevisionEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="RevisionEntry-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -4371,7 +4373,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="RevisionEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="RevisionEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="RevisionEntry-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -4666,7 +4668,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="RevisionFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="RevisionFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="RevisionFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -4701,7 +4703,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="RevisionFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="RevisionFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="RevisionFeed-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -5008,7 +5010,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="SiteEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="SiteEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="SiteEntry-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -5043,7 +5045,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="SiteEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="SiteEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="SiteEntry-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -5338,7 +5340,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="SiteFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="SiteFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="SiteFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -5373,7 +5375,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="SiteFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="SiteFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="SiteFeed-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -6016,7 +6018,8 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <strong>SITES_TEMPLATE</strong> = '{http://schemas.google.com/sites/2008}%s'<br>
 <strong>SPREADSHEETS_NAMESPACE</strong> = 'http://schemas.google.com/spreadsheets/2006'<br>
 <strong>SPREADSHEETS_TEMPLATE</strong> = '{http://schemas.google.com/spreadsheets/2006}%s'<br>
-<strong>SUPPORT_KINDS</strong> = ['announcement', 'announcementspage', 'attachment', 'comment', 'filecabinet', 'listitem', 'listpage', 'webpage', 'webattachment']<br>
+<strong>SUPPORT_KINDS</strong> = ['announcement', 'announcementspage', 'attachment', 'comment', 'filecabinet', 'listitem', 'listpage', 'webpage', 'webattachment', 'tag']<br>
+<strong>TAG_KIND_TERM</strong> = 'http://schemas.google.com/sites/2008#tag'<br>
 <strong>THR_TERMS_TEMPLATE</strong> = '{http://purl.org/syndication/thread/1.0}%s'<br>
 <strong>WEBATTACHMENT_KIND_TERM</strong> = 'http://schemas.google.com/sites/2008#webattachment'<br>
 <strong>WEBPAGE_KIND_TERM</strong> = 'http://schemas.google.com/sites/2008#webpage'<br>

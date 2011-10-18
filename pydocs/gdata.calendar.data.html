@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.calendar.html"><font color="#ffffff">calendar</font></a>.data</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/calendar/data.py">/usr/local/lib/python2.6/dist-packages/gdata/calendar/data.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/working/gdata-python-client/src/gdata/calendar/data.py">/home/afshar/working/gdata-python-client/src/gdata/calendar/data.py</a></font></td></tr></table>
     <p><tt>Contains&nbsp;the&nbsp;data&nbsp;classes&nbsp;of&nbsp;the&nbsp;Google&nbsp;Calendar&nbsp;Data&nbsp;API</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -768,6 +768,8 @@ Data and other attributes defined here:<br>
 
 <hr>
 Data and other attributes inherited from <a href="gdata.acl.data.html#AclEntry">gdata.acl.data.AclEntry</a>:<br>
+<dl><dt><strong>additional_role</strong> = &lt;class 'gdata.acl.data.AclAdditionalRole'&gt;<dd><tt>Describes&nbsp;an&nbsp;additionalRole&nbsp;element.</tt></dl>
+
 <dl><dt><strong>role</strong> = &lt;class 'gdata.acl.data.AclRole'&gt;<dd><tt>Describes&nbsp;the&nbsp;role&nbsp;of&nbsp;an&nbsp;entry&nbsp;in&nbsp;an&nbsp;access&nbsp;control&nbsp;list.</tt></dl>
 
 <dl><dt><strong>scope</strong> = &lt;class 'gdata.acl.data.AclScope'&gt;<dd><tt>Describes&nbsp;the&nbsp;scope&nbsp;of&nbsp;an&nbsp;entry&nbsp;in&nbsp;an&nbsp;access&nbsp;control&nbsp;list.</tt></dl>
@@ -1031,7 +1033,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="CalendarAclEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="CalendarAclEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="CalendarAclEntry-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -1066,7 +1068,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="CalendarAclEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="CalendarAclEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="CalendarAclEntry-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -1359,7 +1361,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="CalendarAclFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="CalendarAclFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="CalendarAclFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -1394,7 +1396,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="CalendarAclFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="CalendarAclFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="CalendarAclFeed-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -1840,7 +1842,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="CalendarCommentEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="CalendarCommentEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="CalendarCommentEntry-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -1875,7 +1877,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="CalendarCommentEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="CalendarCommentEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="CalendarCommentEntry-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -2168,7 +2170,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="CalendarCommentFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="CalendarCommentFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="CalendarCommentFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -2203,7 +2205,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="CalendarCommentFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="CalendarCommentFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="CalendarCommentFeed-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -2672,7 +2674,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="CalendarEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="CalendarEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="CalendarEntry-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -2707,7 +2709,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="CalendarEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="CalendarEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="CalendarEntry-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -3111,7 +3113,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="CalendarEventEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="CalendarEventEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="CalendarEventEntry-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -3146,7 +3148,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="CalendarEventEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="CalendarEventEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="CalendarEventEntry-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -3663,7 +3665,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="CalendarEventFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="CalendarEventFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="CalendarEventFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -3698,7 +3700,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="CalendarEventFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="CalendarEventFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="CalendarEventFeed-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -4178,7 +4180,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="CalendarFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="CalendarFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="CalendarFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -4213,7 +4215,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="CalendarFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="CalendarFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="CalendarFeed-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -4679,7 +4681,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="CalendarRecurrenceExceptionEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="CalendarRecurrenceExceptionEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="CalendarRecurrenceExceptionEntry-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -4714,7 +4716,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="CalendarRecurrenceExceptionEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="CalendarRecurrenceExceptionEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="CalendarRecurrenceExceptionEntry-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -5007,7 +5009,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="CalendarSettingsFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="CalendarSettingsFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="CalendarSettingsFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -5042,7 +5044,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="CalendarSettingsFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="CalendarSettingsFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="CalendarSettingsFeed-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -7771,7 +7773,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="SettingsEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="SettingsEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="SettingsEntry-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -7806,7 +7808,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="SettingsEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="SettingsEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="SettingsEntry-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -9221,7 +9223,7 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><strong>GCAL_NAMESPACE</strong> = 'http://schemas.google.com/gCal/2005'<br>
-<strong>GCAL_TEMPLATE</strong> = '{http://schemas.google.com/gCal/2005/}%s'<br>
+<strong>GCAL_TEMPLATE</strong> = '{http://schemas.google.com/gCal/2005}%s'<br>
 <strong>WEB_CONTENT_LINK_REL</strong> = 'http://schemas.google.com/gCal/2005/webContent'<br>
 <strong>__author__</strong> = 'j.s@google.com (Jeff Scudder)'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">

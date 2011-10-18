@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.contacts.html"><font color="#ffffff">contacts</font></a>.data</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/contacts/data.py">/usr/local/lib/python2.6/dist-packages/gdata/contacts/data.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/working/gdata-python-client/src/gdata/contacts/data.py">/home/afshar/working/gdata-python-client/src/gdata/contacts/data.py</a></font></td></tr></table>
     <p><tt>Data&nbsp;model&nbsp;classes&nbsp;for&nbsp;parsing&nbsp;and&nbsp;generating&nbsp;XML&nbsp;for&nbsp;the&nbsp;Contacts&nbsp;API.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -57,11 +57,18 @@
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.contacts.data.html#Region">Region</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.contacts.data.html#Relation">Relation</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.contacts.data.html#Sensitivity">Sensitivity</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.contacts.data.html#Status">Status</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.contacts.data.html#Street">Street</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.contacts.data.html#SubRegion">SubRegion</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.contacts.data.html#SystemGroup">SystemGroup</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.contacts.data.html#UserDefinedField">UserDefinedField</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.contacts.data.html#Website">Website</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="atom.data.html#Link">atom.data.Link</a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.contacts.data.html#ContactLink">ContactLink</a>
 </font></dt></dl>
 </dd>
 <dt><font face="helvetica, arial"><a href="gdata.data.html#BatchEntry">gdata.data.BatchEntry</a>(<a href="gdata.data.html#GDEntry">gdata.data.GDEntry</a>)
@@ -732,7 +739,7 @@ Specifies&nbsp;billing&nbsp;information&nbsp;of&nbsp;the&nbsp;entity&nbsp;repres
 
 <dl><dt><strong>calendar_link</strong> = [&lt;class 'gdata.contacts.data.CalendarLink'&gt;]</dl>
 
-<dl><dt><strong>directory_server</strong> = &lt;class 'gdata.contacts.data.DirectoryServer'&gt;<dd><tt>A&nbsp;directory&nbsp;server&nbsp;associated&nbsp;with&nbsp;this&nbsp;contact.&nbsp;<br>
+<dl><dt><strong>directory_server</strong> = &lt;class 'gdata.contacts.data.DirectoryServer'&gt;<dd><tt>A&nbsp;directory&nbsp;server&nbsp;associated&nbsp;with&nbsp;this&nbsp;contact.<br>
 May&nbsp;not&nbsp;be&nbsp;repeated.</tt></dl>
 
 <dl><dt><strong>email</strong> = [&lt;class 'gdata.data.Email'&gt;]</dl>
@@ -750,18 +757,20 @@ The&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
 
 <dl><dt><strong>im</strong> = [&lt;class 'gdata.data.Im'&gt;]</dl>
 
-<dl><dt><strong>initals</strong> = &lt;class 'gdata.contacts.data.Initials'&gt;<dd><tt>Specifies&nbsp;the&nbsp;initials&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.&nbsp;The&nbsp;<br>
+<dl><dt><strong>initials</strong> = &lt;class 'gdata.contacts.data.Initials'&gt;<dd><tt>Specifies&nbsp;the&nbsp;initials&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.&nbsp;The<br>
 element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
 
 <dl><dt><strong>jot</strong> = [&lt;class 'gdata.contacts.data.Jot'&gt;]</dl>
 
 <dl><dt><strong>language</strong> = [&lt;class 'gdata.contacts.data.Language'&gt;]</dl>
 
-<dl><dt><strong>maiden_name</strong> = &lt;class 'gdata.contacts.data.MaidenName'&gt;<dd><tt>Specifies&nbsp;maiden&nbsp;name&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.&nbsp;<br>
+<dl><dt><strong>link</strong> = [&lt;class 'gdata.contacts.data.ContactLink'&gt;]</dl>
+
+<dl><dt><strong>maiden_name</strong> = &lt;class 'gdata.contacts.data.MaidenName'&gt;<dd><tt>Specifies&nbsp;maiden&nbsp;name&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.<br>
 The&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
 
-<dl><dt><strong>mileage</strong> = &lt;class 'gdata.contacts.data.Mileage'&gt;<dd><tt>Specifies&nbsp;the&nbsp;mileage&nbsp;for&nbsp;the&nbsp;entity&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.&nbsp;<br>
-Can&nbsp;be&nbsp;used&nbsp;for&nbsp;example&nbsp;to&nbsp;document&nbsp;distance&nbsp;needed&nbsp;for&nbsp;reimbursement&nbsp;<br>
+<dl><dt><strong>mileage</strong> = &lt;class 'gdata.contacts.data.Mileage'&gt;<dd><tt>Specifies&nbsp;the&nbsp;mileage&nbsp;for&nbsp;the&nbsp;entity&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.<br>
+Can&nbsp;be&nbsp;used&nbsp;for&nbsp;example&nbsp;to&nbsp;document&nbsp;distance&nbsp;needed&nbsp;for&nbsp;reimbursement<br>
 purposes.&nbsp;The&nbsp;value&nbsp;is&nbsp;not&nbsp;interpreted.&nbsp;The&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
 
 <dl><dt><strong>name</strong> = &lt;class 'gdata.data.Name'&gt;<dd><tt>The&nbsp;gd:name&nbsp;element.<br>
@@ -769,10 +778,10 @@ purposes.&nbsp;The&nbsp;value&nbsp;is&nbsp;not&nbsp;interpreted.&nbsp;The&nbsp;e
 Allows&nbsp;storing&nbsp;person's&nbsp;name&nbsp;in&nbsp;a&nbsp;structured&nbsp;way.&nbsp;Consists&nbsp;of<br>
 given&nbsp;name,&nbsp;additional&nbsp;name,&nbsp;family&nbsp;name,&nbsp;prefix,&nbsp;suffix&nbsp;and&nbsp;full&nbsp;name.</tt></dl>
 
-<dl><dt><strong>nickname</strong> = &lt;class 'gdata.contacts.data.NickName'&gt;<dd><tt>Specifies&nbsp;the&nbsp;nickname&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.&nbsp;<br>
+<dl><dt><strong>nickname</strong> = &lt;class 'gdata.contacts.data.NickName'&gt;<dd><tt>Specifies&nbsp;the&nbsp;nickname&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.<br>
 The&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
 
-<dl><dt><strong>occupation</strong> = &lt;class 'gdata.contacts.data.Occupation'&gt;<dd><tt>Specifies&nbsp;the&nbsp;occupation/profession&nbsp;of&nbsp;the&nbsp;person&nbsp;specified&nbsp;by&nbsp;the&nbsp;contact.&nbsp;<br>
+<dl><dt><strong>occupation</strong> = &lt;class 'gdata.contacts.data.Occupation'&gt;<dd><tt>Specifies&nbsp;the&nbsp;occupation/profession&nbsp;of&nbsp;the&nbsp;person&nbsp;specified&nbsp;by&nbsp;the&nbsp;contact.<br>
 The&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
 
 <dl><dt><strong>phone_number</strong> = [&lt;class 'gdata.data.PhoneNumber'&gt;]</dl>
@@ -795,6 +804,8 @@ The&nbsp;priority&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
 &nbsp;&nbsp;*&nbsp;Private<br>
 &nbsp;<br>
 The&nbsp;sensitivity&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
+
+<dl><dt><strong>status</strong> = &lt;class 'gdata.contacts.data.Status'&gt;<dd><tt>Person's&nbsp;status&nbsp;element.</tt></dl>
 
 <dl><dt><strong>structured_postal_address</strong> = [&lt;class 'gdata.data.StructuredPostalAddress'&gt;]</dl>
 
@@ -866,8 +877,6 @@ Data and other attributes inherited from <a href="atom.data.html#FeedEntryParent
 <dl><dt><strong>contributor</strong> = [&lt;class 'atom.data.Contributor'&gt;]</dl>
 
 <dl><dt><strong>id</strong> = &lt;class 'atom.data.Id'&gt;<dd><tt>The&nbsp;atom:id&nbsp;element.</tt></dl>
-
-<dl><dt><strong>link</strong> = [&lt;class 'atom.data.Link'&gt;]</dl>
 
 <dl><dt><strong>rights</strong> = &lt;class 'atom.data.Rights'&gt;<dd><tt>The&nbsp;atom:rights&nbsp;element.</tt></dl>
 
@@ -1075,7 +1084,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="ContactEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="ContactEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="ContactEntry-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -1110,7 +1119,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="ContactEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="ContactEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="ContactEntry-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -1128,6 +1137,171 @@ consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
 <dl><dt><a name="ContactEntry-get_next_link"><strong>get_next_link</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="ContactEntry-get_self_link"><strong>get_self_link</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ContactLink">class <strong>ContactLink</strong></a>(<a href="atom.data.html#Link">atom.data.Link</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Extends&nbsp;atom.data.<a href="atom.data.html#Link">Link</a>&nbsp;to&nbsp;add&nbsp;gd:etag&nbsp;attribute&nbsp;for&nbsp;photo&nbsp;link.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.contacts.data.html#ContactLink">ContactLink</a></dd>
+<dd><a href="atom.data.html#Link">atom.data.Link</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>etag</strong> = '{http://schemas.google.com/g/2005}etag'</dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.data.html#Link">atom.data.Link</a>:<br>
+<dl><dt><strong>href</strong> = 'href'</dl>
+
+<dl><dt><strong>hreflang</strong> = 'hreflang'</dl>
+
+<dl><dt><strong>length</strong> = 'length'</dl>
+
+<dl><dt><strong>rel</strong> = 'rel'</dl>
+
+<dl><dt><strong>title</strong> = 'title'</dl>
+
+<dl><dt><strong>type</strong> = 'type'</dl>
+
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="ContactLink-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="ContactLink-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="ContactLink-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="ContactLink-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="ContactLink-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>, pretty_print<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="ContactLink-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="ContactLink-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ContactLink-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="ContactLink-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="ContactLink-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>, pretty_print<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -1619,7 +1793,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="ContactsFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="ContactsFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="ContactsFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -1654,7 +1828,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="ContactsFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="ContactsFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="ContactsFeed-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -1972,7 +2146,7 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <font color="#000000" face="helvetica, arial"><a name="DirectoryServer">class <strong>DirectoryServer</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>A&nbsp;directory&nbsp;server&nbsp;associated&nbsp;with&nbsp;this&nbsp;contact.&nbsp;<br>
+<td colspan=2><tt>A&nbsp;directory&nbsp;server&nbsp;associated&nbsp;with&nbsp;this&nbsp;contact.<br>
 May&nbsp;not&nbsp;be&nbsp;repeated.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -2119,7 +2293,7 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <font color="#000000" face="helvetica, arial"><a name="Event">class <strong>Event</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>These&nbsp;elements&nbsp;describe&nbsp;events&nbsp;associated&nbsp;with&nbsp;a&nbsp;contact.&nbsp;<br>
+<td colspan=2><tt>These&nbsp;elements&nbsp;describe&nbsp;events&nbsp;associated&nbsp;with&nbsp;a&nbsp;contact.<br>
 They&nbsp;may&nbsp;be&nbsp;repeated<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -2276,7 +2450,7 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <font color="#000000" face="helvetica, arial"><a name="ExternalId">class <strong>ExternalId</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>&nbsp;Describes&nbsp;an&nbsp;ID&nbsp;of&nbsp;the&nbsp;contact&nbsp;in&nbsp;an&nbsp;external&nbsp;system&nbsp;of&nbsp;some&nbsp;kind.&nbsp;<br>
+<td colspan=2><tt>&nbsp;Describes&nbsp;an&nbsp;ID&nbsp;of&nbsp;the&nbsp;contact&nbsp;in&nbsp;an&nbsp;external&nbsp;system&nbsp;of&nbsp;some&nbsp;kind.<br>
 This&nbsp;element&nbsp;may&nbsp;be&nbsp;repeated.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -2877,7 +3051,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="GroupEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="GroupEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="GroupEntry-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -2912,7 +3086,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="GroupEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="GroupEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="GroupEntry-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -3574,7 +3748,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="GroupsFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="GroupsFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="GroupsFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -3609,7 +3783,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="GroupsFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="GroupsFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="GroupsFeed-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -3635,7 +3809,7 @@ consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
 <font color="#000000" face="helvetica, arial"><a name="Hobby">class <strong>Hobby</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Describes&nbsp;an&nbsp;ID&nbsp;of&nbsp;the&nbsp;contact&nbsp;in&nbsp;an&nbsp;external&nbsp;system&nbsp;of&nbsp;some&nbsp;kind.&nbsp;<br>
+<td colspan=2><tt>Describes&nbsp;an&nbsp;ID&nbsp;of&nbsp;the&nbsp;contact&nbsp;in&nbsp;an&nbsp;external&nbsp;system&nbsp;of&nbsp;some&nbsp;kind.<br>
 This&nbsp;element&nbsp;may&nbsp;be&nbsp;repeated.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -3782,7 +3956,7 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <font color="#000000" face="helvetica, arial"><a name="HouseName">class <strong>HouseName</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Used&nbsp;in&nbsp;places&nbsp;where&nbsp;houses&nbsp;or&nbsp;buildings&nbsp;have&nbsp;names&nbsp;(and&nbsp;<br>
+<td colspan=2><tt>Used&nbsp;in&nbsp;places&nbsp;where&nbsp;houses&nbsp;or&nbsp;buildings&nbsp;have&nbsp;names&nbsp;(and<br>
 not&nbsp;necessarily&nbsp;numbers),&nbsp;eg.&nbsp;"The&nbsp;Pillars".<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -3929,7 +4103,7 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <font color="#000000" face="helvetica, arial"><a name="Initials">class <strong>Initials</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Specifies&nbsp;the&nbsp;initials&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.&nbsp;The&nbsp;<br>
+<td colspan=2><tt>Specifies&nbsp;the&nbsp;initials&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.&nbsp;The<br>
 element&nbsp;cannot&nbsp;be&nbsp;repeated.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -4076,8 +4250,8 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <font color="#000000" face="helvetica, arial"><a name="Jot">class <strong>Jot</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Storage&nbsp;for&nbsp;arbitrary&nbsp;pieces&nbsp;of&nbsp;information&nbsp;about&nbsp;the&nbsp;contact.&nbsp;Each&nbsp;jot&nbsp;<br>
-has&nbsp;a&nbsp;type&nbsp;specified&nbsp;by&nbsp;the&nbsp;rel&nbsp;attribute&nbsp;and&nbsp;a&nbsp;text&nbsp;value.&nbsp;<br>
+<td colspan=2><tt>Storage&nbsp;for&nbsp;arbitrary&nbsp;pieces&nbsp;of&nbsp;information&nbsp;about&nbsp;the&nbsp;contact.&nbsp;Each&nbsp;jot<br>
+has&nbsp;a&nbsp;type&nbsp;specified&nbsp;by&nbsp;the&nbsp;rel&nbsp;attribute&nbsp;and&nbsp;a&nbsp;text&nbsp;value.<br>
 The&nbsp;element&nbsp;can&nbsp;be&nbsp;repeated.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -4228,11 +4402,11 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <font color="#000000" face="helvetica, arial"><a name="Language">class <strong>Language</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Specifies&nbsp;the&nbsp;preferred&nbsp;languages&nbsp;of&nbsp;the&nbsp;contact.&nbsp;<br>
+<td colspan=2><tt>Specifies&nbsp;the&nbsp;preferred&nbsp;languages&nbsp;of&nbsp;the&nbsp;contact.<br>
 The&nbsp;element&nbsp;can&nbsp;be&nbsp;repeated.<br>
 &nbsp;<br>
-&nbsp;The&nbsp;language&nbsp;must&nbsp;be&nbsp;specified&nbsp;using&nbsp;one&nbsp;of&nbsp;two&nbsp;mutually&nbsp;exclusive&nbsp;methods:&nbsp;<br>
-&nbsp;using&nbsp;the&nbsp;freeform&nbsp;@label&nbsp;attribute,&nbsp;or&nbsp;using&nbsp;the&nbsp;@code&nbsp;attribute,&nbsp;whose&nbsp;value&nbsp;<br>
+&nbsp;The&nbsp;language&nbsp;must&nbsp;be&nbsp;specified&nbsp;using&nbsp;one&nbsp;of&nbsp;two&nbsp;mutually&nbsp;exclusive&nbsp;methods:<br>
+&nbsp;using&nbsp;the&nbsp;freeform&nbsp;@label&nbsp;attribute,&nbsp;or&nbsp;using&nbsp;the&nbsp;@code&nbsp;attribute,&nbsp;whose&nbsp;value<br>
 &nbsp;must&nbsp;conform&nbsp;to&nbsp;the&nbsp;IETF&nbsp;BCP&nbsp;47&nbsp;specification.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -4385,7 +4559,7 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <font color="#000000" face="helvetica, arial"><a name="MaidenName">class <strong>MaidenName</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Specifies&nbsp;maiden&nbsp;name&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.&nbsp;<br>
+<td colspan=2><tt>Specifies&nbsp;maiden&nbsp;name&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.<br>
 The&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -4532,8 +4706,8 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <font color="#000000" face="helvetica, arial"><a name="Mileage">class <strong>Mileage</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Specifies&nbsp;the&nbsp;mileage&nbsp;for&nbsp;the&nbsp;entity&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.&nbsp;<br>
-Can&nbsp;be&nbsp;used&nbsp;for&nbsp;example&nbsp;to&nbsp;document&nbsp;distance&nbsp;needed&nbsp;for&nbsp;reimbursement&nbsp;<br>
+<td colspan=2><tt>Specifies&nbsp;the&nbsp;mileage&nbsp;for&nbsp;the&nbsp;entity&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.<br>
+Can&nbsp;be&nbsp;used&nbsp;for&nbsp;example&nbsp;to&nbsp;document&nbsp;distance&nbsp;needed&nbsp;for&nbsp;reimbursement<br>
 purposes.&nbsp;The&nbsp;value&nbsp;is&nbsp;not&nbsp;interpreted.&nbsp;The&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -4682,7 +4856,7 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt>This&nbsp;is&nbsp;used&nbsp;to&nbsp;disambiguate&nbsp;a&nbsp;street&nbsp;address&nbsp;when&nbsp;a&nbsp;city&nbsp;contains&nbsp;more&nbsp;than<br>
 one&nbsp;street&nbsp;with&nbsp;the&nbsp;same&nbsp;name,&nbsp;or&nbsp;to&nbsp;specify&nbsp;a&nbsp;small&nbsp;place&nbsp;whose&nbsp;mail&nbsp;is<br>
-routed&nbsp;through&nbsp;a&nbsp;larger&nbsp;postal&nbsp;town.&nbsp;In&nbsp;China&nbsp;it&nbsp;could&nbsp;be&nbsp;a&nbsp;county&nbsp;or&nbsp;a&nbsp;<br>
+routed&nbsp;through&nbsp;a&nbsp;larger&nbsp;postal&nbsp;town.&nbsp;In&nbsp;China&nbsp;it&nbsp;could&nbsp;be&nbsp;a&nbsp;county&nbsp;or&nbsp;a<br>
 minor&nbsp;city.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -4829,7 +5003,7 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <font color="#000000" face="helvetica, arial"><a name="NickName">class <strong>NickName</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Specifies&nbsp;the&nbsp;nickname&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.&nbsp;<br>
+<td colspan=2><tt>Specifies&nbsp;the&nbsp;nickname&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.<br>
 The&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -4976,7 +5150,7 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <font color="#000000" face="helvetica, arial"><a name="Occupation">class <strong>Occupation</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Specifies&nbsp;the&nbsp;occupation/profession&nbsp;of&nbsp;the&nbsp;person&nbsp;specified&nbsp;by&nbsp;the&nbsp;contact.&nbsp;<br>
+<td colspan=2><tt>Specifies&nbsp;the&nbsp;occupation/profession&nbsp;of&nbsp;the&nbsp;person&nbsp;specified&nbsp;by&nbsp;the&nbsp;contact.<br>
 The&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -5292,7 +5466,7 @@ Specifies&nbsp;billing&nbsp;information&nbsp;of&nbsp;the&nbsp;entity&nbsp;repres
 
 <dl><dt><strong>calendar_link</strong> = [&lt;class 'gdata.contacts.data.CalendarLink'&gt;]</dl>
 
-<dl><dt><strong>directory_server</strong> = &lt;class 'gdata.contacts.data.DirectoryServer'&gt;<dd><tt>A&nbsp;directory&nbsp;server&nbsp;associated&nbsp;with&nbsp;this&nbsp;contact.&nbsp;<br>
+<dl><dt><strong>directory_server</strong> = &lt;class 'gdata.contacts.data.DirectoryServer'&gt;<dd><tt>A&nbsp;directory&nbsp;server&nbsp;associated&nbsp;with&nbsp;this&nbsp;contact.<br>
 May&nbsp;not&nbsp;be&nbsp;repeated.</tt></dl>
 
 <dl><dt><strong>email</strong> = [&lt;class 'gdata.data.Email'&gt;]</dl>
@@ -5310,18 +5484,20 @@ The&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
 
 <dl><dt><strong>im</strong> = [&lt;class 'gdata.data.Im'&gt;]</dl>
 
-<dl><dt><strong>initals</strong> = &lt;class 'gdata.contacts.data.Initials'&gt;<dd><tt>Specifies&nbsp;the&nbsp;initials&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.&nbsp;The&nbsp;<br>
+<dl><dt><strong>initials</strong> = &lt;class 'gdata.contacts.data.Initials'&gt;<dd><tt>Specifies&nbsp;the&nbsp;initials&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.&nbsp;The<br>
 element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
 
 <dl><dt><strong>jot</strong> = [&lt;class 'gdata.contacts.data.Jot'&gt;]</dl>
 
 <dl><dt><strong>language</strong> = [&lt;class 'gdata.contacts.data.Language'&gt;]</dl>
 
-<dl><dt><strong>maiden_name</strong> = &lt;class 'gdata.contacts.data.MaidenName'&gt;<dd><tt>Specifies&nbsp;maiden&nbsp;name&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.&nbsp;<br>
+<dl><dt><strong>link</strong> = [&lt;class 'gdata.contacts.data.ContactLink'&gt;]</dl>
+
+<dl><dt><strong>maiden_name</strong> = &lt;class 'gdata.contacts.data.MaidenName'&gt;<dd><tt>Specifies&nbsp;maiden&nbsp;name&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.<br>
 The&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
 
-<dl><dt><strong>mileage</strong> = &lt;class 'gdata.contacts.data.Mileage'&gt;<dd><tt>Specifies&nbsp;the&nbsp;mileage&nbsp;for&nbsp;the&nbsp;entity&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.&nbsp;<br>
-Can&nbsp;be&nbsp;used&nbsp;for&nbsp;example&nbsp;to&nbsp;document&nbsp;distance&nbsp;needed&nbsp;for&nbsp;reimbursement&nbsp;<br>
+<dl><dt><strong>mileage</strong> = &lt;class 'gdata.contacts.data.Mileage'&gt;<dd><tt>Specifies&nbsp;the&nbsp;mileage&nbsp;for&nbsp;the&nbsp;entity&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.<br>
+Can&nbsp;be&nbsp;used&nbsp;for&nbsp;example&nbsp;to&nbsp;document&nbsp;distance&nbsp;needed&nbsp;for&nbsp;reimbursement<br>
 purposes.&nbsp;The&nbsp;value&nbsp;is&nbsp;not&nbsp;interpreted.&nbsp;The&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
 
 <dl><dt><strong>name</strong> = &lt;class 'gdata.data.Name'&gt;<dd><tt>The&nbsp;gd:name&nbsp;element.<br>
@@ -5329,10 +5505,10 @@ purposes.&nbsp;The&nbsp;value&nbsp;is&nbsp;not&nbsp;interpreted.&nbsp;The&nbsp;e
 Allows&nbsp;storing&nbsp;person's&nbsp;name&nbsp;in&nbsp;a&nbsp;structured&nbsp;way.&nbsp;Consists&nbsp;of<br>
 given&nbsp;name,&nbsp;additional&nbsp;name,&nbsp;family&nbsp;name,&nbsp;prefix,&nbsp;suffix&nbsp;and&nbsp;full&nbsp;name.</tt></dl>
 
-<dl><dt><strong>nickname</strong> = &lt;class 'gdata.contacts.data.NickName'&gt;<dd><tt>Specifies&nbsp;the&nbsp;nickname&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.&nbsp;<br>
+<dl><dt><strong>nickname</strong> = &lt;class 'gdata.contacts.data.NickName'&gt;<dd><tt>Specifies&nbsp;the&nbsp;nickname&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.<br>
 The&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
 
-<dl><dt><strong>occupation</strong> = &lt;class 'gdata.contacts.data.Occupation'&gt;<dd><tt>Specifies&nbsp;the&nbsp;occupation/profession&nbsp;of&nbsp;the&nbsp;person&nbsp;specified&nbsp;by&nbsp;the&nbsp;contact.&nbsp;<br>
+<dl><dt><strong>occupation</strong> = &lt;class 'gdata.contacts.data.Occupation'&gt;<dd><tt>Specifies&nbsp;the&nbsp;occupation/profession&nbsp;of&nbsp;the&nbsp;person&nbsp;specified&nbsp;by&nbsp;the&nbsp;contact.<br>
 The&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
 
 <dl><dt><strong>organization</strong> = &lt;class 'gdata.data.Organization'&gt;<dd><tt>The&nbsp;gd:organization&nbsp;element.<br>
@@ -5359,6 +5535,8 @@ The&nbsp;priority&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
 &nbsp;&nbsp;*&nbsp;Private<br>
 &nbsp;<br>
 The&nbsp;sensitivity&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
+
+<dl><dt><strong>status</strong> = &lt;class 'gdata.contacts.data.Status'&gt;<dd><tt>Person's&nbsp;status&nbsp;element.</tt></dl>
 
 <dl><dt><strong>structured_postal_address</strong> = [&lt;class 'gdata.data.StructuredPostalAddress'&gt;]</dl>
 
@@ -5430,8 +5608,6 @@ Data and other attributes inherited from <a href="atom.data.html#FeedEntryParent
 <dl><dt><strong>contributor</strong> = [&lt;class 'atom.data.Contributor'&gt;]</dl>
 
 <dl><dt><strong>id</strong> = &lt;class 'atom.data.Id'&gt;<dd><tt>The&nbsp;atom:id&nbsp;element.</tt></dl>
-
-<dl><dt><strong>link</strong> = [&lt;class 'atom.data.Link'&gt;]</dl>
 
 <dl><dt><strong>rights</strong> = &lt;class 'atom.data.Rights'&gt;<dd><tt>The&nbsp;atom:rights&nbsp;element.</tt></dl>
 
@@ -5639,7 +5815,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="PersonEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="PersonEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="PersonEntry-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -5674,7 +5850,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="PersonEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="PersonEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="PersonEntry-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -5700,7 +5876,7 @@ consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
 <font color="#000000" face="helvetica, arial"><a name="PostalCode">class <strong>PostalCode</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Postal&nbsp;code.&nbsp;Usually&nbsp;country-wide,&nbsp;but&nbsp;sometimes&nbsp;specific&nbsp;to&nbsp;the&nbsp;<br>
+<td colspan=2><tt>Postal&nbsp;code.&nbsp;Usually&nbsp;country-wide,&nbsp;but&nbsp;sometimes&nbsp;specific&nbsp;to&nbsp;the<br>
 city&nbsp;(e.g.&nbsp;"2"&nbsp;in&nbsp;"Dublin&nbsp;2,&nbsp;Ireland"&nbsp;addresses).<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -6021,7 +6197,7 @@ Specifies&nbsp;billing&nbsp;information&nbsp;of&nbsp;the&nbsp;entity&nbsp;repres
 
 <dl><dt><strong>calendar_link</strong> = [&lt;class 'gdata.contacts.data.CalendarLink'&gt;]</dl>
 
-<dl><dt><strong>directory_server</strong> = &lt;class 'gdata.contacts.data.DirectoryServer'&gt;<dd><tt>A&nbsp;directory&nbsp;server&nbsp;associated&nbsp;with&nbsp;this&nbsp;contact.&nbsp;<br>
+<dl><dt><strong>directory_server</strong> = &lt;class 'gdata.contacts.data.DirectoryServer'&gt;<dd><tt>A&nbsp;directory&nbsp;server&nbsp;associated&nbsp;with&nbsp;this&nbsp;contact.<br>
 May&nbsp;not&nbsp;be&nbsp;repeated.</tt></dl>
 
 <dl><dt><strong>email</strong> = [&lt;class 'gdata.data.Email'&gt;]</dl>
@@ -6039,18 +6215,20 @@ The&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
 
 <dl><dt><strong>im</strong> = [&lt;class 'gdata.data.Im'&gt;]</dl>
 
-<dl><dt><strong>initals</strong> = &lt;class 'gdata.contacts.data.Initials'&gt;<dd><tt>Specifies&nbsp;the&nbsp;initials&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.&nbsp;The&nbsp;<br>
+<dl><dt><strong>initials</strong> = &lt;class 'gdata.contacts.data.Initials'&gt;<dd><tt>Specifies&nbsp;the&nbsp;initials&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.&nbsp;The<br>
 element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
 
 <dl><dt><strong>jot</strong> = [&lt;class 'gdata.contacts.data.Jot'&gt;]</dl>
 
 <dl><dt><strong>language</strong> = [&lt;class 'gdata.contacts.data.Language'&gt;]</dl>
 
-<dl><dt><strong>maiden_name</strong> = &lt;class 'gdata.contacts.data.MaidenName'&gt;<dd><tt>Specifies&nbsp;maiden&nbsp;name&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.&nbsp;<br>
+<dl><dt><strong>link</strong> = [&lt;class 'gdata.contacts.data.ContactLink'&gt;]</dl>
+
+<dl><dt><strong>maiden_name</strong> = &lt;class 'gdata.contacts.data.MaidenName'&gt;<dd><tt>Specifies&nbsp;maiden&nbsp;name&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.<br>
 The&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
 
-<dl><dt><strong>mileage</strong> = &lt;class 'gdata.contacts.data.Mileage'&gt;<dd><tt>Specifies&nbsp;the&nbsp;mileage&nbsp;for&nbsp;the&nbsp;entity&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.&nbsp;<br>
-Can&nbsp;be&nbsp;used&nbsp;for&nbsp;example&nbsp;to&nbsp;document&nbsp;distance&nbsp;needed&nbsp;for&nbsp;reimbursement&nbsp;<br>
+<dl><dt><strong>mileage</strong> = &lt;class 'gdata.contacts.data.Mileage'&gt;<dd><tt>Specifies&nbsp;the&nbsp;mileage&nbsp;for&nbsp;the&nbsp;entity&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.<br>
+Can&nbsp;be&nbsp;used&nbsp;for&nbsp;example&nbsp;to&nbsp;document&nbsp;distance&nbsp;needed&nbsp;for&nbsp;reimbursement<br>
 purposes.&nbsp;The&nbsp;value&nbsp;is&nbsp;not&nbsp;interpreted.&nbsp;The&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
 
 <dl><dt><strong>name</strong> = &lt;class 'gdata.data.Name'&gt;<dd><tt>The&nbsp;gd:name&nbsp;element.<br>
@@ -6058,10 +6236,10 @@ purposes.&nbsp;The&nbsp;value&nbsp;is&nbsp;not&nbsp;interpreted.&nbsp;The&nbsp;e
 Allows&nbsp;storing&nbsp;person's&nbsp;name&nbsp;in&nbsp;a&nbsp;structured&nbsp;way.&nbsp;Consists&nbsp;of<br>
 given&nbsp;name,&nbsp;additional&nbsp;name,&nbsp;family&nbsp;name,&nbsp;prefix,&nbsp;suffix&nbsp;and&nbsp;full&nbsp;name.</tt></dl>
 
-<dl><dt><strong>nickname</strong> = &lt;class 'gdata.contacts.data.NickName'&gt;<dd><tt>Specifies&nbsp;the&nbsp;nickname&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.&nbsp;<br>
+<dl><dt><strong>nickname</strong> = &lt;class 'gdata.contacts.data.NickName'&gt;<dd><tt>Specifies&nbsp;the&nbsp;nickname&nbsp;of&nbsp;the&nbsp;person&nbsp;represented&nbsp;by&nbsp;the&nbsp;contact.<br>
 The&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
 
-<dl><dt><strong>occupation</strong> = &lt;class 'gdata.contacts.data.Occupation'&gt;<dd><tt>Specifies&nbsp;the&nbsp;occupation/profession&nbsp;of&nbsp;the&nbsp;person&nbsp;specified&nbsp;by&nbsp;the&nbsp;contact.&nbsp;<br>
+<dl><dt><strong>occupation</strong> = &lt;class 'gdata.contacts.data.Occupation'&gt;<dd><tt>Specifies&nbsp;the&nbsp;occupation/profession&nbsp;of&nbsp;the&nbsp;person&nbsp;specified&nbsp;by&nbsp;the&nbsp;contact.<br>
 The&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
 
 <dl><dt><strong>organization</strong> = &lt;class 'gdata.data.Organization'&gt;<dd><tt>The&nbsp;gd:organization&nbsp;element.<br>
@@ -6088,6 +6266,8 @@ The&nbsp;priority&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
 &nbsp;&nbsp;*&nbsp;Private<br>
 &nbsp;<br>
 The&nbsp;sensitivity&nbsp;element&nbsp;cannot&nbsp;be&nbsp;repeated.</tt></dl>
+
+<dl><dt><strong>status</strong> = &lt;class 'gdata.contacts.data.Status'&gt;<dd><tt>Person's&nbsp;status&nbsp;element.</tt></dl>
 
 <dl><dt><strong>structured_postal_address</strong> = [&lt;class 'gdata.data.StructuredPostalAddress'&gt;]</dl>
 
@@ -6159,8 +6339,6 @@ Data and other attributes inherited from <a href="atom.data.html#FeedEntryParent
 <dl><dt><strong>contributor</strong> = [&lt;class 'atom.data.Contributor'&gt;]</dl>
 
 <dl><dt><strong>id</strong> = &lt;class 'atom.data.Id'&gt;<dd><tt>The&nbsp;atom:id&nbsp;element.</tt></dl>
-
-<dl><dt><strong>link</strong> = [&lt;class 'atom.data.Link'&gt;]</dl>
 
 <dl><dt><strong>rights</strong> = &lt;class 'atom.data.Rights'&gt;<dd><tt>The&nbsp;atom:rights&nbsp;element.</tt></dl>
 
@@ -6368,7 +6546,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="ProfileEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="ProfileEntry-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="ProfileEntry-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -6403,7 +6581,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="ProfileEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="ProfileEntry-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="ProfileEntry-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -6912,7 +7090,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="ProfilesFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="ProfilesFeed-FindUrl"><strong>FindUrl</strong></a> = find_url(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="ProfilesFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a> = get_alternate_link(self)</dt></dl>
 
@@ -6947,7 +7125,7 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;str&nbsp;containing&nbsp;the&nbsp;link's&nbsp;href&nbsp;or&nbsp;None&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel<br>
 &nbsp;&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
 
-<dl><dt><a name="ProfilesFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
+<dl><dt><a name="ProfilesFeed-find_url"><strong>find_url</strong></a>(self, rel)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;(as&nbsp;a&nbsp;string)&nbsp;in&nbsp;a&nbsp;link&nbsp;with&nbsp;the&nbsp;desired&nbsp;rel&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="ProfilesFeed-get_alternate_link"><strong>get_alternate_link</strong></a>(self)</dt></dl>
 
@@ -6973,7 +7151,7 @@ consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
 <font color="#000000" face="helvetica, arial"><a name="Region">class <strong>Region</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>A&nbsp;state,&nbsp;province,&nbsp;county&nbsp;(in&nbsp;Ireland),&nbsp;Land&nbsp;(in&nbsp;Germany),&nbsp;<br>
+<td colspan=2><tt>A&nbsp;state,&nbsp;province,&nbsp;county&nbsp;(in&nbsp;Ireland),&nbsp;Land&nbsp;(in&nbsp;Germany),<br>
 departement&nbsp;(in&nbsp;France),&nbsp;etc.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -7120,7 +7298,7 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <font color="#000000" face="helvetica, arial"><a name="Relation">class <strong>Relation</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>This&nbsp;element&nbsp;describe&nbsp;another&nbsp;entity&nbsp;(usually&nbsp;a&nbsp;person)&nbsp;that&nbsp;is&nbsp;in&nbsp;a&nbsp;<br>
+<td colspan=2><tt>This&nbsp;element&nbsp;describe&nbsp;another&nbsp;entity&nbsp;(usually&nbsp;a&nbsp;person)&nbsp;that&nbsp;is&nbsp;in&nbsp;a<br>
 relation&nbsp;of&nbsp;some&nbsp;kind&nbsp;with&nbsp;the&nbsp;contact.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -7426,10 +7604,160 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Status">class <strong>Status</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Person's&nbsp;status&nbsp;element.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.contacts.data.html#Status">Status</a></dd>
+<dd><a href="atom.core.html#XmlElement">atom.core.XmlElement</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>indexed</strong> = 'indexed'</dl>
+
+<hr>
+Methods inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><a name="Status-FindChildren"><strong>FindChildren</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Status-FindExtensions"><strong>FindExtensions</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Status-GetAttributes"><strong>GetAttributes</strong></a> = get_attributes(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="Status-GetElements"><strong>GetElements</strong></a> = get_elements(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Status-ToString"><strong>ToString</strong></a> = to_string(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>, pretty_print<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Status-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="Status-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Status-get_attributes"><strong>get_attributes</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;attributes&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;attributes&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_attributes&nbsp;with&nbsp;the&nbsp;tag<br>
+and&nbsp;namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches<br>
+through&nbsp;the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;attributes&nbsp;stored&nbsp;in<br>
+_other_attributes&nbsp;which&nbsp;did&nbsp;not&nbsp;fit&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this<br>
+class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;attributes.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;XmlAttribute&nbsp;objects&nbsp;for&nbsp;the&nbsp;matching&nbsp;attributes.</tt></dd></dl>
+
+<dl><dt><a name="Status-get_elements"><strong>get_elements</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>, version<font color="#909090">=1</font>)</dt><dd><tt>Find&nbsp;all&nbsp;sub&nbsp;elements&nbsp;which&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;all&nbsp;elements&nbsp;in&nbsp;this&nbsp;object,&nbsp;call&nbsp;get_elements&nbsp;with&nbsp;the&nbsp;tag&nbsp;and<br>
+namespace&nbsp;both&nbsp;set&nbsp;to&nbsp;None&nbsp;(the&nbsp;default).&nbsp;This&nbsp;method&nbsp;searches&nbsp;through<br>
+the&nbsp;object's&nbsp;members&nbsp;and&nbsp;the&nbsp;elements&nbsp;stored&nbsp;in&nbsp;_other_elements&nbsp;which<br>
+did&nbsp;not&nbsp;match&nbsp;any&nbsp;of&nbsp;the&nbsp;XML&nbsp;parsing&nbsp;rules&nbsp;for&nbsp;this&nbsp;class.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str<br>
+&nbsp;&nbsp;namespace:&nbsp;str<br>
+&nbsp;&nbsp;version:&nbsp;int&nbsp;Specifies&nbsp;the&nbsp;version&nbsp;of&nbsp;the&nbsp;XML&nbsp;rules&nbsp;to&nbsp;be&nbsp;used&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searching&nbsp;for&nbsp;matching&nbsp;elements.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;matching&nbsp;XmlElements.</tt></dd></dl>
+
+<dl><dt><a name="Status-to_string"><strong>to_string</strong></a>(self, version<font color="#909090">=1</font>, encoding<font color="#909090">=None</font>, pretty_print<font color="#909090">=None</font>)</dt><dd><tt>Converts&nbsp;this&nbsp;object&nbsp;to&nbsp;XML.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>attributes</strong></dt>
+</dl>
+<dl><dt><strong>children</strong></dt>
+</dl>
+<dl><dt><strong>extension_attributes</strong></dt>
+</dl>
+<dl><dt><strong>extension_elements</strong></dt>
+</dl>
+<dl><dt><strong>namespace</strong></dt>
+</dl>
+<dl><dt><strong>tag</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="atom.core.html#XmlElement">atom.core.XmlElement</a>:<br>
+<dl><dt><strong>text</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="Street">class <strong>Street</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Can&nbsp;be&nbsp;street,&nbsp;avenue,&nbsp;road,&nbsp;etc.&nbsp;This&nbsp;element&nbsp;also&nbsp;includes&nbsp;the&nbsp;house&nbsp;<br>
+<td colspan=2><tt>Can&nbsp;be&nbsp;street,&nbsp;avenue,&nbsp;road,&nbsp;etc.&nbsp;This&nbsp;element&nbsp;also&nbsp;includes&nbsp;the&nbsp;house<br>
 number&nbsp;and&nbsp;room/apartment/flat/floor&nbsp;number.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -7577,7 +7905,7 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt>Handles&nbsp;administrative&nbsp;districts&nbsp;such&nbsp;as&nbsp;U.S.&nbsp;or&nbsp;U.K.&nbsp;counties&nbsp;that&nbsp;are&nbsp;not<br>
-&nbsp;used&nbsp;for&nbsp;mail&nbsp;addressing&nbsp;purposes.&nbsp;Subregion&nbsp;is&nbsp;not&nbsp;intended&nbsp;for&nbsp;<br>
+&nbsp;used&nbsp;for&nbsp;mail&nbsp;addressing&nbsp;purposes.&nbsp;Subregion&nbsp;is&nbsp;not&nbsp;intended&nbsp;for<br>
 &nbsp;delivery&nbsp;addresses.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -8029,7 +8357,7 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <font color="#000000" face="helvetica, arial"><a name="Website">class <strong>Website</strong></a>(<a href="atom.core.html#XmlElement">atom.core.XmlElement</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Describes&nbsp;websites&nbsp;associated&nbsp;with&nbsp;the&nbsp;contact,&nbsp;including&nbsp;links.&nbsp;<br>
+<td colspan=2><tt>Describes&nbsp;websites&nbsp;associated&nbsp;with&nbsp;the&nbsp;contact,&nbsp;including&nbsp;links.<br>
 May&nbsp;be&nbsp;repeated.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>

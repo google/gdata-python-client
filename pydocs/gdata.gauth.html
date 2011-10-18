@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.gauth</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/gauth.py">/usr/local/lib/python2.6/dist-packages/gdata/gauth.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/working/gdata-python-client/src/gdata/gauth.py">/home/afshar/working/gdata-python-client/src/gdata/gauth.py</a></font></td></tr></table>
     <p><tt>Provides&nbsp;auth&nbsp;related&nbsp;token&nbsp;classes&nbsp;and&nbsp;functions&nbsp;for&nbsp;Google&nbsp;Data&nbsp;APIs.<br>
 &nbsp;<br>
 Token&nbsp;classes&nbsp;represent&nbsp;a&nbsp;user's&nbsp;authorization&nbsp;of&nbsp;this&nbsp;app&nbsp;to&nbsp;access&nbsp;their<br>
@@ -42,9 +42,12 @@ ae_save</tt></p>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="atom.html">atom</a><br>
+<a href="datetime.html">datetime</a><br>
 </td><td width="25%" valign=top><a href="random.html">random</a><br>
+<a href="simplejson.html">simplejson</a><br>
 </td><td width="25%" valign=top><a href="time.html">time</a><br>
-</td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
+<a href="urllib.html">urllib</a><br>
+</td><td width="25%" valign=top><a href="urlparse.html">urlparse</a><br>
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
@@ -63,6 +66,7 @@ ae_save</tt></p>
 </font></dt></dl>
 </dd>
 <dt><font face="helvetica, arial"><a href="gdata.gauth.html#ClientLoginToken">ClientLoginToken</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.gauth.html#OAuth2Token">OAuth2Token</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.gauth.html#OAuthHmacToken">OAuthHmacToken</a>
 </font></dt><dd>
 <dl>
@@ -83,7 +87,8 @@ ae_save</tt></p>
 <dt><font face="helvetica, arial"><a href="gdata.gauth.html#Error">Error</a>
 </font></dt><dd>
 <dl>
-<dt><font face="helvetica, arial"><a href="gdata.gauth.html#UnsupportedTokenType">UnsupportedTokenType</a>
+<dt><font face="helvetica, arial"><a href="gdata.gauth.html#OAuth2AccessTokenError">OAuth2AccessTokenError</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.gauth.html#UnsupportedTokenType">UnsupportedTokenType</a>
 </font></dt></dl>
 </dd>
 </dl>
@@ -212,6 +217,165 @@ Data descriptors inherited from <a href="exceptions.html#BaseException">exceptio
 <dl><dt><strong>args</strong></dt>
 </dl>
 <dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="OAuth2AccessTokenError">class <strong>OAuth2AccessTokenError</strong></a>(<a href="gdata.gauth.html#Error">Error</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Raised&nbsp;when&nbsp;an&nbsp;OAuth2&nbsp;error&nbsp;occurs.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.gauth.html#OAuth2AccessTokenError">OAuth2AccessTokenError</a></dd>
+<dd><a href="gdata.gauth.html#Error">Error</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="OAuth2AccessTokenError-__init__"><strong>__init__</strong></a>(self, error_message)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="gdata.gauth.html#Error">Error</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#OAuth2AccessTokenError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="OAuth2AccessTokenError-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#OAuth2AccessTokenError-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="OAuth2AccessTokenError-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#OAuth2AccessTokenError-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="OAuth2AccessTokenError-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#OAuth2AccessTokenError-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="OAuth2AccessTokenError-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#OAuth2AccessTokenError-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="OAuth2AccessTokenError-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="OAuth2AccessTokenError-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#OAuth2AccessTokenError-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="OAuth2AccessTokenError-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#OAuth2AccessTokenError-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="OAuth2AccessTokenError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="OAuth2AccessTokenError-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#OAuth2AccessTokenError-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="OAuth2AccessTokenError-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="OAuth2Token">class <strong>OAuth2Token</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Token&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;for&nbsp;OAuth&nbsp;2.0&nbsp;as&nbsp;described&nbsp;on<br>
+&lt;<a href="http://code.google.com/apis/accounts/docs/OAuth2.html">http://code.google.com/apis/accounts/docs/OAuth2.html</a>&gt;.<br>
+&nbsp;<br>
+Token&nbsp;can&nbsp;be&nbsp;applied&nbsp;to&nbsp;a&nbsp;gdata.client.GDClient&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;using&nbsp;the&nbsp;<a href="#OAuth2Token-authorize">authorize</a>()<br>
+method,&nbsp;which&nbsp;then&nbsp;signs&nbsp;each&nbsp;request&nbsp;from&nbsp;that&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;the&nbsp;OAuth&nbsp;2.0<br>
+access&nbsp;token.<br>
+This&nbsp;class&nbsp;supports&nbsp;3&nbsp;flows&nbsp;of&nbsp;OAuth&nbsp;2.0:<br>
+&nbsp;&nbsp;Client-side&nbsp;web&nbsp;flow:&nbsp;call&nbsp;generate_authorize_url&nbsp;with&nbsp;`response_type='token''<br>
+&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;the&nbsp;registered&nbsp;`redirect_uri'.<br>
+&nbsp;&nbsp;Server-side&nbsp;web&nbsp;flow:&nbsp;call&nbsp;generate_authorize_url&nbsp;with&nbsp;the&nbsp;registered<br>
+&nbsp;&nbsp;&nbsp;&nbsp;`redirect_url'.<br>
+&nbsp;&nbsp;Native&nbsp;applications&nbsp;flow:&nbsp;call&nbsp;generate_authorize_url&nbsp;as&nbsp;it&nbsp;is.&nbsp;You&nbsp;will&nbsp;have<br>
+&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;ask&nbsp;the&nbsp;user&nbsp;to&nbsp;go&nbsp;to&nbsp;the&nbsp;generated&nbsp;url&nbsp;and&nbsp;pass&nbsp;in&nbsp;the&nbsp;authorization<br>
+&nbsp;&nbsp;&nbsp;&nbsp;code&nbsp;to&nbsp;your&nbsp;application.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="OAuth2Token-ModifyRequest"><strong>ModifyRequest</strong></a> = <a href="#OAuth2Token-modify_request">modify_request</a>(self, http_request)</dt></dl>
+
+<dl><dt><a name="OAuth2Token-__init__"><strong>__init__</strong></a>(self, client_id, client_secret, scope, user_agent, auth_uri<font color="#909090">='https://accounts.google.com/o/oauth2/auth'</font>, token_uri<font color="#909090">='https://accounts.google.com/o/oauth2/token'</font>, access_token<font color="#909090">=None</font>, refresh_token<font color="#909090">=None</font>)</dt><dd><tt>Create&nbsp;an&nbsp;instance&nbsp;of&nbsp;<a href="#OAuth2Token">OAuth2Token</a><br>
+&nbsp;<br>
+This&nbsp;constructor&nbsp;is&nbsp;not&nbsp;usually&nbsp;called&nbsp;by&nbsp;the&nbsp;user,&nbsp;instead<br>
+OAuth2Credentials&nbsp;objects&nbsp;are&nbsp;instantiated&nbsp;by&nbsp;the&nbsp;OAuth2WebServerFlow.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;client_id:&nbsp;string,&nbsp;client&nbsp;identifier.<br>
+&nbsp;&nbsp;client_secret:&nbsp;string&nbsp;client&nbsp;secret.<br>
+&nbsp;&nbsp;scope:&nbsp;string,&nbsp;scope&nbsp;of&nbsp;the&nbsp;credentials&nbsp;being&nbsp;requested.<br>
+&nbsp;&nbsp;user_agent:&nbsp;string,&nbsp;HTTP&nbsp;User-Agent&nbsp;to&nbsp;provide&nbsp;for&nbsp;this&nbsp;application.<br>
+&nbsp;&nbsp;auth_uri:&nbsp;string,&nbsp;URI&nbsp;for&nbsp;authorization&nbsp;endpoint.&nbsp;For&nbsp;convenience<br>
+&nbsp;&nbsp;&nbsp;&nbsp;defaults&nbsp;to&nbsp;Google's&nbsp;endpoints&nbsp;but&nbsp;any&nbsp;OAuth&nbsp;2.0&nbsp;provider&nbsp;can&nbsp;be&nbsp;used.<br>
+&nbsp;&nbsp;token_uri:&nbsp;string,&nbsp;URI&nbsp;for&nbsp;token&nbsp;endpoint.&nbsp;For&nbsp;convenience<br>
+&nbsp;&nbsp;&nbsp;&nbsp;defaults&nbsp;to&nbsp;Google's&nbsp;endpoints&nbsp;but&nbsp;any&nbsp;OAuth&nbsp;2.0&nbsp;provider&nbsp;can&nbsp;be&nbsp;used.<br>
+&nbsp;&nbsp;access_token:&nbsp;string,&nbsp;access&nbsp;token.<br>
+&nbsp;&nbsp;refresh_token:&nbsp;string,&nbsp;refresh&nbsp;token.</tt></dd></dl>
+
+<dl><dt><a name="OAuth2Token-authorize"><strong>authorize</strong></a>(self, client)</dt><dd><tt>Authorize&nbsp;a&nbsp;gdata.client.GDClient&nbsp;instance&nbsp;with&nbsp;these&nbsp;credentials.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;client:&nbsp;An&nbsp;instance&nbsp;of&nbsp;gdata.client.GDClient<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;something&nbsp;that&nbsp;acts&nbsp;like&nbsp;it.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;A&nbsp;modified&nbsp;instance&nbsp;of&nbsp;client&nbsp;that&nbsp;was&nbsp;passed&nbsp;in.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&nbsp;&nbsp;c&nbsp;=&nbsp;gdata.client.GDClient(source='user-agent')<br>
+&nbsp;&nbsp;c&nbsp;=&nbsp;token.<a href="#OAuth2Token-authorize">authorize</a>(c)</tt></dd></dl>
+
+<dl><dt><a name="OAuth2Token-generate_authorize_url"><strong>generate_authorize_url</strong></a>(self, redirect_uri<font color="#909090">='oob'</font>, response_type<font color="#909090">='code'</font>, **kwargs)</dt><dd><tt>Returns&nbsp;a&nbsp;URI&nbsp;to&nbsp;redirect&nbsp;to&nbsp;the&nbsp;provider.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;redirect_uri:&nbsp;string,&nbsp;Either&nbsp;the&nbsp;string&nbsp;'oob'&nbsp;for&nbsp;a&nbsp;non-web-based<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;application,&nbsp;or&nbsp;a&nbsp;URI&nbsp;that&nbsp;handles&nbsp;the&nbsp;callback&nbsp;from<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;authorization&nbsp;server.<br>
+&nbsp;&nbsp;response_type:&nbsp;string,&nbsp;Either&nbsp;the&nbsp;string&nbsp;'code'&nbsp;for&nbsp;server-side&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;native&nbsp;application,&nbsp;or&nbsp;the&nbsp;string&nbsp;'token'&nbsp;for&nbsp;client-<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;side&nbsp;application.<br>
+&nbsp;<br>
+If&nbsp;redirect_uri&nbsp;is&nbsp;'oob'&nbsp;then&nbsp;pass&nbsp;in&nbsp;the<br>
+generated&nbsp;verification&nbsp;code&nbsp;to&nbsp;get_access_token,<br>
+otherwise&nbsp;pass&nbsp;in&nbsp;the&nbsp;query&nbsp;parameters&nbsp;received<br>
+at&nbsp;the&nbsp;callback&nbsp;uri&nbsp;to&nbsp;get_access_token.<br>
+If&nbsp;the&nbsp;response_type&nbsp;is&nbsp;'token',&nbsp;no&nbsp;need&nbsp;to&nbsp;call<br>
+get_access_token&nbsp;as&nbsp;the&nbsp;API&nbsp;will&nbsp;return&nbsp;it&nbsp;within<br>
+the&nbsp;query&nbsp;parameters&nbsp;received&nbsp;at&nbsp;the&nbsp;callback:<br>
+&nbsp;&nbsp;oauth2_token.access_token&nbsp;=&nbsp;YOUR_ACCESS_TOKEN</tt></dd></dl>
+
+<dl><dt><a name="OAuth2Token-get_access_token"><strong>get_access_token</strong></a>(self, code)</dt><dd><tt>Exhanges&nbsp;a&nbsp;code&nbsp;for&nbsp;an&nbsp;access&nbsp;token.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;code:&nbsp;string&nbsp;or&nbsp;dict,&nbsp;either&nbsp;the&nbsp;code&nbsp;as&nbsp;a&nbsp;string,&nbsp;or&nbsp;a&nbsp;dictionary<br>
+&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;query&nbsp;parameters&nbsp;to&nbsp;the&nbsp;redirect_uri,&nbsp;which&nbsp;contains<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;code.</tt></dd></dl>
+
+<dl><dt><a name="OAuth2Token-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt><dd><tt>Sets&nbsp;the&nbsp;Authorization&nbsp;header&nbsp;in&nbsp;the&nbsp;HTTP&nbsp;request&nbsp;using&nbsp;the&nbsp;token.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;same&nbsp;HTTP&nbsp;request&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>invalid</strong></dt>
+<dd><tt>True&nbsp;if&nbsp;the&nbsp;credentials&nbsp;are&nbsp;invalid,&nbsp;such&nbsp;as&nbsp;being&nbsp;revoked.</tt></dd>
 </dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -763,7 +927,7 @@ Returns:<br>
 &nbsp;<br>
 Supported&nbsp;token&nbsp;classes:&nbsp;<a href="#ClientLoginToken">ClientLoginToken</a>,&nbsp;<a href="#AuthSubToken">AuthSubToken</a>,&nbsp;<a href="#SecureAuthSubToken">SecureAuthSubToken</a>,<br>
 <a href="#OAuthRsaToken">OAuthRsaToken</a>,&nbsp;and&nbsp;<a href="#OAuthHmacToken">OAuthHmacToken</a>,&nbsp;<a href="#TwoLeggedOAuthRsaToken">TwoLeggedOAuthRsaToken</a>,<br>
-<a href="#TwoLeggedOAuthHmacToken">TwoLeggedOAuthHmacToken</a>.<br>
+<a href="#TwoLeggedOAuthHmacToken">TwoLeggedOAuthHmacToken</a>&nbsp;and&nbsp;<a href="#OAuth2Token">OAuth2Token</a>.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;blob:&nbsp;string&nbsp;created&nbsp;by&nbsp;token_to_blob.<br>
@@ -780,7 +944,7 @@ Returns:<br>
 &nbsp;<br>
 Supported&nbsp;token&nbsp;classes:&nbsp;<a href="#ClientLoginToken">ClientLoginToken</a>,&nbsp;<a href="#AuthSubToken">AuthSubToken</a>,&nbsp;<a href="#SecureAuthSubToken">SecureAuthSubToken</a>,<br>
 <a href="#OAuthRsaToken">OAuthRsaToken</a>,&nbsp;and&nbsp;<a href="#OAuthHmacToken">OAuthHmacToken</a>,&nbsp;<a href="#TwoLeggedOAuthRsaToken">TwoLeggedOAuthRsaToken</a>,<br>
-<a href="#TwoLeggedOAuthHmacToken">TwoLeggedOAuthHmacToken</a>.<br>
+<a href="#TwoLeggedOAuthHmacToken">TwoLeggedOAuthHmacToken</a>&nbsp;and&nbsp;<a href="#OAuth2Token">OAuth2Token</a>.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;token:&nbsp;A&nbsp;token&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;which&nbsp;must&nbsp;be&nbsp;of&nbsp;one&nbsp;of&nbsp;the&nbsp;supported&nbsp;token&nbsp;classes.<br>
@@ -1133,7 +1297,7 @@ Returns:<br>
 &nbsp;<br>
 Supported&nbsp;token&nbsp;classes:&nbsp;<a href="#ClientLoginToken">ClientLoginToken</a>,&nbsp;<a href="#AuthSubToken">AuthSubToken</a>,&nbsp;<a href="#SecureAuthSubToken">SecureAuthSubToken</a>,<br>
 <a href="#OAuthRsaToken">OAuthRsaToken</a>,&nbsp;and&nbsp;<a href="#OAuthHmacToken">OAuthHmacToken</a>,&nbsp;<a href="#TwoLeggedOAuthRsaToken">TwoLeggedOAuthRsaToken</a>,<br>
-<a href="#TwoLeggedOAuthHmacToken">TwoLeggedOAuthHmacToken</a>.<br>
+<a href="#TwoLeggedOAuthHmacToken">TwoLeggedOAuthHmacToken</a>&nbsp;and&nbsp;<a href="#OAuth2Token">OAuth2Token</a>.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;blob:&nbsp;string&nbsp;created&nbsp;by&nbsp;token_to_blob.<br>
@@ -1150,7 +1314,7 @@ Returns:<br>
 &nbsp;<br>
 Supported&nbsp;token&nbsp;classes:&nbsp;<a href="#ClientLoginToken">ClientLoginToken</a>,&nbsp;<a href="#AuthSubToken">AuthSubToken</a>,&nbsp;<a href="#SecureAuthSubToken">SecureAuthSubToken</a>,<br>
 <a href="#OAuthRsaToken">OAuthRsaToken</a>,&nbsp;and&nbsp;<a href="#OAuthHmacToken">OAuthHmacToken</a>,&nbsp;<a href="#TwoLeggedOAuthRsaToken">TwoLeggedOAuthRsaToken</a>,<br>
-<a href="#TwoLeggedOAuthHmacToken">TwoLeggedOAuthHmacToken</a>.<br>
+<a href="#TwoLeggedOAuthHmacToken">TwoLeggedOAuthHmacToken</a>&nbsp;and&nbsp;<a href="#OAuth2Token">OAuth2Token</a>.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;token:&nbsp;A&nbsp;token&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;which&nbsp;must&nbsp;be&nbsp;of&nbsp;one&nbsp;of&nbsp;the&nbsp;supported&nbsp;token&nbsp;classes.<br>
@@ -1194,6 +1358,7 @@ Returns:<br>
 <strong>AUTH_SCOPES</strong> = {'analytics': ('https://www.google.com/analytics/feeds/',), 'apps': ('http://www.google.com/a/feeds/', 'https://www.google.com/a/feeds/', 'http://apps-apis.google.com/a/feeds/', 'https://apps-apis.google.com/a/feeds/'), 'blogger': ('http://www.blogger.com/feeds/',), 'books': ('http://www.google.com/books/feeds/',), 'cl': ('https://www.google.com/calendar/feeds/', 'http://www.google.com/calendar/feeds/'), 'code': ('http://code.google.com/feeds/issues',), 'codesearch': ('http://www.google.com/codesearch/feeds/',), 'cp': ('https://www.google.com/m8/feeds/', 'http://www.google.com/m8/feeds/'), 'finance': ('http://finance.google.com/finance/feeds/',), 'gbase': ('http://base.google.com/base/feeds/', 'http://www.google.com/base/feeds/'), ...}<br>
 <strong>DEFAULT_DOMAIN</strong> = 'default'<br>
 <strong>HMAC_SHA1</strong> = 'HMAC-SHA1'<br>
+<strong>OAUTH2_AUTH_LABEL</strong> = 'OAuth '<br>
 <strong>OAUTH_AUTHORIZE_URL</strong> = 'https://www.google.com/accounts/OAuthAuthorizeToken'<br>
 <strong>PROGRAMMATIC_AUTH_LABEL</strong> = 'GoogleLogin auth='<br>
 <strong>REQUEST_TOKEN</strong> = 1<br>

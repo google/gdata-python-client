@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.contacts.html"><font color="#ffffff">contacts</font></a>.client</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/contacts/client.py">/usr/local/lib/python2.6/dist-packages/gdata/contacts/client.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/working/gdata-python-client/src/gdata/contacts/client.py">/home/afshar/working/gdata-python-client/src/gdata/contacts/client.py</a></font></td></tr></table>
     <p><tt>#&nbsp;Copyright&nbsp;(C)&nbsp;2009&nbsp;Google&nbsp;Inc.<br>
 #<br>
 #&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;"License");<br>
@@ -70,37 +70,37 @@
 Methods defined here:<br>
 <dl><dt><a name="ContactsClient-AddContact"><strong>AddContact</strong></a> = <a href="#ContactsClient-add_contact">add_contact</a>(self, new_contact, insert_uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, billing_information<font color="#909090">=None</font>, birthday<font color="#909090">=None</font>, calendar_link<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ContactsClient-ChangePhoto"><strong>ChangePhoto</strong></a> = <a href="#ContactsClient-change_photo">change_photo</a>(self, media, contact_entry_or_url, content_type<font color="#909090">=None</font>, content_length<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="ContactsClient-ChangePhoto"><strong>ChangePhoto</strong></a> = <a href="#ContactsClient-change_photo">change_photo</a>(self, media, contact_entry_or_url, content_type<font color="#909090">=None</font>, content_length<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="ContactsClient-CreateContact"><strong>CreateContact</strong></a> = <a href="#ContactsClient-create_contact">create_contact</a>(self, new_contact, insert_uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ContactsClient-CreateGroup"><strong>CreateGroup</strong></a> = <a href="#ContactsClient-create_group">create_group</a>(self, new_group, insert_uri<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="ContactsClient-CreateGroup"><strong>CreateGroup</strong></a> = <a href="#ContactsClient-create_group">create_group</a>(self, new_group, insert_uri<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="ContactsClient-DeleteGroup"><strong>DeleteGroup</strong></a> = <a href="#ContactsClient-delete_group">delete_group</a>(self, group_object, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kws)</dt></dl>
 
-<dl><dt><a name="ContactsClient-DeletePhoto"><strong>DeletePhoto</strong></a> = <a href="#ContactsClient-delete_photo">delete_photo</a>(self, contact_entry_or_url)</dt></dl>
+<dl><dt><a name="ContactsClient-DeletePhoto"><strong>DeletePhoto</strong></a> = <a href="#ContactsClient-delete_photo">delete_photo</a>(self, contact_entry_or_url, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ContactsClient-ExecuteBatch"><strong>ExecuteBatch</strong></a> = <a href="#ContactsClient-execute_batch">execute_batch</a>(self, batch_feed, url<font color="#909090">='http://www.google.com/m8/feeds/contacts/default/full/batch'</font>, desired_class<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="ContactsClient-ExecuteBatch"><strong>ExecuteBatch</strong></a> = <a href="#ContactsClient-execute_batch">execute_batch</a>(self, batch_feed, url<font color="#909090">='https://www.google.com/m8/feeds/contacts/default/full/batch'</font>, desired_class<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ContactsClient-ExecuteBatchProfiles"><strong>ExecuteBatchProfiles</strong></a> = <a href="#ContactsClient-execute_batch_profiles">execute_batch_profiles</a>(self, batch_feed, url, desired_class<font color="#909090">=&lt;class 'gdata.contacts.data.ProfilesFeed'&gt;</font>)</dt></dl>
+<dl><dt><a name="ContactsClient-ExecuteBatchProfiles"><strong>ExecuteBatchProfiles</strong></a> = <a href="#ContactsClient-execute_batch_profiles">execute_batch_profiles</a>(self, batch_feed, url<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.contacts.data.ProfilesFeed'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="ContactsClient-GetContact"><strong>GetContact</strong></a> = <a href="#ContactsClient-get_contact">get_contact</a>(self, uri, desired_class<font color="#909090">=&lt;class 'gdata.contacts.data.ContactEntry'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ContactsClient-GetContacts"><strong>GetContacts</strong></a> = <a href="#ContactsClient-get_contacts">get_contacts</a>(self, desired_class<font color="#909090">=&lt;class 'gdata.contacts.data.ContactsFeed'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="ContactsClient-GetContacts"><strong>GetContacts</strong></a> = <a href="#ContactsClient-get_contacts">get_contacts</a>(self, uri<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.contacts.data.ContactsFeed'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ContactsClient-GetFeedUri"><strong>GetFeedUri</strong></a> = <a href="#ContactsClient-get_feed_uri">get_feed_uri</a>(self, kind<font color="#909090">='contacts'</font>, contact_list<font color="#909090">=None</font>, projection<font color="#909090">='full'</font>, scheme<font color="#909090">='http'</font>)</dt></dl>
+<dl><dt><a name="ContactsClient-GetFeedUri"><strong>GetFeedUri</strong></a> = <a href="#ContactsClient-get_feed_uri">get_feed_uri</a>(self, kind<font color="#909090">='contacts'</font>, contact_list<font color="#909090">=None</font>, projection<font color="#909090">='full'</font>, scheme<font color="#909090">='https'</font>)</dt></dl>
 
 <dl><dt><a name="ContactsClient-GetGroup"><strong>GetGroup</strong></a> = <a href="#ContactsClient-get_group">get_group</a>(self, uri<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.contacts.data.GroupEntry'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="ContactsClient-GetGroups"><strong>GetGroups</strong></a> = <a href="#ContactsClient-get_groups">get_groups</a>(self, uri<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.contacts.data.GroupsFeed'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ContactsClient-GetPhoto"><strong>GetPhoto</strong></a> = <a href="#ContactsClient-get_photo">get_photo</a>(self, contact_entry_or_url)</dt></dl>
+<dl><dt><a name="ContactsClient-GetPhoto"><strong>GetPhoto</strong></a> = <a href="#ContactsClient-get_photo">get_photo</a>(self, contact_entry_or_url, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ContactsClient-GetProfile"><strong>GetProfile</strong></a> = <a href="#ContactsClient-get_profile">get_profile</a>(self, uri)</dt></dl>
+<dl><dt><a name="ContactsClient-GetProfile"><strong>GetProfile</strong></a> = <a href="#ContactsClient-get_profile">get_profile</a>(self, uri, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ContactsClient-GetProfilesFeed"><strong>GetProfilesFeed</strong></a> = <a href="#ContactsClient-get_profiles_feed">get_profiles_feed</a>(self, uri<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="ContactsClient-GetProfilesFeed"><strong>GetProfilesFeed</strong></a> = <a href="#ContactsClient-get_profiles_feed">get_profiles_feed</a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ContactsClient-UpdateGroup"><strong>UpdateGroup</strong></a> = <a href="#ContactsClient-update_group">update_group</a>(self, edit_uri, updated_group, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, desired_class<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="ContactsClient-UpdateGroup"><strong>UpdateGroup</strong></a> = <a href="#ContactsClient-update_group">update_group</a>(self, edit_uri, updated_group, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, desired_class<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="ContactsClient-UpdateProfile"><strong>UpdateProfile</strong></a> = <a href="#ContactsClient-update_profile">update_profile</a>(self, updated_profile, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
 
@@ -129,13 +129,13 @@ Returns:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'reason':&nbsp;HTTP&nbsp;reason&nbsp;from&nbsp;the&nbsp;server,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'body':&nbsp;HTTP&nbsp;body&nbsp;of&nbsp;the&nbsp;server's&nbsp;response}</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-change_photo"><strong>change_photo</strong></a>(self, media, contact_entry_or_url, content_type<font color="#909090">=None</font>, content_length<font color="#909090">=None</font>)</dt><dd><tt>Change&nbsp;the&nbsp;photo&nbsp;for&nbsp;the&nbsp;contact&nbsp;by&nbsp;uploading&nbsp;a&nbsp;new&nbsp;photo.<br>
+<dl><dt><a name="ContactsClient-change_photo"><strong>change_photo</strong></a>(self, media, contact_entry_or_url, content_type<font color="#909090">=None</font>, content_length<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Change&nbsp;the&nbsp;photo&nbsp;for&nbsp;the&nbsp;contact&nbsp;by&nbsp;uploading&nbsp;a&nbsp;new&nbsp;photo.<br>
 &nbsp;<br>
 Performs&nbsp;a&nbsp;PUT&nbsp;against&nbsp;the&nbsp;photo&nbsp;edit&nbsp;URL&nbsp;to&nbsp;send&nbsp;the&nbsp;binary&nbsp;data&nbsp;for&nbsp;the<br>
 photo.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;media:&nbsp;filename,&nbsp;file-like-object,&nbsp;or&nbsp;a&nbsp;gdata.MediaSource&nbsp;object&nbsp;to&nbsp;send.<br>
+&nbsp;&nbsp;media:&nbsp;filename,&nbsp;file-like-object,&nbsp;or&nbsp;a&nbsp;gdata.data.MediaSource&nbsp;object&nbsp;to&nbsp;send.<br>
 &nbsp;&nbsp;contact_entry_or_url:&nbsp;ContactEntry&nbsp;or&nbsp;str&nbsp;If&nbsp;it&nbsp;is&nbsp;a&nbsp;ContactEntry,&nbsp;this<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method&nbsp;will&nbsp;search&nbsp;for&nbsp;an&nbsp;edit&nbsp;photo&nbsp;link&nbsp;URL&nbsp;and<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;perform&nbsp;a&nbsp;PUT&nbsp;to&nbsp;the&nbsp;URL.<br>
@@ -168,13 +168,17 @@ Returns:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'reason':&nbsp;HTTP&nbsp;reason&nbsp;from&nbsp;the&nbsp;server,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'body':&nbsp;HTTP&nbsp;body&nbsp;of&nbsp;the&nbsp;server's&nbsp;response}</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-create_group"><strong>create_group</strong></a>(self, new_group, insert_uri<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="ContactsClient-create_group"><strong>create_group</strong></a>(self, new_group, insert_uri<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="ContactsClient-delete_group"><strong>delete_group</strong></a>(self, group_object, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kws)</dt></dl>
 
-<dl><dt><a name="ContactsClient-delete_photo"><strong>delete_photo</strong></a>(self, contact_entry_or_url)</dt></dl>
+<dl><dt><a name="ContactsClient-delete_photo"><strong>delete_photo</strong></a>(self, contact_entry_or_url, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Delete&nbsp;the&nbsp;contact's&nbsp;profile&nbsp;photo.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;contact_entry_or_url:&nbsp;a&nbsp;gdata.contacts.ContactEntry&nbsp;object&nbsp;or&nbsp;a&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;containing&nbsp;the&nbsp;photo&nbsp;link's&nbsp;URL.</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-execute_batch"><strong>execute_batch</strong></a>(self, batch_feed, url<font color="#909090">='http://www.google.com/m8/feeds/contacts/default/full/batch'</font>, desired_class<font color="#909090">=None</font>)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;feed&nbsp;to&nbsp;the&nbsp;server.<br>
+<dl><dt><a name="ContactsClient-execute_batch"><strong>execute_batch</strong></a>(self, batch_feed, url<font color="#909090">='https://www.google.com/m8/feeds/contacts/default/full/batch'</font>, desired_class<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;feed&nbsp;to&nbsp;the&nbsp;server.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;batch_feed:&nbsp;gdata.contacts.ContactFeed&nbsp;A&nbsp;feed&nbsp;containing&nbsp;batch<br>
@@ -184,13 +188,13 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;had&nbsp;been&nbsp;inserted.<br>
 &nbsp;&nbsp;url:&nbsp;str&nbsp;The&nbsp;batch&nbsp;URL&nbsp;to&nbsp;which&nbsp;these&nbsp;operations&nbsp;should&nbsp;be&nbsp;applied.<br>
 &nbsp;&nbsp;converter:&nbsp;Function&nbsp;(optional)&nbsp;The&nbsp;function&nbsp;used&nbsp;to&nbsp;convert&nbsp;the&nbsp;server's<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;to&nbsp;an&nbsp;object.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;to&nbsp;an&nbsp;object.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;results&nbsp;of&nbsp;the&nbsp;batch&nbsp;request's&nbsp;execution&nbsp;on&nbsp;the&nbsp;server.&nbsp;If&nbsp;the<br>
 &nbsp;&nbsp;default&nbsp;converter&nbsp;is&nbsp;used,&nbsp;this&nbsp;is&nbsp;stored&nbsp;in&nbsp;a&nbsp;ContactsFeed.</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-execute_batch_profiles"><strong>execute_batch_profiles</strong></a>(self, batch_feed, url, desired_class<font color="#909090">=&lt;class 'gdata.contacts.data.ProfilesFeed'&gt;</font>)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;feed&nbsp;to&nbsp;the&nbsp;server.<br>
+<dl><dt><a name="ContactsClient-execute_batch_profiles"><strong>execute_batch_profiles</strong></a>(self, batch_feed, url<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.contacts.data.ProfilesFeed'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;feed&nbsp;to&nbsp;the&nbsp;server.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;batch_feed:&nbsp;gdata.profiles.ProfilesFeed&nbsp;A&nbsp;feed&nbsp;containing&nbsp;batch<br>
@@ -209,7 +213,7 @@ Returns:<br>
 
 <dl><dt><a name="ContactsClient-get_contact"><strong>get_contact</strong></a>(self, uri, desired_class<font color="#909090">=&lt;class 'gdata.contacts.data.ContactEntry'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ContactsClient-get_contacts"><strong>get_contacts</strong></a>(self, desired_class<font color="#909090">=&lt;class 'gdata.contacts.data.ContactsFeed'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Obtains&nbsp;a&nbsp;feed&nbsp;with&nbsp;the&nbsp;contacts&nbsp;belonging&nbsp;to&nbsp;the&nbsp;current&nbsp;user.<br>
+<dl><dt><a name="ContactsClient-get_contacts"><strong>get_contacts</strong></a>(self, uri<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.contacts.data.ContactsFeed'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Obtains&nbsp;a&nbsp;feed&nbsp;with&nbsp;the&nbsp;contacts&nbsp;belonging&nbsp;to&nbsp;the&nbsp;current&nbsp;user.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;auth_token:&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header&nbsp;in&nbsp;its<br>
@@ -227,7 +231,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTTP&nbsp;reponse&nbsp;object&nbsp;will&nbsp;be&nbsp;returned.&nbsp;Defaults&nbsp;to<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.spreadsheets.data.SpreadsheetsFeed.</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-get_feed_uri"><strong>get_feed_uri</strong></a>(self, kind<font color="#909090">='contacts'</font>, contact_list<font color="#909090">=None</font>, projection<font color="#909090">='full'</font>, scheme<font color="#909090">='http'</font>)</dt><dd><tt>Builds&nbsp;a&nbsp;feed&nbsp;URI.<br>
+<dl><dt><a name="ContactsClient-get_feed_uri"><strong>get_feed_uri</strong></a>(self, kind<font color="#909090">='contacts'</font>, contact_list<font color="#909090">=None</font>, projection<font color="#909090">='full'</font>, scheme<font color="#909090">='https'</font>)</dt><dd><tt>Builds&nbsp;a&nbsp;feed&nbsp;URI.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;kind:&nbsp;The&nbsp;type&nbsp;of&nbsp;feed&nbsp;to&nbsp;return,&nbsp;typically&nbsp;'groups'&nbsp;or&nbsp;'contacts'.<br>
@@ -243,21 +247,21 @@ Returns:<br>
 &nbsp;&nbsp;A&nbsp;feed&nbsp;URI&nbsp;using&nbsp;the&nbsp;given&nbsp;kind,&nbsp;contact&nbsp;list,&nbsp;and&nbsp;projection.<br>
 &nbsp;&nbsp;Example:&nbsp;'/m8/feeds/contacts/default/full'.</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-get_group"><strong>get_group</strong></a>(self, uri<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.contacts.data.GroupEntry'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Get&nbsp;a&nbsp;single&nbsp;groups&nbsp;details&nbsp;<br>
+<dl><dt><a name="ContactsClient-get_group"><strong>get_group</strong></a>(self, uri<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.contacts.data.GroupEntry'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Get&nbsp;a&nbsp;single&nbsp;groups&nbsp;details<br>
 Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;uri:&nbsp;&nbsp;the&nbsp;group&nbsp;uri&nbsp;or&nbsp;id</tt></dd></dl>
 
 <dl><dt><a name="ContactsClient-get_groups"><strong>get_groups</strong></a>(self, uri<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.contacts.data.GroupsFeed'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="ContactsClient-get_photo"><strong>get_photo</strong></a>(self, contact_entry_or_url)</dt><dd><tt>Retrives&nbsp;the&nbsp;binary&nbsp;data&nbsp;for&nbsp;the&nbsp;contact's&nbsp;profile&nbsp;photo&nbsp;as&nbsp;a&nbsp;string.<br>
+<dl><dt><a name="ContactsClient-get_photo"><strong>get_photo</strong></a>(self, contact_entry_or_url, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrives&nbsp;the&nbsp;binary&nbsp;data&nbsp;for&nbsp;the&nbsp;contact's&nbsp;profile&nbsp;photo&nbsp;as&nbsp;a&nbsp;string.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;contact_entry_or_url:&nbsp;a&nbsp;gdata.contacts.ContactEntry&nbsp;objecr&nbsp;or&nbsp;a&nbsp;string<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;containing&nbsp;the&nbsp;photo&nbsp;link's&nbsp;URL.&nbsp;If&nbsp;the&nbsp;contact&nbsp;entry&nbsp;does&nbsp;not&nbsp;<br>
+&nbsp;&nbsp;contact_entry_or_url:&nbsp;a&nbsp;gdata.contacts.ContactEntry&nbsp;object&nbsp;or&nbsp;a&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;containing&nbsp;the&nbsp;photo&nbsp;link's&nbsp;URL.&nbsp;If&nbsp;the&nbsp;contact&nbsp;entry&nbsp;does&nbsp;not<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contain&nbsp;a&nbsp;photo&nbsp;link,&nbsp;the&nbsp;image&nbsp;will&nbsp;not&nbsp;be&nbsp;fetched&nbsp;and&nbsp;this&nbsp;method<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;return&nbsp;None.</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-get_profile"><strong>get_profile</strong></a>(self, uri)</dt><dd><tt>Retrieves&nbsp;a&nbsp;domain's&nbsp;profile&nbsp;for&nbsp;the&nbsp;user.<br>
+<dl><dt><a name="ContactsClient-get_profile"><strong>get_profile</strong></a>(self, uri, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;a&nbsp;domain's&nbsp;profile&nbsp;for&nbsp;the&nbsp;user.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;uri:&nbsp;string&nbsp;the&nbsp;URL&nbsp;to&nbsp;retrieve&nbsp;the&nbsp;profiles&nbsp;feed,<br>
@@ -267,7 +271,7 @@ Returns:<br>
 &nbsp;&nbsp;On&nbsp;success,&nbsp;a&nbsp;ProfileEntry&nbsp;containing&nbsp;the&nbsp;profile&nbsp;for&nbsp;the&nbsp;user.<br>
 &nbsp;&nbsp;On&nbsp;failure,&nbsp;raises&nbsp;a&nbsp;RequestError</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-get_profiles_feed"><strong>get_profiles_feed</strong></a>(self, uri<font color="#909090">=None</font>)</dt><dd><tt>Retrieves&nbsp;a&nbsp;feed&nbsp;containing&nbsp;all&nbsp;domain's&nbsp;profiles.<br>
+<dl><dt><a name="ContactsClient-get_profiles_feed"><strong>get_profiles_feed</strong></a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;a&nbsp;feed&nbsp;containing&nbsp;all&nbsp;domain's&nbsp;profiles.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;uri:&nbsp;string&nbsp;(optional)&nbsp;the&nbsp;URL&nbsp;to&nbsp;retrieve&nbsp;the&nbsp;profiles&nbsp;feed,<br>
@@ -277,7 +281,7 @@ Returns:<br>
 &nbsp;&nbsp;On&nbsp;success,&nbsp;a&nbsp;ProfilesFeed&nbsp;containing&nbsp;the&nbsp;profiles.<br>
 &nbsp;&nbsp;On&nbsp;failure,&nbsp;raises&nbsp;a&nbsp;RequestError.</tt></dd></dl>
 
-<dl><dt><a name="ContactsClient-update_group"><strong>update_group</strong></a>(self, edit_uri, updated_group, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, desired_class<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="ContactsClient-update_group"><strong>update_group</strong></a>(self, edit_uri, updated_group, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, desired_class<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="ContactsClient-update_profile"><strong>update_profile</strong></a>(self, updated_profile, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Updates&nbsp;an&nbsp;existing&nbsp;profile.<br>
 &nbsp;<br>
@@ -372,7 +376,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;text&nbsp;which&nbsp;was&nbsp;contained&nbsp;in&nbsp;the&nbsp;challenge.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Generated&nbsp;token,&nbsp;which&nbsp;is&nbsp;also&nbsp;stored&nbsp;in&nbsp;this&nbsp;object.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Raises:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;RequestError&nbsp;or&nbsp;one&nbsp;of&nbsp;its&nbsp;suclasses:&nbsp;BadAuthentication,<br>
@@ -606,7 +610,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;text&nbsp;which&nbsp;was&nbsp;contained&nbsp;in&nbsp;the&nbsp;challenge.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Generated&nbsp;token,&nbsp;which&nbsp;is&nbsp;also&nbsp;stored&nbsp;in&nbsp;this&nbsp;object.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Raises:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;RequestError&nbsp;or&nbsp;one&nbsp;of&nbsp;its&nbsp;suclasses:&nbsp;BadAuthentication,<br>
@@ -792,6 +796,10 @@ Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
 
 <hr>
+Data and other attributes inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
+<dl><dt><strong>alt_auth_service</strong> = None</dl>
+
+<hr>
 Methods inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
 <dl><dt><a name="ContactsClient-Get"><strong>Get</strong></a> = get(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Performs&nbsp;a&nbsp;request&nbsp;using&nbsp;the&nbsp;GET&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
@@ -815,6 +823,8 @@ Data and other attributes inherited from <a href="atom.client.html#AtomPubClient
 
 <dl><dt><strong>host</strong> = None</dl>
 
+<dl><dt><strong>xoauth_requestor_id</strong> = None</dl>
+
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -836,24 +846,30 @@ Full&nbsp;specs&nbsp;can&nbsp;be&nbsp;found&nbsp;at:&nbsp;U{Contacts&nbsp;query&
 Methods defined here:<br>
 <dl><dt><a name="ContactsQuery-ModifyRequest"><strong>ModifyRequest</strong></a> = <a href="#ContactsQuery-modify_request">modify_request</a>(self, http_request)</dt></dl>
 
-<dl><dt><a name="ContactsQuery-__init__"><strong>__init__</strong></a>(self, feed<font color="#909090">=None</font>, group<font color="#909090">=None</font>, orderby<font color="#909090">=None</font>, showdeleted<font color="#909090">=None</font>, sortorder<font color="#909090">=None</font>, requirealldeleted<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>@param&nbsp;max_results:&nbsp;The&nbsp;maximum&nbsp;number&nbsp;of&nbsp;entries&nbsp;to&nbsp;return.&nbsp;If&nbsp;you&nbsp;want&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;receive&nbsp;all&nbsp;of&nbsp;the&nbsp;contacts,&nbsp;rather&nbsp;than&nbsp;only&nbsp;the&nbsp;default&nbsp;maximum,&nbsp;you&nbsp;<br>
+<dl><dt><a name="ContactsQuery-__init__"><strong>__init__</strong></a>(self, feed<font color="#909090">=None</font>, group<font color="#909090">=None</font>, orderby<font color="#909090">=None</font>, showdeleted<font color="#909090">=None</font>, sortorder<font color="#909090">=None</font>, requirealldeleted<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>@param&nbsp;max_results:&nbsp;The&nbsp;maximum&nbsp;number&nbsp;of&nbsp;entries&nbsp;to&nbsp;return.&nbsp;If&nbsp;you&nbsp;want<br>
+&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;receive&nbsp;all&nbsp;of&nbsp;the&nbsp;contacts,&nbsp;rather&nbsp;than&nbsp;only&nbsp;the&nbsp;default&nbsp;maximum,&nbsp;you<br>
 &nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;specify&nbsp;a&nbsp;very&nbsp;large&nbsp;number&nbsp;for&nbsp;max-results.<br>
 @param&nbsp;start-index:&nbsp;The&nbsp;1-based&nbsp;index&nbsp;of&nbsp;the&nbsp;first&nbsp;result&nbsp;to&nbsp;be&nbsp;retrieved.<br>
 @param&nbsp;updated-min:&nbsp;The&nbsp;lower&nbsp;bound&nbsp;on&nbsp;entry&nbsp;update&nbsp;dates.<br>
 @param&nbsp;group:&nbsp;Constrains&nbsp;the&nbsp;results&nbsp;to&nbsp;only&nbsp;the&nbsp;contacts&nbsp;belonging&nbsp;to&nbsp;the<br>
 &nbsp;&nbsp;&nbsp;&nbsp;group&nbsp;specified.&nbsp;Value&nbsp;of&nbsp;this&nbsp;parameter&nbsp;specifies&nbsp;group&nbsp;ID<br>
-@param&nbsp;orderby:&nbsp;&nbsp;Sorting&nbsp;criterion.&nbsp;The&nbsp;only&nbsp;supported&nbsp;value&nbsp;is&nbsp;<br>
+@param&nbsp;orderby:&nbsp;&nbsp;Sorting&nbsp;criterion.&nbsp;The&nbsp;only&nbsp;supported&nbsp;value&nbsp;is<br>
 &nbsp;&nbsp;&nbsp;&nbsp;lastmodified.<br>
 @param&nbsp;showdeleted:&nbsp;Include&nbsp;deleted&nbsp;contacts&nbsp;in&nbsp;the&nbsp;returned&nbsp;contacts&nbsp;feed<br>
 @pram&nbsp;sortorder:&nbsp;Sorting&nbsp;order&nbsp;direction.&nbsp;Can&nbsp;be&nbsp;either&nbsp;ascending&nbsp;or<br>
 &nbsp;&nbsp;&nbsp;&nbsp;descending.<br>
-@param&nbsp;requirealldeleted:&nbsp;Only&nbsp;relevant&nbsp;if&nbsp;showdeleted&nbsp;and&nbsp;updated-min&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;also&nbsp;provided.&nbsp;It&nbsp;dictates&nbsp;the&nbsp;behavior&nbsp;of&nbsp;the&nbsp;server&nbsp;in&nbsp;case&nbsp;it&nbsp;<br>
+@param&nbsp;requirealldeleted:&nbsp;Only&nbsp;relevant&nbsp;if&nbsp;showdeleted&nbsp;and&nbsp;updated-min<br>
+&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;also&nbsp;provided.&nbsp;It&nbsp;dictates&nbsp;the&nbsp;behavior&nbsp;of&nbsp;the&nbsp;server&nbsp;in&nbsp;case&nbsp;it<br>
 &nbsp;&nbsp;&nbsp;&nbsp;detects&nbsp;that&nbsp;placeholders&nbsp;of&nbsp;some&nbsp;entries&nbsp;deleted&nbsp;since&nbsp;the&nbsp;point&nbsp;in<br>
 &nbsp;&nbsp;&nbsp;&nbsp;time&nbsp;specified&nbsp;as&nbsp;updated-min&nbsp;may&nbsp;have&nbsp;been&nbsp;lost.</tt></dd></dl>
 
 <dl><dt><a name="ContactsQuery-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.client.html#Query">gdata.client.Query</a>:<br>
+<dl><dt><a name="ContactsQuery-AddCustomParameter"><strong>AddCustomParameter</strong></a> = add_custom_parameter(self, key, value)</dt></dl>
+
+<dl><dt><a name="ContactsQuery-add_custom_parameter"><strong>add_custom_parameter</strong></a>(self, key, value)</dt></dl>
 
 <hr>
 Data descriptors inherited from <a href="gdata.client.html#Query">gdata.client.Query</a>:<br>
@@ -869,7 +885,12 @@ Data descriptors inherited from <a href="gdata.client.html#Query">gdata.client.Q
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="ProfilesQuery">class <strong>ProfilesQuery</strong></a>(<a href="gdata.client.html#Query">gdata.client.Query</a>)</font></td></tr>
     
-<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Create&nbsp;a&nbsp;custom&nbsp;Profiles&nbsp;<a href="gdata.client.html#Query">Query</a><br>
+&nbsp;<br>
+Full&nbsp;specs&nbsp;can&nbsp;be&nbsp;found&nbsp;at:&nbsp;U{Profiless&nbsp;query&nbsp;parameters&nbsp;reference<br>
+&lt;<a href="http://code.google.com/apis/apps/profiles/reference.html#Parameters">http://code.google.com/apis/apps/profiles/reference.html#Parameters</a>&gt;}<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.contacts.client.html#ProfilesQuery">ProfilesQuery</a></dd>
 <dd><a href="gdata.client.html#Query">gdata.client.Query</a></dd>
@@ -877,13 +898,19 @@ Data descriptors inherited from <a href="gdata.client.html#Query">gdata.client.Q
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="ProfilesQuery-__init__"><strong>__init__</strong></a>(self, feed<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="ProfilesQuery-ModifyRequest"><strong>ModifyRequest</strong></a> = <a href="#ProfilesQuery-modify_request">modify_request</a>(self, http_request)</dt></dl>
+
+<dl><dt><a name="ProfilesQuery-__init__"><strong>__init__</strong></a>(self, feed<font color="#909090">=None</font>, start_key<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>@param&nbsp;start_key:&nbsp;Opaque&nbsp;key&nbsp;of&nbsp;the&nbsp;first&nbsp;element&nbsp;to&nbsp;retrieve.&nbsp;Present&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;next&nbsp;link&nbsp;of&nbsp;an&nbsp;earlier&nbsp;request,&nbsp;if&nbsp;further&nbsp;pages&nbsp;of&nbsp;response&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;available.</tt></dd></dl>
+
+<dl><dt><a name="ProfilesQuery-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt></dl>
 
 <hr>
 Methods inherited from <a href="gdata.client.html#Query">gdata.client.Query</a>:<br>
-<dl><dt><a name="ProfilesQuery-ModifyRequest"><strong>ModifyRequest</strong></a> = modify_request(self, http_request)</dt></dl>
+<dl><dt><a name="ProfilesQuery-AddCustomParameter"><strong>AddCustomParameter</strong></a> = add_custom_parameter(self, key, value)</dt></dl>
 
-<dl><dt><a name="ProfilesQuery-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt></dl>
+<dl><dt><a name="ProfilesQuery-add_custom_parameter"><strong>add_custom_parameter</strong></a>(self, key, value)</dt></dl>
 
 <hr>
 Data descriptors inherited from <a href="gdata.client.html#Query">gdata.client.Query</a>:<br>
@@ -900,8 +927,8 @@ Data descriptors inherited from <a href="gdata.client.html#Query">gdata.client.Q
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>DEFAULT_BATCH_URL</strong> = 'http://www.google.com/m8/feeds/contacts/default/full/batch'<br>
-<strong>DEFAULT_PROFILES_BATCH_URL</strong> = 'http://www.google.com/m8/feeds/profiles/default/full/batch'<br>
+<td width="100%"><strong>DEFAULT_BATCH_URL</strong> = 'https://www.google.com/m8/feeds/contacts/default/full/batch'<br>
+<strong>DEFAULT_PROFILES_BATCH_URL</strong> = 'https://www.google.com/m8/feeds/profiles/domain/%s/full/batch'<br>
 <strong>__author__</strong> = 'vinces1979@gmail.com (Vince Spicer)'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#7799ee">

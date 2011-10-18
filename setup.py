@@ -25,7 +25,7 @@ if sys.version_info[:3] < (2, 5, 0):
 
 setup(
     name='gdata',
-    version='2.0.14',
+    version='2.0.15',
     description='Python client library for Google data APIs',
     long_description = """\
 The Google data Python client library makes it easy to interact with
@@ -51,6 +51,7 @@ models and service modules for the the following Google data services:
 - Google Sites Data API
 - Google Content API For Shopping
 - Google App Marketplace API
+- Google Content API for Shopping
 - core Google data API functionality 
 The core Google data code provides sufficient functionality to use this 
 library with any Google data API (even if a module hasn't been written for 
