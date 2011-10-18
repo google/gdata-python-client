@@ -24,7 +24,6 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 
 import unittest
 import gdata.spreadsheets.client
-import gdata.spreadsheets.text_db
 import gdata.gauth
 import gdata.client
 import atom.http_core

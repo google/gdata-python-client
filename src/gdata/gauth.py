@@ -111,7 +111,7 @@ AUTH_SCOPES = {
     'weaver': ( # Health H9 Sandbox
         'https://www.google.com/h9/feeds/',),
     'wise': ( # Spreadsheets Data API
-        'https://spreadsheets.google.com/feeds/'),
+        'https://spreadsheets.google.com/feeds/',),
     'sitemaps': ( # Google Webmaster Tools API
         'https://www.google.com/webmasters/tools/feeds/',),
     'youtube': ( # YouTube API

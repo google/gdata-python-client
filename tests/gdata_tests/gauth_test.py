@@ -649,10 +649,10 @@ class FindScopesForService(unittest.TestCase):
 
   def test_multiple_services(self):
     self.assertEqual(
-        gdata.gauth.find_scopes_for_services(('jotspot', 'wise')),
-        ['http://sites.google.com/feeds/', 'https://sites.google.com/feeds/',
-         'https://spreadsheets.google.com/feeds/',
-         'http://spreadsheets.google.com/feeds/'])
+        set(gdata.gauth.find_scopes_for_services(('jotspot', 'wise'))),
+        set(['http://sites.google.com/feeds/',
+             'https://sites.google.com/feeds/',
+             'https://spreadsheets.google.com/feeds/']))
 
 
 def suite():
