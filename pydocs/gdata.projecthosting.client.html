@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.projecthosting.html"><font color="#ffffff">projecthosting</font></a>.client</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/projecthosting/client.py">/usr/local/lib/python2.6/dist-packages/gdata/projecthosting/client.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/working/gdata-python-client/src/gdata/projecthosting/client.py">/home/afshar/working/gdata-python-client/src/gdata/projecthosting/client.py</a></font></td></tr></table>
     <p><tt>#&nbsp;Copyright&nbsp;2009&nbsp;Google&nbsp;Inc.<br>
 #<br>
 #&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;"License");<br>
@@ -189,7 +189,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;text&nbsp;which&nbsp;was&nbsp;contained&nbsp;in&nbsp;the&nbsp;challenge.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Generated&nbsp;token,&nbsp;which&nbsp;is&nbsp;also&nbsp;stored&nbsp;in&nbsp;this&nbsp;object.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Raises:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;RequestError&nbsp;or&nbsp;one&nbsp;of&nbsp;its&nbsp;suclasses:&nbsp;BadAuthentication,<br>
@@ -423,7 +423,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;text&nbsp;which&nbsp;was&nbsp;contained&nbsp;in&nbsp;the&nbsp;challenge.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Generated&nbsp;token,&nbsp;which&nbsp;is&nbsp;also&nbsp;stored&nbsp;in&nbsp;this&nbsp;object.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Raises:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;RequestError&nbsp;or&nbsp;one&nbsp;of&nbsp;its&nbsp;suclasses:&nbsp;BadAuthentication,<br>
@@ -587,12 +587,16 @@ Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
 
 <hr>
+Data and other attributes inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
+<dl><dt><strong>alt_auth_service</strong> = None</dl>
+
+<hr>
 Methods inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
 <dl><dt><a name="ProjectHostingClient-Get"><strong>Get</strong></a> = get(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Performs&nbsp;a&nbsp;request&nbsp;using&nbsp;the&nbsp;GET&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
 <dl><dt><a name="ProjectHostingClient-Put"><strong>Put</strong></a> = put(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;data&nbsp;using&nbsp;the&nbsp;PUT&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="ProjectHostingClient-__init__"><strong>__init__</strong></a>(self, http_client<font color="#909090">=None</font>, host<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, source<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;AtomPubClient&nbsp;instance.<br>
+<dl><dt><a name="ProjectHostingClient-__init__"><strong>__init__</strong></a>(self, http_client<font color="#909090">=None</font>, host<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, source<font color="#909090">=None</font>, xoauth_requestor_id<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;AtomPubClient&nbsp;instance.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;source:&nbsp;The&nbsp;name&nbsp;of&nbsp;your&nbsp;application.<br>
@@ -623,6 +627,8 @@ Data descriptors inherited from <a href="atom.client.html#AtomPubClient">atom.cl
 Data and other attributes inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
 <dl><dt><strong>auth_token</strong> = None</dl>
 
+<dl><dt><strong>xoauth_requestor_id</strong> = None</dl>
+
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -649,6 +655,12 @@ Args:<br>
 &nbsp;&nbsp;status:&nbsp;str&nbsp;Return&nbsp;issues&nbsp;based&nbsp;on&nbsp;the&nbsp;status&nbsp;of&nbsp;the&nbsp;issue.</tt></dd></dl>
 
 <dl><dt><a name="Query-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.client.html#Query">gdata.client.Query</a>:<br>
+<dl><dt><a name="Query-AddCustomParameter"><strong>AddCustomParameter</strong></a> = add_custom_parameter(self, key, value)</dt></dl>
+
+<dl><dt><a name="Query-add_custom_parameter"><strong>add_custom_parameter</strong></a>(self, key, value)</dt></dl>
 
 <hr>
 Data descriptors inherited from <a href="gdata.client.html#Query">gdata.client.Query</a>:<br>

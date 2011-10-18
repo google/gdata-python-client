@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.spreadsheets.html"><font color="#ffffff">spreadsheets</font></a>.client</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/spreadsheets/client.py">/usr/local/lib/python2.6/dist-packages/gdata/spreadsheets/client.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/working/gdata-python-client/src/gdata/spreadsheets/client.py">/home/afshar/working/gdata-python-client/src/gdata/spreadsheets/client.py</a></font></td></tr></table>
     <p><tt>Contains&nbsp;a&nbsp;client&nbsp;to&nbsp;communicate&nbsp;with&nbsp;the&nbsp;Google&nbsp;Spreadsheets&nbsp;servers.<br>
 &nbsp;<br>
 For&nbsp;documentation&nbsp;on&nbsp;the&nbsp;Spreadsheets&nbsp;API,&nbsp;see:<br>
@@ -90,6 +90,12 @@ Args:<br>
 <dl><dt><a name="CellQuery-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt></dl>
 
 <hr>
+Methods inherited from <a href="gdata.client.html#Query">gdata.client.Query</a>:<br>
+<dl><dt><a name="CellQuery-AddCustomParameter"><strong>AddCustomParameter</strong></a> = add_custom_parameter(self, key, value)</dt></dl>
+
+<dl><dt><a name="CellQuery-add_custom_parameter"><strong>add_custom_parameter</strong></a>(self, key, value)</dt></dl>
+
+<hr>
 Data descriptors inherited from <a href="gdata.client.html#Query">gdata.client.Query</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
@@ -138,6 +144,12 @@ Args:<br>
 <dl><dt><a name="ListQuery-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt></dl>
 
 <hr>
+Methods inherited from <a href="gdata.client.html#Query">gdata.client.Query</a>:<br>
+<dl><dt><a name="ListQuery-AddCustomParameter"><strong>AddCustomParameter</strong></a> = add_custom_parameter(self, key, value)</dt></dl>
+
+<dl><dt><a name="ListQuery-add_custom_parameter"><strong>add_custom_parameter</strong></a>(self, key, value)</dt></dl>
+
+<hr>
 Data descriptors inherited from <a href="gdata.client.html#Query">gdata.client.Query</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
@@ -174,6 +186,12 @@ Args:<br>
 <dl><dt><a name="SpreadsheetQuery-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt></dl>
 
 <hr>
+Methods inherited from <a href="gdata.client.html#Query">gdata.client.Query</a>:<br>
+<dl><dt><a name="SpreadsheetQuery-AddCustomParameter"><strong>AddCustomParameter</strong></a> = add_custom_parameter(self, key, value)</dt></dl>
+
+<dl><dt><a name="SpreadsheetQuery-add_custom_parameter"><strong>add_custom_parameter</strong></a>(self, key, value)</dt></dl>
+
+<hr>
 Data descriptors inherited from <a href="gdata.client.html#Query">gdata.client.Query</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
@@ -196,11 +214,19 @@ Data descriptors inherited from <a href="gdata.client.html#Query">gdata.client.Q
 </dl>
 <hr>
 Methods defined here:<br>
+<dl><dt><a name="SpreadsheetsClient-AddListEntry"><strong>AddListEntry</strong></a> = <a href="#SpreadsheetsClient-add_list_entry">add_list_entry</a>(self, list_entry, spreadsheet_key, worksheet_id, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
 <dl><dt><a name="SpreadsheetsClient-AddRecord"><strong>AddRecord</strong></a> = <a href="#SpreadsheetsClient-add_record">add_record</a>(self, spreadsheet_key, table_id, fields, title<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="SpreadsheetsClient-AddTable"><strong>AddTable</strong></a> = <a href="#SpreadsheetsClient-add_table">add_table</a>(self, spreadsheet_key, title, summary, worksheet_name, header_row, num_rows, start_row, insertion_mode, column_headers, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="SpreadsheetsClient-AddWorksheet"><strong>AddWorksheet</strong></a> = <a href="#SpreadsheetsClient-add_worksheet">add_worksheet</a>(self, spreadsheet_key, title, rows, cols, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsClient-GetCell"><strong>GetCell</strong></a> = <a href="#SpreadsheetsClient-get_cell">get_cell</a>(self, spreadsheet_key, worksheet_id, row_num, col_num, desired_class<font color="#909090">=&lt;class 'gdata.spreadsheets.data.CellEntry'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsClient-GetCells"><strong>GetCells</strong></a> = <a href="#SpreadsheetsClient-get_cells">get_cells</a>(self, spreadsheet_key, worksheet_id, desired_class<font color="#909090">=&lt;class 'gdata.spreadsheets.data.CellsFeed'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsClient-GetListFeed"><strong>GetListFeed</strong></a> = <a href="#SpreadsheetsClient-get_list_feed">get_list_feed</a>(self, spreadsheet_key, worksheet_id, desired_class<font color="#909090">=&lt;class 'gdata.spreadsheets.data.ListsFeed'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="SpreadsheetsClient-GetRecord"><strong>GetRecord</strong></a> = <a href="#SpreadsheetsClient-get_record">get_record</a>(self, spreadsheet_key, table_id, record_id, desired_class<font color="#909090">=&lt;class 'gdata.spreadsheets.data.Record'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
@@ -213,6 +239,25 @@ Methods defined here:<br>
 <dl><dt><a name="SpreadsheetsClient-GetWorksheet"><strong>GetWorksheet</strong></a> = <a href="#SpreadsheetsClient-get_worksheet">get_worksheet</a>(self, spreadsheet_key, worksheet_id, desired_class<font color="#909090">=&lt;class 'gdata.spreadsheets.data.WorksheetEntry'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="SpreadsheetsClient-GetWorksheets"><strong>GetWorksheets</strong></a> = <a href="#SpreadsheetsClient-get_worksheets">get_worksheets</a>(self, spreadsheet_key, auth_token<font color="#909090">=None</font>, desired_class<font color="#909090">=&lt;class 'gdata.spreadsheets.data.WorksheetsFeed'&gt;</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsClient-add_list_entry"><strong>add_list_entry</strong></a>(self, list_entry, spreadsheet_key, worksheet_id, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Adds&nbsp;a&nbsp;new&nbsp;row&nbsp;to&nbsp;the&nbsp;worksheet's&nbsp;list&nbsp;feed.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;list_entry:&nbsp;gdata.spreadsheets.data.ListsEntry&nbsp;An&nbsp;entry&nbsp;which&nbsp;contains<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;values&nbsp;which&nbsp;should&nbsp;be&nbsp;set&nbsp;for&nbsp;the&nbsp;columns&nbsp;in&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;record.<br>
+&nbsp;&nbsp;spreadsheet_key:&nbsp;str,&nbsp;The&nbsp;unique&nbsp;ID&nbsp;of&nbsp;this&nbsp;containing&nbsp;spreadsheet.&nbsp;This<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;be&nbsp;the&nbsp;ID&nbsp;from&nbsp;the&nbsp;URL&nbsp;or&nbsp;as&nbsp;provided&nbsp;in&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spreadsheet&nbsp;entry.<br>
+&nbsp;&nbsp;worksheet_id:&nbsp;str,&nbsp;The&nbsp;unique&nbsp;ID&nbsp;of&nbsp;the&nbsp;worksheet&nbsp;in&nbsp;this&nbsp;spreadsheet<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;whose&nbsp;cells&nbsp;we&nbsp;want.&nbsp;This&nbsp;can&nbsp;be&nbsp;obtained&nbsp;using<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WorksheetEntry's&nbsp;get_worksheet_id&nbsp;method.<br>
+&nbsp;&nbsp;auth_token:&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header&nbsp;in&nbsp;its<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modify_request&nbsp;method.&nbsp;Recommended&nbsp;classes&nbsp;include<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.&nbsp;Represents&nbsp;the&nbsp;current&nbsp;user.&nbsp;Defaults&nbsp;to&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;if&nbsp;None,&nbsp;this&nbsp;method&nbsp;will&nbsp;look&nbsp;for&nbsp;a&nbsp;value&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;auth_token&nbsp;member&nbsp;of&nbsp;<a href="#SpreadsheetsClient">SpreadsheetsClient</a>.</tt></dd></dl>
 
 <dl><dt><a name="SpreadsheetsClient-add_record"><strong>add_record</strong></a>(self, spreadsheet_key, table_id, fields, title<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Adds&nbsp;a&nbsp;new&nbsp;row&nbsp;to&nbsp;the&nbsp;table.<br>
 &nbsp;<br>
@@ -266,6 +311,88 @@ Args:<br>
 &nbsp;&nbsp;title:&nbsp;str,&nbsp;The&nbsp;title&nbsp;to&nbsp;be&nbsp;used&nbsp;in&nbsp;for&nbsp;the&nbsp;worksheet.<br>
 &nbsp;&nbsp;rows:&nbsp;str&nbsp;or&nbsp;int,&nbsp;The&nbsp;number&nbsp;of&nbsp;rows&nbsp;this&nbsp;worksheet&nbsp;should&nbsp;start&nbsp;with.<br>
 &nbsp;&nbsp;cols:&nbsp;str&nbsp;or&nbsp;int,&nbsp;The&nbsp;number&nbsp;of&nbsp;columns&nbsp;this&nbsp;worksheet&nbsp;should&nbsp;start&nbsp;with.<br>
+&nbsp;&nbsp;auth_token:&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header&nbsp;in&nbsp;its<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modify_request&nbsp;method.&nbsp;Recommended&nbsp;classes&nbsp;include<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.&nbsp;Represents&nbsp;the&nbsp;current&nbsp;user.&nbsp;Defaults&nbsp;to&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;if&nbsp;None,&nbsp;this&nbsp;method&nbsp;will&nbsp;look&nbsp;for&nbsp;a&nbsp;value&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;auth_token&nbsp;member&nbsp;of&nbsp;<a href="#SpreadsheetsClient">SpreadsheetsClient</a>.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsClient-get_cell"><strong>get_cell</strong></a>(self, spreadsheet_key, worksheet_id, row_num, col_num, desired_class<font color="#909090">=&lt;class 'gdata.spreadsheets.data.CellEntry'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;a&nbsp;single&nbsp;cell&nbsp;from&nbsp;the&nbsp;worksheet.<br>
+&nbsp;<br>
+Indexes&nbsp;are&nbsp;1&nbsp;based&nbsp;so&nbsp;the&nbsp;first&nbsp;cell&nbsp;in&nbsp;the&nbsp;worksheet&nbsp;is&nbsp;1,&nbsp;1.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;spreadsheet_key:&nbsp;str,&nbsp;The&nbsp;unique&nbsp;ID&nbsp;of&nbsp;this&nbsp;containing&nbsp;spreadsheet.&nbsp;This<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;be&nbsp;the&nbsp;ID&nbsp;from&nbsp;the&nbsp;URL&nbsp;or&nbsp;as&nbsp;provided&nbsp;in&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spreadsheet&nbsp;entry.<br>
+&nbsp;&nbsp;worksheet_id:&nbsp;str,&nbsp;The&nbsp;unique&nbsp;ID&nbsp;of&nbsp;the&nbsp;worksheet&nbsp;in&nbsp;this&nbsp;spreadsheet<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;whose&nbsp;cells&nbsp;we&nbsp;want.&nbsp;This&nbsp;can&nbsp;be&nbsp;obtained&nbsp;using<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WorksheetEntry's&nbsp;get_worksheet_id&nbsp;method.<br>
+&nbsp;&nbsp;row_num:&nbsp;int,&nbsp;The&nbsp;row&nbsp;of&nbsp;the&nbsp;cell&nbsp;that&nbsp;we&nbsp;want.&nbsp;Numbering&nbsp;starts&nbsp;with&nbsp;1.<br>
+&nbsp;&nbsp;col_num:&nbsp;int,&nbsp;The&nbsp;column&nbsp;of&nbsp;the&nbsp;cell&nbsp;we&nbsp;want.&nbsp;Numbering&nbsp;starts&nbsp;with&nbsp;1.<br>
+&nbsp;&nbsp;desired_class:&nbsp;class&nbsp;descended&nbsp;from&nbsp;atom.core.XmlElement&nbsp;to&nbsp;which&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;successful&nbsp;response&nbsp;should&nbsp;be&nbsp;converted.&nbsp;If&nbsp;there&nbsp;is&nbsp;no<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;converter&nbsp;function&nbsp;specified&nbsp;(converter=None)&nbsp;then&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;desired_class&nbsp;will&nbsp;be&nbsp;used&nbsp;in&nbsp;calling&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;atom.core.parse&nbsp;function.&nbsp;If&nbsp;neither<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;desired_class&nbsp;nor&nbsp;the&nbsp;converter&nbsp;is&nbsp;specified,&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTTP&nbsp;reponse&nbsp;object&nbsp;will&nbsp;be&nbsp;returned.&nbsp;Defaults&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.spreadsheets.data.CellEntry.<br>
+&nbsp;&nbsp;auth_token:&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header&nbsp;in&nbsp;its<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modify_request&nbsp;method.&nbsp;Recommended&nbsp;classes&nbsp;include<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.&nbsp;Represents&nbsp;the&nbsp;current&nbsp;user.&nbsp;Defaults&nbsp;to&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;if&nbsp;None,&nbsp;this&nbsp;method&nbsp;will&nbsp;look&nbsp;for&nbsp;a&nbsp;value&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;auth_token&nbsp;member&nbsp;of&nbsp;<a href="#SpreadsheetsClient">SpreadsheetsClient</a>.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsClient-get_cells"><strong>get_cells</strong></a>(self, spreadsheet_key, worksheet_id, desired_class<font color="#909090">=&lt;class 'gdata.spreadsheets.data.CellsFeed'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;the&nbsp;cells&nbsp;which&nbsp;have&nbsp;values&nbsp;in&nbsp;this&nbsp;spreadsheet.<br>
+&nbsp;<br>
+Blank&nbsp;cells&nbsp;are&nbsp;not&nbsp;included.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;spreadsheet_key:&nbsp;str,&nbsp;The&nbsp;unique&nbsp;ID&nbsp;of&nbsp;this&nbsp;containing&nbsp;spreadsheet.&nbsp;This<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;be&nbsp;the&nbsp;ID&nbsp;from&nbsp;the&nbsp;URL&nbsp;or&nbsp;as&nbsp;provided&nbsp;in&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spreadsheet&nbsp;entry.<br>
+&nbsp;&nbsp;worksheet_id:&nbsp;str,&nbsp;The&nbsp;unique&nbsp;ID&nbsp;of&nbsp;the&nbsp;worksheet&nbsp;in&nbsp;this&nbsp;spreadsheet<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;whose&nbsp;cells&nbsp;we&nbsp;want.&nbsp;This&nbsp;can&nbsp;be&nbsp;obtained&nbsp;using<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WorksheetEntry's&nbsp;get_worksheet_id&nbsp;method.<br>
+&nbsp;&nbsp;desired_class:&nbsp;class&nbsp;descended&nbsp;from&nbsp;atom.core.XmlElement&nbsp;to&nbsp;which&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;successful&nbsp;response&nbsp;should&nbsp;be&nbsp;converted.&nbsp;If&nbsp;there&nbsp;is&nbsp;no<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;converter&nbsp;function&nbsp;specified&nbsp;(converter=None)&nbsp;then&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;desired_class&nbsp;will&nbsp;be&nbsp;used&nbsp;in&nbsp;calling&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;atom.core.parse&nbsp;function.&nbsp;If&nbsp;neither<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;desired_class&nbsp;nor&nbsp;the&nbsp;converter&nbsp;is&nbsp;specified,&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTTP&nbsp;reponse&nbsp;object&nbsp;will&nbsp;be&nbsp;returned.&nbsp;Defaults&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.spreadsheets.data.CellsFeed.<br>
+&nbsp;&nbsp;auth_token:&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header&nbsp;in&nbsp;its<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modify_request&nbsp;method.&nbsp;Recommended&nbsp;classes&nbsp;include<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.&nbsp;Represents&nbsp;the&nbsp;current&nbsp;user.&nbsp;Defaults&nbsp;to&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;if&nbsp;None,&nbsp;this&nbsp;method&nbsp;will&nbsp;look&nbsp;for&nbsp;a&nbsp;value&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;auth_token&nbsp;member&nbsp;of&nbsp;<a href="#SpreadsheetsClient">SpreadsheetsClient</a>.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsClient-get_list_feed"><strong>get_list_feed</strong></a>(self, spreadsheet_key, worksheet_id, desired_class<font color="#909090">=&lt;class 'gdata.spreadsheets.data.ListsFeed'&gt;</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;the&nbsp;value&nbsp;rows&nbsp;from&nbsp;the&nbsp;worksheet's&nbsp;list&nbsp;feed.<br>
+&nbsp;<br>
+The&nbsp;list&nbsp;feed&nbsp;is&nbsp;a&nbsp;view&nbsp;of&nbsp;the&nbsp;spreadsheet&nbsp;in&nbsp;which&nbsp;the&nbsp;first&nbsp;row&nbsp;is&nbsp;used<br>
+for&nbsp;column&nbsp;names&nbsp;and&nbsp;subsequent&nbsp;rows&nbsp;up&nbsp;to&nbsp;the&nbsp;first&nbsp;blank&nbsp;line&nbsp;are<br>
+records.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;spreadsheet_key:&nbsp;str,&nbsp;The&nbsp;unique&nbsp;ID&nbsp;of&nbsp;this&nbsp;containing&nbsp;spreadsheet.&nbsp;This<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;be&nbsp;the&nbsp;ID&nbsp;from&nbsp;the&nbsp;URL&nbsp;or&nbsp;as&nbsp;provided&nbsp;in&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spreadsheet&nbsp;entry.<br>
+&nbsp;&nbsp;worksheet_id:&nbsp;str,&nbsp;The&nbsp;unique&nbsp;ID&nbsp;of&nbsp;the&nbsp;worksheet&nbsp;in&nbsp;this&nbsp;spreadsheet<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;whose&nbsp;cells&nbsp;we&nbsp;want.&nbsp;This&nbsp;can&nbsp;be&nbsp;obtained&nbsp;using<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WorksheetEntry's&nbsp;get_worksheet_id&nbsp;method.<br>
+&nbsp;&nbsp;desired_class:&nbsp;class&nbsp;descended&nbsp;from&nbsp;atom.core.XmlElement&nbsp;to&nbsp;which&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;successful&nbsp;response&nbsp;should&nbsp;be&nbsp;converted.&nbsp;If&nbsp;there&nbsp;is&nbsp;no<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;converter&nbsp;function&nbsp;specified&nbsp;(converter=None)&nbsp;then&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;desired_class&nbsp;will&nbsp;be&nbsp;used&nbsp;in&nbsp;calling&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;atom.core.parse&nbsp;function.&nbsp;If&nbsp;neither<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;desired_class&nbsp;nor&nbsp;the&nbsp;converter&nbsp;is&nbsp;specified,&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTTP&nbsp;reponse&nbsp;object&nbsp;will&nbsp;be&nbsp;returned.&nbsp;Defaults&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.spreadsheets.data.ListsFeed.<br>
 &nbsp;&nbsp;auth_token:&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header&nbsp;in&nbsp;its<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modify_request&nbsp;method.&nbsp;Recommended&nbsp;classes&nbsp;include<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
@@ -411,7 +538,7 @@ Args:<br>
 Data and other attributes defined here:<br>
 <dl><dt><strong>api_version</strong> = '3'</dl>
 
-<dl><dt><strong>auth_scopes</strong> = ('https://spreadsheets.google.com/feeds/', 'http://spreadsheets.google.com/feeds/')</dl>
+<dl><dt><strong>auth_scopes</strong> = 'https://spreadsheets.google.com/feeds/'</dl>
 
 <dl><dt><strong>auth_service</strong> = 'wise'</dl>
 
@@ -468,7 +595,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;text&nbsp;which&nbsp;was&nbsp;contained&nbsp;in&nbsp;the&nbsp;challenge.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Generated&nbsp;token,&nbsp;which&nbsp;is&nbsp;also&nbsp;stored&nbsp;in&nbsp;this&nbsp;object.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Raises:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;RequestError&nbsp;or&nbsp;one&nbsp;of&nbsp;its&nbsp;suclasses:&nbsp;BadAuthentication,<br>
@@ -702,7 +829,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;text&nbsp;which&nbsp;was&nbsp;contained&nbsp;in&nbsp;the&nbsp;challenge.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Generated&nbsp;token,&nbsp;which&nbsp;is&nbsp;also&nbsp;stored&nbsp;in&nbsp;this&nbsp;object.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Raises:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;RequestError&nbsp;or&nbsp;one&nbsp;of&nbsp;its&nbsp;suclasses:&nbsp;BadAuthentication,<br>
@@ -888,12 +1015,16 @@ Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
 
 <hr>
+Data and other attributes inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
+<dl><dt><strong>alt_auth_service</strong> = None</dl>
+
+<hr>
 Methods inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
 <dl><dt><a name="SpreadsheetsClient-Get"><strong>Get</strong></a> = get(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Performs&nbsp;a&nbsp;request&nbsp;using&nbsp;the&nbsp;GET&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
 <dl><dt><a name="SpreadsheetsClient-Put"><strong>Put</strong></a> = put(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;data&nbsp;using&nbsp;the&nbsp;PUT&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="SpreadsheetsClient-__init__"><strong>__init__</strong></a>(self, http_client<font color="#909090">=None</font>, host<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, source<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;AtomPubClient&nbsp;instance.<br>
+<dl><dt><a name="SpreadsheetsClient-__init__"><strong>__init__</strong></a>(self, http_client<font color="#909090">=None</font>, host<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, source<font color="#909090">=None</font>, xoauth_requestor_id<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;AtomPubClient&nbsp;instance.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;source:&nbsp;The&nbsp;name&nbsp;of&nbsp;your&nbsp;application.<br>
@@ -925,6 +1056,8 @@ Data and other attributes inherited from <a href="atom.client.html#AtomPubClient
 <dl><dt><strong>auth_token</strong> = None</dl>
 
 <dl><dt><strong>host</strong> = None</dl>
+
+<dl><dt><strong>xoauth_requestor_id</strong> = None</dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -968,6 +1101,12 @@ Args:<br>
 <dl><dt><a name="TableQuery-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt></dl>
 
 <hr>
+Methods inherited from <a href="gdata.client.html#Query">gdata.client.Query</a>:<br>
+<dl><dt><a name="TableQuery-AddCustomParameter"><strong>AddCustomParameter</strong></a> = add_custom_parameter(self, key, value)</dt></dl>
+
+<dl><dt><a name="TableQuery-add_custom_parameter"><strong>add_custom_parameter</strong></a>(self, key, value)</dt></dl>
+
+<hr>
 Data descriptors inherited from <a href="gdata.client.html#Query">gdata.client.Query</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
@@ -1005,6 +1144,12 @@ Args:<br>
 <dl><dt><a name="WorksheetQuery-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt></dl>
 
 <hr>
+Methods inherited from <a href="gdata.client.html#Query">gdata.client.Query</a>:<br>
+<dl><dt><a name="WorksheetQuery-AddCustomParameter"><strong>AddCustomParameter</strong></a> = add_custom_parameter(self, key, value)</dt></dl>
+
+<dl><dt><a name="WorksheetQuery-add_custom_parameter"><strong>add_custom_parameter</strong></a>(self, key, value)</dt></dl>
+
+<hr>
 Data descriptors inherited from <a href="gdata.client.html#Query">gdata.client.Query</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
@@ -1019,7 +1164,10 @@ Data descriptors inherited from <a href="gdata.client.html#Query">gdata.client.Q
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>RECORDS_URL</strong> = 'https://spreadsheets.google.com/feeds/%s/records/%s'<br>
+<td width="100%"><strong>CELLS_URL</strong> = 'https://spreadsheets.google.com/feeds/cells/%s/%s/private/full'<br>
+<strong>CELL_URL</strong> = 'https://spreadsheets.google.com/feeds/cells/%s/%s/private/full/R%sC%s'<br>
+<strong>LISTS_URL</strong> = 'https://spreadsheets.google.com/feeds/list/%s/%s/private/full'<br>
+<strong>RECORDS_URL</strong> = 'https://spreadsheets.google.com/feeds/%s/records/%s'<br>
 <strong>RECORD_URL</strong> = 'https://spreadsheets.google.com/feeds/%s/records/%s/%s'<br>
 <strong>SPREADSHEETS_URL</strong> = 'https://spreadsheets.google.com/feeds/spreadsheets/private/full'<br>
 <strong>TABLES_URL</strong> = 'https://spreadsheets.google.com/feeds/%s/tables'<br>

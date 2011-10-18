@@ -8,10 +8,10 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.apps.html"><font color="#ffffff">apps</font></a>.<a href="gdata.apps.migration.html"><font color="#ffffff">migration</font></a>.service</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/apps/migration/service.py">/usr/local/lib/python2.6/dist-packages/gdata/apps/migration/service.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/working/gdata-python-client/src/gdata/apps/migration/service.py">/home/afshar/working/gdata-python-client/src/gdata/apps/migration/service.py</a></font></td></tr></table>
     <p><tt>Contains&nbsp;the&nbsp;methods&nbsp;to&nbsp;import&nbsp;mail&nbsp;via&nbsp;Google&nbsp;Apps&nbsp;Email&nbsp;Migration&nbsp;API.<br>
 &nbsp;<br>
-<a href="#MigrationService">MigrationService</a>:&nbsp;Provides&nbsp;methids&nbsp;to&nbsp;import&nbsp;mail.</tt></p>
+<a href="#MigrationService">MigrationService</a>:&nbsp;Provides&nbsp;methods&nbsp;to&nbsp;import&nbsp;mail.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -20,8 +20,10 @@
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="base64.html">base64</a><br>
-</td><td width="25%" valign=top><a href="gdata.html">gdata</a><br>
+<a href="gdata.html">gdata</a><br>
 </td><td width="25%" valign=top><a href="gdata.apps.migration.html">gdata.apps.migration</a><br>
+<a href="threading.html">threading</a><br>
+</td><td width="25%" valign=top><a href="time.html">time</a><br>
 </td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
@@ -45,8 +47,8 @@
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt>Client&nbsp;for&nbsp;the&nbsp;EMAPI&nbsp;migration&nbsp;service.&nbsp;&nbsp;Use&nbsp;either&nbsp;ImportMail&nbsp;to&nbsp;import<br>
-one&nbsp;message&nbsp;at&nbsp;a&nbsp;time,&nbsp;or&nbsp;AddBatchEntry&nbsp;and&nbsp;SubmitBatch&nbsp;to&nbsp;import&nbsp;a&nbsp;batch&nbsp;of<br>
-messages&nbsp;at&nbsp;a&nbsp;time.<br>&nbsp;</tt></td></tr>
+one&nbsp;message&nbsp;at&nbsp;a&nbsp;time,&nbsp;or&nbsp;AddMailEntry&nbsp;and&nbsp;ImportMultipleMails&nbsp;to&nbsp;import&nbsp;a<br>
+bunch&nbsp;of&nbsp;messages&nbsp;at&nbsp;a&nbsp;time.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.apps.migration.service.html#MigrationService">MigrationService</a></dd>
@@ -57,7 +59,9 @@ messages&nbsp;at&nbsp;a&nbsp;time.<br>&nbsp;</tt></td></tr>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="MigrationService-AddBatchEntry"><strong>AddBatchEntry</strong></a>(self, mail_message, mail_item_properties, mail_labels)</dt><dd><tt>Add&nbsp;a&nbsp;message&nbsp;to&nbsp;the&nbsp;current&nbsp;batch&nbsp;that&nbsp;you&nbsp;later&nbsp;will&nbsp;submit.<br>
+<dl><dt><a name="MigrationService-AddBatchEntry"><strong>AddBatchEntry</strong></a>(self, mail_message, mail_item_properties, mail_labels)</dt><dd><tt>Adds&nbsp;a&nbsp;message&nbsp;to&nbsp;the&nbsp;current&nbsp;batch&nbsp;that&nbsp;you&nbsp;later&nbsp;will&nbsp;submit.<br>
+&nbsp;<br>
+Deprecated,&nbsp;use&nbsp;AddMailEntry&nbsp;instead<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;mail_message:&nbsp;An&nbsp;<a href="http://www.rfc-editor.org/rfc/rfc822.txt">RFC822</a>&nbsp;format&nbsp;email&nbsp;message.<br>
@@ -67,7 +71,19 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;length&nbsp;of&nbsp;the&nbsp;MailEntry&nbsp;representing&nbsp;the&nbsp;message.</tt></dd></dl>
 
-<dl><dt><a name="MigrationService-ImportMail"><strong>ImportMail</strong></a>(self, user_name, mail_message, mail_item_properties, mail_labels)</dt><dd><tt>Import&nbsp;a&nbsp;single&nbsp;mail&nbsp;message.<br>
+<dl><dt><a name="MigrationService-AddMailEntry"><strong>AddMailEntry</strong></a>(self, mail_message, mail_item_properties<font color="#909090">=None</font>, mail_labels<font color="#909090">=None</font>, identifier<font color="#909090">=None</font>)</dt><dd><tt>Prepares&nbsp;a&nbsp;list&nbsp;of&nbsp;mail&nbsp;messages&nbsp;to&nbsp;import&nbsp;using&nbsp;ImportMultipleMails.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;mail_message:&nbsp;An&nbsp;<a href="http://www.rfc-editor.org/rfc/rfc822.txt">RFC822</a>&nbsp;format&nbsp;email&nbsp;message&nbsp;as&nbsp;a&nbsp;string.<br>
+&nbsp;&nbsp;mail_item_properties:&nbsp;List&nbsp;of&nbsp;Gmail&nbsp;properties&nbsp;to&nbsp;apply&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message.<br>
+&nbsp;&nbsp;mail_labels:&nbsp;List&nbsp;of&nbsp;Gmail&nbsp;labels&nbsp;to&nbsp;apply&nbsp;to&nbsp;the&nbsp;message.<br>
+&nbsp;&nbsp;identifier:&nbsp;The&nbsp;optional&nbsp;file&nbsp;identifier&nbsp;string<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;number&nbsp;of&nbsp;email&nbsp;messages&nbsp;to&nbsp;be&nbsp;imported.</tt></dd></dl>
+
+<dl><dt><a name="MigrationService-ImportMail"><strong>ImportMail</strong></a>(self, user_name, mail_message, mail_item_properties, mail_labels)</dt><dd><tt>Imports&nbsp;a&nbsp;single&nbsp;mail&nbsp;message.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;user_name:&nbsp;The&nbsp;username&nbsp;to&nbsp;import&nbsp;messages&nbsp;to.<br>
@@ -81,13 +97,27 @@ Returns:<br>
 Raises:<br>
 &nbsp;&nbsp;AppsForYourDomainException:&nbsp;An&nbsp;error&nbsp;occurred&nbsp;importing&nbsp;the&nbsp;message.</tt></dd></dl>
 
-<dl><dt><a name="MigrationService-SubmitBatch"><strong>SubmitBatch</strong></a>(self, user_name)</dt><dd><tt>Send&nbsp;a&nbsp;all&nbsp;the&nbsp;mail&nbsp;items&nbsp;you&nbsp;have&nbsp;added&nbsp;to&nbsp;the&nbsp;batch&nbsp;to&nbsp;the&nbsp;server.<br>
+<dl><dt><a name="MigrationService-ImportMultipleMails"><strong>ImportMultipleMails</strong></a>(self, user_name, threads_per_batch<font color="#909090">=20</font>)</dt><dd><tt>Launches&nbsp;separate&nbsp;threads&nbsp;to&nbsp;import&nbsp;every&nbsp;message&nbsp;added&nbsp;by&nbsp;AddMailEntry.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;user_name:&nbsp;The&nbsp;user&nbsp;account&nbsp;name&nbsp;to&nbsp;import&nbsp;messages&nbsp;to.<br>
+&nbsp;&nbsp;threads_per_batch:&nbsp;Number&nbsp;of&nbsp;messages&nbsp;to&nbsp;import&nbsp;at&nbsp;a&nbsp;time.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;number&nbsp;of&nbsp;email&nbsp;messages&nbsp;that&nbsp;were&nbsp;successfully&nbsp;migrated.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;Exception:&nbsp;An&nbsp;error&nbsp;occurred&nbsp;while&nbsp;importing&nbsp;mails.</tt></dd></dl>
+
+<dl><dt><a name="MigrationService-SubmitBatch"><strong>SubmitBatch</strong></a>(self, user_name)</dt><dd><tt>Sends&nbsp;all&nbsp;the&nbsp;mail&nbsp;items&nbsp;you&nbsp;have&nbsp;added&nbsp;to&nbsp;the&nbsp;batch&nbsp;to&nbsp;the&nbsp;server.<br>
+&nbsp;<br>
+Deprecated,&nbsp;use&nbsp;ImportMultipleMails&nbsp;instead<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;user_name:&nbsp;The&nbsp;username&nbsp;to&nbsp;import&nbsp;messages&nbsp;to.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;HTTPResponse&nbsp;from&nbsp;the&nbsp;web&nbsp;service&nbsp;call.<br>
+&nbsp;&nbsp;An&nbsp;HTTPResponse&nbsp;from&nbsp;the&nbsp;web&nbsp;service&nbsp;call.<br>
 &nbsp;<br>
 Raises:<br>
 &nbsp;&nbsp;AppsForYourDomainException:&nbsp;An&nbsp;error&nbsp;occurred&nbsp;importing&nbsp;the&nbsp;batch.</tt></dd></dl>
@@ -737,12 +767,12 @@ Data and other attributes inherited from <a href="atom.service.html#AtomService"
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><strong>API_VER</strong> = '2.0'<br>
-<strong>__author__</strong> = 'google-apps-apis@googlegroups.com'</td></tr></table><p>
+<strong>__author__</strong> = ('google-apps-apis@googlegroups.com', 'pti@google.com (Prashant Tiwari)')</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#7799ee">
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
     
 <tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%">google-apps-apis@googlegroups.com</td></tr></table>
+<td width="100%">('google-apps-apis@googlegroups.com',&nbsp;'pti@google.com&nbsp;(Prashant&nbsp;Tiwari)')</td></tr></table>
 </body></html>

@@ -8,8 +8,8 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.docs.html"><font color="#ffffff">docs</font></a>.client</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/docs/client.py">/usr/local/lib/python2.6/dist-packages/gdata/docs/client.py</a></font></td></tr></table>
-    <p><tt><a href="#DocsClient">DocsClient</a>&nbsp;extends&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>&nbsp;to&nbsp;streamline&nbsp;DocList&nbsp;API&nbsp;calls.</tt></p>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/working/gdata-python-client/src/gdata/docs/client.py">/home/afshar/working/gdata-python-client/src/gdata/docs/client.py</a></font></td></tr></table>
+    <p><tt><a href="#DocsClient">DocsClient</a>&nbsp;simplifies&nbsp;interactions&nbsp;with&nbsp;the&nbsp;Documents&nbsp;List&nbsp;API.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -18,10 +18,12 @@
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="atom.html">atom</a><br>
+<a href="copy.html">copy</a><br>
 </td><td width="25%" valign=top><a href="gdata.html">gdata</a><br>
-</td><td width="25%" valign=top><a href="mimetypes.html">mimetypes</a><br>
-</td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
-</td></tr></table></td></tr></table><p>
+<a href="mimetypes.html">mimetypes</a><br>
+</td><td width="25%" valign=top><a href="re.html">re</a><br>
+<a href="urllib.html">urllib</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -49,7 +51,7 @@
 <font color="#000000" face="helvetica, arial"><a name="DocsClient">class <strong>DocsClient</strong></a>(<a href="gdata.client.html#GDClient">gdata.client.GDClient</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Client&nbsp;extension&nbsp;for&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;List&nbsp;API.<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt>Client&nbsp;for&nbsp;all&nbsp;features&nbsp;of&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;List&nbsp;API.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="gdata.docs.client.html#DocsClient">DocsClient</a></dd>
@@ -59,270 +61,514 @@
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="DocsClient-Copy"><strong>Copy</strong></a> = <a href="#DocsClient-copy">copy</a>(self, source_entry, title, auth_token<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-AddAclEntry"><strong>AddAclEntry</strong></a> = <a href="#DocsClient-add_acl_entry">add_acl_entry</a>(self, resource, acl_entry, send_notifications<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-Create"><strong>Create</strong></a> = <a href="#DocsClient-create">create</a>(self, doc_type, title, folder_or_id<font color="#909090">=None</font>, writers_can_invite<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-BatchProcessAclEntries"><strong>BatchProcessAclEntries</strong></a> = <a href="#DocsClient-batch_process_acl_entries">batch_process_acl_entries</a>(self, resource, entries, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-Download"><strong>Download</strong></a> = <a href="#DocsClient-download">download</a>(self, entry_or_id_or_url, file_path, extra_params<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-CopyResource"><strong>CopyResource</strong></a> = <a href="#DocsClient-copy_resource">copy_resource</a>(self, entry, title, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-Export"><strong>Export</strong></a> = <a href="#DocsClient-export">export</a>(self, entry_or_id_or_url, file_path, gid<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-CreateArchive"><strong>CreateArchive</strong></a> = <a href="#DocsClient-create_archive">create_archive</a>(self, entry, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-GetAclPermissions"><strong>GetAclPermissions</strong></a> = <a href="#DocsClient-get_acl_permissions">get_acl_permissions</a>(self, resource_id, auth_token<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-CreateResource"><strong>CreateResource</strong></a> = <a href="#DocsClient-create_resource">create_resource</a>(self, entry, media<font color="#909090">=None</font>, collection<font color="#909090">=None</font>, create_uri<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-GetDoc"><strong>GetDoc</strong></a> = <a href="#DocsClient-get_doc">get_doc</a>(self, resource_id, etag<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-DeleteAclEntry"><strong>DeleteAclEntry</strong></a> = <a href="#DocsClient-delete_acl_entry">delete_acl_entry</a>(self, entry, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-GetDocList"><strong>GetDocList</strong></a> = <a href="#DocsClient-get_doclist">get_doclist</a>(self, uri<font color="#909090">=None</font>, limit<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-DeleteArchive"><strong>DeleteArchive</strong></a> = <a href="#DocsClient-delete_archive">delete_archive</a>(self, entry, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-GetEverything"><strong>GetEverything</strong></a> = <a href="#DocsClient-get_everything">get_everything</a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-DeleteResource"><strong>DeleteResource</strong></a> = <a href="#DocsClient-delete_resource">delete_resource</a>(self, entry, permanent<font color="#909090">=False</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-GetFileContent"><strong>GetFileContent</strong></a> = <a href="#DocsClient-get_file_content">get_file_content</a>(self, uri, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-DeleteRevision"><strong>DeleteRevision</strong></a> = <a href="#DocsClient-delete_revision">delete_revision</a>(self, entry, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-GetRevisions"><strong>GetRevisions</strong></a> = <a href="#DocsClient-get_revisions">get_revisions</a>(self, resource_id, auth_token<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-DownloadArchive"><strong>DownloadArchive</strong></a> = <a href="#DocsClient-download_resource">download_resource</a>(self, entry, file_path, extra_params<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-Move"><strong>Move</strong></a> = <a href="#DocsClient-move">move</a>(self, source_entry, folder_entry<font color="#909090">=None</font>, keep_in_folders<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, delete_folder_uri<font color="#909090">=None</font>, folder_uri<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-DownloadArchiveToMemory"><strong>DownloadArchiveToMemory</strong></a> = <a href="#DocsClient-download_resource_to_memory">download_resource_to_memory</a>(self, entry, extra_params<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-Upload"><strong>Upload</strong></a> = <a href="#DocsClient-upload">upload</a>(self, media, title, folder_or_uri<font color="#909090">=None</font>, content_type<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-DownloadResource"><strong>DownloadResource</strong></a> = <a href="#DocsClient-download_resource">download_resource</a>(self, entry, file_path, extra_params<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-__init__"><strong>__init__</strong></a>(self, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Constructs&nbsp;a&nbsp;new&nbsp;client&nbsp;for&nbsp;the&nbsp;DocList&nbsp;API.<br>
+<dl><dt><a name="DocsClient-DownloadResourceToMemory"><strong>DownloadResourceToMemory</strong></a> = <a href="#DocsClient-download_resource_to_memory">download_resource_to_memory</a>(self, entry, extra_params<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-DownloadRevision"><strong>DownloadRevision</strong></a> = <a href="#DocsClient-download_revision">download_revision</a>(self, entry, file_path, extra_params<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-DownloadRevisionToMemory"><strong>DownloadRevisionToMemory</strong></a> = <a href="#DocsClient-download_revision_to_memory">download_revision_to_memory</a>(self, entry, extra_params<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-GetAclEntry"><strong>GetAclEntry</strong></a> = <a href="#DocsClient-get_acl_entry">get_acl_entry</a>(self, entry, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-GetAclEntryBySelfLink"><strong>GetAclEntryBySelfLink</strong></a> = <a href="#DocsClient-get_acl_entry_by_self_link">get_acl_entry_by_self_link</a>(self, self_link, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-GetAllResources"><strong>GetAllResources</strong></a> = <a href="#DocsClient-get_all_resources">get_all_resources</a>(self, uri<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-GetArchive"><strong>GetArchive</strong></a> = <a href="#DocsClient-get_archive">get_archive</a>(self, entry, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-GetArchiveBySelfLink"><strong>GetArchiveBySelfLink</strong></a> = <a href="#DocsClient-get_archive_by_self_link">get_archive_by_self_link</a>(self, self_link, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-GetChanges"><strong>GetChanges</strong></a> = <a href="#DocsClient-get_changes">get_changes</a>(self, changestamp<font color="#909090">=None</font>, max_results<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-GetMetadata"><strong>GetMetadata</strong></a> = <a href="#DocsClient-get_metadata">get_metadata</a>(self, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-GetResource"><strong>GetResource</strong></a> = <a href="#DocsClient-get_resource">get_resource</a>(self, entry, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-GetResourceAcl"><strong>GetResourceAcl</strong></a> = <a href="#DocsClient-get_resource_acl">get_resource_acl</a>(self, entry, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-GetResourceBySelfLink"><strong>GetResourceBySelfLink</strong></a> = <a href="#DocsClient-get_resource_by_self_link">get_resource_by_self_link</a>(self, self_link, etag<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-GetResources"><strong>GetResources</strong></a> = <a href="#DocsClient-get_resources">get_resources</a>(self, uri<font color="#909090">=None</font>, limit<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-GetRevision"><strong>GetRevision</strong></a> = <a href="#DocsClient-get_revision">get_revision</a>(self, entry, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-GetRevisionBySelfLink"><strong>GetRevisionBySelfLink</strong></a> = <a href="#DocsClient-get_revision_by_self_link">get_revision_by_self_link</a>(self, self_link, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-GetRevisions"><strong>GetRevisions</strong></a> = <a href="#DocsClient-get_revisions">get_revisions</a>(self, entry, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-MoveResource"><strong>MoveResource</strong></a> = <a href="#DocsClient-move_resource">move_resource</a>(self, entry, collection<font color="#909090">=None</font>, keep_in_collections<font color="#909090">=False</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-PublishRevision"><strong>PublishRevision</strong></a> = <a href="#DocsClient-publish_revision">publish_revision</a>(self, entry, publish_auto<font color="#909090">=None</font>, publish_outside_domain<font color="#909090">=False</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-Request"><strong>Request</strong></a> = <a href="#DocsClient-request">request</a>(self, method<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-UnpublishRevision"><strong>UnpublishRevision</strong></a> = <a href="#DocsClient-unpublish_revision">unpublish_revision</a>(self, entry, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-UpdateAclEntry"><strong>UpdateAclEntry</strong></a> = <a href="#DocsClient-update_acl_entry">update_acl_entry</a>(self, entry, send_notifications<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-UpdateArchive"><strong>UpdateArchive</strong></a> = <a href="#DocsClient-update_archive">update_archive</a>(self, entry, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-UpdateResource"><strong>UpdateResource</strong></a> = <a href="#DocsClient-update_resource">update_resource</a>(self, entry, media<font color="#909090">=None</font>, update_metadata<font color="#909090">=True</font>, new_revision<font color="#909090">=False</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-add_acl_entry"><strong>add_acl_entry</strong></a>(self, resource, acl_entry, send_notifications<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Adds&nbsp;the&nbsp;given&nbsp;AclEntry&nbsp;to&nbsp;the&nbsp;given&nbsp;Resource.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
-&nbsp;&nbsp;kwargs:&nbsp;The&nbsp;other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>&nbsp;constructor.</tt></dd></dl>
-
-<dl><dt><a name="DocsClient-copy"><strong>copy</strong></a>(self, source_entry, title, auth_token<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Copies&nbsp;a&nbsp;native&nbsp;Google&nbsp;document,&nbsp;spreadsheet,&nbsp;or&nbsp;presentation.<br>
-&nbsp;<br>
-Note:&nbsp;arbitrary&nbsp;file&nbsp;types&nbsp;and&nbsp;PDFs&nbsp;do&nbsp;not&nbsp;support&nbsp;this&nbsp;feature.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;source_entry:&nbsp;gdata.docs.data.DocsEntry&nbsp;An&nbsp;object&nbsp;representing&nbsp;the&nbsp;source<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document/folder.<br>
-&nbsp;&nbsp;title:&nbsp;str&nbsp;A&nbsp;title&nbsp;for&nbsp;the&nbsp;new&nbsp;document.<br>
-&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
-&nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;URI&nbsp;to&nbsp;use&nbsp;when&nbsp;making&nbsp;this&nbsp;request.&nbsp;&nbsp;Must&nbsp;be&nbsp;a&nbsp;template,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;a&nbsp;%s&nbsp;for&nbsp;where&nbsp;to&nbsp;put&nbsp;the&nbsp;resource_id.<br>
+&nbsp;&nbsp;resource:&nbsp;gdata.docs.data.Resource&nbsp;to&nbsp;which&nbsp;to&nbsp;add&nbsp;AclEntry.<br>
+&nbsp;&nbsp;acl_entry:&nbsp;gdata.docs.data.AclEntry&nbsp;representing&nbsp;ACL&nbsp;entry&nbsp;to&nbsp;add.<br>
+&nbsp;&nbsp;send_notifications:&nbsp;True&nbsp;if&nbsp;users&nbsp;should&nbsp;be&nbsp;notified&nbsp;by&nbsp;email&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;AclEntry&nbsp;is&nbsp;added.<br>
 &nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-post">post</a>().<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;gdata.docs.data.DocsEntry&nbsp;of&nbsp;the&nbsp;duplicated&nbsp;document.</tt></dd></dl>
+&nbsp;&nbsp;gdata.docs.data.AclEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;new&nbsp;entry.<br>
+Raises:<br>
+&nbsp;&nbsp;ValueError:&nbsp;If&nbsp;given&nbsp;resource&nbsp;has&nbsp;no&nbsp;ACL&nbsp;link.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-create"><strong>create</strong></a>(self, doc_type, title, folder_or_id<font color="#909090">=None</font>, writers_can_invite<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;item&nbsp;in&nbsp;the&nbsp;user's&nbsp;doclist.<br>
+<dl><dt><a name="DocsClient-batch_process_acl_entries"><strong>batch_process_acl_entries</strong></a>(self, resource, entries, **kwargs)</dt><dd><tt>Applies&nbsp;the&nbsp;specified&nbsp;operation&nbsp;of&nbsp;each&nbsp;entry&nbsp;in&nbsp;a&nbsp;single&nbsp;request.<br>
+&nbsp;<br>
+To&nbsp;use&nbsp;this,&nbsp;simply&nbsp;set&nbsp;acl_entry.batch_operation&nbsp;to&nbsp;one&nbsp;of<br>
+['query',&nbsp;'insert',&nbsp;'update',&nbsp;'delete'],&nbsp;and&nbsp;optionally&nbsp;set<br>
+acl_entry.batch_id&nbsp;to&nbsp;a&nbsp;string&nbsp;of&nbsp;your&nbsp;choice.<br>
+&nbsp;<br>
+Then,&nbsp;put&nbsp;all&nbsp;of&nbsp;your&nbsp;modified&nbsp;AclEntry&nbsp;objects&nbsp;into&nbsp;a&nbsp;list&nbsp;and&nbsp;pass<br>
+that&nbsp;list&nbsp;as&nbsp;the&nbsp;entries&nbsp;parameter.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;doc_type:&nbsp;str&nbsp;The&nbsp;type&nbsp;of&nbsp;object&nbsp;to&nbsp;create.&nbsp;For&nbsp;example:&nbsp;'document',<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'spreadsheet',&nbsp;'folder',&nbsp;'presentation'.<br>
-&nbsp;&nbsp;title:&nbsp;str&nbsp;A&nbsp;title&nbsp;for&nbsp;the&nbsp;document.<br>
-&nbsp;&nbsp;folder_or_id:&nbsp;gdata.docs.data.DocsEntry&nbsp;or&nbsp;str&nbsp;(optional)&nbsp;Folder&nbsp;entry&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;resouce&nbsp;id&nbsp;of&nbsp;a&nbsp;folder&nbsp;to&nbsp;create&nbsp;the&nbsp;object&nbsp;under.&nbsp;Note:&nbsp;A&nbsp;valid<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource&nbsp;id&nbsp;for&nbsp;a&nbsp;folder&nbsp;is&nbsp;of&nbsp;the&nbsp;form:&nbsp;folder%3Afolder_id.<br>
-&nbsp;&nbsp;writers_can_invite:&nbsp;bool&nbsp;(optional)&nbsp;False&nbsp;prevents&nbsp;collaborators&nbsp;from<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;being&nbsp;able&nbsp;to&nbsp;invite&nbsp;others&nbsp;to&nbsp;edit&nbsp;or&nbsp;view&nbsp;the&nbsp;document.<br>
-&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
-&nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;URI&nbsp;to&nbsp;use&nbsp;when&nbsp;making&nbsp;this&nbsp;request.&nbsp;&nbsp;Must&nbsp;be&nbsp;a&nbsp;template,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;a&nbsp;%s&nbsp;for&nbsp;where&nbsp;to&nbsp;put&nbsp;the&nbsp;resource_id.<br>
+&nbsp;&nbsp;resource:&nbsp;gdata.docs.data.Resource&nbsp;to&nbsp;which&nbsp;the&nbsp;given&nbsp;entries&nbsp;belong.<br>
+&nbsp;&nbsp;entries:&nbsp;[gdata.docs.data.AclEntry]&nbsp;to&nbsp;modify&nbsp;in&nbsp;some&nbsp;way.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;args&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>.<a href="#DocsClient-post">post</a>()<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;Resulting&nbsp;gdata.docs.data.AclFeed&nbsp;of&nbsp;changes.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-copy_resource"><strong>copy_resource</strong></a>(self, entry, title, **kwargs)</dt><dd><tt>Copies&nbsp;the&nbsp;given&nbsp;entry&nbsp;to&nbsp;a&nbsp;new&nbsp;entry&nbsp;with&nbsp;the&nbsp;given&nbsp;title.<br>
+&nbsp;<br>
+Note:&nbsp;Files&nbsp;do&nbsp;not&nbsp;support&nbsp;this&nbsp;feature.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;gdata.docs.data.Resource&nbsp;to&nbsp;copy.<br>
+&nbsp;&nbsp;title:&nbsp;String&nbsp;title&nbsp;for&nbsp;the&nbsp;new&nbsp;entry.<br>
 &nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-post">post</a>().<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;gdata.docs.data.DocsEntry&nbsp;containing&nbsp;information&nbsp;newly&nbsp;created&nbsp;item.</tt></dd></dl>
+&nbsp;&nbsp;gdata.docs.data.Resource&nbsp;representing&nbsp;duplicated&nbsp;resource.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-download"><strong>download</strong></a>(self, entry_or_id_or_url, file_path, extra_params<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Downloads&nbsp;a&nbsp;file&nbsp;from&nbsp;the&nbsp;Document&nbsp;List&nbsp;to&nbsp;local&nbsp;disk.<br>
-&nbsp;<br>
-Note:&nbsp;to&nbsp;download&nbsp;a&nbsp;file&nbsp;in&nbsp;memory,&nbsp;use&nbsp;the&nbsp;<a href="#DocsClient-GetFileContent">GetFileContent</a>()&nbsp;method.<br>
+<dl><dt><a name="DocsClient-create_archive"><strong>create_archive</strong></a>(self, entry, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;archive&nbsp;of&nbsp;resources.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;entry_or_id_or_url:&nbsp;gdata.docs.data.DocsEntry&nbsp;or&nbsp;string&nbsp;representing&nbsp;a<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource&nbsp;id&nbsp;or&nbsp;URL&nbsp;to&nbsp;download&nbsp;the&nbsp;document&nbsp;from&nbsp;(such&nbsp;as&nbsp;the&nbsp;content<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;src&nbsp;link).<br>
-&nbsp;&nbsp;file_path:&nbsp;str&nbsp;The&nbsp;full&nbsp;path&nbsp;to&nbsp;save&nbsp;the&nbsp;file&nbsp;to.<br>
+&nbsp;&nbsp;entry:&nbsp;gdata.docs.data.Archive&nbsp;representing&nbsp;metadata&nbsp;of&nbsp;archive&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;create.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-post">post</a>().<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.docs.data.Archive&nbsp;containing&nbsp;information&nbsp;about&nbsp;new&nbsp;archive.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-create_resource"><strong>create_resource</strong></a>(self, entry, media<font color="#909090">=None</font>, collection<font color="#909090">=None</font>, create_uri<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;new&nbsp;entries&nbsp;in&nbsp;Google&nbsp;Docs,&nbsp;and&nbsp;uploads&nbsp;their&nbsp;contents.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;gdata.docs.data.Resource&nbsp;representing&nbsp;initial&nbsp;version<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;entry&nbsp;being&nbsp;created.&nbsp;If&nbsp;media&nbsp;is&nbsp;also&nbsp;provided,&nbsp;the&nbsp;entry&nbsp;will<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;first&nbsp;be&nbsp;created&nbsp;with&nbsp;the&nbsp;given&nbsp;metadata&nbsp;and&nbsp;content.<br>
+&nbsp;&nbsp;media:&nbsp;(optional)&nbsp;gdata.data.MediaSource&nbsp;containing&nbsp;the&nbsp;file&nbsp;to&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploaded.<br>
+&nbsp;&nbsp;collection:&nbsp;(optional)&nbsp;gdata.docs.data.Resource&nbsp;representing&nbsp;a&nbsp;collection&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;which&nbsp;this&nbsp;new&nbsp;entry&nbsp;should&nbsp;be&nbsp;created.&nbsp;If&nbsp;provided&nbsp;along<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;create_uri,&nbsp;create_uri&nbsp;will&nbsp;win&nbsp;(e.g.&nbsp;entry&nbsp;will&nbsp;be&nbsp;created&nbsp;at<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;create_uri,&nbsp;not&nbsp;necessarily&nbsp;in&nbsp;given&nbsp;collection).<br>
+&nbsp;&nbsp;create_uri:&nbsp;(optional)&nbsp;String&nbsp;URI&nbsp;at&nbsp;which&nbsp;to&nbsp;create&nbsp;the&nbsp;given&nbsp;entry.&nbsp;If<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;collection,&nbsp;media&nbsp;and&nbsp;create_uri&nbsp;are&nbsp;None,&nbsp;use<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.docs.client.RESOURCE_FEED_URI.&nbsp;&nbsp;If&nbsp;collection&nbsp;and&nbsp;create_uri&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None,&nbsp;use&nbsp;gdata.docs.client.RESOURCE_UPLOAD_URI.&nbsp;&nbsp;If&nbsp;collection&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;media&nbsp;are&nbsp;not&nbsp;None,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.docs.client.COLLECTION_UPLOAD_URI_TEMPLATE&nbsp;is&nbsp;used,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;the&nbsp;collection's&nbsp;resource&nbsp;ID&nbsp;substituted&nbsp;in.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-post">post</a>()&nbsp;and&nbsp;<a href="#DocsClient-update">update</a>().<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.docs.data.Resource&nbsp;containing&nbsp;information&nbsp;about&nbsp;new&nbsp;entry.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-delete_acl_entry"><strong>delete_acl_entry</strong></a>(self, entry, **kwargs)</dt><dd><tt>Deletes&nbsp;the&nbsp;given&nbsp;AclEntry.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;gdata.docs.data.AclEntry&nbsp;to&nbsp;delete.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;args&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>.<a href="#DocsClient-Delete">Delete</a>()<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;Result&nbsp;of&nbsp;delete&nbsp;request.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-delete_archive"><strong>delete_archive</strong></a>(self, entry, **kwargs)</dt><dd><tt>Aborts&nbsp;the&nbsp;given&nbsp;Archive&nbsp;operation,&nbsp;or&nbsp;deletes&nbsp;the&nbsp;Archive.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;gdata.docs.data.Archive&nbsp;to&nbsp;delete.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;args&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>.<a href="#DocsClient-Delete">Delete</a>()<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;Result&nbsp;of&nbsp;delete&nbsp;request.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-delete_resource"><strong>delete_resource</strong></a>(self, entry, permanent<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Trashes&nbsp;or&nbsp;deletes&nbsp;the&nbsp;given&nbsp;entry.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;gdata.docs.data.Resource&nbsp;to&nbsp;trash&nbsp;or&nbsp;delete.<br>
+&nbsp;&nbsp;permanent:&nbsp;True&nbsp;to&nbsp;skip&nbsp;the&nbsp;trash&nbsp;and&nbsp;delete&nbsp;the&nbsp;entry&nbsp;forever.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;args&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>.<a href="#DocsClient-Delete">Delete</a>()<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;Result&nbsp;of&nbsp;delete&nbsp;request.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-delete_revision"><strong>delete_revision</strong></a>(self, entry, **kwargs)</dt><dd><tt>Deletes&nbsp;the&nbsp;given&nbsp;Revision.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;gdata.docs.data.Revision&nbsp;to&nbsp;delete.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;args&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>.<a href="#DocsClient-Delete">Delete</a>()<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;Result&nbsp;of&nbsp;delete&nbsp;request.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-download_archive"><strong>download_archive</strong></a> = <a href="#DocsClient-download_resource">download_resource</a>(self, entry, file_path, extra_params<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-download_archive_to_memory"><strong>download_archive_to_memory</strong></a> = <a href="#DocsClient-download_resource_to_memory">download_resource_to_memory</a>(self, entry, extra_params<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-download_resource"><strong>download_resource</strong></a>(self, entry, file_path, extra_params<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Downloads&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;given&nbsp;entry&nbsp;to&nbsp;disk.<br>
+&nbsp;<br>
+Note:&nbsp;to&nbsp;download&nbsp;a&nbsp;file&nbsp;in&nbsp;memory,&nbsp;use&nbsp;the&nbsp;<a href="#DocsClient-DownloadResourceToMemory">DownloadResourceToMemory</a>()<br>
+method.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;gdata.docs.data.Resource&nbsp;whose&nbsp;contents&nbsp;to&nbsp;fetch.<br>
+&nbsp;&nbsp;file_path:&nbsp;str&nbsp;Full&nbsp;path&nbsp;to&nbsp;which&nbsp;to&nbsp;save&nbsp;file.<br>
 &nbsp;&nbsp;extra_params:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;map&nbsp;of&nbsp;any&nbsp;further&nbsp;parameters&nbsp;to&nbsp;control<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;how&nbsp;the&nbsp;document&nbsp;is&nbsp;downloaded/exported.&nbsp;For&nbsp;example,&nbsp;exporting&nbsp;a<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;spreadsheet&nbsp;as&nbsp;a&nbsp;.csv:&nbsp;extra_params={'gid':&nbsp;0,&nbsp;'exportFormat':&nbsp;'csv'}<br>
-&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
 &nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;_download_file().<br>
-&nbsp;<br>
-Raises:<br>
-&nbsp;&nbsp;gdata.client.RequestError&nbsp;if&nbsp;the&nbsp;download&nbsp;URL&nbsp;is&nbsp;malformed&nbsp;or&nbsp;the&nbsp;server's<br>
-&nbsp;&nbsp;response&nbsp;was&nbsp;not&nbsp;successful.<br>
-&nbsp;&nbsp;ValueError&nbsp;if&nbsp;entry_or_id_or_url&nbsp;was&nbsp;a&nbsp;resource&nbsp;id&nbsp;for&nbsp;a&nbsp;filetype<br>
-&nbsp;&nbsp;in&nbsp;which&nbsp;the&nbsp;download&nbsp;link&nbsp;cannot&nbsp;be&nbsp;manually&nbsp;constructed&nbsp;(e.g.&nbsp;pdf).</tt></dd></dl>
-
-<dl><dt><a name="DocsClient-export"><strong>export</strong></a>(self, entry_or_id_or_url, file_path, gid<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Exports&nbsp;a&nbsp;document&nbsp;from&nbsp;the&nbsp;Document&nbsp;List&nbsp;in&nbsp;a&nbsp;different&nbsp;format.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;entry_or_id_or_url:&nbsp;gdata.docs.data.DocsEntry&nbsp;or&nbsp;string&nbsp;representing&nbsp;a<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource&nbsp;id&nbsp;or&nbsp;URL&nbsp;to&nbsp;download&nbsp;the&nbsp;document&nbsp;from&nbsp;(such&nbsp;as&nbsp;the&nbsp;content<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;src&nbsp;link).<br>
-&nbsp;&nbsp;file_path:&nbsp;str&nbsp;The&nbsp;full&nbsp;path&nbsp;to&nbsp;save&nbsp;the&nbsp;file&nbsp;to.&nbsp;&nbsp;The&nbsp;export<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format&nbsp;is&nbsp;inferred&nbsp;from&nbsp;the&nbsp;the&nbsp;file&nbsp;extension.<br>
-&nbsp;&nbsp;gid:&nbsp;str&nbsp;(optional)&nbsp;grid&nbsp;id&nbsp;for&nbsp;downloading&nbsp;a&nbsp;single&nbsp;grid&nbsp;of&nbsp;a<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;spreadsheet.&nbsp;The&nbsp;param&nbsp;should&nbsp;only&nbsp;be&nbsp;used&nbsp;for&nbsp;.csv&nbsp;and&nbsp;.tsv<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;spreadsheet&nbsp;exports.<br>
-&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
-&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-download">download</a>().<br>
 &nbsp;<br>
 Raises:<br>
 &nbsp;&nbsp;gdata.client.RequestError&nbsp;if&nbsp;the&nbsp;download&nbsp;URL&nbsp;is&nbsp;malformed&nbsp;or&nbsp;the&nbsp;server's<br>
 &nbsp;&nbsp;response&nbsp;was&nbsp;not&nbsp;successful.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-get_acl_permissions"><strong>get_acl_permissions</strong></a>(self, resource_id, auth_token<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;a&nbsp;the&nbsp;ACL&nbsp;sharing&nbsp;permissions&nbsp;for&nbsp;a&nbsp;document.<br>
+<dl><dt><a name="DocsClient-download_resource_to_memory"><strong>download_resource_to_memory</strong></a>(self, entry, extra_params<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Returns&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;given&nbsp;entry.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;resource_id:&nbsp;str&nbsp;The&nbsp;document/item's&nbsp;resource&nbsp;id.&nbsp;Example&nbsp;for&nbsp;pdf:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'pdf%3A0A1234567890'.<br>
-&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
-&nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;URI&nbsp;to&nbsp;use&nbsp;when&nbsp;making&nbsp;this&nbsp;request.&nbsp;&nbsp;Must&nbsp;be&nbsp;a&nbsp;template,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;a&nbsp;%s&nbsp;for&nbsp;where&nbsp;to&nbsp;put&nbsp;the&nbsp;resource_id.<br>
-&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-get_feed">get_feed</a>().<br>
+&nbsp;&nbsp;entry:&nbsp;gdata.docs.data.Resource&nbsp;whose&nbsp;contents&nbsp;to&nbsp;fetch.<br>
+&nbsp;&nbsp;extra_params:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;map&nbsp;of&nbsp;any&nbsp;further&nbsp;parameters&nbsp;to&nbsp;control<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;how&nbsp;the&nbsp;document&nbsp;is&nbsp;downloaded/exported.&nbsp;For&nbsp;example,&nbsp;exporting&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;spreadsheet&nbsp;as&nbsp;a&nbsp;.csv:&nbsp;extra_params={'gid':&nbsp;0,&nbsp;'exportFormat':&nbsp;'csv'}<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;_get_content().<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;gdata.docs.data.AclFeed&nbsp;object&nbsp;representing&nbsp;the&nbsp;document's&nbsp;ACL&nbsp;entries.<br>
+&nbsp;&nbsp;Content&nbsp;of&nbsp;given&nbsp;resource&nbsp;after&nbsp;being&nbsp;downloaded.<br>
 &nbsp;<br>
 Raises:<br>
-&nbsp;&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;resource_id&nbsp;is&nbsp;not&nbsp;a&nbsp;valid&nbsp;format.</tt></dd></dl>
+&nbsp;&nbsp;gdata.client.RequestError&nbsp;if&nbsp;the&nbsp;download&nbsp;URL&nbsp;is&nbsp;malformed&nbsp;or&nbsp;the&nbsp;server's<br>
+&nbsp;&nbsp;response&nbsp;was&nbsp;not&nbsp;successful.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-get_doc"><strong>get_doc</strong></a>(self, resource_id, etag<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;a&nbsp;particular&nbsp;document&nbsp;given&nbsp;by&nbsp;its&nbsp;resource&nbsp;id.<br>
+<dl><dt><a name="DocsClient-download_revision"><strong>download_revision</strong></a>(self, entry, file_path, extra_params<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Downloads&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;given&nbsp;revision&nbsp;to&nbsp;disk.<br>
+&nbsp;<br>
+Note:&nbsp;to&nbsp;download&nbsp;a&nbsp;revision&nbsp;in&nbsp;memory,&nbsp;use&nbsp;the&nbsp;<a href="#DocsClient-DownloadRevisionToMemory">DownloadRevisionToMemory</a>()<br>
+method.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;resource_id:&nbsp;str&nbsp;The&nbsp;document/item's&nbsp;resource&nbsp;id.&nbsp;Example&nbsp;spreadsheet:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'spreadsheet%3A0A1234567890'.<br>
-&nbsp;&nbsp;etag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;document/item's&nbsp;etag&nbsp;value&nbsp;to&nbsp;be&nbsp;used&nbsp;in&nbsp;a<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;conditional&nbsp;GET.&nbsp;See&nbsp;<a href="http://code.google.com/apis/documents/docs/3.0/">http://code.google.com/apis/documents/docs/3.0/</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;developers_guide_protocol.html#RetrievingCached.<br>
-&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
-&nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;URI&nbsp;to&nbsp;use&nbsp;for&nbsp;this&nbsp;request.&nbsp;&nbsp;Translates&nbsp;to&nbsp;uri&nbsp;+<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource_id.<br>
+&nbsp;&nbsp;entry:&nbsp;gdata.docs.data.Revision&nbsp;whose&nbsp;contents&nbsp;to&nbsp;fetch.<br>
+&nbsp;&nbsp;file_path:&nbsp;str&nbsp;Full&nbsp;path&nbsp;to&nbsp;which&nbsp;to&nbsp;save&nbsp;file.<br>
+&nbsp;&nbsp;extra_params:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;map&nbsp;of&nbsp;any&nbsp;further&nbsp;parameters&nbsp;to&nbsp;control<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;how&nbsp;the&nbsp;document&nbsp;is&nbsp;downloaded.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;_download_file().<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;gdata.client.RequestError&nbsp;if&nbsp;the&nbsp;download&nbsp;URL&nbsp;is&nbsp;malformed&nbsp;or&nbsp;the&nbsp;server's<br>
+&nbsp;&nbsp;response&nbsp;was&nbsp;not&nbsp;successful.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-download_revision_to_memory"><strong>download_revision_to_memory</strong></a>(self, entry, extra_params<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Returns&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;given&nbsp;revision.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;gdata.docs.data.Revision&nbsp;whose&nbsp;contents&nbsp;to&nbsp;fetch.<br>
+&nbsp;&nbsp;extra_params:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;map&nbsp;of&nbsp;any&nbsp;further&nbsp;parameters&nbsp;to&nbsp;control<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;how&nbsp;the&nbsp;document&nbsp;is&nbsp;downloaded/exported.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;_get_content().<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;Content&nbsp;of&nbsp;given&nbsp;revision&nbsp;after&nbsp;being&nbsp;downloaded.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;gdata.client.RequestError&nbsp;if&nbsp;the&nbsp;download&nbsp;URL&nbsp;is&nbsp;malformed&nbsp;or&nbsp;the&nbsp;server's<br>
+&nbsp;&nbsp;response&nbsp;was&nbsp;not&nbsp;successful.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-get_acl_entry"><strong>get_acl_entry</strong></a>(self, entry, **kwargs)</dt><dd><tt>Retrieves&nbsp;an&nbsp;AclEntry&nbsp;again.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;useful&nbsp;if&nbsp;you&nbsp;need&nbsp;to&nbsp;poll&nbsp;for&nbsp;an&nbsp;ACL&nbsp;changing.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;gdata.docs.data.AclEntry&nbsp;to&nbsp;fetch&nbsp;and&nbsp;return.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;args&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-GetAclEntryBySelfLink">GetAclEntryBySelfLink</a>().<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.docs.data.AclEntry&nbsp;representing&nbsp;retrieved&nbsp;entry.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-get_acl_entry_by_self_link"><strong>get_acl_entry_by_self_link</strong></a>(self, self_link, **kwargs)</dt><dd><tt>Retrieves&nbsp;a&nbsp;particular&nbsp;AclEntry&nbsp;by&nbsp;its&nbsp;self&nbsp;link.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;self_link:&nbsp;URI&nbsp;at&nbsp;which&nbsp;to&nbsp;query&nbsp;for&nbsp;given&nbsp;ACL&nbsp;entry.&nbsp;&nbsp;This&nbsp;can&nbsp;be&nbsp;found<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;using&nbsp;entry.GetSelfLink().<br>
 &nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-get_entry">get_entry</a>().<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;gdata.docs.data.DocsEntry&nbsp;object&nbsp;representing&nbsp;the&nbsp;retrieved&nbsp;entry.<br>
-&nbsp;<br>
-Raises:<br>
-&nbsp;&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;resource_id&nbsp;is&nbsp;not&nbsp;a&nbsp;valid&nbsp;format.</tt></dd></dl>
+&nbsp;&nbsp;gdata.docs.data.AclEntry&nbsp;representing&nbsp;the&nbsp;retrieved&nbsp;entry.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-get_doclist"><strong>get_doclist</strong></a>(self, uri<font color="#909090">=None</font>, limit<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;the&nbsp;main&nbsp;doclist&nbsp;feed&nbsp;containing&nbsp;the&nbsp;user's&nbsp;items.<br>
+<dl><dt><a name="DocsClient-get_all_resources"><strong>get_all_resources</strong></a>(self, uri<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;all&nbsp;of&nbsp;a&nbsp;user's&nbsp;non-collections&nbsp;or&nbsp;everything&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.<br>
+&nbsp;<br>
+Folders&nbsp;are&nbsp;not&nbsp;included&nbsp;in&nbsp;this&nbsp;by&nbsp;default.&nbsp;&nbsp;Pass&nbsp;in&nbsp;a&nbsp;custom&nbsp;URI&nbsp;to<br>
+include&nbsp;collections&nbsp;in&nbsp;your&nbsp;query.&nbsp;&nbsp;The&nbsp;<a href="#DocsQuery">DocsQuery</a>&nbsp;class&nbsp;is&nbsp;an&nbsp;easy&nbsp;way&nbsp;to<br>
+generate&nbsp;such&nbsp;a&nbsp;URI.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;makes&nbsp;multiple&nbsp;HTTP&nbsp;requests&nbsp;(by&nbsp;following&nbsp;the&nbsp;feed's&nbsp;next<br>
+links)&nbsp;in&nbsp;order&nbsp;to&nbsp;fetch&nbsp;the&nbsp;user's&nbsp;entire&nbsp;document&nbsp;list.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;uri:&nbsp;str&nbsp;(optional)&nbsp;A&nbsp;URI&nbsp;to&nbsp;query&nbsp;the&nbsp;doclist&nbsp;feed.<br>
+&nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;URI&nbsp;to&nbsp;query&nbsp;the&nbsp;doclist&nbsp;feed&nbsp;with.&nbsp;If&nbsp;None,&nbsp;then&nbsp;use<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#DocsClient">DocsClient</a>.RESOURCE_FEED_URI,&nbsp;which&nbsp;will&nbsp;retrieve&nbsp;all<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non-collections.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-GetResources">GetResources</a>().<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;List&nbsp;of&nbsp;gdata.docs.data.Resource&nbsp;objects&nbsp;representing&nbsp;the&nbsp;retrieved<br>
+&nbsp;&nbsp;entries.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-get_archive"><strong>get_archive</strong></a>(self, entry, **kwargs)</dt><dd><tt>Retrieves&nbsp;an&nbsp;archive&nbsp;again&nbsp;given&nbsp;its&nbsp;entry.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;useful&nbsp;if&nbsp;you&nbsp;need&nbsp;to&nbsp;poll&nbsp;for&nbsp;an&nbsp;archive&nbsp;completing.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;gdata.docs.data.Archive&nbsp;to&nbsp;fetch&nbsp;and&nbsp;return.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;args&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-GetArchiveBySelfLink">GetArchiveBySelfLink</a>().<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.docs.data.Archive&nbsp;representing&nbsp;retrieved&nbsp;archive.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-get_archive_by_self_link"><strong>get_archive_by_self_link</strong></a>(self, self_link, **kwargs)</dt><dd><tt>Retrieves&nbsp;a&nbsp;particular&nbsp;archive&nbsp;by&nbsp;its&nbsp;self&nbsp;link.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;self_link:&nbsp;URI&nbsp;at&nbsp;which&nbsp;to&nbsp;query&nbsp;for&nbsp;given&nbsp;archive.&nbsp;&nbsp;This&nbsp;can&nbsp;be&nbsp;found<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;using&nbsp;entry.GetSelfLink().<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-get_entry">get_entry</a>().<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.docs.data.Archive&nbsp;representing&nbsp;the&nbsp;retrieved&nbsp;archive.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-get_changes"><strong>get_changes</strong></a>(self, changestamp<font color="#909090">=None</font>, max_results<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;changes&nbsp;to&nbsp;a&nbsp;user's&nbsp;documents&nbsp;list.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;changestamp:&nbsp;(optional)&nbsp;String&nbsp;changestamp&nbsp;value&nbsp;to&nbsp;query&nbsp;since.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;provided,&nbsp;returned&nbsp;changes&nbsp;will&nbsp;have&nbsp;a&nbsp;changestamp&nbsp;larger&nbsp;than<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;given&nbsp;one.<br>
+&nbsp;&nbsp;max_results:&nbsp;(optional)&nbsp;Number&nbsp;of&nbsp;results&nbsp;to&nbsp;fetch.&nbsp;&nbsp;API&nbsp;will&nbsp;limit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;number&nbsp;to&nbsp;100&nbsp;at&nbsp;most.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-get_feed">get_feed</a>().<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.docs.data.ChangeFeed.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-get_metadata"><strong>get_metadata</strong></a>(self, **kwargs)</dt><dd><tt>Retrieves&nbsp;the&nbsp;metadata&nbsp;of&nbsp;a&nbsp;user&nbsp;account.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-get_entry">get_entry</a>().<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.docs.data.Metadata&nbsp;representing&nbsp;metadata&nbsp;of&nbsp;user's&nbsp;account.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-get_resource"><strong>get_resource</strong></a>(self, entry, **kwargs)</dt><dd><tt>Retrieves&nbsp;a&nbsp;resource&nbsp;again&nbsp;given&nbsp;its&nbsp;entry.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;gdata.docs.data.Resource&nbsp;to&nbsp;fetch&nbsp;and&nbsp;return.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;args&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-GetResourceBySelfLink">GetResourceBySelfLink</a>().<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.docs.data.Resource&nbsp;representing&nbsp;retrieved&nbsp;resource.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-get_resource_acl"><strong>get_resource_acl</strong></a>(self, entry, **kwargs)</dt><dd><tt>Retrieves&nbsp;the&nbsp;ACL&nbsp;sharing&nbsp;permissions&nbsp;for&nbsp;the&nbsp;given&nbsp;entry.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;gdata.docs.data.Resource&nbsp;for&nbsp;which&nbsp;to&nbsp;get&nbsp;ACL.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-get_feed">get_feed</a>().<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.docs.data.AclFeed&nbsp;representing&nbsp;the&nbsp;resource's&nbsp;ACL.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-get_resource_by_self_link"><strong>get_resource_by_self_link</strong></a>(self, self_link, etag<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;a&nbsp;particular&nbsp;resource&nbsp;by&nbsp;its&nbsp;self&nbsp;link.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;self_link:&nbsp;URI&nbsp;at&nbsp;which&nbsp;to&nbsp;query&nbsp;for&nbsp;given&nbsp;resource.&nbsp;&nbsp;This&nbsp;can&nbsp;be&nbsp;found<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;using&nbsp;entry.GetSelfLink().<br>
+&nbsp;&nbsp;etag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;document/item's&nbsp;etag&nbsp;value&nbsp;to&nbsp;be&nbsp;used&nbsp;in&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;conditional&nbsp;GET.&nbsp;See&nbsp;<a href="http://code.google.com/apis/documents/docs/3.0/">http://code.google.com/apis/documents/docs/3.0/</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;developers_guide_protocol.html#RetrievingCached.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-get_entry">get_entry</a>().<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.docs.data.Resource&nbsp;representing&nbsp;the&nbsp;retrieved&nbsp;resource.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-get_resources"><strong>get_resources</strong></a>(self, uri<font color="#909090">=None</font>, limit<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;the&nbsp;resources&nbsp;in&nbsp;a&nbsp;user's&nbsp;docslist,&nbsp;or&nbsp;the&nbsp;given&nbsp;URI.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;URI&nbsp;to&nbsp;query&nbsp;for&nbsp;resources.&nbsp;&nbsp;If&nbsp;None,&nbsp;then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.docs.client.<a href="#DocsClient">DocsClient</a>.RESOURCE_FEED_URI&nbsp;is&nbsp;used,&nbsp;which&nbsp;will<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query&nbsp;for&nbsp;all&nbsp;non-collections.<br>
 &nbsp;&nbsp;limit:&nbsp;int&nbsp;(optional)&nbsp;A&nbsp;maximum&nbsp;cap&nbsp;for&nbsp;the&nbsp;number&nbsp;of&nbsp;results&nbsp;to<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;in&nbsp;the&nbsp;feed.&nbsp;By&nbsp;default,&nbsp;the&nbsp;API&nbsp;returns&nbsp;a&nbsp;maximum&nbsp;of&nbsp;100<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;per&nbsp;page.&nbsp;Thus,&nbsp;if&nbsp;you&nbsp;set&nbsp;limit=5000,&nbsp;you&nbsp;will&nbsp;get&nbsp;&lt;=&nbsp;5000<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;documents&nbsp;(guarenteed&nbsp;no&nbsp;more&nbsp;than&nbsp;5000),&nbsp;and&nbsp;will&nbsp;need&nbsp;to&nbsp;follow&nbsp;the<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed's&nbsp;next&nbsp;links&nbsp;(feed.GetNextLink())&nbsp;to&nbsp;the&nbsp;rest.&nbsp;See<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#DocsClient-get_everything">get_everything</a>().&nbsp;Similarly,&nbsp;if&nbsp;you&nbsp;set&nbsp;limit=50,&nbsp;only&nbsp;&lt;=&nbsp;50<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get_everything().&nbsp;Similarly,&nbsp;if&nbsp;you&nbsp;set&nbsp;limit=50,&nbsp;only&nbsp;&lt;=&nbsp;50<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;documents&nbsp;are&nbsp;returned.&nbsp;Note:&nbsp;if&nbsp;the&nbsp;max-results&nbsp;parameter&nbsp;is&nbsp;set&nbsp;in<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;uri&nbsp;parameter,&nbsp;it&nbsp;is&nbsp;chosen&nbsp;over&nbsp;a&nbsp;value&nbsp;set&nbsp;for&nbsp;limit.<br>
-&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
 &nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-get_feed">get_feed</a>().<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;gdata.docs.data.DocList&nbsp;feed.</tt></dd></dl>
+&nbsp;&nbsp;gdata.docs.data.ResourceFeed&nbsp;feed.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-get_everything"><strong>get_everything</strong></a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;the&nbsp;user's&nbsp;entire&nbsp;doc&nbsp;list.<br>
-&nbsp;<br>
-The&nbsp;method&nbsp;makes&nbsp;multiple&nbsp;HTTP&nbsp;requests&nbsp;(by&nbsp;following&nbsp;the&nbsp;feed's&nbsp;next&nbsp;links)<br>
-in&nbsp;order&nbsp;to&nbsp;fetch&nbsp;the&nbsp;user's&nbsp;entire&nbsp;document&nbsp;list.<br>
+<dl><dt><a name="DocsClient-get_revision"><strong>get_revision</strong></a>(self, entry, **kwargs)</dt><dd><tt>Retrieves&nbsp;a&nbsp;revision&nbsp;again&nbsp;given&nbsp;its&nbsp;entry.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;uri:&nbsp;str&nbsp;(optional)&nbsp;A&nbsp;URI&nbsp;to&nbsp;query&nbsp;the&nbsp;doclist&nbsp;feed&nbsp;with.<br>
-&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
-&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-GetDocList">GetDocList</a>().<br>
+&nbsp;&nbsp;entry:&nbsp;gdata.docs.data.Revision&nbsp;to&nbsp;fetch&nbsp;and&nbsp;return.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;args&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-GetRevisionBySelfLink">GetRevisionBySelfLink</a>().<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.docs.data.Revision&nbsp;representing&nbsp;retrieved&nbsp;revision.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-get_revision_by_self_link"><strong>get_revision_by_self_link</strong></a>(self, self_link, **kwargs)</dt><dd><tt>Retrieves&nbsp;a&nbsp;particular&nbsp;reivision&nbsp;by&nbsp;its&nbsp;self&nbsp;link.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;self_link:&nbsp;URI&nbsp;at&nbsp;which&nbsp;to&nbsp;query&nbsp;for&nbsp;given&nbsp;revision.&nbsp;&nbsp;This&nbsp;can&nbsp;be&nbsp;found<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;using&nbsp;entry.GetSelfLink().<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-get_entry">get_entry</a>().<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;gdata.docs.data.DocsEntry&nbsp;objects&nbsp;representing&nbsp;the&nbsp;retrieved<br>
-&nbsp;&nbsp;entries.</tt></dd></dl>
+&nbsp;&nbsp;gdata.docs.data.Revision&nbsp;representing&nbsp;the&nbsp;retrieved&nbsp;revision.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-get_file_content"><strong>get_file_content</strong></a>(self, uri, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Fetches&nbsp;the&nbsp;file&nbsp;content&nbsp;from&nbsp;the&nbsp;specified&nbsp;uri.<br>
-&nbsp;<br>
-This&nbsp;method&nbsp;is&nbsp;useful&nbsp;for&nbsp;downloading/exporting&nbsp;a&nbsp;file&nbsp;within&nbsp;enviornments<br>
-like&nbsp;Google&nbsp;App&nbsp;Engine,&nbsp;where&nbsp;the&nbsp;user&nbsp;does&nbsp;not&nbsp;have&nbsp;the&nbsp;ability&nbsp;to&nbsp;write<br>
-the&nbsp;file&nbsp;to&nbsp;a&nbsp;local&nbsp;disk.<br>
+<dl><dt><a name="DocsClient-get_revisions"><strong>get_revisions</strong></a>(self, entry, **kwargs)</dt><dd><tt>Retrieves&nbsp;the&nbsp;revision&nbsp;history&nbsp;for&nbsp;a&nbsp;resource.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;uri:&nbsp;str&nbsp;The&nbsp;full&nbsp;URL&nbsp;to&nbsp;fetch&nbsp;the&nbsp;file&nbsp;contents&nbsp;from.<br>
-&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
-&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-request">request</a>().<br>
-&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;The&nbsp;binary&nbsp;file&nbsp;content.<br>
-&nbsp;<br>
-Raises:<br>
-&nbsp;&nbsp;gdata.client.RequestError:&nbsp;on&nbsp;error&nbsp;response&nbsp;from&nbsp;server.</tt></dd></dl>
-
-<dl><dt><a name="DocsClient-get_revisions"><strong>get_revisions</strong></a>(self, resource_id, auth_token<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;the&nbsp;revision&nbsp;history&nbsp;for&nbsp;a&nbsp;document.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;resource_id:&nbsp;str&nbsp;The&nbsp;document/item's&nbsp;resource&nbsp;id.&nbsp;Example&nbsp;for&nbsp;pdf:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'pdf%3A0A1234567890'.<br>
-&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
-&nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;URI&nbsp;to&nbsp;use&nbsp;when&nbsp;making&nbsp;this&nbsp;request.&nbsp;&nbsp;Must&nbsp;be&nbsp;a&nbsp;template,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;a&nbsp;%s&nbsp;for&nbsp;where&nbsp;to&nbsp;put&nbsp;the&nbsp;resource_id.<br>
+&nbsp;&nbsp;entry:&nbsp;gdata.docs.data.Resource&nbsp;for&nbsp;which&nbsp;to&nbsp;get&nbsp;revisions.<br>
 &nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-get_feed">get_feed</a>().<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;gdata.docs.data.RevisionFeed&nbsp;representing&nbsp;the&nbsp;document's&nbsp;revisions.<br>
-&nbsp;<br>
-Raises:<br>
-&nbsp;&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;resource_id&nbsp;is&nbsp;not&nbsp;a&nbsp;valid&nbsp;format.</tt></dd></dl>
+&nbsp;&nbsp;gdata.docs.data.RevisionFeed&nbsp;representing&nbsp;the&nbsp;resource's&nbsp;revisions.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-move"><strong>move</strong></a>(self, source_entry, folder_entry<font color="#909090">=None</font>, keep_in_folders<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, delete_folder_uri<font color="#909090">=None</font>, folder_uri<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Moves&nbsp;an&nbsp;item&nbsp;into&nbsp;a&nbsp;different&nbsp;folder&nbsp;(or&nbsp;to&nbsp;the&nbsp;root&nbsp;document&nbsp;list).<br>
+<dl><dt><a name="DocsClient-move_resource"><strong>move_resource</strong></a>(self, entry, collection<font color="#909090">=None</font>, keep_in_collections<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Moves&nbsp;an&nbsp;item&nbsp;into&nbsp;a&nbsp;different&nbsp;collection&nbsp;(or&nbsp;out&nbsp;of&nbsp;all&nbsp;collections).<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;source_entry:&nbsp;gdata.docs.data.DocsEntry&nbsp;An&nbsp;object&nbsp;representing&nbsp;the&nbsp;source<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document/folder.<br>
-&nbsp;&nbsp;folder_entry:&nbsp;gdata.docs.data.DocsEntry&nbsp;(optional)&nbsp;An&nbsp;object&nbsp;representing<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;destination&nbsp;folder.&nbsp;If&nbsp;None,&nbsp;set&nbsp;keep_in_folders&nbsp;to<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;True&nbsp;to&nbsp;remove&nbsp;the&nbsp;item&nbsp;from&nbsp;all&nbsp;parent&nbsp;folders.<br>
-&nbsp;&nbsp;keep_in_folders:&nbsp;boolean&nbsp;(optional)&nbsp;If&nbsp;True,&nbsp;the&nbsp;source&nbsp;entry<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;not&nbsp;removed&nbsp;from&nbsp;any&nbsp;existing&nbsp;parent&nbsp;folders&nbsp;it&nbsp;is&nbsp;in.<br>
-&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
-&nbsp;&nbsp;delete_folder_uri:&nbsp;(optional)&nbsp;URI&nbsp;to&nbsp;use&nbsp;when&nbsp;making&nbsp;this&nbsp;request.&nbsp;&nbsp;Must<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;a&nbsp;template,&nbsp;with&nbsp;a&nbsp;%s&nbsp;for&nbsp;where&nbsp;to&nbsp;put&nbsp;the&nbsp;resource_id.<br>
-&nbsp;&nbsp;folder_uri:&nbsp;(optional)&nbsp;URI&nbsp;to&nbsp;use&nbsp;when&nbsp;making&nbsp;this&nbsp;request.&nbsp;&nbsp;Must&nbsp;be&nbsp;a<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;template,&nbsp;with&nbsp;a&nbsp;%s&nbsp;for&nbsp;where&nbsp;to&nbsp;put&nbsp;the&nbsp;resource_id.<br>
+&nbsp;&nbsp;entry:&nbsp;gdata.docs.data.Resource&nbsp;to&nbsp;move.<br>
+&nbsp;&nbsp;collection:&nbsp;gdata.docs.data.Resource&nbsp;(optional)&nbsp;An&nbsp;object&nbsp;representing<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;destination&nbsp;collection.&nbsp;If&nbsp;None,&nbsp;set&nbsp;keep_in_collections&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;False&nbsp;to&nbsp;remove&nbsp;the&nbsp;item&nbsp;from&nbsp;all&nbsp;collections.<br>
+&nbsp;&nbsp;keep_in_collections:&nbsp;boolean&nbsp;(optional)&nbsp;If&nbsp;True,&nbsp;the&nbsp;given&nbsp;entry<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;not&nbsp;removed&nbsp;from&nbsp;any&nbsp;existing&nbsp;collections&nbsp;it&nbsp;is&nbsp;already&nbsp;in.<br>
 &nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-post">post</a>().<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;gdata.docs.data.DocsEntry&nbsp;of&nbsp;the&nbsp;moved&nbsp;entry&nbsp;or&nbsp;True&nbsp;if&nbsp;just&nbsp;moving&nbsp;the<br>
-&nbsp;&nbsp;item&nbsp;out&nbsp;of&nbsp;all&nbsp;folders&nbsp;(e.g.&nbsp;<a href="#DocsClient-Move">Move</a>(source_entry)).</tt></dd></dl>
+&nbsp;&nbsp;gdata.docs.data.Resource&nbsp;of&nbsp;the&nbsp;moved&nbsp;entry.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-upload"><strong>upload</strong></a>(self, media, title, folder_or_uri<font color="#909090">=None</font>, content_type<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Uploads&nbsp;a&nbsp;file&nbsp;to&nbsp;Google&nbsp;Docs.<br>
+<dl><dt><a name="DocsClient-publish_revision"><strong>publish_revision</strong></a>(self, entry, publish_auto<font color="#909090">=None</font>, publish_outside_domain<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Publishes&nbsp;the&nbsp;given&nbsp;revision.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;only&nbsp;be&nbsp;used&nbsp;for&nbsp;document&nbsp;revisions.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;media:&nbsp;A&nbsp;gdata.data.MediaSource&nbsp;object&nbsp;containing&nbsp;the&nbsp;file&nbsp;to&nbsp;be<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploaded&nbsp;or&nbsp;a&nbsp;string&nbsp;of&nbsp;the&nbsp;filepath.<br>
-&nbsp;&nbsp;title:&nbsp;str&nbsp;The&nbsp;title&nbsp;of&nbsp;the&nbsp;document&nbsp;on&nbsp;the&nbsp;server&nbsp;after&nbsp;being<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploaded.<br>
-&nbsp;&nbsp;folder_or_uri:&nbsp;gdata.docs.data.DocsEntry&nbsp;or&nbsp;str&nbsp;(optional)&nbsp;An&nbsp;object&nbsp;with<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;link&nbsp;to&nbsp;the&nbsp;folder&nbsp;or&nbsp;the&nbsp;uri&nbsp;to&nbsp;upload&nbsp;the&nbsp;file&nbsp;to.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note:&nbsp;A&nbsp;valid&nbsp;uri&nbsp;for&nbsp;a&nbsp;folder&nbsp;is&nbsp;of&nbsp;the&nbsp;form:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/feeds/default/private/full/folder%3Afolder_id/contents<br>
-&nbsp;&nbsp;content_type:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;file's&nbsp;mimetype.&nbsp;If&nbsp;not&nbsp;provided,&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;one&nbsp;in&nbsp;the&nbsp;media&nbsp;source&nbsp;object&nbsp;is&nbsp;used&nbsp;or&nbsp;the&nbsp;mimetype&nbsp;is&nbsp;inferred<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;the&nbsp;filename&nbsp;(if&nbsp;media&nbsp;is&nbsp;a&nbsp;string).&nbsp;When&nbsp;media&nbsp;is&nbsp;a&nbsp;filename,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it&nbsp;is&nbsp;always&nbsp;recommended&nbsp;to&nbsp;pass&nbsp;in&nbsp;a&nbsp;content&nbsp;type.<br>
-&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
+&nbsp;&nbsp;entry:&nbsp;Revision&nbsp;to&nbsp;update.<br>
+&nbsp;&nbsp;publish_auto:&nbsp;True&nbsp;to&nbsp;automatically&nbsp;publish&nbsp;future&nbsp;revisions&nbsp;of&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.&nbsp;&nbsp;False&nbsp;to&nbsp;not&nbsp;automatically&nbsp;publish&nbsp;future&nbsp;revisions.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None&nbsp;to&nbsp;take&nbsp;no&nbsp;action&nbsp;and&nbsp;use&nbsp;the&nbsp;default&nbsp;value.<br>
+&nbsp;&nbsp;publish_outside_domain:&nbsp;True&nbsp;to&nbsp;make&nbsp;the&nbsp;published&nbsp;revision&nbsp;available<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outside&nbsp;of&nbsp;a&nbsp;Google&nbsp;Apps&nbsp;domain.&nbsp;&nbsp;False&nbsp;to&nbsp;not&nbsp;publish&nbsp;outside<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;domain.&nbsp;&nbsp;None&nbsp;to&nbsp;use&nbsp;the&nbsp;default&nbsp;value.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;super(<a href="#DocsClient">DocsClient</a>,&nbsp;self).<a href="#DocsClient-update">update</a>().<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.docs.data.Revision&nbsp;representing&nbsp;the&nbsp;updated&nbsp;revision.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-request"><strong>request</strong></a>(self, method<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Add&nbsp;support&nbsp;for&nbsp;imitating&nbsp;other&nbsp;users&nbsp;via&nbsp;2-Legged&nbsp;OAuth.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;URI&nbsp;of&nbsp;the&nbsp;request&nbsp;in&nbsp;which&nbsp;to&nbsp;replace&nbsp;default&nbsp;with<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.<strong>xoauth_requestor_id</strong>.<br>
+Returns:<br>
+&nbsp;&nbsp;Result&nbsp;of&nbsp;super(<a href="#DocsClient">DocsClient</a>,&nbsp;self).<a href="#DocsClient-request">request</a>().</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-unpublish_revision"><strong>unpublish_revision</strong></a>(self, entry, **kwargs)</dt><dd><tt>Unpublishes&nbsp;the&nbsp;given&nbsp;revision.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;can&nbsp;only&nbsp;be&nbsp;used&nbsp;for&nbsp;document&nbsp;revisions.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;Revision&nbsp;to&nbsp;update.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;super(<a href="#DocsClient">DocsClient</a>,&nbsp;self).<a href="#DocsClient-update">update</a>().<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.docs.data.Revision&nbsp;representing&nbsp;the&nbsp;updated&nbsp;revision.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-update_acl_entry"><strong>update_acl_entry</strong></a>(self, entry, send_notifications<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Updates&nbsp;the&nbsp;given&nbsp;AclEntry&nbsp;with&nbsp;new&nbsp;metadata.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;AclEntry&nbsp;to&nbsp;update.&nbsp;Make&nbsp;any&nbsp;metadata&nbsp;changes&nbsp;to&nbsp;this&nbsp;entry.<br>
+&nbsp;&nbsp;send_notifications:&nbsp;True&nbsp;if&nbsp;users&nbsp;should&nbsp;be&nbsp;notified&nbsp;by&nbsp;email&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;AclEntry&nbsp;is&nbsp;updated.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;super(<a href="#DocsClient">DocsClient</a>,&nbsp;self).<a href="#DocsClient-update">update</a>().<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.docs.data.AclEntry&nbsp;representing&nbsp;the&nbsp;updated&nbsp;ACL&nbsp;entry.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-update_archive"><strong>update_archive</strong></a>(self, entry, **kwargs)</dt><dd><tt>Updates&nbsp;the&nbsp;given&nbsp;Archive&nbsp;with&nbsp;new&nbsp;metadata.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;is&nbsp;really&nbsp;only&nbsp;useful&nbsp;for&nbsp;updating&nbsp;the&nbsp;notification&nbsp;email<br>
+address&nbsp;of&nbsp;an&nbsp;archive&nbsp;that&nbsp;is&nbsp;being&nbsp;processed.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;Archive&nbsp;to&nbsp;update.&nbsp;Make&nbsp;any&nbsp;metadata&nbsp;changes&nbsp;to&nbsp;this&nbsp;entry.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;super(<a href="#DocsClient">DocsClient</a>,&nbsp;self).<a href="#DocsClient-update">update</a>().<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.docs.data.Archive&nbsp;representing&nbsp;the&nbsp;updated&nbsp;archive.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-update_resource"><strong>update_resource</strong></a>(self, entry, media<font color="#909090">=None</font>, update_metadata<font color="#909090">=True</font>, new_revision<font color="#909090">=False</font>, **kwargs)</dt><dd><tt>Updates&nbsp;an&nbsp;entry&nbsp;in&nbsp;Google&nbsp;Docs&nbsp;with&nbsp;new&nbsp;metadata&nbsp;and/or&nbsp;new&nbsp;data.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;Entry&nbsp;to&nbsp;update.&nbsp;Make&nbsp;any&nbsp;metadata&nbsp;changes&nbsp;to&nbsp;this&nbsp;entry.<br>
+&nbsp;&nbsp;media:&nbsp;(optional)&nbsp;gdata.data.MediaSource&nbsp;object&nbsp;containing&nbsp;the&nbsp;file&nbsp;with<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;to&nbsp;replace&nbsp;the&nbsp;entry's&nbsp;data.<br>
+&nbsp;&nbsp;update_metadata:&nbsp;(optional)&nbsp;True&nbsp;to&nbsp;update&nbsp;the&nbsp;metadata&nbsp;from&nbsp;the&nbsp;entry<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;itself.&nbsp;&nbsp;You&nbsp;might&nbsp;set&nbsp;this&nbsp;to&nbsp;False&nbsp;to&nbsp;only&nbsp;update&nbsp;an&nbsp;entry's<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file&nbsp;content,&nbsp;and&nbsp;not&nbsp;its&nbsp;metadata.<br>
+&nbsp;&nbsp;new_revision:&nbsp;(optional)&nbsp;True&nbsp;to&nbsp;create&nbsp;a&nbsp;new&nbsp;revision&nbsp;with&nbsp;this&nbsp;update,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;False&nbsp;otherwise.<br>
 &nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-post">post</a>().<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;A&nbsp;gdata.docs.data.DocsEntry&nbsp;containing&nbsp;information&nbsp;about&nbsp;uploaded&nbsp;doc.</tt></dd></dl>
+&nbsp;&nbsp;gdata.docs.data.Resource&nbsp;representing&nbsp;the&nbsp;updated&nbsp;entry.</tt></dd></dl>
 
 <hr>
 Data and other attributes defined here:<br>
+<dl><dt><strong>alt_auth_service</strong> = 'wise'</dl>
+
+<dl><dt><strong>alt_auth_token</strong> = None</dl>
+
 <dl><dt><strong>api_version</strong> = '3.0'</dl>
 
-<dl><dt><strong>auth_scopes</strong> = ('https://docs.google.com/feeds/', 'http://docs.google.com/feeds/')</dl>
+<dl><dt><strong>auth_scopes</strong> = ('https://docs.google.com/feeds/', 'https://spreadsheets.google.com/feeds/', 'https://docs.googleusercontent.com/')</dl>
 
 <dl><dt><strong>auth_service</strong> = 'writely'</dl>
 
@@ -381,7 +627,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;text&nbsp;which&nbsp;was&nbsp;contained&nbsp;in&nbsp;the&nbsp;challenge.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Generated&nbsp;token,&nbsp;which&nbsp;is&nbsp;also&nbsp;stored&nbsp;in&nbsp;this&nbsp;object.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Raises:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;RequestError&nbsp;or&nbsp;one&nbsp;of&nbsp;its&nbsp;suclasses:&nbsp;BadAuthentication,<br>
@@ -462,59 +708,6 @@ Subclasses&nbsp;may&nbsp;override&nbsp;this&nbsp;method&nbsp;to&nbsp;add&nbsp;th
 modifications&nbsp;before&nbsp;the&nbsp;request&nbsp;is&nbsp;made.</tt></dd></dl>
 
 <dl><dt><a name="DocsClient-Post"><strong>Post</strong></a> = post(self, entry, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt></dl>
-
-<dl><dt><a name="DocsClient-Request"><strong>Request</strong></a> = request(self, method<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, **kwargs)</dt><dd><tt>Make&nbsp;an&nbsp;HTTP&nbsp;request&nbsp;to&nbsp;the&nbsp;server.<br>
-&nbsp;<br>
-See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;atom.client.AtomPubClient.request.<br>
-&nbsp;<br>
-If&nbsp;a&nbsp;302&nbsp;redirect&nbsp;is&nbsp;sent&nbsp;from&nbsp;the&nbsp;server&nbsp;to&nbsp;the&nbsp;client,&nbsp;this&nbsp;client<br>
-assumes&nbsp;that&nbsp;the&nbsp;redirect&nbsp;is&nbsp;in&nbsp;the&nbsp;form&nbsp;used&nbsp;by&nbsp;the&nbsp;Google&nbsp;Calendar&nbsp;API.<br>
-The&nbsp;same&nbsp;request&nbsp;URI&nbsp;and&nbsp;method&nbsp;will&nbsp;be&nbsp;used&nbsp;as&nbsp;in&nbsp;the&nbsp;original&nbsp;request,<br>
-but&nbsp;a&nbsp;gsessionid&nbsp;URL&nbsp;parameter&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;request&nbsp;URI&nbsp;with<br>
-the&nbsp;value&nbsp;provided&nbsp;in&nbsp;the&nbsp;server's&nbsp;302&nbsp;redirect&nbsp;response.&nbsp;If&nbsp;the&nbsp;302<br>
-redirect&nbsp;is&nbsp;not&nbsp;in&nbsp;the&nbsp;format&nbsp;specified&nbsp;by&nbsp;the&nbsp;Google&nbsp;Calendar&nbsp;API,&nbsp;a<br>
-RedirectError&nbsp;will&nbsp;be&nbsp;raised&nbsp;containing&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;server's<br>
-response.<br>
-&nbsp;<br>
-The&nbsp;method&nbsp;calls&nbsp;the&nbsp;client's&nbsp;modify_request&nbsp;method&nbsp;to&nbsp;make&nbsp;any&nbsp;changes<br>
-required&nbsp;by&nbsp;the&nbsp;client&nbsp;before&nbsp;the&nbsp;request&nbsp;is&nbsp;made.&nbsp;For&nbsp;example,&nbsp;a<br>
-version&nbsp;2&nbsp;client&nbsp;could&nbsp;add&nbsp;a&nbsp;GData-Version:&nbsp;2&nbsp;header&nbsp;to&nbsp;the&nbsp;request&nbsp;in<br>
-its&nbsp;modify_request&nbsp;method.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;method:&nbsp;str&nbsp;The&nbsp;HTTP&nbsp;verb&nbsp;for&nbsp;this&nbsp;request,&nbsp;usually&nbsp;'GET',&nbsp;'POST',<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'PUT',&nbsp;or&nbsp;'DELETE'<br>
-&nbsp;&nbsp;uri:&nbsp;atom.http_core.Uri,&nbsp;str,&nbsp;or&nbsp;unicode&nbsp;The&nbsp;URL&nbsp;being&nbsp;requested.<br>
-&nbsp;&nbsp;auth_token:&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header&nbsp;in&nbsp;its<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modify_request&nbsp;method.&nbsp;Recommended&nbsp;classes&nbsp;include<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.<br>
-&nbsp;&nbsp;http_request:&nbsp;(optional)&nbsp;atom.http_core.HttpRequest<br>
-&nbsp;&nbsp;converter:&nbsp;function&nbsp;which&nbsp;takes&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;response&nbsp;as&nbsp;it's&nbsp;only<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argument&nbsp;and&nbsp;returns&nbsp;the&nbsp;desired&nbsp;object.<br>
-&nbsp;&nbsp;desired_class:&nbsp;class&nbsp;descended&nbsp;from&nbsp;atom.core.XmlElement&nbsp;to&nbsp;which&nbsp;a<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;successful&nbsp;response&nbsp;should&nbsp;be&nbsp;converted.&nbsp;If&nbsp;there&nbsp;is&nbsp;no<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;converter&nbsp;function&nbsp;specified&nbsp;(converter=None)&nbsp;then&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;desired_class&nbsp;will&nbsp;be&nbsp;used&nbsp;in&nbsp;calling&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;atom.core.parse&nbsp;function.&nbsp;If&nbsp;neither<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;desired_class&nbsp;nor&nbsp;the&nbsp;converter&nbsp;is&nbsp;specified,&nbsp;an<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTTP&nbsp;reponse&nbsp;object&nbsp;will&nbsp;be&nbsp;returned.<br>
-&nbsp;&nbsp;redirects_remaining:&nbsp;(optional)&nbsp;int,&nbsp;if&nbsp;this&nbsp;number&nbsp;is&nbsp;0&nbsp;and&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server&nbsp;sends&nbsp;a&nbsp;302&nbsp;redirect,&nbsp;the&nbsp;request&nbsp;method<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;raise&nbsp;an&nbsp;exception.&nbsp;This&nbsp;parameter&nbsp;is&nbsp;used&nbsp;in<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;recursive&nbsp;request&nbsp;calls&nbsp;to&nbsp;avoid&nbsp;an&nbsp;infinite&nbsp;loop.<br>
-&nbsp;<br>
-Any&nbsp;additional&nbsp;arguments&nbsp;are&nbsp;passed&nbsp;through&nbsp;to<br>
-atom.client.AtomPubClient.request.<br>
-&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;An&nbsp;HTTP&nbsp;response&nbsp;object&nbsp;(see&nbsp;atom.http_core.HttpResponse&nbsp;for&nbsp;a<br>
-&nbsp;&nbsp;description&nbsp;of&nbsp;the&nbsp;object's&nbsp;interface)&nbsp;if&nbsp;no&nbsp;converter&nbsp;was<br>
-&nbsp;&nbsp;specified&nbsp;and&nbsp;no&nbsp;desired_class&nbsp;was&nbsp;specified.&nbsp;If&nbsp;a&nbsp;converter&nbsp;function<br>
-&nbsp;&nbsp;was&nbsp;provided,&nbsp;the&nbsp;results&nbsp;of&nbsp;calling&nbsp;the&nbsp;converter&nbsp;are&nbsp;returned.&nbsp;If&nbsp;no<br>
-&nbsp;&nbsp;converter&nbsp;was&nbsp;specified&nbsp;but&nbsp;a&nbsp;desired_class&nbsp;was&nbsp;provided,&nbsp;the&nbsp;response<br>
-&nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
-&nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
 
 <dl><dt><a name="DocsClient-RequestClientLoginToken"><strong>RequestClientLoginToken</strong></a> = request_client_login_token(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
@@ -615,7 +808,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;text&nbsp;which&nbsp;was&nbsp;contained&nbsp;in&nbsp;the&nbsp;challenge.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Generated&nbsp;token,&nbsp;which&nbsp;is&nbsp;also&nbsp;stored&nbsp;in&nbsp;this&nbsp;object.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Raises:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;RequestError&nbsp;or&nbsp;one&nbsp;of&nbsp;its&nbsp;suclasses:&nbsp;BadAuthentication,<br>
@@ -697,59 +890,6 @@ modifications&nbsp;before&nbsp;the&nbsp;request&nbsp;is&nbsp;made.</tt></dd></dl
 
 <dl><dt><a name="DocsClient-post"><strong>post</strong></a>(self, entry, uri, auth_token<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-request"><strong>request</strong></a>(self, method<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, converter<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, **kwargs)</dt><dd><tt>Make&nbsp;an&nbsp;HTTP&nbsp;request&nbsp;to&nbsp;the&nbsp;server.<br>
-&nbsp;<br>
-See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;atom.client.AtomPubClient.request.<br>
-&nbsp;<br>
-If&nbsp;a&nbsp;302&nbsp;redirect&nbsp;is&nbsp;sent&nbsp;from&nbsp;the&nbsp;server&nbsp;to&nbsp;the&nbsp;client,&nbsp;this&nbsp;client<br>
-assumes&nbsp;that&nbsp;the&nbsp;redirect&nbsp;is&nbsp;in&nbsp;the&nbsp;form&nbsp;used&nbsp;by&nbsp;the&nbsp;Google&nbsp;Calendar&nbsp;API.<br>
-The&nbsp;same&nbsp;request&nbsp;URI&nbsp;and&nbsp;method&nbsp;will&nbsp;be&nbsp;used&nbsp;as&nbsp;in&nbsp;the&nbsp;original&nbsp;request,<br>
-but&nbsp;a&nbsp;gsessionid&nbsp;URL&nbsp;parameter&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;request&nbsp;URI&nbsp;with<br>
-the&nbsp;value&nbsp;provided&nbsp;in&nbsp;the&nbsp;server's&nbsp;302&nbsp;redirect&nbsp;response.&nbsp;If&nbsp;the&nbsp;302<br>
-redirect&nbsp;is&nbsp;not&nbsp;in&nbsp;the&nbsp;format&nbsp;specified&nbsp;by&nbsp;the&nbsp;Google&nbsp;Calendar&nbsp;API,&nbsp;a<br>
-RedirectError&nbsp;will&nbsp;be&nbsp;raised&nbsp;containing&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;server's<br>
-response.<br>
-&nbsp;<br>
-The&nbsp;method&nbsp;calls&nbsp;the&nbsp;client's&nbsp;modify_request&nbsp;method&nbsp;to&nbsp;make&nbsp;any&nbsp;changes<br>
-required&nbsp;by&nbsp;the&nbsp;client&nbsp;before&nbsp;the&nbsp;request&nbsp;is&nbsp;made.&nbsp;For&nbsp;example,&nbsp;a<br>
-version&nbsp;2&nbsp;client&nbsp;could&nbsp;add&nbsp;a&nbsp;GData-Version:&nbsp;2&nbsp;header&nbsp;to&nbsp;the&nbsp;request&nbsp;in<br>
-its&nbsp;modify_request&nbsp;method.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;method:&nbsp;str&nbsp;The&nbsp;HTTP&nbsp;verb&nbsp;for&nbsp;this&nbsp;request,&nbsp;usually&nbsp;'GET',&nbsp;'POST',<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'PUT',&nbsp;or&nbsp;'DELETE'<br>
-&nbsp;&nbsp;uri:&nbsp;atom.http_core.Uri,&nbsp;str,&nbsp;or&nbsp;unicode&nbsp;The&nbsp;URL&nbsp;being&nbsp;requested.<br>
-&nbsp;&nbsp;auth_token:&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header&nbsp;in&nbsp;its<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modify_request&nbsp;method.&nbsp;Recommended&nbsp;classes&nbsp;include<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.<br>
-&nbsp;&nbsp;http_request:&nbsp;(optional)&nbsp;atom.http_core.HttpRequest<br>
-&nbsp;&nbsp;converter:&nbsp;function&nbsp;which&nbsp;takes&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;response&nbsp;as&nbsp;it's&nbsp;only<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argument&nbsp;and&nbsp;returns&nbsp;the&nbsp;desired&nbsp;object.<br>
-&nbsp;&nbsp;desired_class:&nbsp;class&nbsp;descended&nbsp;from&nbsp;atom.core.XmlElement&nbsp;to&nbsp;which&nbsp;a<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;successful&nbsp;response&nbsp;should&nbsp;be&nbsp;converted.&nbsp;If&nbsp;there&nbsp;is&nbsp;no<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;converter&nbsp;function&nbsp;specified&nbsp;(converter=None)&nbsp;then&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;desired_class&nbsp;will&nbsp;be&nbsp;used&nbsp;in&nbsp;calling&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;atom.core.parse&nbsp;function.&nbsp;If&nbsp;neither<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;desired_class&nbsp;nor&nbsp;the&nbsp;converter&nbsp;is&nbsp;specified,&nbsp;an<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTTP&nbsp;reponse&nbsp;object&nbsp;will&nbsp;be&nbsp;returned.<br>
-&nbsp;&nbsp;redirects_remaining:&nbsp;(optional)&nbsp;int,&nbsp;if&nbsp;this&nbsp;number&nbsp;is&nbsp;0&nbsp;and&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server&nbsp;sends&nbsp;a&nbsp;302&nbsp;redirect,&nbsp;the&nbsp;request&nbsp;method<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;raise&nbsp;an&nbsp;exception.&nbsp;This&nbsp;parameter&nbsp;is&nbsp;used&nbsp;in<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;recursive&nbsp;request&nbsp;calls&nbsp;to&nbsp;avoid&nbsp;an&nbsp;infinite&nbsp;loop.<br>
-&nbsp;<br>
-Any&nbsp;additional&nbsp;arguments&nbsp;are&nbsp;passed&nbsp;through&nbsp;to<br>
-atom.client.AtomPubClient.request.<br>
-&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;An&nbsp;HTTP&nbsp;response&nbsp;object&nbsp;(see&nbsp;atom.http_core.HttpResponse&nbsp;for&nbsp;a<br>
-&nbsp;&nbsp;description&nbsp;of&nbsp;the&nbsp;object's&nbsp;interface)&nbsp;if&nbsp;no&nbsp;converter&nbsp;was<br>
-&nbsp;&nbsp;specified&nbsp;and&nbsp;no&nbsp;desired_class&nbsp;was&nbsp;specified.&nbsp;If&nbsp;a&nbsp;converter&nbsp;function<br>
-&nbsp;&nbsp;was&nbsp;provided,&nbsp;the&nbsp;results&nbsp;of&nbsp;calling&nbsp;the&nbsp;converter&nbsp;are&nbsp;returned.&nbsp;If&nbsp;no<br>
-&nbsp;&nbsp;converter&nbsp;was&nbsp;specified&nbsp;but&nbsp;a&nbsp;desired_class&nbsp;was&nbsp;provided,&nbsp;the&nbsp;response<br>
-&nbsp;&nbsp;body&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;the&nbsp;class&nbsp;using<br>
-&nbsp;&nbsp;atom.core.parse.</tt></dd></dl>
-
 <dl><dt><a name="DocsClient-request_client_login_token"><strong>request_client_login_token</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="DocsClient-revoke_token"><strong>revoke_token</strong></a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>)</dt><dd><tt>Requests&nbsp;that&nbsp;the&nbsp;token&nbsp;be&nbsp;invalidated.<br>
@@ -806,6 +946,21 @@ Methods inherited from <a href="atom.client.html#AtomPubClient">atom.client.Atom
 
 <dl><dt><a name="DocsClient-Put"><strong>Put</strong></a> = put(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;data&nbsp;using&nbsp;the&nbsp;PUT&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
+<dl><dt><a name="DocsClient-__init__"><strong>__init__</strong></a>(self, http_client<font color="#909090">=None</font>, host<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, source<font color="#909090">=None</font>, xoauth_requestor_id<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;AtomPubClient&nbsp;instance.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;source:&nbsp;The&nbsp;name&nbsp;of&nbsp;your&nbsp;application.<br>
+&nbsp;&nbsp;http_client:&nbsp;An&nbsp;object&nbsp;capable&nbsp;of&nbsp;performing&nbsp;HTTP&nbsp;requests&nbsp;through&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request&nbsp;method.&nbsp;This&nbsp;object&nbsp;is&nbsp;used&nbsp;to&nbsp;perform&nbsp;the&nbsp;request<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;when&nbsp;the&nbsp;AtomPubClient's&nbsp;request&nbsp;method&nbsp;is&nbsp;called.&nbsp;Used&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow&nbsp;HTTP&nbsp;requests&nbsp;to&nbsp;be&nbsp;directed&nbsp;to&nbsp;a&nbsp;mock&nbsp;server,&nbsp;or&nbsp;use<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;an&nbsp;alternate&nbsp;library&nbsp;instead&nbsp;of&nbsp;the&nbsp;default&nbsp;of&nbsp;httplib&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make&nbsp;HTTP&nbsp;requests.<br>
+&nbsp;&nbsp;host:&nbsp;str&nbsp;The&nbsp;default&nbsp;host&nbsp;name&nbsp;to&nbsp;use&nbsp;if&nbsp;a&nbsp;host&nbsp;is&nbsp;not&nbsp;specified&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested&nbsp;URI.<br>
+&nbsp;&nbsp;auth_token:&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;HTTP&nbsp;Authorization&nbsp;header&nbsp;when&nbsp;its<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modify_request&nbsp;method&nbsp;is&nbsp;called.</tt></dd></dl>
+
 <dl><dt><a name="DocsClient-get"><strong>get</strong></a>(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Performs&nbsp;a&nbsp;request&nbsp;using&nbsp;the&nbsp;GET&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
 <dl><dt><a name="DocsClient-put"><strong>put</strong></a>(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;data&nbsp;using&nbsp;the&nbsp;PUT&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
@@ -821,6 +976,8 @@ Data descriptors inherited from <a href="atom.client.html#AtomPubClient">atom.cl
 <hr>
 Data and other attributes inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
 <dl><dt><strong>auth_token</strong> = None</dl>
+
+<dl><dt><strong>xoauth_requestor_id</strong> = None</dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -838,63 +995,67 @@ Data and other attributes inherited from <a href="atom.client.html#AtomPubClient
 Methods defined here:<br>
 <dl><dt><a name="DocsQuery-ModifyRequest"><strong>ModifyRequest</strong></a> = <a href="#DocsQuery-modify_request">modify_request</a>(self, http_request)</dt></dl>
 
-<dl><dt><a name="DocsQuery-__init__"><strong>__init__</strong></a>(self, title<font color="#909090">=None</font>, title_exact<font color="#909090">=None</font>, opened_min<font color="#909090">=None</font>, opened_max<font color="#909090">=None</font>, edited_min<font color="#909090">=None</font>, edited_max<font color="#909090">=None</font>, owner<font color="#909090">=None</font>, writer<font color="#909090">=None</font>, reader<font color="#909090">=None</font>, show_folders<font color="#909090">=None</font>, show_deleted<font color="#909090">=None</font>, ocr<font color="#909090">=None</font>, target_language<font color="#909090">=None</font>, source_language<font color="#909090">=None</font>, convert<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Constructs&nbsp;a&nbsp;query&nbsp;URL&nbsp;for&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;List&nbsp;&nbsp;API.<br>
+<dl><dt><a name="DocsQuery-__init__"><strong>__init__</strong></a>(self, title<font color="#909090">=None</font>, title_exact<font color="#909090">=None</font>, opened_min<font color="#909090">=None</font>, opened_max<font color="#909090">=None</font>, edited_min<font color="#909090">=None</font>, edited_max<font color="#909090">=None</font>, owner<font color="#909090">=None</font>, writer<font color="#909090">=None</font>, reader<font color="#909090">=None</font>, show_collections<font color="#909090">=None</font>, show_root<font color="#909090">=None</font>, show_deleted<font color="#909090">=None</font>, ocr<font color="#909090">=None</font>, target_language<font color="#909090">=None</font>, source_language<font color="#909090">=None</font>, convert<font color="#909090">=None</font>, query<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Constructs&nbsp;a&nbsp;query&nbsp;URL&nbsp;for&nbsp;the&nbsp;Google&nbsp;Documents&nbsp;List&nbsp;API.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;title:&nbsp;str&nbsp;(optional)&nbsp;Specifies&nbsp;the&nbsp;search&nbsp;terms&nbsp;for&nbsp;the&nbsp;title&nbsp;of&nbsp;a<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.&nbsp;This&nbsp;parameter&nbsp;used&nbsp;without&nbsp;title_exact&nbsp;will&nbsp;only<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;submit&nbsp;partial&nbsp;queries,&nbsp;not&nbsp;exact&nbsp;queries.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.&nbsp;This&nbsp;parameter&nbsp;used&nbsp;without&nbsp;title_exact&nbsp;will&nbsp;only<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;submit&nbsp;partial&nbsp;queries,&nbsp;not&nbsp;exact&nbsp;queries.<br>
 &nbsp;&nbsp;title_exact:&nbsp;str&nbsp;(optional)&nbsp;Meaningless&nbsp;without&nbsp;title.&nbsp;Possible&nbsp;values<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;'true'&nbsp;and&nbsp;'false'.&nbsp;Note:&nbsp;Matches&nbsp;are&nbsp;case-insensitive.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;'true'&nbsp;and&nbsp;'false'.&nbsp;Note:&nbsp;Matches&nbsp;are&nbsp;case-insensitive.<br>
 &nbsp;&nbsp;opened_min:&nbsp;str&nbsp;(optional)&nbsp;Lower&nbsp;bound&nbsp;on&nbsp;the&nbsp;last&nbsp;time&nbsp;a&nbsp;document&nbsp;was<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;opened&nbsp;by&nbsp;the&nbsp;current&nbsp;user.&nbsp;Use&nbsp;the&nbsp;<a href="http://www.rfc-editor.org/rfc/rfc3339.txt">RFC&nbsp;3339</a>&nbsp;timestamp<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format.&nbsp;For&nbsp;example:&nbsp;opened_min='2005-08-09T09:57:00-08:00'.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;opened&nbsp;by&nbsp;the&nbsp;current&nbsp;user.&nbsp;Use&nbsp;the&nbsp;<a href="http://www.rfc-editor.org/rfc/rfc3339.txt">RFC&nbsp;3339</a>&nbsp;timestamp<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format.&nbsp;For&nbsp;example:&nbsp;opened_min='2005-08-09T09:57:00-08:00'.<br>
 &nbsp;&nbsp;opened_max:&nbsp;str&nbsp;(optional)&nbsp;Upper&nbsp;bound&nbsp;on&nbsp;the&nbsp;last&nbsp;time&nbsp;a&nbsp;document&nbsp;was<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;opened&nbsp;by&nbsp;the&nbsp;current&nbsp;user.&nbsp;(See&nbsp;also&nbsp;opened_min.)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;opened&nbsp;by&nbsp;the&nbsp;current&nbsp;user.&nbsp;(See&nbsp;also&nbsp;opened_min.)<br>
 &nbsp;&nbsp;edited_min:&nbsp;str&nbsp;(optional)&nbsp;Lower&nbsp;bound&nbsp;on&nbsp;the&nbsp;last&nbsp;time&nbsp;a&nbsp;document&nbsp;was<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edited&nbsp;by&nbsp;the&nbsp;current&nbsp;user.&nbsp;This&nbsp;value&nbsp;corresponds&nbsp;to&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edited.text&nbsp;value&nbsp;in&nbsp;the&nbsp;doc's&nbsp;entry&nbsp;object,&nbsp;which<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;represents&nbsp;changes&nbsp;to&nbsp;the&nbsp;document's&nbsp;content&nbsp;or&nbsp;metadata.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use&nbsp;the&nbsp;<a href="http://www.rfc-editor.org/rfc/rfc3339.txt">RFC&nbsp;3339</a>&nbsp;timestamp&nbsp;format.&nbsp;For&nbsp;example:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edited_min='2005-08-09T09:57:00-08:00'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edited&nbsp;by&nbsp;the&nbsp;current&nbsp;user.&nbsp;This&nbsp;value&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;edited.text<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value&nbsp;in&nbsp;the&nbsp;doc's&nbsp;entry&nbsp;object,&nbsp;which&nbsp;represents&nbsp;changes&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document's&nbsp;content&nbsp;or&nbsp;metadata.&nbsp;&nbsp;Use&nbsp;the&nbsp;<a href="http://www.rfc-editor.org/rfc/rfc3339.txt">RFC&nbsp;3339</a>&nbsp;timestamp&nbsp;format.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;example:&nbsp;edited_min='2005-08-09T09:57:00-08:00'<br>
 &nbsp;&nbsp;edited_max:&nbsp;str&nbsp;(optional)&nbsp;Upper&nbsp;bound&nbsp;on&nbsp;the&nbsp;last&nbsp;time&nbsp;a&nbsp;document&nbsp;was<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edited&nbsp;by&nbsp;the&nbsp;user.&nbsp;(See&nbsp;also&nbsp;edited_min.)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edited&nbsp;by&nbsp;the&nbsp;user.&nbsp;(See&nbsp;also&nbsp;edited_min.)<br>
 &nbsp;&nbsp;owner:&nbsp;str&nbsp;(optional)&nbsp;Searches&nbsp;for&nbsp;documents&nbsp;with&nbsp;a&nbsp;specific&nbsp;owner.&nbsp;Use<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;email&nbsp;address&nbsp;of&nbsp;the&nbsp;owner.&nbsp;For&nbsp;example:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;owner='user@gmail.com'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;email&nbsp;address&nbsp;of&nbsp;the&nbsp;owner.&nbsp;For&nbsp;example:&nbsp;owner='user@gmail.com'<br>
 &nbsp;&nbsp;writer:&nbsp;str&nbsp;(optional)&nbsp;Searches&nbsp;for&nbsp;documents&nbsp;which&nbsp;can&nbsp;be&nbsp;written&nbsp;to<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by&nbsp;specific&nbsp;users.&nbsp;Use&nbsp;a&nbsp;single&nbsp;email&nbsp;address&nbsp;or&nbsp;a&nbsp;comma<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;separated&nbsp;list&nbsp;of&nbsp;email&nbsp;addresses.&nbsp;For&nbsp;example:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;writer='user1@gmail.com,user@example.com'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by&nbsp;specific&nbsp;users.&nbsp;Use&nbsp;a&nbsp;single&nbsp;email&nbsp;address&nbsp;or&nbsp;a&nbsp;comma&nbsp;separated&nbsp;list<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;email&nbsp;addresses.&nbsp;For&nbsp;example:&nbsp;writer='user1@gmail.com,user@example.com'<br>
 &nbsp;&nbsp;reader:&nbsp;str&nbsp;(optional)&nbsp;Searches&nbsp;for&nbsp;documents&nbsp;which&nbsp;can&nbsp;be&nbsp;read&nbsp;by<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specific&nbsp;users.&nbsp;(See&nbsp;also&nbsp;writer.)<br>
-&nbsp;&nbsp;show_folders:&nbsp;str&nbsp;(optional)&nbsp;Specifies&nbsp;whether&nbsp;the&nbsp;query&nbsp;should&nbsp;return<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;folders&nbsp;as&nbsp;well&nbsp;as&nbsp;documents.&nbsp;Possible&nbsp;values&nbsp;are&nbsp;'true'<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;'false'.&nbsp;Default&nbsp;is&nbsp;false.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specific&nbsp;users.&nbsp;(See&nbsp;also&nbsp;writer.)<br>
+&nbsp;&nbsp;show_collections:&nbsp;str&nbsp;(optional)&nbsp;Specifies&nbsp;whether&nbsp;the&nbsp;query&nbsp;should&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;collections&nbsp;as&nbsp;well&nbsp;as&nbsp;documents&nbsp;and&nbsp;files.&nbsp;Possible&nbsp;values&nbsp;are&nbsp;'true'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;'false'.&nbsp;Default&nbsp;is&nbsp;'false'.<br>
+&nbsp;&nbsp;show_root:&nbsp;(optional)&nbsp;'true'&nbsp;to&nbsp;specify&nbsp;when&nbsp;an&nbsp;item&nbsp;is&nbsp;in&nbsp;the&nbsp;root<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;collection.&nbsp;Default&nbsp;is&nbsp;'false'<br>
 &nbsp;&nbsp;show_deleted:&nbsp;str&nbsp;(optional)&nbsp;Specifies&nbsp;whether&nbsp;the&nbsp;query&nbsp;should&nbsp;return<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;documents&nbsp;which&nbsp;are&nbsp;in&nbsp;the&nbsp;trash&nbsp;as&nbsp;well&nbsp;as&nbsp;other<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;documents.&nbsp;Possible&nbsp;values&nbsp;are&nbsp;'true'&nbsp;and&nbsp;'false'.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;is&nbsp;false.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;documents&nbsp;which&nbsp;are&nbsp;in&nbsp;the&nbsp;trash&nbsp;as&nbsp;well&nbsp;as&nbsp;other&nbsp;documents.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Possible&nbsp;values&nbsp;are&nbsp;'true'&nbsp;and&nbsp;'false'.&nbsp;Default&nbsp;is&nbsp;false.<br>
 &nbsp;&nbsp;ocr:&nbsp;str&nbsp;(optional)&nbsp;Specifies&nbsp;whether&nbsp;to&nbsp;attempt&nbsp;OCR&nbsp;on&nbsp;a&nbsp;.jpg,&nbsp;.png,&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.gif&nbsp;upload.&nbsp;Possible&nbsp;values&nbsp;are&nbsp;'true'&nbsp;and&nbsp;'false'.&nbsp;Default&nbsp;is<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;false.&nbsp;See&nbsp;OCR&nbsp;in&nbsp;the&nbsp;Protocol&nbsp;Guide:&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://code.google.com/apis/documents/docs/3.0/developers_guide_protocol.html#OCR">http://code.google.com/apis/documents/docs/3.0/developers_guide_protocol.html#OCR</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.gif&nbsp;upload.&nbsp;Possible&nbsp;values&nbsp;are&nbsp;'true'&nbsp;and&nbsp;'false'.&nbsp;Default&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;false.&nbsp;See&nbsp;OCR&nbsp;in&nbsp;the&nbsp;Protocol&nbsp;Guide:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://code.google.com/apis/documents/docs/3.0/developers_guide_protocol.html#OCR">http://code.google.com/apis/documents/docs/3.0/developers_guide_protocol.html#OCR</a><br>
 &nbsp;&nbsp;target_language:&nbsp;str&nbsp;(optional)&nbsp;Specifies&nbsp;the&nbsp;language&nbsp;to&nbsp;translate&nbsp;a<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document&nbsp;into.&nbsp;See&nbsp;Document&nbsp;Translation&nbsp;in&nbsp;the&nbsp;Protocol<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Guide&nbsp;for&nbsp;a&nbsp;table&nbsp;of&nbsp;possible&nbsp;values:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://code.google.com/apis/documents/docs/3.0/developers_guide_protocol.html#DocumentTranslation">http://code.google.com/apis/documents/docs/3.0/developers_guide_protocol.html#DocumentTranslation</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document&nbsp;into.&nbsp;See&nbsp;Document&nbsp;Translation&nbsp;in&nbsp;the&nbsp;Protocol&nbsp;Guide&nbsp;for&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;table&nbsp;of&nbsp;possible&nbsp;values:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://code.google.com/apis/documents/docs/3.0/developers_guide_protocol.html#DocumentTranslation">http://code.google.com/apis/documents/docs/3.0/developers_guide_protocol.html#DocumentTranslation</a><br>
 &nbsp;&nbsp;source_language:&nbsp;str&nbsp;(optional)&nbsp;Specifies&nbsp;the&nbsp;source&nbsp;language&nbsp;of&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;original&nbsp;document.&nbsp;Optional&nbsp;when&nbsp;using&nbsp;the&nbsp;translation<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;service.&nbsp;If&nbsp;not&nbsp;provided,&nbsp;Google&nbsp;will&nbsp;attempt&nbsp;to<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;auto-detect&nbsp;the&nbsp;source&nbsp;language.&nbsp;See&nbsp;Document<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Translation&nbsp;in&nbsp;the&nbsp;Protocol&nbsp;Guide&nbsp;for&nbsp;a&nbsp;table&nbsp;of<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;possible&nbsp;values&nbsp;(link&nbsp;in&nbsp;target_language).<br>
-&nbsp;&nbsp;convert:&nbsp;str&nbsp;(optional)&nbsp;Used&nbsp;when&nbsp;uploading&nbsp;arbitrary&nbsp;file&nbsp;types&nbsp;to<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specity&nbsp;if&nbsp;document-type&nbsp;uploads&nbsp;should&nbsp;convert&nbsp;to&nbsp;a&nbsp;native<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Google&nbsp;Docs&nbsp;format.&nbsp;Possible&nbsp;values&nbsp;are&nbsp;'true'&nbsp;and&nbsp;'false'.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;default&nbsp;is&nbsp;'true'.</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;original&nbsp;document.&nbsp;Optional&nbsp;when&nbsp;using&nbsp;the&nbsp;translation&nbsp;service.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;not&nbsp;provided,&nbsp;Google&nbsp;will&nbsp;attempt&nbsp;to&nbsp;auto-detect&nbsp;the&nbsp;source<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;language.&nbsp;See&nbsp;Document&nbsp;Translation&nbsp;in&nbsp;the&nbsp;Protocol&nbsp;Guide&nbsp;for&nbsp;a&nbsp;table&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;possible&nbsp;values&nbsp;(link&nbsp;in&nbsp;target_language).<br>
+&nbsp;&nbsp;convert:&nbsp;str&nbsp;(optional)&nbsp;Used&nbsp;when&nbsp;uploading&nbsp;files&nbsp;specify&nbsp;if&nbsp;document&nbsp;uploads<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should&nbsp;convert&nbsp;to&nbsp;a&nbsp;native&nbsp;Google&nbsp;Docs&nbsp;format.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Possible&nbsp;values&nbsp;are&nbsp;'true'&nbsp;and&nbsp;'false'.&nbsp;The&nbsp;default&nbsp;is&nbsp;'true'.<br>
+&nbsp;&nbsp;query:&nbsp;str&nbsp;(optional)&nbsp;Full-text&nbsp;query&nbsp;to&nbsp;use.&nbsp;&nbsp;See&nbsp;the&nbsp;'q'&nbsp;parameter&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;documentation.</tt></dd></dl>
 
 <dl><dt><a name="DocsQuery-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.client.html#Query">gdata.client.Query</a>:<br>
+<dl><dt><a name="DocsQuery-AddCustomParameter"><strong>AddCustomParameter</strong></a> = add_custom_parameter(self, key, value)</dt></dl>
+
+<dl><dt><a name="DocsQuery-add_custom_parameter"><strong>add_custom_parameter</strong></a>(self, key, value)</dt></dl>
 
 <hr>
 Data descriptors inherited from <a href="gdata.client.html#Query">gdata.client.Query</a>:<br>
@@ -911,16 +1072,18 @@ Data descriptors inherited from <a href="gdata.client.html#Query">gdata.client.Q
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>ACL_FEED_TEMPLATE</strong> = '/feeds/default/private/full/%s/acl'<br>
-<strong>DOCLIST_FEED_URI</strong> = '/feeds/default/private/full/'<br>
-<strong>FOLDERS_FEED_TEMPLATE</strong> = '/feeds/default/private/full/%s/contents'<br>
-<strong>REVISIONS_FEED_TEMPLATE</strong> = '/feeds/default/private/full/%s/revisions'<br>
-<strong>__author__</strong> = 'e.bidelman (Eric Bidelman)'</td></tr></table><p>
+<td width="100%"><strong>ARCHIVE_FEED_URI</strong> = '/feeds/default/private/archive'<br>
+<strong>CHANGE_FEED_URI</strong> = '/feeds/default/private/changes'<br>
+<strong>COLLECTION_UPLOAD_URI_TEMPLATE</strong> = '/feeds/upload/create-session/feeds/default/private/full/%s/contents'<br>
+<strong>METADATA_URI</strong> = '/feeds/metadata/default'<br>
+<strong>RESOURCE_FEED_URI</strong> = '/feeds/default/private/full'<br>
+<strong>RESOURCE_UPLOAD_URI</strong> = '/feeds/upload/create-session/default/private/full'<br>
+<strong>__author__</strong> = 'vicfryzel@google.com (Vic Fryzel)'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#7799ee">
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
     
 <tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%">e.bidelman&nbsp;(Eric&nbsp;Bidelman)</td></tr></table>
+<td width="100%">vicfryzel@google.com&nbsp;(Vic&nbsp;Fryzel)</td></tr></table>
 </body></html>

@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.alt.html"><font color="#ffffff">alt</font></a>.appengine</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/alt/appengine.py">/usr/local/lib/python2.6/dist-packages/gdata/alt/appengine.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/working/gdata-python-client/src/gdata/alt/appengine.py">/home/afshar/working/gdata-python-client/src/gdata/alt/appengine.py</a></font></td></tr></table>
     <p><tt>Provides&nbsp;HTTP&nbsp;functions&nbsp;for&nbsp;gdata.service&nbsp;to&nbsp;use&nbsp;on&nbsp;Google&nbsp;App&nbsp;Engine<br>
 &nbsp;<br>
 <a href="#AppEngineHttpClient">AppEngineHttpClient</a>:&nbsp;Provides&nbsp;an&nbsp;HTTP&nbsp;request&nbsp;method&nbsp;which&nbsp;uses&nbsp;App&nbsp;Engine's<br>
@@ -260,6 +260,9 @@ Args:<br>
 
 <dl><dt><a name="TokenCollection-delete"><strong>delete</strong></a>(self, **kwargs)</dt><dd><tt>Deletes&nbsp;this&nbsp;entity&nbsp;from&nbsp;the&nbsp;datastore.<br>
 &nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;config:&nbsp;datastore_rpc.Configuration&nbsp;to&nbsp;use&nbsp;for&nbsp;this&nbsp;request.<br>
+&nbsp;<br>
 Raises:<br>
 &nbsp;&nbsp;TransactionFailedError&nbsp;if&nbsp;the&nbsp;data&nbsp;could&nbsp;not&nbsp;be&nbsp;committed.</tt></dd></dl>
 
@@ -318,6 +321,9 @@ If&nbsp;this&nbsp;instance&nbsp;is&nbsp;new,&nbsp;we&nbsp;add&nbsp;an&nbsp;entit
 Otherwise,&nbsp;we&nbsp;update&nbsp;this&nbsp;instance,&nbsp;and&nbsp;the&nbsp;key&nbsp;will&nbsp;remain&nbsp;the<br>
 same.<br>
 &nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;config:&nbsp;datastore_rpc.Configuration&nbsp;to&nbsp;use&nbsp;for&nbsp;this&nbsp;request.<br>
+&nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;key&nbsp;of&nbsp;the&nbsp;instance&nbsp;(either&nbsp;the&nbsp;existing&nbsp;key&nbsp;or&nbsp;a&nbsp;new&nbsp;key).<br>
 &nbsp;<br>
@@ -329,6 +335,9 @@ Raises:<br>
 If&nbsp;this&nbsp;instance&nbsp;is&nbsp;new,&nbsp;we&nbsp;add&nbsp;an&nbsp;entity&nbsp;to&nbsp;the&nbsp;datastore.<br>
 Otherwise,&nbsp;we&nbsp;update&nbsp;this&nbsp;instance,&nbsp;and&nbsp;the&nbsp;key&nbsp;will&nbsp;remain&nbsp;the<br>
 same.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;config:&nbsp;datastore_rpc.Configuration&nbsp;to&nbsp;use&nbsp;for&nbsp;this&nbsp;request.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;key&nbsp;of&nbsp;the&nbsp;instance&nbsp;(either&nbsp;the&nbsp;existing&nbsp;key&nbsp;or&nbsp;a&nbsp;new&nbsp;key).<br>
@@ -379,6 +388,7 @@ kind&nbsp;of&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;is&nbsp;bein
 Args:<br>
 &nbsp;&nbsp;keys:&nbsp;Key&nbsp;within&nbsp;datastore&nbsp;entity&nbsp;collection&nbsp;to&nbsp;find;&nbsp;or&nbsp;string&nbsp;key;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;list&nbsp;of&nbsp;Keys&nbsp;or&nbsp;string&nbsp;keys.<br>
+&nbsp;&nbsp;config:&nbsp;datastore_rpc.Configuration&nbsp;to&nbsp;use&nbsp;for&nbsp;this&nbsp;request.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;If&nbsp;a&nbsp;single&nbsp;key&nbsp;was&nbsp;given:&nbsp;a&nbsp;<a href="google.appengine.ext.db.html#Model">Model</a>&nbsp;instance&nbsp;associated&nbsp;with&nbsp;key<br>
@@ -394,13 +404,15 @@ Raises:<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;key_names:&nbsp;A&nbsp;single&nbsp;id&nbsp;or&nbsp;a&nbsp;list&nbsp;of&nbsp;ids.<br>
-&nbsp;&nbsp;parent:&nbsp;Parent&nbsp;of&nbsp;instances&nbsp;to&nbsp;get.&nbsp;&nbsp;Can&nbsp;be&nbsp;a&nbsp;model&nbsp;or&nbsp;key.</tt></dd></dl>
+&nbsp;&nbsp;parent:&nbsp;Parent&nbsp;of&nbsp;instances&nbsp;to&nbsp;get.&nbsp;&nbsp;Can&nbsp;be&nbsp;a&nbsp;model&nbsp;or&nbsp;key.<br>
+&nbsp;&nbsp;config:&nbsp;datastore_rpc.Configuration&nbsp;to&nbsp;use&nbsp;for&nbsp;this&nbsp;request.</tt></dd></dl>
 
 <dl><dt><a name="TokenCollection-get_by_key_name"><strong>get_by_key_name</strong></a>(cls, key_names, parent<font color="#909090">=None</font>, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="google.appengine.ext.db.html#PropertiedClass">google.appengine.ext.db.PropertiedClass</a></font></font></dt><dd><tt>Get&nbsp;instance&nbsp;of&nbsp;<a href="google.appengine.ext.db.html#Model">Model</a>&nbsp;class&nbsp;by&nbsp;its&nbsp;key's&nbsp;name.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;key_names:&nbsp;A&nbsp;single&nbsp;key-name&nbsp;or&nbsp;a&nbsp;list&nbsp;of&nbsp;key-names.<br>
-&nbsp;&nbsp;parent:&nbsp;Parent&nbsp;of&nbsp;instances&nbsp;to&nbsp;get.&nbsp;&nbsp;Can&nbsp;be&nbsp;a&nbsp;model&nbsp;or&nbsp;key.</tt></dd></dl>
+&nbsp;&nbsp;parent:&nbsp;Parent&nbsp;of&nbsp;instances&nbsp;to&nbsp;get.&nbsp;&nbsp;Can&nbsp;be&nbsp;a&nbsp;model&nbsp;or&nbsp;key.<br>
+&nbsp;&nbsp;config:&nbsp;datastore_rpc.Configuration&nbsp;to&nbsp;use&nbsp;for&nbsp;this&nbsp;request.</tt></dd></dl>
 
 <dl><dt><a name="TokenCollection-get_or_insert"><strong>get_or_insert</strong></a>(cls, key_name, **kwds)<font color="#909090"><font face="helvetica, arial"> from <a href="google.appengine.ext.db.html#PropertiedClass">google.appengine.ext.db.PropertiedClass</a></font></font></dt><dd><tt>Transactionally&nbsp;retrieve&nbsp;or&nbsp;create&nbsp;an&nbsp;instance&nbsp;of&nbsp;<a href="google.appengine.ext.db.html#Model">Model</a>&nbsp;class.<br>
 &nbsp;<br>
@@ -473,6 +485,17 @@ Args:<br>
 We&nbsp;just&nbsp;use&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;model&nbsp;for&nbsp;now,&nbsp;ignoring&nbsp;potential&nbsp;collisions.</tt></dd></dl>
 
 <dl><dt><a name="TokenCollection-properties"><strong>properties</strong></a>(cls)<font color="#909090"><font face="helvetica, arial"> from <a href="google.appengine.ext.db.html#PropertiedClass">google.appengine.ext.db.PropertiedClass</a></font></font></dt><dd><tt>Returns&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;all&nbsp;the&nbsp;properties&nbsp;defined&nbsp;for&nbsp;this&nbsp;model.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="google.appengine.ext.db.html#Model">google.appengine.ext.db.Model</a>:<br>
+<dl><dt><a name="TokenCollection-__new__"><strong>__new__</strong></a>(*args, **unused_kwds)</dt><dd><tt>Allow&nbsp;subclasses&nbsp;to&nbsp;call&nbsp;<a href="#TokenCollection-__new__">__new__</a>()&nbsp;with&nbsp;arguments.<br>
+&nbsp;<br>
+Do&nbsp;NOT&nbsp;list&nbsp;'cls'&nbsp;as&nbsp;the&nbsp;first&nbsp;argument,&nbsp;or&nbsp;in&nbsp;the&nbsp;case&nbsp;when<br>
+the&nbsp;'unused_kwds'&nbsp;dictionary&nbsp;contains&nbsp;the&nbsp;key&nbsp;'cls',&nbsp;the&nbsp;function<br>
+will&nbsp;complain&nbsp;about&nbsp;multiple&nbsp;argument&nbsp;values&nbsp;for&nbsp;'cls'.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;TypeError&nbsp;if&nbsp;there&nbsp;are&nbsp;no&nbsp;positional&nbsp;arguments.</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="google.appengine.ext.db.html#Model">google.appengine.ext.db.Model</a>:<br>

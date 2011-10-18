@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.client</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/client.py">/usr/local/lib/python2.6/dist-packages/gdata/client.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/working/gdata-python-client/src/gdata/client.py">/home/afshar/working/gdata-python-client/src/gdata/client.py</a></font></td></tr></table>
     <p><tt>Provides&nbsp;a&nbsp;client&nbsp;to&nbsp;interact&nbsp;with&nbsp;Google&nbsp;Data&nbsp;API&nbsp;servers.<br>
 &nbsp;<br>
 This&nbsp;module&nbsp;is&nbsp;used&nbsp;for&nbsp;version&nbsp;2&nbsp;of&nbsp;the&nbsp;Google&nbsp;Data&nbsp;APIs.&nbsp;The&nbsp;primary&nbsp;class<br>
@@ -618,7 +618,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;text&nbsp;which&nbsp;was&nbsp;contained&nbsp;in&nbsp;the&nbsp;challenge.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Generated&nbsp;token,&nbsp;which&nbsp;is&nbsp;also&nbsp;stored&nbsp;in&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Raises:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;<a href="#RequestError">RequestError</a>&nbsp;or&nbsp;one&nbsp;of&nbsp;its&nbsp;suclasses:&nbsp;<a href="#BadAuthentication">BadAuthentication</a>,<br>
@@ -805,6 +805,8 @@ Returns:<br>
 
 <hr>
 Data and other attributes defined here:<br>
+<dl><dt><strong>alt_auth_service</strong> = None</dl>
+
 <dl><dt><strong>api_version</strong> = None</dl>
 
 <dl><dt><strong>auth_scopes</strong> = None</dl>
@@ -817,7 +819,7 @@ Methods inherited from <a href="atom.client.html#AtomPubClient">atom.client.Atom
 
 <dl><dt><a name="GDClient-Put"><strong>Put</strong></a> = put(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;data&nbsp;using&nbsp;the&nbsp;PUT&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="GDClient-__init__"><strong>__init__</strong></a>(self, http_client<font color="#909090">=None</font>, host<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, source<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;<a href="atom.client.html#AtomPubClient">AtomPubClient</a>&nbsp;instance.<br>
+<dl><dt><a name="GDClient-__init__"><strong>__init__</strong></a>(self, http_client<font color="#909090">=None</font>, host<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, source<font color="#909090">=None</font>, xoauth_requestor_id<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;<a href="atom.client.html#AtomPubClient">AtomPubClient</a>&nbsp;instance.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;source:&nbsp;The&nbsp;name&nbsp;of&nbsp;your&nbsp;application.<br>
@@ -851,6 +853,8 @@ Data and other attributes inherited from <a href="atom.client.html#AtomPubClient
 <dl><dt><strong>host</strong> = None</dl>
 
 <dl><dt><strong>ssl</strong> = False</dl>
+
+<dl><dt><strong>xoauth_requestor_id</strong> = None</dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -1127,9 +1131,11 @@ Data descriptors inherited from <a href="exceptions.html#BaseException">exceptio
     
 <tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
+<dl><dt><a name="Query-AddCustomParameter"><strong>AddCustomParameter</strong></a> = <a href="#Query-add_custom_parameter">add_custom_parameter</a>(self, key, value)</dt></dl>
+
 <dl><dt><a name="Query-ModifyRequest"><strong>ModifyRequest</strong></a> = <a href="#Query-modify_request">modify_request</a>(self, http_request)</dt></dl>
 
-<dl><dt><a name="Query-__init__"><strong>__init__</strong></a>(self, text_query<font color="#909090">=None</font>, categories<font color="#909090">=None</font>, author<font color="#909090">=None</font>, alt<font color="#909090">=None</font>, updated_min<font color="#909090">=None</font>, updated_max<font color="#909090">=None</font>, pretty_print<font color="#909090">=False</font>, published_min<font color="#909090">=None</font>, published_max<font color="#909090">=None</font>, start_index<font color="#909090">=None</font>, max_results<font color="#909090">=None</font>, strict<font color="#909090">=False</font>)</dt><dd><tt>Constructs&nbsp;a&nbsp;Google&nbsp;Data&nbsp;<a href="#Query">Query</a>&nbsp;to&nbsp;filter&nbsp;feed&nbsp;contents&nbsp;serverside.<br>
+<dl><dt><a name="Query-__init__"><strong>__init__</strong></a>(self, text_query<font color="#909090">=None</font>, categories<font color="#909090">=None</font>, author<font color="#909090">=None</font>, alt<font color="#909090">=None</font>, updated_min<font color="#909090">=None</font>, updated_max<font color="#909090">=None</font>, pretty_print<font color="#909090">=False</font>, published_min<font color="#909090">=None</font>, published_max<font color="#909090">=None</font>, start_index<font color="#909090">=None</font>, max_results<font color="#909090">=None</font>, strict<font color="#909090">=False</font>, **custom_parameters)</dt><dd><tt>Constructs&nbsp;a&nbsp;Google&nbsp;Data&nbsp;<a href="#Query">Query</a>&nbsp;to&nbsp;filter&nbsp;feed&nbsp;contents&nbsp;serverside.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;text_query:&nbsp;Full&nbsp;text&nbsp;search&nbsp;str&nbsp;(optional)<br>
@@ -1173,7 +1179,10 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit&nbsp;to&nbsp;the&nbsp;max_results&nbsp;you&nbsp;can&nbsp;fetch&nbsp;in&nbsp;a&nbsp;request.<br>
 &nbsp;&nbsp;strict:&nbsp;boolean&nbsp;(optional)&nbsp;If&nbsp;True,&nbsp;the&nbsp;server&nbsp;will&nbsp;return&nbsp;an&nbsp;error&nbsp;if<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;server&nbsp;does&nbsp;not&nbsp;recognize&nbsp;any&nbsp;of&nbsp;the&nbsp;parameters&nbsp;in&nbsp;the&nbsp;request<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;URL.&nbsp;Defaults&nbsp;to&nbsp;False.</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;URL.&nbsp;Defaults&nbsp;to&nbsp;False.<br>
+&nbsp;&nbsp;custom_parameters:&nbsp;other&nbsp;query&nbsp;parameters&nbsp;that&nbsp;are&nbsp;not&nbsp;explicitly&nbsp;defined.</tt></dd></dl>
+
+<dl><dt><a name="Query-add_custom_parameter"><strong>add_custom_parameter</strong></a>(self, key, value)</dt></dl>
 
 <dl><dt><a name="Query-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt></dl>
 
@@ -1336,11 +1345,11 @@ Data descriptors inherited from <a href="exceptions.html#BaseException">exceptio
 <td width="100%">Methods defined here:<br>
 <dl><dt><a name="ResumableUploader-QueryUploadStatus"><strong>QueryUploadStatus</strong></a> = <a href="#ResumableUploader-query_upload_status">query_upload_status</a>(self, uri<font color="#909090">=None</font>)</dt></dl>
 
-<dl><dt><a name="ResumableUploader-UpdateFile"><strong>UpdateFile</strong></a> = <a href="#ResumableUploader-update_file">update_file</a>(self, entry_or_resumable_edit_link, headers<font color="#909090">=None</font>, force<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="ResumableUploader-UpdateFile"><strong>UpdateFile</strong></a> = <a href="#ResumableUploader-update_file">update_file</a>(self, entry_or_resumable_edit_link, headers<font color="#909090">=None</font>, force<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, update_metadata<font color="#909090">=False</font>, uri_params<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="ResumableUploader-UploadChunk"><strong>UploadChunk</strong></a> = <a href="#ResumableUploader-upload_chunk">upload_chunk</a>(self, start_byte, content_bytes)</dt></dl>
 
-<dl><dt><a name="ResumableUploader-UploadFile"><strong>UploadFile</strong></a> = <a href="#ResumableUploader-upload_file">upload_file</a>(self, resumable_media_link, entry<font color="#909090">=None</font>, headers<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="ResumableUploader-UploadFile"><strong>UploadFile</strong></a> = <a href="#ResumableUploader-upload_file">upload_file</a>(self, resumable_media_link, entry<font color="#909090">=None</font>, headers<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="ResumableUploader-__init__"><strong>__init__</strong></a>(self, client, file_handle, content_type, total_file_size, chunk_size<font color="#909090">=None</font>, desired_class<font color="#909090">=None</font>)</dt><dd><tt>Starts&nbsp;a&nbsp;resumable&nbsp;upload&nbsp;to&nbsp;a&nbsp;service&nbsp;that&nbsp;supports&nbsp;the&nbsp;protocol.<br>
 &nbsp;<br>
@@ -1368,7 +1377,7 @@ Raises:<br>
 &nbsp;&nbsp;<a href="#RequestError">RequestError</a>&nbsp;if&nbsp;anything&nbsp;other&nbsp;than&nbsp;a&nbsp;HTTP&nbsp;308&nbsp;is&nbsp;returned<br>
 &nbsp;&nbsp;when&nbsp;the&nbsp;request&nbsp;raises&nbsp;an&nbsp;exception.</tt></dd></dl>
 
-<dl><dt><a name="ResumableUploader-update_file"><strong>update_file</strong></a>(self, entry_or_resumable_edit_link, headers<font color="#909090">=None</font>, force<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>)</dt><dd><tt>Updates&nbsp;the&nbsp;contents&nbsp;of&nbsp;an&nbsp;existing&nbsp;file&nbsp;using&nbsp;the&nbsp;resumable&nbsp;protocol.<br>
+<dl><dt><a name="ResumableUploader-update_file"><strong>update_file</strong></a>(self, entry_or_resumable_edit_link, headers<font color="#909090">=None</font>, force<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, update_metadata<font color="#909090">=False</font>, uri_params<font color="#909090">=None</font>)</dt><dd><tt>Updates&nbsp;the&nbsp;contents&nbsp;of&nbsp;an&nbsp;existing&nbsp;file&nbsp;using&nbsp;the&nbsp;resumable&nbsp;protocol.<br>
 &nbsp;<br>
 If&nbsp;you&nbsp;are&nbsp;interested&nbsp;in&nbsp;pausing&nbsp;an&nbsp;upload&nbsp;or&nbsp;controlling&nbsp;the&nbsp;chunking<br>
 yourself,&nbsp;use&nbsp;the&nbsp;<a href="#ResumableUploader-upload_chunk">upload_chunk</a>()&nbsp;method&nbsp;instead.<br>
@@ -1388,14 +1397,18 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;its&nbsp;modify_request&nbsp;method.&nbsp;Recommended&nbsp;classes&nbsp;include<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.<br>
+&nbsp;&nbsp;update_metadata:&nbsp;(optional)&nbsp;True&nbsp;to&nbsp;also&nbsp;update&nbsp;the&nbsp;entry's&nbsp;metadata<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;that&nbsp;in&nbsp;the&nbsp;given&nbsp;GDEntry&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;in&nbsp;entry_or_resumable_edit_link.<br>
+&nbsp;&nbsp;uri_params:&nbsp;(optional)&nbsp;Dict&nbsp;of&nbsp;additional&nbsp;parameters&nbsp;to&nbsp;attach&nbsp;to&nbsp;the&nbsp;URI.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Some&nbsp;non-dict&nbsp;types&nbsp;are&nbsp;valid&nbsp;here,&nbsp;too,&nbsp;like&nbsp;list&nbsp;of&nbsp;tuple&nbsp;pairs.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;final&nbsp;Atom&nbsp;entry&nbsp;created&nbsp;on&nbsp;the&nbsp;server.&nbsp;The&nbsp;entry&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;type&nbsp;will<br>
 &nbsp;&nbsp;be&nbsp;the&nbsp;class&nbsp;specified&nbsp;in&nbsp;self.<strong>desired_class</strong>.<br>
 &nbsp;<br>
 Raises:<br>
-&nbsp;&nbsp;<a href="#RequestError">RequestError</a>&nbsp;if&nbsp;anything&nbsp;other&nbsp;than&nbsp;a&nbsp;HTTP&nbsp;308&nbsp;is&nbsp;returned<br>
-&nbsp;&nbsp;when&nbsp;the&nbsp;request&nbsp;raises&nbsp;an&nbsp;exception.</tt></dd></dl>
+&nbsp;&nbsp;<a href="#RequestError">RequestError</a>&nbsp;if&nbsp;anything&nbsp;other&nbsp;than&nbsp;a&nbsp;HTTP&nbsp;308&nbsp;is&nbsp;returned&nbsp;when&nbsp;the<br>
+&nbsp;&nbsp;request&nbsp;raises&nbsp;an&nbsp;exception.</tt></dd></dl>
 
 <dl><dt><a name="ResumableUploader-upload_chunk"><strong>upload_chunk</strong></a>(self, start_byte, content_bytes)</dt><dd><tt>Uploads&nbsp;a&nbsp;byte&nbsp;range&nbsp;(chunk)&nbsp;to&nbsp;the&nbsp;resumable&nbsp;upload&nbsp;server.<br>
 &nbsp;<br>
@@ -1413,7 +1426,7 @@ Raises:<br>
 &nbsp;&nbsp;server&nbsp;returns&nbsp;something&nbsp;other&nbsp;than&nbsp;an&nbsp;HTTP&nbsp;308&nbsp;when&nbsp;the&nbsp;upload&nbsp;is<br>
 &nbsp;&nbsp;incomplete.</tt></dd></dl>
 
-<dl><dt><a name="ResumableUploader-upload_file"><strong>upload_file</strong></a>(self, resumable_media_link, entry<font color="#909090">=None</font>, headers<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>)</dt><dd><tt>Uploads&nbsp;an&nbsp;entire&nbsp;file&nbsp;in&nbsp;chunks&nbsp;using&nbsp;the&nbsp;resumable&nbsp;upload&nbsp;protocol.<br>
+<dl><dt><a name="ResumableUploader-upload_file"><strong>upload_file</strong></a>(self, resumable_media_link, entry<font color="#909090">=None</font>, headers<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Uploads&nbsp;an&nbsp;entire&nbsp;file&nbsp;in&nbsp;chunks&nbsp;using&nbsp;the&nbsp;resumable&nbsp;upload&nbsp;protocol.<br>
 &nbsp;<br>
 If&nbsp;you&nbsp;are&nbsp;interested&nbsp;in&nbsp;pausing&nbsp;an&nbsp;upload&nbsp;or&nbsp;controlling&nbsp;the&nbsp;chunking<br>
 yourself,&nbsp;use&nbsp;the&nbsp;<a href="#ResumableUploader-upload_chunk">upload_chunk</a>()&nbsp;method&nbsp;instead.<br>
@@ -1430,6 +1443,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;its&nbsp;modify_request&nbsp;method.&nbsp;Recommended&nbsp;classes&nbsp;include<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.<br>
+&nbsp;&nbsp;kwargs:&nbsp;(optional)&nbsp;Other&nbsp;args&nbsp;to&nbsp;pass&nbsp;to&nbsp;self.<strong>_init_session</strong>.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;final&nbsp;Atom&nbsp;entry&nbsp;created&nbsp;on&nbsp;the&nbsp;server.&nbsp;The&nbsp;entry&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;type&nbsp;will<br>
@@ -1450,6 +1464,8 @@ Data descriptors defined here:<br>
 <hr>
 Data and other attributes defined here:<br>
 <dl><dt><strong>DEFAULT_CHUNK_SIZE</strong> = 5242880</dl>
+
+<dl><dt><strong>MIN_CHUNK_SIZE</strong> = 262144</dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">

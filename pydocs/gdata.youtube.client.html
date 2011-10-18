@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.youtube.html"><font color="#ffffff">youtube</font></a>.client</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/gdata/youtube/client.py">/usr/local/lib/python2.6/dist-packages/gdata/youtube/client.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/working/gdata-python-client/src/gdata/youtube/client.py">/home/afshar/working/gdata-python-client/src/gdata/youtube/client.py</a></font></td></tr></table>
     <p><tt>Contains&nbsp;a&nbsp;client&nbsp;to&nbsp;communicate&nbsp;with&nbsp;the&nbsp;YouTube&nbsp;servers.<br>
 &nbsp;<br>
 A&nbsp;quick&nbsp;and&nbsp;dirty&nbsp;port&nbsp;of&nbsp;the&nbsp;YouTube&nbsp;GDATA&nbsp;1.0&nbsp;Python&nbsp;client<br>
@@ -270,9 +270,11 @@ Returns:<br>
 Data and other attributes defined here:<br>
 <dl><dt><strong>api_version</strong> = '2'</dl>
 
-<dl><dt><strong>auth_scopes</strong> = ['http://gdata.youtube.com/feeds/api', 'https://gdata.youtube.com/feeds/api']</dl>
+<dl><dt><strong>auth_scopes</strong> = ['https://gdata.youtube.com/feeds/api']</dl>
 
 <dl><dt><strong>auth_service</strong> = 'youtube'</dl>
+
+<dl><dt><strong>ssl</strong> = True</dl>
 
 <hr>
 Methods inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
@@ -325,7 +327,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;text&nbsp;which&nbsp;was&nbsp;contained&nbsp;in&nbsp;the&nbsp;challenge.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Generated&nbsp;token,&nbsp;which&nbsp;is&nbsp;also&nbsp;stored&nbsp;in&nbsp;this&nbsp;object.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Raises:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;<a href="#RequestError">RequestError</a>&nbsp;or&nbsp;one&nbsp;of&nbsp;its&nbsp;suclasses:&nbsp;BadAuthentication,<br>
@@ -559,7 +561,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;text&nbsp;which&nbsp;was&nbsp;contained&nbsp;in&nbsp;the&nbsp;challenge.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Generated&nbsp;token,&nbsp;which&nbsp;is&nbsp;also&nbsp;stored&nbsp;in&nbsp;this&nbsp;object.<br>
 &nbsp;<br>
 &nbsp;&nbsp;Raises:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;<a href="#RequestError">RequestError</a>&nbsp;or&nbsp;one&nbsp;of&nbsp;its&nbsp;suclasses:&nbsp;BadAuthentication,<br>
@@ -745,12 +747,16 @@ Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
 
 <hr>
+Data and other attributes inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
+<dl><dt><strong>alt_auth_service</strong> = None</dl>
+
+<hr>
 Methods inherited from <a href="atom.client.html#AtomPubClient">atom.client.AtomPubClient</a>:<br>
 <dl><dt><a name="YouTubeClient-Get"><strong>Get</strong></a> = get(self, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Performs&nbsp;a&nbsp;request&nbsp;using&nbsp;the&nbsp;GET&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
 <dl><dt><a name="YouTubeClient-Put"><strong>Put</strong></a> = put(self, uri<font color="#909090">=None</font>, data<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;data&nbsp;using&nbsp;the&nbsp;PUT&nbsp;method,&nbsp;returns&nbsp;an&nbsp;HTTP&nbsp;response.</tt></dd></dl>
 
-<dl><dt><a name="YouTubeClient-__init__"><strong>__init__</strong></a>(self, http_client<font color="#909090">=None</font>, host<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, source<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;AtomPubClient&nbsp;instance.<br>
+<dl><dt><a name="YouTubeClient-__init__"><strong>__init__</strong></a>(self, http_client<font color="#909090">=None</font>, host<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, source<font color="#909090">=None</font>, xoauth_requestor_id<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;AtomPubClient&nbsp;instance.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;source:&nbsp;The&nbsp;name&nbsp;of&nbsp;your&nbsp;application.<br>
@@ -783,7 +789,7 @@ Data and other attributes inherited from <a href="atom.client.html#AtomPubClient
 
 <dl><dt><strong>host</strong> = None</dl>
 
-<dl><dt><strong>ssl</strong> = False</dl>
+<dl><dt><strong>xoauth_requestor_id</strong> = None</dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">

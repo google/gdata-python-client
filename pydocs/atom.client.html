@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="atom.html"><font color="#ffffff">atom</font></a>.client</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.6/dist-packages/atom/client.py">/usr/local/lib/python2.6/dist-packages/atom/client.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/working/gdata-python-client/src/atom/client.py">/home/afshar/working/gdata-python-client/src/atom/client.py</a></font></td></tr></table>
     <p><tt><a href="#AtomPubClient">AtomPubClient</a>&nbsp;provides&nbsp;CRUD&nbsp;ops.&nbsp;in&nbsp;line&nbsp;with&nbsp;the&nbsp;Atom&nbsp;Publishing&nbsp;Protocol.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -30,6 +30,7 @@
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="atom.client.html#AtomPubClient">AtomPubClient</a>
+</font></dt><dt><font face="helvetica, arial"><a href="atom.client.html#CustomHeaders">CustomHeaders</a>
 </font></dt></dl>
 </dd>
 <dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>(<a href="exceptions.html#BaseException">exceptions.BaseException</a>)
@@ -64,7 +65,7 @@
 
 <dl><dt><a name="AtomPubClient-Request"><strong>Request</strong></a> = <a href="#AtomPubClient-request">request</a>(self, method<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, http_request<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
-<dl><dt><a name="AtomPubClient-__init__"><strong>__init__</strong></a>(self, http_client<font color="#909090">=None</font>, host<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, source<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;<a href="#AtomPubClient">AtomPubClient</a>&nbsp;instance.<br>
+<dl><dt><a name="AtomPubClient-__init__"><strong>__init__</strong></a>(self, http_client<font color="#909090">=None</font>, host<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, source<font color="#909090">=None</font>, xoauth_requestor_id<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;<a href="#AtomPubClient">AtomPubClient</a>&nbsp;instance.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;source:&nbsp;The&nbsp;name&nbsp;of&nbsp;your&nbsp;application.<br>
@@ -135,6 +136,45 @@ Data and other attributes defined here:<br>
 
 <dl><dt><strong>ssl</strong> = False</dl>
 
+<dl><dt><strong>xoauth_requestor_id</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="CustomHeaders">class <strong>CustomHeaders</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Add&nbsp;custom&nbsp;headers&nbsp;to&nbsp;an&nbsp;http_request.<br>
+&nbsp;<br>
+Usage:<br>
+&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;custom_headers&nbsp;=&nbsp;atom.client.<a href="#CustomHeaders">CustomHeaders</a>(header1='value1',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;header2='value2')<br>
+&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;client.get(uri,&nbsp;custom_headers=custom_headers)<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="CustomHeaders-__init__"><strong>__init__</strong></a>(self, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;<a href="#CustomHeaders">CustomHeaders</a>&nbsp;instance.<br>
+&nbsp;<br>
+Initialize&nbsp;the&nbsp;headers&nbsp;dictionary&nbsp;with&nbsp;the&nbsp;arguments&nbsp;list.</tt></dd></dl>
+
+<dl><dt><a name="CustomHeaders-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt><dd><tt>Changes&nbsp;the&nbsp;HTTP&nbsp;request&nbsp;before&nbsp;sending&nbsp;it&nbsp;to&nbsp;the&nbsp;server.<br>
+&nbsp;<br>
+Adds&nbsp;the&nbsp;custom&nbsp;headers&nbsp;to&nbsp;the&nbsp;HTTP&nbsp;request.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;http_request:&nbsp;An&nbsp;atom.http_core.HttpRequest().<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.http_core.HttpRequest()&nbsp;with&nbsp;the&nbsp;added&nbsp;custom&nbsp;headers.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
