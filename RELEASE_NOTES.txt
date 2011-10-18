@@ -1,3 +1,25 @@
+=== 2.0.15 ===
+18 Oct 2011
+
+- New Documents List API client
+- Added support for MDM Provisioning API
+- Added Batch support for Documents List API ACL changes
+- Added category handling for Documents List API client
+- Added commenter role to Documents List API client
+- Added support for gContact:status
+- Added subdomain support for Email Settings API
+- Added support for Apparel attributes in Content API for Shopping client
+- Added Documents List sample
+- Added Sample for Provisioning API with OAuth2
+- Added Sample for Email Settings API with OAuth2
+- Added Sample for Provisioning API with Sites and Profiles API
+- Fixed Youtube client to use SSL
+- Fixed Sites API sample to use SSL
+- Removed Google Base Data API support
+
+We didn't keep track of individual bug fixes because we did a big issue tracker
+cleanup, and closed over 50 issues.
+
 === 2.0.14 ===
 7 Mar 2011
 
