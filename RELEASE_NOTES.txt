@@ -16,9 +16,10 @@
 - Fixed Youtube client to use SSL
 - Fixed Sites API sample to use SSL
 - Removed Google Base Data API support
-
-We didn't keep track of individual bug fixes because we did a big issue tracker
-cleanup, and closed over 50 issues.
+- Issues closed:
+    #190, #206, #215, #230, #268, #270, #279, #281, #288, #296, #303, #312,
+    #346, #363, #399, #424, #435, #483, #492, #494, #498, #508, #512, #516,
+    #526, #532, #533, #534, #541, #547
 
 === 2.0.14 ===
 7 Mar 2011
