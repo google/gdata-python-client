@@ -82,7 +82,8 @@ class DocsClient(gdata.client.GDClient):
 
   GetMetadata = get_metadata
 
-  def get_changes(self, changestamp=None, max_results=None, **kwargs):
+  def get_changes(self, changestamp=None, max_results=None, show_root=None,
+                  **kwargs):
     """Retrieves changes to a user's documents list.
 
     Args:
@@ -91,6 +92,8 @@ class DocsClient(gdata.client.GDClient):
           the given one.
       max_results: (optional) Number of results to fetch.  API will limit
           this number to 100 at most.
+      show_root: (optional) True to include indications if a resource is in
+          the root collection.
       kwargs: Other parameters to pass to self.get_feed().
 
     Returns:
@@ -102,13 +105,15 @@ class DocsClient(gdata.client.GDClient):
       uri.query['start-index'] = changestamp
     if max_results is not None:
       uri.query['max-results'] = max_results
+    if show_root is not None:
+      uri.query['showroot'] = str(show_root).lower()
 
     return self.get_feed(
         uri, desired_class=gdata.docs.data.ChangeFeed, **kwargs)
 
   GetChanges = get_changes
 
-  def get_resources(self, uri=None, limit=None, **kwargs):
+  def get_resources(self, uri=None, limit=None, show_root=None, **kwargs):
     """Retrieves the resources in a user's docslist, or the given URI.
 
     Args:
@@ -123,6 +128,8 @@ class DocsClient(gdata.client.GDClient):
           get_everything(). Similarly, if you set limit=50, only <= 50
           documents are returned. Note: if the max-results parameter is set in
           the uri parameter, it is chosen over a value set for limit.
+      show_root: (optional) True to include indications if a resource is in
+          the root collection.
       kwargs: Other parameters to pass to self.get_feed().
 
     Returns:
@@ -132,18 +139,21 @@ class DocsClient(gdata.client.GDClient):
       uri = RESOURCE_FEED_URI
 
     if isinstance(uri, basestring):
-      uri = atom.http_core.Uri.parse_uri(uri)    
+      uri = atom.http_core.Uri.parse_uri(uri)
 
     # Add max-results param if it wasn't included in the uri.
     if limit is not None and not 'max-results' in uri.query:
       uri.query['max-results'] = limit
+    if show_root is not None:
+      uri.query['showroot'] = str(show_root).lower()
+
 
     return self.get_feed(uri, desired_class=gdata.docs.data.ResourceFeed,
                          **kwargs)
 
   GetResources = get_resources
 
-  def get_all_resources(self, uri=None, **kwargs):
+  def get_all_resources(self, uri=None, show_root=None, **kwargs):
     """Retrieves all of a user's non-collections or everything at the given URI.
 
     Folders are not included in this by default.  Pass in a custom URI to
@@ -157,6 +167,8 @@ class DocsClient(gdata.client.GDClient):
       uri: (optional) URI to query the doclist feed with. If None, then use
           DocsClient.RESOURCE_FEED_URI, which will retrieve all
           non-collections.
+      show_root: (optional) True to include indications if a resource is in
+          the root collection.
       kwargs: Other parameters to pass to self.GetResources().
 
     Returns:
@@ -165,6 +177,12 @@ class DocsClient(gdata.client.GDClient):
     """
     if uri is None:
       uri = RESOURCE_FEED_URI
+
+    if isinstance(uri, basestring):
+      uri = atom.http_core.Uri.parse_uri(uri)
+
+    if show_root is not None:
+      uri.query['showroot'] = str(show_root).lower()
 
     feed = self.GetResources(uri=uri, **kwargs)
     entries = feed.entry
@@ -179,37 +197,40 @@ class DocsClient(gdata.client.GDClient):
 
   def get_resource(self, entry, **kwargs):
     """Retrieves a resource again given its entry.
-    
+
     Args:
       entry: gdata.docs.data.Resource to fetch and return.
       kwargs: Other args to pass to GetResourceBySelfLink().
     Returns:
       gdata.docs.data.Resource representing retrieved resource.
     """
-
     return self.GetResourceBySelfLink(entry.GetSelfLink().href, **kwargs)
 
   GetResource = get_resource
 
-  def get_resource_by_self_link(self, self_link, etag=None, **kwargs):
+  def get_resource_by_self_link(self, uri, etag=None, show_root=None,
+                                **kwargs):
     """Retrieves a particular resource by its self link.
 
     Args:
-      self_link: URI at which to query for given resource.  This can be found
+      uri: str URI at which to query for given resource.  This can be found
           using entry.GetSelfLink().
       etag: str (optional) The document/item's etag value to be used in a
           conditional GET. See http://code.google.com/apis/documents/docs/3.0/
           developers_guide_protocol.html#RetrievingCached.
+      show_root: (optional) True to include indications if a resource is in
+          the root collection.
       kwargs: Other parameters to pass to self.get_entry().
 
     Returns:
       gdata.docs.data.Resource representing the retrieved resource.
     """
-    if isinstance(self_link, atom.data.Link):
-      self_link = self_link.href
-
+    if isinstance(uri, basestring):
+      uri = atom.http_core.Uri.parse_uri(uri)
+    if show_root is not None:
+      uri.query['showroot'] = str(show_root).lower()
     return self.get_entry(
-        self_link, etag=etag, desired_class=gdata.docs.data.Resource, **kwargs)
+        uri , etag=etag, desired_class=gdata.docs.data.Resource, **kwargs)
 
   GetResourceBySelfLink = get_resource_by_self_link
 
