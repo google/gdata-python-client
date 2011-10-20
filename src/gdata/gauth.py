@@ -1170,7 +1170,6 @@ class OAuth2Token(object):
         'user-agent': self.user_agent,
     }
 
-    print 'REFRESHING!'
     http_request = atom.http_core.HttpRequest(uri=self.token_uri, method='POST', headers=headers)
     http_request.add_body_part(body, mime_type='application/x-www-form-urlencoded')
     response = request(http_request)
