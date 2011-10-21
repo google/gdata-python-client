@@ -353,22 +353,4 @@ class MultiDomainProvisioningClient(gdata.client.GDClient):
     return self.delete(self.MakeMultidomainAliasProvisioningUri(email),
                        **kwargs)
 
-  DeleteAlias = delete_aliasdef retrieve_all_user_aliases(self, user_email, **kwargs):
-    """Retrieves all aliases for a given user in the domain.
-
-    Args:
-      user_email: string Email address of the user whose aliases
-                         are to be retrieved
-      kwargs: The other parameters to pass to gdata.client.GDClient.GetFeed()
-
-    Returns:
-      A gdata.data.GDFeed of the user aliases
-    """
-    uri = self.MakeMultidomainAliasProvisioningUri(
-                  params = {'userEmail' : user_email})
-    return self.GetFeed(
-        uri,
-        desired_class=gdata.apps.multidomain.data.AliasFeed,
-        **kwargs)
-    
-  RetrieveAllUserAliases = retrieve_all_user_aliases
+  DeleteAlias = delete_alias
