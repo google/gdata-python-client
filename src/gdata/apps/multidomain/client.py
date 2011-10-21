@@ -301,6 +301,26 @@ class MultiDomainProvisioningClient(gdata.client.GDClient):
         **kwargs)
 
   RetrieveAlias = retrieve_alias
+  
+  def retrieve_all_user_aliases(self, user_email, **kwargs):
+    """Retrieves all aliases for a given user in the domain.
+
+    Args:
+      user_email: string Email address of the user whose aliases
+                         are to be retrieved
+      kwargs: The other parameters to pass to gdata.client.GDClient.GetFeed()
+
+    Returns:
+      A gdata.data.GDFeed of the user aliases
+    """
+    uri = self.MakeMultidomainAliasProvisioningUri(
+                  params = {'userEmail' : user_email})
+    return self.GetFeed(
+        uri,
+        desired_class=gdata.apps.multidomain.data.AliasFeed,
+        **kwargs)
+    
+  RetrieveAllUserAliases = retrieve_all_user_aliases
 
   def create_alias(self, user_email, alias_email, **kwargs):
     """Creates an alias in the domain with the given properties.
