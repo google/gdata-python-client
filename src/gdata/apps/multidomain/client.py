@@ -314,7 +314,7 @@ class MultiDomainProvisioningClient(gdata.client.GDClient):
       A gdata.data.GDFeed of the user aliases
     """
     uri = self.MakeMultidomainAliasProvisioningUri(
-                  params = {'userEmail' : user_email})
+        params = {'userEmail' : user_email})
     return self.GetFeed(
         uri,
         desired_class=gdata.apps.multidomain.data.AliasFeed,
