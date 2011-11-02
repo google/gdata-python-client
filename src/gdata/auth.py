@@ -27,8 +27,14 @@ import atom.token_store
 import atom.url
 import gdata.oauth as oauth
 import gdata.oauth.rsa as oauth_rsa
-import gdata.tlslite.utils.keyfactory as keyfactory
-import gdata.tlslite.utils.cryptomath as cryptomath
+try:
+  import gdata.tlslite.utils.keyfactory as keyfactory
+except ImportError:
+  from tlslite.tlslite.utils import keyfactory
+try:
+  import gdata.tlslite.utils.cryptomath as cryptomath
+except ImportError:
+  from tlslite.tlslite.utils import cryptomath
 
 import gdata.gauth
 

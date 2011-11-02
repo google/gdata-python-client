@@ -467,7 +467,11 @@ def generate_signature(data, rsa_key):
   try:
     from tlslite.utils import keyfactory
   except ImportError:
-    from gdata.tlslite.utils import keyfactory
+    try:
+      from gdata.tlslite.utils import keyfactory
+    except ImportError:
+      from tlslite.tlslite.utils import keyfactory
+
   private_key = keyfactory.parsePrivateKey(rsa_key)
   signed = private_key.hashAndSign(data)
   # Python2.3 and lower does not have the base64.b64encode function.
@@ -653,7 +657,10 @@ def generate_rsa_signature(http_request, consumer_key, rsa_key,
   try:
     from tlslite.utils import keyfactory
   except ImportError:
-    from gdata.tlslite.utils import keyfactory
+    try:
+      from gdata.tlslite.utils import keyfactory
+    except ImportError:
+      from tlslite.tlslite.utils import keyfactory
   base_string = build_oauth_base_string(
       http_request, consumer_key, nonce, RSA_SHA1, timestamp, version,
       next, token, verifier=verifier)
