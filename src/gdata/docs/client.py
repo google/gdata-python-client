@@ -32,6 +32,7 @@ import gdata.gauth
 # Feed URIs that are given by the API, but cannot be obtained without
 # making a mostly unnecessary HTTP request.
 RESOURCE_FEED_URI = '/feeds/default/private/full'
+RESOURCE_SELF_LINK_TEMPLATE = RESOURCE_FEED_URI + '/%s'
 RESOURCE_UPLOAD_URI = '/feeds/upload/create-session/default/private/full'
 COLLECTION_UPLOAD_URI_TEMPLATE = \
     '/feeds/upload/create-session/feeds/default/private/full/%s/contents'
@@ -207,6 +208,20 @@ class DocsClient(gdata.client.GDClient):
     return self.GetResourceBySelfLink(entry.GetSelfLink().href, **kwargs)
 
   GetResource = get_resource
+
+  def get_resource_by_id(self, resource_id, **kwargs):
+    """Retrieves a resource again given its resource ID.
+
+    Args:
+      resource_id: Typed or untyped resource ID of a resource.
+      kwargs: Other args to pass to GetResourceBySelfLink().
+    Returns:
+      gdata.docs.data.Resource representing retrieved resource.
+    """
+    return self.GetResourceBySelfLink(
+        RESOURCE_SELF_LINK_TEMPLATE % resource_id, **kwargs)
+
+  GetResourceById = get_resource_by_id
 
   def get_resource_by_self_link(self, uri, etag=None, show_root=None,
                                 **kwargs):
@@ -571,11 +586,25 @@ class DocsClient(gdata.client.GDClient):
       raise ValueError(
           '%s is a collection, which is not valid in this method' % str(entry))
 
+  def get_acl(self, entry, **kwargs):
+    """Retrieves an AclFeed for the given resource.
+
+    Args:
+      entry: gdata.docs.data.Resource to fetch AclFeed for.
+      kwargs: Other args to pass to GetFeed().
+    Returns:
+      gdata.docs.data.AclFeed representing retrieved entries.
+    """
+    self._check_entry_is_resource(entry)
+    return self.get_feed(
+        entry.GetAclFeedLink().href,
+        desired_class=gdata.docs.data.AclFeed, **kwargs)
+
   def get_acl_entry(self, entry, **kwargs):
     """Retrieves an AclEntry again.
-    
+
     This is useful if you need to poll for an ACL changing.
-    
+
     Args:
       entry: gdata.docs.data.AclEntry to fetch and return.
       kwargs: Other args to pass to GetAclEntryBySelfLink().
