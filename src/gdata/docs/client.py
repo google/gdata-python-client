@@ -600,6 +600,8 @@ class DocsClient(gdata.client.GDClient):
         entry.GetAclFeedLink().href,
         desired_class=gdata.docs.data.AclFeed, **kwargs)
 
+  GetAcl = get_acl
+
   def get_acl_entry(self, entry, **kwargs):
     """Retrieves an AclEntry again.
 
