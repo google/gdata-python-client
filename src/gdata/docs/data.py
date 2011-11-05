@@ -445,10 +445,7 @@ class Resource(gdata.data.GDEntry, CategoryFinder):
     Returns:
       A gdata.data.FeedLink object.
     """
-    for feed_link in self.feed_link:
-      if feed_link.rel == RESUMABLE_CREATE_MEDIA_LINK_REL:
-        return feed_link
-    return None
+    return self.get_link(RESUMABLE_CREATE_MEDIA_LINK_REL)
 
   GetResumableCreateMediaLink = get_resumable_create_media_link
 
@@ -458,10 +455,7 @@ class Resource(gdata.data.GDEntry, CategoryFinder):
     Returns:
       A gdata.data.FeedLink object.
     """
-    for feed_link in self.feed_link:
-      if feed_link.rel == RESUMABLE_EDIT_MEDIA_LINK_REL:
-        return feed_link
-    return None
+    return self.get_link(RESUMABLE_EDIT_MEDIA_LINK_REL)
 
   GetResumableEditMediaLink = get_resumable_edit_media_link
 
