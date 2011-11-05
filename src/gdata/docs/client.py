@@ -291,7 +291,7 @@ class DocsClient(gdata.client.GDClient):
     """
     if media is not None:
       if create_uri is None and collection is not None:
-        create_uri = collection.GetResumableCreateMediaLink()
+        create_uri = collection.GetResumableCreateMediaLink().href
       elif create_uri is None:
         create_uri = RESOURCE_UPLOAD_URI
       uploader = gdata.client.ResumableUploader(
