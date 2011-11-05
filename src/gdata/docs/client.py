@@ -34,8 +34,6 @@ import gdata.gauth
 RESOURCE_FEED_URI = '/feeds/default/private/full'
 RESOURCE_SELF_LINK_TEMPLATE = RESOURCE_FEED_URI + '/%s'
 RESOURCE_UPLOAD_URI = '/feeds/upload/create-session/default/private/full'
-COLLECTION_UPLOAD_URI_TEMPLATE = \
-    '/feeds/upload/create-session/feeds/default/private/full/%s/contents'
 ARCHIVE_FEED_URI = '/feeds/default/private/archive'
 METADATA_URI = '/feeds/metadata/default'
 CHANGE_FEED_URI = '/feeds/default/private/changes'
@@ -284,7 +282,7 @@ class DocsClient(gdata.client.GDClient):
           gdata.docs.client.RESOURCE_FEED_URI.  If collection and create_uri are
           None, use gdata.docs.client.RESOURCE_UPLOAD_URI.  If collection and
           media are not None,
-          gdata.docs.client.COLLECTION_UPLOAD_URI_TEMPLATE is used,
+          collection.GetResumableCreateMediaLink() is used,
           with the collection's resource ID substituted in.
       kwargs: Other parameters to pass to self.post() and self.update().
 
@@ -293,8 +291,7 @@ class DocsClient(gdata.client.GDClient):
     """
     if media is not None:
       if create_uri is None and collection is not None:
-        create_uri = COLLECTION_UPLOAD_URI_TEMPLATE % \
-            collection.resource_id.text
+        create_uri = collection.GetResumableCreateMediaLink()
       elif create_uri is None:
         create_uri = RESOURCE_UPLOAD_URI
       uploader = gdata.client.ResumableUploader(
