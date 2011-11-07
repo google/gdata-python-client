@@ -183,6 +183,29 @@ class SpreadsheetsClientTest(unittest.TestCase):
     cell_entry.cell.input_value = value
     self.assert_(self.client.update(cell_entry) is not None)
 
+  def test_batch_set_cells(self):
+    if not conf.options.get_value('runlive') == 'true':
+      return
+    # Either load the recording or prepare to make a live request.
+    conf.configure_cache(self.client, 'test_get_and_update_cell')
+
+    spreadsheet_id = conf.options.get_value('spreadsheetid')
+
+    test_worksheet = self.client.add_worksheet(
+        spreadsheet_id, 'worksheet x', rows=30, cols=3)
+
+    # Set a couple of cells in a batch request.
+    feed = gdata.spreadsheets.data.build_batch_cells_update(
+        spreadsheet_id, test_worksheet.get_worksheet_id())
+    feed.add_set_cell(1, 1, '5')
+    feed.add_set_cell(1, 2, '=A1+2')
+    result = self.client.batch(feed, force=True)
+    self.assertEqual(result.entry[0].cell.text, '5')
+    self.assertEqual(result.entry[1].cell.text, '7')
+
+    # Delete the test worksheet.
+    self.client.delete(test_worksheet, force=True)
+
   def test_crud_on_list_feed(self):
     if not conf.options.get_value('runlive') == 'true':
       return

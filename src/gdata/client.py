@@ -214,7 +214,7 @@ class GDClient(atom.client.AtomPubClient):
                   gdata.gauth.ClientLoginToken and gdata.gauth.AuthSubToken
                   among others.
       http_request: (optional) atom.http_core.HttpRequest
-      converter: function which takes the body of the response as it's only
+      converter: function which takes the body of the response as its only
                  argument and returns the desired object.
       desired_class: class descended from atom.core.XmlElement to which a
                      successful response should be converted. If there is no
@@ -753,9 +753,40 @@ class GDClient(atom.client.AtomPubClient):
 
   Delete = delete
 
-  #TODO: implement batch requests.
-  #def batch(feed, uri, auth_token=None, converter=None, **kwargs):
-  #  pass
+  def batch(self, feed, uri=None, force=False, auth_token=None, **kwargs):
+    """Sends a batch request to the server to execute operation entries.
+
+    Args:
+      feed: A batch feed containing batch entries, each is an operation.
+      uri: (optional) The uri to which the batch request feed should be POSTed.
+          If none is provided, then the feed's edit link will be used.
+      force: (optional) boolean set to True if you want the batch update to
+          clobber all data. If False, the version in the information in the
+          feed object will cause the server to check to see that no changes
+          intervened between when you fetched the data and when you sent the
+          changes.
+      auth_token: (optional) An object which sets the Authorization HTTP header
+          in its modify_request method. Recommended classes include
+          gdata.gauth.ClientLoginToken and gdata.gauth.AuthSubToken
+          among others.
+    """
+    http_request = atom.http_core.HttpRequest()
+    http_request.add_body_part(
+        feed.to_string(get_xml_version(self.api_version)),
+        'application/atom+xml')
+    if force:
+      http_request.headers['If-Match'] = '*'
+    elif hasattr(feed, 'etag') and feed.etag:
+      http_request.headers['If-Match'] = feed.etag
+
+    if uri is None:
+      uri = feed.find_edit_link()
+
+    return self.request(method='POST', uri=uri, auth_token=auth_token,
+                        http_request=http_request,
+                        desired_class=feed.__class__, **kwargs)
+
+  Batch = batch
 
   # TODO: add a refresh method to request a conditional update to an entry
   # or feed.
