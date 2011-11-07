@@ -42,6 +42,11 @@ OVERWRITE_MODE = 'overwrite'
 
 WORKSHEETS_REL = 'http://schemas.google.com/spreadsheets/2006#worksheetsfeed'
 
+BATCH_POST_ID_TEMPLATE = ('https://spreadsheets.google.com/feeds/cells'
+                          '/%s/%s/private/full')
+BATCH_ENTRY_ID_TEMPLATE = '%s/R%sC%s'
+BATCH_EDIT_LINK_TEMPLATE = '%s/batch'
+
 
 class Error(Exception):
   pass
@@ -341,6 +346,36 @@ class CellsFeed(gdata.data.BatchFeed):
   """
   entry = [CellEntry]
 
-  def batch_set_cell(row, col, input):
-    pass
+  def add_set_cell(self, row, col, input_value):
+    """Adds a request to change the contents of a cell to this batch request.
+    
+    Args:
+      row: int, The row number for this cell. Numbering starts at 1.
+      col: int, The column number for this cell. Starts at 1.
+      input_value: str, The desired formula/content this cell should contain.
+    """
+    self.add_update(CellEntry(
+        id=atom.data.Id(text=BATCH_ENTRY_ID_TEMPLATE % (
+            self.id.text, row, col)),
+        cell=Cell(col=str(col), row=str(row), input_value=input_value)))
+    return self
 
+
+def build_batch_cells_update(spreadsheet_key, worksheet_id):
+  """Creates an empty cells feed for adding batch cell updates to.
+  
+  Call batch_set_cell on the resulting CellsFeed instance then send the batch
+  request TODO: fill in
+
+  Args:
+    spreadsheet_key: The ID of the spreadsheet 
+    worksheet_id:
+  """
+  feed_id_text = BATCH_POST_ID_TEMPLATE % (spreadsheet_key, worksheet_id)
+  return CellsFeed(
+      id=atom.data.Id(text=feed_id_text),
+      link=[atom.data.Link(
+          rel='edit', href=BATCH_EDIT_LINK_TEMPLATE % (feed_id_text,))])
+
+
+BuildBatchCellsUpdate = build_batch_cells_update
