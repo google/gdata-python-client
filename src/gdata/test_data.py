@@ -5644,3 +5644,158 @@ MULTIDOMAIN_ALIAS_FEED = """<?xml version='1.0' encoding='UTF-8'?>
     <apps:property name="aliasEmail" value="support@gethelp_example.com" />
   </entry>
 </feed>"""
+
+USER_ENTRY1 = """<?xml version='1.0' encoding='UTF-8'?>
+<entry xmlns='http://www.w3.org/2005/Atom' xmlns:apps='http://schemas.google.com/apps/2006' xmlns:gd='http://schemas.google.com/g/2005'>
+  <id>http://apps-apis.google.com/a/feeds/srkapps.com/user/2.0/abcd12310</id>
+  <updated>1970-01-01T00:00:00.000Z</updated>
+  <category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/apps/2006#user'/>
+  <title type='text'>abcd12310</title>
+  <link rel='self' type='application/atom+xml' href='http://apps-apis.google.com/a/feeds/srkapps.com/user/2.0/abcd12310'/>
+  <link rel='edit' type='application/atom+xml' href='http://apps-apis.google.com/a/feeds/srkapps.com/user/2.0/abcd12310'/>
+  <apps:login userName='abcd12310' suspended='false' ipWhitelisted='false' admin='false' changePasswordAtNextLogin='false' agreedToTerms='false'/><apps:quota limit='25600'/>
+  <apps:name familyName='efgh3' givenName='abcd33'/>
+  <gd:feedLink rel='http://schemas.google.com/apps/2006#user.nicknames' href='http://apps-apis.google.com/a/feeds/srkapps.com/nickname/2.0?username=abcd12310'/>
+  <gd:feedLink rel='http://schemas.google.com/apps/2006#user.emailLists' href='http://apps-apis.google.com/a/feeds/srkapps.com/emailList/2.0?recipient=abcd12310%40srkapps.com'/>
+</entry>"""
+
+USER_FEED1 = """<?xml version='1.0' encoding='utf-8'?>
+<ns0:feed xmlns:ns0="http://www.w3.org/2005/Atom">
+  <ns0:category scheme="http://schemas.google.com/g/2005#kind"
+  term="http://schemas.google.com/apps/2006#user" />
+  <ns0:id>
+  https://apps-apis.google.com/a/feeds/srkapps.com/user/2.0</ns0:id>
+  <ns1:startIndex xmlns:ns1="http://a9.com/-/spec/opensearchrss/1.0/">
+  1</ns1:startIndex>
+  <ns0:title type="text">Users</ns0:title>
+  <ns0:link href="https://apps-apis.google.com/a/feeds/srkapps.com/user/2.0"
+  rel="http://schemas.google.com/g/2005#feed"
+  type="application/atom+xml" />
+  <ns0:link href="https://apps-apis.google.com/a/feeds/srkapps.com/user/2.0"
+  rel="http://schemas.google.com/g/2005#post"
+  type="application/atom+xml" />
+  <ns0:link href="https://apps-apis.google.com/a/feeds/srkapps.com/user/2.0?startUsername=user8306"
+  rel="self" type="application/atom+xml" />
+  <ns0:updated>1970-01-01T00:00:00.000Z</ns0:updated>
+  <ns0:entry>
+    <ns1:name familyName="LastName8306"
+    givenName="FirstName8306"
+    xmlns:ns1="http://schemas.google.com/apps/2006" />
+    <ns0:category scheme="http://schemas.google.com/g/2005#kind"
+    term="http://schemas.google.com/apps/2006#user" />
+    <ns0:id>
+    https://apps-apis.google.com/a/feeds/srkapps.com/user/2.0/user8306</ns0:id>
+    <ns0:updated>1970-01-01T00:00:00.000Z</ns0:updated>
+    <ns1:quota limit="25600"
+    xmlns:ns1="http://schemas.google.com/apps/2006" />
+    <ns1:feedLink href="https://apps-apis.google.com/a/feeds/srkapps.com/nickname/2.0?username=user8306"
+    rel="http://schemas.google.com/apps/2006#user.nicknames"
+    xmlns:ns1="http://schemas.google.com/g/2005" />
+    <ns1:feedLink href="https://apps-apis.google.com/a/feeds/srkapps.com/emailList/2.0?recipient=user8306%40srkapps.com"
+    rel="http://schemas.google.com/apps/2006#user.emailLists"
+    xmlns:ns1="http://schemas.google.com/g/2005" />
+    <ns0:title type="text">user8306</ns0:title>
+    <ns0:link href="https://apps-apis.google.com/a/feeds/srkapps.com/user/2.0/user8306"
+    rel="self" type="application/atom+xml" />
+    <ns0:link href="https://apps-apis.google.com/a/feeds/srkapps.com/user/2.0/user8306"
+    rel="edit" type="application/atom+xml" />
+    <ns1:login admin="false" agreedToTerms="false"
+    changePasswordAtNextLogin="false" ipWhitelisted="false"
+    suspended="false" userName="user8306"
+    xmlns:ns1="http://schemas.google.com/apps/2006" />
+  </ns0:entry>
+  <ns0:entry>
+    <ns1:name familyName="LastName8307"
+    givenName="FirstName8307"
+    xmlns:ns1="http://schemas.google.com/apps/2006" />
+    <ns0:category scheme="http://schemas.google.com/g/2005#kind"
+    term="http://schemas.google.com/apps/2006#user" />
+    <ns0:id>
+    https://apps-apis.google.com/a/feeds/srkapps.com/user/2.0/user8307</ns0:id>
+    <ns0:updated>1970-01-01T00:00:00.000Z</ns0:updated>
+    <ns1:quota limit="25600"
+    xmlns:ns1="http://schemas.google.com/apps/2006" />
+    <ns1:feedLink href="https://apps-apis.google.com/a/feeds/srkapps.com/nickname/2.0?username=user8307"
+    rel="http://schemas.google.com/apps/2006#user.nicknames"
+    xmlns:ns1="http://schemas.google.com/g/2005" />
+    <ns1:feedLink href="https://apps-apis.google.com/a/feeds/srkapps.com/emailList/2.0?recipient=user8307%40srkapps.com"
+    rel="http://schemas.google.com/apps/2006#user.emailLists"
+    xmlns:ns1="http://schemas.google.com/g/2005" />
+    <ns0:title type="text">user8307</ns0:title>
+    <ns0:link href="https://apps-apis.google.com/a/feeds/srkapps.com/user/2.0/user8307"
+    rel="self" type="application/atom+xml" />
+    <ns0:link href="https://apps-apis.google.com/a/feeds/srkapps.com/user/2.0/user8307"
+    rel="edit" type="application/atom+xml" />
+    <ns1:login admin="false" agreedToTerms="false"
+    changePasswordAtNextLogin="false" ipWhitelisted="false"
+    suspended="false" userName="user8307"
+    xmlns:ns1="http://schemas.google.com/apps/2006" />
+  </ns0:entry>
+</ns0:feed>"""
+
+NICKNAME_ENTRY = """<?xml version='1.0' encoding='utf-8'?>
+<entry xmlns='http://www.w3.org/2005/Atom'
+xmlns:apps='http://schemas.google.com/apps/2006'>
+  <id>
+  https://apps-apis.google.com/a/feeds/srkapps.net/nickname/2.0/nehag</id>
+  <updated>1970-01-01T00:00:00.000Z</updated>
+  <category scheme='http://schemas.google.com/g/2005#kind'
+  term='http://schemas.google.com/apps/2006#nickname' />
+  <title type='text'>nehag</title>
+  <link rel='self' type='application/atom+xml'
+  href='https://apps-apis.google.com/a/feeds/srkapps.net/nickname/2.0/nehag' />
+  <link rel='edit' type='application/atom+xml'
+  href='https://apps-apis.google.com/a/feeds/srkapps.net/nickname/2.0/nehag' />
+  <apps:nickname name='nehag' />
+  <apps:login userName='neha' />
+</entry>"""
+
+
+NICKNAME_FEED = """<?xml version='1.0' encoding='utf-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom'
+xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
+xmlns:apps='http://schemas.google.com/apps/2006'>
+  <id>
+  https://apps-apis.google.com/a/feeds/srkapps.net/nickname/2.0</id>
+  <updated>1970-01-01T00:00:00.000Z</updated>
+  <category scheme='http://schemas.google.com/g/2005#kind'
+  term='http://schemas.google.com/apps/2006#nickname' />
+  <title type='text'>Nicknames</title>
+  <link rel='http://schemas.google.com/g/2005#feed'
+  type='application/atom+xml'
+  href='https://apps-apis.google.com/a/feeds/srkapps.net/nickname/2.0' />
+  <link rel='http://schemas.google.com/g/2005#post'
+  type='application/atom+xml'
+  href='https://apps-apis.google.com/a/feeds/srkapps.net/nickname/2.0' />
+  <link rel='self' type='application/atom+xml'
+  href='https://apps-apis.google.com/a/feeds/srkapps.net/nickname/2.0' />
+  <openSearch:startIndex>1</openSearch:startIndex>
+  <entry>
+    <id>
+    https://apps-apis.google.com/a/feeds/srkapps.net/nickname/2.0/nehag</id>
+    <updated>1970-01-01T00:00:00.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind'
+    term='http://schemas.google.com/apps/2006#nickname' />
+    <title type='text'>nehag</title>
+    <link rel='self' type='application/atom+xml'
+    href='https://apps-apis.google.com/a/feeds/srkapps.net/nickname/2.0/nehag' />
+    <link rel='edit' type='application/atom+xml'
+    href='https://apps-apis.google.com/a/feeds/srkapps.net/nickname/2.0/nehag' />
+    <apps:nickname name='nehag' />
+    <apps:login userName='neha' />
+  </entry>
+  <entry>
+    <id>
+    https://apps-apis.google.com/a/feeds/srkapps.net/nickname/2.0/richag</id>
+    <updated>1970-01-01T00:00:00.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind'
+    term='http://schemas.google.com/apps/2006#nickname' />
+    <title type='text'>richag</title>
+    <link rel='self' type='application/atom+xml'
+    href='https://apps-apis.google.com/a/feeds/srkapps.net/nickname/2.0/richag' />
+    <link rel='edit' type='application/atom+xml'
+    href='https://apps-apis.google.com/a/feeds/srkapps.net/nickname/2.0/richag' />
+    <apps:nickname name='richag' />
+    <apps:login userName='richa' />
+  </entry>
+</feed>"""
