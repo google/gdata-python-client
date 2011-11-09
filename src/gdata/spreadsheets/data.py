@@ -360,6 +360,8 @@ class CellsFeed(gdata.data.BatchFeed):
         cell=Cell(col=str(col), row=str(row), input_value=input_value)))
     return self
 
+  AddSetCell = add_set_cell
+
 
 def build_batch_cells_update(spreadsheet_key, worksheet_id):
   """Creates an empty cells feed for adding batch cell updates to.
