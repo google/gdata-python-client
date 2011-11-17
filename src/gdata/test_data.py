@@ -5799,3 +5799,123 @@ xmlns:apps='http://schemas.google.com/apps/2006'>
     <apps:login userName='richa' />
   </entry>
 </feed>"""
+
+GROUP_ENTRY = """<?xml version='1.0' encoding='utf-8'?>
+<entry xmlns='http://www.w3.org/2005/Atom'
+xmlns:apps='http://schemas.google.com/apps/2006'>
+  <id>
+  http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/trial%40srkapps.com</id>
+  <updated>2011-11-10T16:54:56.784Z</updated>
+  <link rel='self' type='application/atom+xml'
+  href='http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/trial%40srkapps.com' />
+  <link rel='edit' type='application/atom+xml'
+  href='http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/trial%40srkapps.com' />
+  <apps:property name='groupId' value='trial@srkapps.com' />
+  <apps:property name='groupName' value='Trial' />
+  <apps:property name='emailPermission' value='Domain' />
+  <apps:property name='permissionPreset' value='Custom' />
+  <apps:property name='description' value='For try' />
+</entry>"""
+
+GROUP_FEED= """<?xml version='1.0' encoding='utf-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom'
+xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
+xmlns:apps='http://schemas.google.com/apps/2006'>
+  <id>
+  http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com</id>
+  <updated>2011-11-10T16:56:03.830Z</updated>
+  <link rel='http://schemas.google.com/g/2005#feed'
+  type='application/atom+xml'
+  href='http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com' />
+  <link rel='http://schemas.google.com/g/2005#post'
+  type='application/atom+xml'
+  href='http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com' />
+  <link rel='self' type='application/atom+xml'
+  href='http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com' />
+  <openSearch:startIndex>1</openSearch:startIndex>
+  <entry>
+    <id>
+    http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/firstgroup%40srkapps.com</id>
+    <updated>2011-11-10T16:56:03.830Z</updated>
+    <link rel='self' type='application/atom+xml'
+    href='http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/firstgroup%40srkapps.com' />
+    <link rel='edit' type='application/atom+xml'
+    href='http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/firstgroup%40srkapps.com' />
+    <apps:property name='groupId' value='firstgroup@srkapps.com' />
+    <apps:property name='groupName' value='FirstGroup' />
+    <apps:property name='emailPermission' value='Domain' />
+    <apps:property name='permissionPreset' value='Custom' />
+    <apps:property name='description' value='First group' />
+  </entry>
+  <entry>
+    <id>
+    http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/trial%40srkapps.com</id>
+    <updated>2011-11-10T16:56:03.830Z</updated>
+    <link rel='self' type='application/atom+xml'
+    href='http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/trial%40srkapps.com' />
+    <link rel='edit' type='application/atom+xml'
+    href='http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/trial%40srkapps.com' />
+    <apps:property name='groupId' value='trial@srkapps.com' />
+    <apps:property name='groupName' value='Trial' />
+    <apps:property name='emailPermission' value='Domain' />
+    <apps:property name='permissionPreset' value='Custom' />
+    <apps:property name='description' value='For try' />
+  </entry>
+</feed>"""
+
+GROUP_MEMBER_ENTRY = """<?xml version='1.0' encoding='utf-8'?>
+<entry xmlns='http://www.w3.org/2005/Atom'
+xmlns:apps='http://schemas.google.com/apps/2006'>
+  <id>
+  http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/trial/member/abcd12310%40srkapps.com</id>
+  <updated>2011-11-10T16:58:40.804Z</updated>
+  <link rel='self' type='application/atom+xml'
+  href='http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/trial/member/abcd12310%40srkapps.com' />
+  <link rel='edit' type='application/atom+xml'
+  href='http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/trial/member/abcd12310%40srkapps.com' />
+  <apps:property name='memberType' value='User' />
+  <apps:property name='memberId' value='abcd12310@srkapps.com' />
+  <apps:property name='directMember' value='true' />
+</entry>"""
+
+GROUP_MEMBER_FEED = """<?xml version='1.0' encoding='utf-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom'
+xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
+xmlns:apps='http://schemas.google.com/apps/2006'>
+  <id>
+  http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/trial/member</id>
+  <updated>2011-11-10T16:57:15.574Z</updated>
+  <link rel='http://schemas.google.com/g/2005#feed'
+  type='application/atom+xml'
+  href='http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/trial/member' />
+  <link rel='http://schemas.google.com/g/2005#post'
+  type='application/atom+xml'
+  href='http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/trial/member' />
+  <link rel='self' type='application/atom+xml'
+  href='http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/trial/member' />
+  <openSearch:startIndex>1</openSearch:startIndex>
+  <entry>
+    <id>
+    http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/trial/member/abcd12310%40srkapps.com</id>
+    <updated>2011-11-10T16:57:15.574Z</updated>
+    <link rel='self' type='application/atom+xml'
+    href='http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/trial/member/abcd12310%40srkapps.com' />
+    <link rel='edit' type='application/atom+xml'
+    href='http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/trial/member/abcd12310%40srkapps.com' />
+    <apps:property name='memberType' value='User' />
+    <apps:property name='memberId' value='abcd12310@srkapps.com' />
+    <apps:property name='directMember' value='true' />
+  </entry>
+  <entry>
+    <id>
+    http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/trial/member/neha.technocrat%40srkapps.com</id>
+    <updated>2011-11-10T16:57:15.574Z</updated>
+    <link rel='self' type='application/atom+xml'
+    href='http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/trial/member/neha.technocrat%40srkapps.com' />
+    <link rel='edit' type='application/atom+xml'
+    href='http://apps-apis.google.com/a/feeds/group/2.0/srkapps.com/trial/member/neha.technocrat%40srkapps.com' />
+    <apps:property name='memberType' value='User' />
+    <apps:property name='memberId' value='neha.technocrat@srkapps.com' />
+    <apps:property name='directMember' value='true' />
+  </entry>
+</feed>"""
