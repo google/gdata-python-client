@@ -104,10 +104,10 @@ AUTH_SCOPES = {
     'lh2': ( # Picasa Web Albums API
         'http://picasaweb.google.com/data/',),
     'apps': ( # Google Apps Provisioning API
-        'http://www.google.com/a/feeds/',
-        'https://www.google.com/a/feeds/',
-        'http://apps-apis.google.com/a/feeds/',
-        'https://apps-apis.google.com/a/feeds/'),
+        'https://apps-apis.google.com/a/feeds/user/',
+        'https://apps-apis.google.com/a/feeds/policies/',
+        'https://apps-apis.google.com/a/feeds/alias/',
+        'https://apps-apis.google.com/a/feeds/groups/'),
     'weaver': ( # Health H9 Sandbox
         'https://www.google.com/h9/feeds/',),
     'wise': ( # Spreadsheets Data API

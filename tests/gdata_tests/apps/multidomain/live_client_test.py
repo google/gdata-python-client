@@ -56,10 +56,10 @@ class MultidomainProvisioningClientTest(unittest.TestCase):
     self.assertEqual('2.0', self.client.api_version)
     self.assertEqual('apps', self.client.auth_service)
     self.assertEqual(
-        ('http://www.google.com/a/feeds/',
-         'https://www.google.com/a/feeds/',
-         'http://apps-apis.google.com/a/feeds/',
-         'https://apps-apis.google.com/a/feeds/'), self.client.auth_scopes)
+        ('https://apps-apis.google.com/a/feeds/user/',
+         'https://apps-apis.google.com/a/feeds/policies/',
+         'https://apps-apis.google.com/a/feeds/alias/',
+         'https://apps-apis.google.com/a/feeds/groups/'), self.client.auth_scopes)
     if conf.options.get_value('runlive') == 'true':
       self.assertEqual(self.client.domain, conf.options.get_value('appsdomain'))
     else:
@@ -145,6 +145,12 @@ class MultidomainProvisioningClientTest(unittest.TestCase):
     fetched_alias = self.client.RetrieveAlias(alias)
     self.assertEquals(fetched_alias.user_email, new_email)
     self.assertEquals(fetched_alias.alias_email, alias)
+    
+    fetched_aliases = self.client.RetrieveAllUserAliases(new_email)
+    self.assertEquals(fetched_aliases.entry[0].user_email, new_email)
+    self.assertEquals(fetched_aliases.entry[0].alias_email, email)
+    self.assertEquals(fetched_aliases.entry[1].user_email, new_email)
+    self.assertEquals(fetched_aliases.entry[1].alias_email, alias)
 
     self.client.DeleteAlias(alias)
     self.client.DeleteUser(new_email)
