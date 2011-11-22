@@ -655,8 +655,8 @@ class DocsClient(gdata.client.GDClient):
       raise ValueError(('Given resource has no ACL link.  Did you fetch this'
                         'resource from the API?'))
     if send_notifications is not None:
-      if send_notifications:
-        uri += '?send-notification-emails=true'
+      if not send_notifications:
+        uri += '?send-notification-emails=false'
 
     return self.post(acl_entry, uri, desired_class=gdata.docs.data.AclEntry,
                      **kwargs)
@@ -676,8 +676,8 @@ class DocsClient(gdata.client.GDClient):
       gdata.docs.data.AclEntry representing the updated ACL entry.
     """
     uri = entry.GetEditLink().href
-    if send_notifications:
-      uri += '?send-notification-emails=true'
+    if not send_notifications:
+      uri += '?send-notification-emails=false'
     return super(DocsClient, self).update(entry, uri=uri, force=True, **kwargs)
 
   UpdateAclEntry = update_acl_entry
