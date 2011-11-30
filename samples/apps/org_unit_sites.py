@@ -46,7 +46,7 @@ THEME = 'slate'
 HTML_HEADER = ('<html:div xmlns:html="http://www.w3.org/1999/xhtml">'
                '<html:table cellspacing="0" class='
                '"sites-layout-name-one-column sites-layout-hbox"><html:tbody>'
-               'html:tr><html:td class="sites-layout-tile '
+               '<html:tr><html:td class="sites-layout-tile '
                'sites-tile-name-content-1">')
 #Footer for the new webpages
 HTML_FOOTER = '</html:td></html:tr></html:tbody></html:table></html:div>'
