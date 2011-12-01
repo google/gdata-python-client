@@ -21,6 +21,7 @@ __author__ = 'Claudio Cherubino <ccherubino@google.com>'
 
 
 import gdata.apps
+import gdata.apps.apps_property_entry
 import gdata.apps_property
 import gdata.data
 
@@ -60,47 +61,7 @@ USER_NEW_EMAIL = 'newEmail'
 ALIAS_EMAIL = 'aliasEmail'
 
 
-class MultidomainProvisioningEntry(gdata.data.GDEntry):
-  """Represents a Multidomain Provisioning entry in object form."""
-
-  property = [gdata.apps_property.AppsProperty]
-
-  def _GetProperty(self, name):
-    """Get the apps:property value with the given name.
-
-    Args:
-      name: string Name of the apps:property value to get.
-
-    Returns:
-      The apps:property value with the given name, or None if the name was
-      invalid.
-    """
-    value = None
-    for p in self.property:
-      if p.name == name:
-        value = p.value
-        break
-    return value
-
-  def _SetProperty(self, name, value):
-    """Set the apps:property value with the given name to the given value.
-
-    Args:
-      name: string Name of the apps:property value to set.
-      value: string Value to give the apps:property value with the given name.
-    """
-    found = False
-    for i in range(len(self.property)):
-      if self.property[i].name == name:
-        self.property[i].value = value
-        found = True
-        break
-    if not found:
-      self.property.append(
-          gdata.apps_property.AppsProperty(name=name, value=value))
-
-
-class UserEntry(MultidomainProvisioningEntry):
+class UserEntry(gdata.apps.apps_property_entry.AppsPropertyEntry):
   """Represents an User in object form."""
 
   def GetFirstName(self):
@@ -357,7 +318,7 @@ class UserFeed(gdata.data.GDFeed):
   entry = [UserEntry]
 
 
-class UserRenameRequest(MultidomainProvisioningEntry):
+class UserRenameRequest(gdata.apps.apps_property_entry.AppsPropertyEntry):
   """Represents an User rename request in object form."""
 
   def GetNewEmail(self):
@@ -391,7 +352,7 @@ class UserRenameRequest(MultidomainProvisioningEntry):
       self.new_email = new_email
 
 
-class AliasEntry(MultidomainProvisioningEntry):
+class AliasEntry(gdata.apps.apps_property_entry.AppsPropertyEntry):
   """Represents an Alias in object form."""
 
   def GetUserEmail(self):

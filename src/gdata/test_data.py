@@ -5919,3 +5919,145 @@ xmlns:apps='http://schemas.google.com/apps/2006'>
     <apps:property name='directMember' value='true' />
   </entry>
 </feed>"""
+
+ORGANIZATION_UNIT_CUSTOMER_ID_ENTRY = """<?xml version='1.0' encoding='utf-8'?>
+<entry xmlns='http://www.w3.org/2005/Atom'
+xmlns:apps='http://schemas.google.com/apps/2006'>
+<id>
+https://apps-apis.google.com/a/feeds/customer/2.0/C123A456B</id>
+<updated>2011-11-21T13:17:02.274Z</updated>
+<link rel='self' type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/customer/2.0/C123A456B' />
+<link rel='edit' type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/customer/2.0/C123A456B' />
+<apps:property name='customerOrgUnitDescription'
+value='example.com' />
+<apps:property name='customerId' value='C123A456B' />
+<apps:property name='customerOrgUnitName' value='example.com' />
+<apps:property name='description' value='tempdescription' />
+<apps:property name='name' value='example.com' />
+</entry>"""
+
+ORGANIZATION_UNIT_ORGUNIT_ENTRY = """<?xml version='1.0' encoding='utf-8'?>
+<entry xmlns='http://www.w3.org/2005/Atom'
+xmlns:apps='http://schemas.google.com/apps/2006'>
+<id>
+https://apps-apis.google.com/a/feeds/orgunit/2.0/C123A456B/Test+Organization</id>
+<updated>2011-11-21T13:32:12.334Z</updated>
+<link rel='self' type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/orgunit/2.0/C123A456B/Test+Organization' />
+<link rel='edit' type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/orgunit/2.0/C123A456B/Test+Organization' />
+<apps:property name='description' value='New Test Org' />
+<apps:property name='parentOrgUnitPath' value='Test' />
+<apps:property name='name' value='Test Organization' />
+<apps:property name='orgUnitPath' value='Test/Test+Organization' />
+<apps:property name='blockInheritance' value='false' />
+</entry>"""
+
+ORGANIZATION_UNIT_ORGUNIT_FEED = """<?xml version='1.0' encoding='utf-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom'
+xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
+xmlns:apps='http://schemas.google.com/apps/2006'>
+<id>https://apps-apis.google.com/a/feeds/orgunit/2.0/C123A456B</id>
+<updated>2011-11-21T13:47:12.551Z</updated>
+<link rel='http://schemas.google.com/g/2005#feed'
+type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/orgunit/2.0/C123A456B' />
+<link rel='http://schemas.google.com/g/2005#post'
+type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/orgunit/2.0/C123A456B' />
+<link rel='http://schemas.google.com/g/2005#batch'
+type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/orgunit/2.0/C123A456B/batch' />
+<link rel='self' type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/orgunit/2.0/C123A456B?get=all' />
+<openSearch:startIndex>1</openSearch:startIndex>
+<entry>
+<id>
+https://apps-apis.google.com/a/feeds/orgunit/2.0/C123A456B/testOrgUnit92</id>
+<updated>2011-11-21T13:42:45.349Z</updated>
+<link rel='self' type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/orgunit/2.0/C123A456B/testOrgUnit92' />
+<link rel='edit' type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/orgunit/2.0/C123A456B/testOrgUnit92' />
+<apps:property name='description' value='test92' />
+<apps:property name='parentOrgUnitPath' value='Test' />
+<apps:property name='name' value='testOrgUnit92' />
+<apps:property name='orgUnitPath' value='Test/testOrgUnit92' />
+<apps:property name='blockInheritance' value='false' />
+</entry>
+<entry>
+<id>
+https://apps-apis.google.com/a/feeds/orgunit/2.0/C123A456B/testOrgUnit93</id>
+<updated>2011-11-21T13:42:45.349Z</updated>
+<link rel='self' type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/orgunit/2.0/C123A456B/testOrgUnit93' />
+<link rel='edit' type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/orgunit/2.0/C123A456B/testOrgUnit93' />
+<apps:property name='description' value='test93' />
+<apps:property name='parentOrgUnitPath' value='Test' />
+<apps:property name='name' value='testOrgUnit93' />
+<apps:property name='orgUnitPath' value='Test/testOrgUnit93' />
+<apps:property name='blockInheritance' value='false' />
+</entry>
+</feed>"""
+
+
+ORGANIZATION_UNIT_ORGUSER_ENTRY = """<?xml version='1.0' encoding='utf-8'?>
+<entry xmlns='http://www.w3.org/2005/Atom'
+xmlns:apps='http://schemas.google.com/apps/2006'>
+<id>
+https://apps-apis.google.com/a/feeds/orguser/2.0/C123A456B/admin%40example.com</id>
+<updated>2011-11-21T14:05:17.734Z</updated>
+<link rel='self' type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/orguser/2.0/C123A456B/admin%40example.com' />
+<link rel='edit' type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/orguser/2.0/C123A456B/admin%40example.com' />
+<apps:property name='orgUserEmail' value='admin@example.com' />
+<apps:property name='orgUnitPath' value='Test' />
+</entry>"""
+
+ORGANIZATION_UNIT_ORGUSER_FEED = """<?xml version='1.0' encoding='utf-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom'
+xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
+xmlns:apps='http://schemas.google.com/apps/2006'>
+<id>https://apps-apis.google.com/a/feeds/orguser/2.0/C123A456B</id>
+<updated>2011-11-21T14:10:48.206Z</updated>
+<link rel='http://schemas.google.com/g/2005#feed'
+type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/orguser/2.0/C123A456B' />
+<link rel='http://schemas.google.com/g/2005#post'
+type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/orguser/2.0/C123A456B' />
+<link rel='http://schemas.google.com/g/2005#batch'
+type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/orguser/2.0/C123A456B/batch' />
+<link rel='self' type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/orguser/2.0/C123A456B?get=all' />
+<openSearch:startIndex>1</openSearch:startIndex>
+<entry>
+<id>
+https://apps-apis.google.com/a/feeds/orguser/2.0/C123A456B/user720430%40example.com</id>
+<updated>2011-11-21T14:09:16.600Z</updated>
+<link rel='self' type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/orguser/2.0/C123A456B/user720430%40example.com' />
+<link rel='edit' type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/orguser/2.0/C123A456B/user720430%40example.com' />
+<apps:property name='orgUserEmail'
+value='user720430@example.com' />
+<apps:property name='orgUnitPath' value='Test' />
+</entry>
+<entry>
+<id>
+https://apps-apis.google.com/a/feeds/orguser/2.0/C123A456B/user832648%40example.com</id>
+<updated>2011-11-21T14:09:16.600Z</updated>
+<link rel='self' type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/orguser/2.0/C123A456B/user832648%40example.com' />
+<link rel='edit' type='application/atom+xml'
+href='https://apps-apis.google.com/a/feeds/orguser/2.0/C123A456B/user832648%40example.com' />
+<apps:property name='orgUserEmail'
+value='user832648@example.com' />
+<apps:property name='orgUnitPath' value='Test' />
+</entry>
+</feed>"""
