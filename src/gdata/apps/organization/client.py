@@ -222,12 +222,15 @@ class OrganizationUnitProvisioningClient(gdata.client.GDClient):
       org_unit_path: string The organization's full path name.
                      [Note: Each element of the path MUST be URL encoded
                      (example: finance%2Forganization/suborganization)]
-      org_unit_entry: string The updated organization unit entry.
+      org_unit_entry: gdata.apps.organization.data.OrgUnitEntry
+                      The updated organization unit entry.
 
     Returns:
       A gdata.apps.organization.data.OrgUnitEntry representing an organization
           unit.
     """
+    if not org_unit_entry.GetParentOrgUnitPath():
+      org_unit_entry.SetParentOrgUnitPath('/')
     return self.update(org_unit_entry,
                        uri=self.MakeOrganizationUnitOrgunitProvisioningUri(
                            customer_id, org_unit_path=org_unit_path), **kwargs)
