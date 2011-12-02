@@ -14,26 +14,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Sample for the Provisioning API and the Email Settings API with OAuth 2.0"""
+"""Sample for the Provisioning API and the Email Settings API with OAuth 2.0."""
 
 __author__ = 'Shraddha Gupta <shraddhag@google.com>'
 
 from optparse import OptionParser
 import gdata.apps
 import gdata.apps.emailsettings.client
+import gdata.apps.groups.client
 import gdata.client
 import gdata.gauth
 
 
 API_VERSION = '2.0'
 BASE_URL = '/a/feeds/group/%s' % API_VERSION
-SCOPE = ('https://apps-apis.google.com/a/feeds/group '
+SCOPE = ('https://apps-apis.google.com/a/feeds/groups/ '
          'https://apps-apis.google.com/a/feeds/emailsettings/2.0/')
 HOST = 'apps-apis.google.com'
 
 
 class OAuth2ClientSample(object):
-  """ OAuth2ClientSample object demos the use of OAuth2Token for retrieving
+  """OAuth2ClientSample object demos the use of OAuth2Token for retrieving
   Members of a Group and updating Email Settings for them."""
 
   def __init__(self, domain, client_id, client_secret):
@@ -59,8 +60,8 @@ class OAuth2ClientSample(object):
       exit(0)
     self.domain = domain
     self.baseuri = '%s/%s' % (BASE_URL, domain)
-    self.client = gdata.client.GDClient(host=HOST)
-    self.client.domain = self.domain
+    self.client = gdata.apps.groups.client.GroupsProvisioningClient(
+        domain=self.domain, auth_token=self.token)
     # Authorize the client. 
     # This will add the Authorization header to all future requests.
     self.token.authorize(self.client)
@@ -68,52 +69,27 @@ class OAuth2ClientSample(object):
         domain=self.domain, auth_token=self.token)
     self.token.authorize(self.email_client)
 
-  def get_users(self, group):
-    """Retrieves members from the given group.
-    
-    Args:
-      group: string Id of the group
-      
-    Returns:
-      Member feed for the given group
-    """
-    uri = '%s/%s/member' % (self.baseuri, group)
-    try:
-      feed = self.client.GetFeed(uri=uri)
-      return gdata.apps.PropertyFeedFromString(str(feed))
-    except gdata.client.RequestError, e:
-      print 'Exception %s' % e
-
   def create_filter(self, feed):
-    """Creates a mail filter that marks as read all messages not containing 
+    """Creates a mail filter that marks as read all messages not containing
     Domain name as one of their words for each member of the group.
-    
+
     Args:
-      feed: PropertyFeed Member feed whose emailsettings need to be updated
+      feed: GroupMemberFeed members whose emailsettings need to updated
     """
     for entry in feed.entry:
-      memberType = None
-      memberId = None
-      domain = None
-      for i, property in enumerate(entry.property):
-        if property.name == 'memberType':
-          memberType = property.value
-        if property.name == 'memberId':
-          user_name, domain = property.value.split('@', 1)
-          memberId = property.value
-      # Check that the member is a User belonging to the primary Domain.
-      if memberType == 'User' and domain == self.domain:
-        print 'creating filter for %s' % memberId
+      user_name, domain = entry.member_id.split('@', 1)
+      if entry.member_type == 'User' and domain == self.domain:
+        print 'creating filter for %s' % entry.member_id
         self.email_client.CreateFilter(user_name,
                                        does_not_have_the_word=self.domain,
                                        mark_as_read=True)
-      elif memberType == 'User':
-        print 'User belongs to other Domain %s' %memberId
+      elif entry.member_type == 'User':
+        print 'User belongs to other Domain %s' %entry.member_id
       else:
-        print 'Member is a group %s' %memberId
+        print 'Member is a group %s' %entry.member_id
 
   def run(self, group):
-    feed = self.get_users(group)
+    feed = self.client.RetrieveAllMembers(group)
     self.create_filter(feed)
 
 
@@ -135,11 +111,11 @@ def main():
       options.GROUP):
     parser.print_help()
     return
-  
+
   sample = OAuth2ClientSample(options.DOMAIN,
       options.CLIENT_ID, options.CLIENT_SECRET)
   sample.run(options.GROUP)
-    
+
 
 if __name__ == '__main__':
   main()
