@@ -174,9 +174,21 @@ class EmailSettingsVacationResponderTest(unittest.TestCase):
     self.entry.message = 'See you on September 1st'
     self.assertEquals(self.entry.message, 'See you on September 1st')
 
+  def testStartDate(self):
+    self.entry.start_date = '2011-12-05'
+    self.assertEquals(self.entry.start_date, '2011-12-05')
+  
+  def testEndDate(self):
+    self.entry.end_date = '2011-12-06'
+    self.assertEquals(self.entry.end_date, '2011-12-06')
+
   def testContactsOnly(self):
     self.entry.contacts_only = True
     self.assertEquals(self.entry.contacts_only, True)
+
+  def testDomainOnly(self):
+    self.entry.domain_only = True
+    self.assertEquals(self.entry.domain_only, True)
 
 
 class EmailSettingsSignatureTest(unittest.TestCase):

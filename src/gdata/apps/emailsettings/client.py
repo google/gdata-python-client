@@ -384,7 +384,8 @@ class EmailSettingsClient(gdata.client.GDClient):
   RetrieveImap = retrieve_imap
 
   def update_vacation(self, username, enable, subject=None, message=None,
-                      contacts_only=None, **kwargs):
+                      start_date=None, end_date=None, contacts_only=None,
+                      domain_only=None, **kwargs):
     """Update Google Mail vacation-responder settings.
 
     Args:
@@ -394,8 +395,14 @@ class EmailSettingsClient(gdata.client.GDClient):
           autoresponse.
       message: string (optional) The message body of the vacation responder
           autoresponse.
+      startDate: string (optional) The start date of the vacation responder
+          autoresponse.
+      endDate: string (optional) The end date of the vacation responder
+          autoresponse.
       contacts_only: Boolean (optional) Whether to only send autoresponses
           to known contacts.
+      domain_only: Boolean (optional) Whether to only send autoresponses
+          to users in the primary domain.
       kwargs: The other parameters to pass to the update method.
 
     Returns:
@@ -406,7 +413,8 @@ class EmailSettingsClient(gdata.client.GDClient):
                                     setting_id=SETTING_ID_VACATION_RESPONDER)
     new_vacation = gdata.apps.emailsettings.data.EmailSettingsVacationResponder(
         uri=uri, enable=enable, subject=subject,
-        message=message, contacts_only=contacts_only)
+        message=message, start_date=start_date, end_date=end_date,
+        contacts_only=contacts_only, domain_only=domain_only)
     return self.update(new_vacation, **kwargs)
 
   UpdateVacation = update_vacation
