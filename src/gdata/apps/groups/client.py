@@ -200,7 +200,8 @@ class GroupsProvisioningClient(gdata.client.GDClient):
     Returns:
       gdata.apps.groups.data.GroupFeed of the groups
     """
-    groups_feed = self.RetrievePageOfMemberGroups()
+    groups_feed = self.RetrievePageOfMemberGroups(member_id=member_id,
+        direct_only=direct_only)
     # pagination
     return self.RetrieveAllPages(groups_feed, gdata.apps.groups.data.GroupFeed)
 
