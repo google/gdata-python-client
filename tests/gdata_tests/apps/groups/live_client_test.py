@@ -56,10 +56,11 @@ class GroupsProvisioningClientTest(unittest.TestCase):
     self.assertEqual('2.0', self.client.api_version)
     self.assertEqual('apps', self.client.auth_service)
     self.assertEqual(
-        ('http://www.google.com/a/feeds/',
-         'https://www.google.com/a/feeds/',
-         'http://apps-apis.google.com/a/feeds/',
-         'https://apps-apis.google.com/a/feeds/'), self.client.auth_scopes)
+        ('https://apps-apis.google.com/a/feeds/user/',
+         'https://apps-apis.google.com/a/feeds/policies/',
+         'https://apps-apis.google.com/a/feeds/alias/',
+         'https://apps-apis.google.com/a/feeds/groups/'),
+         self.client.auth_scopes)
     if conf.options.get_value('runlive') == 'true':
       self.assertEqual(self.client.domain, conf.options.get_value('appsdomain'))
     else:
@@ -71,6 +72,9 @@ class GroupsProvisioningClientTest(unittest.TestCase):
     self.assertEqual('/a/feeds/group/2.0/%s/firstgroup@example.com'
         % self.client.domain,
         self.client.MakeGroupProvisioningUri(group_id='firstgroup@example.com'))
+    self.assertEqual(
+        '/a/feeds/group/2.0/%s?member=member1' % self.client.domain,
+        self.client.MakeGroupProvisioningUri(params={'member':'member1'}))
 
   def testMakeGroupMembersUri(self):
     self.assertEqual('/a/feeds/group/2.0/%s/firstgroup@example.com/member'

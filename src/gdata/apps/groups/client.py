@@ -107,19 +107,51 @@ class GroupsProvisioningClient(gdata.client.GDClient):
         member_id=member_id, params=params)
 
   MakeGroupMembersUri = make_group_member_uri
+  
+  def RetrieveAllPages(self, feed, desired_class=gdata.data.GDFeed):
+    """Retrieve all pages and add all elements.
 
-  def retrieve_all_groups(self, **kwargs):
-    """Retrieves all groups for the given domain.
+    Args:
+      feed: gdata.data.GDFeed object with linked elements.
+      desired_class: type of Feed to be returned.
+
+    Returns:
+      desired_class: subclass of gdata.data.GDFeed. 
+    """
+
+    next = feed.GetNextLink()
+    while next is not None:
+      next_feed = self.GetFeed(next.href, desired_class=desired_class)
+      for a_entry in next_feed.entry:
+        feed.entry.append(a_entry)
+      next = next_feed.GetNextLink()
+    return feed
+
+  def retrieve_page_of_groups(self, **kwargs):
+    """Retrieves first page of groups for the given domain.
 
     Args:
       kwargs: The other parameters to pass to gdata.client.GDClient.GetFeed()
 
     Returns:
-      A gdata.apps.groups.data.GDFeed of the group users
+      A gdata.apps.groups.data.GroupFeed of the groups
     """
     uri = self.MakeGroupProvisioningUri()
     return self.GetFeed(uri,
         desired_class=gdata.apps.groups.data.GroupFeed, **kwargs)
+
+  RetrievePageOfGroups = retrieve_page_of_groups
+
+  def retrieve_all_groups(self):
+    """Retrieve all groups in this domain.
+
+    Returns:
+      gdata.apps.groups.data.GroupFeed of the groups
+    """
+
+    groups_feed = self.RetrievePageOfGroups()
+    # pagination
+    return self.RetrieveAllPages(groups_feed, gdata.apps.groups.data.GroupFeed)
 
   RetrieveAllGroups = retrieve_all_groups
 
@@ -134,11 +166,45 @@ class GroupsProvisioningClient(gdata.client.GDClient):
       A gdata.apps.groups.data.GroupEntry representing the group
     """
     uri = self.MakeGroupProvisioningUri(group_id=group_id)
-    print uri
     return self.GetEntry(uri,
         desired_class=gdata.apps.groups.data.GroupEntry, **kwargs)
 
   RetrieveGroup = retrieve_group
+  
+  def retrieve_page_of_member_groups(self, member_id, direct_only=False):
+    """Retrieve one page of groups that belong to the given member_id.
+
+    Args:
+      member_id: The member's email address (e.g. member@example.com).
+      direct_only: Boolean whether only return groups that this member
+                   directly belongs to.
+
+    Returns:
+    gdata.apps.groups.data.GroupFeed of the groups.
+    """
+    uri = self.MakeGroupProvisioningUri(params={'member':member_id,
+                                        'directOnly':direct_only})
+    return self.GetFeed(uri,
+        desired_class=gdata.apps.groups.data.GroupFeed, **kwargs)
+    
+  RetrievePageOfMemberGroups = retrieve_page_of_member_groups
+
+  def retrieve_groups(self, member_id, direct_only=False, **kwargs):
+    """Retrieve all groups that belong to the given member_id.
+
+    Args:
+      member_id: The member's email address (e.g. member@example.com).
+      direct_only: Boolean whether only return groups that this member
+                   directly belongs to.
+
+    Returns:
+      gdata.apps.groups.data.GroupFeed of the groups
+    """
+    groups_feed = self.RetrievePageOfMemberGroups()
+    # pagination
+    return self.RetrieveAllPages(groups_feed, gdata.apps.groups.data.GroupFeed)
+
+  RetrieveGroups = retrieve_groups
 
   def create_group(self, group_id, group_name,
       description=None, email_permission=None, **kwargs):
@@ -190,19 +256,33 @@ class GroupsProvisioningClient(gdata.client.GDClient):
 
   DeleteGroup = delete_group
 
-  def retrieve_all_members(self, group_id, **kwargs):
-    """Retrieves group members of the group.
+  def retrieve_page_of_members(self, group_id, **kwargs):
+    """Retrieves first page of group members of the group.
 
     Args:
       group_id: string groupId of the group whose members are retrieved
       kwargs: The other parameters to pass to gdata.client.GDClient.GetFeed()
 
     Returns:
-      A gdata.apps.groups.data.GDFeed of the GroupMember entries
+      A gdata.apps.groups.data.GroupMemberFeed of the GroupMember entries
     """
     uri = self.MakeGroupMembersUri(group_id=group_id)
     return self.GetFeed(uri,
         desired_class=gdata.apps.groups.data.GroupMemberFeed, **kwargs)
+
+  RetrievePageOfMembers = retrieve_page_of_members
+
+  def retrieve_all_members(self, group_id, **kwargs):
+    """Retrieve all members of the group.
+
+    Returns:
+      gdata.apps.groups.data.GroupMemberFeed
+    """
+
+    group_member_feed = self.RetrievePageOfMembers(group_id=group_id)
+    # pagination
+    return self.RetrieveAllPages(group_member_feed,
+        gdata.apps.groups.data.GroupMemberFeed)
 
   RetrieveAllMembers = retrieve_all_members
 
