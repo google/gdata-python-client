@@ -171,7 +171,8 @@ class GroupsProvisioningClient(gdata.client.GDClient):
 
   RetrieveGroup = retrieve_group
   
-  def retrieve_page_of_member_groups(self, member_id, direct_only=False):
+  def retrieve_page_of_member_groups(self, member_id, direct_only=False,
+                                     **kwargs):
     """Retrieve one page of groups that belong to the given member_id.
 
     Args:
