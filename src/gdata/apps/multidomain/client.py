@@ -148,6 +148,32 @@ class MultiDomainProvisioningClient(gdata.client.GDClient):
 
   MakeMultidomainAliasProvisioningUri = make_multidomain_alias_provisioning_uri
 
+  def retrieve_all_pages(self, uri, desired_class=gdata.data.GDFeed, **kwargs):
+    """Retrieves all pages from uri.
+
+    Args:
+      uri: The uri where the first page is.
+      desired_class: Type of feed that is retrieved.
+      kwargs: The other parameters to pass to gdata.client.GDClient.GetFeed()
+
+    Returns:
+      A desired_class feed object.
+    """
+    feed = self.GetFeed(
+        uri,
+        desired_class=desired_class,
+        **kwargs)
+    next_link = feed.GetNextLink()
+    while next_link is not None:
+      uri = next_link.href                    
+      temp_feed = self.GetFeed(
+          uri, desired_class=desired_class, **kwargs)
+      feed.entry = feed.entry + temp_feed.entry
+      next_link = temp_feed.GetNextLink()
+    return feed
+
+  RetrieveAllPages = retrieve_all_pages
+
   def retrieve_all_users(self, **kwargs):
     """Retrieves all users in all domains.
 
@@ -158,7 +184,7 @@ class MultiDomainProvisioningClient(gdata.client.GDClient):
       A gdata.data.GDFeed of the domain users
     """
     uri = self.MakeMultidomainUserProvisioningUri()
-    return self.GetFeed(
+    return self.RetrieveAllPages(
         uri,
         desired_class=gdata.apps.multidomain.data.UserFeed,
         **kwargs)
@@ -277,7 +303,7 @@ class MultiDomainProvisioningClient(gdata.client.GDClient):
       A gdata.data.GDFeed of the domain aliases
     """
     uri = self.MakeMultidomainAliasProvisioningUri()
-    return self.GetFeed(
+    return self.RetrieveAllPages(
         uri,
         desired_class=gdata.apps.multidomain.data.AliasFeed,
         **kwargs)
@@ -315,7 +341,7 @@ class MultiDomainProvisioningClient(gdata.client.GDClient):
     """
     uri = self.MakeMultidomainAliasProvisioningUri(
         params = {'userEmail' : user_email})
-    return self.GetFeed(
+    return self.RetrieveAllPages(
         uri,
         desired_class=gdata.apps.multidomain.data.AliasFeed,
         **kwargs)
