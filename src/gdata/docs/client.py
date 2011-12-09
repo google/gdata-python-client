@@ -678,7 +678,7 @@ class DocsClient(gdata.client.GDClient):
     uri = entry.GetEditLink().href
     if not send_notifications:
       uri += '?send-notification-emails=false'
-    return super(DocsClient, self).update(entry, uri=uri, force=True, **kwargs)
+    return super(DocsClient, self).update(entry, uri=uri, **kwargs)
 
   UpdateAclEntry = update_acl_entry
 
@@ -692,7 +692,7 @@ class DocsClient(gdata.client.GDClient):
     Returns:
       Result of delete request.
     """
-    return super(DocsClient, self).delete(entry.GetEditLink().href, force=True,
+    return super(DocsClient, self).delete(entry.GetEditLink().href,
                                           **kwargs)
 
   DeleteAclEntry = delete_acl_entry
@@ -718,7 +718,7 @@ class DocsClient(gdata.client.GDClient):
     feed = gdata.docs.data.AclFeed()
     feed.entry = entries
     return super(DocsClient, self).post(
-        feed, uri=resource.GetAclLink().href + '/acl', force=True, **kwargs)
+        feed, uri=resource.GetAclLink().href + '/acl', **kwargs)
 
   BatchProcessAclEntries = batch_process_acl_entries
 
