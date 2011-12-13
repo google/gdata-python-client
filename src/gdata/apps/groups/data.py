@@ -22,6 +22,7 @@ __author__ = 'Shraddha gupta <shraddhag@google.com>'
 
 import atom.data
 import gdata.apps
+import gdata.apps.apps_property_entry
 import gdata.apps_property
 import gdata.data
 
@@ -47,48 +48,7 @@ MEMBER_TYPE = 'memberType'
 DIRECT_MEMBER = 'directMember'
 
 
-class PropertyEntry(gdata.data.GDEntry):
-  """Base class for GroupEntry and GroupMemberEntry objects."""
-
-  _qname = atom.data.ATOM_TEMPLATE % 'entry'
-  property = [gdata.apps_property.AppsProperty]
-
-  def _GetProperty(self, name):
-    """Get the apps:property value with the given name.
-
-    Args:
-      name: string Name of the apps:property value to get.
-
-    Returns:
-      The apps:property value with the given name, or None if the name was
-      invalid.
-    """
-    value = None
-    for p in self.property:
-      if p.name == name:
-        value = p.value
-        break
-    return value
-
-  def _SetProperty(self, name, value):
-    """Set the apps:property value with the given name to the given value.
-
-    Args:
-      name: string Name of the apps:property value to set.
-      value: string Value to give the apps:property value with the given name.
-    """
-    found = False
-    for i in range(len(self.property)):
-      if self.property[i].name == name:
-        self.property[i].value = value
-        found = True
-        break
-    if not found:
-      self.property.append(
-          gdata.apps_property.AppsProperty(name=name, value=value))
-
-
-class GroupEntry(PropertyEntry):
+class GroupEntry(gdata.apps.apps_property_entry.AppsPropertyEntry):
   """Represents a group entry in object form."""
 
   def GetGroupId(self):
@@ -191,7 +151,7 @@ class GroupFeed(gdata.data.GDFeed):
   entry = [GroupEntry]
 
 
-class GroupMemberEntry(PropertyEntry):
+class GroupMemberEntry(gdata.apps.apps_property_entry.AppsPropertyEntry):
   """Represents a group member in object form."""
 
   def GetMemberId(self):
