@@ -56,24 +56,24 @@ class AppsClient(gdata.client.GDClient):
   def _nicknameURL(self):
     return '%s/nickname/%s' % (self._baseURL(), self.api_version)
 
-  def RetrieveAllPages(self, link_finder, func):
+  def RetrieveAllPages(self, feed, desired_class=gdata.data.GDFeed):
     """Retrieve all pages and add all elements.
 
     Args:
-      link_finder: atom.data.LinkFinder object with linked elements.
-      func: gdata.data.GDFeed type of Feed.
+      feed: gdata.data.GDFeed object with linked elements.
+      desired_class: type of feed to be returned.
 
     Returns:
-      atom.data.LinkFinder
+      desired_class: subclass of gdata.data.GDFeed. 
     """
 
-    next = link_finder.GetNextLink()
+    next = feed.GetNextLink()
     while next is not None:
-      next_feed = func(str(self.GetFeed(next.href)))
+      next_feed = self.GetFeed(next.href, desired_class=desired_class)
       for a_entry in next_feed.entry:
-        link_finder.entry.append(a_entry)
+        feed.entry.append(a_entry)
       next = next_feed.GetNextLink()
-    return link_finder
+    return feed
 
   def CreateUser(self, user_name, family_name, given_name, password,
                  suspended=False, admin=None, quota_limit=None,
