@@ -1,6 +1,7 @@
 INSTALL.txt
 README.txt
 RELEASE_NOTES.txt
+setup.py
 pydocs/atom.auth.html
 pydocs/atom.client.html
 pydocs/atom.core.html
