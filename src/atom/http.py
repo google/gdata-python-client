@@ -213,11 +213,8 @@ class ProxiedHttpClient(HttpClient):
       # The request was HTTP or HTTPS, but there was no appropriate proxy set.
       return HttpClient._prepare_connection(self, url, headers)
     else:
-      print '!!!!%s' % proxy_settings
       proxy_auth = _get_proxy_auth(proxy_settings)
       proxy_netloc = _get_proxy_net_location(proxy_settings)
-      print '!!!!%s' % proxy_auth
-      print '!!!!%s' % proxy_netloc
       if url.protocol == 'https':
         # Set any proxy auth headers 
         if proxy_auth:
