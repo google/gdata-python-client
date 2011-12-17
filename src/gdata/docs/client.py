@@ -718,7 +718,7 @@ class DocsClient(gdata.client.GDClient):
     feed = gdata.docs.data.AclFeed()
     feed.entry = entries
     return super(DocsClient, self).post(
-        feed, uri=resource.GetAclLink().href + '/acl', **kwargs)
+        feed, uri=resource.GetAclLink().href + '/acl/batch', **kwargs)
 
   BatchProcessAclEntries = batch_process_acl_entries
 
