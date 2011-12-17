@@ -257,7 +257,7 @@ class CategoryFinder(object):
     Args:
       label: The str label to set
     """
-    if not self.has_label(self):
+    if not self.has_label(label):
       self.add_category(scheme=LABELS_SCHEME,
                         term='%s#%s' % (LABELS_NS, label),
                         label=label)
