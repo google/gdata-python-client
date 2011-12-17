@@ -25,7 +25,6 @@ __author__ = 'pti@google.com (Prashant Tiwari)'
 
 from optparse import OptionParser
 import os
-import string
 from gdata.apps.migration import service
 
 
