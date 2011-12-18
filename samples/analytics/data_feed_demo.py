@@ -94,7 +94,7 @@ class DataFeedDemo(object):
     print 'Results Returned    = ' + self.feed.items_per_page.text
     print 'Start Date          = ' + self.feed.start_date.text
     print 'End Date            = ' + self.feed.end_date.text
-    print 'Has Sampeld Data    = ' + str(self.feed.HasSampledData())
+    print 'Has Sampled Data    = ' + str(self.feed.HasSampledData())
 
   def PrintDataSources(self):
     """Prints data found in the data source elements.
