@@ -28,6 +28,8 @@ settings.
 __author__ = 'Claudio Cherubino <ccherubino@google.com>'
 
 
+import urllib
+
 import gdata.apps.emailsettings.data
 import gdata.client
 
@@ -161,6 +163,23 @@ class EmailSettingsClient(gdata.client.GDClient):
     return self.GetFeed(uri, auth_token=None, query=None, **kwargs)
   
   RetrieveLabels = retrieve_labels
+
+  def delete_label(self, username, label, **kwargs):
+    """Delete a label from the specified account.
+
+    Args:
+      username: string Name of the user
+      label: string Name of the label to be deleted
+
+    Returns:
+      An atom.http_core.HttpResponse() with the result of the request
+    """
+    uri = self.MakeEmailSettingsUri(username=username,
+                                    setting_id=SETTING_ID_LABEL)
+    uri = '/'.join([uri, urllib.quote_plus(label)])
+    return self.delete(uri, **kwargs)
+  
+  DeleteLabel = delete_label
 
   def create_filter(self, username, from_address=None,
                     to_address=None, subject=None, has_the_word=None,

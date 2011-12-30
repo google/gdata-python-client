@@ -65,7 +65,7 @@ class EmailSettingsClientTest(unittest.TestCase):
         'abc', 'label'),
         self.client.MakeEmailSettingsUri('abc', 'label'))
 
-  def testCreateLabel(self):
+  def testCreateDeleteLabel(self):
     if not conf.options.get_value('runlive') == 'true':
       return
 
@@ -79,6 +79,10 @@ class EmailSettingsClientTest(unittest.TestCase):
     self.assert_(isinstance(new_label,
         gdata.apps.emailsettings.data.EmailSettingsLabel))
     self.assertEqual(new_label.name, 'status updates')
+
+    self.client.DeleteLabel(
+        username=conf.options.get_value('targetusername'),
+        label='status updates')
 
   def testCreateFilter(self):
     if not conf.options.get_value('runlive') == 'true':
