@@ -197,7 +197,7 @@ def DeleteResourceSample():
 
 
 def AddAclSample():
-  """Delete a resource (after creating it)."""
+  """Create a resource and an ACL."""
   client = CreateClient()
   doc = gdata.docs.data.Resource(type='document', title='My Sample Doc')
   doc = client.CreateResource(doc)
@@ -206,6 +206,19 @@ def AddAclSample():
       role=gdata.acl.data.AclRole(value='reader'),
   )
   client.AddAclEntry(doc, acl_entry, send_notification=False)
+
+
+def DeleteAclSample():
+  """Create an ACL entry, and delete it."""
+  client = CreateClient()
+  doc = gdata.docs.data.Resource(type='document', title='My Sample Doc')
+  doc = client.CreateResource(doc)
+  acl_entry = gdata.docs.data.AclEntry(
+      scope=gdata.acl.data.AclScope(value='user@example.com', type='user'),
+      role=gdata.acl.data.AclRole(value='reader'),
+  )
+  acl_entry = client.AddAclEntry(doc, acl_entry)
+  client.DeleteAclEntry(acl_entry)
 
 
 def AddAclBatchSample():
