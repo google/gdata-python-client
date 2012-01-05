@@ -178,9 +178,9 @@ class AtomPubClient(object):
 
     # Set the user agent header for logging purposes.
     if self.source:
-      http_request.headers['User-Agent'] = '%s gdata-py/2.0.15' % self.source
+      http_request.headers['User-Agent'] = '%s gdata-py/2.0.16' % self.source
     else:
-      http_request.headers['User-Agent'] = 'gdata-py/2.0.15'
+      http_request.headers['User-Agent'] = 'gdata-py/2.0.16'
 
     return http_request
 
