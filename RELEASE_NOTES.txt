@@ -1,3 +1,34 @@
+=== 2.0.16 ===
+5 Jan 2011
+
+- Add sample for Docs List API to delete ACL.
+- Added support for label deletion in the Email Settings API client library
+- Added a sample for Email Settings create label and filters with exponential
+  back-off
+- Added sample for enabling pop settings using Email Settings API
+- Fixed typo in analytics sample.
+- Fixed ACL batching URI in Docs.
+- Updated RetrieveAllUsers and RetrieveAllAliases to return all pages instead
+  of one.
+- Removing force=True from some ACL requests in DocsClient
+- Added RetrieveGroups method and updated RetrieveAllGroups and
+  RetrieveAllMembers method
+- Added a quick start sample for user provisioning
+- Added a client for organization unit provisioning
+- Added client architecture for group provisioning
+- Added a new sample for multidonain provisioning. Demonstrates all the
+  functions available.
+- Added test for RetrieveAllUserAliases and changed OAuth scopes for Apps
+- Added client architecture for provisioning api and tests for client
+- Added support for batch requests to update spreadsheet cells.
+- Added GetAcl alias for get_acl in DocsClient
+- Added new ACL and get by ID methods to DocsClient.
+- Added some conditional imports for tlslite.
+- Updates to category handling for Documents list API
+- Added a function to retrieve all the aliases for a given user email.
+- Fixed #553
+
+
 === 2.0.15 ===
 18 Oct 2011
 
