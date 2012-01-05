@@ -9,6 +9,6 @@
 # Notes: You may have to update the location of the
 #        App Engine library for your local system.
 
-set GOOGLE_APPENGINE=$HOME/projects/google_appengine/
-set PYTHONPATH=`pwd`/../src:$GOOGLE_APPENGINE
+export GOOGLE_APPENGINE=/usr/local/google_appengine/
+export PYTHONPATH=`pwd`/../src:$GOOGLE_APPENGINE
 find ../src/ -name "*.py" | sed "s/\/__init__.py//" | sed "s/\.py//" | sed "s#^\.\.\/src\/##" | sed "s#/#.#g" | xargs pydoc -w
