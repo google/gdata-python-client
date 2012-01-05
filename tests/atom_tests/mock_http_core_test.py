@@ -131,11 +131,12 @@ class MockHttpClientTest(unittest.TestCase):
     response = self.client.request(request)
     if self.client.real_client:
       self.client._save_recordings('test_use_recordings')
-    self.assert_(response.status == 200)
-    self.assert_(response.reason == 'OK')
+    self.assert_(response.status in (200, 302))
+    self.assert_(response.reason in ('OK', 'Found'))
     self.assert_(response.getheader('server') == 'gws')
     body = response.read()
-    self.assert_(body.startswith('<!doctype html>'))
+    self.assert_(body.startswith('<!doctype html>') or
+                 body.startswith('<HTML>'))
 
   def test_match_request(self):
     x = atom.http_core.HttpRequest('http://example.com/', 'GET')
