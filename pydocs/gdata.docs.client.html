@@ -91,17 +91,19 @@ Methods defined here:<br>
 
 <dl><dt><a name="DocsClient-DownloadRevisionToMemory"><strong>DownloadRevisionToMemory</strong></a> = <a href="#DocsClient-download_revision_to_memory">download_revision_to_memory</a>(self, entry, extra_params<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
+<dl><dt><a name="DocsClient-GetAcl"><strong>GetAcl</strong></a> = <a href="#DocsClient-get_acl">get_acl</a>(self, entry, **kwargs)</dt></dl>
+
 <dl><dt><a name="DocsClient-GetAclEntry"><strong>GetAclEntry</strong></a> = <a href="#DocsClient-get_acl_entry">get_acl_entry</a>(self, entry, **kwargs)</dt></dl>
 
 <dl><dt><a name="DocsClient-GetAclEntryBySelfLink"><strong>GetAclEntryBySelfLink</strong></a> = <a href="#DocsClient-get_acl_entry_by_self_link">get_acl_entry_by_self_link</a>(self, self_link, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-GetAllResources"><strong>GetAllResources</strong></a> = <a href="#DocsClient-get_all_resources">get_all_resources</a>(self, uri<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-GetAllResources"><strong>GetAllResources</strong></a> = <a href="#DocsClient-get_all_resources">get_all_resources</a>(self, uri<font color="#909090">=None</font>, show_root<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="DocsClient-GetArchive"><strong>GetArchive</strong></a> = <a href="#DocsClient-get_archive">get_archive</a>(self, entry, **kwargs)</dt></dl>
 
 <dl><dt><a name="DocsClient-GetArchiveBySelfLink"><strong>GetArchiveBySelfLink</strong></a> = <a href="#DocsClient-get_archive_by_self_link">get_archive_by_self_link</a>(self, self_link, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-GetChanges"><strong>GetChanges</strong></a> = <a href="#DocsClient-get_changes">get_changes</a>(self, changestamp<font color="#909090">=None</font>, max_results<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-GetChanges"><strong>GetChanges</strong></a> = <a href="#DocsClient-get_changes">get_changes</a>(self, changestamp<font color="#909090">=None</font>, max_results<font color="#909090">=None</font>, show_root<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="DocsClient-GetMetadata"><strong>GetMetadata</strong></a> = <a href="#DocsClient-get_metadata">get_metadata</a>(self, **kwargs)</dt></dl>
 
@@ -109,9 +111,11 @@ Methods defined here:<br>
 
 <dl><dt><a name="DocsClient-GetResourceAcl"><strong>GetResourceAcl</strong></a> = <a href="#DocsClient-get_resource_acl">get_resource_acl</a>(self, entry, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-GetResourceBySelfLink"><strong>GetResourceBySelfLink</strong></a> = <a href="#DocsClient-get_resource_by_self_link">get_resource_by_self_link</a>(self, self_link, etag<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-GetResourceById"><strong>GetResourceById</strong></a> = <a href="#DocsClient-get_resource_by_id">get_resource_by_id</a>(self, resource_id, **kwargs)</dt></dl>
 
-<dl><dt><a name="DocsClient-GetResources"><strong>GetResources</strong></a> = <a href="#DocsClient-get_resources">get_resources</a>(self, uri<font color="#909090">=None</font>, limit<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="DocsClient-GetResourceBySelfLink"><strong>GetResourceBySelfLink</strong></a> = <a href="#DocsClient-get_resource_by_self_link">get_resource_by_self_link</a>(self, uri, etag<font color="#909090">=None</font>, show_root<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="DocsClient-GetResources"><strong>GetResources</strong></a> = <a href="#DocsClient-get_resources">get_resources</a>(self, uri<font color="#909090">=None</font>, limit<font color="#909090">=None</font>, show_root<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="DocsClient-GetRevision"><strong>GetRevision</strong></a> = <a href="#DocsClient-get_revision">get_revision</a>(self, entry, **kwargs)</dt></dl>
 
@@ -203,7 +207,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.docs.client.RESOURCE_FEED_URI.&nbsp;&nbsp;If&nbsp;collection&nbsp;and&nbsp;create_uri&nbsp;are<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None,&nbsp;use&nbsp;gdata.docs.client.RESOURCE_UPLOAD_URI.&nbsp;&nbsp;If&nbsp;collection&nbsp;and<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;media&nbsp;are&nbsp;not&nbsp;None,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.docs.client.COLLECTION_UPLOAD_URI_TEMPLATE&nbsp;is&nbsp;used,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;collection.GetResumableCreateMediaLink()&nbsp;is&nbsp;used,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;the&nbsp;collection's&nbsp;resource&nbsp;ID&nbsp;substituted&nbsp;in.<br>
 &nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-post">post</a>()&nbsp;and&nbsp;<a href="#DocsClient-update">update</a>().<br>
 &nbsp;<br>
@@ -315,6 +319,14 @@ Raises:<br>
 &nbsp;&nbsp;gdata.client.RequestError&nbsp;if&nbsp;the&nbsp;download&nbsp;URL&nbsp;is&nbsp;malformed&nbsp;or&nbsp;the&nbsp;server's<br>
 &nbsp;&nbsp;response&nbsp;was&nbsp;not&nbsp;successful.</tt></dd></dl>
 
+<dl><dt><a name="DocsClient-get_acl"><strong>get_acl</strong></a>(self, entry, **kwargs)</dt><dd><tt>Retrieves&nbsp;an&nbsp;AclFeed&nbsp;for&nbsp;the&nbsp;given&nbsp;resource.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;gdata.docs.data.Resource&nbsp;to&nbsp;fetch&nbsp;AclFeed&nbsp;for.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;args&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-GetFeed">GetFeed</a>().<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.docs.data.AclFeed&nbsp;representing&nbsp;retrieved&nbsp;entries.</tt></dd></dl>
+
 <dl><dt><a name="DocsClient-get_acl_entry"><strong>get_acl_entry</strong></a>(self, entry, **kwargs)</dt><dd><tt>Retrieves&nbsp;an&nbsp;AclEntry&nbsp;again.<br>
 &nbsp;<br>
 This&nbsp;is&nbsp;useful&nbsp;if&nbsp;you&nbsp;need&nbsp;to&nbsp;poll&nbsp;for&nbsp;an&nbsp;ACL&nbsp;changing.<br>
@@ -335,7 +347,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;gdata.docs.data.AclEntry&nbsp;representing&nbsp;the&nbsp;retrieved&nbsp;entry.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-get_all_resources"><strong>get_all_resources</strong></a>(self, uri<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;all&nbsp;of&nbsp;a&nbsp;user's&nbsp;non-collections&nbsp;or&nbsp;everything&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.<br>
+<dl><dt><a name="DocsClient-get_all_resources"><strong>get_all_resources</strong></a>(self, uri<font color="#909090">=None</font>, show_root<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;all&nbsp;of&nbsp;a&nbsp;user's&nbsp;non-collections&nbsp;or&nbsp;everything&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.<br>
 &nbsp;<br>
 Folders&nbsp;are&nbsp;not&nbsp;included&nbsp;in&nbsp;this&nbsp;by&nbsp;default.&nbsp;&nbsp;Pass&nbsp;in&nbsp;a&nbsp;custom&nbsp;URI&nbsp;to<br>
 include&nbsp;collections&nbsp;in&nbsp;your&nbsp;query.&nbsp;&nbsp;The&nbsp;<a href="#DocsQuery">DocsQuery</a>&nbsp;class&nbsp;is&nbsp;an&nbsp;easy&nbsp;way&nbsp;to<br>
@@ -348,6 +360,8 @@ Args:<br>
 &nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;URI&nbsp;to&nbsp;query&nbsp;the&nbsp;doclist&nbsp;feed&nbsp;with.&nbsp;If&nbsp;None,&nbsp;then&nbsp;use<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#DocsClient">DocsClient</a>.RESOURCE_FEED_URI,&nbsp;which&nbsp;will&nbsp;retrieve&nbsp;all<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non-collections.<br>
+&nbsp;&nbsp;show_root:&nbsp;(optional)&nbsp;True&nbsp;to&nbsp;include&nbsp;indications&nbsp;if&nbsp;a&nbsp;resource&nbsp;is&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;root&nbsp;collection.<br>
 &nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-GetResources">GetResources</a>().<br>
 &nbsp;<br>
 Returns:<br>
@@ -374,7 +388,7 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;gdata.docs.data.Archive&nbsp;representing&nbsp;the&nbsp;retrieved&nbsp;archive.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-get_changes"><strong>get_changes</strong></a>(self, changestamp<font color="#909090">=None</font>, max_results<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;changes&nbsp;to&nbsp;a&nbsp;user's&nbsp;documents&nbsp;list.<br>
+<dl><dt><a name="DocsClient-get_changes"><strong>get_changes</strong></a>(self, changestamp<font color="#909090">=None</font>, max_results<font color="#909090">=None</font>, show_root<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;changes&nbsp;to&nbsp;a&nbsp;user's&nbsp;documents&nbsp;list.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;changestamp:&nbsp;(optional)&nbsp;String&nbsp;changestamp&nbsp;value&nbsp;to&nbsp;query&nbsp;since.<br>
@@ -382,6 +396,8 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;given&nbsp;one.<br>
 &nbsp;&nbsp;max_results:&nbsp;(optional)&nbsp;Number&nbsp;of&nbsp;results&nbsp;to&nbsp;fetch.&nbsp;&nbsp;API&nbsp;will&nbsp;limit<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;number&nbsp;to&nbsp;100&nbsp;at&nbsp;most.<br>
+&nbsp;&nbsp;show_root:&nbsp;(optional)&nbsp;True&nbsp;to&nbsp;include&nbsp;indications&nbsp;if&nbsp;a&nbsp;resource&nbsp;is&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;root&nbsp;collection.<br>
 &nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-get_feed">get_feed</a>().<br>
 &nbsp;<br>
 Returns:<br>
@@ -412,20 +428,30 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;gdata.docs.data.AclFeed&nbsp;representing&nbsp;the&nbsp;resource's&nbsp;ACL.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-get_resource_by_self_link"><strong>get_resource_by_self_link</strong></a>(self, self_link, etag<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;a&nbsp;particular&nbsp;resource&nbsp;by&nbsp;its&nbsp;self&nbsp;link.<br>
+<dl><dt><a name="DocsClient-get_resource_by_id"><strong>get_resource_by_id</strong></a>(self, resource_id, **kwargs)</dt><dd><tt>Retrieves&nbsp;a&nbsp;resource&nbsp;again&nbsp;given&nbsp;its&nbsp;resource&nbsp;ID.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;self_link:&nbsp;URI&nbsp;at&nbsp;which&nbsp;to&nbsp;query&nbsp;for&nbsp;given&nbsp;resource.&nbsp;&nbsp;This&nbsp;can&nbsp;be&nbsp;found<br>
+&nbsp;&nbsp;resource_id:&nbsp;Typed&nbsp;or&nbsp;untyped&nbsp;resource&nbsp;ID&nbsp;of&nbsp;a&nbsp;resource.<br>
+&nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;args&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-GetResourceBySelfLink">GetResourceBySelfLink</a>().<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.docs.data.Resource&nbsp;representing&nbsp;retrieved&nbsp;resource.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-get_resource_by_self_link"><strong>get_resource_by_self_link</strong></a>(self, uri, etag<font color="#909090">=None</font>, show_root<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;a&nbsp;particular&nbsp;resource&nbsp;by&nbsp;its&nbsp;self&nbsp;link.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;str&nbsp;URI&nbsp;at&nbsp;which&nbsp;to&nbsp;query&nbsp;for&nbsp;given&nbsp;resource.&nbsp;&nbsp;This&nbsp;can&nbsp;be&nbsp;found<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;using&nbsp;entry.GetSelfLink().<br>
 &nbsp;&nbsp;etag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;document/item's&nbsp;etag&nbsp;value&nbsp;to&nbsp;be&nbsp;used&nbsp;in&nbsp;a<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;conditional&nbsp;GET.&nbsp;See&nbsp;<a href="http://code.google.com/apis/documents/docs/3.0/">http://code.google.com/apis/documents/docs/3.0/</a><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;developers_guide_protocol.html#RetrievingCached.<br>
+&nbsp;&nbsp;show_root:&nbsp;(optional)&nbsp;True&nbsp;to&nbsp;include&nbsp;indications&nbsp;if&nbsp;a&nbsp;resource&nbsp;is&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;root&nbsp;collection.<br>
 &nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-get_entry">get_entry</a>().<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;gdata.docs.data.Resource&nbsp;representing&nbsp;the&nbsp;retrieved&nbsp;resource.</tt></dd></dl>
 
-<dl><dt><a name="DocsClient-get_resources"><strong>get_resources</strong></a>(self, uri<font color="#909090">=None</font>, limit<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;the&nbsp;resources&nbsp;in&nbsp;a&nbsp;user's&nbsp;docslist,&nbsp;or&nbsp;the&nbsp;given&nbsp;URI.<br>
+<dl><dt><a name="DocsClient-get_resources"><strong>get_resources</strong></a>(self, uri<font color="#909090">=None</font>, limit<font color="#909090">=None</font>, show_root<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Retrieves&nbsp;the&nbsp;resources&nbsp;in&nbsp;a&nbsp;user's&nbsp;docslist,&nbsp;or&nbsp;the&nbsp;given&nbsp;URI.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;URI&nbsp;to&nbsp;query&nbsp;for&nbsp;resources.&nbsp;&nbsp;If&nbsp;None,&nbsp;then<br>
@@ -439,6 +465,8 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get_everything().&nbsp;Similarly,&nbsp;if&nbsp;you&nbsp;set&nbsp;limit=50,&nbsp;only&nbsp;&lt;=&nbsp;50<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;documents&nbsp;are&nbsp;returned.&nbsp;Note:&nbsp;if&nbsp;the&nbsp;max-results&nbsp;parameter&nbsp;is&nbsp;set&nbsp;in<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;uri&nbsp;parameter,&nbsp;it&nbsp;is&nbsp;chosen&nbsp;over&nbsp;a&nbsp;value&nbsp;set&nbsp;for&nbsp;limit.<br>
+&nbsp;&nbsp;show_root:&nbsp;(optional)&nbsp;True&nbsp;to&nbsp;include&nbsp;indications&nbsp;if&nbsp;a&nbsp;resource&nbsp;is&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;root&nbsp;collection.<br>
 &nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;<a href="#DocsClient-get_feed">get_feed</a>().<br>
 &nbsp;<br>
 Returns:<br>
@@ -578,6 +606,22 @@ Data and other attributes defined here:<br>
 
 <hr>
 Methods inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
+<dl><dt><a name="DocsClient-Batch"><strong>Batch</strong></a> = batch(self, feed, uri<font color="#909090">=None</font>, force<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;to&nbsp;the&nbsp;server&nbsp;to&nbsp;execute&nbsp;operation&nbsp;entries.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;feed:&nbsp;A&nbsp;batch&nbsp;feed&nbsp;containing&nbsp;batch&nbsp;entries,&nbsp;each&nbsp;is&nbsp;an&nbsp;operation.<br>
+&nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;The&nbsp;uri&nbsp;to&nbsp;which&nbsp;the&nbsp;batch&nbsp;request&nbsp;feed&nbsp;should&nbsp;be&nbsp;POSTed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;none&nbsp;is&nbsp;provided,&nbsp;then&nbsp;the&nbsp;feed's&nbsp;edit&nbsp;link&nbsp;will&nbsp;be&nbsp;used.<br>
+&nbsp;&nbsp;force:&nbsp;(optional)&nbsp;boolean&nbsp;set&nbsp;to&nbsp;True&nbsp;if&nbsp;you&nbsp;want&nbsp;the&nbsp;batch&nbsp;update&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clobber&nbsp;all&nbsp;data.&nbsp;If&nbsp;False,&nbsp;the&nbsp;version&nbsp;in&nbsp;the&nbsp;information&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed&nbsp;object&nbsp;will&nbsp;cause&nbsp;the&nbsp;server&nbsp;to&nbsp;check&nbsp;to&nbsp;see&nbsp;that&nbsp;no&nbsp;changes<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intervened&nbsp;between&nbsp;when&nbsp;you&nbsp;fetched&nbsp;the&nbsp;data&nbsp;and&nbsp;when&nbsp;you&nbsp;sent&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;changes.<br>
+&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;its&nbsp;modify_request&nbsp;method.&nbsp;Recommended&nbsp;classes&nbsp;include<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.</tt></dd></dl>
+
 <dl><dt><a name="DocsClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
@@ -758,6 +802,22 @@ Args:<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
+
+<dl><dt><a name="DocsClient-batch"><strong>batch</strong></a>(self, feed, uri<font color="#909090">=None</font>, force<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;to&nbsp;the&nbsp;server&nbsp;to&nbsp;execute&nbsp;operation&nbsp;entries.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;feed:&nbsp;A&nbsp;batch&nbsp;feed&nbsp;containing&nbsp;batch&nbsp;entries,&nbsp;each&nbsp;is&nbsp;an&nbsp;operation.<br>
+&nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;The&nbsp;uri&nbsp;to&nbsp;which&nbsp;the&nbsp;batch&nbsp;request&nbsp;feed&nbsp;should&nbsp;be&nbsp;POSTed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;none&nbsp;is&nbsp;provided,&nbsp;then&nbsp;the&nbsp;feed's&nbsp;edit&nbsp;link&nbsp;will&nbsp;be&nbsp;used.<br>
+&nbsp;&nbsp;force:&nbsp;(optional)&nbsp;boolean&nbsp;set&nbsp;to&nbsp;True&nbsp;if&nbsp;you&nbsp;want&nbsp;the&nbsp;batch&nbsp;update&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clobber&nbsp;all&nbsp;data.&nbsp;If&nbsp;False,&nbsp;the&nbsp;version&nbsp;in&nbsp;the&nbsp;information&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed&nbsp;object&nbsp;will&nbsp;cause&nbsp;the&nbsp;server&nbsp;to&nbsp;check&nbsp;to&nbsp;see&nbsp;that&nbsp;no&nbsp;changes<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intervened&nbsp;between&nbsp;when&nbsp;you&nbsp;fetched&nbsp;the&nbsp;data&nbsp;and&nbsp;when&nbsp;you&nbsp;sent&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;changes.<br>
+&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;its&nbsp;modify_request&nbsp;method.&nbsp;Recommended&nbsp;classes&nbsp;include<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.</tt></dd></dl>
 
 <dl><dt><a name="DocsClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
@@ -1074,9 +1134,9 @@ Data descriptors inherited from <a href="gdata.client.html#Query">gdata.client.Q
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><strong>ARCHIVE_FEED_URI</strong> = '/feeds/default/private/archive'<br>
 <strong>CHANGE_FEED_URI</strong> = '/feeds/default/private/changes'<br>
-<strong>COLLECTION_UPLOAD_URI_TEMPLATE</strong> = '/feeds/upload/create-session/feeds/default/private/full/%s/contents'<br>
 <strong>METADATA_URI</strong> = '/feeds/metadata/default'<br>
 <strong>RESOURCE_FEED_URI</strong> = '/feeds/default/private/full'<br>
+<strong>RESOURCE_SELF_LINK_TEMPLATE</strong> = '/feeds/default/private/full/%s'<br>
 <strong>RESOURCE_UPLOAD_URI</strong> = '/feeds/upload/create-session/default/private/full'<br>
 <strong>__author__</strong> = 'vicfryzel@google.com (Vic Fryzel)'</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">

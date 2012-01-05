@@ -541,6 +541,8 @@ api_version&nbsp;member&nbsp;to&nbsp;a&nbsp;string,&nbsp;either&nbsp;'1'&nbsp;or
 </dl>
 <hr>
 Methods defined here:<br>
+<dl><dt><a name="GDClient-Batch"><strong>Batch</strong></a> = <a href="#GDClient-batch">batch</a>(self, feed, uri<font color="#909090">=None</font>, force<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
 <dl><dt><a name="GDClient-ClientLogin"><strong>ClientLogin</strong></a> = <a href="#GDClient-client_login">client_login</a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="GDClient-Delete"><strong>Delete</strong></a> = <a href="#GDClient-delete">delete</a>(self, entry_or_uri, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, **kwargs)</dt></dl>
@@ -568,6 +570,22 @@ Methods defined here:<br>
 <dl><dt><a name="GDClient-Update"><strong>Update</strong></a> = <a href="#GDClient-update">update</a>(self, entry, auth_token<font color="#909090">=None</font>, force<font color="#909090">=False</font>, uri<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="GDClient-UpgradeToken"><strong>UpgradeToken</strong></a> = <a href="#GDClient-upgrade_token">upgrade_token</a>(self, token<font color="#909090">=None</font>, url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>)</dt></dl>
+
+<dl><dt><a name="GDClient-batch"><strong>batch</strong></a>(self, feed, uri<font color="#909090">=None</font>, force<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;to&nbsp;the&nbsp;server&nbsp;to&nbsp;execute&nbsp;operation&nbsp;entries.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;feed:&nbsp;A&nbsp;batch&nbsp;feed&nbsp;containing&nbsp;batch&nbsp;entries,&nbsp;each&nbsp;is&nbsp;an&nbsp;operation.<br>
+&nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;The&nbsp;uri&nbsp;to&nbsp;which&nbsp;the&nbsp;batch&nbsp;request&nbsp;feed&nbsp;should&nbsp;be&nbsp;POSTed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;none&nbsp;is&nbsp;provided,&nbsp;then&nbsp;the&nbsp;feed's&nbsp;edit&nbsp;link&nbsp;will&nbsp;be&nbsp;used.<br>
+&nbsp;&nbsp;force:&nbsp;(optional)&nbsp;boolean&nbsp;set&nbsp;to&nbsp;True&nbsp;if&nbsp;you&nbsp;want&nbsp;the&nbsp;batch&nbsp;update&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clobber&nbsp;all&nbsp;data.&nbsp;If&nbsp;False,&nbsp;the&nbsp;version&nbsp;in&nbsp;the&nbsp;information&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;will&nbsp;cause&nbsp;the&nbsp;server&nbsp;to&nbsp;check&nbsp;to&nbsp;see&nbsp;that&nbsp;no&nbsp;changes<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intervened&nbsp;between&nbsp;when&nbsp;you&nbsp;fetched&nbsp;the&nbsp;data&nbsp;and&nbsp;when&nbsp;you&nbsp;sent&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;changes.<br>
+&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;An&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;its&nbsp;modify_request&nbsp;method.&nbsp;Recommended&nbsp;classes&nbsp;include<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.</tt></dd></dl>
 
 <dl><dt><a name="GDClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
@@ -727,7 +745,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.<br>
 &nbsp;&nbsp;http_request:&nbsp;(optional)&nbsp;atom.http_core.HttpRequest<br>
-&nbsp;&nbsp;converter:&nbsp;function&nbsp;which&nbsp;takes&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;response&nbsp;as&nbsp;it's&nbsp;only<br>
+&nbsp;&nbsp;converter:&nbsp;function&nbsp;which&nbsp;takes&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;response&nbsp;as&nbsp;its&nbsp;only<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argument&nbsp;and&nbsp;returns&nbsp;the&nbsp;desired&nbsp;<a href="__builtin__.html#object">object</a>.<br>
 &nbsp;&nbsp;desired_class:&nbsp;class&nbsp;descended&nbsp;from&nbsp;atom.core.XmlElement&nbsp;to&nbsp;which&nbsp;a<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;successful&nbsp;response&nbsp;should&nbsp;be&nbsp;converted.&nbsp;If&nbsp;there&nbsp;is&nbsp;no<br>

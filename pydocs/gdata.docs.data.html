@@ -3162,6 +3162,16 @@ Methods inherited from <a href="gdata.docs.data.html#Resource">Resource</a>:<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;gdata.data.FeedLink&nbsp;<a href="__builtin__.html#object">object</a>.</tt></dd></dl>
 
+<dl><dt><a name="Change-GetResumableCreateMediaLink"><strong>GetResumableCreateMediaLink</strong></a> = get_resumable_create_media_link(self)</dt><dd><tt>Extracts&nbsp;the&nbsp;<a href="#Resource">Resource</a>'s&nbsp;resumable&nbsp;create&nbsp;link.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;gdata.data.FeedLink&nbsp;<a href="__builtin__.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Change-GetResumableEditMediaLink"><strong>GetResumableEditMediaLink</strong></a> = get_resumable_edit_media_link(self)</dt><dd><tt>Extracts&nbsp;the&nbsp;<a href="#Resource">Resource</a>'s&nbsp;resumable&nbsp;update&nbsp;link.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;gdata.data.FeedLink&nbsp;<a href="__builtin__.html#object">object</a>.</tt></dd></dl>
+
 <dl><dt><a name="Change-GetRevisionsFeedLink"><strong>GetRevisionsFeedLink</strong></a> = get_revisions_feed_link(self)</dt><dd><tt>Extracts&nbsp;the&nbsp;<a href="#Resource">Resource</a>'s&nbsp;revisions&nbsp;feed&nbsp;&lt;gd:feedLink&gt;.<br>
 &nbsp;<br>
 Returns:<br>
@@ -3172,6 +3182,11 @@ Returns:<br>
 <dl><dt><a name="Change-__init__"><strong>__init__</strong></a>(self, type<font color="#909090">=None</font>, title<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="Change-get_acl_feed_link"><strong>get_acl_feed_link</strong></a>(self)</dt><dd><tt>Extracts&nbsp;the&nbsp;<a href="#Resource">Resource</a>'s&nbsp;ACL&nbsp;feed&nbsp;&lt;gd:feedLink&gt;.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;gdata.data.FeedLink&nbsp;<a href="__builtin__.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Change-get_resumable_create_media_link"><strong>get_resumable_create_media_link</strong></a>(self)</dt><dd><tt>Extracts&nbsp;the&nbsp;<a href="#Resource">Resource</a>'s&nbsp;resumable&nbsp;create&nbsp;link.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;gdata.data.FeedLink&nbsp;<a href="__builtin__.html#object">object</a>.</tt></dd></dl>
@@ -7143,6 +7158,10 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 Methods defined here:<br>
 <dl><dt><a name="Resource-GetAclFeedLink"><strong>GetAclFeedLink</strong></a> = <a href="#Resource-get_acl_feed_link">get_acl_feed_link</a>(self)</dt></dl>
 
+<dl><dt><a name="Resource-GetResumableCreateMediaLink"><strong>GetResumableCreateMediaLink</strong></a> = <a href="#Resource-get_resumable_create_media_link">get_resumable_create_media_link</a>(self)</dt></dl>
+
+<dl><dt><a name="Resource-GetResumableEditMediaLink"><strong>GetResumableEditMediaLink</strong></a> = <a href="#Resource-get_resumable_edit_media_link">get_resumable_edit_media_link</a>(self)</dt></dl>
+
 <dl><dt><a name="Resource-GetRevisionsFeedLink"><strong>GetRevisionsFeedLink</strong></a> = <a href="#Resource-get_revisions_feed_link">get_revisions_feed_link</a>(self)</dt></dl>
 
 <dl><dt><a name="Resource-InCollections"><strong>InCollections</strong></a> = <a href="#Resource-in_collections">in_collections</a>(self)</dt></dl>
@@ -7150,6 +7169,11 @@ Methods defined here:<br>
 <dl><dt><a name="Resource-__init__"><strong>__init__</strong></a>(self, type<font color="#909090">=None</font>, title<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="Resource-get_acl_feed_link"><strong>get_acl_feed_link</strong></a>(self)</dt><dd><tt>Extracts&nbsp;the&nbsp;<a href="#Resource">Resource</a>'s&nbsp;ACL&nbsp;feed&nbsp;&lt;gd:feedLink&gt;.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;gdata.data.FeedLink&nbsp;<a href="__builtin__.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Resource-get_resumable_create_media_link"><strong>get_resumable_create_media_link</strong></a>(self)</dt><dd><tt>Extracts&nbsp;the&nbsp;<a href="#Resource">Resource</a>'s&nbsp;resumable&nbsp;create&nbsp;link.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;A&nbsp;gdata.data.FeedLink&nbsp;<a href="__builtin__.html#object">object</a>.</tt></dd></dl>
@@ -9216,6 +9240,8 @@ Data and other attributes inherited from <a href="atom.core.html#XmlElement">ato
 <strong>PRIVATE_LABEL</strong> = 'private'<br>
 <strong>PUBLISH_LINK_REL</strong> = 'http://schemas.google.com/docs/2007#publish'<br>
 <strong>RESTRICTEDDOWNLOAD_LABEL</strong> = 'restricted-download'<br>
+<strong>RESUMABLE_CREATE_MEDIA_LINK_REL</strong> = 'http://schemas.google.com/g/2005#resumable-create-media'<br>
+<strong>RESUMABLE_EDIT_MEDIA_LINK_REL</strong> = 'http://schemas.google.com/g/2005#resumable-edit-media'<br>
 <strong>REVISION_FEEDLINK_REL</strong> = 'http://schemas.google.com/docs/2007/revisions'<br>
 <strong>SHAREDWITHDOMAIN_LABEL</strong> = 'shared-with-domain'<br>
 <strong>SPREADSHEET_LABEL</strong> = 'spreadsheet'<br>

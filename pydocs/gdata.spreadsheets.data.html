@@ -632,7 +632,14 @@ operations&nbsp;in&nbsp;one&nbsp;HTTP&nbsp;request.<br>&nbsp;</tt></td></tr>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="CellsFeed-batch_set_cell"><strong>batch_set_cell</strong></a>(row, col, input)</dt></dl>
+<dl><dt><a name="CellsFeed-AddSetCell"><strong>AddSetCell</strong></a> = <a href="#CellsFeed-add_set_cell">add_set_cell</a>(self, row, col, input_value)</dt></dl>
+
+<dl><dt><a name="CellsFeed-add_set_cell"><strong>add_set_cell</strong></a>(self, row, col, input_value)</dt><dd><tt>Adds&nbsp;a&nbsp;request&nbsp;to&nbsp;change&nbsp;the&nbsp;contents&nbsp;of&nbsp;a&nbsp;cell&nbsp;to&nbsp;this&nbsp;batch&nbsp;request.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;row:&nbsp;int,&nbsp;The&nbsp;row&nbsp;number&nbsp;for&nbsp;this&nbsp;cell.&nbsp;Numbering&nbsp;starts&nbsp;at&nbsp;1.<br>
+&nbsp;&nbsp;col:&nbsp;int,&nbsp;The&nbsp;column&nbsp;number&nbsp;for&nbsp;this&nbsp;cell.&nbsp;Starts&nbsp;at&nbsp;1.<br>
+&nbsp;&nbsp;input_value:&nbsp;str,&nbsp;The&nbsp;desired&nbsp;formula/content&nbsp;this&nbsp;cell&nbsp;should&nbsp;contain.</tt></dd></dl>
 
 <hr>
 Data and other attributes defined here:<br>
@@ -5970,12 +5977,38 @@ consider&nbsp;using&nbsp;find_url&nbsp;instead.</tt></dd></dl>
 
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-BuildBatchCellsUpdate"><strong>BuildBatchCellsUpdate</strong></a> = build_batch_cells_update(spreadsheet_key, worksheet_id)</dt><dd><tt>Creates&nbsp;an&nbsp;empty&nbsp;cells&nbsp;feed&nbsp;for&nbsp;adding&nbsp;batch&nbsp;cell&nbsp;updates&nbsp;to.<br>
+&nbsp;<br>
+Call&nbsp;batch_set_cell&nbsp;on&nbsp;the&nbsp;resulting&nbsp;<a href="#CellsFeed">CellsFeed</a>&nbsp;instance&nbsp;then&nbsp;send&nbsp;the&nbsp;batch<br>
+request&nbsp;TODO:&nbsp;fill&nbsp;in<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;spreadsheet_key:&nbsp;The&nbsp;ID&nbsp;of&nbsp;the&nbsp;spreadsheet&nbsp;<br>
+&nbsp;&nbsp;worksheet_id:</tt></dd></dl>
+ <dl><dt><a name="-build_batch_cells_update"><strong>build_batch_cells_update</strong></a>(spreadsheet_key, worksheet_id)</dt><dd><tt>Creates&nbsp;an&nbsp;empty&nbsp;cells&nbsp;feed&nbsp;for&nbsp;adding&nbsp;batch&nbsp;cell&nbsp;updates&nbsp;to.<br>
+&nbsp;<br>
+Call&nbsp;batch_set_cell&nbsp;on&nbsp;the&nbsp;resulting&nbsp;<a href="#CellsFeed">CellsFeed</a>&nbsp;instance&nbsp;then&nbsp;send&nbsp;the&nbsp;batch<br>
+request&nbsp;TODO:&nbsp;fill&nbsp;in<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;spreadsheet_key:&nbsp;The&nbsp;ID&nbsp;of&nbsp;the&nbsp;spreadsheet&nbsp;<br>
+&nbsp;&nbsp;worksheet_id:</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>GSX_NAMESPACE</strong> = 'http://schemas.google.com/spreadsheets/2006/extended'<br>
+<td width="100%"><strong>BATCH_EDIT_LINK_TEMPLATE</strong> = '%s/batch'<br>
+<strong>BATCH_ENTRY_ID_TEMPLATE</strong> = '%s/R%sC%s'<br>
+<strong>BATCH_POST_ID_TEMPLATE</strong> = 'https://spreadsheets.google.com/feeds/cells/%s/%s/private/full'<br>
+<strong>GSX_NAMESPACE</strong> = 'http://schemas.google.com/spreadsheets/2006/extended'<br>
 <strong>GS_TEMPLATE</strong> = '{http://schemas.google.com/spreadsheets/2006}%s'<br>
 <strong>INSERT_MODE</strong> = 'insert'<br>
 <strong>OVERWRITE_MODE</strong> = 'overwrite'<br>

@@ -25,7 +25,8 @@ settings.</tt></p>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="gdata.html">gdata</a><br>
-</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+</td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -71,6 +72,8 @@ Methods defined here:<br>
 
 <dl><dt><a name="EmailSettingsClient-DeleteEmailDelegate"><strong>DeleteEmailDelegate</strong></a> = <a href="#EmailSettingsClient-delete_email_delegate">delete_email_delegate</a>(self, username, address, **kwargs)</dt></dl>
 
+<dl><dt><a name="EmailSettingsClient-DeleteLabel"><strong>DeleteLabel</strong></a> = <a href="#EmailSettingsClient-delete_label">delete_label</a>(self, username, label, **kwargs)</dt></dl>
+
 <dl><dt><a name="EmailSettingsClient-MakeEmailSettingsUri"><strong>MakeEmailSettingsUri</strong></a> = <a href="#EmailSettingsClient-make_email_settings_uri">make_email_settings_uri</a>(self, username, setting_id)</dt></dl>
 
 <dl><dt><a name="EmailSettingsClient-RetrieveEmailDelegates"><strong>RetrieveEmailDelegates</strong></a> = <a href="#EmailSettingsClient-retrieve_email_delegates">retrieve_email_delegates</a>(self, username, **kwargs)</dt></dl>
@@ -101,7 +104,7 @@ Methods defined here:<br>
 
 <dl><dt><a name="EmailSettingsClient-UpdateSignature"><strong>UpdateSignature</strong></a> = <a href="#EmailSettingsClient-update_signature">update_signature</a>(self, username, signature, **kwargs)</dt></dl>
 
-<dl><dt><a name="EmailSettingsClient-UpdateVacation"><strong>UpdateVacation</strong></a> = <a href="#EmailSettingsClient-update_vacation">update_vacation</a>(self, username, enable, subject<font color="#909090">=None</font>, message<font color="#909090">=None</font>, contacts_only<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="EmailSettingsClient-UpdateVacation"><strong>UpdateVacation</strong></a> = <a href="#EmailSettingsClient-update_vacation">update_vacation</a>(self, username, enable, subject<font color="#909090">=None</font>, message<font color="#909090">=None</font>, start_date<font color="#909090">=None</font>, end_date<font color="#909090">=None</font>, contacts_only<font color="#909090">=None</font>, domain_only<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="EmailSettingsClient-UpdateWebclip"><strong>UpdateWebclip</strong></a> = <a href="#EmailSettingsClient-update_webclip">update_webclip</a>(self, username, enable, **kwargs)</dt></dl>
 
@@ -178,6 +181,15 @@ Returns:<br>
 Args:<br>
 &nbsp;&nbsp;username:&nbsp;string&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;user<br>
 &nbsp;&nbsp;address:&nbsp;string&nbsp;The&nbsp;email&nbsp;address&nbsp;of&nbsp;the&nbsp;delegated&nbsp;account</tt></dd></dl>
+
+<dl><dt><a name="EmailSettingsClient-delete_label"><strong>delete_label</strong></a>(self, username, label, **kwargs)</dt><dd><tt>Delete&nbsp;a&nbsp;label&nbsp;from&nbsp;the&nbsp;specified&nbsp;account.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;username:&nbsp;string&nbsp;Name&nbsp;of&nbsp;the&nbsp;user<br>
+&nbsp;&nbsp;label:&nbsp;string&nbsp;Name&nbsp;of&nbsp;the&nbsp;label&nbsp;to&nbsp;be&nbsp;deleted<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.http_core.HttpResponse()&nbsp;with&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;request</tt></dd></dl>
 
 <dl><dt><a name="EmailSettingsClient-make_email_settings_uri"><strong>make_email_settings_uri</strong></a>(self, username, setting_id)</dt><dd><tt>Creates&nbsp;the&nbsp;URI&nbsp;for&nbsp;the&nbsp;Email&nbsp;Settings&nbsp;API&nbsp;call.<br>
 &nbsp;<br>
@@ -338,7 +350,7 @@ Returns:<br>
 &nbsp;&nbsp;gdata.apps.emailsettings.data.EmailSettingsSignature&nbsp;of&nbsp;the<br>
 &nbsp;&nbsp;updated&nbsp;resource.</tt></dd></dl>
 
-<dl><dt><a name="EmailSettingsClient-update_vacation"><strong>update_vacation</strong></a>(self, username, enable, subject<font color="#909090">=None</font>, message<font color="#909090">=None</font>, contacts_only<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Update&nbsp;Google&nbsp;Mail&nbsp;vacation-responder&nbsp;settings.<br>
+<dl><dt><a name="EmailSettingsClient-update_vacation"><strong>update_vacation</strong></a>(self, username, enable, subject<font color="#909090">=None</font>, message<font color="#909090">=None</font>, start_date<font color="#909090">=None</font>, end_date<font color="#909090">=None</font>, contacts_only<font color="#909090">=None</font>, domain_only<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Update&nbsp;Google&nbsp;Mail&nbsp;vacation-responder&nbsp;settings.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;username:&nbsp;string&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;user.<br>
@@ -347,8 +359,14 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;autoresponse.<br>
 &nbsp;&nbsp;message:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;message&nbsp;body&nbsp;of&nbsp;the&nbsp;vacation&nbsp;responder<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;autoresponse.<br>
+&nbsp;&nbsp;startDate:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;start&nbsp;date&nbsp;of&nbsp;the&nbsp;vacation&nbsp;responder<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;autoresponse.<br>
+&nbsp;&nbsp;endDate:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;end&nbsp;date&nbsp;of&nbsp;the&nbsp;vacation&nbsp;responder<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;autoresponse.<br>
 &nbsp;&nbsp;contacts_only:&nbsp;Boolean&nbsp;(optional)&nbsp;Whether&nbsp;to&nbsp;only&nbsp;send&nbsp;autoresponses<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;known&nbsp;contacts.<br>
+&nbsp;&nbsp;domain_only:&nbsp;Boolean&nbsp;(optional)&nbsp;Whether&nbsp;to&nbsp;only&nbsp;send&nbsp;autoresponses<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;users&nbsp;in&nbsp;the&nbsp;primary&nbsp;domain.<br>
 &nbsp;&nbsp;kwargs:&nbsp;The&nbsp;other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;the&nbsp;update&nbsp;method.<br>
 &nbsp;<br>
 Returns:<br>
@@ -370,7 +388,7 @@ Returns:<br>
 Data and other attributes defined here:<br>
 <dl><dt><strong>api_version</strong> = '2.0'</dl>
 
-<dl><dt><strong>auth_scopes</strong> = ('http://www.google.com/a/feeds/', 'https://www.google.com/a/feeds/', 'http://apps-apis.google.com/a/feeds/', 'https://apps-apis.google.com/a/feeds/')</dl>
+<dl><dt><strong>auth_scopes</strong> = ('https://apps-apis.google.com/a/feeds/user/', 'https://apps-apis.google.com/a/feeds/policies/', 'https://apps-apis.google.com/a/feeds/alias/', 'https://apps-apis.google.com/a/feeds/groups/')</dl>
 
 <dl><dt><strong>auth_service</strong> = 'apps'</dl>
 
@@ -380,6 +398,22 @@ Data and other attributes defined here:<br>
 
 <hr>
 Methods inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
+<dl><dt><a name="EmailSettingsClient-Batch"><strong>Batch</strong></a> = batch(self, feed, uri<font color="#909090">=None</font>, force<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;to&nbsp;the&nbsp;server&nbsp;to&nbsp;execute&nbsp;operation&nbsp;entries.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;feed:&nbsp;A&nbsp;batch&nbsp;feed&nbsp;containing&nbsp;batch&nbsp;entries,&nbsp;each&nbsp;is&nbsp;an&nbsp;operation.<br>
+&nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;The&nbsp;uri&nbsp;to&nbsp;which&nbsp;the&nbsp;batch&nbsp;request&nbsp;feed&nbsp;should&nbsp;be&nbsp;POSTed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;none&nbsp;is&nbsp;provided,&nbsp;then&nbsp;the&nbsp;feed's&nbsp;edit&nbsp;link&nbsp;will&nbsp;be&nbsp;used.<br>
+&nbsp;&nbsp;force:&nbsp;(optional)&nbsp;boolean&nbsp;set&nbsp;to&nbsp;True&nbsp;if&nbsp;you&nbsp;want&nbsp;the&nbsp;batch&nbsp;update&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clobber&nbsp;all&nbsp;data.&nbsp;If&nbsp;False,&nbsp;the&nbsp;version&nbsp;in&nbsp;the&nbsp;information&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed&nbsp;object&nbsp;will&nbsp;cause&nbsp;the&nbsp;server&nbsp;to&nbsp;check&nbsp;to&nbsp;see&nbsp;that&nbsp;no&nbsp;changes<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intervened&nbsp;between&nbsp;when&nbsp;you&nbsp;fetched&nbsp;the&nbsp;data&nbsp;and&nbsp;when&nbsp;you&nbsp;sent&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;changes.<br>
+&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;its&nbsp;modify_request&nbsp;method.&nbsp;Recommended&nbsp;classes&nbsp;include<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.</tt></dd></dl>
+
 <dl><dt><a name="EmailSettingsClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
@@ -538,7 +572,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.<br>
 &nbsp;&nbsp;http_request:&nbsp;(optional)&nbsp;atom.http_core.HttpRequest<br>
-&nbsp;&nbsp;converter:&nbsp;function&nbsp;which&nbsp;takes&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;response&nbsp;as&nbsp;it's&nbsp;only<br>
+&nbsp;&nbsp;converter:&nbsp;function&nbsp;which&nbsp;takes&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;response&nbsp;as&nbsp;its&nbsp;only<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argument&nbsp;and&nbsp;returns&nbsp;the&nbsp;desired&nbsp;object.<br>
 &nbsp;&nbsp;desired_class:&nbsp;class&nbsp;descended&nbsp;from&nbsp;atom.core.XmlElement&nbsp;to&nbsp;which&nbsp;a<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;successful&nbsp;response&nbsp;should&nbsp;be&nbsp;converted.&nbsp;If&nbsp;there&nbsp;is&nbsp;no<br>
@@ -613,6 +647,22 @@ Args:<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;The&nbsp;upgraded&nbsp;gdata.gauth.AuthSubToken&nbsp;object.</tt></dd></dl>
+
+<dl><dt><a name="EmailSettingsClient-batch"><strong>batch</strong></a>(self, feed, uri<font color="#909090">=None</font>, force<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;to&nbsp;the&nbsp;server&nbsp;to&nbsp;execute&nbsp;operation&nbsp;entries.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;feed:&nbsp;A&nbsp;batch&nbsp;feed&nbsp;containing&nbsp;batch&nbsp;entries,&nbsp;each&nbsp;is&nbsp;an&nbsp;operation.<br>
+&nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;The&nbsp;uri&nbsp;to&nbsp;which&nbsp;the&nbsp;batch&nbsp;request&nbsp;feed&nbsp;should&nbsp;be&nbsp;POSTed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;none&nbsp;is&nbsp;provided,&nbsp;then&nbsp;the&nbsp;feed's&nbsp;edit&nbsp;link&nbsp;will&nbsp;be&nbsp;used.<br>
+&nbsp;&nbsp;force:&nbsp;(optional)&nbsp;boolean&nbsp;set&nbsp;to&nbsp;True&nbsp;if&nbsp;you&nbsp;want&nbsp;the&nbsp;batch&nbsp;update&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clobber&nbsp;all&nbsp;data.&nbsp;If&nbsp;False,&nbsp;the&nbsp;version&nbsp;in&nbsp;the&nbsp;information&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed&nbsp;object&nbsp;will&nbsp;cause&nbsp;the&nbsp;server&nbsp;to&nbsp;check&nbsp;to&nbsp;see&nbsp;that&nbsp;no&nbsp;changes<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intervened&nbsp;between&nbsp;when&nbsp;you&nbsp;fetched&nbsp;the&nbsp;data&nbsp;and&nbsp;when&nbsp;you&nbsp;sent&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;changes.<br>
+&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;its&nbsp;modify_request&nbsp;method.&nbsp;Recommended&nbsp;classes&nbsp;include<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.</tt></dd></dl>
 
 <dl><dt><a name="EmailSettingsClient-client_login"><strong>client_login</strong></a>(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
@@ -772,7 +822,7 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.<br>
 &nbsp;&nbsp;http_request:&nbsp;(optional)&nbsp;atom.http_core.HttpRequest<br>
-&nbsp;&nbsp;converter:&nbsp;function&nbsp;which&nbsp;takes&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;response&nbsp;as&nbsp;it's&nbsp;only<br>
+&nbsp;&nbsp;converter:&nbsp;function&nbsp;which&nbsp;takes&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;response&nbsp;as&nbsp;its&nbsp;only<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argument&nbsp;and&nbsp;returns&nbsp;the&nbsp;desired&nbsp;object.<br>
 &nbsp;&nbsp;desired_class:&nbsp;class&nbsp;descended&nbsp;from&nbsp;atom.core.XmlElement&nbsp;to&nbsp;which&nbsp;a<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;successful&nbsp;response&nbsp;should&nbsp;be&nbsp;converted.&nbsp;If&nbsp;there&nbsp;is&nbsp;no<br>
