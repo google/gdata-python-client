@@ -1,7 +1,7 @@
 include MANIFEST
 include *.txt
 include *.py
-recursive-include src *.py
+recursive-include src *
 recursive-include samples *
 recursive-include tests *
 recursive-include pydocs *
