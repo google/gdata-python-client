@@ -1,0 +1,8 @@
+include MANIFEST
+include *.txt
+include *.py
+recursive-include src *.py
+recursive-include samples *
+recursive-include tests *
+recursive-include pydocs *
+global-exclude *.pyc
