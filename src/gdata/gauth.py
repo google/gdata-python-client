@@ -1177,8 +1177,10 @@ class OAuth2Token(object):
         'user-agent': self.user_agent,
     }
 
-    http_request = atom.http_core.HttpRequest(uri=self.token_uri, method='POST', headers=headers)
-    http_request.add_body_part(body, mime_type='application/x-www-form-urlencoded')
+    http_request = atom.http_core.HttpRequest(
+        uri=self.token_uri, method='POST', headers=headers)
+    http_request.add_body_part(
+        body, mime_type='application/x-www-form-urlencoded')
     response = request(http_request)
     body = response.read()
     if response.status == 200:
@@ -1197,16 +1199,19 @@ class OAuth2Token(object):
     else:
       self.token_expiry = None
 
-  def generate_authorize_url(self, redirect_uri='oob', response_type='code', **kwargs):
+  def generate_authorize_url(self, redirect_uri='oob', response_type='code',
+                             access_type='offline', **kwargs):
     """Returns a URI to redirect to the provider.
 
     Args:
-      redirect_uri: string, Either the string 'oob' for a non-web-based
-                    application, or a URI that handles the callback from
-                    the authorization server.
-      response_type: string, Either the string 'code' for server-side or
-                     native application, or the string 'token' for client-
-                     side application.
+      redirect_uri: Either the string 'oob' for a non-web-based application, or
+                    a URI that handles the callback from the authorization
+                    server.
+      response_type: Either the string 'code' for server-side or native
+                     application, or the string 'token' for client-side
+                     application.
+      access_type: Either the string 'offline' to request a refresh token or
+                   'online'.
 
     If redirect_uri is 'oob' then pass in the
     generated verification code to get_access_token,
@@ -1223,6 +1228,7 @@ class OAuth2Token(object):
       'client_id': self.client_id,
       'redirect_uri': redirect_uri,
       'scope': self.scope,
+      'access_type': access_type
       }
     query.update(kwargs)
     parts = list(urlparse.urlparse(self.auth_uri))
