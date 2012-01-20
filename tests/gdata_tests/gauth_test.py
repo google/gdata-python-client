@@ -512,12 +512,17 @@ class OAuth2TokenTests(unittest.TestCase):
     self.assertEqual(url,
         'https://accounts.google.com/o/oauth2/auth?scope=https%3A%2F%2Fwww.google'
         '.com%2Fcalendar%2Ffeeds&redirect_uri=oob&response_type=code&client_id='
-        'clientId')
+        'clientId&access_type=offline')
     url = token.generate_authorize_url('https://www.example.com/redirect', 'token')
     self.assertEqual(url,
         'https://accounts.google.com/o/oauth2/auth?scope=https%3A%2F%2Fwww.google'
         '.com%2Fcalendar%2Ffeeds&redirect_uri=https%3A%2F%2Fwww.example.com%2F'
-        'redirect&response_type=token&client_id=clientId')
+        'redirect&response_type=token&client_id=clientId&access_type=offline')
+    url = token.generate_authorize_url(access_type='online')
+    self.assertEqual(url,
+        'https://accounts.google.com/o/oauth2/auth?scope=https%3A%2F%2Fwww.google'
+        '.com%2Fcalendar%2Ffeeds&redirect_uri=oob&response_type=code&client_id='
+        'clientId&access_type=online')
 
   def test_modify_request(self):
     token = gdata.gauth.OAuth2Token('clientId', 'clientSecret',
