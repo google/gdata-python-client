@@ -364,6 +364,7 @@ class DocsClient(gdata.client.GDClient):
       response was not successful.
     """
     self._check_entry_is_not_collection(entry)
+    self._check_entry_has_content(entry)
     uri = self._get_download_uri(entry.content.src, extra_params)
     self._download_file(uri, file_path, **kwargs)
 
@@ -387,6 +388,7 @@ class DocsClient(gdata.client.GDClient):
       response was not successful.
     """
     self._check_entry_is_not_collection(entry)
+    self._check_entry_has_content(entry)
     uri = self._get_download_uri(entry.content.src, extra_params)
     return self._get_content(uri, **kwargs)
 
@@ -582,6 +584,19 @@ class DocsClient(gdata.client.GDClient):
     if entry.get_resource_type() == gdata.docs.data.COLLECTION_LABEL:
       raise ValueError(
           '%s is a collection, which is not valid in this method' % str(entry))
+
+  def _check_entry_has_content(self, entry):
+    """Ensures given entry has a content element with src.
+    
+    Args:
+      entry: Entry to test.
+    Raises:
+      ValueError: If given entry is not an entry or has no content src.
+    """
+    # Don't use _check_entry_is_resource since could be Revision etc
+    if not (hasattr(entry, 'content') and entry.content and
+            entry.content.src):
+      raise ValueError('Entry %s has no downloadable content.' % entry)
 
   def get_acl(self, entry, **kwargs):
     """Retrieves an AclFeed for the given resource.
@@ -788,6 +803,8 @@ class DocsClient(gdata.client.GDClient):
       gdata.client.RequestError if the download URL is malformed or the server's
       response was not successful.
     """
+    self._check_entry_is_not_collection(entry)
+    self._check_entry_has_content(entry)
     uri = self._get_download_uri(entry.content.src, extra_params)
     self._download_file(uri, file_path, **kwargs)
 
@@ -810,6 +827,7 @@ class DocsClient(gdata.client.GDClient):
       response was not successful.
     """
     self._check_entry_is_not_collection(entry)
+    self._check_entry_has_content(entry)
     uri = self._get_download_uri(entry.content.src, extra_params)
     return self._get_content(uri, **kwargs)
 
