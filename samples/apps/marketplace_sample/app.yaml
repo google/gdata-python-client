@@ -1,0 +1,21 @@
+application: domain-mgmt
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /css
+  static_dir: css
+
+- url: /js
+  static_dir: js
+
+- url: /images
+  static_dir: images
+
+- url: /_ah/login_required
+  script: domain_mgmt_app.py
+
+- url: .*
+  script: domain_mgmt_app.py
+  login: required

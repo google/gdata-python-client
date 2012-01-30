@@ -1,0 +1,24 @@
+#kd-googlebar {
+  position: relative;
+  background: #F1F1F1;
+  height: 70px;
+  line-height: 70px;
+  padding-left: 44px;
+  border-bottom: 1px solid #E5E5E5;
+  z-index: 40;
+  vertical-align: top;
+}
+
+#users {
+  text-align: center;
+  top:200px;
+  right:10px;
+}
+
+#input_details {
+  margin-left: auto;
+  margin-right: auto;
+  border-width: 4px;
+  border-style: outset;
+  border-color: gray;
+}

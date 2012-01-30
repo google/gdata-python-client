@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block header-content %}
+<h3>Cron</h3>
+<p>This utility allows you to schedule url's to be fetched at certain times/intervals. These actions are initiated during normal requests to your website, as long as request includes an import appengine_utlities.event.
+<br />
+<strong>NOTE: </strong>This will not work on the local SDK due to it being single threaded an unable to make a request to itself.
+</p>
+{% endblock %}
+{% block content %}
+<table>
+<tr>
+<th>Cron Entry</th><th colspan=2>Next Run Time</th>
+</tr>
+{% for cron in cron_entries %}
+<tr><td>{{ cron.cron_entry }}</td><td>{{ cron.next_run }}</td>
+<td><form action="" method="post"><input type="hidden" name="key" value="{{ cron.key }}"><input type="submit" name="action" value="Delete" /></form></td>
+</tr>
+{% endfor %}
+</table>
+Add cron entry
+<form method="post" action="">
+<input type="text" size="80" name="cron_entry" /><br />
+<input name="action" type="submit" value="Add" />
+</form>
+{% endblock %}

@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+    <script>
+      google.load('jquery', '1.7.1');
+    </script>
+    <script type='text/javascript' src='js/json2.js'></script>
+    <script type='text/javascript' src='js/main.js'></script>
+    
+    <link rel='stylesheet' type='text/css' href='/css/style.css' />
+    <title>User Details</title>
+  </head>
+  <body>
+    <div id='kd-googlebar' class='alternate'>
+      <img style='margin-right: 20px; margin-top:4px;' src='/images/google.png'>
+    </div>
+    <br />
+    <div id='users'>
+      Choose one user <select id='users_list'></select>
+      <button type='button' id='get_details'>Get Details</button>
+    </div>    
+    <hr />
+    <br />
+    <div id='details'>
+      <table id='details_table' align='center' valign='center' border='4'>
+        <tr  align='middle'>
+          <td><h2>Groups</h2></td>
+          <td><h2>Nicknames</h2></td>
+          <td><h2>Organization Unit</h2></td>
+          <tbody>
+          </tbody>
+        </tr>
+    </div>
+  </body>
+</html>

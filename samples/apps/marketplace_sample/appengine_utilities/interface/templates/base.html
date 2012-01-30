@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>GAEUtilities</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Cache-Control" content="no-cache" /> 
+<link rel="stylesheet" type="text/css" href="/gaeutilities/css/cssreset/reset-min.css">
+<link rel="stylesheet" type="text/css" href="/gaeutilities/css/cssfonts/fonts-min.css">
+<link rel="stylesheet" type="text/css" href="/gaeutilities/css/cssgrids/grids.css">
+</head>
+<link rel="stylesheet" href="css/main.css" type="text/css" media="screen, projection" />
+</head>
+<body>
+<div id="wrap" class="yui-d0">
+  <div id="header_top">
+    <h1 id="logo">gaeutilities</span></a></h1>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="http://code.google.com/p/gaeutilities/">Project Page</a></li>
+        <li><a href="http://groups.google.com/group/appengine-utilities">Group</a></li>
+        <li><a href="http://code.google.com/p/gaeutilities/w/list">Wiki</a></li>
+        <li><a href="http://code.google.com/p/gaeutilities/downloads/list">Downloads</a></li>
+    </ul>
+    <div id="slogan">
+      <p><b>Utility</b> classes to make working with <b>appengine</b> easier.</p>
+    </div>
+  </div>
+  <div id="header_bottom">
+    {% block header-content %}{% endblock %}
+    <div>
+    <b>CRON SUPPORT IS NOW DEPRECATED, NO FURTHER UPDATES WILL BE MADE. GOOGLE HAS NOW PROVIDED A CRON FOR APPENGINE APPLICATIONS</b>
+    </div>
+  </div>
+  <div id="maincontent">
+    <div id="left">
+    <p><strong>Menu: </strong><a href="/gaeutilities/">Cron</a><br />
+    {% block content %}{% endblock %}
+    </div>
+    <div id="right">
+    </div>
+  </div>
+  <div id="footer">
+    <p>Design: <a href="http://www.solucija.com/">Luka Cvrk</a> &middot; Sponsored by <a href="http://webpoint.wordpress.com/">B4Contact</a> &middot; Released under a <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Licence</a></p>
+    <p>&copy; Copyright 2008 <a href="http://www.free-css.com/">Conceptnova</a></p>
+  </div>
+</div>
+</body>
+</html>
