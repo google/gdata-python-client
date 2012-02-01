@@ -578,9 +578,10 @@ class ProductEntry(gdata.data.BatchEntry):
 
     This should be a :class:`atom.data.Link` element, for example::
 
+      link = atom.data.Link(rel='alternate', type='text/html',
+                            href='http://www.somehost.com/123456jsh9')
       entry = ProductEntry()
-      entry.title = atom.data.Link(rel='alternate', type='text/html',
-                                   href='http://www.somehost.com/123456jsh9')
+      entry.link.append(link)
 
   .. attribute:: additional_image_link
 
@@ -879,9 +880,10 @@ class ProductEntry(gdata.data.BatchEntry):
     This should be a :class:`Tax` element, with the tax rule elements embedded
     within, for example::
 
+      tax = Tax()
+      tax.tax_rate = TaxRate('17.5')
       entry = ProductEntry()
-      entry.tax = Tax()
-      entry.tax.tax_rate = TaxRate('17.5')
+      entry.tax.append(tax)
 
   .. attribute:: year
 
@@ -924,7 +926,7 @@ class ProductEntry(gdata.data.BatchEntry):
   shipping_weight = ShippingWeight
   size = [Size]
   target_country = TargetCountry
-  tax = Tax
+  tax = [Tax]
   year = Year
 
 
