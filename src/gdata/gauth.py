@@ -103,11 +103,14 @@ AUTH_SCOPES = {
         'https://docs.googleusercontent.com/'),
     'lh2': ( # Picasa Web Albums API
         'http://picasaweb.google.com/data/',),
-    'apps': ( # Google Apps Provisioning API
+    'apps': ( # Google Apps Domain Info & Management APIs
         'https://apps-apis.google.com/a/feeds/user/',
         'https://apps-apis.google.com/a/feeds/policies/',
         'https://apps-apis.google.com/a/feeds/alias/',
-        'https://apps-apis.google.com/a/feeds/groups/'),
+        'https://apps-apis.google.com/a/feeds/groups/',
+        'https://apps-apis.google.com/a/feeds/compliance/audit/',
+        'https://apps-apis.google.com/a/feeds/migration/',
+        'https://apps-apis.google.com/a/feeds/emailsettings/2.0/'),
     'weaver': ( # Health H9 Sandbox
         'https://www.google.com/h9/feeds/',),
     'wise': ( # Spreadsheets Data API
