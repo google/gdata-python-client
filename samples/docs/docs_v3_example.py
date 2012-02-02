@@ -205,7 +205,7 @@ def AddAclSample():
       scope=gdata.acl.data.AclScope(value='user@example.com', type='user'),
       role=gdata.acl.data.AclRole(value='reader'),
   )
-  client.AddAclEntry(doc, acl_entry, send_notification=False)
+  client.AddAclEntry(doc, acl_entry, send_notifications=False)
 
 
 def DeleteAclSample():
