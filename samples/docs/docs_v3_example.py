@@ -163,6 +163,9 @@ def UploadResourceSample():
   """Upload a document, and convert to Google Docs."""
   client = CreateClient()
   doc = gdata.docs.data.Resource(type='document', title='My Sample Doc')
+  # Set the description
+  doc.description = gdata.docs.data.Description(
+      'This is a simple Word document.')
   # This is a convenient MS Word doc that we know exists
   path = _GetDataFilePath('test.0.doc')
   print 'Selected file at: %s' % path
