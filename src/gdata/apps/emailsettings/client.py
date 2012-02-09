@@ -160,7 +160,12 @@ class EmailSettingsClient(gdata.client.GDClient):
     """
     uri = self.MakeEmailSettingsUri(username=username,
                                     setting_id=SETTING_ID_LABEL)
-    return self.GetFeed(uri, auth_token=None, query=None, **kwargs)
+    return self.GetFeed(
+        uri,
+        auth_token=None,
+        query=None,
+        desired_class=gdata.apps.emailsettings.data.EmailSettingsLabel,
+        **kwargs)
   
   RetrieveLabels = retrieve_labels
 
@@ -263,7 +268,12 @@ class EmailSettingsClient(gdata.client.GDClient):
     """
     uri = self.MakeEmailSettingsUri(username=username,
                                     setting_id=SETTING_ID_SENDAS)
-    return self.GetFeed(uri, auth_token=None, query=None, **kwargs)
+    return self.GetFeed(
+        uri,
+        auth_token=None,
+        query=None,
+        desired_class=gdata.apps.emailsettings.data.EmailSettingsSendAsAlias,
+        **kwargs)
   
   RetrieveSendAs = retrieve_send_as
 
@@ -322,7 +332,12 @@ class EmailSettingsClient(gdata.client.GDClient):
     """
     uri = self.MakeEmailSettingsUri(username=username,
                                     setting_id=SETTING_ID_FORWARDING)
-    return self.GetEntry(uri, auth_token=None, query=None, **kwargs)
+    return self.GetEntry(
+        uri,
+        auth_token=None,
+        query=None,
+        desired_class=gdata.apps.emailsettings.data.EmailSettingsForwarding,
+        **kwargs)
   
   RetrieveForwarding = retrieve_forwarding
 
@@ -364,7 +379,12 @@ class EmailSettingsClient(gdata.client.GDClient):
     """
     uri = self.MakeEmailSettingsUri(username=username,
                                     setting_id=SETTING_ID_POP)
-    return self.GetEntry(uri, auth_token=None, query=None, **kwargs)
+    return self.GetEntry(
+        uri,
+        auth_token=None,
+        query=None,
+        desired_class=gdata.apps.emailsettings.data.EmailSettingsPop,
+        **kwargs)
   
   RetrievePop = retrieve_pop
 
@@ -398,7 +418,12 @@ class EmailSettingsClient(gdata.client.GDClient):
     """
     uri = self.MakeEmailSettingsUri(username=username,
                                     setting_id=SETTING_ID_IMAP)
-    return self.GetEntry(uri, auth_token=None, query=None, **kwargs)
+    return self.GetEntry(
+        uri,
+        auth_token=None,
+        query=None,
+        desired_class=gdata.apps.emailsettings.data.EmailSettingsImap,
+        **kwargs)
   
   RetrieveImap = retrieve_imap
 
@@ -449,7 +474,13 @@ class EmailSettingsClient(gdata.client.GDClient):
     """
     uri = self.MakeEmailSettingsUri(username=username,
                                     setting_id=SETTING_ID_VACATION_RESPONDER)
-    return self.GetEntry(uri, auth_token=None, query=None, **kwargs)
+    return self.GetEntry(
+        uri,
+        auth_token=None,
+        query=None,
+        desired_class=
+            gdata.apps.emailsettings.data.EmailSettingsVacationResponder,
+        **kwargs)
   
   RetrieveVacation = retrieve_vacation
 
@@ -484,7 +515,12 @@ class EmailSettingsClient(gdata.client.GDClient):
     """
     uri = self.MakeEmailSettingsUri(username=username,
                                     setting_id=SETTING_ID_SIGNATURE)
-    return self.GetEntry(uri, auth_token=None, query=None, **kwargs)
+    return self.GetEntry(
+        uri,
+        auth_token=None,
+        query=None,
+        desired_class=gdata.apps.emailsettings.data.EmailSettingsSignature,
+        **kwargs)
   
   RetrieveSignature = retrieve_signature
 
@@ -565,7 +601,12 @@ class EmailSettingsClient(gdata.client.GDClient):
     """
     uri = self.MakeEmailSettingsUri(username=username,
                                     setting_id=SETTING_ID_DELEGATION)
-    return self.GetFeed(uri, auth_token=None, query=None, **kwargs)
+    return self.GetFeed(
+        uri,
+        auth_token=None,
+        query=None,
+        desired_class=gdata.apps.emailsettings.data.EmailSettingsDelegation,
+        **kwargs)
   
   RetrieveEmailDelegates = retrieve_email_delegates
   
