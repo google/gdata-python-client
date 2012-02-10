@@ -50,12 +50,12 @@ FILTER_HAS_ATTACHMENTS_NAME = 'hasAttachment'
 FILTER_LABEL = 'label'
 # The apps:property shouldMarkAsRead of the filter action property
 FILTER_MARK_AS_READ = 'shouldMarkAsRead'
-# The apps:property shouldArchive of the filter action propertylabel
+# The apps:property shouldArchive of the filter action property
 FILTER_ARCHIVE = 'shouldArchive'
 
 # The apps:property name of the send-as alias property
 SENDAS_ALIAS_NAME = 'name'
-# The apps:property address of theAPPS_TEMPLATE send-as alias property
+# The apps:property address of the send-as alias property
 SENDAS_ALIAS_ADDRESS = 'address'
 # The apps:property replyTo of the send-as alias property
 SENDAS_ALIAS_REPLY_TO = 'replyTo'
@@ -74,7 +74,7 @@ FORWARDING_ACTION = 'action'
 
 # The apps:property enable of the POP property
 POP_ENABLE = 'enable'
-# The apps:property enableFor of the POP propertyACTION
+# The apps:property enableFor of the POP property
 POP_ENABLE_FOR = 'enableFor'
 # The apps:property action of the POP property
 POP_ACTION = 'action'
@@ -161,7 +161,8 @@ class EmailSettingsEntry(gdata.data.GDEntry):
         found = True
         break
     if not found:
-      self.property.append(gdata.apps_property.AppsProperty(name=name, value=value))
+      self.property.append(
+          gdata.apps_property.AppsProperty(name=name, value=value))
 
   def find_edit_link(self):
     return self.uri
@@ -194,7 +195,7 @@ class EmailSettingsLabel(EmailSettingsEntry):
     """Constructs a new EmailSettingsLabel object with the given arguments.
 
     Args:
-      uri: string (optional) The uri of of this object for HTTP requests.
+      uri: string (optional) The uri of this object for HTTP requests.
       name: string (optional) The name to give this new object.
       args: The other parameters to pass to gdata.entry.GDEntry constructor.
       kwargs: The other parameters to pass to gdata.entry.GDEntry constructor.
@@ -398,7 +399,7 @@ class EmailSettingsFilter(EmailSettingsEntry):
     """Constructs a new EmailSettingsFilter object with the given arguments.
 
     Args:
-      uri: string (optional) The uri of of this object for HTTP requests.
+      uri: string (optional) The uri of this object for HTTP requests.
       from_address: string (optional) The source email address for the filter.
       to_address: string (optional) The destination email address for
           the filter.
@@ -518,7 +519,7 @@ class EmailSettingsSendAsAlias(EmailSettingsEntry):
     """Set the MakeDefault value of this send-as Alias object.
 
     Args:
-      value: string The new MakeDefault valueto give this object.WebClip
+      value: string The new MakeDefault value to give this object.
     """
 
     self._SetProperty(SENDAS_ALIAS_MAKE_DEFAULT, value)
@@ -531,7 +532,7 @@ class EmailSettingsSendAsAlias(EmailSettingsEntry):
        arguments.
 
     Args:
-      uri: string (optional) The uri of of this object for HTTP requests.
+      uri: string (optional) The uri f this object for HTTP requests.
       name: string (optional) The name that will appear in the "From" field
             for this user.
       address: string (optional) The email address that appears as the
@@ -583,7 +584,7 @@ class EmailSettingsWebClip(EmailSettingsEntry):
     """Constructs a new EmailSettingsWebClip object with the given arguments.
 
     Args:
-      uri: string (optional) The uri of of this object for HTTP requests.
+      uri: string (optional) The uri of this object for HTTP requests.
       enable: Boolean (optional) Whether to enable showing Web clips.
       args: The other parameters to pass to gdata.entry.GDEntry constructor.
       kwargs: The other parameters to pass to gdata.entry.GDEntry constructor.
@@ -663,7 +664,7 @@ class EmailSettingsForwarding(EmailSettingsEntry):
     """Constructs a new EmailSettingsForwarding object with the given arguments.
 
     Args:
-      uri: string (optional) The uri of of this object for HTTP requests.
+      uri: string (optional) The uri of this object for HTTP requests.
       enable: Boolean (optional) Whether to enable incoming email forwarding.
       forward_to: string (optional) The address email will be forwarded to.
       action: string (optional) The action to perform after forwarding an
@@ -750,7 +751,7 @@ class EmailSettingsPop(EmailSettingsEntry):
     """Constructs a new EmailSettingsPOP object with the given arguments.
 
     Args:
-      uri: string (optional) The uri of of this object for HTTP requests.
+      uri: string (optional) The uri of this object for HTTP requests.
       enable: Boolean (optional) Whether to enable incoming POP3 access.
       enable_for: string (optional) Whether to enable POP3 for all mail
                   ("ALL_MAIL"), or mail from now on ("MAIL_FROM_NOW_ON").
@@ -798,7 +799,7 @@ class EmailSettingsImap(EmailSettingsEntry):
     """Constructs a new EmailSettingsImap object with the given arguments.
 
     Args:
-      uri: string (optional) The uri of of this object for HTTP requests.
+      uri: string (optional) The uri of this object for HTTP requests.
       enable: Boolean (optional) Whether to enable IMAP access.
       args: The other parameters to pass to gdata.entry.GDEntry constructor.
       kwargs: The other parameters to pass to gdata.entry.GDEntry constructor.
@@ -964,7 +965,7 @@ class EmailSettingsVacationResponder(EmailSettingsEntry):
        given arguments.
 
     Args:
-      uri: string (optional) The uri of of this object for HTTP requests.
+      uri: string (optional) The uri of this object for HTTP requests.
       enable: Boolean (optional) Whether to enable the vacation responder.
       subject: string (optional) The subject line of the vacation responder
                autoresponse.
@@ -1033,7 +1034,7 @@ class EmailSettingsSignature(EmailSettingsEntry):
     """Constructs a new EmailSettingsSignature object with the given arguments.
 
     Args:
-      uri: string (optional) The uri of of this object for HTTP requests.
+      uri: string (optional) The uri of this object for HTTP requests.
       signature: string (optional) The signature to be appended to outgoing
                  messages.
       args: The other parameters to pass to gdata.entry.GDEntry constructor.
@@ -1073,7 +1074,7 @@ class EmailSettingsLanguage(EmailSettingsEntry):
     """Constructs a new EmailSettingsLanguage object with the given arguments.
 
     Args:
-      uri: string (optional) The uri of of this object for HTTP requests.
+      uri: string (optional) The uri of this object for HTTP requests.
       language: string (optional) The language tag for Google Mail's display
                 language.
       args: The other parameters to pass to gdata.entry.GDEntry constructor.
@@ -1194,7 +1195,7 @@ class EmailSettingsGeneral(EmailSettingsEntry):
     """Constructs a new EmailSettingsGeneral object with the given arguments.
 
     Args:
-      uri: string (optional) The uri of of this object for HTTP requests.
+      uri: string (optional) The uri of this object for HTTP requests.
       page_size: int (optional) The number of conversations to be shown per page.
       shortcuts: Boolean (optional) Whether to enable keyboard shortcuts.
       arrows: Boolean (optional) Whether to display arrow-shaped personal
@@ -1233,7 +1234,7 @@ class EmailSettingsDelegation(EmailSettingsEntry):
     return self._GetProperty(DELEGATION_ADDRESS)
 
   def SetAddress(self, value):
-    """Set the email address of of the delegated user.
+    """Set the email address of the delegated user.
 
     Args:
       value: string The email address of another user on the same domain
@@ -1247,7 +1248,7 @@ class EmailSettingsDelegation(EmailSettingsEntry):
        arguments.
 
     Args:
-      uri: string (optional) The uri of of this object for HTTP requests.
+      uri: string (optional) The uri of this object for HTTP requests.
       address: string The email address of the delegated user.
     """
     super(EmailSettingsDelegation, self).__init__(*args, **kwargs)
