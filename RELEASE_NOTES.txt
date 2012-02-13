@@ -1,5 +1,5 @@
 === 2.0.16 ===
-5 Jan 2011
+5 Jan 2012
 
 - Add sample for Docs List API to delete ACL.
 - Added support for label deletion in the Email Settings API client library
