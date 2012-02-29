@@ -59,6 +59,15 @@ class AdditionalImageLink(atom.core.XmlElement):
   _qname = SC_NAMESPACE_TEMPLATE % 'additional_image_link'
 
 
+class Channel(atom.core.XmlElement):
+  """
+  sc:channel element
+
+  The channel for the product. Supported values are: 'online', 'local'
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'channel'
+
+
 class ContentLanguage(atom.core.XmlElement):
   """
   sc:content_language element
@@ -221,15 +230,6 @@ class Brand(atom.core.XmlElement):
   The brand of the product
   """
   _qname = SCP_NAMESPACE_TEMPLATE % 'brand'
-
-
-class Channel(atom.core.XmlElement):
-  """
-  scp:channel element
-
-  The channel for the product. Supported values are: 'online', 'local'
-  """
-  _qname = SCP_NAMESPACE_TEMPLATE % 'channel'
 
 
 class Color(atom.core.XmlElement):
