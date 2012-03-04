@@ -1256,3 +1256,18 @@ class EmailSettingsDelegation(EmailSettingsEntry):
       self.uri = uri
     if address:
       self.address = address
+
+
+class EmailSettingsLabelFeed(gdata.data.GDFeed):
+  """Main feed containing a list of labels."""
+  entry = [EmailSettingsLabel]
+
+
+class EmailSettingsSendAsAliasFeed(gdata.data.GDFeed):
+  """Main feed containing a list of send-as aliases."""
+  entry = [EmailSettingsSendAsAlias]
+
+
+class EmailSettingsDelegationFeed(gdata.data.GDFeed):
+  """Main feed containing a list of email delegation entries."""
+  entry = [EmailSettingsDelegation]

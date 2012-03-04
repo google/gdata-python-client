@@ -164,6 +164,7 @@ class EmailSettingsClient(gdata.client.GDClient):
         uri,
         auth_token=None,
         query=None,
+        desired_class=gdata.apps.emailsettings.data.EmailSettingsLabelFeed,
         **kwargs)
   
   RetrieveLabels = retrieve_labels
@@ -271,6 +272,7 @@ class EmailSettingsClient(gdata.client.GDClient):
         uri,
         auth_token=None,
         query=None,
+        desired_class=gdata.apps.emailsettings.data.EmailSettingsSendAsAliasFeed,
         **kwargs)
   
   RetrieveSendAs = retrieve_send_as
@@ -603,6 +605,7 @@ class EmailSettingsClient(gdata.client.GDClient):
         uri,
         auth_token=None,
         query=None,
+        desired_class=gdata.apps.emailsettings.data.EmailSettingsDelegationFeed,
         **kwargs)
   
   RetrieveEmailDelegates = retrieve_email_delegates
