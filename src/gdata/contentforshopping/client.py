@@ -230,7 +230,8 @@ class ContentForShoppingClient(gdata.client.GDClient):
     :param warnings: Flag to include warnings in response. False by default.
     """
     feed = self._create_batch_feed(products, 'insert')
-    return self.batch(feed)
+    return self.batch(feed, account_id=account_id, auth_token=auth_token,
+                      dry_run=dry_run, warnings=warnings)
 
   def update_products(self, products, account_id=None, auth_token=None,
                       dry_run=False, warnings=False):
@@ -248,7 +249,8 @@ class ContentForShoppingClient(gdata.client.GDClient):
     .. note:: Entries must have the atom:id element set.
     """
     feed = self._create_batch_feed(products, 'update')
-    return self.batch(feed)
+    return self.batch(feed, account_id=account_id, auth_token=auth_token,
+                      dry_run=dry_run, warnings=warnings)
 
   def delete_products(self, products, account_id=None, auth_token=None,
                       dry_run=False, warnings=False):
@@ -266,7 +268,8 @@ class ContentForShoppingClient(gdata.client.GDClient):
     .. note:: Entries must have the atom:id element set.
     """
     feed = self._create_batch_feed(products, 'delete')
-    return self.batch(feed)
+    return self.batch(feed, account_id=account_id, auth_token=auth_token,
+                      dry_run=dry_run, warnings=warnings)
 
   # Operations on datafeeds
 
