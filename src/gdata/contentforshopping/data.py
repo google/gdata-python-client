@@ -839,9 +839,10 @@ class ProductEntry(gdata.data.BatchEntry):
     This should be a :class:`Shipping` with the necessary rules embedded as
     elements, for example::
 
+      shipping = Shipping()
+      shipping.shipping_price = ShippingPrice('10.00', unit='USD')
       entry = ProductEntry()
-      entry.shipping = Shipping()
-      entry.shipping.shipping_price = ShippingPrice('10.00', unit='USD')
+      entry.shipping.append(shipping)
 
   .. attribute:: shipping_weight
 
@@ -922,7 +923,7 @@ class ProductEntry(gdata.data.BatchEntry):
   product_id = ProductId
   product_type = ProductType
   quantity = Quantity
-  shipping = Shipping
+  shipping = [Shipping]
   shipping_weight = ShippingWeight
   size = [Size]
   target_country = TargetCountry
