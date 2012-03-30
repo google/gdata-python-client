@@ -55,11 +55,7 @@ class MultidomainProvisioningClientTest(unittest.TestCase):
     self.assertEqual('apps-apis.google.com', self.client.host)
     self.assertEqual('2.0', self.client.api_version)
     self.assertEqual('apps', self.client.auth_service)
-    self.assertEqual(
-        ('https://apps-apis.google.com/a/feeds/user/',
-         'https://apps-apis.google.com/a/feeds/policies/',
-         'https://apps-apis.google.com/a/feeds/alias/',
-         'https://apps-apis.google.com/a/feeds/groups/'), self.client.auth_scopes)
+    self.assertEqual(gdata.gauth.AUTH_SCOPES['apps'], self.client.auth_scopes)
     if conf.options.get_value('runlive') == 'true':
       self.assertEqual(self.client.domain, conf.options.get_value('appsdomain'))
     else:
@@ -95,7 +91,7 @@ class MultidomainProvisioningClientTest(unittest.TestCase):
 
     # Either load the recording or prepare to make a live request.
     conf.configure_cache(self.client, 'testCreateUpdateDelete')
-    
+
     rnd_number = random.randrange(0, 100001)
     email = 'test_user%s@%s' % (rnd_number, self.client.domain)
     alias = 'test_alias%s@%s' % (rnd_number, self.client.domain)
@@ -145,7 +141,7 @@ class MultidomainProvisioningClientTest(unittest.TestCase):
     fetched_alias = self.client.RetrieveAlias(alias)
     self.assertEquals(fetched_alias.user_email, new_email)
     self.assertEquals(fetched_alias.alias_email, alias)
-    
+
     fetched_aliases = self.client.RetrieveAllUserAliases(new_email)
     self.assertEquals(fetched_aliases.entry[0].user_email, new_email)
     self.assertEquals(fetched_aliases.entry[0].alias_email, email)

@@ -53,11 +53,7 @@ class CalendarResourceClientTest(unittest.TestCase):
     self.assertEqual('apps-apis.google.com', self.client.host)
     self.assertEqual('2.0', self.client.api_version)
     self.assertEqual('apps', self.client.auth_service)
-    self.assertEqual(
-        ('http://www.google.com/a/feeds/',
-         'https://www.google.com/a/feeds/',
-         'http://apps-apis.google.com/a/feeds/',
-         'https://apps-apis.google.com/a/feeds/'), self.client.auth_scopes)
+    self.assertEqual(gdata.gauth.AUTH_SCOPES['apps'], self.client.auth_scopes)
     if conf.options.get_value('runlive') == 'true':
       self.assertEqual(self.client.domain, conf.options.get_value('appsdomain'))
     else:
