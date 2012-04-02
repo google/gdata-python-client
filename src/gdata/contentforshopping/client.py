@@ -61,7 +61,8 @@ class ContentForShoppingClient(gdata.client.GDClient):
     gdata.client.GDClient.__init__(self, **kwargs)
 
   def _create_uri(self, account_id, resource, path=(), use_projection=True,
-                  dry_run=False, warnings=False):
+                  dry_run=False, warnings=False, max_results=None,
+                  start_token=None, start_index=None):
     """Create a request uri from the given arguments.
 
     If arguments are None, use the default client attributes.
@@ -81,6 +82,12 @@ class ContentForShoppingClient(gdata.client.GDClient):
       request_params.append('dry-run')
     if warnings:
       request_params.append('warnings')
+    if max_results is not None:
+      request_params.append('max-results=%s' % max_results)
+    if start_token is not None:
+      request_params.append('start-token=%s' % start_token)
+    if start_index is not None:
+      request_params.append('start-index=%s' % start_index)
     request_params = '&'.join(request_params)
 
     if request_params:
@@ -181,12 +188,13 @@ class ContentForShoppingClient(gdata.client.GDClient):
 
   # Operations on multiple products
 
-  def get_products(self, start_index=None, max_results=None, account_id=None,
-                   auth_token=None):
+  def get_products(self, max_results=None, start_token=None, start_index=None,
+                   account_id=None, auth_token=None):
     """Get a feed of products for the account.
 
     :param max_results: The maximum number of results to return (default 25,
                         maximum 250).
+    :param start_token: The start token of the feed provided by the API.
     :param start_index: The starting index of the feed to return (default 1,
                         maximum 10000)
     :param account_id: The Merchant Center Account ID. If ommitted the default
@@ -194,7 +202,9 @@ class ContentForShoppingClient(gdata.client.GDClient):
     :param auth_token: An object which sets the Authorization HTTP header in its
                        modify_request method.
     """
-    uri = self._create_uri(account_id, 'items/products')
+    uri = self._create_uri(account_id, 'items/products',
+                           max_results=max_results, start_token=start_token,
+                           start_index=start_index)
     return self.get_feed(uri, auth_token=auth_token,
         desired_class=gdata.contentforshopping.data.ProductFeed)
 

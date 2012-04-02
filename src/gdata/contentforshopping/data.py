@@ -23,6 +23,7 @@ __author__ = 'afshar (Ali Afshar), dhermes (Daniel Hermes)'
 
 import atom.core
 import atom.data
+import atom.http_core
 import gdata.data
 
 
@@ -954,6 +955,26 @@ class ProductFeed(gdata.data.BatchFeed):
   total_results = TotalResults
   items_per_page = ItemsPerPage
   start_index = StartIndex
+
+  def get_start_token(self):
+    """Attempts to parse start-token from rel="next" link.
+
+    A products feed may contain a rel="next" atom:link and the
+    href contained in the link may have a start-token query parameter.
+
+    Returns:
+      If there is no rel="next" link or the rel="next" link doesn't contain
+      the start-token query parameter, None is returned. Otherwise, the
+      string value of the start-token query parameter is returned.
+    """
+    next_link = self.get_next_link()
+    if next_link is not None:
+      uri = atom.http_core.parse_uri(next_link.href)
+      if 'start-token' in uri.query:
+        return uri.query['start-token']
+    return None
+
+  GetStartToken = get_start_token
 
 
 class Edited(atom.core.XmlElement):
