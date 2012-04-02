@@ -27,6 +27,8 @@ import atom.http_core
 import gdata.data
 
 
+GD_NAMESPACE = 'http://schemas.google.com/g/2005'
+GD_NAMESPACE_TEMPLATE = '{http://schemas.google.com/g/2005}%s'
 SC_NAMESPACE_TEMPLATE = ('{http://schemas.google.com/'
                         'structuredcontent/2009}%s')
 SCP_NAMESPACE_TEMPLATE = ('{http://schemas.google.com/'
@@ -895,7 +897,7 @@ class ProductEntry(gdata.data.BatchEntry):
 
       entry = ProductEntry()
       entry.year = Year('2001')
-"""
+  """
 
   additional_image_link = [AdditionalImageLink]
   author = Author
@@ -930,6 +932,97 @@ class ProductEntry(gdata.data.BatchEntry):
   target_country = TargetCountry
   tax = [Tax]
   year = Year
+
+  def get_batch_errors(self):
+    """Attempts to parse errors from atom:content element.
+
+    If the atom:content element is type application/vnd.google.gdata.error+xml,
+    then it will contain a gd:errors block.
+
+    Returns:
+      If the type of the content element is not
+          'application/vnd.google.gdata.error+xml', or 0 or more than 1
+          gd:errors elements are found within the <content type='app...'> block,
+          then None is returned. Other wise, the gd:errors element parsed
+          as a ContentForShoppingErrors object is returned.
+    """
+    if self.content.type == 'application/vnd.google.gdata.error+xml':
+      errors_elements = self.content.get_elements(tag='errors',
+                                                  namespace=GD_NAMESPACE)
+      if len(errors_elements) == 1:
+        errors_block = errors_elements[0]
+        return atom.core.parse(errors_block.to_string(),
+                               ContentForShoppingErrors)
+    return None
+
+  GetBatchErrors = get_batch_errors
+
+
+class ErrorDomain(atom.core.XmlElement):
+  """gd:domain element
+
+  The scope of the error. If the error is global (e.g. missing title) then sc
+  value is returned. Otherwise a comma-separated list of destinations is
+  returned.
+
+  This element should be placed inside the gd:error (ContentForShoppingError)
+  element.
+  """
+  _qname = GD_NAMESPACE_TEMPLATE % 'domain'
+
+
+class ErrorCode(atom.core.XmlElement):
+  """gd:code element
+
+  A code to categorize the errors.
+
+  This element should be placed inside the gd:error (ContentForShoppingError)
+  element.
+  """
+  _qname = GD_NAMESPACE_TEMPLATE % 'code'
+
+
+class ErrorLocation(atom.core.XmlElement):
+  """gd:location element
+
+  The name of the attribute that failed validation.
+
+  This element should be placed inside the gd:error (ContentForShoppingError)
+  element.
+  """
+  _qname = GD_NAMESPACE_TEMPLATE % 'location'
+  type = 'type'
+
+
+class InternalReason(atom.core.XmlElement):
+  """gd:internalReason element
+
+  A more detailed message to explain the cause of the error.
+
+  This element should be placed inside the gd:error (ContentForShoppingError)
+  element.
+  """
+  _qname = GD_NAMESPACE_TEMPLATE % 'internalReason'
+
+
+class ContentForShoppingError(atom.core.XmlElement):
+  """gd:error element
+
+  This element should be placed inside the gd:errors (ContentForShoppingErrors)
+  element.
+  """
+  _qname = GD_NAMESPACE_TEMPLATE % 'error'
+  domain = ErrorDomain
+  code = ErrorCode
+  location = ErrorLocation
+  internal_reason = InternalReason
+  id = atom.data.Id
+
+
+class ContentForShoppingErrors(atom.core.XmlElement):
+  """The gd:errors element."""
+  _qname = GD_NAMESPACE_TEMPLATE % 'errors'
+  errors = [ContentForShoppingError]
 
 
 # opensearch needs overriding for wrong version
