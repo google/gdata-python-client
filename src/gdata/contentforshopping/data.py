@@ -123,6 +123,18 @@ class RequiredDestination(atom.core.XmlElement):
   dest = 'dest'
 
 
+class ValidateDestination(atom.core.XmlElement):
+  """sc:validate_destination element
+
+  This element defines the validate destination for a product, namely
+  "ProductSearch", "ProductAds" or "CommerceSearch". It should be added to the
+  app:control element (ProductEntry's "control" attribute) to specify which the
+  destinations you would like error info for.
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'validate_destination'
+  dest = 'dest'
+
+
 class ExcludedDestination(atom.core.XmlElement):
   """sc:excluded_destination element
 
@@ -130,9 +142,6 @@ class ExcludedDestination(atom.core.XmlElement):
   "ProductSearch", "ProductAds" or "CommerceSearch". It should be added to the
   app:control element (ProductEntry's "control" attribute) to specify where the
   product should not appear in search APIs.
-
-  By default, when omitted, the api attempts to upload to as many destinations
-  as possible.
   """
   _qname = SC_NAMESPACE_TEMPLATE % 'excluded_destination'
   dest = 'dest'
@@ -200,8 +209,10 @@ class ProductControl(atom.data.Control):
 
   overridden to provide additional elements in the sc namespace.
   """
-  required_destination = RequiredDestination
-  excluded_destination = ExcludedDestination
+  _qname = atom.data.Control._qname[1]
+  required_destination = [RequiredDestination]
+  validate_destination = [ValidateDestination]
+  excluded_destination = [ExcludedDestination]
   warnings = Warnings
 
 # Content API for Shopping, product (scp) attributes
