@@ -106,6 +106,29 @@ class Adult(atom.core.XmlElement):
   """
   _qname = SC_NAMESPACE_TEMPLATE % 'adult'
 
+
+class Attribute(atom.core.XmlElement):
+  """sc:attribute element
+
+  Generic attribute used for generic projection and to define
+  custom elements.
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'attribute'
+  name = 'name'
+  type = 'type'
+  unit = 'unit'
+
+
+class Group(atom.core.XmlElement):
+  """sc:group element
+
+  Generic group used for generic projection and to define
+  custom elements groups.
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'group'
+  attribute = [Attribute]
+
+
 # Destination Attributes (to be used with app:control element)
 
 class RequiredDestination(atom.core.XmlElement):
@@ -615,6 +638,19 @@ class ProductEntry(gdata.data.BatchEntry):
       entry = ProductEntry()
       entry.author = atom.data.Author(u'Isaac Asimov')
 
+  .. attribute:: attributes
+
+    List of generic attributes.
+
+    This should be a list of :class:`Attribute` elements, for example::
+
+      attribute = Attribute('foo')
+      attribute.name = 'bar'
+      attribute.type = 'baz'
+      attribute.unit = 'kg'
+      entry = ProductEntry()
+      entry.attributes.append(attribute)
+
   .. attribute:: availability
 
     The avilability of a product.
@@ -912,6 +948,7 @@ class ProductEntry(gdata.data.BatchEntry):
 
   additional_image_link = [AdditionalImageLink]
   author = Author
+  attribute = [Attribute]
   availability = Availability
   brand = Brand
   channel = Channel
@@ -926,6 +963,7 @@ class ProductEntry(gdata.data.BatchEntry):
   gender = Gender
   genre = Genre
   google_product_category = GoogleProductCategory
+  group = [Group]
   gtin = Gtin
   image_link = ImageLink
   item_group_id = ItemGroupID
