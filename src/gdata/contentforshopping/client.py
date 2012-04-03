@@ -62,7 +62,8 @@ class ContentForShoppingClient(gdata.client.GDClient):
 
   def _create_uri(self, account_id, resource, path=(), use_projection=True,
                   dry_run=False, warnings=False, max_results=None,
-                  start_token=None, start_index=None):
+                  start_token=None, start_index=None,
+                  performance_start=None, performance_end=None):
     """Create a request uri from the given arguments.
 
     If arguments are None, use the default client attributes.
@@ -88,6 +89,10 @@ class ContentForShoppingClient(gdata.client.GDClient):
       request_params.append('start-token=%s' % start_token)
     if start_index is not None:
       request_params.append('start-index=%s' % start_index)
+    if performance_start is not None:
+      request_params.append('performance.start=%s' % performance_start)
+    if performance_end is not None:
+      request_params.append('performance.end=%s' % performance_end)
     request_params = '&'.join(request_params)
 
     if request_params:
@@ -197,6 +202,7 @@ class ContentForShoppingClient(gdata.client.GDClient):
   # Operations on multiple products
 
   def get_products(self, max_results=None, start_token=None, start_index=None,
+                   performance_start=None, performance_end=None,
                    account_id=None, auth_token=None):
     """Get a feed of products for the account.
 
@@ -205,14 +211,23 @@ class ContentForShoppingClient(gdata.client.GDClient):
     :param start_token: The start token of the feed provided by the API.
     :param start_index: The starting index of the feed to return (default 1,
                         maximum 10000)
+    :param performance_start: The start date (inclusive) of click data returned.
+                              Should be represented as YYYY-MM-DD; not appended
+                              if left as None.
+    :param performance_end: The end date (inclusive) of click data returned.
+                            Should be represented as YYYY-MM-DD; not appended
+                            if left as None.
     :param account_id: The Merchant Center Account ID. If ommitted the default
                        Account ID will be used for this client
     :param auth_token: An object which sets the Authorization HTTP header in its
                        modify_request method.
     """
     uri = self._create_uri(account_id, 'items/products',
-                           max_results=max_results, start_token=start_token,
-                           start_index=start_index)
+                           max_results=max_results,
+                           start_token=start_token,
+                           start_index=start_index,
+                           performance_start=performance_start,
+                           performance_end=performance_end)
     return self.get_feed(uri, auth_token=auth_token,
         desired_class=gdata.contentforshopping.data.ProductFeed)
 

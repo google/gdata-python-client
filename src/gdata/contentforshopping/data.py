@@ -226,6 +226,27 @@ class Warnings(atom.core.XmlElement):
   _qname = SC_NAMESPACE_TEMPLATE % 'warnings'
   warnings = [WarningElement]
 
+
+class Datapoint(atom.core.XmlElement):
+  """sc:datapoint element
+
+  Datapoint representing click data for an item on
+  a given day.
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'datapoint'
+  clicks = 'clicks'
+  date = 'date'
+
+
+class Performance(atom.core.XmlElement):
+  """sc:performance element
+
+  Container element for daily click data.
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'performance'
+  datapoint = [Datapoint]
+
+
 class ProductControl(atom.data.Control):
   """
   app:control element
@@ -638,7 +659,7 @@ class ProductEntry(gdata.data.BatchEntry):
       entry = ProductEntry()
       entry.author = atom.data.Author(u'Isaac Asimov')
 
-  .. attribute:: attributes
+  .. attribute:: attribute
 
     List of generic attributes.
 
@@ -846,6 +867,12 @@ class ProductEntry(gdata.data.BatchEntry):
       entry = ProductEntry()
       entry.pattern = Pattern('polka dots')
 
+  .. attribute:: performance
+
+    The performance of the product.
+
+    This should be a :class:`Performance` element.
+
   .. attribute:: price
 
     The price for this product.
@@ -971,6 +998,7 @@ class ProductEntry(gdata.data.BatchEntry):
   material = Material
   mpn = Mpn
   pattern = Pattern
+  performance = Performance
   price = Price
   product_id = ProductId
   product_type = ProductType
