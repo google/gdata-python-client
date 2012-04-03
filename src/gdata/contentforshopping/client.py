@@ -251,6 +251,8 @@ class ContentForShoppingClient(gdata.client.GDClient):
     return self.post(feed, uri=uri, auth_token=auth_token,
                      desired_class=ProductFeed)
 
+  Batch = batch
+
   def insert_products(self, products, account_id=None, auth_token=None,
                       dry_run=False, warnings=False):
     """Insert the products using a batch request
