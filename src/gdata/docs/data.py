@@ -391,7 +391,7 @@ class AclFeed(gdata.acl.data.AclFeed):
   entry = [AclEntry]
 
 
-class Resource(gdata.data.GDEntry, CategoryFinder):
+class Resource(gdata.data.BatchEntry, CategoryFinder):
   """DocList version of an Atom Entry."""
 
   last_viewed = LastViewed
@@ -475,7 +475,7 @@ class Resource(gdata.data.GDEntry, CategoryFinder):
   InCollections = in_collections
 
 
-class ResourceFeed(gdata.data.GDFeed):
+class ResourceFeed(gdata.data.BatchFeed):
   """Main feed containing a list of resources."""
   entry = [Resource]
 
