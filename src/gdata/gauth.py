@@ -1160,8 +1160,8 @@ class OAuth2Token(object):
   def __init__(self, client_id, client_secret, scope, user_agent,
       auth_uri='https://accounts.google.com/o/oauth2/auth',
       token_uri='https://accounts.google.com/o/oauth2/token',
-      revoke_uri='https://accounts.google.com/o/oauth2/revoke',
-      access_token=None, refresh_token=None):
+      access_token=None, refresh_token=None,
+      revoke_uri='https://accounts.google.com/o/oauth2/revoke'):
     """Create an instance of OAuth2Token
 
     This constructor is not usually called by the user, instead
