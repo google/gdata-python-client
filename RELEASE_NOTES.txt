@@ -1,3 +1,136 @@
+=== 2.0.17 ===
+1143   3a0447b78b27   2012-04-20 13:25 -0400   jeffy
+  The gdata.youtube.service class now explicitly sets the GData-Version: 1 header, and is updated to use the correct ClientLogin URL.
+
+1142   1e302ccfd1db   2012-04-19 14:09 -0700   dhermes
+  Adding support for OAuth2 revoke endpoint.
+
+1141   7dbf78073e2c   2012-04-18 09:51 -0700   alainv
+  Make Resource and ResourceFeed "Batch" compatible.
+
+1140   cde9a812ff75   2012-04-02 22:25 -0700   dhermes
+  Forgot to add camelcase alias for batch in issue 5970062.
+
+1139   f3db7c388325   2012-04-02 20:37 -0700   dhermes
+  Adding support for performance data in Content API for Shopping (fixes Issue 5976061).
+
+1138   f5d8bd1a5d58   2012-04-02 20:30 -0700   dhermes
+  Added support for custom attributes in Content API for Shopping (fixes Issue 5970070).
+
+1137   df2263245009   2012-04-02 08:18 -0700   dhermes
+  Changed dest attrs in Content API to iterable, added validate_dest and fixed qname on app:control (fixes Issue 5976046).
+
+1136   6fa84c09df8e   2012-04-02 07:46 -0700   dhermes
+  Added camel case names to content API client public methods (fixes Issue 5970062).
+
+1135   f5d03167e6de   2012-04-02 07:38 -0700   dhermes
+  Added support for Content for API errors on single and batch requests (fixes Issue 5971061).
+
+1134   906bb1d9c899   2012-04-02 07:31 -0700   dhermes
+  Added support for start-token in Content API for Shopping (closes Issue 5980044).
+
+1133   f98fff494fb8   2012-03-30 11:36 -0700   alainv
+  Change gdata.docs.client.DocsClient.DeleteResource to use the entry instead of the link.
+
+1132   e3594e4ea683   2012-03-30 10:56 -0700   alainv
+  Allow for random kwargs in atom.client.AtomClient.request method.
+
+1131   57db9d630ee7   2012-03-29 15:44 -0700   dhermes
+  Changing Shipping to list element in Content API for Shopping.
+
+1130   ab61823f2562   2012-03-29 15:34 -0700   dhermes
+  Fixing behavior in atom.http_core.Uri._get_query_string for query parameters with no parameter value (closes Issue 5938047).
+
+1129   583a2f25c123   2012-03-27 15:21 -0700   dhermes
+  Fixed batch function issues in content api for shopping client.
+
+1128   900e9a0c3b3a   2012-03-03 18:08 -0800   ccherubino
+  Updated GetFeed methods in the Email Settings API to return typed feeds
+
+1127   c21438385488   2012-02-29 09:18 -0800   dhermes
+  Namespace for channel element (in contentforshopping) was promoted from scp to sc.
+
+1126   5e7914da3fc5   2012-02-13 10:29 -0500   afshar
+  Fixed release date year.
+
+1125   78f1044f8338   2012-02-09 16:48 -0800   ccherubino
+  Fixing bug in recent change to the Email Settings API client library (rev. 194d0fd21fdd) + some typos
+
+1123   194d0fd21fdd   2012-02-09 11:29 -0800   ccherubino
+  Updating the Email Settings API to return instances of the correct classes when retrieving settings
+
+1122:1120   5d90af058646   2012-02-09 17:14 +0530   shraddhag
+  Added a sample to create a group and update its settings using the Groups Provisioning and Groups Settings APIs.
+
+1121   632df99f18bb   2012-02-09 14:30 -0500   afshar
+  Added docs:description element to docs resources.
+
+1120   b916755be737   2012-02-02 09:49 -0500   afshar
+  Fixed error in docs sample.
+
+1119   19b1a2901d7e   2012-02-01 12:20 +0530   gunjansharma
+  Added scopes for all Admin APIs in apps tag
+
+1118   0e47dfadd4f6   2012-02-01 12:18 +0530   gunjansharma
+  Added a sample for Email Audit API demonstrating CRUD operations on email monitors
+
+1117   ce66eae4ca6f   2012-01-31 17:02 -0800   dhermes
+  Fixed small doc errors, made tax a list element
+
+1116   9676d3b1059b   2012-01-30 08:57 -0800   alainv
+  Fix issues 590/591: Contact's gender XML element was wrong.
+
+1115   32d0f6e650f5   2012-01-30 15:54 +0530   gunjansharma
+  Added a sample marketplace application
+
+1114   3a91fa3c66d1   2012-01-30 14:50 +0530   shraddhag
+  Sample to delete obsolete suspended users
+
+1113   1b7323bc42e7   2012-01-30 14:49 +0530   shraddhag
+  Sample to retrieve user's profile and contacts using 2LO
+
+1112   3265462309de   2012-01-25 22:42 -0500   vicfryzel
+  Fixing issue 587.  Wrong URL used for batch ACL changes.
+
+1111   15e17565f0ed   2012-01-24 12:04 +0530   shraddhag
+  Added a sample to list all the members of a group
+
+1108:1106   d762873e72e8   2012-01-06 14:35 -0800   alainv
+  Adding access_type=offline to OAuth 2.0 authorize URL.
+
+1107   9941fe8ba765   2012-01-20 19:30 +0000   afshar
+  Check document list entries have a content before trying to download them.
+
+1106   090c7ee66c93   2012-01-05 20:43 +0000   afshar
+  Added tag 2.0.16 for changeset c67f3c6398ba
+
+1105[2.0.16]   c67f3c6398ba   2012-01-05 20:39 +0000   afshar
+  Updated hgignore
+
+1104   e3c66713a107   2012-01-05 20:34 +0000   afshar
+  Updated MANIFEST.in
+
+1103   20c9ab58878a   2012-01-05 20:24 +0000   afshar
+  Use a generated MANIFEST from MANIFEST.in
+
+1102   b395b9e31ee9   2012-01-05 20:15 +0000   afshar
+  Updated release notes.
+
+1101   012305c4dac1   2012-01-05 19:43 +0000   afshar
+  Fixed recording test, sometimes outside the US, google.com tries to redirect.
+
+1100   e93eb1a3fe7c   2012-01-05 19:08 +0000   afshar
+  Updated pydocs
+
+1099   85cc6c57a719   2012-01-05 19:08 +0000   afshar
+  Bumped version string
+
+1098   afd40075d6bd   2012-01-05 18:42 +0000   afshar
+  Fixed doc generation script for my environment.
+
+1096   c6b6a36a98be   2012-01-16 22:21 +0530   shraddhag
+  Added a sample to search users with a given pattern and and move them to an organization
+
 === 2.0.16 ===
 5 Jan 2012
 
