@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.contentforshopping.html"><font color="#ffffff">contentforshopping</font></a>.client</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/working/gdata-python-client/src/gdata/contentforshopping/client.py">/home/afshar/working/gdata-python-client/src/gdata/contentforshopping/client.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/wrk/gdata-python-client/src/gdata/contentforshopping/client.py">/home/afshar/wrk/gdata-python-client/src/gdata/contentforshopping/client.py</a></font></td></tr></table>
     <p><tt>Extend&nbsp;the&nbsp;gdata&nbsp;client&nbsp;for&nbsp;the&nbsp;Content&nbsp;API&nbsp;for&nbsp;Shopping.<br>
 &nbsp;<br>
 TODO:<br>
@@ -62,6 +62,42 @@ TODO:<br>
 </dl>
 <hr>
 Methods defined here:<br>
+<dl><dt><a name="ContentForShoppingClient-Batch"><strong>Batch</strong></a> = <a href="#ContentForShoppingClient-batch">batch</a>(self, feed, account_id<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, dry_run<font color="#909090">=False</font>, warnings<font color="#909090">=False</font>)</dt></dl>
+
+<dl><dt><a name="ContentForShoppingClient-DeleteClientAccount"><strong>DeleteClientAccount</strong></a> = <a href="#ContentForShoppingClient-delete_client_account">delete_client_account</a>(self, client_account_id, account_id<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, dry_run<font color="#909090">=False</font>, warnings<font color="#909090">=False</font>)</dt></dl>
+
+<dl><dt><a name="ContentForShoppingClient-DeleteDatafeed"><strong>DeleteDatafeed</strong></a> = <a href="#ContentForShoppingClient-delete_datafeed">delete_datafeed</a>(self, feed_id, account_id<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="ContentForShoppingClient-DeleteProduct"><strong>DeleteProduct</strong></a> = <a href="#ContentForShoppingClient-delete_product">delete_product</a>(self, product, account_id<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, dry_run<font color="#909090">=False</font>, warnings<font color="#909090">=False</font>)</dt></dl>
+
+<dl><dt><a name="ContentForShoppingClient-DeleteProducts"><strong>DeleteProducts</strong></a> = <a href="#ContentForShoppingClient-delete_products">delete_products</a>(self, products, account_id<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, dry_run<font color="#909090">=False</font>, warnings<font color="#909090">=False</font>)</dt></dl>
+
+<dl><dt><a name="ContentForShoppingClient-GetClientAccounts"><strong>GetClientAccounts</strong></a> = <a href="#ContentForShoppingClient-get_client_accounts">get_client_accounts</a>(self, account_id<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="ContentForShoppingClient-GetDatafeed"><strong>GetDatafeed</strong></a> = <a href="#ContentForShoppingClient-get_datafeed">get_datafeed</a>(self, feed_id, account_id<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="ContentForShoppingClient-GetDatafeeds"><strong>GetDatafeeds</strong></a> = <a href="#ContentForShoppingClient-get_datafeeds">get_datafeeds</a>(self, account_id<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="ContentForShoppingClient-GetProduct"><strong>GetProduct</strong></a> = <a href="#ContentForShoppingClient-get_product">get_product</a>(self, id, country, language, account_id<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="ContentForShoppingClient-GetProducts"><strong>GetProducts</strong></a> = <a href="#ContentForShoppingClient-get_products">get_products</a>(self, max_results<font color="#909090">=None</font>, start_token<font color="#909090">=None</font>, start_index<font color="#909090">=None</font>, performance_start<font color="#909090">=None</font>, performance_end<font color="#909090">=None</font>, account_id<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="ContentForShoppingClient-InsertClientAccount"><strong>InsertClientAccount</strong></a> = <a href="#ContentForShoppingClient-insert_client_account">insert_client_account</a>(self, entry, account_id<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, dry_run<font color="#909090">=False</font>, warnings<font color="#909090">=False</font>)</dt></dl>
+
+<dl><dt><a name="ContentForShoppingClient-InsertDatafeed"><strong>InsertDatafeed</strong></a> = <a href="#ContentForShoppingClient-insert_datafeed">insert_datafeed</a>(self, entry, account_id<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, dry_run<font color="#909090">=False</font>, warnings<font color="#909090">=False</font>)</dt></dl>
+
+<dl><dt><a name="ContentForShoppingClient-InsertProduct"><strong>InsertProduct</strong></a> = <a href="#ContentForShoppingClient-insert_product">insert_product</a>(self, product, account_id<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, dry_run<font color="#909090">=False</font>, warnings<font color="#909090">=False</font>)</dt></dl>
+
+<dl><dt><a name="ContentForShoppingClient-InsertProducts"><strong>InsertProducts</strong></a> = <a href="#ContentForShoppingClient-insert_products">insert_products</a>(self, products, account_id<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, dry_run<font color="#909090">=False</font>, warnings<font color="#909090">=False</font>)</dt></dl>
+
+<dl><dt><a name="ContentForShoppingClient-UpdateClientAccount"><strong>UpdateClientAccount</strong></a> = <a href="#ContentForShoppingClient-update_client_account">update_client_account</a>(self, entry, client_account_id, account_id<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, dry_run<font color="#909090">=False</font>, warnings<font color="#909090">=False</font>)</dt></dl>
+
+<dl><dt><a name="ContentForShoppingClient-UpdateDatafeed"><strong>UpdateDatafeed</strong></a> = <a href="#ContentForShoppingClient-update_datafeed">update_datafeed</a>(self, entry, feed_id, account_id<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, dry_run<font color="#909090">=False</font>, warnings<font color="#909090">=False</font>)</dt></dl>
+
+<dl><dt><a name="ContentForShoppingClient-UpdateProduct"><strong>UpdateProduct</strong></a> = <a href="#ContentForShoppingClient-update_product">update_product</a>(self, product, account_id<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, dry_run<font color="#909090">=False</font>, warnings<font color="#909090">=False</font>)</dt></dl>
+
+<dl><dt><a name="ContentForShoppingClient-UpdateProducts"><strong>UpdateProducts</strong></a> = <a href="#ContentForShoppingClient-update_products">update_products</a>(self, products, account_id<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, dry_run<font color="#909090">=False</font>, warnings<font color="#909090">=False</font>)</dt></dl>
+
 <dl><dt><a name="ContentForShoppingClient-__init__"><strong>__init__</strong></a>(self, account_id<font color="#909090">=None</font>, api_version<font color="#909090">='v1'</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="ContentForShoppingClient-batch"><strong>batch</strong></a>(self, feed, account_id<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, dry_run<font color="#909090">=False</font>, warnings<font color="#909090">=False</font>)</dt><dd><tt>Send&nbsp;a&nbsp;batch&nbsp;request.<br>
@@ -149,12 +185,19 @@ Methods defined here:<br>
 :param&nbsp;auth_token:&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header&nbsp;in&nbsp;its<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modify_request&nbsp;method.</tt></dd></dl>
 
-<dl><dt><a name="ContentForShoppingClient-get_products"><strong>get_products</strong></a>(self, start_index<font color="#909090">=None</font>, max_results<font color="#909090">=None</font>, account_id<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>)</dt><dd><tt>Get&nbsp;a&nbsp;feed&nbsp;of&nbsp;products&nbsp;for&nbsp;the&nbsp;account.<br>
+<dl><dt><a name="ContentForShoppingClient-get_products"><strong>get_products</strong></a>(self, max_results<font color="#909090">=None</font>, start_token<font color="#909090">=None</font>, start_index<font color="#909090">=None</font>, performance_start<font color="#909090">=None</font>, performance_end<font color="#909090">=None</font>, account_id<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>)</dt><dd><tt>Get&nbsp;a&nbsp;feed&nbsp;of&nbsp;products&nbsp;for&nbsp;the&nbsp;account.<br>
 &nbsp;<br>
 :param&nbsp;max_results:&nbsp;The&nbsp;maximum&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return&nbsp;(default&nbsp;25,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum&nbsp;250).<br>
+:param&nbsp;start_token:&nbsp;The&nbsp;start&nbsp;token&nbsp;of&nbsp;the&nbsp;feed&nbsp;provided&nbsp;by&nbsp;the&nbsp;API.<br>
 :param&nbsp;start_index:&nbsp;The&nbsp;starting&nbsp;index&nbsp;of&nbsp;the&nbsp;feed&nbsp;to&nbsp;return&nbsp;(default&nbsp;1,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum&nbsp;10000)<br>
+:param&nbsp;performance_start:&nbsp;The&nbsp;start&nbsp;date&nbsp;(inclusive)&nbsp;of&nbsp;click&nbsp;data&nbsp;returned.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Should&nbsp;be&nbsp;represented&nbsp;as&nbsp;YYYY-MM-DD;&nbsp;not&nbsp;appended<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;left&nbsp;as&nbsp;None.<br>
+:param&nbsp;performance_end:&nbsp;The&nbsp;end&nbsp;date&nbsp;(inclusive)&nbsp;of&nbsp;click&nbsp;data&nbsp;returned.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Should&nbsp;be&nbsp;represented&nbsp;as&nbsp;YYYY-MM-DD;&nbsp;not&nbsp;appended<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;left&nbsp;as&nbsp;None.<br>
 :param&nbsp;account_id:&nbsp;The&nbsp;Merchant&nbsp;Center&nbsp;Account&nbsp;ID.&nbsp;If&nbsp;ommitted&nbsp;the&nbsp;default<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account&nbsp;ID&nbsp;will&nbsp;be&nbsp;used&nbsp;for&nbsp;this&nbsp;client<br>
 :param&nbsp;auth_token:&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header&nbsp;in&nbsp;its<br>
@@ -263,22 +306,6 @@ Data and other attributes defined here:<br>
 
 <hr>
 Methods inherited from <a href="gdata.client.html#GDClient">gdata.client.GDClient</a>:<br>
-<dl><dt><a name="ContentForShoppingClient-Batch"><strong>Batch</strong></a> = batch(self, feed, uri<font color="#909090">=None</font>, force<font color="#909090">=False</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Sends&nbsp;a&nbsp;batch&nbsp;request&nbsp;to&nbsp;the&nbsp;server&nbsp;to&nbsp;execute&nbsp;operation&nbsp;entries.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;feed:&nbsp;A&nbsp;batch&nbsp;feed&nbsp;containing&nbsp;batch&nbsp;entries,&nbsp;each&nbsp;is&nbsp;an&nbsp;operation.<br>
-&nbsp;&nbsp;uri:&nbsp;(optional)&nbsp;The&nbsp;uri&nbsp;to&nbsp;which&nbsp;the&nbsp;batch&nbsp;request&nbsp;feed&nbsp;should&nbsp;be&nbsp;POSTed.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;none&nbsp;is&nbsp;provided,&nbsp;then&nbsp;the&nbsp;feed's&nbsp;edit&nbsp;link&nbsp;will&nbsp;be&nbsp;used.<br>
-&nbsp;&nbsp;force:&nbsp;(optional)&nbsp;boolean&nbsp;set&nbsp;to&nbsp;True&nbsp;if&nbsp;you&nbsp;want&nbsp;the&nbsp;batch&nbsp;update&nbsp;to<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clobber&nbsp;all&nbsp;data.&nbsp;If&nbsp;False,&nbsp;the&nbsp;version&nbsp;in&nbsp;the&nbsp;information&nbsp;in&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed&nbsp;object&nbsp;will&nbsp;cause&nbsp;the&nbsp;server&nbsp;to&nbsp;check&nbsp;to&nbsp;see&nbsp;that&nbsp;no&nbsp;changes<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intervened&nbsp;between&nbsp;when&nbsp;you&nbsp;fetched&nbsp;the&nbsp;data&nbsp;and&nbsp;when&nbsp;you&nbsp;sent&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;changes.<br>
-&nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;An&nbsp;object&nbsp;which&nbsp;sets&nbsp;the&nbsp;Authorization&nbsp;HTTP&nbsp;header<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;its&nbsp;modify_request&nbsp;method.&nbsp;Recommended&nbsp;classes&nbsp;include<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gdata.gauth.ClientLoginToken&nbsp;and&nbsp;gdata.gauth.AuthSubToken<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;others.</tt></dd></dl>
-
 <dl><dt><a name="ContentForShoppingClient-ClientLogin"><strong>ClientLogin</strong></a> = client_login(self, email, password, source, service<font color="#909090">=None</font>, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, auth_url<font color="#909090">=&lt;atom.http_core.Uri object&gt;</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;an&nbsp;auth&nbsp;request&nbsp;using&nbsp;the&nbsp;user's&nbsp;email&nbsp;address&nbsp;and&nbsp;password.<br>
 &nbsp;<br>
 In&nbsp;order&nbsp;to&nbsp;modify&nbsp;user&nbsp;specific&nbsp;data&nbsp;and&nbsp;read&nbsp;user&nbsp;private&nbsp;data,&nbsp;your<br>
