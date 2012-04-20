@@ -41,7 +41,7 @@ import gdata.youtube
 
 YOUTUBE_SERVER = 'gdata.youtube.com'
 YOUTUBE_SERVICE = 'youtube'
-YOUTUBE_CLIENTLOGIN_AUTHENTICATION_URL = 'https://www.google.com/youtube/accounts/ClientLogin'
+YOUTUBE_CLIENTLOGIN_AUTHENTICATION_URL = 'https://www.google.com/accounts/ClientLogin'
 YOUTUBE_SUPPORTED_UPLOAD_TYPES = ('mov', 'avi', 'wmv', 'mpg', 'quicktime',
                                   'flv', 'mp4', 'x-flv')
 YOUTUBE_QUERY_VALID_TIME_PARAMETERS = ('today', 'this_week', 'this_month',
@@ -168,6 +168,9 @@ class YouTubeService(gdata.service.GDataService):
 
     if developer_key is not None:
       self.additional_headers['X-GData-Key'] = 'key=%s' % developer_key
+
+    if 'GData-Version' not in self.additional_headers:
+      self.additional_headers['GData-Version'] = 1
 
     self.auth_service_url = YOUTUBE_CLIENTLOGIN_AUTHENTICATION_URL
 
