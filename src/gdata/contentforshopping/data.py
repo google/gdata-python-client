@@ -1220,8 +1220,7 @@ class ProcessingStatus(atom.core.XmlElement):
 
 
 class DatafeedEntry(gdata.data.GDEntry):
-  """An entry for a Datafeed
-  """
+  """An entry for a Datafeed."""
   content_language = ContentLanguage
   target_country = TargetCountry
   feed_file_name = FeedFileName
@@ -1233,9 +1232,11 @@ class DatafeedEntry(gdata.data.GDEntry):
 
 
 class DatafeedFeed(gdata.data.GDFeed):
-  """A datafeed feed
-  """
+  """A datafeed feed."""
   entry = [DatafeedEntry]
+  total_results = TotalResults
+  items_per_page = ItemsPerPage
+  start_index = StartIndex
 
 
 class AdultContent(atom.core.XmlElement):
@@ -1257,17 +1258,18 @@ class ReviewsUrl(atom.core.XmlElement):
 
 
 class ClientAccount(gdata.data.GDEntry):
-  """A multiclient account entry
-  """
+  """A multiclient account entry."""
   adult_content = AdultContent
   internal_id = InternalId
   reviews_url = ReviewsUrl
 
 
 class ClientAccountFeed(gdata.data.GDFeed):
-  """A multiclient account feed
-  """
+  """A multiclient account feed."""
   entry = [ClientAccount]
+  total_results = TotalResults
+  items_per_page = ItemsPerPage
+  start_index = StartIndex
 
 
 # Users Feed Classes
@@ -1291,6 +1293,9 @@ class UsersEntry(gdata.data.GDEntry):
 class UsersFeed(gdata.data.GDFeed):
   """A User Management Feed."""
   entry = [UsersEntry]
+  total_results = TotalResults
+  items_per_page = ItemsPerPage
+  start_index = StartIndex
 
 
 # Data Quality Feed Classes
@@ -1361,3 +1366,6 @@ class DataQualityEntry(gdata.data.GDEntry):
 class DataQualityFeed(gdata.data.GDFeed):
   """A Data Quality Feed."""
   entry = [DataQualityEntry]
+  total_results = TotalResults
+  items_per_page = ItemsPerPage
+  start_index = StartIndex
