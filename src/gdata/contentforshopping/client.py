@@ -1,3 +1,4 @@
+
 #!/usr/bin/python
 #
 # Copyright (C) 2010-2011 Google Inc.
@@ -15,19 +16,14 @@
 # limitations under the License.
 
 
-"""Extend the gdata client for the Content API for Shopping.
-
-TODO:
-
-1. Proper MCA Support.
-2. Add classes for datafeed functions instead of asking for raw XML.
-"""
+"""Extend the gdata client for the Content API for Shopping."""
 
 
 __author__ = 'afshar (Ali Afshar), dhermes (Daniel Hermes)'
 
 
-import atom.data
+import urllib
+
 import gdata.client
 from gdata.contentforshopping.data import ClientAccount
 from gdata.contentforshopping.data import ClientAccountFeed
@@ -35,6 +31,8 @@ from gdata.contentforshopping.data import DatafeedEntry
 from gdata.contentforshopping.data import DatafeedFeed
 from gdata.contentforshopping.data import ProductEntry
 from gdata.contentforshopping.data import ProductFeed
+from gdata.contentforshopping.data import UsersEntry
+from gdata.contentforshopping.data import UsersFeed
 
 
 CFS_VERSION = 'v1'
@@ -75,7 +73,7 @@ class ContentForShoppingClient(gdata.client.GDClient):
     segments = [CFS_URI, self.cfs_api_version, account_id, resource]
     if use_projection:
       segments.append(CFS_PROJECTION)
-    segments.extend(path)
+    segments.extend(urllib.quote(value) for value in path)
     result = '/'.join(segments)
 
     request_params = []
@@ -482,3 +480,85 @@ class ContentForShoppingClient(gdata.client.GDClient):
     return self.delete(uri, auth_token=auth_token)
 
   DeleteClientAccount = delete_client_account
+
+  def get_users_feed(self, account_id=None, auth_token=None):
+    """Get the users feed for an account.
+
+    :param account_id: The Merchant Center Account ID. If ommitted the default
+                       Account ID will be used for this client
+    :param auth_token: An object which sets the Authorization HTTP header in its
+                       modify_request method.
+    """
+
+    uri = self._create_uri(account_id, 'users', use_projection=False)
+    return self.get_feed(uri, auth_token=auth_token, desired_class=UsersFeed)
+
+  GetUsersFeed = get_users_feed
+
+  def get_users_entry(self, user_email, account_id=None, auth_token=None):
+    """Get a users feed entry for an account.
+
+    :param user_email: Email of the user entry to be retrieved.
+    :param account_id: The Merchant Center Account ID. If ommitted the default
+                       Account ID will be used for this client
+    :param auth_token: An object which sets the Authorization HTTP header in its
+                       modify_request method.
+    """
+    uri = self._create_uri(
+        account_id, 'users', path=[user_email], use_projection=False)
+    return self.get_entry(uri, auth_token=auth_token, desired_class=UsersEntry)
+
+  GetUsersEntry = get_users_entry
+
+  def insert_users_entry(self, entry, account_id=None, auth_token=None):
+    """Insert a users feed entry for an account.
+
+    :param entry: A :class:`gdata.contentforshopping.data.UsersEntry` with
+                  the required user data.
+    :param account_id: The Merchant Center Account ID. If ommitted the default
+                       Account ID will be used for this client
+    :param auth_token: An object which sets the Authorization HTTP header in its
+                       modify_request method.
+    """
+    uri = self._create_uri(account_id, 'users', use_projection=False)
+    return self.post(entry, uri=uri, auth_token=auth_token)
+
+  InsertUsersEntry = insert_users_entry
+
+  def update_users_entry(self, entry, account_id=None, auth_token=None):
+    """Update a users feed entry for an account.
+
+    :param entry: A :class:`gdata.contentforshopping.data.UsersEntry` with
+                  the required user data.
+    :param account_id: The Merchant Center Account ID. If ommitted the default
+                       Account ID will be used for this client
+    :param auth_token: An object which sets the Authorization HTTP header in its
+                       modify_request method.
+    """
+    # Could also use entry.find_edit_link() but that is inconsistent
+    # with the rest of the module
+    user_email = entry.title.text
+    uri = self._create_uri(
+        account_id, 'users', path=[user_email], use_projection=False)
+    return self.update(entry, uri=uri, auth_token=auth_token)
+
+  UpdateUsersEntry = update_users_entry
+
+  def delete_users_entry(self, entry, account_id=None, auth_token=None):
+    """Delete a users feed entry for an account.
+
+    :param entry: A :class:`gdata.contentforshopping.data.UsersEntry` with
+                  the required user data.
+    :param account_id: The Merchant Center Account ID. If ommitted the default
+                       Account ID will be used for this client
+    :param auth_token: An object which sets the Authorization HTTP header in its
+                       modify_request method.
+    """
+    # Could also use entry.find_edit_link() but that is inconsistent
+    # with the rest of the module
+    user_email = entry.title.text
+    uri = self._create_uri(
+        account_id, 'users', path=[user_email], use_projection=False)
+    return self.delete(uri, auth_token=auth_token)
+
+  DeleteUsersEntry = delete_users_entry

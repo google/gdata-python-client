@@ -27,7 +27,6 @@ import atom.http_core
 import gdata.data
 
 
-ATOM_NAMESPACE = 'http://www.w3.org/2005/Atom'
 GD_NAMESPACE = 'http://schemas.google.com/g/2005'
 GD_NAMESPACE_TEMPLATE = '{http://schemas.google.com/g/2005}%s'
 SC_NAMESPACE_TEMPLATE = ('{http://schemas.google.com/'
@@ -170,19 +169,6 @@ class ExcludedDestination(atom.core.XmlElement):
   _qname = SC_NAMESPACE_TEMPLATE % 'excluded_destination'
   dest = 'dest'
 
-
-class Status(atom.core.XmlElement):
-  """sc:status element
-
-  This element defines the status of an element in a particular destination. It
-  has a destination and an actual status such as enlisted, review, or
-  disapproved.
-  """
-  _qname = SC_NAMESPACE_TEMPLATE % 'status'
-  dest = 'dest'
-  status = 'status'
-
-
 # Warning Attributes (to be used with app:control element)
 
 class Code(atom.core.XmlElement):
@@ -271,7 +257,6 @@ class ProductControl(atom.data.Control):
   required_destination = [RequiredDestination]
   validate_destination = [ValidateDestination]
   excluded_destination = [ExcludedDestination]
-  statuses = [Status]
   warnings = Warnings
 
 # Content API for Shopping, product (scp) attributes
@@ -1108,20 +1093,7 @@ class ContentForShoppingError(atom.core.XmlElement):
   code = ErrorCode
   location = ErrorLocation
   internal_reason = InternalReason
-
-  @property
-  def id(self):
-    """Id for error element.
-
-    The namespace for the id element is different in batch requests than in
-    individual requests, so we need to consider either case.
-    """
-    for element in self.GetElements():
-      if element.tag == 'id':
-        if element.namespace in (GD_NAMESPACE, ATOM_NAMESPACE):
-          return element.text
-
-    return None
+  id = atom.data.Id
 
 
 class ContentForShoppingErrors(atom.core.XmlElement):
@@ -1268,3 +1240,26 @@ class ClientAccountFeed(gdata.data.GDFeed):
   """A multiclient account feed
   """
   entry = [ClientAccount]
+
+
+# Users Feed Classes
+class Admin(atom.core.XmlElement):
+  """sc:admin element"""
+  _qname = SC_NAMESPACE_TEMPLATE % 'admin'
+
+
+class Permission(atom.core.XmlElement):
+  """sc:permission element"""
+  _qname = SC_NAMESPACE_TEMPLATE % 'permission'
+  scope = 'scope'
+
+
+class UsersEntry(gdata.data.GDEntry):
+  """A User Management Feed entry."""
+  admin = Admin
+  permission = [Permission]
+
+
+class UsersFeed(gdata.data.GDFeed):
+  """A User Management Feed."""
+  entry = [UsersEntry]
