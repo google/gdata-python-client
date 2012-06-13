@@ -1111,17 +1111,17 @@ class ContentForShoppingError(atom.core.XmlElement):
 
   @property
   def id(self):
-  """Id for error element.
+    """Id for error element.
 
-  The namespace for the id element is different in batch requests than in
-  individual requests, so we need to consider either case.
-  """
-  for element in self.GetElements():
-    if element.tag == 'id':
-      if element.namespace in (GD_NAMESPACE, ATOM_NAMESPACE):
-        return element.text
+    The namespace for the id element is different in batch requests than in
+    individual requests, so we need to consider either case.
+    """
+    for element in self.GetElements():
+      if element.tag == 'id':
+        if element.namespace in (GD_NAMESPACE, ATOM_NAMESPACE):
+          return element.text
 
-  return None
+    return None
 
 
 class ContentForShoppingErrors(atom.core.XmlElement):
@@ -1291,3 +1291,73 @@ class UsersEntry(gdata.data.GDEntry):
 class UsersFeed(gdata.data.GDFeed):
   """A User Management Feed."""
   entry = [UsersEntry]
+
+
+# Data Quality Feed Classes
+class ExampleItemLink(atom.core.XmlElement):
+  """sc:link element"""
+  _qname = SC_NAMESPACE_TEMPLATE % 'link'
+
+
+class ExampleItemTitle(atom.core.XmlElement):
+  """sc:title element"""
+  _qname = SC_NAMESPACE_TEMPLATE % 'title'
+
+
+class ItemId(atom.core.XmlElement):
+  """sc:item_id element"""
+  _qname = SC_NAMESPACE_TEMPLATE % 'item_id'
+
+
+class SubmittedValue(atom.core.XmlElement):
+  """sc:submitted_value element"""
+  _qname = SC_NAMESPACE_TEMPLATE % 'submitted_value'
+
+
+class ValueOnLandingPage(atom.core.XmlElement):
+  """sc:value_on_landing_page element"""
+  _qname = SC_NAMESPACE_TEMPLATE % 'value_on_landing_page'
+
+
+class ExampleItem(atom.core.XmlElement):
+  """sc:example_item element"""
+  _qname = SC_NAMESPACE_TEMPLATE % 'example_item'
+  item_id = ItemId
+  link = ExampleItemLink
+  title = ExampleItemTitle
+  submitted_value = SubmittedValue
+  value_on_landing_page = ValueOnLandingPage
+
+
+class Issue(atom.core.XmlElement):
+  """sc:issue element"""
+  _qname = SC_NAMESPACE_TEMPLATE % 'issue'
+  id = 'id'
+  last_checked = 'last_checked'
+  num_items = 'num_items'
+  offending_term = 'offending_term'
+  example_item = [ExampleItem]
+
+
+class IssueGroup(atom.core.XmlElement):
+  """sc:issue_group element"""
+  _qname = SC_NAMESPACE_TEMPLATE % 'issue_group'
+  issue = [Issue]
+  country = 'country'
+  id = 'id'
+
+
+class IssueGroups(atom.core.XmlElement):
+  """sc:issue_groups element"""
+  _qname = SC_NAMESPACE_TEMPLATE % 'issue_groups'
+  issue_group = [IssueGroup]
+
+
+class DataQualityEntry(gdata.data.GDEntry):
+  """A Data Quality Feed entry."""
+  issue_groups = IssueGroups
+
+
+class DataQualityFeed(gdata.data.GDFeed):
+  """A Data Quality Feed."""
+  entry = [DataQualityEntry]

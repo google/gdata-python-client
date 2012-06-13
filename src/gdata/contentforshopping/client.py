@@ -1,4 +1,3 @@
-
 #!/usr/bin/python
 #
 # Copyright (C) 2010-2011 Google Inc.
@@ -29,6 +28,8 @@ from gdata.contentforshopping.data import ClientAccount
 from gdata.contentforshopping.data import ClientAccountFeed
 from gdata.contentforshopping.data import DatafeedEntry
 from gdata.contentforshopping.data import DatafeedFeed
+from gdata.contentforshopping.data import DataQualityEntry
+from gdata.contentforshopping.data import DataQualityFeed
 from gdata.contentforshopping.data import ProductEntry
 from gdata.contentforshopping.data import ProductFeed
 from gdata.contentforshopping.data import UsersEntry
@@ -562,3 +563,45 @@ class ContentForShoppingClient(gdata.client.GDClient):
     return self.delete(uri, auth_token=auth_token)
 
   DeleteUsersEntry = delete_users_entry
+
+  def get_data_quality_feed(self, account_id=None, auth_token=None,
+                            max_results=None, start_index=None):
+    """Get the data quality feed for an account.
+
+    :param max_results: The maximum number of results to return (default 25,
+                        max 100).
+    :param start_index: The starting index of the feed to return.
+    :param account_id: The Merchant Center Account ID. If ommitted the default
+                       Account ID will be used for this client
+    :param auth_token: An object which sets the Authorization HTTP header in its
+                       modify_request method.
+    """
+
+    uri = self._create_uri(account_id, 'dataquality', use_projection=False,
+                           max_results=max_results, start_index=start_index)
+    return self.get_feed(uri, auth_token=auth_token,
+                         desired_class=DataQualityFeed)
+
+  GetDataQualityFeed = get_data_quality_feed
+
+  def get_data_quality_entry(self, secondary_account_id=None,
+                             account_id=None, auth_token=None):
+    """Get the data quality feed entry for an account.
+
+    :param secondary_account_id: The Account ID of the secondary account. If
+                                 ommitted the value of account_id is used.
+    :param account_id: The Merchant Center Account ID. If ommitted the default
+                       Account ID will be used for this client
+    :param auth_token: An object which sets the Authorization HTTP header in its
+                       modify_request method.
+    """
+    if secondary_account_id is None:
+      secondary_account_id = account_id or self.cfs_account_id
+
+    uri = self._create_uri(account_id, 'dataquality',
+                           path=[secondary_account_id],
+                           use_projection=False)
+    return self.get_entry(uri, auth_token=auth_token,
+                          desired_class=DataQualityEntry)
+
+  GetDataQualityEntry = get_data_quality_entry
