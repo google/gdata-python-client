@@ -27,6 +27,7 @@ import atom.http_core
 import gdata.data
 
 
+ATOM_NAMESPACE = 'http://www.w3.org/2005/Atom'
 GD_NAMESPACE = 'http://schemas.google.com/g/2005'
 GD_NAMESPACE_TEMPLATE = '{http://schemas.google.com/g/2005}%s'
 SC_NAMESPACE_TEMPLATE = ('{http://schemas.google.com/'
@@ -1107,7 +1108,20 @@ class ContentForShoppingError(atom.core.XmlElement):
   code = ErrorCode
   location = ErrorLocation
   internal_reason = InternalReason
-  id = atom.data.Id
+
+  @property
+  def id(self):
+    """Id for error element.
+
+    The namespace for the id element is different in batch requests than in
+    individual requests, so we need to consider either case.
+    """
+    for element in self.GetElements():
+      if element.tag == 'id':
+        if element.namespace in (GD_NAMESPACE, ATOM_NAMESPACE):
+          return element.text
+
+    return None
 
 
 class ContentForShoppingErrors(atom.core.XmlElement):
