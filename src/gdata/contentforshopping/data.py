@@ -169,6 +169,19 @@ class ExcludedDestination(atom.core.XmlElement):
   _qname = SC_NAMESPACE_TEMPLATE % 'excluded_destination'
   dest = 'dest'
 
+
+class Status(atom.core.XmlElement):
+  """sc:status element
+
+  This element defines the status of an element in a particular destination. It
+  has a destination and an actual status such as enlisted, review, or
+  disapproved.
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'status'
+  dest = 'dest'
+  status = 'status'
+
+
 # Warning Attributes (to be used with app:control element)
 
 class Code(atom.core.XmlElement):
@@ -257,6 +270,7 @@ class ProductControl(atom.data.Control):
   required_destination = [RequiredDestination]
   validate_destination = [ValidateDestination]
   excluded_destination = [ExcludedDestination]
+  statuses = [Status]
   warnings = Warnings
 
 # Content API for Shopping, product (scp) attributes
