@@ -1239,21 +1239,25 @@ class OAuth2Token(object):
     else:
       self.token_expiry = None
 
-  def generate_authorize_url(self, redirect_uri='oob', response_type='code',
-                             access_type='offline', **kwargs):
+  def generate_authorize_url(self, redirect_uri='urn:ietf:wg:oauth:2.0:oob',
+                             response_type='code', access_type='offline',
+                             approval_prompt='auto', **kwargs):
     """Returns a URI to redirect to the provider.
 
     Args:
-      redirect_uri: Either the string 'oob' for a non-web-based application, or
-                    a URI that handles the callback from the authorization
-                    server.
+      redirect_uri: Either the string 'urn:ietf:wg:oauth:2.0:oob' for a
+                    non-web-based application, or a URI that handles the
+                    callback from the authorization server.
       response_type: Either the string 'code' for server-side or native
                      application, or the string 'token' for client-side
                      application.
       access_type: Either the string 'offline' to request a refresh token or
                    'online'.
+      approval_prompt: Either the string 'auto' to let the OAuth mechanism
+                       determine if the approval page is needed or 'force'
+                       if the approval prompt is desired in all cases.
 
-    If redirect_uri is 'oob' then pass in the
+    If redirect_uri is 'urn:ietf:wg:oauth:2.0:oob' then pass in the
     generated verification code to get_access_token,
     otherwise pass in the query parameters received
     at the callback uri to get_access_token.
@@ -1268,6 +1272,7 @@ class OAuth2Token(object):
       'client_id': self.client_id,
       'redirect_uri': redirect_uri,
       'scope': self.scope,
+      'approval_prompt': approval_prompt,
       'access_type': access_type
       }
     query.update(kwargs)
