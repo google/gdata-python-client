@@ -1369,3 +1369,110 @@ class DataQualityFeed(gdata.data.GDFeed):
   total_results = TotalResults
   items_per_page = ItemsPerPage
   start_index = StartIndex
+
+
+# Local Products Feed Classes
+class SalePrice(atom.core.XmlElement):
+  """scp:sale_price element
+
+  The sale price of the product. The unit attribute must be set, and should
+  represent the currency.
+  """
+  _qname = SCP_NAMESPACE_TEMPLATE % 'sale_price'
+  unit = 'unit'
+
+
+class SalePriceEffectiveDate(atom.core.XmlElement):
+  """scp:sale_price_effective_date element
+
+  The effective date of the sale price of the product.
+  """
+  _qname = SCP_NAMESPACE_TEMPLATE % 'sale_price_effective_date'
+
+
+class LocalProductEntry(gdata.data.BatchEntry):
+  """Product entry containing local product information.
+
+  The elements of this entry that are used are made up of five different
+  namespaces. They are:
+
+  atom: - Atom
+  app: - Atom Publishing Protocol
+  gd: - Google Data API
+  sc: - Content API for Shopping, general attributes
+  scp: - Content API for Shopping, product attributes
+
+  Only the sc and scp namespace elements are defined here, but additional useful
+  elements are defined in superclasses.
+
+  To remove the value of an attribute of a local product, set the value of the
+  attribute to the empty string. For example:
+
+      entry.availability = Availability('')
+
+  The following attributes are encoded as XML elements in the Atom (atom:)
+  namespace: title, link, entry, id, category, content, author, created
+  updated. Among these, the title, content and link tags are part of the
+  required Content for Shopping API so we document them here.
+
+  .. attribute:: availability
+
+    The avilability of a local product.
+
+    This should be an :class:`Availability` instance, for example::
+
+      entry = LocalProductEntry()
+      entry.availability = Availability('in stock')
+
+  .. attribute:: price
+
+    The price for this local product.
+
+    This should be a :class:`Price` element, including a unit argument to
+    indicate the currency, for example::
+
+      entry = LocalProductEntry()
+      entry.price = Price('20.00', unit='USD')
+
+  .. attribute:: quantity
+
+    The quantity of local product available in stock.
+
+    This should be a :class:`Quantity` element, for example::
+
+      entry = LocalProductEntry()
+      entry.quantity = Quantity('100')
+
+  .. attribute:: sale_price
+
+    The sale price for this local product.
+
+    This should be a :class:`SalePrice` element, including a unit argument to
+    indicate the currency, for example::
+
+      entry = LocalProductEntry()
+      entry.sale_price = SalePrice('20.00', unit='USD')
+
+  .. attribute:: sale_price_effective_date
+
+    The effective data of the sale price for this local product.
+
+    This should be a :class:`SalePriceEffectiveDate` element, for example::
+
+      entry = LocalProductEntry()
+      entry.sale_price_effective_date = SalePriceEffectiveDate(
+          '2012-01-09 2012-01-13')
+  """
+  availability = Availability
+  price = Price
+  quantity = Quantity
+  sale_price = SalePrice
+  sale_price_effective_date = SalePriceEffectiveDate
+
+
+class LocalProductFeed(gdata.data.BatchFeed):
+  """Represents a feed of a merchant's local products."""
+  entry = [LocalProductEntry]
+  total_results = TotalResults
+  items_per_page = ItemsPerPage
+  start_index = StartIndex

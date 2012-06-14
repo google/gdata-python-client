@@ -23,6 +23,7 @@ __author__ = 'afshar (Ali Afshar), dhermes (Daniel Hermes)'
 
 import urllib
 
+import atom.data
 import gdata.client
 from gdata.contentforshopping.data import ClientAccount
 from gdata.contentforshopping.data import ClientAccountFeed
@@ -30,6 +31,7 @@ from gdata.contentforshopping.data import DatafeedEntry
 from gdata.contentforshopping.data import DatafeedFeed
 from gdata.contentforshopping.data import DataQualityEntry
 from gdata.contentforshopping.data import DataQualityFeed
+from gdata.contentforshopping.data import LocalProductFeed
 from gdata.contentforshopping.data import ProductEntry
 from gdata.contentforshopping.data import ProductFeed
 from gdata.contentforshopping.data import UsersEntry
@@ -99,12 +101,13 @@ class ContentForShoppingClient(gdata.client.GDClient):
 
     return result
 
-  def _create_product_id(self, id, country, language):
-    return 'online:%s:%s:%s' % (language, country, id)
+  def _create_product_id(self, id, country, language, channel='online'):
+    return '%s:%s:%s:%s' % (channel, language, country, id)
 
-  def _create_batch_feed(self, entries, operation, feed=None):
+  def _create_batch_feed(self, entries, operation, feed=None,
+                         feed_class=ProductFeed):
     if feed is None:
-      feed = ProductFeed()
+      feed = feed_class()
     for entry in entries:
       entry.batch_operation = gdata.data.BatchOperation(type=operation)
       feed.entry.append(entry)
@@ -163,8 +166,8 @@ class ContentForShoppingClient(gdata.client.GDClient):
                        modify_request method.
     :param dry_run: Flag to run all requests that modify persistent data in
                     dry-run mode. False by default.
-                    :param warnings: Flag to include warnings in response. False
-                    by default.
+    :param warnings: Flag to include warnings in response. False
+                     by default.
     """
     pid = self._create_product_id(product.product_id.text,
                                   product.target_country.text,
@@ -228,7 +231,7 @@ class ContentForShoppingClient(gdata.client.GDClient):
                            performance_start=performance_start,
                            performance_end=performance_end)
     return self.get_feed(uri, auth_token=auth_token,
-        desired_class=gdata.contentforshopping.data.ProductFeed)
+        desired_class=ProductFeed)
 
   GetProducts = get_products
 
@@ -605,3 +608,71 @@ class ContentForShoppingClient(gdata.client.GDClient):
                           desired_class=DataQualityEntry)
 
   GetDataQualityEntry = get_data_quality_entry
+
+  def update_local_product(self, product, id, country, language, store_code,
+                           account_id=None, auth_token=None):
+    """Update a local product, by putting the product entry feed.
+
+    :param product: A :class:`gdata.contentforshopping.data.LocalProductEntry`
+                    with the required product data.
+    :param id: The product ID
+    :param country: The country (target_country)
+    :param language: The language (content_language)
+    :param store_code: The code for the store where this local product will
+    :param account_id: The Merchant Center Account ID. If ommitted the default
+                       Account ID will be used for this client
+    :param auth_token: An object which sets the Authorization HTTP header in its
+                       modify_request method.
+    """
+    pid = self._create_product_id(id, country, language, channel='local')
+    uri = self._create_uri(account_id, 'inventory',
+                           path=[store_code, 'items', pid],
+                           use_projection=False)
+    return self.update(product, uri=uri, auth_token=auth_token)
+
+  UpdateLocalProduct = update_local_product
+
+  def add_local_id(self, product, id, country, language,
+                   store_code, account_id=None):
+    """Add an atom id to a local product with a local store specific URI.
+
+    :param product: A :class:`gdata.contentforshopping.data.LocalProductEntry`
+                    with the required product data.
+    :param id: The product ID
+    :param country: The country (target_country)
+    :param language: The language (content_language)
+    :param store_code: The code for the store where this local product will
+    :param account_id: The Merchant Center Account ID. If ommitted the default
+                       Account ID will be used for this client
+    """
+    pid = self._create_product_id(id, country, language, channel='local')
+    uri = self._create_uri(account_id, 'inventory',
+                           path=[store_code, 'items', pid],
+                           use_projection=False)
+    product.id = atom.data.Id(uri)
+    return product
+
+  AddLocalId = add_local_id
+
+  def update_local_products(self, products, account_id=None, auth_token=None):
+    """Update a batch of local products, by putting the product entry feed.
+
+    :param products: A list containing entries of
+                     :class:`gdata.contentforshopping.data.LocalProductEntry`
+                     with the required product data
+    :param account_id: The Merchant Center Account ID. If ommitted the default
+                       Account ID will be used for this client
+    :param auth_token: An object which sets the Authorization HTTP header in its
+                       modify_request method.
+
+    .. note:: Entries must have the atom:id element set. You can use
+              add_local_id to set this attribute using the store_code, product
+              id, country and language.
+    """
+    feed = self._create_batch_feed(products, 'update',
+                                   feed_class=LocalProductFeed)
+    uri = self._create_uri(account_id, 'inventory', path=['batch'],
+                           use_projection=False)
+    return self.post(feed, uri=uri, auth_token=auth_token)
+
+  UpdateLocalProducts = update_local_products
