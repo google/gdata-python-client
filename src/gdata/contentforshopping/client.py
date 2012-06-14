@@ -408,20 +408,43 @@ class ContentForShoppingClient(gdata.client.GDClient):
 
   # Operations on client accounts
 
-  def get_client_accounts(self, account_id=None, auth_token=None):
+  def get_client_accounts(self, max_results=None, start_index=None,
+                          account_id=None, auth_token=None):
     """Get the feed of managed accounts
 
+    :param max_results: The maximum number of results to return (default 25,
+                        maximum 250).
+    :param start_index: The starting index of the feed to return (default 1,
+                        maximum 10000)
     :param account_id: The Merchant Center Account ID. If ommitted the default
                        Account ID will be used for this client
     :param auth_token: An object which sets the Authorization HTTP header in its
                        modify_request method.
     """
-    uri = self._create_uri(account_id, 'managedaccounts/products',
+    uri = self._create_uri(account_id, 'managedaccounts',
+                           max_results=max_results, start_index=start_index,
                            use_projection=False)
     return self.get_feed(uri, desired_class=ClientAccountFeed,
                          auth_token=auth_token)
 
   GetClientAccounts = get_client_accounts
+
+  def get_client_account(self, client_account_id,
+                         account_id=None, auth_token=None):
+    """Get a managed account.
+
+    :param client_account_id: The Account ID of the subaccount being retrieved.
+    :param account_id: The Merchant Center Account ID. If ommitted the default
+                       Account ID will be used for this client
+    :param auth_token: An object which sets the Authorization HTTP header in its
+                       modify_request method.
+    """
+    uri = self._create_uri(account_id, 'managedaccounts',
+                           path=[client_account_id], use_projection=False)
+    return self.get_entry(uri, desired_class=ClientAccount,
+                          auth_token=auth_token)
+
+  GetClientAccount = get_client_account
 
   def insert_client_account(self, entry, account_id=None, auth_token=None,
                             dry_run=False, warnings=False):
@@ -436,7 +459,7 @@ class ContentForShoppingClient(gdata.client.GDClient):
                     dry-run mode. False by default.
     :param warnings: Flag to include warnings in response. False by default.
     """
-    uri = self._create_uri(account_id, 'managedaccounts/products',
+    uri = self._create_uri(account_id, 'managedaccounts',
                            use_projection=False, dry_run=dry_run,
                            warnings=warnings)
     return self.post(entry, uri=uri, auth_token=auth_token)
@@ -457,7 +480,7 @@ class ContentForShoppingClient(gdata.client.GDClient):
                     dry-run mode. False by default.
     :param warnings: Flag to include warnings in response. False by default.
     """
-    uri = self._create_uri(account_id, 'managedaccounts/products',
+    uri = self._create_uri(account_id, 'managedaccounts',
                            path=[client_account_id], use_projection=False,
                            dry_run=dry_run, warnings=warnings)
     return self.update(entry, uri=uri, auth_token=auth_token)
@@ -478,7 +501,7 @@ class ContentForShoppingClient(gdata.client.GDClient):
     :param warnings: Flag to include warnings in response. False by default.
     """
 
-    uri = self._create_uri(account_id, 'managedaccounts/products',
+    uri = self._create_uri(account_id, 'managedaccounts',
                            path=[client_account_id], use_projection=False,
                            dry_run=dry_run, warnings=warnings)
     return self.delete(uri, auth_token=auth_token)
