@@ -31,7 +31,7 @@ from gdata.contentforshopping.data import DatafeedEntry
 from gdata.contentforshopping.data import DatafeedFeed
 from gdata.contentforshopping.data import DataQualityEntry
 from gdata.contentforshopping.data import DataQualityFeed
-from gdata.contentforshopping.data import LocalProductFeed
+from gdata.contentforshopping.data import InventoryFeed
 from gdata.contentforshopping.data import ProductEntry
 from gdata.contentforshopping.data import ProductFeed
 from gdata.contentforshopping.data import UsersEntry
@@ -632,16 +632,17 @@ class ContentForShoppingClient(gdata.client.GDClient):
 
   GetDataQualityEntry = get_data_quality_entry
 
-  def update_local_product(self, product, id, country, language, store_code,
-                           account_id=None, auth_token=None):
-    """Update a local product, by putting the product entry feed.
+  def update_inventory_entry(self, product, id, country, language, store_code,
+                             account_id=None, auth_token=None):
+    """Make a local product update, by putting the inventory entry.
 
-    :param product: A :class:`gdata.contentforshopping.data.LocalProductEntry`
+    :param product: A :class:`gdata.contentforshopping.data.InventoryEntry`
                     with the required product data.
     :param id: The product ID
     :param country: The country (target_country)
     :param language: The language (content_language)
     :param store_code: The code for the store where this local product will
+                       be updated.
     :param account_id: The Merchant Center Account ID. If ommitted the default
                        Account ID will be used for this client
     :param auth_token: An object which sets the Authorization HTTP header in its
@@ -653,18 +654,19 @@ class ContentForShoppingClient(gdata.client.GDClient):
                            use_projection=False)
     return self.update(product, uri=uri, auth_token=auth_token)
 
-  UpdateLocalProduct = update_local_product
+  UpdateInventoryEntry = update_inventory_entry
 
   def add_local_id(self, product, id, country, language,
                    store_code, account_id=None):
     """Add an atom id to a local product with a local store specific URI.
 
-    :param product: A :class:`gdata.contentforshopping.data.LocalProductEntry`
+    :param product: A :class:`gdata.contentforshopping.data.InventoryEntry`
                     with the required product data.
     :param id: The product ID
     :param country: The country (target_country)
     :param language: The language (content_language)
     :param store_code: The code for the store where this local product will
+                       be updated.
     :param account_id: The Merchant Center Account ID. If ommitted the default
                        Account ID will be used for this client
     """
@@ -677,11 +679,11 @@ class ContentForShoppingClient(gdata.client.GDClient):
 
   AddLocalId = add_local_id
 
-  def update_local_products(self, products, account_id=None, auth_token=None):
+  def update_inventory_feed(self, products, account_id=None, auth_token=None):
     """Update a batch of local products, by putting the product entry feed.
 
     :param products: A list containing entries of
-                     :class:`gdata.contentforshopping.data.LocalProductEntry`
+                     :class:`gdata.contentforshopping.data.InventoryEntry`
                      with the required product data
     :param account_id: The Merchant Center Account ID. If ommitted the default
                        Account ID will be used for this client
@@ -693,9 +695,9 @@ class ContentForShoppingClient(gdata.client.GDClient):
               id, country and language.
     """
     feed = self._create_batch_feed(products, 'update',
-                                   feed_class=LocalProductFeed)
+                                   feed_class=InventoryFeed)
     uri = self._create_uri(account_id, 'inventory', path=['batch'],
                            use_projection=False)
     return self.post(feed, uri=uri, auth_token=auth_token)
 
-  UpdateLocalProducts = update_local_products
+  UpdateInventoryFeed = update_inventory_feed

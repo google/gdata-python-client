@@ -1390,7 +1390,7 @@ class SalePriceEffectiveDate(atom.core.XmlElement):
   _qname = SCP_NAMESPACE_TEMPLATE % 'sale_price_effective_date'
 
 
-class LocalProductEntry(gdata.data.BatchEntry):
+class InventoryEntry(gdata.data.BatchEntry):
   """Product entry containing local product information.
 
   The elements of this entry that are used are made up of five different
@@ -1421,7 +1421,7 @@ class LocalProductEntry(gdata.data.BatchEntry):
 
     This should be an :class:`Availability` instance, for example::
 
-      entry = LocalProductEntry()
+      entry = InventoryEntry()
       entry.availability = Availability('in stock')
 
   .. attribute:: price
@@ -1431,7 +1431,7 @@ class LocalProductEntry(gdata.data.BatchEntry):
     This should be a :class:`Price` element, including a unit argument to
     indicate the currency, for example::
 
-      entry = LocalProductEntry()
+      entry = InventoryEntry()
       entry.price = Price('20.00', unit='USD')
 
   .. attribute:: quantity
@@ -1440,7 +1440,7 @@ class LocalProductEntry(gdata.data.BatchEntry):
 
     This should be a :class:`Quantity` element, for example::
 
-      entry = LocalProductEntry()
+      entry = InventoryEntry()
       entry.quantity = Quantity('100')
 
   .. attribute:: sale_price
@@ -1450,7 +1450,7 @@ class LocalProductEntry(gdata.data.BatchEntry):
     This should be a :class:`SalePrice` element, including a unit argument to
     indicate the currency, for example::
 
-      entry = LocalProductEntry()
+      entry = InventoryEntry()
       entry.sale_price = SalePrice('20.00', unit='USD')
 
   .. attribute:: sale_price_effective_date
@@ -1459,7 +1459,7 @@ class LocalProductEntry(gdata.data.BatchEntry):
 
     This should be a :class:`SalePriceEffectiveDate` element, for example::
 
-      entry = LocalProductEntry()
+      entry = InventoryEntry()
       entry.sale_price_effective_date = SalePriceEffectiveDate(
           '2012-01-09 2012-01-13')
   """
@@ -1470,9 +1470,9 @@ class LocalProductEntry(gdata.data.BatchEntry):
   sale_price_effective_date = SalePriceEffectiveDate
 
 
-class LocalProductFeed(gdata.data.BatchFeed):
+class InventoryFeed(gdata.data.BatchFeed):
   """Represents a feed of a merchant's local products."""
-  entry = [LocalProductEntry]
+  entry = [InventoryEntry]
   total_results = TotalResults
   items_per_page = ItemsPerPage
   start_index = StartIndex
