@@ -127,6 +127,7 @@ class Group(atom.core.XmlElement):
   custom elements groups.
   """
   _qname = SC_NAMESPACE_TEMPLATE % 'group'
+  name = 'name'
   attribute = [Attribute]
 
 
