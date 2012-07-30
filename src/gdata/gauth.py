@@ -76,7 +76,7 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 
 PROGRAMMATIC_AUTH_LABEL = 'GoogleLogin auth='
 AUTHSUB_AUTH_LABEL = 'AuthSub token='
-OAUTH2_AUTH_LABEL = 'OAuth '
+OAUTH2_AUTH_LABEL = 'Bearer '
 
 
 # This dict provides the AuthSub and OAuth scopes for all services by service
