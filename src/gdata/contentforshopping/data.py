@@ -1258,11 +1258,27 @@ class ReviewsUrl(atom.core.XmlElement):
   _qname = SC_NAMESPACE_TEMPLATE % 'reviews_url'
 
 
+class AdwordsAccount(atom.core.XmlElement):
+  """sc:adwords_account element"""
+  _qname = SC_NAMESPACE_TEMPLATE % 'adwords_account'
+  status = 'status'
+
+
+class AdwordsAccounts(atom.core.XmlElement):
+  """sc:adwords_accounts element
+
+  Container element for adwords accounts settings.
+  """
+  _qname = SC_NAMESPACE_TEMPLATE % 'adwords_accounts'
+  adwords_account = [AdwordsAccount]
+
+
 class ClientAccount(gdata.data.GDEntry):
   """A multiclient account entry."""
   adult_content = AdultContent
   internal_id = InternalId
   reviews_url = ReviewsUrl
+  adwords_accounts = AdwordsAccounts
 
 
 class ClientAccountFeed(gdata.data.GDFeed):
