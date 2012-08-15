@@ -251,6 +251,7 @@ class Datapoint(atom.core.XmlElement):
   _qname = SC_NAMESPACE_TEMPLATE % 'datapoint'
   clicks = 'clicks'
   date = 'date'
+  paid_clicks = 'paid_clicks'
 
 
 class Performance(atom.core.XmlElement):
