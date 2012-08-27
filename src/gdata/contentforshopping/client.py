@@ -56,9 +56,11 @@ class ContentForShoppingClient(gdata.client.GDClient):
 
   api_version = '1.0'
 
-  def __init__(self, account_id=None, api_version=CFS_VERSION, **kwargs):
+  def __init__(self, account_id=None, api_version=CFS_VERSION,
+               cfs_uri=CFS_URI, **kwargs):
     self.cfs_account_id = account_id
     self.cfs_api_version = api_version
+    self.cfs_uri = cfs_uri
     gdata.client.GDClient.__init__(self, **kwargs)
 
   def _create_uri(self, account_id, resource, path=(), use_projection=True,
@@ -73,7 +75,7 @@ class ContentForShoppingClient(gdata.client.GDClient):
     if account_id is None:
         raise ValueError('No Account ID set. '
                          'Either set for the client, or per request')
-    segments = [CFS_URI, self.cfs_api_version, account_id, resource]
+    segments = [self.cfs_uri, self.cfs_api_version, account_id, resource]
     if use_projection:
       segments.append(CFS_PROJECTION)
     segments.extend(urllib.quote(value) for value in path)
