@@ -41,7 +41,7 @@ from gdata.contentforshopping.data import UsersFeed
 CFS_VERSION = 'v1'
 CFS_HOST = 'content.googleapis.com'
 CFS_URI = 'https://%s/content' % CFS_HOST
-CFS_PROJECTION = 'generic'
+CFS_PROJECTION = 'schema'
 
 
 class ContentForShoppingClient(gdata.client.GDClient):
