@@ -1164,9 +1164,6 @@ class OAuth2Token(object):
       revoke_uri='https://accounts.google.com/o/oauth2/revoke'):
     """Create an instance of OAuth2Token
 
-    This constructor is not usually called by the user, instead
-    OAuth2Credentials objects are instantiated by the OAuth2WebServerFlow.
-
     Args:
       client_id: string, client identifier.
       client_secret: string client secret.
@@ -1204,8 +1201,8 @@ class OAuth2Token(object):
     """Refresh the access_token using the refresh_token.
 
     Args:
-       http: An instance of httplib2.Http.request
-           or something that acts like it.
+      request: The atom.http_core.HttpRequest which contains all of the
+          information needed to send a request to the remote server.
     """
     body = urllib.urlencode({
       'grant_type': 'refresh_token',
@@ -1307,7 +1304,8 @@ class OAuth2Token(object):
     http_client = atom.http_core.HttpClient()
     http_request = atom.http_core.HttpRequest(uri=self.token_uri, method='POST',
                                               headers=headers)
-    http_request.add_body_part(data=body, mime_type='application/x-www-form-urlencoded')
+    http_request.add_body_part(data=body,
+                               mime_type='application/x-www-form-urlencoded')
     response = http_client.request(http_request)
     body = response.read()
     if response.status == 200:
@@ -1394,6 +1392,97 @@ class OAuth2Token(object):
     return http_request
 
   ModifyRequest = modify_request
+
+
+def _make_credentials_property(name):
+  """Helper method which generates properties.
+
+  Used to access and set values on credentials property as if they were native
+  attributes on the current object.
+
+  Args:
+    name: A string corresponding to the attribute being accessed on the
+        credentials attribute of the object which will own the property.
+
+  Returns:
+    An instance of `property` which is a proxy for the `name` attribute on the
+        credentials attribute of the object.
+  """
+  def get_credentials_value(self):
+    return getattr(self.credentials, name)
+  def set_credentials_value(self, value):
+    setattr(self.credentials, name, value)
+  return property(get_credentials_value, set_credentials_value)
+
+
+class OAuth2TokenFromCredentials(OAuth2Token):
+  """Special subclass to be used in conjunction with google-api-python-client.
+
+  These libraries are built for different purposes. This one is used for APIs
+  that use the GData Protocol:
+  https://developers.google.com/gdata/docs/2.0/reference
+  while google-api-python-client is for APIs which are discovery-based:
+  https://developers.google.com/discovery/v1/getting_started#background
+
+  Developers using Google APIs may want to use both simultaneously, and this
+  class provides a way for them to use OAuth 2.0 credentials obtained for use
+  with google-api-python-client as credentials in gdata-python-client and to
+  ensure all token/credential refresh impacts both this object and the
+  google-api-python-client credentials object.
+
+  In addition, any manual patching of this object or the credentials object will
+  be immediately reflected since attributes such as `client_id`, `access_token`,
+  etc. are directly proxied between instances of this class and the credentials
+  objects that they own.
+  """
+
+  def __init__(self, credentials):
+    """Constructor for OAuth2TokenFromCredentials object.
+
+    The constructor for the superclass is not called because the actual values
+    are retrieved from the credentials object directly via `property` instances
+    which act as proxies.
+
+    Args:
+      credentials: An instance of oauth2client.client.Credentials or some
+          subclass.
+    """
+    self.credentials = credentials
+
+  client_id = _make_credentials_property('client_id')
+  client_secret = _make_credentials_property('client_secret')
+  user_agent = _make_credentials_property('user_agent')
+  # `scope` is not included as an attribute because the Credentials object in
+  # google-api-python-client does not handle the initial auth flow.
+  token_uri = _make_credentials_property('token_uri')
+  access_token = _make_credentials_property('access_token')
+  refresh_token = _make_credentials_property('refresh_token')
+  # Again, since Credentials don't handle the initial auth flow, `auth_uri` and
+  # `redirect_uri` are not included as attributes. In addition, revoke has not
+  # been implemented for Credentials hence `revoke_uri` is not included either.
+  token_expiry = _make_credentials_property('token_expiry')
+  _invalid = _make_credentials_property('invalid')
+
+  # Disable methods not supported by Credentials.
+  def generate_authorize_url(self, *args, **kwargs): raise NotImplementedError
+  def get_access_token(self, *args, **kwargs): raise NotImplementedError
+  def revoke(self, *args, **kwargs): raise NotImplementedError
+  def _extract_tokens(self, *args, **kwargs): raise NotImplementedError
+
+  def _refresh(self, unused_request):
+    """Refresh the access_token using the Credentials object.
+
+    Args:
+      unused_request: The atom.http_core.HttpRequest which contains all of the
+          information needed to send a request to the remote server. This won't
+          be used since we are refreshing the Credentials object directly and
+          need to use the supported HTTP mechanisms for the
+          google-api-python-client library.
+    """
+    # Import httplib2 here since we don't want it as an unnecessary dependency
+    # for users who don't integrate with google-api-python-client.
+    import httplib2
+    self.credentials._refresh(httplib2.Http().request)
 
 
 def _join_token_parts(*args):

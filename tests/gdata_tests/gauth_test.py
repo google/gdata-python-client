@@ -21,7 +21,10 @@
 __author__ = 'j.s@google.com (Jeff Scudder)'
 
 
+import sys
+import types
 import unittest
+
 import gdata.gauth
 import atom.http_core
 import gdata.test_config as conf
@@ -509,20 +512,27 @@ class OAuth2TokenTests(unittest.TestCase):
                                     'https://www.google.com/calendar/feeds',
                                     'userAgent')
     url = token.generate_authorize_url()
-    self.assertEqual(url,
-        'https://accounts.google.com/o/oauth2/auth?scope=https%3A%2F%2Fwww.google'
-        '.com%2Fcalendar%2Ffeeds&redirect_uri=oob&response_type=code&client_id='
-        'clientId&access_type=offline')
-    url = token.generate_authorize_url('https://www.example.com/redirect', 'token')
-    self.assertEqual(url,
-        'https://accounts.google.com/o/oauth2/auth?scope=https%3A%2F%2Fwww.google'
-        '.com%2Fcalendar%2Ffeeds&redirect_uri=https%3A%2F%2Fwww.example.com%2F'
-        'redirect&response_type=token&client_id=clientId&access_type=offline')
+    self.assertEqual(
+        url,
+        'https://accounts.google.com/o/oauth2/auth?access_type=offline&'
+        'redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code&'
+        'client_id=clientId&approval_prompt=auto&'
+        'scope=https%3A%2F%2Fwww.google.com%2Fcalendar%2Ffeeds')
+    url = token.generate_authorize_url('https://www.example.com/redirect',
+                                       'token')
+    self.assertEqual(
+        url,
+        'https://accounts.google.com/o/oauth2/auth?access_type=offline&'
+        'redirect_uri=https%3A%2F%2Fwww.example.com%2Fredirect&'
+        'response_type=token&client_id=clientId&approval_prompt=auto&'
+        'scope=https%3A%2F%2Fwww.google.com%2Fcalendar%2Ffeeds')
     url = token.generate_authorize_url(access_type='online')
-    self.assertEqual(url,
-        'https://accounts.google.com/o/oauth2/auth?scope=https%3A%2F%2Fwww.google'
-        '.com%2Fcalendar%2Ffeeds&redirect_uri=oob&response_type=code&client_id='
-        'clientId&access_type=online')
+    self.assertEqual(
+        url,
+        'https://accounts.google.com/o/oauth2/auth?access_type=online&'
+        'redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code&'
+        'client_id=clientId&approval_prompt=auto&'
+        'scope=https%3A%2F%2Fwww.google.com%2Fcalendar%2Ffeeds')
 
   def test_modify_request(self):
     token = gdata.gauth.OAuth2Token('clientId', 'clientSecret',
@@ -530,7 +540,122 @@ class OAuth2TokenTests(unittest.TestCase):
                                     'userAgent', access_token='accessToken')
     request = atom.http_core.HttpRequest()
     token.modify_request(request)
-    self.assertEqual(request.headers['Authorization'], 'OAuth accessToken')
+    self.assertEqual(request.headers['Authorization'], 'Bearer accessToken')
+
+
+class OAuth2TokenFromCredentialsTest(unittest.TestCase):
+  class DummyCredentials(object):
+    def __init__(self, *args, **kwargs):
+      self.client_id = 'client_id'
+      self.client_secret = 'client_secret'
+      self.user_agent = 'user_agent'
+      self.token_uri = 'token_uri'
+      self.access_token = 'access_token'
+      self.refresh_token = 'refresh_token'
+      self.token_expiry = 'token_expiry'
+      self.invalid = 'invalid'
+
+      self._refresh_called = False
+
+    def _refresh(self, unused_http_request):
+      self._refresh_called = True
+
+  def setUp(self):
+    # Don't want to force the test to have a dependency on httplib2,
+    # which is a dependency of google-api-python-client
+    self._httplib2 = sys.modules.get('httplib2')
+
+    dummy_httplib2 = types.ModuleType('httplib2')
+
+    class DummyHttp(object):
+      def request(self, *args, **kwargs):
+        pass
+
+    dummy_httplib2.Http = DummyHttp
+    sys.modules['httplib2'] = dummy_httplib2
+
+    self.credentials = self.DummyCredentials()
+    self.token = gdata.gauth.OAuth2TokenFromCredentials(self.credentials)
+
+  def tearDown(self):
+    del sys.modules['httplib2']
+    if self._httplib2 is not None:
+      sys.modules['httplib2'] = self._httplib2
+    del self._httplib2
+
+  def _check_all_values(self):
+    self.assertEqual(self.token.client_id, self.credentials.client_id)
+    self.assertEqual(self.token.client_secret, self.credentials.client_secret)
+    self.assertEqual(self.token.user_agent, self.credentials.user_agent)
+    self.assertEqual(self.token.token_uri, self.credentials.token_uri)
+    self.assertEqual(self.token.access_token, self.credentials.access_token)
+    self.assertEqual(self.token.refresh_token, self.credentials.refresh_token)
+    self.assertEqual(self.token.token_expiry, self.credentials.token_expiry)
+    self.assertEqual(self.token._invalid, self.credentials.invalid)
+
+  def test_get_proxied_attributes(self):
+    self._check_all_values()
+
+  def test_get_proxied_values_notset(self):
+    proxy_keys = ['client_id', 'client_secret', 'user_agent', 'token_uri',
+                  'access_token', 'refresh_token', 'token_expiry', '_invalid']
+    for key in proxy_keys:
+      self.assertFalse(self.token.__dict__.has_key(key))
+
+  def test_get_proxied_values_change_credentials(self):
+    new_value = 'NEW_VALUE'
+    self.credentials.access_token = new_value
+    self.assertEqual(self.token.access_token, new_value)
+
+    self.credentials.invalid = new_value
+    self.assertEqual(self.token._invalid, new_value)
+
+  def test_get_proxied_values_change_credentials(self):
+    # Make sure scope is not a valid attribute (ignored in this subclass)
+    self.assertFalse(self.token.__dict__.has_key('scope'))
+    self.assertFalse(self.token.__class__.__dict__.has_key('scope'))
+    # Make sure attribute lookup fails as it should
+    self.assertRaises(AttributeError, getattr, self.token, 'scope')
+    self.assertRaises(AttributeError, lambda: self.token.scope)
+
+  def test_set_proxied_values(self):
+    # Check all values after each setattr to make sure no side affects
+    self.token.client_id = 'value1'
+    self._check_all_values()
+    self.token.client_secret = 'value2'
+    self._check_all_values()
+    self.token.user_agent = 'value3'
+    self._check_all_values()
+    self.token.token_uri = 'value4'
+    self._check_all_values()
+    self.token.access_token = 'value5'
+    self._check_all_values()
+    self.token.refresh_token = 'value6'
+    self._check_all_values()
+    self.token.token_expiry = 'value7'
+    self._check_all_values()
+    self.token._invalid = 'value8'
+    self._check_all_values()
+
+  def test_set_proxied_values_nonprotected_attribute(self):
+    self.assertFalse(self.token.__dict__.has_key('scope'))
+    self.assertFalse(self.token.__class__.__dict__.has_key('scope'))
+    self.token.scope = 'value'
+    self.assertEqual(self.token.scope, 'value')
+    self.assertFalse(hasattr(self.credentials, 'scope'))
+    self._check_all_values()
+
+  def test_disallowed(self):
+    self.assertRaises(NotImplementedError, self.token.generate_authorize_url)
+    self.assertRaises(NotImplementedError, self.token.get_access_token)
+    self.assertRaises(NotImplementedError, self.token.revoke)
+    self.assertRaises(NotImplementedError, self.token._extract_tokens)
+
+  def test_refresh(self):
+    dummy_gdata_request_object = object()
+    self.assertFalse(self.credentials._refresh_called)
+    self.token._refresh(dummy_gdata_request_object)
+    self.assertTrue(self.credentials._refresh_called)
 
 
 class OAuthHeaderTest(unittest.TestCase):
