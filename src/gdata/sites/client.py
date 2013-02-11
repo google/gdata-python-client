@@ -284,7 +284,7 @@ class SitesClient(gdata.client.GDClient):
   CreateSite = create_site
 
   def create_page(self, kind, title, html='', page_name=None, parent=None,
-                  auth_token=None, **kwargs):
+                  auth_token=None, template=None, **kwargs):
     """Creates a new page (specified by kind) on a Google Site.
 
     Args:
@@ -299,14 +299,20 @@ class SitesClient(gdata.client.GDClient):
           entry or parent link url to create the page under.
       auth_token: (optional) gdata.gauth.ClientLoginToken, AuthSubToken, or
           OAuthToken which authorizes this client to edit the user's data.
+      template: string or gdata.sites.data.ContentEntry (optional) Create page
+          using the given template.  Any content elements will be discarded as
+          they are not valid when creating a page from a template.
       kwargs: Other parameters to pass to gdata.client.post().
 
     Returns:
       gdata.sites.data.ContentEntry of the created page.
     """
+    content = gdata.sites.data.Content(text=html)
+    if template is not None:
+      content = None
     new_entry = gdata.sites.data.ContentEntry(
         title=atom.data.Title(text=title), kind=kind,
-        content=gdata.sites.data.Content(text=html))
+        content=content)
 
     if page_name is not None:
       new_entry.page_name = gdata.sites.data.PageName(text=page_name)
@@ -322,6 +328,18 @@ class SitesClient(gdata.client.GDClient):
                                    type='application/atom+xml',
                                    href=parent)
       new_entry.link.append(parent_link)
+
+    # Add template link to entry if present.
+    if isinstance(template, gdata.sites.data.ContentEntry):
+      template_link = atom.data.Link(
+          rel=gdata.sites.data.SITES_TEMPLATE_LINK_REL,
+          type='application/atom+xml', href=template.GetSelfLink().href)
+      new_entry.link.append(template_link)
+    elif template is not None:
+      template_link = atom.data.Link(
+          rel=gdata.sites.data.SITES_TEMPLATE_LINK_REL,
+          type='application/atom+xml', href=template)
+      new_entry.link.append(template_link)
 
     return self.post(new_entry, self.make_content_feed_uri(),
                      auth_token=auth_token, **kwargs)
