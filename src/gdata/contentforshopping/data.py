@@ -609,6 +609,47 @@ class Year(atom.core.XmlElement):
   _qname = SCP_NAMESPACE_TEMPLATE % 'year'
 
 
+class IdentifierExist(atom.core.XmlElement):
+  """scp:identifier_exist element
+
+  Specify as true if the item has no manufacturer part number or
+  any other industry standard product identifier.
+  """
+  _qname = SCP_NAMESPACE_TEMPLATE % 'identifier_exist'
+
+
+class UnitPricingMeasure(atom.core.XmlElement):
+  """scp:unit_pricing_measure element
+
+  The dimension by which the item is sold.
+  """
+  _qname = SCP_NAMESPACE_TEMPLATE % 'unit_pricing_measure'
+
+
+class UnitPricingBaseMeasure(atom.core.XmlElement):
+  """scp:unit_pricing_base_measure element
+
+  Your preference of the denominator of the unit price.
+  """
+  _qname = SCP_NAMESPACE_TEMPLATE % 'unit_pricing_base_measure'
+
+
+class EnergyEfficiencyClass(atom.core.XmlElement):
+  """scp:energy_efficiency_class element
+
+  The item's energy efficiency class.
+  """
+  _qname = SCP_NAMESPACE_TEMPLATE % 'energy_efficiency_class'
+
+
+class MerchantMultipackQuantity(atom.core.XmlElement):
+  """scp:merchant_multipack_quantity element
+
+  The number of products in a merchant-defined custom multipack
+  """
+  _qname = SCP_NAMESPACE_TEMPLATE % 'merchant_multipack_quantity'
+
+
 class ProductEntry(gdata.data.BatchEntry):
   """Product entry containing product information
 
@@ -1026,6 +1067,11 @@ class ProductEntry(gdata.data.BatchEntry):
   target_country = TargetCountry
   tax = [Tax]
   year = Year
+  identifier_exist = IdentifierExist
+  unit_pricing_measure = UnitPricingMeasure
+  unit_pricing_base_measure = UnitPricingBaseMeasure
+  energy_efficiency_class = EnergyEfficiencyClass
+  merchant_multipack_quantity = MerchantMultipackQuantity
 
   def get_batch_errors(self):
     """Attempts to parse errors from atom:content element.
