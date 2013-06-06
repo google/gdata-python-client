@@ -44,6 +44,7 @@ product_entry = build_entry(
   tax_rate='17.5',
   condition = 'new',
   link = 'http://pseudoscience.co.uk/google4e823e35f032f011.html',
+  identifier_exists='hello'
 )
 
 # Post it to the service

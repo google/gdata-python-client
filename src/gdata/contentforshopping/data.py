@@ -609,13 +609,13 @@ class Year(atom.core.XmlElement):
   _qname = SCP_NAMESPACE_TEMPLATE % 'year'
 
 
-class IdentifierExist(atom.core.XmlElement):
-  """scp:identifier_exist element
+class IdentifierExists(atom.core.XmlElement):
+  """scp:identifier_exists element
 
   Specify as true if the item has no manufacturer part number or
   any other industry standard product identifier.
   """
-  _qname = SCP_NAMESPACE_TEMPLATE % 'identifier_exist'
+  _qname = SCP_NAMESPACE_TEMPLATE % 'identifier_exists'
 
 
 class UnitPricingMeasure(atom.core.XmlElement):
@@ -1067,7 +1067,7 @@ class ProductEntry(gdata.data.BatchEntry):
   target_country = TargetCountry
   tax = [Tax]
   year = Year
-  identifier_exist = IdentifierExist
+  identifier_exists = IdentifierExists
   unit_pricing_measure = UnitPricingMeasure
   unit_pricing_base_measure = UnitPricingBaseMeasure
   energy_efficiency_class = EnergyEfficiencyClass
