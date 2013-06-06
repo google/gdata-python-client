@@ -642,12 +642,12 @@ class EnergyEfficiencyClass(atom.core.XmlElement):
   _qname = SCP_NAMESPACE_TEMPLATE % 'energy_efficiency_class'
 
 
-class MerchantMultipackQuantity(atom.core.XmlElement):
-  """scp:merchant_multipack_quantity element
+class Multipack(atom.core.XmlElement):
+  """scp:ultipack element
 
   The number of products in a merchant-defined custom multipack
   """
-  _qname = SCP_NAMESPACE_TEMPLATE % 'merchant_multipack_quantity'
+  _qname = SCP_NAMESPACE_TEMPLATE % 'multipack'
 
 
 class ProductEntry(gdata.data.BatchEntry):
@@ -1071,7 +1071,7 @@ class ProductEntry(gdata.data.BatchEntry):
   unit_pricing_measure = UnitPricingMeasure
   unit_pricing_base_measure = UnitPricingBaseMeasure
   energy_efficiency_class = EnergyEfficiencyClass
-  merchant_multipack_quantity = MerchantMultipackQuantity
+  multipack = Multipack
 
   def get_batch_errors(self):
     """Attempts to parse errors from atom:content element.
