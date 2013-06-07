@@ -624,6 +624,7 @@ class UnitPricingMeasure(atom.core.XmlElement):
   The dimension by which the item is sold.
   """
   _qname = SCP_NAMESPACE_TEMPLATE % 'unit_pricing_measure'
+  unit = 'unit'
 
 
 class UnitPricingBaseMeasure(atom.core.XmlElement):
@@ -632,6 +633,7 @@ class UnitPricingBaseMeasure(atom.core.XmlElement):
   Your preference of the denominator of the unit price.
   """
   _qname = SCP_NAMESPACE_TEMPLATE % 'unit_pricing_base_measure'
+  unit = 'unit'
 
 
 class EnergyEfficiencyClass(atom.core.XmlElement):
