@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.health.html"><font color="#ffffff">health</font></a>.service</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/wrk/gdata-python-client/src/gdata/health/service.py">/home/afshar/wrk/gdata-python-client/src/gdata/health/service.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/google/home/afshar/src/external-gdata-release/google3/src/gdata/health/service.py">/usr/local/google/home/afshar/src/external-gdata-release/google3/src/gdata/health/service.py</a></font></td></tr></table>
     <p><tt><a href="#HealthService">HealthService</a>&nbsp;extends&nbsp;<a href="gdata.service.html#GDataService">GDataService</a>&nbsp;to&nbsp;streamline&nbsp;Google&nbsp;Health&nbsp;API&nbsp;access.<br>
 &nbsp;<br>
 <a href="#HealthService">HealthService</a>:&nbsp;Provides&nbsp;methods&nbsp;to&nbsp;interact&nbsp;with&nbsp;the&nbsp;profile,&nbsp;profile&nbsp;list,<br>
@@ -159,6 +159,9 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 
 <dl><dt><a name="HealthProfileListQuery-copy"><strong>copy</strong></a>(...)</dt><dd><tt>D.<a href="#HealthProfileListQuery-copy">copy</a>()&nbsp;-&gt;&nbsp;a&nbsp;shallow&nbsp;copy&nbsp;of&nbsp;D</tt></dd></dl>
 
+<dl><dt><a name="HealthProfileListQuery-fromkeys"><strong>fromkeys</strong></a>(...)</dt><dd><tt>dict.<a href="#HealthProfileListQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
+
 <dl><dt><a name="HealthProfileListQuery-get"><strong>get</strong></a>(...)</dt><dd><tt>D.<a href="#HealthProfileListQuery-get">get</a>(k[,d])&nbsp;-&gt;&nbsp;D[k]&nbsp;if&nbsp;k&nbsp;in&nbsp;D,&nbsp;else&nbsp;d.&nbsp;&nbsp;d&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
 
 <dl><dt><a name="HealthProfileListQuery-has_key"><strong>has_key</strong></a>(...)</dt><dd><tt>D.<a href="#HealthProfileListQuery-has_key">has_key</a>(k)&nbsp;-&gt;&nbsp;True&nbsp;if&nbsp;D&nbsp;has&nbsp;a&nbsp;key&nbsp;k,&nbsp;else&nbsp;False</tt></dd></dl>
@@ -181,21 +184,24 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 
 <dl><dt><a name="HealthProfileListQuery-setdefault"><strong>setdefault</strong></a>(...)</dt><dd><tt>D.<a href="#HealthProfileListQuery-setdefault">setdefault</a>(k[,d])&nbsp;-&gt;&nbsp;D.<a href="#HealthProfileListQuery-get">get</a>(k,d),&nbsp;also&nbsp;set&nbsp;D[k]=d&nbsp;if&nbsp;k&nbsp;not&nbsp;in&nbsp;D</tt></dd></dl>
 
-<dl><dt><a name="HealthProfileListQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#HealthProfileListQuery-update">update</a>(E,&nbsp;**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;dict/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
-If&nbsp;E&nbsp;has&nbsp;a&nbsp;.<a href="#HealthProfileListQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
-If&nbsp;E&nbsp;lacks&nbsp;.<a href="#HealthProfileListQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
+<dl><dt><a name="HealthProfileListQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#HealthProfileListQuery-update">update</a>([E,&nbsp;]**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;dict/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
+If&nbsp;E&nbsp;present&nbsp;and&nbsp;has&nbsp;a&nbsp;.<a href="#HealthProfileListQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
+If&nbsp;E&nbsp;present&nbsp;and&nbsp;lacks&nbsp;.<a href="#HealthProfileListQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
 In&nbsp;either&nbsp;case,&nbsp;this&nbsp;is&nbsp;followed&nbsp;by:&nbsp;for&nbsp;k&nbsp;in&nbsp;F:&nbsp;D[k]&nbsp;=&nbsp;F[k]</tt></dd></dl>
 
 <dl><dt><a name="HealthProfileListQuery-values"><strong>values</strong></a>(...)</dt><dd><tt>D.<a href="#HealthProfileListQuery-values">values</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;values</tt></dd></dl>
+
+<dl><dt><a name="HealthProfileListQuery-viewitems"><strong>viewitems</strong></a>(...)</dt><dd><tt>D.<a href="#HealthProfileListQuery-viewitems">viewitems</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;items</tt></dd></dl>
+
+<dl><dt><a name="HealthProfileListQuery-viewkeys"><strong>viewkeys</strong></a>(...)</dt><dd><tt>D.<a href="#HealthProfileListQuery-viewkeys">viewkeys</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;keys</tt></dd></dl>
+
+<dl><dt><a name="HealthProfileListQuery-viewvalues"><strong>viewvalues</strong></a>(...)</dt><dd><tt>D.<a href="#HealthProfileListQuery-viewvalues">viewvalues</a>()&nbsp;-&gt;&nbsp;an&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;values</tt></dd></dl>
 
 <hr>
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__hash__</strong> = None</dl>
 
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#HealthProfileListQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
-
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object&gt;<dd><tt>dict.<a href="#HealthProfileListQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
-v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -322,6 +328,9 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 
 <dl><dt><a name="HealthProfileQuery-copy"><strong>copy</strong></a>(...)</dt><dd><tt>D.<a href="#HealthProfileQuery-copy">copy</a>()&nbsp;-&gt;&nbsp;a&nbsp;shallow&nbsp;copy&nbsp;of&nbsp;D</tt></dd></dl>
 
+<dl><dt><a name="HealthProfileQuery-fromkeys"><strong>fromkeys</strong></a>(...)</dt><dd><tt>dict.<a href="#HealthProfileQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
+
 <dl><dt><a name="HealthProfileQuery-get"><strong>get</strong></a>(...)</dt><dd><tt>D.<a href="#HealthProfileQuery-get">get</a>(k[,d])&nbsp;-&gt;&nbsp;D[k]&nbsp;if&nbsp;k&nbsp;in&nbsp;D,&nbsp;else&nbsp;d.&nbsp;&nbsp;d&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
 
 <dl><dt><a name="HealthProfileQuery-has_key"><strong>has_key</strong></a>(...)</dt><dd><tt>D.<a href="#HealthProfileQuery-has_key">has_key</a>(k)&nbsp;-&gt;&nbsp;True&nbsp;if&nbsp;D&nbsp;has&nbsp;a&nbsp;key&nbsp;k,&nbsp;else&nbsp;False</tt></dd></dl>
@@ -344,21 +353,24 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 
 <dl><dt><a name="HealthProfileQuery-setdefault"><strong>setdefault</strong></a>(...)</dt><dd><tt>D.<a href="#HealthProfileQuery-setdefault">setdefault</a>(k[,d])&nbsp;-&gt;&nbsp;D.<a href="#HealthProfileQuery-get">get</a>(k,d),&nbsp;also&nbsp;set&nbsp;D[k]=d&nbsp;if&nbsp;k&nbsp;not&nbsp;in&nbsp;D</tt></dd></dl>
 
-<dl><dt><a name="HealthProfileQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#HealthProfileQuery-update">update</a>(E,&nbsp;**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;dict/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
-If&nbsp;E&nbsp;has&nbsp;a&nbsp;.<a href="#HealthProfileQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
-If&nbsp;E&nbsp;lacks&nbsp;.<a href="#HealthProfileQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
+<dl><dt><a name="HealthProfileQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#HealthProfileQuery-update">update</a>([E,&nbsp;]**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;dict/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
+If&nbsp;E&nbsp;present&nbsp;and&nbsp;has&nbsp;a&nbsp;.<a href="#HealthProfileQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
+If&nbsp;E&nbsp;present&nbsp;and&nbsp;lacks&nbsp;.<a href="#HealthProfileQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
 In&nbsp;either&nbsp;case,&nbsp;this&nbsp;is&nbsp;followed&nbsp;by:&nbsp;for&nbsp;k&nbsp;in&nbsp;F:&nbsp;D[k]&nbsp;=&nbsp;F[k]</tt></dd></dl>
 
 <dl><dt><a name="HealthProfileQuery-values"><strong>values</strong></a>(...)</dt><dd><tt>D.<a href="#HealthProfileQuery-values">values</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;values</tt></dd></dl>
+
+<dl><dt><a name="HealthProfileQuery-viewitems"><strong>viewitems</strong></a>(...)</dt><dd><tt>D.<a href="#HealthProfileQuery-viewitems">viewitems</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;items</tt></dd></dl>
+
+<dl><dt><a name="HealthProfileQuery-viewkeys"><strong>viewkeys</strong></a>(...)</dt><dd><tt>D.<a href="#HealthProfileQuery-viewkeys">viewkeys</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;keys</tt></dd></dl>
+
+<dl><dt><a name="HealthProfileQuery-viewvalues"><strong>viewvalues</strong></a>(...)</dt><dd><tt>D.<a href="#HealthProfileQuery-viewvalues">viewvalues</a>()&nbsp;-&gt;&nbsp;an&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;values</tt></dd></dl>
 
 <hr>
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__hash__</strong> = None</dl>
 
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#HealthProfileQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
-
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object&gt;<dd><tt>dict.<a href="#HealthProfileQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
-v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -474,6 +486,9 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 
 <dl><dt><a name="HealthRegisterQuery-copy"><strong>copy</strong></a>(...)</dt><dd><tt>D.<a href="#HealthRegisterQuery-copy">copy</a>()&nbsp;-&gt;&nbsp;a&nbsp;shallow&nbsp;copy&nbsp;of&nbsp;D</tt></dd></dl>
 
+<dl><dt><a name="HealthRegisterQuery-fromkeys"><strong>fromkeys</strong></a>(...)</dt><dd><tt>dict.<a href="#HealthRegisterQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
+
 <dl><dt><a name="HealthRegisterQuery-get"><strong>get</strong></a>(...)</dt><dd><tt>D.<a href="#HealthRegisterQuery-get">get</a>(k[,d])&nbsp;-&gt;&nbsp;D[k]&nbsp;if&nbsp;k&nbsp;in&nbsp;D,&nbsp;else&nbsp;d.&nbsp;&nbsp;d&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
 
 <dl><dt><a name="HealthRegisterQuery-has_key"><strong>has_key</strong></a>(...)</dt><dd><tt>D.<a href="#HealthRegisterQuery-has_key">has_key</a>(k)&nbsp;-&gt;&nbsp;True&nbsp;if&nbsp;D&nbsp;has&nbsp;a&nbsp;key&nbsp;k,&nbsp;else&nbsp;False</tt></dd></dl>
@@ -496,21 +511,24 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 
 <dl><dt><a name="HealthRegisterQuery-setdefault"><strong>setdefault</strong></a>(...)</dt><dd><tt>D.<a href="#HealthRegisterQuery-setdefault">setdefault</a>(k[,d])&nbsp;-&gt;&nbsp;D.<a href="#HealthRegisterQuery-get">get</a>(k,d),&nbsp;also&nbsp;set&nbsp;D[k]=d&nbsp;if&nbsp;k&nbsp;not&nbsp;in&nbsp;D</tt></dd></dl>
 
-<dl><dt><a name="HealthRegisterQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#HealthRegisterQuery-update">update</a>(E,&nbsp;**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;dict/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
-If&nbsp;E&nbsp;has&nbsp;a&nbsp;.<a href="#HealthRegisterQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
-If&nbsp;E&nbsp;lacks&nbsp;.<a href="#HealthRegisterQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
+<dl><dt><a name="HealthRegisterQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#HealthRegisterQuery-update">update</a>([E,&nbsp;]**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;dict/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
+If&nbsp;E&nbsp;present&nbsp;and&nbsp;has&nbsp;a&nbsp;.<a href="#HealthRegisterQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
+If&nbsp;E&nbsp;present&nbsp;and&nbsp;lacks&nbsp;.<a href="#HealthRegisterQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
 In&nbsp;either&nbsp;case,&nbsp;this&nbsp;is&nbsp;followed&nbsp;by:&nbsp;for&nbsp;k&nbsp;in&nbsp;F:&nbsp;D[k]&nbsp;=&nbsp;F[k]</tt></dd></dl>
 
 <dl><dt><a name="HealthRegisterQuery-values"><strong>values</strong></a>(...)</dt><dd><tt>D.<a href="#HealthRegisterQuery-values">values</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;values</tt></dd></dl>
+
+<dl><dt><a name="HealthRegisterQuery-viewitems"><strong>viewitems</strong></a>(...)</dt><dd><tt>D.<a href="#HealthRegisterQuery-viewitems">viewitems</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;items</tt></dd></dl>
+
+<dl><dt><a name="HealthRegisterQuery-viewkeys"><strong>viewkeys</strong></a>(...)</dt><dd><tt>D.<a href="#HealthRegisterQuery-viewkeys">viewkeys</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;keys</tt></dd></dl>
+
+<dl><dt><a name="HealthRegisterQuery-viewvalues"><strong>viewvalues</strong></a>(...)</dt><dd><tt>D.<a href="#HealthRegisterQuery-viewvalues">viewvalues</a>()&nbsp;-&gt;&nbsp;an&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;values</tt></dd></dl>
 
 <hr>
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__hash__</strong> = None</dl>
 
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#HealthRegisterQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
-
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object&gt;<dd><tt>dict.<a href="#HealthRegisterQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
-v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">

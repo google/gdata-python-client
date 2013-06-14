@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.youtube.html"><font color="#ffffff">youtube</font></a>.service</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/wrk/gdata-python-client/src/gdata/youtube/service.py">/home/afshar/wrk/gdata-python-client/src/gdata/youtube/service.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/google/home/afshar/src/external-gdata-release/google3/src/gdata/youtube/service.py">/usr/local/google/home/afshar/src/external-gdata-release/google3/src/gdata/youtube/service.py</a></font></td></tr></table>
     <p><tt><a href="#YouTubeService">YouTubeService</a>&nbsp;extends&nbsp;<a href="gdata.service.html#GDataService">GDataService</a>&nbsp;to&nbsp;streamline&nbsp;YouTube&nbsp;operations.<br>
 &nbsp;<br>
 <a href="#YouTubeService">YouTubeService</a>:&nbsp;Provides&nbsp;methods&nbsp;to&nbsp;perform&nbsp;CRUD&nbsp;operations&nbsp;on&nbsp;YouTube&nbsp;feeds.<br>
@@ -85,7 +85,7 @@ Data descriptors defined here:<br>
 </dl>
 <hr>
 Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><a name="Error-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+<dl><dt><a name="Error-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;help(type(x))&nbsp;for&nbsp;signature</tt></dd></dl>
 
 <hr>
 Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
@@ -146,7 +146,7 @@ Data descriptors inherited from <a href="gdata.youtube.service.html#Error">Error
 </dl>
 <hr>
 Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><a name="RequestError-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#RequestError-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+<dl><dt><a name="RequestError-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#RequestError-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;help(type(x))&nbsp;for&nbsp;signature</tt></dd></dl>
 
 <hr>
 Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
@@ -207,7 +207,7 @@ Data descriptors inherited from <a href="gdata.youtube.service.html#Error">Error
 </dl>
 <hr>
 Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><a name="YouTubeError-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#YouTubeError-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+<dl><dt><a name="YouTubeError-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#YouTubeError-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;help(type(x))&nbsp;for&nbsp;signature</tt></dd></dl>
 
 <hr>
 Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
@@ -374,6 +374,9 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 
 <dl><dt><a name="YouTubePlaylistQuery-copy"><strong>copy</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubePlaylistQuery-copy">copy</a>()&nbsp;-&gt;&nbsp;a&nbsp;shallow&nbsp;copy&nbsp;of&nbsp;D</tt></dd></dl>
 
+<dl><dt><a name="YouTubePlaylistQuery-fromkeys"><strong>fromkeys</strong></a>(...)</dt><dd><tt>dict.<a href="#YouTubePlaylistQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
+
 <dl><dt><a name="YouTubePlaylistQuery-get"><strong>get</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubePlaylistQuery-get">get</a>(k[,d])&nbsp;-&gt;&nbsp;D[k]&nbsp;if&nbsp;k&nbsp;in&nbsp;D,&nbsp;else&nbsp;d.&nbsp;&nbsp;d&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
 
 <dl><dt><a name="YouTubePlaylistQuery-has_key"><strong>has_key</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubePlaylistQuery-has_key">has_key</a>(k)&nbsp;-&gt;&nbsp;True&nbsp;if&nbsp;D&nbsp;has&nbsp;a&nbsp;key&nbsp;k,&nbsp;else&nbsp;False</tt></dd></dl>
@@ -396,21 +399,24 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 
 <dl><dt><a name="YouTubePlaylistQuery-setdefault"><strong>setdefault</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubePlaylistQuery-setdefault">setdefault</a>(k[,d])&nbsp;-&gt;&nbsp;D.<a href="#YouTubePlaylistQuery-get">get</a>(k,d),&nbsp;also&nbsp;set&nbsp;D[k]=d&nbsp;if&nbsp;k&nbsp;not&nbsp;in&nbsp;D</tt></dd></dl>
 
-<dl><dt><a name="YouTubePlaylistQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubePlaylistQuery-update">update</a>(E,&nbsp;**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;dict/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
-If&nbsp;E&nbsp;has&nbsp;a&nbsp;.<a href="#YouTubePlaylistQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
-If&nbsp;E&nbsp;lacks&nbsp;.<a href="#YouTubePlaylistQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
+<dl><dt><a name="YouTubePlaylistQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubePlaylistQuery-update">update</a>([E,&nbsp;]**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;dict/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
+If&nbsp;E&nbsp;present&nbsp;and&nbsp;has&nbsp;a&nbsp;.<a href="#YouTubePlaylistQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
+If&nbsp;E&nbsp;present&nbsp;and&nbsp;lacks&nbsp;.<a href="#YouTubePlaylistQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
 In&nbsp;either&nbsp;case,&nbsp;this&nbsp;is&nbsp;followed&nbsp;by:&nbsp;for&nbsp;k&nbsp;in&nbsp;F:&nbsp;D[k]&nbsp;=&nbsp;F[k]</tt></dd></dl>
 
 <dl><dt><a name="YouTubePlaylistQuery-values"><strong>values</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubePlaylistQuery-values">values</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;values</tt></dd></dl>
+
+<dl><dt><a name="YouTubePlaylistQuery-viewitems"><strong>viewitems</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubePlaylistQuery-viewitems">viewitems</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;items</tt></dd></dl>
+
+<dl><dt><a name="YouTubePlaylistQuery-viewkeys"><strong>viewkeys</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubePlaylistQuery-viewkeys">viewkeys</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;keys</tt></dd></dl>
+
+<dl><dt><a name="YouTubePlaylistQuery-viewvalues"><strong>viewvalues</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubePlaylistQuery-viewvalues">viewvalues</a>()&nbsp;-&gt;&nbsp;an&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;values</tt></dd></dl>
 
 <hr>
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__hash__</strong> = None</dl>
 
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#YouTubePlaylistQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
-
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object&gt;<dd><tt>dict.<a href="#YouTubePlaylistQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
-v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -1828,6 +1834,9 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 
 <dl><dt><a name="YouTubeUserQuery-copy"><strong>copy</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubeUserQuery-copy">copy</a>()&nbsp;-&gt;&nbsp;a&nbsp;shallow&nbsp;copy&nbsp;of&nbsp;D</tt></dd></dl>
 
+<dl><dt><a name="YouTubeUserQuery-fromkeys"><strong>fromkeys</strong></a>(...)</dt><dd><tt>dict.<a href="#YouTubeUserQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
+
 <dl><dt><a name="YouTubeUserQuery-get"><strong>get</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubeUserQuery-get">get</a>(k[,d])&nbsp;-&gt;&nbsp;D[k]&nbsp;if&nbsp;k&nbsp;in&nbsp;D,&nbsp;else&nbsp;d.&nbsp;&nbsp;d&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
 
 <dl><dt><a name="YouTubeUserQuery-has_key"><strong>has_key</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubeUserQuery-has_key">has_key</a>(k)&nbsp;-&gt;&nbsp;True&nbsp;if&nbsp;D&nbsp;has&nbsp;a&nbsp;key&nbsp;k,&nbsp;else&nbsp;False</tt></dd></dl>
@@ -1850,21 +1859,24 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 
 <dl><dt><a name="YouTubeUserQuery-setdefault"><strong>setdefault</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubeUserQuery-setdefault">setdefault</a>(k[,d])&nbsp;-&gt;&nbsp;D.<a href="#YouTubeUserQuery-get">get</a>(k,d),&nbsp;also&nbsp;set&nbsp;D[k]=d&nbsp;if&nbsp;k&nbsp;not&nbsp;in&nbsp;D</tt></dd></dl>
 
-<dl><dt><a name="YouTubeUserQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubeUserQuery-update">update</a>(E,&nbsp;**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;dict/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
-If&nbsp;E&nbsp;has&nbsp;a&nbsp;.<a href="#YouTubeUserQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
-If&nbsp;E&nbsp;lacks&nbsp;.<a href="#YouTubeUserQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
+<dl><dt><a name="YouTubeUserQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubeUserQuery-update">update</a>([E,&nbsp;]**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;dict/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
+If&nbsp;E&nbsp;present&nbsp;and&nbsp;has&nbsp;a&nbsp;.<a href="#YouTubeUserQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
+If&nbsp;E&nbsp;present&nbsp;and&nbsp;lacks&nbsp;.<a href="#YouTubeUserQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
 In&nbsp;either&nbsp;case,&nbsp;this&nbsp;is&nbsp;followed&nbsp;by:&nbsp;for&nbsp;k&nbsp;in&nbsp;F:&nbsp;D[k]&nbsp;=&nbsp;F[k]</tt></dd></dl>
 
 <dl><dt><a name="YouTubeUserQuery-values"><strong>values</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubeUserQuery-values">values</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;values</tt></dd></dl>
+
+<dl><dt><a name="YouTubeUserQuery-viewitems"><strong>viewitems</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubeUserQuery-viewitems">viewitems</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;items</tt></dd></dl>
+
+<dl><dt><a name="YouTubeUserQuery-viewkeys"><strong>viewkeys</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubeUserQuery-viewkeys">viewkeys</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;keys</tt></dd></dl>
+
+<dl><dt><a name="YouTubeUserQuery-viewvalues"><strong>viewvalues</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubeUserQuery-viewvalues">viewvalues</a>()&nbsp;-&gt;&nbsp;an&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;values</tt></dd></dl>
 
 <hr>
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__hash__</strong> = None</dl>
 
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#YouTubeUserQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
-
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object&gt;<dd><tt>dict.<a href="#YouTubeUserQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
-v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -2024,6 +2036,9 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 
 <dl><dt><a name="YouTubeVideoQuery-copy"><strong>copy</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubeVideoQuery-copy">copy</a>()&nbsp;-&gt;&nbsp;a&nbsp;shallow&nbsp;copy&nbsp;of&nbsp;D</tt></dd></dl>
 
+<dl><dt><a name="YouTubeVideoQuery-fromkeys"><strong>fromkeys</strong></a>(...)</dt><dd><tt>dict.<a href="#YouTubeVideoQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
+
 <dl><dt><a name="YouTubeVideoQuery-get"><strong>get</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubeVideoQuery-get">get</a>(k[,d])&nbsp;-&gt;&nbsp;D[k]&nbsp;if&nbsp;k&nbsp;in&nbsp;D,&nbsp;else&nbsp;d.&nbsp;&nbsp;d&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
 
 <dl><dt><a name="YouTubeVideoQuery-has_key"><strong>has_key</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubeVideoQuery-has_key">has_key</a>(k)&nbsp;-&gt;&nbsp;True&nbsp;if&nbsp;D&nbsp;has&nbsp;a&nbsp;key&nbsp;k,&nbsp;else&nbsp;False</tt></dd></dl>
@@ -2046,21 +2061,24 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 
 <dl><dt><a name="YouTubeVideoQuery-setdefault"><strong>setdefault</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubeVideoQuery-setdefault">setdefault</a>(k[,d])&nbsp;-&gt;&nbsp;D.<a href="#YouTubeVideoQuery-get">get</a>(k,d),&nbsp;also&nbsp;set&nbsp;D[k]=d&nbsp;if&nbsp;k&nbsp;not&nbsp;in&nbsp;D</tt></dd></dl>
 
-<dl><dt><a name="YouTubeVideoQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubeVideoQuery-update">update</a>(E,&nbsp;**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;dict/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
-If&nbsp;E&nbsp;has&nbsp;a&nbsp;.<a href="#YouTubeVideoQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
-If&nbsp;E&nbsp;lacks&nbsp;.<a href="#YouTubeVideoQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
+<dl><dt><a name="YouTubeVideoQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubeVideoQuery-update">update</a>([E,&nbsp;]**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;dict/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
+If&nbsp;E&nbsp;present&nbsp;and&nbsp;has&nbsp;a&nbsp;.<a href="#YouTubeVideoQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
+If&nbsp;E&nbsp;present&nbsp;and&nbsp;lacks&nbsp;.<a href="#YouTubeVideoQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
 In&nbsp;either&nbsp;case,&nbsp;this&nbsp;is&nbsp;followed&nbsp;by:&nbsp;for&nbsp;k&nbsp;in&nbsp;F:&nbsp;D[k]&nbsp;=&nbsp;F[k]</tt></dd></dl>
 
 <dl><dt><a name="YouTubeVideoQuery-values"><strong>values</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubeVideoQuery-values">values</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;values</tt></dd></dl>
+
+<dl><dt><a name="YouTubeVideoQuery-viewitems"><strong>viewitems</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubeVideoQuery-viewitems">viewitems</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;items</tt></dd></dl>
+
+<dl><dt><a name="YouTubeVideoQuery-viewkeys"><strong>viewkeys</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubeVideoQuery-viewkeys">viewkeys</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;keys</tt></dd></dl>
+
+<dl><dt><a name="YouTubeVideoQuery-viewvalues"><strong>viewvalues</strong></a>(...)</dt><dd><tt>D.<a href="#YouTubeVideoQuery-viewvalues">viewvalues</a>()&nbsp;-&gt;&nbsp;an&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;values</tt></dd></dl>
 
 <hr>
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__hash__</strong> = None</dl>
 
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#YouTubeVideoQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
-
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object&gt;<dd><tt>dict.<a href="#YouTubeVideoQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
-v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">

@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.calendar.html"><font color="#ffffff">calendar</font></a>.service</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/wrk/gdata-python-client/src/gdata/calendar/service.py">/home/afshar/wrk/gdata-python-client/src/gdata/calendar/service.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/google/home/afshar/src/external-gdata-release/google3/src/gdata/calendar/service.py">/usr/local/google/home/afshar/src/external-gdata-release/google3/src/gdata/calendar/service.py</a></font></td></tr></table>
     <p><tt><a href="#CalendarService">CalendarService</a>&nbsp;extends&nbsp;the&nbsp;<a href="gdata.service.html#GDataService">GDataService</a>&nbsp;to&nbsp;streamline&nbsp;Google&nbsp;Calendar&nbsp;operations.<br>
 &nbsp;<br>
 <a href="#CalendarService">CalendarService</a>:&nbsp;Provides&nbsp;methods&nbsp;to&nbsp;query&nbsp;feeds&nbsp;and&nbsp;manipulate&nbsp;items.&nbsp;Extends&nbsp;<br>
@@ -162,6 +162,9 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 
 <dl><dt><a name="CalendarEventCommentQuery-copy"><strong>copy</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarEventCommentQuery-copy">copy</a>()&nbsp;-&gt;&nbsp;a&nbsp;shallow&nbsp;copy&nbsp;of&nbsp;D</tt></dd></dl>
 
+<dl><dt><a name="CalendarEventCommentQuery-fromkeys"><strong>fromkeys</strong></a>(...)</dt><dd><tt>dict.<a href="#CalendarEventCommentQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
+
 <dl><dt><a name="CalendarEventCommentQuery-get"><strong>get</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarEventCommentQuery-get">get</a>(k[,d])&nbsp;-&gt;&nbsp;D[k]&nbsp;if&nbsp;k&nbsp;in&nbsp;D,&nbsp;else&nbsp;d.&nbsp;&nbsp;d&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
 
 <dl><dt><a name="CalendarEventCommentQuery-has_key"><strong>has_key</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarEventCommentQuery-has_key">has_key</a>(k)&nbsp;-&gt;&nbsp;True&nbsp;if&nbsp;D&nbsp;has&nbsp;a&nbsp;key&nbsp;k,&nbsp;else&nbsp;False</tt></dd></dl>
@@ -184,21 +187,24 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 
 <dl><dt><a name="CalendarEventCommentQuery-setdefault"><strong>setdefault</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarEventCommentQuery-setdefault">setdefault</a>(k[,d])&nbsp;-&gt;&nbsp;D.<a href="#CalendarEventCommentQuery-get">get</a>(k,d),&nbsp;also&nbsp;set&nbsp;D[k]=d&nbsp;if&nbsp;k&nbsp;not&nbsp;in&nbsp;D</tt></dd></dl>
 
-<dl><dt><a name="CalendarEventCommentQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarEventCommentQuery-update">update</a>(E,&nbsp;**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;dict/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
-If&nbsp;E&nbsp;has&nbsp;a&nbsp;.<a href="#CalendarEventCommentQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
-If&nbsp;E&nbsp;lacks&nbsp;.<a href="#CalendarEventCommentQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
+<dl><dt><a name="CalendarEventCommentQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarEventCommentQuery-update">update</a>([E,&nbsp;]**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;dict/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
+If&nbsp;E&nbsp;present&nbsp;and&nbsp;has&nbsp;a&nbsp;.<a href="#CalendarEventCommentQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
+If&nbsp;E&nbsp;present&nbsp;and&nbsp;lacks&nbsp;.<a href="#CalendarEventCommentQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
 In&nbsp;either&nbsp;case,&nbsp;this&nbsp;is&nbsp;followed&nbsp;by:&nbsp;for&nbsp;k&nbsp;in&nbsp;F:&nbsp;D[k]&nbsp;=&nbsp;F[k]</tt></dd></dl>
 
 <dl><dt><a name="CalendarEventCommentQuery-values"><strong>values</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarEventCommentQuery-values">values</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;values</tt></dd></dl>
+
+<dl><dt><a name="CalendarEventCommentQuery-viewitems"><strong>viewitems</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarEventCommentQuery-viewitems">viewitems</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;items</tt></dd></dl>
+
+<dl><dt><a name="CalendarEventCommentQuery-viewkeys"><strong>viewkeys</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarEventCommentQuery-viewkeys">viewkeys</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;keys</tt></dd></dl>
+
+<dl><dt><a name="CalendarEventCommentQuery-viewvalues"><strong>viewvalues</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarEventCommentQuery-viewvalues">viewvalues</a>()&nbsp;-&gt;&nbsp;an&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;values</tt></dd></dl>
 
 <hr>
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__hash__</strong> = None</dl>
 
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#CalendarEventCommentQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
-
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object&gt;<dd><tt>dict.<a href="#CalendarEventCommentQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
-v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -325,6 +331,9 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 
 <dl><dt><a name="CalendarEventQuery-copy"><strong>copy</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarEventQuery-copy">copy</a>()&nbsp;-&gt;&nbsp;a&nbsp;shallow&nbsp;copy&nbsp;of&nbsp;D</tt></dd></dl>
 
+<dl><dt><a name="CalendarEventQuery-fromkeys"><strong>fromkeys</strong></a>(...)</dt><dd><tt>dict.<a href="#CalendarEventQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
+
 <dl><dt><a name="CalendarEventQuery-get"><strong>get</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarEventQuery-get">get</a>(k[,d])&nbsp;-&gt;&nbsp;D[k]&nbsp;if&nbsp;k&nbsp;in&nbsp;D,&nbsp;else&nbsp;d.&nbsp;&nbsp;d&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
 
 <dl><dt><a name="CalendarEventQuery-has_key"><strong>has_key</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarEventQuery-has_key">has_key</a>(k)&nbsp;-&gt;&nbsp;True&nbsp;if&nbsp;D&nbsp;has&nbsp;a&nbsp;key&nbsp;k,&nbsp;else&nbsp;False</tt></dd></dl>
@@ -347,21 +356,24 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 
 <dl><dt><a name="CalendarEventQuery-setdefault"><strong>setdefault</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarEventQuery-setdefault">setdefault</a>(k[,d])&nbsp;-&gt;&nbsp;D.<a href="#CalendarEventQuery-get">get</a>(k,d),&nbsp;also&nbsp;set&nbsp;D[k]=d&nbsp;if&nbsp;k&nbsp;not&nbsp;in&nbsp;D</tt></dd></dl>
 
-<dl><dt><a name="CalendarEventQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarEventQuery-update">update</a>(E,&nbsp;**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;dict/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
-If&nbsp;E&nbsp;has&nbsp;a&nbsp;.<a href="#CalendarEventQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
-If&nbsp;E&nbsp;lacks&nbsp;.<a href="#CalendarEventQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
+<dl><dt><a name="CalendarEventQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarEventQuery-update">update</a>([E,&nbsp;]**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;dict/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
+If&nbsp;E&nbsp;present&nbsp;and&nbsp;has&nbsp;a&nbsp;.<a href="#CalendarEventQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
+If&nbsp;E&nbsp;present&nbsp;and&nbsp;lacks&nbsp;.<a href="#CalendarEventQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
 In&nbsp;either&nbsp;case,&nbsp;this&nbsp;is&nbsp;followed&nbsp;by:&nbsp;for&nbsp;k&nbsp;in&nbsp;F:&nbsp;D[k]&nbsp;=&nbsp;F[k]</tt></dd></dl>
 
 <dl><dt><a name="CalendarEventQuery-values"><strong>values</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarEventQuery-values">values</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;values</tt></dd></dl>
+
+<dl><dt><a name="CalendarEventQuery-viewitems"><strong>viewitems</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarEventQuery-viewitems">viewitems</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;items</tt></dd></dl>
+
+<dl><dt><a name="CalendarEventQuery-viewkeys"><strong>viewkeys</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarEventQuery-viewkeys">viewkeys</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;keys</tt></dd></dl>
+
+<dl><dt><a name="CalendarEventQuery-viewvalues"><strong>viewvalues</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarEventQuery-viewvalues">viewvalues</a>()&nbsp;-&gt;&nbsp;an&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;values</tt></dd></dl>
 
 <hr>
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__hash__</strong> = None</dl>
 
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#CalendarEventQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
-
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object&gt;<dd><tt>dict.<a href="#CalendarEventQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
-v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -464,6 +476,9 @@ Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 
 <dl><dt><a name="CalendarListQuery-copy"><strong>copy</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarListQuery-copy">copy</a>()&nbsp;-&gt;&nbsp;a&nbsp;shallow&nbsp;copy&nbsp;of&nbsp;D</tt></dd></dl>
 
+<dl><dt><a name="CalendarListQuery-fromkeys"><strong>fromkeys</strong></a>(...)</dt><dd><tt>dict.<a href="#CalendarListQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
+
 <dl><dt><a name="CalendarListQuery-get"><strong>get</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarListQuery-get">get</a>(k[,d])&nbsp;-&gt;&nbsp;D[k]&nbsp;if&nbsp;k&nbsp;in&nbsp;D,&nbsp;else&nbsp;d.&nbsp;&nbsp;d&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
 
 <dl><dt><a name="CalendarListQuery-has_key"><strong>has_key</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarListQuery-has_key">has_key</a>(k)&nbsp;-&gt;&nbsp;True&nbsp;if&nbsp;D&nbsp;has&nbsp;a&nbsp;key&nbsp;k,&nbsp;else&nbsp;False</tt></dd></dl>
@@ -486,21 +501,24 @@ If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nb
 
 <dl><dt><a name="CalendarListQuery-setdefault"><strong>setdefault</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarListQuery-setdefault">setdefault</a>(k[,d])&nbsp;-&gt;&nbsp;D.<a href="#CalendarListQuery-get">get</a>(k,d),&nbsp;also&nbsp;set&nbsp;D[k]=d&nbsp;if&nbsp;k&nbsp;not&nbsp;in&nbsp;D</tt></dd></dl>
 
-<dl><dt><a name="CalendarListQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarListQuery-update">update</a>(E,&nbsp;**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;dict/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
-If&nbsp;E&nbsp;has&nbsp;a&nbsp;.<a href="#CalendarListQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
-If&nbsp;E&nbsp;lacks&nbsp;.<a href="#CalendarListQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
+<dl><dt><a name="CalendarListQuery-update"><strong>update</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarListQuery-update">update</a>([E,&nbsp;]**F)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;D&nbsp;from&nbsp;dict/iterable&nbsp;E&nbsp;and&nbsp;F.<br>
+If&nbsp;E&nbsp;present&nbsp;and&nbsp;has&nbsp;a&nbsp;.<a href="#CalendarListQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;k&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;E[k]<br>
+If&nbsp;E&nbsp;present&nbsp;and&nbsp;lacks&nbsp;.<a href="#CalendarListQuery-keys">keys</a>()&nbsp;method,&nbsp;does:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(k,&nbsp;v)&nbsp;in&nbsp;E:&nbsp;D[k]&nbsp;=&nbsp;v<br>
 In&nbsp;either&nbsp;case,&nbsp;this&nbsp;is&nbsp;followed&nbsp;by:&nbsp;for&nbsp;k&nbsp;in&nbsp;F:&nbsp;D[k]&nbsp;=&nbsp;F[k]</tt></dd></dl>
 
 <dl><dt><a name="CalendarListQuery-values"><strong>values</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarListQuery-values">values</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;values</tt></dd></dl>
+
+<dl><dt><a name="CalendarListQuery-viewitems"><strong>viewitems</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarListQuery-viewitems">viewitems</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;items</tt></dd></dl>
+
+<dl><dt><a name="CalendarListQuery-viewkeys"><strong>viewkeys</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarListQuery-viewkeys">viewkeys</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;keys</tt></dd></dl>
+
+<dl><dt><a name="CalendarListQuery-viewvalues"><strong>viewvalues</strong></a>(...)</dt><dd><tt>D.<a href="#CalendarListQuery-viewvalues">viewvalues</a>()&nbsp;-&gt;&nbsp;an&nbsp;object&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;values</tt></dd></dl>
 
 <hr>
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__hash__</strong> = None</dl>
 
 <dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#CalendarListQuery-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
-
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object&gt;<dd><tt>dict.<a href="#CalendarListQuery-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;dict&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
-v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -1364,7 +1382,7 @@ Data descriptors defined here:<br>
 </dl>
 <hr>
 Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><a name="Error-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+<dl><dt><a name="Error-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;help(type(x))&nbsp;for&nbsp;signature</tt></dd></dl>
 
 <hr>
 Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
@@ -1423,7 +1441,7 @@ Data descriptors inherited from <a href="gdata.calendar.service.html#Error">Erro
 </dl>
 <hr>
 Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><a name="RequestError-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#RequestError-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+<dl><dt><a name="RequestError-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#RequestError-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;help(type(x))&nbsp;for&nbsp;signature</tt></dd></dl>
 
 <hr>
 Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>

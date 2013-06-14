@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.gauth</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/wrk/gdata-python-client/src/gdata/gauth.py">/home/afshar/wrk/gdata-python-client/src/gdata/gauth.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/google/home/afshar/src/external-gdata-release/google3/src/gdata/gauth.py">/usr/local/google/home/afshar/src/external-gdata-release/google3/src/gdata/gauth.py</a></font></td></tr></table>
     <p><tt>Provides&nbsp;auth&nbsp;related&nbsp;token&nbsp;classes&nbsp;and&nbsp;functions&nbsp;for&nbsp;Google&nbsp;Data&nbsp;APIs.<br>
 &nbsp;<br>
 Token&nbsp;classes&nbsp;represent&nbsp;a&nbsp;user's&nbsp;authorization&nbsp;of&nbsp;this&nbsp;app&nbsp;to&nbsp;access&nbsp;their<br>
@@ -44,7 +44,7 @@ ae_save</tt></p>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="atom.html">atom</a><br>
 <a href="datetime.html">datetime</a><br>
 </td><td width="25%" valign=top><a href="random.html">random</a><br>
-<a href="json.html">json</a><br>
+<a href="simplejson.html">simplejson</a><br>
 </td><td width="25%" valign=top><a href="time.html">time</a><br>
 <a href="urllib.html">urllib</a><br>
 </td><td width="25%" valign=top><a href="urlparse.html">urlparse</a><br>
@@ -67,7 +67,12 @@ ae_save</tt></p>
 </dd>
 <dt><font face="helvetica, arial"><a href="gdata.gauth.html#ClientLoginToken">ClientLoginToken</a>
 </font></dt><dt><font face="helvetica, arial"><a href="gdata.gauth.html#OAuth2Token">OAuth2Token</a>
-</font></dt><dt><font face="helvetica, arial"><a href="gdata.gauth.html#OAuthHmacToken">OAuthHmacToken</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.gauth.html#OAuth2TokenFromCredentials">OAuth2TokenFromCredentials</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gdata.gauth.html#OAuthHmacToken">OAuthHmacToken</a>
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="gdata.gauth.html#OAuthRsaToken">OAuthRsaToken</a>
@@ -181,7 +186,7 @@ Data descriptors defined here:<br>
 </dl>
 <hr>
 Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><a name="Error-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+<dl><dt><a name="Error-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#Error-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;help(type(x))&nbsp;for&nbsp;signature</tt></dd></dl>
 
 <hr>
 Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
@@ -371,10 +376,7 @@ This&nbsp;class&nbsp;supports&nbsp;3&nbsp;flows&nbsp;of&nbsp;OAuth&nbsp;2.0:<br>
 <td width="100%">Methods defined here:<br>
 <dl><dt><a name="OAuth2Token-ModifyRequest"><strong>ModifyRequest</strong></a> = <a href="#OAuth2Token-modify_request">modify_request</a>(self, http_request)</dt></dl>
 
-<dl><dt><a name="OAuth2Token-__init__"><strong>__init__</strong></a>(self, client_id, client_secret, scope, user_agent, auth_uri<font color="#909090">='https://accounts.google.com/o/oauth2/auth'</font>, token_uri<font color="#909090">='https://accounts.google.com/o/oauth2/token'</font>, revoke_uri<font color="#909090">='https://accounts.google.com/o/oauth2/revoke'</font>, access_token<font color="#909090">=None</font>, refresh_token<font color="#909090">=None</font>)</dt><dd><tt>Create&nbsp;an&nbsp;instance&nbsp;of&nbsp;<a href="#OAuth2Token">OAuth2Token</a><br>
-&nbsp;<br>
-This&nbsp;constructor&nbsp;is&nbsp;not&nbsp;usually&nbsp;called&nbsp;by&nbsp;the&nbsp;user,&nbsp;instead<br>
-OAuth2Credentials&nbsp;objects&nbsp;are&nbsp;instantiated&nbsp;by&nbsp;the&nbsp;OAuth2WebServerFlow.<br>
+<dl><dt><a name="OAuth2Token-__init__"><strong>__init__</strong></a>(self, client_id, client_secret, scope, user_agent, auth_uri<font color="#909090">='https://accounts.google.com/o/oauth2/auth'</font>, token_uri<font color="#909090">='https://accounts.google.com/o/oauth2/token'</font>, access_token<font color="#909090">=None</font>, refresh_token<font color="#909090">=None</font>, revoke_uri<font color="#909090">='https://accounts.google.com/o/oauth2/revoke'</font>)</dt><dd><tt>Create&nbsp;an&nbsp;instance&nbsp;of&nbsp;<a href="#OAuth2Token">OAuth2Token</a><br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;client_id:&nbsp;string,&nbsp;client&nbsp;identifier.<br>
@@ -403,19 +405,22 @@ Example:<br>
 &nbsp;&nbsp;&gt;&gt;&gt;&nbsp;c&nbsp;=&nbsp;gdata.client.GDClient(source='user-agent')<br>
 &nbsp;&nbsp;&gt;&gt;&gt;&nbsp;c&nbsp;=&nbsp;token.<a href="#OAuth2Token-authorize">authorize</a>(c)</tt></dd></dl>
 
-<dl><dt><a name="OAuth2Token-generate_authorize_url"><strong>generate_authorize_url</strong></a>(self, redirect_uri<font color="#909090">='oob'</font>, response_type<font color="#909090">='code'</font>, access_type<font color="#909090">='offline'</font>, **kwargs)</dt><dd><tt>Returns&nbsp;a&nbsp;URI&nbsp;to&nbsp;redirect&nbsp;to&nbsp;the&nbsp;provider.<br>
+<dl><dt><a name="OAuth2Token-generate_authorize_url"><strong>generate_authorize_url</strong></a>(self, redirect_uri<font color="#909090">='urn:ietf:wg:oauth:2.0:oob'</font>, response_type<font color="#909090">='code'</font>, access_type<font color="#909090">='offline'</font>, approval_prompt<font color="#909090">='auto'</font>, **kwargs)</dt><dd><tt>Returns&nbsp;a&nbsp;URI&nbsp;to&nbsp;redirect&nbsp;to&nbsp;the&nbsp;provider.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;redirect_uri:&nbsp;Either&nbsp;the&nbsp;string&nbsp;'oob'&nbsp;for&nbsp;a&nbsp;non-web-based&nbsp;application,&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;URI&nbsp;that&nbsp;handles&nbsp;the&nbsp;callback&nbsp;from&nbsp;the&nbsp;authorization<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server.<br>
+&nbsp;&nbsp;redirect_uri:&nbsp;Either&nbsp;the&nbsp;string&nbsp;'urn:ietf:wg:oauth:2.0:oob'&nbsp;for&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non-web-based&nbsp;application,&nbsp;or&nbsp;a&nbsp;URI&nbsp;that&nbsp;handles&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;callback&nbsp;from&nbsp;the&nbsp;authorization&nbsp;server.<br>
 &nbsp;&nbsp;response_type:&nbsp;Either&nbsp;the&nbsp;string&nbsp;'code'&nbsp;for&nbsp;server-side&nbsp;or&nbsp;native<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;application,&nbsp;or&nbsp;the&nbsp;string&nbsp;'token'&nbsp;for&nbsp;client-side<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;application.<br>
 &nbsp;&nbsp;access_type:&nbsp;Either&nbsp;the&nbsp;string&nbsp;'offline'&nbsp;to&nbsp;request&nbsp;a&nbsp;refresh&nbsp;token&nbsp;or<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'online'.<br>
+&nbsp;&nbsp;approval_prompt:&nbsp;Either&nbsp;the&nbsp;string&nbsp;'auto'&nbsp;to&nbsp;let&nbsp;the&nbsp;OAuth&nbsp;mechanism<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;determine&nbsp;if&nbsp;the&nbsp;approval&nbsp;page&nbsp;is&nbsp;needed&nbsp;or&nbsp;'force'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;the&nbsp;approval&nbsp;prompt&nbsp;is&nbsp;desired&nbsp;in&nbsp;all&nbsp;cases.<br>
 &nbsp;<br>
-If&nbsp;redirect_uri&nbsp;is&nbsp;'oob'&nbsp;then&nbsp;pass&nbsp;in&nbsp;the<br>
+If&nbsp;redirect_uri&nbsp;is&nbsp;'urn:ietf:wg:oauth:2.0:oob'&nbsp;then&nbsp;pass&nbsp;in&nbsp;the<br>
 generated&nbsp;verification&nbsp;code&nbsp;to&nbsp;get_access_token,<br>
 otherwise&nbsp;pass&nbsp;in&nbsp;the&nbsp;query&nbsp;parameters&nbsp;received<br>
 at&nbsp;the&nbsp;callback&nbsp;uri&nbsp;to&nbsp;get_access_token.<br>
@@ -453,6 +458,107 @@ Example:<br>
 
 <hr>
 Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>invalid</strong></dt>
+<dd><tt>True&nbsp;if&nbsp;the&nbsp;credentials&nbsp;are&nbsp;invalid,&nbsp;such&nbsp;as&nbsp;being&nbsp;revoked.</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="OAuth2TokenFromCredentials">class <strong>OAuth2TokenFromCredentials</strong></a>(<a href="gdata.gauth.html#OAuth2Token">OAuth2Token</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Special&nbsp;subclass&nbsp;to&nbsp;be&nbsp;used&nbsp;in&nbsp;conjunction&nbsp;with&nbsp;google-api-python-client.<br>
+&nbsp;<br>
+These&nbsp;libraries&nbsp;are&nbsp;built&nbsp;for&nbsp;different&nbsp;purposes.&nbsp;This&nbsp;one&nbsp;is&nbsp;used&nbsp;for&nbsp;APIs<br>
+that&nbsp;use&nbsp;the&nbsp;GData&nbsp;Protocol:<br>
+https://developers.google.com/gdata/docs/2.0/reference<br>
+while&nbsp;google-api-python-client&nbsp;is&nbsp;for&nbsp;APIs&nbsp;which&nbsp;are&nbsp;discovery-based:<br>
+https://developers.google.com/discovery/v1/getting_started#background<br>
+&nbsp;<br>
+Developers&nbsp;using&nbsp;Google&nbsp;APIs&nbsp;may&nbsp;want&nbsp;to&nbsp;use&nbsp;both&nbsp;simultaneously,&nbsp;and&nbsp;this<br>
+class&nbsp;provides&nbsp;a&nbsp;way&nbsp;for&nbsp;them&nbsp;to&nbsp;use&nbsp;OAuth&nbsp;2.0&nbsp;credentials&nbsp;obtained&nbsp;for&nbsp;use<br>
+with&nbsp;google-api-python-client&nbsp;as&nbsp;credentials&nbsp;in&nbsp;gdata-python-client&nbsp;and&nbsp;to<br>
+ensure&nbsp;all&nbsp;token/credential&nbsp;refresh&nbsp;impacts&nbsp;both&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;and&nbsp;the<br>
+google-api-python-client&nbsp;credentials&nbsp;<a href="__builtin__.html#object">object</a>.<br>
+&nbsp;<br>
+In&nbsp;addition,&nbsp;any&nbsp;manual&nbsp;patching&nbsp;of&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;or&nbsp;the&nbsp;credentials&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;will<br>
+be&nbsp;immediately&nbsp;reflected&nbsp;since&nbsp;attributes&nbsp;such&nbsp;as&nbsp;`client_id`,&nbsp;`access_token`,<br>
+etc.&nbsp;are&nbsp;directly&nbsp;proxied&nbsp;between&nbsp;instances&nbsp;of&nbsp;this&nbsp;class&nbsp;and&nbsp;the&nbsp;credentials<br>
+objects&nbsp;that&nbsp;they&nbsp;own.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.gauth.html#OAuth2TokenFromCredentials">OAuth2TokenFromCredentials</a></dd>
+<dd><a href="gdata.gauth.html#OAuth2Token">OAuth2Token</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="OAuth2TokenFromCredentials-__init__"><strong>__init__</strong></a>(self, credentials)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#OAuth2TokenFromCredentials">OAuth2TokenFromCredentials</a>&nbsp;<a href="__builtin__.html#object">object</a>.<br>
+&nbsp;<br>
+The&nbsp;constructor&nbsp;for&nbsp;the&nbsp;superclass&nbsp;is&nbsp;not&nbsp;called&nbsp;because&nbsp;the&nbsp;actual&nbsp;values<br>
+are&nbsp;retrieved&nbsp;from&nbsp;the&nbsp;credentials&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;directly&nbsp;via&nbsp;`property`&nbsp;instances<br>
+which&nbsp;act&nbsp;as&nbsp;proxies.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;credentials:&nbsp;An&nbsp;instance&nbsp;of&nbsp;oauth2client.client.Credentials&nbsp;or&nbsp;some<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subclass.</tt></dd></dl>
+
+<dl><dt><a name="OAuth2TokenFromCredentials-generate_authorize_url"><strong>generate_authorize_url</strong></a>(self, *args, **kwargs)</dt><dd><tt>#&nbsp;Disable&nbsp;methods&nbsp;not&nbsp;supported&nbsp;by&nbsp;Credentials.</tt></dd></dl>
+
+<dl><dt><a name="OAuth2TokenFromCredentials-get_access_token"><strong>get_access_token</strong></a>(self, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="OAuth2TokenFromCredentials-revoke"><strong>revoke</strong></a>(self, *args, **kwargs)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>access_token</strong></dt>
+</dl>
+<dl><dt><strong>client_id</strong></dt>
+</dl>
+<dl><dt><strong>client_secret</strong></dt>
+</dl>
+<dl><dt><strong>refresh_token</strong></dt>
+</dl>
+<dl><dt><strong>token_expiry</strong></dt>
+</dl>
+<dl><dt><strong>token_uri</strong></dt>
+</dl>
+<dl><dt><strong>user_agent</strong></dt>
+</dl>
+<hr>
+Methods inherited from <a href="gdata.gauth.html#OAuth2Token">OAuth2Token</a>:<br>
+<dl><dt><a name="OAuth2TokenFromCredentials-ModifyRequest"><strong>ModifyRequest</strong></a> = modify_request(self, http_request)</dt><dd><tt>Sets&nbsp;the&nbsp;Authorization&nbsp;header&nbsp;in&nbsp;the&nbsp;HTTP&nbsp;request&nbsp;using&nbsp;the&nbsp;token.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;same&nbsp;HTTP&nbsp;request&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
+
+<dl><dt><a name="OAuth2TokenFromCredentials-authorize"><strong>authorize</strong></a>(self, client)</dt><dd><tt>Authorize&nbsp;a&nbsp;gdata.client.GDClient&nbsp;instance&nbsp;with&nbsp;these&nbsp;credentials.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;client:&nbsp;An&nbsp;instance&nbsp;of&nbsp;gdata.client.GDClient<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;something&nbsp;that&nbsp;acts&nbsp;like&nbsp;it.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;A&nbsp;modified&nbsp;instance&nbsp;of&nbsp;client&nbsp;that&nbsp;was&nbsp;passed&nbsp;in.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;c&nbsp;=&nbsp;gdata.client.GDClient(source='user-agent')<br>
+&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;c&nbsp;=&nbsp;token.<a href="#OAuth2TokenFromCredentials-authorize">authorize</a>(c)</tt></dd></dl>
+
+<dl><dt><a name="OAuth2TokenFromCredentials-modify_request"><strong>modify_request</strong></a>(self, http_request)</dt><dd><tt>Sets&nbsp;the&nbsp;Authorization&nbsp;header&nbsp;in&nbsp;the&nbsp;HTTP&nbsp;request&nbsp;using&nbsp;the&nbsp;token.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;same&nbsp;HTTP&nbsp;request&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="gdata.gauth.html#OAuth2Token">OAuth2Token</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
@@ -832,7 +938,7 @@ Data descriptors inherited from <a href="gdata.gauth.html#Error">Error</a>:<br>
 </dl>
 <hr>
 Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><a name="UnsupportedTokenType-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#UnsupportedTokenType-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+<dl><dt><a name="UnsupportedTokenType-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#UnsupportedTokenType-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;help(type(x))&nbsp;for&nbsp;signature</tt></dd></dl>
 
 <hr>
 Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
@@ -1443,8 +1549,7 @@ Returns:<br>
 <strong>AUTH_SCOPES</strong> = {'analytics': ('https://www.google.com/analytics/feeds/',), 'apps': ('https://apps-apis.google.com/a/feeds/user/', 'https://apps-apis.google.com/a/feeds/policies/', 'https://apps-apis.google.com/a/feeds/alias/', 'https://apps-apis.google.com/a/feeds/groups/', 'https://apps-apis.google.com/a/feeds/compliance/audit/', 'https://apps-apis.google.com/a/feeds/migration/', 'https://apps-apis.google.com/a/feeds/emailsettings/2.0/'), 'blogger': ('http://www.blogger.com/feeds/',), 'books': ('http://www.google.com/books/feeds/',), 'cl': ('https://www.google.com/calendar/feeds/', 'http://www.google.com/calendar/feeds/'), 'code': ('http://code.google.com/feeds/issues',), 'codesearch': ('http://www.google.com/codesearch/feeds/',), 'cp': ('https://www.google.com/m8/feeds/', 'http://www.google.com/m8/feeds/'), 'finance': ('http://finance.google.com/finance/feeds/',), 'gbase': ('http://base.google.com/base/feeds/', 'http://www.google.com/base/feeds/'), ...}<br>
 <strong>DEFAULT_DOMAIN</strong> = 'default'<br>
 <strong>HMAC_SHA1</strong> = 'HMAC-SHA1'<br>
-<strong>JSONDecodeError</strong> = None<br>
-<strong>OAUTH2_AUTH_LABEL</strong> = 'OAuth '<br>
+<strong>OAUTH2_AUTH_LABEL</strong> = 'Bearer '<br>
 <strong>OAUTH_AUTHORIZE_URL</strong> = 'https://www.google.com/accounts/OAuthAuthorizeToken'<br>
 <strong>PROGRAMMATIC_AUTH_LABEL</strong> = 'GoogleLogin auth='<br>
 <strong>REQUEST_TOKEN</strong> = 1<br>

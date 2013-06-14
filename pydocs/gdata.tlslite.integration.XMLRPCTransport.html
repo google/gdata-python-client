@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.tlslite.html"><font color="#ffffff">tlslite</font></a>.<a href="gdata.tlslite.integration.html"><font color="#ffffff">integration</font></a>.XMLRPCTransport</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/wrk/gdata-python-client/src/gdata/tlslite/integration/XMLRPCTransport.py">/home/afshar/wrk/gdata-python-client/src/gdata/tlslite/integration/XMLRPCTransport.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/google/home/afshar/src/external-gdata-release/google3/src/gdata/tlslite/integration/XMLRPCTransport.py">/usr/local/google/home/afshar/src/external-gdata-release/google3/src/gdata/tlslite/integration/XMLRPCTransport.py</a></font></td></tr></table>
     <p><tt>TLS&nbsp;Lite&nbsp;+&nbsp;xmlrpclib.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -153,11 +153,15 @@ offered&nbsp;by&nbsp;the&nbsp;client.</tt></dd></dl>
 
 <hr>
 Methods inherited from <a href="xmlrpclib.html#Transport">xmlrpclib.Transport</a>:<br>
+<dl><dt><a name="XMLRPCTransport-close"><strong>close</strong></a>(self)</dt><dd><tt>##<br>
+#&nbsp;Clear&nbsp;any&nbsp;cached&nbsp;connection&nbsp;object.<br>
+#&nbsp;Used&nbsp;in&nbsp;the&nbsp;event&nbsp;of&nbsp;socket&nbsp;errors.</tt></dd></dl>
+
 <dl><dt><a name="XMLRPCTransport-get_host_info"><strong>get_host_info</strong></a>(self, host)</dt></dl>
 
 <dl><dt><a name="XMLRPCTransport-getparser"><strong>getparser</strong></a>(self)</dt></dl>
 
-<dl><dt><a name="XMLRPCTransport-parse_response"><strong>parse_response</strong></a>(self, file)</dt></dl>
+<dl><dt><a name="XMLRPCTransport-parse_response"><strong>parse_response</strong></a>(self, response)</dt></dl>
 
 <dl><dt><a name="XMLRPCTransport-request"><strong>request</strong></a>(self, host, handler, request_body, verbose<font color="#909090">=0</font>)</dt></dl>
 
@@ -169,8 +173,14 @@ Methods inherited from <a href="xmlrpclib.html#Transport">xmlrpclib.Transport</a
 
 <dl><dt><a name="XMLRPCTransport-send_user_agent"><strong>send_user_agent</strong></a>(self, connection)</dt></dl>
 
+<dl><dt><a name="XMLRPCTransport-single_request"><strong>single_request</strong></a>(self, host, handler, request_body, verbose<font color="#909090">=0</font>)</dt></dl>
+
 <hr>
 Data and other attributes inherited from <a href="xmlrpclib.html#Transport">xmlrpclib.Transport</a>:<br>
+<dl><dt><strong>accept_gzip_encoding</strong> = True</dl>
+
+<dl><dt><strong>encode_threshold</strong> = None</dl>
+
 <dl><dt><strong>user_agent</strong> = 'xmlrpclib.py/1.0.1 (by www.pythonware.com)'</dl>
 
 </td></tr></table></td></tr></table>

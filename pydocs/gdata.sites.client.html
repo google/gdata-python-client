@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.sites.html"><font color="#ffffff">sites</font></a>.client</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/afshar/wrk/gdata-python-client/src/gdata/sites/client.py">/home/afshar/wrk/gdata-python-client/src/gdata/sites/client.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/google/home/afshar/src/external-gdata-release/google3/src/gdata/sites/client.py">/usr/local/google/home/afshar/src/external-gdata-release/google3/src/gdata/sites/client.py</a></font></td></tr></table>
     <p><tt><a href="#SitesClient">SitesClient</a>&nbsp;extends&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a>&nbsp;to&nbsp;streamline&nbsp;Sites&nbsp;API&nbsp;calls.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -51,7 +51,7 @@
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="SitesClient-CreatePage"><strong>CreatePage</strong></a> = <a href="#SitesClient-create_page">create_page</a>(self, kind, title, html<font color="#909090">=''</font>, page_name<font color="#909090">=None</font>, parent<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
+<dl><dt><a name="SitesClient-CreatePage"><strong>CreatePage</strong></a> = <a href="#SitesClient-create_page">create_page</a>(self, kind, title, html<font color="#909090">=''</font>, page_name<font color="#909090">=None</font>, parent<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, template<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="SitesClient-CreateSite"><strong>CreateSite</strong></a> = <a href="#SitesClient-create_site">create_site</a>(self, title, description<font color="#909090">=None</font>, source_site<font color="#909090">=None</font>, theme<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
@@ -93,7 +93,7 @@ Args:<br>
 &nbsp;&nbsp;kwargs:&nbsp;The&nbsp;other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="gdata.client.html#GDClient">GDClient</a><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;constructor.</tt></dd></dl>
 
-<dl><dt><a name="SitesClient-create_page"><strong>create_page</strong></a>(self, kind, title, html<font color="#909090">=''</font>, page_name<font color="#909090">=None</font>, parent<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;page&nbsp;(specified&nbsp;by&nbsp;kind)&nbsp;on&nbsp;a&nbsp;Google&nbsp;Site.<br>
+<dl><dt><a name="SitesClient-create_page"><strong>create_page</strong></a>(self, kind, title, html<font color="#909090">=''</font>, page_name<font color="#909090">=None</font>, parent<font color="#909090">=None</font>, auth_token<font color="#909090">=None</font>, template<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;page&nbsp;(specified&nbsp;by&nbsp;kind)&nbsp;on&nbsp;a&nbsp;Google&nbsp;Site.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;kind:&nbsp;string&nbsp;The&nbsp;type&nbsp;of&nbsp;page/item&nbsp;to&nbsp;create.&nbsp;For&nbsp;example,&nbsp;webpage,<br>
@@ -107,6 +107,9 @@ Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;or&nbsp;parent&nbsp;link&nbsp;url&nbsp;to&nbsp;create&nbsp;the&nbsp;page&nbsp;under.<br>
 &nbsp;&nbsp;auth_token:&nbsp;(optional)&nbsp;gdata.gauth.ClientLoginToken,&nbsp;AuthSubToken,&nbsp;or<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OAuthToken&nbsp;which&nbsp;authorizes&nbsp;this&nbsp;client&nbsp;to&nbsp;edit&nbsp;the&nbsp;user's&nbsp;data.<br>
+&nbsp;&nbsp;template:&nbsp;string&nbsp;or&nbsp;gdata.sites.data.ContentEntry&nbsp;(optional)&nbsp;Create&nbsp;page<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;using&nbsp;the&nbsp;given&nbsp;template.&nbsp;&nbsp;Any&nbsp;content&nbsp;elements&nbsp;will&nbsp;be&nbsp;discarded&nbsp;as<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;they&nbsp;are&nbsp;not&nbsp;valid&nbsp;when&nbsp;creating&nbsp;a&nbsp;page&nbsp;from&nbsp;a&nbsp;template.<br>
 &nbsp;&nbsp;kwargs:&nbsp;Other&nbsp;parameters&nbsp;to&nbsp;pass&nbsp;to&nbsp;gdata.client.<a href="#SitesClient-post">post</a>().<br>
 &nbsp;<br>
 Returns:<br>
