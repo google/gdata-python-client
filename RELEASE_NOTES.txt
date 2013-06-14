@@ -1,3 +1,79 @@
+=== 2.0.18 ===
+1173[tip]   93c436da2d19   2013-06-14 07:21 -0700   afshar
+  Remove unused script.
+
+1172   e692050ec194   2013-06-14 07:20 -0700   afshar
+  Updated docs.
+
+1171   159874713088   2013-06-14 07:20 -0700   afshar
+  Bumped version.
+
+1170   7b4e3c22e83c   2013-06-07 15:52 +0200   burcud
+  Adding missing unit attributes for unit picing elements.
+
+1169   ad8ee900dda5   2013-06-06 19:01 +0200   burcud
+  Fixing identifier_exists attribute for product items.
+
+1168   d6ce8dc4970a   2013-06-06 17:53 +0200   burcud
+  Fixing multipack attribute.
+
+1167   b87779918c90   2013-06-06 15:10 +0200   burcud
+  Adding new product spec attributes.
+
+1166   624d33ad26f2   2013-02-11 12:47 -0800   rkubiak
+  Update Sites Python API to allow page creation from a template
+
+1165   ecb1d49b5fbe   2013-01-07 11:29 -0800   dhermes
+  Adding an OAuth2Token subclass which can interact with google-api-python-client.
+
+1164   f76c53eaf151   2012-11-20 16:09 +0100   burcud
+  Modifying Content API for Shopping client to use schema projection.
+
+1163   a8c25010b8b7   2012-08-27 13:50 -0700   dhermes
+  Adding in ability to change Content for Shopping base URI via a kwarg for client constructor. (Fixes 6479060).
+
+1162   c5d57eff0ef4   2012-08-15 08:31 -0700   dhermes
+  Adding paid clicks to Content API performance datapoint. (Issue 6443130)
+
+1161   71971b013563   2012-08-06 15:20 -0700   dhermes
+  Adding support for adwords_accounts settings element in managedaccounts feed of Content API. (6443092)
+
+1160   cf0208e89433   2012-07-30 09:53 -0700   dhermes
+  Changing OAuth2 Authorization Header lead in from OAuth to Bearer (per http://goo.gl/QDiLZ). (issue 6455060)
+
+1159   3b021605570f   2012-07-12 18:14 -0700   dhermes
+  Adding missing name XML attribute to gdata.contentforshopping.data.Group.
+
+1158   524fc2b2e821   2012-06-19 08:43 -0700   dhermes
+  Renaming classes for inventory feed of Content API. (Issue 6296085)
+
+1157   32c0cb313b2e   2012-06-14 15:36 -0700   dhermes
+  Updating offline URI for OAuth2 and explicity specifying approval_prompt as a kw arg. (Issue 6296072)
+
+1156   f7593ae5d035   2012-06-14 15:35 -0700   dhermes
+  Added individual get for ManagedAccounts, functionality for paging and changed to correct endpoint. (issue 6304076)
+
+1155   723e577ada7b   2012-06-14 13:53 -0700   dhermes
+  Adding support for Local Products feed in Content API. (Issue 6305091)
+
+1154   75ee2830ca74   2012-06-13 12:48 -0700   dhermes
+  Adding support for wrong open search version hack on other ContentAPI Feed classes. (Issue 6296071)
+
+1153   f783c64b953f   2012-06-13 10:07 -0700   dhermes
+  Adding support for Data Quality Feed of Content API for Shopping. (Issue 6295074)
+
+1152   4cc916619658   2012-06-13 09:07 -0700   dhermes
+  Adding back accidentally removed code from commit c92bc870e3a4363bed2732d50d782189407af7ac.
+
+1151   c92bc870e3a4   2012-06-13 09:01 -0700   dhermes
+  Adding support for Content API Users Feed. (Issue 6295071)
+
+1150   0dcb1f3aff81   2012-06-12 17:25 -0700   dhermes
+  Adding custom id parser for Content API errors. (issue 6306073)
+
+1149   8f11de681f03   2012-06-12 17:21 -0700   dhermes
+  Adding support for product status elements in app:control for content for shopping. (Fixes 6299076)
+
 === 2.0.17 ===
 1143   3a0447b78b27   2012-04-20 13:25 -0400   jeffy
   The gdata.youtube.service class now explicitly sets the GData-Version: 1 header, and is updated to use the correct ClientLogin URL.
