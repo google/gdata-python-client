@@ -27,7 +27,6 @@ import gdata.data
 import gdata.acl.data
 import gdata.analytics.data
 import gdata.dublincore.data
-import gdata.books.data
 import gdata.calendar.data
 import gdata.geo.data
 import gdata.finance.data
@@ -91,14 +90,6 @@ class DataSmokeTest(unittest.TestCase):
         gdata.dublincore.data.Rights,
         gdata.dublincore.data.Subject,
         gdata.dublincore.data.Title,
-        gdata.books.data.CollectionEntry,
-        gdata.books.data.CollectionFeed,
-        gdata.books.data.Embeddability,
-        gdata.books.data.OpenAccess,
-        gdata.books.data.Review,
-        gdata.books.data.Viewability,
-        gdata.books.data.VolumeEntry,
-        gdata.books.data.VolumeFeed,
         gdata.calendar.data.AccessLevelProperty,
         gdata.calendar.data.AllowGSync2Property,
         gdata.calendar.data.AllowGSyncProperty,

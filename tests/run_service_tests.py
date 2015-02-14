@@ -10,17 +10,14 @@ import getpass
 import atom_tests.service_test
 import gdata_tests.service_test
 import gdata_tests.apps.service_test
-import gdata_tests.books.service_test
 import gdata_tests.calendar.service_test
 import gdata_tests.docs.service_test
-import gdata_tests.health.service_test
 import gdata_tests.spreadsheet.service_test
 import gdata_tests.spreadsheet.text_db_test
 import gdata_tests.photos.service_test
 import gdata_tests.contacts.service_test
 import gdata_tests.blogger.service_test
 import gdata_tests.youtube.service_test
-import gdata_tests.health.service_test
 import gdata_tests.contacts.profiles.service_test
 
 
@@ -30,11 +27,8 @@ def RunAllTests(username, password, spreadsheet_key, worksheet_key,
   test_runner.modules = [atom_tests.service_test, 
                          gdata_tests.service_test, 
                          gdata_tests.apps.service_test,
-                         gdata_tests.base.service_test, 
-                         gdata_tests.books.service_test, 
                          gdata_tests.calendar.service_test,
                          gdata_tests.docs.service_test, 
-                         gdata_tests.health.service_test,
                          gdata_tests.spreadsheet.service_test,
                          gdata_tests.spreadsheet.text_db_test,
                          gdata_tests.contacts.service_test,
