@@ -129,7 +129,7 @@ def main():
   for entry in result.error_entries:
     print ' > Failed to update %s: (%s) %s' % (
         entry.id.text, entry.batch_status.code, entry.batch_status.reason)
-  sys.exit(result.error_count)
+  sys.exit(0 if not result.error_count else 1)
 
 
 if __name__ == '__main__':
