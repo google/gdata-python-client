@@ -131,7 +131,7 @@ def main():
       raise PopSettingsException('Invalid consumer credentials')
     elif e.status == 503:
       raise PopSettingsException('Server busy')
-    else e.status == 500:
+    elif e.status == 500:
       raise PopSettingsException('Internal server error')
     else:
       raise PopSettingsException('Unknown error')
