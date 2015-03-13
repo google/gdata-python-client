@@ -1084,7 +1084,7 @@ class GDataService(atom.service.AtomService):
           return result_body
         return entry
       return feed
-    elif server_response.status == 302:
+    elif server_response.status in (301, 302):
       if redirects_remaining > 0:
         location = (server_response.getheader('Location')
                     or server_response.getheader('location'))

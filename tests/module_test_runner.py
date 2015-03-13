@@ -41,7 +41,7 @@ class ModuleTestRunner(object):
     It also sets any module variables which match the settings keys to the
     corresponding values in the settings member.
     """
-    runner = unittest.TextTestRunner()
+    runner = unittest.TextTestRunner(verbosity=2)
     for module in self.modules:
       # Set any module variables according to the contents in the settings
       for setting, value in self.settings.iteritems():
@@ -53,5 +53,6 @@ class ModuleTestRunner(object):
           pass
       # We have set all of the applicable settings for the module, now
       # run the tests.
-      print '\nRunning all tests in module', module.__name__
-      runner.run(unittest.defaultTestLoader.loadTestsFromModule(module))    
+      result = runner.run(unittest.defaultTestLoader.loadTestsFromModule(module))
+      if not result.wasSuccessful():
+        raise Exception('Tests failed!')
