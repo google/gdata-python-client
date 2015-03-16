@@ -397,7 +397,7 @@ class DocsClient(gdata.client.GDClient):
   def _get_download_uri(self, base_uri, extra_params=None):
     uri = base_uri.replace('&amp;', '&')
     if extra_params is not None:
-      if 'exportFormat' in extra_params and '/Export?' not in uri:
+      if 'exportFormat' in extra_params and '/Export?' not in uri and '/export?' not in uri:
         raise gdata.client.Error, ('This entry type cannot be exported '
                                    'as a different format.')
 

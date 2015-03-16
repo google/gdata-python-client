@@ -330,7 +330,7 @@ class DocsService(gdata.service.GDataService):
         url = entry_or_id_or_url
 
     if export_format is not None:
-      if url.find('/Export?') == -1:
+      if (url.find('/Export?') == -1) and (url.find('/export?') == -1):
         raise gdata.service.Error, ('This entry cannot be exported '
                                     'as a different format')
       url += '&exportFormat=%s' % export_format
