@@ -44,7 +44,7 @@ class MockHttpClientUnitTest(unittest.TestCase):
     # Turn on pass-through record mode.
     self.client.real_client = atom.http.ProxiedHttpClient()
     live_response = self.client.request('GET', 
-        'http://www.google.com/base/feeds/snippets?max-results=1')
+        'https://www.blogger.com/feeds/7986894085536788407/posts/default?max-results=1')
     live_response_body = live_response.read()
     self.assertEquals(live_response.status, 200)
     self.assertEquals(live_response_body.startswith('<?xml'), True)
