@@ -52,7 +52,7 @@ class MockHttpClientUnitTest(unittest.TestCase):
     # Requery for the now canned data.
     self.client.real_client = None
     canned_response = self.client.request('GET',
-        'http://www.google.com/base/feeds/snippets?max-results=1')
+        'https://www.blogger.com/feeds/7986894085536788407/posts/default?max-results=1')
 
     # The canned response should be the stored response.
     canned_response_body = canned_response.read()
