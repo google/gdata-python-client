@@ -7,14 +7,7 @@ requires tlslite - http://trevp.net/tlslite/
 
 import binascii
 
-try:
-  from gdata.tlslite.utils import keyfactory
-except ImportError:
-  from tlslite.tlslite.utils import keyfactory
-try:
-  from gdata.tlslite.utils import cryptomath
-except ImportError:
-  from tlslite.tlslite.utils import cryptomath
+from tlslite.utils import keyfactory
 
 # XXX andy: ugly local import due to module name, oauth.oauth
 import gdata.oauth as oauth
