@@ -65,12 +65,6 @@ library may also be used with any Atom Publishing Protocol service (AtomPub).
     packages=[
       'atom', 
       'gdata', 
-      'gdata.Crypto', 
-      'gdata.Crypto.Cipher', 
-      'gdata.Crypto.Hash', 
-      'gdata.Crypto.Protocol', 
-      'gdata.Crypto.PublicKey', 
-      'gdata.Crypto.Util',
       'gdata.acl', 
       'gdata.alt', 
       'gdata.analytics', 
