@@ -464,13 +464,7 @@ def build_auth_sub_data(http_request, timestamp, nonce):
 def generate_signature(data, rsa_key):
   """Signs the data string for a secure AuthSub request."""
   import base64
-  try:
-    from tlslite.utils import keyfactory
-  except ImportError:
-    try:
-      from gdata.tlslite.utils import keyfactory
-    except ImportError:
-      from tlslite.tlslite.utils import keyfactory
+  from tlslite.utils import keyfactory
 
   private_key = keyfactory.parsePrivateKey(rsa_key)
   signed = private_key.hashAndSign(data)
@@ -654,13 +648,7 @@ def generate_rsa_signature(http_request, consumer_key, rsa_key,
                            timestamp, nonce, version, next='oob',
                            token=None, token_secret=None, verifier=None):
   import base64
-  try:
-    from tlslite.utils import keyfactory
-  except ImportError:
-    try:
-      from gdata.tlslite.utils import keyfactory
-    except ImportError:
-      from tlslite.tlslite.utils import keyfactory
+  from tlslite.utils import keyfactory
   base_string = build_oauth_base_string(
       http_request, consumer_key, nonce, RSA_SHA1, timestamp, version,
       next, token, verifier=verifier)

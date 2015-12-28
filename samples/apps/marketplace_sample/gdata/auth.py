@@ -27,14 +27,8 @@ import atom.token_store
 import atom.url
 import gdata.oauth as oauth
 import gdata.oauth.rsa as oauth_rsa
-try:
-  import gdata.tlslite.utils.keyfactory as keyfactory
-except ImportError:
-  from tlslite.tlslite.utils import keyfactory
-try:
-  import gdata.tlslite.utils.cryptomath as cryptomath
-except ImportError:
-  from tlslite.tlslite.utils import cryptomath
+from tlslite.utils import keyfactory
+from base64 import encodestring
 
 import gdata.gauth
 
@@ -944,7 +938,7 @@ class SecureAuthSubToken(AuthSubToken):
     timestamp = int(math.floor(time.time()))
     nonce = '%lu' % random.randrange(1, 2**64)
     data = '%s %s %d %s' % (http_method, str(http_url), timestamp, nonce)
-    sig = cryptomath.bytesToBase64(self.rsa_key.hashAndSign(data))
+    sig = encodestring(self.rsa_key.hashAndSign(data).tostring()).rstrip()
     header = {'Authorization': '%s"%s" data="%s" sig="%s" sigalg="rsa-sha1"' %
               (AUTHSUB_AUTH_LABEL, self.token_string, data, sig)}
     return header

@@ -18,7 +18,7 @@
 import sys
 from distutils.core import setup
 
-required = []
+required = ['pycrypto', 'tlslite']
 
 if sys.version_info[:3] < (2, 5, 0):
   required.append('elementtree')
@@ -65,12 +65,6 @@ library may also be used with any Atom Publishing Protocol service (AtomPub).
     packages=[
       'atom', 
       'gdata', 
-      'gdata.Crypto', 
-      'gdata.Crypto.Cipher', 
-      'gdata.Crypto.Hash', 
-      'gdata.Crypto.Protocol', 
-      'gdata.Crypto.PublicKey', 
-      'gdata.Crypto.Util',
       'gdata.acl', 
       'gdata.alt', 
       'gdata.analytics', 
@@ -100,9 +94,6 @@ library may also be used with any Atom Publishing Protocol service (AtomPub).
       'gdata.sites', 
       'gdata.spreadsheet', 
       'gdata.spreadsheets', 
-      'gdata.tlslite', 
-      'gdata.tlslite.integration', 
-      'gdata.tlslite.utils', 
       'gdata.webmastertools', 
       'gdata.youtube', 
       ],
