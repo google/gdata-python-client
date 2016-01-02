@@ -938,7 +938,7 @@ class SecureAuthSubToken(AuthSubToken):
     timestamp = int(math.floor(time.time()))
     nonce = '%lu' % random.randrange(1, 2**64)
     data = '%s %s %d %s' % (http_method, str(http_url), timestamp, nonce)
-    sig = encodestring(self.rsa_key.hashAndSign(data).tostring()).rstrip()
+    sig = encodestring(str(self.rsa_key.hashAndSign(data))).rstrip()
     header = {'Authorization': '%s"%s" data="%s" sig="%s" sigalg="rsa-sha1"' %
               (AUTHSUB_AUTH_LABEL, self.token_string, data, sig)}
     return header
