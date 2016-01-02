@@ -67,8 +67,8 @@ class ProjectHostingClient(gdata.client.GDClient):
       new_entry.status = gdata.projecthosting.data.Status(text=status)
 
     if owner:
-      owner = [gdata.projecthosting.data.Owner(
-          username=gdata.projecthosting.data.Username(text=owner))]
+      new_entry.owner = gdata.projecthosting.data.Owner(
+          username=gdata.projecthosting.data.Username(text=owner))
 
     if labels:
       new_entry.label = [gdata.projecthosting.data.Label(text=label)
