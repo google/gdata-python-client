@@ -32,7 +32,7 @@ THR_TEMPLATE = '{http://purl.org/syndication/thread/1.0}%s'
 
 BLOG_NAME_PATTERN = re.compile('(http://)(\w*)')
 BLOG_ID_PATTERN = re.compile('(tag:blogger.com,1999:blog-)(\w*)')
-BLOG_ID2_PATTERN = re.compile('tag:blogger.com,1999:user-(\d+)\.blog-(\d+)')
+BLOG_ID2_PATTERN = re.compile('tag:blogger.com,1999:user-g?(\d+)\.blog-(\d+)')
 POST_ID_PATTERN = re.compile(
     '(tag:blogger.com,1999:blog-)(\w*)(.post-)(\w*)')
 PAGE_ID_PATTERN = re.compile(
@@ -54,13 +54,12 @@ class BloggerEntry(gdata.data.GDEntry):
     Returns:
       The blog's unique id as a string.
     """
-    if self.id.text:
-      match = BLOG_ID_PATTERN.match(self.id.text)
+    if not self.id.text:
+      return None
+    for pattern in BLOG_ID_PATTERN, BLOG_ID2_PATTERN:
+      match = pattern.match(self.id.text)
       if match:
         return match.group(2)
-      else:
-        return BLOG_ID2_PATTERN.match(self.id.text).group(2)
-    return None
 
   GetBlogId = get_blog_id
 
