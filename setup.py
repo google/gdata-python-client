@@ -61,7 +61,7 @@ library may also be used with any Atom Publishing Protocol service (AtomPub).
     author='Jeffrey Scudder',
     author_email='j.s@google.com',
     license='Apache 2.0',
-    url='http://code.google.com/p/gdata-python-client/',
+    url='https://github.com/google/gdata-python-client',
     packages=[
       'atom', 
       'gdata', 
