@@ -392,10 +392,18 @@ class EmailSettingsFilter(EmailSettingsEntry):
 
   archive = pyproperty(GetArchive, SetArchive)
 
+  def GetForwardTo(self):
+      return self._GetProperty(FORWARDING_TO)
+
+  def SetForwardTo(self, value):
+      self._SetProperty(FORWARDING_TO, value)
+
+  forward_to = pyproperty(GetForwardTo, SetForwardTo)
+
   def __init__(self, uri=None, from_address=None, to_address=None,
     subject=None, has_the_word=None, does_not_have_the_word=None,
     has_attachments=None, label=None, mark_as_read=None,
-    archive=None, *args, **kwargs):
+    archive=None, forward_to=None, *args, **kwargs):
     """Constructs a new EmailSettingsFilter object with the given arguments.
 
     Args:
@@ -441,6 +449,8 @@ class EmailSettingsFilter(EmailSettingsEntry):
       self.mark_as_read = str(mark_as_read)
     if archive is not None:
       self.archive = str(archive)
+    if forward_to is not None:
+      self.forward_to = forward_to
 
 
 class EmailSettingsSendAsAlias(EmailSettingsEntry):
