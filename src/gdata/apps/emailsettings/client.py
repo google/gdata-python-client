@@ -189,7 +189,8 @@ class EmailSettingsClient(gdata.client.GDClient):
   def create_filter(self, username, from_address=None,
                     to_address=None, subject=None, has_the_word=None,
                     does_not_have_the_word=None, has_attachments=None,
-                    label=None, mark_as_read=None, archive=None, **kwargs):
+                    label=None, mark_as_read=None, archive=None,
+                    forward_to=None, **kwargs):
     """Creates a filter with the given properties.
 
     Args:
@@ -211,6 +212,7 @@ class EmailSettingsClient(gdata.client.GDClient):
           messages matching the filter criteria as read.
       archive: Boolean (optional) Whether or not to move messages
           matching to Archived state.
+      forwardTo: (optional) The email address to forward matching messages to.
       kwargs: The other parameters to pass to gdata.client.GDClient.post().
 
     Returns:
@@ -224,7 +226,8 @@ class EmailSettingsClient(gdata.client.GDClient):
         has_the_word=has_the_word,
         does_not_have_the_word=does_not_have_the_word,
         has_attachments=has_attachments, label=label,
-        mark_as_read=mark_as_read, archive=archive)
+        mark_as_read=mark_as_read, archive=archive,
+        forward_to=forward_to)
     return self.post(new_filter, uri, **kwargs)
 
   CreateFilter = create_filter
