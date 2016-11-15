@@ -93,7 +93,7 @@ def v1_deprecated(warning=None):
     # Preserve the original name to avoid masking all decorated functions as
     # 'deprecated_function'
     try:
-      optional_warn_function.func_name = f.func_name
+      optional_warn_function.func_name = f.__name__
     except TypeError:
       pass # In Python2.3 we can't set the func_name
     return optional_warn_function
