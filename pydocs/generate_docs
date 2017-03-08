@@ -11,4 +11,4 @@
 
 export GOOGLE_APPENGINE=/usr/local/google_appengine/
 export PYTHONPATH=`pwd`/../src:$GOOGLE_APPENGINE
-find ../src/ -name "*.py" | sed "s/\/__init__.py//" | sed "s/\.py//" | sed "s#^\.\.\/src\/##" | sed "s#/#.#g" | xargs pydoc -w
+find ../src/ -name "*.py" | sed "s/\/__init__.py//" | sed "s/\.py//" | sed "s#^\.\.\/src\/##" | sed "s#/#.#g" | LC_ALL=C sort | xargs pydoc -w
