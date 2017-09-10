@@ -73,17 +73,17 @@ class SitesExample(object):
 
   def PrintMainMenu(self):
     """Displays a menu of options for the user to choose from."""
-    print '\nSites API Sample'
-    print '================================'
-    print '\n'.join(MAIN_MENU)
-    print '================================\n'
+    print ('\nSites API Sample')
+    print ('================================')
+    print ('\n'.join(MAIN_MENU))
+    print ('================================\n')
 
   def PrintSettingsMenu(self):
     """Displays a menu of settings for the user change."""
-    print '\nSites API Sample > Settings'
-    print '================================'
-    print '\n'.join(SETTINGS_MENU)
-    print '================================\n'
+    print ('\nSites API Sample > Settings')
+    print ('================================')
+    print ('\n'.join(SETTINGS_MENU))
+    print ('================================\n')
 
   def GetMenuChoice(self, menu):
     """Retrieves the menu selection from the user.
@@ -111,7 +111,7 @@ class SitesExample(object):
     while not site_name:
       site_name = raw_input('site name: ')
       if not site_name:
-        print 'Please enter the name of your Google Site.'
+        print ('Please enter the name of your Google Site.')
     return site_name
 
   def PromptDomain(self):
@@ -120,7 +120,7 @@ class SitesExample(object):
 
   def GetChoiceSelection(self, feed, message):
     for i, entry in enumerate(feed.entry):
-      print '%d.) %s' % (i + 1, entry.title.text)
+      print (('%d.) %s' % (i + 1, entry.title.text)))
     choice = 0
     while not choice or not 0 <= choice <= len(feed.entry):
       choice = int(raw_input(message))
@@ -128,38 +128,38 @@ class SitesExample(object):
     return choice
 
   def PrintEntry(self, entry):
-    print '%s [%s]' % (entry.title.text, entry.Kind())
+    print ('%s [%s]' % (entry.title.text, entry.Kind()))
     if entry.page_name:
-      print ' page name:\t%s' % entry.page_name.text
+      print (' page name:\t%s' % entry.page_name.text)
     if entry.content:
-      print ' content\t%s...' % str(entry.content.html)[0:100]
+      print (' content\t%s...' % str(entry.content.html)[0:100])
 
   def PrintListItem(self, entry):
-    print '%s [%s]' % (entry.title.text, entry.Kind())
+    print ('%s [%s]' % (entry.title.text, entry.Kind()))
     for col in entry.field:
-      print ' %s %s\t%s' % (col.index, col.name, col.text)
+      print (' %s %s\t%s' % (col.index, col.name, col.text))
 
   def PrintListPage(self, entry):
-    print '%s [%s]' % (entry.title.text, entry.Kind())
+    print ('%s [%s]' % (entry.title.text, entry.Kind()))
     for col in entry.data.column:
-      print ' %s %s' % (col.index, col.name)
+      print (' %s %s' % (col.index, col.name))
 
   def PrintFileCabinetPage(self, entry):
-    print '%s [%s]' % (entry.title.text, entry.Kind())
-    print ' page name:\t%s' % entry.page_name.text
-    print ' content\t%s...' % str(entry.content.html)[0:100]
+    print ('%s [%s]' % (entry.title.text, entry.Kind()))
+    print (' page name:\t%s' % entry.page_name.text)
+    print (' content\t%s...' % str(entry.content.html)[0:100])
 
   def PrintAttachment(self, entry):
-    print '%s [%s]' % (entry.title.text, entry.Kind())
+    print ('%s [%s]' % (entry.title.text, entry.Kind()))
     if entry.summary is not None:
-      print ' description:\t%s' % entry.summary.text
-    print ' content\t%s, %s' % (entry.content.type, entry.content.src)
+      print (' description:\t%s' % entry.summary.text)
+    print (' content\t%s, %s' % (entry.content.type, entry.content.src))
 
   def PrintWebAttachment(self, entry):
-    print '%s [%s]' % (entry.title.text, entry.Kind())
+    print ('%s [%s]' % (entry.title.text, entry.Kind()))
     if entry.summary.text is not None:
-      print ' description:\t%s' % entry.summary.text
-    print ' content src\t%s' % entry.content.src
+      print (' description:\t%s' % entry.summary.text)
+    print (' content src\t%s' % entry.content.src)
 
   def Run(self):
     """Executes the demo application."""
@@ -179,7 +179,7 @@ class SitesExample(object):
           else:
             feed = self.client.GetContentFeed()
 
-          print "\nFetching content feed of '%s'...\n" % self.client.site
+          print ("\nFetching content feed of '%s'...\n" % self.client.site)
 
           for entry in feed.entry:
             kind = entry.Kind()
@@ -197,36 +197,36 @@ class SitesExample(object):
             else:
               self.PrintEntry(entry)
 
-            print ' revision:\t%s' % entry.revision.text
-            print ' updated:\t%s' % entry.updated.text
+            print (' revision:\t%s' % entry.revision.text)
+            print (' updated:\t%s' % entry.updated.text)
 
             parent_link = entry.FindParentLink()
             if parent_link:
-              print ' parent link:\t%s' % parent_link
+              print (' parent link:\t%s' % parent_link)
 
             if entry.GetAlternateLink():
-              print ' view in Sites:\t%s' % entry.GetAlternateLink().href
+              print (' view in Sites:\t%s' % entry.GetAlternateLink().href)
 
             if entry.feed_link:
-              print ' feed of items:\t%s' % entry.feed_link.href
+              print (' feed of items:\t%s' % entry.feed_link.href)
 
             if entry.IsDeleted():
-              print ' deleted:\t%s' % entry.IsDeleted()
+              print (' deleted:\t%s' % entry.IsDeleted())
 
             if entry.in_reply_to:
-              print ' in reply to:\t%s' % entry.in_reply_to.href
+              print (' in reply to:\t%s' % entry.in_reply_to.href)
 
             print
 
         elif choice == 2:
-          print "\nFetching activity feed of '%s'..." % self.client.site
+          print ("\nFetching activity feed of '%s'..." % self.client.site)
           feed = self.client.GetActivityFeed()
           for entry in feed.entry:
-            print '  %s [%s on %s]' % (entry.title.text, entry.Kind(),
-                                       entry.updated.text)
+            print ('  %s [%s on %s]' % (entry.title.text, entry.Kind(),
+                                       entry.updated.text))
 
         elif choice == 3:
-          print "\nFetching content feed of '%s'...\n" % self.client.site
+          print ("\nFetching content feed of '%s'...\n" % self.client.site)
 
           feed = self.client.GetContentFeed()
           try:
@@ -240,14 +240,14 @@ class SitesExample(object):
           feed = self.client.GetRevisionFeed(
               feed.entry[selection - 1].GetNodeId())
           for entry in feed.entry:
-            print entry.title.text
-            print '  new version on:\t%s' % entry.updated.text
-            print '  view changes:\t%s' % entry.GetAlternateLink().href
-            print '  current version:\t%s...' % str(entry.content.html)[0:100]
+            print (entry.title.text)
+            print ('  new version on:\t%s' % entry.updated.text)
+            print ('  view changes:\t%s' % entry.GetAlternateLink().href)
+            print ('  current version:\t%s...' % str(entry.content.html)[0:100])
             print
 
         elif choice == 4:
-          print "\nFetching content feed of '%s'...\n" % self.client.site
+          print ("\nFetching content feed of '%s'...\n" % self.client.site)
 
           feed = self.client.GetContentFeed()
           try:
@@ -266,10 +266,10 @@ class SitesExample(object):
               'webpage', page_title, '<b>Your html content</b>',
               parent=parent)
           if new_entry.GetAlternateLink():
-            print 'Created. View it at: %s' % new_entry.GetAlternateLink().href
+            print ('Created. View it at: %s' % new_entry.GetAlternateLink().href)
 
         elif choice == 5:
-          print "\nFetching filecabinets on '%s'...\n" % self.client.site
+          print ("\nFetching filecabinets on '%s'...\n" % self.client.site)
 
           uri = '%s?kind=%s' % (self.client.make_content_feed_uri(),
                                 'filecabinet')
@@ -289,10 +289,10 @@ class SitesExample(object):
 
           self.client.CreateWebAttachment(url, content_type, title,
                                           parent_entry, description=description)
-          print 'Created!'
+          print ('Created!')
 
         elif choice == 6:
-          print "\nFetching filecainets on '%s'...\n" % self.client.site
+          print ("\nFetching filecainets on '%s'...\n" % self.client.site
 
           uri = '%s?kind=%s' % (self.client.make_content_feed_uri(),
                                 'filecabinet')
@@ -320,10 +320,10 @@ class SitesExample(object):
           new_entry = self.client.UploadAttachment(
               filepath, entry, content_type=content_type, title=page_title,
               description=description)
-          print 'Uploaded. View it at: %s' % new_entry.GetAlternateLink().href
+          print ('Uploaded. View it at: %s' % new_entry.GetAlternateLink().href)
 
         elif choice == 7:
-          print "\nFetching all attachments on '%s'...\n" % self.client.site
+          print ("\nFetching all attachments on '%s'...\n" % self.client.site
 
           uri = '%s?kind=%s' % (self.client.make_content_feed_uri(),
                                 'attachment')
@@ -339,10 +339,10 @@ class SitesExample(object):
             entry = feed.entry[selection - 1]
 
           self.client.DownloadAttachment(entry, filepath)
-          print 'Downloaded.'
+          print ('Downloaded.')
 
         elif choice == 8:
-          print "\nFetching content feed of '%s'...\n" % self.client.site
+          print ("\nFetching content feed of '%s'...\n" % self.client.site
 
           feed = self.client.GetContentFeed()
           selection = self.GetChoiceSelection(feed, 'Select a page to delete: ')
@@ -352,7 +352,7 @@ class SitesExample(object):
             entry = feed.entry[selection - 1]
 
           self.client.Delete(entry)
-          print 'Removed!'
+          print ('Removed!')
 
         elif choice == 9:
           print ('\nFetching your list of sites for domain: %s...\n'
@@ -361,12 +361,12 @@ class SitesExample(object):
           feed = self.client.GetSiteFeed()
           for entry in feed.entry:
             print entry.title.text
-            print '  site name: ' + entry.site_name.text
+            print ('  site name: ' + entry.site_name.text)
             if entry.summary.text:
-              print '  summary: ' + entry.summary.text
+              print ('  summary: ' + entry.summary.text)
             if entry.FindSourceLink():
-              print '  copied from site: ' + entry.FindSourceLink()
-            print '  acl feed: %s\n' % entry.FindAclLink()
+              print ('  copied from site: ' + entry.FindSourceLink())
+            print ('  acl feed: %s\n' % entry.FindAclLink())
 
         elif choice == 10:
           title = raw_input('Enter a title: ')
@@ -375,15 +375,15 @@ class SitesExample(object):
 
           new_entry = self.client.CreateSite(
               title, description=summary, theme=theme)
-          print 'Site created! View it at: ' + new_entry.GetAlternateLink().href
+          print ('Site created! View it at: ' + new_entry.GetAlternateLink().href)
 
         elif choice == 11:
-          print "\nFetching acl permissions of '%s'...\n" % self.client.site
+          print ("\nFetching acl permissions of '%s'...\n" % self.client.site)
 
           feed = self.client.GetAclFeed()
           for entry in feed.entry:
-            print '%s (%s) - %s' % (entry.scope.value, entry.scope.type,
-                                    entry.role.value)
+            print ('%s (%s) - %s' % (entry.scope.value, entry.scope.type,
+                                    entry.role.value))
 
         elif choice == 12:
           self.PrintSettingsMenu()
@@ -395,7 +395,7 @@ class SitesExample(object):
             self.client.domain = self.PromptDomain()
 
         elif choice == 13:
-          print 'Later!\n'
+          print ('Later!\n')
           return
 
     except gdata.client.RequestError, error:
@@ -407,13 +407,13 @@ class SitesExample(object):
 def main():
   """The main function runs the SitesExample application."""
 
-  print 'NOTE: Please run these tests only with a test account.\n'
+  print ('NOTE: Please run these tests only with a test account.\n')
 
   try:
     opts, args = getopt.getopt(sys.argv[1:], '',
                                ['site=', 'domain=', 'debug'])
   except getopt.error, msg:
-    print """python sites_sample.py --site [sitename]
+    print ("""python sites_sample.py --site [sitename]
                                     --domain [domain or "site"]
                                     --debug [prints debug info if set]"""
     sys.exit(2)
