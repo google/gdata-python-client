@@ -1,3 +1,5 @@
+ !!! Unmaintained use https://github.com/google/google-api-python-client instead !!!
+ 
  Copyright (C) 2006-2014 Google Inc.
 
  Licensed under the Apache License, Version 2.0 (the "License");
