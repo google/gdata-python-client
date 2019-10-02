@@ -28,6 +28,8 @@ in this module is GDClient.
 """
 
 
+from __future__ import absolute_import
+import six
 __author__ = 'j.s@google.com (Jeff Scudder)'
 
 
@@ -240,7 +242,7 @@ class GDClient(atom.client.AtomPubClient):
       body will be converted to the class using
       atom.core.parse.
     """
-    if isinstance(uri, (str, unicode)):
+    if isinstance(uri, (str, six.text_type)):
       uri = atom.http_core.Uri.parse_uri(uri)
 
     # Add the gsession ID to the URL to prevent further redirects.
@@ -742,7 +744,7 @@ class GDClient(atom.client.AtomPubClient):
 
     # If the user passes in a URL, just delete directly, may not work as
     # the service might require an ETag.
-    if isinstance(entry_or_uri, (str, unicode, atom.http_core.Uri)):
+    if isinstance(entry_or_uri, (str, six.text_type, atom.http_core.Uri)):
       return self.request(method='DELETE', uri=entry_or_uri,
                           http_request=http_request, auth_token=auth_token,
                           **kwargs)
@@ -1037,7 +1039,7 @@ class ResumableUploader(object):
                                      http_request=http_request,
                                      desired_class=self.desired_class)
       return response
-    except RequestError, error:
+    except RequestError as error:
       if error.status == 308:
         return None
       else:
@@ -1183,7 +1185,7 @@ class ResumableUploader(object):
       else:
         raise error_from_response(
             '%s returned by server' % response.status, response, RequestError)
-    except RequestError, error:
+    except RequestError as error:
       if error.status == 308:
         for pair in error.headers:
           if pair[0].capitalize() == 'Range':
